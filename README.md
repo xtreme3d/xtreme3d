@@ -6,7 +6,10 @@ This project is not connected in any way with the original Xtreme3D developer. A
 
 The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Shadowvolume, Mirror, Navigator, Tree, Trail, DCE, FPS, Partition. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
 
-Features:
+Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
+
+Features
+--------
 * Scene hierarchy
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
@@ -25,8 +28,6 @@ Features:
 * Skyboxes
 * Procedural skydome with Sun, stars and day/night cycle
 * Dynamic shadows
-
-Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
 License
 -------
