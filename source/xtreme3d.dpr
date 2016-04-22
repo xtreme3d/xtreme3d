@@ -13,7 +13,7 @@ uses
   GLBumpShader, GLCelShader, GLContext, GLTerrainRenderer, GLHeightData,
   GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
-  GLSkyBox, GLShadowPlane, GLSkydome, GLLensFlare;
+  GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare;
 
 type
    TEmpty = class(TComponent)
@@ -68,119 +68,15 @@ end;
 {$I 'shaders'}
 {$I 'thorfx'}
 {$I 'firefx'}
+{$I 'lensflare'}
 {$I 'terrain'}
 {$I 'blur'}
 {$I 'skybox'}
 {$I 'shadowplane'}
+{$I 'shadowvolume'}
 {$I 'skydome'}
 {$I 'water'}
 {$I 'text'}
-
-function LensflareCreate(parent: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  if not (parent=0) then
-    lf := TGLLensFlare.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    lf := TGLLensFlare.CreateAsChild(scene.Objects);
-  result := Integer(lf);
-end;
-
-function LensflareSetSize(lensflare, size: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.Size := trunc64(size);
-  result := 1.0;
-end;
-
-function LensflareSetSeed(lensflare, seed: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.Seed := trunc64(seed);
-  result := 1.0;
-end;
-
-function LensflareSetSqueeze(lensflare, squeeze: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.Squeeze := squeeze;
-  result := 1.0;
-end;
-
-function LensflareSetStreaks(lensflare, streaks: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.NumStreaks := trunc64(streaks);
-  result := 1.0;
-end;
-
-function LensflareSetStreakWidth(lensflare, width: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.StreakWidth := width;
-  result := 1.0;
-end;
-
-function LensflareSetSecs(lensflare, secs: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.NumSecs := trunc64(secs);
-  result := 1.0;
-end;
-
-function LensflareSetResolution(lensflare, res: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.Resolution := trunc64(res);
-  result := 1.0;
-end;
-
-function LensflareSetElements(lensflare, glow, ring, streaks, rays, secs: real): real; stdcall;
-var
-  lf: TGLLensFlare;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  lf.Elements := [];
-  if glow = 1    then lf.Elements := lf.Elements + [feGlow];
-  if ring = 1    then lf.Elements := lf.Elements + [feRing];
-  if streaks = 1 then lf.Elements := lf.Elements + [feStreaks];
-  if rays = 1    then lf.Elements := lf.Elements + [feRays];
-  if secs = 1    then lf.Elements := lf.Elements + [feSecondaries];
-  result := 1.0;
-end;
-
-function LensflareSetGradients(lensflare, ind, color1, alpha1, color2, alpha2 : real): real; stdcall;
-var
-  lf: TGLLensFlare;
-  gradient: TGLFlareGradient;
-begin
-  lf := TGLLensFlare(trunc64(lensflare));
-  if ind = 0 then gradient := lf.GlowGradient;
-  if ind = 1 then gradient := lf.RingGradient;
-  if ind = 2 then gradient := lf.StreaksGradient;
-  if ind = 3 then gradient := lf.RaysGradient;
-  if ind = 4 then gradient := lf.SecondariesGradient;
-  gradient.FromColor.AsWinColor := TColor(trunc64(color1));
-  gradient.FromColor.Alpha := alpha1;
-  gradient.ToColor.AsWinColor := TColor(trunc64(color2));
-  gradient.ToColor.Alpha := alpha2;
-  result := 1.0;
-end;
 
 exports
 //Engine
@@ -366,6 +262,11 @@ BlurSetColor, BlurSetBlendingMode,
 SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
 //Shadowplane
 ShadowplaneCreate, ShadowplaneSetLight, ShadowplaneSetObject, ShadowplaneSetOptions,
+//Shadowvolume
+ShadowvolumeCreate, ShadowvolumeSetActive,
+ShadowvolumeAddLight, ShadowvolumeRemoveLight,
+ShadowvolumeAddOccluder, ShadowvolumeRemoveOccluder,
+ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
 //Text
 TextRead;
 
