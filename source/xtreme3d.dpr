@@ -232,26 +232,63 @@ begin
 end;
 
 function DceDynamicApplyAcceleration(obj, x, y, z: real): real; stdcall;
-var
-  FForce : TVector3f;
 begin
-  FForce[0] := x;
-  FForce[1] := y;
-  FForce[2] := z;
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAccel(FForce);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAccel(x, y, z);
   Result := 1;
 end;
 
-// TODO:
-// DceDynamicApplyAbsAcceleration
-// DceDynamicStopAcceleration
-// DceDynamicStopAbsAcceleration
-// DceDynamicJump
-// DceDynamicMove
-// DceDynamicMoveTo
-// DceDynamicSetSpeed
-// DceDynamicInGround
-// DceDynamicSetMaxRecursionDepth
+function DceDynamicApplyAbsAcceleration(obj, x, y, z: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAbsAccel(x, y, z);
+  Result := 1;
+end;
+
+function DceDynamicStopAcceleration(obj: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAccel;
+  Result := 1;
+end;
+
+function DceDynamicStopAbsAcceleration(obj: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAbsAccel;
+  Result := 1;
+end;
+
+function DceDynamicJump(obj, height, speed: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Jump(height, speed);
+  Result := 1;
+end;
+
+function DceDynamicMove(obj, x, y, z, delta: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Move(AffineVectorMake(x, y, z), delta);
+  Result := 1;
+end;
+
+function DceDynamicMoveTo(obj, x, y, z, amount: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MoveTo(AffineVectorMake(x, y, z), amount);
+  Result := 1;
+end;
+
+function DceDynamicSetSpeed(obj, x, y, z: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := AffineVectorMake(x, y, z);
+  Result := 1;
+end;
+
+function DceDynamicInGround(obj: real): real; stdcall;
+begin
+  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).InGround);
+end;
+
+function DceDynamicSetMaxRecursionDepth(obj, depth: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MaxRecursionDepth := trunc64(depth);
+  Result := 1;
+end;
 
 function DceStaticSetManager(obj, man: real): real; stdcall;
 begin
@@ -324,10 +361,10 @@ begin
 end;
 
 // TODO:
-// DceGetVelocity
-// DceGetGravity
-// DceVelocityCollided
-// DceGravityCollided
+// DceDynamicGetVelocity
+// DceDynamicGetGravity
+// DceDynamicVelocityCollided
+// DceDynamicGravityCollided
 // DceCountCollisions
 // DceGetCollidedObject
 // DceGetCollisionPosition
@@ -529,7 +566,11 @@ DceManagerSetLayers, DceManagerSetManualStep,
 DceDynamicSetManager, DceDynamicSetActive, DceDynamicIsActive,
 DceDynamicSetUseGravity, DceDynamicSetLayer, DceDynamicGetLayer,
 DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
-DceDynamicSetSize, DceDynamicSetSlideOrBounce, DceDynamicApplyAcceleration,
+DceDynamicSetSize, DceDynamicSetSlideOrBounce,
+DceDynamicApplyAcceleration, DceDynamicApplyAbsAcceleration,
+DceDynamicStopAcceleration, DceDynamicStopAbsAcceleration,
+DceDynamicJump, DceDynamicMove, DceDynamicMoveTo, DceDynamicSetSpeed,
+DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
 DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
 DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
 //Text
