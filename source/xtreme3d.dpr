@@ -13,7 +13,7 @@ uses
   GLBumpShader, GLCelShader, GLContext, GLTerrainRenderer, GLHeightData,
   GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
-  GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare;
+  GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE;
 
 type
    TEmpty = class(TComponent)
@@ -77,6 +77,261 @@ end;
 {$I 'skydome'}
 {$I 'water'}
 {$I 'text'}
+
+// DCE functions wrapper by Hacker
+
+function DceManagerCreate: real; stdcall;
+var
+  DCEManager: TGLDCEManager;
+begin
+  DCEManager := TGLDCEManager.Create(scene);
+  Result := Integer(DCEManager);
+end;
+
+function DceManagerStep(man, dt: real): real; stdcall;
+begin
+  TGLDCEManager(trunc64(man)).Step(dt);
+  Result := 1;
+end;
+
+function DceManagerSetGravity(man, grav: real): real; stdcall;
+begin
+  TGLDCEManager(trunc64(man)).Gravity := grav;
+  Result := 1;
+end;
+
+function DceManagerSetWorldDirection(man, x, y, z: real): real; stdcall;
+var
+  DCEManager: TGLDCEManager;
+begin
+  DCEManager := TGLDCEManager(trunc64(man));
+  DCEManager.WorldDirection.X := x;
+  DCEManager.WorldDirection.Y := y;
+  DCEManager.WorldDirection.Z := z;
+  Result := 1;
+end;
+
+function DceManagerSetWorldScale(man, scale: real): real; stdcall;
+begin
+  TGLDCEManager(trunc64(man)).WorldScale := scale;
+  Result := 1;
+end;
+
+function DceManagerSetMovementScale(man, scale: real): real; stdcall;
+begin
+  TGLDCEManager(trunc64(man)).MovimentScale := scale;
+  Result := 1;
+end;
+
+function DceManagerSetLayers(man, mode: real): real; stdcall;
+var
+  DCEManager: TGLDCEManager;
+begin
+  DCEManager := TGLDCEManager(trunc64(man));
+  case trunc64(mode) of
+    0: DCEManager.StandardiseLayers := ccsDCEStandard;
+    1: DCEManager.StandardiseLayers := ccsCollisionStandard;
+    2: DCEManager.StandardiseLayers := ccsHybrid;
+  else
+    DCEManager.StandardiseLayers := ccsDCEStandard;
+  end;
+  Result := 1;
+end;
+
+function DceManagerSetManualStep(man, mode: real): real; stdcall;
+begin
+  TGLDCEManager(trunc64(man)).ManualStep := Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceDynamicSetManager(obj, man: real): real; stdcall;
+var
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  GetOrCreateDCEDynamic(ob).Manager := TGLDCEManager(trunc64(man));
+  Result := 1;
+end;
+
+function DceDynamicSetActive(obj, mode: real): real; stdcall;
+var
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  GetOrCreateDCEDynamic(ob).Active := Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceDynamicIsActive(obj: real): real; stdcall;
+begin
+  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Active);
+end;
+
+function DceDynamicSetUseGravity(obj, mode: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).UseGravity := Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceDynamicSetLayer(obj, layer: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
+  Result := 1;
+end;
+
+function DceDynamicGetLayer(obj: real): real; stdcall;
+begin
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer;
+end;
+
+function DceDynamicSetSolid(obj, mode: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceDynamicSetFriction(obj, friction: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
+  Result := 1;
+end;
+
+function DceDynamicSetBounce(obj, bounce: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bounce;
+  Result := 1;
+end;
+
+function DceDynamicSetSize(obj, x, y, z: real): real; stdcall;
+var
+  dyn: TGLDCEDynamic;
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  dyn := GetOrCreateDCEDynamic(ob);
+  dyn.Size.X := x;
+  dyn.Size.Y := y;
+  dyn.Size.Z := z;
+  Result := 1;
+end;
+
+function DceDynamicSetSlideOrBounce(obj, mode: real): real; stdcall;
+var
+  dyn: TGLDCEDynamic;
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  dyn := GetOrCreateDCEDynamic(ob);
+  case trunc64(mode) of
+    0: dyn.SlideOrBounce := csbSlide;
+    1: dyn.SlideOrBounce := csbBounce;
+  else
+    dyn.SlideOrBounce := csbSlide;
+  end;
+  Result := 1;
+end;
+
+function DceDynamicApplyAcceleration(obj, x, y, z: real): real; stdcall;
+var
+  FForce : TVector3f;
+begin
+  FForce[0] := x;
+  FForce[1] := y;
+  FForce[2] := z;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAccel(FForce);
+  Result := 1;
+end;
+
+// TODO:
+// DceDynamicApplyAbsAcceleration
+// DceDynamicStopAcceleration
+// DceDynamicStopAbsAcceleration
+// DceDynamicJump
+// DceDynamicMove
+// DceDynamicMoveTo
+// DceDynamicSetSpeed
+// DceDynamicInGround
+// DceDynamicSetMaxRecursionDepth
+
+function DceStaticSetManager(obj, man: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Manager :=
+    TGLDCEManager(trunc64(man));
+  Result := 1;
+end;
+
+function DceStaticSetActive(obj, mode: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Active :=
+    Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceStaticSetShape(obj, mode: real): real; stdcall;
+var
+  stat: TGLDCEStatic;
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOrCreateDCEStatic(ob);
+  case Trunc(mode) of
+    0: stat.Shape := csEllipsoid;
+    1: stat.Shape := csBox;
+    2: stat.Shape := csFreeform;
+    3: stat.Shape := csTerrain;
+  else
+    Result := 0;
+    Exit;
+  end;
+  Result := 1;
+end;
+
+function DceStaticSetLayer(obj, layer: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
+  Result := 1;
+end;
+
+function DceStaticSetSize(obj, x, y, z: real): real; stdcall;
+var
+  stat: TGLDCEStatic;
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOrCreateDCEStatic(ob);
+  stat.Size.X := x;
+  stat.Size.Y := y;
+  stat.Size.Z := z;
+  Result := 1;
+end;
+
+function DceStaticSetSolid(obj, mode: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
+  Result := 1;
+end;
+
+function DceStaticSetFriction(obj, friction: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
+  Result := 1;
+end;
+
+function DceStaticSetBounceFactor(obj, bfactor: real): real; stdcall;
+begin
+  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bfactor;
+  Result := 1;
+end;
+
+// TODO:
+// DceGetVelocity
+// DceGetGravity
+// DceVelocityCollided
+// DceGravityCollided
+// DceCountCollisions
+// DceGetCollidedObject
+// DceGetCollisionPosition
+// DceGetCollisionNormal
 
 exports
 //Engine
@@ -267,6 +522,16 @@ ShadowvolumeCreate, ShadowvolumeSetActive,
 ShadowvolumeAddLight, ShadowvolumeRemoveLight,
 ShadowvolumeAddOccluder, ShadowvolumeRemoveOccluder,
 ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
+//DCE
+DceManagerCreate, DceManagerStep, DceManagerSetGravity, DceManagerSetWorldDirection,
+DceManagerSetWorldScale, DceManagerSetMovementScale,
+DceManagerSetLayers, DceManagerSetManualStep,
+DceDynamicSetManager, DceDynamicSetActive, DceDynamicIsActive,
+DceDynamicSetUseGravity, DceDynamicSetLayer, DceDynamicGetLayer,
+DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
+DceDynamicSetSize, DceDynamicSetSlideOrBounce, DceDynamicApplyAcceleration,
+DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
+DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
 //Text
 TextRead;
 
