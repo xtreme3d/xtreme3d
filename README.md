@@ -28,6 +28,7 @@ Features
 * Skyboxes
 * Procedural skydome with Sun, stars and day/night cycle
 * Dynamic shadows
+* Built-in collision system (DCE)
 
 License
 -------
