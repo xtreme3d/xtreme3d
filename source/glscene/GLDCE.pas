@@ -275,7 +275,7 @@ begin
   FMovimentScale := 1;
   FStandardiseLayers := ccsDCEStandard;
   FManualStep := False;
-  RegisterManager(Self);
+  //RegisterManager(Self);
 end;
 
 // Destroy
@@ -284,7 +284,7 @@ destructor TGLDCEManager.Destroy;
 begin
 	DeRegisterAllStatics;
 	DeRegisterAllDynamics;
-  DeRegisterManager(Self);
+  //DeRegisterManager(Self);
   FStatics.Free;
   FDynamics.Free;
   FWorldDirection.Free;
@@ -882,7 +882,8 @@ end;
 procedure TGLDCEDynamic.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited doProgress(progressTime);
-  assert(assigned(manager), 'DCE Manager not assigned to behaviour.');
+  //assert(assigned(manager), 'DCE Manager not assigned to behaviour.');
+  if FManager = nil then Exit;
 
   if (not FManager.ManualStep) and FActive then
   begin

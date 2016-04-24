@@ -85,6 +85,7 @@ var
   DCEManager: TGLDCEManager;
 begin
   DCEManager := TGLDCEManager.Create(scene);
+  DCEManager.ManualStep := true;
   Result := Integer(DCEManager);
 end;
 
@@ -147,9 +148,12 @@ end;
 function DceDynamicSetManager(obj, man: real): real; stdcall;
 var
   ob: TGLBaseSceneObject;
+  dyn: TGLDCEDynamic;
 begin
   ob := TGLBaseSceneObject(trunc64(obj));
-  GetOrCreateDCEDynamic(ob).Manager := TGLDCEManager(trunc64(man));
+  dyn := GetOrCreateDCEDynamic(ob);
+  dyn.Manager := TGLDCEManager(trunc64(man));
+  //GetOrCreateDCEDynamic(ob).Manager := TGLDCEManager(trunc64(man));
   Result := 1;
 end;
 
@@ -311,15 +315,10 @@ var
 begin
   ob := TGLBaseSceneObject(trunc64(obj));
   stat := GetOrCreateDCEStatic(ob);
-  case Trunc(mode) of
-    0: stat.Shape := csEllipsoid;
-    1: stat.Shape := csBox;
-    2: stat.Shape := csFreeform;
-    3: stat.Shape := csTerrain;
-  else
-    Result := 0;
-    Exit;
-  end;
+  if mode = 0 then stat.Shape := csEllipsoid;
+  if mode = 1 then stat.Shape := csBox;
+  if mode = 2 then stat.Shape := csFreeform;
+  if mode = 3 then stat.Shape := csTerrain;
   Result := 1;
 end;
 
@@ -360,15 +359,25 @@ begin
   Result := 1;
 end;
 
+function DceDynamicGetVelocity(obj, ind: real): real; stdcall;
+var
+  dyn: TGLDCEDynamic;
+  ob: TGLBaseSceneObject;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  dyn := GetOrCreateDCEDynamic(ob);
+  Result := dyn.Speed[trunc64(ind)];
+end;
+
+// DceDynamicGetGravity is no longer available
+
 // TODO:
-// DceDynamicGetVelocity
-// DceDynamicGetGravity
 // DceDynamicVelocityCollided
 // DceDynamicGravityCollided
-// DceCountCollisions
-// DceGetCollidedObject
-// DceGetCollisionPosition
-// DceGetCollisionNormal
+// DceDynamicCountCollisions
+// DceDynamicGetCollidedObject
+// DceDynamicGetCollisionPosition
+// DceDynamicGetCollisionNormal
 
 exports
 //Engine
@@ -573,6 +582,7 @@ DceDynamicJump, DceDynamicMove, DceDynamicMoveTo, DceDynamicSetSpeed,
 DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
 DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
 DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
+DceDynamicGetVelocity,
 //Text
 TextRead;
 
