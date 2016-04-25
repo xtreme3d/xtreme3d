@@ -8,6 +8,10 @@ The engine is written in Delphi and based on a modified version of GLScene 1.0.0
 
 Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
+Screenshots
+-----------
+[![Screenshot1](/screenshots/001-thumb.jpg)](/screenshots/001.jpg)
+
 Features
 --------
 * Scene hierarchy
