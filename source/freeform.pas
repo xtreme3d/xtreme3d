@@ -21,6 +21,8 @@ begin
       mesh1.BuildTangentSpace();
   end;
   
+  GLFreeForm1.BuildOctree;
+  
   result:=Integer(GLFreeForm1);
 end;
 

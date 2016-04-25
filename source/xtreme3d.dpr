@@ -102,8 +102,11 @@ begin
 end;
 
 function FpsManagerAddMap(man, ffm: real): real; stdcall;
+var
+  freeform: TGLFreeform;
 begin
-  TGLFPSMovementManager(trunc64(man)).Maps.addMap(TGLFreeform(trunc64(ffm)));
+  freeform := TGLFreeform(trunc64(ffm));
+  TGLFPSMovementManager(trunc64(man)).Maps.addMap(freeform);
   Result := 1;
 end;
 
