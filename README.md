@@ -28,7 +28,12 @@ Features
 * Skyboxes
 * Procedural skydome with Sun, stars and day/night cycle
 * Dynamic shadows
-* Built-in collision system (DCE)
+* Built-in game-oriented collision system (DCE, FPSManager)
+
+Asset Creation
+--------------
+For static geometry, we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
+For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. These formats are widely supported in 3D modeling software.
 
 License
 -------
