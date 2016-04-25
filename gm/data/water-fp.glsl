@@ -24,11 +24,11 @@ void main()
    float specular = pow(max(dot(H, N), 0.0), 3.0 * gl_FrontMaterial.shininess);
    
     vec4 col =
-     reflectionTerm * 0.6 +
+     reflectionTerm * 0.4 +
      diffuse * reflectionTerm +
      specular * gl_FrontMaterial.specular;
      
-    col.a = max(0.8, fresnel);
+    col.a = max(0.5, fresnel);
 
     gl_FragColor = col;
 }
