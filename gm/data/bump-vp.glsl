@@ -6,7 +6,7 @@ void main()
     gl_TexCoord[0] = gl_MultiTexCoord0;
     
     n = normalize(gl_NormalMatrix * gl_Normal);
-    t = normalize(gl_NormalMatrix * gl_MultiTexCoord1.xyz);
+    t = normalize(gl_NormalMatrix * gl_MultiTexCoord2.xyz);
     b = cross(n, t);
 
     position = (gl_ModelViewMatrix * gl_Vertex).xyz;

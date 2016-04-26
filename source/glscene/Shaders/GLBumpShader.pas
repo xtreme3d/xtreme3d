@@ -207,8 +207,8 @@ begin
    VP.Add('PARAM lightPos = program.local[0];');
    VP.Add('PARAM lightAtten = program.local[1];');
    if BumpSpace = bsTangentExternal then begin
-      VP.Add('ATTRIB tangent = vertex.texcoord[1];');
-      VP.Add('ATTRIB binormal = vertex.texcoord[2];');
+      VP.Add('ATTRIB tangent = vertex.texcoord[2];');
+      VP.Add('ATTRIB binormal = vertex.texcoord[3];');
       VP.Add('ATTRIB normal = vertex.normal;');
    end;
    VP.Add('TEMP temp, temp2, light, eye, atten;');
