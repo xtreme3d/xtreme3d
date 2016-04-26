@@ -2,9 +2,10 @@ function CameraCreate(parent: real): real; stdcall;
 var
   GLCamera1: TGLCamera;
 begin
-  GLCamera1:=TGLCamera.CreateAsChild(TGLBaseSceneObject(trunc64(parent)));
-  //TGLScene(scene).Objects.AddChild(GLCamera1);
-  //if not (parent=0) then GLCamera1.Parent:=TGLBaseSceneObject(trunc64(parent));
+  if not (parent=0) then
+    GLCamera1:=TGLCamera.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    GLCamera1:=TGLCamera.CreateAsChild(scene.Objects);
   result:=Integer(GLCamera1);
 end;
 

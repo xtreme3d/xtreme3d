@@ -83,35 +83,37 @@ end;
 procedure TGLMD5VectorFile.LoadFromStream(aStream : TStream);
 
   procedure AllocateMaterial(var shader : String);
-  {const
-    cTexType : array[0..2] of String = ('_local', '_d', '_s');
+//const
+    //cTexType : array[0..2] of String = ('_local', '_d', '_s');
   var
     shader_nopath, temp : String;
     libmat : TGLLibMaterial;
-    i, j : Integer;//}
+    i, j : Integer;
   begin
-    {if Assigned(Owner.MaterialLibrary) then begin
-      shader:=StringReplace(shader,'/','\',[rfReplaceAll]);
-      if not DirectoryExists(ExtractFilePath(shader)) then
-        shader:=ExtractFileName(shader);
+    //if Assigned(Owner.MaterialLibrary) then begin
+      //shader:=StringReplace(shader,'/','\',[rfReplaceAll]);
+      //if not DirectoryExists(ExtractFilePath(shader)) then
+      shader:=ExtractFileName(shader);
       if not Assigned(Owner.MaterialLibrary.Materials.GetLibMaterialByName(shader)) then begin
-        libmat:=Owner.MaterialLibrary.Materials.Add;
-        libmat.Name:=shader;
-        for i:=0 to High(cTexType) do begin
-          temp:=ChangeFileExt(shader, '')+cTexType[i];
-          for j:=0 to vMD5TextureExtensions.Count-1 do begin
-            if FileExists(temp+vMD5TextureExtensions[j]) then begin
-              with libmat.Material.TextureEx.Add do begin
-                Texture.Image.LoadFromFile(temp+vMD5TextureExtensions[j]);
-                Texture.Enabled:=True;
-              end;
-              Break;
-            end;
-          end;
-        end;
+        //libmat:=Owner.MaterialLibrary.Materials.Add;
+        //libmat.Name:=shader;
+        //for i:=0 to High(cTexType) do begin
+          temp:=shader;//ChangeFileExt(shader, ''); //+cTexType[i];
+          //for j:=0 to vMD5TextureExtensions.Count-1 do begin
+          //Owner.MaterialLibrary.TexturePaths
+            //if FileExists(temp) then begin
+              //with libmat.Material.Texture do begin
+              //  Image.LoadFromFile(temp+vMD5TextureExtensions[j]);
+              //  Enabled:=True;
+              //end;
+              Owner.MaterialLibrary.AddTextureMaterial(shader, temp, true);
+              //Break;
+            //end;
+          //end;
+        //end;
       end;
-    end else//}
-      shader:='';
+    //end else
+    //  shader:='';
   end;
 
   function QuaternionMakeFromImag(ix, iy, iz : Single) : TQuaternion;
