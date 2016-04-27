@@ -11,6 +11,7 @@ Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 Screenshots
 -----------
 [![Screenshot1](/screenshots/001-thumb.jpg)](/screenshots/001.jpg)
+[![Screenshot2](/screenshots/002-thumb.jpg)](/screenshots/002.jpg)
 
 Features
 --------
