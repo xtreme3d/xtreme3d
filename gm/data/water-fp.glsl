@@ -28,7 +28,7 @@ void main()
      diffuse * reflectionTerm +
      specular * gl_FrontMaterial.specular;
      
-    col.a = max(0.5, fresnel);
+    col.a = max(0.8, fresnel);
 
     gl_FragColor = col;
 }
