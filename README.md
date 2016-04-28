@@ -4,7 +4,7 @@ Once upon a time, there was a great 3D graphics engine for Game Maker - Xtreme3D
 
 This project is not connected in any way with the original Xtreme3D developer. All code was written from scratch.
 
-The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Mirror, Tree, Trail, Partition, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
+The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Tree, Trail, Partition, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
 
 Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
@@ -34,10 +34,11 @@ Features
 * Procedural skydome with Sun, stars and day/night cycle
 * Dynamic shadows
 * Built-in game-oriented collision system (DCE, FPSManager)
+* + a lot more
 
 Asset Creation
 --------------
-For static geometry, we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
+For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
 For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. These formats are widely supported in 3D modeling software.
 
 License

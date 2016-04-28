@@ -80,28 +80,8 @@ end;
 {$I 'navigator'}
 {$I 'dce'}
 {$I 'fps'}
+{$I 'mirror'}
 {$I 'text'}
-
-function MirrorCreate(target, parent: real): real; stdcall;
-var
-  mi: TGLMirror;
-begin
-  if not (parent=0) then
-    mi := TGLMirror.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    mi := TGLMirror.CreateAsChild(scene.Objects);
-  mi.MirrorObject := TGLBaseSceneObject(trunc64(target)); 
-  Result := Integer(mi);
-end;
-
-function MirrorSetObject(mirror, target: real): real; stdcall;
-var
-  mi: TGLMirror;
-begin
-  mi := TGLMirror(trunc64(mirror));
-  mi.MirrorObject := TGLBaseSceneObject(trunc64(target)); 
-  Result := 1.0;
-end;
 
 exports
 
@@ -319,6 +299,9 @@ FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,
 FpsManagerAddMap, FpsManagerRemoveMap, FpsManagerMapSetCollisionGroup,
 FpsSetManager, FpsSetCollisionGroup, FpsSetSphereRadius, FpsSetGravity,
 FpsMove, FpsStrafe, FpsLift, FpsGetVelocity,
+//Mirror
+MirrorCreate, MirrorSetObject, MirrorSetOptions,
+MirrorSetShape, MirrorSetDiskOptions,
 //Text
 TextRead;
 
