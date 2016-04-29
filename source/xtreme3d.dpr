@@ -14,7 +14,7 @@ uses
   GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
-  GLNavigator, GLFPSMovement, GLMirror;
+  GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning;
 
 type
    TEmpty = class(TComponent)
@@ -82,6 +82,73 @@ end;
 {$I 'fps'}
 {$I 'mirror'}
 {$I 'text'}
+
+function OctreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; stdcall;
+var
+  octree: TOctreeSpacePartition;
+begin
+  octree := TOctreeSpacePartition.Create();
+  octree.MaxTreeDepth := trunc64(maxdepth);
+  octree.LeafThreshold := trunc64(leafthreshold);
+  octree.GrowGravy := growgravy;
+  if culling = 0 then octree.CullingMode := cmFineCulling;
+  if culling = 1 then octree.CullingMode := cmGrossCulling;
+  result := Integer(octree);
+end;
+
+function QuadtreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; stdcall;
+var
+  quadtree: TQuadtreeSpacePartition;
+begin
+  quadtree := TQuadtreeSpacePartition.Create();
+  quadtree.MaxTreeDepth := trunc64(maxdepth);
+  quadtree.LeafThreshold := trunc64(leafthreshold);
+  quadtree.GrowGravy := growgravy;
+  if culling = 0 then quadtree.CullingMode := cmFineCulling;
+  if culling = 1 then quadtree.CullingMode := cmGrossCulling;
+  result := Integer(quadtree);
+end;
+
+function PartitionDestroy(tree: real): real; stdcall;
+var
+  t: TSectoredSpacePartition;
+begin
+  t := TSectoredSpacePartition(trunc64(tree));
+  t.Free;
+  result := 1.0;
+end;
+
+function PartitionAddLeaf(tree, obj: real): real; stdcall;
+var
+  t: TSectoredSpacePartition;
+  tobj: TSceneObj;
+begin
+  t := TSectoredSpacePartition(trunc64(tree));
+  tobj := TSceneObj.CreateObj(t, TGLBaseSceneObject(trunc64(obj)));
+  result := Integer(tobj);
+end;
+
+function PartitionLeafChanged(leaf: real): real; stdcall;
+var
+  pleaf: TSpacePartitionLeaf;
+begin
+  pleaf := TSpacePartitionLeaf(trunc64(leaf));
+  pleaf.Changed;
+  result := 1.0;
+end;
+
+{
+function PartitionQueryFrustum(tree, viewer: real): real; stdcall;
+var
+  t: TSectoredSpacePartition;
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  t := TSectoredSpacePartition(trunc64(tree));
+  //t.QueryFrustum(v.);
+  result := 1.0;
+end;
+}
 
 exports
 
