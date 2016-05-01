@@ -4,7 +4,7 @@ Once upon a time, there was a great 3D graphics engine for Game Maker - Xtreme3D
 
 This project is not connected in any way with the original Xtreme3D developer. All code was written from scratch.
 
-The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Tree, Trail, Partition, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
+The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Lines, Tree, Trail, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
 
 Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
@@ -34,15 +34,17 @@ Features
 * Procedural skydome with Sun, stars and day/night cycle
 * Dynamic shadows
 * Built-in game-oriented collision system (DCE, FPSManager)
+* Octree and quadtree to speed-up rendering and collision tests
 * + a lot more
 
 Asset Creation
 --------------
-For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
+For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter. Probably we will make a tutorial soon.
+
 For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. These formats are widely supported in 3D modeling software.
 
 License
 -------
 GLScene is distributed under Mozilla Public License 1.1. 
 
-Xtreme3D v3 is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you  don't modify the source code and only use compiled version of the library for linking.
+Xtreme3D v3 is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
