@@ -41,7 +41,7 @@ Asset Creation
 --------------
 For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter. Probably we will make a tutorial soon.
 
-For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. These formats are widely supported in 3D modeling software.
+For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. You can use MD5 exporter for Blender to create models in this format - find it in tools/blender-md5-exporter.
 
 License
 -------
