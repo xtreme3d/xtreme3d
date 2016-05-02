@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLCamera</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>Назначение объекта камера (Camera) ясно из названия - это точка обзора сцены, которая, как и другие 
 объекты, имеет позицию и ориентацию в пространстве. Вы можете создать несколько камер и переключаться 
 между ними в любое время функцией </A><A class=funclink href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A><A>. Можно также "привязать" 
@@ -35,7 +33,7 @@
 <A class=type>real</A><A> );</A>
 <BR><A>Задает так называемый стиль камеры (cs) - метод проекции на экран. Доступны следующие значения cs:</A>
 <BR><A class=constant name="csPerspective">csPerspective</A><A> = 0 - перспектива (значение по умолчанию);</A>
-<BR><A class=constant name="csOrthogonal">csOrthogonal</A><A> = 1 - ортографическая проекция (без перспективного сокращения). Ортографическая проекция под углом 45 градусов называется изометрией;</A>
+<BR><A class=constant name="csOrthogonal">csOrthogonal</A><A> = 1 - ортографическая (параллельная) проекция (без перспективного сокращения). Ортографическая проекция под углом 45 градусов называется изометрией;</A>
 <BR><A class=constant name="csOrtho2D">csOrtho2D</A><A> = 2 - бесконечная ортографическая проекция. Значение, задаваемое функцией 
 </A><A class=funclink href=../functions/camera.htm#CameraSetViewDepth>CameraSetViewDepth</A><A> (дальность обзора) игнорируется;</A>
 <BR><A class=constant name="csInfinitePerspective">csInfinitePerspective</A><A> = 3 - бесконечная перспектива. Значение, задаваемое функцией 
@@ -57,7 +55,7 @@
 <H1 class=name>CameraSetSceneScale</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraSetSceneScale</A><A>( cam,scale as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Задает масштаб изображения камеры (линейный зум). Аналог </A><A class=funclink href=../functions/camera.htm#CameraSetFocal>CameraSetFocal</A><A>, но не затрагивающий перспективное сокращение.</A>
+<BR><A>Задает масштаб изображения камеры. По сути, аналог </A><A class=funclink href=../functions/camera.htm#CameraSetFocal>CameraSetFocal</A><A>, но не затрагивающий перспективное сокращение.</A>
 <BR><A>cam - id камеры</A>
 <BR><A>scale - масштаб (значение по умолчанию: 1).</A>
 <HR>
@@ -85,7 +83,7 @@
 <H1 class=name>CameraSetTargetObject</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraSetTargetObject</A><A>( cam,obj as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Назначает объект-цель камеры. При этом камера будет всегда направлена на цель, где бы она ни находилась, а обычные функции поворота игнорируются. Целью может быть любой другой объект, например, персонаж, которым управляет  игрок.</A>
+<BR><A>Назначает объект-цель камеры. При этом камера будет всегда направлена на цель, где бы она ни находилась, а обычные функции поворота игнорируются. Целью может быть любой объект - например, персонаж, которым управляет игрок.</A>
 <BR><A>Обратите внимание, что назначение объекта-цели не "привязывает" камеру к объекту - при перемещении цели камера останется на месте.</A>
 <BR><A>cam - id камеры</A>
 <BR><A>obj - id объекта-цели.</A>
@@ -95,7 +93,7 @@
 <H1 class=name>CameraMoveAroundTarget</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraMoveAroundTarget</A><A>( cam,pitch,turn as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Вращает камеру вокруг ее объекта-цели (как планеты вращаются вокруг Солнца). Вращение осуществляется по двум осям - X и Y.</A>
+<BR><A>Вращает камеру вокруг ее объекта-цели. Вращение осуществляется по двум осям - X и Y.</A>
 <BR><A>cam - id камеры</A>
 <BR><A>pitch - угол поворота по оси X</A>
 <BR><A>turn - угол поворота по оси Y.</A>
@@ -105,7 +103,7 @@
 <H1 class=name>CameraSetDistanceToTarget</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraSetDistanceToTarget</A><A>( cam,distance as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Изменяет расстояние между камерой и ее объектом-целью. Фактически, приближает или отдаляет камеру относительно цели. </A>
+<BR><A>Изменяет расстояние между камерой и ее объектом-целью (приближает или отдаляет камеру относительно цели). </A>
 <BR><A>cam - id камеры</A>
 <BR><A>distance - расстояние.</A>
 <HR>
@@ -125,7 +123,161 @@
 <BR><A>Копирует содержимое камеры (отрисованное изображение) в текстуру материала. </A>
 <BR><A>cam - id камеры</A>
 <BR><A>material - имя материала</A>
-<BR><A>width, height - ширина и высота генерируемой текстуры в пикселях.</A>
+<BR><A>width, height - ширина и высота генерируемой текстуры в пикселях. Должны быть степенью двойки (то есть, например, 128, 256, 512 и т.д.).</A>
+<HR>
+
+<A name="CameraGetNearPlane"></A>
+<H1 class=name>CameraGetNearPlane</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraGetNearPlane</A><A>( cam as </A>
+<A class=type>real</A><A> ).</A>
+<BR><A>Возвращает расстояние до ближней плоскости отсечения камеры (то есть, плоскости, ближе которой ничего не рисуется).</A>
+<BR><A>cam - id камеры.</A>
+<HR>
+
+<A name="CameraSetNearPlaneBias"></A>
+<H1 class=name>CameraSetNearPlaneBias</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraSetNearPlaneBias</A><A>( cam,bias as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Задает коэффициент ближней плоскости отсечения камеры. Напрямую изменить ближнюю плоскость (как это делается для дальней плоскости функцией </A><A class=funclink href=../functions/camera.htm#CameraSetViewDepth>CameraSetViewDepth</A><A>) невозможно - она вычисляется по специальной формуле с учетом угла зрения и разрешения вида. С помощью данного коэффициента можно смещать плоскость вперед (значения больше 1) или назад (значения меньше 1).</A>
+<BR><A>cam - id камеры</A>
+<BR><A>bias - коэффициент (значение по умолчанию: 1).</A>
+<HR>
+
+<A name="CameraAbsoluteVectorToTarget"></A>
+<H1 class=name>CameraAbsoluteVectorToTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraAbsoluteVectorToTarget</A><A>( cam,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор Z в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление от камеры к объекту-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Direction.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraAbsoluteRightVectorToTarget"></A>
+<H1 class=name>CameraAbsoluteRightVectorToTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraAbsoluteRightVectorToTarget</A><A>( cam,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор X в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление вправо от камеры относительно ее объекта-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Right.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraAbsoluteUpVectorToTarget"></A>
+<H1 class=name>CameraAbsoluteUpVectorToTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraAbsoluteUpVectorToTarget</A><A>( cam,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор Y в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление вверх от камеры относительно ее объекта-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Up.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraZoomAll"></A>
+<H1 class=name>CameraZoomAll</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraZoomAll</A><A>( cam as </A>
+<A class=type>real</A><A> ).</A>
+<BR><A>Располагает камеру таким образом, чтобы она охватывала все объекты сцены.</A>
+<BR><A>cam - id камеры.</A>
+<HR>
+
+<A name="CameraScreenDeltaToVector"></A>
+<H1 class=name>CameraScreenDeltaToVector</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraScreenDeltaToVector</A><A>( cam,deltax,deltay,ratio,normx,normy,normz,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Вычисляет абсолютный вектор переноса, соответствующий экранному вектору переноса камеры. Полезная функция для реализации элементов пользовательского интерфейса на сцене (3D-манипуляторов).</A>
+<BR><A>cam - id камеры</A>
+<BR><A>deltax,deltay - целочисленный экранный вектор переноса</A>
+<BR><A>ratio - коэфициент, на который умножается экранный вектор</A>
+<BR><A>normx,normy,normz - нормаль плоскости, в которой следует вычислить трехмерный перенос</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraScreenDeltaToVectorXY"></A>
+<H1 class=name>CameraScreenDeltaToVectorXY</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraScreenDeltaToVectorXY</A><A>( cam,deltax,deltay,ratio,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Функция делает то же, что </A><A class=funclink href=../functions/camera.htm#CameraScreenDeltaToVector>CameraScreenDeltaToVector</A><A>, 
+но оптимизирована для работы в плоскости XY.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>deltax,deltay - целочисленный экранный вектор переноса</A>
+<BR><A>ratio - коэфициент, на который умножается экранный вектор</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraScreenDeltaToVectorXZ"></A>
+<H1 class=name>CameraScreenDeltaToVectorXZ</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraScreenDeltaToVectorXZ</A><A>( cam,deltax,deltay,ratio,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Функция делает то же, что </A><A class=funclink href=../functions/camera.htm#CameraScreenDeltaToVector>CameraScreenDeltaToVector</A><A>, 
+но оптимизирована для работы в плоскости XZ.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>deltax,deltay - целочисленный экранный вектор переноса</A>
+<BR><A>ratio - коэфициент, на который умножается экранный вектор</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraScreenDeltaToVectorYZ"></A>
+<H1 class=name>CameraScreenDeltaToVectorYZ</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraScreenDeltaToVectorYZ</A><A>( cam,deltax,deltay,ratio,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Функция делает то же, что </A><A class=funclink href=../functions/camera.htm#CameraScreenDeltaToVector>CameraScreenDeltaToVector</A><A>, 
+но оптимизирована для работы в плоскости XZ.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>deltax,deltay - целочисленный экранный вектор переноса</A>
+<BR><A>ratio - коэфициент, на который умножается экранный вектор</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraAbsoluteEyeSpaceVector"></A>
+<H1 class=name>CameraAbsoluteEyeSpaceVector</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraAbsoluteEyeSpaceVector</A><A>( cam,fordist,rightdist,updist,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>fordist,rightdist,updist - сведения отсутствуют</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="CameraSetAutoLeveling"></A>
+<H1 class=name>CameraSetAutoLeveling</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraSetAutoLeveling</A><A>( cam,factor as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>factor - сведения отсутствуют.</A>
+<HR>
+
+<A name="CameraMoveInEyeSpace"></A>
+<H1 class=name>CameraMoveInEyeSpace</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraMoveInEyeSpace</A><A>( cam,fordist,rightdist,updist as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>fordist,rightdist,updist - сведения отсутствуют.</A>
+<HR>
+
+<A name="CameraMoveTargetInEyeSpace"></A>
+<H1 class=name>CameraMoveTargetInEyeSpace</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraMoveTargetInEyeSpace</A><A>( cam,fordist,rightdist,updist as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>fordist,rightdist,updist - сведения отсутствуют.</A>
+<HR>
+
+<A name="CameraPointInFront"></A>
+<H1 class=name>CameraPointInFront</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraPointInFront</A><A>( cam,x,y,z as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="CameraGetFieldOfView"></A>
+<H1 class=name>CameraGetFieldOfView</H1>
+<A class=type>real</A><A> = </A><A class=function>CameraGetFieldOfView</A><A>( cam as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>cam - id камеры.</A>
 <HR>
 
 </DIV>
