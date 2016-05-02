@@ -4,7 +4,7 @@ Once upon a time, there was a great 3D graphics engine for Game Maker - Xtreme3D
 
 This project is not connected in any way with the original Xtreme3D developer. All code was written from scratch.
 
-The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Lines, Tree, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
+The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. It is not finished yet, the following functionality is missing: Lines, ODE. The code is compatible with Delphi 7 and higher (Lazarus support is  also theoretically possible with some minor changes, we will return to this when the codebase will be ready).
 
 Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
@@ -31,7 +31,8 @@ Features
 * 2D sprites and text
 * 3D text
 * Skyboxes
-* Procedural skydome with Sun, stars and day/night cycle
+* Procedural skydome with sun, stars and day/night cycle
+* Procedural trees
 * Dynamic shadows
 * Built-in game-oriented collision system (DCE, FPSManager)
 * Octree and quadtree to speed-up rendering and collision tests
