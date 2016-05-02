@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Actor</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Actor</H1>
+
+<A class=type>Класс: TGLActor</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>Актер (Actor) - анимированный объект, загружаемый из внешнего файла. Поддерживаются форматы MD2 (Quake II), MD3 (Quake III), MD5 (Doom III), SMD (Half-Life). Гарантированная полная поддержка распространяется на MD2 и SMD - основные форматы вертексной и скелетной анимации.
+<BR>В случае вертексной анимации, в памяти хранятся отдельные модели для каждого ключевого кадра. Вершины полигональной сетки просто интерполируются от одного положения к другому.
+<BR>Скелетная анимация подразумевает наличие только одной модели в нейтральной позе и набора матриц, которые трансформируют отдельные части этой модели. Эти матрицы условно называют костями. Иными словами, в модель встроен "скелет" из этих костей - при повороте отдельной кости, поворачивается и соответствующая часть тела.
+<BR><HR>
+
+<A name="ActorCreate"></A>
+<H1 class=name>ActorCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorCreate</A><A>( filename as </A><A class=type>string</A><A>, parent as </A><A class=type>real</A> );</A>
+<BR><A>Создает нового актера и возвращает его id.</A>
+<BR><A>fname - путь к файлу модели</A>
+<BR><A>parent - id родителя для актера (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="ActorCopy"></A>
+<H1 class=name>ActorCopy</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorCopy</A><A>( actor,parent as </A><A class=type>real</A> );</A>
+<BR><A>Создает копию уже существующего актера и возвращает ее id.</A>
+<BR><A>actor - id актера</A>
+<BR><A>parent - id родителя для копии (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="ActorSetAnimationRange"></A>
+<H1 class=name>ActorSetAnimationRange</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSetAnimationRange</A><A>( actor,start,end as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает начальный и конечный кадр анимации.</A>
+<BR><A>actor - id актера</A>
+<BR><A>start,end - начальный и конечный кадр. Отсчет кадров начинается с нуля.</A>
+<HR>
+
+<A name="ActorGetCurrentFrame"></A>
+<H1 class=name>ActorGetCurrentFrame</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetCurrentFrame</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает текущий кадр анимации.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorSwitchToAnimation"></A>
+<H1 class=name>ActorSwitchToAnimation</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSwitchToAnimation</A><A>( actor,anim as </A><A class=type>real</A><A> );</A>
+<BR><A>Совершает переход к заданной анимационной последовательности.</A>
+<BR><A>actor - id актера</A>
+<BR><A>anim - порядковый номер анимации.</A>
+<HR>
+
+<A name="ActorSynchronize"></A>
+<H1 class=name>ActorSynchronize</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSynchronize</A><A>( actor1,actor2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Синхронизирует анимацию актера 1 с актером 2.</A>
+<BR><A>actor1 - id актера 1</A>
+<BR><A>actor2 - id актера 2.</A>
+<HR>
+
+<A name="ActorSetInterval"></A>
+<H1 class=name>ActorSetInterval</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSetInterval</A><A>( actor,interval as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает временной интервал интерполяции между двумя кадрами. Чем выше это значение - тем медленнее анимация.</A>
+<BR><A>actor - id актера</A>
+<BR><A>interval - интервал (в миллисекундах).</A>
+<HR>
+
+<A name="ActorSetAnimationMode"></A>
+<H1 class=name>ActorSetAnimationMode</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSetAnimationMode</A><A>( actor,aam as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает режим воспроизведения анимации.</A>
+<BR><A>actor - id актера</A>
+<BR><A>aam - режим анимации. Доступны следующие значения aam:</A>
+<BR><A class=constant name="aamNone">aamNone</A><A> = 0 - анимация не воспроизводится;</A>
+<BR><A class=constant name="aamPlayOnce">aamPlayOnce</A><A> = 1 - анимация воспроизводится один раз и останавливается при достижении конечного кадра;</A>
+<BR><A class=constant name="aamLoop">aamLoop</A><A> = 2 - повторяется циклически (по умолчанию);</A>
+<BR><A class=constant name="aamBounceForward">aamBounceForward</A><A> = 3 - повторяется циклически вперед до конечного кадра, затем в обратную сторону до начального кадра, затем опять вперед и так далее;</A>
+<BR><A class=constant name="aamBounceBackward">aamBounceBackward</A><A> = 4 - то же самое, но в обратную сторону;</A>
+<BR><A class=constant name="aamLoopBackward">aamLoopBackward</A><A> = 5 - повторяется циклически в обратную сторону.</A>
+<HR>
+
+<A name="ActorSetFrameInterpolation"></A>
+<H1 class=name>ActorSetFrameInterpolation</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSetFrameInterpolation</A><A>( actor,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает линейную интерполяцию между кадрами. При выключенной интерполяции будет резкая смена кадров.</A>
+<BR><A>actor - id актера</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ActorAddObject"></A>
+<H1 class=name>ActorAddObject</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorAddObject</A><A>( actor as </A><A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Особенность моделей формата SMD - раздельное хранение модели и анимации скелета. Данная функция добавляет актеру новую анимационную последовательность из файла SMD и присваивает ей порядковый номер. Отсчет ведется с 1.</A>
+<BR><A>actor - id актера</A>
+<BR><A>fname - путь к файлу *.smd с анимацией.</A>
+<HR>
+
+<A name="ActorGetCurrentAnimation"></A>
+<H1 class=name>ActorGetCurrentAnimation</H1>
+<A class=type>string,real</A><A> = </A><A class=function>ActorGetCurrentAnimation</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает текущую анимационную последовательность. Для моделей формата SMD это будет путь к файлу анимации без расширения, например 'models/animation1'. Для моделей MD2 и MD3 функция возвращает порядковый номер анимации.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorGetFrameCount"></A>
+<H1 class=name>ActorGetFrameCount</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetFrameCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает общее количество кадров анимации.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorGetBoneCount"></A>
+<H1 class=name>ActorGetBoneCount</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetBoneCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает общее количество костей в скелете актера.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorGetBoneByName"></A>
+<H1 class=name>ActorGetBoneByName</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetBoneByName</A><A>( actor as </A><A class=type>real</A><A>, bonename as </A><A class=type>string</A><A> );</A>
+<BR><A>Возвращает индекс кости с заданным именем.</A>
+<BR><A>actor - id актера</A>
+<BR><A>bonename - имя кости.</A>
+<HR>
+
+<A name="ActorRotateBone"></A>
+<H1 class=name>ActorRotateBone</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorRotateBone</A><A>( actor,boneindex,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Поворачивает кость.</A>
+<BR><A>actor - id актера</A>
+<BR><A>boneindex - индекс кости</A>
+<BR><A>x,y,z - углы поворота по трем осям.</A>
+<HR>
+
+<A name="ObjectClueToBone"></A>
+<H1 class=namenew>ObjectClueToBone</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectClueToBone</A><A>( object,actor,boneindex as </A><A class=type>real</A><A> );</A>
+<BR><A>Синхронизирует локальный поворот заданного объекта с локальным поворотом кости заданного актера. Обратите внимание, что данная функция не "прикрепляет" объект к кости, она лишь синхронизирует углы поворота. Для точного "прикрепления" необходимо воссоздать всю иерархию костей, начиная с корневой, используя объекты Dummycube.</A>
+<BR><A>object - id объекта</A>
+<BR><A>actor - id актера</A>
+<BR><A>boneindex - индекс кости</A>
+<HR>
+
+<A name="ActorGetBoneRotation"></A>
+<H1 class=namenew>ActorGetBoneRotation</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetBoneRotation</A><A>( actor,boneindex,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает локальный угол поворота кости по заданной оси.</A>
+<BR><A>actor - id актера</A>
+<BR><A>boneindex - индекс кости</A>
+<BR><A>index - ось x, y или z (0, 1 и 2 соответственно).</A>
+<HR>
+
+<A name="ActorMoveBone"></A>
+<H1 class=name>ActorMoveBone</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorMoveBone</A><A>( actor,boneindex,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Перемещает кость.</A>
+<BR><A>actor - id актера</A>
+<BR><A>boneindex - индекс кости</A>
+<BR><A>x,y,z - координаты смещения по трем осям.</A>
+<HR>
+
+<A name="ActorGetBonePosition"></A>
+<H1 class=namenew>ActorGetBonePosition</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetBonePosition</A><A>( actor,boneindex,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает координату локального смещения кости по заданной оси.</A>
+<BR><A>actor - id актера</A>
+<BR><A>boneindex - индекс кости</A>
+<BR><A>index - ось x, y или z (0, 1 и 2 соответственно).</A>
+<HR>
+
+<A name="ActorShowSkeleton"></A>
+<H1 class=name>ActorShowSkeleton</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorShowSkeleton</A><A>( actor,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает схематичное отображение скелета.</A>
+<BR><A>actor - id актера</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

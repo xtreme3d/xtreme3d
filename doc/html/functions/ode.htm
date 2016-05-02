@@ -1,0 +1,745 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>ODE</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Open Dynamics Engine (ODE)</H1>
+
+<A class=type>Класс: TGLODEStatic, TGLODEDynamic, TGLODEElementBox, TGLODEElementSphere, 
+TGLODEElementPlane, 
+<BR>TGLODEElementCylinder, TGLODEElementCapsule, TGLODEElementCone, TGLODEElementTriMesh,  
+<BR>TODEJointBall, TODEJointFixed, TODEJointHinge, TODEJointHinge2, TODEJointSlider, TODEJointUniversal</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>
+Xtreme3D поддерживает ODE - популярный свободный физический движок. 
+<BR>При помощи ODE вы можете создать объекты, которые ведут себя как в реальности, т.е. подчинены 
+законам физики. Такие объекты называются телами (body). Тела в ODE бывают двух типов - статические и 
+динамические. Динамические тела подчинены различным силам (силе тяжести, трения, линейным и вращающим импульсам 
+и т.д.), которые приводят их в движение. Статические тела неподвижны. 
+<BR><BR>Все тела в ODE представлены геометрическими объектами, определяющими характер их взаимодействий. 
+Эти объекты (геометрии) включают сферу, прямоугольный параллелепипед, плоскость, конус, цилиндр, цилиндр с верхушкой и 
+полигональная сетка. Вы можете использовать сколь угодно сложные полигональные объекты, которые будут представлены 
+в ODE как простые параллелепипеды или цилиндры, и таким образом получите выйгрыш в производительности.
+<BR><BR>Тела соединяются друг с другом при помощи сочленений (joint). Это невидимые объекты, которые удерживают 
+тела на некотором расстоянии и/или под определенным углом относительно друг от друга, одновременно предоставляя 
+им ограниченную свободу движения или вращения.
+<BR><BR>Когда сочленение создано, ничто не препятствует его движению в любом направлении. 
+Этот диапазон движений может быть ограничен при помощи остановок (stops) в сочленении. Угол 
+или позиция сочленения будут предохранены от достижения меньше заданного минимального порога 
+или превышения заданного верхнего порога. 
+<BR>Так же как и остановки, многие типы сочленений могут иметь двигатели (motors). Двигатели прикладывают 
+вращающую или линейную силу к сочленениям для достижения желаемой скорости в точке вращения или 
+скольжения. Двигатели имеют два параметра: желаемая скорость и максимальная сила, с помощью которой может 
+быть достигнута эта скорость.
+<BR>
+<BR>Примечание: для использования ODE необходимо скопировать файл ode.dll в директорию с проектом.
+</A>   
+<BR>
+<HR>
+
+<H1 class=name>OdeManagerCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerCreate</A><A>();</A>
+<BR><A>Создает менеджер ODE.</A>
+<HR>
+
+<H1 class=name>OdeManagerDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerDestroy</A><A>();</A>
+<BR><A>Уничтожает менеджер ODE.</A>
+<HR>
+
+<H1 class=name>OdeManagerStep</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerStep</A><A>( delta as </A><A class=type>real</A><A> );</A>
+<BR><A>Совершает шаг интегрирования - вычисления текущих состояний объектов ODE.</A>
+<BR><A>delta - размер шага.</A>
+<HR>
+
+<H1 class=name>OdeManagerGetNumContactJoints</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerGetNumContactJoints</A><A>();</A>
+<BR><A>Сведения отсутствуют.</A>
+<HR>
+
+<H1 class=name>OdeManagerSetGravity</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetGravity</A><A>( x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает вектор гравитации. Для Земли этот вектор будет соответствовать (0,-0.981,0).</A>
+<BR><A>x,y,z - вектор гравитации.</A>
+<HR>
+
+<H1 class=name>OdeManagerSetSolver</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetSolver</A><A>( osm as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает метод интегрирования (osm). Доступны следующие значения: </A>
+<BR>
+<BR><A class=constant name="osmStep">osmStep</A><A> = 0 - используется метод большой матрицы, который 
+требует времени расчета порядка m<SUP>3</SUP> и памяти порядка m<SUP>2</SUP>, где m - общее количество строк матрицы. Для больших систем 
+требуется много памяти, скорость работы будет низка, но на текущий момент это самый точный метод.</A>
+<BR>
+<BR><A class=constant name="osmStepFast">osmStepFast</A><A> = 1 - для  больших  систем </A><A class=constant>osmStep</A><A> может потребовать  
+много памяти и времени для расчета. </A><A class=constant>osmStepFast</A><A> обеспечивает альтернативный путь решения этой проблемы, жертвуя точностью. 
+</A><A class=constant>osmStepFast</A><A> не зависит от количества итераций в одном шаге. Используйте этот метод, когда у вас имеется немного параметров, 
+влияющих на стабильность, и вы хотите использовать преимущества скорости или расхода памяти. Другой совет использования 
+</A><A class=constant>osmStepFast</A><A> - это сразу ориентироваться на этот метод, если вы знаете что будете строить большие миры с большим количеством 
+физических объектов. Последний совет по использованию </A><A class=constant>osmStepFast</A><A> - это использовать его только там, где это необходимо. 
+Поскольку </A><A class=constant>osmStepFast</A><A> использует такие же структуры тела и мира как и </A><A class=constant>osmStep</A><A>, то можно переключатся между ними.</A>
+<BR>
+<BR><A class=constant name="osmQuickStep">osmQuickStep</A><A> = 2 - используется метод итераций, который требует 
+времени порядка m*N и памяти порядка m, где m - общее количество строк матрицы и N - количество итераций. Для больших систем 
+это работает намного быстрее, чем </A><A class=constant>osmStep</A><A>, но менее точно. </A><A class=constant>osmQuickStep</A><A> отлично подходит для большого количества объектов, 
+особенно вместе с авто-выключением (см. ниже). Тем не менее, имеет не очень хорошую точность для неустойчивых систем (near-singular). 
+Система может становиться неустойчивой, когда используются контакты с сильным трением, двигатели и определенные составные структуры. 
+Например, робот с несколькими ногами. Увеличение итераций в </A><A class=constant>osmQuickStep</A><A>  может немного помочь, но не сильно, если система неустойчива. </A>
+<HR>
+
+<H1 class=name>OdeManagerSetIterations</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetIterations</A><A>( iterations as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество итераций, которые использует метод </A><A class=constant>osmQuickStep</A><A> на каждом шаге расчета.</A>
+<BR><A>iterations - количество итераций (по умолчанию 20).</A>
+<HR>
+
+<H1 class=name>OdeManagerSetMaxContacts</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetMaxContacts</A><A>( maxcontacts as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>maxcontacts - cведения отсутствуют.</A>
+<HR>
+
+<H1 class=name>OdeManagerSetVisible</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetVisible</A><A>( mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Переключает режим видимости геометрии тел. По умолчанию видимость выключена.</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeManagerSetGeomColor</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeManagerSetGeomColor</A><A>( color as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает цвет отображения линий геометрии тел. По умолчанию цвет красный (255,0,0).</A>
+<BR><A>color - цвет.</A>
+<HR>
+
+<H1 class=namenew>OdeWorldSetAutoDisableFlag</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableFlag</A><A>( flag as </A><A class=type>real</A><A> );</A>
+<BR><A>Каждое тело может быть включено (enabled) или выключено (disabled). Включенные тела участвуют в 
+симуляции, в то время как выключенные тела деактивированы, и их состояния не обновляются во время 
+шагов симуляции. Новые тела всегда создаются во включенном состоянии. Выключенные тела, которые соединены 
+сочленениями (joint) с включенными телами, автоматически включаются на следующем шаге симуляции. 
+<BR>Выключенные тела не тратят время процессора, поэтому неподвижные тела надо отключать. Это может 
+быть сделано автоматически при помощи возможностей автовыключения (AutoDisable). 
+<BR>Если флаг авто-выключения установлен, то тела будут автоматически выключаться, если: 
+<BR>1) Они будут бездействовать заданное количество шагов симуляции; 
+<BR>2) Они будут бездействовать заданное время симуляции. 
+<BR>Тело считается бездействующим, если величина линейной и угловых скоростей меньше заданного порога. 
+Таким образом, каждое тело имеет пять параметров автовыключения: флаг включения (flag), количество 
+шагов бездействия (steps), время бездействия (time), пороги линейной (linear threshold) и угловой (angular 
+threshold) скорости. Только что созданные тела берут эти параметры из менеджера ODE.</A>
+<BR><A>flag - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (по умолчанию </A><A class=constant>false</A><A>).</A>
+<HR>
+
+<H1 class=namenew>OdeWorldSetAutoDisableLinearThreshold</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableLinearThreshold</A><A>( velocity as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает порог линейной скорости автовыключения.</A>
+<BR><A>velocity - линейная скорость (по умолчанию 0.01).</A>
+<HR>
+
+<H1 class=namenew>OdeWorldSetAutoDisableAngularThreshold</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableAngularThreshold</A><A>( velocity as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает порог угловой скорости автовыключения.</A>
+<BR><A>velocity - угловая скорость (по умолчанию 0.01).</A>
+<HR>
+
+<H1 class=namenew>OdeWorldSetAutoDisableSteps</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableSteps</A><A>( steps as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество шагов бездействия автовыключения.</A>
+<BR><A>steps - количество шагов (по умолчанию 10).</A>
+<HR>
+
+<H1 class=namenew>OdeWorldSetAutoDisableTime</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableTime</A><A>( time as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает время бездействия автовыключения.</A>
+<BR><A>time - время (по умолчанию 0).</A>
+<HR>
+
+<H1 class=namenew>OdeDynamicSetAutoDisableFlag</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableFlag</A><A>( object,flag as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает флаг автовыключения динамического тела.</A>
+<BR><A>flag - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=namenew>OdeDynamicSetAutoDisableLinearThreshold</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableLinearThreshold</A><A>( object,velocity as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает порог линейной скорости автовыключения динамического тела.</A>
+<BR><A>velocity - линейная скорость.</A>
+<HR>
+
+<H1 class=namenew>OdeDynamicSetAutoDisableAngularThreshold</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableAngularThreshold</A><A>( object,velocity as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает порог угловой скорости автовыключения динамического тела.</A>
+<BR><A>velocity - угловая скорость.</A>
+<HR>
+
+<H1 class=namenew>OdeDynamicSetAutoDisableSteps</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableSteps</A><A>( object,steps as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество шагов бездействия автовыключения динамического тела.</A>
+<BR><A>steps - количество шагов.</A>
+<HR>
+
+<H1 class=namenew>OdeDynamicSetAutoDisableTime</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableTime</A><A>( object,time as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает время бездействия автовыключения динамического тела.</A>
+<BR><A>time - время.</A>
+<HR>
+
+<H1 class=name>OdeStaticCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeStaticCreate</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает статическое тело и возвращает его id. Объект object выступает в роли объекта привязки - то есть, для того, 
+чтобы тело было видимо, необходимо создать соответствующий объект Xtreme3D. Другими словами, функция создает физическую 
+модель в ODE для объекта Xtreme3D. После привязки объекта к статическому телу, его все еще можно перемещать обычными функциями Xtreme3D.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeDynamicCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicCreate</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает динамическое тело и возвращает его id. Объект object выступает в роли объекта привязки - то есть, для того, 
+чтобы тело было видимо, необходимо создать соответствующий объект Xtreme3D. Другими словами, функция создает физическую 
+модель в ODE для объекта Xtreme3D. После привязки объекта к динамическому телу, он полностью подчиняется ODE и его невозможно перемещать обычными функциями Xtreme3D.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAlignObject</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAlignObject</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeDynamicEnable</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicEnable</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает динамическое тело. Включенные тела участвуют в симуляции, в то время 
+как выключенные тела деактивированы и их состояния не обновляются. Новые тела всегда создаются во включенном 
+состоянии. Выключенные тела, которые соединены сочленениями с включенными телами, автоматически 
+включаются на следующем шаге симуляции. Поэтому, если требуется выключить такие тела, необходимо 
+выключить и их сочленения. </A>
+<BR><A>object - id объекта</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeDynamicCalibrateCenterOfMass</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicCalibrateCenterOfMass</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddForce</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddForce</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с абсолютным вектором к центру массы динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор силы.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddForceAtPos</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddForceAtPos</A><A>( object,x,y,z,px,py,pz as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с абсолютным вектором к заданной абсолютной точке динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор силы</A>
+<BR><A>px,py,pz - абсолютные координаты точки.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddForceAtRelPos</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddForceAtRelPos</A><A>( object,x,y,z,px,py,pz as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с абсолютным вектором к заданной локальной точке динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор силы</A>
+<BR><A>px,py,pz - локальные координаты точки.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForce</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddRelForce</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с локальным вектором к центру массы динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - локальный вектор силы.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForceAtPos</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddRelForceAtPos</A><A>( object,x,y,z,px,py,pz as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с локальным вектором к заданной абсолютной точке динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - локальный вектор силы</A>
+<BR><A>px,py,pz - абсолютные координаты точки.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForceAtRelPos</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddRelForceAtRelPos</A><A>( object,x,y,z,px,py,pz as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает линейную силу с локальным вектором к заданной локальной точке динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - локальный вектор силы</A>
+<BR><A>px,py,pz - локальные координаты точки.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddTorque</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddTorque</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает вращающую силу вокруг абсолютной оси динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор оси вращения.</A>
+<HR>
+
+<H1 class=name>OdeDynamicAddRelTorque</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicAddRelTorque</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает вращающую силу вокруг локальной оси динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - локальный вектор оси вращения.</A>
+<HR>
+
+<H1 class=name>OdeDynamicGetContactCount</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicGetContactCount</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество точек контакта динамического тела, обнаруженных проверкой столкновения.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeDynamicGetContact</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicGetContact</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - сведения отсутствуют.</A>
+<HR>
+
+<H1 class=name>OdeStaticGetContactCount</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeStaticGetContactCount</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество точек контакта статического тела, обнаруженных проверкой столкновения.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeStaticGetContact</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeStaticGetContact</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - сведения отсутствуют.</A>
+<HR>
+
+<H1 class=name>OdeAddBox</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddBox</A><A>( object,width,height,depth as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию прямоугольного параллелепипеда и возвращает ее id.</A>
+<BR><A>object - id объекта</A>
+<BR><A>width,height,depth - длины сторон параллелепипеда.</A>
+<HR>
+
+<H1 class=name>OdeAddCapsule</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddCapsule</A><A>( object,length,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию цилиндра с верхушкой, или капсулы и возвращает ее id. 
+Цилиндр с верхушкой похож на обычный цилиндр, за исключением того, что на его концах расположено по полусфере. 
+Это делает внутренний код определения столкновения более точным и быстрым.  
+В длину цилиндра верхушки не входят. Радиус верхушек равен радиусу самого цилиндра.</A>
+<BR><A>object - id объекта</A>
+<BR><A>length - длина цилиндра</A>
+<BR><A>radius - радиус основания цилиндра.</A>
+<HR>
+
+<H1 class=name>OdeAddCone</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddCone</A><A>( object,length,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию конуса и возвращает ее id.</A>
+<BR><A>object - id объекта</A>
+<BR><A>length - длина конуса</A>
+<BR><A>radius - радиус основания конуса.</A>
+<HR>
+
+<H1 class=name>OdeAddCylinder</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddCylinder</A><A>( object,length,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию цилиндра и возвращает ее id.</A>
+<BR><A>object - id объекта</A>
+<BR><A>length - длина цилиндра</A>
+<BR><A>radius - радиус основания цилиндра.</A>
+<HR>
+
+<H1 class=name>OdeAddPlane</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddPlane</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию плоскости и возвращает ее id. Геометрия плоскости ODE, в отличие от примитива 
+плоскости Xtreme3D, бесконечна. Кроме того, плоскость - неперемещаемая геометрия. Это 
+значит, что ее позиция и угол поворота постоянны. Другими словами, предполагается, что плоскость 
+является частью статичного тела и не связана с каким либо подвижным объектом.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeAddSphere</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddSphere</A><A>( object,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию сферы и возвращает ее id.</A>
+<BR><A>object - id объекта</A>
+<BR><A>radius - радиус сферы.</A>
+<HR>
+
+<H1 class=name>OdeAddTriMesh</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddTriMesh</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает геометрию полигональной сетки.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetRollingFrictionCoeff</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetRollingFrictionCoeff</A><A>( body,rfc as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает коэффициент трения качения для поверхности тела. Значение должно лежать в промежутке 
+(0..1). 0 означает отсутствие трения (тела будут катиться бесконечно), 1 - максимальное трение (тела не 
+катятся).</A>
+<BR><A>body - id тела</A>
+<BR><A>rfc - коэффициент трения качения.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceEnableRollingFrictionCoeff</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceEnableRollingFrictionCoeff</A><A>( body,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает трение качения для поверхности тела. Если включено, коэффициент трения должен 
+быть установлен функцией </A><A class=funclink href="ode.htm#OdeSurfaceSetRollingFrictionCoeff">OdeSurfaceSetRollingFrictionCoeff</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetMode</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetMode</A><A>( body,Mu2,FDir1,Bounce,SoftERP,SoftCFM,Motion1,Motion2,Slip1,Slip2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает флаги поверхности тела. Это комбинация следующих флагов:
+<BR>Mu2 - если не установлен, то используется &mu; для обоих направлений трения. Если установлен, то &mu; 
+используется для первого направления трения, а &mu;2 для второго направления трения. 
+<BR>FDir1 - если установлен, то FDir1 берется первым направлением трения. В противном слyчае, FDir1 
+рассчитывается автоматически как перпендикуляр к нормали контакта (в этом слyчае результирующие 
+направление непредсказуемо). 
+<BR>Bounce - если  установлен, то поверхность считается упругой; другими словами, тела будут пружинить 
+друг от друга. Точное значение упругости определяется функцией </A><A class=funclink href="ode.htm#OdeSurfaceSetBounce">OdeSurfaceSetBounce</A><A>. 
+<BR>SoftERP - если установлен, то параметр уменьшения ошибки нормали контакта контролируется функцией </A><A class=funclink href="ode.htm#OdeSurfaceSetSoftERP">OdeSurfaceSetSoftERP</A><A>. 
+<BR>SoftCFM - если установлен, то смешивающая сила соединения нормали контакта контролируется функцией </A><A class=funclink href="ode.htm#OdeSurfaceSetSoftCFM">OdeSurfaceSetSoftCFM</A><A>. 
+<BR>Motion1 - если установлен, то предполагается, что поверхность геометрии движется независимо от тела. Если этот 
+флаг установлен, то функцией </A><A class=funclink href="ode.htm#OdeSurfaceSetMotion1">OdeSurfaceSetMotion1</A><A> задает 
+скорость поверхности в первом направлении трения. 
+<BR>Motion2 - то же что и выше, но во втором направлении трения. 
+<BR>Slip1 - скольжение, зависящее от силы FDS в первом направлении трения. 
+<BR>Slip2 - скольжение, зависящие от силы FDS во втором направлении трения. 
+<BR>Первое направление трения - это вектор, вдоль которого прилагается сила трения, перпендикулярный нормали контакта. 
+<BR>Второе направления трения вычисляется как перпендикуляр к нормали контакта и FDir1.</A>
+<BR><A>body - id тела</A>
+<BR><A>Mu2 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>FDir1 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>Bounce - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>SoftERP - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>SoftCFM - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>Motion1 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>Motion2 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>Slip1 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>
+<BR><A>Slip2 - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetMu</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetMu</A><A>( body,mu as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает коэффициент трения &mu; (мю) для первого направления трения поверхности тела. 
+Значение 0 дает отсутствие трения в поверхности.</A>
+<BR><A>body - id тела</A>
+<BR><A>mu - коэффициент трения &mu;.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetMu2</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetMu2</A><A>( body,mu2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает &mu;2 - необязательный коэффициент трения для второго направления трения поверхности тела. 
+<BR>Параметр должен быть определен только в случае установки соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>mu2 - коэффициент трения &mu;2.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetBounce</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetBounce</A><A>( body,bounce as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает параметр восстановления состояния поверхности тела (упругости). Значение 0 значит, 
+что поверхность абсолютно не упруга, 1 - максимальная упругость. 
+<BR>Параметр должен быть определен 
+только в случае установки соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>bounce - упругость.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetBounceVel</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetBounceVel</A><A>( body,vel as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает минимальную скорость, необходимую для упругости (в м/с) поверхности тела. Скорость ниже этого порога 
+определяет параметр упругости равным 0. 
+<BR>Параметр должен быть определен только в случае установки 
+соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>vel - линейная скорость.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetSoftERP</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetSoftERP</A><A>( body,erp as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает ERP (Error Reduction Parameter - параметр уменьшения ошибки) поверхности тела - параметр, 
+контролирующий силу возвращения тел на правильные позиции во время каждого шага для компенации ошибок 
+при сочленении двух тел. Это необходимо, чтобы тела занимали определенное положение и ориентацию друг 
+относительно друга. 
+<BR>ERP принимает значение от 0 до 1 и определяет пропорцию, в которой ошибка в 
+сочленении будет исправляться в следующем шаге симуляции. Если ERP=0, то корректирующая сила 
+прилагаться не будет, и тела будут перемещаться в соответствии с ходом симуляции. Если ERP=1, то 
+будет предприниматься попытка исправить все ошибки в сочленениях на следующем шаге симуляции. 
+Тем не менее, устанавливать ERP=1 не рекомендуется, поскольку ошибки в сочленении нельзя 
+полностью устранить из-за различных внутренних округлений. Рекомендуется устанавливать значения от 
+0.1 до 0.8 (0.2 - значение по умолчанию). 
+<BR>Глобальное значение ERP воздействует на большинство сочленений симуляции. Тем не менее, некоторые 
+сочленения могут иметь локальные значения ERP, которые контролируют определенные аспекты их поведения. 
+<BR>Параметр должен быть определен только в случае установки соответствующего флага 
+в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>erp - параметр уменьшения ошибки.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetSoftCFM</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetSoftCFM</A><A>( body,cfm as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает CFM (Сonstraint Force Mixing - cмешивающая  сила  соединения ) поверхности тела - параметр, 
+контролирующий так называемое "мягкое" сочленение тел. 
+<BR>Большинство сочленений по своей природе "жесткие". Это значит, что сочленение находится в 
+определенных условиях, которые никогда не могут быть нарушены. 
+Например, шарик всегда должен быть в разъеме, а сгибание должно происходит вдоль одной линии. На 
+практике сочленения могут быть нарушены непреднамеренным возникновением ошибок в системе, но с 
+помощью параметра уменьшения ошибки можно откорректировать эти ошибки. 
+<BR>Но не все соединения жестки. "Мягкие" соединения разработаны для того, чтобы специально быть 
+нарушенными. Например, контактное соединение, которое предотвращает сталкивающиеся объекты от 
+взаимного проникновения, по умолчанию жестко: это выглядит так, как будто сталкивающиеся 
+поверхности сделаны из стали. Но для симуляции материалов помягче можно сделать мягкое 
+соединение, тем самым позволив при взаимодействии двух объектов иметь место естественному 
+проникновению.  
+<BR>Если CFM установлен в 0, соединение будет жестким. Если в CFM установлено положительное число, 
+то появляется возможность нарушать сочленение смещением. Другими словами, соединение 
+становится мягким, и мягкость будет нарастать с увеличением CFM. Происходит здесь следующее: 
+сочленению позволяется быть нарушенным пропорционально CFM раз, восстанавливая силу, которая 
+нужна для удержания соединения. 
+<BR>Утановка в CFM отрицательного значения может привести к непредсказуемым последствиям, включая 
+снижение стабильности.  
+<BR>Параметр должен быть определен только в случае установки соответствующего флага 
+в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>cfm - cмешивающая  сила  соединения.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetMotion1</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetMotion1</A><A>( body,motion1 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливают скорость поверхности тела в первом направлении (в м/с). 
+<BR>Параметр должен быть определен только в случае установки 
+соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>motion1 - линейная скорость.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetMotion2</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetMotion2</A><A>( body,motion2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает скорость поверхности тела во втором направлении (в м/с). 
+<BR>Параметр должен быть определен только в случае установки 
+соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>motion2 - линейная скорость.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetSlip1</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetSlip1</A><A>( body,slip1 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает коэффициент скольжения поверхности тела, зависящий от силы трения первого направления. 
+Это эффект, который вынуждает контактирующие поверхности скользить относительно друг друга 
+со скоростью, пропорциональной силе, приложенной по касательной к поверхности. 
+<BR>Параметр должен быть определен только в случае установки 
+соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>slip1 - коэффициент скольжения.</A>
+<HR>
+
+<H1 class=name>OdeSurfaceSetSlip2</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetSlip2</A><A>( body,slip2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает коэффициент скольжения поверхности тела, зависящий от силы трения второго направления. 
+<BR>Параметр должен быть определен только в случае установки 
+соответствующего флага в </A><A class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A>
+<BR><A>body - id тела</A>
+<BR><A>slip2 - коэффициент скольжения.</A>
+<HR>
+
+<H1 class=name>OdeAddJointBall</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointBall</A><A>();</A>
+<BR><A>Создает сочленение типа Ball-and-socket ("шарик-в-разъеме") и возвращает его id. 
+<BR>Позволяет телам свободно вращаться вокруг заданной точки, но не дает 
+им разойтись в стороны. Напоминает шарнирное соединение.</A>
+<BR><BR><img src=../data/jointball.jpg align="center">
+<HR>
+
+<H1 class=name>OdeAddJointFixed</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointFixed</A><A>();</A>
+<BR><A>Создает сочленение типа Fixed (фиксированное) и возвращает его id.
+<BR>Сохраняет жесткую фиксированную позицию и ориентацию тел.</A>
+<BR><BR><img src=../data/jointfixed.jpg align="center">
+<HR>
+
+<H1 class=name>OdeAddJointHinge</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointHinge</A><A>();</A>
+<BR><A>Создает сочленение типа Hinge (сгибание) и возвращает его id.
+<BR>Позволяет телам вращаться вокруг заданной оси. Напоминает соединение в дверных петлях.</A>
+<BR><BR><img src=../data/jointhinge.jpg align="center">
+<HR>
+
+<H1 class=name>OdeAddJointHinge2</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointHinge</A><A>();</A>
+<BR><A>Создает сочленение типа Hinge-2 (сгибание-2) и возвращает его id.
+<BR>Похоже на два сочленения Hinge, соединенных последовательно, с разными осями сгибания.
+Например, это может быть колесо машины, где одна ось позволяет колесу поворачиваться, а вторая вращаться. 
+Сочленение сгибание-2 имеет точку соединения и две оси сгибания. Ось 1 определяется относительно тела 1 (может 
+быть осью поворота, если тело 1 - рама). Ось 2 определяется относительно тела 2 (может быть осью вращения колеса, 
+если тело 2 - колесо).</A>
+<BR><BR><img src=../data/jointhinge2.jpg align="center">
+<HR>
+
+<H1 class=name>OdeAddJointSlider</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointSlider</A><A>();</A>
+<BR><A>Создает сочленение типа Slider (скольжение) и возвращает его id.
+<BR>Позволяет телам двигаться вдоль одной линии, не давая им вращаться относительно друг друга.</A>
+<BR><BR><img src=../data/jointslider.jpg align="center">
+<HR>
+
+<H1 class=name>OdeAddJointUniversal</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeAddJointUniversal</A><A>();</A>
+<BR><A>Создает сочленение типа Universal (универсальное) и возвращает его id.
+<BR>Имеет более сложную структуру. Оно  похоже  на  сочленение "шарик-в-разъеме", y которого 
+граничена степень свободы вращения. Если задать ось 1 для одного тела и ось 2 для второго перпендикулярно друг другу,  
+их перпендикулярность будет сохраняться. Другими словами, можно сказать, что тела будут сохранять перпендикулярную 
+ориентацию относительно своих осей. Универсальные сочленения проявляют себя в автомобилях, а именно при соединении 
+двигателя с карданным валом, вращающимся вдоль оси машины.</A>
+<BR><BR><img src=../data/jointuniversal.jpg align="center">
+<HR>
+
+<H1 class=name>OdeJointSetObjects</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetObjects</A><A>( joint,object1,object2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Присоединяет сочленение к телам. Если сочленение уже куда-то присоединено, то сначала оно будет 
+отсоединено от старых тел. Для того, чтобы присоединить сочленение только к одному телу, надо установить object1 
+или object2 в ноль - ноль значит статическое окружение. Установка обоих этих параметров в ноль переведет 
+сочленение в неопределенное состояние и оно не будет принимать участия в симуляции. 
+Чтобы работать, некоторые сочленения, такие как сгибание-2 (hinge-2), обязательно должны быть 
+присоединены к двум телам.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>object1,object2 - id объектов.</A>
+<HR>
+
+<H1 class=name>OdeJointEnable</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointEnable</A><A>( joint,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает сочленение. Включенные сочленения участвуют в симуляции, в то время как 
+выключенные - деактивированы и их состояния не обновляются. Новые сочленения всегда создаются во 
+включенном состоянии.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeJointInitialize</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointInitialize</A><A>( joint,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>joint - id сочленения.</A>
+<HR>
+
+<H1 class=name>OdeJointSetAnchor</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetAnchor</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает точку соединения, или якорь (anchor) сочленения. Сочленение будет пытаться удержать 
+два тела относительно этой точки.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - координаты точки.</A>
+<HR>
+
+<H1 class=name>OdeJointSetAnchorAtObject</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetAnchorAtObject</A><A>( joint,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>OdeJointSetAxis1</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetAxis1</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает вектор первой оси сочленения (axis-1). Функция может быть применена к следующим 
+типам сочленений: сгибание (Hinge), скольжение (Slider), универсальное (Universal), сгибание-2 (Hinge-2).</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - единичный вектор.</A>
+<HR>
+
+<H1 class=name>OdeJointSetAxis2</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetAxis2</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает вектор второй оси сочленения (axis-2). Функция может быть применена к следующим 
+типам сочленений: универсальное (Universal), сгибание-2 (Hinge-2).</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - единичный вектор.</A>
+<HR>
+
+<H1 class=name>OdeJointSetBounce</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetBounce</A><A>( joint,axis,bounce as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает упругость остановок в сочленении. Параметр восстановления лежит в диапазоне (0..1). 
+0 означает, что остановка совсем не упруга, 1 - максимальная упругость.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>bounce - упругость.</A>
+<HR>
+
+<H1 class=name>OdeJointSetCFM</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetCFM</A><A>( joint,axis,cfm as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает значение смешивающей силы соединения (CFM) в сочленении.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>cfm - смешивающая сила соединения.</A>
+<HR>
+
+<H1 class=name>OdeJointSetFMax</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetFMax</A><A>( joint,axis,fmax as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает максимальную линейную или вращающую силу, которую будет использовать двигатель сочленения
+для достижения желаемой скорости. Это значение всегда должно быть больше или равно нулю. Установка этого значения 
+в ноль (значение по умолчанию) выключает двигатель.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>fmax - сила.</A>
+<HR>
+
+<H1 class=name>OdeJointSetFudgeFactor</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetFudgeFactor</A><A>( joint,axis,ffactor as </A><A class=type>real</A><A> );</A>
+<BR><A>В текущей реализации остановок и двигателей есть маленькая проблема: когда сочленение имеет остановку 
+и двигатель, который пытается не допустить остановки, за один шаг времени может быть приложена слишком большая 
+сила, вызывая "скачки"  движения.  Для  масштабирования  избыточной  силы  используется 
+надстроечный показатель (fudge factor). Его значение должно лежать между нулем и единицей (значение по 
+умолчанию). Если в сочленении видны скачки движения, значение должно быть уменьшено. Делая это 
+значение меньше, можно уберечь двигатель от движения сочленения из положения остановки.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>ffactor - значение надстроечного показателя.</A>
+<HR>
+
+<H1 class=name>OdeJointSetHiStop</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetHiStop</A><A>( joint,axis,histop as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает верхний порог угла или позиции. Для вращающихся сочленений это значение должно 
+быть меньше числа </A><A class=constant>pi</A><A>, чтобы эффект был заметен. Если верхний порог меньше 
+нижнего, то оба порога не дают никакого эффекта.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>histop - верхний порог.</A>
+<HR>
+
+<H1 class=name>OdeJointSetLoStop</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetLoStop</A><A>( joint,axis,lostop as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает нижний порог угла или позиции. Для вращающихся сочленений это значение должно 
+быть больше числа </A><A class=constant>pi</A><A>, чтобы эффект был заметен. Если нижний порог больше 
+верхнего, то оба порога не дают никакого эффекта.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>lostop - нижний порог.</A>
+<HR>
+
+<H1 class=name>OdeJointSetStopCFM</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetStopCFM</A><A>( joint,axis,cfm as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает значение смешивающей силы соединения (CFM), используемой остановками. Вместе со 
+значением ERP может быть использовано для получения более мягких остановок.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>cfm - смешивающая сила соединения.</A>
+<HR>
+
+<H1 class=name>OdeJointSetStopERP</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetStopERP</A><A>( joint,axis,erp as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает параметр уменьшения ошибки (ERP), используемый остановками. Вместе со 
+значением CFM может быть использовано для получения более мягких остановок.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>erp - параметр уменьшения ошибки.</A>
+<HR>
+
+<H1 class=name>OdeJointSetVel</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeJointSetVel</A><A>( joint,axis,velocity as </A><A class=type>real</A><A> );</A>
+<BR><A>Устанавливает желаемую скорость двигателя.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>axis - индекс оси сочленения (1 или 2)</A>
+<BR><A>velocity - линейная или угловая скорость.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

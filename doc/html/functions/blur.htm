@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Blur</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Blur</H1>
+
+<A class=type>Класс: TGLBlur</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>
+Размытие (Blur) - всем знакомый эффект. В данном случае речь идет о motion blur - размытии при движении, которое 
+визуально возникает при быстром повороте или перемещении точки обзора. Введение такого эффекта может придать реалистичности 
+в некоторых игровых ситуациях. Motion blur часто используется, например, в гонках.
+<BR>Принцип действия эффекта blur заключается в хранении и отрисовке нескольких предыдущих кадров с постепенным масштабированием и 
+уменьшением прозрачности (а также, в некоторых случаях, и цвета). Разумеется, это не может не сказаться на производительности. 
+Поэтому blur не стоит использовать слишком часто.
+</A>
+<HR>
+
+<A name="BlurCreate"></A>
+<H1 class=name>BlurCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый объект blur и возвращает его id.</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="BlurSetPreset"></A>
+<H1 class=name>BlurSetPreset</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurSetPreset</A><A>( blur,p as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает стиль размытия (p). Вы можете выбрать, какой из них больше подходит для конкретной ситуации. 
+<BR>Доступны следующие значения p:
+<BR></A><A class=constant name="pNone">pNone</A><A> = 0 - отсутствие размытия
+<BR></A><A class=constant name="pGlossy">pGlossy</A><A> = 1 - "блеск" - умеренное размытие и яркость, без тонировки
+<BR></A><A class=constant name="pBeastView">pBeastView</A><A> = 2 - "глазами зверя" - кроваво-красная тонировка, слабое размытие
+<BR></A><A class=constant name="pOceanDepth">pOceanDepth</A><A> = 3 - "в океанской глубине" - густая синяя тонировка, сильное размытие
+<BR></A><A class=constant name="pDream">pDream</A><A> = 4 - "сон" - сильное замедленное размытие, слабая яркость, без тонировки
+<BR></A><A class=constant name="pOverBlur">pOverBlur</A><A> = 5 - "сверхразмытие" - сильное размытие, сильная яркость, без тонировки.
+</A>
+<BR><A>blur - id объекта blur</A>
+<BR><A>p - стиль размытия.</A>
+<HR>
+
+<A name="BlurSetOptions"></A>
+<H1 class=name>BlurSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurSetOptions</A><A>( blur,delta,left,top,right,bottom as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает опции отрисовки размытия. Delta - задержка, время до наложения очередного кадра размытия. Чем ниже это значение, 
+тем качественнее эффект, но ниже производительность. Left, top, right, bottom - смещение границ кадров влево, вверх, вправо, вниз. Изменяя смещение, можно добиться горизонтального,  
+вертикального или диагонального размытия. 
+<BR>Для задержки и смещения обычно задаются очень маленькие значения - в пределах 0.001 - 0.015. Смещение допускает отрицательные значения.
+</A>
+<BR><A>blur - id объекта blur</A>
+<BR><A>delta - задержка в секундах</A>
+<BR><A>left,top,right,bottom - смещение влево, вверх, вправо, вниз.</A>
+<HR>
+
+<A name="BlurSetResolution"></A>
+<H1 class=name>BlurSetResolution</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurSetResolution</A><A>( blur,res as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает разрешение кадра размытия. Значение должно соответствовать степени двойки (512,256,128 и т.д.)</A>
+<BR><A>blur - id объекта blur</A>
+<BR><A>res - разрешение.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

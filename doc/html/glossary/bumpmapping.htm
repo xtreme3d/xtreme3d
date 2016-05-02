@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Bump Mapping</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=name>Bump Mapping</H1>
+<A class=type>Bump Mapping | Бамп Маппинг</A>
+<HR>
+<A> Метод достижения видимости рельефа на поверхности. Для реализации bump mapping используются разные типы текстур:
+<br>- Карты высот, где тексели задают высоту в соответствующем месте на карте. Такие текстуры выглядят, как чёрно-белые. 
+Чем светлее тексель, тем выше расположена соответствующая часть поверхности.
+<br>- Карты нормалей, в которых хранятся нормали для соответствующих частей поверхности. Отсюда normal mapping, который 
+является методом достижения bump mapping. Нормали линейным преобразованием сопоставляются с цветами. Каждая 
+координата (x, y, z) — для соответствующего цвета (r, g, b). Относительно ровная поверхность, означает, что x и y близки к нулю, 
+а z — к единице, поэтому в таких текстурах преобладает синий цвет с проявлением сиреневых и зелёных оттенков. Карты 
+нормалей можно генерировать из карт высот или из сопоставления сложной геометрии с низкополигональной (polybump).
+<br>- Карты смещений, задающие смещение текстурных координат для накладываемой диффузной текстуры.
+</A>
+<BR>
+<BR><A>См. также </A>
+<A class=link href="normalmap.htm">Normal Map</A><A>, </A>
+<A class=link href="displacementmapping.htm">Displacement Mapping</A><A>, </A>
+<A class=link href="parallaxmapping.htm">Parallax Mapping</A><A>.</A>
+<HR>
+<img src=../data/bumpmapping1.jpg align="left">
+<img src=../data/bumpmapping2.jpg align="left">
+</DIV>
+
+</BODY>
+</HTML>

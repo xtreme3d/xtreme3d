@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Создание простой сцены</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Урок 2<BR>Создание простой сцены</H1>
+
+<A><B>Уровень:</B> начинающий</A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR>
+<BR>Перед тем, как начать практические занятия, позвольте кое-что разъяснить.
+Xtreme3D - это библиотека динамической компоновки (DLL). А DLL - не что иное, как скомпилированный набор 
+инструкций, написанных на каком-либо языке программирования, с целью их использования программами на 
+любом другом языке, поддерживающим DLL. Xtreme3D, например, написан на Delphi, и в нем содержится около 580 
+таких инструкций. Назовем из для простоты функциями. При помощи интерфейса Game Maker мы можем создать 
+скрипты, каждый из которых будет вызывать определенную функцию из библиотеки. После этого можно будет вызывать 
+функции через код GML по названиям скриптов. Вот типичный пример функции Xtreme3D: </A><A class=func2link href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object,'material'). 
+Некоторые функции возвращают различные числовые и строковые значения. Например, при создании объекта возвращается его идентификатор (id), который необходимо записать в переменную для дальнейшей работы с объектом.
+<BR>
+<BR>Следующий важный момент: константы. Многие функции используют в качестве аргументов числовые коды, и не всегда 
+легко запомнить, какой код нужен для достижения нужного эффекта или включения нужного режима. Поэтому можно 
+вместо кодов вводить соответствующие названия констант (список констант и их числовых значений можно увидеть в 
+Global Game Settings, вкладка Constants). По негласной традиции константы Xtreme3D выглядят так: </A><A class=constant>tmmCubeMapReflection</A><A>.
+Строчные буквы в начале (tmm) обозначают свойство, к которому относится константа. В данном случае 
+это TextureMappingMode, а функция, задающая его - </A><A class=func2link href=../functions/material.htm#MaterialSetTextureMappingMode>MaterialSetTextureMappingMode</A><A>('material',tmm), где вместо tmm подставляется нужная tmm-константа. 
+<BR>Помните, что константы являются частью Game Maker/GML и к самой Xtreme3D.dll они отношения не имеют.
+<BR>
+<BR>Для начала работы вам понадобится файл *.gm6 (или *.gmk для Game Maker 7), с готовым набором функций и 
+констант Xtreme3D. Такой файл вы можете взять из официального дистрибутива движка. Для подготовки к работе достаточно 
+удалить из него все объекты. Назовем его условно project.gm6. Скопируйте его в отдельную папку и добавьте туда же 
+файлы Xtreme3D.dll и ode.dll.
+<BR>
+<BR>Откройте project.gm6. Создайте новый объект Game Maker и назовите его o_engine.
+Добавьте событие Create и перетащите действие Execute a piece of code со вкладки Control. 
+Если вы уже работали с GML, проблем не будет. Если нет, настоятельно рекомендуем оставить пока Xtreme3D и изучить язык 
+на встроенной графике Game Maker. 
+<BR>
+<BR>Следующий код загружает функции из библиотеки в память и запускает работу движка Xtreme3D:
+<BR>
+<BR></A><A class=type>dll_init</A>(); 
+<BR></A><A class=func2link href=../functions/engine.htm#EngineCreate>EngineCreate</A><A>(</A><A>);
+<BR>
+<BR>Идем дальше:
+<BR>
+<BR>view=</A><A class=func2link href=../functions/viewer.htm#ViewerCreate>ViewerCreate</A><A>(<A class=type>window_handle</A>, 0,0,640,480); 
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerSetLighting>ViewerSetLighting</A><A>(view,1);
+<BR>
+<BR>Для того, чтобы наблюдать что-либо в окне с игрой, понадобится Вид (Viewer). Вид - это прямоугольник, в котором происходит отрисовка сцены Xtreme3D. Все, что за пределами этого прямоугольника, "принадлежит" встроенной графике Game Maker. Мы создали Вид разрешением 640х480, под размер окна, так что графики Game Maker и вовсе не будет видно. Позиция нашего Вида на экране - (0,0). По существу, это координата левого верхнего угла Вида, относительно левого верхнего угла окна. 
+<BR>Также в функцию </A><A class=func2link href=../functions/viewer.htm#ViewerCreate>ViewerCreate</A><A> передается </A><A class=type>window_handle</A><A>(), функция GML, возвращающая идентификатор главного окна игры. Таким образом, Вид будет "привязан" к окну игры Game Maker, что нам и нужно.
+<BR>Как ни странно, Вид - это тоже объект, поэтому при создании мы заносим его идентификатор в переменную, в нашем случае - view. Мы можем использовать идентификатор Вида для изменения его свойств. В данный момент нас интересует только одно - использование освещения (</A><A class=func2link href=../functions/viewer.htm#ViewerSetLighting>ViewerSetLighting</A><A>). Если выключить освещение (0), все объекты будут выглядеть плоскими и необъемными. Поэтому мы его включаем (1). Правда, для того, чтобы освещение работало, надо еще создать источники света:
+<BR>
+<BR>light=</A><A class=func2link href=../functions/light.htm#LightCreate>LightCreate</A><A>(<A class=constant>lsOmni</A><A>,0);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(light,0,18,0);
+<BR>
+<BR>Функция </A><A class=func2link href=../functions/light.htm#LightCreate>LightCreate</A><A> создает источник света и возвращает его идентификатор, так как свет - это тоже объект. 
+В Xtreme3D есть три типа источников света - точечный (константа </A><A class=constant>lsOmni</A><A>), направленный (</A><A class=constant>lsSpot</A><A>) и параллельный (</A><A class=constant>lsParallel</A><A>).
+Точечный излучает свет равномерно во всех направлениях (как, например, лампочка), направленный светит в пределах конуса (как фонарик), параллельный испускает параллельные лучи в направлении одной оси (имитация солнечного света).
+Мы можем назначить источнику света родителя, но, поскольку никаких сценических объектов у нас пока нет, подставляем вместо родителя 0. Создав точечный источник света, можно уточнить его положение в пространстве - точка (0,18,0). 
+<BR>
+<BR>Мы все еще ничего не увидим, поскольку свету нечего освещать. Создадим какой-нибудь простейший видимый объект. 
+Но перед этим необходимо создать корневые объекты нашей сцены:
+<BR>
+<BR><B>global</B>.back=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0);
+<BR><B>global</B>.scene=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0); 
+<BR><B>global</B>.front=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0);
+<BR>
+<BR>Функция DummycubeCreate создает Манекен (Dummycube) и возвращает его идентификатор. Объект, носящий это забавное название, играет важную роль в формировании иерархии. Манекен невидим, это как бы объект-призрак. Но, в то же время, он обладает всеми обычными свойствами объектов, которые мы рассмотрели в предыдущей главе - координатами в пространстве, векторами Direction, Up, Left и т.д. Его можно свободно перемещать, вращать и масштабировать. Манекен может иметь родителя и потомков. В данном случае мы создали три корневых Манекена. Корневых - потому что выше их в иерархии ничего не будет. 
+Все остальные сценические объекты будут потомками этих трех Манекенов:
+<BR><B>global</B>.back - родитель для объектов на заднем плане (небо, фон и т.д.)
+<BR><B>global</B>.scene - родитель для объектов на сценическом плане (все трехмерные объекты)
+<BR><B>global</B>.front - родитель для объектов на экране (спрайты, текст и т.д.)
+<BR>Важно соблюсти именно этот порядок создания Манекенов - сначала задний план, потом сцена, потом экран. Это необходимо для того, чтобы движок мог отрисовать объекты в нужном порядке. Этот порядок называется сортировкой: все объекты отрисовываются в том порядке, в котором были созданы, они сами или их родители. 
+<BR>
+<BR>Создадим первый объект сценического плана - плоскость:
+<BR>
+<BR>plane=</A><A class=func2link href=../functions/primitives.htm#PlaneCreate>PlaneCreate</A><A>(0,64,64,8,8,<B>global</B>.scene);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(plane,90);
+<BR>
+<BR>Плоскость - один из примитивов, простых геометрических тел, которые генерируются движком. 
+Функция </A><A class=func2link href=../functions/primitives.htm#PlaneCreate>PlaneCreate</A><A> создает плоскость и возвращает ее идентификатор. Рассмотрим ее аргументы:
+<BR>0 - определяет, нужно ли представить плоскость одним квадратом (сокращенно - квадом), или разбить на несколько;
+нам для красивого освещения нужно несколько, поэтому указываем 0;
+<BR>64,64 - размер плоскости;
+<BR>8,8 - количество квадов. В общей сложности плоскость будет разбита на 8 * 8 = 64 квадов;
+<BR><B>global</B>.scene - родитель.
+<BR>Созданная нами плоскость по умолчанию вертикальна, поэтому надо ее повернуть на 90 градусов по оси X. Если помните, 
+поворот по оси X называется Pitch, поэтому нам нужна функция </A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>.
+<BR>
+<BR>Мы все еще ничего не увидим, так как не создали Камеру. Камера - это тоже объект, невидимый, как и Манекен. 
+Используется для проекции трехмерной сцены на плоскость экрана, а точнее - на плоскость Вида. Проекция осуществляется 
+из точки положения Камеры в направлении вектора Direction Камеры. Проще говоря, куда смотрит Камера, то мы и видим, как 
+и в реальной жизни.
+<BR>
+<BR>camPos=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(<B>global</B>.scene);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(camPos,0,10,0);
+<BR>camera=</A><A class=func2link href=../functions/camera.htm#CameraCreate>CameraCreate</A><A>(camPos);
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A><A>(view,camera);
+<BR>
+<BR>Перед созданием камеры мы создали для нее родителя - еще один Манекен. Это сделано для того, чтобы сама камера могла свободно вращаться, а ее движение контролировалось через этот Манекен.
+<BR>Функция </A><A class=func2link href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A><A> указывает Виду, какую Камеру использовать для передачи изображения.
+<BR>
+<BR>Как видите, пока все достаточно просто. Осталось только последнее:
+<BR>
+<BR></A><A class=type>set_automatic_draw</A><A>(0);
+<BR>
+<BR>Этой функцией мы отключаем автоматическую отрисовку графики Game Maker - все равно Вид ее полностью перекроет, нет смысла  тратить ресурсы системы на ее обработку.
+<BR>
+<BR>Сцену мы создали, осталось заставить ее работать. Добавьте событие Step и в нем добавьте следующий код:
+<BR>
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_left</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,-2);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_right</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,2);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_up</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,-1);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_down</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,1);
+<BR>
+<BR>Теперь, когда пользователь нажмет клавишу, скажем, "Вверх", Камера будет двигаться вперед (соответственно и для клавиши "Назад"). Для поворота Камеры используются клавиши "Влево" и "Вправо". Поворот осуществляется по оси Y (Turn), поэтому используется функция </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>. Заметьте, что для трансформации мы используем не саму Камеру, а ее родителя. Благодаря этому мы потом сможем вращать Камеру при помощи мыши.
+<BR>
+<BR></A><A class=func2link href=../functions/engine.htm#Update>Update</A><A>();
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A>(view);
+<BR>
+<BR>Эти две функции надо обязательно вызвать, иначе движок будет "парализован". </A><A class=func2link href=../functions/engine.htm#Update>Update</A><A> обновляет состояние объектов сцены, </A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A> совершает отрисовку указанного Вида. 
+<BR>
+<BR>Это все! Теперь можно поместить наш объект o_engine в комнате и запускать.
+<BR>
+<BR><img src="2_screensh.jpg">
+<BR>
+<BR>Поздравляю, вы создали свою первую рабочую программу Xtreme3D!
+Вот ее полный исходный код: 
+<BR>
+<BR>В событии Create:
+<BR>
+<BR></A><A class=type>dll_init</A>(); 
+<BR></A><A class=func2link href=../functions/engine.htm#EngineCreate>EngineCreate</A><A>(</A><A class=type>window_handle</A><A>());
+<BR>view=</A><A class=func2link href=../functions/viewer.htm#ViewerCreate>ViewerCreate</A><A>(0,0,640,480); 
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerSetLighting>ViewerSetLighting</A><A>(view,1);
+<BR>light=</A><A class=func2link href=../functions/light.htm#LightCreate>LightCreate</A><A>(<A class=constant>lsOmni</A><A>,0);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(light,0,18,0);
+<BR><B>global</B>.back=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0);
+<BR><B>global</B>.scene=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0); 
+<BR><B>global</B>.front=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(0);
+<BR>plane=</A><A class=func2link href=../functions/primitives.htm#PlaneCreate>PlaneCreate</A><A>(0,64,64,8,8,<B>global</B>.scene);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(plane,90);
+<BR>camPos=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(<B>global</B>.scene);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(camPos,0,10,0);
+<BR>camera=</A><A class=func2link href=../functions/camera.htm#CameraCreate>CameraCreate</A><A>(camPos);
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A><A>(view,camera);
+<BR></A><A class=type>set_automatic_draw</A><A>(0);
+<BR>
+<BR>В событии Step:
+<BR>
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_left</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,-2);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_right</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,2);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_up</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,-1);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_down</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,1);
+<BR><A class=func2link href=../functions/engine.htm#Update>Update</A><A>();
+<BR><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A>(view);
+
+</DIV>
+
+</BODY>
+</HTML>

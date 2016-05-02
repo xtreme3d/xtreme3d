@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Polygon</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Polygon</H1>
+
+<A class=type>Класс: TGLPolygon</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>Полигон (polygon) - плоскость, сформированная тремя точками в пространстве. Xtreme3D располагает довольно 
+ограниченными средствами отрисовки полигонов, поэтому составить из них сложную модель вряд ли удастся. Хотя полигоны 
+все равно можно использовать, например, для создания различных спецэффектов.
+<BR><HR>
+
+<A name="PolygonCreate"></A>
+<H1 class=name>PolygonCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>PolygonCreate</A><A>( parent as </A><A class=type>real</A> );</A>
+<BR><A>Создает полигон и возвращает его id.</A>
+<BR><A>parent - id родителя для полигона.</A>
+<HR>
+
+<A name="PolygonAddVertex"></A>
+<H1 class=name>PolygonAddVertex</H1>
+<A class=type>real</A><A> = </A><A class=function>PolygonAddVertex</A><A>( polygon,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет вершину (точку) в полигон и возвращает ее id.</A>
+<BR><A>polygon - id полигона</A>
+<BR><A>x,y,z - координаты вершины.</A>
+<HR>
+
+<A name="PolygonSetVertexPosition"></A>
+<H1 class=name>PolygonSetVertexPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>PolygonSetVertexPosition</A><A>( polygon,vertex,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Задает координаты вершины.</A>
+<BR><A>polygon - id полигона</A>
+<BR><A>vertex - id вершины</A>
+<BR><A>x,y,z - координаты.</A>
+<HR>
+
+<A name="PolygonDeleteVertex"></A>
+<H1 class=name>PolygonDeleteVertex</H1>
+<A class=type>real</A><A> = </A><A class=function>PolygonDeleteVertex</A><A>( polygon,vertex as </A><A class=type>real</A> );</A>
+<BR><A>Удаляет вершину из полигона.</A>
+<BR><A>polygon - id полигона</A>
+<BR><A>vertex - id вершины.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

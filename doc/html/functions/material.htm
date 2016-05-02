@@ -1,0 +1,418 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Material</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Material</H1>
+
+<A class=type>Класс: TGLMaterialLibrary</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>Материал в Xtreme3D - это совокупность параметров визуального отображения объекта, объединенных 
+под уникальным именем, по которому осуществляется изменение этих параметров. В качестве имени используется 
+строковое значение.
+Параметры включают в себя использование текстуры, цвета, альфа-канала, смешивания, сжатия, фильтрации и т.д.
+Можно создать один материал 
+и применить его к нескольким объектам - изменения, внесенные в параметры материала, автоматически коснутся 
+всех этих объектов. Такой подход, несомненно, имеет огромное преимущество (которое, впрочем, иногда может 
+стать недостатком: например, если необходимо, чтобы изменения повлияли только на один конкретный объект).
+<BR>Библиотекой материалов (Material Library) называется специальная конструкция, содержащая список материалов. 
+Библиотека может быть активной или неактивной. В первом случае в нее можно добавлять материалы, настраивать 
+их и применять к объектам. Во втором случае это невозможно. Поскольку разные библиотеки могут содержать 
+материалы с одинаковыми именами, нельзя сделать активными две или более библиотеки одновременно.
+<BR><HR>
+
+<A name="MaterialLibraryCreate"></A>
+<H1 class=name>MaterialLibraryCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryCreate</A><A>();</A>
+<BR><A>Создает библиотеку материалов и возвращает ее id.</A>
+<HR>
+
+<A name="MaterialLibraryActivate"></A>
+<H1 class=name>MaterialLibraryActivate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryActivate</A><A>( matlib as </A><A class=type>real</A> );</A>
+<BR><A>Активирует библиотеку материалов. Все остальные библиотеки автоматически становятся неактивными.</A>
+<BR><A>matlib - id библиотеки материалов.</A>
+<HR>
+
+<A name="MaterialLibrarySetTexturePaths"></A>
+<H1 class=name>MaterialLibrarySetTexturePaths</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibrarySetTexturePaths</A><A>( matlib as </A><A class=type>real</A><A>, path as </A><A class=type>string</A> );</A>
+<BR><A>Указывает библиотеке, откуда по умолчанию загружать текстуры при загрузке модели, 
+содержащей данные о текстурах.</A>
+<BR><A>matlib - id библиотеки материалов</A>
+<BR><A>path - путь к текстурам.</A>
+<HR>
+
+<A name="MaterialLibraryClear"></A>
+<H1 class=name>MaterialLibraryClear</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryClear</A><A>( matlib as </A><A class=type>real</A> );</A>
+<BR><A>Очищает библиотеку, удаляя из нее все материалы.</A>
+<BR><A>matlib - id библиотеки материалов.</A>
+<HR>
+
+<A name="MaterialLibraryDeleteUnused"></A>
+<H1 class=name>MaterialLibraryDeleteUnused</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryDeleteUnused</A><A>( matlib as </A><A class=type>real</A> );</A>
+<BR><A>Удаляет из библиотеки неиспользуемые материалы.</A>
+<BR><A>matlib - id библиотеки материалов.</A>
+<HR>
+
+<A name="MaterialCreate"></A>
+<H1 class=name>MaterialCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialCreate</A><A>( material,filename as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A> );</A>
+<BR><A>Создает новый материал в активной библиотеке. Можно указать путь к файлу текстуры - Xtreme3D поддерживает форматы BMP, JPG, PNG, PCX, PSD, TGA, TIF. 
+Если оставить это значение пустым, будет создан материал без текстуры.
+<BR>Обратите внимание, что для корректной обработки разрешение текстур должно соответствовать степеням двойки (256х256, 512х512, 256х64, 64х128 и т.д.)</A>
+<BR><A>material - имя материала</A>
+<BR><A>filename - путь к файлу текстуры</A>
+<BR><A>mode - сведения отсутствуют.</A>
+<HR>
+
+<A name="MaterialAddCubeMap"></A>
+<H1 class=name>MaterialAddCubeMap</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialAddCubeMap</A><A>( material as </A><A class=type>string</A><A> );</A>
+<BR><A>Создает материал для кубического проецирования (cubemapping). В таком материале используется целых шесть текстур, формирующих 
+шесть сторон воображаемого куба, окружающего объект. В результате этого создается эффект полного отражения объектом окружающего пространства.
+Cubemap-материалы обычно используются для водных поверхностей и изделий из металла.</A>
+<BR><A>material - имя cubemap-материала.</A>
+<HR>
+
+<A name="MaterialCubeMapLoadImage"></A>
+<H1 class=name>MaterialCubeMapLoadImage</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialCubeMapLoadImage</A><A>( material,texture as </A><A class=type>string</A><A>, ind as </A><A class=type>real</A> );</A>
+<BR><A>Загружает текстуру для заданной стороны куба в cubemap-материале.</A>
+<BR><A>material - имя cubemap-материала</A>
+<BR><A>texture - имя материала, содержащего нужную текстуру</A>
+<BR><A>ind - индекс стороны куба: 
+<BR>0 - левая
+<BR>1 - правая
+<BR>2 - верхняя
+<BR>3 - нижняя
+<BR>4 - задняя
+<BR>5 - передняя.</A>
+<HR>
+
+<A name="MaterialCubeMapFromScene"></A>
+<H1 class=name>MaterialCubeMapFromScene</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialCubeMapFromScene</A><A>( material as </A><A class=type>string</A><A>, camera,res as </A><A class=type>real</A> );</A>
+<BR><A>Совершает рендеринг текстур для куба в cubemap-материале через заданную камеру. При этом следует указать разрешение текстуры по стороне (512, 256, 128 и т.д.) 
+<BR>Эта функция позволяет получить точное отражение сцены. Но пользоваться ей надо осторожно, так как при высоких разрешениях может значительно упасть производительность.</A>
+<BR><A>material - имя cubemap-материала</A>
+<BR><A>camera - id камеры</A>
+<BR><A>res - разрешение.</A>
+<HR>
+
+<A name="MaterialSetAmbientColor"></A>
+<H1 class=name>MaterialSetAmbientColor</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetAmbientColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
+<BR><A>Задает цветовой компонент Аmbient. Объект полностью закрашивается этим цветом (если включено освещение, цвет Ambient останется только в теневой части объекта - 
+иными словами, обычно этот компонент соответствует цвету тени).</A>
+<BR><A>material - имя материала</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="MaterialSetDiffuseColor"></A>
+<H1 class=name>MaterialSetDiffuseColor</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetDiffuseColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
+<BR><A>Задает цветовой компонент Diffuse. Этим цветом закрашивается только освещенная часть объекта.</A>
+<BR><A>material - имя материала</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="MaterialSetEmissionColor"></A>
+<H1 class=name>MaterialSetEmissionColor</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetEmissionColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
+<BR><A>Задает цветовой компонент Emission. Используется для имитации самосвечения объекта (суммируется с остальными компонентами, делая объект более ярким).</A>
+<BR><A>material - имя материала</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="MaterialSetSpecularColor"></A>
+<H1 class=name>MaterialSetSpecularColor</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetSpecularColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
+<BR><A>Задает цветовой компонент Specular, соответствующий цвету блика (блик возникает при прямом отражении световых лучей 
+поверхностью объекта).</A>
+<BR><A>material - имя материала</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="MaterialSetShininess"></A>
+<H1 class=name>MaterialSetShininess</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetShininess</A><A>( material as </A><A class=type>string</A><A>, shininess as </A><A class=type>real</A> );</A>
+<BR><A>Задает уровень блеска. Параметр управляет бликом (Specular): чем выше это значение, тем меньше будет размер блика. 
+<BR>В большинстве случаев неплохие результаты дадут значения в промежутке от 10 до 30.</A>
+<BR><A>material - имя материала</A>
+<BR><A>shininess - уровень блеска (значение от 0 до 128).</A>
+<HR>
+
+<A name="MaterialSetPolygonMode"></A>
+<H1 class=name>MaterialSetPolygonMode</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetPolygonMode</A><A>( material as </A><A class=type>string</A><A>, pm as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим отображения полигонов (pm). Доступны следующие значения pm:</A>
+<BR><A class=constant name="">pmFill</A><A> = 0 - полигоны в виде плоскостей (значение по умолчанию)</A>
+<BR><A class=constant name="">pmLines</A><A> = 1 - полигоны в виде образующих линий (каркасное отображение)</A>
+<BR><A class=constant name="">pmPoints</A><A> = 2 - полигоны в виде образующих точек.</A>
+<BR><A>material - имя материала</A>
+<BR><A>pm - режим.</A>
+<HR>
+
+<A name="MaterialSetTextureMappingMode"></A>
+<H1 class=name>MaterialSetTextureMappingMode</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureMappingMode</A><A>( material as </A><A class=type>string</A><A>, tmm as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим проецирования текстуры (tmm). Доступны следующие значения tmm:</A>
+<BR><A class=constant name="tmmUser">tmmUser</A><A> = 0 - проецирование по умолчанию (определяется разверткой объекта)</A>
+<BR><A class=constant name="tmmObjectLinear">tmmObjectLinear</A><A> = 1 - линейное проецирование, фиксированное по отношению к объекту</A>
+<BR><A class=constant name="tmmEyeLinear">tmmEyeLinear</A><A> = 2 - линейное проецирование, фиксированное по отношению к сцене</A>
+<BR><A class=constant name="tmmSphere">tmmSphere</A><A> = 3 - сферическое проецирование</A>
+<BR><A class=constant name="tmmCubeMapReflection">tmmCubeMapReflection</A><A> = 4 - кубическое проецирование</A>
+<BR><A class=constant name="tmmCubeMapNormal">tmmCubeMapNormal</A><A> = 5 - кубическое проецирование, фиксированное по отношению к нормали поворота</A>
+<BR><A class=constant name="tmmCubeMapLight0">tmmCubeMapLight0</A><A> = 6 - сведения отсутствуют</A>
+<BR><A class=constant name="tmmCubeMapCamera">tmmCubeMapCamera</A><A> = 7 - сведения отсутствуют.</A>
+<BR><A>material - имя материала</A>
+<BR><A>tmm - режим.</A>
+<HR>
+
+<A name="MaterialSetTextureImageAlpha"></A>
+<H1 class=name>MaterialSetTextureImageAlpha</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureImageAlpha</A><A>( material as </A><A class=type>string</A><A>, tia as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим прозрачности текстуры (tia). Доступны следующие значения tia:</A>
+<BR><A class=constant name="tiaDefault">tiaDefault</A><A> = 0 - прозрачность по умолчанию (определяется альфа-каналом)</A>
+<BR><A class=constant name="tiaAlphaFromIntensity">tiaAlphaFromIntensity</A><A> = 1 - прозрачность выделяется из интенсивности цвета (чем темнее, тем прозрачнее)</A>
+<BR><A class=constant name="tiaSuperBlackTransparent">tiaSuperBlackTransparent</A><A> = 2 - текстура прозрачна в абсолютно черных местах (0,0,0)</A>
+<BR><A class=constant name="tiaLuminance">tiaLuminance</A><A> = 3 - сведения отсутствуют</A>
+<BR><A class=constant name="tiaLuminanceSqrt">tiaLuminanceSqrt</A><A> = 4 - сведения отсутствуют</A>
+<BR><A class=constant name="tiaOpaque">tiaOpaque</A><A> = 5 - полная непрозрачность</A>
+<BR><A class=constant name="tiaTopLeftPointColorTransparent">tiaTopLeftPointColorTransparent</A><A> = 6 - текстура прозрачна в местах одного цвета с левым нижним углом изображения</A>
+<BR><A class=constant name="tiaInverseLuminance">tiaInverseLuminance</A><A> = 7 - сведения отсутствуют</A>
+<BR><A class=constant name="tiaInverseLuminanceSqrt">tiaInverseLuminanceSqrt</A><A> = 8 - сведения отсутствуют</A>
+<BR><A>material - имя материала</A>
+<BR><A>tia - режим.</A>
+<HR>
+
+<A name="MaterialSetTextureScale"></A>
+<H1 class=name>MaterialSetTextureScale</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureScale</A><A>( material as </A><A class=type>string</A><A>, u,v as </A><A class=type>real</A> );</A>
+<BR><A>Задает размер текстуры.</A>
+<BR><A>material - имя материала</A>
+<BR><A>u,v - размер по горизонтали и вертикали.</A>
+<HR>
+
+<A name="MaterialGetFromLib"></A>
+<H1 class=name>MaterialGetFromLib</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGetFromLib</A><A>( material1,material2 as </A><A class=type>string</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>material1 - сведения отсутствуют</A>
+<BR><A>material2 - сведения отсутствуют.</A>
+<HR>
+
+<A name="MaterialSetTextureOffset"></A>
+<H1 class=name>MaterialSetTextureOffset</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureOffset</A><A>( material as </A><A class=type>string</A><A>, u,v as </A><A class=type>real</A> );</A>
+<BR><A>Задает смещение текстуры.</A>
+<BR><A>material - имя материала</A>
+<BR><A>u,v - смещение по горизонтали и вертикали.</A>
+<HR>
+
+<A name="MaterialSetTextureMode"></A>
+<H1 class=name>MaterialSetTextureMode</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureMode</A><A>( material as </A><A class=type>string</A><A>, tm as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим текстуры (tm). Доступны следующие значения tm:</A>
+<BR><A class=constant name="tmDecal">tmDecal</A><A> = 0 - замещение с прозрачностью</A>
+<BR><A class=constant name="tmModulate">tmModulate</A><A> = 1 - замещение с прозрачностью и цветовым смешиванием (используется компонент Diffuse)</A>
+<BR><A class=constant name="tmBlend">tmBlend</A><A> = 2 - сведения отсутствуют</A>
+<BR><A class=constant name="tmReplace">tmReplace</A><A> = 3 - полное замещение (без прозрачности и смешивания)</A>
+<BR><A>material - имя материала</A>
+<BR><A>tm - режим.</A>
+<HR>
+
+<A name="MaterialSetBlendingMode"></A>
+<H1 class=name>MaterialSetBlendingMode</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetBlendingMode</A><A>( material as </A><A class=type>string</A><A>, bm as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим смешивания (bm). Доступны следующие значения bm:</A>
+<BR><A class=constant name="bmOpaque">bmOpaque</A><A> = 0 - отсутствие прозрачности и смешивания (полное замещение)</A>
+<BR><A class=constant name="bmTransparency">bmTransparency</A><A> = 1 - используется прозрачность или альфа-канал</A>
+<BR><A class=constant name="bmAdditive">bmAdditive</A><A> = 2 - используется суммирование цветов</A>
+<BR><A class=constant name="bmAlphaTest50">bmAlphaTest50</A><A> = 3 - сведения отсутствуют</A>
+<BR><A class=constant name="bmAlphaTest100">bmAlphaTest100</A><A> = 4 - сведения отсутствуют</A>
+<BR><A class=constant name="bmModulate">bmModulate</A><A> = 5 - используется модуляция цветов.</A>
+<BR><A>material - имя материала</A>
+<BR><A>bm - режим.</A>
+<HR>
+
+<A name="MaterialSetTextureFilter"></A>
+<H1 class=name>MaterialSetTextureFilter</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureFilter</A><A>( material as </A><A class=type>string</A><A>, mi,ma as </A><A class=type>real</A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A class=constant name="miNearest">miNearest</A><A> = 0 - сведения отсутствуют</A>
+<BR><A class=constant name="miLinear">miLinear</A><A> = 1 - сведения отсутствуют</A>
+<BR><A class=constant name="miNearestMipmapNearest">miNearestMipmapNearest</A><A> = 2 - сведения отсутствуют</A>
+<BR><A class=constant name="miLinearMipmapNearest">miLinearMipmapNearest</A><A> = 3 - сведения отсутствуют</A>
+<BR><A class=constant name="miNearestMipmapLinear">miNearestMipmapLinear</A><A> = 4 - сведения отсутствуют</A>
+<BR><A class=constant name="miLinearMipmapLinear">miLinearMipmapLinear</A><A> = 5 - сведения отсутствуют</A>
+<BR><A class=constant name="maNearest">maNearest</A><A> = 0 - сведения отсутствуют</A>
+<BR><A class=constant name="maLinear">maLinear</A><A> = 1 - сведения отсутствуют</A>
+<BR><A>material - имя материала</A>
+<BR><A>mi - сведения отсутствуют</A>
+<BR><A>ma - сведения отсутствуют.</A>
+<HR>
+
+<A name="MaterialDisableTexture"></A>
+<H1 class=name>MaterialDisableTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialDisableTexture</A><A>( material as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A> );</A>
+<BR><A>Включает или выключает отображение текстуры.</A>
+<BR><A>material - имя материала</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="MaterialLoadTexture"></A>
+<H1 class=name>MaterialLoadTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLoadTexture</A><A>( material,filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Загружает в материал текстуру.</A>
+<BR><A>material - имя материала</A>
+<BR><A>filename - путь к файлу текстуры.</A>
+<HR>
+
+<A name="MaterialGetCount"></A>
+<H1 class=name>MaterialGetCount</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGetCount</A><A>();</A>
+<BR><A>Возвращает общее количество материалов в активной библиотеке.</A>
+<HR>
+
+<A name="MaterialGetName"></A>
+<H1 class=name>MaterialGetName</H1>
+<A class=type>string</A><A> = </A><A class=function>MaterialGetName</A><A>(ind);</A>
+<BR><A>Возвращает имя материала заданного номера.</A>
+<BR><A>ind - порядковый номер материала в библиотеке.</A>
+<HR>
+
+<A name="MaterialSetFaceCulling"></A>
+<H1 class=name>MaterialSetFaceCulling</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetFaceCulling</A><A>( material as </A><A class=type>string</A><A>, fc as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим отбора видимости полигонов (fc). Доступны следующие значения fc:</A>
+<BR><A class=constant name="fcCull">fcCull</A><A> = 1 - отбор видимости включен</A>
+<BR><A class=constant name="fcNoCull">fcNoCull</A><A> = 2 - отбор видимости выключен.</A>
+<BR><A>material - имя материала</A>
+<BR><A>fc - режим отбора видимости.</A>
+<HR>
+
+<A name="MaterialSetSecondTexture"></A>
+<H1 class=name>MaterialSetSecondTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetSecondTexture</A><A>( material1,material2 as </A><A class=type>string</A><A> );</A>
+<BR><A>Загружает материалу 1 вторую текстуру из материала 2. Вторая текстура ложится поверх первой и использует второй набор текстурных координат (если его нет, используется первый).</A>
+<BR><A>material1 - имя материала 1</A>
+<BR><A>material2 - имя материала 2.</A>
+<HR>
+
+<A name="MaterialSetTextureFormat"></A>
+<H1 class=name>MaterialSetTextureFormat</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureFormat</A><A>( material as </A><A class=type>string</A><A>, tf as </A><A class=type>real</A> );</A>
+<BR><A>Задает формат хранения текстуры в памяти (tf - не путать с TextureFilter). 
+Доступны следующие значения tf:</A>
+<BR><A class=constant name="tfDefault">tfDefault</A><A> = 0 - формат по умолчанию (</A><A class=constant>tfRGBA</A><A>)</A>
+<BR><A class=constant name="tfRGB">tfRGB</A><A> = 1 - 24-битный RGB, 8 бит на компонент, без альфа-канала</A>
+<BR><A class=constant name="tfRGBA">tfRGBA</A><A> = 2 - 24-битный RGBA, 8 бит на компонент, включает альфа-канал</A>
+<BR><A class=constant name="tfRGB16">tfRGB16</A><A> = 3 - 16-битный RGB, без альфа-канала</A>
+<BR><A class=constant name="tfRGBA16">tfRGBA16</A><A> = 4 - 16-битный RGBA, включает альфа-канал</A>
+<BR><A class=constant name="tfAlpha">tfAlpha</A><A> = 5 - только 8-битный альфа-канал без цвета</A>
+<BR><A class=constant name="tfLuminance">tfLuminance</A><A> = 6 - только 8-битный компонент яркости, без альфа-канала</A>
+<BR><A class=constant name="tfLuminanceAlpha">tfLuminanceAlpha</A><A> = 7 - только 8-битный компонент яркости, включает альфа-канал</A>
+<BR><A class=constant name="tfIntensity">tfIntensity</A><A> = 8 - только 8-битный компонент насыщенности, без альфа-канала</A>
+<BR><A class=constant name="tfNormalMap">tfNormalMap</A><A> = 9 - 24-битная RGB карта нормалей, генерируемая из исходной текстуры</A>
+<BR><A class=constant name="tfRGBAFloat16">tfRGBAFloat16</A><A> = 10 - 16-битный RGBA с плавающей запятой, включает альфа-канал</A>
+<BR><A class=constant name="tfRGBAFloat32">tfRGBAFloat32</A><A> = 11 - 32-битный RGBA с плавающей запятой, включает альфа-канал.</A>
+<BR><A>material - имя материала</A>
+<BR><A>tf - формат.</A>
+<HR>
+
+<A name="MaterialSetTextureCompression"></A>
+<H1 class=name>MaterialSetTextureCompression</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureCompression</A><A>( material as </A><A class=type>string</A><A>, tc as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим сжатия текстуры (tc). Сжатие способствует экономии видеопамяти, но может снизить производительность. 
+<BR>Доступны следующие значения tc:</A>
+<BR><A class=constant name="tcDefault">tcDefault</A><A> = 0 - сжатие по умолчанию</A>
+<BR><A class=constant name="tcNone">tcNone</A><A> = 1 - не использовать сжатие</A>
+<BR><A class=constant name="tcStandard">tcStandard</A><A> = 2 - стандартное сжатие (средние качество и скорость декомпрессии)</A>
+<BR><A class=constant name="tcHighQuality">tcHighQuality</A><A> = 3 - высокое качество, низкая скорость декомпрессии</A>
+<BR><A class=constant name="tcHighSpeed">tcHighSpeed</A><A> = 4 - высокая скорость декомпрессии, низкое качество.</A>
+<BR><A>material - имя материала</A>
+<BR><A>tc - режим.</A>
+<HR>
+
+<A name="MaterialTextureRequiredMemory"></A>
+<H1 class=name>MaterialTextureRequiredMemory</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialTextureRequiredMemory</A><A>( material as </A><A class=type>string</A><A> );</A>
+<BR><A>Возвращает объем памяти, занимаемый текстурой (в байтах).</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="MaterialSetFilteringQuality"></A>
+<H1 class=name>MaterialSetFilteringQuality</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetFilteringQuality</A><A>( material as </A><A class=type>string</A><A>, tf as </A><A class=type>real</A> );</A>
+<BR><A>Задает режим фильтрации текстуры (tf - не путать с TextureFilter и TextureFormat). Фильтрация происходит, когда разрешение mip-уровня текстуры 
+становится больше или меньше изображения-оригинала.  Доступны следующие значения tf:</A>
+<BR><A class=constant name="tfIsotropic">tfIsotropic</A><A> = 0 - изотропная фильтрация</A>
+<BR><A class=constant name="tfAnisotropic">tfAnisotropic</A><A> = 1 - анизотропная фильтрация.</A>
+<BR><A>material - имя материала</A>
+<BR><A>tf - режим.</A>
+<HR>
+
+<A name="MaterialSetOptions"></A>
+<H1 class=name>MaterialSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetOptions</A><A>( material as </A><A class=type>string</A><A>, fog,lighting as </A><A class=type>real</A> );</A>
+<BR><A>Включает или выключает влияние тумана (fog) и света (lighting) на материал.
+<BR><A>material - имя материала</A>
+<BR><A>fog - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
+<BR><A>lighting - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="MaterialSetShader"></A>
+<H1 class=name>MaterialSetShader</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetShader</A><A>( material as </A><A class=type>string</A><A>, shader as </A><A class=type>real</A> );</A>
+<BR><A>Применяет к материалу шейдер.</A>
+<BR><A>material - имя материала</A>
+<BR><A>shader - id шейдера.</A>
+<HR>
+
+<A name="MaterialAddTextureEx"></A>
+<H1 class=name>MaterialAddTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialAddTextureEx</A><A>( material,texture as </A><A class=type>string</A><A> );</A>
+<BR><A>Добавляет в материал дополнительную текстуру. Первая добавленная текстура заменяет 
+собственную текстуру материала. Все последующие добавленные текстуры ложатся слоями поверх предыдущих, в режиме смешивания Modulate (белый цвет полностью прозрачный). 
+<BR>Все настройки материала, из которого берется дополнительная текстура, игнорируются (за исключением некоторых настроек текстуры). 
+Поэтому этот метод мультитекстурирования несколько ограничен, но зато не снижает производительность, поэтому может быть применен, например, для эффектов освещения (lightmapping).</A>
+<BR><A>material - имя материала</A>
+<BR><A>texture - имя материала, из которого следует взять текстуру.</A>
+<HR>
+
+<A name="MaterialTextureExClear"></A>
+<H1 class=name>MaterialTextureExClear</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialTextureExClear</A><A>( material as </A><A class=type>string</A><A> );</A>
+<BR><A>Полностью очищает список дополнительных текстур материала.</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="MaterialTextureExDelete"></A>
+<H1 class=name>MaterialTextureExDelete</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialTextureExDelete</A><A>( material as </A><A class=type>string</A><A>, ind as </A><A class=type>real</A> );</A>
+<BR><A>Удаляет дополнительную текстуру заданного номера. Номер присваивается всем текстурам, начиная со второй (первая дополнительная текстура не имеет номера, она считается корневой). 
+Отсчет ведется с 1.
+<BR>Нулевой номер присваивается всему списку текстур в целом. Удаление текстуры под номером 0 равносильно вызову </A><A class=funclink href=../functions/material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>.</A>
+<BR><A>material - имя материала</A>
+<BR><A>ind - номер текстуры.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

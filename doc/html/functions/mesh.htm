@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Mesh</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Mesh</H1>
+
+<A class=type>Класс: TGLFreeForm</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>Функции меша (mesh) относятся, как правило, к объектам свободной формы и работают непосредственно с их геометрией.
+<BR><HR>
+
+<A name="MeshCountObjects"></A>
+<H1 class=name>MeshCountObjects</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshCountObjects</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество мешей в модели.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="MeshRotate"></A>
+<H1 class=name>MeshRotate</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshRotate</A><A>( object,x,y,z,angle as </A><A class=type>real</A> );</A>
+<BR><A>Поворачивает модель вокруг заданной оси. Обратите внимание, что этот поворот относится только к геометрии и никак не влияет на обычный поворот объекта по осям XYZ.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - единичный вектор оси поворота</A>
+<BR><A>angle - угол поворота.</A>
+<HR>
+
+<A name="MeshExplode"></A>
+<H1 class=name>MeshExplode</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshExplode</A><A>( object,sp,max,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>"Взрывает" модель: полигоны, составляющие его, разлетаются в стороны. "Собрать" меш обратно нельзя.</A>
+<BR><A>object - id объекта</A>
+<BR><A>sp - постоянная скорость разлета</A>
+<BR><A>max - максимальная скорость разлета</A>
+<BR><A>x,y,z - единичный вектор движения. Если эти значения соответствуют нулю, полигоны разлетятся в направлении своих нормалей, т.е. во все стороны.</A><HR>
+
+<A name="MeshSetVisible"></A>
+<H1 class=name>MeshSetVisible</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshSetVisible</A><A>( object,ind,mode as </A><A class=type>real</A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - сведения отсутствуют</A>
+<BR><A>mode - сведения отсутствуют.</A>
+<HR>
+
+<A name="MeshCountVertices"></A>
+<H1 class=name>MeshCountVertices</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshCountVertices</A><A>( object,ind as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество вершин в модели.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - сведения отсутствуют.</A>
+<HR>
+
+<A name="MeshOptimize"></A>
+<H1 class=name>MeshOptimize</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshOptimize</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="MeshSmoothFaces"></A>
+<H1 class=name>MeshSmoothFaces</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshSmoothFaces</A><A>( object,weld,threshold as </A><A class=type>real</A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта</A>
+<BR><A>weld - сведения отсутствуют</A>
+<BR><A>threshold - сведения отсутствуют.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

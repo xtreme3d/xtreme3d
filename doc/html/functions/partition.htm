@@ -1,0 +1,141 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Partition</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Partition</H1>
+
+<A class=type>Класс: TQuadtreeSpacePartition, TOctreeSpacePartition</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>
+Чем больше вы добавляете на сцену объектов, тем медленнее протекает их обработка и 
+рендеринг. В таких ситуациях на отрисовку отправляется слишком много данных о вершинах, в том числе  
+и тех, которые и рисоваться не должны - камера их просто не видит. Что же делать? На помощь приходят 
+методы разбиения пространства. В частности, квадратичные и октарные деревья: Quadtree и Octree.
+<BR>Рассмотрим принцип действия Octree. Игровой мир вписывается в куб, получившийся куб делится надвое по 
+каждой оси (X,Y,Z). Таким образом, получается, что мир разбит на восемь кубов (отсюда и название Octree – 
+восьмеричное дерево). Далее эти восемь кубов делятся еще на восемь, те еще на восемь и так далее. 
+<BR>Самый большой куб - исходный - называется корнем (root). Все кубы дерева, 
+в том числе и корень – это узлы (node). Узлы, находящиеся в самом низу дерева и хранящие объекты - листья (leaf).
+<BR>Когда сцена разбита на некоторе количество узлов, и в каждом листе хранятся списки принадлежащих ему 
+объектов, мы, используя пирамиду видимости (frustum), определяем из всех листов те, которые видны камере. А определив их, 
+рисуем только те объекты, которые находятся в кубах этих листьев.
+<BR><BR><img src="../data/octree.jpg" align="center">
+<BR>
+<BR>Квадратичное дерево (Quadtree) устроено аналогично, только мир делится не на кубы, а на квадраты. 
+Quadtree больше подходит для разбиения плоских пространств, в которых перемещение камеры ограничено 
+преимущественно некоторой плоскостью: примером может служить автосимулятор.
+<BR>Деревья могут применяться не только для отбора видимости, но и для оптимизации проверки столкновений. 
+Например, вы можете определять листы, находящиеся внутри некоего ограничивающего параллелепипеда (AABB) или 
+сферы (BSphere).
+</A>
+<BR>
+<HR>
+
+<H1 class=name>OctreeCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OctreeCreate</A><A>( maxdepth,leafthreshold,growgravy,culling as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает октарное дерево и возвращает его id.</A>
+<BR><A>maxdepth - </A>
+<BR><A>leafthreshold - </A>
+<BR><A>growgravy - </A>
+<BR><A>culling - </A><A class=constant name="cmFineCulling">cmFineCulling</A><A>=0 или </A><A class=constant name="cmGrossCulling">cmGrossCulling</A><A>=1.</A>
+<HR>
+
+<H1 class=name>QuadtreeCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>QuadtreeCreate</A><A>( maxdepth,leafthreshold,growgravy,culling as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает квадратичное дерево и возвращает его id.</A>
+<BR><A>maxdepth - </A>
+<BR><A>leafthreshold - </A>
+<BR><A>growgravy - </A>
+<BR><A>culling - </A><A class=constant>cmFineCulling</A><A>=0 или </A><A class=constant>cmGrossCulling</A><A>=1.</A>
+<HR>
+
+<H1 class=name>PartitionDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionDestroy</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Уничтожает дерево.</A>
+<BR><A>tree - id дерева.</A>
+<HR>
+
+<H1 class=name>PartitionAddLeaf</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionAddLeaf</A><A>( tree,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Добавляет к дереву объект, который должен участвовать в разбиении.
+<BR><A>tree - id дерева</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>PartitionLeafChanged</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionLeafChanged</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>PartitionQueryFrustrum</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionQueryFrustrum</A><A>( tree,viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Запрашивает у дерева все листья, которые видны камере заданного вида.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>viewer - id вида.</A>
+<HR>
+
+<H1 class=name>PartitionQueryLeaf</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionQueryLeaf</A><A>( tree,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>PartitionQueryAABB</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionQueryAABB</A><A>( tree,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Запрашивает у дерева все листья, находящиеся внутри ограничивающего параллелепипеда заданного объекта.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>PartitionQueryBSphere</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionQueryBSphere</A><A>( tree,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Запрашивает у дерева все листья, находящиеся внутри ограничивающей сферы заданного объекта.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<H1 class=name>PartitionGetNodeTests</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionGetNodeTests</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>tree - id дерева.</A>
+<HR>
+
+<H1 class=name>PartitionGetNodeCount</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionGetNodeCount</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает общее количество узлов дерева.</A>
+<BR><A>tree - id дерева.</A>
+<HR>
+
+<H1 class=name>PartitionGetResult</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionGetResult</A><A>( tree,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает id объекта, принадлежащего заданному листу результата последнего запроса.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>index - номер листа.</A>
+<HR>
+
+<H1 class=name>PartitionResultShow</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionResultShow</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Показывает объекты, принадлежащие листьям результата последнего запроса.</A>
+<BR><A>tree - id дерева.</A>
+<HR>
+
+<H1 class=name>PartitionResultHide</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionResultHide</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Скрывает объекты, принадлежащие листьям результата последнего запроса.</A>
+<BR><A>tree - id дерева.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

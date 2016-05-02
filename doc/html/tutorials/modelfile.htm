@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Загрузка модели из файла</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Урок 7<BR>Загрузка модели из файла</H1>
+
+<A><B>Уровень:</B> начинающий</A>
+<BR><A><B>Версия Xtreme3D:</B> 2.0.x</A><A>
+<BR>
+<BR>Примитивы - это, конечно, хорошо, но для создания полноценной игры их явно недостаточно. Самое любимое 
+занятие каждого, кто начинает знакомиться с 3D-движками, - несомненно, загрузка в движок собственных моделей, 
+подготовленных в стороннем редакторе.
+<BR>Статичная (то есть, неанимированная) модель в Xtreme3D загружается в специальный объект - Freeform:
+<BR>
+<BR>model=</A><A class=func2link href=../functions/freeform.htm#FreeformCreate>FreeformCreate</A><A>('model.3ds',<B>global.</B>scene);
+<BR>
+<BR>Xtreme3D поддерживает модели форматов 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), GLSM (GLScene Mesh), 
+BSP (Quake), MS3D (Milkshape), B3D (Blitz3D) и LOD (LODka 3D). Некоторые из них могут 
+содержать данные о материалах модели. В этом случае Xtreme3D автоматически загрузит материалы и текстуры. 
+Вопрос только в том, где именно движок будет искать эти текстуры. По умолчанию - в рабочей директории игры. 
+Но хранить их там - не лучшая идея. Гораздо удобнее поместить текстуры в какую-либо папку, наример, /textures. 
+Тогда нам придется указать активной библиотеке материалов, что текстуры следует искать именно там:
+<BR>
+<BR></A><A class=func2link href=../functions/material.htm#MaterialLibrarySetTexturePaths>MaterialLibrarySetTexturePaths</A><A>(matlib,'textures');
+<BR>
+<BR>Материалы будут загружены в текущую активную библиотеку под теми именами, какие были заданы в 3D-редакторе. 
+Используя эти имена, вы можете настраивать характеристики материалов. Это дает возможность частично изменять 
+внешний вид модели. Например, представьте, что вы загрузили модель автомобиля. Вы можете изменить цвет корпуса 
+или салона, не затрагивая другие детали, сделать прозрачные окна тонированными, добавить эффекты отражения на 
+диски колес и т.д.
+<BR>
+<BR>Правда, как только вам захочется, чтобы автомобиль поехал, вы обнаружите, что невозможно повернуть колеса. 
+Это неудивительно: они являются частью одного Freeform. Поэтому в такой ситуации следует разбить модель на ее 
+составляющие - меши:
+<BR>
+<BR>car=</A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(<B>global.</B>scene);</A>
+<BR><A class=func2link href=../functions/freeform.htm#FreeformToFreeforms>FreeformToFreeforms</A><A>(model,0,0,car);
+<BR>
+<BR>Мы создаем Манекен, который будет родителем для всех деталей автомобиля, и разбиваем модель на отдельные 
+самостоятельные Freeform. Примите во внимание, что эта операция возможна только в том случае, если детали 
+автомобиля (кузов, колеса, дверцы, багажник и т.д.) представляют собой отдельные меши.
+<BR>Исходный Freeform нам уже не нужен, и мы его удаляем:
+<BR>
+<BR></A><A class=func2link href=../functions/object.htm#ObjectDestroy>ObjectDestroy</A><A>(model);
+<BR>
+<BR>Чтобы управлять созданными объектами, нам нужно получить их идентификаторы. Это можно сделать функцией 
+</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>. Для этого не лишним будет знать, 
+сколько всего мешей было в исходной модели. Допустим, что пять - четыре колеса и кузов:
+<BR>
+<BR>car_body=</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>(map,0);</A>
+<BR><A>car_wheel1=</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>(map,1);</A>
+<BR><A>car_wheel2=</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>(map,2);</A>
+<BR><A>car_wheel3=</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>(map,3);</A>
+<BR><A>car_wheel4=</A><A class=func2link href=../functions/object.htm#ObjectGetChild>ObjectGetChild</A><A>(map,4);</A><A>
+<BR>
+<BR>Помните, что отсчет ведется с нуля, поэтому первый потомок - нулевой.
+<BR>Таким образом, мы получили новую иерархию, по структуре полностью идентичную с исходной моделью. Вы теперь 
+можете вращать колеса:
+<BR>
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(car_wheel1,3);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(car_wheel2,3);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(car_wheel3,3);
+<BR></A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A>(car_wheel4,3);
+<BR>
+<BR>Вместо </A><A class=func2link href=../functions/object.htm#ObjectPitch>ObjectPitch</A><A> можно использовать 
+</A><A class=func2link href=../functions/object.htm#ObjectRoll>ObjectRoll</A><A> - в зависимости от того, куда 
+"смотрит" кузов автомобиля: вдоль оси Z или X.
+<BR>
+<BR>Вы также можете заменять одни части модели на другие. Например, если создать модель сразу с двумя вариантами 
+колес, можно скрыть одни колеса, оставив другие, и наоборот. Или сделать несколько вариантов кузова с различной 
+степенью повреждений, чтобы динамически переключаться между ними, когда автомобиль врезается в препятствие. 
+А еще вы можете использовать координаты деталей в пространстве, чтобы создать в них различные спецэффекты - 
+дым или пламя. Или, например, если вы создали танк, то можете вращать его башню и выстреливать из дула снаряды 
+в соответствующем направлении. Xtreme3D позволяет делать с моделями все, что угодно! 
+</A>
+
+</DIV>
+
+</BODY>
+</HTML>

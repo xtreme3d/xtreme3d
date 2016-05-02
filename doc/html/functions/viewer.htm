@@ -1,0 +1,286 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Viewer</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Viewer</H1>
+
+<A class=type>Класс: TGLSceneViewer</A><BR><BR>
+
+<A>Видом (Viewer) в Xtreme3D называется прямоугольная область окна, в которой происходит отрисовка 3D-сцены. 
+Вы можете создать несколько независимых видов, и все они могут отображать сцену с различных 
+ракурсов. Функции вида стоят на втором месте по 
+значимости после функций движка, так как именно они в первую очередь отвечают за вывод графики.</A><HR>
+
+<A name="ViewerCreate"></A>
+<H1 class=name>ViewerCreate</H1>
+<A class=type>real</A><A> = </A><A class=function name="">ViewerCreate</A><A>( x,y,width,height,window_h as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый вид и возвращает его id.</A>
+<BR><A>x,y - координаты вида (левый верхний угол) относительно окна Game Maker</A>
+<BR><A>width, height - ширина и высота вида.</A>
+<BR><A>window_h - идентификатор окна, к которому следует привязать движок. Идентификатор окна игры в GML 
+возвращается функцией <A class=type>window_handle</A><A>.</A></A>
+<HR>
+
+<A name="ViewerSetCamera"></A>
+<H1 class=name>ViewerSetCamera</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetCamera</A><A>( viewer,camera as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Определяет камеру, которую должен использовать вид для отрисовки проекции на сцену. 
+Можно использовать одну и ту же камеру для нескольких видов, но обычно каждому виду назначается 
+своя отдельная камера.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>camera - id камеры.</A>
+<HR>
+
+<A name="ViewerEnableVSync"></A>
+<H1 class=name>ViewerEnableVSync</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerEnableVSync</A><A>( viewer,vsm as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает вертикальную синхронизацию для вида. Существует распространенная 
+проблема, когда обновление экрана расходится во времени с рендерингом кадров. Эта функция решает 
+проблему, синхронизируя монитор и видеокарту так, что FPS не превысит частоту 
+обновления экрана. Это и называется вертикальной синхронизацией.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>vsm - </A><A class=constant name="vsmSync">vsmSync</A><A> или </A><A class=constant name="vsmNoSync">vsmNoSync</A>
+<A> (0 и 1 соответственно).</A>
+<HR>
+
+<!--
+<A name="ViewerRender"></A>
+<H1 class=name>ViewerRender</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerRender</A><A>( viewer as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Совершает рендеринг вида - отрисовку 
+проекции и вывод на экран.</A>
+<BR><A>viewer - id вида</A>
+<HR>
+-->
+
+<A name="ViewerRenderToFile"></A>
+<H1 class=name>ViewerRenderToFile</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerRenderToFile</A><A>( viewer as </A>
+<A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Совершает рендеринг вида в файл BMP (иными словами, делает скриншот).</A>
+<BR><A>viewer - id вида</A>
+<BR><A>filename - имя файла BMP.</A>
+<HR>
+
+<A name="ViewerResize"></A>
+<H1 class=name>ViewerResize</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerResize</A><A>( viewer,x,y,width,height as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Изменяет позицию и размер вида. Обычно в играх это не требуется, но может пригодиться, например, 
+если Вы даете игроку возможность растягивать окно в оконном режиме. Обратите внимание, что эта функция 
+довольно медленная и не должна вызываться постоянно.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - новые координаты вида (левый верхний угол) относительно окна Game Maker</A>
+<BR><A>width, height - новые ширина и высота вида.</A>
+<HR>
+
+<A name="ViewerSetVisible"></A>
+<H1 class=name>ViewerSetVisible</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetVisible</A><A>( viewer,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Прячет или показывает вид. Помните, что рендеринг для спрятанного вида не прекращается автоматически 
+- для остановки рендеринга вам необходимо прекратить вызов </A><A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A>
+<A> для данного вида.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ViewerGetPixelColor"></A>
+<H1 class=name>ViewerGetPixelColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPixelColor</A><A>( viewer,x,y as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает цвет пикселя на позиции x,y относительно верхнего левого угла вида.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты пикселя.</A>
+<HR>
+
+<A name="ViewerGetPixelDepth"></A>
+<H1 class=name>ViewerGetPixelDepth</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPixelDepth</A><A>( viewer,x,y as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает глубину пикселя в Z-буфере на позиции x,y относительно верхнего левого угла вида.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты пикселя.</A>
+<HR>
+
+<A name="ViewerSetLighting"></A>
+<H1 class=name>ViewerSetLighting</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetLighting</A><A>( viewer,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает освещение для вида. Если освещение включено, при отрисовке объектов будут 
+учтены источники света, в ином случае объекты будут отрисованы плоско, без затенения.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ViewerSetBackgroundColor"></A>
+<H1 class=name>ViewerSetBackgroundColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetBackgroundColor</A><A>( viewer,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Определяет фоновой цвет вида. Это цвет, которым по умолчанию заполняется все пустое 
+пространство позади объектов. Это не очень эффектно, но в некоторых случаях достаточно.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>color - цвет.</A>
+<HR>
+
+<A name="ViewerSetAmbientColor"></A>
+<H1 class=name>ViewerSetAmbientColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetAmbientColor</A><A>( viewer,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Определяет цвет окружения вида. Цвет окружения используется для задания общего оттенка объектов 
+отдельно от источников света и вне зависимости от их собственных цветов. Можно привести такой пример: ночью все предметы, особенно белые, в неярком свете кажутся голубоватыми, независимо от их собственного цвета. Похожий эффект наблюдается и при использовании инфракрасной камеры.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>color - цвет.</A>
+<HR>
+
+<A name="ViewerEnableFog"></A>
+<H1 class=name>ViewerEnableFog</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerEnableFog</A><A>( viewer,mode as </A><A class=type>real</A> );</A>
+<BR><A>Включает или выключает туман для вида. Туман - это очень распространенный эффект. Все объекты дальше 
+определенного расстояния постепенно окрашиваются в заданный цвет по мере отдаления. Самые дальние объекты 
+уже не имеют собственного цвета и, как предполагается, должны полностью слиться с фоном.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ViewerSetFogColor"></A>
+<H1 class=name>ViewerSetFogColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetFogColor</A><A>( viewer,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Определяет цвет тумана.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>color - цвет.</A>
+<HR>
+
+<A name="ViewerSetFogDistance"></A>
+<H1 class=name>ViewerSetFogDistance</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetFogDistance</A><A>( viewer,start,end as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Определяет расстояние "затуманивания".</A>
+<BR><A>viewer - id вида</A>
+<BR><A>start - минимальное расстояние, объекты ближе которого не подвергаются действию тумана</A>
+<BR><A>end - максимальное расстояние, на котором объекты полностью окрашены в цвет тумана.</A>
+<HR>
+
+<A name="ViewerScreenToWorld"></A>
+<H1 class=name>ViewerScreenToWorld</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerScreenToWorld</A><A>( viewer,x,y,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Конвертирует двумерные координаты на экране в абсолютные трехмерные координаты сцены. 
+За (0,0) берется левый нижний угол экрана.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты на экране</A>
+<BR><A>ind - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1, z если ind=2.</A>
+<HR>
+
+<A name="ViewerWorldToScreen"></A>
+<H1 class=name>ViewerWorldToScreen</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerWorldToScreen</A><A>( viewer,x,y,z,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Конвертирует абсолютные трехмерные координаты сцены в двумерные координаты на экране. За (0,0) берется левый нижний угол экрана.</A>
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты на экране</A>
+<BR><A>ind - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1, z если ind=2.</A>
+<HR>
+
+<A name="ViewerCopyToTexture"></A>
+<H1 class=name>ViewerCopyToTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerCopyToTexture</A><A>( viewer as </A><A class=type>real</A>
+<A>, material as </A><A class=type>string</A><A> );</A>
+<BR><A>Копирует содержимое вида (отрисованное изображение) в текстуру Материала. 
+<BR>Обратите внимание, что эта функция работает только в том случае, когда ширина и высота вида соответствуют степеням двойки (512, 256, 128 и т.д.)</A>
+<BR><A>viewer - id вида</A>
+<BR><A>material - имя Материала.</A>
+<HR>
+
+<A name="ViewerGetFramesPerSecond"></A>
+<H1 class=name>ViewerGetFramesPerSecond</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetFramesPerSecond</A><A>( viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество кадров в секунду, отрисовываемое видом (frames per second, FPS).
+<BR><A>viewer - id вида.</A>
+<HR>
+
+<A name="ViewerGetPickedObject"></A>
+<H1 class=name>ViewerGetPickedObject</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPickedObject</A><A>( viewer,x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает ближайший объект, которому соответствует заданная точка на экране.
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты на экране.</A>
+<HR>
+
+<A name="ViewerGetPickedObjectsList"></A>
+<H1 class=name>ViewerGetPickedObjectsList</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPickedObjectsList</A><A>( viewer,x,y,w,h,num,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает объект из списка объектов, которые попадают в заданную прямоугольную область на экране.
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты верхнего левого угла прямоугольника</A>
+<BR><A>w,h - ширина и высота прямоугольника</A>
+<BR><A>num - приблизительное ожидаемое количество объектов</A>
+<BR><A>ind - индекс объекта в списке.</A>
+<HR>
+
+<A name="ViewerScreenToVector"></A>
+<H1 class=name>ViewerScreenToVector</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerScreenToVector</A><A>( viewer,x,y,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Вычисляет единичный вектор от позиции камеры вида к заданной точке на экране.
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты на экране</A>
+<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="ViewerVectorToScreen"></A>
+<H1 class=name>ViewerVectorToScreen</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerVectorToScreen</A><A>( viewer,x,y,z,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Вычисляет координаты точки на экране, соответствующей заданному единичному вектору от позиции камеры вида.
+<BR><A>viewer - id вида</A>
+<BR><A>x,y,z - вектор</A>
+<BR><A>ind - индекс координаты точки (0 = X, 1 = Y).</A>
+<HR>
+
+<A name="ViewerPixelToDistance"></A>
+<H1 class=name>ViewerPixelToDistance</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerPixelToDistance</A><A>( viewer,x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Вычисляет расстояние от позиции камеры вида до ближайшего объекта, которому соответствует заданная точка на экране.
+<BR><A>viewer - id вида</A>
+<BR><A>x,y - координаты на экране.</A>
+<HR>
+
+<A name="ViewerSetAntiAliasing"></A>
+<H1 class=name>ViewerSetAntiAliasing</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetAntiAliasing</A><A>( viewer,aa as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает режим антиалиасинга (сглаживания) для вида, если это поддерживается видеодрайвером.
+<BR><A>viewer - id вида</A>
+<BR><A>aa - режим антиалиасинга. Доступны следующие значения aa:</A>
+<BR><A class=constant name="aaDefault">aaDefault</A><A> = 0 - значение по умолчанию (использовать настройку драйвера);</A></A>
+<BR><A class=constant name="aaNone">aaNone</A><A> = 1 - антиалиасинг отключен;</A></A>
+<BR><A class=constant name="aa2x">aa2x</A><A> = 2 - удваивает горизонтальное и вертикальное разрешение;</A></A>
+<BR><A class=constant name="aa2xHQ">aa2xHQ</A><A> = 3 - то же, что </A><A class=constant name="aa2x">aa2x</A><A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания;</A></A>
+<BR><A class=constant name="aa4x">aa4x</A><A> = 4 - учетверяет горизонтальное и вертикальное разрешение;</A></A>
+<BR><A class=constant name="aa4xHQ">aa4xHQ</A><A> = 5 - то же, что </A><A class=constant name="aa2x">aa4x</A><A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания;</A></A>
+<HR>
+
+<A name="ViewerGetVBOSupported"></A>
+<H1 class=name>ViewerGetVBOSupported</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetVBOSupported</A><A>( viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает истину, если видеодрайвер поддерживает вершинные буферы (VBO).
+<BR><A>viewer - id вида.</A>
+<HR>
+
+<A name="ViewerGetGLSLSupported"></A>
+<H1 class=name>ViewerGetGLSLSupported</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetGLSLSupported</A><A>( viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает истину, если видеодрайвер поддерживает шейдеры на языке GLSL.
+<BR><A>viewer - id вида.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

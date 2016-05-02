@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Light</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Light</H1>
+
+<A class=type>Класс: TGLLightSource</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>Объект, создающий освещение. Источники освещения могут быть различных типов и иметь различные характеристики. Это аналоги осветительных приборов реального мира, которые обладают дополнительными возможностями, недоступными реальным источникам.</A>
+<BR>
+<BR><A>Источники света могут быть трех типов:</A>
+<BR><A>Omni (точечный свет) - светит одинаково во всех направлениях из одной точки (например, лампочка);</A>
+<BR><A>Spot (направленный свет) - светит не во всех направлениях, а в пределах некоего конуса. Освещаются только объекты, попадающие в этот конус. Простой пример - фонарик;</A>
+<BR><A>Parallel (параллельный свет) - имитирует удаленные источники света, например, солнце. Свет излучается в направлении только одной оси, из источника, находящегося на бесконечно большом расстоянии от зрителя, а все световые лучи являются параллельными.</A>
+<BR>
+<BR><A>Цвет освещаемых объектов рассчитывается как сумма компонентов Ambient, Diffuse и Specular от всех Источников света в сцене:</A>
+<BR><A>Аmbient (равномерный компонент) - аппроксимация глобального освещения, общий цвет для всех объектов, не зависящий от других факторов;</A>
+<BR><A>Diffuse (диффузный компонент) - зависит от положения источника освещения и от нормали поверхности. Этот компонент влияет на цвет освещенных (повернутых к свету) частей объектов;</A>
+<BR><A>Specular (бликовый компонент) - определяет цвет бликов отражения лучей света от поверхности. Эти блики существенно увеличивают реалистичность изображения, ведь редкие реальные поверхности не отражают свет, поэтому данная составляющая очень важна.</A>
+<BR><A>Обратите внимание, что сами объекты также могут иметь индивидуальные компоненты Ambient, Diffuse и Specular, влияющие на цвет.</A>
+<BR>
+<BR><A>Xtreme3D поддерживает до восьми динамических источников освещения.</A>
+<BR><HR>
+
+<A name="LightCreate"></A>
+<H1 class=name>LightCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>LightCreate</A><A>( ls,parent as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Создает новый источник освещения и возвращает его id. </A>
+<BR><A>ls - тип Источника освещения (</A><A class=constant name="lsSpot">lsSpot</A><A>, </A><A class=constant name="lsOmni">lsOmni</A><A> или </A><A class=constant name="lsParallel">lsParallel</A><A> - соответственно, 0, 1 или 2)</A>
+<BR><A>parent - id родителя для источника освещения (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="LightSetAmbientColor"></A>
+<H1 class=name>LightSetAmbientColor</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetAmbientColor</A><A>( light,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Задает компонент Аmbient источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>color - цвет компонента.</A>
+<HR>
+
+<A name="LightSetDiffuseColor"></A>
+<H1 class=name>LightSetDiffuseColor</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetDiffuseColor</A><A>( light,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Задает компонент Diffuse источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>color - цвет компонента.</A>
+<HR>
+
+<A name="LightSetSpecularColor"></A>
+<H1 class=name>LightSetSpecularColor</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetSpecularColor</A><A>( light,color as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Задает компонент Specular источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>color - цвет компонента.</A>
+<HR>
+
+<A name="LightSetAttenuation"></A>
+<H1 class=name>LightSetAttenuation</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetAttenuation</A><A>( light,constant,linear,quadratic  as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Точечные и направленные источники света обладают параметром, влияющим на силу освещения - так называемое затухание (attenuation). Этот параметр влияет на убывание интенсивности света с расстоянием. В квадратное уравнение, определяющее интенсивность света, входят три параметра: постоянная, линейная и квадратичная составляющие (constant, linear, quadratic). По умолчанию им присваиваются значения 1, 0 и 0 соответственно - интенсивность света от такого источника не убывает с расстоянием. Уравнение выглядит следующим образом:</A>
+<BR>
+<BR><img src=../data/attenuation.jpg align="center">
+<BR>
+<BR><A>где а - величина затухания, с - постоянная составляющая (constant), l - линейная составляющая (linear), q - квадратичная составляющая (quadratic), d - расстояние от источника света.</A>
+<BR><A>Данная функция задает величину затухания через эти три составляющие.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>constant - постоянная составляющая затухания</A>
+<BR><A>linear - линейная составляющая затухания</A>
+<BR><A>quadratic - квадратичная составляющая затухания.</A>
+<HR>
+
+<A name="LightSetShining"></A>
+<H1 class=name>LightSetShining</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetShining</A><A>( light,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает источник освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="LightSetSpotCutoff"></A>
+<H1 class=name>LightSetSpotCutoff</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetSpotCutoff</A><A>( light,cutoff as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Для направленного источника освещения задает угол между осью и стороной ограничивающего конуса (он же половина угла  конуса). Иными словами, влияет на ширину конуса света. Если данное значение соответствует 180 градусам, направленный источник света рассматривается как точечный.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>cutoff - угол.</A>
+<HR>
+
+<A name="LightSetSpotExponent"></A>
+<H1 class=name>LightSetSpotExponent</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetSpotExponent</A><A>( light,exponent as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Для направленного источника освещения задает экспоненту убывания интенсивности в зависимости от угла между осью ограничивающего конуса и лучом распространения света.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>exponent - экспонента.</A>
+<HR>
+
+<A name="LightSetSpotDirection"></A>
+<H1 class=name>LightSetSpotDirection</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetSpotDirection</A><A>( light,x,y,z as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Для направленного источника освещения задает направление оси ограничивающего конуса.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>x,y,z - единичный вектор направления.</A>
+<HR>
+
+<A name="LightSetStyle"></A>
+<H1 class=name>LightSetStyle</H1>
+<A class=type>real</A><A> = </A><A class=function>LightSetStyle</A><A>( light,ls as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Задает тип источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>ls - тип источника освещения (</A><A class=constant>lsSpot</A><A>, </A><A class=constant>lsOmni</A><A> или </A><A class=constant>lsParallel</A><A> - соответственно, 0, 1 или 2).</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Trail</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Trail</H1>
+
+<A class=type>Класс: TGLTrail</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>
+Объект trail ("след") создает позади другого объекта красивый шлейф, возникающий при быстром движении. 
+Такой эффект можно использовать, например, в авиасимуляторах.
+</A>
+<BR>
+<HR>
+
+<A name="TrailCreate"></A>
+<H1 class=name>TrailCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailCreate</A><A>( object,parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый объект trail и возвращает его id.</A>
+<BR><A>object - id целевого объекта, к которому должен быть применен эффект шлейфа</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="TrailSetObject"></A>
+<H1 class=name>TrailSetObject</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetObject</A><A>( trail,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Меняет целевой объект, к которому должен быть применен эффект шлейфа</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>object - id нового целевого объекта.</A>
+<HR>
+
+<A name="TrailSetAlpha"></A>
+<H1 class=name>TrailSetAlpha</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetAlpha</A><A>( trail,alpha,fade as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает прозрачность шлейфа.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>alpha - прозрачность</A>
+<BR><A>fade - определяет, нужно ли сделать шлейф плавно исчезающим: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="TrailSetLimits"></A>
+<H1 class=name>TrailSetLimits</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetLimits</A><A>( trail,vl,tl as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает ограничения шлейфа.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>vl - максимальная длина шлейфа</A>
+<BR><A>tl - время до исчезновения шлейфа (в секундах).</A>
+<HR>
+
+<A name="TrailSetMinDistance"></A>
+<H1 class=name>TrailSetMinDistance</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetMinDistance</A><A>( trail,distance as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает расстояние, при прохождении которого целевым объектом следует создать очередной сегмент шлейфа. Чем 
+выше это значение, тем качественнее эффект.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>distance - расстояние.</A>
+<HR>
+
+<A name="TrailSetUVScale"></A>
+<H1 class=name>TrailSetUVScale</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetUVScale</A><A>( trail,uv as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>uv - сведения отсутствуют.</A>
+<HR>
+
+<A name="TrailSetMarkStyle"></A>
+<H1 class=name>TrailSetMarkStyle</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetMarkStyle</A><A>( trail,ms as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает стиль шлейфа (ms). Доступны следующие значения ms:</A>
+<BR><A class=constant name="msUp">msUp</A><A> = 0 - шлейф всегда выровнен по вертикали</A>
+<BR><A class=constant name="msDirection">msDirection</A><A> = 1 - шлейф похож на экран радара: движется по кругу относительно локального центра объекта trail, следуя за целевым объектом</A>
+<BR><A class=constant name="msFaceCamera">msFaceCamera</A><A> = 2 - шлейф всегда выровнен по камере и поэтому кажется объемным (значение по умолчанию).</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>ms - стиль шлейфа.</A>
+<HR>
+
+<A name="TrailSetMarkWidth"></A>
+<H1 class=name>TrailSetMarkWidth</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetMarkWidth</A><A>( trail,width as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает размер шлейфа.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>width - размер (по умолчанию: 1).</A>
+<HR>
+
+<A name="TrailSetEnabled"></A>
+<H1 class=name>TrailSetEnabled</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailSetEnabled</A><A>( trail,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает шлейф.</A>
+<BR><A>trail - id объекта trail</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="TrailClearMarks"></A>
+<H1 class=name>TrailClearMarks</H1>
+<A class=type>real</A><A> = </A><A class=function>TrailClearMarks</A><A>( trail as </A><A class=type>real</A><A> );</A>
+<BR><A>Сбрасывает состояние шлейфа. Полезно, когда нужно резко остановить объект, не дожидаясь, когда шлейф сам исчезнет.</A>
+<BR><A>trail - id объекта trail.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

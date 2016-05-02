@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Mirror</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Mirror</H1>
+
+<A class=type>Класс: TGLMirror</A><BR><BR>
+
+<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
+
+<A>
+Зеркало (mirror) - плоскость, отражающая другие объекты. Эффект отражения достигается путем отрисовки зеркальных копий объектов внутри 
+прямоугольной плоскости отсечения.
+</A>
+<BR>
+<HR>
+
+<A name="MirrorCreate"></A>
+<H1 class=name>MirrorCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MirrorCreate</A><A>( target,parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новое зеркало и возвращает его id. Размер зеркала по умолчанию 1х1.</A>
+<BR><A>target - id целевого объекта, который должен отражаться в зеркале (все его потомки также будут отражаться).</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="MirrorSetObject"></A>
+<H1 class=name>MirrorSetObject</H1>
+<A class=type>real</A><A> = </A><A class=function>MirrorSetObject</A><A>( mirror,target as </A><A class=type>real</A><A> );</A>
+<BR><A>Меняет объект, который должен отражаться в зеркале.</A>
+<BR><A>mirror - id зеркала</A>
+<BR><A>target - id объекта.</A>
+<HR>
+
+<A name="MirrorSetOptions"></A>
+<H1 class=name>MirrorSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>MirrorSetOptions</A><A>( mirror,stencil,opaque,planeclipping,clearzbuffer as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает опции зеркала.</A>
+<BR><A>mirror - id зеркала</A>
+<BR><A>stencil - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, отражение будет обрезано по плоскости. По умолчанию: 1</A>
+<BR><A>opaque - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция выключена, плоскость зеркала будет прозрачной. По умолчанию: 0</A>
+<BR><A>planeclipping - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, объекты, находящиеся за зеркалом, не будут давать обратного отражения. По умолчанию: 0</A>
+<BR><A>clearzbuffer - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, отражение будет полностью перекрывать объекты, находящиеся за зеркалом. По умолчанию: 0.</A>
+<BR><A>Реалистичное зеркало даст комбинация 1,0,1,1.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>
