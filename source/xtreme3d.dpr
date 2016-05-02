@@ -14,7 +14,8 @@ uses
   GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
-  GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning;
+  GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
+  GLTrail;
 
 type
    TEmpty = class(TComponent)
@@ -73,6 +74,7 @@ end;
 {$I 'terrain'}
 {$I 'blur'}
 {$I 'skybox'}
+{$I 'trail'}
 {$I 'shadowplane'}
 {$I 'shadowvolume'}
 {$I 'skydome'}
@@ -267,6 +269,9 @@ BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,
 BlurSetColor, BlurSetBlendingMode,
 //Skybox
 SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
+//Trail
+TrailCreate, TrailSetObject, TrailSetAlpha, TrailSetLimits, TrailSetMinDistance,
+TrailSetUVScale, TrailSetMarkStyle, TrailSetMarkWidth, TrailSetEnabled, TrailClearMarks,
 //Shadowplane
 ShadowplaneCreate, ShadowplaneSetLight, ShadowplaneSetObject, ShadowplaneSetOptions,
 //Shadowvolume
