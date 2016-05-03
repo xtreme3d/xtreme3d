@@ -160,10 +160,6 @@
   <PARAM name="Local" value="functions/light.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="B3D">
-  <PARAM name="Local" value="functions/b3d.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Font &amp; Text">
   <PARAM name="Local" value="functions/fonttext.htm">
  </OBJECT>
@@ -837,8 +833,8 @@
   <PARAM name="Local" value="glossary/zsorting.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="&Ntilde;&Agrave;&Iuml;&Dstrok;">
-  <PARAM name="Local" value="glossary/ÑÀÏÐ.htm">
+  <PARAM name="Name" value="ÑÀÏÐ">
+  <PARAM name="Local" value="glossary/sapr.htm">
  </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
