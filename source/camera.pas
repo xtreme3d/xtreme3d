@@ -133,6 +133,7 @@ function CameraScreenDeltaToVector(camera,dx,dy,ratio,nx,ny,nz,ind: real): real;
 var
   vec,pnorm: TVector;
 begin
+  pnorm := VectorMake(nx, ny, nz);
   vec:=TGLCamera(trunc64(camera)).ScreenDeltaToVector(trunc64(dx),trunc64(dy),ratio,pnorm);
   result:=vec[trunc64(ind)];
 end;
