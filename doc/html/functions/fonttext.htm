@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLWindowsBitmapFont, TGLHUDText</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>Шрифт и текст. Xtreme3D поддерживает три типа текстовых объектов: плоский, объемный и экранный. Экранный текст отображается поверх отрендеренной картинки и применяется для представления некоей текстовой информации в игре: количество жизней или патронов, различных сообщений и пр. Плоский и объемный текст расположены внутри трехмерного пространства - объемный, в отличие от плоского, имеет толщину.</A>
 <BR><A>Все типы текста используют специальные шрифтовые объекты, хранящие изображения текстовых символов - букв, цифр и знаков препинания. Эти изображения можно задать двумя способами: сгенерировать из системных векторных шрифтов Windows или загрузить из файла. Второе более предпочтительно, так как Вы можете нарисовать в графическом редакторе шрифт любого цвета и сложности, с любыми символами и на любом языке, в то время как поддержка системных шрифтов сильно ограничена (поддерживается только латиница). Но у векторных шрифтов есть одно неоспоримое преимущество - масштабируемость.
 <BR>Обратите внимание, что Xtreme3D не распознает в строковых значениях символ # как переход на следующую строку. Вместо этого рекомендуется использовать тринадцатый символ ASCII - </A><A class=type>chr</A><A>(13). Например:
@@ -40,10 +38,11 @@
 
 <A name="WindowsBitmapfontCreate"></A>
 <H1 class=name>WindowsBitmapfontCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>WindowsBitmapfontCreate</A><A>( fontname as </A><A class=type>string</A><A>, size as </A><A class=type>real</A><A> );</A>
-<BR><A>Загружает векторный шрифт Windows и возвращает его id.</A>
+<A class=type>real</A><A> = </A><A class=function>WindowsBitmapfontCreate</A><A>( fontname as </A><A class=type>string</A><A>, size,start,end as </A><A class=type>real</A><A> );</A>
+<BR><A>Загружает системный шрифт Windows и возвращает его id.</A>
 <BR><A>fontname - название шрифта, например: 'Arial'</A>
-<BR><A>size - размер шрифта.</A>
+<BR><A>size - размер шрифта</A>
+<BR><A>start,end - номера первого и последнего буквенного символа. Для латиницы эти значения соответствуют 32 и 95.</A>
 <HR>
 
 <A name="FlatTextCreate"></A>
@@ -54,6 +53,32 @@
 <BR><A>font - id шрифта</A>
 <BR><A>string - текстовая строка для отображения</A>
 <BR><A>parent - id родителя для текстового объекта (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="FlatTextSetFont"></A>
+<H1 class=name>FlatTextSetFont</H1>
+<A class=type>real</A><A> = </A><A class=function>FlatTextSetFont</A><A>( text,font as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает шрифт плоского текста.</A>
+<BR><A>font - id текста</A>
+<BR><A>font - id шрифта.</A>
+<HR>
+
+<A name="FlatTextSetColor"></A>
+<H1 class=name>FlatTextSetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>FlatTextSetColor</A><A>( text,color,alpha as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает цвет плоского текста.</A>
+<BR><A>font - id текста</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="FlatTextSetText"></A>
+<H1 class=name>FlatTextSetText</H1>
+<A class=type>real</A><A> = </A><A class=function>FlatTextSetText</A><A>( text as </A><A class=type>real</A>
+<A>, string as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает текстовую строку для отображения плоским текстом.</A>
+<BR><A>text - id текстового объекта</A>
+<BR><A>string - текстовая строка.</A>
 <HR>
 
 <A name="HUDTextCreate"></A>
@@ -72,6 +97,32 @@
 <BR><A>Задает угол поворота экранного текста.</A>
 <BR><A>text - id текстового объекта</A>
 <BR><A>angle - угол поворота в градусах.</A>
+<HR>
+
+<A name="HUDTextSetFont"></A>
+<H1 class=name>HUDTextSetFont</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDTextSetFont</A><A>( text,font as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает шрифт экранного текста.</A>
+<BR><A>font - id текста</A>
+<BR><A>font - id шрифта.</A>
+<HR>
+
+<A name="HUDTextSetColor"></A>
+<H1 class=name>HUDTextSetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDTextSetColor</A><A>( text,color,alpha as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает цвет экранного текста.</A>
+<BR><A>font - id текста</A>
+<BR><A>color - цвет</A>
+<BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="HUDTextSetText"></A>
+<H1 class=name>HUDTextSetText</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDTextSetText</A><A>( text as </A><A class=type>real</A>
+<A>, string as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает текстовую строку для отображения экранным текстом.</A>
+<BR><A>text - id текстового объекта</A>
+<BR><A>string - текстовая строка.</A>
 <HR>
 
 <A name="SpaceTextCreate"></A>
@@ -93,6 +144,24 @@
 <BR><A>extrusion - толщина текста.</A>
 <HR>
 
+<A name="SpaceTextSetFont"></A>
+<H1 class=name>SpaceTextSetFont</H1>
+<A class=type>real</A><A> = </A><A class=function>SpaceTextSetFont</A><A>( text,font as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает шрифт объемного текста.</A>
+<BR><A>font - id текста</A>
+<BR><A>font - id шрифта.</A>
+<HR>
+
+<A name="SpaceTextSetText"></A>
+<H1 class=name>SpaceTextSetText</H1>
+<A class=type>real</A><A> = </A><A class=function>SpaceTextSetText</A><A>( text as </A><A class=type>real</A>
+<A>, string as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает текстовую строку для отображения объемным текстом.</A>
+<BR><A>text - id текстового объекта</A>
+<BR><A>string - текстовая строка.</A>
+<HR>
+
+<!--
 <A name="TextSetColor"></A>
 <H1 class=name>TextSetColor</H1>
 <A class=type>real</A><A> = </A><A class=function>TextSetColor</A><A>( text,color,alpha as </A><A class=type>real</A><A> );</A>
@@ -118,6 +187,7 @@
 <BR><A>text - id текстового объекта</A>
 <BR><A>string - текстовая строка.</A>
 <HR>
+-->
 
 </DIV>
 
