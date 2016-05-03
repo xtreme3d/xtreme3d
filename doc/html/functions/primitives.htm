@@ -10,11 +10,9 @@
 
 <H1 class=pagetitle>Primitives</H1>
 
-<A class=type>Класс: TGLPlane, TGLCube, TGLSphere, TGLCylinder, TGLCone, TGLAnnulus, TGLTorus, TGLDisk</A><BR><BR>
+<A class=type>Класс: TGLPlane, TGLCube, TGLSphere, TGLCylinder, TGLCone, TGLAnnulus, TGLTorus, TGLDisk, TGLFrustrum, TGLDodecahedron, TGLIcosahedron, TGLTeapot</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
-<A>Примитивы (Primitive) - простейшие геометрические тела, которые генерируются движком. К примитивам относятся плоскость (plane), куб (cube), сфера (sphere), цилиндр (cylinder), конус (cone), полый цилиндр (annulus), тороид (torus) и диск (disk).</A>
+<A>Примитивы (Primitive) - простейшие геометрические тела, которые генерируются движком. К примитивам относятся плоскость (plane), куб (cube), сфера (sphere), цилиндр (cylinder), конус (cone), полый цилиндр (annulus), тор (torus), диск (disk), усеченная пирамида (frustrum), додекаэдр (dodecahedron), икосаэдр (icosahedron) и чайник Юта (teapot).</A>
 <BR><HR>
 
 <A name="PlaneCreate"></A>
@@ -52,6 +50,15 @@
 <BR><A>radius - радиус сферы</A>
 <BR><A>slices,stacks - задают количество меридиан и параллелей</A>
 <BR><A>parent - id родителя для сферы (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="SphereSetAngleLimits"></A>
+<H1 class=name>SphereSetAngleLimits</H1>
+<A class=type>real</A><A> = </A><A class=function>SphereSetAngleLimits</A><A>( sphere,start,stop,top,bottom as </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>sphere - id сферы</A>
+<BR><A>start,stop - cведения отсутствуют</A>
+<BR><A>top,bottom - cведения отсутствуют.</A>
 <HR>
 
 <A name="CylinderCreate"></A>
@@ -93,7 +100,7 @@
 <H1 class=name>TorusCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>TorusCreate</A>
 <A>( outerradius,innerradius,rings,sides,parent as  </A><A class=type>real</A><A>);</A>
-<BR><A>Создает тороид и возвращает его id. Тороид, или тор - это тело, напоминающее бублик.</A>
+<BR><A>Создает тор и возвращает его id. Тор - это тело, напоминающее бублик.</A>
 <BR><A>outerradius - радиус внешней окружности</A>
 <BR><A>innerradius - радиус внутренней окружности</A>
 <BR><A>rings,sides - задают количество колец и сегментов</A>
@@ -110,6 +117,41 @@
 <BR><A>startangle,sweepangle - начальный и конечный угол сектора. Для замкнутого диска эти значения соответствуют 0, 360</A>
 <BR><A>loops,slices - задают количество концентрических окружностей и ребер</A>
 <BR><A>parent - id родителя для полого цилиндра (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="FrustrumCreate"></A>
+<H1 class=name>FrustrumCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>FrustrumCreate</A>
+<A>( basewidth,basedepth,apexheight,cutheight,parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает усеченную пирамиду и возвращает ее id.</A>
+<BR><A>basewidth,basedepth - ширина и глубина основания</A>
+<BR><A>apexheight - высота апекса (вершины, противолежащей основанию)</A>
+<BR><A>cutheight - высота отсечения</A>
+<BR><A>parent - id родителя для усеченной пирамиды (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="DodecahedronCreate"></A>
+<H1 class=name>DodecahedronCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>DodecahedronCreate</A>
+<A>( parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает додекаэдр (многогранник, составленный из 12 правильных пятиугольников) и возвращает его id.</A>
+<BR><A>parent - id родителя для додекаэдра (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="IcosahedronCreate"></A>
+<H1 class=name>IcosahedronCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>IcosahedronCreate</A>
+<A>( parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает икосаэдр (многогранник, составленный из 20 равносторонних треугольников) и возвращает его id.</A>
+<BR><A>parent - id родителя для икосаэдра (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="TeapotCreate"></A>
+<H1 class=name>TeapotCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>TeapotCreate</A>
+<A>( parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает чайник Юта и возвращает его id.</A>
+<BR><A>parent - id родителя для чайника (0 - отсутствие родителя).</A>
 <HR>
 
 </DIV>
