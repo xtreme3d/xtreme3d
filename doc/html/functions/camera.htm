@@ -230,9 +230,9 @@
 <H1 class=name>CameraAbsoluteEyeSpaceVector</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraAbsoluteEyeSpaceVector</A><A>( cam,fordist,rightdist,updist,ind as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Вычисляет абсолютный вектор переноса, соответствующий заданному вектору переноса в видовом пространстве камеры.</A>
 <BR><A>cam - id камеры</A>
-<BR><A>fordist,rightdist,updist - сведения отсутствуют</A>
+<BR><A>fordist,rightdist,updist - перенос вперед, вправо и вверх</A>
 <BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
@@ -249,35 +249,36 @@
 <H1 class=name>CameraMoveInEyeSpace</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraMoveInEyeSpace</A><A>( cam,fordist,rightdist,updist as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Двигает камеру в ее видовом пространстве.</A>
 <BR><A>cam - id камеры</A>
-<BR><A>fordist,rightdist,updist - сведения отсутствуют.</A>
+<BR><A>fordist,rightdist,updist - перенос вперед, вправо и вверх.</A>
 <HR>
 
 <A name="CameraMoveTargetInEyeSpace"></A>
 <H1 class=name>CameraMoveTargetInEyeSpace</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraMoveTargetInEyeSpace</A><A>( cam,fordist,rightdist,updist as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Двигает целевой объект камеры в ее видовом пространстве.</A>
 <BR><A>cam - id камеры</A>
-<BR><A>fordist,rightdist,updist - сведения отсутствуют.</A>
+<BR><A>fordist,rightdist,updist - перенос вперед, вправо и вверх.</A>
 <HR>
 
 <A name="CameraPointInFront"></A>
 <H1 class=name>CameraPointInFront</H1>
 <A class=type>real</A><A> = </A><A class=function>CameraPointInFront</A><A>( cam,x,y,z as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Возвращает истину, если заданная точка находится в поле зрения камеры.</A>
 <BR><A>cam - id камеры</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - координаты точки.</A>
 <HR>
 
 <A name="CameraGetFieldOfView"></A>
 <H1 class=name>CameraGetFieldOfView</H1>
-<A class=type>real</A><A> = </A><A class=function>CameraGetFieldOfView</A><A>( cam as </A>
+<A class=type>real</A><A> = </A><A class=function>CameraGetFieldOfView</A><A>( cam,vpdim as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>cam - id камеры.</A>
+<BR><A>Возвращает угол поля зрения камеры в градусах.</A>
+<BR><A>cam - id камеры</A>
+<BR><A>vpdim - размерность вида (меньшее из ширины и высоты).</A>
 <HR>
 
 </DIV>
