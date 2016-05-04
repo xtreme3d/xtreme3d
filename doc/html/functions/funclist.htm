@@ -312,6 +312,7 @@
 <BR><A class=funclink href=object.htm#ObjectIsVisible>ObjectIsVisible</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectCopy>ObjectCopy</A><A>(object,parent)</A>
 <BR><A class=funclink href=object.htm#ObjectDestroy>ObjectDestroy</A><A>(object)</A>
+<BR><A class=funclink href=object.htm#ObjectDestroyChildren>ObjectDestroyChildren</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectGetPosition>ObjectGetPosition</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(object,ind)</A>
@@ -338,20 +339,26 @@
 <BR><A class=funclink href=object.htm#ObjectSetScale>ObjectSetScale</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectSetUpVector>ObjectSetUpVector</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectPointToObject>ObjectPointToObject</A><A>(object1,object2)</A>
+<!--
 <BR><A class=funclink href=object.htm#ObjectAlignToCamera>ObjectAlignToCamera</A><A>(object,camera)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAtXY>ObjectGetAtXY</A><A>(viewer,x,y)</A>
+-->
 <BR><A class=funclink href=object.htm#ObjectShowAxes>ObjectShowAxes</A><A>(object,mode)</A>
 <BR><A class=funclink href=object.htm#ObjectGetGroundHeight>ObjectGetGroundHeight</A><A>(object,target)</A>
 <BR><A class=funclink href=object.htm#ObjectSceneRaycast>ObjectSceneRaycast</A><A>(object,target)</A>
 <BR><A class=funclink href=object.htm#ObjectRaycast>ObjectRaycast</A><A>(object,target)</A>
 <BR><A class=funclink href=object.htm#ObjectGetCollisionPosition>ObjectGetCollisionPosition</A><A>(ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetCollisionNormal>ObjectGetCollisionNormal</A><A>(ind)</A>
+<!--
 <BR><A class=funclink href=object.htm#ObjectSetDiffuseColor>ObjectSetDiffuseColor</A><A>(object,color,alpha)</A>
+-->
 <BR><A class=funclink href=object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object,material)</A>
 <BR><A class=funclink href=object.htm#ObjectGetDistance>ObjectGetDistance</A><A>(object1,object2)</A>
-<BR><A class=funclink href=object.htm#ObjectCheckCubeVsFace>ObjectCheckCubeVsFace</A><A>(object1,object2)</A>
-<BR><A class=funclink href=object.htm#ObjectCheckCubeVsCube>ObjectCheckCubeVsCube</A><A>(object1,object2)</A>
+<!--
 <BR><A class=funclink href=object.htm#ObjectCheckFaceVsFace>ObjectCheckFaceVsFace</A><A>(object1,object2)</A>
+<BR><A class=funclink href=object.htm#ObjectCheckCubeVsFace>ObjectCheckCubeVsFace</A><A>(object1,object2)</A>
+-->
+<BR><A class=funclink href=object.htm#ObjectCheckCubeVsCube>ObjectCheckCubeVsCube</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckSphereVsSphere>ObjectCheckSphereVsSphere</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckSphereVsCube>ObjectCheckSphereVsCube</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectIsPointInObject>ObjectIsPointInObject</A><A>(object,x,y,z)</A>
@@ -359,14 +366,14 @@
 <BR><A class=funclink href=object.htm#ObjectSetName>ObjectSetName</A><A>(object,name)</A>
 <BR><A class=funclink href=object.htm#ObjectGetName>ObjectGetName</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetClassName>ObjectGetClassName</A><A>(object)</A>
-<BR><A class=funclink href=object.htm#ObjectSetID>ObjectSetID</A><A>(object,id)</A>
-<BR><A class=funclink href=object.htm#ObjectGetID>ObjectGetID</A><A>(object)</A>
+<BR><A class=funclink href=object.htm#ObjectSetTag>ObjectSeTag</A><A>(object,id)</A>
+<BR><A class=funclink href=object.htm#ObjectGetTag>ObjectGetTag</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetParent>ObjectGetParent</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetChildCount>ObjectGetChildCount</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetChild>ObjectGetChild</A><A>(object,ind)</A>
-<BR><A class=funclink href=object.htm#ObjectGetBoundingsphereRadius>ObjectGetBoundingsphereRadius</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetIndex>ObjectGetIndex</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectFindChild>ObjectFindChild</A><A>(object,name)</A>
+<BR><A class=funclink href=object.htm#ObjectGetBoundingsphereRadius>ObjectGetBoundingsphereRadius</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteUp>ObjectGetAbsoluteUp</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectSetAbsoluteUp>ObjectSetAbsoluteUp</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteRight>ObjectGetAbsoluteRight</A><A>(object,ind)</A>
@@ -382,12 +389,19 @@
 <BR><A class=funclink href=object.htm#ObjectPitch>ObjectPitch</A><A>(object,angle)</A>
 <BR><A class=funclink href=object.htm#ObjectTurn>ObjectTurn</A><A>(object,angle)</A>
 <BR><A class=funclink href=object.htm#ObjectRoll>ObjectRoll</A><A>(object,roll)</A>
-<BR><A class=funclink href=object.htm#ObjectGetUpVector>ObjectGetUpVector</A><A>(object,ind)</A>
+<BR><A class=funclink href=object.htm#ObjectGetUp>ObjectGetUp</A><A>(object,ind)</A>
+<!--
 <BR><A class=funclink href=object.htm#ObjectStructureChanged>ObjectStructureChanged</A><A>(object)</A>
+-->
 <BR><A class=funclink href=object.htm#ObjectRotateAbsolute>ObjectRotateAbsolute</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectRotateAbsoluteVector>ObjectRotateAbsoluteVector</A><A>(object,x,y,z,angle)</A>
+<!--
 <BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectIsClipped>ObjectIsClipped</A><A>(object)</A>
+-->
+<BR><A class=funclink href=object.htm#ObjectSetMatrixColumn>ObjectSetMatrixColumn</A><A>(object,ind,x,y,z,w)</A>
+<BR><A class=funclink href=object.htm#ObjectExportMatrix>ObjectExportMatrix</A><A>(object1,object2)</A>
+<BR><A class=funclink href=object.htm#ObjectExportAbsoluteMatrix>ObjectExportAbsoluteMatrix</A><A>(object1,object2)</A>
 <BR>
 <BR>
 <A name="Polygon"></A>

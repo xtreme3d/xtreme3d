@@ -12,8 +12,6 @@
 
 <A class=type>Класс: -</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>Данные функции управляют любыми объектами, вне зависимости от типа. 
 <BR><HR>
 
@@ -52,6 +50,13 @@
 <A class=type>real</A><A> = </A><A class=function>ObjectDestroy</A><A>( object as </A><A class=type>real</A> );</A>
 <BR><A>Уничтожает объект. Безопасно уничтожить можно только те объекты, у которых нет потомков. Кроме того, у некоторых 
 типов объектов есть собственные функции уничтожения - в этом случае лучше использовать именно их.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="ObjectDestroyChildren"></A>
+<H1 class=name>ObjectDestroyChildren</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectDestroyChildren</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Уничтожает потомков объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
@@ -117,6 +122,27 @@
 <BR><A>Изменяет локальную координату положения объекта в пространстве по оси Z.</A>
 <BR><A>object - id объекта</A>
 <BR><A>z - координата по оси Z.</A>
+<HR>
+
+<A name="ObjectGetPositionX"></A>
+<H1 class=name>ObjectGetPositionX</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionX</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает локальную координату положения объекта в пространстве по оси X.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="ObjectGetPositionY"></A>
+<H1 class=name>ObjectGetPositionY</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionY</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает локальную координату положения объекта в пространстве по оси Y.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="ObjectGetPositionZ"></A>
+<H1 class=name>ObjectGetPositionZ</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionZ</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает локальную координату положения объекта в пространстве по оси Z.</A>
+<BR><A>object - id объекта.</A>
 <HR>
 
 <A name="ObjectSetAbsolutePosition"></A>
@@ -260,6 +286,7 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
+<!--
 <A name="ObjectAlignToCamera"></A>
 <H1 class=name>ObjectAlignToCamera</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectAlignToCamera</A><A>( object,camera as </A><A class=type>real</A> );</A>
@@ -267,7 +294,9 @@
 <BR><A>object - id объекта</A>
 <BR><A>camera - id камеры.</A>
 <HR>
+-->
 
+<!--
 <A name="ObjectGetAtXY"></A>
 <H1 class=name>ObjectGetAtXY</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAtXY</A><A>( viewer,x,y as </A><A class=type>real</A> );</A>
@@ -276,6 +305,7 @@
 <BR><A>viewer - id Вида</A>
 <BR><A>x,y - координаты точки.</A>
 <HR>
+-->
 
 <A name="ObjectShowAxes"></A>
 <H1 class=name>ObjectShowAxes</H1>
@@ -323,9 +353,10 @@
 <H1 class=name>ObjectGetCollisionNormal</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetCollisionNormal</A><A>( ind as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает нормаль полигона последнего пересечения, обнаруженного функциями </A><A class=funclink href=../functions/object.htm#ObjectSceneRaycast>ObjectSceneRaycast</A><A> и </A><A class=funclink href=../functions/object.htm#ObjectRaycast>ObjectRaycast</A><A>.</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
+<!--
 <A name="ObjectSetDiffuseColor"></A>
 <H1 class=namenew>ObjectSetDiffuseColor</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectSetDiffuseColor</A><A>( object,color,alpha as </A><A class=type>real</A> );</A>
@@ -334,6 +365,7 @@
 <BR><A>color - цвет</A>
 <BR><A>alpha - прозрачность.</A>
 <HR>
+-->
 
 <A name="ObjectSetMaterial"></A>
 <H1 class=name>ObjectSetMaterial</H1>
@@ -351,6 +383,7 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
+<!--
 <A name="ObjectCheckCubeVsFace"></A>
 <H1 class=name>ObjectCheckCubeVsFace</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
@@ -358,6 +391,7 @@
 <BR><A>object1 - id объекта 1</A>
 <BR><A>object2 - id объекта 2.</A>
 <HR>
+-->
 
 <A name="ObjectCheckCubeVsCube"></A>
 <H1 class=name>ObjectCheckCubeVsCube</H1>
@@ -367,6 +401,7 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
+<!--
 <A name="ObjectCheckFaceVsFace"></A>
 <H1 class=name>ObjectCheckFaceVsFace</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectCheckFaceVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
@@ -374,6 +409,7 @@
 <BR><A>object1 - id объекта 1</A>
 <BR><A>object2 - id объекта 2.</A>
 <HR>
+-->
 
 <A name="ObjectCheckSphereVsSphere"></A>
 <H1 class=name>ObjectCheckSphereVsSphere</H1>
@@ -430,17 +466,17 @@
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="ObjectSetID"></A>
-<H1 class=name>ObjectSetID</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetID</A><A>( object,id as </A><A class=type>real</A> );</A>
+<A name="ObjectSetTag"></A>
+<H1 class=name>ObjectSetTag</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectSetTag</A><A>( object,id as </A><A class=type>real</A> );</A>
 <BR><A>Задает уникальный идентификатор объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>id - идентификатор.</A>
 <HR>
 
-<A name="ObjectGetID"></A>
-<H1 class=name>ObjectGetID</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetID</A><A>( object as </A><A class=type>real</A> );</A>
+<A name="ObjectGetTag"></A>
+<H1 class=name>ObjectGetTag</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetTag</A><A>( object as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает идентификатор объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
@@ -467,13 +503,6 @@
 <BR><A>ind - номер потомка.</A>
 <HR>
 
-<A name="ObjectGetBoundingsphereRadius"></A>
-<H1 class=name>ObjectGetBoundingsphereRadius</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetBoundingsphereRadius</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает радиус ограничивающей сферы объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
 <A name="ObjectGetIndex"></A>
 <H1 class=name>ObjectGetIndex</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetIndex</A><A>( object as </A><A class=type>real</A> );</A>
@@ -489,12 +518,19 @@
 <BR><A>name - имя объекта.</A>
 <HR>
 
+<A name="ObjectGetBoundingsphereRadius"></A>
+<H1 class=name>ObjectGetBoundingsphereRadius</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetBoundingsphereRadius</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает радиус ограничивающей сферы объекта.</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
 <A name="ObjectGetAbsoluteUp"></A>
 <H1 class=name>ObjectGetAbsoluteUp</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает абсолютный единичный вектор Up объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="ObjectSetAbsoluteUp"></A>
@@ -510,31 +546,31 @@
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteRight</A><A>( object,ind as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает абсолютный единичный вектор Right объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="ObjectGetAbsoluteXVector"></A>
 <H1 class=name>ObjectGetAbsoluteXVector</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteXVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют</A>
+<BR><A>Возвращает абсолютный вектор X, выраженный в локальных координатах объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="ObjectGetAbsoluteYVector"></A>
 <H1 class=name>ObjectGetAbsoluteYVector</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteYVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют</A>
+<BR><A>Возвращает абсолютный вектор Y, выраженный в локальных координатах объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="ObjectGetAbsoluteZVector"></A>
 <H1 class=name>ObjectGetAbsoluteZVector</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteZVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют</A>
+<BR><A>Возвращает абсолютный вектор Z, выраженный в локальных координатах объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="ObjectGetRight"></A>
@@ -548,17 +584,17 @@
 <A name="ObjectMoveChildUp"></A>
 <H1 class=name>ObjectMoveChildUp</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectMoveChildUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Сдвигает потомка объекта вверх в списке.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - сведения отсутствуют.</A>
+<BR><A>ind - индекс потомка.</A>
 <HR>
 
 <A name="ObjectMoveChildDown"></A>
 <H1 class=name>ObjectMoveChildDown</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectMoveChildDown</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Сдвигает потомка объекта вниз в списке.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - сведения отсутствуют.</A>
+<BR><A>ind - индекс потомка.</A>
 <HR>
 
 <A name="ObjectSetParent"></A>
@@ -571,11 +607,11 @@
 
 <A name="ObjectRemoveChild"></A>
 <H1 class=name>ObjectRemoveChild</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRemoveChild</A><A>( object,child,keep as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<A class=type>real</A><A> = </A><A class=function>ObjectRemoveChild</A><A>( object,child,keepchildren as </A><A class=type>real</A> );</A>
+<BR><A>Удаляет потомка объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>child - cведения отсутствуют</A>
-<BR><A>keep - cведения отсутствуют.</A>
+<BR><A>child - id потомка</A>
+<BR><A>keepchildren - указывает, нужно ли скопировать потомков удаляемого объекта его родителю (в противном случае потомки также будут удалены).</A>
 <HR>
 
 <A name="ObjectMoveObjectAround"></A>
@@ -611,20 +647,22 @@
 <BR><A>angle - угол поворота.</A>
 <HR>
 
-<A name="ObjectGetUpVector"></A>
-<H1 class=name>ObjectGetUpVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetUpVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
+<A name="ObjectGetUp"></A>
+<H1 class=name>ObjectGetUp</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает локальный единичный вектор Up объекта.</A>
 <BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
+<!--
 <A name="ObjectStructureChanged"></A>
 <H1 class=name>ObjectStructureChanged</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectStructureChanged</A><A>( object as </A><A class=type>real</A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>object - id объекта.</A>
 <HR>
+-->
 
 <A name="ObjectRotateAbsolute"></A>
 <H1 class=name>ObjectRotateAbsolute</H1>
@@ -643,6 +681,7 @@
 <BR><A>angle - угол поворота.</A>
 <HR>
 
+<!--
 <A name="ObjectInFrustrum"></A>
 <H1 class=name>ObjectInFrustrum</H1>
 <A class=type>boolean</A><A> = </A><A class=function>ObjectInFrustrum</A><A>( object as </A><A class=type>real</A> );</A>
@@ -655,6 +694,32 @@
 <A class=type>boolean</A><A> = </A><A class=function>ObjectIsClipped</A><A>( object as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает истину, если объект находится вне поля зрения.</A>
 <BR><A>object - id объекта.</A>
+<HR>
+-->
+
+<A name="ObjectSetMatrixColumn"></A>
+<H1 class=name>ObjectSetMatrixColumn</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectSetMatrixColumn</A><A>( object,ind,x,y,z,w as </A><A class=type>real</A> );</A>
+<BR><A>Заполняет столбец локальной матрицы трансформации объекта. Вызвав эту функцию для каждого из 4 столбцов, можно задать произвольную матрицу трансформации.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - индекс столбца (0, 1, 2 или 3)</A>
+<BR><A>x,y,z,w - значения элементов столбца.</A>
+<HR>
+
+<A name="ObjectExportMatrix"></A>
+<H1 class=name>ObjectExportMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectExportMatrix</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
+<BR><A>Копирует локальную матрицу трансформации объекта 1 в локальную матрицу трансформации объекта 2.</A>
+<BR><A>object1 - id объекта 1</A>
+<BR><A>object2 - id объекта 2.</A>
+<HR>
+
+<A name="ObjectExportAbsoluteMatrix"></A>
+<H1 class=name>ObjectExportAbsoluteMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectExportAbsoluteMatrix</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
+<BR><A>Копирует абсолютную матрицу трансформации объекта 1 в абсолютную матрицу трансформации объекта 2.</A>
+<BR><A>object1 - id объекта 1</A>
+<BR><A>object2 - id объекта 2.</A>
 <HR>
 
 </DIV>
