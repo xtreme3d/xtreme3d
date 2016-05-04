@@ -32,3 +32,25 @@ begin
   pr.MasterObject := TGLBaseSceneObject(trunc64(target));
   result := 1.0;
 end;
+
+function MultiProxyObjectCreate(parent: real): real; stdcall;
+var
+  mp: TGLMultiProxy;
+begin
+  if not (parent=0) then
+    mp := TGLMultiProxy.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    mp := TGLMultiProxy.CreateAsChild(scene.Objects);
+  result := Integer(mp);
+end;
+
+function MultiProxyObjectAddTarget(mproxy, target, mindist, maxdist: real): real; stdcall;
+var
+  mp: TGLMultiProxy;
+  ob: TGLBaseSceneObject;
+begin
+  mp := TGLMultiProxy(trunc64(mproxy));
+  ob := TGLBaseSceneObject(trunc64(target));
+  mp.MasterObjects.Add(ob, mindist, maxdist);
+  result := 1.0;
+end;

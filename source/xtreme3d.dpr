@@ -15,7 +15,7 @@ uses
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree;
+  GLTrail, GLTree, GLMultiProxy;
 
 type
    TEmpty = class(TComponent)
@@ -326,6 +326,7 @@ PartitionGetNodeCount, PartitionGetResult, PartitionGetResultCount,
 PartitionResultShow, PartitionResultHide,
 //Proxy
 ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
+MultiProxyObjectCreate, MultiProxyObjectAddTarget,
 //Text
 TextRead;
 
