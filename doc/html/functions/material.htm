@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLMaterialLibrary</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>Материал в Xtreme3D - это совокупность параметров визуального отображения объекта, объединенных 
 под уникальным именем, по которому осуществляется изменение этих параметров. В качестве имени используется 
 строковое значение.
@@ -64,15 +62,30 @@
 <BR><A>matlib - id библиотеки материалов.</A>
 <HR>
 
+<A name="MaterialLibraryHasMaterial"></A>
+<H1 class=name>MaterialLibraryHasMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryHasMaterial</A><A>( matlib as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
+<BR><A>Возвращает истину, если в библиотеке есть материал с заданным именем.</A>
+<BR><A>matlib - id библиотеки материалов</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="MaterialLibraryLoadScript"></A>
+<H1 class=name>MaterialLibraryLoadScript</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialLibraryLoadScript</A><A>( matlib as </A><A class=type>real</A>, filename as </A><A class=type>string</A> );</A>
+<BR><A>Загружает скрипт материала - то есть, создает в библиотеке новый материал согласно текстовому описанию из файла.</A>
+<BR><A>matlib - id библиотеки материалов</A>
+<BR><A>filename - имя файла скрипта.</A>
+<HR>
+
 <A name="MaterialCreate"></A>
 <H1 class=name>MaterialCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialCreate</A><A>( material,filename as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A> );</A>
+<A class=type>real</A><A> = </A><A class=function>MaterialCreate</A><A>( material,filename as </A><A class=type>string</A><A> );</A>
 <BR><A>Создает новый материал в активной библиотеке. Можно указать путь к файлу текстуры - Xtreme3D поддерживает форматы BMP, JPG, PNG, PCX, PSD, TGA, TIF. 
 Если оставить это значение пустым, будет создан материал без текстуры.
-<BR>Обратите внимание, что для корректной обработки разрешение текстур должно соответствовать степеням двойки (256х256, 512х512, 256х64, 64х128 и т.д.)</A>
+<BR>Обратите внимание, что для корректной обработки ширина и высота текстуры должны соответствовать степеням двойки (256х256, 512х512, 256х64, 64х128 и т.д.)</A>
 <BR><A>material - имя материала</A>
-<BR><A>filename - путь к файлу текстуры</A>
-<BR><A>mode - сведения отсутствуют.</A>
+<BR><A>filename - путь к файлу текстуры.</A>
 <HR>
 
 <A name="MaterialAddCubeMap"></A>
@@ -99,12 +112,21 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR>5 - передняя.</A>
 <HR>
 
+<A name="MaterialCubeMapGenerate"></A>
+<H1 class=name>MaterialCubeMapGenerate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialCubeMapGenerate</A><A>( material as </A><A class=type>string</A><A>, res as </A><A class=type>real</A><A> );</A>
+<BR><A>Генерирует текстуры для cubemap-материала.</A>
+<BR><A>material - имя cubemap-материала</A>
+<BR><A>res - сторона текстуры. Рекомендуется выставить ее равной степени двойки (64, 128, 256 и т.д.)</A>
+<HR>
+
 <A name="MaterialCubeMapFromScene"></A>
 <H1 class=name>MaterialCubeMapFromScene</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialCubeMapFromScene</A><A>( material as </A><A class=type>string</A><A>, camera,res as </A><A class=type>real</A> );</A>
-<BR><A>Совершает рендеринг текстур для куба в cubemap-материале через заданную камеру. При этом следует указать разрешение текстуры по стороне (512, 256, 128 и т.д.) 
-<BR>Эта функция позволяет получить точное отражение сцены. Но пользоваться ей надо осторожно, так как при высоких разрешениях может значительно упасть производительность.</A>
+<A class=type>real</A><A> = </A><A class=function>MaterialCubeMapFromScene</A><A>( material as </A><A class=type>string</A><A>, viewer,camera,res as </A><A class=type>real</A> );</A>
+<BR><A>Совершает рендеринг текстур для куба в cubemap-материале через заданную камеру и с настройками заданного вида. При этом следует указать разрешение рендеринга по стороне (512, 256, 128 и т.д.) 
+<BR>Эта функция позволяет получить точное отражение сцены. Но пользоваться ей надо осторожно, так как при высоких разрешениях cubemap-материала может значительно упасть производительность.</A>
 <BR><A>material - имя cubemap-материала</A>
+<BR><A>viewer - id вида</A>
 <BR><A>camera - id камеры</A>
 <BR><A>res - разрешение.</A>
 <HR>
@@ -112,8 +134,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <A name="MaterialSetAmbientColor"></A>
 <H1 class=name>MaterialSetAmbientColor</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialSetAmbientColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
-<BR><A>Задает цветовой компонент Аmbient. Объект полностью закрашивается этим цветом (если включено освещение, цвет Ambient останется только в теневой части объекта - 
-иными словами, обычно этот компонент соответствует цвету тени).</A>
+<BR><A>Задает цветовой компонент Аmbient. Объект полностью закрашивается этим цветом (если включено освещение, цвет Ambient останется только в теневой части объекта - иными словами, этот компонент соответствует цвету тени).</A>
 <BR><A>material - имя материала</A>
 <BR><A>color - цвет</A>
 <BR><A>alpha - прозрачность.</A>
@@ -140,8 +161,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <A name="MaterialSetSpecularColor"></A>
 <H1 class=name>MaterialSetSpecularColor</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialSetSpecularColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
-<BR><A>Задает цветовой компонент Specular, соответствующий цвету блика (блик возникает при прямом отражении световых лучей 
-поверхностью объекта).</A>
+<BR><A>Задает цветовой компонент Specular, соответствующий цвету блика (блик возникает при прямом отражении световых лучей поверхностью объекта).</A>
 <BR><A>material - имя материала</A>
 <BR><A>color - цвет</A>
 <BR><A>alpha - прозрачность.</A>
@@ -150,7 +170,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <A name="MaterialSetShininess"></A>
 <H1 class=name>MaterialSetShininess</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialSetShininess</A><A>( material as </A><A class=type>string</A><A>, shininess as </A><A class=type>real</A> );</A>
-<BR><A>Задает уровень блеска. Параметр управляет бликом (Specular): чем выше это значение, тем меньше будет размер блика. 
+<BR><A>Задает уровень зеркального блеска. Параметр управляет бликом (Specular): чем выше это значение, тем меньше будет размер блика. 
 <BR>В большинстве случаев неплохие результаты дадут значения в промежутке от 10 до 30.</A>
 <BR><A>material - имя материала</A>
 <BR><A>shininess - уровень блеска (значение от 0 до 128).</A>
@@ -208,6 +228,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>u,v - размер по горизонтали и вертикали.</A>
 <HR>
 
+<!--
 <A name="MaterialGetFromLib"></A>
 <H1 class=name>MaterialGetFromLib</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialGetFromLib</A><A>( material1,material2 as </A><A class=type>string</A><A> );</A>
@@ -215,6 +236,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>material1 - сведения отсутствуют</A>
 <BR><A>material2 - сведения отсутствуют.</A>
 <HR>
+-->
 
 <A name="MaterialSetTextureOffset"></A>
 <H1 class=name>MaterialSetTextureOffset</H1>
@@ -267,9 +289,9 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>ma - сведения отсутствуют.</A>
 <HR>
 
-<A name="MaterialDisableTexture"></A>
-<H1 class=name>MaterialDisableTexture</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialDisableTexture</A><A>( material as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A> );</A>
+<A name="MaterialEnableTexture"></A>
+<H1 class=name>MaterialEnableTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialEnableTexture</A><A>( material as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A> );</A>
 <BR><A>Включает или выключает отображение текстуры.</A>
 <BR><A>material - имя материала</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
@@ -300,6 +322,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <H1 class=name>MaterialSetFaceCulling</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialSetFaceCulling</A><A>( material as </A><A class=type>string</A><A>, fc as </A><A class=type>real</A> );</A>
 <BR><A>Задает режим отбора видимости полигонов (fc). Доступны следующие значения fc:</A>
+<BR><A class=constant name="fcBufferDefault">fcCull</A><A> = 0 - значение по умолчанию</A>
 <BR><A class=constant name="fcCull">fcCull</A><A> = 1 - отбор видимости включен</A>
 <BR><A class=constant name="fcNoCull">fcNoCull</A><A> = 2 - отбор видимости выключен.</A>
 <BR><A>material - имя материала</A>
@@ -410,6 +433,69 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR>Нулевой номер присваивается всему списку текстур в целом. Удаление текстуры под номером 0 равносильно вызову </A><A class=funclink href=../functions/material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>.</A>
 <BR><A>material - имя материала</A>
 <BR><A>ind - номер текстуры.</A>
+<HR>
+
+<A name="MaterialSaveTexture"></A>
+<H1 class=name>MaterialSaveTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSaveTexture</A><A>( material,filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Сохраняет текстуру материала в файл BMP.</A>
+<BR><A>material - имя материала</A>
+<BR><A>filename - имя файла.</A>
+<HR>
+
+<A name="MaterialNoiseCreate"></A>
+<H1 class=name>MaterialNoiseCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseCreate</A><A>( material as </A><A class=type>string</A><A> );</A>
+<BR><A>Создает материал с процедурно сгенерированной текстурой шума Перлина.</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="MaterialNoiseSetDimensions"></A>
+<H1 class=name>MaterialNoiseSetDimensions</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseSetDimensions</A><A>( material as </A><A class=type>string</A><A>, width,height as </A><A class=type>real</A><A>);</A>
+<BR><A>Задает разрешение текстуры шума.</A>
+<BR><A>material - имя материала</A>
+<BR><A>width,height - ширина и высота текстуры.</A>
+<HR>
+
+<A name="MaterialNoiseAnimate"></A>
+<H1 class=name>MaterialNoiseAnimate</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseAnimate</A><A>( material as </A><A class=type>string</A><A>, speed as </A><A class=type>real</A><A>);</A>
+<BR><A>Анимирует текстуру шума (генерирует новое изображение, близкое к изначальному).</A>
+<BR><A>material - имя материала</A>
+<BR><A>speed - скорость.</A>
+<HR>
+
+<A name="MaterialNoiseSetMinCut"></A>
+<H1 class=name>MaterialNoiseSetMinCut</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseSetMinCut</A><A>( material as </A><A class=type>string</A><A>, mincut as </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>material - имя материала</A>
+<BR><A>mincut - сведения отсутствуют.</A>
+<HR>
+
+<A name="MaterialNoiseSetSharpness"></A>
+<H1 class=name>MaterialNoiseSetSharpness</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseSetSharpness</A><A>( material as </A><A class=type>string</A><A>, sharpness as </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>material - имя материала</A>
+<BR><A>sharpness - сведения отсутствуют.</A>
+<HR>
+
+<A name="MaterialNoiseSetSeamless"></A>
+<H1 class=name>MaterialNoiseSetSeamless</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseSetSeamless</A><A>( material as </A><A class=type>string</A><A>, mode as </A><A class=type>real</A><A>);</A>
+<BR><A>Переключает бесшовность текстуры шума.</A>
+<BR><A>material - имя материала</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="MaterialNoiseRandomSeed"></A>
+<H1 class=name>MaterialNoiseRandomSeed</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialNoiseRandomSeed</A><A>( material as </A><A class=type>string</A><A>, seed as </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>material - имя материала</A>
+<BR><A>seed - сведения отсутствуют.</A>
 <HR>
 
 </DIV>

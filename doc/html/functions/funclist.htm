@@ -419,10 +419,19 @@
 <BR><A class=funclink href=material.htm#MaterialLibrarySetTexturePaths>MaterialLibrarySetTexturePaths</A><A>(matlib,path)</A>
 <BR><A class=funclink href=material.htm#MaterialLibraryClear>MaterialLibraryClear</A><A>(matlib)</A>
 <BR><A class=funclink href=material.htm#MaterialLibraryDeleteUnused>MaterialLibraryDeleteUnused</A><A>(matlib)</A>
-<BR><A class=funclink href=material.htm#MaterialCreate>MaterialCreate</A><A>(material,filename,mode)</A>
+
+<BR><A class=funclink href=material.htm#MaterialLibraryHasMaterial>MaterialLibraryHasMaterial</A><A>(matlib,material)</A>
+<BR><A class=funclink href=material.htm#MaterialLibraryLoadScript>MaterialLibraryLoadScript</A><A>(matlib,filename)</A>
+
+<BR><A class=funclink href=material.htm#MaterialCreate>MaterialCreate</A><A>(material,filename)</A>
+
 <BR><A class=funclink href=material.htm#MaterialAddCubeMap>MaterialAddCubeMap</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialCubeMapLoadImage>MaterialCubeMapLoadImage</A><A>(material,texture)</A>
-<BR><A class=funclink href=material.htm#MaterialCubeMapFromScene>MaterialCubeMapFromScene</A><A>(material,camera,res)</A>
+
+<BR><A class=funclink href=material.htm#MaterialCubeMapGenerate>MaterialCubeMapGenerate</A><A>(material,res)</A>
+
+<BR><A class=funclink href=material.htm#MaterialCubeMapFromScene>MaterialCubeMapFromScene</A><A>(material,viewer,camera,res)</A>
+
 <BR><A class=funclink href=material.htm#MaterialSetAmbientColor>MaterialSetAmbientColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetDiffuseColor>MaterialSetDiffuseColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetEmissionColor>MaterialSetEmissionColor</A><A>(material,color,alpha)</A>
@@ -432,12 +441,16 @@
 <BR><A class=funclink href=material.htm#MaterialSetTextureMappingMode>MaterialSetTextureMappingMode</A><A>(material,tmm)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureImageAlpha>MaterialSetTextureImageAlpha</A><A>(material,tia)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureScale>MaterialSetTextureScale</A><A>(material,u,v)</A>
+<!--
 <BR><A class=funclink href=material.htm#MaterialGetFromLib>MaterialGetFromLib</A><A>(material1,material2)</A>
+-->
 <BR><A class=funclink href=material.htm#MaterialSetTextureOffset>MaterialSetTextureOffset</A><A>(material,u,v)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureMode>MaterialSetTextureMode</A><A>(material,tm)</A>
 <BR><A class=funclink href=material.htm#MaterialSetBlendingMode>MaterialSetBlendingMode</A><A>(material,bm)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureFilter>MaterialSetTextureFilter</A><A>(material,mi,ma)</A>
-<BR><A class=funclink href=material.htm#MaterialDisableTexture>MaterialDisableTexture</A><A>(material,mode)</A>
+
+<BR><A class=funclink href=material.htm#MaterialEnableTexture>MaterialEnableTexture</A><A>(material,mode)</A>
+
 <BR><A class=funclink href=material.htm#MaterialLoadTexture>MaterialLoadTexture</A><A>(material,filename)</A>
 <BR><A class=funclink href=material.htm#MaterialGetCount>MaterialGetCount</A><A>()</A>
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
@@ -452,6 +465,16 @@
 <BR><A class=funclink href=material.htm#MaterialAddTextureEx>MaterialAddTextureEx</A><A>(material,texture)</A>
 <BR><A class=funclink href=material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialTextureExDelete>MaterialTextureExDelete</A><A>(material,ind)</A>
+
+<BR><A class=funclink href=material.htm#MaterialSaveTexture>MaterialSaveTexture</A><A>(material,filename)</A>
+
+<BR><A class=funclink href=material.htm#MaterialNoiseCreate>MaterialNoiseCreate</A><A>(material)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseSetDimensions>MaterialNoiseSetDimensions</A><A>(material,width,height)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseAnimate>MaterialNoiseAnimate</A><A>(material,speed)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseSetMinCut>MaterialNoiseSetMinCut</A><A>(material,mincut)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseSetSharpness>MaterialNoiseSetSharpness</A><A>(material,sharpness)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseSetSeamless>MaterialNoiseSetSeamless</A><A>(material,mode)</A>
+<BR><A class=funclink href=material.htm#MaterialNoiseRandomSeed>MaterialNoiseRandomSeed</A><A>(material,seed)</A>
 <BR>
 <BR>
 <A name="Shaders"></A>
