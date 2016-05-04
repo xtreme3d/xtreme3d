@@ -12,47 +12,43 @@
 
 <A class=type>Класс: TGLBitmapHDS, TGLTerrainRenderer</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
-<A>Xtreme3D 2.0.2.0 поддерживает генерацию ландшафта (terrain), состоящего из сетки прямоугольников - тайлов. При рендеринге ландшафта учитывается 
+<A>Xtreme3D поддерживает отрисовку ландшафта (terrain), состоящего из сетки прямоугольников - тайлов. При рендеринге ландшафта учитывается 
 расстояние от камеры для сокращения количества полигонов на удаленных участках (LOD). Этот процесс называется тесселяцией. 
-<BR>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, 
-темные - снижение. HDS импортируется из текстуры материала. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). 
-В противном случае ландшафт будет выглядеть ступенчатым.
+<BR>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, темные - снижение. HDS загружается из файла изображения. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). В противном случае ландшафт будет выглядеть ступенчатым.
 <BR><HR>
 
 <A name="BmpHDSCreate"></A>
-<H1 class=namenew>BmpHDSCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSCreate</A><A>( material as </A><A class=type>string</A><A> );</A>
-<BR><A>Создает новый HDS из текстуры материала и возвращает его id.</A>
-<BR><A>material - имя материала.</A>
+<H1 class=name>BmpHDSCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSCreate</A><A>( filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Загружает HDS из изображения и возвращает его id.</A>
+<BR><A>filename - имя файла.</A>
 <HR>
 
 <A name="BmpHDSSetInfiniteWarp"></A>
-<H1 class=namenew>BmpHDSSetInfiniteWarp</H1>
+<H1 class=name>BmpHDSSetInfiniteWarp</H1>
 <A class=type>real</A><A> = </A><A class=function>BmpHDSSetInfiniteWarp</A><A>( hds,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает повторение HDS. При включенном повторении ландшафт будет бесконечным.</A>
 <BR><A>hds - id HDS</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
 <HR>
 
-<A name="BmpHDSSetInverted"></A>
-<H1 class=namenew>BmpHDSSetInverted</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSSetInverted</A><A>( hds,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает инверсию HDS. При включенной инверсии будет задействован "негатив" карты высот.</A>
+<A name="BmpHDSInvert"></A>
+<H1 class=name>BmpHDSInvert</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSInvert</A><A>( hds as </A><A class=type>real</A><A> );</A>
+<BR><A>Инвертирует HDS (обращает высоты).</A>
 <BR><A>hds - id HDS</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
 <HR>
 
 <A name="TerrainCreate"></A>
-<H1 class=namenew>TerrainCreate</H1>
+<H1 class=name>TerrainCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainCreate</A><A>( parent as </A><A class=type>real</A> );</A>
 <BR><A>Создает новый ландшафт и возвращает его id.</A>
 <BR><A>parent - id родителя для ландшафта (0 - отсутствие родителя).</A>
 <HR>
 
 <A name="TerrainSetHeightData"></A>
-<H1 class=namenew>TerrainSetHeightData</H1>
+<H1 class=name>TerrainSetHeightData</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetHeightData</A><A>( terrain,hds as </A><A class=type>real</A> );</A>
 <BR><A>Применяет HDS к ландшафту.</A>
 <BR><A>terrain - id ландшафта</A>
@@ -60,7 +56,7 @@
 <HR>
 
 <A name="TerrainSetTileSize"></A>
-<H1 class=namenew>TerrainSetTileSize</H1>
+<H1 class=name>TerrainSetTileSize</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetTileSize</A><A>( terrain,size as </A><A class=type>real</A> );</A>
 <BR><A>Задает размер тайла.</A>
 <BR><A>terrain - id ландшафта</A>
@@ -68,7 +64,7 @@
 <HR>
 
 <A name="TerrainSetTilesPerTexture"></A>
-<H1 class=namenew>TerrainSetTilesPerTexture</H1>
+<H1 class=name>TerrainSetTilesPerTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetTilesPerTexture</A><A>( terrain,tiles as </A><A class=type>real</A> );</A>
 <BR><A>Задает количество тайлов на текстуру.</A>
 <BR><A>terrain - id ландшафта</A>
@@ -76,7 +72,7 @@
 <HR>
 
 <A name="TerrainSetQualityDistance"></A>
-<H1 class=namenew>TerrainSetQualityDistance</H1>
+<H1 class=name>TerrainSetQualityDistance</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetQualityDistance</A><A>( terrain,distance as </A><A class=type>real</A> );</A>
 <BR><A>Задает расстояние от камеры, на котором детализация ландшафта начинает снижаться для повышения скорости отрисовки.</A>
 <BR><A>terrain - id ландшафта</A>
@@ -84,7 +80,7 @@
 <HR>
 
 <A name="TerrainSetQualityStyle"></A>
-<H1 class=namenew>TerrainSetQualityStyle</H1>
+<H1 class=name>TerrainSetQualityStyle</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetQualityStyle</A><A>( terrain,hrs as </A><A class=type>real</A> );</A>
 <BR><A>Определяет метод обработки тайлов, находящихся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>. 
 Доступны следующие значения:
@@ -96,7 +92,7 @@
 <HR>
 
 <A name="TerrainSetMaxCLodTriangles"></A>
-<H1 class=namenew>TerrainSetMaxCLodTriangles</H1>
+<H1 class=name>TerrainSetMaxCLodTriangles</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetMaxCLodTriangles</A><A>( terrain,triangles as </A><A class=type>real</A> );</A>
 <BR><A>Задает максимально возможное количество полигонов для отдаленных участков ландшафта (CLOD). Этот лимит не затрагивает тайлы, находящиеся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>.
 <BR><A>terrain - id ландшафта</A>
@@ -104,7 +100,7 @@
 <HR>
 
 <A name="TerrainSetCLodPrecision"></A>
-<H1 class=namenew>TerrainSetCLodPrecision</H1>
+<H1 class=name>TerrainSetCLodPrecision</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetCLodPrecision</A><A>( terrain,precision as </A><A class=type>real</A> );</A>
 <BR><A>Задает точность обработки для отдаленных участков ландшафта (CLOD). Чем ниже это значение, тем выше детализация. Этот лимит не затрагивает тайлы, находящиеся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>.
 <BR><A>terrain - id ландшафта</A>
@@ -112,7 +108,7 @@
 <HR>
 
 <A name="TerrainSetOcclusionFrameSkip"></A>
-<H1 class=namenew>TerrainSetOcclusionFrameSkip</H1>
+<H1 class=name>TerrainSetOcclusionFrameSkip</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetOcclusionFrameSkip</A><A>( terrain,frames as </A><A class=type>real</A> );</A>
 <BR><A>Задает количество кадров отрисовки, в течение которых следует остановить отрисовку "невидимых" тайлов. Тайлы считаются "невидимыми", когда полностью перекрываются другими объектами или частями самого ландшафта (например, большие дома или горы). Это способствует снижению нагрузки на процессор, но может также привести к артефактам и снижению FPS на сценах с минимальным перекрытием (вид сверху) или статичной отрисовкой (когда точка обзора не меняется со временем). <BR>Данная оптимизация требует аппаратной поддержки расширения GL_NV_occlusion_query.</A>
 <BR><A>terrain - id ландшафта</A>
@@ -120,7 +116,7 @@
 <HR>
 
 <A name="TerrainSetOcclusionTesselate"></A>
-<H1 class=namenew>TerrainSetOcclusionTesselate</H1>
+<H1 class=name>TerrainSetOcclusionTesselate</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainSetOcclusionTesselate</A><A>( terrain,tot as </A><A class=type>real</A> );</A>
 <BR><A>Определяет метод влияния перекрытия на тесселяцию. Выключение тесселяции для "невидимых" тайлов повышает производительность, но может негативно повлиять на тесселяцию соседних "видимых" тайлов. Этот эффект можно частично устранить повышением расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A> - таким образом, артефакты будут проявляться на отдаленных областях ландшафта и будут менее заметны. 
 <BR><A>terrain - id ландшафта</A>
@@ -128,15 +124,15 @@
 <HR>
 
 <A name="TerrainGetHeightAtObjectPosition"></A>
-<H1 class=namenew>TerrainGetHeightAtObjectPosition</H1>
+<H1 class=name>TerrainGetHeightAtObjectPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainGetHeightAtObjectPosition</A><A>( terrain,object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает высоту точки на поверхности ландшафта. Координаты точки соответствуют координатам заданного объекта.</A>
+<BR><A>Возвращает высоту точки на поверхности ландшафта, соответствующей абсолютной позиции заданного объекта.</A>
 <BR><A>terrain - id ландшафта</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
 <A name="TerrainGetLastTriCount"></A>
-<H1 class=namenew>TerrainGetLastTriCount</H1>
+<H1 class=name>TerrainGetLastTriCount</H1>
 <A class=type>real</A><A> = </A><A class=function>TerrainGetLastTriCount</A><A>( terrain as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает количество полигонов в ландшафте на момент последней отрисовки сцены.</A>
 <BR><A>terrain - id ландшафта.</A>
