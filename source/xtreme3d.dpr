@@ -79,6 +79,7 @@ end;
 {$I 'shadowvolume'}
 {$I 'skydome'}
 {$I 'water'}
+{$I 'lines'}
 {$I 'tree'}
 {$I 'navigator'}
 {$I 'dce'}
@@ -270,6 +271,9 @@ BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,
 BlurSetColor, BlurSetBlendingMode,
 //Skybox
 SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
+//Lines
+LinesCreate, LinesAddNode, LinesDeleteNode, LinesSetColors, LinesSetSize,
+LinesSetSplineMode, LinesSetNodesAspect, LinesSetDivision,
 //Tree
 TreeCreate, TreeSetMaterials, TreeSetBranchFacets, TreeBuildMesh,
 TreeSetBranchNoise, TreeSetBranchAngle, TreeSetBranchSize, TreeSetBranchRadius,
