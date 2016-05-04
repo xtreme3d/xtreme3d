@@ -40,9 +40,13 @@
 <BR>
 <A name="A"></A>
 <H1 class=name>A</H1>
-<A class=funclink href=actor.htm#ActorAddObject>ActorAddObject</A><A>(actor,filename)</A>
+<A class=funclink href=actor.htm#ActorAddObject>ActorAddObject</A><A>(actor,matlib,filename)</A>
+<BR><A class=funclink href=actor.htm#ActorBoneExportMatrix>ActorBoneExportMatrix</A><A>(actor,boneindex,object)</A>
 <BR><A class=funclink href=actor.htm#ActorCopy>ActorCopy</A><A>(actor,parent)</A>
 <BR><A class=funclink href=actor.htm#ActorCreate>ActorCreate</A><A>(filename,parent)</A>
+<BR><A class=funclink href=actor.htm#ActorFaceGroupGetMaterialName>ActorFaceGroupGetMaterialName</A><A>(actor,mesh,fgroup)</A>
+<BR><A class=funclink href=actor.htm#ActorFaceGroupsCount>ActorFaceGroupsCount</A><A>(actor,mesh)</A>
+<BR><A class=funclink href=actor.htm#ActorFaceGroupSetMaterial>ActorFaceGroupSetMaterial</A><A>(actor,mesh,fgroup,material)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneByName>ActorGetBoneByName</A><A>(actor,bonename)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneCount>ActorGetBoneCount</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBonePosition>ActorGetBonePosition</A><A>(actor,boneindex,index)</A>
@@ -50,16 +54,31 @@
 <BR><A class=funclink href=actor.htm#ActorGetCurrentAnimation>ActorGetCurrentAnimation</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetCurrentFrame>ActorGetCurrentFrame</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetFrameCount>ActorGetFrameCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorLoadQ3Animations>ActorLoadQ3Animations</A><A>(actor,filename,classname)</A>
+<BR><A class=funclink href=actor.htm#ActorLoadQ3TagList>ActorLoadQ3TagList</A><A>(filename)</A>
+<BR><A class=funclink href=actor.htm#ActorMakeSkeletalRotationDelta>ActorMakeSkeletalRotationDelta</A><A>(actor,anim)</A>
+<BR><A class=funclink href=actor.htm#ActorMakeSkeletalTranslationStatic>ActorMakeSkeletalTranslationStatic</A><A>(actor,anim)</A>
+<BR><A class=funclink href=actor.htm#ActorMeshObjectsCount>ActorMeshObjectsCount</A><A>(actor)</A>
+<!--
 <BR><A class=funclink href=actor.htm#ActorMoveBone>ActorMoveBone</A><A>(actor,boneindex,x,y,z)</A>
+-->
+<BR><A class=funclink href=actor.htm#ActorQ3TagExportMatrix>ActorQ3TagExportMatrix</A><A>(actor,taglist,tagname,object)</A>
+<!--
 <BR><A class=funclink href=actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor,boneindex,x,y,z)</A>
+-->
 <BR><A class=funclink href=actor.htm#ActorSetAnimationMode>ActorSetAnimationMode</A><A>(actor,aam)</A>
 <BR><A class=funclink href=actor.htm#ActorSetAnimationRange>ActorSetAnimationRange</A><A>(actor,start,end)</A>
 <BR><A class=funclink href=actor.htm#ActorSetFrameInterpolation>ActorSetFrameInterpolation</A><A>(actor,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorSetInterval>ActorSetInterval</A><A>(actor,interval)</A>
 <BR><A class=funclink href=actor.htm#ActorShowSkeleton>ActorShowSkeleton</A><A>(actor,mode)</A>
-<BR><A class=funclink href=actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor,anim)</A>
+<BR><A class=funclink href=actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor,anim,smooth)</A>
+<BR><A class=funclink href=actor.htm#ActorSwitchToAnimationName>ActorSwitchToAnimationName</A><A>(actor,animname,smooth)</A>
 <BR><A class=funclink href=actor.htm#ActorSynchronize>ActorSynchronize</A><A>(actor1,actor2)</A>
 <BR><A class=funclink href=primitives.htm#AnnulusCreate>AnnulusCreate</A><A>(innerradius,outerradius,height,slices,stacks,loops,parent)</A>
+<BR><A class=funclink href=actor.htm#AnimationBlenderCreate>AnimationBlenderCreate</A><A>()</A>
+<BR><A class=funclink href=actor.htm#AnimationBlenderSetActor>AnimationBlenderSetActor</A><A>(animblender,actor)</A>
+<BR><A class=funclink href=actor.htm#AnimationBlenderSetAnimation>AnimationBlenderSetAnimation</A><A>(animblender,animname)</A>
+<BR><A class=funclink href=actor.htm#AnimationBlenderSetRatio>AnimationBlenderSetRatio</A><A>(animblender,ratio)</A>
 <BR>
 <BR>
 <A name="B"></A>
@@ -366,7 +385,6 @@
 <BR><A class=funclink href=object.htm#ObjectCheckFaceVsFace>ObjectCheckFaceVsFace</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckSphereVsCube>ObjectCheckSphereVsCube</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckSphereVsSphere>ObjectCheckSphereVsSphere</A><A>(object1,object2)</A>
-<BR><A class=func2link href=actor.htm#ObjectClueToBone>ObjectClueToBone</A><A>(object,actor,boneindex)</A>
 <BR><A class=funclink href=object.htm#ObjectCopy>ObjectCopy</A><A>(object,parent)</A>
 <BR><A class=funclink href=object.htm#ObjectDestroy>ObjectDestroy</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectFindChild>ObjectFindChild</A><A>(object,name)</A>
