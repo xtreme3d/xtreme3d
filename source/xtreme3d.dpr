@@ -86,6 +86,7 @@ end;
 {$I 'fps'}
 {$I 'mirror'}
 {$I 'partition'}
+{$I 'proxy'}
 {$I 'text'}
 
 exports
@@ -323,6 +324,8 @@ PartitionLeafChanged, PartitionQueryFrustum, PartitionQueryLeaf,
 PartitionQueryAABB, PartitionQueryBSphere, PartitionGetNodeTests,
 PartitionGetNodeCount, PartitionGetResult, PartitionGetResultCount,
 PartitionResultShow, PartitionResultHide,
+//Proxy
+ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
 //Text
 TextRead;
 
