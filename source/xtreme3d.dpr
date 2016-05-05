@@ -96,6 +96,27 @@ end;
 {$I 'proxy'}
 {$I 'text'}
 
+function DceDynamicSetAbsSpeed(obj, x, y, z: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := AffineVectorMake(x, y, z);
+  Result := 1;
+end;
+
+function DceDynamicGetAbsSpeed(obj, ind: real): real; stdcall;
+begin
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed[trunc64(ind)];
+end;
+
+function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; stdcall;
+var
+  imp: TAffineVector;
+begin
+  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed;
+  imp := VectorAdd(imp, AffineVectorMake(x, y, z));
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := imp;
+  Result := 1;
+end;
+
 exports
 
 //Engine
@@ -314,7 +335,8 @@ DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
 DceDynamicSetSize, DceDynamicSetSlideOrBounce,
 DceDynamicApplyAcceleration, DceDynamicApplyAbsAcceleration,
 DceDynamicStopAcceleration, DceDynamicStopAbsAcceleration,
-DceDynamicJump, DceDynamicMove, DceDynamicMoveTo, DceDynamicSetSpeed,
+DceDynamicJump, DceDynamicMove, DceDynamicMoveTo,
+DceDynamicSetSpeed, DceDynamicSetAbsSpeed, DceDynamicGetAbsSpeed, DceDynamicApplyAbsImpulse,
 DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
 DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
 DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
