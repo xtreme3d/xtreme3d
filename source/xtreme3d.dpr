@@ -52,6 +52,13 @@ begin
    end else Result:='';
 end;
 
+function VectorDivide(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result[0]:=v1[0]/delta;
+   Result[1]:=v1[1]/delta;
+   Result[2]:=v1[2]/delta;
+end;
+
 {$I 'engine'}
 {$I 'viewer'}
 {$I 'dummycube'}
@@ -158,6 +165,8 @@ FreeformFaceGroupsCount, FreeformFaceGroupTriangleCount,
 FreeformSetLightmapsFromFreeform,
 FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
+FreeformSphereSweepIntersect, FreeformPointInMesh,
+FreeformToFreeforms,
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,

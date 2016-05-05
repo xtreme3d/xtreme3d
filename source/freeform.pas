@@ -201,6 +201,95 @@ begin
   result := 1;
 end;
 
+function FreeformSphereSweepIntersect(freeform, obj, radius, vel: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  ob: TGLBaseSceneObject;
+  start, dir: TVector;
+  res: Boolean;
+begin
+  ffm := TGLFreeForm(trunc64(freeform));
+  ob := TGLBaseSceneObject(trunc64(obj));
+  start := ob.Position.AsVector;
+  dir := ob.Direction.AsVector;
+  res := ffm.OctreeSphereSweepIntersect(start, dir, vel, radius);
+  result := Integer(res);
+end;
+
+function FreeformPointInMesh(freeform, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  p: TVector;
+  res: Boolean;
+begin
+  ffm := TGLFreeForm(trunc64(freeform));
+  p := VectorMake(x, y, z);
+  res := ffm.OctreePointInMesh(p);
+  result := Integer(res);
+end;
+
+function FreeformToFreeforms(freeform, parent: real): real; stdcall;
+var
+  ffm, ffm2: TGLFreeForm;
+  mi, fgi, vi, tci: Integer;
+  mesh, mesh2: TMeshObject;
+  fg: TFGVertexIndexList;
+  fg2: TFGVertexNormalTexIndexList;
+  centroid: TAffineVector;
+  one: TAffineVector;
+  divisor: Single;
+begin
+  ffm := TGLFreeForm(trunc64(freeform));
+  one := AffineVectorMake(1, 1, 1);
+  
+  for mi:=0 to ffm.MeshObjects.Count-1 do begin
+    mesh := ffm.MeshObjects[mi];
+
+    if not (parent=0) then
+      ffm2 := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    else
+      ffm2 := TGLFreeForm.CreateAsChild(scene.Objects);
+    mesh2 := TMeshObject.CreateOwned(ffm2.MeshObjects);
+
+    // Calc centroid
+    centroid := AffineVectorMake(0, 0, 0);
+    for vi:=0 to mesh.Vertices.Count-1 do begin
+      mesh2.Vertices.Add(mesh.Vertices[vi]);
+      centroid := VectorAdd(centroid, mesh2.Vertices[vi]);
+    end;
+    ffm2.Position.AsAffineVector := VectorDivide(centroid, mesh2.Vertices.Count);
+
+    // Reposition vertices
+    for vi:=0 to mesh2.Vertices.Count-1 do begin
+      mesh2.Vertices[vi] := VectorSubtract(mesh2.Vertices[vi], ffm2.Position.AsAffineVector);
+    end;
+
+    for vi:=0 to mesh.Normals.Count-1 do begin
+      mesh2.Normals.Add(mesh.Normals[vi]);
+    end;
+
+    for vi:=0 to mesh.TexCoords.Count-1 do begin
+      mesh2.TexCoords.Add(mesh.TexCoords[vi]);
+    end;
+
+    for vi:=0 to mesh.LightMapTexCoords.Count-1 do begin
+      mesh2.LightMapTexCoords.Add(mesh.LightMapTexCoords[vi]);
+    end;
+
+    mesh2.Mode := momFaceGroups;
+    for fgi:=0 to mesh.FaceGroups.Count-1 do begin
+      fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
+      fg2 := TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
+      fg2.Mode := fgmmTriangles;
+      fg2.VertexIndices := fg.VertexIndices;
+      fg2.NormalIndices := fg.VertexIndices;
+      fg2.TexCoordIndices := fg.VertexIndices;
+    end;
+
+  end;
+  result := 1.0;
+end;
+
 // Unimplemented:
 // MeshRotate
 // MeshCountVertices
