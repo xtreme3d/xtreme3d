@@ -26,7 +26,6 @@
 <BR><A>parent - id родителя для объекта свободной формы (0 - отсутствие родителя).</A>
 <HR>
 
-<!--
 <A name="FreeformPointInMesh"></A>
 <H1 class=name>FreeformPointInMesh</H1>
 <A class=type>boolean</A><A> = </A><A class=function>FreeformPointInMesh</A><A>( freeform,x,y,z as </A><A class=type>real</A> );</A>
@@ -34,31 +33,24 @@
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>x,y,z - координаты точки.</A>
 <HR>
--->
 
-<!--
 <A name="FreeformSphereSweepIntersect"></A>
 <H1 class=name>FreeformSphereSweepIntersect</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformSphereSweepIntersect</A><A>( freeform,sphere,radius,vel as </A><A class=type>real</A> );</A>
+<A class=type>real</A><A> = </A><A class=function>FreeformSphereSweepIntersect</A><A>( freeform,object,radius,vel as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает </A><A class=constant>true</A><A> (1), если сфера заданного радиуса вокруг заданного объекта, движущегося с заданной скоростью, при следующем шаге столкнется с поверхностью объекта свободной формы.</A>
 <BR><A>freeform - id объекта свободной формы</A>
-<BR><A>sphere - id объекта</A>
+<BR><A>object - id объекта</A>
 <BR><A>radius - радиус сферы (относительно поверхности объекта)</A>
 <BR><A>vel - скорость движения объекта.</A>
 <HR>
--->
 
-<!--
 <A name="FreeformToFreeforms"></A>
 <H1 class=name>FreeformToFreeforms</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformToFreeforms</A><A>( freeform,start,count,parent as </A><A class=type>real</A> );</A>
+<A class=type>real</A><A> = </A><A class=function>FreeformToFreeforms</A><A>( freeform,parent as </A><A class=type>real</A> );</A>
 <BR><A>Разбивает объект свободной формы на его составляющие - меши, каждый из которых становится отдельным объектом свободной формы.</A>
 <BR><A>freeform - id объекта свободной формы</A>
-<BR><A>start - индекс начального меша, с которого следует начинать разбивку</A>
-<BR><A>count - количество отделяемых мешей</A>
 <BR><A>parent - id родителя для полученных объектов.</A>
 <HR>
--->
 
 <!--
 <A name="FreeformSetSecondTextureCoords"></A>
