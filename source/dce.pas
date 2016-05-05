@@ -196,7 +196,7 @@ begin
   Result := 1;
 end;
 
-function DceDynamicSetSpeed(obj, x, y, z: real): real; stdcall;
+function DceDynamicSetVelocity(obj, x, y, z: real): real; stdcall;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := AffineVectorMake(x, y, z);
   Result := 1;
@@ -286,6 +286,37 @@ begin
   ob := TGLBaseSceneObject(trunc64(obj));
   dyn := GetOrCreateDCEDynamic(ob);
   Result := dyn.Speed[trunc64(ind)];
+end;
+
+function DceDynamicSetAbsVelocity(obj, x, y, z: real): real; stdcall;
+begin
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := AffineVectorMake(x, y, z);
+  Result := 1;
+end;
+
+function DceDynamicGetAbsVelocity(obj, ind: real): real; stdcall;
+begin
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed[trunc64(ind)];
+end;
+
+function DceDynamicApplyImpulse(obj, x, y, z: real): real; stdcall;
+var
+  imp: TAffineVector;
+begin
+  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed;
+  imp := VectorAdd(imp, AffineVectorMake(x, y, z));
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := imp;
+  Result := 1;
+end;
+
+function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; stdcall;
+var
+  imp: TAffineVector;
+begin
+  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed;
+  imp := VectorAdd(imp, AffineVectorMake(x, y, z));
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := imp;
+  Result := 1;
 end;
 
 // DceDynamicGetGravity is no longer available
