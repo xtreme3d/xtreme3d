@@ -92,7 +92,12 @@
 <BR><A class=funclink href=terrain.htm#BmpHDSCreate>BmpHDSCreate</A><A>(material)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInverted>BmpHDSInvert</A><A>(hds)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A><A>(hds,mode)</A>
-<BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>(texture2)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>()</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetMethod>BumpShaderSetMethod</A><A>(shader,bm)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetOptions>BumpShaderSetOptions</A><A>(shader,texture2,texcoords2,lightatten,parallax)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetParallaxOffset>BumpShaderSetParallaxOffset</A><A>(shader,offset)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetSpace>BumpShaderSetSpace</A><A>(shader,bs)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetSpecularMode>BumpShaderSetSpecularMode</A><A>(shader,sm)</A>
 <BR>
 <BR>
 <A name="C"></A>
@@ -127,6 +132,7 @@
 <BR><A class=funclink href=shader.htm#CelShaderCreate>CelShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineColor>CelShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineWidth>CelShaderSetLineWidth</A><A>(shader,width)</A>
+<BR><A class=funclink href=shader.htm#CelShaderSetOptions>CelShaderSetOptions</A><A>(shader,outlines,textured)</A>
 <BR><A class=funclink href=b3d.htm#ClearZones>ClearZones</A><A>()</A>
 <BR><A class=funclink href=primitives.htm#ConeCreate>ConeCreate</A><A>(bottomradius,height,slices,stacks,loops,parent)</A>
 <BR><A class=funclink href=b3d.htm#CreateZones>CreateZones</A><A>(parent,clear)</A>
@@ -256,6 +262,20 @@
 <BR><A class=funclink href=freeform.htm#FreeformToFreeforms>FreeformToFreeforms</A><A>(freeform,parent)</A>
 
 <BR><A class=funclink href=primitives.htm#FrustrumCreate>FrustrumCreate</A><A>(basewidth,basedepth,apexheight,cutheight,parent)</A>
+<BR>
+<BR>
+<A name="G"></A>
+<H1 class=name>G</H1>
+<BR><A class=funclink href=shader.htm#GLSLShaderCreate>GLSLShaderCreate</A><A>(vertexshader,fragmentshader)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderCreateParameter>GLSLShaderCreateParameter</A><A>(shader,name)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter1f>GLSLShaderSetParameter1f</A><A>(shader,value)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter1i>GLSLShaderSetParameter1i</A><A>(shader,value)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter2f>GLSLShaderSetParameter2f</A><A>(shader,x,y)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter3f>GLSLShaderSetParameter3f</A><A>(shader,x,y,z)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter4f>GLSLShaderSetParameter4f</A><A>(shader,x,y,z,w)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterInvMatrix>GLSLShaderSetParameterInvMatrix</A><A>(shader,object)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterMatrix>GLSLShaderSetParameterMatrix</A><A>(shader,object)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterTexture>GLSLShaderSetParameterTexture</A><A>(shader,material,texunit)</A>
 <BR>
 <BR>
 <A name="H"></A>
@@ -511,7 +531,8 @@
 <BR>
 <A name="P"></A>
 <H1 class=name>P</H1>
-<A class=funclink href=primitives.htm#PlaneCreate>PlaneCreate</A><A>(singlequad,width,height,xtiles,ytiles,parent)</A>
+<A class=funclink href=shader.htm#PhongShaderCreate>PhongShaderCreate</A><A>()</A>
+<BR><A class=funclink href=primitives.htm#PlaneCreate>PlaneCreate</A><A>(singlequad,width,height,xtiles,ytiles,parent)</A>
 <BR><A class=funclink href=polygon.htm#PolygonAddVertex>PolygonAddVertex</A><A>(polygon,x,y,z)</A>
 <BR><A class=funclink href=polygon.htm#PolygonCreate>PolygonCreate</A><A>(parent)</A>
 <BR><A class=funclink href=polygon.htm#PolygonDeleteVertex>PolygonDeleteVertex</A><A>(polygon,vertex)</A>
@@ -586,6 +607,10 @@
 <BR><A class=funclink href=terrain.htm#TerrainSetTilesPerTexture>TerrainSetTilesPerTexture</A><A>(terrain,tiles)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>(terrain,distance)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetQualityStyle>TerrainSetQualityStyle</A><A>(terrain,hrs)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderAddCombiner>TexCombineShaderAddCombiner</A><A>(shader,instruction)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderCreate>TexCombineShaderCreate</A><A>(matlib)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderMaterial3>TexCombineShaderMaterial3</A><A>(shader,material)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderMaterial4>TexCombineShaderMaterial4</A><A>(shader,material)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXCreate>ThorFXCreate</A><A>(manager,parent)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXEnableCore>ThorFXEnableCore</A><A>(manager,mode)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXEnableGlow>ThorFXEnableGlow</A><A>(manager,mode)</A>

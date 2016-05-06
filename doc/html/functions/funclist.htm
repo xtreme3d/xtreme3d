@@ -481,10 +481,20 @@
 <A name="Shaders"></A>
 <H1 class=name>Shaders</H1>
 <A class=funclink href=shader.htm#ShaderEnable>ShaderEnable</A><A>(shader,mode)</A>
-<BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>(texture2)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>()</A>
+
+<BR><A class=funclink href=shader.htm#BumpShaderSetMethod>BumpShaderSetMethod</A><A>(shader,bm)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetSpecularMode>BumpShaderSetSpecularMode</A><A>(shader,sm)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetSpace>BumpShaderSetSpace</A><A>(shader,bs)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetParallaxOffset>BumpShaderSetParallaxOffset</A><A>(shader,offset)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderSetOptions>BumpShaderSetOptions</A><A>(shader,texture2,texcoords2,lightatten,parallax)</A>
+
 <BR><A class=funclink href=shader.htm#CelShaderCreate>CelShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineColor>CelShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineWidth>CelShaderSetLineWidth</A><A>(shader,width)</A>
+
+<BR><A class=funclink href=shader.htm#CelShaderSetOptions>CelShaderSetOptions</A><A>(shader,outlines,textured)</A>
+
 <BR><A class=funclink href=shader.htm#HiddenLineShaderCreate>HiddenLineShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#HiddenLineShaderSetLineSmooth>HiddenLineShaderSetLineSmooth</A><A>(shader,mode)</A>
 <BR><A class=funclink href=shader.htm#HiddenLineShaderSetSolid>HiddenLineShaderSetSolid</A><A>(shader,mode)</A>
@@ -495,6 +505,24 @@
 <BR><A class=funclink href=shader.htm#OutlineShaderCreate>OutlineShaderCreate</A><A>(smooth)</A>
 <BR><A class=funclink href=shader.htm#OutlineShaderSetLineColor>OutlineShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#OutlineShaderSetLineWidth>OutlineShaderSetLineWidth</A><A>(shader,width)</A>
+
+<BR><A class=funclink href=shader.htm#TexCombineShaderCreate>TexCombineShaderCreate</A><A>(matlib)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderMaterial3>TexCombineShaderMaterial3</A><A>(shader,material)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderMaterial4>TexCombineShaderMaterial4</A><A>(shader,material)</A>
+<BR><A class=funclink href=shader.htm#TexCombineShaderAddCombiner>TexCombineShaderAddCombiner</A><A>(shader,instruction)</A>
+
+<BR><A class=funclink href=shader.htm#PhongShaderCreate>PhongShaderCreate</A><A>()</A>
+
+<BR><A class=funclink href=shader.htm#GLSLShaderCreate>GLSLShaderCreate</A><A>(vertexshader,fragmentshader)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderCreateParameter>GLSLShaderCreateParameter</A><A>(shader,name)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter1i>GLSLShaderSetParameter1i</A><A>(shader,value)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter1f>GLSLShaderSetParameter1f</A><A>(shader,value)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter2f>GLSLShaderSetParameter2f</A><A>(shader,x,y)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter3f>GLSLShaderSetParameter3f</A><A>(shader,x,y,z)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameter4f>GLSLShaderSetParameter4f</A><A>(shader,x,y,z,w)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterTexture>GLSLShaderSetParameterTexture</A><A>(shader,material,texunit)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterMatrix>GLSLShaderSetParameterMatrix</A><A>(shader,object)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterInvMatrix>GLSLShaderSetParameterInvMatrix</A><A>(shader,object)</A>
 <BR>
 <BR>
 <A name="ThorFX"></A>

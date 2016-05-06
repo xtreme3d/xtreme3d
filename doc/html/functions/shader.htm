@@ -12,8 +12,6 @@
 
 <A class=type>Класс: ??</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>Шейдер в Xtreme3D - это спецэффект для материала. Есть пять разных шейдеров: Bump, Cel, HiddenLine, MultiMaterial, Outline, TexCombine, Phong и GLSL. Для применения шейдера к материалу используется функция </A><A class=funclink href=../functions/material.htm#MaterialSetShader>MaterialSetShader</A><A>. При помощи шейдеров на языке GLSL вы можете программировать свои собственные спецэффекты.
 <BR><HR>
 
@@ -88,9 +86,8 @@
 <A name="CelShaderCreate"></A>
 <H1 class=name>CelShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>CelShaderCreate</A><A>();</A>
-<BR><A>Создает так называемый cel-шейдер и возвращает его id. Этот тип шейдера используется для создания специального эффекта мультипликационного изображения. Он включает 
-отрисовку контуров и упрощение модели освещения (свет и тень представлены четко разграниченными пятнами).
-<BR>Данный шейдер требует аппаратной поддержки расширения GL_ARB_vertex_program.</A></A>
+<BR><A>Создает так называемый cel-шейдер и возвращает его id. Этот тип шейдера используется для создания специального эффекта мультипликационного изображения. Он включает отрисовку контуров и упрощение модели освещения (свет и тень представлены четко разграниченными пятнами).
+<BR>Данный шейдер требует поддержки расширений GL_ARB_vertex_program и GL_ARB_fragment_program.</A></A>
 <HR>
 
 <A name="CelShaderSetLineColor"></A>
@@ -107,6 +104,15 @@
 <BR><A>Задает толщину контура в cel-шейдере.</A>
 <BR><A>shader - id шейдера</A>
 <BR><A>width - ширина.</A>
+<HR>
+
+<A name="CelShaderSetOptions"></A>
+<H1 class=name>CelShaderSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>CelShaderSetOptions</A><A>( shader,outlines,textured as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает опции cel-шейдера.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>outlines - указывает, рисовать ли контуры - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
+<BR><A>textured - указывает, использовать ли текстуру материала - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
 <HR>
 
 <A name="HiddenLineShaderCreate"></A>
@@ -165,11 +171,9 @@
 <A name="MultiMaterialShaderCreate"></A>
 <H1 class=name>MultiMaterialShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>MultiMaterialShaderCreate</A><A>( matlib as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает мультиматериальный шейдер и возвращает его id. Он позволяет создать материал, состоящий из нескольких слоев других материалов, с собственными 
-текстурами и параметрами. Эти материалы загружаются из отдельной библиотеки.
-<BR>Этот чрезвычайно мощный шейдер будет главным образом полезен для имитации поверхностей, состоящих из нескольких веществ с различными свойствами: например, деревянный ящик, 
-окованный металлом, или камень с вкраплениями лавы или кристаллов. Но ему можно найти и другие применения.</A>
-<BR><A>matlib - id библиотеки материалов.</A>
+<BR><A>Создает мультиматериальный шейдер и возвращает его id. Этот шейдер позволяет создать материал, состоящий из нескольких слоев других материалов, с собственными текстурами и параметрами. Эти материалы загружаются из отдельной библиотеки.
+<BR>Этот чрезвычайно мощный шейдер будет главным образом полезен для имитации поверхностей, состоящих из нескольких веществ с различными свойствами: например, деревянный ящик, окованный металлом, или камень с вкраплениями лавы или кристаллов. Но ему можно найти и другие применения.</A>
+<BR><A>matlib - id библиотеки материалов. Материалы будут накладываться в том порядке, в каком они были добавлены в библиотеку (то есть, первый материал будет внизу).</A>
 <HR>
 
 <A name="OutlineShaderCreate"></A>
@@ -193,6 +197,134 @@
 <BR><A>Задает толщину контура в контурном шейдере.</A>
 <BR><A>shader - id шейдера</A>
 <BR><A>width - ширина.</A>
+<HR>
+
+<A name="TexCombineShaderCreate"></A>
+<H1 class=name>TexCombineShaderCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>TexCombineShaderCreate</A><A>( matlib as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает шейдер комбинирования текстур и возвращает его id. Этот шейдер позволяет вам запрограммировать простейшие операции с текстурами: суммирование, вычитание, умножение и т.д. - это что-то наподобие языка описания шейдеров, который работает только с текстурами. Шейдер поддерживает до 4 текстур - первые две задаются автоматически (это первая и вторая текстуры первого материала в библиотеке), третья и четвертая задаются вручную соответствующими функциями.</A>
+<BR><A>matlib - id библиотеки материалов, из которой будут читаться текстуры.</A>
+<HR>
+
+<A name="TexCombineShaderMaterial3"></A>
+<H1 class=name>TexCombineShaderMaterial3</H1>
+<A class=type>real</A><A> = </A><A class=function>TexCombineShaderMaterial3</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает материал, из которого нужно прочитать третью текстуру для шейдера комбинирования текстур.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="TexCombineShaderMaterial4"></A>
+<H1 class=name>TexCombineShaderMaterial4</H1>
+<A class=type>real</A><A> = </A><A class=function>TexCombineShaderMaterial4</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает материал, из которого нужно прочитать четвертую текстуру для шейдера комбинирования текстур.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>material - имя материала.</A>
+<HR>
+
+<A name="TexCombineShaderAddCombiner"></A>
+<H1 class=name>TexCombineShaderAddCombiner</H1>
+<A class=type>real</A><A> = </A><A class=function>TexCombineShaderAddCombiner</A><A>( shader as </A><A class=type>real</A><A>, instruction as </A><A class=type>string</A><A> );</A>
+<BR><A>Добавляет новый комбинатор - то есть, инструкцию для комбинирования текстур. Синтаксис инструкции напоминает операцию присваивания в Pascal. Доступны четыре обозначения текстурных слоев (Tex0, Tex1, Tex2, Tex3), к которым можно добавлять суффиксы ".а" и ".rgb" для получения по отдельности альфа-канала и значений RGB, соответственно. Также поддерживаются идентификатор PrimaryColor (или просто Col) - основной цвет (освещенность вершины), функции Interpolate (интерполяция между двумя текстурами) и Dot3 (скалярное произведение текстур).</A>
+<BR><A>Результатом работы шейдера будет комбинатор с наибольшим индексом.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>instruction - строка, содержащая инструкцию. Вот несколько примеров инструкций:</A>
+<BR><A>"Tex1:=Tex0;" - закрашивание первой текстурой</A>
+<BR><A>"Tex1:=Tex0+Tex1;" - суммирование первых двух текстур</A>
+<BR><A>"Tex1:=Tex0-Tex1;" - вычитание второй текстуры из первой</A>
+<BR><A>"Tex1:=Tex0*Tex1;" - умножение первых двух текстур</A>
+<BR><A>"Tex1:=Interpolate(Tex0,Tex1,PrimaryColor);" - интерполяция между первыми двумя текстурами с использованием освещенности в качестве параметра (то есть, текстура на освещенной стороне будет плавно переходить в текстуру на теневой стороне)</A>
+<BR><A>"Tex1:=Dot3(Tex0,Tex1);" - скалярное произведение первых двух текстур.</A>
+<HR>
+
+<A name="PhongShaderCreate"></A>
+<H1 class=name>PhongShaderCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>PhongShaderCreate</A><A>( );</A>
+<BR><A>Создает шейдер освещения с бликами по Фонгу (Phong) и возвращает его id. Это самая простейшая реализация освещения по Фонгу - поддерживает только свойства материала и источников света: поддержки текстур, к сожалению, нет. Если вам нужно реализовать более сложный шейдер с бликами по Фонгу, рекомендуем сделать это с помощью языка GLSL (см. далее). 
+<BR>Данный шейдер требует поддержки расширений GL_ARB_vertex_program и GL_ARB_fragment_program.</A>
+<HR>
+
+<A name="GLSLShaderCreate"></A>
+<H1 class=name>GLSLShaderCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderCreate</A><A>( vertexshader,fragmentshader as </A><A class=type>string</A><A> );</A>
+<BR><A>Создает шейдер GLSL и возвращает его id. GLSL (OpenGL Shading Language) - это язык описания шейдеров, при помощи которого вы можете запрограммировать графический конвейер (иными словами, управлять рендерингом объектов на вершинном и пиксельном уровне). За обработку вершин отвечает вершинная программа, за обработку пикселей - фрагментная.</A>
+<BR><A>Данный шейдер требует поддержки расширений GL_ARB_shading_language (или GL_ARB_shading_language_100), GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader.</A>
+<BR><A>vertexshader - строка, содержащая вершинную программу GLSL (не имя файла!)</A>
+<BR><A>fragmentshader - строка, содержащая фрагментную программу GLSL (не имя файла!)</A>
+<BR><A>Если в функцию будет передана некорректная программа, будет выведено сообщение об ошибке, и движок продолжит работу.</A>
+<HR>
+
+<A name="GLSLShaderCreateParameter"></A>
+<H1 class=name>GLSLShaderCreateParameter</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderCreateParameter</A><A>( shader as </A><A class=type>real</A><A>, name as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый параметр шейдера и возвращает его id. Эти параметры соответствуют uniform-переменным GLSL. Их можно модифицировать динамически в вашем приложении, но в шейдере они доступны только для чтения.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>name - имя параметра.</A>
+<HR>
+
+<A name="GLSLShaderSetParameter1i"></A>
+<H1 class=name>GLSLShaderSetParameter1i</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter1i</A><A>( param,value as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр значение типа int (целое число).</A>
+<BR><A>param - id параметра</A>
+<BR><A>value - значение.</A>
+<HR>
+
+<A name="GLSLShaderSetParameter1f"></A>
+<H1 class=name>GLSLShaderSetParameter1f</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter1f</A><A>( param,value as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр значение типа float (вещественное число).</A>
+<BR><A>param - id параметра</A>
+<BR><A>value - значение.</A>
+<HR>
+
+<A name="GLSLShaderSetParameter2f"></A>
+<H1 class=name>GLSLShaderSetParameter2f</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter2f</A><A>( param,x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр значение типа vec2 (вектор из двух вещественных чисел).</A>
+<BR><A>param - id параметра</A>
+<BR><A>x,y - вектор.</A>
+<HR>
+
+<A name="GLSLShaderSetParameter3f"></A>
+<H1 class=name>GLSLShaderSetParameter3f</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter3f</A><A>( param,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр значение типа vec3 (вектор из трех вещественных чисел).</A>
+<BR><A>param - id параметра</A>
+<BR><A>x,y,z - вектор.</A>
+<HR>
+
+<A name="GLSLShaderSetParameter4f"></A>
+<H1 class=name>GLSLShaderSetParameter4f</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter4f</A><A>( param,x,y,z,w as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр значение типа vec4 (вектор из четырех вещественных чисел).</A>
+<BR><A>param - id параметра</A>
+<BR><A>x,y,z,w - вектор.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterTexture"></A>
+<H1 class=name>GLSLShaderSetParameterTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterTexture</A><A>( param as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A>, texunit as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
+<BR><A>param - id параметра</A>
+<BR><A>material - имя материала (в активной библиотеке материалов)</A>
+<BR><A>texunit - определяет, через какой текстурный блок передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости лучше не использовать больше 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterMatrix"></A>
+<H1 class=name>GLSLShaderSetParameterMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterMatrix</A><A>( param,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
+<BR><A>param - id параметра</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterInvMatrix"></A>
+<H1 class=name>GLSLShaderSetParameterInvMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterInvMatrix</A><A>( param,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр обратную абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
+<BR><A>param - id параметра</A>
+<BR><A>object - id объекта.</A>
 <HR>
 
 </DIV>
