@@ -275,6 +275,14 @@
   <PARAM name="Name" value="Partition">
   <PARAM name="Local" value="functions/partition.htm">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Grid">
+  <PARAM name="Local" value="functions/grid.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Text">
+  <PARAM name="Local" value="functions/text.htm">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FAQ">
