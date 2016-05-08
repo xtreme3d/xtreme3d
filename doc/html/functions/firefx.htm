@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLFireFXManager, TFire</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>FireFX - система частиц, моделирующая огонь. Хотя с помощью FireFX можно воссоздавать и другие эффекты: дым, искры, взрывы, дождь, фейерверк, бенгальские огни и т.д.
 <BR>Система FireFX состоит из конечного числа частиц - небольших объектов-спрайтов, изображающих крохотные цветные точки. Частицы обычно движутся 
 в одном направлении, соответствующем вектору Direction объекта системы (правда, можно "взорвать" систему - тогда частицы разлетятся во все стороны).
@@ -33,10 +31,10 @@
 
 <A name="FireFXCreate"></A>
 <H1 class=name>FireFXCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXCreate</A><A>( manager,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новую систему FireFX и возвращает ее id.</A>
+<A class=type>real</A><A> = </A><A class=function>FireFXCreate</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новую систему FireFX и прикрепляет ее к заданному объекту.</A>
 <BR><A>manager - id менеджера FireFX</A>
-<BR><A>parent - id родителя для системы.</A>
+<BR><A>object - id объекта.</A>
 <HR>
 
 <A name="FireFXSetColor"></A>
