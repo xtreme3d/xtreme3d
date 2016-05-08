@@ -15,7 +15,7 @@ uses
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree, GLMultiProxy;
+  GLTrail, GLTree, GLMultiProxy, GLODEManager;
 
 type
    TEmpty = class(TComponent)
@@ -31,6 +31,8 @@ var
 
   collisionPoint: TVector;
   collisionNormal: TVector;
+
+  ode: TGLODEManager;
 
 {$R *.res}
 
@@ -95,6 +97,33 @@ end;
 {$I 'partition'}
 {$I 'proxy'}
 {$I 'text'}
+{$I 'grid'}
+
+function OdeManagerCreate(): real; stdcall;
+begin
+  ode := TGLODEManager.Create(nil);
+  result := 1.0;
+end;
+
+{
+function NewtonManagerStep(dt: real): real; stdcall;
+begin
+  NewtonManager.Step(dt);
+  result := 1.0;
+end;
+
+function NewtonDynamicBodyCreate(obj, density: real): real; stdcall;
+var
+  ob: TGLBaseSceneObject;
+  dyn: TGLNGDDynamic;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  dyn := ob.GetOrCreateBehaviour(TGLNGDDynamic) as TGLNGDDynamic; //GetOrCreateNGDDynamic(ob);
+  dyn.Manager := NewtonManager;
+  dyn.Density := density;
+  Result := 1.0;
+end;
+}
 
 exports
 
@@ -339,7 +368,12 @@ PartitionResultShow, PartitionResultHide,
 ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
 MultiProxyObjectCreate, MultiProxyObjectAddTarget,
 //Text
-TextRead;
+TextRead,
+//Grid
+GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
+GridSetColor, GridSetSize, GridSetPattern,
+//ODE
+OdeManagerCreate;
 
 begin
 end.
