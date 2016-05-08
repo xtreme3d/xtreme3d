@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLBlur</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>
 Размытие (Blur) - всем знакомый эффект. В данном случае речь идет о motion blur - размытии при движении, которое 
 визуально возникает при быстром повороте или перемещении точки обзора. Введение такого эффекта может придать реалистичности 
@@ -26,8 +24,9 @@
 
 <A name="BlurCreate"></A>
 <H1 class=name>BlurCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>BlurCreate</A><A>( target,parent as </A><A class=type>real</A><A> );</A>
 <BR><A>Создает новый объект blur и возвращает его id.</A>
+<BR><A>target - id объекта, который должен быть размыт. Размыты будут и все потомки этого объекта.</A>
 <BR><A>parent - id родителя.</A>
 <HR>
 
@@ -66,6 +65,28 @@
 <BR><A>Задает разрешение кадра размытия. Значение должно соответствовать степени двойки (512,256,128 и т.д.)</A>
 <BR><A>blur - id объекта blur</A>
 <BR><A>res - разрешение.</A>
+<HR>
+
+<A name="BlurSetColor"></A>
+<H1 class=name>BlurSetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurSetColor</A><A>( blur,color as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает цвет размытия.</A>
+<BR><A>blur - id объекта blur</A>
+<BR><A>color - цвет.</A>
+<HR>
+
+<A name="BlurSetBlendingMode"></A>
+<H1 class=name>BlurSetBlendingMode</H1>
+<A class=type>real</A><A> = </A><A class=function>BlurSetBlendingMode</A><A>( blur,bm as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает Задает режим смешивания размытия (bm). Доступны следующие значения bm:</A>
+<BR><A class=constant name="bmOpaque">bmOpaque</A><A> = 0 - отсутствие прозрачности и смешивания (полное замещение)</A>
+<BR><A class=constant name="bmTransparency">bmTransparency</A><A> = 1 - используется прозрачность (альфа-смешивание)</A>
+<BR><A class=constant name="bmAdditive">bmAdditive</A><A> = 2 - используется суммирование цветов</A>
+<BR><A class=constant name="bmAlphaTest50">bmAlphaTest50</A><A> = 3 - сведения отсутствуют</A>
+<BR><A class=constant name="bmAlphaTest100">bmAlphaTest100</A><A> = 4 - сведения отсутствуют</A>
+<BR><A class=constant name="bmModulate">bmModulate</A><A> = 5 - используется модуляция цветов.</A>
+<BR><A>blur - id объекта blur</A>
+<BR><A>bm - режим смешивания.</A>
 <HR>
 
 </DIV>
