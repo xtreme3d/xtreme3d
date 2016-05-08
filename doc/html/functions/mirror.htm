@@ -12,11 +12,9 @@
 
 <A class=type>Класс: TGLMirror</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>
 Зеркало (mirror) - плоскость, отражающая другие объекты. Эффект отражения достигается путем отрисовки зеркальных копий объектов внутри 
-прямоугольной плоскости отсечения.
+прямоугольной или дискообразной плоскости отсечения.
 </A>
 <BR>
 <HR>
@@ -47,6 +45,23 @@
 <BR><A>planeclipping - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, объекты, находящиеся за зеркалом, не будут давать обратного отражения. По умолчанию: 0</A>
 <BR><A>clearzbuffer - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, отражение будет полностью перекрывать объекты, находящиеся за зеркалом. По умолчанию: 0.</A>
 <BR><A>Реалистичное зеркало даст комбинация 1,0,1,1.</A>
+<HR>
+
+<A name="MirrorSetShape"></A>
+<H1 class=name>MirrorSetShape</H1>
+<A class=type>real</A><A> = </A><A class=function>MirrorSetShape</A><A>( mirror,ms as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает форму зеркала - это может быть прямоугольная плоскость (</A><A class=constant>msRect</A><A>) или диск (</A><A class=constant>msDisk</A><A>).</A>
+<BR><A>mirror - id зеркала</A>
+<BR><A>ms - форма зеркала: </A><A class=constant>msRect</A><A> = 0 или </A><A class=constant>msDisk</A><A> = 1.</A></A>
+<HR>
+
+<A name="MirrorSetDiskOptions"></A>
+<H1 class=name>MirrorSetDiskOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>MirrorSetDiskOptions</A><A>( mirror,radius,slices as </A><A class=type>real</A><A> );</A>
+<BR><A>Если зеркало имеет форму диска, эта функция задает радиус и количество сегментов диска.</A>
+<BR><A>mirror - id зеркала</A>
+<BR><A>radius - радиус диска</A>
+<BR><A>slices - количество сегментов диска.</A>
 <HR>
 
 </DIV>
