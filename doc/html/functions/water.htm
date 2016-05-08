@@ -12,15 +12,12 @@
 
 <A class=type>Класс: TGLWaterPlane</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
-<A>Реалистичная анимированная вода (water) стала своего рода визитной карточкой Xtreme3D. Это и в самом деле красивый спецэффект, 
+<A>Реалистичная анимированная вода (water) является своего рода визитной карточкой Xtreme3D. Это и в самом деле красивый спецэффект, 
 позволяющий добиться высокой степени реализма сцены. Однако использовать воду надо осторожно, так как вычисления, связанные 
 с ней, довольно ресурсоемки.
 <BR>Water представляет собой плоскую поверхность, разбитую на определенное количество квадов, на которых возникают концентрические 
-волновые возмущения. Получается эффект "дождя". К сожалению, линейные волны (как в океане) не поддерживаются, поэтому water можно 
-использовать только для небольших водоемов - например, лужи, бассейна или маленького пруда. Теоретически, можно настроить воду так, 
-чтобы получилось большое озеро или река, но это сделать непросто. 
+волновые возмущения - получается эффект "дождя". Также поддерживаются линейные волны, как в океане - они параллельны, вычисляются по синусоиде и 
+равномерно движутся по всей поверхности воды.
 <BR>Сама по себе water - всего лишь геометрия и никакими свойствами жидкости, кроме волн, не обладает. Поэтому все остальные эффекты, 
 усиливающие впечатление от воды (отражение, брызги, физику плавающих объектов и т.д.) вам придется писать самостоятельно.
 </A>
@@ -43,9 +40,25 @@
 <A name="WaterCreateRippleAtGridPosition"></A>
 <H1 class=name>WaterCreateRippleAtGridPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtGridPosition</A><A>( water,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает возмущение в заданной точке на поверхности воды.</A>
+<BR><A>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно исходной точки поверхности.</A>
 <BR><A>water - id объекта water</A>
-<BR><A>x,y - координаты точки возмущения относительно исходной точки поверхности.</A>
+<BR><A>x,y - координаты точки возмущения.</A>
+<HR>
+
+<A name="WaterCreateRippleAtWorldPosition"></A>
+<H1 class=name>WaterCreateRippleAtWorldPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtWorldPosition</A><A>( water,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно абсолютного начала координат.</A>
+<BR><A>water - id объекта water</A>
+<BR><A>x,y,z - координаты точки возмущения.</A>
+<HR>
+
+<A name="WaterCreateRippleAtObjectPosition"></A>
+<H1 class=name>WaterCreateRippleAtObjectPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtObjectPosition</A><A>( water,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает возмущение в точке на поверхности воды, соответствующей абсолютной позиции заданного объекта. Функция пригождается, если нужно сделать волны, расходящиеся от упавшего в воду предмета.</A>
+<BR><A>water - id объекта water</A>
+<BR><A>object - id объекта.</A>
 <HR>
 
 <A name="WaterSetMask"></A>
@@ -76,9 +89,8 @@
 <A name="WaterSetRainTimeInterval"></A>
 <H1 class=name>WaterSetRainTimeInterval</H1>
 <A class=type>real</A><A> = </A><A class=function>WaterSetRainTimeInterval</A><A>( water,interval as </A><A class=type>real</A><A> );</A>
-<BR><A>Вместо того, чтобы вызывать </A><A class=funclink href=../functions/water.htm#WaterCreateRandomRipple>WaterCreateRandomRipple</A><A> и </A><A class=funclink href=../functions/water.htm#WaterCreateRippleAtGridPosition>WaterCreateRippleAtGridPosition</A><A>, 
-можно задать автоматическую генерацию возмущений. Это будет выглядеть, как будто идет дождь. Данная функция задает длительность 
-паузы между двумя "каплями" в этом дожде.</A>
+<BR><A>Для воды можно задать автоматическую генерацию возмущений. Это будет выглядеть, как будто идет дождь. Данная функция задает временной 
+интервал между двумя "каплями" в этом дожде. Если выставить это значение равным 0, то дождь будет отключен.</A>
 <BR><A>water - id объекта water</A>
 <BR><A>interval - время в миллисекундах (в диапазоне от 0 до 1000000; по умолчанию 500).</A>
 <HR>
@@ -115,6 +127,22 @@
 качество воды, и, соответственно, ниже скорость ее работы.</A>
 <BR><A>water - id объекта water</A>
 <BR><A>res - разрешение (от 16 и выше; по умолчанию 64).</A>
+<HR>
+
+<A name="WaterSetLinearWaveHeight"></A>
+<H1 class=name>WaterSetLinearWaveHeight</H1>
+<A class=type>real</A><A> = </A><A class=function>WaterSetLinearWaveHeight</A><A>( water,height as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает высоту линейных волн.</A>
+<BR><A>water - id объекта water</A>
+<BR><A>height - высота (по умолчанию 1).</A>
+<HR>
+
+<A name="WaterSetLinearWaveFrequency"></A>
+<H1 class=name>WaterSetLinearWaveFrequency</H1>
+<A class=type>real</A><A> = </A><A class=function>WaterSetLinearWaveFrequency</A><A>( water,freq as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает частоту линейных волн (по сути, длину одного колебания). Если выставить это значение равным 0, то линейные волны будут отключены.</A>
+<BR><A>water - id объекта water</A>
+<BR><A>freq - частота (по умолчанию 0).</A>
 <HR>
 
 </DIV>
