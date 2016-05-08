@@ -722,32 +722,43 @@
 <A name="DCE"></A>
 <H1 class=name>DCE</H1>
 <A class=funclink href=dce.htm#DceManagerCreate>DceManagerCreate</A><A>()</A>
+<BR><A class=funclink href=dce.htm#DceManagerStep>DceManagerStep</A><A>(manager,delta)</A>
+
+<BR><A class=funclink href=dce.htm#DceManagerSetGravity>DceManagerSetGravity</A><A>(manager,grav)</A>
+
 <BR><A class=funclink href=dce.htm#DceManagerSetWorldDirection>DceManagerSetWorldDirection</A><A>(manager,x,y,z)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetWorldScale>DceManagerSetWorldScale</A><A>(manager,scale)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetMovementScale>DceManagerSetMovementScale</A><A>(manager,scale)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetLayers>DceManagerSetLayers</A><A>(manager,ccs)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetManualStep>DceManagerSetManualStep</A><A>(manager,mode)</A>
-<BR><A class=funclink href=dce.htm#DceSetManager>DceSetManager</A><A>(object,manager)</A>
-<BR><A class=funclink href=dce.htm#DceSetActive>DceSetActive</A><A>(object,mode)</A>
-<BR><A class=funclink href=dce.htm#DceIsActive>DceIsActive</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceSetUseGravity>DceSetUseGravity</A><A>(object,mode)</A>
-<BR><A class=funclink href=dce.htm#DceSetLayer>DceSetLayer</A><A>(object,layer)</A>
-<BR><A class=funclink href=dce.htm#DceGetLayer>DceGetLayer</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceSetSolid>DceSetSolid</A><A>(object,mode)</A>
-<BR><A class=funclink href=dce.htm#DceSetFriction>DceSetFriction</A><A>(object,friction)</A>
-<BR><A class=funclink href=dce.htm#DceSetBounce>DceSetBounce</A><A>(object,bounce)</A>
-<BR><A class=funclink href=dce.htm#DceSetSize>DceSetSize</A><A>(object,x,y,z)</A>
-<BR><A class=funclink href=dce.htm#DceSetSlideOrBounce>DceSetSlideOrBounce</A><A>(object,csb)</A>
-<BR><A class=funclink href=dce.htm#DceApplyAcceleration>DceApplyAcceleration</A><A>(object,x,y,z)</A>
-<BR><A class=funclink href=dce.htm#DceApplyAbsAcceleration>DceApplyAbsAcceleration</A><A>(object,x,y,z)</A>
-<BR><A class=funclink href=dce.htm#DceStopAcceleration>DceStopAcceleration</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceStopAbsAcceleration>DceStopAbsAcceleration</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceJump>DceJump</A><A>(object,height,speed)</A>
-<BR><A class=funclink href=dce.htm#DceMove>DceMove</A><A>(object,x,y,z,delta)</A>
-<BR><A class=funclink href=dce.htm#DceMoveTo>DceMoveTo</A><A>(object,object,x,y,z,amount)</A>
-<BR><A class=funclink href=dce.htm#DceSetSpeed>DceSetSpeed</A><A>(object,x,y,z)</A>
-<BR><A class=funclink href=dce.htm#DceInGround>DceInGround</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceSetMaxRecursionDepth>DceSetMaxRecursionDepth</A><A>(object,depth)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetManager>DceDynamicSetManager</A><A>(object,manager)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetActive>DceDynamicSetActive</A><A>(object,mode)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicIsActive>DceDynamicIsActive</A><A>(object)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetUseGravity>DceDynamicSetUseGravity</A><A>(object,mode)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetLayer>DceDynamicSetLayer</A><A>(object,layer)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicGetLayer>DceDynamicGetLayer</A><A>(object)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetSolid>DceDynamicSetSolid</A><A>(object,mode)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetFriction>DceDynamicSetFriction</A><A>(object,friction)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetBounce>DceDynamicDynamicSetBounce</A><A>(object,bounce)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetSize>DceDynamicSetSize</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetSlideOrBounce>DceDynamicSetSlideOrBounce</A><A>(object,csb)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicApplyAcceleration>DceDynamicApplyAcceleration</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicApplyAbsAcceleration>DceDynamicApplyAbsAcceleration</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicStopAcceleration>DceDynamicStopAcceleration</A><A>(object)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicStopAbsAcceleration>DceDynamicStopAbsAcceleration</A><A>(object)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicJump>DceDynamicJump</A><A>(object,height,speed)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicMove>DceDynamicMove</A><A>(object,x,y,z,delta)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicMoveTo>DceDynamicMoveTo</A><A>(object,object,x,y,z,amount)</A>
+
+<BR><A class=funclink href=dce.htm#DceDynamicSetVelocity>DceDynamicSetVelocity</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicGetVelocity>DceDynamicGetVelocity</A><A>(object,ind)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetAbsVelocity>DceDynamicSetAbsVelocity</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicGetAbsVelocity>DceDynamicGetAbsVelocity</A><A>(object,ind)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicApplyImpulse>DceDynamicApplyImpulse</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicApplyAbsImpulse>DceDynamicApplyAbsImpulse</A><A>(object,x,y,z)</A>
+
+<BR><A class=funclink href=dce.htm#DceDynamicInGround>DceDynamicInGround</A><A>(object)</A>
+<BR><A class=funclink href=dce.htm#DceDynamicSetMaxRecursionDepth>DceDynamicSetMaxRecursionDepth</A><A>(object,depth)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetManager>DceStaticSetManager</A><A>(object,manager)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetActive>DceStaticSetActive</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetShape>DceStaticSetShape</A><A>(object,cs)</A>
@@ -756,7 +767,8 @@
 <BR><A class=funclink href=dce.htm#DceStaticSetSolid>DceStaticSetSolid</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetFriction>DceStaticSetFriction</A><A>(object,friction)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetBounceFactor>DceStaticSetBounceFactor</A><A>(object,bounce)</A>
-<BR><A class=funclink href=dce.htm#DceGetVelocity>DceGetVelocity</A><A>(object,ind)</A>
+
+<!--
 <BR><A class=funclink href=dce.htm#DceGetGravity>DceGetGravity</A><A>(object,ind)</A>
 <BR><A class=funclink href=dce.htm#DceVelocityCollided>DceVelocityCollided</A><A>(object)</A>
 <BR><A class=funclink href=dce.htm#DceGravityCollided>DceGravityCollided</A><A>(object)</A>
@@ -764,6 +776,7 @@
 <BR><A class=funclink href=dce.htm#DceGetCollidedObject>DceGetCollidedObject</A><A>(object,col)</A>
 <BR><A class=funclink href=dce.htm#DceGetCollisionPosition>DceGetCollisionPosition</A><A>(object,col,ind)</A>
 <BR><A class=funclink href=dce.htm#DceGetCollisionNormal>DceGetCollisionNormal</A><A>(object,col,ind)</A>
+-->
 <BR>
 <BR>
 <A name="FPS"></A>

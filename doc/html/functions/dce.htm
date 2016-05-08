@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TGLDCEManager</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>
 DCE - очень мощный движок обнаружения и обработки столкновений, достаточно универсальный, чтобы его можно было 
 применять в играх любого жанра. Вам для этого совершенно не потребуется разбираться в особенностях 
@@ -132,18 +130,19 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 </TABLE>
 <BR>Вы можете использовать слои для того, чтобы разбить игровое пространство на отдельные области, в которых 
 действуют объекты, и тем самым повысить производительность. А можно найти и другие применения.
+<BR>Еще одна интересная особенность DCE в том, что динамические объекты имеют два кинематических состояния - локальное и абсолютное. Иными словами, такие параметры, как скорость, ускорение и импульс могут быть заданы как в локальных координатах объекта, так и в глобальных. Эти параметры независимы друг от друга, но оба учитываются одновременно при расчете движения. Локальные параметры удобны, когда вы управляете объектом, который может вращаться и двигается в ту сторону, куда "смотрит" - а такая ситуация наблюдается в абсолютном большинстве игр. При этом абсолютные параметры удобны для воздействия на объекты какой-либо внешней силой - например, если персонажа отбрасывает взрывом или сносит ветром (поскольку скорости суммируются, персонаж будет двигаться быстрее, если идет по ветру - примерно как и в реальной жизни).
 </A>
 <BR>
 <HR>
 
 <A name="DceManagerCreate"></A>
-<H1 class=namenew>DceManagerCreate</H1>
+<H1 class=name>DceManagerCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerCreate</A><A>();</A>
 <BR><A>Создает менеджер DCE и возвращает его id.</A>
 <HR>
 
 <A name="DceManagerStep"></A>
-<H1 class=namenew>DceManagerStep</H1>
+<H1 class=name>DceManagerStep</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerStep</A><A>( manager,delta as </A><A class=type>real</A><A> );</A>
 <BR><A>Совершает ручное обновление менеджера. Используется только если ручное обновление включено функцией 
 </A><A class=funclink href=../functions/dce.htm#DceManagerSetManualStep>DceManagerSetManualStep</A><A>. В ином случае 
@@ -152,8 +151,16 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <BR><A>delta - размер шага времени, обычно в диапазоне от 0.1 до 1.</A>
 <HR>
 
+<A name="DceManagerSetGravity"></A>
+<H1 class=name>DceManagerSetGravity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceManagerSetGravity</A><A>( manager,grav as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает величину гравитации (силу, с которой динамические объекты будут притягиваться к земле).</A>
+<BR><A>manager - id менеджера DCE</A>
+<BR><A>grav - гравитация.</A>
+<HR>
+
 <A name="DceManagerSetWorldDirection"></A>
-<H1 class=namenew>DceManagerSetWorldDirection</H1>
+<H1 class=name>DceManagerSetWorldDirection</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerSetWorldDirection</A><A>( manager,x,y,z as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>manager - id менеджера DCE</A>
@@ -161,7 +168,7 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceManagerSetWorldScale"></A>
-<H1 class=namenew>DceManagerSetWorldScale</H1>
+<H1 class=name>DceManagerSetWorldScale</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerSetWorldScale</A><A>( manager,scale as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>manager - id менеджера DCE</A>
@@ -169,7 +176,7 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceManagerSetMovementScale"></A>
-<H1 class=namenew>DceManagerSetMovementScale</H1>
+<H1 class=name>DceManagerSetMovementScale</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerSetMovementScale</A><A>( manager,scale as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>manager - id менеджера DCE</A>
@@ -177,18 +184,18 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceManagerSetLayers"></A>
-<H1 class=namenew>DceManagerSetLayers</H1>
+<H1 class=name>DceManagerSetLayers</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerSetLayers</A><A>( manager,ccs as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
-<BR><A class=constant name="ccsDCEStandard">ccsDCEStandard</A><A> = 0 - </A>
-<BR><A class=constant name="ccsCollisionStandard">ccsCollisionStandard</A><A> = 1 - </A>
-<BR><A class=constant name="ccsHybrid">ccsHybrid</A><A> = 2 - </A>
+<BR><A class=constant name="ccsDCEStandard">ccsDCEStandard</A><A> = 0 - сведения отсутствуют</A>
+<BR><A class=constant name="ccsCollisionStandard">ccsCollisionStandard</A><A> = 1 - сведения отсутствуют</A>
+<BR><A class=constant name="ccsHybrid">ccsHybrid</A><A> = 2 - сведения отсутствуют</A>
 <BR><A>manager - id менеджера DCE</A>
 <BR><A>ccs - сведения отсутствуют.</A>
 <HR>
 
 <A name="DceManagerSetManualStep"></A>
-<H1 class=namenew>DceManagerSetManualStep</H1>
+<H1 class=name>DceManagerSetManualStep</H1>
 <A class=type>real</A><A> = </A><A class=function>DceManagerSetManualStep</A><A>( manager,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает ручной режим обновления. При включенном ручном обновлении необходимо использовать функцию 
 </A><A class=funclink href=../functions/dce.htm#DceManagerStep>DceManagerStep</A><A>.</A>
@@ -196,88 +203,88 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
-<A name="DceSetManager"></A>
-<H1 class=namenew>DceSetManager</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetManager</A><A>( object,manager as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetManager"></A>
+<H1 class=name>DceDynamicSetManager</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetManager</A><A>( object,manager as </A><A class=type>real</A><A> );</A>
 <BR><A>Определяет объект в среде DCE как динамический, прикрепляя его к заданному менеджеру.</A>
 <BR><A>object - id объекта</A>
 <BR><A>manager - id менеджера DCE.</A>
 <HR>
 
-<A name="DceSetActive"></A>
-<H1 class=namenew>DceSetActive</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetActive</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetActive"></A>
+<H1 class=name>DceDynamicSetActive</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetActive</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает динамический объект. Выключенные объекты не учитываются при проверке столкновений и, следовательно, на них не 
 затрачиваются вычислительные ресурсы.</A>
 <BR><A>object - id объекта</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
-<A name="DceIsActive"></A>
-<H1 class=namenew>DceIsActive</H1>
-<A class=type>boolean</A><A> = </A><A class=function>DceIsActive</A><A>( object as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicIsActive"></A>
+<H1 class=name>DceDynamicIsActive</H1>
+<A class=type>boolean</A><A> = </A><A class=function>DceDynamicIsActive</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает истину, если объект включен, и ложь, если выключен.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="DceSetUseGravity"></A>
-<H1 class=namenew>DceSetUseGravity</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetUseGravity</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetUseGravity"></A>
+<H1 class=name>DceDynamicSetUseGravity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetUseGravity</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает гравитацию для динамического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
-<A name="DceSetLayer"></A>
-<H1 class=namenew>DceSetLayer</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetLayer</A><A>( object,layer as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetLayer"></A>
+<H1 class=name>DceDynamicSetLayer</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetLayer</A><A>( object,layer as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает слой динамического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>layer - номер слоя.</A>
 <HR>
 
-<A name="DceGetLayer"></A>
-<H1 class=namenew>DceGetLayer</H1>
-<A class=type>real</A><A> = </A><A class=function>DceGetLayer</A><A>( object as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicGetLayer"></A>
+<H1 class=name>DceDynamicGetLayer</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicGetLayer</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает номер слоя динамического объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="DceSetSolid"></A>
-<H1 class=namenew>DceSetSolid</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetSolid</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает плотность динамического объекта. Если плотность включена, объект будет твердым по отношению к другим объектам.</A>
+<A name="DceDynamicSetSolid"></A>
+<H1 class=name>DceDynamicSetSolid</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetSolid</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает твердость динамического объекта. Если плотность включена, объект будет твердым по отношению к другим динамическим объектам.</A>
 <BR><A>object - id объекта</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
-<A name="DceSetFriction"></A>
-<H1 class=namenew>DceSetFriction</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetFriction</A><A>( object,friction as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetFriction"></A>
+<H1 class=name>DceDynamicSetFriction</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetFriction</A><A>( object,friction as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает коэффициент трения для динамического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>friction - коэффициент трения.</A>
 <HR>
 
-<A name="DceSetBounce"></A>
-<H1 class=namenew>DceSetBounce</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetBounce</A><A>( object,bounce as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetBounce"></A>
+<H1 class=name>DceDynamicSetBounce</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetBounce</A><A>( object,bounce as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает параметр упругости для динамического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>bounce - параметр упругости (значение в диапазоне от 0 до 1).</A>
 <HR>
 
-<A name="DceSetSize"></A>
-<H1 class=namenew>DceSetSize</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetSize</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает размер коллайдера динамического объекта. Коллайдер динамических объектов всегда имеет форму сфероида (</A><A class=constant>csEllipsoid</A><A>).</A>
+<A name="DceDynamicSetSize"></A>
+<H1 class=name>DceDynamicSetSize</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetSize</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает размер коллайдера динамического объекта. Коллайдер динамических объектов всегда имеет форму эллипсоида (</A><A class=constant>csEllipsoid</A><A>) - таким образом, эта функция задает радиусы эллипсоида по трем осям.</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - размер коллайдера по трем осям.</A>
 <HR>
 
-<A name="DceSetSlideOrBounce"></A>
-<H1 class=namenew>DceSetSlideOrBounce</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetSlideOrBounce</A><A>( object,csb as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetSlideOrBounce"></A>
+<H1 class=name>DceDynamicSetSlideOrBounce</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetSlideOrBounce</A><A>( object,csb as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает тип поведения динамического объекта при столкновениях - скольжение или отталкивание. Допускаются следующие значения:</A>
 <BR><A class=constant name="csbSlide">csbSlide</A><A> = 0 - скольжение</A>
 <BR><A class=constant name="csbBounce">csbBounce</A><A> = 1 - отталкивание.</A>
@@ -285,88 +292,128 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <BR><A>csb - скольжение или отталкивание.</A>
 <HR>
 
-<A name="DceApplyAcceleration"></A>
-<H1 class=namenew>DceApplyAcceleration</H1>
-<A class=type>real</A><A> = </A><A class=function>DceApplyAcceleration</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Придает динамическому объекту локальное ускорение.</A>
+<A name="DceDynamicApplyAcceleration"></A>
+<H1 class=name>DceDynamicApplyAcceleration</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicApplyAcceleration</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Придает динамическому объекту локальное ускорение (выраженное в локальной координатной системе).</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - вектор ускорения.</A>
 <HR>
 
-<A name="DceApplyAbsAcceleration"></A>
-<H1 class=namenew>DceApplyAbsAcceleration</H1>
-<A class=type>real</A><A> = </A><A class=function>DceApplyAbsAcceleration</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicApplyAbsAcceleration"></A>
+<H1 class=name>DceDynamicApplyAbsAcceleration</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicApplyAbsAcceleration</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
 <BR><A>Придает динамическому объекту абсолютное ускорение.</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - вектор ускорения.</A>
 <HR>
 
-<A name="DceStopAcceleration"></A>
-<H1 class=namenew>DceStopAcceleration</H1>
-<A class=type>real</A><A> = </A><A class=function>DceStopAcceleration</A><A>( object as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicStopAcceleration"></A>
+<H1 class=name>DceDynamicStopAcceleration</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicStopAcceleration</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Останавливает локальное ускорение динамического объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="DceStopAbsAcceleration"></A>
-<H1 class=namenew>DceStopAbsAcceleration</H1>
-<A class=type>real</A><A> = </A><A class=function>DceStopAbsAcceleration</A><A>( object as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicStopAbsAcceleration"></A>
+<H1 class=name>DceDynamicStopAbsAcceleration</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicStopAbsAcceleration</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Останавливает абсолютное ускорение динамического объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="DceJump"></A>
-<H1 class=namenew>DceJump</H1>
-<A class=type>real</A><A> = </A><A class=function>DceJump</A><A>( object,height,speed as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicJump"></A>
+<H1 class=name>DceDynamicJump</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicJump</A><A>( object,height,speed as </A><A class=type>real</A><A> );</A>
 <BR><A>Совершает прыжок динамического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>height - максимальная высота прыжка</A>
 <BR><A>speed - скорость прыжка.</A>
 <HR>
 
-<A name="DceMove"></A>
-<H1 class=namenew>DceMove</H1>
-<A class=type>real</A><A> = </A><A class=function>DceMove</A><A>( object,x,y,z,delta as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает динамический объект.</A>
+<A name="DceDynamicMove"></A>
+<H1 class=name>DceDynamicMove</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicMove</A><A>( object,x,y,z,delta as </A><A class=type>real</A><A> );</A>
+<BR><A>Двигает динамический объект. Обратите внимание, что движение объекта этой функцией не подчиняется гравитации.</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - вектор движения</A>
 <BR><A>delta - сведения отсутствуют.</A>
 <HR>
 
-<A name="DceMoveTo"></A>
-<H1 class=namenew>DceMoveTo</H1>
-<A class=type>real</A><A> = </A><A class=function>DceMoveTo</A><A>( object,x,y,z,amount as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicMoveTo"></A>
+<H1 class=name>DceDynamicMoveTo</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicMoveTo</A><A>( object,x,y,z,amount as </A><A class=type>real</A><A> );</A>
 <BR><A>Двигает динамический объект в направлении к указанной точке.</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - абсолютные координаты точки</A>
 <BR><A>amount - скорость движения.</A>
 <HR>
 
-<A name="DceSetSpeed"></A>
-<H1 class=namenew>DceSetSpeed</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetSpeed</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает постоянную скорость динамического объекта.</A>
+<A name="DceDynamicSetVelocity"></A>
+<H1 class=name>DceDynamicSetVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetVelocity</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает локальную скорость динамического объекта (выраженную в локальной координатной системе).</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - вектор скорости.</A>
 <HR>
 
-<A name="DceInGround"></A>
-<H1 class=namenew>DceInGround</H1>
-<A class=type>boolean</A><A> = </A><A class=function>DceInGround</A><A>( object as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает истину, если динамический объект "стоит на земле".</A>
+<A name="DceDynamicGetVelocity"></A>
+<H1 class=name>DceDynamicGetVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicGetVelocity</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает локальную скорость динамического объекта.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="DceDynamicSetAbsVelocity"></A>
+<H1 class=name>DceDynamicSetAbsVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetAbsVelocity</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает абсолютную скорость динамического объекта (выраженную в глобальной координатной системе).</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - вектор скорости.</A>
+<HR>
+
+<A name="DceDynamicGetAbsVelocity"></A>
+<H1 class=name>DceDynamicGetAbsVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicGetAbsVelocity</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает абсолютную скорость динамического объекта.</A>
+<BR><A>object - id объекта</A>
+<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="DceDynamicApplyImpulse"></A>
+<H1 class=name>DceDynamicApplyImpulse</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicApplyImpulse</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Придает динамическому объекту локальный импульс (моментальное изменение локальной скорости).</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - импульс. Суммируется с текущей локальной скоростью.</A>
+<HR>
+
+<A name="DceDynamicApplyAbsImpulse"></A>
+<H1 class=name>DceDynamicApplyAbsImpulse</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicApplyAbsImpulse</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Придает динамическому объекту абсолютный импульс (моментальное изменение абсолютной скорости).</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - импульс. Суммируется с текущей абсолютной скоростью.</A>
+<HR>
+
+<A name="DceDynamicInGround"></A>
+<H1 class=name>DceDynamicInGround</H1>
+<A class=type>boolean</A><A> = </A><A class=function>DceDynamicInGround</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает истину, если динамический объект "стоит на земле" - то есть, находится в контакте с поверхностью под ним.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
-<A name="DceSetMaxRecursionDepth"></A>
-<H1 class=namenew>DceSetMaxRecursionDepth</H1>
-<A class=type>real</A><A> = </A><A class=function>DceSetMaxRecursionDepth</A><A>( object,depth as </A><A class=type>real</A><A> );</A>
+<A name="DceDynamicSetMaxRecursionDepth"></A>
+<H1 class=name>DceDynamicSetMaxRecursionDepth</H1>
+<A class=type>real</A><A> = </A><A class=function>DceDynamicSetMaxRecursionDepth</A><A>( object,depth as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>object - id объекта</A>
 <BR><A>depth - сведения отсутствуют.</A>
 <HR>
 
 <A name="DceStaticSetManager"></A>
-<H1 class=namenew>DceStaticSetManager</H1>
+<H1 class=name>DceStaticSetManager</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetManager</A><A>( object,manager as </A><A class=type>real</A><A> );</A>
 <BR><A>Определяет объект в среде DCE как статический, прикрепляя его к заданному менеджеру.</A>
 <BR><A>object - id объекта</A>
@@ -374,7 +421,7 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceStaticSetActive"></A>
-<H1 class=namenew>DceStaticSetActive</H1>
+<H1 class=name>DceStaticSetActive</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetActive</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает статический объект. Выключенные объекты не учитываются при проверке столкновений и, следовательно, на них не 
 затрачиваются вычислительные ресурсы.</A>
@@ -383,18 +430,19 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceStaticSetShape"></A>
-<H1 class=namenew>DceStaticSetShape</H1>
+<H1 class=name>DceStaticSetShape</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetShape</A><A>( object,cs as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает форму коллайдера статического объекта. Допускаются следующие значения:</A>
-<BR><A class=constant name="csEllipsoid">csEllipsoid</A><A> = 0 - сфера</A>
+<BR><A class=constant name="csEllipsoid">csEllipsoid</A><A> = 0 - эллипсоид</A>
 <BR><A class=constant name="csBox">csBox</A><A> = 1 - прямоугольный параллелепипед</A>
-<BR><A class=constant name="csFreeform">csFreeform</A><A> = 2 - свободная форма.</A>
+<BR><A class=constant name="csFreeform">csFreeform</A><A> = 2 - объект свободной формы</A>
+<BR><A class=constant name="csTerrain">csTerrain</A><A> = 3 - ландшафт.</A>
 <BR><A>object - id объекта</A>
 <BR><A>cs - форма коллайдера.</A>
 <HR>
 
 <A name="DceStaticSetLayer"></A>
-<H1 class=namenew>DceStaticSetLayer</H1>
+<H1 class=name>DceStaticSetLayer</H1>
 <A class=type>real</A><A> = </A><A class=function>DceSetLayer</A><A>( object,layer as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает слой статического объекта.</A>
 <BR><A>object - id объекта</A>
@@ -402,7 +450,7 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceStaticSetSize"></A>
-<H1 class=namenew>DceStaticSetSize</H1>
+<H1 class=name>DceStaticSetSize</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetSize</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает размер коллайдера статического объекта.</A>
 <BR><A>object - id объекта</A>
@@ -410,15 +458,15 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceStaticSetSolid"></A>
-<H1 class=namenew>DceStaticSetSolid</H1>
+<H1 class=name>DceStaticSetSolid</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetSolid</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает плотность статического объекта. Если плотность включена, объект будет твердым по отношению к другим объектам.</A>
+<BR><A>Включает или выключает твердость статического объекта. Если плотность включена, объект будет твердым по отношению к динамическим объектам.</A>
 <BR><A>object - id объекта</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
 <A name="DceStaticSetFriction"></A>
-<H1 class=namenew>DceStaticSetFriction</H1>
+<H1 class=name>DceStaticSetFriction</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetFriction</A><A>( object,friction as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает коэффициент трения для статического объекта.</A>
 <BR><A>object - id объекта</A>
@@ -426,23 +474,16 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceStaticSetBounceFactor"></A>
-<H1 class=namenew>DceStaticSetBounceFactor</H1>
+<H1 class=name>DceStaticSetBounceFactor</H1>
 <A class=type>real</A><A> = </A><A class=function>DceStaticSetBounceFactor</A><A>( object,bounce as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает параметр упругости для статического объекта.</A>
 <BR><A>object - id объекта</A>
 <BR><A>bounce - параметр упругости (значение в диапазоне от 0 до 1).</A>
 <HR>
 
-<A name="DceGetVelocity"></A>
-<H1 class=namenew>DceGetVelocity</H1>
-<A class=type>real</A><A> = </A><A class=function>DceGetVelocity</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает скорость динамического объекта по заданной оси.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
+<!--
 <A name="DceGetGravity"></A>
-<H1 class=namenew>DceGetGravity</H1>
+<H1 class=name>DceGetGravity</H1>
 <A class=type>real</A><A> = </A><A class=function>DceGetGravity</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает гравитацию динамического объекта по заданной оси.</A>
 <BR><A>object - id объекта</A>
@@ -450,28 +491,28 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceVelocityCollided"></A>
-<H1 class=namenew>DceVelocityCollided</H1>
+<H1 class=name>DceVelocityCollided</H1>
 <A class=type>real</A><A> = </A><A class=function>DceVelocityCollided</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает истину, если обнаружено столкновение при движении объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
 <A name="DceGravityCollided"></A>
-<H1 class=namenew>DceGravityCollided</H1>
+<H1 class=name>DceGravityCollided</H1>
 <A class=type>real</A><A> = </A><A class=function>DceGravityCollided</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает истину, если обнаружено столкновение при падении объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
 <A name="DceCountCollisions"></A>
-<H1 class=namenew>DceCountCollisions</H1>
+<H1 class=name>DceCountCollisions</H1>
 <A class=type>real</A><A> = </A><A class=function>DceCountCollisions</A><A>( object as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает количество текущих столкновений объекта.</A>
 <BR><A>object - id объекта.</A>
 <HR>
 
 <A name="DceGetCollidedObject"></A>
-<H1 class=namenew>DceGetCollidedObject</H1>
+<H1 class=name>DceGetCollidedObject</H1>
 <A class=type>real</A><A> = </A><A class=function>DceGetCollidedObject</A><A>( object,col as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает id объекта, с которым произошло столкновение.</A>
 <BR><A>object - id объекта</A>
@@ -479,7 +520,7 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceGetCollisionPosition"></A>
-<H1 class=namenew>DceGetCollisionPosition</H1>
+<H1 class=name>DceGetCollisionPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>DceGetCollisionPosition</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает координаты точки столкновения.</A>
 <BR><A>object - id объекта</A>
@@ -488,13 +529,14 @@ DCE - очень мощный движок обнаружения и обработки столкновений, достаточно униве
 <HR>
 
 <A name="DceGetCollisionNormal"></A>
-<H1 class=namenew>DceGetCollisionNormal</H1>
+<H1 class=name>DceGetCollisionNormal</H1>
 <A class=type>real</A><A> = </A><A class=function>DceGetCollisionNormal</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает нормаль к поверхности в точке столкновения.</A>
 <BR><A>object - id объекта</A>
 <BR><A>col - номер столкновения</A>
 <BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
+-->
 
 </DIV>
 
