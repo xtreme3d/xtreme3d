@@ -280,6 +280,10 @@
   <PARAM name="Local" value="functions/partition.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Proxy">
+  <PARAM name="Local" value="functions/proxy.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Grid">
   <PARAM name="Local" value="functions/grid.htm">
  </OBJECT>
