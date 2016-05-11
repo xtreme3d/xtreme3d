@@ -12,22 +12,54 @@
 
 <A class=type>Класс: TGLProxyObject, TGLMultiProxy</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке.</A><BR><BR>
-
-<A>Прокси - это специальный тип объекта, который не имеет собственной графики для отрисовки - он рисует графику другого объекта, но использует для этого собственную трансформацию. Иными словами, прокси - это лучший способ создать несколько копий 3D-объекта, не дублируя его в памяти.
+<A>Прокси - это специальный тип объекта, который не имеет собственной графики для отрисовки - он рисует графику другого объекта, но использует для этого собственную трансформацию. Иными словами, прокси - это лучший способ создать несколько копий 3D-модели, не дублируя ее в памяти.
 <BR>
-<BR>Мультипрокси - особый подвид прокси, который может рисовать разные объекты в зависимости от удаленности от камеры. С его помощью вы можете реализовать дискретный LOD (level of detail) - систему адаптивной детализации для игровой графики.
+<BR>Мультипрокси - особый подвид прокси, который может рисовать разные объекты в зависимости от удаленности от камеры. С его помощью вы можете реализовать дискретный LOD (level of detail) - систему адаптивной детализации: чем дальше прокси от камеры, тем более низкополигональную модель он рендерит.
 </A>
 <HR>
 
-<!--
-<A name="WaterCreate"></A>
-<H1 class=name>WaterCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект water и возвращает его id.</A>
+<A name="ProxyObjectCreate"></A>
+<H1 class=name>ProxyObjectCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ProxyObjectCreate</A><A>( object,parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый прокси с графикой заданного объекта.</A>
+<BR><A>object - id объекта</A>
 <BR><A>parent - id родителя.</A>
 <HR>
--->
+
+<A name="ProxyObjectSetOptions"></A>
+<H1 class=name>ProxyObjectSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>ProxyObjectSetOptions</A><A>( proxy,copyeffects,copyobjects,copytransform as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает опции прокси.</A>
+<BR><A>proxy - id прокси</A>
+<BR><A>copyeffects - указывает, копировать ли эффекты заданного объекта (речь идет о системах частиц, прикрепленных к объекту)</A>
+<BR><A>copyobjects - указывает, копировать ли потомков объекта</A>
+<BR><A>copytransform - указывает, копировать ли локальную трансформацию объекта.</A>
+<HR>
+
+<A name="ProxyObjectSetTarget"></A>
+<H1 class=name>ProxyObjectSetTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>ProxyObjectSetTarget</A><A>( proxy,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает целевой объект прокси.</A>
+<BR><A>proxy - id прокси</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
+<A name="MultiProxyObjectCreate"></A>
+<H1 class=name>MultiProxyObjectCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MultiProxyObjectCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый мультипрокси.</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="MultiProxyObjectAddTarget"></A>
+<H1 class=name>MultiProxyObjectAddTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>MultiProxyObjectAddTarget</A><A>( mproxy,object,mindist,maxdist as </A><A class=type>real</A><A> );</A>
+<BR><A>Добавляет целевой объект в мультипрокси и задает диапазон расстояний от камеры, на котором этот объект должен рендериться.</A>
+<BR><A>parent - id мультипрокси</A>
+<BR><A>object - id объекта</A>
+<BR><A>mindist - минимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект</A>
+<BR><A>maxdist - максимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект.</A>
+<HR>
 
 </DIV>
 
