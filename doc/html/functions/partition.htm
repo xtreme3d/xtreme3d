@@ -12,8 +12,6 @@
 
 <A class=type>Класс: TQuadtreeSpacePartition, TOctreeSpacePartition</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>
 Чем больше вы добавляете на сцену объектов, тем медленнее протекает их обработка и 
 рендеринг. В таких ситуациях на отрисовку отправляется слишком много данных о вершинах, в том числе  
@@ -119,6 +117,13 @@ Quadtree больше подходит для разбиения плоских пространств, в которых перемещени
 <H1 class=name>PartitionGetResult</H1>
 <A class=type>real</A><A> = </A><A class=function>PartitionGetResult</A><A>( tree,index as </A><A class=type>real</A><A> );</A>
 <BR><A>Возвращает id объекта, принадлежащего заданному листу результата последнего запроса.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>index - номер листа.</A>
+<HR>
+
+<H1 class=name>PartitionGetResultCount</H1>
+<A class=type>real</A><A> = </A><A class=function>PartitionGetResultCount</A><A>( tree as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество листьев в результате последнего запроса.</A>
 <BR><A>tree - id дерева</A>
 <BR><A>index - номер листа.</A>
 <HR>
