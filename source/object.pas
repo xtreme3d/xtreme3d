@@ -330,7 +330,7 @@ var
 begin
   object1:=TGLBaseSceneObject(trunc64(obj));
   object2:=TGLBaseSceneObject(trunc64(target));
-  rstart := object1.Position.DirectVector;
+  rstart := object1.AbsolutePosition;
   rdir := VectorMake(0, -1, 0, 0);
   ipoint := VectorMake(0, -MaxSingle, 0, 0);
   object2.RayCastIntersect(rstart, rdir, @ipoint, @inorm);
@@ -350,8 +350,8 @@ function Raycast(
 var
   rstart, rdir, ipoint, inorm: TVector;
 begin
-  rstart := obj.Position.DirectVector;
-  rdir := obj.Direction.DirectVector;
+  rstart := obj.AbsolutePosition;
+  rdir := obj.AbsoluteDirection;
   if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
   begin
     isecPoint := ipoint;
@@ -373,8 +373,8 @@ var
   i: Integer;
 begin
   bestObject := nil;
-  rstart := obj.Position.DirectVector;
-  rdir := obj.Direction.DirectVector;
+  rstart := obj.AbsolutePosition;
+  rdir := obj.AbsoluteDirection;
   if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
   begin
     d := VectorDistance(rstart, ipoint);
@@ -482,7 +482,7 @@ var
 begin
   object1:=TGLBaseSceneObject(trunc64(obj));
   object2:=TGLBaseSceneObject(trunc64(target));
-  result:=VectorDistance(object1.Position.AsVector, object2.Position.AsVector);
+  result:=VectorDistance(object1.AbsolutePosition, object2.AbsolutePosition);
 end;
 
 function ObjectCheckCubeVsCube(obj1, obj2: real): real; stdcall;
