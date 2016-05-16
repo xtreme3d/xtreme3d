@@ -11,7 +11,7 @@ unit GLFileB3D;
 interface
 
 uses
-  Classes, SysUtils, GLVectorFileObjects, ApplicationFileIO, FileB3D, TypesB3D;
+  Classes, SysUtils, Dialogs, GLVectorFileObjects, ApplicationFileIO, FileB3D, TypesB3D;
 
 type
   TGLB3DVectorFile = class(TVectorFile)
@@ -130,21 +130,17 @@ var
         if (Assigned(LightLib)) and (Assigned(aLightmap)) then
         begin
           LightName := aLightmap.GetTextureName;
-          //add base material
-          libMat := LightLib.Materials.GetLibMaterialByName(LightName  {+ IntToStr(MaterialNum)});
+          libMat := LightLib.Materials.GetLibMaterialByName(LightName);
           if not Assigned(libMat) then
           begin
             if not FileExists(LightName) then
               LightName := ExtractFileName(LightName);
-
-            libMat := LightLib.AddTextureMaterial(LightName  {+ IntToStr(MaterialNum)}, LightName, false);
+            libMat := LightLib.AddTextureMaterial(LightName, LightName, false);
             libMat.Material.Texture.TextureMode := tmReplace;
             if Assigned(aLightMap) then
             begin
-
               libMat.TextureOffset.AsAffineVector := AffineVectorMake(aLightMap.TextureData.x_pos,
                 aLightMap.TextureData.y_pos, 0);
-
               libMat.TextureScale.AsAffineVector := AffineVectorMake(aLightMap.TextureData.x_scale,
                 aLightMap.TextureData.y_scale, 1);
             end;
@@ -172,18 +168,30 @@ begin
       //check if there is one texture layer
       if B3DMat.MaterialData.n_texs>0 then
       begin
-        //if B3DMat.MaterialData.texture_id[0]>=0 then
-        //  B3DTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[0]]);
+        if B3DMat.MaterialData.texture_id[0]>=0 then
+          B3DTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[0]]);
+      end;
+      
+      //ShowMessage(IntToStr(B3DMat.MaterialData.n_texs));
+      if B3DMat.MaterialData.n_texs>1 then
+      begin
+        //ShowMessage(IntToStr(B3DMat.MaterialData.texture_id[1]));
+        if B3DMat.MaterialData.texture_id[1]>=0 then
+          B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[1]]);
+      end;
+      
         //check if there are two texture layer
-        //if B3DMat.MaterialData.n_texs>1 then        
-         //if B3DMat.MaterialData.texture_id[3]>=0 then
-         //   B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[3]])
-         //else if B3DMat.MaterialData.texture_id[2]>=0 then
-         //   B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[2]])
-         //else 
-         //if B3DMat.MaterialData.texture_id[1]>=0 then
-         //   B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[1]]);
-         
+        //if B3DMat.MaterialData.n_texs>1 then
+        //begin     
+          //if B3DMat.MaterialData.texture_id[3]>=0 then
+          //  B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[3]])
+          //else if B3DMat.MaterialData.texture_id[2]>=0 then
+          // B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[2]])
+          //else 
+          //if B3DMat.MaterialData.texture_id[1]>=0 then
+            //B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[1]]);
+        //end;
+         {
          if B3DMat.MaterialData.texture_id[0]>=0 then
           B3DTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[0]]);
         //check if there are two texture layer
@@ -196,7 +204,7 @@ begin
           if B3DMat.MaterialData.n_texs>2 then
            if B3DMat.MaterialData.texture_id[2]>=0 then
                B3DLightTex := TB3DTexture(b3d.Textures.Objects[B3DMat.MaterialData.texture_id[2]]);
-      end;
+          }
       GetOrAllocateMaterial(I, B3DMat, B3DTex, B3DLightTex);
     end;
 
@@ -241,7 +249,9 @@ begin
                   2: mo.TexCoords.Add(Vertex^.tex_coords[0], -Vertex^.tex_coords[1], 0);
                   3: mo.TexCoords.Add(Vertex^.tex_coords[0], -Vertex^.tex_coords[1], Vertex^.tex_coords[2]);
                 end;
-                mo.LightMapTexCoords.Add(Vertex^.tex_coords[Node^.meshes^.vertices.tex_coord_set_size],
+                //mo.LightMapTexCoords.Add(Vertex^.tex_coords[0], -Vertex^.tex_coords[1]);
+                mo.LightMapTexCoords.Add(
+                  Vertex^.tex_coords[Node^.meshes^.vertices.tex_coord_set_size],
                   -Vertex^.tex_coords[Node^.meshes^.vertices.tex_coord_set_size+1]);
               end;
             end;
@@ -289,6 +299,7 @@ begin
 
           RotMat := CreateRotationMatrixZ(DegToRad(90));
           mo.Vertices.TransformAsVectors(RotMat);
+          mo.Normals.TransformAsVectors(RotMat);
         end;
         Node := Node^.next;
     end;

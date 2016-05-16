@@ -61,6 +61,120 @@ begin
    Result[2]:=v1[2]/delta;
 end;
 
+function VectorMultiply(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result[0]:=v1[0]*delta;
+   Result[1]:=v1[1]*delta;
+   Result[2]:=v1[2]*delta;
+end;
+
+procedure GenMeshTangents(mesh: TMeshObject);
+var
+   i,j        : Integer;
+   v,t      : array[0..2] of TAffineVector;
+
+   x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
+   sDir, tDir: TAffineVector;
+   sTan, tTan: TAffineVectorList;
+   tangents, bitangents: TVectorList;
+   sv, tv: array[0..2] of TAffineVector;
+   r, oneOverR: Single;
+   n, ta: TAffineVector;
+   tang: TAffineVector;
+
+   tangent,
+   binormal   : array[0..2] of TVector;
+   vt,tt      : TAffineVector;
+   interp,dot : Single;
+
+begin
+   mesh.Tangents.Clear;
+   mesh.Binormals.Clear;
+   mesh.Tangents.Count:=mesh.Vertices.Count;
+   mesh.Binormals.Count:=mesh.Vertices.Count;
+
+   tangents := TVectorList.Create;
+   tangents.Count:=mesh.Vertices.Count;
+
+   bitangents := TVectorList.Create;
+   bitangents.Count:=mesh.Vertices.Count; 
+
+   sTan := TAffineVectorList.Create;
+   tTan := TAffineVectorList.Create;
+   sTan.Count := mesh.Vertices.Count;
+   tTan.Count := mesh.Vertices.Count;
+
+   for i:=0 to mesh.TriangleCount-1 do begin
+      sv[0] := AffineVectorMake(0, 0, 0);
+      tv[0] := AffineVectorMake(0, 0, 0);
+      sv[1] := AffineVectorMake(0, 0, 0);
+      tv[1] := AffineVectorMake(0, 0, 0);
+      sv[2] := AffineVectorMake(0, 0, 0);
+      tv[2] := AffineVectorMake(0, 0, 0);
+
+      mesh.SetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.SetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+   end;
+
+   for i:=0 to mesh.TriangleCount-1 do begin
+      mesh.GetTriangleData(i,mesh.Vertices,v[0],v[1],v[2]);
+      mesh.GetTriangleData(i,mesh.TexCoords,t[0],t[1],t[2]);
+
+      x1 := v[1][0] - v[0][0];
+      x2 := v[2][0] - v[0][0];
+      y1 := v[1][1] - v[0][1];
+      y2 := v[2][1] - v[0][1];
+      z1 := v[1][2] - v[0][2];
+      z2 := v[2][2] - v[0][2];
+
+      s1 := t[1][0] - t[0][0];
+      s2 := t[2][0] - t[0][0];
+      t1 := t[1][1] - t[0][1];
+      t2 := t[2][1] - t[0][1];
+
+      r := (s1 * t2) - (s2 * t1);
+
+      if r = 0.0 then
+        r := 1.0;
+
+      oneOverR := 1.0 / r;
+
+      sDir[0] := (t2 * x1 - t1 * x2) * oneOverR;
+      sDir[1] := (t2 * y1 - t1 * y2) * oneOverR;
+      sDir[2] := (t2 * z1 - t1 * z2) * oneOverR;
+
+      tDir[0] := (s1 * x2 - s2 * x1) * oneOverR;
+      tDir[1] := (s1 * y2 - s2 * y1) * oneOverR;
+      tDir[2] := (s1 * z2 - s2 * z1) * oneOverR;
+
+      mesh.GetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.GetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+
+      sv[0] := VectorAdd(sv[0], sDir);
+      tv[0] := VectorAdd(tv[0], tDir);
+      sv[1] := VectorAdd(sv[1], sDir);
+      tv[1] := VectorAdd(tv[1], tDir);
+      sv[2] := VectorAdd(sv[2], sDir);
+      tv[2] := VectorAdd(tv[2], tDir);
+
+      mesh.SetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.SetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+   end;
+
+   for i:=0 to mesh.Vertices.Count-1 do begin
+      n := mesh.Normals[i];
+      ta := sTan[i];
+      tang := VectorSubtract(ta, VectorMultiply(n, VectorDotProduct(n, ta)));
+      tang := VectorNormalize(tang);
+
+      tangents[i] := VectorMake(tang, 1);
+      bitangents[i] := VectorMake(VectorCrossProduct(n, tang), 1);
+   end;
+
+   mesh.Tangents := tangents;
+   mesh.Binormals := bitangents;
+end;
+
 {$I 'engine'}
 {$I 'viewer'}
 {$I 'dummycube'}
