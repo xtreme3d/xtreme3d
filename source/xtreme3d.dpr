@@ -283,12 +283,6 @@ SpriteRotate, SpriteMirror, SpriteNoZWrite,
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
 CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
 DodecahedronCreate, IcosahedronCreate, TeapotCreate,
-//Memory Viewer
-MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
-//ZShadows
-ZShadowsCreate,
-ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
-ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
 //Actor
 ActorCreate, ActorCopy, ActorSetAnimationRange, ActorGetCurrentFrame, ActorSwitchToAnimation,
 ActorSwitchToAnimationName, ActorSynchronize, ActorSetInterval, ActorSetAnimationMode,
@@ -377,6 +371,7 @@ MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete,
 MaterialNoiseCreate, MaterialNoiseAnimate, MaterialNoiseSetDimensions,
 MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
 MaterialNoiseRandomSeed,
+MaterialGenTexture, MaterialSetTextureWrap,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate, BumpShaderSetMethod, BumpShaderSetSpecularMode,
@@ -486,6 +481,13 @@ TextRead,
 //Grid
 GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
 GridSetColor, GridSetSize, GridSetPattern,
+//Memory Viewer
+MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
+MemoryViewerSetViewport, MemoryViewerCopyToTexture,
+//ZShadows
+ZShadowsCreate,
+ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
+ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
 //ODE
 OdeManagerCreate;
 

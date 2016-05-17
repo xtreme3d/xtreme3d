@@ -8,7 +8,7 @@ Also visit our website at http://xtreme3d.narod.ru
 
 Demos
 -----
-water.gmk - demonstrates sea water shader, animated MD5 model, B3D scene with lightmap, procedural tree, skybox, lensflare and first person camera with collision detection.
+demo.gmk - demonstrates sea water shader, animated MD5 model, B3D scene with lightmap, procedural tree, skybox, lensflare and first person camera with collision detection.
 
 Asset Creation
 --------------

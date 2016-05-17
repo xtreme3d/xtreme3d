@@ -461,6 +461,32 @@ begin
   result:=1;
 end;
 
+function MaterialSetTextureWrap(mtrl: pchar; wrap: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  if wrap = 0 then
+    mat.Material.Texture.TextureWrap := twNone
+  else
+    mat.Material.Texture.TextureWrap := twBoth;
+  result:=1;
+end;
+
+function MaterialGenTexture(mtrl: pchar; w, h: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.Texture.ImageClassName := TGLBlankImage.ClassName;
+  with mat.Material.Texture.Image as TGLBlankImage do begin
+    Width := trunc64(w);
+    Height := trunc64(h);
+  end;
+  result:=1;
+end;
+
+
 function MaterialNoiseCreate(mtrl:pchar): real; stdcall;
 var
   mat:TGLLibMaterial;
