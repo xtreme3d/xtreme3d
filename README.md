@@ -10,8 +10,8 @@ Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
 Screenshots
 -----------
-[![Screenshot1](/screenshots/001-thumb.jpg)](/screenshots/001.jpg)
 [![Screenshot3](/screenshots/003-thumb.jpg)](/screenshots/003.jpg)
+[![Screenshot1](/screenshots/007-thumb.jpg)](/screenshots/007.jpg)
 [![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
 [![Screenshot4](/screenshots/006-thumb.jpg)](/screenshots/006.jpg)
 
@@ -43,6 +43,10 @@ Features
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives
 * + a lot more
+
+Demos
+-----
+A growing collection of Xtreme3D usage examples for GM8 can be found here: https://github.com/xtreme3d/demos.
 
 Asset Creation
 --------------
