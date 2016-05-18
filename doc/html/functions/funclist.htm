@@ -43,9 +43,17 @@
 <A class=funclink href=funclist.htm#Navigator>Navigator</A><A> | </A>
 <A class=funclink href=funclist.htm#DCE>DCE</A><A> | </A>
 <A class=funclink href=funclist.htm#FPS>FPS</A><A> | </A>
+<!--
 <A class=funclink href=funclist.htm#Mouse>Mouse</A><A> | </A>
-<A class=funclink href=funclist.htm#ODE>ODE</A><A> | </A>
+-->
 <A class=funclink href=funclist.htm#Partition>Partition</A>
+<A class=funclink href=funclist.htm#Proxy>Proxy</A>
+<A class=funclink href=funclist.htm#Grid>Grid</A>
+<A class=funclink href=funclist.htm#MemoryViewer>MemoryViewer</A>
+<A class=funclink href=funclist.htm#Text>Text</A>
+<!--
+<A class=funclink href=funclist.htm#ODE>ODE</A><A> | </A>
+-->
 <BR>
 <BR>
 <A name="Engine"></A>
@@ -468,6 +476,8 @@
 <BR><A class=funclink href=material.htm#MaterialTextureExDelete>MaterialTextureExDelete</A><A>(material,ind)</A>
 
 <BR><A class=funclink href=material.htm#MaterialSaveTexture>MaterialSaveTexture</A><A>(material,filename)</A>
+<BR><A class=funclink href=material.htm#MaterialGenTexture>MaterialGenTexture</A><A>(material,width,height)</A>
+<BR><A class=funclink href=material.htm#MaterialSetTextureWrap>MaterialSetTextureWrap</A><A>(material,mode)</A>
 
 <BR><A class=funclink href=material.htm#MaterialNoiseCreate>MaterialNoiseCreate</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialNoiseSetDimensions>MaterialNoiseSetDimensions</A><A>(material,width,height)</A>
@@ -851,6 +861,20 @@
 <BR><A class=funclink href=grid.htm#GridSetColor>GridSetColor</A><A>(grid,color,alpha)</A>
 <BR><A class=funclink href=grid.htm#GridSetSize>GridSetSize</A><A>(grid,size)</A>
 <BR><A class=funclink href=grid.htm#GridSetPattern>GridSetPattern</A><A>(grid,pattern)</A>
+<BR>
+<BR>
+<A name="MemoryViewer"></A>
+<H1 class=name>MemoryViewer</H1>
+<A class=funclink href=memviewer.htm#MemoryViewerCreate>MemoryViewerCreate</A><A>(width,height)</A>
+<BR><A class=funclink href=memviewer.htm#MemoryViewerSetCamera>MemoryViewerSetCamera</A><A>(memviewer,camera)</A>
+<BR><A class=funclink href=memviewer.htm#MemoryViewerSetViewport>MemoryViewerSetViewport</A><A>(memviewer,x,y,width,height)</A>
+<BR><A class=funclink href=memviewer.htm#MemoryViewerRender>MemoryViewerRender</A><A>(memviewer)</A>
+<BR><A class=funclink href=memviewer.htm#MemoryViewerCopyToTexture>MemoryViewerCopyToTexture</A><A>(memviewer,material)</A>
+<BR>
+<BR>
+<A name="Text"></A>
+<H1 class=name>Text</H1>
+<A class=funclink href=text.htm#TextRead>TextRead</A><A>(filename)</A>
 
 </DIV>
 

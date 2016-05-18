@@ -443,6 +443,22 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>filename - имя файла.</A>
 <HR>
 
+<A name="MaterialGenTexture"></A>
+<H1 class=name>MaterialGenTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGenTexture</A><A>( material,width,height as </A><A class=type>string</A><A> );</A>
+<BR><A>Создает пустую текстуру у материала.</A>
+<BR><A>material - имя материала</A>
+<BR><A>width,height - ширина и высота текстуры.</A>
+<HR>
+
+<A name="MaterialSetTextureWrap"></A>
+<H1 class=name>MaterialSetTextureWrap</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureWrap</A><A>( material,mode as </A><A class=type>string</A><A> );</A>
+<BR><A>Переключает повторение текстуры, когда UV-координаты выходят за пределы диапазона [0..1].</A>
+<BR><A>material - имя материала</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
 <A name="MaterialNoiseCreate"></A>
 <H1 class=name>MaterialNoiseCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialNoiseCreate</A><A>( material as </A><A class=type>string</A><A> );</A>
