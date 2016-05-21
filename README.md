@@ -38,7 +38,7 @@ Features
 * Dynamic shadows
 * Lines and curves rendering
 * Discrete LOD system
-* Offscreen rendering
+* Offscreen rendering via p-buffers and FBO
 * Built-in game-oriented collision system (DCE, FPSManager)
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives

@@ -2,9 +2,7 @@ function ZShadowsCreate(view,cast,w,h: real): real; stdcall;
 var
   zsh: TGLZShadows;
 begin
-  zsh:=TGLZShadows.Create(scene);
-  TGLScene(scene).Objects.AddChild(zsh);
-  //zsh:=TGLZShadows.CreateAsChild(scene.Objects);
+  zsh := TGLZShadows.CreateAsChild(scene.Objects);
   zsh.Viewer:=TGLSceneViewer(trunc64(view));
   zsh.Caster:=TGLMemoryViewer(trunc64(cast));
   zsh.Width:=trunc64(w);
@@ -12,7 +10,7 @@ begin
   zsh.FrustShadow := True;
   zsh.SkyShadow := False;
   zsh.Color.SetColor(0.0, 0.0, 0.0, 1.0);
-  zsh.Optimise:=opNone;//op16in1;
+  zsh.Optimise:=op16in1;
   result:=integer(zsh);
 end;
 

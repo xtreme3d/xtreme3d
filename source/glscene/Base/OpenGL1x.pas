@@ -189,6 +189,7 @@ var
    GL_ARB_texture_env_dot3,
    GL_ARB_vertex_program,
    GL_ARB_vertex_buffer_object,
+   GL_ARB_framebuffer_object,
    GL_ARB_shader_objects,
    GL_ARB_vertex_shader,
    GL_ARB_fragment_shader,
@@ -1442,6 +1443,89 @@ const
    GL_BUFFER_ACCESS_ARB                              = $88BB;
    GL_BUFFER_MAPPED_ARB                              = $88BC;
    GL_BUFFER_MAP_POINTER_ARB                         = $88BD;
+   
+   // ARB Extension #45 - GL_ARB_framebuffer_object
+  // (Also went simultaneously to core 3.0, so no ARB prefix on names)
+  GL_INVALID_FRAMEBUFFER_OPERATION = $0506;
+  GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING = $8210;
+  GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE = $8211;
+  GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE = $8212;
+  GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE = $8213;
+  GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE = $8214;
+  GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE = $8215;
+  GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE = $8216;
+  GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE = $8217;
+  GL_FRAMEBUFFER_DEFAULT = $8218;
+  GL_FRAMEBUFFER_UNDEFINED = $8219;
+  GL_DEPTH_STENCIL_ATTACHMENT = $821A;
+  GL_INDEX = $8222;
+  GL_MAX_RENDERBUFFER_SIZE = $84E8;
+  GL_DEPTH_STENCIL = $84F9;
+  GL_UNSIGNED_INT_24_8 = $84FA;
+  GL_DEPTH24_STENCIL8 = $88F0;
+  GL_TEXTURE_STENCIL_SIZE = $88F1;
+  GL_TEXTURE_RED_TYPE = $8C10;
+  GL_TEXTURE_GREEN_TYPE = $8C11;
+  GL_TEXTURE_BLUE_TYPE = $8C12;
+  GL_TEXTURE_ALPHA_TYPE = $8C13;
+  GL_TEXTURE_LUMINANCE_TYPE = $8C14;
+  GL_TEXTURE_INTENSITY_TYPE = $8C15;
+  GL_TEXTURE_DEPTH_TYPE = $8C16;
+  GL_UNSIGNED_NORMALIZED = $8C17;
+  GL_FRAMEBUFFER_BINDING = $8CA6;
+  GL_DRAW_FRAMEBUFFER_BINDING = GL_FRAMEBUFFER_BINDING;
+  GL_RENDERBUFFER_BINDING = $8CA7;
+  GL_READ_FRAMEBUFFER = $8CA8;
+  GL_DRAW_FRAMEBUFFER = $8CA9;
+  GL_READ_FRAMEBUFFER_BINDING = $8CAA;
+  GL_RENDERBUFFER_SAMPLES = $8CAB;
+  GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = $8CD0;
+  GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = $8CD1;
+  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = $8CD2;
+  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = $8CD3;
+  GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER = $8CD4;
+  GL_FRAMEBUFFER_COMPLETE = $8CD5;
+  GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT = $8CD6;
+  GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = $8CD7;
+  GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER = $8CDB;
+  GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER = $8CDC;
+  GL_FRAMEBUFFER_UNSUPPORTED = $8CDD;
+  GL_MAX_COLOR_ATTACHMENTS = $8CDF;
+  GL_COLOR_ATTACHMENT0 = $8CE0;
+  GL_COLOR_ATTACHMENT1 = $8CE1;
+  GL_COLOR_ATTACHMENT2 = $8CE2;
+  GL_COLOR_ATTACHMENT3 = $8CE3;
+  GL_COLOR_ATTACHMENT4 = $8CE4;
+  GL_COLOR_ATTACHMENT5 = $8CE5;
+  GL_COLOR_ATTACHMENT6 = $8CE6;
+  GL_COLOR_ATTACHMENT7 = $8CE7;
+  GL_COLOR_ATTACHMENT8 = $8CE8;
+  GL_COLOR_ATTACHMENT9 = $8CE9;
+  GL_COLOR_ATTACHMENT10 = $8CEA;
+  GL_COLOR_ATTACHMENT11 = $8CEB;
+  GL_COLOR_ATTACHMENT12 = $8CEC;
+  GL_COLOR_ATTACHMENT13 = $8CED;
+  GL_COLOR_ATTACHMENT14 = $8CEE;
+  GL_COLOR_ATTACHMENT15 = $8CEF;
+  GL_DEPTH_ATTACHMENT = $8D00;
+  GL_STENCIL_ATTACHMENT = $8D20;
+  GL_FRAMEBUFFER = $8D40;
+  GL_RENDERBUFFER = $8D41;
+  GL_RENDERBUFFER_WIDTH = $8D42;
+  GL_RENDERBUFFER_HEIGHT = $8D43;
+  GL_RENDERBUFFER_INTERNAL_FORMAT = $8D44;
+  GL_STENCIL_INDEX1 = $8D46;
+  GL_STENCIL_INDEX4 = $8D47;
+  GL_STENCIL_INDEX8 = $8D48;
+  GL_STENCIL_INDEX16 = $8D49;
+  GL_RENDERBUFFER_RED_SIZE = $8D50;
+  GL_RENDERBUFFER_GREEN_SIZE = $8D51;
+  GL_RENDERBUFFER_BLUE_SIZE = $8D52;
+  GL_RENDERBUFFER_ALPHA_SIZE = $8D53;
+  GL_RENDERBUFFER_DEPTH_SIZE = $8D54;
+  GL_RENDERBUFFER_STENCIL_SIZE = $8D55;
+  GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE = $8D56;
+  GL_MAX_SAMPLES = $8D57;
 
    // ARB_shader_objects
    GL_PROGRAM_OBJECT_ARB                             = $8B40;
@@ -3150,6 +3234,28 @@ var
    glUnmapBufferARB: function(target: GLenum): GLboolean; {$ifdef MSWINDOWS} stdcall; {$endif} {$ifdef LINUX} cdecl; {$endif}
    glGetBufferParameterivARB: procedure(target: GLenum; pname: GLenum; params: PGLint); {$ifdef MSWINDOWS} stdcall; {$endif} {$ifdef LINUX} cdecl; {$endif}
    glGetBufferPointervARB: procedure(target: GLenum; pname: GLenum; params: Pointer); {$ifdef MSWINDOWS} stdcall; {$endif} {$ifdef LINUX} cdecl; {$endif}
+  
+// GL_ARB_framebuffer_object
+glIsRenderbuffer: function(renderbuffer: GLuint): TGLBoolean; {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glBindRenderbuffer: procedure(target: GLenum; renderbuffer: GLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glDeleteRenderbuffers: procedure(n: GLsizei; renderbuffers: PGLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glGenRenderbuffers: procedure(n: GLSizei; renderbuffers: PGLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glRenderbufferStorage: procedure(target: GLenum; internalformat: GLenum; width: GLsizei;  height: GLsizei); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glRenderbufferStorageMultisample: procedure(target: GLenum; samples: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glGetRenderbufferParameteriv: procedure(target: GLenum; pname: GLenum; params: PGLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glIsFramebuffer: function(framebuffer:TGLuint): TGLboolean; {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glBindFramebuffer: procedure(target: GLenum; framebuffer: GLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glDeleteFramebuffers: procedure(n: GLsizei; framebuffers: PGLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glGenFramebuffers: procedure(n: GLsizei; framebuffers: PGLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glCheckFramebufferStatus: function(target: GLenum): GLenum; {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glFramebufferTexture1D: procedure(target: GLenum; attachment: GLenum; textarget: GLenum; texture: GLuint; level: GLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glFramebufferTexture2D: procedure(target: GLenum; attachment: GLenum; textarget: GLenum; texture: GLuint; level: GLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glFramebufferTexture3D: procedure(target: GLenum; attachment: GLenum; textarget: GLenum; texture: GLuint; level: GLint; layer: GLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glFramebufferTextureLayer: procedure(target: GLenum; attachment: GLenum; texture: GLuint; level: GLint; layer: GLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glFramebufferRenderbuffer: procedure(target: GLenum; attachment: GLenum; renderbuffertarget: GLenum; renderbuffer: GLuint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glGetFramebufferAttachmentParameteriv: procedure(target: GLenum; attachment: GLenum; pname: GLenum; params: PGLint); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glBlitFramebuffer:  procedure(srcX0: GLint; srcY0: GLint; srcX1: GLint; srcY1: GLint; dstX0: GLint; dstY0: GLint; dstX1: GLint; dstY1: GLint; mask: TGLbitfield; filter: GLenum); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
+glGenerateMipmap: procedure(target: GLenum); {$IFDEF MSWINDOWS} stdcall; {$ENDIF} {$IFDEF UNIX} cdecl; {$ENDIF}
 
    // GL_ARB_shader_objects
    glDeleteObjectARB: procedure(obj: GLhandleARB); {$ifdef MSWINDOWS} stdcall; {$endif} {$ifdef LINUX} cdecl; {$endif}
@@ -3665,6 +3771,28 @@ begin
    glUnmapBufferARB := GLGetProcAddress('glUnmapBufferARB');
    glGetBufferParameterivARB := GLGetProcAddress('glGetBufferParameterivARB');
    glGetBufferPointervARB := GLGetProcAddress('glGetBufferPointervARB');
+   
+   // GL_ARB_frame_buffer_object
+   glIsRenderbuffer := GLGetProcAddress('glIsRenderbuffer');
+   glBindRenderbuffer := GLGetProcAddress('glBindRenderbuffer');
+   glDeleteRenderbuffers := GLGetProcAddress('glDeleteRenderbuffers');
+   glGenRenderbuffers := GLGetProcAddress('glGenRenderbuffers');
+   glRenderbufferStorage := GLGetProcAddress('glRenderbufferStorage');
+   glRenderbufferStorageMultisample := GLGetProcAddress('glRenderbufferStorageMultisample');
+   glGetRenderbufferParameteriv := GLGetProcAddress('glGetRenderbufferParameteriv');
+   glIsFramebuffer := GLGetProcAddress('glIsFramebuffer');
+   glBindFramebuffer := GLGetProcAddress('glBindFramebuffer');
+   glDeleteFramebuffers := GLGetProcAddress('glDeleteFramebuffers');
+   glGenFramebuffers := GLGetProcAddress('glGenFramebuffers');
+   glCheckFramebufferStatus := GLGetProcAddress('glCheckFramebufferStatus');
+   glFramebufferTexture1D := GLGetProcAddress('glFramebufferTexture1D');
+   glFramebufferTexture2D := GLGetProcAddress('glFramebufferTexture2D');
+   glFramebufferTexture3D := GLGetProcAddress('glFramebufferTexture3D');
+   glFramebufferTextureLayer := GLGetProcAddress('glFramebufferTextureLayer');
+   glFramebufferRenderbuffer := GLGetProcAddress('glFramebufferRenderbuffer');
+   glGetFramebufferAttachmentParameteriv := GLGetProcAddress('glGetFramebufferAttachmentParameteriv');
+   glBlitFramebuffer := GLGetProcAddress('glBlitFramebuffer');
+   glGenerateMipmap := GLGetProcAddress('glGenerateMipmap');
 
    // GL_ARB_shader_objects
    glDeleteObjectARB := GLGetProcAddress('glDeleteObjectARB');
@@ -4030,6 +4158,7 @@ begin
    GL_ARB_texture_env_dot3 := CheckExtension('GL_ARB_texture_env_dot3');
    GL_ARB_vertex_program := CheckExtension('GL_ARB_vertex_program');
    GL_ARB_vertex_buffer_object := CheckExtension('GL_ARB_vertex_buffer_object');
+   GL_ARB_framebuffer_object := CheckExtension('GL_ARB_framebuffer_object');
    GL_ARB_shader_objects := CheckExtension('GL_ARB_shader_objects');
    GL_ARB_vertex_shader := CheckExtension('GL_ARB_vertex_shader');
    GL_ARB_fragment_shader := CheckExtension('GL_ARB_fragment_shader');

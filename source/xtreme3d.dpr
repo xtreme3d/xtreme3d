@@ -15,7 +15,7 @@ uses
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree, GLMultiProxy, GLODEManager;
+  GLTrail, GLTree, GLMultiProxy, GLODEManager, GLShadowMap;
 
 type
    TEmpty = class(TComponent)
@@ -212,6 +212,46 @@ end;
 {$I 'proxy'}
 {$I 'text'}
 {$I 'grid'}
+
+function FBOViewerCreate(w, h, viewer: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+  fbv: TGLFBOViewer;
+begin
+  if not GL_ARB_framebuffer_object then
+  begin
+      ShowMessage('GL_ARB_frame_buffer_object required');
+      result := 0;
+      Exit;
+  end;
+  v := TGLSceneViewer(trunc64(viewer));
+  fbv := TGLFBOViewer.Create;
+  fbv.Width := trunc64(w);
+  fbv.Height := trunc64(h);
+  fbv.Buffer := v.Buffer;
+  result:=integer(fbv);
+end;
+
+function FBOViewerSetTexture(fboview: real; matname: pchar): real; stdcall;
+var
+  fbv: TGLFBOViewer;
+  mat: TGLLibMaterial;
+begin
+  fbv:=TGLFBOViewer(trunc64(fboview));
+  mat := matlib.Materials.GetLibMaterialByName(String(matname));
+  fbv.Texture := mat.Material.Texture; 
+  result:=1;
+end;
+
+function FBOViewerRender(fboview: real): real; stdcall;
+var
+  fbv: TGLFBOViewer;
+begin
+  fbv:=TGLFBOViewer(trunc64(fboview));
+  fbv.Render();
+  result:=1;
+end;
+
 
 function OdeManagerCreate(): real; stdcall;
 begin
@@ -488,6 +528,8 @@ MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 ZShadowsCreate,
 ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
 ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
+//FBO
+FBOViewerCreate, FBOViewerSetTexture, FBOViewerRender,
 //ODE
 OdeManagerCreate;
 

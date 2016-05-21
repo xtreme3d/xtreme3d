@@ -6,10 +6,6 @@ The engine is written in Delphi and based on a modified version of GLScene 1.0.0
 This SDK includes only compiled version of the engine (xtreme3d.dll). The source code can be found at https://github.com/xtreme3d/xtreme3d
 Also visit our website at http://xtreme3d.narod.ru
 
-Demos
------
-demo.gmk - demonstrates sea water shader, animated MD5 model, B3D scene with lightmap, procedural tree, skybox, lensflare and first person camera with collision detection.
-
 Asset Creation
 --------------
 For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
