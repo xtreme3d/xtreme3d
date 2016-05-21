@@ -224,6 +224,7 @@ type
     procedure DoProgress(const progressTime : TProgressTimes); override;
     //Runtime only
     property Speed : TAffineVector read FSpeed write FSpeed;
+    property AbsSpeed : TAffineVector read FAbsSpeed write FAbsSpeed;
     property InGround : Boolean read FInGround;
     property MaxRecursionDepth:byte read FMaxRecursionDepth write FMaxRecursionDepth;//gak20041119
   published

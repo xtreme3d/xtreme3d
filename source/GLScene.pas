@@ -1309,6 +1309,8 @@ type
             OpenGL documentation. }
          property NearPlane : Single read FNearPlane;
 
+         property ViewPortRadius: Single read FViewPortRadius;
+
          //: Apply camera transformation
          procedure Apply;
          procedure DoRender(var rci : TRenderContextInfo;
@@ -1808,7 +1810,7 @@ type
             You do not need to call this method, unless you explicitly want a
             render at a specific time. If you just want the control to get
             refreshed, use Invalidate instead. }
-         procedure Render(baseObject : TGLBaseSceneObject); overload;
+         procedure Render(baseObject : TGLBaseSceneObject; updatePerfCounter: Boolean = true); overload;
          procedure Render; overload;
          {: Render the scene to a bitmap at given DPI.<p>
             DPI = "dots per inch".<p>
@@ -7716,7 +7718,7 @@ end;
 
 // Render
 //
-procedure TGLSceneBuffer.Render(baseObject : TGLBaseSceneObject);
+procedure TGLSceneBuffer.Render(baseObject : TGLBaseSceneObject; updatePerfCounter: Boolean = true);
 var
    perfCounter, framePerf : Int64;
    backColor : TColorVector;
@@ -7746,7 +7748,8 @@ begin
       Exit;
    end;
 
-   QueryPerformanceCounter(framePerf);
+   if updatePerfCounter then
+     QueryPerformanceCounter(framePerf);
 
    if Assigned(FCamera) and Assigned(FCamera.FScene) then begin
       FCamera.AbsoluteMatrixAsAddress;
@@ -7773,12 +7776,15 @@ begin
             RenderingContext.SwapBuffers;
 
          // yes, calculate average frames per second...
-         Inc(FFrameCount);
-         QueryPerformanceCounter(perfCounter);
-         FLastFrameTime:=(perfCounter-framePerf)/vCounterFrequency;
-         Dec(perfCounter, FFirstPerfCounter);
-         if perfCounter>0 then
-            FFramesPerSecond:=(FFrameCount*vCounterFrequency)/perfCounter;
+         if updatePerfCounter then
+         begin
+           Inc(FFrameCount);
+           QueryPerformanceCounter(perfCounter);
+           FLastFrameTime:=(perfCounter-framePerf)/vCounterFrequency;
+           Dec(perfCounter, FFirstPerfCounter);
+           if perfCounter>0 then
+              FFramesPerSecond:=(FFrameCount*vCounterFrequency)/perfCounter;
+         end;
          CheckOpenGLError;
       finally
          FRenderingContext.Deactivate;
