@@ -20,7 +20,7 @@ Features
 * Scene hierarchy
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
-* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, SMD and others)
+* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and others)
 * Model animation (per-vertex and skeletal)
 * Lightmapping and dynamic lighting
 * Terrain rendering with automatic LOD
@@ -39,7 +39,7 @@ Features
 * Lines and curves rendering
 * Discrete LOD system
 * Offscreen rendering via p-buffers
-* Built-in game-oriented collision system (DCE, FPSManager)
+* Built-in game-oriented collision systems (DCE, FPSManager)
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives
 * + a lot more
