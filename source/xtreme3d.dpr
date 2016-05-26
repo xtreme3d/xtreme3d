@@ -238,7 +238,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapCreate(w, h, viewer: real): real; stdcall;
+function ShadowMapCreate(size, viewer, caster: real): real; stdcall;
 var
   v: TGLSceneViewer;
   sm: TGLShadowMap;
@@ -251,9 +251,10 @@ begin
   end;
   v := TGLSceneViewer(trunc64(viewer));
   sm := TGLShadowMap.Create;
-  sm.Width := trunc64(w);
-  sm.Height := trunc64(h);
+  sm.Width := trunc64(size);
+  sm.Height := trunc64(size);
   sm.MainBuffer := v.Buffer;
+  sm.Caster := TGLBaseSceneObject(trunc64(caster));
   result:=integer(sm);
 end;
 
@@ -263,6 +264,43 @@ var
 begin
   sm:=TGLShadowMap(trunc64(shadowmap));
   sm.ShadowCamera := TGLCamera(trunc64(cam));
+  result:=1;
+end;
+
+function ShadowMapSetCaster(shadowmap, caster: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+begin
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.Caster := TGLBaseSceneObject(trunc64(caster));
+  result:=1;
+end;
+
+function ShadowMapSetProjectionSize(shadowmap, size: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+begin
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.ProjectionSize := size;
+  result:=1;
+end;
+
+function ShadowMapSetZScale(shadowmap, scale: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+begin
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.ZScale := scale;
+  result:=1;
+end;
+
+function ShadowMapSetZClippingPlanes(shadowmap, znear, zfar: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+begin
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.ZNear := znear;
+  sm.ZFar := zfar;
   result:=1;
 end;
 
@@ -554,7 +592,9 @@ ZShadowsCreate,
 ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
 ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
 //ShadowMap
-ShadowMapCreate, ShadowMapSetCamera, ShadowMapRender,
+ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
+ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
+ShadowMapRender,
 //ODE
 OdeManagerCreate;
 

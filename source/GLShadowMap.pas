@@ -32,6 +32,11 @@ type
         FDepthBorderColor: TGLColor;
         FShadowMatrix: TMatrix;
         FShadowCamera: TGLCamera;
+        FCaster: TGLBaseSceneObject;
+        FProjectionSize: Single;
+        FZScale: Single;
+        FZNear: Single;
+        FZFar: Single;
         procedure SetTexture(texture: TGLTexture);
         procedure DoInitialize;
     public
@@ -46,6 +51,11 @@ type
         property DepthTextureHandle: GLuint read FDepthTextureHandle write FDepthTextureHandle;
         property ShadowMatrix: TMatrix read FShadowMatrix;
         property ShadowCamera: TGLCamera read FShadowCamera write FShadowCamera;
+        property Caster: TGLBaseSceneObject read FCaster write FCaster;
+        property ProjectionSize: Single read FProjectionSize write FProjectionSize;
+        property ZScale: Single read FZScale write FZScale;
+        property ZNear: Single read FZNear write FZNear;
+        property ZFar: Single read FZFar write FZFar;
   end;
 
 implementation
@@ -95,6 +105,10 @@ begin
   FInitialized := false;
   FDepthBorderColor := TGLColor.Create(Self);
   FDepthBorderColor.SetColor(1, 1, 1, 1);
+  FProjectionSize := 20.0;
+  FZScale := 1.0; //0.945;
+  FZNear := 0.0; //-20.0
+  FZFar := 100.0; //200.0
 end;
 
 destructor TGLShadowMap.Destroy;
@@ -111,7 +125,6 @@ var
    oldWidth, oldHeight: Integer;
    projMat, mvMat, mvpMat, tsMat, tmpMat, invCamMat: TMatrix;
    oldCamera: TGLCamera;
-   size: Integer;
 begin
    if not Assigned(FShadowCamera) then
      Exit;
@@ -137,30 +150,26 @@ begin
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
    glCullFace(GL_FRONT);
 
-   //glEnable(GL_POLYGON_OFFSET_FILL);
-   //glPolygonOffset(1.1, 4.0);
-
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   size := 25;
-   glOrtho(-size, size, -size, size, -20.0, 200.0);
+   glOrtho(-FProjectionSize, FProjectionSize,
+           -FProjectionSize, FProjectionSize, FZNear, FZFar);
    glGetFloatv(GL_PROJECTION_MATRIX, @projMat);
+
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   MainBuffer.Camera.AbsoluteMatrixAsAddress;
+   //MainBuffer.Camera.AbsoluteMatrixAsAddress;
    MainBuffer.Camera.Apply;
    glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat);
-
-   //InvertMatrix(mvMat);
-
-   MainBuffer.SimpleRender(MainBuffer.Camera.Scene.Objects);
+   
+   MainBuffer.SimpleRender(FCaster);
 
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
    glMatrixMode(GL_MODELVIEW);
    glPushMatrix();
    glLoadIdentity();
-   oldCamera.AbsoluteMatrixAsAddress;
+   //oldCamera.AbsoluteMatrixAsAddress;
    oldCamera.Apply;
    glGetFloatv(GL_MODELVIEW_MATRIX, @invCamMat);
    glPopMatrix();
@@ -174,13 +183,11 @@ begin
    glMultMatrixf(@projMat);
    glMultMatrixf(@mvMat);
    glMultMatrixf(@invCamMat);
-   glScalef(1.0, 1.0, 0.945);
+   glScalef(FZScale, FZScale, FZScale);
    glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix);
    glPopMatrix();
 
    glCullFace(GL_BACK);
-   glPolygonOffset(0.0, 0.0);
-   //glDisable(GL_POLYGON_OFFSET_FILL);
    
    MainBuffer.RenderingContext.Deactivate;
    

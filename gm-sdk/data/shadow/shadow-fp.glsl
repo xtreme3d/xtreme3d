@@ -3,13 +3,13 @@ varying vec3 normal;
 
 uniform sampler2D diffuseMap;
 uniform sampler2DShadow shadowMap;
+uniform float shadowMapSize;
 
 float lookup(sampler2DShadow depths, vec4 coord, vec2 offset)
 {
-    vec2 texelSize = vec2(1.0) / vec2(1024.0, 1024.0); //dgl_ShadowMapSize
-    vec2 v = offset * texelSize * coord.w;
-    //coord.z *= 1.001;
-    float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0, 0.0), 2.0).z;
+    float texelSize = 1.0 / shadowMapSize;
+    vec2 v = offset * texelSize;// * coord.w;
+    float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0, 0.0)).z;
     return z;
 }
 
