@@ -96,6 +96,23 @@
 <BR><A>mesh - индекс меша.</A>
 <HR>
 
+<A name="FreeformMeshSetMaterial"></A>
+<H1 class=name>FreeformMeshSetMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetMaterial</A><A>( freeform,mesh as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
+<BR><A>Присваивает мешу материал.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
+<HR>
+
+<A name="FreeformUseMeshMaterials"></A>
+<H1 class=name>FreeformUseMeshMaterials</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformUseMeshMaterials</A><A>( freeform,mode as </A><A class=type>real</A> );</A>
+<BR><A>Переключает использование материалов мешей. Если отключить эту опцию, объект Freeform будет отрисован с использованием его собственного материала, задаваемого функцией </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
 <A name="FreeformFaceGroupsCount"></A>
 <H1 class=name>FreeformFaceGroupsCount</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformFaceGroupsCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>

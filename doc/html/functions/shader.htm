@@ -327,6 +327,23 @@
 <BR><A>object - id объекта.</A>
 <HR>
 
+<A name="GLSLShaderSetParameterShadowTexture"></A>
+<H1 class=name>GLSLShaderSetParameterShadowTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowTexture</A><A>( param,shadowmap,texunit as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр текстуру буфера теневой карты. В GLSL она имеет тип sampler2DShadow. С помощью этой текстуры можно реализовать в шейдере рендеринг теней.</A>
+<BR><A>param - id параметра</A>
+<BR><A>shadowmap - id теневой карты</A>
+<BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterShadowMatrix"></A>
+<H1 class=name>GLSLShaderSetParameterShadowMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowMatrix</A><A>( param,shadowmap as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр теневую матрицу из теневой карты. Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</A>
+<BR><A>param - id параметра</A>
+<BR><A>object - id объекта.</A>
+<HR>
+
 </DIV>
 
 </BODY>
