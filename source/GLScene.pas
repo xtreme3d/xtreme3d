@@ -1812,6 +1812,9 @@ type
             refreshed, use Invalidate instead. }
          procedure Render(baseObject : TGLBaseSceneObject; updatePerfCounter: Boolean = true); overload;
          procedure Render; overload;
+
+         procedure SimpleRender(baseObject : TGLBaseSceneObject);
+
          {: Render the scene to a bitmap at given DPI.<p>
             DPI = "dots per inch".<p>
             The "magic" DPI of the screen is 96 under Windows. }
@@ -7795,6 +7798,19 @@ begin
    finally
       FRendering:=False;
    end;
+end;
+
+procedure TGLSceneBuffer.SimpleRender(baseObject : TGLBaseSceneObject);
+var
+   maxLights : Integer;
+begin
+   if FRendering then Exit;
+   FRendering:=True;
+   FCamera.FScene.AddBuffer(Self);
+   glGetFloatv(GL_PROJECTION_MATRIX, @FProjectionMatrix);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
+   FCamera.FScene.RenderScene(self, FViewport.Width, FViewport.Height, dsRendering, baseObject);
+   FRendering:=False;
 end;
 
 // SetBackgroundColor

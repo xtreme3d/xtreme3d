@@ -35,10 +35,10 @@ Features
 * Skyboxes
 * Procedural skydome with sun, stars and day/night cycle
 * Procedural trees
-* Dynamic shadows
+* Dynamic soft shadows
 * Lines and curves rendering
 * Discrete LOD system
-* Offscreen rendering via p-buffers and FBO
+* Offscreen rendering via p-buffers
 * Built-in game-oriented collision system (DCE, FPSManager)
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives

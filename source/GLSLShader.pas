@@ -4,7 +4,8 @@ interface
 
 uses
   Classes, Dialogs, VectorTypes,
-  GLTexture, GLUserShader, OpenGL1x, GLUtils;
+  GLTexture, GLUserShader, OpenGL1x, GLUtils,
+  GLShadowMap;
 
 type
   TGLSLShaderParameterType = (
@@ -14,7 +15,8 @@ type
       uniform3f,
       uniform4f,
       uniformMatrix4f,
-      uniformTexture2D
+      uniformTexture2D,
+      uniformShadowTexture
     );
 
   TGLSLShader = class;
@@ -24,6 +26,7 @@ type
       FName: String;
       FInitialized: Boolean;
       FTexture: TGLTexture;
+      FShadowMap: TGLShadowMap;
       FUniformLocation: GLint;
       FUniformType: TGLSLShaderParameterType;
       FUniformInteger: Integer;
@@ -44,6 +47,7 @@ type
       property UniformInteger: Integer read FUniformInteger write FUniformInteger;
       property UniformTexture: Integer read FUniformTexture write FUniformTexture;
       property Texture: TGLTexture read FTexture write FTexture;
+      property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
       property Initialized: Boolean read FInitialized write FInitialized;
   end;
 
@@ -63,6 +67,7 @@ type
       function AddUniform3f(name: String): TGLSLShaderParameter;
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
+      function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       procedure Bind;
       procedure Unbind;
   end;
@@ -141,6 +146,14 @@ begin
   begin
     glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
     glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
+    glUniform1iARB(FUniformLocation, FUniformTexture);
+    glActiveTextureARB(GL_TEXTURE0_ARB);
+  end;
+  
+  if FUniformType = uniformShadowTexture then
+  begin
+    glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+    glBindTexture(GL_TEXTURE_2D, FShadowMap.DepthTextureHandle);
     glUniform1iARB(FUniformLocation, FUniformTexture);
     glActiveTextureARB(GL_TEXTURE0_ARB);
   end;
@@ -259,6 +272,16 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformTexture2D, name);
+  param.Initialized := False;
+  Result := param;
+end;
+
+function TGLSLShaderParameters.AddUniformShadowTexture(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformShadowTexture, name);
   param.Initialized := False;
   Result := param;
 end;

@@ -6,8 +6,17 @@ uses
   Classes, Dialogs, VectorTypes, VectorGeometry,
   GLScene, GLTexture, OpenGL1x, GLUtils;
 
+const
+  // OpenGL 1.4 required
+  GL_CLAMP_TO_BORDER = $812D;
+  GL_TEXTURE_COMPARE_MODE = $884C;
+  GL_TEXTURE_COMPARE_FUNC = $884D;
+  GL_COMPARE_R_TO_TEXTURE = $884E;
+  GL_DEPTH_TEXTURE_MODE = $884B;
+
 type
-  TGLFBOViewer = class
+
+  TGLShadowMap = class(TPersistent)
     private
         { Private Declarations }
     protected
@@ -15,87 +24,168 @@ type
         FInitialized: Boolean;
         FFramebuffer: GLuint;
         FDepthRenderBuffer: GLuint;
+        FDepthTextureHandle: GLuint;
         FTexture: TGLTexture;
-        FBuffer: TGLSceneBuffer;
+        FMainBuffer: TGLSceneBuffer;
         FWidth: Integer;
         FHeight: Integer;
+        FDepthBorderColor: TGLColor;
+        FShadowMatrix: TMatrix;
+        FShadowCamera: TGLCamera;
         procedure SetTexture(texture: TGLTexture);
         procedure DoInitialize;
     public
         { Public Declarations }
         constructor Create;
         destructor Destroy; override;
-        procedure Render(); 
+        procedure Render;
         property Texture: TGLTexture read FTexture write SetTexture;
-        property Buffer: TGLSceneBuffer read FBuffer write FBuffer;
+        property MainBuffer: TGLSceneBuffer read FMainBuffer write FMainBuffer;
         property Width: Integer read FWidth write FWidth;
         property Height: Integer read FHeight write FHeight;
+        property DepthTextureHandle: GLuint read FDepthTextureHandle write FDepthTextureHandle;
+        property ShadowMatrix: TMatrix read FShadowMatrix;
+        property ShadowCamera: TGLCamera read FShadowCamera write FShadowCamera;
   end;
 
 implementation
 
-procedure TGLFBOViewer.SetTexture(texture: TGLTexture);
+procedure TGLShadowMap.SetTexture(texture: TGLTexture);
 begin
   FTexture := texture;
 end;
 
-procedure TGLFBOViewer.DoInitialize;
+procedure TGLShadowMap.DoInitialize;
 begin
-  if FFramebuffer <> 0 then
-    glDeleteFramebuffers(1, @FFramebuffer);
-  glGenFramebuffers(1, @FFramebuffer);
-  assert(FFramebuffer <> 0);
   FInitialized := True;
 
-  glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+  glGenTextures(1, @FDepthTextureHandle);
+  glBindTexture(GL_TEXTURE_2D, FDepthTextureHandle);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
-  glGenRenderbuffers(1, @FDepthRenderBuffer);
-  glBindRenderbuffer(GL_RENDERBUFFER, FDepthRenderBuffer);
-  glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 256, 256);
-  glBindRenderbuffer(GL_RENDERBUFFER, 0);
+  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, @FDepthBorderColor.color);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+  //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
 
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, FTexture.Handle, 0);
-  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, FDepthRenderBuffer);
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+
+  glTexImage2D(GL_TEXTURE_2D, 0,
+      GL_DEPTH_COMPONENT, Width, Height, 0,
+      GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nil);
+
+  glBindTexture(GL_TEXTURE_2D, 0);
+
+  glGenFramebuffers(1, @FFramebuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+  glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, FDepthTextureHandle, 0);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 end;
 
-constructor TGLFBOViewer.Create;
+constructor TGLShadowMap.Create;
 begin
   inherited Create;
   Width:=256;
   Height:=256;
   FInitialized := false;
+  FDepthBorderColor := TGLColor.Create(Self);
+  FDepthBorderColor.SetColor(1, 1, 1, 1);
 end;
 
-destructor TGLFBOViewer.Destroy;
+destructor TGLShadowMap.Destroy;
 begin
-  if FFramebuffer <> 0 then
-  begin
-    glDeleteRenderbuffers(1, @FDepthRenderBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glDeleteFramebuffers(1, @FFramebuffer);
-  end;
+  if (glIsTexture(FDepthTextureHandle)) then
+    glDeleteTextures(1, @FDepthTextureHandle);
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  glDeleteFramebuffers(1, @FFramebuffer);
   inherited Destroy;
 end;
 
-procedure TGLFBOViewer.Render;
+procedure TGLShadowMap.Render;
 var
    oldWidth, oldHeight: Integer;
+   projMat, mvMat, mvpMat, tsMat, tmpMat, invCamMat: TMatrix;
+   oldCamera: TGLCamera;
+   size: Integer;
 begin
-   oldWidth := Buffer.Width;
-   oldHeight := Buffer.Height;
-   Buffer.Resize(Width, Height);
-   Buffer.SetViewPort(0, 0, oldWidth, oldHeight);
+   if not Assigned(FShadowCamera) then
+     Exit;
 
-   Buffer.RenderingContext.Activate;
+   oldWidth := MainBuffer.Width;
+   oldHeight := MainBuffer.Height;
+   oldCamera := MainBuffer.Camera;
+   MainBuffer.Resize(FWidth, FHeight);
+   MainBuffer.SetViewPort(0, 0, FWidth, FHeight);
+   MainBuffer.Camera := FShadowCamera;
+
+   MainBuffer.RenderingContext.Activate;
    if not FInitialized then
      DoInitialize;
    glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
-   Buffer.Render(FBuffer.Camera.Scene.Objects, False);
+
+   glClearColor(0, 0, 0, 1);
+   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+   glEnable(GL_DEPTH_TEST);
+   glEnable(GL_CULL_FACE);
+   glDisable(GL_LIGHTING);
+   glDepthFunc(GL_LESS);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+   glCullFace(GL_FRONT);
+
+   //glEnable(GL_POLYGON_OFFSET_FILL);
+   //glPolygonOffset(1.1, 4.0);
+
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   size := 25;
+   glOrtho(-size, size, -size, size, -20.0, 200.0);
+   glGetFloatv(GL_PROJECTION_MATRIX, @projMat);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   MainBuffer.Camera.AbsoluteMatrixAsAddress;
+   MainBuffer.Camera.Apply;
+   glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat);
+
+   //InvertMatrix(mvMat);
+
+   MainBuffer.SimpleRender(MainBuffer.Camera.Scene.Objects);
+
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-   Buffer.RenderingContext.Deactivate;
+
+   glMatrixMode(GL_MODELVIEW);
+   glPushMatrix();
+   glLoadIdentity();
+   oldCamera.AbsoluteMatrixAsAddress;
+   oldCamera.Apply;
+   glGetFloatv(GL_MODELVIEW_MATRIX, @invCamMat);
+   glPopMatrix();
+   InvertMatrix(invCamMat);
+
+   glMatrixMode(GL_MODELVIEW);
+   glPushMatrix();
+   glLoadIdentity();
+   glTranslatef(0.5, 0.5, 0.5);
+   glScalef(0.5, 0.5, 0.5);
+   glMultMatrixf(@projMat);
+   glMultMatrixf(@mvMat);
+   glMultMatrixf(@invCamMat);
+   glScalef(1.0, 1.0, 0.945);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix);
+   glPopMatrix();
+
+   glCullFace(GL_BACK);
+   glPolygonOffset(0.0, 0.0);
+   //glDisable(GL_POLYGON_OFFSET_FILL);
    
-   Buffer.Resize(oldWidth, oldHeight);
+   MainBuffer.RenderingContext.Deactivate;
+   
+   MainBuffer.Resize(oldWidth, oldHeight);
+   MainBuffer.Camera := oldCamera;
 end;
 
 end.

@@ -213,10 +213,35 @@ end;
 {$I 'text'}
 {$I 'grid'}
 
-function FBOViewerCreate(w, h, viewer: real): real; stdcall;
+function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  i: Integer;
+  me: TMeshObject;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
+  for i:=0 to me.FaceGroups.Count-1 do
+  begin
+    me.FaceGroups[i].MaterialName := String(material);  
+  end;
+  GLFreeForm1.StructureChanged;
+  result:=1;
+end;
+
+function FreeformUseMeshMaterials(ff,mode: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.UseMeshMaterials:=boolean(trunc64(mode));
+  result:=1;
+end;
+
+function ShadowMapCreate(w, h, viewer: real): real; stdcall;
 var
   v: TGLSceneViewer;
-  fbv: TGLFBOViewer;
+  sm: TGLShadowMap;
 begin
   if not GL_ARB_framebuffer_object then
   begin
@@ -225,30 +250,28 @@ begin
       Exit;
   end;
   v := TGLSceneViewer(trunc64(viewer));
-  fbv := TGLFBOViewer.Create;
-  fbv.Width := trunc64(w);
-  fbv.Height := trunc64(h);
-  fbv.Buffer := v.Buffer;
-  result:=integer(fbv);
+  sm := TGLShadowMap.Create;
+  sm.Width := trunc64(w);
+  sm.Height := trunc64(h);
+  sm.MainBuffer := v.Buffer;
+  result:=integer(sm);
 end;
 
-function FBOViewerSetTexture(fboview: real; matname: pchar): real; stdcall;
+function ShadowMapSetCamera(shadowmap, cam: real): real; stdcall;
 var
-  fbv: TGLFBOViewer;
-  mat: TGLLibMaterial;
+  sm: TGLShadowMap;
 begin
-  fbv:=TGLFBOViewer(trunc64(fboview));
-  mat := matlib.Materials.GetLibMaterialByName(String(matname));
-  fbv.Texture := mat.Material.Texture; 
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.ShadowCamera := TGLCamera(trunc64(cam));
   result:=1;
 end;
 
-function FBOViewerRender(fboview: real): real; stdcall;
+function ShadowMapRender(shadowmap: real): real; stdcall;
 var
-  fbv: TGLFBOViewer;
+  sm: TGLShadowMap;
 begin
-  fbv:=TGLFBOViewer(trunc64(fboview));
-  fbv.Render();
+  sm:=TGLShadowMap(trunc64(shadowmap));
+  sm.Render();
   result:=1;
 end;
 
@@ -344,6 +367,7 @@ FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 FreeformSphereSweepIntersect, FreeformPointInMesh,
 FreeformToFreeforms,
+FreeformMeshSetMaterial, FreeformUseMeshMaterials,
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
@@ -428,6 +452,7 @@ GLSLShaderCreate, GLSLShaderCreateParameter,
 GLSLShaderSetParameter1i, GLSLShaderSetParameter1f, GLSLShaderSetParameter2f,
 GLSLShaderSetParameter3f, GLSLShaderSetParameter4f, GLSLShaderSetParameterTexture,
 GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
+GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
 //ThorFX
 ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
 ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
@@ -528,8 +553,8 @@ MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 ZShadowsCreate,
 ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
 ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
-//FBO
-FBOViewerCreate, FBOViewerSetTexture, FBOViewerRender,
+//ShadowMap
+ShadowMapCreate, ShadowMapSetCamera, ShadowMapRender,
 //ODE
 OdeManagerCreate;
 
