@@ -292,6 +292,10 @@
   <PARAM name="Local" value="functions/memviewer.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ShadowMap">
+  <PARAM name="Local" value="functions/shadowmap.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Text">
   <PARAM name="Local" value="functions/text.htm">
  </OBJECT>
