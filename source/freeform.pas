@@ -93,58 +93,6 @@ begin
   result:=tri;
 end;
 
-// TODO: this seems not working
-function FreeformSetLightmapsFromFreeform(ff1, ff2: real): real; stdcall;
-var
-  GLFreeForm1,GLFreeForm2: TGLFreeForm;
-  mesh1, mesh2: TMeshObject;
-  fg1, fg2: TFaceGroup;
-  tc2: TAffineVectorList;
-  sc: TTexPointList;
-  tcc2, ti, mi, fgi, mati: Integer;
-  lmapLib: TGLMaterialLibrary;
-  lmapMat: String;
-  mat: TGLLibMaterial;
-  v: TAffineVector;
-  t: TTexPoint;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff1));
-  GLFreeForm2:=TGLFreeForm(trunc64(ff2));
-
-  lmapLib := GLFreeForm2.LightmapLibrary;
-  GLFreeForm1.LightmapLibrary := lmapLib;
-
-  for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
-    mesh1 := GLFreeForm1.MeshObjects[mi];
-    mesh2 := GLFreeForm2.MeshObjects[mi];
-
-    mesh1.LightMapTexCoords.Count := 0;
-    for ti:=0 to mesh2.TexCoords.Count-1 do begin
-      v := mesh2.TexCoords[ti];
-      mesh1.LightMapTexCoords.Add(v[0], v[1]);
-    end;
-
-    for fgi:=0 to mesh1.FaceGroups.Count-1 do begin
-      fg1 := mesh1.FaceGroups[fgi];
-      fg2 := mesh2.FaceGroups[fgi];
-
-      lmapMat := fg2.MaterialName;
-
-      for mati:=0 to lmapLib.Materials.Count-1 do begin
-        mat := lmapLib.Materials[mati];
-
-        if ansicomparestr(mat.Name, lmapMat) = 0 then begin
-          fg1.LightMapIndex := mati;
-          
-          Break;
-        end;
-      end;
-    end;
-  end;
-
-  result:=1;
-end;
-
 // Change: explosion creation API changed
 function FreeformCreateExplosionFX(ff1, enable: real): real; stdcall;
 var
@@ -229,6 +177,31 @@ begin
   result := Integer(res);
 end;
 
+function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  i: Integer;
+  me: TMeshObject;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
+  for i:=0 to me.FaceGroups.Count-1 do
+  begin
+    me.FaceGroups[i].MaterialName := String(material);  
+  end;
+  GLFreeForm1.StructureChanged;
+  result:=1;
+end;
+
+function FreeformUseMeshMaterials(ff,mode: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.UseMeshMaterials:=boolean(trunc64(mode));
+  result:=1;
+end;
+
 function FreeformToFreeforms(freeform, parent: real): real; stdcall;
 var
   ffm, ffm2: TGLFreeForm;
@@ -297,8 +270,8 @@ end;
 // MeshOptimize
 // MeshSmoothFaces
 
-
 {
+// TODO:
 function FreeformCreateEmpty(matl1, matl2, parent: real): real; stdcall;
 var
   ffm: TGLFreeForm;
@@ -337,5 +310,59 @@ begin
   fgroup := TFaceGroup.CreateOwned(mesh.FaceGroups);
   fgroup.MaterialName := String(matname);
   result := mesh.FaceGroups.Count-1;
+end;
+}
+
+{
+// TODO: this seems not working
+function FreeformSetLightmapsFromFreeform(ff1, ff2: real): real; stdcall;
+var
+  GLFreeForm1,GLFreeForm2: TGLFreeForm;
+  mesh1, mesh2: TMeshObject;
+  fg1, fg2: TFaceGroup;
+  tc2: TAffineVectorList;
+  sc: TTexPointList;
+  tcc2, ti, mi, fgi, mati: Integer;
+  lmapLib: TGLMaterialLibrary;
+  lmapMat: String;
+  mat: TGLLibMaterial;
+  v: TAffineVector;
+  t: TTexPoint;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff1));
+  GLFreeForm2:=TGLFreeForm(trunc64(ff2));
+
+  lmapLib := GLFreeForm2.LightmapLibrary;
+  GLFreeForm1.LightmapLibrary := lmapLib;
+
+  for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
+    mesh1 := GLFreeForm1.MeshObjects[mi];
+    mesh2 := GLFreeForm2.MeshObjects[mi];
+
+    mesh1.LightMapTexCoords.Count := 0;
+    for ti:=0 to mesh2.TexCoords.Count-1 do begin
+      v := mesh2.TexCoords[ti];
+      mesh1.LightMapTexCoords.Add(v[0], v[1]);
+    end;
+
+    for fgi:=0 to mesh1.FaceGroups.Count-1 do begin
+      fg1 := mesh1.FaceGroups[fgi];
+      fg2 := mesh2.FaceGroups[fgi];
+
+      lmapMat := fg2.MaterialName;
+
+      for mati:=0 to lmapLib.Materials.Count-1 do begin
+        mat := lmapLib.Materials[mati];
+
+        if ansicomparestr(mat.Name, lmapMat) = 0 then begin
+          fg1.LightMapIndex := mati;
+          
+          Break;
+        end;
+      end;
+    end;
+  end;
+
+  result:=1;
 end;
 }

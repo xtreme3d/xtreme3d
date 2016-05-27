@@ -70,8 +70,8 @@ end;
 
 procedure GenMeshTangents(mesh: TMeshObject);
 var
-   i,j        : Integer;
-   v,t      : array[0..2] of TAffineVector;
+   i,j: Integer;
+   v,t: array[0..2] of TAffineVector;
 
    x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
    sDir, tDir: TAffineVector;
@@ -184,7 +184,6 @@ end;
 {$I 'sprite'}
 {$I 'primitives'}
 {$I 'memviewer'}
-{$I 'zshadows'}
 {$I 'actor'}
 {$I 'freeform'}
 {$I 'object'}
@@ -212,133 +211,13 @@ end;
 {$I 'proxy'}
 {$I 'text'}
 {$I 'grid'}
-
-function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-  i: Integer;
-  me: TMeshObject;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
-  for i:=0 to me.FaceGroups.Count-1 do
-  begin
-    me.FaceGroups[i].MaterialName := String(material);  
-  end;
-  GLFreeForm1.StructureChanged;
-  result:=1;
-end;
-
-function FreeformUseMeshMaterials(ff,mode: real): real; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  GLFreeForm1.UseMeshMaterials:=boolean(trunc64(mode));
-  result:=1;
-end;
-
-function ShadowMapCreate(size, viewer, caster: real): real; stdcall;
-var
-  v: TGLSceneViewer;
-  sm: TGLShadowMap;
-begin
-  if not GL_ARB_framebuffer_object then
-  begin
-      ShowMessage('GL_ARB_frame_buffer_object required');
-      result := 0;
-      Exit;
-  end;
-  v := TGLSceneViewer(trunc64(viewer));
-  sm := TGLShadowMap.Create;
-  sm.Width := trunc64(size);
-  sm.Height := trunc64(size);
-  sm.MainBuffer := v.Buffer;
-  sm.Caster := TGLBaseSceneObject(trunc64(caster));
-  result:=integer(sm);
-end;
-
-function ShadowMapSetCamera(shadowmap, cam: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ShadowCamera := TGLCamera(trunc64(cam));
-  result:=1;
-end;
-
-function ShadowMapSetCaster(shadowmap, caster: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.Caster := TGLBaseSceneObject(trunc64(caster));
-  result:=1;
-end;
-
-function ShadowMapSetProjectionSize(shadowmap, size: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ProjectionSize := size;
-  result:=1;
-end;
-
-function ShadowMapSetZScale(shadowmap, scale: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ZScale := scale;
-  result:=1;
-end;
-
-function ShadowMapSetZClippingPlanes(shadowmap, znear, zfar: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ZNear := znear;
-  sm.ZFar := zfar;
-  result:=1;
-end;
-
-function ShadowMapRender(shadowmap: real): real; stdcall;
-var
-  sm: TGLShadowMap;
-begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.Render();
-  result:=1;
-end;
-
+{$I 'shadowmap'}
 
 function OdeManagerCreate(): real; stdcall;
 begin
   ode := TGLODEManager.Create(nil);
   result := 1.0;
 end;
-
-{
-function NewtonManagerStep(dt: real): real; stdcall;
-begin
-  NewtonManager.Step(dt);
-  result := 1.0;
-end;
-
-function NewtonDynamicBodyCreate(obj, density: real): real; stdcall;
-var
-  ob: TGLBaseSceneObject;
-  dyn: TGLNGDDynamic;
-begin
-  ob := TGLBaseSceneObject(trunc64(obj));
-  dyn := ob.GetOrCreateBehaviour(TGLNGDDynamic) as TGLNGDDynamic; //GetOrCreateNGDDynamic(ob);
-  dyn.Manager := NewtonManager;
-  dyn.Density := density;
-  Result := 1.0;
-end;
-}
 
 exports
 
@@ -348,7 +227,7 @@ SetPakArchive,
 Update, TrisRendered,
 //Viewer
 ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRenderToFile,
-ViewerRender,
+ViewerRender, ViewerSetAutoRender,
 ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
 ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor, ViewerEnableFog,
 ViewerSetFogColor, ViewerSetFogDistance, ViewerScreenToWorld, ViewerWorldToScreen,
@@ -400,7 +279,6 @@ ActorFaceGroupSetMaterial,
 FreeformCreate, FreeformMeshObjectsCount, FreeformMeshSetVisible,
 FreeformMeshSetSecondCoords, FreeformMeshTriangleCount,  
 FreeformFaceGroupsCount, FreeformFaceGroupTriangleCount,
-FreeformSetLightmapsFromFreeform,
 FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 FreeformSphereSweepIntersect, FreeformPointInMesh,
@@ -587,10 +465,6 @@ GridSetColor, GridSetSize, GridSetPattern,
 //Memory Viewer
 MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
-//ZShadows
-ZShadowsCreate,
-ZShadowsSetFrustShadow, ZShadowsSetSkyShadow, ZShadowsSetColor, ZShadowsCast,
-ZShadowsSetSoft, ZShadowsSetTolerance, ZShadowsSetDepthFade,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,

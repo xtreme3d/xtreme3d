@@ -63,6 +63,7 @@ type
          FMouseInControl : Boolean;
          FIsOpenGLAvailable : Boolean;
          FLastScreenPos : TPoint;
+         FAutoRender: Boolean;
 
          procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); Message WM_ERASEBKGND;
          procedure WMPaint(var Message: TWMPaint); Message WM_PAINT;
@@ -149,6 +150,8 @@ type
          changed, FieldOfView is changed also. }
          property FieldOfView : single read GetFieldOfView write SetFieldOfView;
 
+         property AutoRender: Boolean read FAutoRender write FAutoRender;
+
 			   property OnMouseLeave : TNotifyEvent read FOnMouseLeave write FOnMouseLeave;
 			   property OnMouseEnter : TNotifyEvent read FOnMouseEnter write FOnMouseEnter;
          
@@ -225,6 +228,7 @@ begin
    FBuffer.ViewerBeforeRender:=DoBeforeRender;
    FBuffer.OnChange:=DoBufferChange;
    FBuffer.OnStructuralChange:=DoBufferStructuralChange;
+   FAutoRender := true;
 end;
 
 // Destroy
@@ -386,7 +390,7 @@ begin
    BeginPaint(Handle, PS);
    try
       if IsOpenGLAvailable and (Width>0) and (Height>0) then begin
-         //if Enabled = true then
+         if FAutoRender then
              FBuffer.Render;
       end
    finally

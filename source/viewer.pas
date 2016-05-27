@@ -11,7 +11,8 @@ begin
   GLSceneViewer1.Visible:=true;
   GLSceneViewer1.Buffer.Lighting:=true;
   GLSceneViewer1.ParentWindow:=trunc64(pw);
-  GLSceneViewer1.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow]; 
+  GLSceneViewer1.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow];
+  GLSceneViewer1.AutoRender := False; 
   result:=Integer(GLSceneViewer1);
 end;
 
@@ -30,8 +31,7 @@ end;
 
 function ViewerRender(viewer: real): real; stdcall;
 begin
-  //TGLSceneViewer(trunc64(viewer)).Buffer.Render();
-  //TGLSceneViewer(trunc64(viewer)).Enabled:=true;
+  TGLSceneViewer(trunc64(viewer)).Buffer.Render();
   result:=1;
 end;
 
@@ -223,4 +223,10 @@ begin
        Result := 1
    else
        Result := 0;
+end;
+
+function ViewerSetAutoRender(viewer, mode: real): real; stdcall;
+begin
+  TGLSceneViewer(trunc64(viewer)).AutoRender := Boolean(trunc64(mode));
+  result:=1;
 end;
