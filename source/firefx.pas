@@ -8,7 +8,7 @@ begin
   m.MaxParticles := 96;
   m.ParticleSize := 0.69;
   m.FireDensity := 0.5;
-  m.FireEvaporation := 0.86;
+  m.FireEvaporation := 1.0;
   m.FireBurst := 1;
   m.FireRadius := 0.5;
   m.InnerColor.Alpha := 1.0;

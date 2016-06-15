@@ -710,10 +710,11 @@ begin
    glGetFloatv(GL_MODELVIEW_MATRIX, @mat);
 
    SetVector(innerColor, Manager.FInnerColor.Color);
-   for i := 0 to Manager.NP-1 do begin
+   for i:=Manager.NP-1 downto 0 do begin
      glPushMatrix;
      fp:=@(Manager.FFireParticles[i]);
-     glTranslatef(fp.Position[0]-lastTr[0], fp.Position[1]-lastTr[1], fp.Position[2]-lastTr[2]);
+     glTranslatef(fp.Position[0], fp.Position[1], fp.Position[2]);
+     //glTranslatef(fp.Position[0]-lastTr[0], fp.Position[1]-lastTr[1], fp.Position[2]-lastTr[2]);
      SetVector(lastTr, fp.Position);
      innerColor[3]:=fp.Alpha*fp.TimeToLive/Sqr(fp.LifeLength);
      glColor4fv(@innerColor);
