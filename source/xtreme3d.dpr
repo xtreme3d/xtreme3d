@@ -16,7 +16,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLShadowMap,
-  GLParticleFX, GLSpriteParticleFXManager;
+  GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
 
 type
    TEmpty = class(TComponent)
@@ -312,11 +312,27 @@ begin
   result := 1.0;
 end;
 
+function OdeDynamicCalibrateCenterOfMass(obj: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.CalibrateCenterOfMass;
+  result := 1.0;
+end;
+
+function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddForce(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
 // TODO:
 // OdeDynamicAlignObject
 // OdeDynamicEnable
-// OdeDynamicCalibrateCenterOfMass
-// OdeDynamicAddForce
 // OdeDynamicAddForceAtPos
 // OdeDynamicAddForceAtRelPos
 // OdeDynamicAddRelForce
@@ -357,13 +373,55 @@ begin
   result := 1.0;
 end;
 
+function OdeAddPlane(obj: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    stat.AddNewElement(TODEElementPlane);
+  if dyna <> nil then
+    dyna.AddNewElement(TODEElementPlane);
+  result := 1.0;
+end;
+
+// Change from Xtreme3D 2.0: mesh index should be specified
+function OdeAddTriMesh(obj, mesh: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementTriMesh;
+  m: Integer;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementTriMesh(stat.AddNewElement(TODEElementTriMesh));
+  if dyna <> nil then
+    elem := TODEElementTriMesh(dyna.AddNewElement(TODEElementTriMesh));
+  m := trunc64(mesh);
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Vertices := TGLFreeform(o).MeshObjects.Items[m].ExtractTriangles;
+      Indices := BuildVectorCountOptimizedIndices(Vertices);
+    end;
+  end;
+  result := 1.0;
+end;
+
 // TODO:
 // OdeAddCapsule
 // OdeAddCone
 // OdeAddCylinder
-// OdeAddPlane
 // OdeAddSphere
-// OdeAddTriMesh
 // OdeSurfaceSetRollingFrictionCoeff
 // OdeSurfaceEnableRollingFrictionCoeff
 // OdeSurfaceSetMode
@@ -656,7 +714,8 @@ OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
 OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
 OdeWorldSetAutoDisableFlag,
 OdeStaticCreate, OdeDynamicCreate,
-OdeAddBox;
+OdeDynamicCalibrateCenterOfMass, OdeDynamicAddForce,
+OdeAddBox, OdeAddPlane, OdeAddTriMesh;
 
 begin
 end.
