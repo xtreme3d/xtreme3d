@@ -40,6 +40,7 @@ Features
 * Discrete LOD system
 * Offscreen rendering via p-buffers
 * Built-in game-oriented collision systems (DCE, FPSManager)
+* Rigid body physics using ODE engine (WIP status)
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives
 * + a lot more

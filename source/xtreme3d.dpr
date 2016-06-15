@@ -15,7 +15,8 @@ uses
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree, GLMultiProxy, GLODEManager, GLShadowMap;
+  GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLShadowMap,
+  GLParticleFX, GLSpriteParticleFXManager;
 
 type
    TEmpty = class(TComponent)
@@ -216,8 +217,188 @@ end;
 function OdeManagerCreate(): real; stdcall;
 begin
   ode := TGLODEManager.Create(nil);
+  dWorldSetAutoDisableFlag(ode.World, 0);
   result := 1.0;
 end;
+
+function OdeManagerDestroy(): real; stdcall;
+begin
+  ode.Destroy;
+  result := 1.0;
+end;
+
+function OdeManagerStep(dt: real): real; stdcall;
+begin
+  ode.Step(dt);
+  result := 1.0;
+end;
+
+function OdeManagerGetNumContactJoints(): real; stdcall;
+begin
+  result := ode.NumContactJoints;
+end;
+
+function OdeManagerSetGravity(x,y,z: real): real; stdcall;
+begin
+  ode.Gravity.SetVector(x, y, z);
+  result := 1.0;
+end;
+
+function OdeManagerSetSolver(osm: real): real; stdcall;
+begin
+  if osm = 0 then ode.Solver := osmDefault;
+  if osm = 1 then ode.Solver := osmStepFast;
+  if osm = 2 then ode.Solver := osmQuickStep; 
+  result := 1.0;
+end;
+
+function OdeManagerSetIterations(iterations: real): real; stdcall;
+begin
+  ode.Iterations := trunc64(iterations);
+  result := 1.0;
+end;
+
+function OdeManagerSetMaxContacts(maxcontacts: real): real; stdcall;
+begin
+  ode.MaxContacts := trunc64(maxcontacts);
+  result := 1.0;
+end;
+
+function OdeManagerSetVisible(mode: real): real; stdcall;
+begin
+  ode.Visible := Boolean(trunc64(mode));
+  result := 1.0;
+end;
+
+function OdeManagerSetGeomColor(color: real): real; stdcall;
+begin
+  ode.GeomColor.AsWinColor := TColor(trunc64(color));
+  ode.GeomColor.Alpha := 1.0;
+  result := 1.0;
+end;
+
+function OdeWorldSetAutoDisableFlag(flag: real): real; stdcall;
+begin
+  dWorldSetAutoDisableFlag(ode.World, trunc64(flag));
+  result := 1.0;
+end;
+
+// TODO:
+// OdeWorldSetAutoDisableLinearThreshold
+// OdeWorldSetAutoDisableAngularThreshold
+// OdeWorldSetAutoDisableSteps
+// OdeWorldSetAutoDisableTime
+// OdeDynamicSetAutoDisableFlag
+// OdeDynamicSetAutoDisableLinearThreshold
+// OdeDynamicSetAutoDisableAngularThreshold
+// OdeDynamicSetAutoDisableSteps
+// OdeDynamicSetAutoDisableTime
+
+function OdeStaticCreate(obj: real): real; stdcall;
+var
+  stat: TGLODEStatic;
+begin
+  stat := GetOrCreateOdeStatic(TGLBaseSceneObject(trunc64(obj)));
+  stat.Manager := ode;
+  result := 1.0;
+end;
+
+function OdeDynamicCreate(obj: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.Manager := ode;
+  result := 1.0;
+end;
+
+// TODO:
+// OdeDynamicAlignObject
+// OdeDynamicEnable
+// OdeDynamicCalibrateCenterOfMass
+// OdeDynamicAddForce
+// OdeDynamicAddForceAtPos
+// OdeDynamicAddForceAtRelPos
+// OdeDynamicAddRelForce
+// OdeDynamicAddRelForceAtPos
+// OdeDynamicAddRelForceAtRelPos
+// OdeDynamicAddTorque
+// OdeDynamicAddRelTorque
+// OdeDynamicGetContactCount
+// OdeDynamicGetContact
+// OdeStaticGetContactCount
+// OdeStaticGetContact
+
+// Change from Xtreme3D 2.0: position should be specified
+function OdeAddBox(obj, x, y, z, w, h, d: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementBox;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementBox(stat.AddNewElement(TODEElementBox));
+  if dyna <> nil then
+    elem := TODEElementBox(dyna.AddNewElement(TODEElementBox));
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Position.SetPoint(x, y, z);
+      BoxWidth := w;
+      BoxHeight := h;
+      BoxDepth := d;
+    end;
+  end;
+  result := 1.0;
+end;
+
+// TODO:
+// OdeAddCapsule
+// OdeAddCone
+// OdeAddCylinder
+// OdeAddPlane
+// OdeAddSphere
+// OdeAddTriMesh
+// OdeSurfaceSetRollingFrictionCoeff
+// OdeSurfaceEnableRollingFrictionCoeff
+// OdeSurfaceSetMode
+// OdeSurfaceSetMu
+// OdeSurfaceSetMu2
+// OdeSurfaceSetBounce
+// OdeSurfaceSetBounceVel
+// OdeSurfaceSetSoftERP
+// OdeSurfaceSetSoftCFM
+// OdeSurfaceSetMotion1
+// OdeSurfaceSetMotion2
+// OdeSurfaceSetSlip1
+// OdeSurfaceSetSlip2
+// OdeAddJointBall
+// OdeAddJointFixed
+// OdeAddJointHinge
+// OdeAddJointHinge2
+// OdeAddJointSlider
+// OdeAddJointUniversal
+// OdeJointSetObjects
+// OdeJointEnable
+// OdeJointInitialize
+// OdeJointSetAnchor
+// OdeJointSetAnchorAtObject
+// OdeJointSetAxis1
+// OdeJointSetAxis2
+// OdeJointSetBounce
+// OdeJointSetCFM
+// OdeJointSetFMax
+// OdeJointSetFudgeFactor
+// OdeJointSetHiStop
+// OdeJointSetLoStop
+// OdeJointSetStopCFM
+// OdeJointSetStopERP
+// OdeJointSetVel
 
 exports
 
@@ -470,7 +651,12 @@ ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
 ShadowMapRender,
 //ODE
-OdeManagerCreate;
+OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
+OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
+OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
+OdeWorldSetAutoDisableFlag,
+OdeStaticCreate, OdeDynamicCreate,
+OdeAddBox;
 
 begin
 end.
