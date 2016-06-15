@@ -17,5 +17,8 @@ Xtreme3D 3.0 is mainly written by Timur Gafarov aka Gecko. DCE functions are wri
 
 License
 -------
-GLScene is distributed under Mozilla Public License 1.1. 
 Xtreme3D 3.0 is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
+
+GLScene is distributed under Mozilla Public License 1.1. 
+
+ODE is distributed under BSD-style license. 

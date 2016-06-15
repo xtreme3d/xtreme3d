@@ -57,6 +57,8 @@ For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) forma
 
 License
 -------
+Xtreme3D 3.0 is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
+
 GLScene is distributed under Mozilla Public License 1.1. 
 
-Xtreme3D v3 is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
+ODE is distributed under BSD-style license. 
