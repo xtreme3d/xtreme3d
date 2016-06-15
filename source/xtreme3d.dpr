@@ -176,6 +176,24 @@ begin
    mesh.Binormals := bitangents;
 end;
 
+function getODEBehaviour(obj: TGLBaseSceneObject): TGLODEBehaviour;
+var
+  dyna: TGLODEDynamic;
+  stat: TGLODEStatic;
+begin
+  stat := GetOdeStatic(obj);
+  dyna := GetOdeDynamic(obj);
+  result := nil;
+  if stat <> nil then
+  begin
+    result := stat;
+  end;
+  if dyna <> nil then
+  begin
+    result := dyna;
+  end;
+end;
+
 {$I 'engine'}
 {$I 'viewer'}
 {$I 'dummycube'}
@@ -312,27 +330,40 @@ begin
   result := 1.0;
 end;
 
+// New function
+function OdeDynamicCalculateMass(obj: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+  m: TdMass;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  m := dyna.CalculateMass;
+  dBodySetMass(dyna.Body, @m);
+end;
+
 function OdeDynamicCalibrateCenterOfMass(obj: real): real; stdcall;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
   dyna.CalibrateCenterOfMass;
-  result := 1.0;
-end;
-
-function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
-var
-  dyna: TGLODEDynamic;
-begin
-  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  dyna.AddForce(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
 
 // TODO:
 // OdeDynamicAlignObject
 // OdeDynamicEnable
+
+function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddForce(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+// TODO:
 // OdeDynamicAddForceAtPos
 // OdeDynamicAddForceAtRelPos
 // OdeDynamicAddRelForce
@@ -369,8 +400,38 @@ begin
       BoxHeight := h;
       BoxDepth := d;
     end;
+    result := Integer(elem);
+    Exit;
   end;
-  result := 1.0;
+  result := 0.0;
+end;
+
+// Change from Xtreme3D 2.0: position should be specified
+function OdeAddSphere(obj, x, y, z, r: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementSphere;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementSphere(stat.AddNewElement(TODEElementSphere));
+  if dyna <> nil then
+    elem := TODEElementSphere(dyna.AddNewElement(TODEElementSphere));
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Position.SetPoint(x, y, z);
+      Radius := r;
+    end;
+    result := Integer(elem);
+    Exit;
+  end;
+  result := 0.0;
 end;
 
 function OdeAddPlane(obj: real): real; stdcall;
@@ -378,15 +439,21 @@ var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
+  elem: TODEElementBase;
 begin
   o := TGLBaseSceneObject(trunc64(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    stat.AddNewElement(TODEElementPlane);
+    elem := stat.AddNewElement(TODEElementPlane);
   if dyna <> nil then
-    dyna.AddNewElement(TODEElementPlane);
-  result := 1.0;
+    elem := dyna.AddNewElement(TODEElementPlane);
+  if elem <> nil then
+  begin  
+    result := Integer(elem);
+    Exit;
+  end;
+  result := 0.0;
 end;
 
 // Change from Xtreme3D 2.0: mesh index should be specified
@@ -413,7 +480,19 @@ begin
       Vertices := TGLFreeform(o).MeshObjects.Items[m].ExtractTriangles;
       Indices := BuildVectorCountOptimizedIndices(Vertices);
     end;
+    result := Integer(elem);
+    Exit;
   end;
+  result := 0.0;
+end;
+
+// New function
+function OdeElementSetDensity(element, density: real): real; stdcall;
+var
+  elem: TODEElementBase;
+begin
+  elem := TODEElementBase(trunc64(element));
+  elem.Density := density;
   result := 1.0;
 end;
 
@@ -422,12 +501,47 @@ end;
 // OdeAddCone
 // OdeAddCylinder
 // OdeAddSphere
+
+function OdeSurfaceEnableRollingFrictionCoeff(obj, mode: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.RollingFrictionEnabled := Boolean(trunc64(mode));
+  result := 1.0;
+end;
+
+function OdeSurfaceSetRollingFrictionCoeff(obj, rfc: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.RollingFrictionCoeff := rfc;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetBounce(obj, bounce: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Bounce := bounce;
+  result := 1.0;
+end;
+
 // OdeSurfaceSetRollingFrictionCoeff
-// OdeSurfaceEnableRollingFrictionCoeff
 // OdeSurfaceSetMode
 // OdeSurfaceSetMu
 // OdeSurfaceSetMu2
-// OdeSurfaceSetBounce
 // OdeSurfaceSetBounceVel
 // OdeSurfaceSetSoftERP
 // OdeSurfaceSetSoftCFM
@@ -714,8 +828,12 @@ OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
 OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
 OdeWorldSetAutoDisableFlag,
 OdeStaticCreate, OdeDynamicCreate,
-OdeDynamicCalibrateCenterOfMass, OdeDynamicAddForce,
-OdeAddBox, OdeAddPlane, OdeAddTriMesh;
+OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
+OdeDynamicAddForce,
+OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddTriMesh,
+OdeElementSetDensity,
+OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
+OdeSurfaceSetBounce;
 
 begin
 end.
