@@ -1642,7 +1642,7 @@ var
   i : Integer;
 begin
   if not Visible then Exit;
-  if not (csDesigning in ComponentState) then
+  //if not (csDesigning in ComponentState) then
     if not VisibleAtRunTime then Exit;
 
   glPushAttrib(GL_ENABLE_BIT + GL_CURRENT_BIT + GL_POLYGON_BIT);

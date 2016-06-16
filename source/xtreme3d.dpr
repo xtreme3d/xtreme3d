@@ -236,6 +236,7 @@ function OdeManagerCreate(): real; stdcall;
 begin
   ode := TGLODEManager.Create(nil);
   dWorldSetAutoDisableFlag(ode.World, 0);
+  ode.RenderPoint := TGLRenderPoint.CreateAsChild(scene.Objects);
   result := 1.0;
 end;
 
@@ -285,6 +286,7 @@ end;
 function OdeManagerSetVisible(mode: real): real; stdcall;
 begin
   ode.Visible := Boolean(trunc64(mode));
+  ode.VisibleAtRunTime := Boolean(trunc64(mode));
   result := 1.0;
 end;
 
@@ -306,11 +308,6 @@ end;
 // OdeWorldSetAutoDisableAngularThreshold
 // OdeWorldSetAutoDisableSteps
 // OdeWorldSetAutoDisableTime
-// OdeDynamicSetAutoDisableFlag
-// OdeDynamicSetAutoDisableLinearThreshold
-// OdeDynamicSetAutoDisableAngularThreshold
-// OdeDynamicSetAutoDisableSteps
-// OdeDynamicSetAutoDisableTime
 
 function OdeStaticCreate(obj: real): real; stdcall;
 var
@@ -353,6 +350,11 @@ end;
 // TODO:
 // OdeDynamicAlignObject
 // OdeDynamicEnable
+// OdeDynamicSetAutoDisableFlag
+// OdeDynamicSetAutoDisableLinearThreshold
+// OdeDynamicSetAutoDisableAngularThreshold
+// OdeDynamicSetAutoDisableSteps
+// OdeDynamicSetAutoDisableTime
 
 function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
 var
@@ -373,6 +375,8 @@ end;
 // OdeDynamicAddRelTorque
 // OdeDynamicGetContactCount
 // OdeDynamicGetContact
+
+// TODO:
 // OdeStaticGetContactCount
 // OdeStaticGetContact
 
@@ -434,6 +438,7 @@ begin
   result := 0.0;
 end;
 
+// Note: Plane/Trimesh collision is not supported
 function OdeAddPlane(obj: real): real; stdcall;
 var
   o: TGLBaseSceneObject;
@@ -456,7 +461,96 @@ begin
   result := 0.0;
 end;
 
+// Change from Xtreme3D 2.0: position should be specified
+// Note: Cylinder/Trimesh collision is not supported
+function OdeAddCylinder(obj, x, y, z, len, r: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementCylinder;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementCylinder(stat.AddNewElement(TODEElementCylinder));
+  if dyna <> nil then
+    elem := TODEElementCylinder(dyna.AddNewElement(TODEElementCylinder));
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Position.SetPoint(x, y, z);
+      Radius := r;
+      Length := len;
+    end;
+    result := Integer(elem);
+    Exit;
+  end;
+  result := 0.0;
+end;
+
+// Change from Xtreme3D 2.0: position should be specified
+function OdeAddCone(obj, x, y, z, len, r: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementCone;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementCone(stat.AddNewElement(TODEElementCone));
+  if dyna <> nil then
+    elem := TODEElementCone(dyna.AddNewElement(TODEElementCone));
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Position.SetPoint(x, y, z);
+      Radius := r;
+      Length := len;
+    end;
+    result := Integer(elem);
+    Exit;
+  end;
+  result := 0.0;
+end;
+
+// Change from Xtreme3D 2.0: position should be specified
+function OdeAddCapsule(obj, x, y, z, len, r: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  stat: TGLODEStatic;
+  dyna: TGLODEDynamic;
+  elem: TODEElementCapsule;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  stat := GetOdeStatic(o);
+  dyna := GetOdeDynamic(o);
+  if stat <> nil then
+    elem := TODEElementCapsule(stat.AddNewElement(TODEElementCapsule));
+  if dyna <> nil then
+    elem := TODEElementCapsule(dyna.AddNewElement(TODEElementCapsule));
+  if elem <> nil then
+  begin
+    with elem do
+    begin
+      Position.SetPoint(x, y, z);
+      Radius := r;
+      Length := len;
+    end;
+    result := Integer(elem);
+    Exit;
+  end;
+  result := 0.0;
+end;
+
 // Change from Xtreme3D 2.0: mesh index should be specified
+// Note Trimes/Trimesh collision is not supported
 function OdeAddTriMesh(obj, mesh: real): real; stdcall;
 var
   o: TGLBaseSceneObject;
@@ -496,12 +590,6 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeAddCapsule
-// OdeAddCone
-// OdeAddCylinder
-// OdeAddSphere
-
 function OdeSurfaceEnableRollingFrictionCoeff(obj, mode: real): real; stdcall;
 var
   o: TGLBaseSceneObject;
@@ -538,7 +626,7 @@ begin
   result := 1.0;
 end;
 
-// OdeSurfaceSetRollingFrictionCoeff
+// TODO:
 // OdeSurfaceSetMode
 // OdeSurfaceSetMu
 // OdeSurfaceSetMu2
@@ -549,12 +637,16 @@ end;
 // OdeSurfaceSetMotion2
 // OdeSurfaceSetSlip1
 // OdeSurfaceSetSlip2
+
+// TODO:
 // OdeAddJointBall
 // OdeAddJointFixed
 // OdeAddJointHinge
 // OdeAddJointHinge2
 // OdeAddJointSlider
 // OdeAddJointUniversal
+
+// TODO:
 // OdeJointSetObjects
 // OdeJointEnable
 // OdeJointInitialize
@@ -830,7 +922,7 @@ OdeWorldSetAutoDisableFlag,
 OdeStaticCreate, OdeDynamicCreate,
 OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
 OdeDynamicAddForce,
-OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddTriMesh,
+OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule, OdeAddTriMesh,
 OdeElementSetDensity,
 OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
 OdeSurfaceSetBounce;
