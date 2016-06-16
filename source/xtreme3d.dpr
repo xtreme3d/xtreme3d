@@ -15,8 +15,8 @@ uses
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLShadowMap,
-  GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
+  GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
+  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
 
 type
    TEmpty = class(TComponent)
@@ -177,10 +177,11 @@ begin
 end;
 
 function getODEBehaviour(obj: TGLBaseSceneObject): TGLODEBehaviour;
-var
-  dyna: TGLODEDynamic;
-  stat: TGLODEStatic;
+//var
+//  dyna: TGLODEDynamic;
+//  stat: TGLODEStatic;
 begin
+{
   stat := GetOdeStatic(obj);
   dyna := GetOdeDynamic(obj);
   result := nil;
@@ -192,6 +193,8 @@ begin
   begin
     result := dyna;
   end;
+}
+  result := TGLODEBehaviour(obj.Behaviours.GetByClass(TGLODEBehaviour));
 end;
 
 {$I 'engine'}
@@ -324,6 +327,17 @@ var
 begin
   dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
   dyna.Manager := ode;
+  result := 1.0;
+end;
+
+// New function
+// Note: Terrain/Trimesh collision is not supported
+function OdeTerrainCreate(terr: real): real; stdcall;
+var
+  hf: TGLODEHeightField;
+begin
+  hf := GetOrCreateODEHeightField(TGLBaseSceneObject(trunc64(terr)));
+  hf.Manager := ode;
   result := 1.0;
 end;
 
@@ -919,7 +933,7 @@ OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoin
 OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
 OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
 OdeWorldSetAutoDisableFlag,
-OdeStaticCreate, OdeDynamicCreate,
+OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
 OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
 OdeDynamicAddForce,
 OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule, OdeAddTriMesh,
