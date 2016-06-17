@@ -379,19 +379,87 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeDynamicAddForceAtPos
-// OdeDynamicAddForceAtRelPos
-// OdeDynamicAddRelForce
-// OdeDynamicAddRelForceAtPos
-// OdeDynamicAddRelForceAtRelPos
-// OdeDynamicAddTorque
-// OdeDynamicAddRelTorque
-// OdeDynamicGetContactCount
-// OdeDynamicGetContact
+function OdeDynamicAddForceAtPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddForceAtPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
+  result := 1.0;
+end;
+
+function OdeDynamicAddForceAtRelPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddForceAtRelPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
+  result := 1.0;
+end;
+
+function OdeDynamicAddRelForce(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddRelForce(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicAddRelForceAtPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddRelForceAtPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
+  result := 1.0;
+end;
+
+function OdeDynamicAddRelForceAtRelPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddRelForceAtRelPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
+  result := 1.0;
+end;
+
+function OdeDynamicAddTorque(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddTorque(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicAddRelTorque(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AddRelTorque(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicGetContactCount(obj: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  result := dyna.NumContacts;
+end;
+
+function OdeStaticGetContactCount(obj: real): real; stdcall;
+var
+  stat: TGLODEStatic;
+begin
+  stat := TGLODEStatic(TGLBaseSceneObject(trunc64(obj)));
+  result := stat.NumContacts;
+end;
 
 // TODO:
-// OdeStaticGetContactCount
+// OdeDynamicGetContact
 // OdeStaticGetContact
 
 // Change from Xtreme3D 2.0: position should be specified
@@ -935,7 +1003,10 @@ OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
 OdeWorldSetAutoDisableFlag,
 OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
 OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
-OdeDynamicAddForce,
+OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos, 
+OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
+OdeDynamicAddTorque, OdeDynamicAddRelTorque,
+OdeDynamicGetContactCount, OdeStaticGetContactCount,
 OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule, OdeAddTriMesh,
 OdeElementSetDensity,
 OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,

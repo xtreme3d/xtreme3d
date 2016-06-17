@@ -271,6 +271,7 @@ type
       FOnCollision : TODEObjectCollisionEvent;
       FInitialized : Boolean;
       FOwnerBaseSceneObject : TGLBaseSceneObject;
+      FNumContacts: Integer;
     protected
       { Protected Declarations }
       procedure Initialize; virtual;
@@ -284,6 +285,8 @@ type
       procedure SetSurface(value:TODECollisionSurface);
       function GetAbsoluteMatrix : TMatrix;
 
+      procedure OnCollisionDefault(Sender: TObject; Object2: TObject; Contact: TdContact);
+
     public
       { Public Declarations }
       constructor Create(AOwner : TXCollection); override;
@@ -295,6 +298,8 @@ type
       procedure Reinitialize;
       property Initialized : Boolean read FInitialized;
       property AbsoluteMatrix : TMatrix read GetAbsoluteMatrix;
+
+      property NumContacts: Integer read FNumContacts write FNumContacts; 
 
     published
       { Published Declarations }
@@ -1552,9 +1557,12 @@ begin
 
   // Align static elements to their GLScene parent objects
   for i:=0 to FODEBehaviours.Count-1 do
+  begin
+    ODEBehaviours[i].NumContacts := 0;
     if ODEBehaviours[i] is TGLODEStatic then
       if ODEBehaviours[i].Initialized then
         TGLODEStatic(ODEBehaviours[i]).AlignElements;
+  end;
 
   // Run ODE collisions and step the scene
   dSpaceCollide(FSpace,Self,nearCallback);
@@ -1567,9 +1575,11 @@ begin
 
   // Align dynamic objects to their ODE bodies
   for i:=0 to FODEBehaviours.Count-1 do
+  begin
     if ODEBehaviours[i] is TGLODEDynamic then
       if ODEBehaviours[i].Initialized then
         TGLODEDynamic(ODEBehaviours[i]).AlignObject;
+  end;
 
   // Process rolling friction
   Coeff:=0;
@@ -1970,6 +1980,8 @@ begin
   FOwnerBaseSceneObject:=OwnerBaseSceneObject;
   if Assigned(FOwnerBaseSceneObject) then
     RegisterGLSceneObject(OwnerBaseSceneObject);
+  FOnCollision := OnCollisionDefault;
+  FNumContacts := 0;
 end;
 
 // Destroy
@@ -2097,6 +2109,11 @@ begin
   if Assigned(Owner.Owner) then
     if Owner.Owner is TGLBaseSceneObject then
       Result:=TGLBaseSceneObject(Owner.Owner).AbsoluteMatrix;
+end;
+
+procedure TGLODEBehaviour.OnCollisionDefault(Sender: TObject; Object2: TObject; Contact: TdContact);
+begin
+  FNumContacts := FNumContacts + 1;
 end;
 
 
