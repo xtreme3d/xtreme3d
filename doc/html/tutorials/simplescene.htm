@@ -33,16 +33,16 @@ Global Game Settings, вкладка Constants). По негласной традиции константы Xtreme
 <BR>Для начала работы вам понадобится файл *.gm6 (или *.gmk для Game Maker 7), с готовым набором функций и 
 констант Xtreme3D. Такой файл вы можете взять из официального дистрибутива движка. Для подготовки к работе достаточно 
 удалить из него все объекты. Назовем его условно project.gm6. Скопируйте его в отдельную папку и добавьте туда же 
-файлы Xtreme3D.dll и ode.dll.
+файлы xtreme3d.dll и ode.dll.
 <BR>
 <BR>Откройте project.gm6. Создайте новый объект Game Maker и назовите его o_engine.
 Добавьте событие Create и перетащите действие Execute a piece of code со вкладки Control. 
 Если вы уже работали с GML, проблем не будет. Если нет, настоятельно рекомендуем оставить пока Xtreme3D и изучить язык 
 на встроенной графике Game Maker. 
 <BR>
-<BR>Следующий код загружает функции из библиотеки в память и запускает работу движка Xtreme3D:
+<BR>Следующий код загружает функции из библиотеки xtreme3d.dll в память и запускает работу движка:
 <BR>
-<BR></A><A class=type>dll_init</A>(); 
+<BR></A><A class=type>dll_init</A>('xtreme3d.dll'); 
 <BR></A><A class=func2link href=../functions/engine.htm#EngineCreate>EngineCreate</A><A>(</A><A>);
 <BR>
 <BR>Идем дальше:
@@ -115,14 +115,14 @@ Global Game Settings, вкладка Constants). По негласной традиции константы Xtreme
 <BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_left</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,-2);
 <BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_right</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(camPos,2);
 <BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_up</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,-1);
-<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_down</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,1);
+<BR><B>if</B> </A><A class=type>keyboard_check</A><A>(</A><A class=constant>vk_down</A><A>) </A><A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(camPos,1);</A>
 <BR>
-<BR>Теперь, когда пользователь нажмет клавишу, скажем, "Вверх", Камера будет двигаться вперед (соответственно и для клавиши "Назад"). Для поворота Камеры используются клавиши "Влево" и "Вправо". Поворот осуществляется по оси Y (Turn), поэтому используется функция </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>. Заметьте, что для трансформации мы используем не саму Камеру, а ее родителя. Благодаря этому мы потом сможем вращать Камеру при помощи мыши.
+<BR><A>Теперь, когда пользователь нажмет клавишу, скажем, "Вверх", Камера будет двигаться вперед (соответственно и для клавиши "Назад"). Для поворота Камеры используются клавиши "Влево" и "Вправо". Поворот осуществляется по оси Y (Turn), поэтому используется функция </A><A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>. Заметьте, что для трансформации мы используем не саму Камеру, а ее родителя. Благодаря этому мы потом сможем вращать Камеру при помощи мыши.
 <BR>
-<BR></A><A class=func2link href=../functions/engine.htm#Update>Update</A><A>();
-<BR></A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A>(view);
+<BR></A><A class=func2link href=../functions/engine.htm#Update>Update</A><A>(1.0/</A><A class=constant>room_speed</A><A>);
+<BR></A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A>(view);</A>
 <BR>
-<BR>Эти две функции надо обязательно вызвать, иначе движок будет "парализован". </A><A class=func2link href=../functions/engine.htm#Update>Update</A><A> обновляет состояние объектов сцены, </A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A> совершает отрисовку указанного Вида. 
+<BR><A>Эти две функции надо обязательно вызвать, иначе движок будет "парализован". </A><A class=func2link href=../functions/engine.htm#Update>Update</A><A> обновляет состояние объектов сцены, </A><A class=func2link href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A> совершает отрисовку указанного Вида. В функцию <A class=func2link href=../functions/engine.htm#Update>Update</A> необходимо передать шаг времени для обновления анимации. Он измеряется в секундах и может быть равен времени между двумя кадрами рендеринга. Обычно в Game Maker это время ограничивается в настройках комнаты - задается так называемая "скорость комнаты", максимальная кадровая частота, измеряемая в кадрах в секунду. Обычно ее устанавливают равой 60 - это значение соответствует частоте обновления монитора. Мы можем вычислить временной промежуток между кадрами, поделив единицу (1 секунду) на это значение.
 <BR>
 <BR>Это все! Теперь можно поместить наш объект o_engine в комнате и запускать.
 <BR>
