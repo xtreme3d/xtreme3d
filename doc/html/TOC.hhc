@@ -35,12 +35,12 @@
   <PARAM name="Local" value="tutorials/simplescene.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Камера от первого лица">
-  <PARAM name="Local" value="tutorials/firstpersoncamera.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Иерархия объектов">
   <PARAM name="Local" value="tutorials/hierarchy.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Камера от первого лица">
+  <PARAM name="Local" value="tutorials/firstpersoncamera.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Библиотека материалов">
