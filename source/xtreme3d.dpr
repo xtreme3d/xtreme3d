@@ -16,7 +16,8 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
+  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils,
+  GLKraftManager;
 
 type
    TEmpty = class(TComponent)
@@ -361,10 +362,34 @@ begin
   result := 1.0;
 end;
 
+function OdeDynamicAlignObject(obj: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.AlignObject;
+  result := 1.0;
+end;
+
+function OdeDynamicEnable(obj, mode: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.Enabled := Boolean(trunc64(mode));
+  result := 1.0;
+end;
+
+function OdeDynamicSetAutoDisableFlag(obj, mode: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dBodySetAutoDisableFlag(dyna.Body, trunc64(mode));
+  result := 1.0;
+end;
+
 // TODO:
-// OdeDynamicAlignObject
-// OdeDynamicEnable
-// OdeDynamicSetAutoDisableFlag
 // OdeDynamicSetAutoDisableLinearThreshold
 // OdeDynamicSetAutoDisableAngularThreshold
 // OdeDynamicSetAutoDisableSteps
@@ -1003,6 +1028,7 @@ OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
 OdeWorldSetAutoDisableFlag,
 OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
 OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
+OdeDynamicAlignObject, OdeDynamicEnable, OdeDynamicSetAutoDisableFlag,
 OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos, 
 OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
 OdeDynamicAddTorque, OdeDynamicAddRelTorque,
