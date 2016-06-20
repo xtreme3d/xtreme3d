@@ -16,7 +16,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
+  GLShadowMap, GLParticleFX, MeshUtils;
 
 type
    TEmpty = class(TComponent)
