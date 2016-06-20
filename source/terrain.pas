@@ -50,7 +50,7 @@ var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
   TerrainRenderer1:=TGLTerrainRenderer(trunc64(terrain));
-  TerrainRenderer1.HeightDataSource:=TGLBitmapHDS(trunc64(hds));
+  TerrainRenderer1.HeightDataSource:=THeightDataSource(trunc64(hds)); //TGLBitmapHDS(trunc64(hds));
   result:=1;
 end;
 

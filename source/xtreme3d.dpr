@@ -16,8 +16,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils,
-  GLKraftManager;
+  GLShadowMap, GLParticleFX, GLSpriteParticleFXManager, MeshUtils;
 
 type
    TEmpty = class(TComponent)
@@ -771,8 +770,8 @@ end;
 // OdeJointSetStopERP
 // OdeJointSetVel
 
-exports
-
+exports
+
 //Engine
 EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
 SetPakArchive,
