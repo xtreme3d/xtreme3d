@@ -306,11 +306,29 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeWorldSetAutoDisableLinearThreshold
-// OdeWorldSetAutoDisableAngularThreshold
-// OdeWorldSetAutoDisableSteps
-// OdeWorldSetAutoDisableTime
+function OdeWorldSetAutoDisableLinearThreshold(velocity: real): real; stdcall;
+begin
+  dWorldSetAutoDisableLinearThreshold(ode.World, velocity);
+  result := 1.0;
+end;
+
+function OdeWorldSetAutoDisableAngularThreshold(velocity: real): real; stdcall;
+begin
+  dWorldSetAutoDisableAngularThreshold(ode.World, velocity);
+  result := 1.0;
+end;
+
+function OdeWorldSetAutoDisableSteps(steps: real): real; stdcall;
+begin
+  dWorldSetAutoDisableSteps(ode.World, trunc64(steps));
+  result := 1.0;
+end;
+
+function OdeWorldSetAutoDisableTime(time: real): real; stdcall;
+begin
+  dWorldSetAutoDisableTime(ode.World, time);
+  result := 1.0;
+end;
 
 function OdeStaticCreate(obj: real): real; stdcall;
 var
@@ -388,11 +406,41 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeDynamicSetAutoDisableLinearThreshold
-// OdeDynamicSetAutoDisableAngularThreshold
-// OdeDynamicSetAutoDisableSteps
-// OdeDynamicSetAutoDisableTime
+function OdeDynamicSetAutoDisableLinearThreshold(obj, velocity: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dBodySetAutoDisableLinearThreshold(dyna.Body, velocity);
+  result := 1.0;
+end;
+
+function OdeDynamicSetAutoDisableAngularThreshold(obj, velocity: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dBodySetAutoDisableAngularThreshold(dyna.Body, velocity);
+  result := 1.0;
+end;
+
+function OdeDynamicSetAutoDisableSteps(obj, steps: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dBodySetAutoDisableSteps(dyna.Body, trunc64(steps));
+  result := 1.0;
+end;
+
+function OdeDynamicSetAutoDisableTime(obj, time: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dBodySetAutoDisableTime(dyna.Body, time);
+  result := 1.0;
+end;
 
 function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
 var
@@ -1024,10 +1072,13 @@ ShadowMapRender,
 OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
 OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
 OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
-OdeWorldSetAutoDisableFlag,
+OdeWorldSetAutoDisableFlag, OdeWorldSetAutoDisableLinearThreshold,
+OdeWorldSetAutoDisableAngularThreshold, OdeWorldSetAutoDisableSteps, OdeWorldSetAutoDisableTime,
 OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
 OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
 OdeDynamicAlignObject, OdeDynamicEnable, OdeDynamicSetAutoDisableFlag,
+OdeDynamicSetAutoDisableLinearThreshold, OdeDynamicSetAutoDisableAngularThreshold,
+OdeDynamicSetAutoDisableSteps, OdeDynamicSetAutoDisableTime,
 OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos, 
 OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
 OdeDynamicAddTorque, OdeDynamicAddRelTorque,
