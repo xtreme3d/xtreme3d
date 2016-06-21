@@ -16,7 +16,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, GLParticleFX, MeshUtils;
+  GLShadowMap, GLParticleFX, MeshUtils, GLODEVehicle;
 
 type
    TEmpty = class(TComponent)
@@ -927,6 +927,43 @@ end;
 // OdeJointSetStopERP
 // OdeJointSetVel
 
+function OdeVehicleCreate(parent: real): real; stdcall;
+var
+  veh: TGLODEVehicle;
+begin
+  if not (parent=0) then
+    veh := TGLODEVehicle.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    veh := TGLODEVehicle.CreateAsChild(scene.Objects);
+  result := Integer(veh);
+end;
+
+function OdeVehicleSetScene(vehicle, obj: real): real; stdcall;
+var
+  veh: TGLODEVehicle;
+begin
+  veh := TGLODEVehicle(trunc64(vehicle));
+  veh.RaycastScene := TGLBaseSceneObject(trunc64(obj)); 
+  result := 1.0;
+end;
+
+function OdeVehicleAddWheel(vehicle, x, y, z, radius, maxsusplen: real): real; stdcall;
+var
+  veh: TGLODEVehicle;
+  wheel: TGLODEVehicleWheel;
+begin
+  veh := TGLODEVehicle(trunc64(vehicle));
+  wheel := veh.AddWheel(AffineVectorMake(x, y, z));
+  wheel.Radius := radius;
+  wheel.SuspensionMaxLength := maxsusplen;
+  wheel.Stiffness := 1.0;
+  wheel.Damping := 0.2;
+  wheel.Compression := 0.0;
+  wheel.SuspensionLength := 0.0;
+  wheel.SuspensionLengthPrev := 0.0;
+  result := Integer(wheel);
+end;
+
 exports
 
 //Engine
@@ -1197,7 +1234,9 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
 OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
 OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
-OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2;
+OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
+
+OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleAddWheel;
 
 begin
 end.
