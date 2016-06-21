@@ -177,23 +177,7 @@ begin
 end;
 
 function getODEBehaviour(obj: TGLBaseSceneObject): TGLODEBehaviour;
-//var
-//  dyna: TGLODEDynamic;
-//  stat: TGLODEStatic;
 begin
-{
-  stat := GetOdeStatic(obj);
-  dyna := GetOdeDynamic(obj);
-  result := nil;
-  if stat <> nil then
-  begin
-    result := stat;
-  end;
-  if dyna <> nil then
-  begin
-    result := dyna;
-  end;
-}
   result := TGLODEBehaviour(obj.Behaviours.GetByClass(TGLODEBehaviour));
 end;
 
@@ -768,6 +752,59 @@ begin
   result := 1.0;
 end;
 
+function OdeSurfaceSetMode(
+  obj, Mu2, FDir1,
+  Bounce, SoftERP, SoftCFM,
+  Motion1, Motion2,
+  Slip1, Slip2 : real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+  surf: TODECollisionSurface;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+  begin
+    surf := beh.Surface;
+    surf.SurfaceMode := [];
+    if Mu2 = 1     then surf.SurfaceMode := surf.SurfaceMode + [csmMu2];
+    if FDir1 = 1   then surf.SurfaceMode := surf.SurfaceMode + [csmFDir1];
+    if Bounce = 1  then surf.SurfaceMode := surf.SurfaceMode + [csmBounce];
+    if SoftERP = 1 then surf.SurfaceMode := surf.SurfaceMode + [csmSoftERP];
+    if SoftCFM = 1 then surf.SurfaceMode := surf.SurfaceMode + [csmSoftCFM];
+    if Motion1 = 1 then surf.SurfaceMode := surf.SurfaceMode + [csmMotion1];
+    if Motion2 = 1 then surf.SurfaceMode := surf.SurfaceMode + [csmMotion2];
+    if Slip1 = 1   then surf.SurfaceMode := surf.SurfaceMode + [csmSlip1];
+    if Slip2 = 1   then surf.SurfaceMode := surf.SurfaceMode + [csmSlip2];
+  end;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetMu(obj, mu: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Mu := mu;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetMu2(obj, mu2: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Mu2 := mu2;
+  result := 1.0;
+end;
+
 function OdeSurfaceSetBounce(obj, bounce: real): real; stdcall;
 var
   o: TGLBaseSceneObject;
@@ -780,17 +817,89 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeSurfaceSetMode
-// OdeSurfaceSetMu
-// OdeSurfaceSetMu2
-// OdeSurfaceSetBounceVel
-// OdeSurfaceSetSoftERP
-// OdeSurfaceSetSoftCFM
-// OdeSurfaceSetMotion1
-// OdeSurfaceSetMotion2
-// OdeSurfaceSetSlip1
-// OdeSurfaceSetSlip2
+function OdeSurfaceSetBounceVel(obj, vel: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Bounce_Vel := vel;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetSoftERP(obj, erp: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.SoftERP := erp;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetSoftCFM(obj, cfm: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.SoftCFM := cfm;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetMotion1(obj, motion1: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Motion1 := motion1;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetMotion2(obj, motion2: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Motion2 := motion2;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetSlip1(obj, slip1: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Slip1 := slip1;
+  result := 1.0;
+end;
+
+function OdeSurfaceSetSlip2(obj, slip2: real): real; stdcall;
+var
+  o: TGLBaseSceneObject;
+  beh: TGLODEBehaviour;
+begin
+  o := TGLBaseSceneObject(trunc64(obj));
+  beh := getODEBehaviour(o);
+  if beh <> nil then
+    beh.Surface.Slip2 := slip2;
+  result := 1.0;
+end;
 
 // TODO:
 // OdeAddJointBall
@@ -1086,7 +1195,9 @@ OdeDynamicGetContactCount, OdeStaticGetContactCount,
 OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule, OdeAddTriMesh,
 OdeElementSetDensity,
 OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
-OdeSurfaceSetBounce;
+OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
+OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
+OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2;
 
 begin
 end.
