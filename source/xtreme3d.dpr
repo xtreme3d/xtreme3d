@@ -956,8 +956,8 @@ begin
   susp := veh.AddSuspension(AffineVectorMake(x, y, z));
   susp.WheelRadius := wheelradius;
   susp.MaxLength := maxlen;
-  susp.Stiffness := 0.7;
-  susp.Damping := 0.2;
+  susp.Stiffness := 5.0;
+  susp.Damping := 0.5;
   susp.Compression := 0.0;
   susp.Length := 0.0;
   susp.LengthPrev := 0.0;
@@ -970,6 +970,15 @@ end;
 begin
   susp := TGLODEVehicleSuspension(trunc64(suspension));
   result := Integer(susp.Wheel);
+end;
+
+function OdeVehicleSuspensionSetSteeringAngle(suspension, angle: real): real; stdcall;
+var
+  susp: TGLODEVehicleSuspension;
+begin
+  susp := TGLODEVehicleSuspension(trunc64(suspension));
+  susp.SteeringAngle := angle;
+  result := 1.0;
 end;
 
 function OdeVehicleSetForwardForce(vehicle, f: real): real; stdcall;
@@ -1254,7 +1263,7 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
 
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
-OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel;
+OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
 
 begin
 end.

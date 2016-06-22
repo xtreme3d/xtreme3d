@@ -23,6 +23,9 @@ type
     FLengthPrev: Single;
     FForcePosition: TAffineVector;
     FWheel: TGLDummyCube;
+    FSteeringAngle: Single;
+    FMinSteeringAngle: Single;
+    FMaxSteeringAngle: Single;
   public
     constructor Create(AOwner: TComponent); override;
     procedure SetVehicleFromParent;
@@ -36,6 +39,9 @@ type
     property LengthPrev: Single read FLengthPrev write FLengthPrev;
     property ForcePosition: TAffineVector read FForcePosition write FForcePosition;
     property Wheel: TGLDummyCube read FWheel;
+    property SteeringAngle: Single read FSteeringAngle write FSteeringAngle;
+    property MinSteeringAngle: Single read FMinSteeringAngle write FMinSteeringAngle;
+    property MaxSteeringAngle: Single read FMaxSteeringAngle write FMaxSteeringAngle;
   end;
 
   TGLODEVehicle = class(TGLBaseSceneObject)
@@ -124,6 +130,7 @@ var
   sideForce: TAffineVector;
   sideSpeed: Single;
   forwardDir: TAffineVector;
+  forwardForce: TAffineVector;
   maxFrictionForce: Single;
   groundForce: TAffineVector;
 begin
@@ -142,7 +149,9 @@ begin
     bodyVelocity := AffineVectorMake(dyna.Body.lvel[0], dyna.Body.lvel[1], dyna.Body.lvel[2]);
     bodyAngVelocity := AffineVectorMake(dyna.Body.avel[0], dyna.Body.avel[1], dyna.Body.avel[2]);
 
-    forwardSpeed := VectorDotProduct(bodyVelocity, AffineVectorMake(AbsoluteDirection));
+    forwardDir := AffineVectorMake(susp.AbsoluteDirection);
+
+    forwardSpeed := VectorDotProduct(bodyVelocity, forwardDir);
     wheelRollSpeed := -forwardSpeed / susp.WheelRadius;
     susp.Wheel.Pitch(RadToDeg(wheelRollSpeed * dt));
 
@@ -150,28 +159,34 @@ begin
     radiusVector := VectorSubtract(susp.ForcePosition, AffineVectorMake(AbsolutePosition));
     pointVelocity := VectorAdd(bodyVelocity, VectorCrossProduct(bodyAngVelocity, radiusVector));
     sideSpeed := VectorDotProduct(pointVelocity, sideForce);
-    ScaleVector(sideForce, -sideSpeed);// * 0.05
-    //dyna.AddForceAtPos(sideForce, susp.ForcePosition);
+    ScaleVector(sideForce, -sideSpeed * 0.1);// * 0.05
+    dyna.AddForceAtPos(sideForce, susp.ForcePosition);
+
+    susp.TurnAngle := susp.SteeringAngle;
 
     if Abs(forwardSpeed) < 10.0 then
     begin
-      forwardDir := AffineVectorMake(AbsoluteDirection);
-      ScaleVector(forwardDir, FForwardForce);
-      //dyna.AddForce(forwardDir);
+      forwardForce := forwardDir;
+      ScaleVector(forwardForce, FForwardForce);
     end
     else
-      forwardDir := AffineVectorMake(0, 0, 0);
+      forwardForce := AffineVectorMake(0, 0, 0);
 
-    maxFrictionForce := (springForce + dampingForce) * 0.5;
-    groundForce := VectorAdd(forwardDir, sideForce);
+    dyna.AddForce(forwardForce);
+    {
+    maxFrictionForce := (springForce + dampingForce) * 0.6; //frictionCoef
+    groundForce := VectorAdd(forwardForce, sideForce);
     if VectorLength(groundForce) > maxFrictionForce then
     begin
       if VectorLength(groundForce) > EPSILON then
+      begin
         groundForce := VectorNormalize(groundForce);
-      ScaleVector(groundForce, maxFrictionForce);
+        ScaleVector(groundForce, maxFrictionForce);
+      end;
     end;
+    }
 
-    dyna.AddForce(groundForce);
+    //dyna.AddForceAtPos(groundForce, susp.ForcePosition);
   end;
 end;
 
