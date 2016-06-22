@@ -947,21 +947,38 @@ begin
   result := 1.0;
 end;
 
-function OdeVehicleAddWheel(vehicle, x, y, z, radius, maxsusplen: real): real; stdcall;
+function OdeVehicleAddSuspension(vehicle, x, y, z, wheelradius, maxlen: real): real; stdcall;
 var
   veh: TGLODEVehicle;
-  wheel: TGLODEVehicleWheel;
+  susp: TGLODEVehicleSuspension;
 begin
   veh := TGLODEVehicle(trunc64(vehicle));
-  wheel := veh.AddWheel(AffineVectorMake(x, y, z));
-  wheel.Radius := radius;
-  wheel.SuspensionMaxLength := maxsusplen;
-  wheel.Stiffness := 1.0;
-  wheel.Damping := 0.2;
-  wheel.Compression := 0.0;
-  wheel.SuspensionLength := 0.0;
-  wheel.SuspensionLengthPrev := 0.0;
-  result := Integer(wheel);
+  susp := veh.AddSuspension(AffineVectorMake(x, y, z));
+  susp.WheelRadius := wheelradius;
+  susp.MaxLength := maxlen;
+  susp.Stiffness := 0.7;
+  susp.Damping := 0.2;
+  susp.Compression := 0.0;
+  susp.Length := 0.0;
+  susp.LengthPrev := 0.0;
+  result := Integer(susp);
+end;
+
+function OdeVehicleSuspensionGetWheel(suspension: real): real; stdcall;
+var
+  susp: TGLODEVehicleSuspension;
+begin
+  susp := TGLODEVehicleSuspension(trunc64(suspension));
+  result := Integer(susp.Wheel);
+end;
+
+function OdeVehicleSetForwardForce(vehicle, f: real): real; stdcall;
+var
+  veh: TGLODEVehicle;
+begin
+  veh := TGLODEVehicle(trunc64(vehicle));
+  veh.ForwardForce := f;
+  result := 1.0;
 end;
 
 exports
@@ -1236,7 +1253,8 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
 OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
 
-OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleAddWheel;
+OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
+OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel;
 
 begin
 end.
