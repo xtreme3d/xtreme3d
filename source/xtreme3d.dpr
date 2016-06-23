@@ -34,6 +34,7 @@ var
   collisionNormal: TVector;
 
   ode: TGLODEManager;
+  jointList: TGLODEJointList;
 
 {$R *.res}
 
@@ -224,6 +225,7 @@ begin
   ode := TGLODEManager.Create(nil);
   dWorldSetAutoDisableFlag(ode.World, 0);
   ode.RenderPoint := TGLRenderPoint.CreateAsChild(scene.Objects);
+  jointList := TGLODEJointList.Create(nil);
   result := 1.0;
 end;
 
@@ -901,16 +903,37 @@ begin
   result := 1.0;
 end;
 
+function OdeAddJointBall: real; stdcall;
+var
+  j: TODEJointBall;
+begin
+  j := TODEJointBall.Create(jointList.Joints);
+  j.Manager := ode;
+  result := Integer(j);
+end;
+
 // TODO:
-// OdeAddJointBall
 // OdeAddJointFixed
 // OdeAddJointHinge
 // OdeAddJointHinge2
 // OdeAddJointSlider
 // OdeAddJointUniversal
 
+function OdeJointSetObjects(joint, obj1, obj2: real): real; stdcall;
+var
+  j: TODEJointBase;
+  o1: TGLBaseSceneObject;
+  o2: TGLBaseSceneObject;
+begin
+  j := TODEJointBase(trunc64(joint));
+  o1 := TGLBaseSceneObject(trunc64(obj1));
+  o2 := TGLBaseSceneObject(trunc64(obj2));
+  j.Object1 := o1;
+  j.Object2 := o2;
+  result := 1.0;
+end;
+
 // TODO:
-// OdeJointSetObjects
 // OdeJointEnable
 // OdeJointInitialize
 // OdeJointSetAnchor
@@ -927,6 +950,8 @@ end;
 // OdeJointSetStopERP
 // OdeJointSetVel
 
+// Warning: OdeVehicle functionality is experimental
+// and not recommended for real usage!
 function OdeVehicleCreate(parent: real): real; stdcall;
 var
   veh: TGLODEVehicle;
@@ -1261,6 +1286,8 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
 OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
 OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
+
+OdeAddJointBall, OdeJointSetObjects,
 
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;

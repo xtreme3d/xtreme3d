@@ -4,7 +4,7 @@ interface
 
 uses
   Classes, Dialogs, VectorTypes, VectorGeometry,
-  GLScene, GLTexture, GLUtils, GLMisc, GLODEManager,
+  GLScene, GLTexture, GLUtils, GLMisc, GLODEManager, dynode,
   GLTerrainRenderer, GLObjects;
 
 type
@@ -133,6 +133,9 @@ var
   forwardForce: TAffineVector;
   maxFrictionForce: Single;
   groundForce: TAffineVector;
+  torqueCompensation: Single;
+  torqueCompensationVec: TAffineVector;
+  odevel: PdVector3;
 begin
   dyna := TGLODEDynamic(Behaviours.GetByClass(TGLODEDynamic));
   if dyna <> nil then
@@ -146,7 +149,8 @@ begin
     dyna.AddForceAtPos(springForceVec, susp.ForcePosition);
     dyna.AddForceAtPos(dampingForceVec, susp.ForcePosition);
 
-    bodyVelocity := AffineVectorMake(dyna.Body.lvel[0], dyna.Body.lvel[1], dyna.Body.lvel[2]);
+    odevel := dBodyGetLinearVel(dyna.Body);
+    bodyVelocity := AffineVectorMake(odevel[0], odevel[1], odevel[2]);
     bodyAngVelocity := AffineVectorMake(dyna.Body.avel[0], dyna.Body.avel[1], dyna.Body.avel[2]);
 
     forwardDir := AffineVectorMake(susp.AbsoluteDirection);
@@ -157,24 +161,28 @@ begin
 
     sideForce := AffineVectorMake(susp.AbsoluteRight);
     radiusVector := VectorSubtract(susp.ForcePosition, AffineVectorMake(AbsolutePosition));
-    pointVelocity := VectorAdd(bodyVelocity, VectorCrossProduct(bodyAngVelocity, radiusVector));
+    pointVelocity := bodyVelocity; //VectorAdd(bodyVelocity, VectorCrossProduct(bodyAngVelocity, radiusVector));
     sideSpeed := VectorDotProduct(pointVelocity, sideForce);
-    ScaleVector(sideForce, -sideSpeed * 0.1);// * 0.05
+    ScaleVector(sideForce, -sideSpeed);
+    //dyna.AddForce(sideForce);
     dyna.AddForceAtPos(sideForce, susp.ForcePosition);
 
     susp.TurnAngle := susp.SteeringAngle;
 
-    if Abs(forwardSpeed) < 10.0 then
+    forwardForce := forwardDir;
+    ScaleVector(forwardForce, FForwardForce);
+    {
+    if Abs(forwardSpeed) < 5.0 then
     begin
       forwardForce := forwardDir;
       ScaleVector(forwardForce, FForwardForce);
     end
     else
       forwardForce := AffineVectorMake(0, 0, 0);
-
+    }
     dyna.AddForce(forwardForce);
     {
-    maxFrictionForce := (springForce + dampingForce) * 0.6; //frictionCoef
+    maxFrictionForce := (springForce + dampingForce) * 0.5; //frictionCoef
     groundForce := VectorAdd(forwardForce, sideForce);
     if VectorLength(groundForce) > maxFrictionForce then
     begin
@@ -184,9 +192,17 @@ begin
         ScaleVector(groundForce, maxFrictionForce);
       end;
     end;
+    dyna.AddForceAtPos(groundForce, susp.ForcePosition);
     }
+    //torqueCompensation := VectorDotProduct(forwardDir, VectorCrossProduct(groundForce, radiusVector));
+    //torqueCompensationVec := forwardDir;
+    //ScaleVector(torqueCompensationVec, torqueCompensation);
+    //dyna.AddTorque(torqueCompensationVec);
 
-    //dyna.AddForceAtPos(groundForce, susp.ForcePosition);
+    //torqueCompensation := VectorDotProduct(AffineVectorMake(susp.AbsoluteRight), VectorCrossProduct(groundForce, radiusVector));
+    //torqueCompensationVec := AffineVectorMake(susp.AbsoluteRight);
+    //ScaleVector(torqueCompensationVec, torqueCompensation);
+    //dyna.AddTorque(torqueCompensationVec);
   end;
 end;
 
@@ -200,11 +216,12 @@ var
   res: Boolean;
 begin
   rstart := obj.AbsolutePosition;
-  rdir := VectorMake(0, 1, 0, 0); 
+  rdir := VectorMake(0, 1, 0, 0);
   ipoint := VectorMake(0, 0, 0, 0);
   inorm := VectorMake(0, 0, 0, 0);
   bestDistance := 100;
   res := False;
+
   if target.ClassType = TGLTerrainRenderer then
   begin
     bestDistance := rstart[1] - TGLTerrainRenderer(target).InterpolatedHeight(rstart);
@@ -243,7 +260,7 @@ var
 begin
   if FRaycastScene = nil then
   begin
-    susp.ForcePosition := AffineVectorMake(susp.AbsolutePosition[0], 0.0, susp.AbsolutePosition[2]);
+    susp.ForcePosition := AffineVectorMake(susp.AbsolutePosition[0], 0.1, susp.AbsolutePosition[2]);
     suspToGround := susp.AbsolutePosition[1];
   end
   else
@@ -253,7 +270,8 @@ begin
     if ObjRaycast(susp, FRaycastScene, point, rayDist) then
     begin
       suspToGround := rayDist;
-      susp.ForcePosition := point;
+      susp.ForcePosition := //point;
+        AffineVectorMake(point[0], point[1] + 0.1, point[2]);
     end;
   end;
   
