@@ -120,31 +120,29 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>flag - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (по умолчанию </A><A class=constant>false</A><A>).</A>
 <HR>
 
-<!--
-<H1 class=namenew>OdeWorldSetAutoDisableLinearThreshold</H1>
+<H1 class=name>OdeWorldSetAutoDisableLinearThreshold</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableLinearThreshold</A><A>( velocity as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает порог линейной скорости автовыключения.</A>
 <BR><A>velocity - линейная скорость (по умолчанию 0.01).</A>
 <HR>
 
-<H1 class=namenew>OdeWorldSetAutoDisableAngularThreshold</H1>
+<H1 class=name>OdeWorldSetAutoDisableAngularThreshold</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableAngularThreshold</A><A>( velocity as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает порог угловой скорости автовыключения.</A>
 <BR><A>velocity - угловая скорость (по умолчанию 0.01).</A>
 <HR>
 
-<H1 class=namenew>OdeWorldSetAutoDisableSteps</H1>
+<H1 class=name>OdeWorldSetAutoDisableSteps</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableSteps</A><A>( steps as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает количество шагов бездействия автовыключения.</A>
 <BR><A>steps - количество шагов (по умолчанию 10).</A>
 <HR>
 
-<H1 class=namenew>OdeWorldSetAutoDisableTime</H1>
+<H1 class=name>OdeWorldSetAutoDisableTime</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeWorldSetAutoDisableTime</A><A>( time as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает время бездействия автовыключения.</A>
 <BR><A>time - время (по умолчанию 0).</A>
 <HR>
--->
 
 <H1 class=name>OdeStaticCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeStaticCreate</A><A>( object as </A><A class=type>real</A><A> );</A>
@@ -203,31 +201,29 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>flag - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
 <HR>
 
-<!--
-<H1 class=namenew>OdeDynamicSetAutoDisableLinearThreshold</H1>
+<H1 class=name>OdeDynamicSetAutoDisableLinearThreshold</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableLinearThreshold</A><A>( object,velocity as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает порог линейной скорости автовыключения динамического тела.</A>
 <BR><A>velocity - линейная скорость.</A>
 <HR>
 
-<H1 class=namenew>OdeDynamicSetAutoDisableAngularThreshold</H1>
+<H1 class=name>OdeDynamicSetAutoDisableAngularThreshold</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableAngularThreshold</A><A>( object,velocity as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает порог угловой скорости автовыключения динамического тела.</A>
 <BR><A>velocity - угловая скорость.</A>
 <HR>
 
-<H1 class=namenew>OdeDynamicSetAutoDisableSteps</H1>
+<H1 class=name>OdeDynamicSetAutoDisableSteps</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableSteps</A><A>( object,steps as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает количество шагов бездействия автовыключения динамического тела.</A>
 <BR><A>steps - количество шагов.</A>
 <HR>
 
-<H1 class=namenew>OdeDynamicSetAutoDisableTime</H1>
+<H1 class=name>OdeDynamicSetAutoDisableTime</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAutoDisableTime</A><A>( object,time as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает время бездействия автовыключения динамического тела.</A>
 <BR><A>time - время.</A>
 <HR>
--->
 
 <H1 class=name>OdeDynamicAddForce</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicAddForce</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
@@ -403,7 +399,6 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>bounce - упругость.</A>
 <HR>
 
-<!--
 <H1 class=name>OdeSurfaceSetBounceVel</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeSurfaceSetBounceVel</A><A>( body,vel as </A><A class=type>real</A><A> );</A>
 <BR><A>Устанавливает минимальную скорость, необходимую для упругости (в м/с) поверхности тела. Скорость ниже этого порога 
@@ -548,9 +543,7 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>body - id тела</A>
 <BR><A>slip2 - коэффициент скольжения.</A>
 <HR>
--->
 
-<!--
 <H1 class=name>OdeAddJointBall</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeAddJointBall</A><A>();</A>
 <BR><A>Создает сочленение типа Ball-and-socket ("шарик-в-разъеме") и возвращает его id. 
@@ -559,6 +552,7 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><BR><img src=../data/jointball.jpg align="center">
 <HR>
 
+<!--
 <H1 class=name>OdeAddJointFixed</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeAddJointFixed</A><A>();</A>
 <BR><A>Создает сочленение типа Fixed (фиксированное) и возвращает его id.
@@ -601,6 +595,7 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 двигателя с карданным валом, вращающимся вдоль оси машины.</A>
 <BR><BR><img src=../data/jointuniversal.jpg align="center">
 <HR>
+-->
 
 <H1 class=name>OdeJointSetObjects</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeJointSetObjects</A><A>( joint,object1,object2 as </A><A class=type>real</A><A> );</A>
@@ -614,6 +609,7 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>object1,object2 - id объектов.</A>
 <HR>
 
+<!--
 <H1 class=name>OdeJointEnable</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeJointEnable</A><A>( joint,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает сочленение. Включенные сочленения участвуют в симуляции, в то время как 

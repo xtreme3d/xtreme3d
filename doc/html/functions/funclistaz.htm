@@ -572,6 +572,7 @@
 <BR><A class=funclink href=ode.htm#OdeAddCapsule>OdeAddCapsule</A><A>(object,x,y,z,length,radius)</A>
 <BR><A class=funclink href=ode.htm#OdeAddCone>OdeAddCone</A><A>(object,x,y,z,length,radius)</A>
 <BR><A class=funclink href=ode.htm#OdeAddCylinder>OdeAddCylinder</A><A>(object,x,y,z,length,radius)</A>
+<BR><A class=funclink href=ode.htm#OdeAddJointBall>OdeAddJointBall</A><A>()</A>
 <BR><A class=funclink href=ode.htm#OdeAddPlane>OdeAddPlane</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeAddSphere>OdeAddSphere</A><A>(object,x,y,z,radius)</A>
 <BR><A class=funclink href=ode.htm#OdeAddTriMesh>OdeAddTriMesh</A><A>(object,mesh)</A>
@@ -589,8 +590,13 @@
 <BR><A class=funclink href=ode.htm#OdeDynamicCreate>OdeDynamicCreate</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicEnable>OdeDynamicEnable</A><A>(object,mode)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicGetContactCount>OdeDynamicGetContactCount</A><A>(object)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableAngularThreshold>OdeDynamicSetAutoDisableAngularThreshold</A><A>(object,velocity)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableFlag>OdeDynamicSetAutoDisableFlag</A><A>(object,flag)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableLinearThreshold>OdeDynamicSetAutoDisableLinearThreshold</A><A>(object,velocity)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableSteps>OdeDynamicSetAutoDisableSteps</A><A>(object,steps)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableTime>OdeDynamicSetAutoDisableTime</A><A>(object,time)</A>
 <BR><A class=funclink href=ode.htm#OdeElementSetDensity>OdeElementSetDensity</A><A>(element,density)</A>
+<BR><A class=funclink href=ode.htm#OdeJointSetObjects>OdeJointSetObjects</A><A>(joint,object1,object2)</A>
 <BR><A class=funclink href=ode.htm#OdeManagerCreate>OdeManagerCreate</A><A>()</A>
 <BR><A class=funclink href=ode.htm#OdeManagerDestroy>OdeManagerDestroy</A><A>()</A>
 <BR><A class=funclink href=ode.htm#OdeManagerGetNumContactJoints>OdeManagerGetNumContactJoints</A><A>()</A>
@@ -605,9 +611,23 @@
 <BR><A class=funclink href=ode.htm#OdeStaticGetContactCount>OdeStaticGetContactCount</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeSurfaceEnableRollingFrictionCoeff>OdeSurfaceEnableRollingFrictionCoeff</A><A>(object,mode)</A>
 <BR><A class=funclink href=ode.htm#OdeSurfaceSetBounce>OdeSurfaceSetBounce</A><A>(object,bounce)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetBounceVel>OdeSurfaceSetBounceVel</A><A>(object,vel)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetMode>OdeSurfaceSetMode</A><A>(object,mu2,fdir1,bounce,erp,cfm,motion1,motion2,slip1,slip2)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetMotion1>OdeSurfaceSetMotion1</A><A>(object,motion1)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetMotion2>OdeSurfaceSetMotion2</A><A>(object,motion2)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetMu>OdeSurfaceSetMu</A><A>(object,mu)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetMu2>OdeSurfaceSetMu2</A><A>(object,mu2)</A>
 <BR><A class=funclink href=ode.htm#OdeSurfaceSetRollingFrictionCoeff>OdeSurfaceSetRollingFrictionCoeff</A><A>(object,rfc)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetSlip1>OdeSurfaceSetSlip1</A><A>(object,slip1)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetSlip2>OdeSurfaceSetSlip2</A><A>(object,slip2)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetSoftCFM>OdeSurfaceSetSoftCFM2</A><A>(object,cfm)</A>
+<BR><A class=funclink href=ode.htm#OdeSurfaceSetSoftERP>OdeSurfaceSetSoftERP2</A><A>(object,erp)</A>
 <BR><A class=funclink href=ode.htm#OdeTerrainCreate>OdeTerrainCreate</A><A>(terrain)</A>
+<BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableAngularThreshold>OdeWorldSetAutoDisableAngularThreshold</A><A>(velocity)</A>
 <BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableFlag>OdeWorldSetAutoDisableFlag</A><A>(flag)</A>
+<BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableLinearThreshold>OdeWorldSetAutoDisableLinearThreshold</A><A>(velocity)</A>
+<BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableSteps>OdeWorldSetAutoDisableSteps</A><A>(steps)</A>
+<BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableTime>OdeWorldSetAutoDisableTime</A><A>(time)</A>
 
 <BR><A class=funclink href=shader.htm#OutlineShaderCreate>OutlineShaderCreate</A><A>(smooth)</A>
 <BR><A class=funclink href=shader.htm#OutlineShaderSetLineColor>OutlineShaderSetLineColor</A><A>(shader,color)</A>
