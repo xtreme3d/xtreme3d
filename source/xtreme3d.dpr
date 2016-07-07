@@ -182,6 +182,32 @@ begin
   result := TGLODEBehaviour(obj.Behaviours.GetByClass(TGLODEBehaviour));
 end;
 
+function getJointAxisParams(j: TODEJointBase; axis: Integer): TODEJointParams;
+var
+  res: TODEJointParams;
+begin
+  if j is TODEJointHinge then
+  begin
+    if axis = 1 then
+      res := TODEJointHinge(j).AxisParams;
+  end
+  else if j is TODEJointHinge2 then
+  begin
+    if axis = 1 then
+      res := TODEJointHinge2(j).Axis1Params
+    else if axis = 2 then
+      res := TODEJointHinge2(j).Axis2Params;
+  end
+  else if j is TODEJointUniversal then
+  begin
+    if axis = 1 then
+      res := TODEJointUniversal(j).Axis1Params
+    else if axis = 2 then
+      res := TODEJointUniversal(j).Axis2Params;
+  end;
+  result := res;
+end;
+
 {$I 'engine'}
 {$I 'viewer'}
 {$I 'dummycube'}
@@ -933,24 +959,193 @@ begin
   result := 1.0;
 end;
 
-// TODO:
-// OdeJointEnable
-// OdeJointInitialize
-// OdeJointSetAnchor
-// OdeJointSetAnchorAtObject
-// OdeJointSetAxis1
-// OdeJointSetAxis2
-// OdeJointSetBounce
-// OdeJointSetCFM
-// OdeJointSetFMax
-// OdeJointSetFudgeFactor
-// OdeJointSetHiStop
-// OdeJointSetLoStop
-// OdeJointSetStopCFM
-// OdeJointSetStopERP
-// OdeJointSetVel
+function OdeJointEnable(joint, mode: real): real; stdcall;
+var
+  j: TODEJointBase;
+begin
+  j := TODEJointBase(trunc64(joint));
+  j.Enabled := Boolean(trunc64(mode));
+  result := 1.0;
+end;
 
-// Warning: OdeVehicle functionality is experimental
+function OdeJointInitialize(joint: real): real; stdcall;
+var
+  j: TODEJointBase;
+begin
+  j := TODEJointBase(trunc64(joint));
+  j.Initialize;
+  result := 1.0;
+end;
+
+function OdeJointSetAnchor(joint, x, y, z: real): real; stdcall;
+var
+  j: TODEJointBase;
+begin
+  j := TODEJointBase(trunc64(joint));
+  if j is TODEJointHinge then
+    TODEJointHinge(j).Anchor.SetPoint(x, y, z)
+  else if j is TODEJointBall then
+    TODEJointBall(j).Anchor.SetPoint(x, y, z)
+  else if j is TODEJointHinge2 then
+    TODEJointHinge2(j).Anchor.SetPoint(x, y, z)
+  else if j is TODEJointUniversal then
+    TODEJointUniversal(j).Anchor.SetPoint(x, y, z);
+  result := 1.0;
+end;
+
+function OdeJointSetAnchorAtObject(joint, obj: real): real; stdcall;
+var
+  j: TODEJointBase;
+  o: TGLBaseSceneObject;
+begin
+  j := TODEJointBase(trunc64(joint));
+  o := TGLBaseSceneObject(trunc64(obj));
+  if j is TODEJointHinge then
+    TODEJointHinge(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TODEJointBall then
+    TODEJointBall(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TODEJointHinge2 then
+    TODEJointHinge2(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TODEJointUniversal then
+    TODEJointUniversal(j).Anchor.SetPoint(o.AbsolutePosition);
+  result := 1.0;
+end;
+
+function OdeJointSetAxis1(joint, x, y, z: real): real; stdcall;
+var
+  j: TODEJointBase;
+begin
+  j := TODEJointBase(trunc64(joint));
+  if j is TODEJointHinge then
+    TODEJointHinge(j).Axis.SetVector(x, y, z)
+  else if j is TODEJointHinge2 then
+    TODEJointHinge2(j).Axis1.SetVector(x, y, z)
+  else if j is TODEJointUniversal then
+    TODEJointUniversal(j).Axis1.SetVector(x, y, z);
+  result := 1.0;
+end;
+
+function OdeJointSetAxis2(joint, x, y, z: real): real; stdcall;
+var
+  j: TODEJointBase;
+begin
+  j := TODEJointBase(trunc64(joint));
+  if j is TODEJointHinge2 then
+    TODEJointHinge2(j).Axis2.SetVector(x, y, z)
+  else if j is TODEJointUniversal then
+    TODEJointUniversal(j).Axis2.SetVector(x, y, z);
+  result := 1.0;
+end;
+
+function OdeJointSetBounce(joint, axis, bounce: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.Bounce := bounce;
+  result := 1.0;
+end;
+
+function OdeJointSetCFM(joint, axis, cfm: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.CFM := cfm;
+  result := 1.0;
+end;
+
+function OdeJointSetFMax(joint, axis, fmax: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.FMax := fmax;
+  result := 1.0;
+end;
+
+function OdeJointSetFudgeFactor(joint, axis, ffactor: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.FudgeFactor := ffactor;
+  result := 1.0;
+end;
+
+function OdeJointSetHiStop(joint, axis, histop: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.HiStop := histop;
+  result := 1.0;
+end;
+
+function OdeJointSetLoStop(joint, axis, lostop: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.LoStop := lostop;
+  result := 1.0;
+end;
+
+function OdeJointSetStopCFM(joint, axis, cfm: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.StopCFM := cfm;
+  result := 1.0;
+end;
+
+function OdeJointSetStopERP(joint, axis, erp: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.StopERP := erp;
+  result := 1.0;
+end;
+
+function OdeJointSetVel(joint, axis, velocity: real): real; stdcall;
+var
+  j: TODEJointBase;
+  p: TODEJointParams;
+begin
+  j := TODEJointBase(trunc64(joint));
+  p := getJointAxisParams(j, trunc64(axis));
+  if p <> nil then
+    p.Vel := velocity;
+  result := 1.0;
+end;
+
+// Warning: OdeVehicle functionality is experimental
 // and not recommended for real usage!
 function OdeVehicleCreate(parent: real): real; stdcall;
 var
@@ -1287,7 +1482,12 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
 OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
 
-OdeAddJointBall, OdeJointSetObjects,
+OdeAddJointBall,
+
+OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
+OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
+OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
+OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
 
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
