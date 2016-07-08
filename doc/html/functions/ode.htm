@@ -15,8 +15,6 @@ TGLODEElementPlane,
 <BR>TGLODEElementCylinder, TGLODEElementCapsule, TGLODEElementCone, TGLODEElementTriMesh,  
 <BR>TODEJointBall, TODEJointFixed, TODEJointHinge, TODEJointHinge2, TODEJointSlider, TODEJointUniversal</A><BR><BR>
 
-<A class=function>ВНИМАНИЕ: страница находится в разработке. Информация ниже была изначально написана для Xtreme3D v2 и может не соответствовать Xtreme3D v3.</A><BR><BR>
-
 <A>
 Xtreme3D поддерживает ODE - популярный свободный физический движок. 
 <BR>При помощи ODE вы можете создать объекты, которые ведут себя как в реальности, т.е. подчинены законам физики. Такие объекты называются телами (body). Тела в ODE разделяются на два основных типа - статические и динамические. Динамические тела подчинены различным силам (если быть точным, сумме пользовательских сил и их моментов, а также силы тяжести), которые приводят их в движение. Статические тела неподвижны. 
@@ -552,7 +550,6 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><BR><img src=../data/jointball.jpg align="center">
 <HR>
 
-<!--
 <H1 class=name>OdeAddJointFixed</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeAddJointFixed</A><A>();</A>
 <BR><A>Создает сочленение типа Fixed (фиксированное) и возвращает его id.
@@ -595,7 +592,6 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 двигателя с карданным валом, вращающимся вдоль оси машины.</A>
 <BR><BR><img src=../data/jointuniversal.jpg align="center">
 <HR>
--->
 
 <H1 class=name>OdeJointSetObjects</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeJointSetObjects</A><A>( joint,object1,object2 as </A><A class=type>real</A><A> );</A>
@@ -609,7 +605,6 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>object1,object2 - id объектов.</A>
 <HR>
 
-<!--
 <H1 class=name>OdeJointEnable</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeJointEnable</A><A>( joint,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает сочленение. Включенные сочленения участвуют в симуляции, в то время как 
@@ -620,7 +615,7 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <HR>
 
 <H1 class=name>OdeJointInitialize</H1>
-<A class=type>real</A><A> = </A><A class=function>OdeJointInitialize</A><A>( joint,mode as </A><A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>OdeJointInitialize</A><A>( joint as </A><A class=type>real</A><A> );</A>
 <BR><A>Сведения отсутствуют.</A>
 <BR><A>joint - id сочленения.</A>
 <HR>
@@ -741,7 +736,6 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>axis - индекс оси сочленения (1 или 2)</A>
 <BR><A>velocity - линейная или угловая скорость.</A>
 <HR>
--->
 
 </DIV>
 

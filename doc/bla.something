@@ -41,13 +41,13 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Камера от первого лица">
-                        <param name="Local" value="tutorials/firstpersoncamera.htm">
+                        <param name="Name" value="Иерархия объектов">
+                        <param name="Local" value="tutorials/hierarchy.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Иерархия объектов">
-                        <param name="Local" value="tutorials/hierarchy.htm">
+                        <param name="Name" value="Камера от первого лица">
+                        <param name="Local" value="tutorials/firstpersoncamera.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -327,8 +327,28 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Mouse">
-                        <param name="Local" value="functions/mouse.htm">
+                        <param name="Name" value="Partition">
+                        <param name="Local" value="functions/partition.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Proxy">
+                        <param name="Local" value="functions/proxy.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Grid">
+                        <param name="Local" value="functions/grid.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="MemoryViewer">
+                        <param name="Local" value="functions/memviewer.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="ShadowMap">
+                        <param name="Local" value="functions/shadowmap.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -337,8 +357,13 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Partition">
-                        <param name="Local" value="functions/partition.htm">
+                        <param name="Name" value="Mouse">
+                        <param name="Local" value="functions/mouse.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Text">
+                        <param name="Local" value="functions/text.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
         </UL>
