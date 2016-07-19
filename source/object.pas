@@ -320,30 +320,6 @@ begin
   result:=1;
 end;
 
-function ObjectGetGroundHeight(obj, target: real): real; stdcall;
-var
-  object1: TGLBaseSceneObject;
-  object2: TGLBaseSceneObject;
-  rstart, rdir, ipoint, inorm: TVector;
-  i: Integer;
-  maxh, h: Single;
-begin
-  object1:=TGLBaseSceneObject(trunc64(obj));
-  object2:=TGLBaseSceneObject(trunc64(target));
-  rstart := object1.AbsolutePosition;
-  rdir := VectorMake(0, -1, 0, 0);
-  ipoint := VectorMake(0, -MaxSingle, 0, 0);
-  object2.RayCastIntersect(rstart, rdir, @ipoint, @inorm);
-  maxh := ipoint[1];
-  for i := 0 to object2.Count do
-  begin
-     h := ObjectGetGroundHeight(obj, Integer(object2.Children[i]));
-     if h > maxh then
-         maxh := h; 
-  end;
-  result:=maxh;
-end;
-
 function Raycast(
   obj, target: TGLBaseSceneObject;
   var isecPoint, isecNorm: TVector): Boolean;
@@ -364,17 +340,18 @@ end;
 
 function RecursiveRaycast(
   obj, target: TGLBaseSceneObject;
+  rstart, rdir: TVector;
   var isecPoint, isecNorm: TVector;
   var bestDistance: Single): TGLBaseSceneObject;
 var
-  ip, rstart, rdir, ipoint, inorm: TVector;
+  ip, ipoint, inorm: TVector;
   bestObject: TGLBaseSceneObject;
+  resObj: TGLBaseSceneObject;
   d: Single;
   i: Integer;
 begin
   bestObject := nil;
-  rstart := obj.AbsolutePosition;
-  rdir := obj.AbsoluteDirection;
+
   if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
   begin
     d := VectorDistance(rstart, ipoint);
@@ -386,18 +363,43 @@ begin
       bestObject := target;
     end;
   end;
-  for i := 0 to target.Count do
+
+  for i := 0 to target.Count-1 do
   begin
-    obj := RecursiveRaycast(obj, target.Children[i], ipoint, inorm, bestDistance);
-    if obj <> nil then
+    resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
+    if resObj <> nil then
     begin
       isecPoint := ipoint;
       isecNorm := inorm;
-      bestDistance := d;
-      bestObject := obj;
+      bestObject := resObj;
     end;
   end;
+
   result := bestObject;
+end;
+
+function ObjectGetGroundHeight(obj, target: real): real; stdcall;
+var
+  object1: TGLBaseSceneObject;
+  object2: TGLBaseSceneObject;
+  rstart, rdir, ipoint, inorm: TVector;
+  bestDistance: Single;
+  i: Integer;
+  maxh, h: Single;
+  res: TGLBaseSceneObject;
+begin
+  object1:=TGLBaseSceneObject(trunc64(obj));
+  object2:=TGLBaseSceneObject(trunc64(target));
+  rstart := VectorMake(object1.AbsolutePosition[0], 1000, object1.AbsolutePosition[2], 1);
+  rdir := VectorMake(0, -1, 0, 0);
+  ipoint := VectorMake(0, -MaxSingle, 0, 0);
+  
+  bestDistance := MaxSingle;
+  res := RecursiveRaycast(object1, object2, rstart, rdir, ipoint, inorm, bestDistance);
+  if res <> nil then
+    result:=ipoint[1]
+  else
+    result:=0;
 end;
 
 function ObjectSceneRaycast(obj, target: real): real; stdcall;
@@ -405,14 +407,17 @@ var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
   res: TGLBaseSceneObject;
+  rstart, rdir: TVector;
   bestDistance: Single;
 begin
   object1:=TGLBaseSceneObject(trunc64(obj));
   object2:=TGLBaseSceneObject(trunc64(target));
-  collisionPoint := VectorMake(0, 0, 0, 0);
-  collisionNormal := VectorMake(0, 0, 0, 0);
+  //collisionPoint := VectorMake(0, 0, 0, 0);
+  //collisionNormal := VectorMake(0, 0, 0, 0);
+  rstart := object1.AbsolutePosition;
+  rdir := object1.AbsoluteDirection;
   bestDistance := MaxSingle;
-  res := RecursiveRaycast(object1, object2, collisionPoint, collisionNormal, bestDistance);
+  res := RecursiveRaycast(object1, object2, rstart, rdir, collisionPoint, collisionNormal, bestDistance);
   if res <> nil then
     result:=Integer(res)
   else
@@ -427,8 +432,8 @@ var
 begin
   object1:=TGLBaseSceneObject(trunc64(obj));
   object2:=TGLBaseSceneObject(trunc64(target));
-  collisionPoint := VectorMake(0, 0, 0, 0);
-  collisionNormal := VectorMake(0, 0, 0, 0);
+  //collisionPoint := VectorMake(0, 0, 0, 0);
+  //collisionNormal := VectorMake(0, 0, 0, 0);
   res := Raycast(object1, object2, collisionPoint, collisionNormal);
   result:=Integer(res);
 end;
@@ -442,6 +447,10 @@ function ObjectGetCollisionNormal(ind: real): real; stdcall;
 begin
   result := collisionNormal[trunc64(ind)];
 end;
+
+//TODO:
+//ObjectResetCollision()
+//ObjectMoveToCollision(obj)
 
 // ObjectUseObjectColor is removed
 // ObjectSetDiffuseColor is removed
