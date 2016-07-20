@@ -23,6 +23,9 @@ type
     private
    end;
 
+const
+   {$I 'bumpshader'}
+
 var
   scene: TGLScene;
   matlib: TGLMaterialLibrary;
@@ -248,7 +251,7 @@ end;
 {$I 'ode'}
 
 // Warning: OdeVehicle functionality is experimental
-// and not recommended for real usage!
+// and not recommended for real usage!
 function OdeVehicleCreate(parent: real): real; stdcall;
 var
   veh: TGLODEVehicle;
@@ -447,8 +450,9 @@ MaterialNoiseRandomSeed,
 MaterialGenTexture, MaterialSetTextureWrap,
 //Shaders
 ShaderEnable, 
-BumpShaderCreate, BumpShaderSetMethod, BumpShaderSetSpecularMode,
-BumpShaderSetSpace, BumpShaderSetOptions, BumpShaderSetParallaxOffset,
+BumpShaderCreate,
+BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,
+BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
 CelShaderCreate, CelShaderSetLineColor, CelShaderSetLineWidth, CelShaderSetOptions,
 MultiMaterialShaderCreate,
 HiddenLineShaderCreate, HiddenLineShaderSetLineSmooth, HiddenLineShaderSetSolid,

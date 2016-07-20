@@ -17,6 +17,133 @@ end;
 
 function BumpShaderCreate(): real; stdcall;
 var
+  bump: TGLSLShader;
+  paramDiffTex: TGLSLShaderParameter;
+  paramNormTex: TGLSLShaderParameter;
+  paramHeightTex: TGLSLShaderParameter;
+  paramMaxLights: TGLSLShaderParameter;
+  paramUseParallax: TGLSLShaderParameter;
+  paramParallaxHeight: TGLSLShaderParameter; 
+begin
+  if not
+    (GL_ARB_shader_objects and
+     GL_ARB_vertex_shader and
+     GL_ARB_fragment_shader) then begin
+      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
+      result := 0;
+      Exit;
+  end;
+  bump := TGLSLShader.Create(scene);
+  bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
+  paramDiffTex := bump.Param.AddUniform('diffuseMap');
+  paramNormTex := bump.Param.AddUniform('normalMap');
+  paramHeightTex := bump.Param.AddUniform('heightMap');
+  paramMaxLights := bump.Param.AddUniform('maxNumLights');
+  paramMaxLights.UniformType := uniform1i;
+  paramMaxLights.UniformInteger := 1;
+  paramMaxLights.Initialized := True;
+  paramUseParallax := bump.Param.AddUniform('useParallax');
+  paramUseParallax.UniformType := uniform1i;
+  paramUseParallax.UniformInteger := 0;
+  paramUseParallax.Initialized := True;
+  paramParallaxHeight := bump.Param.AddUniform('parallaxHeight');
+  paramParallaxHeight.UniformType := uniform1f;
+  paramParallaxHeight.UniformVector[0] := 0.03;
+  paramParallaxHeight.Initialized := True;
+  result := integer(bump);
+end;
+
+function BumpShaderSetDiffuseTexture(shader: real; mtrl: pchar): real; stdcall;
+var
+  bump: TGLSLShader;
+  mat: TGLLibMaterial;
+  paramDiffTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  paramDiffTex := bump.Param.Items[0];
+  paramDiffTex.UniformType := uniformTexture2D;
+  paramDiffTex.Texture := mat.Material.Texture;
+  paramDiffTex.UniformTexture := 0;
+  paramDiffTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetNormalTexture(shader: real; mtrl: pchar): real; stdcall;
+var
+  bump: TGLSLShader;
+  mat: TGLLibMaterial;
+  paramNormTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  paramNormTex := bump.Param.Items[1];
+  paramNormTex.UniformType := uniformTexture2D;
+  paramNormTex.Texture := mat.Material.Texture;
+  paramNormTex.UniformTexture := 1;
+  paramNormTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetHeightTexture(shader: real; mtrl: pchar): real; stdcall;
+var
+  bump: TGLSLShader;
+  mat: TGLLibMaterial;
+  paramHeightTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  paramHeightTex := bump.Param.Items[2];
+  paramHeightTex.UniformType := uniformTexture2D;
+  paramHeightTex.Texture := mat.Material.Texture;
+  paramHeightTex.UniformTexture := 2;
+  paramHeightTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetMaxLights(shader, maxlights: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  paramMaxLights: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  paramMaxLights := bump.Param.Items[3];
+  paramMaxLights.UniformInteger := trunc64(maxlights);
+  result:=1;
+end;
+
+function BumpShaderUseParallax(shader, mode: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  paramUseParallax: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  paramUseParallax := bump.Param.Items[4];
+  paramUseParallax.UniformInteger := trunc64(mode);
+  result:=1;
+end;
+
+function BumpShaderSetParallaxOffset(shader, height: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  paramParallaxHeight: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(trunc64(shader));
+  paramParallaxHeight := bump.Param.Items[5];
+  paramParallaxHeight.UniformVector[0] := height;
+  result:=1;
+end;
+
+// BumpShaderSetMethod is no longer available, bump shader is now GLSL-only
+// BumpShaderSetSpecularMode is no longer available, only Blinn-Phong specular is supported
+// BumpShaderSetSpace is no longer available, only tangent space is supported
+// BumpShaderSetOptions is no longer available
+
+{
+// GLScene's built-in BumpShader doesn't work anymore
+
+function BumpShaderCreate(): real; stdcall;
+var
   GLBump1: TGLBumpShader;
 begin
   GLBump1:=TGLBumpShader.Create(scene);
@@ -87,6 +214,7 @@ begin
   if (dt2=0) and (stc=0) and (la=0) and (pm=0) then GLBump1.BumpOptions:=[                                                                              ];
   result:=1;
 end;
+}
 
 //Cel Shader
 function CelShaderCreate(): real; stdcall;
