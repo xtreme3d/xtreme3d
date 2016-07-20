@@ -383,33 +383,13 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
-<!--
-<A name="ObjectCheckCubeVsFace"></A>
-<H1 class=name>ObjectCheckCubeVsFace</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ограничивающим параллелепипедом (BB) объекта 1 и геометрией объекта 2. Объект 2 должен быть типа freeform.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
--->
-
 <A name="ObjectCheckCubeVsCube"></A>
 <H1 class=name>ObjectCheckCubeVsCube</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsCube</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ограничивающими параллелепипедами (BB) двух объектов.</A>
+<BR><A>Возвращает истину при обнаружении столкновения между ориентированными ограничивающими параллелепипедами (OBB) двух объектов.</A>
 <BR><A>object1 - id объекта 1</A>
 <BR><A>object2 - id объекта 2.</A>
 <HR>
-
-<!--
-<A name="ObjectCheckFaceVsFace"></A>
-<H1 class=name>ObjectCheckFaceVsFace</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckFaceVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между геометрией двух объектов. Объекты должны быть типа freeform.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
--->
 
 <A name="ObjectCheckSphereVsSphere"></A>
 <H1 class=name>ObjectCheckSphereVsSphere</H1>
@@ -422,7 +402,24 @@
 <A name="ObjectCheckSphereVsCube"></A>
 <H1 class=name>ObjectCheckSphereVsCube</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectCheckSphereVsCube</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ограничивающей сферой объекта 1 и ограничивающим параллелепипедом объекта 2.</A>
+<BR><A>Возвращает истину при обнаружении столкновения между ограничивающей сферой объекта 1 и ориентированным ограничивающим параллелепипедом объекта 2.</A>
+<BR><A>object1 - id объекта 1</A>
+<BR><A>object2 - id объекта 2.</A>
+<HR>
+
+<A name="ObjectCheckCubeVsFace"></A>
+<H1 class=name>ObjectCheckCubeVsFace</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает истину при обнаружении столкновения между ориентированным ограничивающим параллелепипедом (OBB) объекта 1 и геометрией объекта 2. Объект 2 должен быть типа freeform.</A>
+<BR><A>object1 - id объекта 1</A>
+<BR><A>object2 - id объекта 2.</A>
+<HR>
+
+<A name="ObjectCheckFaceVsFace"></A>
+<H1 class=name>ObjectCheckFaceVsFace</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectCheckFaceVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает истину при обнаружении столкновения между геометрией двух объектов. Объекты должны быть типа freeform.
+<BR>Эта проверка довольно медленная, поэтому рекомендуем оптимизировать ее использование - например, осуществлять точную проверку между геометриями объектов только в том случае, если обнаружено столкновение между их ограничивающими сферами.</A>
 <BR><A>object1 - id объекта 1</A>
 <BR><A>object2 - id объекта 2.</A>
 <HR>
