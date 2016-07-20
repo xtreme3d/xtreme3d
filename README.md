@@ -20,6 +20,7 @@ Features
 * Scene hierarchy
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
+* Popular image formats support (BMP, JPG, PNG, TGA, DDS)
 * Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and others)
 * Model animation (per-vertex and skeletal)
 * Lightmapping and dynamic lighting
