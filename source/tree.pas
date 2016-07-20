@@ -50,7 +50,7 @@ begin
   for mi:=0 to ffm.MeshObjects.Count-1 do begin
       mesh1 := ffm.MeshObjects[mi];
       //mesh1.BuildTangentSpace();
-      GenMeshTangents(mesh1);
+      //GenMeshTangents(mesh1);
   end;
 
   ffm.BuildOctree;
