@@ -40,6 +40,7 @@ Features
 * Lines and curves rendering
 * Discrete LOD system
 * Offscreen rendering via p-buffers
+* Collision detection between bounding spheres, oriented bounding boxes and meshes
 * Built-in game-oriented collision systems (DCE, FPSManager)
 * Rigid body physics using ODE engine
 * Octree and quadtree to speed-up rendering and collision tests

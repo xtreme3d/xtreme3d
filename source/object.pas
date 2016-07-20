@@ -498,51 +498,51 @@ function ObjectCheckCubeVsCube(obj1, obj2: real): real; stdcall;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
-  aabb1, aabb2: TAABB;
 begin
   object1:=TGLBaseSceneObject(trunc64(obj1));
   object2:=TGLBaseSceneObject(trunc64(obj2));
-  aabb1 := object1.AxisAlignedBoundingBox;
-  aabb2 := object2.AxisAlignedBoundingBox;
-  result := Integer(IntersectAABBs(aabb1, aabb2, object2.AbsoluteMatrix, object1.AbsoluteMatrix));
+  result := Integer(FastCheckCubeVsCube(object1, object2));
 end;
 
 function ObjectCheckSphereVsSphere(obj1, obj2: real): real; stdcall;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
-  s1, s2: TBSphere;
 begin
   object1:=TGLBaseSceneObject(trunc64(obj1));
   object2:=TGLBaseSceneObject(trunc64(obj2));
-  s1.Center := AffineVectorMake(object1.AbsolutePosition);
-  s2.Center := AffineVectorMake(object2.AbsolutePosition);
-  s1.Radius := object1.BoundingSphereRadius;
-  s2.Radius := object2.BoundingSphereRadius;
-  result := Integer(BSphereIntersectsBSphere(s1, s2));
+  result := Integer(FastCheckSphereVsSphere(object1, object2));
 end;
 
 function ObjectCheckSphereVsCube(obj1, obj2: real): real; stdcall;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
-  s1: TBSphere;
-  aabb2: TAABB;
 begin
   object1:=TGLBaseSceneObject(trunc64(obj1));
   object2:=TGLBaseSceneObject(trunc64(obj2));
-  s1.Center := AffineVectorMake(object1.AbsolutePosition);
-  s1.Radius := object1.BoundingSphereRadius;
-  aabb2 := object2.AxisAlignedBoundingBox;
-  if AABBContainsBSphere(aabb2, s1) <> scNoOverlap then
-      result := 1
-  else
-      result := 0;
+  result := Integer(FastCheckSphereVsCube(object1, object2));
 end;
 
-// Not implemented yet:
-// ObjectCheckCubeVsFace
-// ObjectCheckFaceVsFace
+function ObjectCheckCubeVsFace(obj1, obj2: real): real; stdcall;
+var
+  object1: TGLBaseSceneObject;
+  object2: TGLBaseSceneObject;
+begin
+  object1:=TGLBaseSceneObject(trunc64(obj1));
+  object2:=TGLBaseSceneObject(trunc64(obj2));
+  result := Integer(FastCheckCubeVsFace(object1, object2));
+end;
+
+function ObjectCheckFaceVsFace(obj1, obj2: real): real; stdcall;
+var
+  object1: TGLBaseSceneObject;
+  object2: TGLBaseSceneObject;
+begin
+  object1:=TGLBaseSceneObject(trunc64(obj1));
+  object2:=TGLBaseSceneObject(trunc64(obj2));
+  result := Integer(FastCheckFaceVsFace(object1, object2));
+end;
 
 function ObjectIsPointInObject(obj1, x, y, z: real): real; stdcall;
 var

@@ -19,7 +19,8 @@ begin
   for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
       mesh1 := GLFreeForm1.MeshObjects[mi];
       //mesh1.BuildTangentSpace();
-      GenMeshTangents(mesh1);
+      if mesh1.TexCoords.Count > 0 then
+        GenMeshTangents(mesh1);
   end;
   
   GLFreeForm1.BuildOctree;
