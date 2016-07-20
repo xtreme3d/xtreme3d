@@ -4,7 +4,7 @@ uses
   GLScene, GLObjects, GLWin32FullScreenViewer, GLMisc, GLGraph,
   GLCollision, GLTexture, OpenGL1x, VectorGeometry, Graphics,
   GLVectorFileObjects, GLWin32Viewer, GLSpaceText, GLGeomObjects, GLCadencer,
-  JPeg, Tga, GLProcTextures, Spin, GLVfsPAK, GLCanvas, GLGraphics, GLPortal,
+  Jpeg, Tga, DDS, GLProcTextures, Spin, GLVfsPAK, GLCanvas, GLGraphics, GLPortal,
   GLHUDObjects, GLBitmapFont, GLWindowsFont, GLImposter, VectorTypes, GLUtils,
   GLPolyhedron, GLTeapot, GLzBuffer, GLFile3DS, GLFileGTS, GLFileLWO, GLFileMD2,
   GLFileMD3, Q3MD3, GLFileMS3D, GLFileMD5, GLFileNMF, GLFileNurbs, GLFileObj, GLFileOCT,

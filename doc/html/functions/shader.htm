@@ -26,10 +26,62 @@
 <A name="BumpShaderCreate"></A>
 <H1 class=name>BumpShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>BumpShaderCreate</A><A>( );</A>
-<BR><A>Создает шейдер рельефа (bump mapping) и возвращает его id. При применении шейдера первая текстура материала должна быть картой нормалей. 
-<BR>Данный шейдер требует поддержки расширений GL_ARB_vertex_program и GL_ARB_fragment_program.</A>
+<BR><A>Создает шейдер рельефа (bump mapping) и возвращает его id. В настоящее время этот шейдер корректно работает только на объектах типа Freeform.
+<BR>Данный шейдер требует поддержки расширений GL_ARB_shading_language (или GL_ARB_shading_language_100), GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader.</A>
 <HR>
 
+<A name="BumpShaderSetDiffuseTexture"></A>
+<H1 class=name>BumpShaderSetDiffuseTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderSetDiffuseTexture</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает диффузную текстуру шейдера рельефа. Диффузная текстура - это обычная текстура, определяющая цвет поверхности объекта.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>material - имя материала в текущей библиотеке, из которого следует читать текстуру.</A>
+<HR>
+
+<A name="BumpShaderSetNormalTexture"></A>
+<H1 class=name>BumpShaderSetNormalTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderSetNormalTexture</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает карту нормалей шейдера рельефа. Карта нормалей - это текстура, определяющая нормаль в каждой точке поверхности объекта (XYZ = RGB). BumpShader поддерживает карты нормалей в пространстве касательных (tangent space) - то есть, заданные в пространстве, где ось Z соответствует интерполированной нормали треугольника, а X и Y - взаимно перпендикулярным касательным к нормали (их также называют tangent и bitangent).</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>material - имя материала в текущей библиотеке, из которого следует читать текстуру.</A>
+<HR>
+
+<A name="BumpShaderSetHeightTexture"></A>
+<H1 class=name>BumpShaderSetHeightTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderSetHeightTexture</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает карту высот шейдера рельефа. Карта высот - это текстура, темные элементы которой означают снижение высоты, а светлые - повышение. Карта высот необходима при использовании эффекта parallax mapping (см. ниже). </A>
+<BR><A>shader - id шейдера</A>
+<BR><A>material - имя материала в текущей библиотеке, из которого следует читать текстуру.</A>
+<HR>
+
+<A name="BumpShaderUseParallax"></A>
+<H1 class=name>BumpShaderUseParallax</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderUseParallax</A><A>( shader,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает использование parallax mapping - эффект усиления иллюзии рельефа, достигаемый за счет смещения текстурных координат в зависимости от угла обзора. Этот эффект требует указания карты высот функцией </A><A class=funclink href=../functions/shader.htm#BumpShaderSetHeightTexture>BumpShaderSetHeightTexture<A><A>.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). По умолчанию parallax mapping выключен.</A>
+<HR>
+
+<A name="BumpShaderSetParallaxOffset"></A>
+<H1 class=name>BumpShaderSetParallaxOffset</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderSetParallaxOffset</A><A>( shader,offset as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает коэффициент смещения для эффекта parallax mapping. Чем больше это значение, тем выше рельеф.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>offset - смещение. Значение по умолчанию: 0.03.</A>
+<HR>
+
+<A name="BumpShaderSetMaxLights"></A>
+<H1 class=name>BumpShaderSetMaxLights</H1>
+<A class=type>real</A><A> = </A><A class=function>BumpShaderSetMaxLights</A><A>( shader,maxlights as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество источников света, которые должны учитываться шейдером рельефа. Это количество, как правило, меньше или равно числу источников света, созданных функцией </A><A class=funclink href=../functions/light.htm#LightCreate>LightCreate</A><A>. 
+Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает только источники света типа </A><A class=constant>lsOmni</A> и </A><A class=constant>lsParallel</A><A>.
+<BR>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией </A><A class=funclink href=../functions/light.htm#LightSetShining>LightSetShining</A><A>, игнорируется шейдером. Чтобы выключить источник света, можно функцией </A><A class=funclink href=../functions/light.htm#LightSetAttenuation>LightSetAttenuation</A><A> выставить в ноль его постоянную составляющую затухания (constant attenuation).
+</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>maxlights - количество источников света. Значение по умолчанию: 1.</A>
+<HR>
+
+<!--
 <A name="BumpShaderSetMethod"></A>
 <H1 class=name>BumpShaderSetMethod</H1>
 <A class=type>real</A><A> = </A><A class=function>BumpShaderSetMethod</A><A>( shader,bm as </A><A class=type>real</A><A> );</A>
@@ -72,6 +124,7 @@
 <BR><A>lightatten - указывает, использовать затухание источников света при расчете освещенности - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
 <BR><A>parallax - указывает, использовать ли параллактическое отображение (parallax mapping) - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
 <HR>
+-->
 
 <!--
 <A name="BumpShaderCreate"></A>
