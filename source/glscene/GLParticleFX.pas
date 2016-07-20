@@ -2907,8 +2907,8 @@ begin
       glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE)
    else glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
    ApplyBlendingMode;
-   if ColorMode<>scmFade then
-      glBegin(GL_QUADS);
+   //if ColorMode<>scmFade then
+   //   glBegin(GL_QUADS);
 end;
 
 // RenderParticle
@@ -2931,6 +2931,7 @@ var
    i : Integer;
    tcs : PTexCoordsSet;
    spt : TSpritesPerTexture;
+   v: TAffineVector;
 
    procedure IssueVertices(tcs : PTexCoordsSet; vertexList : PAffineVectorArray);
    begin
@@ -2972,7 +2973,14 @@ begin
 
    if FLifeRotations then
       RotateVertexBuf(FVertBuf, lifeTime, aParticle.Position);
-
+   
+   glPointSize(5.0);
+   glBegin(GL_POINTS);
+   glVertex3fv(@aParticle.Position);
+   glEnd();
+   glPointSize(1.0);
+   
+   {
    case ColorMode of
       scmFade : begin
          ComputeColors(lifeTime, inner, outer);
@@ -2980,8 +2988,10 @@ begin
             glColor4fv(@inner);
             glTexCoord2f((tcs[0].S+tcs[2].S)*0.5, (tcs[0].T+tcs[2].T)*0.5);
             glVertex3fv(@aParticle.Position);
+            
             glColor4fv(@outer);
             IssueVertices(tcs, vertexList);
+
             glTexCoord2fv(@tcs[0]);
             glVertex3fv(@vertexList[0]);
          glEnd;
@@ -3001,15 +3011,16 @@ begin
       end;
    else
       Assert(False);
-   end;            
+   end;
+    }            
 end;
 
 // EndParticles
 //
 procedure TGLBaseSpritePFXManager.EndParticles;
 begin
-   if ColorMode<>scmFade then
-      glEnd;
+   //if ColorMode<>scmFade then
+   //   glEnd;
    UnApplyBlendingMode;
 end;
 
