@@ -13,7 +13,7 @@ Screenshots
 [![Screenshot3](/screenshots/003-thumb.jpg)](/screenshots/003.jpg)
 [![Screenshot1](/screenshots/008-thumb.jpg)](/screenshots/008.jpg)
 [![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
-[![Screenshot4](/screenshots/006-thumb.jpg)](/screenshots/006.jpg)
+[![Screenshot4](/screenshots/009-thumb.jpg)](/screenshots/009.jpg)
 
 Features
 --------
@@ -27,7 +27,7 @@ Features
 * Dynamic water rendering
 * Static and dynamic cubemaps
 * GLSL shaders
-* Built-in shaders, including cel shader, bump shader, multimaterial shader, etc.
+* Built-in shaders, including cel shader, bump/parallax shader, multimaterial shader, etc.
 * Particle system
 * Lensflare effect
 * 2D sprites and text
