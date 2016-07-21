@@ -14,6 +14,10 @@
   <PARAM name="Local" value="xtreme3d.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="История Xtreme3D">
+  <PARAM name="Local" value="history.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Статьи">
  </OBJECT>
 <UL>
