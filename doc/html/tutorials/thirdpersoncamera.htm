@@ -10,7 +10,45 @@
 
 <H1 class=pagetitle>Камера от третьего лица</H1>
 
-<A></A>
+<A><B>Уровень:</B> средний<A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR>
+<BR>Многие игры используют вид от третьего лица, где камера показывает персонажа "со спины" - это, например, многие игры жанров Action и RPG, 3D-платформеры типа Spyro или Crash Bandicoot, спортивные симуляторы и т.д. При этом, как правило, камера не является жестко зафиксированной на определенном расстоянии от персонажа - она обычно перемещается плавно, с некоторым запаздыванием, что добавляет реализма и кинематографичности. 
+<BR>
+<BR>На Xtreme3D подобную механику реализовать ненамного сложнее, чем вид от первого лица. Нижеследующий код создаст иерархию из персонажа, которым игрок будет управлять, и камеры, которая будет за ним следить. В качестве условного персонажа используется простой куб.
+<BR>
+<BR>Код в событии Create:
+<BR>
+<BR>camera = <A class=func2link href=../functions/camera.htm#CameraCreate>CameraCreate</A>(<B>global</B>.scene);
+<BR><A class=func2link href=../functions/camera.htm#CameraSetViewDepth>CameraSetViewDepth</A>(camera, 800);
+<BR><A class=func2link href=../functions/camera.htm#CameraSetFocal>CameraSetFocal</A>(camera, 80);
+<BR><A class=func2link href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A>(view1, camera);
+<BR>
+<BR>actor = <A class=func2link href=../functions/primitives.htm#CubeCreate>CubeCreate</A>(1, 1, 1, <B>global</B>.scene);
+<BR>
+<BR>target = <A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A>(actor);
+<BR><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A>(target, 0, 1, -4);
+<BR><A class=func2link href=../functions/camera.htm#CameraSetTargetObject>CameraSetTargetObject</A>(camera, actor);
+<BR>
+<BR>Код в событии Step:
+<BR>
+<BR><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_up</A>) <A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A>(actor, 10 * dt);
+<BR><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_down</A>) <A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A>(actor, -10 * dt);
+<BR><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_left</A>) <A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A>(actor, -200 * dt);
+<BR><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_right</A>) <A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A>(actor, 200 * dt);
+<BR>
+<BR>cx = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(camera, 0);
+<BR>cy = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(camera, 1);
+<BR>cz = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(camera, 2);
+<BR>tx = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(target, 0);
+<BR>ty = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(target, 1);
+<BR>tz = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A>(target, 2);
+<BR>dx = tx - cx;
+<BR>dy = ty - cy;
+<BR>dz = tz - cz;
+<BR><A class=func2link href=../functions/object.htm#ObjectTranslate>ObjectTranslate</A>(camera, dx * 0.05, dy * 0.05, dz * 0.05);
+<BR>
+<BR>Логика камеры устроена так, что ее наиболее дальняя дистанция от персонажа - при движении вперед (чтобы можно было хорошо видеть, что творится вокруг), а самая близкая - при движении назад. При повороте персонажа камера позволяет рассмотреть его сбоку. Примерно такой же прием используется в гоночных симуляторах, так что на основе этого кода вполне можно сделать и движок гонок.
 
 </DIV>
 
