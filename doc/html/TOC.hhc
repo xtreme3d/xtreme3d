@@ -63,16 +63,12 @@
   <PARAM name="Local" value="tutorials/vertexanim.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Скелетная анимация 1">
+  <PARAM name="Name" value="Скелетная анимация">
   <PARAM name="Local" value="tutorials/skeletalanim1.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Камера от третьего лица">
   <PARAM name="Local" value="tutorials/thirdpersoncamera.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Загрузка карты">
-  <PARAM name="Local" value="tutorials/maploading.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Проверка столкновений">

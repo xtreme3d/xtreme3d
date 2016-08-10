@@ -8,9 +8,46 @@
 
 <DIV ALIGN=justify>
 
-<H1 class=pagetitle>Проверка столкновений</H1>
+<H1 class=pagetitle>Урок 11<BR>Проверка столкновений</H1>
 
-<A></A>
+<A><B>Уровень:</B> средний<A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR>
+<BR>В играх очень часто требуется определить факт столкновения двух объектов. Ими могут быть, к примеру, персонаж и платформа, снаряд и цель и т.д. На обнаружении столкновений основана логика шутеров, платформеров, симуляторов, ролевых игр и некоторых стратегий. При этом далеко не всегда требуется обнаружить точное пересечение двух полигональных мешей - достаточно протестировать на пересечение их ограничивающие сферы (Bounding Sphere) или параллелепипеды (Bounding Box). Xtreme3D включает удобные инструменты, позволяющие вам сделать это.
+<BR>
+<BR>Функции проверки столкновений в Xtreme3D начинаются на "ObjectCheck..." и оперируют ограничивающими сферами и параллелепипедами объектов, которые вычисляются движком автоматически, в зависимости от объема, который занимает их геометрия. Ограничивающие параллелепипеды (которые в этих функциях называются Cube) выровнены по локальным координатным осям объекта - то есть, могут вращаться вместе с ним. Такие параллелепипеды часто называют Oriented Bounding Box, или сокращенно OBB. Функции возвращают истину (1), если обнаружено пересечение, и ложь (0) в противном случае.
+<BR>
+<BR>Xtreme3D включает следующие функции проверки столкновений: 
+</A><A class=func2link href=../functions/object.htm#ObjectCheckSphereVsSphere>ObjectCheckSphereVsSphere</A><A>,
+</A><A class=func2link href=../functions/object.htm#ObjectCheckSphereVsCube>ObjectCheckSphereVsCube</A><A>,
+</A><A class=func2link href=../functions/object.htm#ObjectCheckCubeVsCube>ObjectCheckCubeVsCube</A><A>,
+</A><A class=func2link href=../functions/object.htm#ObjectCheckCubeVsFace>ObjectCheckCubeVsFace</A><A>,
+</A><A class=func2link href=../functions/object.htm#ObjectCheckFaceVsFace>ObjectCheckFaceVsFace</A><A>.
+Последние две из них оперируют объектами типа Freeform - соответственно, позволяют обнаружить пересечение ограничивающего параллелепипеда одного объекта с полигональной моделью другого, а также пересечение двух моделей. Эта проверка довольно медленная, поэтому рекомендуем оптимизировать ее использование - например, осуществлять точную проверку между моделями только в том случае, если обнаружено столкновение между их ограничивающими сферами:
+<BR>
+<BR><B>if</B></A> <A class=func2link href=../functions/object.htm#ObjectCheckSphereVsSphere>ObjectCheckSphereVsSphere</A><A>(obj1, obj2)
+<BR>{
+<BR>&nbsp;&nbsp;<B>if</B> </A><A class=func2link href=../functions/object.htm#ObjectCheckFaceVsFace>ObjectCheckFaceVsFace</A><A>(obj1, obj2)
+<BR>&nbsp;&nbsp;{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;// делаем что-то
+<BR>&nbsp;&nbsp;}
+<BR>}
+</PRE>
+<BR>
+<BR>Эти функции полезны, когда нужно выполнить дискретную проверку - то есть, когда можно допустить, что объекты движутся с небольшими скоростями. Если скорости высокие, и объект за один шаг игрового времени пролетает расстояние, превышающее размер другого объекта, дискретная проверка может запросто не сработать. Универсального решения этой проблемы до сих пор нет, но существуют различные упрощенные методы. Самый простой - метод "бросания лучей" (Ray Casting). В Xtreme3D есть достаточно эффективная реализация этого метода. Из центра объекта выпускается луч в направлении Direction этого объекта. Затем на пересечение с этим лучом проверяется целевой объект, один или несколько. Таким образом, можно сымитировать движение пули (при допущении, что она движется с бесконечной скоростью) - мгновенно обнаружить точку, в которую она попадет. Также при помощи "бросания лучей" можно определить высоту земли под персонажем, что необходимо для реализации прыжков. Кроме того, данный метод незаменим для построения логики взаимодействия персонажа с интерактивными объектами и триггерами - представьте, например, шутер, RPG или квест от первого лица, где игрок может подбирать предметы и нажимать на рычаги, кликая по ним мышью. Для этого можно оценить расстояние между игроком и объектом, а затем применить "бросание лучей":
+<BR>
+<BR><B>if</B></A> <A class=func2link href=../functions/object.htm#ObjectGetDistance>ObjectGetDistance</A><A>(player, item) &lt;= 1.0
+<BR>{
+<BR>&nbsp;&nbsp;<B>if</B> </A><A class=func2link href=../functions/object.htm#ObjectRaycast>ObjectRaycast</A><A>(player, item)
+<BR>&nbsp;&nbsp;{
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;hit_x = </A><A class=func2link href=../functions/object.htm#ObjectGetCollisionPosition>ObjectGetCollisionPosition</A><A>(0);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;hit_y = </A><A class=func2link href=../functions/object.htm#ObjectGetCollisionPosition>ObjectGetCollisionPosition</A><A>(1);
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;hit_z = </A><A class=func2link href=../functions/object.htm#ObjectGetCollisionPosition>ObjectGetCollisionPosition</A><A>(2);
+<BR>&nbsp;&nbsp;}
+<BR>}
+<BR>
+<BR>Что самое приятное, "бросание лучей" в Xtreme3D полностью совместимо с объектами Freeform и выдает корректные результаты при любой трансформации объектов.
+<BR>
 
 </DIV>
 
