@@ -76,7 +76,7 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Скелетная анимация 1">
+                        <param name="Name" value="Скелетная анимация">
                         <param name="Local" value="tutorials/skeletalanim1.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
@@ -88,11 +88,6 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Проверка столкновений">
                         <param name="Local" value="tutorials/collisionchecking.htm">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Настройка материалов">
-                        <param name="Local" value="tutorials/materialsetup.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">

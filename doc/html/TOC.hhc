@@ -75,10 +75,6 @@
   <PARAM name="Local" value="tutorials/collisionchecking.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Настройка материалов">
-  <PARAM name="Local" value="tutorials/materialsetup.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="2D-графика">
   <PARAM name="Local" value="tutorials/2dgraphics.htm">
  </OBJECT>
