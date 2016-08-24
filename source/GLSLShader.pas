@@ -38,7 +38,7 @@ type
     public
       constructor Create(ACollection: TCollection); override;
       procedure Init(paramType: TGLSLShaderParameterType; name: String);
-      procedure Bind(shader: TGLSLShader);
+      procedure Bind(mat: TGLLibMaterial; shader: TGLSLShader);
       procedure Unbind(shader: TGLSLShader);
       property UniformVector[index: Integer]: Single read GetVecElem write SetVecElem;
       property UniformMatrix: TMatrix4f read FUniformMatrix write FUniformMatrix;
@@ -68,7 +68,7 @@ type
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
-      procedure Bind;
+      procedure Bind(mat: TGLLibMaterial);
       procedure Unbind;
   end;
 
@@ -131,7 +131,7 @@ begin
   FName := name;
 end;
 
-procedure TGLSLShaderParameter.Bind(shader: TGLSLShader);
+procedure TGLSLShaderParameter.Bind(mat: TGLLibMaterial; shader: TGLSLShader);
 begin
   if not FInitialized then
     Exit;
@@ -144,18 +144,31 @@ begin
 
   if FUniformType = uniformTexture2D then
   begin
-    glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-    glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
+    {
+    if FTexture = Nil then
+    begin
+      if mat.Material.Texture <> Nil then
+        FTexture := mat.Material.Texture;
+    end;
+    }
+    if FTexture <> Nil then
+    begin    
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+      glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
-    glActiveTextureARB(GL_TEXTURE0_ARB);
   end;
   
   if FUniformType = uniformShadowTexture then
   begin
-    glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-    glBindTexture(GL_TEXTURE_2D, FShadowMap.DepthTextureHandle);
+    if FShadowMap <> Nil then
+    begin
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+      glBindTexture(GL_TEXTURE_2D, FShadowMap.DepthTextureHandle);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
-    glActiveTextureARB(GL_TEXTURE0_ARB);
   end;
 
   if FUniformType = uniform1f then
@@ -183,9 +196,12 @@ begin
     Exit;
   if FUniformType = uniformTexture2D then
   begin
-    glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-    glBindTexture(FTexture.Image.NativeTextureTarget, 0);
-    glActiveTextureARB(GL_TEXTURE0_ARB);
+    if FTexture <> Nil then
+    begin
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+      glBindTexture(FTexture.Image.NativeTextureTarget, 0);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
   end;
 end;
 
@@ -286,7 +302,7 @@ begin
   Result := param;
 end;
 
-procedure TGLSLShaderParameters.Bind;
+procedure TGLSLShaderParameters.Bind(mat: TGLLibMaterial);
 var
   i: Integer;
   p: TGLSLShaderParameter;
@@ -294,7 +310,7 @@ begin
   for i := 0 to Count-1 do
   begin
     p := TGLSLShaderParameter(inherited Items[i]);
-    p.Bind(FShader);
+    p.Bind(mat, FShader);
   end;
 end;
 
@@ -376,12 +392,15 @@ begin
 end;
 
 procedure TGLSLShader.DoApply(var rci: TRenderContextInfo; Sender : TObject);
+var
+  mat: TGLLibMaterial;
 begin
+  mat := TGLLibMaterial(Sender);
   if not (csDesigning in ComponentState) and shaderSane then
   begin
       //glDisable(GL_STENCIL_TEST);
       glUseProgramObjectARB(shaderProg);
-      Parameters.Bind;
+      Parameters.Bind(mat);
       //glEnable(GL_STENCIL_TEST);
   end;
 end;

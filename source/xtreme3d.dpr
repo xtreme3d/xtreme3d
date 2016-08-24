@@ -250,8 +250,110 @@ end;
 {$I 'shadowmap'}
 {$I 'ode'}
 
-// Warning: OdeVehicle functionality is experimental
-// and not recommended for real usage!
+function FreeformToFreeforms(freeform, parent: real): real; stdcall;
+var
+  ffm, ffm2: TGLFreeForm;
+  mi, fgi, vi, tci: Integer;
+  mesh, mesh2: TMeshObject;
+  fg: TFGVertexIndexList;
+  fg2: TFGVertexNormalTexIndexList;
+  centroid: TAffineVector;
+  one: TAffineVector;
+  divisor: Single;
+begin
+  ffm := TGLFreeForm(trunc64(freeform));
+  one := AffineVectorMake(1, 1, 1);
+  
+  for mi:=0 to ffm.MeshObjects.Count-1 do begin
+    mesh := ffm.MeshObjects[mi];
+
+    if not (parent=0) then
+      ffm2 := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    else
+      ffm2 := TGLFreeForm.CreateAsChild(scene.Objects);
+    mesh2 := TMeshObject.CreateOwned(ffm2.MeshObjects);
+    
+    ffm2.MaterialLibrary:=ffm.MaterialLibrary;
+    ffm2.LightmapLibrary:=ffm.LightmapLibrary;
+    ffm2.UseMeshMaterials:=True;
+
+    // Calc centroid
+    centroid := AffineVectorMake(0, 0, 0);
+    for vi:=0 to mesh.Vertices.Count-1 do begin
+      mesh2.Vertices.Add(mesh.Vertices[vi]);
+      centroid := VectorAdd(centroid, mesh2.Vertices[vi]);
+    end;
+    ffm2.Position.AsAffineVector := VectorDivide(centroid, mesh2.Vertices.Count);
+
+    // Reposition vertices
+    for vi:=0 to mesh2.Vertices.Count-1 do begin
+      mesh2.Vertices[vi] := VectorSubtract(mesh2.Vertices[vi], ffm2.Position.AsAffineVector);
+    end;
+
+    for vi:=0 to mesh.Normals.Count-1 do begin
+      mesh2.Normals.Add(mesh.Normals[vi]);
+    end;
+
+    for vi:=0 to mesh.TexCoords.Count-1 do begin
+      mesh2.TexCoords.Add(mesh.TexCoords[vi]);
+    end;
+
+    for vi:=0 to mesh.LightMapTexCoords.Count-1 do begin
+      mesh2.LightMapTexCoords.Add(mesh.LightMapTexCoords[vi]);
+    end;
+
+    mesh2.Mode := momFaceGroups;
+    for fgi:=0 to mesh.FaceGroups.Count-1 do begin
+      fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
+      fg2 := TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
+      fg2.Mode := fgmmTriangles;
+      fg2.VertexIndices := fg.VertexIndices;
+      fg2.NormalIndices := fg.VertexIndices;
+      fg2.TexCoordIndices := fg.VertexIndices;
+      fg2.MaterialName := fg.MaterialName;
+      fg2.LightMapIndex := fg.LightMapIndex;
+      fg2.PrepareMaterialLibraryCache(ffm2.MaterialLibrary);
+    end;
+
+  end;
+  result := 1.0;
+end;
+
+function FreeformFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  me: TMeshObject;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
+  result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
+end;
+
+function FreeformFaceGroupSetMaterial(ff,mesh,fgroup: real; matname: pchar): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  me: TMeshObject;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
+  me.FaceGroups[trunc64(fgroup)].MaterialName := String(matname);
+  result:=1;
+end;
+
+function MaterialSetTexture(mtrl, mtrl2: pchar): real; stdcall;
+var
+  mat:TGLLibMaterial;
+  mat2:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat2:=matlib.Materials.GetLibMaterialByName(mtrl2);
+  mat.Material.Texture := mat2.Material.Texture;
+  result:=1;
+end;
+
+// OdeVehicle functionality is experimental
+// and does not work properly for now
+{
 function OdeVehicleCreate(parent: real): real; stdcall;
 var
   veh: TGLODEVehicle;
@@ -314,6 +416,7 @@ begin
   veh.ForwardForce := f;
   result := 1.0;
 end;
+}
 
 exports
 
@@ -380,6 +483,7 @@ FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 FreeformSphereSweepIntersect, FreeformPointInMesh,
 FreeformToFreeforms,
 FreeformMeshSetMaterial, FreeformUseMeshMaterials,
+FreeformFaceGroupGetMaterial, FreeformFaceGroupSetMaterial,
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
@@ -411,7 +515,7 @@ ObjectIsPointInObject,
 ObjectSetCulling,
 ObjectSetName, ObjectGetName, ObjectGetClassName,
 ObjectSetTag, ObjectGetTag,
-ObjectGetParent, ObjectGetChildCound, ObjectGetChild, ObjectGetIndex, ObjectFindChild,
+ObjectGetParent, ObjectGetChildCount, ObjectGetChild, ObjectGetIndex, ObjectFindChild,
 ObjectGetBoundingSphereRadius,
 ObjectGetAbsoluteUp, ObjectSetAbsoluteUp, ObjectGetAbsoluteRight,
 ObjectGetAbsoluteXVector, ObjectGetAbsoluteYVector, ObjectGetAbsoluteZVector,
@@ -441,7 +545,8 @@ MaterialSetPolygonMode, MaterialSetTextureImageAlpha,
 MaterialSetTextureScale, MaterialSetTextureOffset,
 MaterialSetTextureFilter, MaterialEnableTexture,
 MaterialGetCount, MaterialGetName,
-MaterialSetFaceCulling, MaterialSetSecondTexture,
+MaterialSetFaceCulling,
+MaterialSetTexture, MaterialSetSecondTexture,
 MaterialSetTextureFormat, MaterialSetTextureCompression,
 MaterialTextureRequiredMemory, MaterialSetFilteringQuality,
 MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete,
@@ -588,17 +693,16 @@ OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule,
 OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
 OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
 OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
-
 OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
 OdeAddJointSlider, OdeAddJointUniversal, 
-
 OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
 OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
 OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
-OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
-
+OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel;
+{
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
+}
 
 begin
 end.

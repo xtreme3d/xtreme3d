@@ -624,7 +624,7 @@ begin
   result := Integer(object1.Parent);
 end;
 
-function ObjectGetChildCound(obj1: real): real; stdcall;
+function ObjectGetChildCount(obj1: real): real; stdcall;
 var
   object1: TGLBaseSceneObject;
 begin

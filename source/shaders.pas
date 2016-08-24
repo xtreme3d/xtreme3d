@@ -486,10 +486,13 @@ var
   param: TGLSLShaderParameter;
   mat: TGLLibMaterial;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
   param := TGLSLShaderParameter(trunc64(par));
   param.UniformType := uniformTexture2D;
-  param.Texture := mat.Material.Texture;
+  if Length(mtrl) > 0 then
+  begin
+    mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+    param.Texture := mat.Material.Texture;
+  end;
   param.UniformTexture := trunc64(texUnit);
   param.Initialized := True;
   result := 1;
