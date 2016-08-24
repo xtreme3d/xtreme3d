@@ -11,24 +11,24 @@
 <H1 class=name>Blending</H1>
 <A class=type>Blending | Смешивание</A>
 <HR>
-<A>Метод смешивания цветов текущего пикселя и пикселя, находящегося уже в 
-буфере кадра, для получения выходного пикселя. Введем следующие обозначения:</A>
+<A>Смешивание двух цветов в модели RGB для получения третьего. Используется для наложения одного изображения на другое с использованием различных эффектов прозрачности.
+<BR>
+<BR>Существует множество разных видов смешивания. Введем следующие обозначения:</A>
 <br><A class=red>R1</A><A>,</A><A class=green> G1</A><A>,</A><A class=blue> B1</A><A>, A1 - соответственно представляют красную, зеленую, синюю и 
-альфа компоненты текущего пикселя.</A>
-<br><A class=red>R2</A><A>,</A><A class=green> G2</A><A>,</A><A class=blue> B2</A><A>, A1 -  аналогично для пикселя, уже находящегося в буфере.
+альфа компоненты первого цвета.</A>
+<br><A class=red>R2</A><A>,</A><A class=green> G2</A><A>,</A><A class=blue> B2</A><A>, A1 - аналогично для второго цвета.
 <br>Примеры смешивания:
-<br>Alpha Blending - добавление прозрачности, т.е.</A>
+<br>Alpha Blending - альфа-смешивание, т.е.</A>
 <A>(</A><A class=red>R1</A><A>*A1+</A><A class=red>R2</A><A>*(1-A1),</A><A class=green> G1</A><A>*A1+</A><A class=green>G2</A><A>*(1-A1),</A><A class=blue> B1</A><A>*A1+</A><A class=blue>B2<A>*(1-A1))</A><A>
-<br>Additive Blending - суммирование цветов, т.е.</A>
+<br>Additive Blending - суммирование, т.е.</A>
 <A>(</A><A class=red>R1</A><A>+</A><A class=red>R2</A><A>,</A><A class=green> G1</A><A>+</A><A class=green>G2</A><A>,</A><A class=blue> B1</A><A>+</A><A class=blue>B2</A>)</A><A>
-<br>Modulate Blending - модуляция цветов, т.е.</A>
+<br>Modulate Blending - умножение, т.е.</A>
 <A>(</A><A class=red>R1</A><A>*</A><A class=red>R2</A><A>,</A><A class=green> G1</A><A>*</A><A class=green>G2</A><A>,</A><A class=blue> B1</A><A>*</A><A class=blue>B2</A>)</A><A>
 <BR>
 <BR><A>См. также </A>
 <A class=link href="alpha.htm">Alpha</A><A>, </A>
 <A class=link href="color.htm">Color</A><A>, </A>
-<A class=link href="colormodel.htm">Color Model</A><A>, </A>
-<A class=link href="framebuffer.htm">Frame Buffer</A><A>.</A>
+<A class=link href="colormodel.htm">Color Model</A><A>.</A>
 <HR>
 
 </DIV>

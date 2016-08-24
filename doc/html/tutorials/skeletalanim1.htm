@@ -11,7 +11,8 @@
 <H1 class=pagetitle>Урок 9<BR>Основы скелетной анимации</H1>
 
 <A><B>Уровень:</B> начинающий</A>
-<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
 <BR>
 <BR>Порой возможностей вертексной анимации оказывается недостаточно. Это касается, в основном, 
 игр жанра action. Например, вы можете захотеть "дать" своему герою в руки оружие или "надеть" на него броню. 
@@ -30,21 +31,21 @@
 дополнительно указывать, Xtreme3D способен самостоятельно распознать тип модели и настроиться на соответствующий 
 тип анимации:
 <BR>
-<BR>actor=</A><A class=func2link href=../functions/actor.htm#ActorCreate>ActorCreate</A><A>('model.smd', matlib, matlib, <B>global.</B>scene);
+<BR><A>actor = </A><A class=func2link href=../functions/actor.htm#ActorCreate>ActorCreate</A><A>('model.smd', matlib, matlib, <B>global.</B>scene);</A>
 <BR>
 <BR>Особенность формата SMD заключается в том, что анимация модели хранится в отдельном файле, который также 
 имеет расширение *.smd. Таких файлов может быть несколько. Теоретически, такой метод позволяет использовать 
 одни и те же файлы анимации для разных моделей (если они имеют одинаковый скелет). 
 <BR>После создания Актера следует добавить эти файлы:
 <BR>
-<BR></A><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation1.smd');
-<BR></A><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation2.smd');
-<BR></A><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation3.smd');
+<BR><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation1.smd');</A>
+<BR><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation2.smd');</A>
+<BR><A class=func2link href=../functions/actor.htm#ActorAddObject>ActorAddObject</A><A>(actor, 'animation3.smd');</A>
 <BR>
 <BR>При добавлении очередного smd-файла, к анимации Актера добавляется новая группа кадров, которой присваивается 
 порядковый номер. Отсчет ведется с 1. То есть, если мы теперь переключимся на группу 2:
 <BR>
-<BR></A><A class=func2link href=../functions/actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor, 2, </A><A class=constant>false</A><A>);
+<BR><A class=func2link href=../functions/actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor, 2, </A><A class=constant>false</A><A>);</A>
 <BR>
 <BR>...то будет проиграна анимация, загруженная из файла animation2.smd.
 <BR>
@@ -65,8 +66,10 @@
 <BR></A><A class=func2link href=../functions/actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor, bone_hand, 90,0,0);
 <BR>
 -->
+<!--
 Позднее мы рассмотрим способ получить абсолютные координаты и углы поворота костей - для того, чтобы можно было 
 "прикреплять" к ним различные сторонние объекты.
+-->
 </A>
 
 </DIV>

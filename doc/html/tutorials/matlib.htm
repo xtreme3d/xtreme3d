@@ -11,9 +11,10 @@
 <H1 class=pagetitle>Урок 5<BR>Библиотека материалов</H1>
 
 <A><B>Уровень:</B> начинающий</A>
-<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
 <BR>
-<BR>Одна из самых замечательных особенностей Xtreme3D — использование библиотеки материалов. Материал — 
+<BR>Одна из самых замечательных особенностей Xtreme3D — использование библиотеки материалов. Материал - 
 это набор параметров, определяющих внешний вид объекта. В этот набор входят значения цвета, прозрачности, 
 текстуры, типа смешивания и т.д. Понятие материала в Xtreme3D куда более фундаментально, чем во многих 
 других движках. Очень часто под материалом понимается текстура, но в Xtreme3D материал может и не иметь 
@@ -24,7 +25,7 @@
 ощутимые выгоды (экономия памяти, объема кода, времени и труда программиста), хотя может вызвать и определенные 
 неудобства (например, если необходимо, чтобы изменения параметров материала коснулись только одного конкретного 
 объекта). Материал в Xtreme3D имеет уникальное имя, по которому осуществляется изменение  параметров. Имя 
-задается строковым значением, например «mGround».
+задается строковым значением, например "mGround".
 <BR>
 <BR>Библиотекой материалов (Material Library) называется специальная конструкция, содержащая список материалов. 
 Библиотека может быть активной или неактивной. В первом случае в нее можно добавлять материалы, настраивать их 
@@ -39,19 +40,19 @@
 текстурам, соответствующие искомым папкам. 
 <BR>
 <BR>Существует поистине огромное количество разнообразных настроек материалов. Кроме того, материалы позволяют 
-применять к ним шейдеры, «фотографировать» в них картинки с экрана или с камеры, а также хранить различные 
+применять к ним шейдеры, "фотографировать" в них картинки с экрана или с камеры, а также хранить различные 
 невизуальные данные, например, маски и карты высот. Охватить в одной статье все возможности, которыми располагает 
 система материалов Xtreme3D, просто нереально. Поэтому мы рассмотрим только самые основные: цвет, текстуру и 
 несколько других.
 <BR>
 <BR>Сначала создается и активируется библиотека материалов:
 <BR>
-<BR>matlib=</A><A class=func2link href=../functions/material.htm#MaterialLibraryCreate>MaterialLibraryCreate</A><A>();
-<BR></A><A class=func2link href=../functions/material.htm#MaterialLibraryActivate>MaterialLibraryActivate</A><A>(matlib);
+<BR><A>matlib=</A><A class=func2link href=../functions/material.htm#MaterialLibraryCreate>MaterialLibraryCreate</A><A>();</A>
+<BR><A class=func2link href=../functions/material.htm#MaterialLibraryActivate>MaterialLibraryActivate</A><A>(matlib);</A>
 <BR>
 <BR>Теперь можно создавать сами материалы:
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mTexture','texture.jpg');
+<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mTexture', 'texture.jpg');</A>
 <BR>
 <BR>Эта функция одновременно создает материал и присваивает ему текстуру из файла. Xtreme3D поддерживает 
 форматы BMP, JPG, PNG, TGA, DDS. Рекомендуется использовать текстуры со стороной, равной 128, 
@@ -59,48 +60,47 @@
 <BR>
 <BR>Вы можете создать материал без текстуры, просто оставив строку имени файла пустой:
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mColor','');
+<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mColor', '');</A>
 <BR>
 <BR>В этом случае можно задать цвет материала. Проще всего это сделать функцией
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A><A>('mColor',</A><A class=constant>c_red</A><A>,1);
+<BR><A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A><A>('mColor', </A><A class=constant>c_red</A><A>, 1);</A>
 <BR>
-<BR>Цвет вы можете передать встроенными константами GML (</A><A class=constant>с_red</A><A>, 
-</A><A class=constant>c_yellow</A><A>, </A><A class=constant>c_green</A><A> и др.), функциями 
-</A><A class=type>make_color_rgb</A><A>(r,g,b) или </A><A class=type>make_color_hsv</A><A>(h,s,v) для 
-соответствующих цветовых моделей (RGB и HSV), 
-а также в обратном шестнадцатиричном формате, например, $0000FF означает красный.
+<BR>Цвет вы можете передать встроенными константами GML (<A class=constant>с_red</A>, 
+<A class=constant>c_yellow</A>, <A class=constant>c_green</A> и др.), функциями 
+<A class=type>make_color_rgb</A><A>(r, g, b)</A> или <A class=type>make_color_hsv</A><A>(h, s, v)</A> для цветовых моделей RGB и HSV, соответственно, 
+а также в обратном шестнадцатиричном формате, например, <A>$0000FF</A> означает красный.
 <BR>
-<BR>Кроме цвета, функция </A><A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A><A> задает 
+<BR>Кроме цвета, функция <A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A> задает 
 значение прозрачности — альфа — лежащее в промежутке 
 от 0 до 1. Альфа в нашем случае равно 1 (полная непрозрачность).
 <BR>
-<BR>Строго говоря, </A><A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A><A> задает 
+<BR>Строго говоря, <A class=func2link href=../functions/material.htm#MateriaSetDiffuseColor>MaterialSetDiffuseColor</A> задает 
 только один из компонентов цвета материала, а всего их 
-четыре — Ambient, Diffuse, Specular и Emission. Такое разделение связано с тем, что участки поверхности с 
+четыре - Ambient, Diffuse, Specular и Emission. Такое разделение связано с тем, что участки поверхности с 
 различным уровнем освещенности могут иметь разный цвет. Ambient задает общий оттенок материала, не зависящий 
-от освещения (цвет теневой стороны), Diffuse — цвет освещенной стороны, Specular — цвет блика, Emission — цвет имитации 
+от освещения (цвет теневой стороны), Diffuse - цвет освещенной стороны, Specular - цвет блика, Emission — цвет имитации 
 самосвечения. Более того, сами источники освещения также имеют собственные компоненты Ambient, 
 Diffuse и Specular, и это делает цвет объектов еще более сложным и многообразным.
 <BR>
 <BR>Вы можете отключить для материала освещение (и, заодно, влияние тумана, о котором пойдет речь чуть позже):
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MaterialSetOptions>MaterialSetOptions</A><A>('mColor',1,0); 
+<BR><A class=func2link href=../functions/material.htm#MaterialSetOptions>MaterialSetOptions</A><A>('mColor', 1, 0);</A>
 <BR>
-<BR>Первый параметр, в данном случае равный 1, отвечает за влияние тумана, второй — за влияние освещения. 
+<BR>Первый параметр, в данном случае равный 1, отвечает за влияние тумана, второй - за влияние освещения. 
 <BR>
 <BR>Применить созданный материал к объекту очень просто:
 <BR>
-<BR></A><A class=func2link href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object,'mTexture');
+<BR><A class=func2link href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object, 'mTexture');</A>
 <BR>
 <BR>Кстати, вернемся к материалу с текстурой. С этой текстурой можно творить удивительные вещи! Например, изменение 
 режима проецирования на сферический сделает материал похожим на отражение на металле:
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MaterialSetTextureMappingMode>MaterialSetTextureMappingMode</A><A>('mTexture',</A><A class=constant>tmmSphere</A><A>);
+<BR><A class=func2link href=../functions/material.htm#MaterialSetTextureMappingMode>MaterialSetTextureMappingMode</A><A>('mTexture', </A><A class=constant>tmmSphere</A><A>);</A>
 <BR>
 <BR>А чтобы многократно повторить текстуру на поверхности объекта, меняется ее масштаб:
 <BR>
-<BR></A><A class=func2link href=../functions/material.htm#MaterialSetTextureScale>MaterialSetTextureScale</A><A>('mTexture',10,10);
+<BR><A class=func2link href=../functions/material.htm#MaterialSetTextureScale>MaterialSetTextureScale</A><A>('mTexture', 10, 10);</A>
 <BR>
 <BR>При этом текстура повторится десять раз.
 <BR>

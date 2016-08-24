@@ -12,47 +12,47 @@
 
 <A class=type>Класс:   -</A><BR><BR>
 
-<A>Функции движка (Engine), в отличие от остальных, не относятся к какому-либо типу объектов. 
+<A class=ntext>Функции движка (Engine), в отличие от остальных, не относятся к какому-либо типу объектов. 
 Служат для общего управления Xtreme3D и задания базовых параметров. Функции движка можно 
 считать наиболее важными и первоочередными из всех.</A><HR>
 
 <A name="EngineCreate"></A>
 <H1 class=name>EngineCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>EngineCreate</A><A>();</A>
-<BR><A>Инициализирует Xtreme3D. После вызова этой функции вы можете использовать другие функции движка. 
+<BR><A class=ntext>Инициализирует Xtreme3D. После вызова этой функции вы можете использовать другие функции движка. 
 Инициализация движка может происходить только один раз за одно время, то есть, вы не можете снова вызвать 
-эту функцию, пока не будет выполнена </A><A class=funclink href=../functions/engine.htm#EngineDestroy>EngineDestroy</A><A>.</A>
+эту функцию, пока не будет выполнена <A class=funclink href=../functions/engine.htm#EngineDestroy>EngineDestroy</A>.</A>
 <HR>
 
 <A name="EngineDestroy"></A>
 <H1 class=name>EngineDestroy</H1>
 <A class=type>real</A><A> = </A><A class=function>EngineDestroy</A><A>();</A>
-<BR><A>Уничтожает Xtreme3D, освобождая память из-под всех его ресурсов. После вызова этой функции вы не 
+<BR><A class=ntext>Уничтожает Xtreme3D, освобождая память из-под всех его ресурсов. После вызова этой функции вы не 
 можете использовать другие функции движка, пока не будет выполнена 
-</A><A class=funclink href=../functions/engine.htm#EngineCreate>EngineCreate</A><A>.</A><HR>
+<A class=funclink href=../functions/engine.htm#EngineCreate>EngineCreate</A>.</A><HR>
 
 <A name="EngineSetObjectsSorting"></A>
 <H1 class=name>EngineSetObjectsSorting</H1>
 <A class=type>real</A><A> = </A><A class=function>EngineSetObjectsSorting</A><A>( os as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Определяет режим сортировки (os) для всех объектов. Доступны следующие значения os:</A>
-<BR><A class=constant name="osInherited">osInherited</A><A> = 0 - унаследованная сортировка;</A>
-<BR><A class=constant name="osNone">osNone</A><A> = 1 - отсутствие сортировки;</A>
-<BR><A class=constant name="osRenderFarthestFirst">osRenderFarthestFirst</A><A> = 2 - отрисовка первыми объектов с максимальным удалением от камеры (значение по умолчанию);</A>
-<BR><A class=constant name="osRenderBlendedLast">osRenderBlendedLast</A><A> = 3 - непрозрачные объекты не сортируются и отрисовываются первыми, прозрачные - последними, и с учетом глубины;</A>
-<BR><A class=constant name="osRenderNearestFirst">osRenderNearestFirst</A><A> = 4 - отрисовка первыми объектов с минимальным удалением от камеры.</A>
+<BR><A class=ntext>Определяет режим сортировки (os) для всех объектов. Доступны следующие значения os:
+<BR><A class=constant name="osInherited">osInherited</A> = 0 - унаследованная сортировка;
+<BR><A class=constant name="osNone">osNone</A> = 1 - отсутствие сортировки;
+<BR><A class=constant name="osRenderFarthestFirst">osRenderFarthestFirst</A> = 2 - отрисовка первыми объектов с максимальным удалением от камеры (значение по умолчанию);
+<BR><A class=constant name="osRenderBlendedLast">osRenderBlendedLast</A> = 3 - непрозрачные объекты не сортируются и отрисовываются первыми, прозрачные - последними, и с учетом глубины;
+<BR><A class=constant name="osRenderNearestFirst">osRenderNearestFirst</A> = 4 - отрисовка первыми объектов с минимальным удалением от камеры.
 <HR>
 
 <A name="EngineSetCulling"></A>
 <H1 class=name>EngineSetCulling</H1>
 <A class=type>real</A><A> = </A><A class=function>EngineSetCulling</A><A>( vc as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Определяет режим отбора видимости (vc) для всех объектов. Доступны следующие значения vc:</A>
-<BR><A class=constant name="vcNone">vcNone</A><A> = 0 - отсутствие отбора видимости;</A>
-<BR><A class=constant name="vcInherited">vcInherited</A><A> = 1 - унаследованный отбор видимости;</A>
-<BR><A class=constant name="vcObjectBased">vcObjectBased</A><A> = 2 - отбор совершается на основе объекта: каждый объект может быть отобран в зависимости от своей позиции. Отбор объекта не затрагивает видимость его дочерних объектов;</A>
-<BR><A class=constant name="vcHierarchical">vcHierarchical</A><A> = 3 - отбор осуществляется по принципу иерархии: если материнский объект отобран, все его дочерние объекты также будут невидимы.</A>
-<BR><A>В зависимости от структуры вашей сцены, наиболее эффективными методами будут </A><A class=constant>vcObjectBased</A><A> и </A><A class=constant>vcHierarchical</A><A>.</A>
+<BR><A class=ntext>Определяет режим отбора видимости (vc) для всех объектов. Доступны следующие значения vc:
+<BR><A class=constant name="vcNone">vcNone</A> = 0 - отсутствие отбора видимости;
+<BR><A class=constant name="vcInherited">vcInherited</A> = 1 - унаследованный отбор видимости;
+<BR><A class=constant name="vcObjectBased">vcObjectBased</A> = 2 - отбор совершается на основе объекта: каждый объект может быть отобран в зависимости от своей позиции. Отбор объекта не затрагивает видимость его дочерних объектов;
+<BR><A class=constant name="vcHierarchical">vcHierarchical</A> = 3 - отбор осуществляется по принципу иерархии: если материнский объект отобран, все его дочерние объекты также будут невидимы.
+<BR>В зависимости от структуры вашей сцены, наиболее эффективными методами будут <A class=constant>vcObjectBased</A> и <A class=constant>vcHierarchical</A>.</A>
 <HR>
 
 <!--
@@ -71,7 +71,7 @@
 <H1 class=name>SetPakArchive</H1>
 <A class=type>real</A><A> = </A><A class=function>SetPakArchive</A><A>( filename as </A>
 <A class=type>string</A><A> );</A>
-<BR><A>Открывает сжатый архив *.PAK, из которого вы можете загружать ресурсы движка. Для создания архива требуется 
+<BR><A class=ntext>Открывает сжатый архив *.PAK, из которого вы можете загружать ресурсы движка. Для создания архива требуется 
 утилита PakEdit.exe, входящая в состав Xtreme3D SDK. Рекомендуется создавать архив и добавлять эту функцию только при финальной сборке проекта.
 <BR>Обратите внимание, что после вызова этой функции все ресурсы без исключения будут загружаться движком из
 этого архива. Отменить это во время игры невозможно.
@@ -82,11 +82,10 @@
 <H1 class=name>Update</H1>
 <A class=type>real</A><A> = </A><A class=function>Update</A><A>( dt as </A>
 <A class=type>real</A><A> );</A>
-<BR><A>Совершает программное обновление состояния движка (вычисление столкновений, анимации и т.д.). 
-Обычно вызывается перед </A><A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A><A> и только один раз, даже при наличии нескольких 
+<BR><A class=ntext>Совершает программное обновление состояния движка (вычисление столкновений, анимации и т.д.). 
+Обычно вызывается перед <A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A> и только один раз, даже при наличии нескольких 
 Видов.
-</A>
-<BR><A>dt - шаг времени в секундах. Меняя этот параметр, можно менять скорость анимации. Шаг времени, как правило, обратно пропорционален количеству кадров в секунду (1 / fps).</A>
+<BR>dt - шаг времени в секундах. Меняя этот параметр, можно менять скорость анимации. Шаг времени, как правило, обратно пропорционален количеству кадров в секунду (1 / fps).</A>
 <HR>
 
 <!--

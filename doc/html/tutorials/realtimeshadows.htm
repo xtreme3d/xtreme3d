@@ -11,7 +11,8 @@
 <H1 class=pagetitle>Урок 13<BR>Тени в реальном времени</H1>
 
 <A><B>Уровень:</B> средний<A>
-<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
 <BR>
 <BR>Xtreme3D поддерживает несколько способов рендерить тени. Во-первых, тени (и освещение в целом) могут быть предрассчитаны и "запечены" в текстуру - такая техника называется картой освещения (Lightmapping). Она позволяет получить очень красивый и реалистичный результат, но получившиеся тени будут статичными. Соответственно, эта техника применима только к неподвижным объектам - например, к интерьерам и архитектуре. К тому же, далеко не все форматы 3D-моделей поддерживают карты освещения, и не во всех 3D-редакторах их можно создавать. 
 <BR>
@@ -21,11 +22,11 @@
 <BR>
 <BR>На этом уроке мы рассмотрим теневую плоскость. Создать ее очень просто:
 <BR>
-<BR><A>shadowTarget = </A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(<B>global</B>.scene);</A>
-<BR><A>shadowPlane = </A><A class=func2link href=../functions/shadowplane.htm#ShadowplaneCreate>ShadowplaneCreate</A><A>(20, 20, 10, 10, shadowTarget, light, </A><A class=constant>c_black</A><A>, 0.5, <B>global</B>.scene);</A>
+<BR><A class=src>shadowTarget = </A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A class=src>(<B>global</B>.scene);</A>
+<BR><A class=src>shadowPlane = </A><A class=func2link href=../functions/shadowplane.htm#ShadowplaneCreate>ShadowplaneCreate</A><A class=src>(20, 20, 10, 10, shadowTarget, light, </A><A class=constant>c_black</A><A class=src>, 0.5, <B>global</B>.scene);</A>
 <BR>
 <BR>Теперь остается только добавить те объекты, которые должны отбрасывать тень, в потомки к shadowTarget.
-<A></A>
+</A>
 
 </DIV>
 
