@@ -811,6 +811,10 @@
   <PARAM name="Local" value="glossary/uvcoordinates.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Vector">
+  <PARAM name="Local" value="glossary/vector.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Vertex">
   <PARAM name="Local" value="glossary/vertex.htm">
  </OBJECT>

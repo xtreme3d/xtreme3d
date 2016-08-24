@@ -1008,6 +1008,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Vector">
+                        <param name="Local" value="glossary/vector.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Vertex">
                         <param name="Local" value="glossary/vertex.htm">
                         <param name="ImageNumber" value="0">
