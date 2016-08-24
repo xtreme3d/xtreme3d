@@ -14,6 +14,7 @@ Screenshots
 [![Screenshot1](/screenshots/008-thumb.jpg)](/screenshots/008.jpg)
 [![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
 [![Screenshot4](/screenshots/009-thumb.jpg)](/screenshots/009.jpg)
+[![Screenshot4](/screenshots/010-thumb.jpg)](/screenshots/010.jpg)
 
 Features
 --------
