@@ -8,9 +8,49 @@
 
 <DIV ALIGN=justify>
 
-<H1 class=pagetitle>Шейдеры</H1>
+<H1 class=pagetitle>Урок 18<BR>Шейдеры</H1>
 
-<A></A>
+<A><B>Уровень:</B> опытный<A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
+<BR>
+<BR>Одной из самых интересных особенностей Xtreme3D является поддержка шейдеров. Понятие "шейдер" здесь имеет более широкое значение, чем в других движках. Обычно этим термином обозначают программы для графического процессора, которые выполняются для каждой вершины модели, либо для каждого пикселя модели на экране. Такие шейдеры в Xtreme3D тоже есть (см. следующий урок), но в общем смысле шейдером называется спецэффект, модифицирующий или заменяющий собой материал, к которому он прикреплен. Некоторые такие спецэффекты работают и на старых видеокартах, которые не поддерживают шейдерные программы, а некоторые основаны на встроенных в движок программах.
+<BR>
+<BR>При помощи шейдеров можно наложить на объект несколько материалов, отрисовать контуры объекта, сделать объект рельефным или придать ему "эффект комикса". Рассмотреть все возможности встроенных шейдеров Xtreme3D в рамках одного урока невозможно, поэтому мы остановимся на одном - шейдере рельефа (Bump Shader).
+<BR>
+<BR>Эффект рельефности сильно повышает реализм моделей - он используется в играх уже более 10 лет и за эти годы стал де-факто стандартом. Обычно рельефность достигается путем использования метода normal mapping (проецирование нормалей). На этом методе основан и Bump Shader в Xtreme3D. Суть normal mapping в том, что нормаль задается для каждой точки поверхности (в отличие от обычного вершинного освещения, где нормали задаются для каждой вершины). Это делается при помощи карты нормалей (normal map) - специальной текстуры, в которой цвета пикселей сопоставлены с векторами нормалей (RGB = XYZ). Карты нормалей можно сгенерировать из карт высот или из высокополигональной геометрии путем трассировки лучей - такая функция есть практически во всех профессиональных пакетах 3D-моделирования.
+<BR>
+<BR><img src="../data/normalmap.jpg">
+<BR>
+<BR>Чтобы карта нормалей была инвариантна относительно вращения и переноса модели (то есть, оставалась неизменной при этих трансформациях), ее задают в особом пространстве, называемом пространством касательных (tangent space). В этом пространстве координатная ось Z соответствует перпендикуляру к поверхности, а оси X и Y, соответственно, взаимно перпендикулярным касательным к поверхности. Освещение также рассчитывается в пространстве касательных - направление света трансформируется в это пространство при помощи специальной матрицы, которую называют TBN по первым буквам ее компонентов - Tangent, Bitangent, Normal (тангент, битангент, нормаль). Нормаль здесь - обычная нормаль вершины, а тангент и битангент - векторы, перпендикулярные нормали и перпендикулярные друг другу. Эти векторы вычисляет Xtreme3D. В настоящее время они поддерживаются только для объектов типа Freeform.
+<BR>
+<BR>Несмотря на довольно сложную для начинающих теоретическую базу, использовать эффект рельефа в Xtreme3D очень легко - все сложности реализации скрыты под удобным API.
+<BR>
+<BR>Сначала создадим материалы с необходимыми текстурами:
+<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mBumpDiffuse', 'diffuse.png');</A>
+<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mBumpNormal', 'normal.png');</A
+<BR>
+<BR>Теперь создадим шейдер рельефа и передадим ему текстуры:
+<BR>
+<BR><A>bump = </A><A class=func2link href=../functions/shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>();</A>
+<BR><A class=func2link href=../functions/shader.htm#BumpShaderSetDiffuseTexture>BumpShaderSetDiffuseTexture</A><A>(bump, 'mBumpDiffuse');</A>
+<BR><A class=func2link href=../functions/shader.htm#BumpShaderSetNormalTexture>BumpShaderSetNormalTexture</A><A>(bump, 'mBumpNormal');</A>
+<BR><A class=func2link href=../functions/shader.htm#BumpShaderSetMaxLights>BumpShaderSetMaxLights</A><A>(bump, 3);</A>
+<BR>
+<BR>Функция BumpShaderSetMaxLights задает количество источников света, которые должен учитывать шейдер. Напомним, что Xtreme3D поддерживает до 8 источников света - то же относится и к шейдеру рельефа.
+<BR>
+<BR>Теперь можно создать материал и прикрепить к нему наш шейдер:
+<BR>
+<BR><A class=func2link href=../functions/shader.htm#MaterialCreate>MaterialCreate</A><A>('mBump', '');</A>
+<BR><A class=func2link href=../functions/shader.htm#MaterialSetAmbientColor>MaterialSetAmbientColor</A><A>('mBump', 
+</A><A class=constant>c_black</A><A>, 1);</A>
+<BR><A class=func2link href=../functions/shader.htm#MaterialSetDiffuseColor>MaterialSetDiffuseColor</A><A>('mBump', 
+</A><A class=constant>c_white</A><A>, 1);</A>
+<BR><A class=func2link href=../functions/shader.htm#MaterialSetSpecularColor>MaterialSetSpecularColor</A><A>('mBump', 
+</A><A class=constant>c_ltgray</A><A>, 1);</A>
+<BR><A class=func2link href=../functions/shader.htm#MaterialSetShininess>MaterialSetShininess</A><A>('mBump', 32);</A>
+<BR><A class=func2link href=../functions/shader.htm#MaterialSetShader>MaterialSetShader</A><A>('mBump', bump);</A>
+<BR>
 
 </DIV>
 

@@ -121,8 +121,13 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Системы частиц">
+                        <param name="Name" value="Частицы">
                         <param name="Local" value="tutorials/particles.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="DCE">
+                        <param name="Local" value="tutorials/DCE.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -133,11 +138,6 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="GLSL">
                         <param name="Local" value="tutorials/glsl.htm">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="DCE">
-                        <param name="Local" value="tutorials/DCE.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">

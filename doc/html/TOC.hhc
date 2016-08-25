@@ -94,14 +94,22 @@
   <PARAM name="Name" value="Создание воды">
   <PARAM name="Local" value="tutorials/createwater.htm">
  </OBJECT>
+<!--
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Спецэффекты">
   <PARAM name="Local" value="tutorials/specialfx.htm">
  </OBJECT>
+-->
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Системы частиц">
+  <PARAM name="Name" value="Частицы">
   <PARAM name="Local" value="tutorials/particles.htm">
  </OBJECT>
+<!--
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DCE">
+  <PARAM name="Local" value="tutorials/DCE.htm">
+ </OBJECT>
+-->
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Шейдеры">
   <PARAM name="Local" value="tutorials/shaders.htm">
@@ -110,14 +118,12 @@
   <PARAM name="Name" value="GLSL">
   <PARAM name="Local" value="tutorials/glsl.htm">
  </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="DCE">
-  <PARAM name="Local" value="tutorials/DCE.htm">
- </OBJECT>
+<!--
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Разбиение пространства">
   <PARAM name="Local" value="tutorials/spacepartition.htm">
  </OBJECT>
+-->
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Функции">
