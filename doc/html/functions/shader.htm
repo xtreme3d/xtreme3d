@@ -12,7 +12,7 @@
 
 <A class=type>Класс: ??</A><BR><BR>
 
-<A>Шейдер в Xtreme3D - это спецэффект для материала. Есть пять разных шейдеров: Bump, Cel, HiddenLine, MultiMaterial, Outline, TexCombine, Phong и GLSL. Для применения шейдера к материалу используется функция </A><A class=funclink href=../functions/material.htm#MaterialSetShader>MaterialSetShader</A><A>. При помощи шейдеров на языке GLSL вы можете программировать свои собственные спецэффекты.
+<A>Шейдер в Xtreme3D - это спецэффект для материала. Есть несколько видов шейдеров: Bump, Cel, HiddenLine, MultiMaterial, Outline, TexCombine, Phong и GLSL. Для применения шейдера к материалу используется функция </A><A class=funclink href=../functions/material.htm#MaterialSetShader>MaterialSetShader</A><A>. При помощи шейдеров на языке GLSL вы можете программировать свои собственные спецэффекты.
 <BR><HR>
 
 <A name="ShaderEnable"></A>
@@ -26,7 +26,7 @@
 <A name="BumpShaderCreate"></A>
 <H1 class=name>BumpShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>BumpShaderCreate</A><A>( );</A>
-<BR><A>Создает шейдер рельефа (bump mapping) и возвращает его id. В настоящее время этот шейдер корректно работает только на объектах типа Freeform.
+<BR><A>Создает шейдер рельефа (bump mapping) и возвращает его id. С его помощью можно добиться очень эффектной имитации неровностей на поверхности модели. В настоящее время этот шейдер корректно работает только на объектах типа Freeform.
 <BR>Данный шейдер требует поддержки расширений GL_ARB_shading_language (или GL_ARB_shading_language_100), GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader.</A>
 <HR>
 
@@ -49,7 +49,7 @@
 <A name="BumpShaderSetHeightTexture"></A>
 <H1 class=name>BumpShaderSetHeightTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>BumpShaderSetHeightTexture</A><A>( shader as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
-<BR><A>Задает карту высот шейдера рельефа. Карта высот - это текстура, темные элементы которой означают снижение высоты, а светлые - повышение. Карта высот необходима при использовании эффекта parallax mapping (см. ниже). </A>
+<BR><A>Задает карту высот шейдера рельефа. Карта высот - это текстура, темные элементы которой означают снижение высоты, а светлые - повышение. Карта высот необходима при использовании эффекта parallax mapping (см. ниже). Если этот эффект отключен, карта высот не требуется.</A>
 <BR><A>shader - id шейдера</A>
 <BR><A>material - имя материала в текущей библиотеке, из которого следует читать текстуру.</A>
 <HR>
@@ -57,7 +57,8 @@
 <A name="BumpShaderUseParallax"></A>
 <H1 class=name>BumpShaderUseParallax</H1>
 <A class=type>real</A><A> = </A><A class=function>BumpShaderUseParallax</A><A>( shader,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает использование parallax mapping - эффект усиления иллюзии рельефа, достигаемый за счет смещения текстурных координат в зависимости от угла обзора. Этот эффект требует указания карты высот функцией </A><A class=funclink href=../functions/shader.htm#BumpShaderSetHeightTexture>BumpShaderSetHeightTexture<A><A>.</A>
+<BR><A>Включает или выключает parallax mapping - эффект усиления иллюзии рельефа, достигаемый за счет смещения текстурных координат в зависимости от угла обзора. Этот эффект требует указания карты высот функцией </A>
+<A class=funclink href=../functions/shader.htm#BumpShaderSetHeightTexture>BumpShaderSetHeightTexture<A><A>.</A>
 <BR><A>shader - id шейдера</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). По умолчанию parallax mapping выключен.</A>
 <HR>
@@ -171,7 +172,7 @@
 <A name="HiddenLineShaderCreate"></A>
 <H1 class=name>HiddenLineShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>HiddenLineShaderCreate</A><A>();</A>
-<BR><A>Создает шейдер скрытых линий. Скрытые линии - это ребра полигонов, из которых состоят объекты. Обычно они не отображаются, но этот шейдер позволяет 
+<BR><A>Создает шейдер скрытых линий. Скрытые линии в данном случае - это ребра полигонов, из которых состоят объекты. Обычно они не отображаются, но этот шейдер позволяет 
 их увидеть.</A>
 <HR>
 
@@ -310,7 +311,7 @@
 <A name="GLSLShaderCreateParameter"></A>
 <H1 class=name>GLSLShaderCreateParameter</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderCreateParameter</A><A>( shader as </A><A class=type>real</A><A>, name as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый параметр шейдера и возвращает его id. Эти параметры соответствуют uniform-переменным GLSL. Их можно модифицировать динамически в вашем приложении, но в шейдере они доступны только для чтения.</A>
+<BR><A>Создает новый параметр шейдера и возвращает его id. Эти параметры соответствуют uniform-переменным GLSL. Их можно модифицировать динамически в вашей игре, но в шейдере они доступны только для чтения.</A>
 <BR><A>shader - id шейдера</A>
 <BR><A>name - имя параметра.</A>
 <HR>
@@ -360,7 +361,7 @@
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterTexture</A><A>( param as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A>, texunit as </A><A class=type>real</A><A> );</A>
 <BR><A>Передает в параметр текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
 <BR><A>param - id параметра</A>
-<BR><A>material - имя материала (в активной библиотеке материалов)</A>
+<BR><A>material - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована текстура материала, к которому подключен шейдер. Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости лучше не использовать больше 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок.</A>
 <HR>
 

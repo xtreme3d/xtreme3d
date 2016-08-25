@@ -12,8 +12,13 @@
 
 <A class=type>Класс: TGLFreeform</A><BR><BR>
 
-<A>Объект свободной формы (Freeform) - неанимированная модель, загружаемая из файла 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), GLSM (GLScene Mesh), BSP (Quake), MS3D (Milkshape), B3D (Blitz3D) или LOD (LODka 3D).
-<BR>Объекты такого типа используются обычно в качестве игровых уровней, декораций и интерактивных предметов. 
+<A>Объект свободной формы (Freeform) - неанимированная модель, загружаемая из файла. Объекты такого типа используются обычно в качестве игровых уровней, декораций и интерактивных предметов. Freeform состоит из одного или более мешей (Mesh) - наборов вершин, каждый из которых, в свою очередь, содержит одну или более фейсгрупп (FaceGroup) - наборов граней. Фейсгруппам и мешам можно назначать отдельные материалы. Однако не все форматы моделей поддерживают материалы, как и деление на меши и фейсгруппы.
+<BR>Xtreme3D поддерживает следующие форматы моделей:
+<BR>Игровые - BSP (Quake 3), B3D (Blitz3D), LOD (LODka 3D)
+<BR>Пакеты 3D-моделирования и CAD - 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), MS3D (Milkshape), OCT (FSRad), NMF (AMD NormalMapper), WRL (VRML 1.0)
+<BR>Научные - PLY (Stanford Triangle Format), GTS (GNU Triangulated Surface), TIN (Triangular Irregular Network), STL (Stereolithography)
+<BR>Собственный формат - GLSM (GLScene Mesh).
+<BR>
 <BR><HR>
 
 <A name="FreeformCreate"></A>
@@ -51,16 +56,6 @@
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>parent - id родителя для полученных объектов.</A>
 <HR>
-
-<!--
-<A name="FreeformSetSecondTextureCoords"></A>
-<H1 class=name>FreeformSetSecondTextureCoords</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformSetSecondTextureCoords</A><A>( freeform1,freeform2 as </A><A class=type>real</A> );</A>
-<BR><A>Применяет текстурные координаты объекта freeform2 в качестве вторых текстурных координат объекта freeform1. Второй набор текстурных координат обычно используется для наложения так называемой карты освещения (lightmap).</A>
-<BR><A>freeform1 - id объекта свободной формы</A>
-<BR><A>freeform2 - id объекта свободной формы.</A>
-<HR>
--->
 
 <A name="FreeformMeshObjectsCount"></A>
 <H1 class=name>FreeformMeshObjectsCount</H1>
@@ -128,6 +123,25 @@
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>mesh - индекс меша</A>
 <BR><A>fgroup - индекс фейсгруппы.</A>
+<HR>
+
+<A name="FreeformFaceGroupGetMaterial"></A>
+<H1 class=name>FreeformFaceGroupGetMaterial</H1>
+<A class=type>string</A><A> = </A><A class=function>FreeformFaceGroupGetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает имя материала фейсгруппы.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы.</A>
+<HR>
+
+<A name="FreeformFaceGroupSetMaterial"></A>
+<H1 class=name>FreeformFaceGroupSetMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformFaceGroupSetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
+<BR><A>Присваивает фейсгруппе материал.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы</A>
+<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
 <HR>
 
 <!--
