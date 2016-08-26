@@ -1,9 +1,24 @@
 // GLWaterPlane
+
+{ Modified by skinhat.
+  Includes sin waves to simulate a calm ocean or lake. Includes the new
+  properties SmoothwaveHeight and
+   SmoothwaveFrequency. Smoothwaveheight defines the height of a sin wave
+   (relative units) and smoothwavefrequency defines the frequency of the
+   sine waves (relative units also). The rain waves and sine waves can
+   run together but sine waves modify the rain waves (and not vice versa).
+
+   The only real modification made in the  IterComputeNormals procedure where
+   the rain waves are modified using sin waves.
+}
+
+
+
 {: A plane simulating animated water<p>
 
-	<b>History : </b><font size=-1><ul>
 
-      <li>22/09/04 - R.Cao - Added AxisAlignedDimensionsUnscaled to fix visibility culling
+
+	<b>History : </b><font size=-1><ul>
       <li>02/04/03 - EG - More optimizations, mask support
       <li>01/04/03 - EG - Cleanup and optimizations
       <li>14/11/03 - Mrqzzz - Tried "CreateRippleAtWorldPos" to work at any position/rotation, but need expert's help.. :(
@@ -21,7 +36,7 @@ unit GLWaterPlane;
 interface
 
 uses Classes, VectorTypes, VectorGeometry, GLScene, GLTexture,
-   GLMisc, OpenGL1x, VectorLists, GLCrossPlatform, PersistentClasses;
+   GLMisc, OpenGL1x, VectorLists, GLCrossPlatform, PersistentClasses, sysUtils,windows;
 
 type
 
@@ -58,6 +73,8 @@ type
          FLastIterationStepTime : Single;
          FMask : TGLPicture;
          FOptions : TGLWaterPlaneOptions;
+         FSmoothWaveHeight : Single;
+         FSmoothWaveFrequency : single;
 
       protected
          { Protected Declarations }
@@ -80,15 +97,14 @@ type
 
       public
          { Public Declarations }
+         iTick:Longint;
          constructor Create(AOwner : TComponent); override;
          destructor Destroy; override;
 
          procedure DoProgress(const progressTime : TProgressTimes); override;
          procedure BuildList(var rci : TRenderContextInfo); override;
          procedure Assign(Source: TPersistent); override;
-         function AxisAlignedDimensionsUnscaled : TVector; override;
 
-         
          procedure CreateRippleAtGridPos(X,Y:integer);
          procedure CreateRippleAtWorldPos(const x, y, z : Single); overload;
          procedure CreateRippleAtWorldPos(const pos : TVector); overload;
@@ -100,7 +116,7 @@ type
 
       published
          { Published Declarations }
-         
+
          property Active : Boolean read FActive write FActive default True;
 
          {: Delay between raindrops in milliseconds (0 = no rain) }
@@ -111,6 +127,8 @@ type
          property Elastic : Single read FElastic write SetElastic;
          property Resolution : Integer read FResolution write SetResolution default 64;
          property Options : TGLWaterPlaneOptions read FOptions write SetOptions default cDefaultWaterPlaneOptions;
+         property SmoothwaveHeight:Single read FSmoothWaveHeight write FSmoothWaveHeight;
+         property SmoothwaveFrequency:Single read FSmoothWaveFrequency write FSmoothWaveFrequency;
 
          {: A picture whose pixels determine what part of the waterplane is active.<p>
             Pixels with a green/gray component beyond 128 are active, the others
@@ -157,6 +175,18 @@ begin
    FMask:=TGLPicture.Create;
    FMask.OnChange:=DoMaskChanged;
 
+   FSmoothWaveHeight:=1;
+   FSmoothWaveFrequency:=0;
+//GL1DPerlin:=TGL1DPerlin.create(self);
+//gl1dperlin.number_of_octaves:=6;
+//gl1dperlin.Persistence:=1;
+
+//GL2DPerlin:=TGL2DPerlin.create(nil);
+//gl2dperlin.number_of_octaves:=8;
+//gl2dperlin.Persistence:=1;
+
+   iTick:=getTickCount;
+
    SetResolution(64);
 end;
 
@@ -164,6 +194,7 @@ end;
 //
 destructor TGLWaterPlane.Destroy;
 begin
+   //      GL2DPerlin.free;
    FMask.Free;
    FPlaneQuadNormals.Free;
    FPlaneQuadVertices.Free;
@@ -179,6 +210,9 @@ var
    i : Integer;
 begin
    inherited;
+
+   //    gl2dperlin.generate;
+
    if Active and Visible then begin
       // new raindrops
       if FRainTimeInterval>0 then begin
@@ -215,9 +249,15 @@ end;
 // CreateRippleAtGridPos
 //
 procedure TGLWaterPlane.CreateRippleAtGridPos(x, y : Integer);
+var
+ i:integer;
 begin
    if (x>0) and (y>0) and (x<Resolution-1) and (y<Resolution-1) then
+   begin
       FVelocity[x+y*Resolution]:=FRainForce;
+     // for i:=x-5 to x+5 do
+     // FVelocity[{x}i+y*Resolution]:=FRainForce;
+   end;
 end;
 
 // CreateRippleAtWorldPos
@@ -370,9 +410,10 @@ begin
       for j:=1 to Resolution-2 do begin
          Inc(ij);
          if lockList[ij]<>0 then continue;
-         velList[ij]:= velList[ij]
+         velList[ij]:= //cos(ij+kk mod 3);{//sin((kk+ij)/10){
+         velList[ij]
                       +f2*( posList[ij]
-                           -f1*( 4*( posList[ij-1]         +posList[ij+1]
+                           -f1*(4*( posList[ij-1]         +posList[ij+1]
                                     +posList[ij-Resolution]+posList[ij+Resolution])
                                 +posList[ij-1-Resolution]+posList[ij+1-Resolution]
                                 +posList[ij-1+Resolution]+posList[ij+1+Resolution]));
@@ -392,6 +433,8 @@ var
    coeff : Single;
    posList, velList : PSingleArray;
    lockList : PByteArray;
+   i,j:integer;
+
 begin
    // Calculate the new ripple positions and update vertex coordinates
    coeff:=cVelocityIntegrationCoeff*Resolution;
@@ -399,13 +442,33 @@ begin
    posList:=@FPositions[0];
    velList:=@FVelocity[0];
    lockList:=@FLocks[0];
-   for ij:=0 to Resolution*Resolution-1 do begin
-      if lockList[ij]=0 then begin
-         posList[ij]:=posList[ij]-coeff*velList[ij];
-         velList[ij]:=velList[ij]*FViscosity;
-         FPlaneQuadVertices.List[ij][1]:=posList[ij]*f;
-      end;
-   end;
+   //for i:=0 to resolution-1 do
+    // for j:=0 to resolution-1 do
+   // begin
+       //ij:=i*j;
+
+{       cx=100
+cy=75
+
+for y=0 to 199
+  for x=0 to 319
+    xx = x-cx
+    yy = y-cy
+    d = square_root(xx*xx-yy*yy) * .1
+    plot_pixel(x,y, (sin(d)+1)*31)
+  end of x loop
+end of y loop
+}
+
+   for ij:=0 to Resolution*Resolution-1 do
+     if lockList[ij]=0 then
+     begin
+       posList[ij]:=posList[ij]-coeff*velList[ij];
+       velList[ij]:=velList[ij]*FViscosity;
+       FPlaneQuadVertices.List[ij][1]:=posList[ij]*f;
+     end;
+
+
 end;
 
 // IterComputeNormals
@@ -416,17 +479,35 @@ var
    pv : PAffineVector;
    posList : PSingleArray;
    normList : PAffineVectorArray;
+   ijm1, ijp1, ijpresolution,ijmresolution:single;
+   FrequencyFactor:single;
+   tickdiff:integer;
 begin
    // Calculate the new vertex normals (not normalized, the hardware will handle that)
    posList:=@FPositions[0];
    normList:=FPlaneQuadNormals.List;
+           tickdiff:=(gettickcount-iTick);
    for i:=1 to Resolution-2 do begin
       ij:=i*Resolution;
       for j:=1 to Resolution-2 do begin
          Inc(ij);
          pv:=@normList[ij];
-         pv[0]:=posList[ij+1]-posList[ij-1];
-         pv[2]:=posList[ij+Resolution]-posList[ij-Resolution];
+         ijm1:=posList[ij-1];
+         ijp1:=posList[ij+1];
+         ijmresolution:=posList[ij-Resolution];
+         ijpresolution:=posList[ij+Resolution];
+         if FSmoothWaveFrequency>0 then
+         begin
+           FrequencyFactor:=3/FSmoothWaveFrequency;
+           ijm1:=ijm1+FSmoothWaveHeight*2000*sin((ij-1)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijp1:=ijp1+FSmoothWaveHeight*2000*sin((ij+1)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijmresolution:=ijmresolution+FSmoothWaveHeight*2000*sin((ij-Resolution)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijpresolution:=ijpresolution+FSmoothWaveHeight*2000*sin((ij+Resolution)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+         end;
+         pv[0]:=ijp1-ijm1;
+         pv[2]:=ijpresolution-ijmresolution;
+         //pv[0]:=posList[ij+1]-posList[ij-1];
+        // pv[2]:=posList[ij+Resolution]-posList[ij-Resolution];
       end;
    end;
 end;
@@ -439,8 +520,8 @@ var
 begin
    if Visible then begin
       t:=StartPrecisionTimer;
-
-      IterComputeVelocity;
+      //if FRainTimeInterval>0 then
+        IterComputeVelocity;
       IterComputePositions;
       IterComputeNormals;
 
@@ -493,16 +574,6 @@ begin
    inherited Assign(Source);
 end;
 
-// AxisAlignedDimensionsUnscaled
-//
-function TGLWaterPlane.AxisAlignedDimensionsUnscaled : TVector;
-begin
-  Result[0]:=0.5*Abs(Resolution);
-  Result[1]:=0;
-  Result[2]:=0.5*Abs(FResolution);
-end;
-
-
 // SetElastic
 //
 procedure TGLWaterPlane.SetElastic(const Value: single);
@@ -526,7 +597,11 @@ end;
 procedure TGLWaterPlane.SetRainTimeInterval(Const val:integer);
 begin
    if (val>=0) and (Val<=1000000) then
+   begin
       fRainTimeInterval:=val;
+      if val=0 then
+        InitResolution;
+   end;
 end;
 
 // SetViscosity
@@ -584,7 +659,6 @@ end;
 //-------------------------------------------------------------
 //-------------------------------------------------------------
 //-------------------------------------------------------------
-
 initialization
 //-------------------------------------------------------------
 //-------------------------------------------------------------

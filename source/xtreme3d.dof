@@ -94,7 +94,7 @@ OutputDir=
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
-SearchPath=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+SearchPath=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs;glscene/X3DAddons
 Packages=vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOffice2k
 Conditionals=
 DebugSourceDirs=
@@ -140,8 +140,9 @@ c:\users\public\programs\delphi7\Projects\Bpl\GLScene7.bpl=GLScene - OpenGL 3D l
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=4
-Item0=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item1=glscene;glscene/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item2=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item3=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/CgShaders
+Count=5
+Item0=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs;glscene/X3DAddons
+Item1=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item2=glscene;glscene/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item3=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item4=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/CgShaders

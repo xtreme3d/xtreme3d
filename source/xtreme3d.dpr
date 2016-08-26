@@ -16,7 +16,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, GLParticleFX, MeshUtils, GLODEVehicle, pngimage;
+  GLShadowMap, MeshUtils, pngimage;
 
 type
    TEmpty = class(TComponent)
@@ -211,215 +211,47 @@ begin
   result := res;
 end;
 
-{$I 'engine'}
-{$I 'viewer'}
-{$I 'dummycube'}
-{$I 'camera'}
-{$I 'light'}
-{$I 'fonttext'}
-{$I 'sprite'}
-{$I 'primitives'}
-{$I 'memviewer'}
-{$I 'actor'}
-{$I 'freeform'}
-{$I 'object'}
-{$I 'polygon'}
-{$I 'material'}
-{$I 'shaders'}
-{$I 'thorfx'}
-{$I 'firefx'}
-{$I 'lensflare'}
-{$I 'terrain'}
-{$I 'blur'}
-{$I 'skybox'}
-{$I 'trail'}
-{$I 'shadowplane'}
-{$I 'shadowvolume'}
-{$I 'skydome'}
-{$I 'water'}
-{$I 'lines'}
-{$I 'tree'}
-{$I 'navigator'}
-{$I 'dce'}
-{$I 'fps'}
-{$I 'mirror'}
-{$I 'partition'}
-{$I 'proxy'}
-{$I 'text'}
-{$I 'grid'}
-{$I 'shadowmap'}
-{$I 'ode'}
+{$I 'xtreme3d/engine'}
+{$I 'xtreme3d/viewer'}
+{$I 'xtreme3d/dummycube'}
+{$I 'xtreme3d/camera'}
+{$I 'xtreme3d/light'}
+{$I 'xtreme3d/fonttext'}
+{$I 'xtreme3d/sprite'}
+{$I 'xtreme3d/primitives'}
+{$I 'xtreme3d/memviewer'}
+{$I 'xtreme3d/actor'}
+{$I 'xtreme3d/freeform'}
+{$I 'xtreme3d/object'}
+{$I 'xtreme3d/polygon'}
+{$I 'xtreme3d/material'}
+{$I 'xtreme3d/shaders'}
+{$I 'xtreme3d/thorfx'}
+{$I 'xtreme3d/firefx'}
+{$I 'xtreme3d/lensflare'}
+{$I 'xtreme3d/terrain'}
+{$I 'xtreme3d/blur'}
+{$I 'xtreme3d/skybox'}
+{$I 'xtreme3d/trail'}
+{$I 'xtreme3d/shadowplane'}
+{$I 'xtreme3d/shadowvolume'}
+{$I 'xtreme3d/skydome'}
+{$I 'xtreme3d/water'}
+{$I 'xtreme3d/lines'}
+{$I 'xtreme3d/tree'}
+{$I 'xtreme3d/navigator'}
+{$I 'xtreme3d/dce'}
+{$I 'xtreme3d/fps'}
+{$I 'xtreme3d/mirror'}
+{$I 'xtreme3d/partition'}
+{$I 'xtreme3d/proxy'}
+{$I 'xtreme3d/text'}
+{$I 'xtreme3d/grid'}
+{$I 'xtreme3d/shadowmap'}
+{$I 'xtreme3d/ode'}
 
-function FreeformToFreeforms(freeform, parent: real): real; stdcall;
-var
-  ffm, ffm2: TGLFreeForm;
-  mi, fgi, vi, tci: Integer;
-  mesh, mesh2: TMeshObject;
-  fg: TFGVertexIndexList;
-  fg2: TFGVertexNormalTexIndexList;
-  centroid: TAffineVector;
-  one: TAffineVector;
-  divisor: Single;
-begin
-  ffm := TGLFreeForm(trunc64(freeform));
-  one := AffineVectorMake(1, 1, 1);
-  
-  for mi:=0 to ffm.MeshObjects.Count-1 do begin
-    mesh := ffm.MeshObjects[mi];
+exports
 
-    if not (parent=0) then
-      ffm2 := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-    else
-      ffm2 := TGLFreeForm.CreateAsChild(scene.Objects);
-    mesh2 := TMeshObject.CreateOwned(ffm2.MeshObjects);
-    
-    ffm2.MaterialLibrary:=ffm.MaterialLibrary;
-    ffm2.LightmapLibrary:=ffm.LightmapLibrary;
-    ffm2.UseMeshMaterials:=True;
-
-    // Calc centroid
-    centroid := AffineVectorMake(0, 0, 0);
-    for vi:=0 to mesh.Vertices.Count-1 do begin
-      mesh2.Vertices.Add(mesh.Vertices[vi]);
-      centroid := VectorAdd(centroid, mesh2.Vertices[vi]);
-    end;
-    ffm2.Position.AsAffineVector := VectorDivide(centroid, mesh2.Vertices.Count);
-
-    // Reposition vertices
-    for vi:=0 to mesh2.Vertices.Count-1 do begin
-      mesh2.Vertices[vi] := VectorSubtract(mesh2.Vertices[vi], ffm2.Position.AsAffineVector);
-    end;
-
-    for vi:=0 to mesh.Normals.Count-1 do begin
-      mesh2.Normals.Add(mesh.Normals[vi]);
-    end;
-
-    for vi:=0 to mesh.TexCoords.Count-1 do begin
-      mesh2.TexCoords.Add(mesh.TexCoords[vi]);
-    end;
-
-    for vi:=0 to mesh.LightMapTexCoords.Count-1 do begin
-      mesh2.LightMapTexCoords.Add(mesh.LightMapTexCoords[vi]);
-    end;
-
-    mesh2.Mode := momFaceGroups;
-    for fgi:=0 to mesh.FaceGroups.Count-1 do begin
-      fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
-      fg2 := TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
-      fg2.Mode := fgmmTriangles;
-      fg2.VertexIndices := fg.VertexIndices;
-      fg2.NormalIndices := fg.VertexIndices;
-      fg2.TexCoordIndices := fg.VertexIndices;
-      fg2.MaterialName := fg.MaterialName;
-      fg2.LightMapIndex := fg.LightMapIndex;
-      fg2.PrepareMaterialLibraryCache(ffm2.MaterialLibrary);
-    end;
-
-  end;
-  result := 1.0;
-end;
-
-function FreeformFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-  me: TMeshObject;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
-  result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
-end;
-
-function FreeformFaceGroupSetMaterial(ff,mesh,fgroup: real; matname: pchar): real; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-  me: TMeshObject;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
-  me.FaceGroups[trunc64(fgroup)].MaterialName := String(matname);
-  result:=1;
-end;
-
-function MaterialSetTexture(mtrl, mtrl2: pchar): real; stdcall;
-var
-  mat:TGLLibMaterial;
-  mat2:TGLLibMaterial;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat2:=matlib.Materials.GetLibMaterialByName(mtrl2);
-  mat.Material.Texture := mat2.Material.Texture;
-  result:=1;
-end;
-
-// OdeVehicle functionality is experimental
-// and does not work properly for now
-{
-function OdeVehicleCreate(parent: real): real; stdcall;
-var
-  veh: TGLODEVehicle;
-begin
-  if not (parent=0) then
-    veh := TGLODEVehicle.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    veh := TGLODEVehicle.CreateAsChild(scene.Objects);
-  result := Integer(veh);
-end;
-
-function OdeVehicleSetScene(vehicle, obj: real): real; stdcall;
-var
-  veh: TGLODEVehicle;
-begin
-  veh := TGLODEVehicle(trunc64(vehicle));
-  veh.RaycastScene := TGLBaseSceneObject(trunc64(obj)); 
-  result := 1.0;
-end;
-
-function OdeVehicleAddSuspension(vehicle, x, y, z, wheelradius, maxlen: real): real; stdcall;
-var
-  veh: TGLODEVehicle;
-  susp: TGLODEVehicleSuspension;
-begin
-  veh := TGLODEVehicle(trunc64(vehicle));
-  susp := veh.AddSuspension(AffineVectorMake(x, y, z));
-  susp.WheelRadius := wheelradius;
-  susp.MaxLength := maxlen;
-  susp.Stiffness := 5.0;
-  susp.Damping := 0.5;
-  susp.Compression := 0.0;
-  susp.Length := 0.0;
-  susp.LengthPrev := 0.0;
-  result := Integer(susp);
-end;
-
-function OdeVehicleSuspensionGetWheel(suspension: real): real; stdcall;
-var
-  susp: TGLODEVehicleSuspension;
-begin
-  susp := TGLODEVehicleSuspension(trunc64(suspension));
-  result := Integer(susp.Wheel);
-end;
-
-function OdeVehicleSuspensionSetSteeringAngle(suspension, angle: real): real; stdcall;
-var
-  susp: TGLODEVehicleSuspension;
-begin
-  susp := TGLODEVehicleSuspension(trunc64(suspension));
-  susp.SteeringAngle := angle;
-  result := 1.0;
-end;
-
-function OdeVehicleSetForwardForce(vehicle, f: real): real; stdcall;
-var
-  veh: TGLODEVehicle;
-begin
-  veh := TGLODEVehicle(trunc64(vehicle));
-  veh.ForwardForce := f;
-  result := 1.0;
-end;
-}
-
-exports
-
 //Engine
 EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
 SetPakArchive,

@@ -1309,6 +1309,8 @@ type
             OpenGL documentation. }
          property NearPlane : Single read FNearPlane;
 
+         property ViewPortRadius: Single read FViewPortRadius;
+
          //: Apply camera transformation
          procedure Apply;
          procedure DoRender(var rci : TRenderContextInfo;
@@ -1785,7 +1787,7 @@ type
          {: Returns a PickList with objects in Rect area.<p>
             Returned list should be freed by caller.<br>
             Objects are sorted by depth (nearest objects first). }
-         function GetPickedObjects(const rect: TGLRect; objectCountGuess : Integer = 64) : TGLPickList;
+         function GetPickedObjects(x,y,wid,hei: Integer; objectCountGuess : Integer = 64) : TGLPickList;
          //: Returns the nearest object at x, y coordinates or nil if there is none
          function GetPickedObject(x, y : Integer) : TGLBaseSceneObject;
 
@@ -1808,8 +1810,11 @@ type
             You do not need to call this method, unless you explicitly want a
             render at a specific time. If you just want the control to get
             refreshed, use Invalidate instead. }
-         procedure Render(baseObject : TGLBaseSceneObject); overload;
+         procedure Render(baseObject : TGLBaseSceneObject; updatePerfCounter: Boolean = true); overload;
          procedure Render; overload;
+
+         procedure SimpleRender(baseObject : TGLBaseSceneObject);
+
          {: Render the scene to a bitmap at given DPI.<p>
             DPI = "dots per inch".<p>
             The "magic" DPI of the screen is 96 under Windows. }
@@ -7006,22 +7011,26 @@ begin
             GetMem(buf, Width*Height*4);
             try
                glReadPixels(0, 0, Width, Height, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-               case aTexture.MinFilter of
-                  miNearest, miLinear :
-              	   	glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, Width, Height,
+               //case aTexture.MinFilter of
+                  //miNearest, miLinear :
+					//glTexParameteri(target, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
+				aTexture.MinFilter:=miLinear;
+				gluBuild2DMipmaps(target, aTexture.OpenGLTextureFormat, Width, Height,
+                                  GL_RGBA, GL_UNSIGNED_BYTE, buf);
+              	glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, Width, Height,
                                   0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-               else
-                  if GL_SGIS_generate_mipmap and (target=GL_TEXTURE_2D) then begin
+               //else
+                  //if GL_SGIS_generate_mipmap and (target=GL_TEXTURE_2D) then begin
                      // hardware-accelerated when supported
-                     glTexParameteri(target, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
-              	   	glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, Width, Height,
-                                  0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
-                  end else begin
+                     //glTexParameteri(target, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
+              	   	//glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, Width, Height,
+                                  //0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+                  //end else begin
                      // slower (software mode)
-                     gluBuild2DMipmaps(target, aTexture.OpenGLTextureFormat, Width, Height,
-                                       GL_RGBA, GL_UNSIGNED_BYTE, buf);
-                  end;
-               end;
+                     //gluBuild2DMipmaps(target, aTexture.OpenGLTextureFormat, Width, Height,
+                                       //GL_RGBA, GL_UNSIGNED_BYTE, buf);
+                  //end;
+               //end;
             finally
                FreeMem(buf);
             end;
@@ -7542,10 +7551,10 @@ end;
 
 // GetPickedObjects
 //
-function TGLSceneBuffer.GetPickedObjects(const rect : TGLRect; objectCountGuess : Integer = 64) : TGLPickList;
+function TGLSceneBuffer.GetPickedObjects(x,y,wid,hei: Integer; objectCountGuess : Integer = 64) : TGLPickList;
 begin
    Result:=TGLPickList.Create(psMinDepth);
-   PickObjects(Rect, Result, objectCountGuess);
+   PickObjects(Rect(x, y, wid, hei), Result, objectCountGuess);
 end;
 
 // GetPickedObject
@@ -7554,7 +7563,7 @@ function TGLSceneBuffer.GetPickedObject(x, y : Integer) : TGLBaseSceneObject;
 var
    pkList : TGLPickList;
 begin
-   pkList:=GetPickedObjects(Rect(x-1, y-1, x+1, y+1));
+   pkList:=GetPickedObjects(x-1, y-1, x+1, y+1);
    try
       if pkList.Count>0 then
          Result:=pkList.Hit[0]
@@ -7712,7 +7721,7 @@ end;
 
 // Render
 //
-procedure TGLSceneBuffer.Render(baseObject : TGLBaseSceneObject);
+procedure TGLSceneBuffer.Render(baseObject : TGLBaseSceneObject; updatePerfCounter: Boolean = true);
 var
    perfCounter, framePerf : Int64;
    backColor : TColorVector;
@@ -7742,7 +7751,8 @@ begin
       Exit;
    end;
 
-   QueryPerformanceCounter(framePerf);
+   if updatePerfCounter then
+     QueryPerformanceCounter(framePerf);
 
    if Assigned(FCamera) and Assigned(FCamera.FScene) then begin
       FCamera.AbsoluteMatrixAsAddress;
@@ -7769,12 +7779,15 @@ begin
             RenderingContext.SwapBuffers;
 
          // yes, calculate average frames per second...
-         Inc(FFrameCount);
-         QueryPerformanceCounter(perfCounter);
-         FLastFrameTime:=(perfCounter-framePerf)/vCounterFrequency;
-         Dec(perfCounter, FFirstPerfCounter);
-         if perfCounter>0 then
-            FFramesPerSecond:=(FFrameCount*vCounterFrequency)/perfCounter;
+         if updatePerfCounter then
+         begin
+           Inc(FFrameCount);
+           QueryPerformanceCounter(perfCounter);
+           FLastFrameTime:=(perfCounter-framePerf)/vCounterFrequency;
+           Dec(perfCounter, FFirstPerfCounter);
+           if perfCounter>0 then
+              FFramesPerSecond:=(FFrameCount*vCounterFrequency)/perfCounter;
+         end;
          CheckOpenGLError;
       finally
          FRenderingContext.Deactivate;
@@ -7785,6 +7798,19 @@ begin
    finally
       FRendering:=False;
    end;
+end;
+
+procedure TGLSceneBuffer.SimpleRender(baseObject : TGLBaseSceneObject);
+var
+   maxLights : Integer;
+begin
+   if FRendering then Exit;
+   FRendering:=True;
+   FCamera.FScene.AddBuffer(Self);
+   glGetFloatv(GL_PROJECTION_MATRIX, @FProjectionMatrix);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
+   FCamera.FScene.RenderScene(self, FViewport.Width, FViewport.Height, dsRendering, baseObject);
+   FRendering:=False;
 end;
 
 // SetBackgroundColor
