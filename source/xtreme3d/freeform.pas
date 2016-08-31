@@ -282,16 +282,6 @@ begin
   result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
 end;
 
-function FreeformFaceGroupSetMaterial(ff,mesh,fgroup: real; matname: pchar): real; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-  me: TMeshObject;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
-  me.FaceGroups[trunc64(fgroup)].MaterialName := String(matname);
-  result:=1;
-end;
 
 // Unimplemented:
 // MeshRotate
