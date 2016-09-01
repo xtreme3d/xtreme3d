@@ -31,6 +31,235 @@
 <BR><A>parent - id родителя для объекта свободной формы (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="FreeformCreateEmpty"></A>
+<H1 class=name>FreeformCreateEmpty</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformCreateEmpty</A><A>( matlib,lmapmatlib,parent as </A><A class=type>real</A> );</A>
+<BR><A>Создает новый пустой объект свободной формы и возвращает его id. Геометрия в нем задается при помощи функций ниже - таким образом, вы можете создать собственный формат моделей.</A>
+<BR><A>matlib - библиотека материалов, в которой хранятся материалы модели</A>
+<BR><A>lmapmatlib - библиотека материалов, в которой хранятся материалы карт освещения модели</A>
+<BR><A>parent - id родителя для объекта свободной формы (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="FreeformAddMesh"></A>
+<H1 class=name>FreeformAddMesh</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformAddMesh</A><A>( freeform as </A><A class=type>real</A> );</A>
+<BR><A>Создает новый пустой меш в объекте свободной формы и возвращает его индекс.</A>
+<BR><A>freeform - id объекта свободной формы.</A>
+<HR>
+
+<A name="FreeformMeshAddVertex"></A>
+<H1 class=name>FreeformMeshAddVertex</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddVertex</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новую вершину в меш и возвращает ее индекс. Вершины задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - координаты вершины.</A>
+<HR>
+
+<A name="FreeformMeshAddNormal"></A>
+<H1 class=name>FreeformMeshAddNormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddNormal</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новую нормаль в меш и возвращает ее индекс. Нормали задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - вектор нормали.</A>
+<HR>
+
+<A name="FreeformMeshAddTexCoord"></A>
+<H1 class=name>FreeformMeshAddTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddTexCoord</A><A>( freeform,mesh,u,v as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новую пару текстурных координат в меш и возвращает ее индекс.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>u,v - текстурные координаты.</A>
+<HR>
+
+<A name="FreeformMeshAddSecondTexCoord"></A>
+<H1 class=name>FreeformMeshAddSecondTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddSecondTexCoord</A><A>( freeform,mesh,u,v as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новую пару вторых текстурных координат в меш и возвращает ее индекс. Второй набор текстурных координат обычно используется для наложения карты освещения (lightmap).</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>u,v - вторые текстурные координаты.</A>
+<HR>
+
+<A name="FreeformMeshAddTangent"></A>
+<H1 class=name>FreeformMeshAddTangent</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddTangent</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новый касательный вектор (тангент) в меш и возвращает его индекс. Касательные векторы задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - касательный вектор.</A>
+<HR>
+
+<A name="FreeformMeshAddBinormal"></A>
+<H1 class=name>FreeformMeshAddBinormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddBinormal</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новую бинормаль в меш и возвращает ее индекс. Бинормали задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - вектор бинормали.</A>
+<HR>
+
+<A name="FreeformMeshVerticesCount"></A>
+<H1 class=name>FreeformMeshVerticesCount</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshVerticesCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество вершин в меше.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshTriangleCount"></A>
+<H1 class=name>FreeformMeshTriangleCount</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshTriangleCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество треугольников в меше.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshObjectsCount"></A>
+<H1 class=name>FreeformMeshObjectsCount</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshObjectsCount</A><A>( freeform as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество мешей в модели.</A>
+<BR><A>freeform - id объекта свободной формы.</A>
+<HR>
+
+<A name="FreeformMeshAddFaceGroup"></A>
+<H1 class=name>FreeformMeshAddFaceGroup</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddFaceGroup</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Создает новую пустую фейсгруппу в меше и возвращает ее индекс.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupAddTriangle"></A>
+<H1 class=name>FreeformMeshFaceGroupAddTriangle</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupAddTriangle</A><A>( freeform,mesh,fgroup,v1,v2,v3 as </A><A class=type>real</A> );</A>
+<BR><A>Добавляет новый треугольник в фейсгруппу и возвращает его индекс. Треугольник образуется вершинами индексов v1, v2, v3. Эти же индексы используются в отношении нормалей, текстурных координат и других вершинных атрибутов. Нормали, текстурные координаты и другие дополнительные атрибуты опциональны - если у меша их нет, то ничего страшного не произойдет, движок продолжит работу и будет рендерить меш без этих данных.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы</A>
+<BR><A>v1,v2,v3 - индексы вершины в меше.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupTriangleCount"></A>
+<H1 class=name>FreeformFaceGroupTriangleCount</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupTriangleCount</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество треугольников в фейсгруппе.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupSetMaterial"></A>
+<H1 class=name>FreeformFaceGroupSetMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupSetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
+<BR><A>Присваивает фейсгруппе материал.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы</A>
+<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupGetMaterial"></A>
+<H1 class=name>FreeformFaceGroupGetMaterial</H1>
+<A class=type>string</A><A> = </A><A class=function>FreeformMeshFaceGroupGetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает имя материала фейсгруппы.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>fgroup - индекс фейсгруппы.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupsCount"></A>
+<H1 class=name>FreeformFaceGroupsCount</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupsCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает количество фейсгрупп меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshGenNormals"></A>
+<H1 class=name>FreeformMeshGenNormals</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGenNormals</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Генерирует сглаженные нормали для меша. Эту функцию можно применить, если данные о нормалях отсутствуют. Ее можно вызывать только после создания фейсгрупп, так как нормали невозможно сгенерировать, не имея информации о том, как вершины соединяются между собой.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshGenTangents"></A>
+<H1 class=name>FreeformMeshGenTangents</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGenTangents</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
+<BR><A>Генерирует векторы касательных и бинормалей для меша. Эту функцию можно применить, если данные о касательных и бинормалях отсутствуют. Ее можно вызывать только после создания фейсгрупп, нормалей и текстурных координат.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshSetVisible"></A>
+<H1 class=name>FreeformMeshSetVisible</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetVisible</A><A>( freeform,mesh,mode as </A><A class=type>real</A> );</A>
+<BR><A>Переключает видимость меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="FreeformMeshSetSecondCoords"></A>
+<H1 class=name>FreeformMeshSetSecondCoords</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetSecondCoords</A><A>( freeform1,mesh1,freeform2,mesh2 as </A><A class=type>real</A> );</A>
+<BR><A>Применяет текстурные координаты заданного меша объекта freeform2 в качестве вторых текстурных координат заданного меша объекта freeform1. Второй набор текстурных координат обычно используется для наложения карты освещения (lightmap).</A>
+<BR><A>freeform1 - id объекта свободной формы</A>
+<BR><A>mesh1 - индекс меша</A>
+<BR><A>freeform2 - id объекта свободной формы</A>
+<BR><A>mesh2 - индекс меша.</A>
+<HR>
+
+<A name="FreeformMeshTranslate"></A>
+<H1 class=name>FreeformMeshTranslate</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshTranslate</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Перемещает меш на заданный вектор. Обратите внимание, что это перемещение применяется непосредственно к вершинам модели и никак не влияет на обычную позицию объекта - если вам нужно переместить Freeform, не изменяя его геометрию, воспользуйтесь функцией 
+</A><A class=funclink href=../functions/object.htm#ObjectTranslate>ObjectTranslate</A><A>.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - вектор переноса.</A>
+<HR>
+
+<A name="FreeformMeshRotate"></A>
+<H1 class=name>FreeformMeshRotate</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshRotate</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Поворачивает меш на заданные углы вокруг осей X, Y и Z. Обратите внимание, что этот поворот применяется непосредственно к вершинам модели и никак не влияет на обычный поворот объекта - если вам нужно повернуть объект Freeform, не изменяя его геометрию, воспользуйтесь функцией 
+</A><A class=funclink href=../functions/object.htm#ObjectRotate>ObjectRotate</A><A>.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - углы поворота в градусах.</A>
+<HR>
+
+<A name="FreeformMeshScale"></A>
+<H1 class=name>FreeformMeshScale</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshScale</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Масштабирует меш. Обратите внимание, что это масштабирование применяется непосредственно к вершинам модели в локальном пространстве и никак не влияет на обычный масштаб объекта - если вам нужно масштабировать объект Freeform, не изменяя его геометрию, воспользуйтесь функцией 
+</A><A class=funclink href=../functions/object.htm#ObjectScale>ObjectScale</A><A>.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>x,y,z - вектор масштабирования.</A>
+<HR>
+
+<A name="FreeformMeshSetMaterial"></A>
+<H1 class=name>FreeformMeshSetMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetMaterial</A><A>( freeform,mesh as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
+<BR><A>Присваивает мешу материал.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
+<HR>
+
+<A name="FreeformUseMeshMaterials"></A>
+<H1 class=name>FreeformUseMeshMaterials</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformUseMeshMaterials</A><A>( freeform,mode as </A><A class=type>real</A> );</A>
+<BR><A>Переключает использование материалов мешей. Если отключить эту опцию, объект Freeform будет отрисован с использованием его собственного материала, задаваемого функцией </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
 <A name="FreeformPointInMesh"></A>
 <H1 class=name>FreeformPointInMesh</H1>
 <A class=type>boolean</A><A> = </A><A class=function>FreeformPointInMesh</A><A>( freeform,x,y,z as </A><A class=type>real</A> );</A>
@@ -56,104 +285,6 @@
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>parent - id родителя для полученных объектов.</A>
 <HR>
-
-<A name="FreeformMeshObjectsCount"></A>
-<H1 class=name>FreeformMeshObjectsCount</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshObjectsCount</A><A>( freeform as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество мешей в модели.</A>
-<BR><A>freeform - id объекта свободной формы.</A>
-<HR>
-
-<A name="FreeformMeshSetVisible"></A>
-<H1 class=name>FreeformMeshSetVisible</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetVisible</A><A>( freeform,mesh,mode as </A><A class=type>real</A> );</A>
-<BR><A>Переключает видимость меша.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="FreeformMeshSetSecondCoords"></A>
-<H1 class=name>FreeformMeshSetSecondCoords</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetSecondCoords</A><A>( freeform1,mesh1,freeform2,mesh2 as </A><A class=type>real</A> );</A>
-<BR><A>Применяет текстурные координаты заданного меша объекта freeform2 в качестве вторых текстурных координат заданного меша объекта freeform1. Второй набор текстурных координат обычно используется для наложения карты освещения (lightmap).</A>
-<BR><A>freeform1 - id объекта свободной формы</A>
-<BR><A>mesh1 - индекс меша</A>
-<BR><A>freeform2 - id объекта свободной формы</A>
-<BR><A>mesh2 - индекс меша.</A>
-<HR>
-
-<A name="FreeformMeshTriangleCount"></A>
-<H1 class=name>FreeformMeshTriangleCount</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshTriangleCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество треугольников в меше.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша.</A>
-<HR>
-
-<A name="FreeformMeshSetMaterial"></A>
-<H1 class=name>FreeformMeshSetMaterial</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetMaterial</A><A>( freeform,mesh as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
-<BR><A>Присваивает мешу материал.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
-<HR>
-
-<A name="FreeformUseMeshMaterials"></A>
-<H1 class=name>FreeformUseMeshMaterials</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformUseMeshMaterials</A><A>( freeform,mode as </A><A class=type>real</A> );</A>
-<BR><A>Переключает использование материалов мешей. Если отключить эту опцию, объект Freeform будет отрисован с использованием его собственного материала, задаваемого функцией </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="FreeformFaceGroupsCount"></A>
-<H1 class=name>FreeformFaceGroupsCount</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformFaceGroupsCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество фейсгрупп меша.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша.</A>
-<HR>
-
-<A name="FreeformFaceGroupTriangleCount"></A>
-<H1 class=name>FreeformFaceGroupTriangleCount</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformFaceGroupTriangleCount</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество треугольников в фейсгруппе.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>fgroup - индекс фейсгруппы.</A>
-<HR>
-
-<A name="FreeformFaceGroupGetMaterial"></A>
-<H1 class=name>FreeformFaceGroupGetMaterial</H1>
-<A class=type>string</A><A> = </A><A class=function>FreeformFaceGroupGetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает имя материала фейсгруппы.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>fgroup - индекс фейсгруппы.</A>
-<HR>
-
-<A name="FreeformFaceGroupSetMaterial"></A>
-<H1 class=name>FreeformFaceGroupSetMaterial</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformFaceGroupSetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
-<BR><A>Присваивает фейсгруппе материал.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>fgroup - индекс фейсгруппы</A>
-<BR><A>material - имя материала. Материал должен присутствовать в библиотеке материалов, указанной при создании объекта.</A>
-<HR>
-
-<!--
-<A name="MeshRotate"></A>
-<H1 class=name>MeshRotate</H1>
-<A class=type>real</A><A> = </A><A class=function>MeshRotate</A><A>( object,x,y,z,angle as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает модель вокруг заданной оси. Обратите внимание, что этот поворот относится только к геометрии и никак не влияет на обычный поворот объекта по осям XYZ.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - единичный вектор оси поворота</A>
-<BR><A>angle - угол поворота.</A>
-<HR>
--->
 
 <A name="FreeformCreateExplosionFX"></A>
 <H1 class=name>FreeformCreateExplosionFX</H1>
@@ -186,113 +317,7 @@
 <BR><A>speed - скорость.</A>
 <HR>
 
-
-<A name="FreeformCreateEmpty"></A>
-<H1 class=name>FreeformCreateEmpty</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformCreateEmpty</A><A>( matlib,lmapmatlib,parent as </A><A class=type>real</A> );</A>
-<BR><A>Создает новый пустой объект свободной формы и возвращает его id. Геометрия в нем задается при помощи функций ниже - таким образом, вы можете создать собственный формат моделей.</A>
-<BR><A>matlib - библиотека материалов, в которой хранятся материалы модели</A>
-<BR><A>lmapmatlib - библиотека материалов, в которой хранятся материалы карт освещения модели</A>
-<BR><A>parent - id родителя для объекта свободной формы (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="FreeformAddMesh"></A>
-<H1 class=name>FreeformAddMesh</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformAddMesh</A><A>( freeform as </A><A class=type>real</A> );</A>
-<BR><A>Создает новый пустой меш в объекте свободной формы и возвращает его индекс.</A>
-<BR><A>freeform - id объекта свободной формы.</A>
-<HR>
-
-<A name="FreeformMeshAddFaceGroup"></A>
-<H1 class=name>FreeformMeshAddFaceGroup</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddFaceGroup</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
-<BR><A>Создает новую пустую фейсгруппу в меше и возвращает ее индекс.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша.</A>
-<HR>
-
-<A name="FreeformMeshAddVertex"></A>
-<H1 class=name>FreeformMeshAddVertex</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddVertex</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новую вершину в меш и возвращает ее индекс. Вершины задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>x,y,z - координаты вершины.</A>
-<HR>
-
-<A name="FreeformMeshAddNormal"></A>
-<H1 class=name>FreeformMeshAddNormal</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddNormal</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новую нормаль в меш и возвращает ее индекс. Нормали задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>x,y,z - вектор нормали.</A>
-<HR>
-
-<A name="FreeformMeshAddTexCoord"></A>
-<H1 class=name>FreeformMeshAddTexCoord</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddTexCoord</A><A>( freeform,mesh,u,v as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новую пару текстурных координат в меш и возвращает ее индекс.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>u,v - текстурные координаты.</A>
-<HR>
-
-<A name="FreeformMeshAddLightmapTexCoord"></A>
-<H1 class=name>FreeformMeshAddLightmapTexCoord</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddLightmapTexCoord</A><A>( freeform,mesh,u,v as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новую пару текстурных координат карты освещения в меш и возвращает ее индекс.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>u,v - текстурные координаты карты освещения.</A>
-<HR>
-
-<A name="FreeformMeshAddTangent"></A>
-<H1 class=name>FreeformMeshAddTangent</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddTangent</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новый касательный вектор (тангент) в меш и возвращает его индекс. Касательные векторы задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>x,y,z - касательный вектор.</A>
-<HR>
-
-<A name="FreeformMeshAddBinormal"></A>
-<H1 class=name>FreeformMeshAddBinormal</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshAddBinormal</A><A>( freeform,mesh,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новую бинормаль в меш и возвращает ее индекс. Бинормали задаются в локальном пространстве объекта (то есть, безотносительно позиции, поворота и масштаба).</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>x,y,z - вектор бинормали.</A>
-<HR>
-
-<A name="FreeformMeshFaceGroupAddTriangle"></A>
-<H1 class=name>FreeformMeshFaceGroupAddTriangle</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupAddTriangle</A><A>( freeform,mesh,fgroup,v1,v2,v3 as </A><A class=type>real</A> );</A>
-<BR><A>Добавляет новый треугольник в фейсгруппу и возвращает его индекс. Треугольник образуется вершинами индексов v1, v2, v3. Эти же индексы используются в отношении нормалей, текстурных координат и других вершинных атрибутов. Нормали, текстурные координаты и другие дополнительные атрибуты опциональны - если у меша их нет, то ничего страшного не произойдет, движок продолжит работу и будет рендерить меш без этих данных.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша</A>
-<BR><A>fgroup - индекс фейсгруппы</A>
-<BR><A>v1,v2,v3 - индексы вершины в меше.</A>
-<HR>
-
-<A name="FreeformMeshGenNormals"></A>
-<H1 class=name>FreeformMeshGenNormals</H1>
-<A class=type>real</A><A> = </A><A class=function>FreeformMeshGenNormals</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
-<BR><A>Генерирует сглаженные нормали для меша. Эту функцию можно применить, если данные о нормалях отсутствуют. Ее можно вызывать только после создания фейсгрупп, так как нормали невозможно сгенерировать, не имея информации о том, как вершины соединяются между собой.</A>
-<BR><A>freeform - id объекта свободной формы</A>
-<BR><A>mesh - индекс меша.</A>
-<HR>
-
-
 <!--
-<A name="MeshCountVertices"></A>
-<H1 class=name>MeshCountVertices</H1>
-<A class=type>real</A><A> = </A><A class=function>MeshCountVertices</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество вершин в модели.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - сведения отсутствуют.</A>
-<HR>
-
 <A name="MeshOptimize"></A>
 <H1 class=name>MeshOptimize</H1>
 <A class=type>real</A><A> = </A><A class=function>MeshOptimize</A><A>( object as </A><A class=type>real</A> );</A>

@@ -82,61 +82,6 @@
 <BR><A>maxlights - количество источников света. Значение по умолчанию: 1.</A>
 <HR>
 
-<!--
-<A name="BumpShaderSetMethod"></A>
-<H1 class=name>BumpShaderSetMethod</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderSetMethod</A><A>( shader,bm as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает метод реализации шейдера рельефа: </A><A class=constant name="cimNone">bmDot3TexCombiner</A><A> (при помощи расширения ARB_texture_env_dot3) или </A><A class=constant name="cimNone">bmBasicARBFP</A><A> (при помощи вершинной и фрагментной программ).</A>
-<BR><A>shader - id шейдера</A>
-<BR><A>bm - метод: </A><A class=constant name="cimNone">bmDot3TexCombiner</A><A> = 0 или </A><A class=constant name="cimNone">bmBasicARBFP</A><A> = 1.</A>
-<HR>
-
-<A name="BumpShaderSetSpecularMode"></A>
-<H1 class=name>BumpShaderSetSpecularMode</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderSetSpecularMode</A><A>( shader,sm as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает модель бликовой компоненты рельефа: </A><A class=constant name="cimNone">smOff</A><A> (без бликов), </A><A class=constant name="cimNone">smBlinn</A><A> (модель Блинна) или </A><A class=constant name="cimNone">smPhong</A><A> (модель Фонга). В режиме </A><A class=constant name="cimNone">bmDot3TexCombiner</A><A> блики не работают.</A>
-<BR><A>shader - id шейдера</A>
-<BR><A>sm - модель бликовой компоненты: </A><A class=constant name="cimNone">smOff</A><A> = 0, </A><A class=constant name="cimNone">smBlinn</A><A> = 1 или</A><A class=constant name="cimNone">smPhong</A><A> = 2.</A>
-<HR>
-
-<A name="BumpShaderSetSpace"></A>
-<H1 class=name>BumpShaderSetSpace</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderSetSpace</A><A>( shader,bs as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>shader - id шейдера</A>
-<BR><A>bs - сведения отсутствуют.</A>
-<HR>
-
-<A name="BumpShaderSetParallaxOffset"></A>
-<H1 class=name>BumpShaderSetParallaxOffset</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderSetParallaxOffset</A><A>( shader,offset as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>shader - id шейдера</A>
-<BR><A>offset - сведения отсутствуют.</A>
-<HR>
-
-<A name="BumpShaderSetOptions"></A>
-<H1 class=name>BumpShaderSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderSetOptions</A><A>( shader,texture2,texcoords2,lightatten,parallax as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции шейдера рельефа.</A>
-<BR><A>shader - id шейдера</A>
-<BR><A>texture2 - указывает, использовать ли вторую текстуру материала для диффузной компоненты - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>texcoords2 - указывает, использовать ли второй набор текстурных координат модели для диффузной текстуры - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>]
-<BR><A>lightatten - указывает, использовать затухание источников света при расчете освещенности - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>parallax - указывает, использовать ли параллактическое отображение (parallax mapping) - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
--->
-
-<!--
-<A name="BumpShaderCreate"></A>
-<H1 class=name>BumpShaderCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>BumpShaderCreate</A><A>( texture2 as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает шейдер рельефа (bumpmapping) и возвращает его id. При применении шейдера у материала должны быть две текстуры: первая - карта нормалей, вторая - цвет. 
-<BR>Данный шейдер требует аппаратной поддержки расширения GL_ARB_vertex_program.</A>
-<BR><A>texture2 - указывает, использовать ли вторую текстуру - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
--->
-
 <A name="CelShaderCreate"></A>
 <H1 class=name>CelShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>CelShaderCreate</A><A>();</A>
@@ -363,6 +308,15 @@
 <BR><A>param - id параметра</A>
 <BR><A>material - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована текстура материала, к которому подключен шейдер. Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости лучше не использовать больше 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterSecondTexture"></A>
+<H1 class=name>GLSLShaderSetParameterSecondTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterSecondTexture</A><A>( param as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A>, texunit as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр вторую текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
+<BR><A>param - id параметра</A>
+<BR><A>material - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована вторая текстура материала, к которому подключен шейдер.</A>
+<BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
 <HR>
 
 <A name="GLSLShaderSetParameterMatrix"></A>
