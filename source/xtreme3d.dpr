@@ -321,7 +321,7 @@ begin
   result := meshObj.TexCoords.Add(u, v);
 end;
 
-function FreeformMeshAddLightmapTexCoord(ff, mesh, u, v: real): real; stdcall;
+function FreeformMeshAddSecondTexCoord(ff, mesh, u, v: real): real; stdcall;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -368,22 +368,6 @@ begin
   result := faceGroup.VertexIndices.Count - 1;
 end;
 
-function FreeformFaceGroupSetMaterial(ff,mesh,fg: real; matname: pchar): real; stdcall;
-var
-  freeform: TGLFreeForm;
-  meshObj: TMeshObject;
-  faceGroup: TFGVertexNormalTexIndexList;
-begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
-
-  faceGroup.MaterialName := String(matname);
-  faceGroup.PrepareMaterialLibraryCache(freeform.MaterialLibrary);
-  freeform.StructureChanged;
-  result:=1;
-end;
-
 function FreeformMeshGenNormals(ff, mesh: real): real; stdcall;
 var
   freeform: TGLFreeForm;
@@ -393,13 +377,95 @@ var
 begin
   freeform := TGLFreeForm(trunc64(ff));
   meshObj := freeform.MeshObjects[trunc64(mesh)];
-  indices := TIntegerList.Create;
-  for i:=0 to meshObj.FaceGroups.Count-1 do
+  if (meshObj.Vertices.Count > 0) and (meshObj.FaceGroups.Count > 0) then
   begin
-    indices.Add(TFGVertexNormalTexIndexList(meshObj.FaceGroups[i]).VertexIndices);
+    indices := TIntegerList.Create;
+    for i:=0 to meshObj.FaceGroups.Count-1 do
+    begin
+      indices.Add(TFGVertexNormalTexIndexList(meshObj.FaceGroups[i]).VertexIndices);
+    end;
+    meshObj.BuildNormals(indices, momTriangles);
+    indices.Free;
   end;
-  meshObj.BuildNormals(indices, momTriangles);
-  indices.Free;
+  result := 1.0;
+end;
+
+// ----------------
+
+function FreeformMeshGenTangents(ff, mesh: real): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  if (meshObj.Vertices.Count > 0) and (meshObj.TexCoords.Count > 0) then
+    GenMeshTangents(meshObj);
+  result := 1.0;
+end;
+
+// MeshCountVertices = FreeformMeshVerticesCount
+function FreeformMeshVerticesCount(ff, mesh: real): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  result := meshObj.Vertices.Count;
+end;
+
+function FreeformMeshTranslate(ff, mesh, x, y, z: real): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+  v: TAffineVector;
+  m: TMatrix;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  v := AffineVectorMake(x, y, z);
+  m := CreateTranslationMatrix(v);
+  meshObj.Vertices.TransformAsPoints(m);
+  result := 1.0;
+end;
+
+// MeshRotate = FreeformMeshRotate
+function FreeformMeshRotate(ff, mesh, x, y, z: real): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+  m: TMatrix;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  
+  m := MatrixMultiply(
+    MatrixMultiply(
+      CreateRotationMatrixX(DegToRad(x)),
+      CreateRotationMatrixY(DegToRad(y))),
+    CreateRotationMatrixZ(DegToRad(x)));
+  if meshObj.Vertices.Count > 0 then
+    meshObj.Vertices.TransformAsVectors(m);
+  if meshObj.Normals.Count > 0 then
+    meshObj.Normals.TransformAsVectors(m);
+  if (meshObj.Vertices.Count > 0) and (meshObj.TexCoords.Count > 0) then
+    GenMeshTangents(meshObj);
+  result := 1.0;
+end;
+
+function FreeformMeshScale(ff, mesh, x, y, z: real): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+  v: TAffineVector;
+  m: TMatrix;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  v := AffineVectorMake(x, y, z);
+  m := CreateScaleMatrix(v);
+  meshObj.Vertices.TransformAsPoints(m);
   result := 1.0;
 end;
 
@@ -460,22 +526,26 @@ ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
 ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
 ActorFaceGroupSetMaterial,
 //Freeform
-FreeformCreate, FreeformMeshObjectsCount, FreeformMeshSetVisible,
-FreeformMeshSetSecondCoords, FreeformMeshTriangleCount,  
-FreeformFaceGroupsCount, FreeformFaceGroupTriangleCount,
-FreeformCreateExplosionFX, FreeformExplosionFXReset,
-FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
-FreeformSphereSweepIntersect, FreeformPointInMesh,
-FreeformToFreeforms,
-FreeformMeshSetMaterial, FreeformUseMeshMaterials,
-FreeformFaceGroupGetMaterial, FreeformFaceGroupSetMaterial,
-
-FreeformCreateEmpty, FreeformAddMesh, FreeformMeshAddFaceGroup, 
+FreeformCreate, FreeformCreateEmpty,
+FreeformAddMesh, FreeformMeshAddFaceGroup, 
 FreeformMeshAddVertex, FreeformMeshAddNormal,
-FreeformMeshAddTexCoord, FreeformMeshAddLightmapTexCoord,
+FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
 FreeformMeshAddTangent, FreeformMeshAddBinormal,
 FreeformMeshFaceGroupAddTriangle,
-FreeformMeshGenNormals,
+FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+FreeformMeshGenNormals, FreeformMeshGenTangents,
+FreeformMeshVerticesCount, FreeformMeshTriangleCount, 
+FreeformMeshObjectsCount, FreeformMeshSetVisible,
+FreeformMeshSetSecondCoords,
+FreeformMeshFaceGroupsCount, FreeformMeshFaceGroupTriangleCount,
+FreeformMeshSetMaterial, FreeformUseMeshMaterials,
+FreeformSphereSweepIntersect, FreeformPointInMesh,
+FreeformToFreeforms,
+
+FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
+
+FreeformCreateExplosionFX, FreeformExplosionFXReset,
+FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,

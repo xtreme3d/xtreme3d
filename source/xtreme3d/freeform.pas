@@ -18,8 +18,7 @@ begin
   
   for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
       mesh1 := GLFreeForm1.MeshObjects[mi];
-      //mesh1.BuildTangentSpace();
-      if mesh1.TexCoords.Count > 0 then
+      if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
         GenMeshTangents(mesh1);
   end;
   
@@ -74,7 +73,7 @@ begin
   result:=tri;
 end;
 
-function FreeformFaceGroupsCount(ff,mesh: real): real; stdcall;
+function FreeformMeshFaceGroupsCount(ff,mesh: real): real; stdcall;
 var
   GLFreeForm1: TGLFreeForm;
   fgr: integer;
@@ -84,7 +83,7 @@ begin
   result:=fgr;
 end;
 
-function FreeformFaceGroupTriangleCount(ff,mesh,fgr: real): real; stdcall;
+function FreeformMeshFaceGroupTriangleCount(ff,mesh,fgr: real): real; stdcall;
 var
   GLFreeForm1: TGLFreeForm;
   tri: integer;
@@ -272,7 +271,23 @@ begin
   result := 1.0;
 end;
 
-function FreeformFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; stdcall;
+function FreeformMeshFaceGroupSetMaterial(ff,mesh,fg: real; matname: pchar): real; stdcall;
+var
+  freeform: TGLFreeForm;
+  meshObj: TMeshObject;
+  faceGroup: TFGVertexNormalTexIndexList;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+
+  faceGroup.MaterialName := String(matname);
+  faceGroup.PrepareMaterialLibraryCache(freeform.MaterialLibrary);
+  freeform.StructureChanged;
+  result:=1;
+end;
+
+function FreeformMeshFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; stdcall;
 var
   GLFreeForm1: TGLFreeForm;
   me: TMeshObject;
@@ -282,9 +297,6 @@ begin
   result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
 end;
 
-
 // Unimplemented:
-// MeshRotate
-// MeshCountVertices
 // MeshOptimize
 // MeshSmoothFaces
