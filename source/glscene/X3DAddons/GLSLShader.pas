@@ -16,6 +16,7 @@ type
       uniform4f,
       uniformMatrix4f,
       uniformTexture2D,
+      uniformSecondTexture2D,
       uniformShadowTexture
     );
 
@@ -67,6 +68,7 @@ type
       function AddUniform3f(name: String): TGLSLShaderParameter;
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
+      function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       procedure Bind(mat: TGLLibMaterial);
       procedure Unbind;
@@ -144,18 +146,22 @@ begin
 
   if FUniformType = uniformTexture2D then
   begin
-    {
-    if FTexture = Nil then
-    begin
-      if mat.Material.Texture <> Nil then
-        FTexture := mat.Material.Texture;
-    end;
-    }
     if FTexture <> Nil then
     begin    
       glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
       glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
       glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
+    glUniform1iARB(FUniformLocation, FUniformTexture);
+  end;
+  
+  if FUniformType = uniformSecondTexture2D then
+  begin
+    if FTexture <> Nil then
+    begin    
+      glActiveTextureARB(GL_TEXTURE1_ARB + GLUint(FUniformTexture));
+      glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
+      glActiveTextureARB(GL_TEXTURE1_ARB);
     end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
   end;
@@ -288,6 +294,16 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformTexture2D, name);
+  param.Initialized := False;
+  Result := param;
+end;
+
+function TGLSLShaderParameters.AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformSecondTexture2D, name);
   param.Initialized := False;
   Result := param;
 end;
