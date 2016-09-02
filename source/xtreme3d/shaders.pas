@@ -9,10 +9,56 @@ end;
 
 function PhongShaderCreate(): real; stdcall;
 var
-  GLPhong1: TGLPhongShader;
+  phong: TGLSLShader;
+  paramDiffTex: TGLSLShaderParameter;
+  paramUseTexture: TGLSLShaderParameter;
+  paramMaxLights: TGLSLShaderParameter;
 begin
-  GLPhong1:=TGLPhongShader.Create(scene);
-  result:=integer(GLPhong1);
+  if not
+    (GL_ARB_shader_objects and
+     GL_ARB_vertex_shader and
+     GL_ARB_fragment_shader) then begin
+      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
+      result := 0;
+      Exit;
+  end;
+  phong := TGLSLShader.Create(scene);
+  phong.SetPrograms(phongVertexProgram, phongFragmentProgram);
+  paramDiffTex := phong.Param.AddUniform('diffuseMap');
+  paramDiffTex.UniformType := uniformTexture2D;
+  paramDiffTex.UniformTexture := 0;
+  paramDiffTex.Initialized := True;
+  paramUseTexture := phong.Param.AddUniform('useTexture');
+  paramUseTexture.UniformType := uniform1i;
+  paramUseTexture.UniformInteger := 0;
+  paramUseTexture.Initialized := True;
+  paramMaxLights := phong.Param.AddUniform('maxNumLights');
+  paramMaxLights.UniformType := uniform1i;
+  paramMaxLights.UniformInteger := 1;
+  paramMaxLights.Initialized := True;
+  result := integer(phong);
+end;
+
+function PhongShaderUseTexture(shader, mode: real): real; stdcall;
+var
+  phong: TGLSLShader;
+  paramUseTexture: TGLSLShaderParameter;
+begin
+  phong := TGLSLShader(trunc64(shader));
+  paramUseTexture := phong.Param.Items[1];
+  paramUseTexture.UniformInteger := trunc64(mode);
+  result:=1;
+end;
+
+function PhongShaderSetMaxLights(shader, maxlights: real): real; stdcall;
+var
+  phong: TGLSLShader;
+  paramMaxLights: TGLSLShaderParameter;
+begin
+  phong := TGLSLShader(trunc64(shader));
+  paramMaxLights := phong.Param.Items[2];
+  paramMaxLights.UniformInteger := trunc64(maxlights);
+  result:=1;
 end;
 
 function BumpShaderCreate(): real; stdcall;
