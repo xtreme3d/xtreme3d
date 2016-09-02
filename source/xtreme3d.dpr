@@ -9,7 +9,7 @@ uses
   GLPolyhedron, GLTeapot, GLzBuffer, GLFile3DS, GLFileGTS, GLFileLWO, GLFileMD2,
   GLFileMD3, Q3MD3, GLFileMS3D, GLFileMD5, GLFileNMF, GLFileNurbs, GLFileObj, GLFileOCT,
   GLFilePLY, GLFileQ3BSP, GLFileSMD, GLFileSTL, GLFileTIN, GLFileB3D,
-  GLFileMDC, GLFileVRML, GLFileLOD, GLPhongShader, VectorLists, GLThorFX, GLFireFX,
+  GLFileMDC, GLFileVRML, GLFileLOD, GLFileX, GLPhongShader, VectorLists, GLThorFX, GLFireFX,
   GLTexCombineShader, GLBumpShader, GLCelShader, GLContext, GLTerrainRenderer, GLHeightData,
   GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
   ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
