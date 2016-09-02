@@ -239,8 +239,27 @@
 <A name="PhongShaderCreate"></A>
 <H1 class=name>PhongShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>PhongShaderCreate</A><A>( );</A>
-<BR><A>Создает шейдер освещения с бликами по Фонгу (Phong) и возвращает его id. Это самая простейшая реализация освещения по Фонгу - поддерживает только свойства материала и источников света: поддержки текстур, к сожалению, нет. Если вам нужно реализовать более сложный шейдер с бликами по Фонгу, рекомендуем сделать это с помощью языка GLSL (см. далее). 
-<BR>Данный шейдер требует поддержки расширений GL_ARB_vertex_program и GL_ARB_fragment_program.</A>
+<BR><A>Создает шейдер Фонга, реализующий попиксельное освещение с бликами по Блинну-Фонгу (Blinn-Phong), и возвращает его id. 
+<BR><A>Данный шейдер требует поддержки расширений GL_ARB_shading_language (или GL_ARB_shading_language_100), GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader.</A>
+<HR>
+
+<A name="PhongShaderUseTexture"></A>
+<H1 class=name>PhongShaderUseTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>PhongShaderUseTexture</A><A>( shader,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Определяет, учитывать ли текстуру в шейдере Фонга. Используется текстура материала, к которому подключен шейдер.</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). По умолчанию текстура выключена.</A>
+<HR>
+
+<A name="PhongShaderSetMaxLights"></A>
+<H1 class=name>PhongShaderSetMaxLights</H1>
+<A class=type>real</A><A> = </A><A class=function>PhongShaderSetMaxLights</A><A>( shader,maxlights as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество источников света, которые должны учитываться шейдером Фонга. Это количество, как правило, меньше или равно числу источников света, созданных функцией </A><A class=funclink href=../functions/light.htm#LightCreate>LightCreate</A><A>. 
+Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает только источники света типа </A><A class=constant>lsOmni</A> и </A><A class=constant>lsParallel</A><A>.
+<BR>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией </A><A class=funclink href=../functions/light.htm#LightSetShining>LightSetShining</A><A>, игнорируется шейдером. Чтобы выключить источник света, можно функцией </A><A class=funclink href=../functions/light.htm#LightSetAttenuation>LightSetAttenuation</A><A> выставить в ноль его постоянную составляющую затухания (constant attenuation).
+</A>
+<BR><A>shader - id шейдера</A>
+<BR><A>maxlights - количество источников света. Значение по умолчанию: 1.</A>
 <HR>
 
 <A name="GLSLShaderCreate"></A>
