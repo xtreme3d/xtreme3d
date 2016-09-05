@@ -532,11 +532,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMode(
-  obj, Mu2, FDir1,
-  Bounce, SoftERP, SoftCFM,
-  Motion1, Motion2,
-  Slip1, Slip2 : real): real; stdcall;
+function OdeSurfaceSetMode(obj, Mu2, FDir1, Bounce, SoftERP, SoftCFM, Motion1, Motion2, Slip1, Slip2 : real): real; stdcall;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;

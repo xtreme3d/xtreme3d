@@ -17,7 +17,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, MeshUtils, pngimage;
+  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll;
 
 type
    TEmpty = class(TComponent)
@@ -252,6 +252,115 @@ end;
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
+
+function OdeRagdollWorldCreate(): real; stdcall;
+var
+  ragWorld: TODERagdollWorld;
+begin
+  ragWorld := TODERagdollWorld.CreateFromManager(ode);
+  //CreateFrom(ode.world, ode.space, ode.contactgroup);
+  result := Integer(ragWorld);
+end;
+
+function OdeRagdollCreate(rworld, actor: real): real; stdcall;
+var
+  ragWorld: TODERagdollWorld;
+  act: TGLActor;
+  ragdoll: TODERagdoll;
+begin
+  ragWorld := TODERagdollWorld(trunc64(rworld));
+  act := TGLActor(trunc64(actor));
+  ragdoll := TODERagdoll.Create(act);
+  ragdoll.ODEWorld := ragWorld;
+  ragdoll.GLSceneRoot := scene.Objects;
+  ragdoll.ShowBoundingBoxes := False;
+  result := Integer(ragdoll);
+end;
+
+function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; stdcall;
+var
+  hjoint: TODERagdollHingeJoint;
+begin
+  hjoint := TODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
+  result := Integer(hjoint);
+end;
+
+function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; stdcall;
+var
+  ujoint: TODERagdollUniversalJoint;
+begin
+  ujoint := TODERagdollUniversalJoint.Create(
+    AffineVectorMake(x1, y1, z1), lostop1, histop1,
+    AffineVectorMake(x2, y2, z2), lostop2, histop2);
+  result := Integer(ujoint);
+end;
+
+function OdeRagdollDummyJointCreate: real; stdcall;
+var
+  djoint: TODERagdollDummyJoint;
+begin
+  djoint := TODERagdollDummyJoint.Create;
+  result := Integer(djoint);
+end;
+
+function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; stdcall;
+var
+  ragdoll: TODERagdoll;
+  bone: TODERagdollBone;
+begin
+  ragdoll := TODERagdoll(trunc64(rag));
+  if not (parentbone = 0) then
+    bone := TODERagdollBone.CreateOwned(TODERagdollBone(trunc64(parentbone)))
+  else
+  begin
+    bone := TODERagdollBone.Create(ragdoll);
+    ragdoll.SetRootBone(bone);
+  end;
+  bone.Joint := TGLRagdolJoint(trunc64(ragjoint));
+  bone.BoneID := trunc64(boneid);
+  //bone.Name := IntToStr(bone.BoneID);
+  result := Integer(bone);
+end;
+
+function OdeRagdollBuild(rag: real): real; stdcall;
+var
+  ragdoll: TODERagdoll;
+begin
+  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll.BuildRagdoll;
+  //ragdoll.Start;
+  result := 1.0;
+end;
+
+function OdeRagdollEnable(rag, mode: real): real; stdcall;
+var
+  ragdoll: TODERagdoll;
+begin
+  ragdoll := TODERagdoll(trunc64(rag));
+  if (Boolean(trunc64(mode))) then
+    ragdoll.Start
+  else
+    ragdoll.Stop;
+  result := 1.0;
+end;
+
+function OdeRagdollUpdate(rag: real): real; stdcall;
+var
+  ragdoll: TODERagdoll;
+begin
+  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll.Update;
+  result := 1.0;
+end;
+
+function OdeRagdollWorldUpdate(rworld, dt: real): real; stdcall;
+var
+  ragWorld: TODERagdollWorld;
+begin
+  ragWorld := TODERagdollWorld(trunc64(rworld));
+  ragWorld.WorldUpdate(dt);
+  result := 1.0;
+end;
 
 exports
 
@@ -546,8 +655,13 @@ OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSli
 OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
 OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
 OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
-OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel;
-{
+OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
+
+OdeRagdollWorldCreate, OdeRagdollWorldUpdate,
+OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
+OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
+OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate;
+{
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
 }

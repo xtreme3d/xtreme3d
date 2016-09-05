@@ -420,6 +420,11 @@ type
             on the root bone. }
          property GlobalMatrix : TMatrix read FGlobalMatrix;
 
+         {Set the bone's matrix. Be careful using this. }
+         procedure SetGlobalMatrix(Matrix: TMatrix); // Ragdoll
+         {Set the bone's GlobalMatrix. Used for Ragdoll. }
+         procedure SetGlobalMatrixForRagDoll(RagDollMatrix: TMatrix); // Ragdoll
+
          {: Free all sub bones and reset BoneID and Name. }
          procedure Clean; override;
 	end;
@@ -524,6 +529,7 @@ type
          FCurrentFrame : TSkeletonFrame; // not persistent
          FBonesByIDCache : TList;
          FColliders : TSkeletonColliderList;
+         FRagDollEnabled: Boolean; // ragdoll
 
 	   protected
 	      { Protected Declarations }
@@ -574,6 +580,11 @@ type
 
          {: Applies current frame to morph all mesh objects. }
          procedure MorphMesh(normalize : Boolean);
+
+         {Backup and prepare the BoneMatrixInvertedMeshes to use with ragdolls }
+         procedure StartRagdoll; // ragdoll
+         {Restore the BoneMatrixInvertedMeshes to stop the ragdoll }
+         procedure StopRagdoll; // ragdoll
 
          {: Copy bone rotations from reference skeleton. }
          procedure Synchronize(reference : TSkeleton);
@@ -889,6 +900,9 @@ type
          FBonesPerVertex : Integer;
          FLastVerticeBoneWeightCount, FLastBonesPerVertex : Integer; // not persistent
          FBoneMatrixInvertedMeshes : TList; // not persistent
+         FBackupInvertedMeshes: TList; // ragdoll
+         procedure BackupBoneMatrixInvertedMeshes; // ragdoll
+         procedure RestoreBoneMatrixInvertedMeshes; // ragdoll
 
 	   protected
 	      { Protected Declarations }
@@ -2581,6 +2595,19 @@ begin
       Items[i].PrepareGlobalMatrices;
 end;
 
+procedure TSkeletonBone.SetGlobalMatrix(Matrix: TMatrix); // ragdoll
+begin
+  FGlobalMatrix := Matrix;
+end;
+
+procedure TSkeletonBone.SetGlobalMatrixForRagDoll(RagDollMatrix: TMatrix);
+  // ragdoll
+begin
+  FGlobalMatrix := MatrixMultiply(RagDollMatrix,
+    Skeleton.Owner.InvAbsoluteMatrix);
+  inherited;
+end;
+
 // ------------------
 // ------------------ TSkeletonRootBoneList ------------------
 // ------------------
@@ -2764,6 +2791,8 @@ end;
 //
 procedure TSkeletonBone.PrepareGlobalMatrices;
 begin
+   if (Skeleton.FRagDollEnabled) then
+    Exit; // ragdoll
    FGlobalMatrix:=MatrixMultiply(Skeleton.CurrentFrame.LocalMatrixList[BoneID],
                                  TSkeletonBoneList(Owner).FGlobalMatrix);
    inherited;
@@ -3273,6 +3302,48 @@ begin
    FCurrentFrame:=nil;
    FColliders.Clear;
 end;
+
+procedure TSkeleton.StartRagDoll; // ragdoll
+var
+  i: Integer;
+  mesh: TBaseMeshObject;
+begin
+  if FRagDollEnabled then
+    Exit
+  else
+    FRagDollEnabled := True;
+
+  if Owner.MeshObjects.Count > 0 then
+  begin
+    for i := 0 to Owner.MeshObjects.Count - 1 do
+    begin
+      mesh := Owner.MeshObjects.Items[i];
+      if mesh is TSkeletonMeshObject then
+      begin
+        TSkeletonMeshObject(mesh).BackupBoneMatrixInvertedMeshes;
+        TSkeletonMeshObject(mesh).PrepareBoneMatrixInvertedMeshes;
+      end;
+    end;
+  end;
+end;
+
+procedure TSkeleton.StopRagDoll; // ragdoll
+var
+  i: Integer;
+  mesh: TBaseMeshObject;
+begin
+  FRagDollEnabled := False;
+  if Owner.MeshObjects.Count > 0 then
+  begin
+    for i := 0 to Owner.MeshObjects.Count - 1 do
+    begin
+      mesh := Owner.MeshObjects.Items[i];
+      if mesh is TSkeletonMeshObject then
+        TSkeletonMeshObject(mesh).RestoreBoneMatrixInvertedMeshes;
+    end;
+  end;
+end;
+
 
 // ------------------
 // ------------------ TMeshObject ------------------
@@ -4641,6 +4712,7 @@ end;
 constructor TSkeletonMeshObject.Create;
 begin
    FBoneMatrixInvertedMeshes:=TList.Create;
+   FBackupInvertedMeshes := TList.Create; // ragdoll
 	inherited Create;
 end;
 
@@ -4650,6 +4722,7 @@ destructor TSkeletonMeshObject.Destroy;
 begin
    Clear;
    FBoneMatrixInvertedMeshes.Free;
+   FBackupInvertedMeshes.Free;
 	inherited Destroy;
 end;
 
@@ -4905,6 +4978,47 @@ begin
       end;
    end;
 end;
+
+procedure TSkeletonMeshObject.BackupBoneMatrixInvertedMeshes; // ragdoll
+var
+  i: Integer;
+  bm: TBaseMeshObject;
+begin
+  // cleanup existing stuff
+  for i := 0 to FBackupInvertedMeshes.Count - 1 do
+    TBaseMeshObject(FBackupInvertedMeshes[i]).Free;
+  FBackupInvertedMeshes.Clear;
+  // copy current stuff
+  for i := 0 to FBoneMatrixInvertedMeshes.Count - 1 do
+  begin
+    bm := TBaseMeshObject.Create;
+    bm.Assign(TBaseMeshObject(FBoneMatrixInvertedMeshes[i]));
+    FBackupInvertedMeshes.Add(bm);
+    TBaseMeshObject(FBoneMatrixInvertedMeshes[i]).Free;
+  end;
+  FBoneMatrixInvertedMeshes.Clear;
+end;
+
+procedure TSkeletonMeshObject.RestoreBoneMatrixInvertedMeshes; // ragdoll
+var
+  i: Integer;
+  bm: TBaseMeshObject;
+begin
+  // cleanup existing stuff
+  for i := 0 to FBoneMatrixInvertedMeshes.Count - 1 do
+    TBaseMeshObject(FBoneMatrixInvertedMeshes[i]).Free;
+  FBoneMatrixInvertedMeshes.Clear;
+  // restore the backup
+  for i := 0 to FBackupInvertedMeshes.Count - 1 do
+  begin
+    bm := TBaseMeshObject.Create;
+    bm.Assign(TBaseMeshObject(FBackupInvertedMeshes[i]));
+    FBoneMatrixInvertedMeshes.Add(bm);
+    TBaseMeshObject(FBackupInvertedMeshes[i]).Free;
+  end;
+  FBackupInvertedMeshes.Clear;
+end;
+
 
 // ApplyCurrentSkeletonFrame
 //

@@ -177,6 +177,7 @@ type
 
       property World : PdxWorld read FWorld;
       property Space : PdxSpace read FSpace;
+      property ContactGroup: TdJointGroupID read FContactGroup;
       property NumContactJoints : integer read FNumContactJoints;
 
     published
@@ -191,7 +192,6 @@ type
       property Visible : Boolean read FVisible write SetVisible;
       property VisibleAtRunTime : Boolean read FVisibleAtRunTime write SetVisibleAtRunTime;
       property GeomColor : TGLColor read FGeomColor write SetGeomColor;
-
   end;
 
   // TODECollisionSurface
@@ -1487,7 +1487,7 @@ begin
   // Check for custom collision handling event
   if Assigned(FOnCustomCollision) then begin
     FOnCustomCollision(g1,g2);
-    exit;
+    //exit;
   end;
 
   Obj1:=dGeomGetData(g1);
