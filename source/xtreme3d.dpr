@@ -40,6 +40,7 @@ var
   collisionNormal: TVector;
 
   ode: TGLODEManager;
+  odeRagdollWorld: TODERagdollWorld;
   jointList: TGLODEJointList;
 
 {$R *.res}
@@ -253,25 +254,14 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
-function OdeRagdollWorldCreate(): real; stdcall;
+function OdeRagdollCreate(actor: real): real; stdcall;
 var
-  ragWorld: TODERagdollWorld;
-begin
-  ragWorld := TODERagdollWorld.CreateFromManager(ode);
-  //CreateFrom(ode.world, ode.space, ode.contactgroup);
-  result := Integer(ragWorld);
-end;
-
-function OdeRagdollCreate(rworld, actor: real): real; stdcall;
-var
-  ragWorld: TODERagdollWorld;
   act: TGLActor;
   ragdoll: TODERagdoll;
 begin
-  ragWorld := TODERagdollWorld(trunc64(rworld));
   act := TGLActor(trunc64(actor));
   ragdoll := TODERagdoll.Create(act);
-  ragdoll.ODEWorld := ragWorld;
+  ragdoll.ODEWorld := odeRagdollWorld;
   ragdoll.GLSceneRoot := scene.Objects;
   ragdoll.ShowBoundingBoxes := False;
   result := Integer(ragdoll);
@@ -328,7 +318,6 @@ var
 begin
   ragdoll := TODERagdoll(trunc64(rag));
   ragdoll.BuildRagdoll;
-  //ragdoll.Start;
   result := 1.0;
 end;
 
@@ -350,15 +339,6 @@ var
 begin
   ragdoll := TODERagdoll(trunc64(rag));
   ragdoll.Update;
-  result := 1.0;
-end;
-
-function OdeRagdollWorldUpdate(rworld, dt: real): real; stdcall;
-var
-  ragWorld: TODERagdollWorld;
-begin
-  ragWorld := TODERagdollWorld(trunc64(rworld));
-  ragWorld.WorldUpdate(dt);
   result := 1.0;
 end;
 
@@ -657,7 +637,6 @@ OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSli
 OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
 OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
 
-OdeRagdollWorldCreate, OdeRagdollWorldUpdate,
 OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
 OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
 OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate;

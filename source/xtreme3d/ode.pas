@@ -4,6 +4,7 @@ begin
   dWorldSetAutoDisableFlag(ode.World, 0);
   ode.RenderPoint := TGLRenderPoint.CreateAsChild(scene.Objects);
   jointList := TGLODEJointList.Create(nil);
+  odeRagdollWorld := TODERagdollWorld.CreateFromManager(ode);
   result := 1.0;
 end;
 
