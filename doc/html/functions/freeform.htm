@@ -14,8 +14,8 @@
 
 <A>Объект свободной формы (Freeform) - неанимированная модель, загружаемая из файла. Объекты такого типа используются обычно в качестве игровых уровней, декораций и интерактивных предметов. Freeform состоит из одного или более мешей (Mesh) - наборов вершин, каждый из которых, в свою очередь, содержит одну или более фейсгрупп (FaceGroup) - наборов граней, составленных из этих вершин. Фейсгруппам и мешам можно назначать отдельные материалы. Однако не все форматы моделей поддерживают материалы, как и деление на меши и фейсгруппы.
 <BR>Xtreme3D поддерживает следующие форматы моделей:
-<BR>Игровые - BSP (Quake 3), B3D (Blitz3D), LOD (LODka 3D), X (Microsoft DirectX);
-<BR>Пакеты 3D-моделирования и CAD - 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), MS3D (Milkshape), OCT (FSRad), NMF (AMD NormalMapper), WRL (VRML 1.0)
+<BR>Игровые - BSP (Quake 3), B3D (Blitz3D), LOD (LODka 3D), X (Microsoft DirectX), CSM (Cartography Shop 4), LMTS (Pulsar LMTools);
+<BR>Пакеты 3D-моделирования и CAD - 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), MS3D (Milkshape), ASE (3ds Max), OCT (FSRad), NMF (AMD NormalMapper), WRL (VRML 1.0)
 <BR>Научные - PLY (Stanford Triangle Format), GTS (GNU Triangulated Surface), TIN (Triangular Irregular Network), STL (Stereolithography);
 <BR>Собственный формат - GLSM (GLScene Mesh).
 <BR>
@@ -143,7 +143,7 @@
 <HR>
 
 <A name="FreeformMeshFaceGroupTriangleCount"></A>
-<H1 class=name>FreeformFaceGroupTriangleCount</H1>
+<H1 class=name>FreeformMeshFaceGroupTriangleCount</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupTriangleCount</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает количество треугольников в фейсгруппе.</A>
 <BR><A>freeform - id объекта свободной формы</A>
@@ -152,7 +152,7 @@
 <HR>
 
 <A name="FreeformMeshFaceGroupSetMaterial"></A>
-<H1 class=name>FreeformFaceGroupSetMaterial</H1>
+<H1 class=name>FreeformMeshFaceGroupSetMaterial</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupSetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A>, material as </A><A class=type>string</A> );</A>
 <BR><A>Присваивает фейсгруппе материал.</A>
 <BR><A>freeform - id объекта свободной формы</A>
@@ -162,7 +162,7 @@
 <HR>
 
 <A name="FreeformMeshFaceGroupGetMaterial"></A>
-<H1 class=name>FreeformFaceGroupGetMaterial</H1>
+<H1 class=name>FreeformMeshFaceGroupGetMaterial</H1>
 <A class=type>string</A><A> = </A><A class=function>FreeformMeshFaceGroupGetMaterial</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает имя материала фейсгруппы.</A>
 <BR><A>freeform - id объекта свободной формы</A>
@@ -171,7 +171,7 @@
 <HR>
 
 <A name="FreeformMeshFaceGroupsCount"></A>
-<H1 class=name>FreeformFaceGroupsCount</H1>
+<H1 class=name>FreeformMeshFaceGroupsCount</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupsCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
 <BR><A>Возвращает количество фейсгрупп меша.</A>
 <BR><A>freeform - id объекта свободной формы</A>

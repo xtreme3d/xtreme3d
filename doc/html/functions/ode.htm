@@ -737,6 +737,64 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 <BR><A>velocity - линейная или угловая скорость.</A>
 <HR>
 
+<H1 class=name>OdeRagdollCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollCreate</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает так называемый ragdoll ("тряпичную куклу") - физический контроллер для актера. Ragdoll позволяет создать из анимированной модели безжизненное человеческое тело (и не только человеческое), которое подчиняется законам физики - подобная технология очень часто используется в шутерах и других action-играх.</A>
+<BR><A>actor - id актера.</A>
+<HR>
+
+<H1 class=name>OdeRagdollHingeJointCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollHingeJointCreate</A><A>( x,y,z,lostop,histop as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает ragdoll-сочленение типа Hinge (сгибание) и возвращает его id. Это сочленение позволяет кости актера вращаться вокруг заданной оси относительно родительской кости - как в локтевом или коленном суставах.</A>
+<BR><A>x,y,z - ось (единичный вектор)</A>
+<BR><A>lostop,histop - нижний и верхний угловые пороги вращения (в радианах).</A>
+<HR>
+
+<H1 class=name>OdeRagdollUniversalJointCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollUniversalJointCreate</A><A>( x1,y1,z1,lostop1,histop1,x2,y2,z2,lostop2,histop2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает ragdoll-сочленение типа Universal (универсальное) и возвращает его id. Это сочленение позволяет кости актера вращаться вокруг двух заданных осей относительно родительской кости - как, например, в плечевом суставе.</A>
+<BR><A>x1,y1,z1 - первая ось (единичный вектор)</A>
+<BR><A>lostop1,histop1 - нижний и верхний угловые пороги вращения для первой оси (в радианах)</A>
+<BR><A>x2,y2,z2 - вторая ось (единичный вектор)</A>
+<BR><A>lostop2,histop2 - нижний и верхний угловые пороги вращения для второй оси (в радианах).</A>
+<HR>
+
+<H1 class=name>OdeRagdollDummyJointCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollDummyJointCreate</A><A>();</A>
+<BR><A>Создает фиксированное ragdoll-сочленение. Фактически, кость, вместо прикрепления посредством сочленения, просто объединяется со своей родительской костью в одно динамическое тело ODE.</A>
+<HR>
+
+<H1 class=name>OdeRagdollBoneCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollBoneCreate</A><A>( ragdoll,ragjoint,boneid,parentbone as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает ragdoll-кость - физическую модель для кости актера. Для адекватного ragdoll нужно создать такую для каждой кости в скелете актера.</A>
+<BR><A>ragdoll - id объекта ragdoll</A>
+<BR><A>ragjoint - id ragdoll-сочленения, которое нужно использовать для соединения данной кости к родительской</A>
+<BR><A>boneid - индекс кости актера. Этот индекс можно узнать по имени кости, при помощи функции </A>
+<A class=funclink href="actor.htm#ActorGetBoneByName">ActorGetBoneByName</A><A>.</A>
+<BR><A>parentbone - id родительской ragdoll-кости. Если в этот параметр передать 0, то будет создана корневая кость.</A>
+<HR>
+
+<H1 class=name>OdeRagdollBuild</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollBuild</A><A>( ragdoll as </A><A class=type>real</A><A> );</A>
+<BR><A>Вычисляет ограничивающие объемы костей ragdoll. Эту функцию необходимо вызвать после создания всех костей.</A>
+<BR><A>ragdoll - id объекта ragdoll.</A>
+<HR>
+
+<H1 class=name>OdeRagdollEnable</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollEnable</A><A>( ragdoll,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Активирует или деактивирует ragdoll. При деактивированном ragdoll актер может воспроизводить анимацию. При активизации ragdoll актер плавно перейдет от текущего кадра анимации к физике. При деактивизации переход от физике к анимации будет резким.</A>
+<BR><A>ragdoll - id объекта ragdoll</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+<H1 class=name>OdeRagdollUpdate</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeRagdollUpdate</A><A>( ragdoll as </A><A class=type>real</A><A> );</A>
+<BR><A>Обновляет физику ragdoll. Эту функцию нужно вызывать после </A>
+<A class=funclink href="ode.htm#OdeManagerStep">OdeManagerStep</A><A> и перед </A>
+<A class=funclink href="engine.htm#Update">Update</A><A>.</A>
+<BR><A>ragdoll - id объекта ragdoll.</A>
+<HR>
+
 </DIV>
 
 </BODY>
