@@ -254,6 +254,15 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
+function FreeformSave(ff: real; filename: pchar): real; stdcall;
+var
+  freeform: TGLFreeForm;
+begin
+  freeform := TGLFreeForm(trunc64(ff));
+  freeform.SaveToFile(String(filename));
+  result := 1.0;
+end;
+
 function OdeRagdollCreate(actor: real): real; stdcall;
 var
   act: TGLActor;
@@ -414,8 +423,8 @@ FreeformMeshFaceGroupsCount, FreeformMeshFaceGroupTriangleCount,
 FreeformMeshSetMaterial, FreeformUseMeshMaterials,
 FreeformSphereSweepIntersect, FreeformPointInMesh,
 FreeformToFreeforms,
-
 FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
+FreeformSave,
 
 FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
