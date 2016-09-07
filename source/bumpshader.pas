@@ -1,6 +1,9 @@
 bumpVertexProgram =
   'varying vec3 position;' + #13#10 +
   'varying vec3 n, t, b, e;' + #13#10 + 
+  'varying vec4 shadowCoord;' + #13#10 + 
+  'uniform mat4 shadowMatrix;' + #13#10 + 
+  'uniform bool useShadowMap;' + #13#10 + 
   
   'void main()' + #13#10 +
   '{' + #13#10 +
@@ -18,21 +21,35 @@ bumpVertexProgram =
   '  e.z = dot(position, n);' + #13#10 +
   '  e = -normalize(e);' + #13#10 +
   
+  '  shadowCoord = useShadowMap? shadowMatrix * (gl_ModelViewMatrix * gl_Vertex) : vec4(0.0, 0.0, 0.0, 0.0);' + #13#10 +
+
   '  gl_Position = ftransform();' + #13#10 +
   '}' + #13#10;
 
 bumpFragmentProgram =
   'varying vec3 position;' + #13#10 +
   'varying vec3 n, t, b, e;' + #13#10 +
+  'varying vec4 shadowCoord;' + #13#10 +
 
   'uniform sampler2D diffuseMap;' + #13#10 +
   'uniform sampler2D normalMap;' + #13#10 +
   'uniform sampler2D heightMap;' + #13#10 +
+  'uniform sampler2DShadow shadowMap;' + #13#10 +
   'uniform int maxNumLights;' + #13#10 +
   'uniform bool useParallax;' + #13#10 +
   'uniform float parallaxHeight;' + #13#10 +
+  'uniform vec2 shadowMapSize;' + #13#10 +
+  'uniform float shadowBlurRadius;' + #13#10 +
 
   'const float parallaxBias = -0.01;' + #13#10 +
+  
+  'float lookup(sampler2DShadow depths, vec4 coord, vec2 offset)' + #13#10 +
+  '{' + #13#10 +
+    'vec2 texelSize = 1.0 / shadowMapSize;' + #13#10 +
+    'vec2 v = offset * texelSize * coord.w;' + #13#10 +
+    'float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0.0, 0.0)).z;' + #13#10 +
+    'return z;' + #13#10 +
+  '}' + #13#10 +
 
   'void main()' + #13#10 +
   '{' + #13#10 +
@@ -45,11 +62,29 @@ bumpFragmentProgram =
 
     'if (useParallax)' + #13#10 +
     '{' + #13#10 +
-    'float height = texture2D(heightMap, texCoords).r;'  + #13#10 +
-    'height = height * parallaxHeight + parallaxBias;' + #13#10 +
-    'texCoords = texCoords + (height * E.xy);' + #13#10 +
+      'float height = texture2D(heightMap, texCoords).r;'  + #13#10 +
+      'height = height * parallaxHeight + parallaxBias;' + #13#10 +
+      'texCoords = texCoords + (height * E.xy);' + #13#10 +
     '}' + #13#10 +
     
+    'float shadow = 1.0;' + #13#10 +
+    'if (shadowCoord.w > 0.0)' + #13#10 +
+    '{' + #13#10 +
+      'shadow = 0.0;' + #13#10 +
+      'if (shadowBlurRadius > 0.0)' + #13#10 +
+      '{' + #13#10 +
+        'float x, y;' + #13#10 +
+	      'for (y = -shadowBlurRadius ; y < shadowBlurRadius ; y += 1.0)' + #13#10 +
+	      'for (x = -shadowBlurRadius ; x < shadowBlurRadius ; x += 1.0)' + #13#10 +
+        '{' + #13#10 +
+	        'shadow += lookup(shadowMap, shadowCoord, vec2(x, y));' + #13#10 +
+        '}' + #13#10 +
+	      'shadow /= shadowBlurRadius * shadowBlurRadius * 4.0;' + #13#10 +
+      '}' + #13#10 +
+      'else' + #13#10 +
+        'shadow = lookup(shadowMap, shadowCoord, vec2(0.0, 0.0));' + #13#10 +
+    '}' + #13#10 +
+
     'vec4 diffuseTex = texture2D(diffuseMap, texCoords);' + #13#10 +
     'vec3 N = normalize(texture2D(normalMap, texCoords).rgb * 2.0 - 1.0);' + #13#10 +
         
@@ -96,8 +131,8 @@ bumpFragmentProgram =
     
     'gl_FragColor =' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.ambient +' + #13#10 +
-    '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum +' + #13#10 +
-    '  gl_FrontMaterial.specular * specularSum;' + #13#10 +
+    '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum * shadow +' + #13#10 +
+    '  gl_FrontMaterial.specular * specularSum * shadow;' + #13#10 +
 
     'gl_FragColor.a = 1.0;' + #13#10 +
   '}' + #13#10;

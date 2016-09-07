@@ -7,7 +7,7 @@ uses
   GLScene, GLTexture, OpenGL1x, GLUtils;
 
 const
-  // OpenGL 1.4 required
+  // OpenGL 1.4 required 
   GL_CLAMP_TO_BORDER = $812D;
   GL_TEXTURE_COMPARE_MODE = $884C;
   GL_TEXTURE_COMPARE_FUNC = $884D;
@@ -109,6 +109,7 @@ begin
   FZScale := 1.0; //0.945;
   FZNear := 0.0; //-20.0
   FZFar := 100.0; //200.0
+  FShadowMatrix := IdentityHmgMatrix;
 end;
 
 destructor TGLShadowMap.Destroy;
@@ -154,14 +155,13 @@ begin
    glLoadIdentity();
    glOrtho(-FProjectionSize, FProjectionSize,
            -FProjectionSize, FProjectionSize, FZNear, FZFar);
-   glGetFloatv(GL_PROJECTION_MATRIX, @projMat);
+   glGetFloatv(GL_PROJECTION_MATRIX, @projMat[0]);
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   //MainBuffer.Camera.AbsoluteMatrixAsAddress;
    MainBuffer.Camera.Apply;
-   glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat);
-   
+   glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat[0]);
+
    MainBuffer.SimpleRender(FCaster);
 
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -169,9 +169,8 @@ begin
    glMatrixMode(GL_MODELVIEW);
    glPushMatrix();
    glLoadIdentity();
-   //oldCamera.AbsoluteMatrixAsAddress;
    oldCamera.Apply;
-   glGetFloatv(GL_MODELVIEW_MATRIX, @invCamMat);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @invCamMat[0]);
    glPopMatrix();
    InvertMatrix(invCamMat);
 
@@ -184,7 +183,7 @@ begin
    glMultMatrixf(@mvMat);
    glMultMatrixf(@invCamMat);
    glScalef(FZScale, FZScale, FZScale);
-   glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix[0]);
    glPopMatrix();
 
    glCullFace(GL_BACK);

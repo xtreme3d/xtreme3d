@@ -70,6 +70,11 @@ var
   paramMaxLights: TGLSLShaderParameter;
   paramUseParallax: TGLSLShaderParameter;
   paramParallaxHeight: TGLSLShaderParameter; 
+  paramShadowMap: TGLSLShaderParameter; 
+  paramShadowMatrix: TGLSLShaderParameter; 
+  paramUseShadowMap: TGLSLShaderParameter; 
+  paramShadowMapSize: TGLSLShaderParameter; 
+  paramShadowBlurRadius: TGLSLShaderParameter;
 begin
   if not
     (GL_ARB_shader_objects and
@@ -96,6 +101,35 @@ begin
   paramParallaxHeight.UniformType := uniform1f;
   paramParallaxHeight.UniformVector[0] := 0.03;
   paramParallaxHeight.Initialized := True;
+  
+  paramShadowMap := bump.Param.AddUniform('shadowMap');
+  paramShadowMap.UniformType := uniformShadowTexture;
+  paramShadowMap.UniformTexture := 7;
+  paramShadowMap.ShadowMap := nil;
+  paramShadowMap.Initialized := True;
+  
+  paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
+  paramShadowMatrix.UniformType := uniformShadowMatrix;
+  paramShadowMatrix.ShadowMap := nil;
+  //paramShadowMatrix.UniformMatrix := TGLShadowMap(trunc64(shadowmap)).ShadowMatrix;
+  paramShadowMatrix.Initialized := True;
+  
+  paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
+  paramUseShadowMap.UniformType := uniform1i;
+  paramUseShadowMap.UniformInteger := 0;
+  paramUseShadowMap.Initialized := True;
+  
+  paramShadowMapSize := bump.Param.AddUniform('shadowMapSize');
+  paramShadowMapSize.UniformType := uniform2f;
+  paramShadowMapSize.UniformVector[0] := 1.0;
+  paramShadowMapSize.UniformVector[1] := 1.0;
+  paramShadowMapSize.Initialized := True;
+  
+  paramShadowBlurRadius := bump.Param.AddUniform('shadowBlurRadius');
+  paramShadowBlurRadius.UniformType := uniform1f;
+  paramShadowBlurRadius.UniformVector[0] := 2.0;
+  paramShadowBlurRadius.Initialized := True;
+
   result := integer(bump);
 end;
 
@@ -177,6 +211,41 @@ begin
   bump := TGLSLShader(trunc64(shader));
   paramParallaxHeight := bump.Param.Items[5];
   paramParallaxHeight.UniformVector[0] := height;
+  result:=1;
+end;
+
+function BumpShaderSetShadowMap(shader, shadowmap: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  sm: TGLShadowMap;
+  paramShadowMap: TGLSLShaderParameter; 
+  paramShadowMatrix: TGLSLShaderParameter; 
+  paramUseShadowMap: TGLSLShaderParameter; 
+  paramShadowMapSize: TGLSLShaderParameter; 
+begin
+  bump := TGLSLShader(trunc64(shader));
+  sm := TGLShadowMap(trunc64(shadowmap));
+  paramShadowMap := bump.Param.Items[6];
+  paramShadowMatrix := bump.Param.Items[7];
+  paramUseShadowMap := bump.Param.Items[8];
+  paramShadowMapSize := bump.Param.Items[9];
+  
+  paramShadowMap.ShadowMap := sm;
+  paramShadowMatrix.ShadowMap := sm;
+  paramUseShadowMap.UniformInteger := 1;
+  paramShadowMapSize.UniformVector[0] := sm.Width;
+  paramShadowMapSize.UniformVector[1] := sm.Height;
+  result:=1;
+end;
+
+function BumpShaderSetShadowBlurRadius(shader, radius: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  paramShadowBlurRadius: TGLSLShaderParameter; 
+begin
+  bump := TGLSLShader(trunc64(shader));
+  paramShadowBlurRadius := bump.Param.Items[10];
+  paramShadowBlurRadius.UniformVector[0] := radius;
   result:=1;
 end;
 
@@ -484,7 +553,8 @@ var
   param: TGLSLShaderParameter;
 begin
   param := TGLSLShaderParameter(trunc64(par));
-  param.UniformType := uniformMatrix4f;
+  param.UniformType := uniformShadowMatrix;
+  param.ShadowMap := TGLShadowMap(trunc64(shadowmap));
   param.UniformMatrix := TGLShadowMap(trunc64(shadowmap)).ShadowMatrix;
   param.Initialized := True;
   result := 1;

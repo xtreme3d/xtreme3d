@@ -3,7 +3,7 @@ unit GLSLShader;
 interface
 
 uses
-  Classes, Dialogs, VectorTypes,
+  Classes, Dialogs, VectorTypes, VectorGeometry,
   GLTexture, GLUserShader, OpenGL1x, GLUtils,
   GLShadowMap;
 
@@ -13,11 +13,12 @@ type
       uniform1f,
       uniform2f,
       uniform3f,
-      uniform4f,
+      uniform4f, 
       uniformMatrix4f,
       uniformTexture2D,
       uniformSecondTexture2D,
-      uniformShadowTexture
+      uniformShadowTexture,
+      uniformShadowMatrix
     );
 
   TGLSLShader = class;
@@ -33,7 +34,7 @@ type
       FUniformInteger: Integer;
       FUniformTexture: Integer;
       FUniformVector: array[0..3] of Single;
-      FUniformMatrix: TMatrix4f;
+      FUniformMatrix: TMatrix;
       procedure SetVecElem(index: Integer; const val: Single);
       function GetVecElem(index: Integer): Single;
     public
@@ -114,6 +115,8 @@ begin
   FUniformVector[1] := 0.0;
   FUniformVector[2] := 0.0;
   FUniformVector[3] := 0.0;
+  FUniformMatrix := IdentityHmgMatrix;
+  FShadowMap := nil;
   FInitialized := False;
 end;
 
@@ -165,7 +168,7 @@ begin
     end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
   end;
-  
+
   if FUniformType = uniformShadowTexture then
   begin
     if FShadowMap <> Nil then
@@ -175,6 +178,15 @@ begin
       glActiveTextureARB(GL_TEXTURE0_ARB);
     end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
+  end;
+
+  if FUniformType = uniformShadowMatrix then
+  begin
+    if FShadowMap <> Nil then
+    begin
+      FUniformMatrix := FShadowMap.ShadowMatrix;
+    end;
+    glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
   end;
 
   if FUniformType = uniform1f then
