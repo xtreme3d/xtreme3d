@@ -21,8 +21,11 @@
 <BR>ѕри работе с теневыми картами важно знать некоторые принципы их работы. —ама€ важна€ концепци€ - это пространство отсечени€ (clip space). ¬ данном случае оно представл€ет собой пр€моугольную трубу, ограниченную размером ортогональной проекции, а также ближней и дальней плоскост€ми отсечени€. ”словно говор€, через эту трубу источник света "видит" освещенные точки. » именно в этом пространстве происходит проверка, виден ли тот или иной пиксель - если он перекрываетс€ более близким к источнику света пикселем, то, значит, он находитс€ в тени. „тобы осуществить эту проверку, нужно в вершинном шейдере перевести координаты вершины в пространство отсечени€ источника света - дл€ этого используетс€ специальна€ матрица, которую Xtreme3D вычисл€ет за вас. ≈е остаетс€ только передать в шейдер функцией 
 </A><A class=funclink href=../functions/shader.htm#GLSLShaderSetParameterShadowMatrix>GLSLShaderSetParameterShadowMatrix</A><A>. 
 —ам же буфер глубины передаетс€ функцией 
-</A><A class=funclink href=../functions/shader.htm#GLSLShaderSetParameterShadowTexture>GLSLShaderSetParameterShadowTexture</A><A>. 
-</A>
+</A><A class=funclink href=../functions/shader.htm#GLSLShaderSetParameterShadowTexture>GLSLShaderSetParameterShadowTexture</A><A>.
+<BR>
+<BR>¬ам необ€зательно писать собственный GLSL-шейдер дл€ отрисовки теней - в Xtreme3D есть встроенный шейдер рельефа (BumpShader), который поддерживает тени. ѕросто передайте ему теневую карту функцией 
+</A><A class=funclink href=../functions/shader.htm#BumpShaderSetShadowMap>BumpShaderSetShadowMap</A><A> 
+и наслаждайтесь результатом!</A>
 <HR>
 
 <A name="ShadowMapCreate"></A>
