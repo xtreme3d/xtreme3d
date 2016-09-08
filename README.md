@@ -15,6 +15,7 @@ Screenshots
 [![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
 [![Screenshot4](/screenshots/009-thumb.jpg)](/screenshots/009.jpg)
 [![Screenshot4](/screenshots/010-thumb.jpg)](/screenshots/010.jpg)
+[![Screenshot4](/screenshots/012-thumb.jpg)](/screenshots/012.jpg)
 
 Features
 --------
@@ -22,14 +23,16 @@ Features
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
 * Popular image formats support (BMP, JPG, PNG, TGA, DDS)
-* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and others)
-* Model animation (per-vertex and skeletal)
+* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and many other)
+* Procedural mesh construction from vertex and index lists - make your own model format!
+* Model animation, per-vertex and skeletal
 * Lightmapping and dynamic lighting
 * Terrain rendering with automatic LOD
 * Dynamic water rendering
+* Dynamic soft shadows
 * Static and dynamic cubemaps
 * GLSL shaders
-* Built-in shaders, including cel shader, bump/parallax shader, multimaterial shader, etc.
+* Built-in shaders, including cel shader, bump/parallax shader, phong shader, multimaterial shader, etc.
 * Particle system
 * Lensflare effect
 * 2D sprites and text
@@ -37,13 +40,13 @@ Features
 * Skyboxes
 * Procedural skydome with sun, stars and day/night cycle
 * Procedural trees
-* Dynamic soft shadows
 * Lines and curves rendering
 * Discrete LOD system
 * Offscreen rendering via p-buffers
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
 * Built-in game-oriented collision systems (DCE, FPSManager)
 * Rigid body physics using ODE engine
+* Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from Quake 2 PAK archives
 * + a lot more

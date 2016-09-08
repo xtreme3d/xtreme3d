@@ -127,7 +127,7 @@ begin
   
   paramShadowBlurRadius := bump.Param.AddUniform('shadowBlurRadius');
   paramShadowBlurRadius.UniformType := uniform1f;
-  paramShadowBlurRadius.UniformVector[0] := 2.0;
+  paramShadowBlurRadius.UniformVector[0] := 0.0;
   paramShadowBlurRadius.Initialized := True;
 
   result := integer(bump);
@@ -224,17 +224,29 @@ var
   paramShadowMapSize: TGLSLShaderParameter; 
 begin
   bump := TGLSLShader(trunc64(shader));
-  sm := TGLShadowMap(trunc64(shadowmap));
+  if shadowmap <> 0 then
+    sm := TGLShadowMap(trunc64(shadowmap));
   paramShadowMap := bump.Param.Items[6];
   paramShadowMatrix := bump.Param.Items[7];
   paramUseShadowMap := bump.Param.Items[8];
   paramShadowMapSize := bump.Param.Items[9];
   
-  paramShadowMap.ShadowMap := sm;
-  paramShadowMatrix.ShadowMap := sm;
-  paramUseShadowMap.UniformInteger := 1;
-  paramShadowMapSize.UniformVector[0] := sm.Width;
-  paramShadowMapSize.UniformVector[1] := sm.Height;
+  if shadowmap <> 0 then
+  begin
+    paramShadowMap.ShadowMap := sm;
+    paramShadowMatrix.ShadowMap := sm;
+    paramUseShadowMap.UniformInteger := 1;
+    paramShadowMapSize.UniformVector[0] := sm.Width;
+    paramShadowMapSize.UniformVector[1] := sm.Height;
+  end
+  else
+  begin
+    paramShadowMap.ShadowMap := nil;
+    paramShadowMatrix.ShadowMap := nil;
+    paramUseShadowMap.UniformInteger := 0;
+    paramShadowMapSize.UniformVector[0] := 1.0;
+    paramShadowMapSize.UniformVector[1] := 1.0;
+  end;
   result:=1;
 end;
 
