@@ -21,6 +21,7 @@ The library was reimplemented from scratch because of lacking source code for or
 * Tag support for MD3 models
 * Animation blending for Actors
 * Object-to-bone parenting
+* Material scripts support
 * Improved BumpShader (rewrote shader in GLSL, added specular shading and parallax mapping)
 * TexCombineShader
 * PhongShader
