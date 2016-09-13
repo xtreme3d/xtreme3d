@@ -75,6 +75,7 @@ var
   paramUseShadowMap: TGLSLShaderParameter; 
   paramShadowMapSize: TGLSLShaderParameter; 
   paramShadowBlurRadius: TGLSLShaderParameter;
+  paramUseAutoTangentSpace: TGLSLShaderParameter;
 begin
   if not
     (GL_ARB_shader_objects and
@@ -129,6 +130,11 @@ begin
   paramShadowBlurRadius.UniformType := uniform1f;
   paramShadowBlurRadius.UniformVector[0] := 0.0;
   paramShadowBlurRadius.Initialized := True;
+  
+  paramUseAutoTangentSpace := bump.Param.AddUniform('useAutoTangentSpace');
+  paramUseAutoTangentSpace.UniformType := uniform1i;
+  paramUseAutoTangentSpace.UniformInteger := 0;
+  paramUseAutoTangentSpace.Initialized := True;
 
   result := integer(bump);
 end;
@@ -258,6 +264,17 @@ begin
   bump := TGLSLShader(trunc64(shader));
   paramShadowBlurRadius := bump.Param.Items[10];
   paramShadowBlurRadius.UniformVector[0] := radius;
+  result:=1;
+end;
+
+function BumpShaderUseAutoTangentSpace(shader, mode: real): real; stdcall;
+var
+  bump: TGLSLShader;
+  paramUseAutoTangentSpace: TGLSLShaderParameter; 
+begin
+  bump := TGLSLShader(trunc64(shader));
+  paramUseAutoTangentSpace := bump.Param.Items[11];
+  paramUseAutoTangentSpace.UniformInteger := trunc64(mode);
   result:=1;
 end;
 
