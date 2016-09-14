@@ -146,10 +146,13 @@ var
   paramDiffTex: TGLSLShaderParameter;
 begin
   bump := TGLSLShader(trunc64(shader));
-  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
   paramDiffTex := bump.Param.Items[0];
   paramDiffTex.UniformType := uniformTexture2D;
-  paramDiffTex.Texture := mat.Material.Texture;
+  if Length(mtrl) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+    paramDiffTex.Texture := mat.Material.Texture;
+  end;
   paramDiffTex.UniformTexture := 0;
   paramDiffTex.Initialized := True;
   result:=1;
@@ -162,10 +165,13 @@ var
   paramNormTex: TGLSLShaderParameter;
 begin
   bump := TGLSLShader(trunc64(shader));
-  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
   paramNormTex := bump.Param.Items[1];
   paramNormTex.UniformType := uniformTexture2D;
-  paramNormTex.Texture := mat.Material.Texture;
+  if Length(mtrl) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+    paramNormTex.Texture := mat.Material.Texture;
+  end;
   paramNormTex.UniformTexture := 1;
   paramNormTex.Initialized := True;
   result:=1;
@@ -178,10 +184,13 @@ var
   paramHeightTex: TGLSLShaderParameter;
 begin
   bump := TGLSLShader(trunc64(shader));
-  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
   paramHeightTex := bump.Param.Items[2];
   paramHeightTex.UniformType := uniformTexture2D;
-  paramHeightTex.Texture := mat.Material.Texture;
+  if Length(mtrl) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+    paramHeightTex.Texture := mat.Material.Texture;
+  end;
   paramHeightTex.UniformTexture := 2;
   paramHeightTex.Initialized := True;
   result:=1;
