@@ -5,7 +5,8 @@ v3.1.0 (by Gecko) - ??/??/??
 * Improved Freeform API, added an ability to manually construct Freeforms from vertices and triangles. Freeforms now can be saved to file (GLSM, OBJ, STL, or NMF)
 * New file formats support: CSM and LMTS (these were absent in 3.0), X, ASE, DXS (experimental, without lightmaps for now)
 * Ragdoll support in ODE
-* Improved BumpShader, added shadows support
+* Added Movement object that can be used to define smooth interpolated movement paths for objects
+* Improved BumpShader, added shadows and automatic tangent space support
 * Improved PhongShader, added diffuse texture support
 
 v3.0.0 (by Gecko, Rutraple aka Hacker, Ghost) - 25/08/2016

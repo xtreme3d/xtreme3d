@@ -40,7 +40,8 @@ Features
 * Skyboxes
 * Procedural skydome with sun, stars and day/night cycle
 * Procedural trees
-* Lines and curves rendering
+* Lines and curves rendering (Cubic, Bezier, NURBS)
+* Curves can be used to control object movement
 * Discrete LOD system
 * Offscreen rendering via p-buffers
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
