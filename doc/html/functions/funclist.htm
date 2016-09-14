@@ -41,6 +41,7 @@
 <A class=funclink href=funclist.htm#Shadowvolume>Shadowvolume</A><A> | </A>
 <A class=funclink href=funclist.htm#Mirror>Mirror</A><A> | </A>
 <A class=funclink href=funclist.htm#Navigator>Navigator</A><A> | </A>
+<A class=funclink href=funclist.htm#Movement>Movement</A><A> | </A>
 <A class=funclink href=funclist.htm#DCE>DCE</A><A> | </A>
 <A class=funclink href=funclist.htm#FPS>FPS</A><A> | </A>
 <!--
@@ -524,6 +525,7 @@
 <BR><A class=funclink href=shader.htm#BumpShaderSetMaxLights>BumpShaderSetMaxLights</A><A>(shader,maxlights)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetShadowMap>BumpShaderSetShadowMap</A><A>(shader,shadowmap)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetShadowBlurRadius>BumpShaderSetShadowBlurRadius</A><A>(shader,radius)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderUseAutoTangentSpace>BumpShaderUseAutoTangentSpace</A><A>(shader,mode)</A>
 
 <BR><A class=funclink href=shader.htm#CelShaderCreate>CelShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineColor>CelShaderSetLineColor</A><A>(shader,color)</A>
@@ -758,6 +760,21 @@
 <BR><A class=funclink href=navigator.htm#NavigatorInvertHorizontalWhenUpsideDown>NavigatorInvertHorizontalWhenUpsideDown</A><A>(nav,mode)</A>
 <BR><A class=funclink href=navigator.htm#NavigatorSetAngleLock>NavigatorSetAngleLock</A><A>(nav,mode)</A>
 <BR><A class=funclink href=navigator.htm#NavigatorSetAngles>NavigatorSetAngles</A><A>(nav,min,max)</A>
+<BR>
+<BR>
+<A name="Movement"></A>
+<H1 class=name>Movement</H1>
+<A class=funclink href=movement.htm#MovementCreate>MovementCreate</A><A>(object)</A>
+<BR><A class=funclink href=movement.htm#MovementAddPath>MovementAddPath</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementSetActivePath>MovementSetActivePath</A><A>(movement,index)</A>
+<BR><A class=funclink href=movement.htm#MovementStart>MovementStart</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementStop>MovementStop</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementAutoStartNextPath>MovementAutoStartNextPath</A><A>(movement,mode)</A>
+<BR><A class=funclink href=movement.htm#MovementPathSetSplineMode>MovementPathSetSplineMode</A><A>(path,lsm)</A>
+<BR><A class=funclink href=movement.htm#MovementPathAddNode>MovementPathAddNode</A><A>(path)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetPosition>MovementPathNodeSetPosition</A><A>(node,x,y,z)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetRotation>MovementPathNodeSetRotation</A><A>(node,pitch,turn,roll)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetSpeed>MovementPathNodeSetSpeed</A><A>(node,speed)</A>
 <BR>
 <BR>
 <A name="DCE"></A>

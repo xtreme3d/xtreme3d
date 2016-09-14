@@ -258,6 +258,10 @@
   <PARAM name="Local" value="functions/navigator.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Movement">
+  <PARAM name="Local" value="functions/movement.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="DCE">
   <PARAM name="Local" value="functions/dce.htm">
  </OBJECT>

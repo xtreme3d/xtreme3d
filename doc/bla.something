@@ -312,6 +312,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Movement">
+                        <param name="Local" value="functions/movement.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="DCE">
                         <param name="Local" value="functions/dce.htm">
                         <param name="ImageNumber" value="0">

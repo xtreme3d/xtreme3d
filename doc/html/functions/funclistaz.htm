@@ -102,6 +102,7 @@
 <BR><A class=funclink href=shader.htm#BumpShaderSetParallaxOffset>BumpShaderSetParallaxOffset</A><A>(shader,offset)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetShadowBlurRadius>BumpShaderSetShadowBlurRadius</A><A>(shader,radius)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetShadowMap>BumpShaderSetShadowMap</A><A>(shader,shadowmap)</A>
+<BR><A class=funclink href=shader.htm#BumpShaderUseAutoTangentSpace>BumpShaderUseAutoTangentSpace</A><A>(shader,mode)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderUseParallax>BumpShaderUseParallax</A><A>(shader,mode)</A>
 <BR>
 <BR>
@@ -466,6 +467,18 @@
 <BR><A class=funclink href=mouse.htm#MouseSetPosition>MouseSetPosition</A><A>(x,y)</A>
 <BR><A class=funclink href=mouse.htm#MouseShowCursor>MouseShowCursor</A><A>(mode)</A>
 -->
+<BR><A class=funclink href=movement.htm#MovementCreate>MovementCreate</A><A>(object)</A>
+<BR><A class=funclink href=movement.htm#MovementAddPath>MovementAddPath</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementSetActivePath>MovementSetActivePath</A><A>(movement,index)</A>
+<BR><A class=funclink href=movement.htm#MovementStart>MovementStart</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementStop>MovementStop</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementAutoStartNextPath>MovementAutoStartNextPath</A><A>(movement,mode)</A>
+<BR><A class=funclink href=movement.htm#MovementPathSetSplineMode>MovementPathSetSplineMode</A><A>(path,lsm)</A>
+<BR><A class=funclink href=movement.htm#MovementPathAddNode>MovementPathAddNode</A><A>(path)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetPosition>MovementPathNodeSetPosition</A><A>(node,x,y,z)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetRotation>MovementPathNodeSetRotation</A><A>(node,pitch,turn,roll)</A>
+<BR><A class=funclink href=movement.htm#MovementPathNodeSetSpeed>MovementPathNodeSetSpeed</A><A>(node,speed)</A>
+
 <BR><A class=funclink href=shader.htm#MultiMaterialShaderCreate>MultiMaterialShaderCreate</A><A>(matlib)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectAddTarget>MultiProxyObjectAddTarget</A><A>(mproxy,object,mindist,maxdist)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectCreate>MultiProxyObjectCreate</A><A>(parent)</A>
