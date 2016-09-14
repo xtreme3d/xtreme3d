@@ -36,82 +36,82 @@
              </OBJECT>
         <UL>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Основы Xtreme3D">
+                        <param name="Name" value="1. Основы Xtreme3D">
                         <param name="Local" value="tutorials/basics.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Создание простой сцены">
+                        <param name="Name" value="2. Создание простой сцены">
                         <param name="Local" value="tutorials/simplescene.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Иерархия объектов">
+                        <param name="Name" value="3. Иерархия объектов">
                         <param name="Local" value="tutorials/hierarchy.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Камера от первого лица">
+                        <param name="Name" value="4. Камера от первого лица">
                         <param name="Local" value="tutorials/firstpersoncamera.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Библиотека материалов">
+                        <param name="Name" value="5. Библиотека материалов">
                         <param name="Local" value="tutorials/matlib.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Примитивы">
+                        <param name="Name" value="6. Примитивы">
                         <param name="Local" value="tutorials/primitives.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Загрузка модели из файла">
+                        <param name="Name" value="7. Загрузка модели из файла">
                         <param name="Local" value="tutorials/modelfile.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Вершинная анимация">
+                        <param name="Name" value="8. Вершинная анимация">
                         <param name="Local" value="tutorials/vertexanim.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Скелетная анимация">
+                        <param name="Name" value="9. Скелетная анимация">
                         <param name="Local" value="tutorials/skeletalanim1.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Камера от третьего лица">
+                        <param name="Name" value="10. Камера от третьего лица">
                         <param name="Local" value="tutorials/thirdpersoncamera.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Проверка столкновений">
+                        <param name="Name" value="11. Проверка столкновений">
                         <param name="Local" value="tutorials/collisionchecking.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="2D-графика">
+                        <param name="Name" value="12. 2D-графика">
                         <param name="Local" value="tutorials/2dgraphics.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Тени в реальном времени">
+                        <param name="Name" value="13. Тени в реальном времени">
                         <param name="Local" value="tutorials/realtimeshadows.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Создание неба">
+                        <param name="Name" value="14. Создание неба">
                         <param name="Local" value="tutorials/createsky.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Создание ландшафта">
+                        <param name="Name" value="15. Создание ландшафта">
                         <param name="Local" value="tutorials/createterrain.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Создание воды">
+                        <param name="Name" value="16. Создание воды">
                         <param name="Local" value="tutorials/createwater.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
@@ -121,7 +121,7 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Частицы">
+                        <param name="Name" value="17. Частицы">
                         <param name="Local" value="tutorials/particles.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
@@ -131,12 +131,12 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Шейдеры">
+                        <param name="Name" value="18. Шейдеры">
                         <param name="Local" value="tutorials/shaders.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="GLSL">
+                        <param name="Name" value="19. GLSL">
                         <param name="Local" value="tutorials/glsl.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>

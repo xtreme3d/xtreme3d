@@ -31,67 +31,67 @@
  </OBJECT>
 <UL>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Основы Xtreme3D">
+  <PARAM name="Name" value="1. Основы Xtreme3D">
   <PARAM name="Local" value="tutorials/basics.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Создание простой сцены">
+  <PARAM name="Name" value="2. Создание простой сцены">
   <PARAM name="Local" value="tutorials/simplescene.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Иерархия объектов">
+  <PARAM name="Name" value="3. Иерархия объектов">
   <PARAM name="Local" value="tutorials/hierarchy.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Камера от первого лица">
+  <PARAM name="Name" value="4. Камера от первого лица">
   <PARAM name="Local" value="tutorials/firstpersoncamera.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Библиотека материалов">
+  <PARAM name="Name" value="5. Библиотека материалов">
   <PARAM name="Local" value="tutorials/matlib.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Примитивы">
+  <PARAM name="Name" value="6. Примитивы">
   <PARAM name="Local" value="tutorials/primitives.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Загрузка модели из файла">
+  <PARAM name="Name" value="7. Загрузка модели из файла">
   <PARAM name="Local" value="tutorials/modelfile.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Вершинная анимация">
+  <PARAM name="Name" value="8. Вершинная анимация">
   <PARAM name="Local" value="tutorials/vertexanim.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Скелетная анимация">
+  <PARAM name="Name" value="9. Скелетная анимация">
   <PARAM name="Local" value="tutorials/skeletalanim1.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Камера от третьего лица">
+  <PARAM name="Name" value="10. Камера от третьего лица">
   <PARAM name="Local" value="tutorials/thirdpersoncamera.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Проверка столкновений">
+  <PARAM name="Name" value="11. Проверка столкновений">
   <PARAM name="Local" value="tutorials/collisionchecking.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="2D-графика">
+  <PARAM name="Name" value="12. 2D-графика">
   <PARAM name="Local" value="tutorials/2dgraphics.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Тени в реальном времени">
+  <PARAM name="Name" value="13. Тени в реальном времени">
   <PARAM name="Local" value="tutorials/realtimeshadows.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Создание неба">
+  <PARAM name="Name" value="14. Создание неба">
   <PARAM name="Local" value="tutorials/createsky.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Создание ландшафта">
+  <PARAM name="Name" value="15. Создание ландшафта">
   <PARAM name="Local" value="tutorials/createterrain.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Создание воды">
+  <PARAM name="Name" value="16. Создание воды">
   <PARAM name="Local" value="tutorials/createwater.htm">
  </OBJECT>
 <!--
@@ -101,7 +101,7 @@
  </OBJECT>
 -->
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Частицы">
+  <PARAM name="Name" value="17. Частицы">
   <PARAM name="Local" value="tutorials/particles.htm">
  </OBJECT>
 <!--
@@ -111,11 +111,11 @@
  </OBJECT>
 -->
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Шейдеры">
+  <PARAM name="Name" value="18. Шейдеры">
   <PARAM name="Local" value="tutorials/shaders.htm">
  </OBJECT>
   <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="GLSL">
+  <PARAM name="Name" value="19. GLSL">
   <PARAM name="Local" value="tutorials/glsl.htm">
  </OBJECT>
 <!--
