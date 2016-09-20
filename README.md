@@ -58,7 +58,7 @@ A growing collection of Xtreme3D usage examples for GM8 can be found here: https
 
 Asset Creation
 --------------
-For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter. Probably we will make a tutorial soon.
+For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
 
 For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) formats. You can use MD5 exporter for Blender to create models in this format - find it in tools/blender-md5-exporter.
 
@@ -69,3 +69,4 @@ Xtreme3D 3.x is distributed under GNU Lesser General Public License 2.1. It allo
 GLScene is distributed under Mozilla Public License 1.1. 
 
 ODE is distributed under BSD-style license. 
+
