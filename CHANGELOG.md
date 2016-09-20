@@ -1,6 +1,6 @@
 Xtreme3D version history
 ------------------------
-v3.1.0 (by Gecko) - ??/??/??
+v3.1.0-beta (by Gecko) - 20/09/2016
 
 * Improved Freeform API, added an ability to manually construct Freeforms from vertices and triangles. Freeforms now can be saved to file (GLSM, OBJ, STL, or NMF)
 * New file formats support: CSM and LMTS (these were absent in 3.0), X, ASE, DXS (experimental, without lightmaps for now)
