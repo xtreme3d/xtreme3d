@@ -35,6 +35,17 @@
 <BR><A>parent - id родител€ дл€ спрайта (0 - отсутствие родител€).</A>
 <HR>
 
+<A name="SpriteCreateEx"></A>
+<H1 class=name>SpriteCreateEx</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteCreateEx</A><A>( material as </A><A class=type>string</A><A>, width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>—оздает новый пространственный спрайт из фрагмента текстуры материала и возвращает его id. ≈сли у указанного материала нет текстуры, эта функци€ эквивалентна предыдущей. ‘ункци€ полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур дл€ каждого спрайта.</A>
+<BR><A>material - им€ материала</A>
+<BR><A>width,height - ширина и высота спрайта в единицах координатной системы</A>
+<BR><A>left,top - координаты левого верхнего угла фрагмента (в пиксел€х, относительно левого верхнего угла текстуры)</A>
+<BR><A>right,bottom - координаты правого нижнего угла фрагмента (в пиксел€х, относительно левого верхнего угла текстуры)</A>
+<BR><A>parent - id родител€ дл€ спрайта (0 - отсутствие родител€).</A>
+<HR>
+
 <A name="SpriteSetSize"></A>
 <H1 class=name>SpriteSetSize</H1>
 <A class=type>real</A><A> = </A><A class=function>SpriteSetSize</A><A>( sprite,width,height as </A><A class=type>real</A><A> );</A>
