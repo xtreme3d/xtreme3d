@@ -468,6 +468,34 @@ begin
   result := 1.0;
 end;
 
+// Extended sprite functions
+
+function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+var
+  spr: TGLSprite;
+  tw, th: Single;
+  mat: TGLLibMaterial;
+begin
+  if not (parent=0) then
+    spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    spr:=TGLSprite.CreateAsChild(scene.Objects);
+  spr.SetSize(trunc64(w),trunc64(h));
+  spr.Material.MaterialLibrary:=matlib;
+  spr.Material.LibMaterialName:=mtrl;
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  if mat.Material.Texture <> nil then
+  begin
+    tw := mat.Material.Texture.Image.Width;
+    th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left / tw;
+    spr.UVTop := top / th;
+    spr.UVRight := right / tw;
+    spr.UVBottom := bottom / th;
+  end;
+  result:=Integer(spr);
+end;
+
 exports
 
 //Engine
@@ -507,7 +535,10 @@ FlatTextSetFont, SpaceTextSetFont, HUDTextSetColor, FlatTextSetColor, HUDTextSet
 FlatTextSetText, SpaceTextSetText,
 //Sprite
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
-SpriteRotate, SpriteMirror, SpriteNoZWrite,    
+SpriteRotate, SpriteMirror, SpriteNoZWrite,
+
+SpriteCreateEx,
+    
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
 CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,

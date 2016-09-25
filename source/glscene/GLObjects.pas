@@ -290,6 +290,10 @@ type
          FNoZWrite : Boolean;
          FMirrorU,
          FMirrorV : Boolean;
+      FUVTop: TGLFloat;
+      FUVLeft: TGLFloat;
+      FUVBottom: TGLFloat;
+      FUVRight: TGLFloat;
 
 		protected
 			{ Protected Declarations }
@@ -333,6 +337,11 @@ type
             the texture. }
          property MirrorU : Boolean read FMirrorU write SetMirrorU;
          property MirrorV : Boolean read FMirrorV write SetMirrorV;
+
+         property UVTop: TGLFloat read FUVTop write FUVTop;
+         property UVLeft: TGLFloat read FUVLeft write FUVLeft;
+         property UVBottom: TGLFloat read FUVBottom write FUVBottom;
+         property UVRight: TGLFloat read FUVRight write FUVRight;
 	end;
 
    // TGLPointStyle
@@ -1501,6 +1510,10 @@ begin
    FAlphaChannel:=1;
 	FWidth:=1;
 	FHeight:=1;
+  FUVTop := 0;
+  FUVLeft := 0;
+  FUVBottom := 1;
+  FUVRight := 1;
 end;
 
 // Assign
@@ -1533,7 +1546,7 @@ var
    vx, vy : TAffineVector;
    w, h : Single;
    mat : TMatrix;
-   u0, v0, u1, v1 : Integer;
+   u0, v0, u1, v1 : Single;
 begin
    if FAlphaChannel<>1 then
       rci.GLStates.SetGLMaterialAlphaChannel(GL_FRONT, FAlphaChannel);
@@ -1550,18 +1563,18 @@ begin
    ScaleVector(vx, w/VectorLength(vx));
    ScaleVector(vy, h/VectorLength(vy));
    if FMirrorU then begin
-      u0:=1;
-      u1:=0;
+      u0:=FUVRight;
+      u1:=FUVLeft;
    end else begin
-      u0:=0;
-      u1:=1;
+      u0:=FUVLeft;
+      u1:=FUVRight;
    end;
    if FMirrorV then begin
-      v0:=1;
-      v1:=0;
+      v0:=FUVBottom;
+      v1:=FUVTop;
    end else begin
-      v0:=0;
-      v1:=1;
+      v0:=FUVTop;
+      v1:=FUVBottom;
    end;
 
    if FRotation <> 0 then begin
