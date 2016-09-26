@@ -489,11 +489,57 @@ begin
     tw := mat.Material.Texture.Image.Width;
     th := mat.Material.Texture.Image.Height;
     spr.UVLeft := left / tw;
-    spr.UVTop := top / th;
+    spr.UVTop := 1.0 - top / th;
     spr.UVRight := right / tw;
-    spr.UVBottom := bottom / th;
+    spr.UVBottom := 1.0 - bottom / th;
   end;
-  result:=Integer(spr);
+  result := Integer(spr);
+end;
+
+function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+var
+  spr: TGLHUDSprite;
+  tw, th: Single;
+  mat: TGLLibMaterial;
+begin
+  if not (parent=0) then
+    spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    spr:=TGLHUDSprite.CreateAsChild(scene.Objects);
+  spr.SetSize(trunc64(w),trunc64(h));
+  spr.Material.MaterialLibrary:=matlib;
+  spr.Material.LibMaterialName:=mtrl;
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  if mat.Material.Texture <> nil then
+  begin
+    tw := mat.Material.Texture.Image.Width;
+    th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left / tw;
+    spr.UVTop := 1.0 - top / th;
+    spr.UVRight := right / tw;
+    spr.UVBottom := 1.0 - bottom / th;
+  end;
+  result:= Integer(spr);
+end;
+
+function SpriteSetBounds(sprite, left, top, right, bottom: real): real; stdcall;
+var
+  spr: TGLSprite;
+  tw, th: Single;
+  mat: TGLLibMaterial;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  mat:=spr.Material.MaterialLibrary.Materials.GetLibMaterialByName(spr.Material.LibMaterialName);
+  if mat.Material.Texture <> nil then
+  begin
+    tw := mat.Material.Texture.Image.Width;
+    th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left / tw;
+    spr.UVTop := 1.0 - top / th;
+    spr.UVRight := right / tw;
+    spr.UVBottom := 1.0 - bottom / th;
+  end;
+  result := 1;
 end;
 
 exports
@@ -537,7 +583,7 @@ FlatTextSetText, SpaceTextSetText,
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 
-SpriteCreateEx,
+SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds,
     
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,

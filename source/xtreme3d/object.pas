@@ -466,7 +466,7 @@ begin
   object1:=TGLSceneObject(trunc64(obj));
   object1.Material.MaterialLibrary:=matlib;
   object1.Material.LibMaterialName:=mat;
-
+{
   if object1.ClassType = TGLFreeForm then
   begin
     ffm := TGLFreeForm(trunc64(obj));
@@ -480,7 +480,7 @@ begin
       end;
     end;
   end;
-  
+ }
   result:=1;
 end;
 

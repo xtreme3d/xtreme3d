@@ -174,9 +174,16 @@ procedure TGLHUDSprite.DoRender(var rci : TRenderContextInfo;
                               renderSelf, renderChildren : Boolean);
 var
 	vx, vy, vx1, vy1, f : Single;
+  u0, v0, u1, v1 : Single;
 begin
    if rci.ignoreMaterials then Exit;
   	Material.Apply(rci);
+
+   u0:=UVLeft * FXTiles;
+   u1:=UVRight * FXTiles;
+   v0:=UVTop * FYTiles;
+   v1:=UVBottom * FYTiles;
+
    repeat
       if AlphaChannel<>1 then begin
          if rci.lightingDisabledCounter>0 then begin
@@ -208,10 +215,10 @@ begin
       // issue quad
       glBegin(GL_QUADS);
          glNormal3fv(@YVector);
-         xglTexCoord2f(0, 0);             glVertex2f( vx, vy1);
-         xglTexCoord2f(FXTiles, 0);       glVertex2f(vx1, vy1);
-         xglTexCoord2f(FXTiles, FYTiles); glVertex2f(vx1,  vy);
-         xglTexCoord2f(0, FYTiles);       glVertex2f( vx,  vy);
+         xglTexCoord2f(u0, v0); glVertex2f( vx, vy1);
+         xglTexCoord2f(u1, v0); glVertex2f(vx1, vy1);
+         xglTexCoord2f(u1, v1); glVertex2f(vx1,  vy);
+         xglTexCoord2f(u0, v1); glVertex2f( vx,  vy);
       glEnd;
       // restore state
       glDepthMask(True);
