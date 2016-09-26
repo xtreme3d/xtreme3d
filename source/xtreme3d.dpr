@@ -473,8 +473,8 @@ end;
 function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLSprite;
-  tw, th: Single;
-  mat: TGLLibMaterial;
+  //tw, th: Single;
+ // mat: TGLLibMaterial;
 begin
   if not (parent=0) then
     spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
@@ -483,24 +483,24 @@ begin
   spr.SetSize(trunc64(w),trunc64(h));
   spr.Material.MaterialLibrary:=matlib;
   spr.Material.LibMaterialName:=mtrl;
-  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-  if mat.Material.Texture <> nil then
-  begin
-    tw := mat.Material.Texture.Image.Width;
-    th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left / tw;
-    spr.UVTop := 1.0 - top / th;
-    spr.UVRight := right / tw;
-    spr.UVBottom := 1.0 - bottom / th;
-  end;
+  //mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  //if mat.Material.Texture <> nil then
+ // begin
+    //tw := mat.Material.Texture.Image.Width;
+    //th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left;
+    spr.UVTop := 1.0 - top;
+    spr.UVRight := right;
+    spr.UVBottom := 1.0 - bottom;
+  //end;
   result := Integer(spr);
 end;
 
 function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLHUDSprite;
-  tw, th: Single;
-  mat: TGLLibMaterial;
+  //tw, th: Single;
+  //mat: TGLLibMaterial;
 begin
   if not (parent=0) then
     spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
@@ -509,16 +509,16 @@ begin
   spr.SetSize(trunc64(w),trunc64(h));
   spr.Material.MaterialLibrary:=matlib;
   spr.Material.LibMaterialName:=mtrl;
-  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-  if mat.Material.Texture <> nil then
-  begin
-    tw := mat.Material.Texture.Image.Width;
-    th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left / tw;
-    spr.UVTop := 1.0 - top / th;
-    spr.UVRight := right / tw;
-    spr.UVBottom := 1.0 - bottom / th;
-  end;
+  //mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  //if mat.Material.Texture <> nil then
+ // begin
+    //tw := mat.Material.Texture.Image.Width;
+    //th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left;
+    spr.UVTop := 1.0 - top;
+    spr.UVRight := right;
+    spr.UVBottom := 1.0 - bottom;
+  //end;
   result:= Integer(spr);
 end;
 
