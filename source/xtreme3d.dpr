@@ -4,7 +4,7 @@ uses
   GLScene, GLObjects, GLWin32FullScreenViewer, GLMisc, GLGraph,
   GLCollision, GLTexture, OpenGL1x, VectorGeometry, Graphics,
   GLVectorFileObjects, GLWin32Viewer, GLSpaceText, GLGeomObjects, GLCadencer,
-  Jpeg, Tga, DDS, GLProcTextures, Spin, GLVfsPAK, GLCanvas, GLGraphics, GLPortal,
+  Jpeg, Tga, DDS, PNG, GLProcTextures, Spin, GLVfsPAK, GLCanvas, GLGraphics, GLPortal,
   GLHUDObjects, GLBitmapFont, GLWindowsFont, GLImposter, VectorTypes, GLUtils,
   GLPolyhedron, GLTeapot, GLzBuffer, GLFile3DS, GLFileGTS, GLFileLWO, GLFileMD2,
   GLFileMD3, Q3MD3, GLFileMS3D, GLFileMD5, GLFileNMF, GLFileNurbs, GLFileObj, GLFileOCT,
@@ -473,8 +473,6 @@ end;
 function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLSprite;
-  //tw, th: Single;
- // mat: TGLLibMaterial;
 begin
   if not (parent=0) then
     spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
@@ -483,24 +481,16 @@ begin
   spr.SetSize(trunc64(w),trunc64(h));
   spr.Material.MaterialLibrary:=matlib;
   spr.Material.LibMaterialName:=mtrl;
-  //mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-  //if mat.Material.Texture <> nil then
- // begin
-    //tw := mat.Material.Texture.Image.Width;
-    //th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left;
-    spr.UVTop := 1.0 - top;
-    spr.UVRight := right;
-    spr.UVBottom := 1.0 - bottom;
-  //end;
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
   result := Integer(spr);
 end;
 
 function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLHUDSprite;
-  //tw, th: Single;
-  //mat: TGLLibMaterial;
 begin
   if not (parent=0) then
     spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
@@ -509,16 +499,10 @@ begin
   spr.SetSize(trunc64(w),trunc64(h));
   spr.Material.MaterialLibrary:=matlib;
   spr.Material.LibMaterialName:=mtrl;
-  //mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-  //if mat.Material.Texture <> nil then
- // begin
-    //tw := mat.Material.Texture.Image.Width;
-    //th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left;
-    spr.UVTop := 1.0 - top;
-    spr.UVRight := right;
-    spr.UVBottom := 1.0 - bottom;
-  //end;
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
   result:= Integer(spr);
 end;
 
@@ -535,11 +519,43 @@ begin
     tw := mat.Material.Texture.Image.Width;
     th := mat.Material.Texture.Image.Height;
     spr.UVLeft := left / tw;
-    spr.UVTop := 1.0 - top / th;
+    spr.UVTop := (th - bottom) / th; 
     spr.UVRight := right / tw;
-    spr.UVBottom := 1.0 - bottom / th;
+    spr.UVBottom := (th - top) / th;
   end;
   result := 1;
+end;
+
+function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
+  result := 1;
+end;
+
+function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  result := 0;
+  if mat.Material.Texture <> nil then
+    result := mat.Material.Texture.Image.Width;
+end;
+
+function MaterialGetTextureHeight(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  result := 0;
+  if mat.Material.Texture <> nil then
+    result := mat.Material.Texture.Image.Height;
 end;
 
 exports
@@ -582,8 +598,7 @@ FlatTextSetText, SpaceTextSetText,
 //Sprite
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
-
-SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds,
+SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
     
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
@@ -693,6 +708,7 @@ MaterialNoiseCreate, MaterialNoiseAnimate, MaterialNoiseSetDimensions,
 MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
 MaterialNoiseRandomSeed,
 MaterialGenTexture, MaterialSetTextureWrap,
+MaterialGetTextureWidth, MaterialGetTextureHeight,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate,

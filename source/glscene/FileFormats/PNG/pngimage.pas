@@ -5810,13 +5810,13 @@ initialization
   {Register the necessary chunks for png}
   RegisterCommonChunks;
   {Registers TPNGObject to use with TPicture}
-  {$IFDEF UseDelphi}{$IFDEF RegisterGraphic}
-    TPicture.RegisterFileFormat('PNG', 'Portable Network Graphics', TPNGObject);
-  {$ENDIF}{$ENDIF}
+//  {$IFDEF UseDelphi}{$IFDEF RegisterGraphic}
+//    TPicture.RegisterFileFormat('PNG', 'Portable Network Graphics', TPNGObject);
+//  {$ENDIF}{$ENDIF}
 finalization
-  {$IFDEF UseDelphi}{$IFDEF RegisterGraphic}
-    TPicture.UnregisterGraphicClass(TPNGObject);
-  {$ENDIF}{$ENDIF}
+//  {$IFDEF UseDelphi}{$IFDEF RegisterGraphic}
+//    TPicture.UnregisterGraphicClass(TPNGObject);
+//  {$ENDIF}{$ENDIF}
   {Free chunk classes}
   FreeChunkClassList;
 end.
