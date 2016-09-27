@@ -203,6 +203,7 @@ begin
                    rci.viewPortSize.cy*0.5-f*Position.Y, Position.Z);
       if Rotation<>0 then
          glRotatef(Rotation, 0, 0, 1);
+      glTranslatef(-OriginX, OriginY, 0.0);
       glMatrixMode(GL_PROJECTION);
       glPushMatrix;
       glLoadIdentity;

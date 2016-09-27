@@ -294,6 +294,9 @@ type
       FUVLeft: TGLFloat;
       FUVBottom: TGLFloat;
       FUVRight: TGLFloat;
+      FOriginX: TGLFloat;
+      FOriginY: TGLFloat;
+      //FUseCustomOrigin: Boolean;
 
 		protected
 			{ Protected Declarations }
@@ -342,6 +345,9 @@ type
          property UVLeft: TGLFloat read FUVLeft write FUVLeft;
          property UVBottom: TGLFloat read FUVBottom write FUVBottom;
          property UVRight: TGLFloat read FUVRight write FUVRight;
+         property OriginX: TGLFloat read FOriginX write FOriginX;
+         property OriginY: TGLFloat read FOriginY write FOriginY;
+         //property UseCustomOrigin: Boolean read FUseCustomOrigin write FUseCustomOrigin;
 	end;
 
    // TGLPointStyle
@@ -1514,6 +1520,9 @@ begin
   FUVLeft := 0;
   FUVBottom := 1;
   FUVRight := 1;
+  FOriginX := 0.0;
+  FOriginY := 0.0;
+  //FUseCustomOrigin := False;
 end;
 
 // Assign
@@ -1581,6 +1590,7 @@ begin
      glPushMatrix;
      glRotatef(FRotation,mat[0][2],mat[1][2],mat[2][2]);
    end;
+   glTranslatef(-FOriginX, -FOriginY, 0.0);
    glBegin(GL_QUADS);
       xglTexCoord2f(u1, v1);  glVertex3f( vx[0]+vy[0], vx[1]+vy[1], vx[2]+vy[2]);
       xglTexCoord2f(u0, v1);  glVertex3f(-vx[0]+vy[0],-vx[1]+vy[1],-vx[2]+vy[2]);

@@ -538,6 +538,16 @@ begin
   result := 1;
 end;
 
+function SpriteSetOrigin(sprite, x, y: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  spr.OriginX := x;
+  spr.OriginY := y;
+  result := 1;
+end;
+
 function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
 var
   mat: TGLLibMaterial;
@@ -599,6 +609,7 @@ FlatTextSetText, SpaceTextSetText,
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
+SpriteSetOrigin,
     
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
