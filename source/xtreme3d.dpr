@@ -17,7 +17,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement;
+  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes;
 
 type
    TEmpty = class(TComponent)
@@ -548,6 +548,8 @@ begin
   result := 1;
 end;
 
+// New Material functions
+
 function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
 var
   mat: TGLLibMaterial;
@@ -566,6 +568,108 @@ begin
   result := 0;
   if mat.Material.Texture <> nil then
     result := mat.Material.Texture.Image.Height;
+end;
+
+// HUDShapes
+
+  {
+  shp.Vertices.Add(-1, -1);
+  shp.Vertices.Add(+1, -1);
+  shp.Vertices.Add(+1, +1);
+  shp.Vertices.Add(-1, +1);
+  shp.TexCoords.Add(0, 0);
+  shp.TexCoords.Add(1, 0);
+  shp.TexCoords.Add(1, 1);
+  shp.TexCoords.Add(0, 1);
+  shp.VertexIndices.Add(0, 1, 2);
+  shp.VertexIndices.Add(0, 2, 3);
+  }
+
+    {
+  angle := 0;
+  stepAngle := (2.0 * PI) / trunc64(slices);
+
+  shp.Vertices.Add(0, 0);
+  shp.TexCoords.Add(0.5, 0.5);
+  for i := 0 to trunc64(slices)+1 do
+  begin
+    x := cos(angle);
+    y := sin(angle);
+    shp.Vertices.Add(x, y);
+    shp.TexCoords.Add((x + 1) * 0.5, (y + 1) * 0.5);
+    if i > 0 then
+      shp.VertexIndices.Add(0, i-1, i);
+    angle := angle + stepAngle;
+  end; 
+  }
+
+function HUDShapeRectangleCreate(w, h, parent: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  if not (parent = 0) then
+    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    shp := TGLHUDShape.CreateAsChild(scene.Objects);
+  shp.SetSize(trunc64(w), trunc64(h));
+  shp.ShapeType := hstRectangle;
+  result := Integer(shp);
+end;
+
+function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+  i: Integer;
+  angle, stepAngle, x, y: Single;
+begin
+  if not (parent = 0) then
+    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    shp := TGLHUDShape.CreateAsChild(scene.Objects);
+  shp.SetSize(trunc64(radius * 2), trunc64(radius * 2));
+  shp.ShapeType := hstCircle;
+  shp.NumSlices := trunc64(slices);
+  shp.StartAngle := startAng;
+  shp.EndAngle := endAng;
+  result := Integer(shp);
+end;
+
+function HUDShapeSetColor(shape, col, alpha: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.Color.AsWinColor := TColor(trunc64(col));
+  shp.Color.Alpha := alpha;
+  result := 1;
+end;
+
+function HUDShapeCircleSetRadius(shape, radius: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.SetSize(trunc64(radius * 2), trunc64(radius * 2));
+  result := 1;
+end;
+
+function HUDShapeCircleSetSlices(shape, slices: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.NumSlices := trunc64(slices);
+  result := 1;
+end;
+
+function HUDShapeCircleSetAngles(shape, startAng, endAng: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.StartAngle := startAng;
+  shp.EndAngle := endAng;
+  result := 1;
 end;
 
 exports
@@ -610,6 +714,11 @@ HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
+
+//HUDShapes
+HUDShapeRectangleCreate, HUDShapeCircleCreate,
+HUDShapeSetColor,
+HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
     
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
