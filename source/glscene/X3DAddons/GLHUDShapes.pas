@@ -180,6 +180,7 @@ begin
     glPushAttrib(GL_ENABLE_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
+    glDisable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthMask(False);
@@ -233,6 +234,7 @@ begin
       begin
         if ((FVertexIndices.Count mod 3) = 0) then
         begin
+          glScalef(1.0, -1.0, 1.0);
           c := Round(FVertexIndices.Count / 3);
           for i:=0 to c-1 do
           begin

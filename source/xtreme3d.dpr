@@ -634,6 +634,28 @@ begin
   result := Integer(shp);
 end;
 
+function HUDShapeMeshCreate(parent: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  if not (parent = 0) then
+    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    shp := TGLHUDShape.CreateAsChild(scene.Objects);
+  shp.SetSize(1, 1);
+  shp.ShapeType := hstMesh;
+  result := Integer(shp);
+end;
+
+function HUDShapeSetRotation(shape, angle: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.Rotation := angle;
+  result := 1;
+end;
+
 function HUDShapeSetColor(shape, col, alpha: real): real; stdcall;
 var
   shp: TGLHUDShape;
@@ -670,6 +692,45 @@ begin
   shp.StartAngle := startAng;
   shp.EndAngle := endAng;
   result := 1;
+end;
+
+function HUDShapeMeshAddVertex(shape, x, y, u, v: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.Vertices.Add(x, y);
+  shp.TexCoords.Add(u, v);
+  result := shp.Vertices.Count - 1;
+end;
+
+function HUDShapeMeshAddTriangle(shape, v1, v2, v3: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.VertexIndices.Add(trunc64(v1), trunc64(v2), trunc64(v3));
+  result := shp.VertexIndices.Count - 1;
+end;
+
+function HUDShapeMeshSetVertex(shape, index, x, y: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.Vertices.List[trunc64(index)][0] := x;
+  shp.Vertices.List[trunc64(index)][1] := y;
+  result := 1.0;
+end;
+
+function HUDShapeMeshSetTexCoord(shape, index, u, v: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.TexCoords.List[trunc64(index)][0] := u;
+  shp.TexCoords.List[trunc64(index)][1] := v;
+  result := 1.0;
 end;
 
 exports
@@ -716,9 +777,11 @@ SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
 
 //HUDShapes
-HUDShapeRectangleCreate, HUDShapeCircleCreate,
-HUDShapeSetColor,
+HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeMeshCreate,
+HUDShapeSetRotation, HUDShapeSetColor,
 HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
+HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
+HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
     
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
