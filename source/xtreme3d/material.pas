@@ -395,8 +395,8 @@ var
   mat2:TGLLibMaterial;
   item:TGLTextureExItem;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat2:=matlib.Materials.GetLibMaterialByName(tex);
+  mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat2:=matlib.Materials.GetLibMaterialByName(String(tex));
   item := mat.Material.TextureEx.Add;
   item.Texture := mat2.Material.Texture;
   result:=1;
@@ -488,6 +488,25 @@ begin
   result:=1;
 end;
 
+function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  result := 0;
+  if mat.Material.Texture <> nil then
+    result := mat.Material.Texture.Image.Width;
+end;
+
+function MaterialGetTextureHeight(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  result := 0;
+  if mat.Material.Texture <> nil then
+    result := mat.Material.Texture.Image.Height;
+end;
 
 function MaterialNoiseCreate(mtrl:pchar): real; stdcall;
 var

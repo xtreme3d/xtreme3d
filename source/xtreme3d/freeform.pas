@@ -514,23 +514,13 @@ begin
   result := 1.0;
 end;
 
-function GLSLShaderSetParameterSecondTexture(par: real; mtrl: pchar; texUnit: real): real; stdcall;
+function FreeformSave(ff: real; filename: pchar): real; stdcall;
 var
-  param: TGLSLShaderParameter;
-  mat: TGLLibMaterial;
-  mat2: TGLLibMaterial;
+  freeform: TGLFreeForm;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
-  param.UniformType := uniformSecondTexture2D;
-  if Length(mtrl) > 0 then
-  begin
-    mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
-    mat2 := matlib.Materials.GetLibMaterialByName(mat.Texture2Name);
-    param.Texture := mat2.Material.Texture;
-  end;
-  param.UniformTexture := trunc64(texUnit);
-  param.Initialized := True;
-  result := 1;
+  freeform := TGLFreeForm(trunc64(ff));
+  freeform.SaveToFile(String(filename));
+  result := 1.0;
 end;
 
 // Unimplemented:

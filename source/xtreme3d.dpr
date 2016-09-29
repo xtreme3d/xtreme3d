@@ -222,6 +222,7 @@ end;
 {$I 'xtreme3d/light'}
 {$I 'xtreme3d/fonttext'}
 {$I 'xtreme3d/sprite'}
+{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
 {$I 'xtreme3d/memviewer'}
 {$I 'xtreme3d/actor'}
@@ -244,6 +245,7 @@ end;
 {$I 'xtreme3d/lines'}
 {$I 'xtreme3d/tree'}
 {$I 'xtreme3d/navigator'}
+{$I 'xtreme3d/movement'}
 {$I 'xtreme3d/dce'}
 {$I 'xtreme3d/fps'}
 {$I 'xtreme3d/mirror'}
@@ -253,485 +255,6 @@ end;
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
-
-function FreeformSave(ff: real; filename: pchar): real; stdcall;
-var
-  freeform: TGLFreeForm;
-begin
-  freeform := TGLFreeForm(trunc64(ff));
-  freeform.SaveToFile(String(filename));
-  result := 1.0;
-end;
-
-function OdeRagdollCreate(actor: real): real; stdcall;
-var
-  act: TGLActor;
-  ragdoll: TODERagdoll;
-begin
-  act := TGLActor(trunc64(actor));
-  ragdoll := TODERagdoll.Create(act);
-  ragdoll.ODEWorld := odeRagdollWorld;
-  ragdoll.GLSceneRoot := scene.Objects;
-  ragdoll.ShowBoundingBoxes := False;
-  result := Integer(ragdoll);
-end;
-
-function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; stdcall;
-var
-  hjoint: TODERagdollHingeJoint;
-begin
-  hjoint := TODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
-  result := Integer(hjoint);
-end;
-
-function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; stdcall;
-var
-  ujoint: TODERagdollUniversalJoint;
-begin
-  ujoint := TODERagdollUniversalJoint.Create(
-    AffineVectorMake(x1, y1, z1), lostop1, histop1,
-    AffineVectorMake(x2, y2, z2), lostop2, histop2);
-  result := Integer(ujoint);
-end;
-
-function OdeRagdollDummyJointCreate: real; stdcall;
-var
-  djoint: TODERagdollDummyJoint;
-begin
-  djoint := TODERagdollDummyJoint.Create;
-  result := Integer(djoint);
-end;
-
-function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; stdcall;
-var
-  ragdoll: TODERagdoll;
-  bone: TODERagdollBone;
-begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  if not (parentbone = 0) then
-    bone := TODERagdollBone.CreateOwned(TODERagdollBone(trunc64(parentbone)))
-  else
-  begin
-    bone := TODERagdollBone.Create(ragdoll);
-    ragdoll.SetRootBone(bone);
-  end;
-  bone.Joint := TGLRagdolJoint(trunc64(ragjoint));
-  bone.BoneID := trunc64(boneid);
-  //bone.Name := IntToStr(bone.BoneID);
-  result := Integer(bone);
-end;
-
-function OdeRagdollBuild(rag: real): real; stdcall;
-var
-  ragdoll: TODERagdoll;
-begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  ragdoll.BuildRagdoll;
-  result := 1.0;
-end;
-
-function OdeRagdollEnable(rag, mode: real): real; stdcall;
-var
-  ragdoll: TODERagdoll;
-begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  if (Boolean(trunc64(mode))) then
-    ragdoll.Start
-  else
-    ragdoll.Stop;
-  result := 1.0;
-end;
-
-function OdeRagdollUpdate(rag: real): real; stdcall;
-var
-  ragdoll: TODERagdoll;
-begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  ragdoll.Update;
-  result := 1.0;
-end;
-
-// Movement
-
-function MovementCreate(obj: real): real; stdcall;
-var
-  ob: TGLBaseSceneObject;
-  mov: TGLMovement;
-begin
-  ob := TGLBaseSceneObject(trunc64(obj));
-  mov := GetOrCreateMovement(ob);
-  result := Integer(mov);
-end;
-
-function MovementStart(movement: real): real; stdcall;
-var
-  mov: TGLMovement;
-begin
-  mov := TGLMovement(trunc64(movement));
-  mov.StartPathTravel;
-  result := 1.0;
-end;
-
-function MovementStop(movement: real): real; stdcall;
-var
-  mov: TGLMovement;
-begin
-  mov := TGLMovement(trunc64(movement));
-  mov.StopPathTravel;
-  result := 1.0;
-end;
-
-// Switches to next movement when the current will end
-// and continues moving. Movement will stop when no more paths left
-function MovementAutoStartNextPath(movement, mode: real): real; stdcall;
-var
-  mov: TGLMovement;
-begin
-  mov := TGLMovement(trunc64(movement));
-  mov.AutoStartNextPath := Boolean(trunc64(mode));
-  result := 1.0;
-end;
-
-function MovementAddPath(movement: real): real; stdcall;
-var
-  mov: TGLMovement;
-  path: TGLMovementPath;
-begin
-  mov := TGLMovement(trunc64(movement));
-  path := mov.AddPath;
-  result := Integer(path);
-end;
-
-// After switching active path, MovementStart should be called
-// to start movement
-function MovementSetActivePath(movement,ind: real): real; stdcall;
-var
-  mov: TGLMovement;
-begin
-  mov := TGLMovement(trunc64(movement));
-  mov.ActivePathIndex := trunc64(ind);
-  result := 1.0;
-end;
-
-function MovementPathSetSplineMode(path, lsm: real): real; stdcall;
-var
-  mpath: TGLMovementPath;
-begin
-  mpath := TGLMovementPath(trunc64(path));
-  if lsm = 0 then mpath.PathSplineMode := lsmLines;
-  if lsm = 1 then mpath.PathSplineMode := lsmCubicSpline; // default mode
-  if lsm = 2 then mpath.PathSplineMode := lsmBezierSpline;
-  if lsm = 3 then mpath.PathSplineMode := lsmNURBSCurve;
-  if lsm = 4 then mpath.PathSplineMode := lsmSegments;
-  result := 1.0;
-end;
-
-function MovementPathAddNode(path: real): real; stdcall;
-var
-  mpath: TGLMovementPath;
-  node: TGLPathNode;
-begin
-  mpath := TGLMovementPath(trunc64(path));
-  node := mpath.AddNode;
-  node.Speed := 1.0;
-  result := Integer(node);
-end;
-
-function MovementPathNodeSetPosition(node, x, y, z: real): real; stdcall;
-var
-  pnode: TGLPathNode;
-begin
-  pnode := TGLPathNode(trunc64(node));
-  pnode.X := x;
-  pnode.Y := y;
-  pnode.Z := z;
-  result := 1.0;
-end;
-
-function MovementPathNodeSetRotation(node, x, y, z: real): real; stdcall;
-var
-  pnode: TGLPathNode;
-begin
-  pnode := TGLPathNode(trunc64(node));
-  pnode.PitchAngle := x;
-  pnode.TurnAngle := y;
-  pnode.RollAngle := z;
-  result := 1.0;
-end;
-
-function MovementPathNodeSetSpeed(node, speed: real): real; stdcall;
-var
-  pnode: TGLPathNode;
-begin
-  pnode := TGLPathNode(trunc64(node));
-  pnode.Speed := speed;
-  result := 1.0;
-end;
-
-// Extended sprite functions
-
-function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
-var
-  spr: TGLSprite;
-begin
-  if not (parent=0) then
-    spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    spr:=TGLSprite.CreateAsChild(scene.Objects);
-  spr.SetSize(trunc64(w),trunc64(h));
-  spr.Material.MaterialLibrary:=matlib;
-  spr.Material.LibMaterialName:=mtrl;
-  spr.UVLeft := left;
-  spr.UVTop := 1.0 - bottom;
-  spr.UVRight := right;
-  spr.UVBottom := 1.0 - top;
-  result := Integer(spr);
-end;
-
-function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
-var
-  spr: TGLHUDSprite;
-begin
-  if not (parent=0) then
-    spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    spr:=TGLHUDSprite.CreateAsChild(scene.Objects);
-  spr.SetSize(trunc64(w),trunc64(h));
-  spr.Material.MaterialLibrary:=matlib;
-  spr.Material.LibMaterialName:=mtrl;
-  spr.UVLeft := left;
-  spr.UVTop := 1.0 - bottom;
-  spr.UVRight := right;
-  spr.UVBottom := 1.0 - top;
-  result:= Integer(spr);
-end;
-
-function SpriteSetBounds(sprite, left, top, right, bottom: real): real; stdcall;
-var
-  spr: TGLSprite;
-  tw, th: Single;
-  mat: TGLLibMaterial;
-begin
-  spr := TGLSprite(trunc64(sprite));
-  mat:=spr.Material.MaterialLibrary.Materials.GetLibMaterialByName(spr.Material.LibMaterialName);
-  if mat.Material.Texture <> nil then
-  begin
-    tw := mat.Material.Texture.Image.Width;
-    th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left / tw;
-    spr.UVTop := (th - bottom) / th; 
-    spr.UVRight := right / tw;
-    spr.UVBottom := (th - top) / th;
-  end;
-  result := 1;
-end;
-
-function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; stdcall;
-var
-  spr: TGLSprite;
-begin
-  spr := TGLSprite(trunc64(sprite));
-  spr.UVLeft := left;
-  spr.UVTop := 1.0 - bottom;
-  spr.UVRight := right;
-  spr.UVBottom := 1.0 - top;
-  result := 1;
-end;
-
-function SpriteSetOrigin(sprite, x, y: real): real; stdcall;
-var
-  spr: TGLSprite;
-begin
-  spr := TGLSprite(trunc64(sprite));
-  spr.OriginX := x;
-  spr.OriginY := y;
-  result := 1;
-end;
-
-// New Material functions
-
-function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
-var
-  mat: TGLLibMaterial;
-begin
-  mat := matlib.Materials.GetLibMaterialByName(mtrl);
-  result := 0;
-  if mat.Material.Texture <> nil then
-    result := mat.Material.Texture.Image.Width;
-end;
-
-function MaterialGetTextureHeight(mtrl: pchar): real; stdcall;
-var
-  mat: TGLLibMaterial;
-begin
-  mat := matlib.Materials.GetLibMaterialByName(mtrl);
-  result := 0;
-  if mat.Material.Texture <> nil then
-    result := mat.Material.Texture.Image.Height;
-end;
-
-// HUDShapes
-
-  {
-  shp.Vertices.Add(-1, -1);
-  shp.Vertices.Add(+1, -1);
-  shp.Vertices.Add(+1, +1);
-  shp.Vertices.Add(-1, +1);
-  shp.TexCoords.Add(0, 0);
-  shp.TexCoords.Add(1, 0);
-  shp.TexCoords.Add(1, 1);
-  shp.TexCoords.Add(0, 1);
-  shp.VertexIndices.Add(0, 1, 2);
-  shp.VertexIndices.Add(0, 2, 3);
-  }
-
-    {
-  angle := 0;
-  stepAngle := (2.0 * PI) / trunc64(slices);
-
-  shp.Vertices.Add(0, 0);
-  shp.TexCoords.Add(0.5, 0.5);
-  for i := 0 to trunc64(slices)+1 do
-  begin
-    x := cos(angle);
-    y := sin(angle);
-    shp.Vertices.Add(x, y);
-    shp.TexCoords.Add((x + 1) * 0.5, (y + 1) * 0.5);
-    if i > 0 then
-      shp.VertexIndices.Add(0, i-1, i);
-    angle := angle + stepAngle;
-  end; 
-  }
-
-function HUDShapeRectangleCreate(w, h, parent: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  if not (parent = 0) then
-    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    shp := TGLHUDShape.CreateAsChild(scene.Objects);
-  shp.SetSize(trunc64(w), trunc64(h));
-  shp.ShapeType := hstRectangle;
-  result := Integer(shp);
-end;
-
-function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-  i: Integer;
-  angle, stepAngle, x, y: Single;
-begin
-  if not (parent = 0) then
-    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    shp := TGLHUDShape.CreateAsChild(scene.Objects);
-  shp.SetSize(trunc64(radius * 2), trunc64(radius * 2));
-  shp.ShapeType := hstCircle;
-  shp.NumSlices := trunc64(slices);
-  shp.StartAngle := startAng;
-  shp.EndAngle := endAng;
-  result := Integer(shp);
-end;
-
-function HUDShapeMeshCreate(parent: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  if not (parent = 0) then
-    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-  else
-    shp := TGLHUDShape.CreateAsChild(scene.Objects);
-  shp.SetSize(1, 1);
-  shp.ShapeType := hstMesh;
-  result := Integer(shp);
-end;
-
-function HUDShapeSetRotation(shape, angle: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.Rotation := angle;
-  result := 1;
-end;
-
-function HUDShapeSetColor(shape, col, alpha: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.Color.AsWinColor := TColor(trunc64(col));
-  shp.Color.Alpha := alpha;
-  result := 1;
-end;
-
-function HUDShapeCircleSetRadius(shape, radius: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.SetSize(trunc64(radius * 2), trunc64(radius * 2));
-  result := 1;
-end;
-
-function HUDShapeCircleSetSlices(shape, slices: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.NumSlices := trunc64(slices);
-  result := 1;
-end;
-
-function HUDShapeCircleSetAngles(shape, startAng, endAng: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.StartAngle := startAng;
-  shp.EndAngle := endAng;
-  result := 1;
-end;
-
-function HUDShapeMeshAddVertex(shape, x, y, u, v: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.Vertices.Add(x, y);
-  shp.TexCoords.Add(u, v);
-  result := shp.Vertices.Count - 1;
-end;
-
-function HUDShapeMeshAddTriangle(shape, v1, v2, v3: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.VertexIndices.Add(trunc64(v1), trunc64(v2), trunc64(v3));
-  result := shp.VertexIndices.Count - 1;
-end;
-
-function HUDShapeMeshSetVertex(shape, index, x, y: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.Vertices.List[trunc64(index)][0] := x;
-  shp.Vertices.List[trunc64(index)][1] := y;
-  result := 1.0;
-end;
-
-function HUDShapeMeshSetTexCoord(shape, index, u, v: real): real; stdcall;
-var
-  shp: TGLHUDShape;
-begin
-  shp := TGLHUDShape(trunc64(shape));
-  shp.TexCoords.List[trunc64(index)][0] := u;
-  shp.TexCoords.List[trunc64(index)][1] := v;
-  result := 1.0;
-end;
 
 exports
 
@@ -775,14 +298,13 @@ HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
-
 //HUDShapes
 HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeMeshCreate,
 HUDShapeSetRotation, HUDShapeSetColor,
+HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
 HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
 HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
 HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
-    
 //Primitives
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
 CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
@@ -817,10 +339,8 @@ FreeformSphereSweepIntersect, FreeformPointInMesh,
 FreeformToFreeforms,
 FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
 FreeformSave,
-
 FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
-
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
@@ -1045,7 +565,6 @@ OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSli
 OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
 OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
 OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
-
 OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
 OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
 OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate;

@@ -85,3 +85,81 @@ begin
   GLSprite1.NoZWrite:=boolean(trunc64(mode));
   result:=1;
 end;
+
+function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  if not (parent=0) then
+    spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    spr:=TGLSprite.CreateAsChild(scene.Objects);
+  spr.SetSize(trunc64(w),trunc64(h));
+  spr.Material.MaterialLibrary:=matlib;
+  spr.Material.LibMaterialName:=mtrl;
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
+  result := Integer(spr);
+end;
+
+function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+var
+  spr: TGLHUDSprite;
+begin
+  if not (parent=0) then
+    spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    spr:=TGLHUDSprite.CreateAsChild(scene.Objects);
+  spr.SetSize(trunc64(w),trunc64(h));
+  spr.Material.MaterialLibrary:=matlib;
+  spr.Material.LibMaterialName:=mtrl;
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
+  result:= Integer(spr);
+end;
+
+function SpriteSetBounds(sprite, left, top, right, bottom: real): real; stdcall;
+var
+  spr: TGLSprite;
+  tw, th: Single;
+  mat: TGLLibMaterial;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  mat:=spr.Material.MaterialLibrary.Materials.GetLibMaterialByName(spr.Material.LibMaterialName);
+  if mat.Material.Texture <> nil then
+  begin
+    tw := mat.Material.Texture.Image.Width;
+    th := mat.Material.Texture.Image.Height;
+    spr.UVLeft := left / tw;
+    spr.UVTop := (th - bottom) / th; 
+    spr.UVRight := right / tw;
+    spr.UVBottom := (th - top) / th;
+  end;
+  result := 1;
+end;
+
+function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  spr.UVLeft := left;
+  spr.UVTop := 1.0 - bottom;
+  spr.UVRight := right;
+  spr.UVBottom := 1.0 - top;
+  result := 1;
+end;
+
+function SpriteSetOrigin(sprite, x, y: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  spr.OriginX := x;
+  spr.OriginY := y;
+  result := 1;
+end;

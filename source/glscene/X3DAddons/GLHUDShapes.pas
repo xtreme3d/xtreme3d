@@ -234,6 +234,7 @@ begin
       begin
         if ((FVertexIndices.Count mod 3) = 0) then
         begin
+          glMatrixMode(GL_MODELVIEW);
           glScalef(1.0, -1.0, 1.0);
           c := Round(FVertexIndices.Count / 3);
           for i:=0 to c-1 do
@@ -270,6 +271,7 @@ begin
     // restore state
     glDepthMask(True);
     glPopAttrib;
+    glMatrixMode(GL_PROJECTION);
     glPopMatrix;
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix;
