@@ -5,6 +5,7 @@ v3.1.0 (by Gecko) - 29/09/2016
 * HUDShapes: rectangle, circle, line, and custom 2D mesh
 * Improved Sprite API, added texture atlases support
 * Functions to query Material's texture size
+* Alpha channel support for PNG
 
 v3.1.0-beta (by Gecko) - 20/09/2016
 -----------------------------------
