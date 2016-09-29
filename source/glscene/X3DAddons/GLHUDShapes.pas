@@ -11,36 +11,33 @@ uses Classes, VectorGeometry, GLScene, GLTexture, GLMisc, OpenGL1x, SysUtils,
 
 type
 
-  THUDShapeType = (hstRectangle, hstCircle, hstMesh);
+  THUDShapeType = (hstRectangle, hstCircle, hstLine, hstMesh);
 
 	TGLHUDShape = class(TGLSceneObject)
 		private
 		  FWidth: TGLFloat;
 		  FHeight: TGLFloat;
 		  FRotation: TGLFloat;
-      FUVTop: TGLFloat;
-      FUVLeft: TGLFloat;
-      FUVBottom: TGLFloat;
-      FUVRight: TGLFloat;
       FOriginX: TGLFloat;
       FOriginY: TGLFloat;
-      FXTiles, FYTiles: Integer;
       FVertices: TAffineVectorList;
       FTexCoords: TAffineVectorList;
       FVertexIndices: TIntegerList;
       FShapeType: THUDShapeType;
-
       FNumSlices: Integer;
       FStartAngle: Single;
       FEndAngle: Single;
+      FPoint1X: Single;
+      FPoint1Y: Single;
+      FPoint2X: Single;
+      FPoint2Y: Single;
+      FLineWidth: Single;
       FColor: TGLColor;
 
 		protected
 		  procedure SetWidth(const val: TGLFloat);
       procedure SetHeight(const val: TGLFloat);
       procedure SetRotation(const val: TGLFloat);
-      procedure SetXTiles(const val: Integer);
-      procedure SetYTiles(const val: Integer);
       procedure SetVertices(const val: TAffineVectorList);
       procedure SetTexCoords(const val: TAffineVectorList);
       procedure SetVertexIndices(const val: TIntegerList);
@@ -51,12 +48,10 @@ type
       destructor Destroy; override;
 
 			procedure Assign(Source: TPersistent); override;
-			//procedure BuildList(var rci: TRenderContextInfo); override;
       procedure DoRender(var rci: TRenderContextInfo; renderSelf, renderChildren: Boolean); override;
       function AxisAlignedDimensionsUnscaled: TVector; override;
 
 			procedure SetSize(const width, height: TGLFloat);
-			//: Set width and height to "size"
 			procedure SetSquareSize(const size : TGLFloat);
 
 		published
@@ -65,23 +60,24 @@ type
 			property Height: TGLFloat read FHeight write SetHeight;
       property Rotation: TGLFloat read FRotation write SetRotation;
 
-      property UVTop: TGLFloat read FUVTop write FUVTop;
-      property UVLeft: TGLFloat read FUVLeft write FUVLeft;
-      property UVBottom: TGLFloat read FUVBottom write FUVBottom;
-      property UVRight: TGLFloat read FUVRight write FUVRight;
       property OriginX: TGLFloat read FOriginX write FOriginX;
       property OriginY: TGLFloat read FOriginY write FOriginY;
 
-      property XTiles: Integer read FXTiles write SetXTiles default 1;
-      property YTiles: Integer read FYTiles write SetYTiles default 1;
       property Vertices: TAffineVectorList read FVertices write SetVertices;
       property TexCoords: TAffineVectorList read FTexCoords write SetTexCoords;
       property VertexIndices: TIntegerList read FVertexIndices write SetVertexIndices;
 
       property ShapeType: THUDShapeType read FShapeType write FShapeType;
+      
       property NumSlices: Integer read FNumSlices write FNumSlices;
       property StartAngle: Single read FStartAngle write FStartAngle;
       property EndAngle: Single read FEndAngle write FEndAngle;
+
+      property Point1X: Single read FPoint1X write FPoint1X;
+      property Point1Y: Single read FPoint1Y write FPoint1Y;
+      property Point2X: Single read FPoint2X write FPoint2X;
+      property Point2Y: Single read FPoint2Y write FPoint2Y;
+      property LineWidth: Single read FLineWidth write FLineWidth;
 
       property Color: TGLColor read FColor write FColor;
 	end;
@@ -94,16 +90,10 @@ constructor TGLHUDShape.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   ObjectStyle := ObjectStyle + [osDirectDraw, osNoVisibilityCulling];
-  FWidth := 16;
-  FHeight := 16;
-  FUVTop := 0;
-  FUVLeft := 0;
-  FUVBottom := 1;
-  FUVRight := 1;
+  FWidth := 2;
+  FHeight := 2;
   FOriginX := 0.0;
   FOriginY := 0.0;
-  FXTiles := 1;
-  FYTiles := 1;
   FVertices := TAffineVectorList.Create;
   FTexCoords := TAffineVectorList.Create;
   FVertexIndices := TIntegerList.Create;
@@ -111,6 +101,11 @@ begin
   FNumSlices := 16;
   FStartAngle := 0;
   FEndAngle := 360;
+  FPoint1X := 0;
+  FPoint1Y := 0;
+  FPoint2X := 0;
+  FPoint2Y := 0;
+  FLineWidth := 1;
   Color := TGLColor.Create(Self);
   Color.SetColor(1, 1, 1, 1);
 end;
@@ -130,14 +125,20 @@ begin
     FWidth := TGLHUDShape(Source).FWidth;
     FHeight := TGLHUDShape(Source).FHeight;
     FRotation := TGLHUDShape(Source).FRotation;
-    FUVTop := TGLHUDShape(Source).FUVTop;
-    FUVLeft := TGLHUDShape(Source).FUVLeft;
-    FUVBottom := TGLHUDShape(Source).FUVBottom;
-    FUVRight := TGLHUDShape(Source).FUVRight;
     FOriginX := TGLHUDShape(Source).FOriginX;
     FOriginY := TGLHUDShape(Source).FOriginY;
-    FXTiles := TGLHUDShape(Source).FXTiles;
-    FYTiles := TGLHUDShape(Source).FYTiles;
+    FVertices.Assign(TGLHUDShape(Source).FVertices);
+    FTexCoords.Assign(TGLHUDShape(Source).FTexCoords);
+    FVertexIndices.Assign(TGLHUDShape(Source).FVertexIndices);
+    FShapeType := TGLHUDShape(Source).FShapeType;
+    FNumSlices := TGLHUDShape(Source).FNumSlices;
+    FStartAngle := TGLHUDShape(Source).FStartAngle;
+    FEndAngle := TGLHUDShape(Source).FEndAngle;
+    FPoint1X := TGLHUDShape(Source).FPoint1X;
+    FPoint1Y := TGLHUDShape(Source).FPoint1Y;
+    FPoint2X := TGLHUDShape(Source).FPoint2X;
+    FPoint2Y := TGLHUDShape(Source).FPoint2Y;
+    FLineWidth := TGLHUDShape(Source).FLineWidth;
   end;
   inherited Assign(Source);
 end;
@@ -227,6 +228,16 @@ begin
         end;
         glEnd();
       end;
+    end
+    else if FShapeType = hstLine then
+    begin
+      glMatrixMode(GL_MODELVIEW);
+      glScalef(1.0, -1.0, 1.0);
+      glLineWidth(FLineWidth);
+      glBegin(GL_LINES);
+        glVertex2f(Point1X, Point1Y);
+        glVertex2f(Point2X, Point2Y);
+      glEnd();
     end
     else if FShapeType = hstMesh then
     begin
@@ -326,26 +337,6 @@ begin
 	FWidth:=size;
 	FHeight:=size;
    NotifyChange(Self);
-end;
-
-// SetXTiles
-//
-procedure TGLHUDShape.SetXTiles(const val : Integer);
-begin
-   if val<>FXTiles then begin
-      FXTiles:=val;
-      StructureChanged;
-   end;
-end;
-
-// SetYTiles
-//
-procedure TGLHUDShape.SetYTiles(const val : Integer);
-begin
-   if val<>FYTiles then begin
-      FYTiles:=val;
-      StructureChanged;
-   end;
 end;
 
 procedure TGLHUDShape.SetVertices(const val : TAffineVectorList);

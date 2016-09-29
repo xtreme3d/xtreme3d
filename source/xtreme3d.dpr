@@ -299,10 +299,11 @@ SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
 //HUDShapes
-HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeMeshCreate,
+HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
 HUDShapeSetRotation, HUDShapeSetColor,
 HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
 HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
+HUDShapeLineSetPoints, HUDShapeLineSetWidth,
 HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
 HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
 //Primitives

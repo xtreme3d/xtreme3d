@@ -30,6 +30,23 @@ begin
   result := Integer(shp);
 end;
 
+function HUDShapeLineCreate(x1, y1, x2, y2, parent: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  if not (parent = 0) then
+    shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    shp := TGLHUDShape.CreateAsChild(scene.Objects);
+  shp.Point1X := x1;
+  shp.Point1Y := y1;
+  shp.Point2X := x2;
+  shp.Point2Y := y2;
+  shp.SetSize(2, 2);
+  shp.ShapeType := hstLine;
+  result := Integer(shp);
+end;
+
 function HUDShapeMeshCreate(parent: real): real; stdcall;
 var
   shp: TGLHUDShape;
@@ -129,6 +146,27 @@ begin
   shp := TGLHUDShape(trunc64(shape));
   shp.StartAngle := startAng;
   shp.EndAngle := endAng;
+  result := 1;
+end;
+
+function HUDShapeLineSetPoints(shape, x1, y1, x2, y2: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.Point1X := x1;
+  shp.Point1Y := y1;
+  shp.Point2X := x2;
+  shp.Point2Y := y2;
+  result := 1;
+end;
+
+function HUDShapeLineSetWidth(shape, w: real): real; stdcall;
+var
+  shp: TGLHUDShape;
+begin
+  shp := TGLHUDShape(trunc64(shape));
+  shp.LineWidth := w;
   result := 1;
 end;
 
