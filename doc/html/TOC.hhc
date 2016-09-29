@@ -170,6 +170,10 @@
   <PARAM name="Local" value="functions/sprite.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="HUDShape">
+  <PARAM name="Local" value="functions/hudshape.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Primitives">
   <PARAM name="Local" value="functions/primitives.htm">
  </OBJECT>

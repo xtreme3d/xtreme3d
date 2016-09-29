@@ -18,6 +18,7 @@
 <A class=funclink href=funclist.htm#Blitz3D>Blitz3D</A><A> | </A>
 <A class=funclink href=funclist.htm#FontText>Font & Text</A><A> | </A>
 <A class=funclink href=funclist.htm#Sprite>Sprite</A><A> | </A>
+<A class=funclink href=funclist.htm#HUDShape>HUDShape</A><A> | </A>
 <A class=funclink href=funclist.htm#Primitives>Primitives</A><A> | </A>
 <A class=funclink href=funclist.htm#Actor>Actor</A><A> | </A>
 <A class=funclink href=funclist.htm#Freeform>Freeform</A><A> | </A>
@@ -201,18 +202,41 @@
 <A name="Sprite"></A>
 <H1 class=name>Sprite</H1>
 <A class=funclink href=sprite.htm#HUDSpriteCreate>HUDSpriteCreate</A><A>(material,width,height,parent)</A>
-<BR><A class=funclink href=sprite.htm#HUDSpriteCreateEx>HUDSpriteCreateEx</A><A>(material,width,height,left,top,right,bottom,parent)</A>
+<BR><A class=funclink href=sprite.htm#HUDSpriteCreateEx>HUDSpriteCreateEx</A><A>(width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteCreate>SpriteCreate</A><A>(material,width,height,parent)</A>
-<BR><A class=funclink href=sprite.htm#SpriteCreateEx>SpriteCreateEx</A><A>(material,width,height,left,top,right,bottom,parent)</A>
+<BR><A class=funclink href=sprite.htm#SpriteCreateEx>SpriteCreateEx</A><A>(width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetSize>SpriteSetSize</A><A>(sprite,width,height)</A>
 <BR><A class=funclink href=sprite.htm#SpriteScale>SpriteScale</A><A>(sprite,u,v)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetRotation>SpriteSetRotation</A><A>(sprite,angle)</A>
 <BR><A class=funclink href=sprite.htm#SpriteRotate>SpriteRotate</A><A>(sprite,angle)</A>
-<BR><A class=funclink href=sprite.htm#SpriteMirror>SpriteMirror</A><A>(sprite,u,v)</A>
+<BR><A class=funclink href=sprite.htm#SpriteMirror>SpriteMirror</A><A>(sprite,hscale,vscale)</A>
 <BR><A class=funclink href=sprite.htm#SpriteNoZWrite>SpriteNoZWrite</A><A>(sprite,mode)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetBounds>SpriteSetBounds</A><A>(sprite,left,top,right,bottom)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetBoundsUV>SpriteSetBoundsUV</A><A>(sprite,left,top,right,bottom)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetOrigin>SpriteSetOrigin</A><A>(sprite,x,y)</A>
+<BR>
+<BR>
+<A name="HUDShape"></A>
+<H1 class=name>HUDShape</H1>
+<A class=funclink href=hudshape.htm#HUDShapeRectangleCreate>HUDShapeRectangleCreate</A><A>(width,height,parent)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeCircleCreate>HUDShapeCircleCreate</A><A>(radius,slices,startAngle,endAngle,parent)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeLineCreate>HUDShapeLineCreate</A><A>(x1,y1,x2,y2,parent)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeMeshCreate>HUDShapeMeshCreate</A><A>(parent)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeSetSize>HUDShapeSetSize</A><A>(shape,width,height)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeScale>HUDShapeScale</A><A>(shape,hscale,vscale)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeSetRotation>HUDShapeSetRotation</A><A>(shape,angle)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeRotate>HUDShapeRotate</A><A>(shape,angle)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeSetColor>HUDShapeSetColor</A><A>(shape,color,alpha)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeSetOrigin>HUDShapeSetOrigin</A><A>(shape,x,y)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeCircleSetRadius>HUDShapeCircleSetRadius</A><A>(shape,radius)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeCircleSetSlices>HUDShapeCircleSetSlices</A><A>(shape,slices)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeCircleSetAngles>HUDShapeCircleSetAngles</A><A>(shape,startAngle,endAngle)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeLineSetPoints>HUDShapeLineSetPoints</A><A>(shape,x1,y1,x2,y2)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeLineSetWidth>HUDShapeLineSetWidth</A><A>(shape,width)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeMeshAddVertex>HUDShapeMeshAddVertex</A><A>(shape,x,y,u,v)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeMeshAddTriangle>HUDShapeMeshAddTriangle</A><A>(shape,v1,v2,v3)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeMeshSetVertex>HUDShapeMeshSetVertex</A><A>(shape,index,x,y)</A>
+<BR><A class=funclink href=hudshape.htm#HUDShapeMeshSetTexCoord>HUDShapeMeshSetTexCoord</A><A>(shape,index,u,v)</A>
 <BR>
 <BR>
 <A name="Primitives"></A>

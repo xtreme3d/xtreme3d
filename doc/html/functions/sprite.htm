@@ -26,11 +26,11 @@
 <BR><A>parent - id родителя для спрайта (0 - отсутствие родителя).</A>
 <HR>
 
-<A name="HUDSpriteCreate"></A>
+<A name="HUDSpriteCreateEx"></A>
 <H1 class=name>HUDSpriteCreateEx</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDSpriteCreateEx</A><A>( material as </A><A class=type>string</A><A>, width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
-<BR><A>Создает новый экранный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.</A>
-<BR><A>material - имя материала</A>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteCreateEx</A><A>( width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый экранный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.
+<BR>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
 <BR><A>width,height - ширина и высота спрайта в пикселях</A>
 <BR><A>left,top - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
 <BR><A>right,bottom - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
@@ -48,9 +48,9 @@
 
 <A name="SpriteCreateEx"></A>
 <H1 class=name>SpriteCreateEx</H1>
-<A class=type>real</A><A> = </A><A class=function>SpriteCreateEx</A><A>( material as </A><A class=type>string</A><A>, width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
-<BR><A>Создает новый пространственный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.</A>
-<BR><A>material - имя материала</A>
+<A class=type>real</A><A> = </A><A class=function>SpriteCreateEx</A><A>( width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый пространственный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.
+<BR>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
 <BR><A>width,height - ширина и высота спрайта в единицах координатной системы</A>
 <BR><A>left,top - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
 <BR><A>right,bottom - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
@@ -67,10 +67,10 @@
 
 <A name="SpriteScale"></A>
 <H1 class=name>SpriteScale</H1>
-<A class=type>real</A><A> = </A><A class=function>SpriteScale</A><A>( sprite,u,v as </A><A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>SpriteScale</A><A>( sprite,hscale,vscale as </A><A class=type>real</A><A> );</A>
 <BR><A>Изменяет размер спрайта относительно текущего размера.</A>
 <BR><A>sprite - id спрайта</A>
-<BR><A>u,v - добавляются к текущим значениям ширины и высоты.</A>
+<BR><A>hscale,vscale - добавляются к текущим значениям ширины и высоты.</A>
 <HR>
 
 <A name="SpriteSetRotation"></A>

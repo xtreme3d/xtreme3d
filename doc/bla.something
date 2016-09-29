@@ -202,6 +202,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="HUDShape">
+                        <param name="Local" value="functions/hudshape.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Primitives">
                         <param name="Local" value="functions/primitives.htm">
                         <param name="ImageNumber" value="0">
