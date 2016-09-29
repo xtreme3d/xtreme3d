@@ -1,7 +1,13 @@
 Xtreme3D version history
-------------------------
-v3.1.0-beta (by Gecko) - 20/09/2016
+========================
+v3.1.0 (by Gecko) - 29/09/2016
+------------------------------
+* HUDShapes: rectangle, circle, line, and custom 2D mesh
+* Improved Sprite API, added texture atlases support
+* Functions to query Material's texture size
 
+v3.1.0-beta (by Gecko) - 20/09/2016
+-----------------------------------
 * Improved Freeform API, added an ability to manually construct Freeforms from vertices and triangles. Freeforms now can be saved to file (GLSM, OBJ, STL, or NMF)
 * New file formats support: CSM and LMTS (these were absent in 3.0), X, ASE, DXS (experimental, without lightmaps for now)
 * Ragdoll support in ODE
@@ -10,7 +16,7 @@ v3.1.0-beta (by Gecko) - 20/09/2016
 * Improved PhongShader, added diffuse texture support
 
 v3.0.0 (by Gecko, Rutraple aka Hacker, Ghost) - 25/08/2016
-
+----------------------------------------------------------
 The library was reimplemented from scratch because of lacking source code for original Xtreme3D from Xception.
 
 * GLSL shaders support
@@ -40,14 +46,14 @@ The library was reimplemented from scratch because of lacking source code for or
 * Text reading function
 
 v2.0.2.0 (by Xception) - 16/02/2007
-
+-----------------------------------
 * New ODE functions
 * New Actor functions
 * Dynamic Collision Engine (DCE)
 * CLOD terrain
 
 v2.0.0.0 (by Xception) - 11/02/2007
-
+-----------------------------------
 * Model/Scene loaders with lightmaps:
   * Blitz3D scene loader(with hierarchy) and special portal/zone culling functions
   * Cartography Shop CSM loader

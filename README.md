@@ -35,8 +35,9 @@ Features
 * Built-in shaders, including cel shader, bump/parallax shader, phong shader, multimaterial shader, etc.
 * Particle system
 * Lensflare effect
+* 2D shapes, including rectangle, circle, line, and custom 2D mesh
 * 2D sprites and text
-* 3D text
+* 3D text and billboards
 * Skyboxes
 * Procedural skydome with sun, stars and day/night cycle
 * Procedural trees
@@ -69,4 +70,3 @@ Xtreme3D 3.x is distributed under GNU Lesser General Public License 2.1. It allo
 GLScene is distributed under Mozilla Public License 1.1. 
 
 ODE is distributed under BSD-style license. 
-
