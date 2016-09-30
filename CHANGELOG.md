@@ -1,6 +1,6 @@
 Xtreme3D version history
 ========================
-v3.1.0 (by Gecko) - 29/09/2016
+v3.1.0 (by Gecko) - 30/09/2016
 ------------------------------
 * HUDShapes: rectangle, circle, line, and custom 2D mesh
 * Improved Sprite API, added texture atlases support

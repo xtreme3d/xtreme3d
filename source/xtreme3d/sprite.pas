@@ -129,15 +129,21 @@ var
   mat: TGLLibMaterial;
 begin
   spr := TGLSprite(trunc64(sprite));
-  mat:=spr.Material.MaterialLibrary.Materials.GetLibMaterialByName(spr.Material.LibMaterialName);
-  if mat.Material.Texture <> nil then
+  mat := spr.Material.MaterialLibrary.LibMaterialByName(spr.Material.LibMaterialName);
+  if mat <> nil then
   begin
-    tw := mat.Material.Texture.Image.Width;
-    th := mat.Material.Texture.Image.Height;
-    spr.UVLeft := left / tw;
-    spr.UVTop := (th - bottom) / th; 
-    spr.UVRight := right / tw;
-    spr.UVBottom := (th - top) / th;
+    if mat.Material.Texture <> nil then
+    begin
+      if mat.Material.Texture.Image.Width > 0 then
+      begin
+        tw := mat.Material.Texture.Image.Width;
+        th := mat.Material.Texture.Image.Height;
+        spr.UVLeft := left / tw;
+        spr.UVTop := (th - bottom) / th; 
+        spr.UVRight := right / tw;
+        spr.UVBottom := (th - top) / th;
+      end;
+    end;
   end;
   result := 1;
 end;

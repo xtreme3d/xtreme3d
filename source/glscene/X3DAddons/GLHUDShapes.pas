@@ -90,8 +90,8 @@ constructor TGLHUDShape.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   ObjectStyle := ObjectStyle + [osDirectDraw, osNoVisibilityCulling];
-  FWidth := 2;
-  FHeight := 2;
+  FWidth := 1; //2;
+  FHeight := 1; //2;
   FOriginX := 0.0;
   FOriginY := 0.0;
   FVertices := TAffineVectorList.Create;
@@ -157,9 +157,21 @@ var
   uv1, uv2, uv3: TAffineVector;
   i, c: Integer;
   angleR, endAngleR, stepAngleR, x, y: Single;
+  mat: TGLLibMaterial;
 begin
   if rci.ignoreMaterials then Exit;
+  
   Material.Apply(rci);
+
+  mat := Material.MaterialLibrary.LibMaterialByName(Material.LibMaterialName);
+
+  if mat <> nil then
+  begin
+    if mat.Material.Texture.Image.Width > 0 then
+      glColor4fv(Color.AsAddress);
+  end
+  else
+    glColor4fv(Color.AsAddress);
 
   repeat
     glMatrixMode(GL_MODELVIEW);
@@ -174,10 +186,12 @@ begin
     if Rotation<>0 then
        glRotatef(Rotation, 0, 0, 1);
     glTranslatef(-OriginX, OriginY, 0.0);
-    glScalef(Width * f * 0.5, Height * f * 0.5, 1.0);
+
     glMatrixMode(GL_PROJECTION);
     glPushMatrix;
     glLoadIdentity;
+    glMatrixMode(GL_MODELVIEW);
+      
     glPushAttrib(GL_ENABLE_BIT);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
@@ -185,10 +199,10 @@ begin
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthMask(False);
-    glColor4fv(Color.AsAddress);
 
     if FShapeType = hstRectangle then
     begin
+      glScalef(Width * f * 0.5, Height * f * 0.5, 1.0);
       glBegin(GL_QUADS);
          glNormal3fv(@YVector);
          xglTexCoord2f(0, 0); glVertex2f(-1, -1);
@@ -204,6 +218,7 @@ begin
         angleR := DegToRad(FStartAngle);
         endAngleR := DegToRad(FEndAngle);
         stepAngleR := (2.0 * PI) / FNumSlices;
+        glScalef(Width * f * 0.5, Height * f * 0.5, 1.0);
         glBegin(GL_TRIANGLE_FAN);
         xglTexCoord2f(0.5, 0.5); glVertex2f(0, 0);
         for i := 0 to FNumSlices+1 do
@@ -231,7 +246,7 @@ begin
     end
     else if FShapeType = hstLine then
     begin
-      glMatrixMode(GL_MODELVIEW);
+      glScalef(Width * f, Height * f, 1.0);
       glScalef(1.0, -1.0, 1.0);
       glLineWidth(FLineWidth);
       glBegin(GL_LINES);
@@ -245,6 +260,7 @@ begin
       begin
         if ((FVertexIndices.Count mod 3) = 0) then
         begin
+          glScalef(Width * f, Height * f, 1.0);
           glMatrixMode(GL_MODELVIEW);
           glScalef(1.0, -1.0, 1.0);
           c := Round(FVertexIndices.Count / 3);

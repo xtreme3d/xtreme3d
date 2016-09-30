@@ -42,7 +42,7 @@ begin
   shp.Point1Y := y1;
   shp.Point2X := x2;
   shp.Point2Y := y2;
-  shp.SetSize(2, 2);
+  shp.SetSize(1, 1);
   shp.ShapeType := hstLine;
   result := Integer(shp);
 end;
