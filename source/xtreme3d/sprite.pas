@@ -86,7 +86,7 @@ begin
   result:=1;
 end;
 
-function SpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+function SpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLSprite;
 begin
@@ -95,8 +95,8 @@ begin
   else
     spr:=TGLSprite.CreateAsChild(scene.Objects);
   spr.SetSize(trunc64(w),trunc64(h));
-  spr.Material.MaterialLibrary:=matlib;
-  spr.Material.LibMaterialName:=mtrl;
+  //spr.Material.MaterialLibrary:=matlib;
+  //spr.Material.LibMaterialName:=mtrl;
   spr.UVLeft := left;
   spr.UVTop := 1.0 - bottom;
   spr.UVRight := right;
@@ -104,7 +104,7 @@ begin
   result := Integer(spr);
 end;
 
-function HUDSpriteCreateEx(mtrl: pchar; w, h, left, top, right, bottom, parent: real): real; stdcall;
+function HUDSpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; stdcall;
 var
   spr: TGLHUDSprite;
 begin
@@ -113,8 +113,8 @@ begin
   else
     spr:=TGLHUDSprite.CreateAsChild(scene.Objects);
   spr.SetSize(trunc64(w),trunc64(h));
-  spr.Material.MaterialLibrary:=matlib;
-  spr.Material.LibMaterialName:=mtrl;
+  //spr.Material.MaterialLibrary:=matlib;
+  //spr.Material.LibMaterialName:=mtrl;
   spr.UVLeft := left;
   spr.UVTop := 1.0 - bottom;
   spr.UVRight := right;

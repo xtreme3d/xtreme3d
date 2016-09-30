@@ -458,10 +458,10 @@ end;
 function ObjectSetMaterial(obj:real; mat:pchar): real; stdcall;
 var
   object1:TGLSCeneObject;
-  ffm: TGLFreeForm;
-  mesh1: TMeshObject;
-  fg1: TFaceGroup;
-  mi, fgi: Integer;
+  //ffm: TGLFreeForm;
+  //mesh1: TMeshObject;
+  //fg1: TFaceGroup;
+  //mi, fgi: Integer;
 begin
   object1:=TGLSceneObject(trunc64(obj));
   object1.Material.MaterialLibrary:=matlib;
