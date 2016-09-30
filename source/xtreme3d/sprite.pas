@@ -6,7 +6,7 @@ begin
     GLHUDSprite1:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
   else
     GLHUDSprite1:=TGLHUDSprite.CreateAsChild(scene.Objects);
-  GLHUDSprite1.SetSize(trunc64(w),trunc64(h));
+  GLHUDSprite1.SetSize(w, h);
   GLHUDSprite1.Material.MaterialLibrary:=matlib;
   GLHUDSprite1.Material.LibMaterialName:=mtrl;
   result:=Integer(GLHUDSprite1);
@@ -20,7 +20,7 @@ begin
     GLSprite1:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
   else
     GLSprite1:=TGLSprite.CreateAsChild(scene.Objects);
-  GLSprite1.SetSize(trunc64(w),trunc64(h));
+  GLSprite1.SetSize(w, h);
   GLSprite1.Material.MaterialLibrary:=matlib;
   GLSprite1.Material.LibMaterialName:=mtrl;
   result:=Integer(GLSprite1);
@@ -31,7 +31,7 @@ var
   GLSprite1: TGLSprite;
 begin
   GLSprite1:=TGLSprite(trunc64(sprite));
-  GLSprite1.SetSize(trunc64(w),trunc64(h));
+  GLSprite1.SetSize(w, h);
   result:=1;
 end;
 
@@ -94,7 +94,7 @@ begin
     spr:=TGLSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
   else
     spr:=TGLSprite.CreateAsChild(scene.Objects);
-  spr.SetSize(trunc64(w),trunc64(h));
+  spr.SetSize(w, h);
   //spr.Material.MaterialLibrary:=matlib;
   //spr.Material.LibMaterialName:=mtrl;
   spr.UVLeft := left;
@@ -112,7 +112,7 @@ begin
     spr:=TGLHUDSprite.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
   else
     spr:=TGLHUDSprite.CreateAsChild(scene.Objects);
-  spr.SetSize(trunc64(w),trunc64(h));
+  spr.SetSize(w, h);
   //spr.Material.MaterialLibrary:=matlib;
   //spr.Material.LibMaterialName:=mtrl;
   spr.UVLeft := left;
