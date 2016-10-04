@@ -5,6 +5,7 @@ begin
   mv:=TGLMemoryViewer.Create(scene);
   mv.Width:=trunc64(w);
   mv.Height:=trunc64(h);
+  mv.Buffer.ContextOptions := [roStencilBuffer];
   result:=integer(mv);
 end;
 
