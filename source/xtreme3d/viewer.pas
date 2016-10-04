@@ -45,7 +45,7 @@ begin
   result:=1;
 end;
 
-function ViewerResize(viewer,top,left,w,h:real): real; stdcall;
+function ViewerResize(viewer,left,top,w,h:real): real; stdcall;
 begin
   TGLSceneViewer(trunc64(viewer)).Top:=trunc64(top);
   TGLSceneViewer(trunc64(viewer)).Left:=trunc64(left);
