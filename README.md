@@ -44,7 +44,7 @@ Features
 * Lines and curves rendering (Cubic, Bezier, NURBS)
 * Curves can be used to control object movement
 * Discrete LOD system
-* Offscreen rendering via p-buffers
+* Offscreen rendering via p-buffers or FBOs
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
 * Built-in game-oriented collision systems (DCE, FPSManager)
 * Rigid body physics using ODE engine

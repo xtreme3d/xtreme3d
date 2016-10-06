@@ -17,7 +17,8 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes;
+  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
+  GLFBO;
 
 type
    TEmpty = class(TComponent)
@@ -255,6 +256,78 @@ end;
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
+
+function FBOCreate(w, h, viewer, caster: real): real; stdcall;
+var
+  fbo: TGLFBO;
+  v: TGLSceneViewer;
+begin
+  if not GL_ARB_framebuffer_object then
+  begin
+      ShowMessage('GL_ARB_frame_buffer_object required');
+      result := 0;
+      Exit;
+  end;
+  v := TGLSceneViewer(trunc64(viewer));
+  fbo := TGLFBO.Create;
+  fbo.Width := trunc64(w);
+  fbo.Height := trunc64(h);
+  fbo.MainBuffer := v.Buffer;
+  fbo.Caster := TGLBaseSceneObject(trunc64(caster));
+  result := integer(fbo);
+end;
+
+function FBOSetCamera(fbo, cam: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.Camera := TGLCamera(trunc64(cam));
+  result := 1;
+end;
+
+function FBORender(fbo: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.Render();
+  result := 1;
+end;
+
+function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformFBOColorTexture;
+  param.FBO := TGLFBO(trunc64(fbo));
+  param.UniformTexture := trunc64(texUnit);
+  param.Initialized := True;
+  result := 1;
+end;
+
+function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformFBODepthTexture;
+  param.FBO := TGLFBO(trunc64(fbo));
+  param.UniformTexture := trunc64(texUnit);
+  param.Initialized := True;
+  result := 1;
+end;
+
+function ViewerRenderObject(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
+begin
+  TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
+    True,
+    Boolean(trunc64(updateFPS)),
+    Boolean(trunc64(clear)),
+    Boolean(trunc64(swap)));
+  result:=1;
+end;
 
 exports
 
@@ -535,6 +608,11 @@ GridSetColor, GridSetSize, GridSetPattern,
 //Memory Viewer
 MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
+//FBO
+FBOCreate, FBOSetCamera, FBORender,
+GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
+ViewerRenderObject,
+
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,

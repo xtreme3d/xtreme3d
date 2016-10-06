@@ -5,7 +5,7 @@ interface
 uses
   Classes, Dialogs, VectorTypes, VectorGeometry,
   GLTexture, GLUserShader, OpenGL1x, GLUtils,
-  GLShadowMap;
+  GLShadowMap, GLFBO;
 
 type
   TGLSLShaderParameterType = (
@@ -18,6 +18,8 @@ type
       uniformTexture2D,
       uniformSecondTexture2D,
       uniformShadowTexture,
+      uniformFBOColorTexture,
+      uniformFBODepthTexture,
       uniformShadowMatrix
     );
 
@@ -29,6 +31,7 @@ type
       FInitialized: Boolean;
       FTexture: TGLTexture;
       FShadowMap: TGLShadowMap;
+      FFBO: TGLFBO;
       FUniformLocation: GLint;
       FUniformType: TGLSLShaderParameterType;
       FUniformInteger: Integer;
@@ -50,6 +53,7 @@ type
       property UniformTexture: Integer read FUniformTexture write FUniformTexture;
       property Texture: TGLTexture read FTexture write FTexture;
       property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
+      property FBO: TGLFBO read FFBO write FFBO;
       property Initialized: Boolean read FInitialized write FInitialized;
   end;
 
@@ -71,6 +75,8 @@ type
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
+      function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
+      function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
       procedure Bind(mat: TGLLibMaterial);
       procedure Unbind;
   end;
@@ -162,9 +168,9 @@ begin
   begin
     if FTexture <> Nil then
     begin    
-      glActiveTextureARB(GL_TEXTURE1_ARB + GLUint(FUniformTexture));
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
       glBindTexture(FTexture.Image.NativeTextureTarget, FTexture.Handle);
-      glActiveTextureARB(GL_TEXTURE1_ARB);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
     end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
   end;
@@ -175,6 +181,28 @@ begin
     begin
       glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
       glBindTexture(GL_TEXTURE_2D, FShadowMap.DepthTextureHandle);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
+    glUniform1iARB(FUniformLocation, FUniformTexture);
+  end;
+  
+  if FUniformType = uniformFBOColorTexture then
+  begin
+    if FFBO <> Nil then
+    begin
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+      glBindTexture(GL_TEXTURE_2D, FFBO.ColorTextureHandle);
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+    end;
+    glUniform1iARB(FUniformLocation, FUniformTexture);
+  end;
+  
+  if FUniformType = uniformFBODepthTexture then
+  begin
+    if FFBO <> Nil then
+    begin
+      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+      glBindTexture(GL_TEXTURE_2D, FFBO.DepthTextureHandle);
       glActiveTextureARB(GL_TEXTURE0_ARB);
     end;
     glUniform1iARB(FUniformLocation, FUniformTexture);
@@ -326,6 +354,26 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformShadowTexture, name);
+  param.Initialized := False;
+  Result := param;
+end;
+
+function TGLSLShaderParameters.AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformFBOColorTexture, name);
+  param.Initialized := False;
+  Result := param;
+end;
+
+function TGLSLShaderParameters.AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformFBODepthTexture, name);
   param.Initialized := False;
   Result := param;
 end;

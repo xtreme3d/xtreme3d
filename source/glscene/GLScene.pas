@@ -1814,6 +1814,12 @@ type
          procedure Render; overload;
 
          procedure SimpleRender(baseObject : TGLBaseSceneObject);
+         procedure SimpleRender2(
+           baseObject : TGLBaseSceneObject;
+           useRenderingContext: Boolean;
+           updatePerfCounter: Boolean;
+           clear: Boolean;
+           swap: Boolean);
 
          {: Render the scene to a bitmap at given DPI.<p>
             DPI = "dots per inch".<p>
@@ -7811,6 +7817,76 @@ begin
    glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
    FCamera.FScene.RenderScene(self, FViewport.Width, FViewport.Height, dsRendering, baseObject);
    FRendering:=False;
+end;
+
+procedure TGLSceneBuffer.SimpleRender2(
+  baseObject : TGLBaseSceneObject;
+  useRenderingContext: Boolean;
+  updatePerfCounter: Boolean;
+  clear: Boolean;
+  swap: Boolean);
+var
+   maxLights : Integer;
+   backColor : TColorVector;
+   perfCounter, framePerf : Int64;
+begin
+   if FRendering then Exit;
+   if not Assigned(FRenderingContext) then Exit;
+
+   if updatePerfCounter then
+     QueryPerformanceCounter(framePerf);
+
+   if Assigned(FCamera) and Assigned(FCamera.FScene) then begin
+      FCamera.AbsoluteMatrixAsAddress;
+      FCamera.FScene.AddBuffer(Self);
+   end;
+   
+   FRendering:=True;
+
+   try
+     if useRenderingContext then
+       FRenderingContext.Activate;
+     try
+       backColor:=ConvertWinColor(FBackgroundColor, FBackgroundAlpha);
+       SetupRenderingContext;
+       if clear then
+       begin
+         glClearColor(backColor[0], backColor[1], backColor[2], backColor[3]);
+         ClearBuffers;
+       end;
+       FCamera.FScene.AddBuffer(Self);
+       if FFrameCount=0 then
+         QueryPerformanceCounter(FFirstPerfCounter);
+
+       FRenderDPI:=96;
+       DoBaseRender(FViewport, RenderDPI, dsRendering, baseObject);
+
+       if swap then
+       if not (roNoSwapBuffers in ContextOptions) then
+         RenderingContext.SwapBuffers;
+
+       if updatePerfCounter then
+       begin
+         Inc(FFrameCount);
+         QueryPerformanceCounter(perfCounter);
+         FLastFrameTime:=(perfCounter-framePerf)/vCounterFrequency;
+         Dec(perfCounter, FFirstPerfCounter);
+         if perfCounter>0 then
+           FFramesPerSecond:=(FFrameCount*vCounterFrequency)/perfCounter;
+       end;
+
+     finally
+       if useRenderingContext then
+         FRenderingContext.Deactivate;
+     end;
+
+   if Assigned(FAfterRender) then
+      FAfterRender(Self);
+
+   finally
+      FRendering:=False;
+   end;
+
 end;
 
 // SetBackgroundColor
