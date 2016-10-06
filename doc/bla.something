@@ -352,6 +352,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="FBO">
+                        <param name="Local" value="functions/fbo.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="ShadowMap">
                         <param name="Local" value="functions/shadowmap.htm">
                         <param name="ImageNumber" value="0">
