@@ -257,7 +257,7 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
-function FBOCreate(w, h, viewer, caster: real): real; stdcall;
+function FBOCreate(w, h, viewer, obj: real): real; stdcall;
 var
   fbo: TGLFBO;
   v: TGLSceneViewer;
@@ -273,7 +273,7 @@ begin
   fbo.Width := trunc64(w);
   fbo.Height := trunc64(h);
   fbo.MainBuffer := v.Buffer;
-  fbo.Caster := TGLBaseSceneObject(trunc64(caster));
+  fbo.RenderObject := TGLBaseSceneObject(trunc64(obj));
   result := integer(fbo);
 end;
 
@@ -292,6 +292,27 @@ var
 begin
   fb := TGLFBO(trunc64(fbo));
   fb.Render();
+  result := 1;
+end;
+
+function FBOSetViewer(fbo, viewer: real): real; stdcall;
+var
+  fb: TGLFBO;
+  v: TGLSceneViewer;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  v := TGLSceneViewer(trunc64(viewer));
+  fb.MainBuffer := v.Buffer;
+  result := 1;
+end;
+
+function FBOSetObject(fbo, obj: real): real; stdcall;
+var
+  fb: TGLFBO;
+  v: TGLSceneViewer;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
   result := 1;
 end;
 
@@ -327,6 +348,14 @@ begin
     Boolean(trunc64(clear)),
     Boolean(trunc64(swap)));
   result:=1;
+end;
+
+function ViewerGetFBOSupported(viewer: real): real; stdcall;
+begin
+   if GL_ARB_framebuffer_object then
+       Result := 1
+   else
+       Result := 0;
 end;
 
 exports
@@ -610,8 +639,9 @@ MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
 FBOCreate, FBOSetCamera, FBORender,
+FBOSetViewer, FBOSetObject,
 GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
-ViewerRenderObject,
+ViewerRenderObject, ViewerGetFBOSupported,
 
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,

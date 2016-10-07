@@ -32,7 +32,7 @@ type
         FWidth: Integer;
         FHeight: Integer;
         FCamera: TGLCamera;
-        FCaster: TGLBaseSceneObject;
+        FRenderObject: TGLBaseSceneObject;
         FProjectionSize: Single;
         procedure SetTexture(texture: TGLTexture);
         procedure DoInitialize;
@@ -48,7 +48,7 @@ type
         property DepthTextureHandle: GLuint read FDepthTextureHandle write FDepthTextureHandle;
         property ColorTextureHandle: GLuint read FColorTextureHandle write FColorTextureHandle;
         property Camera: TGLCamera read FCamera write FCamera;
-        property Caster: TGLBaseSceneObject read FCaster write FCaster;
+        property RenderObject: TGLBaseSceneObject read FRenderObject write FRenderObject;
   end;
 
 implementation
@@ -149,7 +149,7 @@ begin
      DoInitialize;
    glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
 
-   MainBuffer.SimpleRender2(FCaster, False, False, True, False);
+   MainBuffer.SimpleRender2(FRenderObject, False, False, True, False);
 
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
