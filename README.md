@@ -19,33 +19,35 @@ Screenshots
 
 Features
 --------
-* Scene hierarchy
+* Scene graph with object hierarchy/pivoting
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
-* Popular image formats support (BMP, JPG, PNG, TGA, DDS)
+* GLSL shaders
+* Built-in easy to use shaders, including cel shader, bump/parallax shader, phong shader, multimaterial shader, etc.
+* Multitexturing. Materials can have up to 8 texture slots accessible from shaders. Fixed-pipeline multipass multitexturing is also supported
+* Popular image formats support for textures (BMP, JPG, PNG, TGA, DDS)
 * Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and many other)
-* Procedural mesh construction from vertex and index lists - make your own model format!
+* Procedural mesh construction from vertex/normal/texcoord/index lists - you are free to design your own model format
 * Model animation, per-vertex and skeletal
 * Lightmapping and dynamic lighting
 * Terrain rendering with automatic LOD
 * Dynamic water rendering
 * Dynamic soft shadows
 * Static and dynamic cubemaps
-* GLSL shaders
-* Built-in shaders, including cel shader, bump/parallax shader, phong shader, multimaterial shader, etc.
-* Particle system
+* Particle system for fire-like and lighting-like effects
 * Lensflare effect
 * 2D shapes, including rectangle, circle, line, and custom 2D mesh
 * 2D sprites and text
 * 3D text and billboards
 * Skyboxes
-* Procedural skydome with sun, stars and day/night cycle
+* Procedural skydome with sun, stars and animated day/night cycle
 * Procedural trees
 * Lines and curves rendering (Cubic, Bezier, NURBS)
 * Curves can be used to control object movement
 * Discrete LOD system
 * Offscreen rendering via p-buffers or FBOs
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
+* Raycasting
 * Built-in game-oriented collision systems (DCE, FPSManager)
 * Rigid body physics using ODE engine
 * Ragdolls
