@@ -76,11 +76,11 @@
 <BR/><A>filename</A> - имя файла BMP.</A>
 <HR>
 
-<A name="ViewerRenderObject"></A>
-<H1 class=name>ViewerRenderObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ViewerRenderObject</A><A>( viewer,object,clear,swap,updateFPS as </A>
+<A name="ViewerRenderEx"></A>
+<H1 class=name>ViewerRenderEx</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerRenderEx</A><A>( viewer,object,clear,swap,updateFPS as </A>
 <A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Совершает рендеринг вида с расширенными опциями. Позволяет организовать многопроходный рендеринг. Функция предназначена для опытных пользователей - не вызывайте ее, если не уверены в том, что делаете. 
+<BR/><A class=ntext>Совершает рендеринг вида с расширенными опциями, позволяет организовать многопроходный рендеринг. Функция предназначена для опытных пользователей - не вызывайте ее, если не уверены в том, что делаете. 
 <BR/><A>viewer</A> - id вида</A>
 <BR/><A>object</A> - id объекта, который нужно отрендерить (со всеми его потомками)</A>
 <BR/><A>clear</A> - определяет, заполнять ли вид фоновым цветом перед рендерингом - 
@@ -284,6 +284,13 @@
 <BR/><A class=constant name="aa2xHQ">aa2xHQ</A> = 3 - то же, что <A class=constant name="aa2x">aa2x</A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания;
 <BR/><A class=constant name="aa4x">aa4x</A> = 4 - учетверяет горизонтальное и вертикальное разрешение;
 <BR/><A class=constant name="aa4xHQ">aa4xHQ</A><A> = 5 - то же, что <A class=constant name="aa2x">aa4x</A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания.</A>
+<HR>
+
+<A name="ViewerGetFBOSupported"></A>
+<H1 class=name>ViewerGetFBOSupported</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetFBOSupported</A><A>( viewer as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Возвращает истину, если видеодрайвер поддерживает кадровые буферы (FBO).
+<BR/><A>viewer</A> - id вида.</A>
 <HR>
 
 <A name="ViewerGetVBOSupported"></A>

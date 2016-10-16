@@ -26,11 +26,10 @@
 
 <A name="FBOCreate"></A>
 <H1 class=name>FBOCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOCreate</A><A>( width,height,viewer,object as </A><A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>FBOCreate</A><A>( width,height,viewer as </A><A class=type>real</A><A> );</A>
 <BR><A>Создает новый FBO и возвращает его id.</A>
 <BR><A>width,height - ширина и высота буфера</A>
-<BR><A>viewer - вид, настройки которого нужно использовать для рендеринга (фоновой цвет, туман, соотношение сторон и т.д.)</A>
-<BR><A>object - объект, который нужно отрендерить (вместе с его потомками). Как правило, в этот параметр передается Dummycube, содержащий иерархию 3D-сцены.</A>
+<BR><A>viewer - id вида, настройки которого нужно использовать для рендеринга (фоновой цвет, туман, соотношение сторон и т.д.).</A>
 <HR>
 
 <A name="FBOSetCamera"></A>
@@ -41,11 +40,20 @@
 <BR><A>camera - id камеры.</A>
 <HR>
 
-<A name="FBORender"></A>
-<H1 class=name>FBORender</H1>
-<A class=type>real</A><A> = </A><A class=function>FBORender</A><A>( fbo as </A><A class=type>real</A><A> );</A>
-<BR><A>Совершает рендеринг в FBO. Обратите внимание, что читать текстуры FBO во время рендеринга в него не рекомендуется, это приведет к неопределенному результату. Иными словами, избегайте ситуации, когда в FBO рендерится объект, использующий шейдер, который читает текстуру того же FBO.</A>
-<BR><A>fbo - id FBO.</A>
+<A name="FBOSetViewer"></A>
+<H1 class=name>FBOSetViewer</H1>
+<A class=type>real</A><A> = </A><A class=function>FBOSetViewer</A><A>( fbo,viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает вид, настройки которого нужно использовать для рендеринга (фоновой цвет, туман, соотношение сторон и т.д.).</A>
+<BR><A>fbo - id FBO</A>
+<BR><A>view - id вида.</A>
+<HR>
+
+<A name="FBORenderObject"></A>
+<H1 class=name>FBORenderObject</H1>
+<A class=type>real</A><A> = </A><A class=function>FBORenderObject</A><A>( fbo,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Совершает рендеринг объекта в FBO. Обратите внимание, что читать текстуры FBO во время рендеринга в него не рекомендуется, это приведет к неопределенному результату. Иными словами, избегайте ситуации, когда в FBO рендерится объект, использующий шейдер, который читает текстуру того же FBO.</A>
+<BR><A>fbo - id FBO</A>
+<BR><A>object - объект, который нужно отрендерить (вместе с его потомками). Как правило, в этот параметр передается Dummycube, содержащий иерархию 3D-сцены.</A>
 <HR>
 
 </DIV>

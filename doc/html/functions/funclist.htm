@@ -77,7 +77,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerSetAutoRender>ViewerSetAutoRender</A><A>(viewer,mode)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRender>ViewerRender</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderToFile>ViewerRenderToFile</A><A>(viewer,filename)</A>
-<BR><A class=funclink href=viewer.htm#ViewerRenderObject>ViewerRenderObject</A><A>(viewer,object,clear,swap,updateFPS)</A>
+<BR><A class=funclink href=viewer.htm#ViewerRenderEx>ViewerRenderEx</A><A>(viewer,object,clear,swap,updateFPS)</A>
 
 <BR><A class=funclink href=viewer.htm#ViewerResize>ViewerResize</A><A>(viewer,x,y,width,height)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetVisible>ViewerSetVisible</A><A>(viewer,mode)</A>
@@ -99,6 +99,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerVectorToScreen>ViewerVectorToScreen</A><A>(viewer,x,y,z,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerPixelToDistance>ViewerPixelToDistance</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetAntiAliasing>ViewerSetAntiAliasing</A><A>(viewer,aa)</A>
+<BR><A class=funclink href=viewer.htm#ViewerGetFBOSupported>ViewerGetFBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetVBOSupported>ViewerGetVBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetGLSLSupported>ViewerGetGLSLSupported</A><A>(viewer)</A>
 <BR>
@@ -513,7 +514,6 @@
 
 <BR><A class=funclink href=material.htm#MaterialEnableTexture>MaterialEnableTexture</A><A>(material,mode)</A>
 
-<BR><A class=funclink href=material.htm#MaterialLoadTexture>MaterialLoadTexture</A><A>(material,filename)</A>
 <BR><A class=funclink href=material.htm#MaterialGetCount>MaterialGetCount</A><A>()</A>
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
 <BR><A class=funclink href=material.htm#MaterialSetFaceCulling>MaterialSetFaceCulling</A><A>(material,fc)</A>
@@ -524,16 +524,20 @@
 <BR><A class=funclink href=material.htm#MaterialSetFilteringQuality>MaterialSetFilteringQuality</A><A>(material,tf)</A>
 <BR><A class=funclink href=material.htm#MaterialSetOptions>MaterialSetOptions</A><A>(material,fog,lighting)</A>
 <BR><A class=funclink href=material.htm#MaterialSetShader>MaterialSetShader</A><A>(material,shader)</A>
+
+<!--
 <BR><A class=funclink href=material.htm#MaterialAddTextureEx>MaterialAddTextureEx</A><A>(material,texture)</A>
 <BR><A class=funclink href=material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialTextureExDelete>MaterialTextureExDelete</A><A>(material,ind)</A>
+-->
 
-<BR><A class=funclink href=material.htm#MaterialSaveTexture>MaterialSaveTexture</A><A>(material,filename)</A>
-<BR><A class=funclink href=material.htm#MaterialGenTexture>MaterialGenTexture</A><A>(material,width,height)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureWrap>MaterialSetTextureWrap</A><A>(material,mode)</A>
-
 <BR><A class=funclink href=material.htm#MaterialGetTextureWidth>MaterialGetTextureWidth</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureHeight>MaterialGetTextureHeight</A><A>(material)</A>
+<BR><A class=funclink href=material.htm#MaterialGenTexture>MaterialGenTexture</A><A>(material,width,height)</A>
+<BR><A class=funclink href=material.htm#MaterialLoadTexture>MaterialLoadTexture</A><A>(material,filename)</A>
+<BR><A class=funclink href=material.htm#MaterialLoadTextureEx>MaterialLoadTextureEx</A><A>(material,filename,index)</A>
+<BR><A class=funclink href=material.htm#MaterialSaveTexture>MaterialSaveTexture</A><A>(material,filename)</A>
 
 <BR><A class=funclink href=material.htm#MaterialNoiseCreate>MaterialNoiseCreate</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialNoiseSetDimensions>MaterialNoiseSetDimensions</A><A>(material,width,height)</A>
@@ -955,9 +959,10 @@
 <BR>
 <A name="FBO"></A>
 <H1 class=name>FBO</H1>
-<A class=funclink href=fbo.htm#FBOCreate>FBOCreate</A><A>(width,height,viewer,object)</A>
+<A class=funclink href=fbo.htm#FBOCreate>FBOCreate</A><A>(width,height,viewer)</A>
 <BR><A class=funclink href=fbo.htm#FBOSetCamera>FBOSetCamera</A><A>(fbo,camera)</A>
-<BR><A class=funclink href=fbo.htm#FBORender>FBORender</A><A>(fbo)</A>
+<BR><A class=funclink href=fbo.htm#FBOSetViewer>FBOSetViewer</A><A>(fbo,viewer)</A>
+<BR><A class=funclink href=fbo.htm#FBORenderObject>FBORenderObject</A><A>(fbo,object)</A>
 <BR>
 <BR>
 <A name="ShadowMap"></A>
