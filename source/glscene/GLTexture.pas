@@ -1277,6 +1277,7 @@ type
          FFrontProperties, FGLBackProperties : TGLFaceProperties;
 			FBlendingMode : TBlendingMode;
          FTexture : TGLTexture;
+         FTextures : array[0..7] of TGLTexture;
          FTextureEx : TGLTextureEx;
          FMaterialLibrary : TGLMaterialLibrary;
          FLibMaterialName : TGLLibMaterialName;
@@ -1334,6 +1335,9 @@ type
 
          //: Gets the primary texture either from material library or the texture property
          function GetActualPrimaryTexture: TGLTexture;
+
+         function  GetTextureN(i: Integer): TGLTexture;
+         procedure SetTextureN(i: Integer; const value: TGLTexture);
 
 		published
 			{ Published Declarations }
@@ -4236,7 +4240,6 @@ var
   units : Cardinal;
 begin
   if not GL_ARB_multitexture then exit;
-
   units:=0;
   glGetIntegerv(GL_MAX_TEXTURE_UNITS_ARB, @texUnits);
   for i:=0 to Count-1 do begin
@@ -4488,6 +4491,20 @@ begin
    Result:=(Assigned(FTextureEx) and (TextureEx.Count>0));
 end;
 
+function TGLMaterial.GetTextureN(i: Integer): TGLTexture;
+begin
+   if (i >= 0) and (i < 8) then
+     Result:=FTextures[i]
+   else
+     Result:=nil;
+end;
+
+procedure TGLMaterial.SetTextureN(i: Integer; const value: TGLTexture);
+begin
+    if (i >= 0) and (i < 8) then
+       FTextures[i] := value;
+end;
+
 // NotifyLibMaterialDestruction
 //
 procedure TGLMaterial.NotifyLibMaterialDestruction;
@@ -4524,6 +4541,8 @@ end;
 // Apply
 //
 procedure TGLMaterial.Apply(var rci : TRenderContextInfo);
+var
+  i: Integer;
 begin
 	if Assigned(currentLibMaterial) then
 		currentLibMaterial.Apply(rci)
@@ -4609,6 +4628,21 @@ begin
             Inc(rci.fogDisabledCounter);
          end;
       end;
+
+      if Assigned(FTexture) then
+         	FTexture.Apply(rci);
+
+      for i := 0 to 8 do
+      begin
+        if FTextures[i] <> nil then
+        begin
+          glActiveTextureARB(GL_TEXTURE0_ARB + i);
+          FTextures[i].Apply(rci);
+        end;
+      end;
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+
+      {
       if not Assigned(FTextureEx) then begin
          if Assigned(FTexture) then
          	FTexture.Apply(rci)
@@ -4618,12 +4652,15 @@ begin
          else if FTextureEx.Count>0 then
             FTextureEx.Apply(rci);
       end;
+      }
 	end;
 end;
 
 // UnApply
 //
 function TGLMaterial.UnApply(var rci : TRenderContextInfo) : Boolean;
+var
+  i: Integer;
 begin
 	if Assigned(currentLibMaterial) then
 		Result:=currentLibMaterial.UnApply(rci)
@@ -4644,10 +4681,26 @@ begin
                rci.GLStates.SetGLState(stFog);
          end;
       end;
+
+      if Assigned(FTexture) then
+         FTexture.UnApply(rci);
+
+      for i := 0 to 8 do
+      begin
+        if FTextures[i] <> nil then
+        begin
+          glActiveTextureARB(GL_TEXTURE0_ARB + i);
+          FTextures[i].UnApply(rci);
+        end;
+      end;
+      glActiveTextureARB(GL_TEXTURE0_ARB);
+
+      {
       if Assigned(FTexture) and (not FTexture.Disabled) and (not FTextureEx.IsTextureEnabled(0)) then
          FTexture.UnApply(rci)
       else if Assigned(FTextureEx) then
          FTextureEx.UnApply(rci);
+      }
       Result:=False;
    end;
 end;

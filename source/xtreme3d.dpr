@@ -357,6 +357,19 @@ begin
   result:=1;
 end;
 
+function MaterialLoadTextureEx(mtrl, filename: pchar; index: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+  tex:TGLTexture;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  tex := TGLTexture.Create(mat.Material);
+  tex.Image.LoadFromFile(String(filename));
+  tex.Disabled := False;
+  mat.Material.SetTextureN(trunc64(index), tex);
+  result:=1;
+end;
+
 exports
 
 //Engine
@@ -515,6 +528,7 @@ MaterialNoiseRandomSeed,
 MaterialGenTexture, MaterialSetTextureWrap,
 MaterialGetTextureWidth, MaterialGetTextureHeight,
 MaterialLoadTexture,
+MaterialLoadTextureEx,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate,
