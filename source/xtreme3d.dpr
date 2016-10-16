@@ -257,7 +257,7 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
-function FBOCreate(w, h, viewer, obj: real): real; stdcall;
+function FBOCreate(w, h, viewer: real): real; stdcall;
 var
   fbo: TGLFBO;
   v: TGLSceneViewer;
@@ -273,7 +273,6 @@ begin
   fbo.Width := trunc64(w);
   fbo.Height := trunc64(h);
   fbo.MainBuffer := v.Buffer;
-  fbo.RenderObject := TGLBaseSceneObject(trunc64(obj));
   result := integer(fbo);
 end;
 
@@ -286,11 +285,12 @@ begin
   result := 1;
 end;
 
-function FBORender(fbo: real): real; stdcall;
+function FBORenderObject(fbo, obj: real): real; stdcall;
 var
   fb: TGLFBO;
 begin
   fb := TGLFBO(trunc64(fbo));
+  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
   fb.Render();
   result := 1;
 end;
@@ -303,16 +303,6 @@ begin
   fb := TGLFBO(trunc64(fbo));
   v := TGLSceneViewer(trunc64(viewer));
   fb.MainBuffer := v.Buffer;
-  result := 1;
-end;
-
-function FBOSetObject(fbo, obj: real): real; stdcall;
-var
-  fb: TGLFBO;
-  v: TGLSceneViewer;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
   result := 1;
 end;
 
@@ -340,7 +330,7 @@ begin
   result := 1;
 end;
 
-function ViewerRenderObject(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
+function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
     True,
@@ -648,10 +638,9 @@ GridSetColor, GridSetSize, GridSetPattern,
 MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
-FBOCreate, FBOSetCamera, FBORender,
-FBOSetViewer, FBOSetObject,
+FBOCreate, FBOSetCamera, FBOSetViewer, FBORenderObject, 
 GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
-ViewerRenderObject, ViewerGetFBOSupported,
+ViewerRenderEx, ViewerGetFBOSupported,
 
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
