@@ -761,7 +761,7 @@ var
   object2: TGLBaseSceneObject;
 begin
   object1:=TGLBaseSceneObject(trunc64(obj1));
-  object2:=TGLBaseSceneObject(trunc64(obj1));
+  object2:=TGLBaseSceneObject(trunc64(obj2));
   object1.Parent := object2;
   result := 1;
 end;
