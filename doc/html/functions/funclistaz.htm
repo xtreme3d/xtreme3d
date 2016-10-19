@@ -411,23 +411,19 @@
 <BR><A class=funclink href=lines.htm#LinesSetNodesAspect>LinesSetNodesAspect</A><A>(line,lna)</A>
 <BR><A class=funclink href=lines.htm#LinesSetSize>LinesSetSize</A><A>(line,linewidth,nodesize)</A>
 <BR><A class=funclink href=lines.htm#LinesSetSplineMode>LinesSetSplineMode</A><A>(line,lsm)</A>
-<!--
-<BR><A class=funclink href=b3d.htm#LoadB3D>LoadB3D</A><A>(filename,parent)</A>
--->
 <BR>
 <BR>
 <A name="M"></A>
 <H1 class=name>M</H1>
 <BR><A class=funclink href=material.htm#MaterialAddCubeMap>MaterialAddCubeMap</A><A>(material)</A>
-<!--
-<BR><A class=funclink href=material.htm#MaterialAddTextureEx>MaterialAddTextureEx</A><A>(material,texture)</A>
--->
 <BR><A class=funclink href=material.htm#MaterialCreate>MaterialCreate</A><A>(material,filename)</A>
 <BR><A class=funclink href=material.htm#MaterialCubeMapFromScene>MaterialCubeMapFromScene</A><A>(material,viewer,camera,res)</A>
 <BR><A class=funclink href=material.htm#MaterialCubeMapGenerate>MaterialCubeMapGenerate</A><A>(material,res)</A>
 <BR><A class=funclink href=material.htm#MaterialCubeMapLoadImage>MaterialCubeMapLoadImage</A><A>(material,texture)</A>
 <BR><A class=funclink href=material.htm#MaterialEnableTexture>MaterialEnableTexture</A><A>(material,mode)</A>
+<BR><A class=funclink href=material.htm#MaterialEnableTextureEx>MaterialEnableTextureEx</A><A>(material,index,mode)</A>
 <BR><A class=funclink href=material.htm#MaterialGenTexture>MaterialGenTexture</A><A>(material,width,height)</A>
+<BR><A class=funclink href=material.htm#MaterialGenTextureEx>MaterialGenTextureEx</A><A>(material,index,width,height)</A>
 <BR><A class=funclink href=material.htm#MaterialGetCount>MaterialGetCount</A><A>()</A>
 <!--
 <BR><A class=funclink href=material.htm#MaterialGetFromLib>MaterialGetFromLib</A><A>(material1,material2)</A>
@@ -435,6 +431,7 @@
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureHeight>MaterialGetTextureHeight</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureWidth>MaterialGetTextureWidth</A><A>(material)</A>
+<BR><A class=funclink href=material.htm#MaterialHasTextureEx>MaterialHasTextureEx</A><A>(material,index)</A>
 <BR><A class=funclink href=material.htm#MaterialLibraryActivate>MaterialLibraryActivate</A><A>(matlib)</A>
 <BR><A class=funclink href=material.htm#MaterialLibraryClear>MaterialLibraryClear</A><A>(matlib)</A>
 <BR><A class=funclink href=material.htm#MaterialLibraryCreate>MaterialLibraryCreate</A><A>()</A>
@@ -466,6 +463,7 @@
 <BR><A class=funclink href=material.htm#MaterialSetSpecularColor>MaterialSetSpecularColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTexture>MaterialSetTexture</A><A>(material1,material2)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureCompression>MaterialSetTextureCompression</A><A>(material,tc)</A>
+<BR><A class=funclink href=material.htm#MaterialSetTextureEx>MaterialSetTextureEx</A><A>(material1,material2,index)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureFilter>MaterialSetTextureFilter</A><A>(material,mi,ma)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureFormat>MaterialSetTextureFormat</A><A>(material,tf)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureImageAlpha>MaterialSetTextureImageAlpha</A><A>(material,tia)</A>
@@ -474,10 +472,6 @@
 <BR><A class=funclink href=material.htm#MaterialSetTextureOffset>MaterialSetTextureOffset</A><A>(material,u,v)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureScale>MaterialSetTextureScale</A><A>(material,u,v)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureWrap>MaterialSetTextureWrap</A><A>(material,mode)</A>
-<!--
-<BR><A class=funclink href=material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>(material)</A>
-<BR><A class=funclink href=material.htm#MaterialTextureExDelete>MaterialTextureExDelete</A><A>(material,ind)</A>
--->
 <BR><A class=funclink href=material.htm#MaterialTextureRequiredMemory>MaterialTextureRequiredMemory</A><A>(material)</A>
 
 <BR><A class=funclink href=memviewer.htm#MemoryViewerCopyToTexture>MemoryViewerCopyToTexture</A><A>(memviewer,material)</A>
@@ -486,12 +480,6 @@
 <BR><A class=funclink href=memviewer.htm#MemoryViewerSetCamera>MemoryViewerSetCamera</A><A>(memviewer,camera)</A>
 <BR><A class=funclink href=memviewer.htm#MemoryViewerSetViewport>MemoryViewerSetViewport</A><A>(memviewer,x,y,width,height)</A>
 
-<!--
-<BR><A class=funclink href=mesh.htm#MeshCountVertices>MeshCountVertices</A><A>(object,ind)</A>
-<BR><A class=funclink href=mesh.htm#MeshOptimize>MeshOptimize</A><A>(object)</A>
-<BR><A class=funclink href=mesh.htm#MeshRotate>MeshRotate</A><A>(object,x,y,z,angle)</A>
-<BR><A class=funclink href=mesh.htm#MeshSmoothFaces>MeshSmoothFaces</A><A>(object,weld,threshold)</A>
--->
 <BR><A class=funclink href=mirror.htm#MirrorCreate>MirrorCreate</A><A>(target,parent)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetDiskOptions>MirrorSetDiskOptions</A><A>(mirror,radius,slices)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetObject>MirrorSetObject</A><A>(mirror,target)</A>
@@ -611,9 +599,6 @@
 <BR><A class=funclink href=object.htm#ObjectSetAbsolutePosition>ObjectSetAbsolutePosition</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectSetAbsoluteUp>ObjectSetAbsoluteUp</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectSetCulling>ObjectSetCulling</A><A>(object,mode)</A>
-<!--
-<BR><A class=funclink href=object.htm#ObjectSetDiffuseColor>ObjectSetDiffuseColor</A><A>(object,color,alpha)</A>
--->
 <BR><A class=funclink href=object.htm#ObjectSetDirection>ObjectSetDirection</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object,material)</A>
 <BR><A class=funclink href=object.htm#ObjectSetMatrixColumn>ObjectSetMatrixColumn</A><A>(object,ind,x,y,z,w)</A>
@@ -637,9 +622,6 @@
 -->
 <BR><A class=funclink href=object.htm#ObjectTranslate>ObjectTranslate</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectTurn>ObjectTurn</A><A>(object,angle)</A>
-<!--
-<BR><A class=func2link href=sprite.htm#ObjectUseObjectColor>ObjectUseObjectColor</A><A>(object,mode)</A>
--->
 <BR><A class=funclink href=ode.htm#OdeAddBox>OdeAddBox</A><A>(object,x,y,z,width,height,depth)</A>
 <BR><A class=funclink href=ode.htm#OdeAddCapsule>OdeAddCapsule</A><A>(object,x,y,z,length,radius)</A>
 <BR><A class=funclink href=ode.htm#OdeAddCone>OdeAddCone</A><A>(object,x,y,z,length,radius)</A>

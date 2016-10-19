@@ -483,6 +483,14 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>filename - путь к файлу изображения.</A>
 <HR>
 
+<A name="MaterialSaveTexture"></A>
+<H1 class=name>MaterialSaveTexture</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSaveTexture</A><A>( material,filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Сохраняет текстуру материала в файл BMP.</A>
+<BR><A>material - имя материала</A>
+<BR><A>filename - имя файла.</A>
+<HR>
+
 <A name="MaterialLoadTextureEx"></A>
 <H1 class=name>MaterialLoadTextureEx</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialLoadTextureEx</A><A>( material,filename as </A><A class=type>string</A><A>, index as </A><A class=type>real</A><A> );</A>
@@ -492,12 +500,39 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>index - индекс текстурного слота (от 0 до 7 включительно).</A>
 <HR>
 
-<A name="MaterialSaveTexture"></A>
-<H1 class=name>MaterialSaveTexture</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialSaveTexture</A><A>( material,filename as </A><A class=type>string</A><A> );</A>
-<BR><A>Сохраняет текстуру материала в файл BMP.</A>
+<A name="MaterialSetTextureEx"></A>
+<H1 class=name>MaterialSetTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetTextureEx</A><A>( material1,material2 as </A><A class=type>string</A><A>, index as </A><A class=type>real</A><A> );</A>
+<BR><A>Копирует текстуру материала 2 в заданный текстурный слот материала 1.</A>
+<BR><A>material1 - имя материала 1</A>
+<BR><A>material2 - имя материала 2</A>
+<BR><A>index - индекс текстурного слота (от 0 до 7 включительно).</A>
+<HR>
+
+<A name="MaterialGenTextureEx"></A>
+<H1 class=name>MaterialGenTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGenTextureEx</A><A>( material as </A><A class=type>string</A><A>, index,width,height as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает пустую текстуру в заданном текстурном слоте материала.</A>
 <BR><A>material - имя материала</A>
-<BR><A>filename - имя файла.</A>
+<BR><A>index - индекс текстурного слота (от 0 до 7 включительно)</A>
+<BR><A>width,height - ширина и высота текстуры.</A>
+<HR>
+
+<A name="MaterialEnableTextureEx"></A>
+<H1 class=name>MaterialEnableTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialEnableTextureEx</A><A>( material as </A><A class=type>string</A><A>, index,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает текстуру в заданном текстурном слоте материала.</A>
+<BR><A>material - имя материала</A>
+<BR><A>index - индекс текстурного слота (от 0 до 7 включительно)</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="MaterialHasTextureEx"></A>
+<H1 class=name>MaterialHasTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialHasTextureEx</A><A>( material as </A><A class=type>string</A><A>, index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает 1, если у материала есть текстура в заданном текстурном слоте, и 0 в противном случае.</A>
+<BR><A>material - имя материала</A>
+<BR><A>index - индекс текстурного слота (от 0 до 7 включительно).</A>
 <HR>
 
 <A name="MaterialNoiseCreate"></A>
