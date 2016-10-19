@@ -45,6 +45,16 @@ begin
   result:=1;
 end;
 
+function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
+begin
+  TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
+    True,
+    Boolean(trunc64(updateFPS)),
+    Boolean(trunc64(clear)),
+    Boolean(trunc64(swap)));
+  result:=1;
+end;
+
 function ViewerResize(viewer,left,top,w,h:real): real; stdcall;
 begin
   TGLSceneViewer(trunc64(viewer)).Top:=trunc64(top);
@@ -207,19 +217,27 @@ begin
   result:=1;
 end;
 
-function ViewerGetVBOSupported(viewer:real): real; stdcall;
-begin
-   if GL_ARB_vertex_buffer_object then
-       Result := 1
-   else
-       Result := 0;
-end;
-
 function ViewerGetGLSLSupported(viewer:real): real; stdcall;
 begin
    if (GL_ARB_shader_objects and
        GL_ARB_vertex_shader and
        GL_ARB_fragment_shader) then
+       Result := 1
+   else
+       Result := 0;
+end;
+
+function ViewerGetFBOSupported(viewer: real): real; stdcall;
+begin
+   if GL_ARB_framebuffer_object then
+       Result := 1
+   else
+       Result := 0;
+end;
+
+function ViewerGetVBOSupported(viewer:real): real; stdcall;
+begin
+   if GL_ARB_vertex_buffer_object then
        Result := 1
    else
        Result := 0;

@@ -225,7 +225,6 @@ end;
 {$I 'xtreme3d/sprite'}
 {$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
-{$I 'xtreme3d/memviewer'}
 {$I 'xtreme3d/actor'}
 {$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
@@ -251,111 +250,13 @@ end;
 {$I 'xtreme3d/fps'}
 {$I 'xtreme3d/mirror'}
 {$I 'xtreme3d/partition'}
+{$I 'xtreme3d/memviewer'}
+{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/text'}
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
-
-function FBOCreate(w, h, viewer: real): real; stdcall;
-var
-  fbo: TGLFBO;
-  v: TGLSceneViewer;
-begin
-  if not GL_ARB_framebuffer_object then
-  begin
-      ShowMessage('GL_ARB_frame_buffer_object required');
-      result := 0;
-      Exit;
-  end;
-  v := TGLSceneViewer(trunc64(viewer));
-  fbo := TGLFBO.Create;
-  fbo.Width := trunc64(w);
-  fbo.Height := trunc64(h);
-  fbo.MainBuffer := v.Buffer;
-  result := integer(fbo);
-end;
-
-function FBOSetCamera(fbo, cam: real): real; stdcall;
-var
-  fb: TGLFBO;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.Camera := TGLCamera(trunc64(cam));
-  result := 1;
-end;
-
-function FBORenderObject(fbo, obj: real): real; stdcall;
-var
-  fb: TGLFBO;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
-  fb.Render();
-  result := 1;
-end;
-
-function FBOSetViewer(fbo, viewer: real): real; stdcall;
-var
-  fb: TGLFBO;
-  v: TGLSceneViewer;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  v := TGLSceneViewer(trunc64(viewer));
-  fb.MainBuffer := v.Buffer;
-  result := 1;
-end;
-
-function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; stdcall;
-var
-  param: TGLSLShaderParameter;
-begin
-  param := TGLSLShaderParameter(trunc64(par));
-  param.UniformType := uniformFBOColorTexture;
-  param.FBO := TGLFBO(trunc64(fbo));
-  param.UniformTexture := trunc64(texUnit);
-  param.Initialized := True;
-  result := 1;
-end;
-
-function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; stdcall;
-var
-  param: TGLSLShaderParameter;
-begin
-  param := TGLSLShaderParameter(trunc64(par));
-  param.UniformType := uniformFBODepthTexture;
-  param.FBO := TGLFBO(trunc64(fbo));
-  param.UniformTexture := trunc64(texUnit);
-  param.Initialized := True;
-  result := 1;
-end;
-
-function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
-begin
-  TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
-    True,
-    Boolean(trunc64(updateFPS)),
-    Boolean(trunc64(clear)),
-    Boolean(trunc64(swap)));
-  result:=1;
-end;
-
-function ViewerGetFBOSupported(viewer: real): real; stdcall;
-begin
-   if GL_ARB_framebuffer_object then
-       Result := 1
-   else
-       Result := 0;
-end;
-
-function MaterialLoadTexture(mtrl, filename: pchar): real; stdcall;
-var
-  mat:TGLLibMaterial;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.Texture.Image.LoadFromFile(String(filename));
-  result:=1;
-end;
 
 function MaterialLoadTextureEx(mtrl, filename: pchar; index: real): real; stdcall;
 var
@@ -378,14 +279,14 @@ SetPakArchive,
 Update, TrisRendered,
 //Viewer
 ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRenderToFile,
-ViewerRender, ViewerSetAutoRender,
+ViewerRender, ViewerSetAutoRender, ViewerRenderEx,
 ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
 ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor, ViewerEnableFog,
 ViewerSetFogColor, ViewerSetFogDistance, ViewerScreenToWorld, ViewerWorldToScreen,
 ViewerCopyToTexture, ViewerGetFramesPerSecond, ViewerGetPickedObject,
 ViewerScreenToVector, ViewerVectorToScreen, ViewerPixelToDistance, ViewerGetPickedObjectsList,
 ViewerSetAntiAliasing,
-ViewerGetVBOSupported, ViewerGetGLSLSupported,
+ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported, 
 //Dummycube
 DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode, DummycubeSetVisible,
 DummycubeSetEdgeColor, DummycubeSetCubeSize,
@@ -549,6 +450,7 @@ GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
 GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
 GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
 GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
+GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
 //ThorFX
 ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
 ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
@@ -652,10 +554,7 @@ GridSetColor, GridSetSize, GridSetPattern,
 MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
-FBOCreate, FBOSetCamera, FBOSetViewer, FBORenderObject, 
-GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
-ViewerRenderEx, ViewerGetFBOSupported,
-
+FBOCreate, FBOSetCamera, FBOSetViewer, FBORenderObject,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,

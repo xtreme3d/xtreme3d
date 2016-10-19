@@ -508,6 +508,15 @@ begin
     result := mat.Material.Texture.Image.Height;
 end;
 
+function MaterialLoadTexture(mtrl, filename: pchar): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.Texture.Image.LoadFromFile(String(filename));
+  result:=1;
+end;
+
 function MaterialNoiseCreate(mtrl:pchar): real; stdcall;
 var
   mat:TGLLibMaterial;

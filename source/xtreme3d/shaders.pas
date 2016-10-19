@@ -642,3 +642,27 @@ begin
   param.Initialized := True;
   result := 1;
 end;
+
+function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformFBOColorTexture;
+  param.FBO := TGLFBO(trunc64(fbo));
+  param.UniformTexture := trunc64(texUnit);
+  param.Initialized := True;
+  result := 1;
+end;
+
+function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformFBODepthTexture;
+  param.FBO := TGLFBO(trunc64(fbo));
+  param.UniformTexture := trunc64(texUnit);
+  param.Initialized := True;
+  result := 1;
+end;
