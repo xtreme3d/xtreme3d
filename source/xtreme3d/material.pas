@@ -517,6 +517,69 @@ begin
   result:=1;
 end;
 
+function MaterialLoadTextureEx(mtrl, filename: pchar; index: real): real; stdcall;
+var
+  mat: TGLLibMaterial;
+  tex: TGLTexture;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  tex := TGLTexture.Create(mat.Material);
+  tex.Image.LoadFromFile(String(filename));
+  tex.Disabled := False;
+  mat.Material.SetTextureN(trunc64(index), tex);
+  result:=1;
+end;
+
+function MaterialSetTextureEx(mtrl, mtrl2: pchar; index: real): real; stdcall;
+var
+  mat: TGLLibMaterial;
+  mat2: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  mat2 := matlib.Materials.GetLibMaterialByName(mtrl2);
+  mat.Material.SetTextureN(trunc64(index), mat2.Material.Texture);
+  result := 1;
+end;
+
+function MaterialGenTextureEx(mtrl: pchar; index, w, h: real): real; stdcall;
+var
+  mat: TGLLibMaterial;
+  tex: TGLTexture;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  tex := TGLTexture.Create(mat.Material);
+  tex.ImageClassName := TGLBlankImage.ClassName;
+  with tex.Image as TGLBlankImage do begin
+    Width := trunc64(w);
+    Height := trunc64(h);
+  end;
+  tex.Disabled := False;
+  mat.Material.SetTextureN(trunc64(index), tex);
+  result := 1;
+end;
+
+function MaterialEnableTextureEx(mtrl: pchar; index, mode: real): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.GetTextureN(trunc64(index)).Disabled := not Boolean(trunc64(mode));
+  result := 1;
+end;
+
+function MaterialHasTextureEx(mtrl: pchar; index: real): real; stdcall;
+var
+  mat: TGLLibMaterial;
+  tex: TGLTexture;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  tex := mat.Material.GetTextureN(trunc64(index));
+  if tex = nil then
+    result := 0
+  else 
+    result := 1;
+end;
+
 function MaterialNoiseCreate(mtrl:pchar): real; stdcall;
 var
   mat:TGLLibMaterial;
