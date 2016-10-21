@@ -1,20 +1,23 @@
 Xtreme3D version history
 ========================
+v3.2.0 (by Gecko) - 21/10/2016
+------------------------------
+* FBO support for fast offscreen rendering and Z-buffer access in shaders
+* Rendering separate objects and hierarchies - essential for multipass rendering
+* New multitexture mechanism for Materials (8 texture slots)
+
 v3.1.0 (by Gecko) - 30/09/2016
 ------------------------------
-* HUDShapes: rectangle, circle, line, and custom 2D mesh
-* Improved Sprite API, added texture atlases support
-* Functions to query Material's texture size
-* Alpha channel support for PNG
-
-v3.1.0-beta (by Gecko) - 20/09/2016
------------------------------------
 * Improved Freeform API, added an ability to manually construct Freeforms from vertices and triangles. Freeforms now can be saved to file (GLSM, OBJ, STL, or NMF)
 * New file formats support: CSM and LMTS (these were absent in 3.0), X, ASE, DXS (experimental, without lightmaps for now)
 * Ragdoll support in ODE
 * Added Movement object that can be used to define smooth interpolated movement paths for objects
 * Improved BumpShader, added shadows and automatic tangent space support
 * Improved PhongShader, added diffuse texture support
+* HUDShapes: rectangle, circle, line, and custom 2D mesh
+* Improved Sprite API, added texture atlases support
+* Functions to query Material's texture size
+* Alpha channel support for PNG
 
 v3.0.0 (by Gecko, Rutraple aka Hacker, Ghost) - 25/08/2016
 ----------------------------------------------------------
