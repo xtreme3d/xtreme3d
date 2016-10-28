@@ -32,7 +32,7 @@ var
 begin
   fb := TGLFBO(trunc64(fbo));
   fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
-  fb.Render();
+  fb.Render(True);
   result := 1;
 end;
 
