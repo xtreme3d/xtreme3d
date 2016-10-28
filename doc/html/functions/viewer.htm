@@ -286,6 +286,15 @@
 <BR/><A class=constant name="aa4xHQ">aa4xHQ</A><A> = 5 - то же, что <A class=constant name="aa2x">aa4x</A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживани€.</A>
 <HR>
 
+<A name="ViewerSetOverrideMaterial"></A>
+<H1 class=name>ViewerSetOverrideMaterial</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerSetOverrideMaterial</A><A>( viewer,matlib as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
+<BR/><A class=ntext>«адает виду замещающий материал. Ётот материал будет использован дл€ всех объектов, которые рендер€тс€ видом, а их собственные материалы будут игнорироватьс€. Ёта возможность пригождаетс€ дл€ реализации некоторых спецэффектов и техник рендеринга, таких как отложенный рендеринг. 
+<BR/><A>viewer</A> - id вида</A>
+<BR/><A>matlib</A> - id библиотеки материалов</A>
+<BR/><A>material</A> - им€ материала в библиотеке. ≈сли передать пустую строку, то замещающий материал будет отключен, и объекты будут, как обычно, рендеритьс€ со своими материалами.</A>
+<HR>
+
 <A name="ViewerGetFBOSupported"></A>
 <H1 class=name>ViewerGetFBOSupported</H1>
 <A class=type>real</A><A> = </A><A class=function>ViewerGetFBOSupported</A><A>( viewer as </A><A class=type>real</A><A> );</A>
