@@ -326,6 +326,7 @@ type
 	TGLTexture         = class;
 	TGLMaterial        = class;
    TGLMaterialLibrary = class;
+   TGLLibMaterial = class;
 
    TDrawState = (dsRendering, dsPicking, dsPrinting);
 
@@ -360,6 +361,7 @@ type
       ignoreMaterials : Boolean;
       ignoreBlendingRequests : Boolean;
       amalgamating : Boolean;
+      overrideMaterial: TGLLibMaterial;
    end;
    PRenderContextInfo = ^TRenderContextInfo;
 
@@ -774,9 +776,6 @@ type
          {: Width of the blank image (for memory allocation). }
 			property Height : Integer read GetHeight write SetHeight default 256;
 	end;
-
-
-   TGLLibMaterial = Class;
 
    // TGLShaderStyle
    //

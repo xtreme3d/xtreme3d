@@ -258,6 +258,23 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
+function ViewerSetOverrideMaterial(viewer, mlb: real; mtrl: pchar): real; stdcall;
+var
+  v: TGLSceneViewer;
+  mlib: TGLMaterialLibrary;
+  mat: TGLLibMaterial;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  v.Buffer.OverrideMaterial := nil;
+  if Length(mtrl) > 0 then
+  begin
+    mlib := TGLMaterialLibrary(trunc64(mlb));
+    mat := mlib.Materials.GetLibMaterialByName(String(mtrl)); 
+    v.Buffer.OverrideMaterial := mat;
+  end;
+  result:=1;
+end;
+
 exports
 
 //Engine
@@ -273,6 +290,7 @@ ViewerSetFogColor, ViewerSetFogDistance, ViewerScreenToWorld, ViewerWorldToScree
 ViewerCopyToTexture, ViewerGetFramesPerSecond, ViewerGetPickedObject,
 ViewerScreenToVector, ViewerVectorToScreen, ViewerPixelToDistance, ViewerGetPickedObjectsList,
 ViewerSetAntiAliasing,
+ViewerSetOverrideMaterial, 
 ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported, 
 //Dummycube
 DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode, DummycubeSetVisible,

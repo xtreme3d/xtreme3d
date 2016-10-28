@@ -259,7 +259,7 @@ interface
 {$i GLScene.inc}
 
 uses
-   Classes, GLMisc, GLTexture, SysUtils, VectorGeometry, XCollection,
+   Classes, Dialogs, GLMisc, GLTexture, SysUtils, VectorGeometry, XCollection,
    GLGraphics, GeometryBB, GLContext, GLCrossPlatform, VectorLists,
    GLSilhouette, PersistentClasses, GLState;
 
@@ -1726,6 +1726,8 @@ type
          FInitiateRendering : TDirectRenderEvent;
          FWrapUpRendering : TDirectRenderEvent;
 
+         FOverrideMaterial: TGLLibMaterial;
+
       protected
          { Protected Declarations }
          procedure SetBackgroundColor(AColor: TColor);
@@ -2062,6 +2064,8 @@ type
             You cannot issue OpenGL calls in this event, if you want to do your own
             OpenGL stuff, use the PostRender event. }
          property AfterRender: TNotifyEvent read FAfterRender write FAfterRender stored False;
+
+         property OverrideMaterial: TGLLibMaterial read FOverrideMaterial write FOverrideMaterial;
    end;
 
    // TGLNonVisualViewer
@@ -3935,13 +3939,16 @@ begin
       if aChild.Owner=Self then
          RemoveComponent(aChild);
       FChildren.Remove(aChild);
-      aChild.FParent:=nil;
+      //aChild.FParent:=nil;
+      {
       if keepChildren then begin
          BeginUpdate;
          with aChild do while Count>0 do
             Children[0].MoveTo(Self);
          EndUpdate;
-      end else NotifyChange(Self);
+      end
+      else NotifyChange(Self);
+      }
    end;
 end;
 
@@ -4663,12 +4670,24 @@ begin
       if self.FScene<>nil then
          self.FScene.FRenderedObject := self;
       if not rci.ignoreMaterials then begin
-         FMaterial.Apply(rci);
-         repeat
-            if (osDirectDraw in ObjectStyle) or rci.amalgamating then
-               BuildList(rci)
-            else glCallList(GetHandle(rci));
-         until not FMaterial.UnApply(rci);
+         if rci.overrideMaterial <> nil then
+         begin
+            rci.overrideMaterial.Material.Apply(rci);
+            repeat
+               if (osDirectDraw in ObjectStyle) or rci.amalgamating then
+                  BuildList(rci)
+               else glCallList(GetHandle(rci));
+            until not rci.overrideMaterial.Material.UnApply(rci);
+         end
+         else
+         begin
+            FMaterial.Apply(rci);
+            repeat
+               if (osDirectDraw in ObjectStyle) or rci.amalgamating then
+                  BuildList(rci)
+               else glCallList(GetHandle(rci));
+            until not FMaterial.UnApply(rci);
+         end;
       end else begin
          if (osDirectDraw in ObjectStyle) or rci.amalgamating then
             BuildList(rci)
@@ -6114,6 +6133,10 @@ begin
    rci.bufferFaceCull:=aBuffer.FaceCulling;
    rci.drawState:=drawState;
    rci.sceneAmbientColor:=FCurrentBuffer.AmbientColor.Color;
+
+   if aBuffer.OverrideMaterial <> nil then
+      rci.overrideMaterial := aBuffer.OverrideMaterial;
+
    with aBuffer.Camera do begin
       rci.cameraPosition:=aBuffer.FCameraAbsolutePosition;
       rci.cameraDirection:=FLastDirection;

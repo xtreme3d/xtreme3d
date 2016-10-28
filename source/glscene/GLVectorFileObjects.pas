@@ -6392,24 +6392,39 @@ begin
          Assert(False);
       end;
       if not rci.ignoreMaterials then begin
-         if UseMeshMaterials and Assigned(MaterialLibrary) then begin
-            rci.materialLibrary:=MaterialLibrary;
-            if not FMaterialLibraryCachesPrepared then
-               PrepareMaterialLibraryCache;
-         end else rci.materialLibrary:=nil;
-         if Assigned(LightmapLibrary) then
-            rci.lightmapLibrary:=LightmapLibrary
-         else rci.lightmapLibrary:=nil;
-         if    rci.amalgamating
-            or not (ListHandleAllocated or (osDirectDraw in ObjectStyle)) then
-            PrepareBuildList(rci);
-         Material.Apply(rci);
-         repeat
-            if (osDirectDraw in ObjectStyle) or rci.amalgamating then
-               BuildList(rci)
-            else glCallList(GetHandle(rci));
-         until not Material.UnApply(rci);
-         rci.materialLibrary:=nil;
+         if rci.overrideMaterial <> nil then
+         begin
+           if rci.amalgamating
+              or not (ListHandleAllocated or (osDirectDraw in ObjectStyle)) then
+              PrepareBuildList(rci);
+           rci.overrideMaterial.Material.Apply(rci);
+           repeat
+              if (osDirectDraw in ObjectStyle) or rci.amalgamating then
+                 BuildList(rci)
+              else glCallList(GetHandle(rci));
+           until not rci.overrideMaterial.Material.UnApply(rci);
+         end
+         else
+         begin
+           if UseMeshMaterials and Assigned(MaterialLibrary) then begin
+              rci.materialLibrary:=MaterialLibrary;
+              if not FMaterialLibraryCachesPrepared then
+                 PrepareMaterialLibraryCache;
+           end else rci.materialLibrary:=nil;
+           if Assigned(LightmapLibrary) then
+              rci.lightmapLibrary:=LightmapLibrary
+           else rci.lightmapLibrary:=nil;
+           if rci.amalgamating
+              or not (ListHandleAllocated or (osDirectDraw in ObjectStyle)) then
+              PrepareBuildList(rci);
+           Material.Apply(rci);
+           repeat
+              if (osDirectDraw in ObjectStyle) or rci.amalgamating then
+                 BuildList(rci)
+              else glCallList(GetHandle(rci));
+           until not Material.UnApply(rci);
+           rci.materialLibrary:=nil;
+         end;
       end else begin
          if (osDirectDraw in ObjectStyle) or rci.amalgamating then
             BuildList(rci)
