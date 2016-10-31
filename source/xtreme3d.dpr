@@ -302,6 +302,31 @@ begin
   result:=1;
 end;
 
+function ShadowMapSetFBO(shadowmap, fbo: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+  fb: TGLFBO;
+begin
+  sm := TGLShadowMap(trunc64(shadowmap));
+  if not (fbo = 0) then
+  begin
+    fb := TGLFBO(trunc64(fbo));
+    sm.FBO := fb;
+  end
+  else
+    sm.FBO := nil;
+  result := 1;
+end;
+
+function FBOUseFloatColorBuffer(fbo, mode: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.UseFloatBuffer := Boolean(trunc64(mode));
+  result := 1;
+end;
+
 exports
 
 //Engine
@@ -589,10 +614,11 @@ MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
 FBOCreate, FBOSetCamera, FBOSetViewer,
 FBORenderObject, FBORenderObjectEx,
-FBOSetOverrideMaterial,
+FBOSetOverrideMaterial, FBOUseFloatColorBuffer,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
+ShadowMapSetFBO,
 ShadowMapRender,
 //ODE
 OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,

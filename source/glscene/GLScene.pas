@@ -1822,6 +1822,7 @@ type
            updatePerfCounter: Boolean;
            clear: Boolean;
            swap: Boolean);
+         procedure SimpleRender3(baseObject : TGLBaseSceneObject);
 
          {: Render the scene to a bitmap at given DPI.<p>
             DPI = "dots per inch".<p>
@@ -4672,12 +4673,12 @@ begin
       if not rci.ignoreMaterials then begin
          if rci.overrideMaterial <> nil then
          begin
-            rci.overrideMaterial.Material.Apply(rci);
+            rci.overrideMaterial.Apply(rci);
             repeat
                if (osDirectDraw in ObjectStyle) or rci.amalgamating then
                   BuildList(rci)
                else glCallList(GetHandle(rci));
-            until not rci.overrideMaterial.Material.UnApply(rci);
+            until not rci.overrideMaterial.UnApply(rci);
          end
          else
          begin
@@ -7830,11 +7831,12 @@ begin
 end;
 
 procedure TGLSceneBuffer.SimpleRender(baseObject : TGLBaseSceneObject);
-var
-   maxLights : Integer;
+//var
+   //maxLights : Integer;
 begin
    if FRendering then Exit;
    FRendering:=True;
+   //FCamera.AbsoluteMatrixAsAddress;
    FCamera.FScene.AddBuffer(Self);
    glGetFloatv(GL_PROJECTION_MATRIX, @FProjectionMatrix);
    glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
@@ -7849,7 +7851,7 @@ procedure TGLSceneBuffer.SimpleRender2(
   clear: Boolean;
   swap: Boolean);
 var
-   maxLights : Integer;
+   //maxLights : Integer;
    backColor : TColorVector;
    perfCounter, framePerf : Int64;
 begin
@@ -7910,6 +7912,22 @@ begin
       FRendering:=False;
    end;
 
+end;
+
+procedure TGLSceneBuffer.SimpleRender3(baseObject : TGLBaseSceneObject);
+//var
+   //maxLights : Integer;
+begin
+   if FRendering then Exit;
+   FRendering:=True;
+   FCamera.AbsoluteMatrixAsAddress;
+   FCamera.FScene.AddBuffer(Self);
+   glGetFloatv(GL_PROJECTION_MATRIX, @FProjectionMatrix);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
+   glClearColor(0, 0, 0, 1);
+   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+   FCamera.FScene.RenderScene(self, FViewport.Width, FViewport.Height, dsRendering, baseObject);
+   FRendering:=False;
 end;
 
 // SetBackgroundColor

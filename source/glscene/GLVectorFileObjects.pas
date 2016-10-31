@@ -6397,12 +6397,12 @@ begin
            if rci.amalgamating
               or not (ListHandleAllocated or (osDirectDraw in ObjectStyle)) then
               PrepareBuildList(rci);
-           rci.overrideMaterial.Material.Apply(rci);
+           rci.overrideMaterial.Apply(rci);
            repeat
               if (osDirectDraw in ObjectStyle) or rci.amalgamating then
                  BuildList(rci)
               else glCallList(GetHandle(rci));
-           until not rci.overrideMaterial.Material.UnApply(rci);
+           until not rci.overrideMaterial.UnApply(rci);
          end
          else
          begin

@@ -4,7 +4,7 @@ interface
 
 uses
   Classes, Dialogs, VectorTypes, VectorGeometry,
-  GLScene, GLTexture, OpenGL1x, GLUtils;
+  GLScene, GLTexture, OpenGL1x, GLUtils, GLFBO;
 
 const
   // OpenGL 1.4 required 
@@ -37,8 +37,11 @@ type
         FZScale: Single;
         FZNear: Single;
         FZFar: Single;
+        FFBO: TGLFBO;
         procedure SetTexture(texture: TGLTexture);
         procedure DoInitialize;
+        procedure RenderToUserFBO;
+        procedure RenderToOwnedFBO;
     public
         { Public Declarations }
         constructor Create;
@@ -56,6 +59,7 @@ type
         property ZScale: Single read FZScale write FZScale;
         property ZNear: Single read FZNear write FZNear;
         property ZFar: Single read FZFar write FZFar;
+        property FBO: TGLFBO read FFBO write FFBO;
   end;
 
 implementation
@@ -110,6 +114,7 @@ begin
   FZNear := 0.0; //-20.0
   FZFar := 100.0; //200.0
   FShadowMatrix := IdentityHmgMatrix;
+  FFBO := nil;
 end;
 
 destructor TGLShadowMap.Destroy;
@@ -121,7 +126,94 @@ begin
   inherited Destroy;
 end;
 
-procedure TGLShadowMap.Render;
+procedure TGLShadowMap.RenderToUserFBO;
+var
+   lightProjMat, lightModelViewMat, invViewMat: TMatrix;
+   oldWidth, oldHeight: Integer;
+   oldCamera: TGLCamera;
+   oldFBOCamera: TGLCamera;
+   oldFBOObject: TGLBaseSceneObject;
+   oldOverrideMat: TGLLibMaterial;
+begin
+   if not Assigned(FShadowCamera) then
+     Exit;
+
+   oldWidth := MainBuffer.Width;
+   oldHeight := MainBuffer.Height;
+   oldCamera := MainBuffer.Camera;
+   MainBuffer.Resize(FFBO.Width, FFBO.Height);
+   MainBuffer.SetViewPort(0, 0, FFBO.Width, FFBO.Height);
+   MainBuffer.Camera := FShadowCamera;
+
+   MainBuffer.RenderingContext.Activate;
+   if not FInitialized then
+     DoInitialize;
+
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glOrtho(-FProjectionSize, FProjectionSize,
+           -FProjectionSize, FProjectionSize, FZNear, FZFar);
+   glGetFloatv(GL_PROJECTION_MATRIX, @lightProjMat[0]);
+
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   FShadowCamera.Apply;
+   glGetFloatv(GL_MODELVIEW_MATRIX, @lightModelViewMat[0]);
+   //glLoadIdentity();
+
+   FFBO.Initialize();
+   glBindFramebuffer(GL_FRAMEBUFFER, FFBO.Framebuffer);
+
+   oldOverrideMat := MainBuffer.OverrideMaterial;
+   if FFBO.OverrideMaterial <> nil then
+   begin
+     MainBuffer.OverrideMaterial := FFBO.OverrideMaterial;
+   end;
+
+   glClearColor(1, 1, 1, 1);
+   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+   glEnable(GL_DEPTH_TEST);
+   glEnable(GL_CULL_FACE);
+   glDisable(GL_LIGHTING);
+   glDepthFunc(GL_LESS);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+   glCullFace(GL_FRONT);
+
+   MainBuffer.SimpleRender(FCaster);
+
+   MainBuffer.OverrideMaterial := oldOverrideMat;
+
+   glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+   glCullFace(GL_BACK);
+
+   glMatrixMode(GL_MODELVIEW);
+   glPushMatrix();
+   glLoadIdentity();
+   oldCamera.Apply;
+   glGetFloatv(GL_MODELVIEW_MATRIX, @invViewMat[0]);
+   glPopMatrix();
+   InvertMatrix(invViewMat);
+
+   glMatrixMode(GL_MODELVIEW);
+   glPushMatrix();
+   glLoadIdentity();
+   glTranslatef(0.5, 0.5, 0.5);
+   glScalef(0.5, 0.5, 0.5);
+   glMultMatrixf(@lightProjMat);
+   glMultMatrixf(@lightModelViewMat);
+   glMultMatrixf(@invViewMat);
+   //glScalef(FZScale, FZScale, FZScale);
+   glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix[0]);
+   glPopMatrix();
+
+   MainBuffer.RenderingContext.Deactivate;
+
+   MainBuffer.Resize(oldWidth, oldHeight);
+   MainBuffer.Camera := oldCamera;
+end;
+
+procedure TGLShadowMap.RenderToOwnedFBO;
 var
    oldWidth, oldHeight: Integer;
    projMat, mvMat, mvpMat, tsMat, tmpMat, invCamMat: TMatrix;
@@ -140,6 +232,7 @@ begin
    MainBuffer.RenderingContext.Activate;
    if not FInitialized then
      DoInitialize;
+
    glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
 
    glClearColor(0, 0, 0, 1);
@@ -159,7 +252,7 @@ begin
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   MainBuffer.Camera.Apply;
+   FShadowCamera.Apply;
    glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat[0]);
 
    MainBuffer.SimpleRender(FCaster);
@@ -192,6 +285,14 @@ begin
    
    MainBuffer.Resize(oldWidth, oldHeight);
    MainBuffer.Camera := oldCamera;
+end;
+
+procedure TGLShadowMap.Render;
+begin
+   if FFBO <> nil then
+     RenderToUserFBO()
+   else
+     RenderToOwnedFBO();
 end;
 
 end.

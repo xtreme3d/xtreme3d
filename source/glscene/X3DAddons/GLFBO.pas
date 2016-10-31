@@ -14,6 +14,9 @@ const
   GL_COMPARE_R_TO_TEXTURE = $884E;
   GL_DEPTH_TEXTURE_MODE = $884B;
 
+  // GL_ARB_texture_float required
+  GL_RGBA32F = $8814;
+
 type   
 
   TGLFBO = class(TPersistent)
@@ -37,8 +40,9 @@ type
 
         FOverrideMaterial: TGLLibMaterial;
 
-        procedure SetTexture(texture: TGLTexture);
+        FUseFloatBuffer: Boolean;
         procedure DoInitialize;
+        procedure SetTexture(texture: TGLTexture);
     public
         { Public Declarations }
         constructor Create;
@@ -53,6 +57,11 @@ type
         property Camera: TGLCamera read FCamera write FCamera;
         property RenderObject: TGLBaseSceneObject read FRenderObject write FRenderObject;
         property OverrideMaterial: TGLLibMaterial read FOverrideMaterial write FOverrideMaterial;
+        property Framebuffer: GLuint read FFramebuffer;
+        property UseFloatBuffer: Boolean read FUseFloatBuffer write FUseFloatBuffer;
+        procedure DoRender(clear: Boolean);
+        procedure DoRender2(clear: Boolean);
+        procedure Initialize;
   end;
 
 implementation
@@ -80,7 +89,10 @@ begin
 
   glGenTextures(1, @FColorTextureHandle);
   glBindTexture(GL_TEXTURE_2D, FColorTextureHandle);
-  glTexImage2D(GL_TEXTURE_2D, 0, 4, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nil);
+  if FUseFloatBuffer then
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, Width, Height, 0, GL_RGBA, GL_FLOAT, nil)
+  else
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nil);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -103,6 +115,7 @@ begin
   Height := 256;
   FInitialized := false;
   FProjectionSize := 20.0;
+  FUseFloatBuffer := false;
 end;
 
 destructor TGLFBO.Destroy;
@@ -116,10 +129,15 @@ begin
   inherited Destroy;
 end;
 
-procedure TGLFBO.Render(clear: Boolean);
+procedure TGLFBO.Initialize;
+begin
+   if not FInitialized then
+     DoInitialize;
+end;
+
+procedure TGLFBO.DoRender(clear: Boolean);
 var
    oldWidth, oldHeight: Integer;
-   projMat, mvMat, mvpMat, tsMat, tmpMat, invCamMat: TMatrix;
    oldCamera: TGLCamera;
    oldOverrideMat: TGLLibMaterial;
 begin
@@ -133,28 +151,62 @@ begin
    MainBuffer.SetViewPort(0, 0, oldWidth, oldHeight);
    MainBuffer.Camera := FCamera;
 
-   MainBuffer.RenderingContext.Activate;
    if not FInitialized then
      DoInitialize;
-   glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
-
-   oldOverrideMat := MainBuffer.OverrideMaterial;
    
+   glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+   oldOverrideMat := MainBuffer.OverrideMaterial;
    if FOverrideMaterial <> nil then
    begin
      MainBuffer.OverrideMaterial := FOverrideMaterial;
    end;
-
    MainBuffer.SimpleRender2(FRenderObject, False, False, clear, False);
-
    MainBuffer.OverrideMaterial := oldOverrideMat;
-
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-   MainBuffer.RenderingContext.Deactivate;
-   
    MainBuffer.Resize(oldWidth, oldHeight);
    MainBuffer.Camera := oldCamera;
+end;
+
+procedure TGLFBO.DoRender2(clear: Boolean);
+var
+   oldWidth, oldHeight: Integer;
+   oldCamera: TGLCamera;
+   oldOverrideMat: TGLLibMaterial;
+begin
+   if not Assigned(FCamera) then
+     Exit;
+
+   oldWidth := MainBuffer.Width;
+   oldHeight := MainBuffer.Height;
+   oldCamera := MainBuffer.Camera;
+   MainBuffer.Resize(FWidth, FHeight);
+   MainBuffer.SetViewPort(0, 0, oldWidth, oldHeight);
+   MainBuffer.Camera := FCamera;
+
+   if not FInitialized then
+     DoInitialize;
+   
+   glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+   oldOverrideMat := MainBuffer.OverrideMaterial;
+   if FOverrideMaterial <> nil then
+   begin
+     MainBuffer.OverrideMaterial := FOverrideMaterial;
+   end;
+   //MainBuffer.SimpleRender3(FRenderObject);
+   MainBuffer.SimpleRender2(FRenderObject, False, False, clear, False);
+   MainBuffer.OverrideMaterial := oldOverrideMat;
+   glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+   MainBuffer.Resize(oldWidth, oldHeight);
+   MainBuffer.Camera := oldCamera;
+end;
+
+procedure TGLFBO.Render(clear: Boolean);
+begin
+   MainBuffer.RenderingContext.Activate;
+   DoRender(clear);
+   MainBuffer.RenderingContext.Deactivate;
 end;
 
 end.
