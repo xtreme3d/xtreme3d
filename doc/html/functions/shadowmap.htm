@@ -78,10 +78,18 @@
 <BR><A>znear - расстояние до дальней плоскости отсечения. Значение по умолчанию - 100.</A>
 <HR>
 
+<A name="ShadowMapSetFBO"></A>
+<H1 class=name>ShadowMapSetFBO</H1>
+<A class=type>real</A><A> = </A><A class=function>ShadowMapSetFBO</A><A>( shadowmap,fbo as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает фреймбуферный объект (FBO) для рендеринга теней. По умолчанию теневая карта рендерит в свой собственный внутренний буфер, но в некоторых случаях вам может понадобиться внешний - например, для реализации теней методом VSM. Обратите внимание, что перед рендерингом буфер очищается белым цветом.</A>
+<BR><A>shadowmap - id теневой карты</A>
+<BR><A>fbo - id FBO.</A>
+<HR>
+
 <A name="ShadowMapRender"></A>
 <H1 class=name>ShadowMapRender</H1>
 <A class=type>real</A><A> = </A><A class=function>ShadowMapRender</A><A>( shadowmap as </A><A class=type>real</A><A> );</A>
-<BR><A>Осуществляет рендеринг буфера теневой карты.</A>
+<BR><A>Осуществляет рендеринг в буфер теневой карты.</A>
 <BR><A>shadowmap - id теневой карты.</A>
 <HR>
 
