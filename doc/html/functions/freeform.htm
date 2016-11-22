@@ -101,6 +101,76 @@
 <BR><A>x,y,z - вектор бинормали.</A>
 <HR>
 
+<A name="FreeformMeshGetVertex"></A>
+<H1 class=name>FreeformMeshGetVertex</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetVertex</A><A>( freeform,mesh,vertex,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает координату вершины меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>vertex - индекс вершины</A>
+<BR><A>index - индекс координаты вершины (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FreeformMeshGetNormal"></A>
+<H1 class=name>FreeformMeshGetNormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetNormal</A><A>( freeform,mesh,normal,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает координату вектора нормали меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>normal - индекс нормали</A>
+<BR><A>index - индекс координаты вектора нормали (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FreeformMeshGetTexCoord"></A>
+<H1 class=name>FreeformMeshGetTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetTexCoord</A><A>( freeform,mesh,texcoord,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает текстурную координату меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>texcoord - индекс пары текстурных координат</A>
+<BR><A>index - индекс элемента (0 = U, 1 = V).</A>
+<HR>
+
+<A name="FreeformMeshGetSecondTexCoord"></A>
+<H1 class=name>FreeformMeshGetSecondTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetSecondTexCoord</A><A>( freeform,mesh,texcoord,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает текстурную координату меша из второго набора текстурных координат.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>texcoord - индекс пары текстурных координат</A>
+<BR><A>index - индекс элемента (0 = U, 1 = V).</A>
+<HR>
+
+<A name="FreeformMeshGetTangent"></A>
+<H1 class=name>FreeformMeshGetTangent</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetTangent</A><A>( freeform,mesh,tangent,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает координату вектора касательной меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>tangent - индекс вектора касательной</A>
+<BR><A>index - индекс координаты вектора касательной (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FreeformMeshGetBinormal"></A>
+<H1 class=name>FreeformMeshGetBinormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshGetBinormal</A><A>( freeform,mesh,binormal,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает координату вектора бинормали меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>binormal - индекс вектора бинормали</A>
+<BR><A>index - индекс координаты вектора бинормали (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupGetIndex"></A>
+<H1 class=name>FreeformMeshFaceGroupGetIndex</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupGetIndex</A><A>( freeform,mesh,facegroup,index as </A><A class=type>real</A> );</A>
+<BR><A>¬озвращает индекс вершины в фейсгруппе. »ндексы идут друг за другом, образу€ "плоский" список треугольников - то есть, индексы 0, 1, 2 образуют первый треугольник, 3, 4, 5 - второй и т.д. ƒл€ нормалей, текстурных координат и других атрибутов используютс€ те же индексы, что и дл€ вершин.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>facegroup - индекс фейсгруппы</A>
+<BR><A>index - индекс индекса вершины.</A>
+<HR>
+
 <A name="FreeformMeshVerticesCount"></A>
 <H1 class=name>FreeformMeshVerticesCount</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshVerticesCount</A><A>( freeform,mesh as </A><A class=type>real</A> );</A>
