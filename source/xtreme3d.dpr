@@ -327,6 +327,71 @@ begin
   result := 1;
 end;
 
+function FreeformMeshGetVertex(ff, mesh, v, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)][trunc64(index)];
+end;
+
+function FreeformMeshGetNormal(ff, mesh, n, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)][trunc64(index)];
+end;
+
+function FreeformMeshGetTexCoord(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)][trunc64(index)];
+end;
+
+function FreeformMeshGetSecondTexCoord(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  i: Integer;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  i := trunc64(index);
+  if i = 0 then
+    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].S
+  else if i = 1 then
+    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].T
+  else
+    result := 0;
+end;
+
+function FreeformMeshGetTangent(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)][trunc64(index)];
+end;
+
+function FreeformMeshGetBinormal(ff, mesh, b, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)][trunc64(index)];
+end;
+
+function FreeformMeshFaceGroupGetIndex(ff, mesh, fg, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  faceGroup: TFGVertexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
+  result := faceGroup.VertexIndices[trunc64(index)];
+end;
+
 exports
 
 //Engine
@@ -400,6 +465,12 @@ FreeformAddMesh, FreeformMeshAddFaceGroup,
 FreeformMeshAddVertex, FreeformMeshAddNormal,
 FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
 FreeformMeshAddTangent, FreeformMeshAddBinormal,
+
+FreeformMeshGetVertex, FreeformMeshGetNormal,
+FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
+FreeformMeshGetTangent, FreeformMeshGetBinormal,
+FreeformMeshFaceGroupGetIndex,
+
 FreeformMeshFaceGroupAddTriangle,
 FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
 FreeformMeshGenNormals, FreeformMeshGenTangents,
