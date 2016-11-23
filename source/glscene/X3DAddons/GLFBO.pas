@@ -16,8 +16,9 @@ const
 
   // GL_ARB_texture_float required
   GL_RGBA32F = $8814;
+  GL_RGBA16F = $881A;
 
-type   
+type
 
   TGLFBO = class(TPersistent)
     private
@@ -40,7 +41,15 @@ type
 
         FOverrideMaterial: TGLLibMaterial;
 
+        // TODO: remove this
         FUseFloatBuffer: Boolean;
+
+        FColorBufferFormat: TGLTextureFormat;
+        
+        FInternalColorFormat: GLint;
+        FColorFormat: GLenum;
+        FColorType: GLenum;
+
         procedure DoInitialize;
         procedure SetTexture(texture: TGLTexture);
     public
@@ -61,6 +70,8 @@ type
         property UseFloatBuffer: Boolean read FUseFloatBuffer write FUseFloatBuffer;
         procedure DoRender(clear: Boolean);
         procedure DoRender2(clear: Boolean);
+        procedure SetColorBufferFormat(format: TGLTextureFormat);
+        procedure Deinitialize;
         procedure Initialize;
   end;
 
@@ -89,10 +100,10 @@ begin
 
   glGenTextures(1, @FColorTextureHandle);
   glBindTexture(GL_TEXTURE_2D, FColorTextureHandle);
-  if FUseFloatBuffer then
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, Width, Height, 0, GL_RGBA, GL_FLOAT, nil)
-  else
-    glTexImage2D(GL_TEXTURE_2D, 0, 4, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nil);
+  //if FUseFloatBuffer then
+  //  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, Width, Height, 0, GL_RGBA, GL_FLOAT, nil)
+  //else
+    glTexImage2D(GL_TEXTURE_2D, 0, FInternalColorFormat, Width, Height, 0, FColorFormat, FColorType, nil);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -108,6 +119,20 @@ begin
     
 end;
 
+procedure TGLFBO.Deinitialize;
+begin
+  if FInitialized then
+  begin
+    FInitialized := False;
+    if (glIsTexture(FDepthTextureHandle)) then
+      glDeleteTextures(1, @FDepthTextureHandle);
+    if (glIsTexture(FColorTextureHandle)) then
+      glDeleteTextures(1, @FColorTextureHandle);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDeleteFramebuffers(1, @FFramebuffer);
+  end;
+end;
+
 constructor TGLFBO.Create;
 begin
   inherited Create;
@@ -116,17 +141,109 @@ begin
   FInitialized := false;
   FProjectionSize := 20.0;
   FUseFloatBuffer := false;
+
+  FColorBufferFormat := tfDefault;
+  
+  FInternalColorFormat := GL_RGBA8;
+  FColorFormat := GL_RGBA;
+  FColorType := GL_UNSIGNED_BYTE;
 end;
 
 destructor TGLFBO.Destroy;
 begin
-  if (glIsTexture(FDepthTextureHandle)) then
-    glDeleteTextures(1, @FDepthTextureHandle);
-  if (glIsTexture(FColorTextureHandle)) then
-    glDeleteTextures(1, @FColorTextureHandle);
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-  glDeleteFramebuffers(1, @FFramebuffer);
+  Deinitialize();
   inherited Destroy;
+end;
+
+procedure TGLFBO.SetColorBufferFormat(format: TGLTextureFormat);
+begin
+  if format = tfDefault then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA8;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfRGB then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGB8;
+    FColorFormat := GL_RGB;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfRGBA then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA8;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfRGB16 then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGB5;
+    FColorFormat := GL_RGB;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfRGBA16 then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA4;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfAlpha then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_ALPHA8;
+    FColorFormat := GL_ALPHA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfLuminance then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_LUMINANCE8;
+    FColorFormat := GL_LUMINANCE;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfLuminanceAlpha then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_LUMINANCE8_ALPHA8;
+    FColorFormat := GL_LUMINANCE_ALPHA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  else if format = tfIntensity then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_INTENSITY8;
+    FColorFormat := GL_LUMINANCE;
+    FColorType := GL_UNSIGNED_BYTE;
+  end
+  // tfNormalMap is not supported
+  else if format = tfRGBAFloat16 then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA16F;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_FLOAT;
+  end
+  else if format = tfRGBAFloat32 then
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA32F;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_FLOAT;
+  end
+  else
+  begin
+    FColorBufferFormat := format;
+    FInternalColorFormat := GL_RGBA8;
+    FColorFormat := GL_RGBA;
+    FColorType := GL_UNSIGNED_BYTE;
+  end;
+
+  Deinitialize();
 end;
 
 procedure TGLFBO.Initialize;

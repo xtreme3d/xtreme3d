@@ -318,12 +318,24 @@ begin
   result := 1;
 end;
 
+// TODO: remove this
+{
 function FBOUseFloatColorBuffer(fbo, mode: real): real; stdcall;
 var
   fb: TGLFBO;
 begin
   fb := TGLFBO(trunc64(fbo));
   fb.UseFloatBuffer := Boolean(trunc64(mode));
+  result := 1;
+end;
+}
+
+function FBOSetColorTextureFormat(fbo, tf: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.SetColorBufferFormat(TGLTextureFormat(trunc64(tf)));
   result := 1;
 end;
 
@@ -685,7 +697,9 @@ MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
 FBOCreate, FBOSetCamera, FBOSetViewer,
 FBORenderObject, FBORenderObjectEx,
-FBOSetOverrideMaterial, FBOUseFloatColorBuffer,
+FBOSetOverrideMaterial,
+//FBOUseFloatColorBuffer,
+FBOSetColorTextureFormat,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
