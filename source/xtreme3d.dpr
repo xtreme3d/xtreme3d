@@ -404,6 +404,15 @@ begin
   result := faceGroup.VertexIndices[trunc64(index)];
 end;
 
+function FreeformMeshSetVertex(ff, mesh, v, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)] := AffineVectorMake(x, y, z);
+  result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -482,6 +491,8 @@ FreeformMeshGetVertex, FreeformMeshGetNormal,
 FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
 FreeformMeshGetTangent, FreeformMeshGetBinormal,
 FreeformMeshFaceGroupGetIndex,
+
+FreeformMeshSetVertex,
 
 FreeformMeshFaceGroupAddTriangle,
 FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
