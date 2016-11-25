@@ -413,6 +413,62 @@ begin
   result := 1.0;
 end;
 
+function FreeformMeshSetNormal(ff, mesh, n, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)] := AffineVectorMake(x, y, z);
+  result := 1.0;
+end;
+
+function FreeformMeshSetTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)] := AffineVectorMake(u, v, 1); 
+  result := 1.0;
+end;
+
+function FreeformMeshSetSecondTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)] := TexPointMake(u, v); 
+  result := 1.0;
+end;
+
+function FreeformMeshSetTangent(ff, mesh, t, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)] := VectorMake(x, y, z, 0.0);
+  result := 1.0;
+end;
+
+function FreeformMeshSetBinormal(ff, mesh, b, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)] := VectorMake(x, y, z, 0.0);
+  result := 1.0;
+end;
+
+function FreeformMeshFaceGroupSetIndex(ff, mesh, fg, index, i: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  faceGroup: TFGVertexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
+  faceGroup.VertexIndices[trunc64(index)] := trunc64(i);
+  result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -492,7 +548,10 @@ FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
 FreeformMeshGetTangent, FreeformMeshGetBinormal,
 FreeformMeshFaceGroupGetIndex,
 
-FreeformMeshSetVertex,
+FreeformMeshSetVertex, FreeformMeshSetNormal,
+FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
+FreeformMeshSetTangent, FreeformMeshSetBinormal,
+FreeformMeshFaceGroupSetIndex,
 
 FreeformMeshFaceGroupAddTriangle,
 FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
