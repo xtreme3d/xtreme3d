@@ -78,6 +78,23 @@ begin
    Result[2]:=v1[2]*delta;
 end;
 
+function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
+var
+   Buffer : String;
+   ExtPos: Integer;
+begin
+   v.Buffer.RenderingContext.Activate;
+   Buffer := StrPas(glGetString(GL_EXTENSIONS));
+   // First find the position of the extension string as substring in Buffer.
+   ExtPos := Pos(Extension, Buffer);
+   Result := ExtPos > 0;
+   // Now check that it isn't only a substring of another extension.
+   if Result then
+     Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
+               or (Buffer[ExtPos + Length(Extension)]=' ');
+   v.Buffer.RenderingContext.Deactivate;
+end;
+
 procedure GenMeshTangents(mesh: TMeshObject);
 var
    i,j: Integer;
@@ -275,6 +292,36 @@ begin
   result:=1;
 end;
 
+function ViewerGetSize(viewer, index: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  if trunc64(index) = 0 then
+    result := v.Width
+  else
+    result := v.Height;
+end;
+
+function ViewerGetPosition(viewer, index: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  if trunc64(index) = 0 then
+    result := v.Left
+  else
+    result := v.Top;
+end;
+
+function ViewerIsOpenGLExtensionSupported(viewer: real; ext: pchar): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  result := Integer(IsExtensionSupported(v, String(ext)));
+end;
+
 function FBORenderObjectEx(fbo, obj, clear: real): real; stdcall;
 var
   fb: TGLFBO;
@@ -317,18 +364,6 @@ begin
     sm.FBO := nil;
   result := 1;
 end;
-
-// TODO: remove this
-{
-function FBOUseFloatColorBuffer(fbo, mode: real): real; stdcall;
-var
-  fb: TGLFBO;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.UseFloatBuffer := Boolean(trunc64(mode));
-  result := 1;
-end;
-}
 
 function FBOSetColorTextureFormat(fbo, tf: real): real; stdcall;
 var
@@ -484,8 +519,10 @@ ViewerSetFogColor, ViewerSetFogDistance, ViewerScreenToWorld, ViewerWorldToScree
 ViewerCopyToTexture, ViewerGetFramesPerSecond, ViewerGetPickedObject,
 ViewerScreenToVector, ViewerVectorToScreen, ViewerPixelToDistance, ViewerGetPickedObjectsList,
 ViewerSetAntiAliasing,
-ViewerSetOverrideMaterial, 
-ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported, 
+ViewerSetOverrideMaterial,
+ViewerIsOpenGLExtensionSupported,
+ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
+ViewerGetSize, ViewerGetPosition,
 //Dummycube
 DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode, DummycubeSetVisible,
 DummycubeSetEdgeColor, DummycubeSetCubeSize,
