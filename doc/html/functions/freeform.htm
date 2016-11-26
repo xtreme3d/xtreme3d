@@ -111,6 +111,67 @@
 <BR><A>x,y,z - координаты.</A>
 <HR>
 
+<A name="FreeformMeshSetNormal"></A>
+<H1 class=name>FreeformMeshSetNormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetNormal</A><A>( freeform,mesh,normal,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Задает вектор нормали меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>normal - индекс нормали</A>
+<BR><A>x,y,z - вектор нормали.</A>
+<HR>
+
+<A name="FreeformMeshSetTexCoord"></A>
+<H1 class=name>FreeformMeshSetTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetTexCoord</A><A>( freeform,mesh,texcoord,u,v as </A><A class=type>real</A> );</A>
+<BR><A>Задает пару текстурных координат меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>texcoord - индекс текстурных координат</A>
+<BR><A>u,v - текстурные координаты.</A>
+<HR>
+
+<A name="FreeformMeshSetSecondTexCoord"></A>
+<H1 class=name>FreeformMeshSetSecondTexCoord</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetSecondTexCoord</A><A>( freeform,mesh,texcoord,u,v as </A><A class=type>real</A> );</A>
+<BR><A>Задает пару вторых текстурных координат меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>texcoord - индекс вторых текстурных координат</A>
+<BR><A>u,v - текстурные координаты.</A>
+<HR>
+
+<A name="FreeformMeshSetTangent"></A>
+<H1 class=name>FreeformMeshSetTangent</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetTangent</A><A>( freeform,mesh,tangent,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Задает вектор касательной меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>tangent - индекс вектора касательной</A>
+<BR><A>x,y,z - вектор касательной.</A>
+<HR>
+
+<A name="FreeformMeshSetBinormal"></A>
+<H1 class=name>FreeformMeshSetBinormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshSetBinormal</A><A>( freeform,mesh,binormal,x,y,z as </A><A class=type>real</A> );</A>
+<BR><A>Задает вектор бинормали меша.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>binormal - индекс вектора бинормали</A>
+<BR><A>x,y,z - вектор бинормали.</A>
+<HR>
+
+<A name="FreeformMeshFaceGroupSetIndex"></A>
+<H1 class=name>FreeformMeshFaceGroupSetIndex</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupSetIndex</A><A>( freeform,mesh,facegroup,index,i as </A><A class=type>real</A> );</A>
+<BR><A>Задает индекс вершины в фейсгруппе. Индексы идут друг за другом, образуя "плоский" список треугольников - то есть, индексы под номером 0, 1, 2 образуют первый треугольник, 3, 4, 5 - второй и т.д. Для нормалей, текстурных координат и других атрибутов используются те же индексы, что и для вершин.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>mesh - индекс меша</A>
+<BR><A>facegroup - индекс фейсгруппы</A>
+<BR><A>index - номер индекса вершины</A>
+<BR><A>i - индекс вершины.</A>
+<HR>
+
 <A name="FreeformMeshGetVertex"></A>
 <H1 class=name>FreeformMeshGetVertex</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshGetVertex</A><A>( freeform,mesh,vertex,index as </A><A class=type>real</A> );</A>
@@ -174,11 +235,11 @@
 <A name="FreeformMeshFaceGroupGetIndex"></A>
 <H1 class=name>FreeformMeshFaceGroupGetIndex</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupGetIndex</A><A>( freeform,mesh,facegroup,index as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает индекс вершины в фейсгруппе. Индексы идут друг за другом, образуя "плоский" список треугольников - то есть, индексы 0, 1, 2 образуют первый треугольник, 3, 4, 5 - второй и т.д. Для нормалей, текстурных координат и других атрибутов используются те же индексы, что и для вершин.</A>
+<BR><A>Возвращает индекс вершины в фейсгруппе. Индексы идут друг за другом, образуя "плоский" список треугольников - то есть, индексы под номером 0, 1, 2 образуют первый треугольник, 3, 4, 5 - второй и т.д. Для нормалей, текстурных координат и других атрибутов используются те же индексы, что и для вершин.</A>
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>mesh - индекс меша</A>
 <BR><A>facegroup - индекс фейсгруппы</A>
-<BR><A>index - индекс индекса вершины.</A>
+<BR><A>index - номер индекса вершины.</A>
 <HR>
 
 <A name="FreeformMeshVerticesCount"></A>

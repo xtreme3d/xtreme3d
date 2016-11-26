@@ -97,11 +97,27 @@
 <A class=type>real</A><A> = </A><A class=function>ViewerResize</A><A>( viewer,x,y,width,height as </A>
 <A class=type>real</A><A> );</A>
 <BR/><A class=ntext>Изменяет позицию и размер вида. Обычно в играх это не требуется, но может пригодиться, например, 
-если Вы даете игроку возможность растягивать окно в оконном режиме. Обратите внимание, что эта функция 
+если вы даете игроку возможность растягивать окно в оконном режиме. Обратите внимание, что эта функция 
 довольно медленная и не должна вызываться постоянно.
 <BR/><A>viewer</A> - id вида
-<BR/><A>x,y</A> - новые координаты вида (левый верхний угол) относительно окна Game Maker
+<BR/><A>x,y</A> - новые координаты вида (левый верхний угол) относительно левого верхнего угла окна Game Maker
 <BR/><A>width, height</A> - новые ширина и высота вида.</A>
+<HR>
+
+<A name="ViewerGetSize"></A>
+<H1 class=name>ViewerGetSize</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetSize</A><A>( viewer,index as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Возвращает ширину или высоту вида.
+<BR/><A>viewer</A> - id вида
+<BR/><A>index</A> - если этот параметр равен 0, функция возвращает ширину, если 1 - высоту.
+<HR>
+
+<A name="ViewerGetPosition"></A>
+<H1 class=name>ViewerGetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPosition</A><A>( viewer,index as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Возвращает позицию вида (координату левого верхнего угла) относительно левого верхнего угла окна Game Maker.
+<BR/><A>viewer</A> - id вида
+<BR/><A>index</A> - если этот параметр равен 0, функция возвращает координату X, если 1 - Y.
 <HR>
 
 <A name="ViewerSetVisible"></A>
@@ -314,6 +330,15 @@
 <A class=type>real</A><A> = </A><A class=function>ViewerGetGLSLSupported</A><A>( viewer as </A><A class=type>real</A><A> );</A>
 <BR/><A class=ntext>Возвращает истину, если видеодрайвер поддерживает шейдеры на языке GLSL.
 <BR/><A>viewer</A> - id вида.</A>
+<HR>
+
+<A name="ViewerIsOpenGLExtensionSupported"></A>
+<H1 class=name>ViewerIsOpenGLExtensionSupported</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerIsOpenGLExtensionSupported</A><A>( viewer as </A><A class=type>real</A><A>, 
+ext as </A><A class=type>string</A><A> );</A>
+<BR/><A class=ntext>Возвращает истину, если видеодрайвер поддерживает заданное расширение OpenGL. С помощью этой функции можно заранее проверить, будут ли работать на целевой машине те или иные функции Xtreme3D, и предпринять соответствующие меры - например, вывести информативное сообщение об ошибке. Если какая-то функция зависит от расширения, в данной справке это оговорено в ее описании. 
+<BR/><A>viewer</A> - id вида</A>
+<BR/><A>ext</A> - полное название расширения (например, "GL_ARB_texture_float" или "GL_NV_occlusion_query").</A>
 <HR>
 
 </DIV>

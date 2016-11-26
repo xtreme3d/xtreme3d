@@ -293,6 +293,7 @@
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupGetIndex>FreeformMeshFaceGroupGetIndex</A><A>(freeform,mesh,facegroup,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupGetMaterial>FreeformMeshFaceGroupGetMaterial</A><A>(freeform,mesh,fgroup)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupsCount>FreeformMeshFaceGroupsCount</A><A>(freeform,mesh)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupSetIndex>FreeformMeshFaceGroupSetIndex</A><A>(freeform,mesh,facegroup,index,i)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupSetMaterial>FreeformMeshFaceGroupSetMaterial</A><A>(freeform,mesh,fgroup,material)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupTriangleCount>FreeformMeshFaceGroupTriangleCount</A><A>(freeform,mesh,fgroup)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGenNormals>FreeformMeshGenNormals</A><A>(freeform,mesh)</A>
@@ -308,9 +309,13 @@
 <BR><A class=funclink href=freeform.htm#FreeformMeshObjectsCount>FreeformMeshObjectsCount</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshRotate>FreeformMeshRotate</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshScale>FreeformMeshScale</A><A>(freeform,mesh,x,y,z)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshSetBinormal>FreeformMeshSetBinormal</A><A>(freeform,mesh,binormal,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetMaterial>FreeformMeshSetMaterial</A><A>(freeform,mesh,material)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshSetNormal>FreeformMeshSetNormal</A><A>(freeform,mesh,normal,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetSecondCoords>FreeformMeshSetSecondCoords</A><A>(freeform1,mesh1,freeform2,mesh2)</A>
-
+<BR><A class=funclink href=freeform.htm#FreeformMeshSetSecondTexCoord>FreeformMeshSetSecondTexCoord</A><A>(freeform,mesh,texcoord,u,v)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshSetTangent>FreeformMeshSetTangent</A><A>(freeform,mesh,tangent,x,y,z)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshSetTexCoord>FreeformMeshSetTexCoord</A><A>(freeform,mesh,texcoord,u,v)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetVertex>FreeformMeshSetVertex</A><A>(freeform,mesh,vertex,x,y,z)</A>
 
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetVisible>FreeformMeshSetVisible</A><A>(freeform,mesh,mode)</A>
@@ -904,14 +909,17 @@
 <BR><A class=funclink href=viewer.htm#ViewerCreate>ViewerCreate</A><A>(x,y,width,height,window_h)</A>
 <BR><A class=funclink href=viewer.htm#ViewerEnableFog>ViewerEnableFog</A><A>(viewer,mode)</A>
 <BR><A class=funclink href=viewer.htm#ViewerEnableVSync>ViewerEnableVSync</A><A>(viewer,vsm)</A>
+<BR><A class=funclink href=viewer.htm#ViewerGetFBOSupported>ViewerGetFBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetFramesPerSecond>ViewerGetFramesPerSecond</A><A>(viewer)</A>
+<BR><A class=funclink href=viewer.htm#ViewerGetGLSLSupported>ViewerGetGLSLSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetPickedObject>ViewerGetPickedObject</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetPickedObjectsList>ViewerGetPickedObjectsList</A><A>(viewer,x,y,w,h,num,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetPixelColor>ViewerGetPixelColor</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetPixelDepth>ViewerGetPixelDepth</A><A>(viewer,x,y)</A>
-<BR><A class=funclink href=viewer.htm#ViewerGetFBOSupported>ViewerGetFBOSupported</A><A>(viewer)</A>
-<BR><A class=funclink href=viewer.htm#ViewerGetGLSLSupported>ViewerGetGLSLSupported</A><A>(viewer)</A>
+<BR><A class=funclink href=viewer.htm#ViewerGetPosition>ViewerGetPosition</A><A>(viewer,index)</A>
+<BR><A class=funclink href=viewer.htm#ViewerGetSize>ViewerGetSize</A><A>(viewer,index)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetVBOSupported>ViewerGetVBOSupported</A><A>(viewer)</A>
+<BR><A class=funclink href=viewer.htm#ViewerIsOpenGLExtensionSupported>ViewerIsOpenGLExtensionSupported</A><A>(viewer,ext)</A>
 <BR><A class=funclink href=viewer.htm#ViewerPixelToDistance>ViewerPixelToDistance</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRender>ViewerRender</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderEx>ViewerRenderEx</A><A>(viewer,object,clear,swap,updateFPS)</A>
