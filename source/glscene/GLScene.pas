@@ -1820,7 +1820,9 @@ type
            baseObject : TGLBaseSceneObject;
            useRenderingContext: Boolean;
            updatePerfCounter: Boolean;
-           clear: Boolean;
+           clearcolor: Boolean;
+           cleardepth: Boolean;
+           clearstencil: Boolean;
            swap: Boolean);
          procedure SimpleRender3(baseObject : TGLBaseSceneObject);
 
@@ -7848,7 +7850,9 @@ procedure TGLSceneBuffer.SimpleRender2(
   baseObject : TGLBaseSceneObject;
   useRenderingContext: Boolean;
   updatePerfCounter: Boolean;
-  clear: Boolean;
+  clearcolor: Boolean;
+  cleardepth: Boolean;
+  clearstencil: Boolean;
   swap: Boolean);
 var
    //maxLights : Integer;
@@ -7874,11 +7878,30 @@ begin
      try
        backColor:=ConvertWinColor(FBackgroundColor, FBackgroundAlpha);
        SetupRenderingContext;
-       if clear then
-       begin
+       
+       if clearcolor then begin
          glClearColor(backColor[0], backColor[1], backColor[2], backColor[3]);
-         ClearBuffers;
-       end;
+         //ClearBuffers;
+         if cleardepth then begin
+           if clearstencil then
+             glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
+           else
+             glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
+         end
+         else if clearstencil then
+           glClear(GL_COLOR_BUFFER_BIT or GL_STENCIL_BUFFER_BIT);
+       end
+       else if cleardepth then begin
+         if clearstencil then
+           glClear(GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
+         else
+           glClear(GL_DEPTH_BUFFER_BIT);
+       end
+       else if clearstencil then
+         glClear(GL_STENCIL_BUFFER_BIT);
+
+         //glClear(GL_COLOR_BUFFER_BIT);
+         
        FCamera.FScene.AddBuffer(Self);
        if FFrameCount=0 then
          QueryPerformanceCounter(FFirstPerfCounter);

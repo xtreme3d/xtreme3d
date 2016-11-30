@@ -57,6 +57,7 @@ type
         constructor Create;
         destructor Destroy; override;
         procedure Render(clear: Boolean);
+        procedure RenderEx(clearcolor, cleardepth, copycolor, copydepth: Boolean);
         property Texture: TGLTexture read FTexture write SetTexture;
         property MainBuffer: TGLSceneBuffer read FMainBuffer write FMainBuffer;
         property Width: Integer read FWidth write FWidth;
@@ -70,6 +71,7 @@ type
         property UseFloatBuffer: Boolean read FUseFloatBuffer write FUseFloatBuffer;
         procedure DoRender(clear: Boolean);
         procedure DoRender2(clear: Boolean);
+        procedure DoRenderEx(clearcolor, cleardepth, copycolor, copydepth: Boolean);
         procedure SetColorBufferFormat(format: TGLTextureFormat);
         procedure Deinitialize;
         procedure Initialize;
@@ -277,9 +279,53 @@ begin
    begin
      MainBuffer.OverrideMaterial := FOverrideMaterial;
    end;
-   MainBuffer.SimpleRender2(FRenderObject, False, False, clear, False);
+   MainBuffer.SimpleRender2(FRenderObject, False, False, clear, clear, clear, False);
    MainBuffer.OverrideMaterial := oldOverrideMat;
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+   MainBuffer.Resize(oldWidth, oldHeight);
+   MainBuffer.Camera := oldCamera;
+end;
+
+procedure TGLFBO.DoRenderEx(clearcolor, cleardepth, copycolor, copydepth: Boolean);
+var
+   oldWidth, oldHeight: Integer;
+   oldCamera: TGLCamera;
+   oldOverrideMat: TGLLibMaterial;
+begin
+   if not Assigned(FCamera) then
+     Exit;
+
+   oldWidth := MainBuffer.Width;
+   oldHeight := MainBuffer.Height;
+   oldCamera := MainBuffer.Camera;
+   MainBuffer.Resize(FWidth, FHeight);
+   MainBuffer.SetViewPort(0, 0, oldWidth, oldHeight);
+   MainBuffer.Camera := FCamera;
+
+   if not FInitialized then
+     DoInitialize;
+   
+   glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+   oldOverrideMat := MainBuffer.OverrideMaterial;
+   if FOverrideMaterial <> nil then
+   begin
+     MainBuffer.OverrideMaterial := FOverrideMaterial;
+   end;
+   MainBuffer.SimpleRender2(FRenderObject, False, False, clearcolor, cleardepth, True, False);
+
+   MainBuffer.OverrideMaterial := oldOverrideMat;
+   glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+   glBindFramebuffer(GL_READ_FRAMEBUFFER, FFramebuffer);
+   if copycolor then begin
+     if copydepth then
+       glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT, GL_NEAREST)
+     else
+       glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+   end
+   else if copydepth then
+     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
    MainBuffer.Resize(oldWidth, oldHeight);
    MainBuffer.Camera := oldCamera;
@@ -311,7 +357,7 @@ begin
      MainBuffer.OverrideMaterial := FOverrideMaterial;
    end;
    //MainBuffer.SimpleRender3(FRenderObject);
-   MainBuffer.SimpleRender2(FRenderObject, False, False, clear, False);
+   MainBuffer.SimpleRender2(FRenderObject, False, False, clear, clear, clear, False);
    MainBuffer.OverrideMaterial := oldOverrideMat;
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -323,6 +369,13 @@ procedure TGLFBO.Render(clear: Boolean);
 begin
    MainBuffer.RenderingContext.Activate;
    DoRender(clear);
+   MainBuffer.RenderingContext.Deactivate;
+end;
+
+procedure TGLFBO.RenderEx(clearcolor, cleardepth, copycolor, copydepth: Boolean);
+begin
+   MainBuffer.RenderingContext.Activate;
+   DoRenderEx(clearcolor, cleardepth, copycolor, copydepth);
    MainBuffer.RenderingContext.Deactivate;
 end;
 

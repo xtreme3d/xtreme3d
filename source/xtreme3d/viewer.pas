@@ -51,6 +51,8 @@ begin
     True,
     Boolean(trunc64(updateFPS)),
     Boolean(trunc64(clear)),
+    Boolean(trunc64(clear)),
+    Boolean(trunc64(clear)),
     Boolean(trunc64(swap)));
   result:=1;
 end;
@@ -133,11 +135,10 @@ end;
 
 function ViewerWorldToScreen(viewer,x,y,z,ind:real): real; stdcall;
 var
-  vec: TAffineVector;
   wts: TAffineVector;
 begin
-  SetVector(vec,x,y,z);
-  wts:=TGLSceneViewer(trunc64(viewer)).Buffer.WorldToScreen(vec);
+  SetVector(wts,0,0,0);
+  wts:=TGLSceneViewer(trunc64(viewer)).Buffer.WorldToScreen(AffineVectorMake(x, y, z));
   result:=wts[trunc64(ind)];
 end;
 

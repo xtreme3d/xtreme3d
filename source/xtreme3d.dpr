@@ -322,6 +322,7 @@ begin
   result := Integer(IsExtensionSupported(v, String(ext)));
 end;
 
+{
 function FBORenderObjectEx(fbo, obj, clear: real): real; stdcall;
 var
   fb: TGLFBO;
@@ -331,6 +332,7 @@ begin
   fb.Render(Boolean(trunc64(clear)));
   result := 1;
 end;
+}
 
 function FBOSetOverrideMaterial(fbo, mlb: real; mtrl: pchar): real; stdcall;
 var
@@ -502,6 +504,17 @@ begin
   faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
   faceGroup.VertexIndices[trunc64(index)] := trunc64(i);
   result := 1.0;
+end;
+
+function FBORenderObjectEx(fbo, obj, clearcolor, cleardepth, copycolor, copydepth: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
+  fb.RenderEx(Boolean(trunc64(clearcolor)), Boolean(trunc64(cleardepth)),
+    Boolean(trunc64(copycolor)), Boolean(trunc64(copydepth)));
+  result := 1;
 end;
 
 exports
