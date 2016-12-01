@@ -20,7 +20,9 @@ type
       uniformShadowTexture,
       uniformFBOColorTexture,
       uniformFBODepthTexture,
-      uniformShadowMatrix
+      uniformShadowMatrix,
+      uniformViewMatrix,
+      uniformInvViewMatrix
     );
 
   TGLSLShader = class;
@@ -43,7 +45,7 @@ type
     public
       constructor Create(ACollection: TCollection); override;
       procedure Init(paramType: TGLSLShaderParameterType; name: String);
-      procedure Bind(mat: TGLLibMaterial; shader: TGLSLShader);
+      procedure Bind(mat: TGLLibMaterial; shader: TGLSLShader; var rci: TRenderContextInfo);
       procedure Unbind(shader: TGLSLShader);
       property UniformVector[index: Integer]: Single read GetVecElem write SetVecElem;
       property UniformMatrix: TMatrix4f read FUniformMatrix write FUniformMatrix;
@@ -77,7 +79,8 @@ type
       function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
-      procedure Bind(mat: TGLLibMaterial);
+      function AddUniformViewMatrix(name: String): TGLSLShaderParameter;
+      procedure Bind(mat: TGLLibMaterial; var rci: TRenderContextInfo);
       procedure Unbind;
   end;
 
@@ -142,7 +145,7 @@ begin
   FName := name;
 end;
 
-procedure TGLSLShaderParameter.Bind(mat: TGLLibMaterial; shader: TGLSLShader);
+procedure TGLSLShaderParameter.Bind(mat: TGLLibMaterial; shader: TGLSLShader; var rci: TRenderContextInfo);
 begin
   if not FInitialized then
     Exit;
@@ -214,6 +217,19 @@ begin
     begin
       FUniformMatrix := FShadowMap.ShadowMatrix;
     end;
+    glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
+  end;
+
+  if FUniformType = uniformViewMatrix then
+  begin
+    FUniformMatrix := rci.modelViewMatrix^;
+    glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
+  end;
+
+  if FUniformType = uniformInvViewMatrix then
+  begin
+    FUniformMatrix := rci.modelViewMatrix^;
+    InvertMatrix(FUniformMatrix);
     glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
   end;
 
@@ -378,7 +394,17 @@ begin
   Result := param;
 end;
 
-procedure TGLSLShaderParameters.Bind(mat: TGLLibMaterial);
+function TGLSLShaderParameters.AddUniformViewMatrix(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformViewMatrix, name);
+  param.Initialized := True;
+  Result := param;
+end;
+
+procedure TGLSLShaderParameters.Bind(mat: TGLLibMaterial; var rci: TRenderContextInfo);
 var
   i: Integer;
   p: TGLSLShaderParameter;
@@ -386,7 +412,7 @@ begin
   for i := 0 to Count-1 do
   begin
     p := TGLSLShaderParameter(inherited Items[i]);
-    p.Bind(mat, FShader);
+    p.Bind(mat, FShader, rci);
   end;
 end;
 
@@ -476,7 +502,7 @@ begin
   begin
       //glDisable(GL_STENCIL_TEST);
       glUseProgramObjectARB(shaderProg);
-      Parameters.Bind(mat);
+      Parameters.Bind(mat, rci);
       //glEnable(GL_STENCIL_TEST);
   end;
 end;

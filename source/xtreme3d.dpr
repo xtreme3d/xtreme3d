@@ -517,6 +517,26 @@ begin
   result := 1;
 end;
 
+function GLSLShaderSetParameterViewMatrix(par: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformViewMatrix;
+  param.Initialized := True;
+  result := 1;
+end;
+
+function GLSLShaderSetParameterInvViewMatrix(par: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformInvViewMatrix;
+  param.Initialized := True;
+  result := 1;
+end;
+
 exports
 
 //Engine
@@ -712,6 +732,7 @@ GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
 GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
 GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
 GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
+GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
 //ThorFX
 ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
 ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
