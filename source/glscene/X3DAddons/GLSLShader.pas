@@ -7,6 +7,10 @@ uses
   GLTexture, GLUserShader, OpenGL1x, GLUtils,
   GLShadowMap, GLFBO;
 
+const
+  // GL_ARB_seamless_cube_map required 
+  GL_TEXTURE_CUBE_MAP_SEAMLESS = $884F;
+
 type
   TGLSLShaderParameterType = (
       uniform1i,
@@ -484,6 +488,8 @@ begin
    shaderSane:=true;
    
    //glEnable(GL_STENCIL_TEST);
+
+   glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 end;
 
 procedure TGLSLShader.SetPrograms(vp, fp: PChar);
