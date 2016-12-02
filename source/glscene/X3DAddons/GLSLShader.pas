@@ -5,7 +5,7 @@ interface
 uses
   Classes, Dialogs, VectorTypes, VectorGeometry,
   GLTexture, GLUserShader, OpenGL1x, GLUtils,
-  GLShadowMap, GLFBO;
+  GLShadowMap, GLFBO, TypInfo, Variants;
 
 const
   // GL_ARB_seamless_cube_map required 
@@ -26,7 +26,9 @@ type
       uniformFBODepthTexture,
       uniformShadowMatrix,
       uniformViewMatrix,
-      uniformInvViewMatrix
+      uniformInvViewMatrix,
+      uniformHaveTexture,
+      uniformMaterialProperty
     );
 
   TGLSLShader = class;
@@ -44,6 +46,7 @@ type
       FUniformTexture: Integer;
       FUniformVector: array[0..3] of Single;
       FUniformMatrix: TMatrix;
+      FMaterialPropertyName: String;
       procedure SetVecElem(index: Integer; const val: Single);
       function GetVecElem(index: Integer): Single;
     public
@@ -60,7 +63,9 @@ type
       property Texture: TGLTexture read FTexture write FTexture;
       property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
       property FBO: TGLFBO read FFBO write FFBO;
+      property MaterialPropertyName: String read FMaterialPropertyName write FMaterialPropertyName;
       property Initialized: Boolean read FInitialized write FInitialized;
+      function GetMaterialField(mat: TGLLibMaterial; name: string): variant;
   end;
 
   TGLSLShaderParameters = class(TCollection)
@@ -149,7 +154,14 @@ begin
   FName := name;
 end;
 
+function TGLSLShaderParameter.GetMaterialField(mat: TGLLibMaterial; name: string): variant;
+begin
+  result := GetPropValue(mat, name);
+end;
+
 procedure TGLSLShaderParameter.Bind(mat: TGLLibMaterial; shader: TGLSLShader; var rci: TRenderContextInfo);
+var
+  propValue: variant;
 begin
   if not FInitialized then
     Exit;
@@ -236,6 +248,39 @@ begin
     InvertMatrix(FUniformMatrix);
     glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
   end;
+
+  if FUniformType = uniformHaveTexture then
+  begin
+    if (FUniformInteger = 0) or (FUniformInteger = 1) then
+    begin
+      if FTexture <> Nil then
+        glUniform1iARB(FUniformLocation, 1)
+      else if mat.Material.GetTextureN(FUniformInteger) <> nil then
+        glUniform1iARB(FUniformLocation, 1)
+      else
+        glUniform1iARB(FUniformLocation, 0);
+    end
+    else
+    begin
+      if mat.Material.GetTextureN(FUniformInteger) <> nil then
+        glUniform1iARB(FUniformLocation, 1)
+      else
+        glUniform1iARB(FUniformLocation, 0);
+    end;
+  end;
+
+  {
+  if FUniformType = uniformMaterialProperty then
+  begin
+    //FUniformMatrix := rci.modelViewMatrix^;
+    //InvertMatrix(FUniformMatrix);
+    //glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
+    propValue := GetMaterialField(mat, FMaterialPropertyName);
+    if (VarType(propValue) and varTypeMask) = varSingle then
+    begin
+    end;
+  end;
+  }
 
   if FUniformType = uniform1f then
     glUniform1fARB(FUniformLocation, FUniformVector[0]);
@@ -489,6 +534,7 @@ begin
    
    //glEnable(GL_STENCIL_TEST);
 
+   // TODO: make this switchable
    glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 end;
 

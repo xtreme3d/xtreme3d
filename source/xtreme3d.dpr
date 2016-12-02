@@ -537,6 +537,17 @@ begin
   result := 1;
 end;
 
+function GLSLShaderSetParameterHasTextureEx(par, slot: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformHaveTexture;
+  param.UniformInteger := trunc64(slot);
+  param.Initialized := True;
+  result := 1;
+end;
+
 exports
 
 //Engine
@@ -733,6 +744,7 @@ GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
 GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
 GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
 GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
+GLSLShaderSetParameterHasTextureEx,
 //ThorFX
 ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
 ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
