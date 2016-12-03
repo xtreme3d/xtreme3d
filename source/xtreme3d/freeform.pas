@@ -16,6 +16,9 @@ begin
   GLFreeForm1.LightmapLibrary:=ml2;
   GLFreeForm1.LoadFromFile(fname);
   
+  {
+  // TODO: make separate functions for this
+  
   for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
       mesh1 := GLFreeForm1.MeshObjects[mi];
       if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
@@ -23,6 +26,7 @@ begin
   end;
   
   GLFreeForm1.BuildOctree;
+  }
   
   result:=Integer(GLFreeForm1);
 end;

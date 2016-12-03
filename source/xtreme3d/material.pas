@@ -99,8 +99,7 @@ begin
     if ind=3 then target:=cmtNY;
     if ind=4 then target:=cmtPZ;
     if ind=5 then target:=cmtNZ;
-    if Length(texture) = 0 then
-        Picture[target].LoadFromFile(String(texture));
+    Picture[target].LoadFromFile(String(texture));
   end;
   result:=1;
 end;
