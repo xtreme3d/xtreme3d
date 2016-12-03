@@ -229,7 +229,7 @@
 <H1 class=name>F</H1>
 <A class=funclink href=fbo.htm#FBOCreate>FBOCreate</A><A>(width,height,viewer)</A>
 <BR><A class=funclink href=fbo.htm#FBORenderObject>FBORenderObject</A><A>(fbo,object)</A>
-<BR><A class=funclink href=fbo.htm#FBORenderObjectEx>FBORenderObjectEx</A><A>(fbo,object,clear)</A>
+<BR><A class=funclink href=fbo.htm#FBORenderObjectEx>FBORenderObjectEx</A><A>(fbo,object,clearcolor,cleardepth,copycolor,copydepth)</A>
 <BR><A class=funclink href=fbo.htm#FBOSetCamera>FBOSetCamera</A><A>(fbo,camera)</A>
 <BR><A class=funclink href=fbo.htm#FBOSetColorTextureFormat>FBOSetColorTextureFormat</A><A>(fbo,tf)</A>
 <BR><A class=funclink href=fbo.htm#FBOSetOverrideMaterial>FBOSetOverrideMaterial</A><A>(fbo,matlib,material)</A>
@@ -276,12 +276,14 @@
 <BR><A class=funclink href=fps.htm#FpsStrafe>FpsStrafe</A><A>(object,speed)</A>
 
 <BR><A class=funclink href=freeform.htm#FreeformAddMesh>FreeformAddMesh</A><A>(freeform)</A>
+<BR><A class=funclink href=freeform.htm#FreeformBuildOctree>FreeformBuildOctree</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformCreate>FreeformCreate</A><A>(filename,matlib,lmapmatlib,parent)</A>
 <BR><A class=funclink href=freeform.htm#FreeformCreateEmpty>FreeformCreateEmpty</A><A>(matlib,lmapmatlib,parent)</A>
 <BR><A class=funclink href=freeform.htm#FreeformCreateExplosionFX>FreeformCreateExplosionFX</A><A>(freeform,enable)</A>
 <BR><A class=funclink href=freeform.htm#FreeformExplosionFXEnable>FreeformExplosionFXEnable</A><A>(freeform,mode)</A>
 <BR><A class=funclink href=freeform.htm#FreeformExplosionFXReset>FreeformExplosionFXReset</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformExplosionFXSetSpeed>FreeformExplosionFXSetSpeed</A><A>(freeform,speed)</A>
+<BR><A class=funclink href=freeform.htm#FreeformGenTangents>FreeformGenTangents</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddBinormal>FreeformMeshAddBinormal</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddFaceGroup>FreeformMeshAddFaceGroup</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddNormal>FreeformMeshAddNormal</A><A>(freeform,mesh,x,y,z)</A>
@@ -345,12 +347,15 @@
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameter4f>GLSLShaderSetParameter4f</A><A>(shader,x,y,z,w)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterFBOColorTexture>GLSLShaderSetParameterFBOColorTexture</A><A>(shader,fbo,texunit)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterFBODepthTexture>GLSLShaderSetParameterFBODepthTexture</A><A>(shader,fbo,texunit)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterHasTextureEx>GLSLShaderSetParameterHasTextureEx</A><A>(shader,index)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterInvMatrix>GLSLShaderSetParameterInvMatrix</A><A>(shader,object)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterInvViewMatrix>GLSLShaderSetParameterInvViewMatrix</A><A>(shader)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterMatrix>GLSLShaderSetParameterMatrix</A><A>(shader,object)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterSecondTexture>GLSLShaderSetParameterSecondTexture</A><A>(shader,material,texunit)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterShadowMatrix>GLSLShaderSetParameterShadowMatrix</A><A>(shader,shadowmap)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterShadowTexture>GLSLShaderSetParameterShadowTexture</A><A>(shader,shadowmap,texunit)</A>
 <BR><A class=funclink href=shader.htm#GLSLShaderSetParameterTexture>GLSLShaderSetParameterTexture</A><A>(shader,material,texunit)</A>
+<BR><A class=funclink href=shader.htm#GLSLShaderSetParameterViewMatrix>GLSLShaderSetParameterViewMatrix</A><A>(shader)</A>
 <BR><A class=funclink href=grid.htm#GridCreate>GridCreate</A><A>(x,y,z,step,parent)</A>
 <BR><A class=funclink href=grid.htm#GridSetColor>GridSetColor</A><A>(grid,color,alpha)</A>
 <BR><A class=funclink href=grid.htm#GridSetParts>GridSetParts</A><A>(grid,gp)</A>

@@ -59,11 +59,17 @@
 
 <A name="FBORenderObjectEx"></A>
 <H1 class=name>FBORenderObjectEx</H1>
-<A class=type>real</A><A> = </A><A class=function>FBORenderObjectEx</A><A>( fbo,object,clear as </A><A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>FBORenderObjectEx</A><A>( fbo,object,clearcolor,cleardepth,copycolor,copydepth as </A><A class=type>real</A><A> );</A>
 <BR><A>Совершает рендеринг объекта в FBO с расширенными опциями. Функция позволяет организовать многопроходный рендеринг.</A>
 <BR><A>fbo - id FBO</A>
 <BR><A>object - объект, который нужно отрендерить (вместе с его потомками). Как правило, в этот параметр передается Dummycube, содержащий иерархию 3D-сцены</A>
-<BR><A>clear - определяет, заполнять ли FBO фоновым цветом перед рендерингом - 
+<BR><A>clearcolor - определяет, очищать ли FBO фоновым цветом перед рендерингом - 
+<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
+<BR><A>cleardepth - определяет, очищать ли буфер глубины FBO перед рендерингом - 
+<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
+<BR><A>copycolor - определяет, копировать ли содержимое цветового буфера FBO в главный кадровый буфер после рендеринга - 
+<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
+<BR><A>copydepth - определяет, копировать ли содержимое буфера глубины FBO в главный кадровый буфер после рендеринга - 
 <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
 <HR>
 

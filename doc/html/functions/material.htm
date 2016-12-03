@@ -102,7 +102,7 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <A class=type>real</A><A> = </A><A class=function>MaterialCubeMapLoadImage</A><A>( material,texture as </A><A class=type>string</A><A>, ind as </A><A class=type>real</A> );</A>
 <BR><A>Загружает текстуру для заданной стороны куба в cubemap-материале.</A>
 <BR><A>material - имя cubemap-материала</A>
-<BR><A>texture - имя материала, содержащего нужную текстуру</A>
+<BR><A>texture - путь к файлу текстуры</A>
 <BR><A>ind - индекс стороны куба: 
 <BR>0 - левая
 <BR>1 - правая
@@ -415,36 +415,6 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 <BR><A>material - имя материала</A>
 <BR><A>shader - id шейдера.</A>
 <HR>
-
-<!--
-<A name="MaterialAddTextureEx"></A>
-<H1 class=name>MaterialAddTextureEx</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialAddTextureEx</A><A>( material,texture as </A><A class=type>string</A><A> );</A>
-<BR><A>Добавляет в материал дополнительную текстуру. Первая добавленная текстура заменяет 
-собственную текстуру материала. Все последующие добавленные текстуры ложатся слоями поверх предыдущих, в режиме смешивания Modulate (белый цвет полностью прозрачный). 
-<BR>Все настройки материала, из которого берется дополнительная текстура, игнорируются (за исключением некоторых настроек текстуры). 
-Поэтому этот метод мультитекстурирования несколько ограничен, но зато не снижает производительность, поэтому может быть применен, например, для эффектов освещения (lightmapping).</A>
-<BR><A>material - имя материала</A>
-<BR><A>texture - имя материала, из которого следует взять текстуру.</A>
-<HR>
-
-<A name="MaterialTextureExClear"></A>
-<H1 class=name>MaterialTextureExClear</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialTextureExClear</A><A>( material as </A><A class=type>string</A><A> );</A>
-<BR><A>Полностью очищает список дополнительных текстур материала.</A>
-<BR><A>material - имя материала.</A>
-<HR>
-
-<A name="MaterialTextureExDelete"></A>
-<H1 class=name>MaterialTextureExDelete</H1>
-<A class=type>real</A><A> = </A><A class=function>MaterialTextureExDelete</A><A>( material as </A><A class=type>string</A><A>, ind as </A><A class=type>real</A> );</A>
-<BR><A>Удаляет дополнительную текстуру заданного номера. Номер присваивается всем текстурам, начиная со второй (первая дополнительная текстура не имеет номера, она считается корневой). 
-Отсчет ведется с 1.
-<BR>Нулевой номер присваивается всему списку текстур в целом. Удаление текстуры под номером 0 равносильно вызову </A><A class=funclink href=../functions/material.htm#MaterialTextureExClear>MaterialTextureExClear</A><A>.</A>
-<BR><A>material - имя материала</A>
-<BR><A>ind - номер текстуры.</A>
-<HR>
--->
 
 <A name="MaterialSetTextureWrap"></A>
 <H1 class=name>MaterialSetTextureWrap</H1>

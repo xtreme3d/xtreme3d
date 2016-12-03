@@ -363,6 +363,14 @@
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
 <HR>
 
+<A name="GLSLShaderSetParameterHasTextureEx"></A>
+<H1 class=name>GLSLShaderSetParameterHasTextureEx</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterHasTextureEx</A><A>( param,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр (int или bool) единицу, если у материала, к которому подключен шейдер, есть текстура в заданном текстурном блоке, и ноль в противном случае.</A>
+<BR><A>param - id параметра</A>
+<BR><A>index - индекс текстурного слота (от 0 до 7 включительно).</A>
+<HR>
+
 <A name="GLSLShaderSetParameterMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterMatrix</A><A>( param,object as </A><A class=type>real</A><A> );</A>
@@ -379,6 +387,20 @@
 <BR><A>object - id объекта.</A>
 <HR>
 
+<A name="GLSLShaderSetParameterViewMatrix"></A>
+<H1 class=name>GLSLShaderSetParameterViewMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterViewMatrix</A><A>( param as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр текущую видовую матрицу (тип mat4), которая переносит точки и векторы из мирового пространства в видовое, где началом координат является позиция камеры, через которую совершается рендеринг. Параметр автоматически обновляется при трансформации камеры.</A>
+<BR><A>param - id параметра.</A>
+<HR>
+
+<A name="GLSLShaderSetParameterInvViewMatrix"></A>
+<H1 class=name>GLSLShaderSetParameterInvViewMatrix</H1>
+<A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterInvViewMatrix</A><A>( param as </A><A class=type>real</A><A> );</A>
+<BR><A>Передает в параметр текущую обратную видовую матрицу (тип mat4), которая переносит точки и векторы из видового пространства в мировое. Параметр автоматически обновляется при трансформации камеры.</A>
+<BR><A>param - id параметра.</A>
+<HR>
+
 <A name="GLSLShaderSetParameterShadowTexture"></A>
 <H1 class=name>GLSLShaderSetParameterShadowTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowTexture</A><A>( param,shadowmap,texunit as </A><A class=type>real</A><A> );</A>
@@ -391,7 +413,7 @@
 <A name="GLSLShaderSetParameterShadowMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterShadowMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowMatrix</A><A>( param,shadowmap as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр теневую матрицу из теневой карты. Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</A>
+<BR><A>Передает в параметр теневую матрицу из теневой карты (тип mat4). Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</A>
 <BR><A>param - id параметра</A>
 <BR><A>object - id объекта.</A>
 <HR>

@@ -435,6 +435,20 @@
 <BR><A>filename - имя файла для сохранения.</A>
 <HR>
 
+<A name="FreeformGenTangents"></A>
+<H1 class=name>FreeformGenTangents</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformGenTangents</A><A>( freeform as </A><A class=type>real</A> );</A>
+<BR><A>Генерирует векторы касательных и бинормалей для всех мешей объекта свободной формы. Эту функцию можно применить, если данные о касательных и бинормалях отсутствуют. Ее можно вызывать только если у модели есть нормали и текстурные координаты.</A>
+<BR><A>freeform - id объекта свободной формы.</A>
+<HR>
+
+<A name="FreeformBuildOctree"></A>
+<H1 class=name>FreeformBuildOctree</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformBuildOctree</A><A>( freeform as </A><A class=type>real</A> );</A>
+<BR><A>Строит октарное дерево для объекта свободной формы. Это необходимо для работы функций </A><A class=funclink href=../functions/partition.htm>Partition</A><A> и проверки столкновений.</A>
+<BR><A>freeform - id объекта свободной формы.</A>
+<HR>
+
 <A name="FreeformCreateExplosionFX"></A>
 <H1 class=name>FreeformCreateExplosionFX</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformCreateExplosionFX</A><A>( freeform,enable as </A><A class=type>real</A> );</A>
