@@ -74,7 +74,7 @@ type
 	TGLHUDText = class (TGLImmaterialSceneObject)
 	   private
 	      { Private Declarations }
-         FBitmapFont : TGLCustomBitmapFont;
+         FFont : TGLFont;
          FText : String;
          FRotation : Single;
          FAlignment : TAlignment;
@@ -83,7 +83,7 @@ type
 
 	   protected
 	      { Protected Declarations }
-         procedure SetBitmapFont(const val : TGLCustomBitmapFont);
+         procedure SetFont(const val : TGLFont);
          procedure SetText(const val : String);
          procedure SetRotation(const val : Single);
          procedure SetAlignment(const val : TAlignment);
@@ -105,7 +105,7 @@ type
          {: Refers the bitmap font to use.<p>
             The referred bitmap font component stores and allows access to
             individual character bitmaps. }
-         property BitmapFont : TGLCustomBitmapFont read FBitmapFont write SetBitmapFont;
+         property Font : TGLFont read FFont write SetFont;
          {: Text to render.<p>
             Be aware that only the characters available in the bitmap font will
             be rendered. CR LF sequences are allowed. }
@@ -250,7 +250,7 @@ end;
 destructor TGLHUDText.Destroy;
 begin
    FModulateColor.Free;
-   BitmapFont:=nil;
+   FFont:=nil;
    inherited;
 end;
 
@@ -258,22 +258,22 @@ end;
 //
 procedure TGLHUDText.Notification(AComponent: TComponent; Operation: TOperation);
 begin
-   if (Operation=opRemove) and (AComponent=FBitmapFont) then
-      BitmapFont:=nil;
+   if (Operation=opRemove) and (AComponent=FFont) then
+      FFont:=nil;
    inherited;
 end;
 
 // SetBitmapFont
 //
-procedure TGLHUDText.SetBitmapFont(const val : TGLCustomBitmapFont);
+procedure TGLHUDText.SetFont(const val : TGLFont);
 begin
-   if val<>FBitmapFont then begin
-      if Assigned(FBitmapFont) then
-         FBitmapFont.UnRegisterUser(Self);
-      FBitmapFont:=val;
-      if Assigned(FBitmapFont) then begin
-         FBitmapFont.RegisterUser(Self);
-         FBitmapFont.FreeNotification(Self);
+   if val<>FFont then begin
+      if Assigned(FFont) then
+         FFont.UnRegisterUser(Self);
+      FFont:=val;
+      if Assigned(FFont) then begin
+         FFont.RegisterUser(Self);
+         FFont.FreeNotification(Self);
       end;
       StructureChanged;
    end;
@@ -325,7 +325,7 @@ procedure TGLHUDText.DoRender(var rci : TRenderContextInfo;
 var
    f : Single;
 begin
-   if Assigned(FBitmapFont) and (Text<>'') then begin
+   if Assigned(FFont) and (Text<>'') then begin
       rci.GLStates.SetGLPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
       // Prepare matrices
       glMatrixMode(GL_MODELVIEW);
@@ -346,7 +346,7 @@ begin
       glPushAttrib(GL_ENABLE_BIT);
       glDisable(GL_DEPTH_TEST);
       // render text
-      FBitmapFont.RenderString(rci, Text, FAlignment, FLayout, FModulateColor.Color);
+      FFont.RenderString(rci, Text, FAlignment, FLayout, FModulateColor.Color);
       // restore state
       glPopAttrib;
       glPopMatrix;

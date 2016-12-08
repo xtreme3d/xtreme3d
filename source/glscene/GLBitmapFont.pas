@@ -104,6 +104,19 @@ type
 
    TDynIntegerArray = array of Integer;
 
+   TGLFont = class (TGLUpdateAbleComponent)
+     public
+	      //constructor Create(AOwner: TComponent); override;
+        //destructor Destroy; override;
+
+	      procedure RegisterUser(anObject : TGLBaseSceneObject); virtual; abstract;
+	      procedure UnRegisterUser(anObject : TGLBaseSceneObject); virtual; abstract;
+     procedure RenderString(var rci : TRenderContextInfo;
+                            const aString : String; alignment : TAlignment;
+                            layout : TGLTextLayout; const color : TColorVector;
+                            position : PVector = nil; reverseY : Boolean = False); virtual; abstract;
+   end;
+
 	// TGLCustomBitmapFont
 	//
    {: Provides access to individual characters in a BitmapFont.<p>
@@ -115,7 +128,7 @@ type
       dimensions should be close to a power of two, and have at least 1 pixel
       spacing between characters (horizontally and vertically) to avoid artefacts
       when rendering with linear filtering. }
-	TGLCustomBitmapFont = class (TGLUpdateAbleComponent)
+	TGLCustomBitmapFont = class (TGLFont)
 	   private
 	      { Private Declarations }
          FRanges : TBitmapFontRanges;
@@ -192,8 +205,8 @@ type
 	      constructor Create(AOwner: TComponent); override;
          destructor Destroy; override;
 
-	      procedure RegisterUser(anObject : TGLBaseSceneObject); virtual;
-	      procedure UnRegisterUser(anObject : TGLBaseSceneObject); virtual;
+	      procedure RegisterUser(anObject : TGLBaseSceneObject); override;
+	      procedure UnRegisterUser(anObject : TGLBaseSceneObject); override;
 
          {: Renders the given string at current position or at position given by the optional position variable.<p>
             The current matrix is blindly used, meaning you can render all kinds
@@ -202,7 +215,7 @@ type
 	      procedure RenderString(var rci : TRenderContextInfo;
                                 const aString : String; alignment : TAlignment;
                                 layout : TGLTextLayout; const color : TColorVector;
-                                position : PVector = nil; reverseY : Boolean = False);
+                                position : PVector = nil; reverseY : Boolean = False); override;
          {: A simpler canvas-style TextOut helper for RenderString.<p>
             The rendering is reversed along Y by default, to allow direct use
             with TGLCanvas }
