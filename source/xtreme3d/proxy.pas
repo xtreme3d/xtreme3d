@@ -11,7 +11,8 @@ begin
   result := Integer(pr);
 end;
 
-function ProxyObjectSetOptions(proxy, copyeffects, copyobjects, copytransform: real): real; stdcall;
+function ProxyObjectSetOptions(proxy,
+  copyeffects, copyobjects, copytransform: real): real; stdcall;
 var
   pr: TGLProxyObject;
 begin

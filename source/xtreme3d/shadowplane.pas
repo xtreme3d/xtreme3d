@@ -1,4 +1,8 @@
-function ShadowplaneCreate(width, height, xtiles, ytiles, target, light, color, alpha, parent: real): real; stdcall;
+function ShadowplaneCreate(
+  width, height,
+  xtiles, ytiles,
+  target, light, color, alpha,
+  parent: real): real; stdcall;
 var
   sp: TGLShadowPlane;
 begin
@@ -37,7 +41,8 @@ begin
   result := 1.0;
 end;
 
-function ShadowplaneSetOptions(shadowplane, stencil, scissor, transparent, ignorez: real): real; stdcall;
+function ShadowplaneSetOptions(shadowplane,
+  stencil, scissor, transparent, ignorez: real): real; stdcall;
 var
   sp: TGLShadowPlane;
 begin

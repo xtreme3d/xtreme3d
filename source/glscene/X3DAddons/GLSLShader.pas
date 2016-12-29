@@ -305,15 +305,15 @@ procedure TGLSLShaderParameter.Unbind(shader: TGLSLShader);
 begin
   if not FInitialized then
     Exit;
-  if FUniformType = uniformTexture2D then
-  begin
-    if FTexture <> Nil then
-    begin
+  //if FUniformType = uniformTexture2D then
+  //begin
+    //if FTexture <> Nil then
+   // begin
       glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-      glBindTexture(FTexture.Image.NativeTextureTarget, 0);
+      glBindTexture(GL_TEXTURE_2D, 0);   //FTexture.Image.NativeTextureTarget
       glActiveTextureARB(GL_TEXTURE0_ARB);
-    end;
-  end;
+   // end;
+  //end;
 end;
 
 constructor TGLSLShaderParameters.Create(AOwner: TGLSLShader);

@@ -18,7 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
-  GLFBO, Hashes;
+  GLFBO, Hashes, Freetype, GLFreetypeFont;
 
 type
    TEmpty = class(TComponent)
@@ -637,6 +637,28 @@ begin
   result := 1.0;
 end;
 
+function FTInit(): real; stdcall;
+begin
+  if InitFreetype('freetype.dll') then
+    result := 1.0
+  else
+    result := 0.0;
+end;
+
+function FTfontCreate(filename: pchar; height: real): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont.Create(scene);
+  ftfont.LoadFont(String(filename), trunc64(height));
+  result := Integer(ftfont);
+end;
+
+function FTConvertANSIToUTF8(str: pchar): pchar; stdcall;
+begin
+  result := PChar(AnsiToUTF8(String(str)));
+end;
+
 exports
 
 //Engine
@@ -677,6 +699,8 @@ BmpFontCreate, BmpFontLoad, WindowsBitmapfontCreate, HUDTextCreate, FlatTextCrea
 HUDTextSetRotation, SpaceTextCreate, SpaceTextSetExtrusion, HUDTextSetFont,
 FlatTextSetFont, SpaceTextSetFont, HUDTextSetColor, FlatTextSetColor, HUDTextSetText,
 FlatTextSetText, SpaceTextSetText,
+//FTfont
+FTInit, FTfontCreate, FTConvertANSIToUTF8,
 //Sprite
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,

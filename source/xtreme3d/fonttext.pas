@@ -46,7 +46,7 @@ begin
     GLHUDText1:=TGLHUDText.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
   else
     GLHUDText1:=TGLHUDText.CreateAsChild(scene.Objects);
-  GLHUDText1.BitmapFont:=TGLCustomBitmapFont(trunc64(font));
+  GLHUDText1.Font:=TGLFont(trunc64(font));
   GLHUDText1.Text:=txt;
   result:=Integer(GLHUDText1);
 end;
@@ -65,7 +65,7 @@ var
   GLHUDText1: TGLHUDText;
 begin
   GLHUDText1:=TGLHUDText(trunc64(text));
-  GLHUDText1.BitmapFont:=TGLCustomBitmapFont(trunc64(font));
+  GLHUDText1.Font:=TGLFont(trunc64(font));
   result:=1;
 end;
 
