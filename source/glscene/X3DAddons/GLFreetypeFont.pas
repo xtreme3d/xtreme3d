@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, Dialogs, VectorTypes, VectorGeometry,
   GLScene, GLTexture, OpenGL1x, GLUtils, GLCrossPlatform,
-  GLBitmapFont, Freetype, SimpleDictionary;
+  ApplicationFileIO, GLBitmapFont, Freetype, SimpleDictionary;
 
 type
 
@@ -34,14 +34,11 @@ type
     protected
         { Protected Declarations }
         FFontFilename: String;
-
         FFace: FT_Face_ptr;
         FCharHeight: Integer;
         FLineGap: Single;
-
-        //FCharacterCache: TFreetypeCharacterCache;
-
         FCharacters: TSimpleObjectDictionary;
+        FFontFileBuffer: array of Byte;
     public
         { Public Declarations }
         constructor Create(AOwner: TComponent); override;
@@ -146,6 +143,8 @@ end;
 destructor TGLFreetypeFont.Destroy;
 begin
   // ...
+  FCharacters.Clear;
+  SetLength(FFontFileBuffer, 0);
   inherited Destroy;
 end;
 
@@ -161,11 +160,40 @@ begin
 end;
 
 function TGLFreetypeFont.LoadFont(filename: String; cheight: Integer): Integer;
+var
+   fs: TStream;
+   n: Cardinal;
 begin
    FCharHeight := cheight;
-   FT_New_Face(ftLibrary, PChar(filename), 0, FFace);
-   FT_Set_Char_Size(FFace, FCharHeight shl 6, FCharHeight shl 6, 96, 96);
-   result := 1;
+
+   n := 0;
+   if FileStreamExists(filename) then begin
+     fs := CreateFileStream(filename, fmOpenRead+fmShareDenyNone);
+     try
+       n := fs.Size;
+       if n > 0 then
+       begin
+        SetLength(FFontFileBuffer, n);
+       	fs.ReadBuffer(FFontFileBuffer[0], n);
+       end;
+     except
+       On E: Exception do begin
+         ShowMessage(E.Message);
+         Halt(1);
+       end;
+     end;
+ 	   fs.Free;
+   end;
+
+   if n > 0 then
+   begin
+     //FT_New_Face(ftLibrary, PChar(filename), 0, FFace);
+     FT_New_Memory_Face(ftLibrary, @FFontFileBuffer[0], n, 0, FFace);
+     FT_Set_Char_Size(FFace, FCharHeight shl 6, FCharHeight shl 6, 96, 96);
+     result := 1;
+   end
+   else
+     result := 0;
 end;
 
 function TGLFreetypeFont.LoadCharacter(code: Integer): Integer;
@@ -291,20 +319,23 @@ begin
    x := 0.0;
    y := -FCharHeight;
 
+   glColor4fv(@color[0]);
+
    i := 0;
    len := Length(aString);
    //for i := 1 to Length(aString) do
-   while i < len do
+   while i < len+1 do
    begin
      //c := ord(aString[i]);
      c := utf8DecodeNext(aString, i);
 
      if not FCharacters.Contains(c) then
        LoadCharacter(c);
+       
      chara := FCharacters.Values[c] as TFreetypeCharacter;
 
      case c of
-       0..12, 14..31 : ; // ignore non-printable characters
+       0..12, 14..31: ; // ignore non-printable characters
        13 : begin
          x := 0;
          y := y - (FCharHeight * FLineGap);
