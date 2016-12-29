@@ -372,6 +372,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="ObjectHash">
+                        <param name="Local" value="functions/objecthash.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Text">
                         <param name="Local" value="functions/text.htm">
                         <param name="ImageNumber" value="0">

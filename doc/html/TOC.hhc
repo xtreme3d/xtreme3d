@@ -308,6 +308,10 @@
  </OBJECT>
 -->
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ObjectHash">
+  <PARAM name="Local" value="functions/objecthash.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Text">
   <PARAM name="Local" value="functions/text.htm">
  </OBJECT>
