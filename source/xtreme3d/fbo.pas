@@ -36,6 +36,17 @@ begin
   result := 1;
 end;
 
+function FBORenderObjectEx(fbo, obj, clearcolor, cleardepth, copycolor, copydepth: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
+  fb.RenderEx(Boolean(trunc64(clearcolor)), Boolean(trunc64(cleardepth)),
+    Boolean(trunc64(copycolor)), Boolean(trunc64(copydepth)));
+  result := 1;
+end;
+
 function FBOSetViewer(fbo, viewer: real): real; stdcall;
 var
   fb: TGLFBO;
@@ -44,5 +55,31 @@ begin
   fb := TGLFBO(trunc64(fbo));
   v := TGLSceneViewer(trunc64(viewer));
   fb.MainBuffer := v.Buffer;
+  result := 1;
+end;
+
+function FBOSetOverrideMaterial(fbo, mlb: real; mtrl: pchar): real; stdcall;
+var
+  fb: TGLFBO;
+  mlib: TGLMaterialLibrary;
+  mat: TGLLibMaterial;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.OverrideMaterial := nil;
+  if Length(mtrl) > 0 then
+  begin
+    mlib := TGLMaterialLibrary(trunc64(mlb));
+    mat := mlib.Materials.GetLibMaterialByName(String(mtrl)); 
+    fb.OverrideMaterial := mat;
+  end;
+  result:=1;
+end;
+
+function FBOSetColorTextureFormat(fbo, tf: real): real; stdcall;
+var
+  fb: TGLFBO;
+begin
+  fb := TGLFBO(trunc64(fbo));
+  fb.SetColorBufferFormat(TGLTextureFormat(trunc64(tf)));
   result := 1;
 end;

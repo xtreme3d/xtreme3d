@@ -69,6 +69,12 @@ const
 	FT_GLYPH_FORMAT_OUTLINE = 1869968492;
 	FT_GLYPH_FORMAT_PLOTTER = 1886154612;
 
+    FT_LCD_FILTER_NONE    = 0;
+    FT_LCD_FILTER_DEFAULT = 1;
+    FT_LCD_FILTER_LIGHT   = 2;
+    FT_LCD_FILTER_LEGACY1 = 3;
+    FT_LCD_FILTER_LEGACY  = 16;
+
 { TYPES DEFINITION }
 type
  FT_Byte    = byte;
@@ -86,6 +92,8 @@ type
  FT_F26Dot6 = longint;
 
  FT_Glyph_Format = integer;
+
+ FT_LcdFilter = integer;
 
  FT_Byte_ptr  = ^FT_Byte;
  FT_Short_ptr = ^FT_Short;
@@ -345,6 +353,7 @@ type
  FT_BitmapGlyph = ^FT_BitmapGlyphRec;
 
  var
+   IsFreetypeInitialized: boolean = False;
    ftLibrary: FT_Library_ptr;
 
    FT_Init_FreeType: function(alibrary: FT_Library_ptr): FT_Error; cdecl;
@@ -356,7 +365,9 @@ type
    FT_Get_Glyph: function(slot: FT_GlyphSlot_ptr; out aglyph: FT_Glyph): FT_Error; cdecl;
    FT_Glyph_To_Bitmap: function(var the_glyph: FT_Glyph; render_mode: FT_Render_Mode; origin: FT_Vector_ptr; destroy: FT_Bool): FT_Error; cdecl;
    FT_Render_Glyph: function(slot: FT_GlyphSlot_ptr; render_mode: FT_Render_Mode ): FT_Error; cdecl;
-   
+
+   FT_Library_SetLcdFilter: function(library_: FT_Library_ptr; filter: FT_LcdFilter): FT_Error; cdecl;
+
    function  FT_CURVE_TAG  (flag : char ) : char;
    function  FT_IS_SCALABLE(face : FT_Face_ptr ) : boolean;
    function  FT_HAS_KERNING(face : FT_Face_ptr ) : boolean;
@@ -398,7 +409,6 @@ uses
 { LOCAL VARIABLES & CONSTANTS }
 var
   vFreetypeHandle: TModuleHandle;
-  IsFreetypeInitialized: boolean = False;
 
 { FT_CURVE_TAG }
 function FT_CURVE_TAG(flag : char ) : char;
@@ -437,6 +447,7 @@ begin
     FT_Get_Glyph := GetModuleSymbol(vFreetypeHandle, 'FT_Get_Glyph');
     FT_Glyph_To_Bitmap := GetModuleSymbol(vFreetypeHandle, 'FT_Glyph_To_Bitmap');
     FT_Render_Glyph := GetModuleSymbol(vFreetypeHandle, 'FT_Render_Glyph');
+    FT_Library_SetLcdFilter := GetModuleSymbol(vFreetypeHandle, 'FT_Library_SetLcdFilter');
 
     FT_Init_FreeType(@ftLibrary);
   end;

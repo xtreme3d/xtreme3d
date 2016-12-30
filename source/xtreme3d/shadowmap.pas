@@ -72,3 +72,19 @@ begin
   sm.Render();
   result:=1;
 end;
+
+function ShadowMapSetFBO(shadowmap, fbo: real): real; stdcall;
+var
+  sm: TGLShadowMap;
+  fb: TGLFBO;
+begin
+  sm := TGLShadowMap(trunc64(shadowmap));
+  if not (fbo = 0) then
+  begin
+    fb := TGLFBO(trunc64(fbo));
+    sm.FBO := fb;
+  end
+  else
+    sm.FBO := nil;
+  result := 1;
+end;

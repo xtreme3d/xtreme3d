@@ -666,3 +666,35 @@ begin
   param.Initialized := True;
   result := 1;
 end;
+
+function GLSLShaderSetParameterViewMatrix(par: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformViewMatrix;
+  param.Initialized := True;
+  result := 1;
+end;
+
+function GLSLShaderSetParameterInvViewMatrix(par: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformInvViewMatrix;
+  param.Initialized := True;
+  result := 1;
+end;
+
+function GLSLShaderSetParameterHasTextureEx(par, slot: real): real; stdcall;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := TGLSLShaderParameter(trunc64(par));
+  param.UniformType := uniformHaveTexture;
+  param.UniformInteger := trunc64(slot);
+  param.Initialized := True;
+  result := 1;
+end;
+

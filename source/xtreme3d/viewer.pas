@@ -249,3 +249,50 @@ begin
   TGLSceneViewer(trunc64(viewer)).AutoRender := Boolean(trunc64(mode));
   result:=1;
 end;
+
+function ViewerSetOverrideMaterial(viewer, mlb: real; mtrl: pchar): real; stdcall;
+var
+  v: TGLSceneViewer;
+  mlib: TGLMaterialLibrary;
+  mat: TGLLibMaterial;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  v.Buffer.OverrideMaterial := nil;
+  if Length(mtrl) > 0 then
+  begin
+    mlib := TGLMaterialLibrary(trunc64(mlb));
+    mat := mlib.Materials.GetLibMaterialByName(String(mtrl)); 
+    v.Buffer.OverrideMaterial := mat;
+  end;
+  result:=1;
+end;
+
+function ViewerGetSize(viewer, index: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  if trunc64(index) = 0 then
+    result := v.Width
+  else
+    result := v.Height;
+end;
+
+function ViewerGetPosition(viewer, index: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  if trunc64(index) = 0 then
+    result := v.Left
+  else
+    result := v.Top;
+end;
+
+function ViewerIsOpenGLExtensionSupported(viewer: real; ext: pchar): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  result := Integer(IsExtensionSupported(v, String(ext)));
+end;

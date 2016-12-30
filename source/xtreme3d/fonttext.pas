@@ -172,3 +172,20 @@ begin
   result:=1;
 end;
 
+function TTFontCreate(filename: pchar; height: real): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont.Create(scene);
+  ftfont.LoadFont(String(filename), trunc64(height));
+  result := Integer(ftfont);
+end;
+
+function TTFontSetLineGap(font, gap: real): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont(trunc64(font));
+  ftfont.LineGap := gap;
+  result := 1.0
+end;

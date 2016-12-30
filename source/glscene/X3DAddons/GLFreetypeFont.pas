@@ -8,7 +8,6 @@ uses
   ApplicationFileIO, GLBitmapFont, Freetype, SimpleDictionary;
 
 type
-
   TGLFreetypeFont = class;
 
   TFreetypeCharacter = class
@@ -36,11 +35,12 @@ type
         FFontFilename: String;
         FFace: FT_Face_ptr;
         FCharHeight: Integer;
-        FLineGap: Single;
         FCharacters: TSimpleObjectDictionary;
         FFontFileBuffer: array of Byte;
     public
         { Public Declarations }
+        LineGap: Single;
+
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         
@@ -84,7 +84,6 @@ begin
     result := c;
     Exit;
   end;
-
   // One continuation (128 to 2047)
   if (c and $E0) = $C0 then
   begin
@@ -100,7 +99,6 @@ begin
     bytePos := bytePos + 1;
     c2 := (Integer(s[bytePos]) and $FF) and $3F;
     bytePos := bytePos + 1;
-    //if ((c1 | c2) >= 0)
     result := ((c and $0F) shl 12) or (c1 shl 6) or c2;
     Exit;
   end
@@ -135,14 +133,12 @@ constructor TGLFreetypeFont.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCharHeight := 12;
-  FLineGap := 2.0;
+  LineGap := 2.0;
   FCharacters := TSimpleObjectDictionary.Create();
-  // ...
 end;
 
 destructor TGLFreetypeFont.Destroy;
 begin
-  // ...
   FCharacters.Clear;
   SetLength(FFontFileBuffer, 0);
   inherited Destroy;
@@ -166,6 +162,15 @@ var
 begin
    FCharHeight := cheight;
 
+   if not IsFreetypeInitialized then
+   begin
+     if not InitFreetype('freetype.dll') then
+     begin
+       result := 0;
+       Exit;
+     end;
+   end;
+
    n := 0;
    if FileStreamExists(filename) then begin
      fs := CreateFileStream(filename, fmOpenRead+fmShareDenyNone);
@@ -187,7 +192,8 @@ begin
 
    if n > 0 then
    begin
-     //FT_New_Face(ftLibrary, PChar(filename), 0, FFace);
+     //FT_Library_SetLcdFilter(ftLibrary, FT_LCD_FILTER_LIGHT);
+     //FT_New_Face(ftLibrary, PChar(filename), 0, FFace); // load directly from file
      FT_New_Memory_Face(ftLibrary, @FFontFileBuffer[0], n, 0, FFace);
      FT_Set_Char_Size(FFace, FCharHeight shl 6, FCharHeight shl 6, 96, 96);
      result := 1;
@@ -212,7 +218,7 @@ begin
    FT_Load_Glyph(FFace, charIndex, FT_LOAD_DEFAULT);
    FT_Get_Glyph(FFace.glyph, glyph);
 
-   FT_Render_Glyph(FFace.glyph, FT_RENDER_MODE_NORMAL);
+   FT_Render_Glyph(FFace.glyph, FT_RENDER_MODE_NORMAL); //FT_RENDER_MODE_LCD
 
    bitmap := @FFace.glyph.bitmap;
 
@@ -323,10 +329,8 @@ begin
 
    i := 0;
    len := Length(aString);
-   //for i := 1 to Length(aString) do
    while i < len+1 do
    begin
-     //c := ord(aString[i]);
      c := utf8DecodeNext(aString, i);
 
      if not FCharacters.Contains(c) then
@@ -336,9 +340,9 @@ begin
 
      case c of
        0..12, 14..31: ; // ignore non-printable characters
-       13 : begin
+       13: begin
          x := 0;
-         y := y - (FCharHeight * FLineGap);
+         y := y - (FCharHeight * LineGap);
        end;
      else begin
        RenderCharacter(chara, x, y);

@@ -527,6 +527,160 @@ begin
   result := 1.0;
 end;
 
+function FreeformMeshGetVertex(ff, mesh, v, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)][trunc64(index)];
+end;
+
+function FreeformMeshGetNormal(ff, mesh, n, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)][trunc64(index)];
+end;
+
+function FreeformMeshGetTexCoord(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)][trunc64(index)];
+end;
+
+function FreeformMeshGetSecondTexCoord(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  i: Integer;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  i := trunc64(index);
+  if i = 0 then
+    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].S
+  else if i = 1 then
+    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].T
+  else
+    result := 0;
+end;
+
+function FreeformMeshGetTangent(ff, mesh, t, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)][trunc64(index)];
+end;
+
+function FreeformMeshGetBinormal(ff, mesh, b, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  result := ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)][trunc64(index)];
+end;
+
+function FreeformMeshFaceGroupGetIndex(ff, mesh, fg, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  faceGroup: TFGVertexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
+  result := faceGroup.VertexIndices[trunc64(index)];
+end;
+
+function FreeformMeshSetVertex(ff, mesh, v, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)] := AffineVectorMake(x, y, z);
+  result := 1.0;
+end;
+
+function FreeformMeshSetNormal(ff, mesh, n, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)] := AffineVectorMake(x, y, z);
+  result := 1.0;
+end;
+
+function FreeformMeshSetTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)] := AffineVectorMake(u, v, 1); 
+  result := 1.0;
+end;
+
+function FreeformMeshSetSecondTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)] := TexPointMake(u, v); 
+  result := 1.0;
+end;
+
+function FreeformMeshSetTangent(ff, mesh, t, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)] := VectorMake(x, y, z, 0.0);
+  result := 1.0;
+end;
+
+function FreeformMeshSetBinormal(ff, mesh, b, x, y, z: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)] := VectorMake(x, y, z, 0.0);
+  result := 1.0;
+end;
+
+function FreeformMeshFaceGroupSetIndex(ff, mesh, fg, index, i: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  faceGroup: TFGVertexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
+  faceGroup.VertexIndices[trunc64(index)] := trunc64(i);
+  result := 1.0;
+end;
+
+function FreeformGenTangents(ff: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  mesh1: TMeshObject;
+  mi: Integer;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
+      mesh1 := GLFreeForm1.MeshObjects[mi];
+      if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
+        GenMeshTangents(mesh1);
+  end;
+  result:=1.0;
+end;
+
+function FreeformBuildOctree(ff: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.BuildOctree;
+  result:=1.0;
+end;
+
 // Unimplemented:
 // MeshOptimize
 // MeshSmoothFaces
