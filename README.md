@@ -69,6 +69,8 @@ License
 -------
 Xtreme3D 3.x is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
 
-GLScene is distributed under Mozilla Public License 1.1. 
+GLScene is distributed under Mozilla Public License 1.1. If you use xtreme3d.dll in your project, please add a copy of GLSCENE-LICENSE.txt to your distribution.
 
-ODE is distributed under BSD-style license. 
+ODE is distributed under BSD-style license. If you use ode.dll in your project, please add a copy of ODE-LICENSE.txt to your distribution.
+
+FreeType is distributed under FreeType License (FTL). If you use freetype.dll in your project, please add a copy of FREETYPE-LICENSE.txt to your distribution.
