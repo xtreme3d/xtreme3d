@@ -18,9 +18,16 @@
 
 <A name="TextRead"></A>
 <H1 class=name>TextRead</H1>
-<A class=type>real</A><A> = </A><A class=function>TextRead</A><A>( filename as </A><A class=type>string</A><A> );</A>
+<A class=type>string</A><A> = </A><A class=function>TextRead</A><A>( filename as </A><A class=type>string</A><A> );</A>
 <BR><A>Загружает текстовый файл в строку и возвращает ее.</A>
 <BR><A>filename - имя файла.</A>
+<HR>
+
+<A name="TextConvertANSIToUTF8"></A>
+<H1 class=name>TextConvertANSIToUTF8</H1>
+<A class=type>string</A><A> = </A><A class=function>TextConvertANSIToUTF8</A><A>( text as </A><A class=type>string</A><A> );</A>
+<BR><A>Конвертирует строку из кодировки ANSI в UTF-8 (Юникод). Входная строка не модифицируется, функция создает в памяти новую строку и возвращает ее. Во избежание утечки памяти не рекомендуется вызывать эту функцию постоянно - сконвертируйте строку один раз в начале программы и используйте ее.</A>
+<BR><A>text - текст.</A>
 <HR>
 
 </DIV>
