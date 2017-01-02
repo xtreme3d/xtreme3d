@@ -657,21 +657,6 @@ begin
   result := 1.0;
 end;
 
-function FreeformGenTangents(ff: real): real; stdcall;
-var
-  GLFreeForm1: TGLFreeForm;
-  mesh1: TMeshObject;
-  mi: Integer;
-begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
-      mesh1 := GLFreeForm1.MeshObjects[mi];
-      if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
-        GenMeshTangents(mesh1);
-  end;
-  result:=1.0;
-end;
-
 function FreeformBuildOctree(ff: real): real; stdcall;
 var
   GLFreeForm1: TGLFreeForm;

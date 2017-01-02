@@ -276,6 +276,82 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 
+function EngineDestroy: real; stdcall;
+begin
+  cadencer.Enabled := false;
+  scene.Destroy;
+  result:=1;
+end;
+
+function FreeformGenTangents(ff: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  mesh1: TMeshObject;
+  mi: Integer;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
+      mesh1 := GLFreeForm1.MeshObjects[mi];
+      if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
+        GenMeshTangents(mesh1);
+  end;
+  GLFreeForm1.StructureChanged;
+  GLFreeForm1.NotifyChange(nil);
+  result:=1.0;
+end;
+
+function OdeDynamicSetVelocity(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetVelocity(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetAngularVelocity(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicGetVelocity(obj, ind: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  result := dyna.GetVelocity[trunc64(ind)];
+end;
+
+function OdeDynamicGetAngularVelocity(obj, ind: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  result := dyna.GetAngularVelocity[trunc64(ind)];
+end;
+
+function OdeDynamicSetPosition(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetPosition(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetRotation(x, y, z, w);
+  result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -625,7 +701,11 @@ OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSli
 OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
 OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
 OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
-OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate;
+OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
+
+OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
+OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
+OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion; 
 {
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;

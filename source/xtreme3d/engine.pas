@@ -9,13 +9,6 @@ begin
   result:=1;
 end;
 
-function EngineDestroy: real; stdcall;
-begin
-  cadencer.Enabled := false;
-  scene.Destroy;
-  result:=1;
-end;
-
 function EngineSetObjectsSorting(os: real): real; stdcall;
 begin
   if os=0 then scene.ObjectsSorting:=osInherited;

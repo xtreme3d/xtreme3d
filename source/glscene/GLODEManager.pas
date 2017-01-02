@@ -360,6 +360,15 @@ type
       procedure AddTorque(Torque : TAffineVector);
       procedure AddRelTorque(Torque : TAffineVector);
 
+      procedure SetVelocity(Vel: TAffineVector);
+      procedure SetAngularVelocity(Vel: TAffineVector);
+
+      function GetVelocity(): TAffineVector;
+      function GetAngularVelocity(): TAffineVector;
+
+      procedure SetPosition(Pos: TAffineVector);
+      procedure SetRotation(qx, qy, qz, qw: Single);
+
       property Body : PdxBody read FBody;
       property Mass : TdMass read GetMass write SetMass;
 
@@ -2434,6 +2443,60 @@ procedure TGLODEDynamic.AddRelTorque(Torque : TAffineVector);
 begin
   if Assigned(FBody) then
     dBodyAddRelTorque(FBody,Torque[0],Torque[1],Torque[2]);
+end;
+
+procedure TGLODEDynamic.SetVelocity(Vel: TAffineVector);
+begin
+  if Assigned(FBody) then
+  begin
+    dBodySetLinearVel(FBody, Vel[0], Vel[1], Vel[2]);
+  end;
+end;
+
+procedure TGLODEDynamic.SetAngularVelocity(Vel: TAffineVector);
+begin
+  if Assigned(FBody) then
+  begin
+    dBodySetAngularVel(FBody, Vel[0], Vel[1], Vel[2]);
+  end;
+end;
+
+function TGLODEDynamic.GetVelocity(): TAffineVector;
+begin
+  if Assigned(FBody) then
+    result := AffineVectorMake(dBodyGetLinearVel(FBody)[0], dBodyGetLinearVel(FBody)[1], dBodyGetLinearVel(FBody)[2])
+  else
+    result := AffineVectorMake(0, 0, 0);
+end;
+
+function TGLODEDynamic.GetAngularVelocity(): TAffineVector;
+begin
+  if Assigned(FBody) then
+    result := AffineVectorMake(dBodyGetAngularVel(FBody)[0], dBodyGetAngularVel(FBody)[1], dBodyGetAngularVel(FBody)[2])
+  else
+    result := AffineVectorMake(0, 0, 0);
+end;
+
+procedure TGLODEDynamic.SetPosition(Pos: TAffineVector);
+begin
+  if Assigned(FBody) then
+  begin
+    dBodySetPosition(FBody, Pos[0], Pos[1], Pos[2]);
+  end;
+end;
+
+procedure TGLODEDynamic.SetRotation(qx, qy, qz, qw: Single);
+var
+  q: TdQuaternion;
+begin
+  if Assigned(FBody) then
+  begin
+    q[0] := qw;
+    q[1] := qx;
+    q[2] := qy;
+    q[3] := qz;
+    dBodySetQuaternion(FBody, q);
+  end;
 end;
 
 
