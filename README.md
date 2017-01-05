@@ -13,8 +13,8 @@ Screenshots
 [![Screenshot3](/screenshots/003-thumb.jpg)](/screenshots/003.jpg)
 [![Screenshot1](/screenshots/011-thumb.jpg)](/screenshots/011.jpg)
 [![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
-[![Screenshot4](/screenshots/013-thumb.jpg)](/screenshots/013.jpg)
-[![Screenshot4](/screenshots/010-thumb.jpg)](/screenshots/010.jpg)
+[![Screenshot4](/screenshots/015-thumb.jpg)](/screenshots/015.jpg)
+[![Screenshot4](/screenshots/014-thumb.jpg)](/screenshots/014.jpg)
 [![Screenshot4](/screenshots/012-thumb.jpg)](/screenshots/012.jpg)
 
 Features
