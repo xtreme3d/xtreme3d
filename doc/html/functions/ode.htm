@@ -278,9 +278,51 @@ threshold) скорости. Только что созданные тела берут эти параметры из менеджера 
 
 <H1 class=name>OdeDynamicAddRelTorque</H1>
 <A class=type>real</A><A> = </A><A class=function>OdeDynamicAddRelTorque</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Прикладывает к динамическому телу момент силы, вращающий вокруг локальной оси./A>
+<BR><A>Прикладывает к динамическому телу момент силы, вращающий вокруг локальной оси.</A>
 <BR><A>object - id объекта</A>
 <BR><A>x,y,z - локальный вектор оси вращения.</A>
+<HR>
+
+<H1 class=name>OdeDynamicSetVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetVelocity</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает скорость динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор скорости.</A>
+<HR>
+
+<H1 class=name>OdeDynamicSetAngularVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetAngularVelocity</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает угловую скорость динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - абсолютный вектор угловой скорости.</A>
+<HR>
+
+<H1 class=name>OdeDynamicGetVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicGetVelocity</A><A>( object,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает скорость динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<H1 class=name>OdeDynamicGetAngularVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicGetAngularVelocity</A><A>( object,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает угловую скорость динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<H1 class=name>OdeDynamicSetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetPosition</A><A>( object,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает позицию динамического тела.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z - координаты позиции.</A>
+<HR>
+
+<H1 class=name>OdeDynamicSetRotationQuaternion</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicSetRotationQuaternion</A><A>( object,x,y,z,w as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает поворот динамического тела, выраженный кватернионом.</A>
+<BR><A>object - id объекта</A>
+<BR><A>x,y,z,w - кватернион поворота.</A>
 <HR>
 
 <H1 class=name>OdeDynamicGetContactCount</H1>

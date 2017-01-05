@@ -51,6 +51,7 @@
 <A class=funclink href=funclist.htm#Partition>Partition</A><A> | </A>
 <A class=funclink href=funclist.htm#Proxy>Proxy</A><A> | </A>
 <A class=funclink href=funclist.htm#Grid>Grid</A><A> | </A>
+<A class=funclink href=funclist.htm#ClipPlane>ClipPlane</A><A> | </A>
 <A class=funclink href=funclist.htm#MemoryViewer>MemoryViewer</A><A> | </A>
 <A class=funclink href=funclist.htm#FBO>FBO</A><A> | </A>
 <A class=funclink href=funclist.htm#ShadowMap>ShadowMap</A><A> | </A>
@@ -986,6 +987,13 @@
 <BR><A class=funclink href=grid.htm#GridSetPattern>GridSetPattern</A><A>(grid,pattern)</A>
 <BR>
 <BR>
+<A name="ClipPlane"></A>
+<H1 class=name>ClipPlane</H1>
+<A class=funclink href=clipplane.htm#ClipPlaneCreate>ClipPlaneCreate</A><A>(parent)</A>
+<BR><A class=funclink href=clipplane.htm#ClipPlaneEnable>ClipPlaneEnable</A><A>(cp,mode)</A>
+<BR><A class=funclink href=clipplane.htm#ClipPlaneSetPlane>ClipPlaneSetPlane</A><A>(cp,px,py,px,nx,ny,nz)</A>
+<BR>
+<BR>
 <A name="MemoryViewer"></A>
 <H1 class=name>MemoryViewer</H1>
 <A class=funclink href=memviewer.htm#MemoryViewerCreate>MemoryViewerCreate</A><A>(width,height)</A>
@@ -1062,6 +1070,14 @@
 <BR><A class=funclink href=ode.htm#OdeDynamicAddRelForceAtRelPos>OdeDynamicAddRelForceAtRelPos</A><A>(object,x,y,z,px,py,pz)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicAddTorque>OdeDynamicAddTorque</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicAddRelTorque>OdeDynamicAddRelTorque</A><A>(object,x,y,z)</A>
+
+<BR><A class=funclink href=ode.htm#OdeDynamicSetVelocity>OdeDynamicSetVelocity</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAngularVelocity>OdeDynamicSetAngularVelocity</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicGetVelocity>OdeDynamicGetVelocity</A><A>(object,index)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicGetAngularVelocity>OdeDynamicGetAngularVelocity</A><A>(object,index)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetPosition>OdeDynamicSetPosition</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetRotationQuaternion>OdeDynamicSetRotationQuaternion</A><A>(object,x,y,z,w)</A>
+
 <BR><A class=funclink href=ode.htm#OdeDynamicGetContactCount>OdeDynamicGetContactCount</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeStaticGetContactCount>OdeStaticGetContactCount</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeAddPlane>OdeAddPlane</A><A>(object)</A>

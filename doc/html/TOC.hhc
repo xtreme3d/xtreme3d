@@ -286,6 +286,10 @@
   <PARAM name="Local" value="functions/grid.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ClipPlane">
+  <PARAM name="Local" value="functions/clipplane.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="MemoryViewer">
   <PARAM name="Local" value="functions/memviewer.htm">
  </OBJECT>

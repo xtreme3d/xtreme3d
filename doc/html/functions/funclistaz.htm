@@ -139,12 +139,17 @@
 <BR><A class=funclink href=shader.htm#CelShaderSetLineColor>CelShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineWidth>CelShaderSetLineWidth</A><A>(shader,width)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetOptions>CelShaderSetOptions</A><A>(shader,outlines,textured)</A>
-<BR><A class=funclink href=b3d.htm#ClearZones>ClearZones</A><A>()</A>
+<!-- <BR><A class=funclink href=b3d.htm#ClearZones>ClearZones</A><A>()</A> -->
+
+<BR><A class=funclink href=clipplane.htm#ClipPlaneCreate>ClipPlaneCreate</A><A>(parent)</A>
+<BR><A class=funclink href=clipplane.htm#ClipPlaneEnable>ClipPlaneEnable</A><A>(cp,mode)</A>
+<BR><A class=funclink href=clipplane.htm#ClipPlaneSetPlane>ClipPlaneSetPlane</A><A>(cp,px,py,px,nx,ny,nz)</A>
+
 <BR><A class=funclink href=primitives.htm#ConeCreate>ConeCreate</A><A>(bottomradius,height,slices,stacks,loops,parent)</A>
-<BR><A class=funclink href=b3d.htm#CreateZones>CreateZones</A><A>(parent,clear)</A>
+<!--  <BR><A class=funclink href=b3d.htm#CreateZones>CreateZones</A><A>(parent,clear)</A> -->
 <BR><A class=funclink href=primitives.htm#CubeCreate>CubeCreate</A><A>(width,height,depth,parent)</A>
 <BR><A class=funclink href=primitives.htm#CubeSetNormalDirection>CubeSetNormalDirection</A><A>(cube,nd)</A>
-<BR><A class=funclink href=b3d.htm#CullZones>CullZones</A><A>(zone,object)</A>
+<!-- <BR><A class=funclink href=b3d.htm#CullZones>CullZones</A><A>(zone,object)</A> -->
 <BR><A class=funclink href=primitives.htm#CylinderCreate>CylinderCreate</A><A>(topradius,bottomradius,height,slices,stacks,loops,parent)</A>
 <BR>
 <BR>
@@ -686,12 +691,18 @@
 <BR><A class=funclink href=ode.htm#OdeDynamicCalibrateCenterOfMass>OdeDynamicCalibrateCenterOfMass</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicCreate>OdeDynamicCreate</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicEnable>OdeDynamicEnable</A><A>(object,mode)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicGetAngularVelocity>OdeDynamicGetAngularVelocity</A><A>(object,index)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicGetContactCount>OdeDynamicGetContactCount</A><A>(object)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicGetVelocity>OdeDynamicGetVelocity</A><A>(object,index)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetAngularVelocity>OdeDynamicSetAngularVelocity</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableAngularThreshold>OdeDynamicSetAutoDisableAngularThreshold</A><A>(object,velocity)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableFlag>OdeDynamicSetAutoDisableFlag</A><A>(object,flag)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableLinearThreshold>OdeDynamicSetAutoDisableLinearThreshold</A><A>(object,velocity)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableSteps>OdeDynamicSetAutoDisableSteps</A><A>(object,steps)</A>
 <BR><A class=funclink href=ode.htm#OdeDynamicSetAutoDisableTime>OdeDynamicSetAutoDisableTime</A><A>(object,time)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetPosition>OdeDynamicSetPosition</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetRotationQuaternion>OdeDynamicSetRotationQuaternion</A><A>(object,x,y,z,w)</A>
+<BR><A class=funclink href=ode.htm#OdeDynamicSetVelocity>OdeDynamicSetVelocity</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=ode.htm#OdeElementSetDensity>OdeElementSetDensity</A><A>(element,density)</A>
 <BR><A class=funclink href=ode.htm#OdeJointEnable>OdeJointEnable</A><A>(joint,mode)</A>
 <BR><A class=funclink href=ode.htm#OdeJointInitialize>OdeJointInitialize</A><A>(joint)</A>

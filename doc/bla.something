@@ -347,6 +347,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="ClipPlane">
+                        <param name="Local" value="functions/clipplane.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="MemoryViewer">
                         <param name="Local" value="functions/memviewer.htm">
                         <param name="ImageNumber" value="0">
