@@ -18,7 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
-  GLFBO, Hashes, Freetype, GLFreetypeFont;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane;
 
 type
    TEmpty = class(TComponent)
@@ -352,6 +352,35 @@ begin
   result := 1.0;
 end;
 
+function ClipPlaneCreate(parent: real): real; stdcall;
+var
+  cp: TGLClipPlane;
+begin
+  if not (parent = 0) then
+    cp := TGLClipPlane.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    cp := TGLClipPlane.CreateAsChild(scene.Objects);
+  result := Integer(cp);
+end;
+
+function ClipPlaneEnable(cplane, mode: real): real; stdcall;
+var
+  cp: TGLClipPlane;
+begin
+  cp := TGLClipPlane(trunc64(cplane));
+  cp.ClipPlaneEnabled := Boolean(trunc64(mode));
+  result := 1;
+end;
+
+function ClipPlaneSetPlane(cplane, px, py, pz, nx, ny, nz: real): real; stdcall;
+var
+  cp: TGLClipPlane;
+begin
+  cp := TGLClipPlane(trunc64(cplane));
+  cp.SetClipPlane(AffineVectorMake(px, py, pz), AffineVectorMake(nx, ny, nz));
+  result := 1;
+end;
+
 exports
 
 //Engine
@@ -658,14 +687,15 @@ ObjectHashClear, ObjectHashDestroy,
 //Grid
 GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
 GridSetColor, GridSetSize, GridSetPattern,
-//Memory Viewer
+//ClipPlane
+ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
+//MemoryViewer
 MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
 MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 //FBO
 FBOCreate, FBOSetCamera, FBOSetViewer,
 FBORenderObject, FBORenderObjectEx,
 FBOSetOverrideMaterial,
-//FBOUseFloatColorBuffer,
 FBOSetColorTextureFormat,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
