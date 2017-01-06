@@ -27,7 +27,6 @@ type
 
 const
    {$I 'bumpshader'}
-   
    {$I 'phongshader'}
 
 var

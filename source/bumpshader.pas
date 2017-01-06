@@ -23,6 +23,7 @@ bumpVertexProgram =
   '  e = -normalize(e);' + #13#10 +
   '  shadowCoord = useShadowMap? shadowMatrix * (gl_ModelViewMatrix * gl_Vertex) : vec4(0.0, 0.0, 0.0, 0.0);' + #13#10 +
   '  gl_Position = ftransform();' + #13#10 +
+  '  gl_ClipVertex = gl_ModelViewMatrix * gl_Vertex;' + #13#10 +
   '}' + #13#10;
 
 bumpFragmentProgram =
