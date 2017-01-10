@@ -19,6 +19,8 @@ phongFragmentProgram =
   'uniform sampler2D diffuseMap;' + #13#10 +
   'uniform int maxNumLights;' + #13#10 +
   'uniform bool useTexture;' + #13#10 +
+  'uniform bool fogEnabled;' + #13#10 +
+  'uniform bool lightingEnabled;' + #13#10 +
 
   'void main()' + #13#10 +
   '{' + #13#10 +
@@ -26,8 +28,11 @@ phongFragmentProgram =
     'vec3 E = normalize(e);' + #13#10 +
     
     'vec2 texCoords = gl_TexCoord[0].st;' + #13#10 +
+    
+    'float fogDistance = gl_FragCoord.z / gl_FragCoord.w;' + #13#10 +
+    'float fogFactor = fogEnabled? clamp((gl_Fog.end - fogDistance) / (gl_Fog.end - gl_Fog.start), 0.0, 1.0) : 1.0; ' + #13#10 +
 
-    'vec4 diffuseTex = useTexture? texture2D(diffuseMap, texCoords) : vec4(1, 1, 1, 1);' + #13#10 +
+    'vec4 diffuseTex = useTexture? texture2D(diffuseMap, texCoords) : vec4(1, 1, 1, gl_FrontMaterial.diffuse.a);' + #13#10 +
         
     'float diffuse;' + #13#10 +
     'float specular;' + #13#10 +
@@ -42,6 +47,8 @@ phongFragmentProgram =
     
     'float spotEffect;' + #13#10 +
     
+    'if (lightingEnabled)' + #13#10 +
+    '{' + #13#10 +
     'for (int i = 0; i < maxNumLights; i++)' + #13#10 +
     '{' + #13#10 +
     '  spotEffect = 1.0;' + #13#10 +
@@ -75,11 +82,15 @@ phongFragmentProgram =
     '  diffuseSum += gl_LightSource[i].diffuse * diffuse * attenuation * spotEffect;' + #13#10 +
     '  specularSum += gl_LightSource[i].specular * specular * attenuation * spotEffect;' + #13#10 +
     '}'  + #13#10 +
+    '}' + #13#10 +
     
-    'gl_FragColor =' + #13#10 +
+    'vec4 finalColor = lightingEnabled? ' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.ambient +' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum +' + #13#10 +
-    '  gl_FrontMaterial.specular * specularSum;' + #13#10 +
+    '  gl_FrontMaterial.specular * specularSum : diffuseTex;' + #13#10 +
+    
+    'gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);' + #13#10 +
+    'gl_FragColor.a = mix(1.0, diffuseTex.a, fogFactor);' + #13#10 +
 
     'gl_FragColor.a = 1.0;' + #13#10 +
   '}' + #13#10;

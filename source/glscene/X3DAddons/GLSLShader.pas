@@ -28,7 +28,9 @@ type
       uniformViewMatrix,
       uniformInvViewMatrix,
       uniformHaveTexture,
-      uniformMaterialProperty
+      uniformMaterialProperty,
+      uniformFogEnabled,
+      uniformLightingEnabled
     );
 
   TGLSLShader = class;
@@ -103,6 +105,8 @@ type
       shaderProg: GLenum;
       shaderVert: GLenum;
       shaderFrag: GLenum;
+      FFogEnabled: Boolean;
+      FLightingEnabled: Boolean;
     public
       constructor Create(AOwner: TComponent); override;
       procedure SetPrograms(vp, fp: PChar);
@@ -113,6 +117,8 @@ type
     published
       property Param: TGLSLShaderParameters read Parameters;
       property Prog: GLenum read shaderProg;
+      property FogEnabled: Boolean read FFogEnabled;
+      property LightingEnabled: Boolean read FLightingEnabled;
   end;
 
 procedure Register;
@@ -267,6 +273,16 @@ begin
       else
         glUniform1iARB(FUniformLocation, 0);
     end;
+  end;
+
+  if FUniformType = uniformFogEnabled then
+  begin
+    glUniform1iARB(FUniformLocation, Integer(shader.FogEnabled));
+  end;
+
+  if FUniformType = uniformLightingEnabled then
+  begin
+    glUniform1iARB(FUniformLocation, Integer(shader.LightingEnabled));
   end;
 
   {
@@ -553,6 +569,8 @@ begin
   if not (csDesigning in ComponentState) and shaderSane then
   begin
       //glDisable(GL_STENCIL_TEST);
+      FFogEnabled := glIsEnabled(GL_FOG);
+      FLightingEnabled := glIsEnabled(GL_LIGHTING);
       glUseProgramObjectARB(shaderProg);
       Parameters.Bind(mat, rci);
       //glEnable(GL_STENCIL_TEST);

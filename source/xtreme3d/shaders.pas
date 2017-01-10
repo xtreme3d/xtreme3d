@@ -13,6 +13,8 @@ var
   paramDiffTex: TGLSLShaderParameter;
   paramUseTexture: TGLSLShaderParameter;
   paramMaxLights: TGLSLShaderParameter;
+  paramFogEnabled: TGLSLShaderParameter;
+  paramLightingEnabled: TGLSLShaderParameter;
 begin
   if not
     (GL_ARB_shader_objects and
@@ -24,18 +26,30 @@ begin
   end;
   phong := TGLSLShader.Create(scene);
   phong.SetPrograms(phongVertexProgram, phongFragmentProgram);
+  
   paramDiffTex := phong.Param.AddUniform('diffuseMap');
   paramDiffTex.UniformType := uniformTexture2D;
   paramDiffTex.UniformTexture := 0;
   paramDiffTex.Initialized := True;
+  
   paramUseTexture := phong.Param.AddUniform('useTexture');
   paramUseTexture.UniformType := uniform1i;
   paramUseTexture.UniformInteger := 0;
   paramUseTexture.Initialized := True;
+  
   paramMaxLights := phong.Param.AddUniform('maxNumLights');
   paramMaxLights.UniformType := uniform1i;
   paramMaxLights.UniformInteger := 1;
   paramMaxLights.Initialized := True;
+  
+  paramFogEnabled := phong.Param.AddUniform('fogEnabled');
+  paramFogEnabled.UniformType := uniformFogEnabled;
+  paramFogEnabled.Initialized := True;
+  
+  paramLightingEnabled := phong.Param.AddUniform('lightingEnabled');
+  paramLightingEnabled.UniformType := uniformLightingEnabled;
+  paramLightingEnabled.Initialized := True;
+  
   result := integer(phong);
 end;
 
@@ -76,6 +90,8 @@ var
   paramShadowMapSize: TGLSLShaderParameter; 
   paramShadowBlurRadius: TGLSLShaderParameter;
   paramUseAutoTangentSpace: TGLSLShaderParameter;
+  paramFogEnabled: TGLSLShaderParameter;
+  paramLightingEnabled: TGLSLShaderParameter;
 begin
   if not
     (GL_ARB_shader_objects and
@@ -135,6 +151,14 @@ begin
   paramUseAutoTangentSpace.UniformType := uniform1i;
   paramUseAutoTangentSpace.UniformInteger := 0;
   paramUseAutoTangentSpace.Initialized := True;
+  
+  paramFogEnabled := bump.Param.AddUniform('fogEnabled');
+  paramFogEnabled.UniformType := uniformFogEnabled;
+  paramFogEnabled.Initialized := True;
+  
+  paramLightingEnabled := bump.Param.AddUniform('lightingEnabled');
+  paramLightingEnabled.UniformType := uniformLightingEnabled;
+  paramLightingEnabled.Initialized := True;
 
   result := integer(bump);
 end;

@@ -41,6 +41,8 @@ bumpFragmentProgram =
   'uniform vec2 shadowMapSize;' + #13#10 +
   'uniform float shadowBlurRadius;' + #13#10 +
   'uniform bool useAutoTangentSpace;' + #13#10 +
+  'uniform bool fogEnabled;' + #13#10 +
+  'uniform bool lightingEnabled;' + #13#10 +
 
   'const float parallaxBias = -0.01;' + #13#10 +
   
@@ -85,6 +87,9 @@ bumpFragmentProgram =
       'texCoords = texCoords + (height * Ee.xy);' + #13#10 +
     '}' + #13#10 +
     
+    'float fogDistance = gl_FragCoord.z / gl_FragCoord.w;' + #13#10 +
+    'float fogFactor = fogEnabled? clamp((gl_Fog.end - fogDistance) / (gl_Fog.end - gl_Fog.start), 0.0, 1.0) : 1.0; ' + #13#10 +
+    
     'float shadow = 1.0;' + #13#10 +
     'if (shadowCoord.w > 0.0)' + #13#10 +
     '{' + #13#10 +
@@ -122,6 +127,8 @@ bumpFragmentProgram =
     
     'float spotEffect;' + #13#10 +
     
+    'if (lightingEnabled)' + #13#10 +
+    '{' + #13#10 +
     'for (int i = 0; i < maxNumLights; i++)' + #13#10 +
     '{' + #13#10 +
     '  spotEffect = 1.0;' + #13#10 +
@@ -159,11 +166,14 @@ bumpFragmentProgram =
     '  diffuseSum += gl_LightSource[i].diffuse * diffuse * attenuation * spotEffect;' + #13#10 +
     '  specularSum += gl_LightSource[i].specular * specular * attenuation * spotEffect;' + #13#10 +
     '}'  + #13#10 +
+    '}' + #13#10 +
     
-    'gl_FragColor =' + #13#10 +
+    'vec4 finalColor = lightingEnabled?' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.ambient +' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum * shadow +' + #13#10 +
-    '  gl_FrontMaterial.specular * specularSum * shadow;' + #13#10 +
+    '  gl_FrontMaterial.specular * specularSum * shadow : diffuseTex * shadow;' + #13#10 +
+    
+    'gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);' + #13#10 +
+    'gl_FragColor.a = mix(1.0, diffuseTex.a, fogFactor);' + #13#10 +
 
-    'gl_FragColor.a = 1.0;' + #13#10 +
   '}' + #13#10;
