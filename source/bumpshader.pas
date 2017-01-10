@@ -120,8 +120,11 @@ bumpFragmentProgram =
     'vec3 L;' + #13#10 +
     'float NH;' + #13#10 +
     
+    'float spotEffect;' + #13#10 +
+    
     'for (int i = 0; i < maxNumLights; i++)' + #13#10 +
     '{' + #13#10 +
+    '  spotEffect = 1.0;' + #13#10 +
     '  if (gl_LightSource[i].position.w > 0.0)' + #13#10 +
     '  {' + #13#10 +
     '    vec3 positionToLightSource = vec3(gl_LightSource[i].position.xyz - position);' + #13#10 +
@@ -131,6 +134,11 @@ bumpFragmentProgram =
     '      gl_LightSource[i].constantAttenuation / ' + #13#10 +
     '      ((1.0+gl_LightSource[i].linearAttenuation * distanceToLight) * ' + #13#10 +
     '       (1.0+gl_LightSource[i].quadraticAttenuation * distanceToLight * distanceToLight));' + #13#10 +
+    '    if (gl_LightSource[i].spotCutoff <= 90.0) ' + #13#10 +
+    '    {' + #13#10 +
+    '      float spotCos = dot(directionToLight, normalize(gl_LightSource[i].spotDirection));' + #13#10 +
+    '      spotEffect = clamp(pow(spotCos, gl_LightSource[i].spotExponent) * step(gl_LightSource[i].spotCosCutoff, spotCos), 0.0, 1.0);' + #13#10 +
+    '    }' + #13#10 + 
     '  }' + #13#10 +
     '  else' + #13#10 +
     '  {' + #13#10 +
@@ -148,8 +156,8 @@ bumpFragmentProgram =
     '  NH = dot(N, H);' + #13#10 +
     '  specular = pow(max(NH, 0.0), 3.0 * gl_FrontMaterial.shininess);' + #13#10 +
     
-    '  diffuseSum += gl_LightSource[i].diffuse * diffuse * attenuation;' + #13#10 +
-    '  specularSum += gl_LightSource[i].specular * specular * attenuation;' + #13#10 +
+    '  diffuseSum += gl_LightSource[i].diffuse * diffuse * attenuation * spotEffect;' + #13#10 +
+    '  specularSum += gl_LightSource[i].specular * specular * attenuation * spotEffect;' + #13#10 +
     '}'  + #13#10 +
     
     'gl_FragColor =' + #13#10 +
