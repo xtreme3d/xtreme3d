@@ -18,6 +18,7 @@ type
         { Protected Declarations }
         FClipPlane: TDoubleHmgPlane;
         FClipPlaneEnabled: Boolean;
+        FClipPlaneID: TGLEnum;
     public
         { Public Declarations }
         constructor Create(AOwner: TComponent); override;
@@ -25,14 +26,20 @@ type
         procedure DoRender(var rci : TRenderContextInfo; renderSelf, renderChildren : Boolean); override;
         procedure SetClipPlane(point, normal: TAffineVector);
         property ClipPlaneEnabled: Boolean read FClipPlaneEnabled write FClipPlaneEnabled;
+        property ClipPlaneID: TGLEnum read FClipPlaneID;
   end;
 
 implementation
+
+var
+  MaxClipPlaneID: TGLEnum;
 
 constructor TGLClipPlane.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FClipPlaneEnabled := False;
+  FClipPlaneID := MaxClipPlaneID;
+  MaxClipPlaneID := MaxClipPlaneID + 1;
   SetClipPlane(AffineVectorMake(0, 0, 0), AffineVectorMake(0, 1, 0));
 end;
 
@@ -52,18 +59,18 @@ begin
    if FRendering then Exit;
    FRendering:=True;
    try
-      if FClipPlaneEnabled then
+      if FClipPlaneEnabled and (FClipPlaneID < 6) then
       begin
-        glEnable(GL_CLIP_PLANE0);
-        glClipPlane(GL_CLIP_PLANE0, @FClipPlane);
+        glEnable(GL_CLIP_PLANE0 + FClipPlaneID);
+        glClipPlane(GL_CLIP_PLANE0 + FClipPlaneID, @FClipPlane);
       end;
 
       if renderChildren and (Count>0) then
          Self.RenderChildren(0, Count-1, rci);
 
-      if FClipPlaneEnabled then
+      if FClipPlaneEnabled and (FClipPlaneID < 6) then
       begin
-         glDisable(GL_CLIP_PLANE0);
+         glDisable(GL_CLIP_PLANE0 + FClipPlaneID);
       end;
    finally
       FRendering:=False;
