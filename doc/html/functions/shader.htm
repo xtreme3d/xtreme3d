@@ -76,7 +76,7 @@
 <A class=type>real</A><A> = </A><A class=function>BumpShaderSetMaxLights</A><A>( shader,maxlights as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает количество источников света, которые должны учитываться шейдером рельефа. Это количество, как правило, меньше или равно числу источников света, созданных функцией </A><A class=funclink href=../functions/light.htm#LightCreate>LightCreate</A><A>. 
 Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает все типы источников света: 
-</A><A class=constant>lsOmni</A>, </A><A class=constant>lsSpot</A></A><A class=constant>lsParallel</A><A>.
+</A><A class=constant>lsOmni</A><A>, </A><A class=constant>lsSpot</A><A>, </A><A class=constant>lsParallel</A><A>.
 <BR>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией </A><A class=funclink href=../functions/light.htm#LightSetShining>LightSetShining</A><A>, игнорируется шейдером. Чтобы выключить источник света, можно функцией </A><A class=funclink href=../functions/light.htm#LightSetAttenuation>LightSetAttenuation</A><A> выставить в ноль его постоянную составляющую затухания (constant attenuation).
 </A>
 <BR><A>shader - id шейдера</A>
@@ -283,7 +283,7 @@
 <A class=type>real</A><A> = </A><A class=function>PhongShaderSetMaxLights</A><A>( shader,maxlights as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает количество источников света, которые должны учитываться шейдером Фонга. Это количество, как правило, меньше или равно числу источников света, созданных функцией </A><A class=funclink href=../functions/light.htm#LightCreate>LightCreate</A><A>. 
 Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает все типы источников света: 
-</A><A class=constant>lsOmni</A>, </A><A class=constant>lsSpot</A></A><A class=constant>lsParallel</A><A>.
+</A><A class=constant>lsOmni</A><A>, </A><A class=constant>lsSpot</A><A>, </A><A class=constant>lsParallel</A><A>.
 <BR>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией </A><A class=funclink href=../functions/light.htm#LightSetShining>LightSetShining</A><A>, игнорируется шейдером. Чтобы выключить источник света, можно функцией </A><A class=funclink href=../functions/light.htm#LightSetAttenuation>LightSetAttenuation</A><A> выставить в ноль его постоянную составляющую затухания (constant attenuation).
 </A>
 <BR><A>shader - id шейдера</A>
