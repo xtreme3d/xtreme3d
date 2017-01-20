@@ -4570,9 +4570,9 @@ begin
          glCullFace(GL_BACK);
 
       if FZWrite then
-         glDepthMask(TGLboolean(0))
+         glDepthMask(TGLboolean(1))
       else
-         glDepthMask(TGLboolean(1));
+         glDepthMask(TGLboolean(0));
 
       // Apply FaceCulling and BackProperties (if needs be)
       if (stCullFace in rci.GLStates.States) then begin
