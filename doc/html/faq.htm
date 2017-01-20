@@ -30,6 +30,7 @@
 <BR><A class=funclink href=faq.htm#q18>- Поддерживает ли Xtreme3D воспроизведение видео?</A>
 <BR><A class=funclink href=faq.htm#q19>- Почему к телам ODE не прикладываются силы?</A>
 <BR><A class=funclink href=faq.htm#q20>- Поддерживает ли ODE "тряпичные куклы" (ragdoll)?</A>
+<BR><A class=funclink href=faq.htm#q21>- Почему материал не учитывает альфа-канал текстуры?</A>
 <BR>
 <BR>
 <A name="q1"></A>
@@ -114,7 +115,7 @@
 активную форму поверх старой, и поэтому обычные события мыши в ней не работают.
 Нажатия кнопок мыши можно проверять только функцией </A><A class=type>keyboard_check_direct</A><A>(</A><A class=constant>mb_left</A><A>)
 или </A><A class=type>keyboard_check_direct</A><A>(</A><A class=constant>mb_right</A><A>) - в этом случае нажатия проверяются непосредственно
-на аппаратном уровне, вне зависимости от конкретного активного окна.
+на аппаратном уровне, вне зависимости от конкретного активного окна. В Game Maker 8 можно также использовать функцию </A><A class=type>mouse_check_button_pressed</A><A>.
 </A>
 <BR>
 <BR>
@@ -189,6 +190,12 @@
 <A name="q20"></A>
 <A><BR><B>20. Поддерживает ли ODE "тряпичные куклы" (ragdoll)?</B>
 <BR>Да, ODE в Xtreme3D 3.1 поддерживает Ragdoll для Актеров (Actor).
+</A>
+<BR>
+<BR>
+<A name="q21"></A>
+<A><BR><B>21. Почему материал не учитывает альфа-канал текстуры?</B>
+<BR>Нужно выставить режим смешивания </A><A class=constant>bmTransparency</A><A> функцией </A><A class=funclink href=functions/material.htm#MaterialSetBlendingMode>MaterialSetBlendingMode</A><A>.
 </A>
 
 <BR>
