@@ -1283,6 +1283,8 @@ type
          FMaterialOptions : TMaterialOptions;
          FFaceCulling : TFaceCulling;
          currentLibMaterial : TGLLibMaterial;
+         FCullFrontFaces: Boolean;
+         FZWrite: Boolean;
 
 	   protected
 	      { Protected Declarations }
@@ -1350,6 +1352,9 @@ type
 			property MaterialLibrary : TGLMaterialLibrary read FMaterialLibrary write SetMaterialLibrary;
 			property LibMaterialName : TGLLibMaterialName read FLibMaterialName write SetLibMaterialName;
          property TextureEx : TGLTextureEx read GetTextureEx write SetTextureEx stored StoreTextureEx;
+
+      property CullFrontFaces: Boolean read FCullFrontFaces write FCullFrontFaces;
+      property ZWrite: Boolean read FZWrite write FZWrite;
 	  end;
 
 	// TGLLibMaterial
@@ -4326,6 +4331,8 @@ begin
   FFrontProperties:=TGLFaceProperties.Create(Self);
   FTexture:=nil; // AutoCreate
   FFaceCulling:=fcBufferDefault;
+  FCullFrontFaces:=false;
+  FZWrite:=True;
 end;
 
 // Destroy
@@ -4556,6 +4563,17 @@ begin
       if stLighting in rci.GLStates.States then
          FFrontProperties.Apply(rci, GL_FRONT)
       else FFrontProperties.ApplyNoLighting(rci, GL_FRONT);
+
+      if FCullFrontFaces then
+         glCullFace(GL_FRONT)
+      else
+         glCullFace(GL_BACK);
+
+      if FZWrite then
+         glDepthMask(TGLboolean(0))
+      else
+         glDepthMask(TGLboolean(1));
+
       // Apply FaceCulling and BackProperties (if needs be)
       if (stCullFace in rci.GLStates.States) then begin
          // currently culling
@@ -4664,6 +4682,9 @@ begin
 	if Assigned(currentLibMaterial) then
 		Result:=currentLibMaterial.UnApply(rci)
    else begin
+      glCullFace(GL_BACK);
+      glDepthMask(TGLboolean(1));
+
       if BlendingMode in [bmAlphaTest50, bmAlphaTest100] then
          glAlphaFunc(GL_GREATER, 0);
       if moNoLighting in MaterialOptions then begin

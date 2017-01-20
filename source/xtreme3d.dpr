@@ -380,6 +380,24 @@ begin
   result := 1;
 end;
 
+function MaterialCullFrontFaces(mtrl: pchar; culff: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.CullFrontFaces := Boolean(trunc64(culff));
+  result:=1;
+end;
+
+function MaterialSetZWrite(mtrl: pchar; zwrite: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.ZWrite := Boolean(trunc64(zwrite));
+  result:=1;
+end;
+
 exports
 
 //Engine
@@ -560,6 +578,7 @@ MaterialGetTextureWidth, MaterialGetTextureHeight,
 MaterialLoadTexture,
 MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
 MaterialEnableTextureEx, MaterialHasTextureEx,
+MaterialCullFrontFaces, MaterialSetZWrite,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate,

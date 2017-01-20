@@ -69,7 +69,7 @@ phongFragmentProgram =
     '  }' + #13#10 +
     '  else' + #13#10 +
     '  {' + #13#10 +
-    '    L = gl_LightSource[0].position.xyz;' + #13#10 +
+    '    L = gl_LightSource[i].position.xyz;' + #13#10 +
     '    attenuation = 1.0;' + #13#10 +
     '  }' + #13#10 +
                   
