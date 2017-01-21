@@ -10,12 +10,12 @@ Visit our Russian Xtreme3D site at http://xtreme3d.narod.ru
 
 Screenshots
 -----------
-[![Screenshot3](/screenshots/003-thumb.jpg)](/screenshots/003.jpg)
-[![Screenshot1](/screenshots/011-thumb.jpg)](/screenshots/011.jpg)
-[![Screenshot4](/screenshots/005-thumb.jpg)](/screenshots/005.jpg)
-[![Screenshot4](/screenshots/015-thumb.jpg)](/screenshots/015.jpg)
-[![Screenshot4](/screenshots/014-thumb.jpg)](/screenshots/014.jpg)
-[![Screenshot4](/screenshots/012-thumb.jpg)](/screenshots/012.jpg)
+[![Screenshot3](/screenshots/pbr-thumb.jpg)](/screenshots/pbr.jpg)
+[![Screenshot1](/screenshots/shadows-thumb.jpg)](/screenshots/shadows.jpg)
+[![Screenshot4](/screenshots/water2-thumb.jpg)](/screenshots/water2.jpg)
+[![Screenshot4](/screenshots/bumpshadows-thumb.jpg)](/screenshots/bumpshadows.jpg)
+[![Screenshot4](/screenshots/x3d-3.0-rain-thumb.jpg)](/screenshots/x3d-3.0-rain.jpg)
+[![Screenshot4](/screenshots/spotlight-thumb.jpg)](/screenshots/spotlight.jpg)
 
 Features
 --------
@@ -69,7 +69,7 @@ License
 -------
 Xtreme3D 3.x is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
 
-GLScene is distributed under Mozilla Public License 1.1. If you use xtreme3d.dll in your project, please add a copy of GLSCENE-LICENSE.txt to your distribution.
+GLScene is distributed under Mozilla Public License 1.1.
 
 ODE is distributed under BSD-style license. If you use ode.dll in your project, please add a copy of ODE-LICENSE.txt to your distribution.
 
