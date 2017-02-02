@@ -55,10 +55,6 @@ Features
 * Loading resources from Quake 2 PAK archives
 * + a lot more
 
-Demos
------
-A growing collection of Xtreme3D usage examples for GM8 can be found here: https://github.com/xtreme3d/demos.
-
 Asset Creation
 --------------
 For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.
@@ -67,10 +63,8 @@ For animated geometry, we recommend either SMD (Half-Life) or MD5 (Doom 3) forma
 
 License
 -------
-Xtreme3D 3.x is distributed under GNU Lesser General Public License 2.1. It allows you to create commercial closed-source applications with the engine if you don't modify the source code and only use compiled version of the library for linking.
+Xtreme3D 3.x and corresponding GLScene fork are both distributed under Mozilla Public License 1.1. This license allows you to create commercial closed-source applications with the engine.
 
-GLScene is distributed under Mozilla Public License 1.1.
+ODE is distributed under BSD-style license.
 
-ODE is distributed under BSD-style license. If you use ode.dll in your project, please add a copy of ODE-LICENSE.txt to your distribution.
-
-FreeType is distributed under FreeType License (FTL). If you use freetype.dll in your project, please add a copy of FREETYPE-LICENSE.txt to your distribution.
+FreeType is distributed under FreeType License (FTL).
