@@ -77,7 +77,7 @@ bumpFragmentProgram =
     
     'vec2 texCoords = gl_TexCoord[0].st;' + #13#10 +
         
-    'mat3 TBN = cotangentFrame(nn, -E, texCoords);' + #13#10 +
+    'mat3 TBN = cotangentFrame(nn, position, texCoords);' + #13#10 +
     'vec3 Ee = useAutoTangentSpace? normalize(E * TBN) : E;' + #13#10 +
 
     'if (useParallax)' + #13#10 +

@@ -91,6 +91,4 @@ phongFragmentProgram =
     
     'gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);' + #13#10 +
     'gl_FragColor.a = mix(1.0, diffuseTex.a, fogFactor);' + #13#10 +
-
-    'gl_FragColor.a = 1.0;' + #13#10 +
   '}' + #13#10;
