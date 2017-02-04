@@ -16,7 +16,7 @@ const
 
 type
 
-  TGLShadowMap = class(TPersistent)
+  TGLShadowMap = class(TComponent)
     private
         { Private Declarations }
     protected
@@ -38,13 +38,15 @@ type
         FZNear: Single;
         FZFar: Single;
         FFBO: TGLFBO;
+        FMatLib: TGLMaterialLibrary;
+        FOverrideMaterial: TGLLibMaterial;
         procedure SetTexture(texture: TGLTexture);
         procedure DoInitialize;
         procedure RenderToUserFBO;
         procedure RenderToOwnedFBO;
     public
         { Public Declarations }
-        constructor Create;
+        constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
         procedure Render;
         property Texture: TGLTexture read FTexture write SetTexture;
@@ -60,6 +62,7 @@ type
         property ZNear: Single read FZNear write FZNear;
         property ZFar: Single read FZFar write FZFar;
         property FBO: TGLFBO read FFBO write FFBO;
+        property OverrideMaterial: TGLLibMaterial read FOverrideMaterial;
   end;
 
 implementation
@@ -101,20 +104,24 @@ begin
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 end;
 
-constructor TGLShadowMap.Create;
+constructor TGLShadowMap.Create(AOwner: TComponent);
 begin
-  inherited Create;
+  inherited;
   Width:=256;
   Height:=256;
   FInitialized := false;
   FDepthBorderColor := TGLColor.Create(Self);
   FDepthBorderColor.SetColor(1, 1, 1, 1);
   FProjectionSize := 20.0;
-  FZScale := 1.0; //0.945;
-  FZNear := 0.0; //-20.0
-  FZFar := 100.0; //200.0
+  FZScale := 1.0;
+  FZNear := 0.0;
+  FZFar := 100.0;
   FShadowMatrix := IdentityHmgMatrix;
   FFBO := nil;
+  FMatLib := TGLMaterialLibrary.Create(self);
+  FOverrideMaterial := FMatLib.AddTextureMaterial('mDefault', '', true);
+  FOverrideMaterial.Material.CullFrontFaces := true;
+  FOverrideMaterial.Material.FaceCulling := fcCull;
 end;
 
 destructor TGLShadowMap.Destroy;
@@ -123,6 +130,7 @@ begin
     glDeleteTextures(1, @FDepthTextureHandle);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   glDeleteFramebuffers(1, @FFramebuffer);
+  FMatLib.Destroy;
   inherited Destroy;
 end;
 
@@ -168,6 +176,10 @@ begin
    if FFBO.OverrideMaterial <> nil then
    begin
      MainBuffer.OverrideMaterial := FFBO.OverrideMaterial;
+   end
+   else
+   begin
+     MainBuffer.OverrideMaterial := FOverrideMaterial;
    end;
 
    glClearColor(1, 1, 1, 1);
@@ -203,7 +215,7 @@ begin
    glMultMatrixf(@lightProjMat);
    glMultMatrixf(@lightModelViewMat);
    glMultMatrixf(@invViewMat);
-   //glScalef(FZScale, FZScale, FZScale);
+   glScalef(FZScale, FZScale, FZScale);
    glGetFloatv(GL_MODELVIEW_MATRIX, @FShadowMatrix[0]);
    glPopMatrix();
 
@@ -218,6 +230,7 @@ var
    oldWidth, oldHeight: Integer;
    projMat, mvMat, mvpMat, tsMat, tmpMat, invCamMat: TMatrix;
    oldCamera: TGLCamera;
+   oldOverrideMat: TGLLibMaterial;
 begin
    if not Assigned(FShadowCamera) then
      Exit;
@@ -235,7 +248,10 @@ begin
 
    glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
 
-   glClearColor(0, 0, 0, 1);
+   oldOverrideMat := MainBuffer.OverrideMaterial;
+   MainBuffer.OverrideMaterial := FOverrideMaterial;
+
+   glClearColor(1, 1, 1, 1);
    glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT);
    glEnable(GL_DEPTH_TEST);
    glEnable(GL_CULL_FACE);
@@ -256,6 +272,8 @@ begin
    glGetFloatv(GL_MODELVIEW_MATRIX, @mvMat[0]);
 
    MainBuffer.SimpleRender(FCaster);
+
+   MainBuffer.OverrideMaterial := oldOverrideMat;
 
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 

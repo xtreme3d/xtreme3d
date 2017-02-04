@@ -10,7 +10,7 @@ begin
       Exit;
   end;
   v := TGLSceneViewer(trunc64(viewer));
-  sm := TGLShadowMap.Create;
+  sm := TGLShadowMap.Create(scene);
   sm.Width := trunc64(size);
   sm.Height := trunc64(size);
   sm.MainBuffer := v.Buffer;
