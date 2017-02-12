@@ -1,5 +1,32 @@
 Xtreme3D version history
 ========================
+v3.5.0 (by Gecko) - 04/02/2017
+------------------------------
+* ClipPlane functions
+* Spot lights, fog, transparency and shadeless rendering support for BumpShader and PhongShader
+* New Material functions: MaterialSetZWrite, MaterialCullFrontFaces
+* New ODE functions: OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity, OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity, OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion
+
+v3.4.0 (by Gecko) - 01/01/2017
+------------------------------
+* TTF fonts and Unicode text support
+* ObjectHash functions
+* Improved FBORenderObjectEx
+* FreeformGenTangents and FreeformBuildOctree
+* ViewMatrix and InvViewMatrix parameters for GLSLShader
+* Added GLSLShaderSetParameterHasTextureEx
+* Seamless cubemapping in shaders
+* Fixed MaterialCubeMapLoadImage
+
+v3.3.0 (by Gecko) - 27/11/2016
+------------------------------
+* Querying and modifying geometry data of Freeforms
+* Getting size and position of Viewer
+* Override materials for Viewer and FBO
+* More color formats for FBO
+* Rendering ShadowMap shadows into custom FBO
+* Querying supported OpenGL extensions
+
 v3.2.0 (by Gecko) - 21/10/2016
 ------------------------------
 * FBO support for fast offscreen rendering and Z-buffer access in shaders
@@ -81,3 +108,4 @@ v2.0.0.0 (by Xception) - 11/02/2007
 * DDS (DXT1, DXT3, DXT5) texture support
 * Actor bone manipulation functions
 * Multiple viewers and material libraries useable
+
