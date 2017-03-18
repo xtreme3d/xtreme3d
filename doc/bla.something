@@ -668,6 +668,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="GPU">
+                        <param name="Local" value="glossary/gpu.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="HDR">
                         <param name="Local" value="glossary/hdr.htm">
                         <param name="ImageNumber" value="0">
@@ -898,8 +903,18 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Rasterization">
+                        <param name="Local" value="glossary/rasterization.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Raycasting">
                         <param name="Local" value="glossary/raycasting.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Ray Tracing">
+                        <param name="Local" value="glossary/raytracing.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -960,6 +975,11 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Shadow Map">
                         <param name="Local" value="glossary/shadowmap.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Shadow Plane">
+                        <param name="Local" value="glossary/shadowplane.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">

@@ -545,6 +545,10 @@
   <PARAM name="Local" value="glossary/glscene.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="GPU">
+  <PARAM name="Local" value="glossary/gpu.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="HDR">
   <PARAM name="Local" value="glossary/hdr.htm">
  </OBJECT>
@@ -729,8 +733,16 @@
   <PARAM name="Local" value="glossary/ragdoll.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Rasterization">
+  <PARAM name="Local" value="glossary/rasterization.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Raycasting">
   <PARAM name="Local" value="glossary/raycasting.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Ray Tracing">
+  <PARAM name="Local" value="glossary/raytracing.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Real-Time">
@@ -779,6 +791,10 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shadow Map">
   <PARAM name="Local" value="glossary/shadowmap.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shadow Plane">
+  <PARAM name="Local" value="glossary/shadowplane.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shadow Volume">

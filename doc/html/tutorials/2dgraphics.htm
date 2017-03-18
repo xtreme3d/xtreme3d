@@ -30,6 +30,22 @@
 <BR><A class=func2link href=../functions/fonttext.htm#HUDTextSetColor>HUDTextSetColor</A><A>(text, </A><A class=constant>c_red</A><A>, 0.5);</A>
 <BR><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(text, 100, 100, 0);</A>
 <BR><A class=func2link href=../functions/fonttext.htm#HUDTextSetRotation>HUDTextSetRotation</A><A>(text, 30.0);</A>
+<BR>
+<BR>У шрифтов типа WindowsBitmapfont есть серьезный недостаток: он поддерживает только кодировку ANSI. Это означает, что в одном приложении нельзя использовать символы нескольких разных алфавитов. Для решения этой проблемы в Xtreme3D была добавлена поддержка библиотеки FreeType и кодировки UTF-8, которая позволяет выводить любые символы без ограничений. При помощи FreeType вы можете загружать TTF-шрифты из файлов, что очень удобно - вам не придется волноваться по поводу того, установлен ли нужный шрифт в системе пользователя: все нужные шрифты могут поставляться вместе с игрой.
+<BR>
+<BR>Создание шрифта и экранного текста при помощи FreeType выглядит следующим образом:
+<BR>
+<BR><A>font = </A><A class=func2link href=../functions/fonttext.htm#TTFontCreate>TTFontCreate</A><A>('data/font.ttf', 14);</A>
+<BR><A>text = </A><A class=func2link href=../functions/fonttext.htm#HUDTextCreate>HUDTextCreate</A><A>(font, 'Hello, World!', <B>global</B>.front);</A>
+<BR>
+<BR>Текстовая строка, которую вы передаете в функцию 
+<A class=func2link href=../functions/fonttext.htm#HUDTextCreate>HUDTextCreate</A>, 
+должна быть закодирована в UTF-8. К сожалению, Game Maker 8 не поддерживает UTF-8 во встроенном редакторе кода, поэтому текст, содержащий символы национальных алфавитов, следует либо загружать из файла функцией 
+<A class=func2link href=../functions/text.htm#TextRead>TextRead</A>, либо конвертировать функцией 
+<A class=func2link href=../functions/text.htm#TextConvertANSIToUTF8>TextConvertANSIToUTF8</A>. 
+<BR>Для использования функции 
+<A class=func2link href=../functions/fonttext.htm#TTFontCreate>TTFontCreate</A>
+поместите в папку с игрой библиотеку freetype.dll (ищите ее в SDK).
 </A>
 
 </DIV>

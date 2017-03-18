@@ -20,12 +20,22 @@
 <BR>
 <BR>Также имеются две техники отрисовки объемных теней - shadow volume и shadow mapping. Первая заключается в создании объекта, определяющего объем, внутри которого точки находятся в тени. Данный метод дает очень точные тени на любом расстоянии, но работает достаточно медленно. Куда более перспективной выглядит новая техника, появившаяся в Xtreme3D 3.0 - теневые карты (shadow mapping). С их помощью можно очень быстро рендерить мягкие тени - но, правда, на ограниченном расстоянии от камеры. 
 <BR>
-<BR>На этом уроке мы рассмотрим теневую плоскость. Создать ее очень просто:
+<BR>Рассмотрим сначала теневую плоскость. Создать ее очень просто:
 <BR>
 <BR><A class=src>shadowTarget = </A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A class=src>(<B>global</B>.scene);</A>
 <BR><A class=src>shadowPlane = </A><A class=func2link href=../functions/shadowplane.htm#ShadowplaneCreate>ShadowplaneCreate</A><A class=src>(20, 20, 10, 10, shadowTarget, light, </A><A class=constant>c_black</A><A class=src>, 0.5, <B>global</B>.scene);</A>
 <BR>
 <BR>Теперь остается только добавить те объекты, которые должны отбрасывать тень, в потомки к shadowTarget.
+<BR>
+<BR>Работать с shadow volume ненамного сложнее:
+<BR>
+<BR><A>sv = </A><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeCreate>ShadowvolumeCreate</A><A>(<B>global</B>.scene);</A>
+<BR><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeAddLight>ShadowvolumeAddLight</A><A>(sv, light);</A>
+<BR>
+<BR>Добавьте те объекты, на которые должна падать тень, в потомки к sv. Те объекты, которые должны отбрасывать тень, добавляются так:
+<BR>
+<BR><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeAddOccluder>ShadowvolumeAddOccluder</A><A>(sv, obj);</A>
+<BR>
 </A>
 
 </DIV>
