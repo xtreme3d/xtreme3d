@@ -353,7 +353,7 @@
   <PARAM name="Local" value="glossary/axis.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Back buffer">
+  <PARAM name="Name" value="Back Buffer">
   <PARAM name="Local" value="glossary/backbuffer.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
@@ -649,6 +649,10 @@
   <PARAM name="Local" value="glossary/nurbs.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="OBB">
+  <PARAM name="Local" value="glossary/obb.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Object">
   <PARAM name="Local" value="glossary/object.htm">
  </OBJECT>
@@ -769,8 +773,12 @@
   <PARAM name="Local" value="glossary/shadingcomponents.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Shading model">
+  <PARAM name="Name" value="Shading Model">
   <PARAM name="Local" value="glossary/shadingmodel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shadow Map">
+  <PARAM name="Local" value="glossary/shadowmap.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shadow Volume">
@@ -807,6 +815,10 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Texture Filtering">
   <PARAM name="Local" value="glossary/texturefiltering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Technique">
+  <PARAM name="Local" value="glossary/technique.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Tiling">

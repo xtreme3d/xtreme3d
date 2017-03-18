@@ -428,7 +428,7 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Back buffer">
+                        <param name="Name" value="Back Buffer">
                         <param name="Local" value="glossary/backbuffer.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
@@ -798,6 +798,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="OBB">
+                        <param name="Local" value="glossary/obb.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Object">
                         <param name="Local" value="glossary/object.htm">
                         <param name="ImageNumber" value="0">
@@ -948,8 +953,13 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Shading model">
+                        <param name="Name" value="Shading Model">
                         <param name="Local" value="glossary/shadingmodel.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Shadow Map">
+                        <param name="Local" value="glossary/shadowmap.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -995,6 +1005,11 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Texture Filtering">
                         <param name="Local" value="glossary/texturefiltering.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Technique">
+                        <param name="Local" value="glossary/technique.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
