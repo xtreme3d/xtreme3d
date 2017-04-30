@@ -18,7 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, CrystalLUA;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms, CrystalLUA;
 
 type
    TEmpty = class(TComponent)
@@ -396,6 +396,82 @@ begin
   mat:=matlib.Materials.GetLibMaterialByName(mtrl);
   mat.Material.ZWrite := Boolean(trunc64(zwrite));
   result:=1;
+end;
+
+// New in Xtreme3D 3.6:
+
+function MouseSetPosition(mx, my: real): real; stdcall;
+begin
+  SetCursorPos(trunc64(mx), trunc64(my));
+  Result := 1;
+end;
+
+function MouseGetPositionX: real; stdcall;
+var
+  mouse : TPoint;
+begin
+  GetCursorPos(mouse);
+  Result := Integer(mouse.X);
+end;
+
+function MouseGetPositionY: real; stdcall;
+var
+  mouse : TPoint;
+begin
+  GetCursorPos(mouse);
+  Result := Integer(mouse.Y);
+end;
+
+function MouseShowCursor(mode: real): real; stdcall;
+begin
+  ShowCursor(LongBool(trunc64(mode)));
+  Result := 1;
+end;
+
+function KeyIsPressed(key: real): real; stdcall;
+begin
+  Result := Integer(IsKeyDown(trunc64(key)));
+end;
+
+function WindowCreate(x, y, w, h, resizeable: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm.Create(nil);
+  frm.Width := trunc64(w);
+  frm.Height := trunc64(h);
+  frm.Left := trunc64(x);
+  frm.Top := trunc64(y);
+  if trunc64(resizeable) = 0 then
+    frm.BorderStyle := bsSingle;
+  frm.Show;
+  result := Integer(frm);
+end;
+
+function WindowGetHandle(w: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  result := Integer(frm.Handle);
+end;
+
+function WindowSetTitle(w: real; title: pchar): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  frm.Caption := String(title);
+  result := 1;
+end;
+
+function WindowDestroy(w: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  frm.Free;
+  result := 1;
 end;
 
 function luaGetObject(const Args: TLuaArgs): TLuaArg;
@@ -798,6 +874,11 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
 }
+// Input
+MouseSetPosition, MouseGetPositionX, MouseGetPositionY, MouseShowCursor, 
+KeyIsPressed,
+// Window
+WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
 // Lua
 LuaCreate, LuaRunScript;
 
