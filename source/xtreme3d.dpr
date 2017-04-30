@@ -1,6 +1,6 @@
 library xtreme3d;
 uses
-  Windows, Messages, Classes, Controls, StdCtrls, ExtCtrls, Dialogs, SysUtils,
+  Windows, Messages, Classes, Controls, StdCtrls, ExtCtrls, Dialogs, SysUtils, TypInfo,
   GLScene, GLObjects, GLWin32FullScreenViewer, GLMisc, GLGraph,
   GLCollision, GLTexture, OpenGL1x, VectorGeometry, Graphics,
   GLVectorFileObjects, GLWin32Viewer, GLSpaceText, GLGeomObjects, GLCadencer,
@@ -18,7 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, CrystalLUA;
 
 type
    TEmpty = class(TComponent)
@@ -398,6 +398,46 @@ begin
   result:=1;
 end;
 
+function luaGetObject(const Args: TLuaArgs): TLuaArg;
+begin
+  result := LuaArg(scene.Objects.FindChild(Args[0].ForceString, false));
+end;
+
+function LuaCreate: real; stdcall;
+var
+  lua: TLua;
+begin
+  lua := TLua.Create();
+
+  Lua.RegProc('Object', @luaGetObject, 1);
+
+  lua.RegClass(TGLCoordinates);
+    
+  lua.RegClass(TGLBaseSceneObject, false);
+  Lua.RegProperty(TGLBaseSceneObject, 'Position', typeinfo(TGLCoordinates),
+    @TGLBaseSceneObject(nil).Position, @TGLBaseSceneObject(nil).Position);
+  Lua.RegProperty(TGLBaseSceneObject, 'Rotation', typeinfo(TGLCoordinates),
+    @TGLBaseSceneObject(nil).Rotation, @TGLBaseSceneObject(nil).Rotation);
+
+  result := Integer(lua);
+end;
+
+function LuaRunScript(lu: real; script: pchar): real; stdcall;
+var
+  lua: TLua;
+begin
+  lua := TLua(trunc64(lu));
+  try
+   lua.RunScript(script);
+  except
+    On E: Exception do
+    begin
+      ShowMessage(E.Message);
+    end;
+  end;
+  result := 1;
+end;
+
 exports
 
 //Engine
@@ -753,11 +793,13 @@ OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
 
 OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
 OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
-OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion; 
+OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion, 
 {
 OdeVehicleCreate, OdeVehicleSetScene, OdeVehicleSetForwardForce,
 OdeVehicleAddSuspension, OdeVehicleSuspensionGetWheel, OdeVehicleSuspensionSetSteeringAngle;
 }
+// Lua
+LuaCreate, LuaRunScript;
 
 begin
 end.

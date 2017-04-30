@@ -52,7 +52,8 @@ Features
 * Rigid body physics using ODE engine
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
-* Loading resources from Quake 2 PAK archives
+* Loading resources from PAK archives
+* Lua scripting
 * + a lot more
 
 Asset Creation
