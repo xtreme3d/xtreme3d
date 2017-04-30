@@ -54,6 +54,8 @@ Features
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from PAK archives
 * Lua scripting
+* Keyboard and mouse input
+* Window creation
 * + a lot more
 
 Asset Creation
