@@ -474,29 +474,34 @@ begin
   result := 1;
 end;
 
-function luaKeyIsPressed(const Args: TLuaArgs): TLuaArg;
+function ObjectCopy(obj, parent: real): real; stdcall;
+var
+  obj1, obj2, par: TGLBaseSceneObject;
 begin
-  result := LuaArg(IsKeyDown(Args[0].AsInteger));
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  if not (parent=0) then
+    par := TGLBaseSceneObject(trunc64(parent))
+  else
+    par := scene.Objects;
+  obj2 := TGLBaseSceneObject(obj1.NewInstance).CreateAsChild(par);
+  result:=Integer(obj2);
 end;
 
-function luaObjectTranslate(const Args: TLuaArgs): TLuaArg;
-var
-  obj: TGLBaseSceneObject;
-begin
-  obj := TGLBaseSceneObject(trunc64(Args[0].AsDouble));
-  obj.Translate(Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
-  result := LuaArg(1.0);
-end;
+{$I 'xtreme3d/lua_wrappers'}
 
 function LuaManagerCreate: real; stdcall;
 var
   lua: TLua;
 begin
-  lua := TLua.Create();
+  lua := TLua.Create();         
 
-  Lua.RegProc('ObjectTranslate', @luaObjectTranslate, 4);
+  lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
+  lua.RegProc('ObjectShow', @lua_ObjectShow, 1);
+  lua.RegProc('ObjectIsVisible', @lua_ObjectIsVisible, 1);
+  lua.RegProc('ObjectCopy', @lua_ObjectCopy, 2);
+  lua.RegProc('ObjectTranslate', @lua_ObjectTranslate, 4);
 
-  Lua.RegProc('KeyIsPressed', @luaKeyIsPressed, 1);
+  lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
 
   result := Integer(lua);
 end;

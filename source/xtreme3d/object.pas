@@ -15,19 +15,6 @@ begin
     Result:=Integer(TGLBaseSceneObject(trunc64(obj)).Visible);
 end;
 
-function ObjectCopy(obj, parent: real): real; stdcall;
-var
-    obj1, obj2: TGLBaseSceneObject;
-begin
-    obj1 := TGLBaseSceneObject(trunc64(obj));
-    if not (parent=0) then
-        obj2:=TGLBaseSceneObject.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
-    else
-        obj2:=TGLBaseSceneObject.CreateAsChild(scene.Objects);
-    obj2.Assign(obj1);
-    result:=Integer(obj2);
-end;
-
 function ObjectDestroy(obj: real): real; stdcall;
 begin
     TGLBaseSceneObject(trunc64(obj)).Free;
