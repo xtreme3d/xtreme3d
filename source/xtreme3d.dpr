@@ -474,34 +474,56 @@ begin
   result := 1;
 end;
 
-function luaGetObject(const Args: TLuaArgs): TLuaArg;
+function luaKeyIsPressed(const Args: TLuaArgs): TLuaArg;
 begin
-  result := LuaArg(scene.Objects.FindChild(Args[0].ForceString, false));
+  result := LuaArg(IsKeyDown(Args[0].AsInteger));
 end;
 
-function LuaCreate: real; stdcall;
+function luaObjectTranslate(const Args: TLuaArgs): TLuaArg;
+var
+  obj: TGLBaseSceneObject;
+begin
+  obj := TGLBaseSceneObject(trunc64(Args[0].AsDouble));
+  obj.Translate(Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function LuaManagerCreate: real; stdcall;
 var
   lua: TLua;
 begin
   lua := TLua.Create();
 
-  Lua.RegProc('Object', @luaGetObject, 1);
+  Lua.RegProc('ObjectTranslate', @luaObjectTranslate, 4);
 
-  lua.RegClass(TGLCoordinates);
-    
-  lua.RegClass(TGLBaseSceneObject, false);
-  Lua.RegProperty(TGLBaseSceneObject, 'Position', typeinfo(TGLCoordinates),
-    @TGLBaseSceneObject(nil).Position, @TGLBaseSceneObject(nil).Position);
-  Lua.RegProperty(TGLBaseSceneObject, 'Rotation', typeinfo(TGLCoordinates),
-    @TGLBaseSceneObject(nil).Rotation, @TGLBaseSceneObject(nil).Rotation);
+  Lua.RegProc('KeyIsPressed', @luaKeyIsPressed, 1);
 
   result := Integer(lua);
 end;
 
-function LuaRunScript(lu: real; script: pchar): real; stdcall;
+function LuaManagerSetConstantReal(lu: real; name: pchar; val: real): real; stdcall;
 var
   lua: TLua;
 begin
+  lua := TLua(trunc64(lu));
+  lua.RegConst(string(name), val);
+  result := 1;
+end;
+
+function LuaManagerSetConstantString(lu: real; name, val: pchar): real; stdcall;
+var
+  lua: TLua;
+begin
+  lua := TLua(trunc64(lu));
+  lua.RegConst(string(name), string(val));
+  result := 1;
+end;
+
+function LuaManagerRunScript(lu: real; script: pchar): real; stdcall;
+var
+  lua: TLua;
+begin
+  result := 1;
   lua := TLua(trunc64(lu));
   try
    lua.RunScript(script);
@@ -509,9 +531,30 @@ begin
     On E: Exception do
     begin
       ShowMessage(E.Message);
+      result := 0;
     end;
   end;
-  result := 1;
+end;
+
+function LuaManagerCallFunction(lu: real; name: pchar): real; stdcall;
+var
+  lua: TLua;
+begin
+  lua := TLua(trunc64(lu));
+  result := 0;
+  if lua.ProcExists(string(name)) then
+  begin
+    result := 1;
+    try
+      lua.Call(string(name), LuaArgs(0));
+    except
+      On E: Exception do
+      begin
+        ShowMessage(E.Message);
+        result := 0;
+      end;
+    end;
+  end;
 end;
 
 exports
@@ -880,7 +923,8 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 // Window
 WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
 // Lua
-LuaCreate, LuaRunScript;
+LuaManagerCreate, LuaManagerSetConstantReal, LuaManagerSetConstantString,
+LuaManagerRunScript, LuaManagerCallFunction;
 
 begin
 end.
