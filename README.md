@@ -53,9 +53,9 @@ Features
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from PAK archives
-* Lua scripting
 * Keyboard and mouse input
 * Window creation
+* Lua scripting
 * + a lot more
 
 Asset Creation

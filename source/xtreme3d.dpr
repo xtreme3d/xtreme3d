@@ -495,10 +495,32 @@ var
 begin
   lua := TLua.Create();         
 
+  // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
   lua.RegProc('ObjectShow', @lua_ObjectShow, 1);
   lua.RegProc('ObjectIsVisible', @lua_ObjectIsVisible, 1);
   lua.RegProc('ObjectCopy', @lua_ObjectCopy, 2);
+  lua.RegProc('ObjectDestroy', @lua_ObjectDestroy, 1);
+  lua.RegProc('ObjectDestroyChildren', @lua_ObjectDestroyChildren, 1);
+  lua.RegProc('ObjectSetPosition', @lua_ObjectSetPosition, 4);
+  lua.RegProc('ObjectGetPosition', @lua_ObjectGetPosition, 2);
+  lua.RegProc('ObjectGetAbsolutePosition', @lua_ObjectGetAbsolutePosition, 2);
+  lua.RegProc('ObjectSetPositionOfObject', @lua_ObjectSetPositionOfObject, 2);
+  lua.RegProc('ObjectAlignWithObject', @lua_ObjectAlignWithObject, 2);
+  lua.RegProc('ObjectSetPositionX', @lua_ObjectSetPositionX, 2);
+  lua.RegProc('ObjectSetPositionY', @lua_ObjectSetPositionY, 2);
+  lua.RegProc('ObjectSetPositionZ', @lua_ObjectSetPositionZ, 2);
+  lua.RegProc('ObjectGetPositionX', @lua_ObjectGetPositionX, 1);
+  lua.RegProc('ObjectGetPositionY', @lua_ObjectGetPositionY, 1);
+  lua.RegProc('ObjectGetPositionZ', @lua_ObjectGetPositionZ, 1);
+  lua.RegProc('ObjectSetAbsolutePosition', @lua_ObjectSetAbsolutePosition, 4);
+  lua.RegProc('ObjectSetDirection', @lua_ObjectSetDirection, 4);
+  lua.RegProc('ObjectGetDirection', @lua_ObjectGetDirection, 2);
+  lua.RegProc('ObjectSetAbsoluteDirection', @lua_ObjectSetAbsoluteDirection, 4);
+  lua.RegProc('ObjectGetPitch', @ObjectGetPitch, 1);
+  lua.RegProc('ObjectGetTurn', @ObjectGetTurn, 1);
+  lua.RegProc('ObjectGetRoll', @ObjectGetRoll, 1);
+  
   lua.RegProc('ObjectTranslate', @lua_ObjectTranslate, 4);
 
   lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
