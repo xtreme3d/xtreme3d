@@ -32,9 +32,17 @@
 <BR><A>script - строка, содержащая скрипт.</A>
 <HR>
 
-<A name="LuaManagerSetConstantNumber"></A>
-<H1 class=name>LuaManagerSetConstantNumber</H1>
-<A class=type>real</A><A> = </A><A class=function>LuaManagerSetConstantNumber</A><A>( lua as </A><A class=type>real</A><A>, name as </A><A class=type>string</A><A>, value as </A><A class=type>real</A><A> );</A>
+<A name="LuaManagerCallFunction"></A>
+<H1 class=name>LuaManagerCallFunction</H1>
+<A class=type>real</A><A> = </A><A class=function>LuaManagerCallFunction</A><A>( lua as </A><A class=type>real</A><A>, name as </A><A class=type>string</A><A> );</A>
+<BR><A>Выполняет функцию Lua и возвращает 1, если такая функция была определена в выполненном ранее скрипте. В противном случае возвращает 0. Поддерживаются только функции без аргументов.</A>
+<BR><A>lua - id менеджера Lua</A>
+<BR><A>name - имя функции.</A>
+<HR>
+
+<A name="LuaManagerSetConstantReal"></A>
+<H1 class=name>LuaManagerSetConstantReal</H1>
+<A class=type>real</A><A> = </A><A class=function>LuaManagerSetConstantReal</A><A>( lua as </A><A class=type>real</A><A>, name as </A><A class=type>string</A><A>, value as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает числовую константу - то есть, неизменяемое значение, доступное в скриптах по заданному имени. Числовую константу можно использовать не только для чисел как таковых, но и для id'ов объектов Xtreme3D - вы можете создавать объекты в основной программе, а управлять ими в скриптах.</A>
 <BR><A>lua - id менеджера Lua</A>
 <BR><A>name - имя константы</A>
