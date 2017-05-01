@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Window</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Window</H1>
+
+<A class=type>Класс: TForm</A><BR><BR>
+
+<A>Функции для создания дополнительных окон и управления ими. Вы можете рендерить в созданном окне графику Xtreme3D, если передадите при создании вида соответствующий идентификатор (HWND) при помощи функции <A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>. Обратите внимание, что перед завершением игры все созданные окна нужно удалить функцией <A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>, иначе возникнет ошибка.
+</A>
+<HR>
+
+<A name="WindowCreate"></A>
+<H1 class=name>WindowCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowCreate</A><A>( x,y,width,height,resizeable as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает окно и возвращает его id.</A>
+<BR><A>x,y - позиция окна на экране</A>
+<BR><A>width,height - ширина и высота окна</A>
+<BR><A>resizeable - может ли пользователь изменять размер окна (</A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>). Изменение размера окна не приводит к изменению размеров подключенного к нему вида.</A>
+<HR>
+
+<A name="WindowGetHandle"></A>
+<H1 class=name>WindowGetHandle</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowGetHandle</A><A>( window as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает идентификатор окна (HWND).</A>
+<BR><A>window - id окна.</A>
+<HR>
+
+<A name="WindowSetTitle"></A>
+<H1 class=name>WindowSetTitle</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowSetTitle</A><A>( window as </A><A class=type>real</A><A>, title as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает заголовок окна.</A>
+<BR><A>window - id окна</A>
+<BR><A>title - заголовок.</A>
+<HR>
+
+<A name="WindowDestroy"></A>
+<H1 class=name>WindowDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowDestroy</A><A>( window as </A><A class=type>real</A><A> );</A>
+<BR><A>Удаляет окно.</A>
+<BR><A>window - id окна.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

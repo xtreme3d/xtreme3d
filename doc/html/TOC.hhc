@@ -319,6 +319,18 @@
   <PARAM name="Name" value="Text">
   <PARAM name="Local" value="functions/text.htm">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Input">
+  <PARAM name="Local" value="functions/input.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Window">
+  <PARAM name="Local" value="functions/window.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lua">
+  <PARAM name="Local" value="functions/lua.htm">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FAQ">
@@ -924,6 +936,10 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FreeType">
   <PARAM name="Local" value="license/license_freetype.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lua">
+  <PARAM name="Local" value="license/license_lua.htm">
  </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">

@@ -57,7 +57,10 @@
 <A class=funclink href=funclist.htm#ShadowMap>ShadowMap</A><A> | </A>
 <A class=funclink href=funclist.htm#ODE>ODE</A><A> | </A>
 <A class=funclink href=funclist.htm#ObjectHash>ObjectHash</A><A> | </A>
-<A class=funclink href=funclist.htm#Text>Text</A>
+<A class=funclink href=funclist.htm#Text>Text</A> |
+<A class=funclink href=funclist.htm#Input>Input</A> |
+<A class=funclink href=funclist.htm#Window>Window</A> |
+<A class=funclink href=funclist.htm#Window>Lua</A>
 <BR>
 <BR>
 <A name="Engine"></A>
@@ -939,16 +942,6 @@
 <BR><A class=funclink href=fps.htm#FpsGetCollisionNormal>FpsGetCollisionNormal</A><A>(object,col,ind)</A>
 <BR><A class=funclink href=fps.htm#FpsGetCollidedObject>FpsGetCollidedObject</A><A>(object,col)</A>
 -->
-<!--
-<BR>
-<BR>
-<A name="Mouse"></A>
-<H1 class=name>Mouse</H1>
-<A class=funclink href=mouse.htm#MouseGetX>MouseGetX</A><A>()</A>
-<BR><A class=funclink href=mouse.htm#MouseGetY>MouseGetY</A><A>()</A>
-<BR><A class=funclink href=mouse.htm#MouseSetPosition>MouseSetPosition</A><A>(x,y)</A>
-<BR><A class=funclink href=mouse.htm#MouseShowCursor>MouseShowCursor</A><A>(mode)</A>
--->
 <BR>
 <BR>
 <A name="Partition"></A>
@@ -1157,7 +1150,35 @@
 <A name="Text"></A>
 <H1 class=name>Text</H1>
 <A class=funclink href=text.htm#TextRead>TextRead</A><A>(filename)</A>
-<BR><A class=funclink href=fonttext.htm#TextConvertANSIToUTF8>TextConvertANSIToUTF8</A><A>(text)</A>
+<BR><A class=funclink href=text.htm#TextConvertANSIToUTF8>TextConvertANSIToUTF8</A><A>(text)</A>
+
+<BR>
+<BR>
+<A name="Input"></A>
+<H1 class=name>Input</H1>
+<A class=funclink href=input.htm#KeyIsPressed>KeyIsPressed</A><A>(vk)</A>
+<BR><A class=funclink href=input.htm#MouseGetX>MouseGetX</A><A>()</A>
+<BR><A class=funclink href=input.htm#MouseGetY>MouseGetY</A><A>()</A>
+<BR><A class=funclink href=input.htm#MouseSetPosition>MouseSetPosition</A><A>(x,y)</A>
+<BR><A class=funclink href=input.htm#MouseShowCursor>MouseShowCursor</A><A>(mode)</A>
+
+<BR>
+<BR>
+<A name="Window"></A>
+<H1 class=name>Window</H1>
+<A class=funclink href=window.htm#WindowCreate>WindowCreate</A><A>(x,y,width,height,resizeable)</A>
+<BR><A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>(window)</A>
+<BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
+<BR><A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>(window)</A>
+
+<BR>
+<BR>
+<A name="Lua"></A>
+<H1 class=name>Lua</H1>
+<A class=funclink href=lua.htm#LuaManagerCreate>LuaManagerCreate</A><A>()</A>
+<BR><A class=funclink href=lua.htm#LuaManagerRunScript>LuaManagerRunScript</A><A>(lua,script)</A>
+<BR><A class=funclink href=lua.htm#LuaManagerSetConstantNumber>LuaManagerSetConstantNumber</A><A>(lua,name,value)</A>
+<BR><A class=funclink href=lua.htm#LuaManagerSetConstantString>LuaManagerSetConstantString</A><A>(lua,name,value)</A>
 
 </DIV>
 

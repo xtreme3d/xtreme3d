@@ -386,6 +386,21 @@
                         <param name="Local" value="functions/text.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Input">
+                        <param name="Local" value="functions/input.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Window">
+                        <param name="Local" value="functions/window.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Lua">
+                        <param name="Local" value="functions/lua.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
         </UL>
         <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value="FAQ">
@@ -1141,6 +1156,11 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="FreeType">
                         <param name="Local" value="license/license_freetype.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Lua">
+                        <param name="Local" value="license/license_lua.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
         </UL>

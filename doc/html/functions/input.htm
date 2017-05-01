@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Input</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Input</H1>
+
+<A class=type>Класс: -</A><BR><BR>
+
+<A>Функции, позволяющие считывать пользовательский ввод с клавиатуры и мыши.
+</A>
+<HR>
+
+<A name="KeyIsPressed"></A>
+<H1 class=name>KeyIsPressed</H1>
+<A class=type>real</A><A> = </A><A class=function>KeyIsPressed</A><A>( vk as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает 1, если клавиша нажата, и 0 в противном случае.</A>
+<BR><A>vk - код клавиши. Коды соответствуют привычным константам </A><A class=constant>vk_left</A><A>, </A><A class=constant>vk_enter</A><A> и пр. Если нужно проверить, нажата ли алфавитно-цифровая клавиша, для получения кода используйте функцию </A><A class=type>ord</A><A> - например, 
+</A><A class=type>ord</A><A>('a').</A>
+<HR>
+
+<A name="MouseGetX"></A>
+<H1 class=name>MouseGetX</H1>
+<A class=type>real</A><A> = </A><A class=function>MouseGetX</A><A>( );</A>
+<BR><A>Возвращает координату X курсора мыши относительно левого верхнего угла экрана (не окна). Функция полностью аналогична 
+</A><A class=type>display_mouse_get_x</A><A>.</A>
+<HR>
+
+<A name="MouseGetY"></A>
+<H1 class=name>MouseGetY</H1>
+<A class=type>real</A><A> = </A><A class=function>MouseGetY</A><A>( );</A>
+<BR><A>Возвращает координату Y курсора мыши относительно левого верхнего угла экрана (не окна). Функция полностью аналогична 
+</A><A class=type>display_mouse_get_x</A><A>.</A>
+<HR>
+
+<A name="MouseSetPosition"></A>
+<H1 class=name>MouseSetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>MouseSetPosition</A><A>( x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает координаты курсора мыши относительно левого верхнего угла экрана (не окна). Функция полностью аналогична 
+</A><A class=type>display_mouse_set</A><A>.</A>
+<BR><A>x,y - координаты.</A>
+<HR>
+
+<A name="MouseShowCursor"></A>
+<H1 class=name>MouseShowCursor</H1>
+<A class=type>real</A><A> = </A><A class=function>MouseShowCursor</A><A>( mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает отображение курсора мыши. Обратите внимание, что вызов этой функции имеет смысл только при включенном отображении курсора в Global Game Settings - если курсор отключен в настройках, то эта функция не отобразит его.</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>
