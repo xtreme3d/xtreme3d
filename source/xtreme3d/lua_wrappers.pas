@@ -172,11 +172,118 @@ begin
   result := LuaArg(p);
 end;
 
+function lua_ObjectSetRotation(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetRotation(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectMove(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectMove(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectLift(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectLift(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectStrafe(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectStrafe(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
 function lua_ObjectTranslate(const Args: TLuaArgs): TLuaArg;
 begin
   ObjectTranslate(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
   result := LuaArg(1.0);
 end;
+
+function lua_ObjectRotate(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectRotate(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectScale(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectScale(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectSetScale(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetScale(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectSetUpVector(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetUpVector(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectPointToObject(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectPointToObject(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectShowAxes(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectShowAxes(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectGetGroundHeight(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectGetGroundHeight(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectSceneRaycast(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectSceneRaycast(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectRaycast(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectRaycast(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectGetCollisionPosition(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectGetCollisionPosition(Args[0].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectGetCollisionNormal(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectGetCollisionNormal(Args[0].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectSetMaterial(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetMaterial(Args[0].AsDouble, pchar(Args[1].AsString));
+  result := LuaArg(1.0);
+end;
+
 
 function lua_KeyIsPressed(const Args: TLuaArgs): TLuaArg;
 begin

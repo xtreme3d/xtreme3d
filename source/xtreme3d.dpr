@@ -550,11 +550,26 @@ begin
   lua.RegProc('ObjectSetDirection', @lua_ObjectSetDirection, 4);
   lua.RegProc('ObjectGetDirection', @lua_ObjectGetDirection, 2);
   lua.RegProc('ObjectSetAbsoluteDirection', @lua_ObjectSetAbsoluteDirection, 4);
-  lua.RegProc('ObjectGetPitch', @ObjectGetPitch, 1);
-  lua.RegProc('ObjectGetTurn', @ObjectGetTurn, 1);
-  lua.RegProc('ObjectGetRoll', @ObjectGetRoll, 1);
-  
+  lua.RegProc('ObjectGetPitch', @lua_ObjectGetPitch, 1);
+  lua.RegProc('ObjectGetTurn', @lua_ObjectGetTurn, 1);
+  lua.RegProc('ObjectGetRoll', @lua_ObjectGetRoll, 1);
+  lua.RegProc('ObjectSetRotation', @lua_ObjectSetRotation, 4);
+  lua.RegProc('ObjectMove', @lua_ObjectMove, 2);
+  lua.RegProc('ObjectLift', @lua_ObjectLift, 2);
+  lua.RegProc('ObjectStrafe', @lua_ObjectStrafe, 2);
   lua.RegProc('ObjectTranslate', @lua_ObjectTranslate, 4);
+  lua.RegProc('ObjectRotate', @lua_ObjectRotate, 4);
+  lua.RegProc('ObjectScale', @lua_ObjectScale, 4);
+  lua.RegProc('ObjectSetScale', @lua_ObjectSetScale, 4);
+  lua.RegProc('ObjectSetUpVector', @lua_ObjectSetUpVector, 4);
+  lua.RegProc('ObjectPointToObject', @lua_ObjectPointToObject, 2);
+  lua.RegProc('ObjectShowAxes', @lua_ObjectShowAxes, 2);
+  lua.RegProc('ObjectGetGroundHeight', @lua_ObjectGetGroundHeight, 2);
+  lua.RegProc('ObjectSceneRaycast', @lua_ObjectSceneRaycast, 2);
+  lua.RegProc('ObjectRaycast', @lua_ObjectRaycast, 2);
+  lua.RegProc('ObjectGetCollisionPosition', @lua_ObjectGetCollisionPosition, 1);
+  lua.RegProc('ObjectGetCollisionNormal', @lua_ObjectGetCollisionNormal, 1);
+  lua.RegProc('ObjectSetMaterial', @lua_ObjectSetMaterial, 2);
 
   lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
 
