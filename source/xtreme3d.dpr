@@ -18,7 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms, CrystalLUA;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms, Squall, CrystalLUA;
 
 type
    TEmpty = class(TComponent)
@@ -487,6 +487,39 @@ begin
   result:=Integer(obj2);
 end;
 
+function SquallInit: real; stdcall;
+var
+  r: boolean;
+begin
+  r := InitSquall('squall.dll');
+  if r then
+    result := SQUALL_Init(nil)
+  else
+    result := 0;
+end;
+
+function SquallAddSound(filename: pchar): real; stdcall;
+var
+  s: Integer;
+begin
+  s := SQUALL_Sample_LoadFile(filename, 1, nil);
+  result := s;
+end;
+
+function SquallPlay(snd, loop: real): real; stdcall;
+var
+  ch: Integer;
+begin
+  ch := SQUALL_Sample_Play(trunc64(snd), trunc64(loop), 0, 1);
+  result := ch;
+end;
+
+function SquallStop(chan: real): real; stdcall;
+begin
+  SQUALL_Channel_Stop(trunc64(chan));
+  result := 1.0;
+end;
+
 {$I 'xtreme3d/lua_wrappers'}
 
 function LuaManagerCreate: real; stdcall;
@@ -949,6 +982,8 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 KeyIsPressed,
 // Window
 WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
+// Squall
+SquallInit, SquallAddSound, SquallPlay, SquallStop,
 // Lua
 LuaManagerCreate, LuaManagerSetConstantReal, LuaManagerSetConstantString,
 LuaManagerRunScript, LuaManagerCallFunction;
