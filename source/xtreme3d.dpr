@@ -522,12 +522,8 @@ end;
 
 {$I 'xtreme3d/lua_wrappers'}
 
-function LuaManagerCreate: real; stdcall;
-var
-  lua: TLua;
+procedure luaRegX3DFunctions(lua: TLua);
 begin
-  lua := TLua.Create();         
-
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
   lua.RegProc('ObjectShow', @lua_ObjectShow, 1);
@@ -570,9 +566,46 @@ begin
   lua.RegProc('ObjectGetCollisionPosition', @lua_ObjectGetCollisionPosition, 1);
   lua.RegProc('ObjectGetCollisionNormal', @lua_ObjectGetCollisionNormal, 1);
   lua.RegProc('ObjectSetMaterial', @lua_ObjectSetMaterial, 2);
+  lua.RegProc('ObjectGetDistance', @lua_ObjectGetDistance, 2);
+  lua.RegProc('ObjectCheckCubeVsCube', @lua_ObjectCheckCubeVsCube, 2);
+  lua.RegProc('ObjectCheckSphereVsSphere', @lua_ObjectCheckSphereVsSphere, 2);
+  lua.RegProc('ObjectCheckSphereVsCube', @lua_ObjectCheckSphereVsCube, 2);
+  lua.RegProc('ObjectCheckCubeVsFace', @lua_ObjectCheckCubeVsFace, 2);
+  lua.RegProc('ObjectCheckFaceVsFace', @lua_ObjectCheckFaceVsFace, 2);
+  lua.RegProc('ObjectIsPointInObject', @lua_ObjectIsPointInObject, 4);
+  lua.RegProc('ObjectSetCulling', @lua_ObjectSetCulling, 2);
+  lua.RegProc('ObjectSetName', @lua_ObjectSetName, 2);
+  lua.RegProc('ObjectGetName', @lua_ObjectGetName, 1);
+  lua.RegProc('ObjectGetClassName', @lua_ObjectGetClassName, 1);
+  lua.RegProc('ObjectSetTag', @lua_ObjectSetTag, 2);
+  lua.RegProc('ObjectGetTag', @lua_ObjectGetTag, 1);
+  lua.RegProc('ObjectGetParent', @lua_ObjectGetParent, 1);
+  lua.RegProc('ObjectGetChildCount', @lua_ObjectGetChildCount, 1);
+  lua.RegProc('ObjectGetChild', @lua_ObjectGetChild, 2);
+  lua.RegProc('ObjectGetIndex', @lua_ObjectGetIndex, 1);
+  lua.RegProc('ObjectFindChild', @lua_ObjectFindChild, 2);
+  lua.RegProc('ObjectGetBoundingSphereRadius', @lua_ObjectGetBoundingSphereRadius, 1);
+  lua.RegProc('ObjectGetAbsoluteUp', @lua_ObjectGetAbsoluteUp, 2);
+  lua.RegProc('ObjectSetAbsoluteUp', @lua_ObjectSetAbsoluteUp, 4);
+  lua.RegProc('ObjectGetAbsoluteRight', @lua_ObjectGetAbsoluteRight, 2);
+  lua.RegProc('ObjectGetAbsoluteXVector', @lua_ObjectGetAbsoluteXVector, 2);
+  lua.RegProc('ObjectGetAbsoluteYVector', @lua_ObjectGetAbsoluteYVector, 2);
+  lua.RegProc('ObjectGetAbsoluteZVector', @lua_ObjectGetAbsoluteZVector, 2);
+  lua.RegProc('ObjectMoveChildUp', @lua_ObjectMoveChildUp, 2);
+  lua.RegProc('ObjectMoveChildDown', @lua_ObjectMoveChildDown, 2);
+  lua.RegProc('ObjectSetParent', @lua_ObjectSetParent, 2);
+  lua.RegProc('ObjectRemoveChild', @lua_ObjectRemoveChild, 3);
+  lua.RegProc('ObjectMoveObjectAround', @lua_ObjectMoveObjectAround, 4);
 
   lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
+end;
 
+function LuaManagerCreate: real; stdcall;
+var
+  lua: TLua;
+begin
+  lua := TLua.Create();
+  luaRegX3DFunctions(lua);
   result := Integer(lua);
 end;
 

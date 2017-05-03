@@ -284,6 +284,236 @@ begin
   result := LuaArg(1.0);
 end;
 
+function lua_ObjectGetDistance(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectGetDistance(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectCheckCubeVsCube(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectCheckCubeVsCube(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectCheckSphereVsSphere(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectCheckSphereVsSphere(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectCheckSphereVsCube(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectCheckSphereVsCube(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectCheckCubeVsFace(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectCheckCubeVsFace(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectCheckFaceVsFace(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectCheckFaceVsFace(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectIsPointInObject(const Args: TLuaArgs): TLuaArg;
+var
+  h: double;
+begin
+  h := ObjectIsPointInObject(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(h);
+end;
+
+function lua_ObjectSetCulling(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetCulling(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectSetName(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetName(Args[0].AsDouble, pchar(Args[1].AsString));
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectGetName(const Args: TLuaArgs): TLuaArg;
+var
+  n: pchar;
+begin
+  n := ObjectGetName(Args[0].AsDouble);
+  result := LuaArg(String(n));
+end;
+
+function lua_ObjectGetClassName(const Args: TLuaArgs): TLuaArg;
+var
+  n: pchar;
+begin
+  n := ObjectGetClassName(Args[0].AsDouble);
+  result := LuaArg(String(n));
+end;
+
+function lua_ObjectSetTag(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetTag(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectGetTag(const Args: TLuaArgs): TLuaArg;
+var
+  t: double;
+begin
+  t := ObjectGetTag(Args[0].AsDouble);
+  result := LuaArg(t);
+end;
+
+function lua_ObjectGetParent(const Args: TLuaArgs): TLuaArg;
+var
+  p: double;
+begin
+  p := ObjectGetParent(Args[0].AsDouble);
+  result := LuaArg(p);
+end;
+
+function lua_ObjectGetChildCount(const Args: TLuaArgs): TLuaArg;
+var
+  cc: double;
+begin
+  cc := ObjectGetChildCount(Args[0].AsDouble);
+  result := LuaArg(cc);
+end;
+
+function lua_ObjectGetChild(const Args: TLuaArgs): TLuaArg;
+var
+  c: double;
+begin
+  c := ObjectGetChild(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(c);
+end;
+
+function lua_ObjectGetIndex(const Args: TLuaArgs): TLuaArg;
+var
+  i: double;
+begin
+  i := ObjectGetIndex(Args[0].AsDouble);
+  result := LuaArg(i);
+end;
+
+function lua_ObjectFindChild(const Args: TLuaArgs): TLuaArg;
+var
+  i: double;
+begin
+  i := ObjectFindChild(Args[0].AsDouble, pchar(Args[1].AsString));
+  result := LuaArg(i);
+end;
+
+function lua_ObjectGetBoundingSphereRadius(const Args: TLuaArgs): TLuaArg;
+var
+  r: double;
+begin
+  r := ObjectGetBoundingSphereRadius(Args[0].AsDouble);
+  result := LuaArg(r);
+end;
+
+function lua_ObjectGetAbsoluteUp(const Args: TLuaArgs): TLuaArg;
+var
+  u: double;
+begin
+  u := ObjectGetAbsoluteUp(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(u);
+end;
+
+function lua_ObjectSetAbsoluteUp(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetAbsoluteUp(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectGetAbsoluteRight(const Args: TLuaArgs): TLuaArg;
+var
+  r: double;
+begin
+  r := ObjectGetAbsoluteRight(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(r);
+end;
+
+function lua_ObjectGetAbsoluteXVector(const Args: TLuaArgs): TLuaArg;
+var
+  x: double;
+begin
+  x := ObjectGetAbsoluteXVector(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(x);
+end;
+
+function lua_ObjectGetAbsoluteYVector(const Args: TLuaArgs): TLuaArg;
+var
+  y: double;
+begin
+  y := ObjectGetAbsoluteYVector(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(y);
+end;
+
+function lua_ObjectGetAbsoluteZVector(const Args: TLuaArgs): TLuaArg;
+var
+  z: double;
+begin
+  z := ObjectGetAbsoluteZVector(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(z);
+end;
+
+function lua_ObjectGetRight(const Args: TLuaArgs): TLuaArg;
+var
+  r: double;
+begin
+  r := ObjectGetRight(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(r);
+end;
+
+function lua_ObjectMoveChildUp(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectMoveChildUp(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectMoveChildDown(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectMoveChildDown(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectSetParent(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetParent(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectRemoveChild(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectRemoveChild(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectMoveObjectAround(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectMoveObjectAround(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
 
 function lua_KeyIsPressed(const Args: TLuaArgs): TLuaArg;
 begin
