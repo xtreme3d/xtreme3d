@@ -40,10 +40,7 @@ end;
 
 function Update(delta: real): real; stdcall;
 begin
-  //scene.BeginUpdate;
-  //scene.EndUpdate;
-  //scene.Progress(delta, delta);
-  //cadencer.Reset;
+  cadencer.FixedDeltaTime := delta;
   cadencer.Progress;
   result:=1;
 end;
