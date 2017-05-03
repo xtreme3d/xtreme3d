@@ -278,7 +278,11 @@ end;
 function EngineDestroy: real; stdcall;
 begin
   cadencer.Enabled := false;
-  scene.Destroy;
+  cadencer.Scene := nil;
+  cadencer.Free;
+  scene.Free;
+  empty.Free;
+  memviewer.Free;
   result:=1;
 end;
 
@@ -524,6 +528,14 @@ end;
 
 procedure luaRegX3DFunctions(lua: TLua);
 begin
+  // Register Engine functions
+  lua.RegProc('EngineCreate', @lua_EngineCreate, 0);
+  lua.RegProc('EngineDestroy', @lua_EngineDestroy, 0);
+  lua.RegProc('EngineSetObjectsSorting', @lua_EngineSetObjectsSorting, 1);
+  lua.RegProc('EngineSetCulling', @lua_EngineSetCulling, 1);
+  lua.RegProc('SetPakArchive', @lua_SetPakArchive, 1);
+  lua.RegProc('Update', @lua_Update, 1);
+
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
   lua.RegProc('ObjectShow', @lua_ObjectShow, 1);
@@ -596,7 +608,17 @@ begin
   lua.RegProc('ObjectSetParent', @lua_ObjectSetParent, 2);
   lua.RegProc('ObjectRemoveChild', @lua_ObjectRemoveChild, 3);
   lua.RegProc('ObjectMoveObjectAround', @lua_ObjectMoveObjectAround, 4);
+  lua.RegProc('ObjectPitch', @lua_ObjectPitch, 2);
+  lua.RegProc('ObjectTurn', @lua_ObjectTurn, 2);
+  lua.RegProc('ObjectRoll', @lua_ObjectRoll, 2);
+  lua.RegProc('ObjectGetUp', @lua_ObjectGetUp, 2);
+  lua.RegProc('ObjectRotateAbsolute', @lua_ObjectRotateAbsolute, 4);
+  lua.RegProc('ObjectRotateAbsoluteVector', @lua_ObjectRotateAbsoluteVector, 5);
+  lua.RegProc('ObjectSetMatrixColumn', @lua_ObjectSetMatrixColumn, 6);
+  lua.RegProc('ObjectExportMatrix', @lua_ObjectExportMatrix, 2);
+  lua.RegProc('ObjectExportAbsoluteMatrix', @lua_ObjectExportAbsoluteMatrix, 2);
 
+  // Register Input functions
   lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
 end;
 

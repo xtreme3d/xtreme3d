@@ -5911,7 +5911,7 @@ begin
    FCameras.Free;
    FLights.Free;
    FObjects.Free;
-   inherited Destroy;
+   //inherited Destroy;
 end;
 
 {$ifndef GLS_DELPHI_5_UP}

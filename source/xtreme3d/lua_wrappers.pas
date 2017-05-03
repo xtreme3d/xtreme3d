@@ -1,3 +1,41 @@
+// Engine
+function lua_EngineCreate(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineCreate();
+  result := LuaArg(1.0);
+end;
+
+function lua_EngineDestroy(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineDestroy();
+  result := LuaArg(1.0);
+end;
+
+function lua_EngineSetObjectsSorting(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineSetObjectsSorting(Args[0].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_EngineSetCulling(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineSetCulling(Args[0].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_SetPakArchive(const Args: TLuaArgs): TLuaArg;
+begin
+  SetPakArchive(pchar(Args[0].AsString));
+  result := LuaArg(1.0);
+end;
+
+function lua_Update(const Args: TLuaArgs): TLuaArg;
+begin
+  Update(Args[0].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+// Object
 function lua_ObjectHide(const Args: TLuaArgs): TLuaArg;
 begin
   ObjectHide(Args[0].AsDouble);
@@ -514,7 +552,63 @@ begin
   result := LuaArg(1.0);
 end;
 
+function lua_ObjectPitch(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectPitch(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
 
+function lua_ObjectTurn(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectTurn(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectRoll(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectRoll(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectGetUp(const Args: TLuaArgs): TLuaArg;
+var
+  u: double;
+begin
+  u := ObjectGetUp(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(u);
+end;
+
+function lua_ObjectRotateAbsolute(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectRotateAbsolute(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectRotateAbsoluteVector(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectRotateAbsoluteVector(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble, Args[4].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectSetMatrixColumn(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectSetMatrixColumn(Args[0].AsDouble, Args[1].AsDouble, Args[2].AsDouble, Args[3].AsDouble, Args[4].AsDouble, Args[5].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectExportMatrix(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectExportMatrix(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+function lua_ObjectExportAbsoluteMatrix(const Args: TLuaArgs): TLuaArg;
+begin
+  ObjectExportAbsoluteMatrix(Args[0].AsDouble, Args[1].AsDouble);
+  result := LuaArg(1.0);
+end;
+
+// Input
 function lua_KeyIsPressed(const Args: TLuaArgs): TLuaArg;
 begin
   result := LuaArg(IsKeyDown(Args[0].AsInteger));

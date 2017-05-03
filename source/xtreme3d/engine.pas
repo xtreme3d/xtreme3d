@@ -1,8 +1,8 @@
 function EngineCreate: real; stdcall;
 begin
-  empty:=TEmpty.Create(scene);
+  empty:=TEmpty.Create(nil);
   scene:=TGLScene.Create(nil);
-  memviewer:=TGLMemoryViewer.Create(scene);
+  memviewer:=TGLMemoryViewer.Create(nil);
   cadencer:=TGLCadencer.Create(nil);
   cadencer.Scene:=scene;
   cadencer.Mode:=cmManual;
