@@ -524,7 +524,11 @@ begin
   result := 1.0;
 end;
 
-{$I 'xtreme3d/lua_wrappers'}
+{$I 'xtreme3d/lua/engine'}
+{$I 'xtreme3d/lua/viewer'}
+{$I 'xtreme3d/lua/dummycube'}
+{$I 'xtreme3d/lua/object'}
+{$I 'xtreme3d/lua/input'}
 
 procedure luaRegX3DFunctions(lua: TLua);
 begin
@@ -535,6 +539,50 @@ begin
   lua.RegProc('EngineSetCulling', @lua_EngineSetCulling, 1);
   lua.RegProc('SetPakArchive', @lua_SetPakArchive, 1);
   lua.RegProc('Update', @lua_Update, 1);
+
+  // Register Viewer functions
+  lua.RegProc('ViewerCreate', @lua_ViewerCreate, 5);
+  lua.RegProc('ViewerSetCamera', @lua_ViewerSetCamera, 2);
+  lua.RegProc('ViewerEnableVSync', @lua_ViewerEnableVSync, 2);
+  lua.RegProc('ViewerRender', @lua_ViewerRender, 1);
+  lua.RegProc('ViewerRenderToFile', @lua_ViewerRenderToFile, 2);
+  lua.RegProc('ViewerRenderEx', @lua_ViewerRenderEx, 5);
+  lua.RegProc('ViewerResize', @lua_ViewerResize, 5);
+  lua.RegProc('ViewerSetVisible', @lua_ViewerSetVisible, 2);
+  lua.RegProc('ViewerGetPixelColor', @lua_ViewerGetPixelColor, 3);
+  lua.RegProc('ViewerGetPixelDepth', @lua_ViewerGetPixelDepth, 3);
+  lua.RegProc('ViewerSetLighting', @lua_ViewerSetLighting, 2);
+  lua.RegProc('ViewerSetBackgroundColor', @lua_ViewerSetBackgroundColor, 2);
+  lua.RegProc('ViewerSetAmbientColor', @lua_ViewerSetAmbientColor, 2);
+  lua.RegProc('ViewerEnableFog', @lua_ViewerEnableFog, 2);
+  lua.RegProc('ViewerSetFogColor', @lua_ViewerSetFogColor, 2);
+  lua.RegProc('ViewerSetFogDistance', @lua_ViewerSetFogDistance, 2);
+  lua.RegProc('ViewerScreenToWorld', @lua_ViewerScreenToWorld, 4);
+  lua.RegProc('ViewerWorldToScreen', @lua_ViewerWorldToScreen, 5);
+  lua.RegProc('ViewerCopyToTexture', @lua_ViewerCopyToTexture, 2);
+  lua.RegProc('ViewerGetFramesPerSecond', @lua_ViewerGetFramesPerSecond, 1);
+  lua.RegProc('ViewerGetPickedObject', @lua_ViewerGetPickedObject, 3);
+  lua.RegProc('ViewerGetPickedObjectsList', @lua_ViewerGetPickedObjectsList, 7);
+  lua.RegProc('ViewerScreenToVector', @lua_ViewerScreenToVector, 4);
+  lua.RegProc('ViewerVectorToScreen', @lua_ViewerVectorToScreen, 5);
+  lua.RegProc('ViewerPixelToDistance', @lua_ViewerPixelToDistance, 3);
+  lua.RegProc('ViewerSetAntiAliasing', @lua_ViewerSetAntiAliasing, 2);
+  lua.RegProc('ViewerGetGLSLSupported', @lua_ViewerGetGLSLSupported, 1);
+  lua.RegProc('ViewerGetFBOSupported', @lua_ViewerGetFBOSupported, 1);
+  lua.RegProc('ViewerGetVBOSupported', @lua_ViewerGetVBOSupported, 1);
+  lua.RegProc('ViewerSetAutoRender', @lua_ViewerSetAutoRender, 2);
+  lua.RegProc('ViewerSetOverrideMaterial', @lua_ViewerSetOverrideMaterial, 3);
+  lua.RegProc('ViewerGetSize', @lua_ViewerGetSize, 2);
+  lua.RegProc('ViewerGetPosition', @lua_ViewerGetPosition, 2);
+  lua.RegProc('ViewerIsOpenGLExtensionSupported', @lua_ViewerIsOpenGLExtensionSupported, 1);
+
+  // Register Dummycube functions
+  lua.RegProc('DummycubeCreate', @lua_DummycubeCreate, 1);
+  lua.RegProc('DummycubeAmalgamate', @lua_DummycubeAmalgamate, 2);
+  lua.RegProc('DummycubeSetCameraMode', @lua_DummycubeSetCameraMode, 2);
+  lua.RegProc('DummycubeSetVisible', @lua_DummycubeSetVisible, 2);
+  lua.RegProc('DummycubeSetEdgeColor', @lua_DummycubeSetEdgeColor, 2);
+  lua.RegProc('DummycubeSetCubeSize', @lua_DummycubeSetCubeSize, 2);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
@@ -622,12 +670,110 @@ begin
   lua.RegProc('KeyIsPressed', @lua_KeyIsPressed, 1);
 end;
 
+procedure luaRegGMConstants(lua: TLua);
+begin
+  // TODO: vk_nokey
+  // TODO: vk_anykey
+  lua.RegConst('vk_left', 37.0);
+  lua.RegConst('vk_up', 38.0);
+  lua.RegConst('vk_right', 39.0);
+  lua.RegConst('vk_down', 40.0);
+  lua.RegConst('vk_enter', 13.0);
+  lua.RegConst('vk_escape', 27.0);
+  lua.RegConst('vk_space', 32.0);
+  lua.RegConst('vk_shift', 16.0);
+  lua.RegConst('vk_control', 17.0);
+  lua.RegConst('vk_alt', 18.0);
+  lua.RegConst('vk_backspace', 8.0);
+  lua.RegConst('vk_tab', 9.0);
+  lua.RegConst('vk_home', 36.0);
+  lua.RegConst('vk_end', 35.0);
+  lua.RegConst('vk_delete', 46.0);
+  lua.RegConst('vk_insert', 45.0);
+  lua.RegConst('vk_pageup', 33.0);
+  lua.RegConst('vk_pagedown', 34.0);
+  lua.RegConst('vk_pause', 19.0);
+  lua.RegConst('vk_printscreen', 44.0);
+  lua.RegConst('vk_f1', 112.0);
+  lua.RegConst('vk_f2', 113.0);
+  lua.RegConst('vk_f3', 114.0);
+  lua.RegConst('vk_f4', 115.0);
+  lua.RegConst('vk_f5', 116.0);
+  lua.RegConst('vk_f6', 117.0);
+  lua.RegConst('vk_f7', 118.0);
+  lua.RegConst('vk_f8', 119.0);
+  lua.RegConst('vk_f9', 120.0);
+  lua.RegConst('vk_f10', 121.0);
+  lua.RegConst('vk_f11', 122.0);
+  lua.RegConst('vk_f12', 123.0);
+  lua.RegConst('vk_numpad0', 96.0);
+  lua.RegConst('vk_numpad1', 97.0);
+  lua.RegConst('vk_numpad2', 98.0);
+  lua.RegConst('vk_numpad3', 99.0);
+  lua.RegConst('vk_numpad4', 100.0);
+  lua.RegConst('vk_numpad5', 101.0);
+  lua.RegConst('vk_numpad6', 102.0);
+  lua.RegConst('vk_numpad7', 103.0);
+  lua.RegConst('vk_numpad8', 104.0);
+  lua.RegConst('vk_numpad9', 105.0);
+  lua.RegConst('vk_multiply', 106.0);
+  lua.RegConst('vk_divide', 111.0);
+  lua.RegConst('vk_add', 107.0);
+  lua.RegConst('vk_subtract', 109.0);
+  lua.RegConst('vk_decimal', 110.0);
+
+  lua.RegConst('c_aqua', 16776960.0);
+  lua.RegConst('c_black', 0.0);
+  lua.RegConst('c_blue', 16711680.0);
+  lua.RegConst('c_dkgray', 4210752.0);
+  lua.RegConst('c_fuchsia', 16711935.0);
+  lua.RegConst('c_gray', 8421504.0);
+  lua.RegConst('c_green', 32768.0);
+  lua.RegConst('c_lime', 65280.0);
+  lua.RegConst('c_ltgray', 12632256.0);
+  lua.RegConst('c_maroon', 128.0);
+  lua.RegConst('c_navy', 8388608.0);
+  lua.RegConst('c_olive', 32896.0);
+  lua.RegConst('c_purple', 8388736.0);
+  lua.RegConst('c_red', 255.0);
+  lua.RegConst('c_silver', 12632256.0);
+  lua.RegConst('c_teal', 8421376.0);
+  lua.RegConst('c_white', 16777215.0);
+  lua.RegConst('c_yellow', 65535.0);
+  lua.RegConst('c_orange', 33023.0);
+end;
+
+procedure luaRegX3DConstants(lua: TLua);
+begin
+  lua.RegConst('osInherited', 0.0);
+  lua.RegConst('osNone', 1.0);
+  lua.RegConst('osRenderFarthestFirst', 2.0);
+  lua.RegConst('osRenderBlendedLast', 3.0);
+  lua.RegConst('osRenderNearestFirst', 4.0);
+
+  lua.RegConst('vcNone', 0.0);
+  lua.RegConst('vcInherited', 1.0);
+  lua.RegConst('vcObjectBased', 2.0);
+  lua.RegConst('vcHierarchical', 3.0);
+
+  lua.RegConst('vsmSync', 0.0);
+  lua.RegConst('vsmNoSync', 1.0);
+
+  lua.RegConst('cimNone', 0.0);
+  lua.RegConst('cimPosition', 1.0);
+  lua.RegConst('cimOrientation', 2.0);
+
+  // TODO
+end;
+
 function LuaManagerCreate: real; stdcall;
 var
   lua: TLua;
 begin
   lua := TLua.Create();
   luaRegX3DFunctions(lua);
+  luaRegGMConstants(lua);
+  luaRegX3DConstants(lua);
   result := Integer(lua);
 end;
 
