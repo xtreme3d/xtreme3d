@@ -142,7 +142,6 @@
 <BR><A>bonename - имя кости.</A>
 <HR>
 
-<!--
 <A name="ActorRotateBone"></A>
 <H1 class=name>ActorRotateBone</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorRotateBone</A><A>( actor,boneindex,x,y,z as </A><A class=type>real</A><A> );</A>
@@ -151,7 +150,6 @@
 <BR><A>boneindex - индекс кости</A>
 <BR><A>x,y,z - углы поворота по трем осям.</A>
 <HR>
--->
 
 <!--
 <A name="ObjectClueToBone"></A>
@@ -173,7 +171,6 @@
 <BR><A>index - ось x, y или z (0, 1 и 2 соответственно).</A>
 <HR>
 
-<!--
 <A name="ActorMoveBone"></A>
 <H1 class=name>ActorMoveBone</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorMoveBone</A><A>( actor,boneindex,x,y,z as </A><A class=type>real</A><A> );</A>
@@ -182,7 +179,6 @@
 <BR><A>boneindex - индекс кости</A>
 <BR><A>x,y,z - координаты смещения по трем осям.</A>
 <HR>
--->
 
 <A name="ActorGetBonePosition"></A>
 <H1 class=name>ActorGetBonePosition</H1>
@@ -204,7 +200,7 @@
 <A name="ActorBoneExportMatrix"></A>
 <H1 class=name>ActorBoneExportMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorBoneExportMatrix</A><A>( actor,boneindex,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Копирует матрицу трансформации кости в матрицу трансформации заданного объекта - иными словами, "прикрепляет" объект к кости.</A>
+<BR><A>Копирует матрицу трансформации кости в локальную матрицу трансформации заданного объекта - иными словами, прикрепляет объект к кости. Матрица локальна относительно актера, поэтому для полноценного прикрепления объект нужно сделать дочерним по отношению к актеру. Эта функция незаменима, когда нужно, например дать в руки герою оружие или надеть на него броню.</A>
 <BR><A>actor - id актера</A>
 <BR><A>boneindex - индекс кости</A>
 <BR><A>object - id объекта.</A>

@@ -18,6 +18,14 @@
   <PARAM name="Local" value="history.htm">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Изменения API">
+  <PARAM name="Local" value="apichanges.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Авторы">
+  <PARAM name="Local" value="authors.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Статьи">
  </OBJECT>
 <UL>
