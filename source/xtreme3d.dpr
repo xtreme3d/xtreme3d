@@ -551,6 +551,8 @@ end;
 {$I 'xtreme3d/lua/engine'}
 {$I 'xtreme3d/lua/viewer'}
 {$I 'xtreme3d/lua/dummycube'}
+{$I 'xtreme3d/lua/camera'}
+{$I 'xtreme3d/lua/light'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -607,6 +609,47 @@ begin
   lua.RegProc('DummycubeSetVisible', @lua_DummycubeSetVisible, 2);
   lua.RegProc('DummycubeSetEdgeColor', @lua_DummycubeSetEdgeColor, 2);
   lua.RegProc('DummycubeSetCubeSize', @lua_DummycubeSetCubeSize, 2);
+
+  // Register Camera functions
+  lua.RegProc('CameraCreate', @lua_CameraCreate, 1);
+  lua.RegProc('CameraSetStyle', @lua_CameraSetStyle, 2);
+  lua.RegProc('CameraSetFocal', @lua_CameraSetFocal, 2);
+  lua.RegProc('CameraSetSceneScale', @lua_CameraSetSceneScale, 2);
+  lua.RegProc('CameraScaleScene', @lua_CameraScaleScene, 2);
+  lua.RegProc('CameraSetViewDepth', @lua_CameraSetViewDepth, 2);
+  lua.RegProc('CameraSetTargetObject', @lua_CameraSetTargetObject, 2);
+  lua.RegProc('CameraMoveAroundTarget', @lua_CameraMoveAroundTarget, 3);
+  lua.RegProc('CameraSetDistanceToTarget', @lua_CameraSetDistanceToTarget, 2);
+  lua.RegProc('CameraGetDistanceToTarget', @lua_CameraGetDistanceToTarget, 1);
+  lua.RegProc('CameraCopyToTexture', @lua_CameraCopyToTexture, 4);
+  lua.RegProc('CameraGetNearPlane', @lua_CameraGetNearPlane, 1);
+  lua.RegProc('CameraSetNearPlaneBias', @lua_CameraSetNearPlaneBias, 2);
+  lua.RegProc('CameraAbsoluteVectorToTarget', @lua_CameraAbsoluteVectorToTarget, 2);
+  lua.RegProc('CameraAbsoluteRightVectorToTarget', @lua_CameraAbsoluteRightVectorToTarget, 2);
+  lua.RegProc('CameraAbsoluteUpVectorToTarget', @lua_CameraAbsoluteUpVectorToTarget, 2);
+  lua.RegProc('CameraZoomAll', @lua_CameraZoomAll, 1);
+  lua.RegProc('CameraScreenDeltaToVector', @lua_CameraScreenDeltaToVector, 8);
+  lua.RegProc('CameraScreenDeltaToVectorXY', @lua_CameraScreenDeltaToVectorXY, 5);
+  lua.RegProc('CameraScreenDeltaToVectorXZ', @lua_CameraScreenDeltaToVectorXZ, 5);
+  lua.RegProc('CameraScreenDeltaToVectorYZ', @lua_CameraScreenDeltaToVectorYZ, 5);
+  lua.RegProc('CameraAbsoluteEyeSpaceVector', @lua_CameraAbsoluteEyeSpaceVector, 5);
+  lua.RegProc('CameraSetAutoLeveling', @lua_CameraSetAutoLeveling, 2);
+  lua.RegProc('CameraMoveInEyeSpace', @lua_CameraMoveInEyeSpace, 4);
+  lua.RegProc('CameraMoveTargetInEyeSpace', @lua_CameraMoveTargetInEyeSpace, 4);
+  lua.RegProc('CameraPointInFront', @lua_CameraPointInFront, 4);
+  lua.RegProc('CameraGetFieldOfView', @lua_CameraGetFieldOfView, 2);
+
+  // Register Light functions
+  lua.RegProc('LightCreate', @lua_LightCreate, 2);
+  lua.RegProc('LightSetAmbientColor', @lua_LightSetAmbientColor, 2);
+  lua.RegProc('LightSetDiffuseColor', @lua_LightSetDiffuseColor, 2);
+  lua.RegProc('LightSetSpecularColor', @lua_LightSetSpecularColor, 2);
+  lua.RegProc('LightSetAttenuation', @lua_LightSetAttenuation, 4);
+  lua.RegProc('LightSetShining', @lua_LightSetShining, 2);
+  lua.RegProc('LightSetSpotCutoff', @lua_LightSetSpotCutoff, 2);
+  lua.RegProc('LightSetSpotExponent', @lua_LightSetSpotExponent, 2);
+  lua.RegProc('LightSetSpotDirection', @lua_LightSetSpotDirection, 4);
+  lua.RegProc('LightSetStyle', @lua_LightSetStyle, 2);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
