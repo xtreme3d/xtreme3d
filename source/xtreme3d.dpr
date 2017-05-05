@@ -404,6 +404,30 @@ end;
 
 // New in Xtreme3D 3.6:
 
+function ActorMoveBone(actor, boneindex, x, y, z: real): real; stdcall;
+var
+  ac: TGLActor;
+  pos: TAffineVector;
+begin
+  ac := TGLActor(trunc64(actor));
+  pos := ac.Skeleton.Frames[ac.NextFrameIndex].Position[trunc64(boneindex)];
+  ac.Skeleton.Frames[ac.NextFrameIndex].Position[trunc64(boneindex)] :=
+    VectorAdd(pos, AffineVectorMake(x, y, z));
+  result := 1;
+end;
+
+function ActorRotateBone(actor, boneindex, x, y, z: real): real; stdcall;
+var
+  ac: TGLActor;
+  rot: TAffineVector;
+begin
+  ac := TGLActor(trunc64(actor));
+  rot := ac.Skeleton.Frames[ac.NextFrameIndex].Rotation[trunc64(boneindex)];
+  ac.Skeleton.Frames[ac.NextFrameIndex].Rotation[trunc64(boneindex)] :=
+    VectorAdd(rot, AffineVectorMake(x, y, z));
+  result := 1;
+end; 
+
 function MouseSetPosition(mx, my: real): real; stdcall;
 begin
   SetCursorPos(trunc64(mx), trunc64(my));
@@ -905,6 +929,7 @@ AnimationBlenderSetRatio,
 ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
 ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
 ActorFaceGroupSetMaterial,
+ActorMoveBone, ActorRotateBone,
 //Freeform
 FreeformCreate, FreeformCreateEmpty,
 FreeformAddMesh, FreeformMeshAddFaceGroup, 
