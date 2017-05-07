@@ -10,7 +10,7 @@
 
 <H1 class=pagetitle>Engine</H1>
 
-<A class=type>Класс:   -</A><BR><BR>
+<A class=type>Класс: -</A><BR><BR>
 
 <A class=ntext>Функции движка (Engine), в отличие от остальных, не относятся к какому-либо типу объектов. 
 Служат для общего управления Xtreme3D и задания базовых параметров. Функции движка можно 
@@ -80,12 +80,31 @@
 
 <A name="Update"></A>
 <H1 class=name>Update</H1>
-<A class=type>real</A><A> = </A><A class=function>Update</A><A>( dt as </A>
-<A class=type>real</A><A> );</A>
+<A class=type>real</A><A> = </A><A class=function>Update</A><A>( dt as </A><A class=type>real</A><A> );</A>
 <BR><A class=ntext>Совершает программное обновление состояния движка (вычисление столкновений, анимации и т.д.). 
 Обычно вызывается перед <A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A> и только один раз, даже при наличии нескольких 
 Видов.
 <BR>dt - шаг времени в секундах. Меняя этот параметр, можно менять скорость анимации. Шаг времени, как правило, обратно пропорционален количеству кадров в секунду (1 / fps).</A>
+<HR>
+
+<A name="EngineSaveScene"></A>
+<H1 class=name>EngineSaveScene</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineSaveScene</A><A>( filename as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Сохраняет все объекты сцены в файл. Функция экспериментальная - с некоторыми типами объектов может работать некорректно.
+<BR>filename - имя файла.</A>
+<HR>
+
+<A name="EngineLoadScene"></A>
+<H1 class=name>EngineLoadScene</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineLoadScene</A><A>( filename as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Удаляет все объекты сцены и загружает новые из файла. Функция экспериментальная - с некоторыми типами объектов может работать некорректно.
+<BR>filename - имя файла.</A>
+<HR>
+
+<A name="EngineRootObject"></A>
+<H1 class=name>EngineRootObject</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineRootObject</A><A>( );</A>
+<BR><A class=ntext>Возвращает id корневого объекта сцены - то есть, объекта, потомками которого являются объекты с нулевым родителем.
 <HR>
 
 <!--
