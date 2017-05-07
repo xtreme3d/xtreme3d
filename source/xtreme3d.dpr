@@ -404,6 +404,23 @@ end;
 
 // New in Xtreme3D 3.6:
 
+function EngineSaveScene(filename: pchar): real; stdcall;
+begin
+  scene.SaveToTextFile(String(filename));
+  result := 1.0;
+end;
+
+function EngineLoadScene(filename: pchar): real; stdcall;
+begin
+  scene.LoadFromTextFile(String(filename));
+  result := 1.0;
+end;
+
+function EngineRootObject: real; stdcall;
+begin
+  result := Integer(scene.Objects);
+end;
+
 function ActorMoveBone(actor, boneindex, x, y, z: real): real; stdcall;
 var
   ac: TGLActor;
@@ -906,6 +923,7 @@ exports
 EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
 SetPakArchive,
 Update, TrisRendered,
+EngineSaveScene, EngineLoadScene, EngineRootObject,
 //Viewer
 ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRenderToFile,
 ViewerRender, ViewerSetAutoRender, ViewerRenderEx,
