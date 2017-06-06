@@ -570,6 +570,7 @@ end;
 {$I 'xtreme3d/lua/dummycube'}
 {$I 'xtreme3d/lua/camera'}
 {$I 'xtreme3d/lua/light'}
+{$I 'xtreme3d/lua/fonttext'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -655,6 +656,26 @@ begin
   lua.RegProc('CameraMoveTargetInEyeSpace', @lua_CameraMoveTargetInEyeSpace, 4);
   lua.RegProc('CameraPointInFront', @lua_CameraPointInFront, 4);
   lua.RegProc('CameraGetFieldOfView', @lua_CameraGetFieldOfView, 2);
+
+  // Register Font & Text functions
+  lua.RegProc('BmpfontCreate', @lua_BmpfontCreate, 8);
+  lua.RegProc('BmpfontLoad', @lua_BmpfontLoad, 2);
+  lua.RegProc('TTFontCreate', @lua_TTFontCreate, 2);
+  lua.RegProc('TTFontSetLineGap', @lua_TTFontSetLineGap, 2);
+  lua.RegProc('WindowsBitmapfontCreate', @lua_WindowsBitmapfontCreate, 4);
+  lua.RegProc('FlatTextCreate', @lua_FlatTextCreate, 3);
+  lua.RegProc('FlatTextSetFont', @lua_FlatTextSetFont, 2);
+  lua.RegProc('FlatTextSetColor', @lua_FlatTextSetColor, 3);
+  lua.RegProc('FlatTextSetText', @lua_FlatTextSetText, 2);
+  lua.RegProc('HUDTextCreate', @lua_HUDTextCreate, 3);
+  lua.RegProc('HUDTextSetRotation', @lua_HUDTextSetRotation, 2);
+  lua.RegProc('HUDTextSetFont', @lua_HUDTextSetFont, 2);
+  lua.RegProc('HUDTextSetColor', @lua_HUDTextSetColor, 3);
+  lua.RegProc('HUDTextSetText', @lua_HUDTextSetText, 2);
+  lua.RegProc('SpaceTextCreate', @lua_SpaceTextCreate, 4);
+  lua.RegProc('SpaceTextSetExtrusion', @lua_SpaceTextSetExtrusion, 2);
+  lua.RegProc('SpaceTextSetFont', @lua_SpaceTextSetFont, 2);
+  lua.RegProc('SpaceTextSetText', @lua_SpaceTextSetText, 2);
 
   // Register Light functions
   lua.RegProc('LightCreate', @lua_LightCreate, 2);
