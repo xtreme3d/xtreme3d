@@ -55,8 +55,8 @@
 <A class=type>real</A><A> = </A><A class=function>ShadowplaneSetOptions</A><A>( sp,stencil,scissor,transparent,ignorez as </A><A class=type>real</A><A> );</A>
 <BR><A>Задает опции теневой плоскости.</A>
 <BR><A>sp - id теневой плоскости</A>
-<BR><A>stencil - включает или отключает прозрачность теней: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>scissor - сведения отсутствуют</A>
+<BR><A>stencil - включает или отключает стенсильный тест: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). При включенном стенсильном тесте тени будут обрезаться по границам плоскости</A>
+<BR><A>scissor - включает или выключает обрезку теней по экранной области, в которой рендерится теневая плоскость: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Это несколько ускоряет рендеринг, так как тени от объектов, не попадающие в плоскость, будут отсечены еще до стенсильного теста</A>
 <BR><A>transparent - включает или отключает прозрачность плоскости: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
 <BR><A>ignorez - включает или отключает игнорирование z-буфера: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
 <HR>
