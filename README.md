@@ -57,7 +57,7 @@ Features
 * Window creation
 * Integrated Squall audio engine
 * Lua scripting
-* + a lot more
+* ...plus a lot more!
 
 Asset Creation
 --------------
@@ -72,3 +72,8 @@ Xtreme3D 3.x and corresponding GLScene fork are both distributed under Mozilla P
 ODE is distributed under BSD-style license.
 
 FreeType is distributed under FreeType License (FTL).
+
+Lua is distributed under MIT License.
+
+Squall is distributed under MIT License.
+
