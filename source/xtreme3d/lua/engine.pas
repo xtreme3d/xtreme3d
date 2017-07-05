@@ -34,3 +34,23 @@ begin
   Update(Args[0].AsDouble);
   result := LuaArg(1.0);
 end;
+
+function lua_EngineSaveScene(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineSaveScene(pchar(Args[0].AsString));
+  result := LuaArg(1.0);
+end;
+
+function lua_EngineLoadScene(const Args: TLuaArgs): TLuaArg;
+begin
+  EngineLoadScene(pchar(Args[0].AsString));
+  result := LuaArg(1.0);
+end;
+
+function lua_EngineRootObject(const Args: TLuaArgs): TLuaArg;
+var
+  o: double;
+begin
+  o := EngineRootObject();
+  result := LuaArg(o);
+end;

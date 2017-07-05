@@ -571,6 +571,7 @@ end;
 {$I 'xtreme3d/lua/camera'}
 {$I 'xtreme3d/lua/light'}
 {$I 'xtreme3d/lua/fonttext'}
+{$I 'xtreme3d/lua/sprite'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -583,6 +584,9 @@ begin
   lua.RegProc('EngineSetCulling', @lua_EngineSetCulling, 1);
   lua.RegProc('SetPakArchive', @lua_SetPakArchive, 1);
   lua.RegProc('Update', @lua_Update, 1);
+  lua.RegProc('EngineSaveScene', @lua_EngineSaveScene, 1);
+  lua.RegProc('EngineLoadScene', @lua_EngineLoadScene, 1);
+  lua.RegProc('EngineRootObject', @lua_EngineRootObject, 0);
 
   // Register Viewer functions
   lua.RegProc('ViewerCreate', @lua_ViewerCreate, 5);
@@ -657,6 +661,18 @@ begin
   lua.RegProc('CameraPointInFront', @lua_CameraPointInFront, 4);
   lua.RegProc('CameraGetFieldOfView', @lua_CameraGetFieldOfView, 2);
 
+  // Register Light functions
+  lua.RegProc('LightCreate', @lua_LightCreate, 2);
+  lua.RegProc('LightSetAmbientColor', @lua_LightSetAmbientColor, 2);
+  lua.RegProc('LightSetDiffuseColor', @lua_LightSetDiffuseColor, 2);
+  lua.RegProc('LightSetSpecularColor', @lua_LightSetSpecularColor, 2);
+  lua.RegProc('LightSetAttenuation', @lua_LightSetAttenuation, 4);
+  lua.RegProc('LightSetShining', @lua_LightSetShining, 2);
+  lua.RegProc('LightSetSpotCutoff', @lua_LightSetSpotCutoff, 2);
+  lua.RegProc('LightSetSpotExponent', @lua_LightSetSpotExponent, 2);
+  lua.RegProc('LightSetSpotDirection', @lua_LightSetSpotDirection, 4);
+  lua.RegProc('LightSetStyle', @lua_LightSetStyle, 2);
+
   // Register Font & Text functions
   lua.RegProc('BmpfontCreate', @lua_BmpfontCreate, 8);
   lua.RegProc('BmpfontLoad', @lua_BmpfontLoad, 2);
@@ -677,17 +693,20 @@ begin
   lua.RegProc('SpaceTextSetFont', @lua_SpaceTextSetFont, 2);
   lua.RegProc('SpaceTextSetText', @lua_SpaceTextSetText, 2);
 
-  // Register Light functions
-  lua.RegProc('LightCreate', @lua_LightCreate, 2);
-  lua.RegProc('LightSetAmbientColor', @lua_LightSetAmbientColor, 2);
-  lua.RegProc('LightSetDiffuseColor', @lua_LightSetDiffuseColor, 2);
-  lua.RegProc('LightSetSpecularColor', @lua_LightSetSpecularColor, 2);
-  lua.RegProc('LightSetAttenuation', @lua_LightSetAttenuation, 4);
-  lua.RegProc('LightSetShining', @lua_LightSetShining, 2);
-  lua.RegProc('LightSetSpotCutoff', @lua_LightSetSpotCutoff, 2);
-  lua.RegProc('LightSetSpotExponent', @lua_LightSetSpotExponent, 2);
-  lua.RegProc('LightSetSpotDirection', @lua_LightSetSpotDirection, 4);
-  lua.RegProc('LightSetStyle', @lua_LightSetStyle, 2);
+  // Register Sprite functions
+  lua.RegProc('HUDSpriteCreate', @lua_HUDSpriteCreate, 4);
+  lua.RegProc('HUDSpriteCreateEx', @lua_HUDSpriteCreateEx, 7);
+  lua.RegProc('SpriteCreate', @lua_SpriteCreate, 4);
+  lua.RegProc('SpriteCreateEx', @lua_SpriteCreateEx, 7);
+  lua.RegProc('SpriteSetSize', @lua_SpriteSetSize, 3);
+  lua.RegProc('SpriteScale', @lua_SpriteScale, 3);
+  lua.RegProc('SpriteSetRotation', @lua_SpriteSetRotation, 2);
+  lua.RegProc('SpriteRotate', @lua_SpriteRotate, 2);
+  lua.RegProc('SpriteMirror', @lua_SpriteMirror, 3);
+  lua.RegProc('SpriteNoZWrite', @lua_SpriteNoZWrite, 2);
+  lua.RegProc('SpriteSetBounds', @lua_SpriteSetBounds, 5);
+  lua.RegProc('SpriteSetBoundsUV', @lua_SpriteSetBoundsUV, 5);
+  lua.RegProc('SpriteSetOrigin', @lua_SpriteSetOrigin, 3);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
@@ -864,9 +883,27 @@ begin
   lua.RegConst('vsmSync', 0.0);
   lua.RegConst('vsmNoSync', 1.0);
 
+  lua.RegConst('vsmNoSync', 1.0);
+
+  lua.RegConst('aaDefault', 0.0);
+  lua.RegConst('aaNone', 1.0);
+  lua.RegConst('aa2x', 2.0);
+  lua.RegConst('aa2xHQ', 3.0);
+  lua.RegConst('aa4x', 4.0);
+  lua.RegConst('aa4xHQ', 5.0);
+
   lua.RegConst('cimNone', 0.0);
   lua.RegConst('cimPosition', 1.0);
   lua.RegConst('cimOrientation', 2.0);
+
+  lua.RegConst('csPerspective', 0.0);
+  lua.RegConst('csOrthogonal', 1.0);
+  lua.RegConst('csOrtho2D', 2.0);
+  lua.RegConst('csInfinitePerspective', 3.0);
+
+  lua.RegConst('lsSpot', 0.0);
+  lua.RegConst('lsOmni', 1.0);
+  lua.RegConst('lsParallel', 2.0);
 
   // TODO
 end;
