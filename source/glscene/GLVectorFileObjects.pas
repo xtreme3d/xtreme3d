@@ -1702,6 +1702,9 @@ type
             smooth interpolation).}
          function isSwitchingAnimation: boolean;
 
+         { Provides a direct access to FCurrentFrame without any checks. Used in TGLActorProxy }
+         procedure SetCurrentFrameDirect(const Value: Integer);
+
       published
          { Published Declarations }
          property StartFrame : Integer read FStartFrame write SetStartFrame default 0;
@@ -7515,6 +7518,11 @@ begin
       Result:=0;
       Assert(False);
    end;
+end;
+
+procedure TGLActor.SetCurrentFrameDirect(const Value: Integer);
+begin
+  FCurrentFrame := Value;
 end;
 
 // DoProgress

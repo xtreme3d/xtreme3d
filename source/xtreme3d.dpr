@@ -17,7 +17,7 @@ uses
   GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes,
+  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
   GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms, Squall, CrystalLUA;
 
 type
@@ -572,6 +572,7 @@ end;
 {$I 'xtreme3d/lua/light'}
 {$I 'xtreme3d/lua/fonttext'}
 {$I 'xtreme3d/lua/sprite'}
+{$I 'xtreme3d/lua/hudshape'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -707,6 +708,27 @@ begin
   lua.RegProc('SpriteSetBounds', @lua_SpriteSetBounds, 5);
   lua.RegProc('SpriteSetBoundsUV', @lua_SpriteSetBoundsUV, 5);
   lua.RegProc('SpriteSetOrigin', @lua_SpriteSetOrigin, 3);
+
+  // Register HUDShape functions
+  lua.RegProc('HUDShapeRectangleCreate', @lua_HUDShapeRectangleCreate, 3);
+  lua.RegProc('HUDShapeCircleCreate', @lua_HUDShapeCircleCreate, 5);
+  lua.RegProc('HUDShapeLineCreate', @lua_HUDShapeLineCreate, 5);
+  lua.RegProc('HUDShapeMeshCreate', @lua_HUDShapeMeshCreate, 1);
+  lua.RegProc('HUDShapeSetSize', @lua_HUDShapeSetSize, 3);
+  lua.RegProc('HUDShapeScale', @lua_HUDShapeScale, 3);
+  lua.RegProc('HUDShapeSetRotation', @lua_HUDShapeSetRotation, 2);
+  lua.RegProc('HUDShapeRotate', @lua_HUDShapeRotate, 2);
+  lua.RegProc('HUDShapeSetColor', @lua_HUDShapeSetColor, 3);
+  lua.RegProc('HUDShapeSetOrigin', @lua_HUDShapeSetOrigin, 3);
+  lua.RegProc('HUDShapeCircleSetRadius', @lua_HUDShapeCircleSetRadius, 2);
+  lua.RegProc('HUDShapeCircleSetSlices', @lua_HUDShapeCircleSetSlices, 2);
+  lua.RegProc('HUDShapeCircleSetAngles', @lua_HUDShapeCircleSetAngles, 3);
+  lua.RegProc('HUDShapeLineSetPoints', @lua_HUDShapeLineSetPoints, 5);
+  lua.RegProc('HUDShapeLineSetWidth', @lua_HUDShapeLineSetWidth, 2);
+  lua.RegProc('HUDShapeMeshAddVertex', @lua_HUDShapeMeshAddVertex, 5);
+  lua.RegProc('HUDShapeMeshAddTriangle', @lua_HUDShapeMeshAddTriangle, 4);
+  lua.RegProc('HUDShapeMeshSetVertex', @lua_HUDShapeMeshSetVertex, 4);
+  lua.RegProc('HUDShapeMeshSetTexCoord', @lua_HUDShapeMeshSetTexCoord, 4);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
@@ -973,6 +995,27 @@ begin
       end;
     end;
   end;
+end;
+
+function ActorProxyObjectCreate(actor, parent: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  if not (parent = 0) then
+    p := TGLActorProxy.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    p := TGLActorProxy.CreateAsChild(scene.Objects);
+  p.MasterObject := TGLActor(trunc64(actor));
+  result := Integer(p);
+end;
+
+function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.SwitchToAnimation(trunc64(anim));
+  result := 1.0;
 end;
 
 exports
@@ -1275,6 +1318,7 @@ PartitionResultShow, PartitionResultHide,
 //Proxy
 ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
 MultiProxyObjectCreate, MultiProxyObjectAddTarget,
+ActorProxyObjectCreate, ActorProxyObjectSwitchToAnimation,
 //Text
 TextRead, TextConvertANSIToUTF8,
 //ObjectHash
