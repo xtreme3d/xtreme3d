@@ -1688,6 +1688,10 @@ type
 
          procedure DoAnimate; virtual;
 
+             function RayCastIntersect(const rayStart, rayVector : TVector;
+                              intersectPoint : PVector = nil;
+                              intersectNormal : PVector = nil) : Boolean; override;
+
          {: Synchronize self animation with an other actor.<p>
             Copies Start/Current/End Frame values, CurrentFrameDelta,
             AnimationMode and FrameInterpolation. }
@@ -7462,6 +7466,13 @@ begin
       end;
       aarNone : ; // do nothing
    end;
+end;
+
+function TGLActor.RayCastIntersect(const rayStart, rayVector: TVector;
+  intersectPoint, intersectNormal: PVector): Boolean;
+begin
+  DoAnimate();
+  Result := inherited RayCastIntersect(rayStart, rayVector, intersectPoint, intersectNormal);
 end;
 
 
