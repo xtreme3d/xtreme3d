@@ -10,11 +10,13 @@
 
 <H1 class=pagetitle>Proxy</H1>
 
-<A class=type>Класс: TGLProxyObject, TGLMultiProxy</A><BR><BR>
+<A class=type>Класс: TGLProxyObject, TGLActorProxy, TGLMultiProxy</A><BR><BR>
 
 <A>Прокси - это специальный тип объекта, который не имеет собственной графики для отрисовки - он рисует графику другого объекта, но использует для этого собственную трансформацию. Иными словами, прокси - это лучший способ создать несколько копий 3D-модели, не дублируя ее в памяти.
 <BR>
 <BR>Мультипрокси - особый подвид прокси, который может рисовать разные объекты в зависимости от удаленности от камеры. С его помощью вы можете реализовать дискретный LOD (level of detail) - систему адаптивной детализации: чем дальше прокси от камеры, тем более низкополигональную модель он рендерит.
+<BR>
+<BR>Для Актеров следует использовать специальный вид прокси - ActorProxyObject. Он позволяет рендерить копию Актера со своей анимацией - это необходимо, если у вас в игре сосуществуют несколько однотипных персонажей (например, врагов).
 </A>
 <HR>
 
@@ -42,6 +44,22 @@
 <BR><A>Задает целевой объект прокси.</A>
 <BR><A>proxy - id прокси</A>
 <BR><A>object - id объекта.</A>
+<HR>
+
+<A name="ActorProxyObjectCreate"></A>
+<H1 class=name>ActorProxyObjectCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectCreate</A><A>( actor,parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новый прокси-Актер.</A>
+<BR><A>actor - id Актера</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="ActorProxyObjectSwitchToAnimation"></A>
+<H1 class=name>ActorProxyObjectSwitchToAnimation</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSwitchToAnimation</A><A>( proxy,anim as </A><A class=type>real</A><A> );</A>
+<BR><A>Переключает анимационную последовательность для прокси-Актера.</A>
+<BR><A>proxy - id прокси</A>
+<BR><A>anim - порядковый номер анимации.</A>
 <HR>
 
 <A name="MultiProxyObjectCreate"></A>

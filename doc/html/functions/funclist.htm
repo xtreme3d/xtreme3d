@@ -55,6 +55,7 @@
 <A class=funclink href=funclist.htm#ODE>ODE</A><A> | </A>
 <A class=funclink href=funclist.htm#ObjectHash>ObjectHash</A><A> | </A>
 <A class=funclink href=funclist.htm#Text>Text</A> |
+<A class=funclink href=funclist.htm#Color>Color</A> |
 <A class=funclink href=funclist.htm#Input>Input</A> |
 <A class=funclink href=funclist.htm#Window>Window</A> |
 <A class=funclink href=funclist.htm#Window>Lua</A>
@@ -194,6 +195,8 @@
 <BR><A class=funclink href=fonttext.htm#BmpfontLoad>BmpfontLoad</A><A>(font,material)</A>
 <BR><A class=funclink href=fonttext.htm#TTFontCreate>TTFontCreate</A><A>(filename,height)</A>
 <BR><A class=funclink href=fonttext.htm#TTFontSetLineGap>TTFontSetLineGap</A><A>(ttf,gap)</A>
+<BR><A class=funclink href=fonttext.htm#TTFontSetEncoding>TTFontSetEncoding</A><A>(ttf,te)</A>
+<BR><A class=funclink href=fonttext.htm#TTFontLoadCodePage>TTFontLoadCodePage</A><A>(ttf,filename)</A>
 <BR><A class=funclink href=fonttext.htm#WindowsBitmapfontCreate>WindowsBitmapfontCreate</A><A>(fontname,size,start,end)</A>
 <BR><A class=funclink href=fonttext.htm#FlatTextCreate>FlatTextCreate</A><A>(font,string,parent)</A>
 <BR><A class=funclink href=fonttext.htm#FlatTextSetColor>FlatTextSetColor</A><A>(text,color,alpha)</A>
@@ -959,6 +962,8 @@
 <A class=funclink href=proxy.htm#ProxyObjectCreate>ProxyObjectCreate</A><A>(object,parent)</A>
 <BR><A class=funclink href=proxy.htm#ProxyObjectSetOptions>ProxyObjectSetOptions</A><A>(proxy,copyeffects,copyobjects,copytransform)</A>
 <BR><A class=funclink href=proxy.htm#ProxyObjectSetTarget>ProxyObjectSetTarget</A><A>(proxy,object)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectCreate>ActorProxyObjectCreate</A><A>(actor,parent)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSwitchToAnimation>ActorProxyObjectSwitchToAnimation</A><A>(actor,anim)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectCreate>MultiProxyObjectCreate</A><A>(parent)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectAddTarget>MultiProxyObjectAddTarget</A><A>(mproxy,object,mindist,maxdist)</A>
 <BR>
@@ -1139,6 +1144,13 @@
 <H1 class=name>Text</H1>
 <A class=funclink href=text.htm#TextRead>TextRead</A><A>(filename)</A>
 <BR><A class=funclink href=text.htm#TextConvertANSIToUTF8>TextConvertANSIToUTF8</A><A>(text)</A>
+
+<BR>
+<BR>
+<A name="Color"></A>
+<H1 class=name>Color</H1>
+<A class=funclink href=color.htm#MakeColorRGB>MakeColorRGB</A><A>(r,g,b)</A>
+<BR><A class=funclink href=color.htm#MakeColorRGBFloat>MakeColorRGBFloat</A><A>(r,g,b)</A>
 
 <BR>
 <BR>

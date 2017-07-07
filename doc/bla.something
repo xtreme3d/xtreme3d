@@ -397,6 +397,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Color">
+                        <param name="Local" value="functions/color.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Input">
                         <param name="Local" value="functions/input.htm">
                         <param name="ImageNumber" value="0">
