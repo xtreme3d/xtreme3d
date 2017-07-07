@@ -401,8 +401,8 @@ var
    HaspooTransformation:boolean;
 begin
    // Set RefObject frame as current ActorProxy frame
-   with RefActor do
-   begin
+   //with RefActor do
+   //begin
      // VARS FOR ACTOR TO ASSUME ACTORPROXY CURRENT ANIMATION FRAME
      cfd := RefActor.CurrentFrameDelta;
      cf := RefActor.CurrentFrame;
@@ -451,16 +451,16 @@ begin
 
 
      // Return RefObject to it's old time
-     CurrentFrameDelta:=cfd;
-     SetCurrentFrameDirect(cf);
+     RefActor.CurrentFrameDelta:=cfd;
+     RefActor.SetCurrentFrameDirect(cf);
      
-     CurrentFrame:=cf;
-     startframe:=sf;
-     endframe:=ef;
+     RefActor.CurrentFrame:=cf;
+     RefActor.startframe:=sf;
+     RefActor.endframe:=ef;
 
      // REVERT ACTOR TO ASSUME ORIGINAL ANIMATION FRAME
      TGLDummyActor(RefActor).DoAnimate();
-   end;
+  // end;
 end;
 
 // SetAnimation
