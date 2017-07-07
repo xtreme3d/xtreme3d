@@ -8,7 +8,7 @@ uses
   ApplicationFileIO, GLBitmapFont, Freetype, SimpleDictionary;
 
 type
-  TFTTextEncoding = (teUTF8, te1251);
+  TFTTextEncoding = (teUTF8, teWindows);
 
   TGLFreetypeFont = class;
 
@@ -38,7 +38,7 @@ type
         FFace: FT_Face_ptr;
         FCharHeight: Integer;
         FCharacters: TSimpleObjectDictionary;
-        FWin1251: array[128..255] of Integer;
+        FWinEnc: array[128..255] of Integer;
         FFontFileBuffer: array of Byte;
         FEncoding: TFTTextEncoding;
     public
@@ -47,6 +47,8 @@ type
 
         constructor Create(AOwner: TComponent); override;
         destructor Destroy; override;
+
+        procedure LoadCodePageMapping(const fileName: String);
         
         procedure RegisterUser(anObject: TGLBaseSceneObject); override;
 	      procedure UnRegisterUser(anObject: TGLBaseSceneObject); override;
@@ -144,157 +146,157 @@ begin
 
   FEncoding := teUTF8;
   
-  //FWin1251 := TSimpleDictionary.Create();
+  //FWinEnc := TSimpleDictionary.Create();
 
-  FWin1251[128] := 1026;
-  FWin1251[129] := 1027;
-  FWin1251[130] := 8218;
-  FWin1251[131] := 1107;
-  FWin1251[132] := 8222;
+  FWinEnc[128] := 1026;
+  FWinEnc[129] := 1027;
+  FWinEnc[130] := 8218;
+  FWinEnc[131] := 1107;
+  FWinEnc[132] := 8222;
   
-  FWin1251[133] := 8230;
-  FWin1251[134] := 8224;
-  FWin1251[135] := 8225;
-  FWin1251[136] := 8364;
-  FWin1251[137] := 8240;
-  FWin1251[138] := 1033;
+  FWinEnc[133] := 8230;
+  FWinEnc[134] := 8224;
+  FWinEnc[135] := 8225;
+  FWinEnc[136] := 8364;
+  FWinEnc[137] := 8240;
+  FWinEnc[138] := 1033;
 
-  FWin1251[139] := 8249;
-  FWin1251[140] := 1034;
-  FWin1251[141] := 1036;
-  FWin1251[142] := 1035;
-  FWin1251[143] := 1039;
-  FWin1251[144] := 1106;
+  FWinEnc[139] := 8249;
+  FWinEnc[140] := 1034;
+  FWinEnc[141] := 1036;
+  FWinEnc[142] := 1035;
+  FWinEnc[143] := 1039;
+  FWinEnc[144] := 1106;
 
-  FWin1251[145] := 8216;
-  FWin1251[146] := 8217;
-  FWin1251[147] := 8220;
-  FWin1251[148] := 8221;
-  FWin1251[149] := 8226;
-  FWin1251[150] := 8211;
+  FWinEnc[145] := 8216;
+  FWinEnc[146] := 8217;
+  FWinEnc[147] := 8220;
+  FWinEnc[148] := 8221;
+  FWinEnc[149] := 8226;
+  FWinEnc[150] := 8211;
 
-  FWin1251[151] := 8212;
-  FWin1251[152] := 152;
-  FWin1251[153] := 8482;
-  FWin1251[154] := 1113;
-  FWin1251[155] := 8250;
-  FWin1251[156] := 1114;
-  FWin1251[157] := 1116;
+  FWinEnc[151] := 8212;
+  FWinEnc[152] := 152;
+  FWinEnc[153] := 8482;
+  FWinEnc[154] := 1113;
+  FWinEnc[155] := 8250;
+  FWinEnc[156] := 1114;
+  FWinEnc[157] := 1116;
 
-  FWin1251[158] := 1115;
-  FWin1251[159] := 1119;
-  FWin1251[160] := 160;
-  FWin1251[161] := 1038;
-  FWin1251[162] := 1118;
-  FWin1251[163] := 1032;
+  FWinEnc[158] := 1115;
+  FWinEnc[159] := 1119;
+  FWinEnc[160] := 160;
+  FWinEnc[161] := 1038;
+  FWinEnc[162] := 1118;
+  FWinEnc[163] := 1032;
 
-  FWin1251[164] := 154;
-  FWin1251[165] := 1168;
-  FWin1251[166] := 166;
-  FWin1251[167] := 167;
-  FWin1251[168] := 1025;
-  FWin1251[169] := 169;
+  FWinEnc[164] := 154;
+  FWinEnc[165] := 1168;
+  FWinEnc[166] := 166;
+  FWinEnc[167] := 167;
+  FWinEnc[168] := 1025;
+  FWinEnc[169] := 169;
 
-  FWin1251[170] := 1028;
-  FWin1251[171] := 171;
-  FWin1251[172] := 172;
-  FWin1251[173] := 173;
-  FWin1251[174] := 174;
-  FWin1251[175] := 1031;
+  FWinEnc[170] := 1028;
+  FWinEnc[171] := 171;
+  FWinEnc[172] := 172;
+  FWinEnc[173] := 173;
+  FWinEnc[174] := 174;
+  FWinEnc[175] := 1031;
 
-  FWin1251[176] := 176;
-  FWin1251[177] := 177;
-  FWin1251[178] := 1030;
-  FWin1251[179] := 1110;
-  FWin1251[180] := 1169;
-  FWin1251[181] := 181;
+  FWinEnc[176] := 176;
+  FWinEnc[177] := 177;
+  FWinEnc[178] := 1030;
+  FWinEnc[179] := 1110;
+  FWinEnc[180] := 1169;
+  FWinEnc[181] := 181;
 
-  FWin1251[182] := 182;
-  FWin1251[183] := 183;
-  FWin1251[184] := 1105;
-  FWin1251[185] := 8470;
-  FWin1251[186] := 1108;
-  FWin1251[187] := 187;
+  FWinEnc[182] := 182;
+  FWinEnc[183] := 183;
+  FWinEnc[184] := 1105;
+  FWinEnc[185] := 8470;
+  FWinEnc[186] := 1108;
+  FWinEnc[187] := 187;
 
-  FWin1251[188] := 1112;
-  FWin1251[189] := 1029;
-  FWin1251[190] := 1109;
-  FWin1251[191] := 1111;
-  FWin1251[192] := 1040;
-  FWin1251[193] := 1041;
+  FWinEnc[188] := 1112;
+  FWinEnc[189] := 1029;
+  FWinEnc[190] := 1109;
+  FWinEnc[191] := 1111;
+  FWinEnc[192] := 1040;
+  FWinEnc[193] := 1041;
 
-  FWin1251[194] := 1042;
-  FWin1251[195] := 1043;
-  FWin1251[196] := 1044;
-  FWin1251[197] := 1045;
-  FWin1251[199] := 1046;
-  FWin1251[199] := 1047;
+  FWinEnc[194] := 1042;
+  FWinEnc[195] := 1043;
+  FWinEnc[196] := 1044;
+  FWinEnc[197] := 1045;
+  FWinEnc[199] := 1046;
+  FWinEnc[199] := 1047;
 
-  FWin1251[200] := 1048;
-  FWin1251[201] := 1049;
-  FWin1251[202] := 1050;
-  FWin1251[203] := 1051;
-  FWin1251[204] := 1052;
-  FWin1251[205] := 1053;
+  FWinEnc[200] := 1048;
+  FWinEnc[201] := 1049;
+  FWinEnc[202] := 1050;
+  FWinEnc[203] := 1051;
+  FWinEnc[204] := 1052;
+  FWinEnc[205] := 1053;
 
-  FWin1251[206] := 1054;
-  FWin1251[207] := 1055;
-  FWin1251[208] := 1056;
-  FWin1251[209] := 1057;
-  FWin1251[210] := 1058;
-  FWin1251[211] := 1059;
+  FWinEnc[206] := 1054;
+  FWinEnc[207] := 1055;
+  FWinEnc[208] := 1056;
+  FWinEnc[209] := 1057;
+  FWinEnc[210] := 1058;
+  FWinEnc[211] := 1059;
 
-  FWin1251[212] := 1060;
-  FWin1251[213] := 1061;
-  FWin1251[214] := 1062;
-  FWin1251[215] := 1063;
-  FWin1251[216] := 1064;
-  FWin1251[217] := 1065;
+  FWinEnc[212] := 1060;
+  FWinEnc[213] := 1061;
+  FWinEnc[214] := 1062;
+  FWinEnc[215] := 1063;
+  FWinEnc[216] := 1064;
+  FWinEnc[217] := 1065;
 
-  FWin1251[218] := 1066;
-  FWin1251[219] := 1067;
-  FWin1251[220] := 1068;
-  FWin1251[221] := 1069;
-  FWin1251[222] := 1070;
-  FWin1251[223] := 1071;
+  FWinEnc[218] := 1066;
+  FWinEnc[219] := 1067;
+  FWinEnc[220] := 1068;
+  FWinEnc[221] := 1069;
+  FWinEnc[222] := 1070;
+  FWinEnc[223] := 1071;
 
-  FWin1251[224] := 1072;
-  FWin1251[225] := 1073;
-  FWin1251[226] := 1074;
-  FWin1251[227] := 1075;
-  FWin1251[228] := 1076;
-  FWin1251[229] := 1077;
+  FWinEnc[224] := 1072;
+  FWinEnc[225] := 1073;
+  FWinEnc[226] := 1074;
+  FWinEnc[227] := 1075;
+  FWinEnc[228] := 1076;
+  FWinEnc[229] := 1077;
 
-  FWin1251[230] := 1078;
-  FWin1251[231] := 1079;
-  FWin1251[232] := 1080;
-  FWin1251[233] := 1081;
-  FWin1251[234] := 1082;
-  FWin1251[235] := 1083;
+  FWinEnc[230] := 1078;
+  FWinEnc[231] := 1079;
+  FWinEnc[232] := 1080;
+  FWinEnc[233] := 1081;
+  FWinEnc[234] := 1082;
+  FWinEnc[235] := 1083;
 
-  FWin1251[236] := 1084;
-  FWin1251[237] := 1085;
-  FWin1251[238] := 1086;
-  FWin1251[239] := 1087;
-  FWin1251[240] := 1088;
-  FWin1251[241] := 1089;
+  FWinEnc[236] := 1084;
+  FWinEnc[237] := 1085;
+  FWinEnc[238] := 1086;
+  FWinEnc[239] := 1087;
+  FWinEnc[240] := 1088;
+  FWinEnc[241] := 1089;
 
-  FWin1251[242] := 1090;
-  FWin1251[243] := 1091;
-  FWin1251[244] := 1092;
-  FWin1251[245] := 1093;
-  FWin1251[246] := 1094;
-  FWin1251[247] := 1095;
+  FWinEnc[242] := 1090;
+  FWinEnc[243] := 1091;
+  FWinEnc[244] := 1092;
+  FWinEnc[245] := 1093;
+  FWinEnc[246] := 1094;
+  FWinEnc[247] := 1095;
 
-  FWin1251[248] := 1096;
-  FWin1251[249] := 1097;
-  FWin1251[250] := 1098;
-  FWin1251[251] := 1099;
-  FWin1251[252] := 1100;
-  FWin1251[253] := 1101;
+  FWinEnc[248] := 1096;
+  FWinEnc[249] := 1097;
+  FWinEnc[250] := 1098;
+  FWinEnc[251] := 1099;
+  FWinEnc[252] := 1100;
+  FWinEnc[253] := 1101;
 
-  FWin1251[254] := 1102;
-  FWin1251[255] := 1103;
+  FWinEnc[254] := 1102;
+  FWinEnc[255] := 1103;
 
 end;
 
@@ -303,6 +305,26 @@ begin
   FCharacters.Destroy;
   SetLength(FFontFileBuffer, 0);
   inherited Destroy;
+end;
+
+procedure TGLFreetypeFont.LoadCodePageMapping(const fileName : String);
+var
+  Strings: TStringList;
+	fs: TStream;
+  s: String;
+  i: Integer;
+begin
+  if FileStreamExists(fileName) then begin
+   	fs := CreateFileStream(fileName, fmOpenRead+fmShareDenyNone);
+    Strings := TStringList.Create;
+    Strings.LoadFromStream(fs);
+    for i := 1 to Strings.Count do
+    begin
+      if i < 128 then
+        FWinEnc[128+i] := StrToInt(Strings[i]);  
+    end;
+    Strings.Free;
+  end;
 end;
 
 procedure TGLFreetypeFont.RegisterUser(anObject: TGLBaseSceneObject);
@@ -500,7 +522,7 @@ begin
      begin
        c := Integer(aString[i]);
        if c > 127 then
-         c := FWin1251[c];
+         c := FWinEnc[c];
        i := i + 1;
      end;
 

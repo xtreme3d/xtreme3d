@@ -427,7 +427,16 @@ var
 begin
   ftfont := TGLFreetypeFont(trunc64(font));
   if te = 0.0 then ftfont.Encoding := teUTF8
-  else if te = 1.0 then ftfont.Encoding := te1251;
+  else if te = 1.0 then ftfont.Encoding := teWindows;
+  result := 1.0;
+end;
+
+function TTFontLoadCodePage(font: real; filename: pchar): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont(trunc64(font));
+  ftfont.LoadCodePageMapping(String(filename));
   result := 1.0;
 end;
 
@@ -1082,7 +1091,7 @@ LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
 LightSetSpotDirection, LightSetStyle,
 //Font & Text
 BmpFontCreate, BmpFontLoad,
-TTFontCreate, TTFontSetLineGap, TTFontSetEncoding,
+TTFontCreate, TTFontSetLineGap, TTFontSetEncoding, TTFontLoadCodePage,
 WindowsBitmapfontCreate,
 HUDTextCreate, FlatTextCreate,
 HUDTextSetRotation, SpaceTextCreate, SpaceTextSetExtrusion, HUDTextSetFont,
