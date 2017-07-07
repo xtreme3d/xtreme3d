@@ -410,13 +410,12 @@ begin
      ef := RefActor.endframe;
      RefActor.CurrentFrameDelta := self.CurrentFrameDelta;
      RefActor.SetCurrentFrameDirect(self.CurrentFrame);
-     //RefActor.CurrentFrame := self.CurrentFrame;
      RefActor.StartFrame := self.StartFrame;
      RefActor.EndFrame := self.EndFrame;
-     
+     RefActor.CurrentFrame := self.CurrentFrame;
 
      // FORCE ACTOR TO ASSUME ACTORPROXY CURRENT ANIMATION FRAME
-     //TGLDummyActor(RefActor).DoAnimate();
+     TGLDummyActor(RefActor).DoAnimate();
 
      HaspooTransformation:=pooTransformation in self.ProxyOptions;
 
@@ -453,14 +452,14 @@ begin
 
      // Return RefObject to it's old time
      CurrentFrameDelta:=cfd;
-     //SetCurrentFrameDirect(cf);
+     SetCurrentFrameDirect(cf);
      
      CurrentFrame:=cf;
      startframe:=sf;
      endframe:=ef;
 
      // REVERT ACTOR TO ASSUME ORIGINAL ANIMATION FRAME
-     //TGLDummyActor(RefActor).DoAnimate();
+     TGLDummyActor(RefActor).DoAnimate();
    end;
 end;
 

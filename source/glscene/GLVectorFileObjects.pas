@@ -1686,6 +1686,8 @@ type
 	      procedure SwitchToAnimation(animationIndex : Integer; smooth : Boolean = False); overload;
          function CurrentAnimation : String;
 
+         procedure DoAnimate; virtual;
+
          {: Synchronize self animation with an other actor.<p>
             Copies Start/Current/End Frame values, CurrentFrameDelta,
             AnimationMode and FrameInterpolation. }
@@ -7395,6 +7397,73 @@ begin
          FOnStartFrameReached(Self);
    end;
 end;
+
+
+procedure TGLActor.DoAnimate();
+var
+   i, k : Integer;
+   nextFrameIdx : Integer;
+   lerpInfos : array of TBlendedLerpInfo;
+begin
+   nextFrameIdx:=NextFrameIndex;
+   case Reference of
+      aarMorph : if nextFrameIdx>=0 then begin
+         case FrameInterpolation of
+            afpLinear :
+               MeshObjects.Lerp(CurrentFrame, nextFrameIdx, CurrentFrameDelta)
+         else
+            MeshObjects.MorphTo(CurrentFrame);
+         end;
+      end;
+      aarSkeleton : if Skeleton.Frames.Count>0 then begin
+         if Assigned(FControlers) and (AnimationMode<>aamExternal) then begin
+            // Blended Skeletal Lerping
+            SetLength(lerpInfos, FControlers.Count+1);
+            if nextFrameIdx>=0 then begin
+               case FrameInterpolation of
+                  afpLinear : with lerpInfos[0] do begin
+                     frameIndex1:=CurrentFrame;
+                     frameIndex2:=nextFrameIdx;
+                     lerpFactor:=CurrentFrameDelta;
+                     weight:=1;
+                  end;
+               else
+                  with lerpInfos[0] do begin
+                     frameIndex1:=CurrentFrame;
+                     frameIndex2:=CurrentFrame;
+                     lerpFactor:=0;
+                     weight:=1;
+                  end;
+               end;
+            end else begin
+               with lerpInfos[0] do begin
+                  frameIndex1:=CurrentFrame;
+                  frameIndex2:=CurrentFrame;
+                  lerpFactor:=0;
+                  weight:=1;
+               end;
+            end;
+            k:=1;
+            for i:=0 to FControlers.Count-1 do
+               if TGLBaseAnimationControler(FControlers[i]).Apply(lerpInfos[k]) then
+                  Inc(k);
+            SetLength(lerpInfos, k);
+            Skeleton.BlendedLerps(lerpInfos);
+         end else if (nextFrameIdx>=0) and (AnimationMode<>aamExternal) then begin
+            // Single Skeletal Lerp
+            case FrameInterpolation of
+               afpLinear :
+                  Skeleton.Lerp(CurrentFrame, nextFrameIdx, CurrentFrameDelta);
+            else
+               Skeleton.SetCurrentFrame(Skeleton.Frames[CurrentFrame]);
+            end;
+         end;
+         Skeleton.MorphMesh(aoSkeletonNormalizeNormals in Options);
+      end;
+      aarNone : ; // do nothing
+   end;
+end;
+
 
 // PrevFrame
 //
