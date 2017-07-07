@@ -573,6 +573,7 @@ end;
 {$I 'xtreme3d/lua/fonttext'}
 {$I 'xtreme3d/lua/sprite'}
 {$I 'xtreme3d/lua/hudshape'}
+{$I 'xtreme3d/lua/primitives'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -729,6 +730,21 @@ begin
   lua.RegProc('HUDShapeMeshAddTriangle', @lua_HUDShapeMeshAddTriangle, 4);
   lua.RegProc('HUDShapeMeshSetVertex', @lua_HUDShapeMeshSetVertex, 4);
   lua.RegProc('HUDShapeMeshSetTexCoord', @lua_HUDShapeMeshSetTexCoord, 4);
+
+  // Register Primitives functions
+  lua.RegProc('PlaneCreate', @lua_PlaneCreate, 6);
+  lua.RegProc('CubeCreate', @lua_CubeCreate, 4);
+  lua.RegProc('CubeSetNormalDirection', @lua_CubeSetNormalDirection, 2);
+  lua.RegProc('SphereCreate', @lua_SphereCreate, 4);
+  lua.RegProc('CylinderCreate', @lua_CylinderCreate, 7);
+  lua.RegProc('ConeCreate', @lua_ConeCreate, 6);
+  lua.RegProc('AnnulusCreate', @lua_AnnulusCreate, 7);
+  lua.RegProc('TorusCreate', @lua_TorusCreate, 5);
+  lua.RegProc('DiskCreate', @lua_DiskCreate, 7);
+  lua.RegProc('FrustrumCreate', @lua_FrustrumCreate, 5);
+  lua.RegProc('DodecahedronCreate', @lua_DodecahedronCreate, 1);
+  lua.RegProc('IcosahedronCreate', @lua_IcosahedronCreate, 1);
+  lua.RegProc('TeapotCreate', @lua_TeapotCreate, 1);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
