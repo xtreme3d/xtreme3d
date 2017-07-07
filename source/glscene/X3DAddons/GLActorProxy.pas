@@ -248,7 +248,6 @@ begin
           MasterActor.CurrentFrameDelta := FCurrentFrameDelta;
 
           MasterActor.SetCurrentFrameDirect(FCurrentFrame);
-          //MasterActor.CurrentFrame := FCurrentFrame;
           FLastFrame := FCurrentFrame;
           MasterActor.StartFrame := FStartFrame;
           MasterActor.EndFrame := FEndFrame;
@@ -271,7 +270,6 @@ begin
           FCurrentFrameDelta := MasterActor.CurrentFrameDelta;
           FCurrentFrame := MasterActor.CurrentFrame;
           MasterActor.CurrentFrameDelta := cfd;
-          //SetCurrentFrameDirect(cf);
           MasterActor.SetCurrentFrameDirect(cf);
           MasterActor.CurrentFrame := cf;
           MasterActor.startframe := sf;
@@ -288,8 +286,6 @@ begin
       Self.RenderChildren(0, Count - 1, ARci);
     if masterGotEffects then
       MasterActor.Effects.RenderPostEffects(Scene.CurrentBuffer, ARci);
-    //if masterGotEffects then
-    //  MasterActor.Effects.RenderPostEffects(ARci);
   finally
     ClearStructureChanged;
   end;
@@ -413,8 +409,8 @@ begin
      sf := RefActor.startframe;
      ef := RefActor.endframe;
      RefActor.CurrentFrameDelta := self.CurrentFrameDelta;
-     //RefActor.SetCurrentFrameDirect(self.CurrentFrame);
-     RefActor.CurrentFrame := self.CurrentFrame;
+     RefActor.SetCurrentFrameDirect(self.CurrentFrame);
+     //RefActor.CurrentFrame := self.CurrentFrame;
      RefActor.StartFrame := self.StartFrame;
      RefActor.EndFrame := self.EndFrame;
      
