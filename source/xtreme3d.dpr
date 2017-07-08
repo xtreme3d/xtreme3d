@@ -551,6 +551,21 @@ begin
   result:=Integer(obj2);
 end;
 
+function ObjectInFrustum(obj, viewer: real): real; stdcall;
+var
+  obj1: TGLBaseSceneObject;
+  mvp: TMatrix;
+  frustum: TFrustum;
+  v: TGLSceneViewer;
+begin
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  v := TGLSceneViewer(trunc64(viewer));
+  mvp := MatrixMultiply(v.Buffer.ModelViewMatrix, v.Buffer.ProjectionMatrix);
+  frustum := ExtractFrustumFromModelViewProjection(mvp);
+  result := Integer(not IsVolumeClipped(
+    AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
+end;
+
 function SquallInit: real; stdcall;
 var
   r: boolean;
@@ -1225,6 +1240,7 @@ ObjectGetUp,
 ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
 ObjectSetMatrixColumn,
 ObjectExportMatrix, ObjectExportAbsoluteMatrix,
+ObjectInFrustum,
 //Polygon
 PolygonCreate, PolygonAddVertex, PolygonSetVertexPosition, PolygonDeleteVertex,
 //Material
