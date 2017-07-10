@@ -628,6 +628,7 @@ end;
 {$I 'xtreme3d/lua/sprite'}
 {$I 'xtreme3d/lua/hudshape'}
 {$I 'xtreme3d/lua/primitives'}
+{$I 'xtreme3d/lua/actor'}
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -799,6 +800,42 @@ begin
   lua.RegProc('DodecahedronCreate', @lua_DodecahedronCreate, 1);
   lua.RegProc('IcosahedronCreate', @lua_IcosahedronCreate, 1);
   lua.RegProc('TeapotCreate', @lua_TeapotCreate, 1);
+
+  // Register Actor functions
+  lua.RegProc('ActorCreate', @lua_ActorCreate, 3);
+  lua.RegProc('ActorCopy', @lua_ActorCopy, 2);
+  lua.RegProc('ActorSetAnimationRange', @lua_ActorSetAnimationRange, 3);
+  lua.RegProc('ActorGetCurrentFrame', @lua_ActorGetCurrentFrame, 1);
+  lua.RegProc('ActorSwitchToAnimation', @lua_ActorSwitchToAnimation, 3);
+  lua.RegProc('ActorSwitchToAnimationName', @lua_ActorSwitchToAnimationName, 3);
+  lua.RegProc('ActorSynchronize', @lua_ActorSynchronize, 2);
+  lua.RegProc('ActorSetInterval', @lua_ActorSetInterval, 2);
+  lua.RegProc('ActorSetAnimationMode', @lua_ActorSetAnimationMode, 2);
+  lua.RegProc('ActorSetFrameInterpolation', @lua_ActorSetFrameInterpolation, 2);
+  lua.RegProc('ActorAddObject', @lua_ActorAddObject, 2);
+  lua.RegProc('ActorGetCurrentAnimation', @lua_ActorGetCurrentAnimation, 1);
+  lua.RegProc('ActorGetFrameCount', @lua_ActorGetFrameCount, 1);
+  lua.RegProc('ActorGetBoneCount', @lua_ActorGetBoneCount, 1);
+  lua.RegProc('ActorGetBoneByName', @lua_ActorGetBoneByName, 2);
+  lua.RegProc('ActorRotateBone', @lua_ActorRotateBone, 5);
+  lua.RegProc('ActorGetBoneRotation', @lua_ActorGetBoneRotation, 3);
+  lua.RegProc('ActorMoveBone', @lua_ActorMoveBone, 4);
+  lua.RegProc('ActorGetBonePosition', @lua_ActorGetBonePosition, 3);
+  lua.RegProc('ActorShowSkeleton', @lua_ActorShowSkeleton, 2);
+  lua.RegProc('ActorBoneExportMatrix', @lua_ActorBoneExportMatrix, 3);
+  lua.RegProc('ActorMakeSkeletalTranslationStatic', @lua_ActorMakeSkeletalTranslationStatic, 2);
+  lua.RegProc('ActorMakeSkeletalRotationDelta', @lua_ActorMakeSkeletalRotationDelta, 2);
+  lua.RegProc('AnimationBlenderCreate', @lua_AnimationBlenderCreate, 0);
+  lua.RegProc('AnimationBlenderSetActor', @lua_AnimationBlenderSetActor, 2);
+  lua.RegProc('AnimationBlenderSetAnimation', @lua_AnimationBlenderSetAnimation, 2);
+  lua.RegProc('AnimationBlenderSetRatio', @lua_AnimationBlenderSetRatio, 2);
+  lua.RegProc('ActorLoadQ3TagList', @lua_ActorLoadQ3TagList, 1);
+  lua.RegProc('ActorQ3TagExportMatrix', @lua_ActorQ3TagExportMatrix, 4);
+  lua.RegProc('ActorLoadQ3Animations', @lua_ActorLoadQ3Animations, 3);
+  lua.RegProc('ActorMeshObjectsCount', @lua_ActorMeshObjectsCount, 1);
+  lua.RegProc('ActorFaceGroupsCount', @lua_ActorFaceGroupsCount, 2);
+  lua.RegProc('ActorFaceGroupGetMaterialName', @lua_ActorFaceGroupGetMaterialName, 3);
+  lua.RegProc('ActorFaceGroupSetMaterial', @lua_ActorFaceGroupSetMaterial, 3);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
