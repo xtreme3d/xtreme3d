@@ -2478,7 +2478,7 @@ end;
 // загрузить библиотеку
 function LoadLuaHandle(): THandle;
 const
-  lib_name = 'lua.dll';
+  lib_name = 'lua51.dll';
 begin
   if (LuaPath = '') then
   begin
