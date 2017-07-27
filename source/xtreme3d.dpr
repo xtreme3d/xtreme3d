@@ -629,6 +629,8 @@ end;
 {$I 'xtreme3d/lua/hudshape'}
 {$I 'xtreme3d/lua/primitives'}
 {$I 'xtreme3d/lua/actor'}
+{$I 'xtreme3d/lua/freeform'}
+
 {$I 'xtreme3d/lua/object'}
 {$I 'xtreme3d/lua/input'}
 
@@ -836,6 +838,59 @@ begin
   lua.RegProc('ActorFaceGroupsCount', @lua_ActorFaceGroupsCount, 2);
   lua.RegProc('ActorFaceGroupGetMaterialName', @lua_ActorFaceGroupGetMaterialName, 3);
   lua.RegProc('ActorFaceGroupSetMaterial', @lua_ActorFaceGroupSetMaterial, 3);
+
+  // Register Freeform functions
+  lua.RegProc('FreeformCreate', @lua_FreeformCreate, 4);
+  lua.RegProc('FreeformCreateEmpty', @lua_FreeformCreateEmpty, 3);
+  lua.RegProc('FreeformAddMesh', @lua_FreeformAddMesh, 1);
+  lua.RegProc('FreeformMeshAddVertex', @lua_FreeformMeshAddVertex, 5);
+  lua.RegProc('FreeformMeshAddNormal', @lua_FreeformMeshAddNormal, 5);
+  lua.RegProc('FreeformMeshAddTexCoord', @lua_FreeformMeshAddTexCoord, 4);
+  lua.RegProc('FreeformMeshAddSecondTexCoord', @lua_FreeformMeshAddSecondTexCoord, 4);
+  lua.RegProc('FreeformMeshAddTangent', @lua_FreeformMeshAddTangent, 5);
+  lua.RegProc('FreeformMeshAddBinormal', @lua_FreeformMeshAddBinormal, 5);
+  lua.RegProc('FreeformMeshSetVertex', @lua_FreeformMeshSetVertex, 6);
+  lua.RegProc('FreeformMeshSetNormal', @lua_FreeformMeshSetNormal, 6);
+  lua.RegProc('FreeformMeshSetTexCoord', @lua_FreeformMeshSetTexCoord, 5);
+  lua.RegProc('FreeformMeshSetSecondTexCoord', @lua_FreeformMeshSetSecondTexCoord, 5);
+  lua.RegProc('FreeformMeshSetTangent', @lua_FreeformMeshSetTangent, 6);
+  lua.RegProc('FreeformMeshSetBinormal', @lua_FreeformMeshSetBinormal, 6);
+  lua.RegProc('FreeformMeshFaceGroupSetIndex', @lua_FreeformMeshFaceGroupSetIndex, 5);
+  lua.RegProc('FreeformMeshGetVertex', @lua_FreeformMeshGetVertex, 4);
+  lua.RegProc('FreeformMeshGetNormal', @lua_FreeformMeshGetNormal, 4);
+  lua.RegProc('FreeformMeshGetSecondTexCoord', @lua_FreeformMeshGetSecondTexCoord, 4);
+  lua.RegProc('FreeformMeshGetTexCoord', @lua_FreeformMeshGetTexCoord, 4);
+  lua.RegProc('FreeformMeshGetTangent', @lua_FreeformMeshGetTangent, 4);
+  lua.RegProc('FreeformMeshGetBinormal', @lua_FreeformMeshGetBinormal, 4);
+  lua.RegProc('FreeformMeshFaceGroupGetIndex', @lua_FreeformMeshFaceGroupGetIndex, 4);
+  lua.RegProc('FreeformMeshVerticesCount', @lua_FreeformMeshVerticesCount, 2);
+  lua.RegProc('FreeformMeshTriangleCount', @lua_FreeformMeshTriangleCount, 2);
+  lua.RegProc('FreeformMeshObjectsCount', @lua_FreeformMeshObjectsCount, 1);
+  lua.RegProc('FreeformMeshAddFaceGroup', @lua_FreeformMeshAddFaceGroup, 2);
+  lua.RegProc('FreeformMeshFaceGroupAddTriangle', @lua_FreeformMeshFaceGroupAddTriangle, 6);
+  lua.RegProc('FreeformMeshFaceGroupTriangleCount', @lua_FreeformMeshFaceGroupTriangleCount, 4);
+  lua.RegProc('FreeformMeshFaceGroupSetMaterial', @lua_FreeformMeshFaceGroupSetMaterial, 4);
+  lua.RegProc('FreeformMeshFaceGroupGetMaterial', @lua_FreeformMeshFaceGroupGetMaterial, 3);
+  lua.RegProc('FreeformMeshFaceGroupsCount', @lua_FreeformMeshFaceGroupsCount, 2);
+  lua.RegProc('FreeformMeshGenNormals', @lua_FreeformMeshGenNormals, 2);
+  lua.RegProc('FreeformMeshGenTangents', @lua_FreeformMeshGenTangents, 2);
+  lua.RegProc('FreeformMeshSetVisible', @lua_FreeformMeshSetVisible, 3);
+  lua.RegProc('FreeformMeshSetSecondCoords', @lua_FreeformMeshSetSecondCoords, 4);
+  lua.RegProc('FreeformMeshTranslate', @lua_FreeformMeshTranslate, 5);
+  lua.RegProc('FreeformMeshRotate', @lua_FreeformMeshRotate, 5);
+  lua.RegProc('FreeformMeshScale', @lua_FreeformMeshScale, 5);
+  lua.RegProc('FreeformMeshSetMaterial', @lua_FreeformMeshSetMaterial, 3);
+  lua.RegProc('FreeformUseMeshMaterials', @lua_FreeformUseMeshMaterials, 2);
+  lua.RegProc('FreeformPointInMesh', @lua_FreeformPointInMesh, 4);
+  lua.RegProc('FreeformSphereSweepIntersect', @lua_FreeformSphereSweepIntersect, 4);
+  lua.RegProc('FreeformToFreeforms', @lua_FreeformToFreeforms, 2);
+  lua.RegProc('FreeformSave', @lua_FreeformSave, 2);
+  lua.RegProc('FreeformGenTangents', @lua_FreeformGenTangents, 1);
+  lua.RegProc('FreeformBuildOctree', @lua_FreeformBuildOctree, 1);
+  lua.RegProc('FreeformCreateExplosionFX', @lua_FreeformCreateExplosionFX, 2);
+  lua.RegProc('FreeformExplosionFXReset', @lua_FreeformExplosionFXReset, 1);
+  lua.RegProc('FreeformExplosionFXEnable', @lua_FreeformExplosionFXEnable, 2);
+  lua.RegProc('FreeformExplosionFXSetSpeed', @lua_FreeformExplosionFXSetSpeed, 2);
 
   // Register Object functions
   lua.RegProc('ObjectHide', @lua_ObjectHide, 1);
