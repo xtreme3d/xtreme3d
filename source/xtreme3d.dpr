@@ -927,6 +927,11 @@ procedure luaRegGMConstants(lua: TLua);
 begin
   // TODO: vk_nokey
   // TODO: vk_anykey
+
+  lua.RegConst('mb_left', 1.0);
+  lua.RegConst('mb_right', 2.0);
+  lua.RegConst('mb_middle', 4.0);
+  
   lua.RegConst('vk_left', 37.0);
   lua.RegConst('vk_up', 38.0);
   lua.RegConst('vk_right', 39.0);
