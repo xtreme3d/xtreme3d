@@ -1185,6 +1185,18 @@ begin
   result := 1.0;
 end;
 
+function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; stdcall;
+var
+  mat1, mat2: TGLLibMaterial;
+  mlib: TGLMaterialLibrary;
+begin
+  mat1 := matlib.Materials.GetLibMaterialByName(String(material1));
+  mlib := TGLMaterialLibrary(trunc64(matlib2));
+  mat2 := mlib.Materials.GetLibMaterialByName(String(material2));
+  mat1.Material.SetTextureN(trunc64(index), mat2.Material.Texture);
+  result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -1368,6 +1380,7 @@ MaterialGetTextureWidth, MaterialGetTextureHeight,
 MaterialLoadTexture,
 MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
 MaterialEnableTextureEx, MaterialHasTextureEx,
+MaterialSetTextureExFromLibrary,
 MaterialCullFrontFaces, MaterialSetZWrite,
 //Shaders
 ShaderEnable, 

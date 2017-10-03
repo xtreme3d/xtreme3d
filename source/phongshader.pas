@@ -7,7 +7,7 @@ phongVertexProgram =
   '  gl_TexCoord[0] = gl_MultiTexCoord0;' + #13#10 +
   '  n = normalize(gl_NormalMatrix * gl_Normal);' + #13#10 +
   '  position = (gl_ModelViewMatrix * gl_Vertex).xyz;' + #13#10 +
-  '  e = -normalize(position);' + #13#10 +
+  '  e = -position;' + #13#10 +
   '  gl_Position = ftransform();' + #13#10 +
   '  gl_ClipVertex = gl_ModelViewMatrix * gl_Vertex;' + #13#10 +
   '}' + #13#10;
