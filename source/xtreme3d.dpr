@@ -1197,6 +1197,31 @@ begin
   result := 1.0;
 end;
 
+function FreeformMeshFaceGroupGetLightmapIndex(ff, mesh, fg: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  meshObj: TMeshObject;
+  faceGroup: TFGVertexNormalTexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  meshObj := ffm.MeshObjects[trunc64(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  result := faceGroup.LightMapIndex;
+end;
+
+function FreeformMeshFaceGroupSetLightmapIndex(ff, mesh, fg, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  meshObj: TMeshObject;
+  faceGroup: TFGVertexNormalTexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  meshObj := ffm.MeshObjects[trunc64(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  faceGroup.LightMapIndex := trunc64(index);
+  result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -1290,6 +1315,7 @@ FreeformMeshFaceGroupSetIndex,
 
 FreeformMeshFaceGroupAddTriangle,
 FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+FreeformMeshFaceGroupGetLightmapIndex, FreeformMeshFaceGroupSetLightmapIndex,
 FreeformMeshGenNormals, FreeformMeshGenTangents,
 FreeformMeshVerticesCount, FreeformMeshTriangleCount, 
 FreeformMeshObjectsCount, FreeformMeshSetVisible,

@@ -212,7 +212,7 @@ var
   mi, fgi, vi, tci: Integer;
   mesh, mesh2: TMeshObject;
   fg: TFGVertexIndexList;
-  fg2: TFGVertexNormalTexIndexList;
+  fg2: TFGVertexIndexList; //TFGVertexNormalTexIndexList;
   centroid: TAffineVector;
   one: TAffineVector;
   divisor: Single;
@@ -261,11 +261,11 @@ begin
     mesh2.Mode := momFaceGroups;
     for fgi:=0 to mesh.FaceGroups.Count-1 do begin
       fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
-      fg2 := TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
+      fg2 := TFGVertexIndexList.CreateOwned(mesh2.FaceGroups); //TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
       fg2.Mode := fgmmTriangles;
       fg2.VertexIndices := fg.VertexIndices;
-      fg2.NormalIndices := fg.VertexIndices;
-      fg2.TexCoordIndices := fg.VertexIndices;
+      //fg2.NormalIndices := fg.VertexIndices;
+      //fg2.TexCoordIndices := fg.VertexIndices;
       fg2.MaterialName := fg.MaterialName;
       fg2.LightMapIndex := fg.LightMapIndex;
       fg2.PrepareMaterialLibraryCache(ffm2.MaterialLibrary);
