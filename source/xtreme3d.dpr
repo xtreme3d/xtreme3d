@@ -509,7 +509,65 @@ begin
   if trunc64(resizeable) = 0 then
     frm.BorderStyle := bsSingle;
   frm.Show;
+  frm.Enabled := True;
   result := Integer(frm);
+end;
+
+function WindowCenter(w: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  frm.Position := poDesktopCenter;
+  result := 1.0;
+end;
+
+function WindowResize(w, x, y, width, height: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  frm.Left := trunc64(x);
+  frm.Top := trunc64(y);
+  frm.Width := trunc64(width);
+  frm.Height := trunc64(height);
+  result := 1.0;
+end;
+
+function WindowGetPosition(w, index: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  if trunc64(index) = 0 then
+  begin
+    result := frm.Left;
+    exit;
+  end;
+  if trunc64(index) = 1 then
+  begin
+    result := frm.Top;
+    exit;
+  end;
+  result := 0.0;
+end;
+
+function WindowGetSize(w, index: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  if trunc64(index) = 0 then
+  begin
+    result := frm.Width;
+    exit;
+  end;
+  if trunc64(index) = 1 then
+  begin
+    result := frm.Height;
+    exit;
+  end;
+  result := 0.0;
 end;
 
 function WindowGetHandle(w: real): real; stdcall;
@@ -1185,6 +1243,15 @@ begin
   result := 1.0;
 end;
 
+function ActorMeshSetVisible(actor, mesh, mode: real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act := TGLActor(trunc64(actor));
+  act.MeshObjects[trunc64(mesh)].Visible := Boolean(trunc64(mode));
+  result := 1.0;
+end;
+
 function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; stdcall;
 var
   mat1, mat2: TGLLibMaterial;
@@ -1220,6 +1287,24 @@ begin
   faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
   faceGroup.LightMapIndex := trunc64(index);
   result := 1.0;
+end;
+
+function FreeformSetMaterialLibraries(ff, matlib, lmmatlib: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MaterialLibrary := TGLMaterialLibrary(trunc64(matlib));
+  ffm.LightmapLibrary := TGLMaterialLibrary(trunc64(lmmatlib));
+  result := 1.0;
+end;
+
+function MaterialGetNameFromLibrary(matlib, index: real): pchar; stdcall;
+var
+  mlib: TGLMaterialLibrary;
+begin
+  mlib := TGLMaterialLibrary(trunc64(matlib));
+  result := pchar(mlib.Materials.Items[trunc64(index)].Name);
 end;
 
 exports
@@ -1293,11 +1378,12 @@ ActorShowSkeleton,
 AnimationBlenderCreate, AnimationBlenderSetActor, AnimationBlenderSetAnimation,
 AnimationBlenderSetRatio,
 ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
-ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
+ActorMeshObjectsCount, ActorMeshSetVisible, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
 ActorFaceGroupSetMaterial,
 ActorMoveBone, ActorRotateBone,
 //Freeform
 FreeformCreate, FreeformCreateEmpty,
+FreeformSetMaterialLibraries,
 FreeformAddMesh, FreeformMeshAddFaceGroup, 
 FreeformMeshAddVertex, FreeformMeshAddNormal,
 FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
@@ -1392,7 +1478,7 @@ MaterialSetShininess,
 MaterialSetPolygonMode, MaterialSetTextureImageAlpha,
 MaterialSetTextureScale, MaterialSetTextureOffset,
 MaterialSetTextureFilter, MaterialEnableTexture,
-MaterialGetCount, MaterialGetName,
+MaterialGetCount, MaterialGetName, MaterialGetNameFromLibrary,
 MaterialSetFaceCulling,
 MaterialSetTexture, MaterialSetSecondTexture,
 MaterialSetTextureFormat, MaterialSetTextureCompression,
@@ -1595,6 +1681,7 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 MakeColorRGB, MakeColorRGBFloat,
 // Window
 WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
+WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
 // Squall
 SquallInit, SquallAddSound, SquallPlay, SquallStop,
 // Lua
