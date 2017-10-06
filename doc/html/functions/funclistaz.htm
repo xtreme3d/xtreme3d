@@ -59,6 +59,7 @@
 <BR><A class=funclink href=actor.htm#ActorMakeSkeletalRotationDelta>ActorMakeSkeletalRotationDelta</A><A>(actor,anim)</A>
 <BR><A class=funclink href=actor.htm#ActorMakeSkeletalTranslationStatic>ActorMakeSkeletalTranslationStatic</A><A>(actor,anim)</A>
 <BR><A class=funclink href=actor.htm#ActorMeshObjectsCount>ActorMeshObjectsCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorMeshSetVisible>ActorMeshSetVisible</A><A>(actor,mesh,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorMoveBone>ActorMoveBone</A><A>(actor,boneindex,x,y,z)</A>
 <BR><A class=funclink href=proxy.htm#ActorProxyObjectCreate>ActorProxyObjectCreate</A><A>(actor,parent)</A>
 <BR><A class=funclink href=proxy.htm#ActorProxyObjectSwitchToAnimation>ActorProxyObjectSwitchToAnimation</A><A>(actor,anim)</A>
@@ -334,6 +335,7 @@
 <BR><A class=funclink href=freeform.htm#FreeformSetSecondTextureCoords>FreeformSetSecondTextureCoords</A><A>(freeform1,freeform2)</A>
 -->
 <BR><A class=funclink href=freeform.htm#FreeformSave>FreeformSave</A><A>(freeform,filename)</A>
+<BR><A class=funclink href=freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A>(freeform,matlib,lmapmatlib)</A>
 <BR><A class=funclink href=freeform.htm#FreeformSphereSweepIntersect>FreeformSphereSweepIntersect</A><A>(freeform,object,radius,vel)</A>
 <BR><A class=funclink href=freeform.htm#FreeformToFreeforms>FreeformToFreeforms</A><A>(freeform,parent)</A>
 <BR><A class=funclink href=freeform.htm#FreeformUseMeshMaterials>FreeformUseMeshMaterials</A><A>(freeform,mode)</A>
@@ -478,6 +480,7 @@
 <BR><A class=funclink href=material.htm#MaterialGetFromLib>MaterialGetFromLib</A><A>(material1,material2)</A>
 -->
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
+<BR><A class=funclink href=material.htm#MaterialGetNameFromLibrary>MaterialGetNameFromLibrary</A><A>(matlib,ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureHeight>MaterialGetTextureHeight</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureWidth>MaterialGetTextureWidth</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialHasTextureEx>MaterialHasTextureEx</A><A>(material,index)</A>
@@ -635,8 +638,9 @@
 <BR><A class=funclink href=objecthash.htm#ObjectHashSetItem>ObjectHashSetItem</A><A>(hash,key,obj)</A>
 
 <BR><A class=funclink href=object.htm#ObjectHide>ObjectHide</A><A>(object)</A>
+
+<BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object,viewer)</A>
 <!--
-<BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectIsClipped>ObjectIsClipped</A><A>(object)</A>
 -->
 <BR><A class=funclink href=object.htm#ObjectIsPointInObject>ObjectIsPointInObject</A><A>(object,x,y,z)</A>
@@ -1016,30 +1020,21 @@
 <BR><A class=funclink href=water.htm#WaterSetResolution>WaterSetResolution</A><A>(water,res)</A>
 <BR><A class=funclink href=water.htm#WaterSetViscosity>WaterSetViscosity</A><A>(water,viscosity)</A>
 
+<BR><A class=funclink href=window.htm#WindowCenter>WindowCenter</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowCreate>WindowCreate</A><A>(x,y,width,height,resizeable)</A>
 <BR><A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>(window)</A>
+<BR><A class=funclink href=window.htm#WindowGetPosition>WindowGetPosition</A><A>(window,index)</A>
+<BR><A class=funclink href=window.htm#WindowGetSize>WindowGetSize</A><A>(window,index)</A>
+<BR><A class=funclink href=window.htm#WindowResize>WindowResize</A><A>(window,x,y,width,height)</A>
 <BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
 
 <BR><A class=funclink href=fonttext.htm#WindowsBitmapfontCreate>WindowsBitmapfontCreate</A><A>(fontname,size,start,end)</A>
 <BR>
 <BR>
-<!--
-<A name="Z"></A>
-<H1 class=name>Z</H1>
-<A class=funclink href=b3d.htm#ZoneAddPortal>ZoneAddPortal</A><A>(dc,portal)</A>
-<BR><A class=funclink href=b3d.htm#ZoneAdjustSize>ZoneAdjustSize</A><A>(object)</A>
-<BR><A class=funclink href=b3d.htm#ZoneGetCurrent>ZoneGetCurrent</A><A>(object)</A>
-<BR><A class=funclink href=b3d.htm#ZoneGetNew>ZoneGetNew</A><A>(dc,object)</A>
-<BR><A class=funclink href=b3d.htm#ZoneGetPortal>ZoneGetPortal</A><A>(zone,ind)</A>
-<BR><A class=funclink href=b3d.htm#ZoneGetPortalCount>ZoneGetPortalCount</A><A>(zone)</A>
-<BR><A class=funclink href=b3d.htm#ZoneObjectInZone>ZoneObjectInZone</A><A>(dc,object)</A>
-<BR><A class=funclink href=b3d.htm#ZonesVisible>ZonesVisible</A><A>()</A>
-
-<BR><BR>
--->
 
 </DIV>
 
 </BODY>
 </HTML>
+

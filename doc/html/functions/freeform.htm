@@ -12,7 +12,7 @@
 
 <A class=type>Класс: TGLFreeform</A><BR><BR>
 
-<A>Объект свободной формы (Freeform) - неанимированная модель, загружаемая из файла. Объекты такого типа используются обычно в качестве игровых уровней, декораций и интерактивных предметов. Freeform состоит из одного или более мешей (Mesh) - наборов вершин, каждый из которых, в свою очередь, содержит одну или более фейсгрупп (FaceGroup) - наборов граней, составленных из этих вершин. Фейсгруппам и мешам можно назначать отдельные материалы. Однако не все форматы моделей поддерживают материалы, как и деление на меши и фейсгруппы.
+<A>Объект свободной формы (Freeform) - неанимированная модель. Объекты такого типа используются обычно в качестве игровых уровней, декораций и интерактивных предметов. Freeform состоит из одного или более мешей (Mesh) - наборов вершин, каждый из которых, в свою очередь, содержит одну или более фейсгрупп (FaceGroup) - наборов граней, составленных из этих вершин. Фейсгруппам и мешам можно назначать отдельные материалы. Однако не все форматы моделей поддерживают материалы, как и деление на меши и фейсгруппы.
 <BR>Xtreme3D поддерживает следующие форматы моделей:
 <BR>Игровые и околоигровые - BSP (Quake 3), B3D (Blitz3D), LOD (LODka 3D), X (Microsoft DirectX), CSM (Cartography Shop 4), LMTS (Pulsar LMTools), DXS (DeleD);
 <BR>Пакеты 3D-моделирования и CAD - 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), MS3D (Milkshape), ASE (3ds Max), OCT (FSRad), NMF (AMD NormalMapper), WRL (VRML 1.0);
@@ -38,6 +38,15 @@
 <BR><A>matlib - библиотека материалов, в которой хранятся материалы модели</A>
 <BR><A>lmapmatlib - библиотека материалов, в которой хранятся материалы карт освещения модели</A>
 <BR><A>parent - id родителя для объекта свободной формы (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="FreeformSetMaterialLibraries"></A>
+<H1 class=name>FreeformSetMaterialLibraries</H1>
+<A class=type>real</A><A> = </A><A class=function>FreeformSetMaterialLibraries</A><A>( freeform,matlib,lmapmatlib as </A><A class=type>real</A> );</A>
+<BR><A>Задает библиотеки материалов объекта свободной формы.</A>
+<BR><A>freeform - id объекта свободной формы</A>
+<BR><A>matlib - библиотека материалов, в которой хранятся материалы модели</A>
+<BR><A>lmapmatlib - библиотека материалов, в которой хранятся материалы карт освещения модели.</A>
 <HR>
 
 <A name="FreeformAddMesh"></A>
@@ -314,8 +323,7 @@
 <A name="FreeformMeshFaceGroupSetLightmapIndex"></A>
 <H1 class=name>FreeformMeshFaceGroupSetLightmapIndex</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupSetLightmapIndex</A><A>( freeform,mesh,fgroup,index as </A><A class=type>real</A> );</A>
-<BR><A>Задает индекс материала, который должен использоваться в качестве карты освещения фейсгруппы. Индекс является порядковым номером материала в библиотеке материалов для карт освещения, задаваемой при создании объекта свободной формы.</A>
-<!-- или функцией </A><A class=funclink href=../functions/freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A> -->
+<BR><A>Задает индекс материала, который должен использоваться в качестве карты освещения фейсгруппы. Индекс является порядковым номером материала в библиотеке материалов для карт освещения, задаваемой при создании объекта свободной формы или функцией </A><A class=funclink href=../functions/freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A>.</A>
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>mesh - индекс меша</A>
 <BR><A>fgroup - индекс фейсгруппы</A>
@@ -325,8 +333,7 @@
 <A name="FreeformMeshFaceGroupGetLightmapIndex"></A>
 <H1 class=name>FreeformMeshFaceGroupGetLightmapIndex</H1>
 <A class=type>real</A><A> = </A><A class=function>FreeformMeshFaceGroupGetLightmapIndex</A><A>( freeform,mesh,fgroup as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает индекс материала, используемого в качестве карты освещения фейсгруппы. Индекс является порядковым номером материала в библиотеке материалов для карт освещения, задаваемой при создании объекта свободной формы.</A>
-<!-- или функцией </A><A class=funclink href=../functions/freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A> -->
+<BR><A>Возвращает индекс материала, используемого в качестве карты освещения фейсгруппы. Индекс является порядковым номером материала в библиотеке материалов для карт освещения, задаваемой при создании объекта свободной формы или функцией </A><A class=funclink href=../functions/freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A>.</A>
 <BR><A>freeform - id объекта свободной формы</A>
 <BR><A>mesh - индекс меша</A>
 <BR><A>fgroup - индекс фейсгруппы.</A>

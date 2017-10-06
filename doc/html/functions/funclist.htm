@@ -58,6 +58,7 @@
 <A class=funclink href=funclist.htm#Color>Color</A> |
 <A class=funclink href=funclist.htm#Input>Input</A> |
 <A class=funclink href=funclist.htm#Window>Window</A> |
+<A class=funclink href=funclist.htm#Squall>Squall</A> |
 <A class=funclink href=funclist.htm#Window>Lua</A>
 <BR>
 <BR>
@@ -309,6 +310,7 @@
 <BR><A class=funclink href=actor.htm#ActorQ3TagExportMatrix>ActorQ3TagExportMatrix</A><A>(actor,taglist,tagname,object)</A>
 <BR><A class=funclink href=actor.htm#ActorLoadQ3Animations>ActorLoadQ3Animations</A><A>(actor,filename,classname)</A>
 <BR><A class=funclink href=actor.htm#ActorMeshObjectsCount>ActorMeshObjectsCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorMeshSetVisible>ActorMeshSetVisible</A><A>(actor,mesh,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupsCount>ActorFaceGroupsCount</A><A>(actor,mesh)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupGetMaterialName>ActorFaceGroupGetMaterialName</A><A>(actor,mesh,fgroup)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupSetMaterial>ActorFaceGroupSetMaterial</A><A>(actor,mesh,fgroup,material)</A>
@@ -318,6 +320,8 @@
 <H1 class=name>Freeform</H1>
 <A class=funclink href=freeform.htm#FreeformCreate>FreeformCreate</A><A>(filename,matlib,lmapmatlib,parent)</A>
 <BR><A class=funclink href=freeform.htm#FreeformCreateEmpty>FreeformCreateEmpty</A><A>(matlib,lmapmatlib,parent)</A>
+<BR><A class=funclink href=freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A>(freeform,matlib,lmapmatlib)</A>
+
 <BR><A class=funclink href=freeform.htm#FreeformAddMesh>FreeformAddMesh</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddVertex>FreeformMeshAddVertex</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddNormal>FreeformMeshAddNormal</A><A>(freeform,mesh,x,y,z)</A>
@@ -495,8 +499,10 @@
 -->
 <BR><A class=funclink href=object.htm#ObjectRotateAbsolute>ObjectRotateAbsolute</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectRotateAbsoluteVector>ObjectRotateAbsoluteVector</A><A>(object,x,y,z,angle)</A>
+
+<BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object,viewer)</A>
+
 <!--
-<BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectIsClipped>ObjectIsClipped</A><A>(object)</A>
 -->
 <BR><A class=funclink href=object.htm#ObjectSetMatrixColumn>ObjectSetMatrixColumn</A><A>(object,ind,x,y,z,w)</A>
@@ -556,6 +562,8 @@
 
 <BR><A class=funclink href=material.htm#MaterialGetCount>MaterialGetCount</A><A>()</A>
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
+<BR><A class=funclink href=material.htm#MaterialGetNameFromLibrary>MaterialGetNameFromLibrary</A><A>(matlib,ind)</A>
+
 <BR><A class=funclink href=material.htm#MaterialSetFaceCulling>MaterialSetFaceCulling</A><A>(material,fc)</A>
 <BR><A class=funclink href=material.htm#MaterialSetSecondTexture>MaterialSetSecondTexture</A><A>(material1,material2)</A>
 <BR><A class=funclink href=material.htm#MaterialSetTextureFormat>MaterialSetTextureFormat</A><A>(material,tf)</A>
@@ -1173,6 +1181,12 @@
 <A name="Window"></A>
 <H1 class=name>Window</H1>
 <A class=funclink href=window.htm#WindowCreate>WindowCreate</A><A>(x,y,width,height,resizeable)</A>
+
+<BR><A class=funclink href=window.htm#WindowCenter>WindowCenter</A><A>(window)</A>
+<BR><A class=funclink href=window.htm#WindowResize>WindowResize</A><A>(window,x,y,width,height)</A>
+<BR><A class=funclink href=window.htm#WindowGetPosition>WindowGetPosition</A><A>(window,index)</A>
+<BR><A class=funclink href=window.htm#WindowGetSize>WindowGetSize</A><A>(window,index)</A>
+
 <BR><A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
 <BR><A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>(window)</A>

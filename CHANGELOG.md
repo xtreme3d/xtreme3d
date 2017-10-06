@@ -14,6 +14,7 @@ v3.6.0 (by Gecko) - ??/??/????
 * Color construction functions: MakeColorRGB, MakeColorRGBFloat
 * New Object function: ObjectInFrustum
 * New Engine functions: EngineSaveScene, EngineLoadScene (experimental, doesn't support all objects)
+* Fixed bug in BumpShader and PhongShader with incorrect specular highlights
 
 v3.5.0 (by Gecko) - 04/02/2017
 ------------------------------

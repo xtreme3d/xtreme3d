@@ -678,14 +678,15 @@
 <BR><A>angle - угол поворота.</A>
 <HR>
 
-<!--
 <A name="ObjectInFrustrum"></A>
 <H1 class=name>ObjectInFrustrum</H1>
-<A class=type>boolean</A><A> = </A><A class=function>ObjectInFrustrum</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину, если объект находится в поле зрения.</A>
-<BR><A>object - id объекта.</A>
+<A class=type>boolean</A><A> = </A><A class=function>ObjectInFrustrum</A><A>( object,viewer as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает истину, если объект находится в поле зрения (попадает в пирамиду видимости) заданного вида, и ложь в противном случае.</A>
+<BR><A>object - id объекта</A>
+<BR><A>viewer - id вида.</A>
 <HR>
 
+<!--
 <A name="ObjectIsClipped"></A>
 <H1 class=name>ObjectIsClipped</H1>
 <A class=type>boolean</A><A> = </A><A class=function>ObjectIsClipped</A><A>( object as </A><A class=type>real</A> );</A>

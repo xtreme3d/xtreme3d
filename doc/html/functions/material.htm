@@ -321,8 +321,16 @@ Cubemap-материалы обычно используются для водных поверхностей и изделий из метал
 
 <A name="MaterialGetName"></A>
 <H1 class=name>MaterialGetName</H1>
-<A class=type>string</A><A> = </A><A class=function>MaterialGetName</A><A>(ind);</A>
+<A class=type>string</A><A> = </A><A class=function>MaterialGetName</A><A>(ind </A><A class=type>real</A>);</A>
 <BR><A>Возвращает имя материала заданного номера.</A>
+<BR><A>ind - порядковый номер материала в библиотеке.</A>
+<HR>
+
+<A name="MaterialGetNameFromLibrary"></A>
+<H1 class=name>MaterialGetNameFromLibrary</H1>
+<A class=type>string</A><A> = </A><A class=function>MaterialGetNameFromLibrary</A><A>(matlib, ind </A><A class=type>real</A>);</A>
+<BR><A>Возвращает имя материала заданного номера в заданной библиотеке материалов.</A>
+<BR><A>matlib - id библиотеки материалов</A>
 <BR><A>ind - порядковый номер материала в библиотеке.</A>
 <HR>
 

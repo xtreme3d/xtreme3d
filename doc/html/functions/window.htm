@@ -22,7 +22,39 @@
 <BR><A>—оздает окно и возвращает его id.</A>
 <BR><A>x,y - позици€ окна на экране</A>
 <BR><A>width,height - ширина и высота окна</A>
-<BR><A>resizeable - может ли пользователь измен€ть размер окна (</A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>). »зменение размера окна не приводит к изменению размеров подключенного к нему вида.</A>
+<BR><A>resizeable - может ли пользователь измен€ть размер окна (</A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>). ќбратите внимание, что изменение размера окна не приводит к изменению размеров подключенного к нему вида, это нужно делать вручную.</A>
+<HR>
+
+<A name="WindowCenter"></A>
+<H1 class=name>WindowCenter</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowCenter</A><A>( window as </A><A class=type>real</A><A> );</A>
+<BR><A>ѕомещает окно в центр экрана.</A>
+<BR><A>window - id окна.</A>
+<HR>
+
+<A name="WindowResize"></A>
+<H1 class=name>WindowResize</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowResize</A><A>( window,x,y,width,height as </A><A class=type>real</A><A> );</A>
+<BR><A>«адает позицию и размер окна. ќбратите внимание, что изменение размера окна не приводит к изменению размеров подключенного к нему вида, это нужно делать вручную.</A>
+<BR><A>window - id окна</A>
+<BR><A>x,y - позици€ окна на экране</A>
+<BR><A>width,height - ширина и высота окна.</A>
+<HR>
+
+<A name="WindowGetPosition"></A>
+<H1 class=name>WindowGetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowGetPosition</A><A>( window,index as </A><A class=type>real</A><A> );</A>
+<BR><A>¬озвращает координату позиции окна (левого верхнего угла).</A>
+<BR><A>window - id окна</A>
+<BR/><A>index - если этот параметр равен 0, функци€ возвращает координату X, если 1 - Y.</A>
+<HR>
+
+<A name="WindowGetSize"></A>
+<H1 class=name>WindowGetSize</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowGetSize</A><A>( window,index as </A><A class=type>real</A><A> );</A>
+<BR><A>¬озвращает ширину или высоту окна.</A>
+<BR><A>window - id окна</A>
+<BR/><A>index - если этот параметр равен 0, функци€ возвращает ширину, если 1 - высоту.</A>
 <HR>
 
 <A name="WindowGetHandle"></A>
