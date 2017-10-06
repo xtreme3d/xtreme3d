@@ -1,5 +1,20 @@
 Xtreme3D version history
 ========================
+v3.6.0 (by Gecko) - ??/??/????
+------------------------------
+* Lua scripting
+* Initial Squall audio engine integration
+* Windows codepages for TTF fonts
+* New Material functions: MaterialSetTextureExFromLibrary, MaterialGetNameFromLibrary
+* New Freeform functions: FreeformMeshFaceGroupSetLightmapIndex, FreeformMeshFaceGroupGetLightmapIndex, FreeformSetMaterialLibraries
+* ActorProxy functions
+* New Actor functions: ActorMoveBone, ActorRotateBone, ActorMeshSetVisible
+* Mouse and keyboard input
+* Window creation and management
+* Color construction functions: MakeColorRGB, MakeColorRGBFloat
+* New Object function: ObjectInFrustum
+* New Engine functions: EngineSaveScene, EngineLoadScene (experimental, doesn't support all objects)
+
 v3.5.0 (by Gecko) - 04/02/2017
 ------------------------------
 * ClipPlane functions

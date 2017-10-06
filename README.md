@@ -37,7 +37,7 @@ Features
 * Particle system for fire-like and lighting-like effects
 * Lensflare effect
 * 2D shapes, including rectangle, circle, line, and custom 2D mesh
-* 2D sprites and text with Unicode support
+* 2D sprites and text with TTF and Unicode support
 * 3D text and billboards
 * Skyboxes
 * Procedural skydome with sun, stars and animated day/night cycle
