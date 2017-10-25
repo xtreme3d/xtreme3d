@@ -506,6 +506,7 @@ end;
 procedure TGLSLShader.DoInitialize;
 var
    pl: Integer;
+   success: Integer;
    infobufferlen: Integer;
    infobuffer: array[0..1000] of Char;
 begin
@@ -528,25 +529,35 @@ begin
    glAttachObjectARB(shaderProg, shaderFrag);
    glLinkProgramARB(shaderProg);
 
-   infobufferlen := 0;
-   FillChar(infobuffer, 1000, 0);
-
-   glGetInfoLogARB(shaderVert, 999, @infobufferlen, infobuffer);
-   if infobuffer[0] <> #0 then begin
-       ShowMessage('GLSL vertex shader error: ' + #13#10 + String(infobuffer));
-       Exit;
-   end;
-
-   infobufferlen := 0;
-   FillChar(infobuffer, 1000, 0);
-
-   glGetInfoLogARB(shaderFrag, 999, @infobufferlen, infobuffer);
-   if infobuffer[0] <> #0 then begin
-       ShowMessage('GLSL fragment shader error: ' + #13#10 + String(infobuffer));
-       Exit;
-   end;
-
    shaderSane:=true;
+
+   success := 0;
+   glGetObjectParameterivARB(shaderVert, GL_OBJECT_COMPILE_STATUS_ARB, @success);
+   if success = 0 then
+   begin
+     shaderSane:=false;
+     infobufferlen := 0;
+     FillChar(infobuffer, 1000, 0);
+     glGetInfoLogARB(shaderVert, 999, @infobufferlen, infobuffer);
+     if infobuffer[0] <> #0 then begin
+       ShowMessage('GLSL vertex shader error: ' + #13#10 + String(infobuffer));
+       //Exit;
+     end;
+   end;
+
+   success := 0;
+   glGetObjectParameterivARB(shaderFrag, GL_OBJECT_COMPILE_STATUS_ARB, @success);
+   if success = 0 then
+   begin
+     shaderSane:=false;
+     infobufferlen := 0;
+     FillChar(infobuffer, 1000, 0);
+     glGetInfoLogARB(shaderFrag, 999, @infobufferlen, infobuffer);
+     if infobuffer[0] <> #0 then begin
+       ShowMessage('GLSL fragment shader error: ' + #13#10 + String(infobuffer));
+       //Exit;
+     end;
+   end;
    
    //glEnable(GL_STENCIL_TEST);
 
