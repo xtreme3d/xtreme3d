@@ -18,7 +18,8 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms, Squall, CrystalLUA;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms;
+  //Squall, CrystalLUA;
 
 type
    TEmpty = class(TComponent)
@@ -624,6 +625,7 @@ begin
     AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
 end;
 
+{
 function SquallInit: real; stdcall;
 var
   r: boolean;
@@ -656,6 +658,7 @@ begin
   SQUALL_Channel_Stop(trunc64(chan));
   result := 1.0;
 end;
+}
 
 function MakeColorRGB(r, g, b: real): real; stdcall;
 var
@@ -677,21 +680,22 @@ begin
   result := Integer(RGB(rb, gb, bb));
 end;
 
-{$I 'xtreme3d/lua/engine'}
-{$I 'xtreme3d/lua/viewer'}
-{$I 'xtreme3d/lua/dummycube'}
-{$I 'xtreme3d/lua/camera'}
-{$I 'xtreme3d/lua/light'}
-{$I 'xtreme3d/lua/fonttext'}
-{$I 'xtreme3d/lua/sprite'}
-{$I 'xtreme3d/lua/hudshape'}
-{$I 'xtreme3d/lua/primitives'}
-{$I 'xtreme3d/lua/actor'}
-{$I 'xtreme3d/lua/freeform'}
+//{$I 'xtreme3d/lua/engine'}
+//{$I 'xtreme3d/lua/viewer'}
+//{$I 'xtreme3d/lua/dummycube'}
+//{$I 'xtreme3d/lua/camera'}
+//{$I 'xtreme3d/lua/light'}
+//{$I 'xtreme3d/lua/fonttext'}
+//{$I 'xtreme3d/lua/sprite'}
+//{$I 'xtreme3d/lua/hudshape'}
+//{$I 'xtreme3d/lua/primitives'}
+//{$I 'xtreme3d/lua/actor'}
+//{$I 'xtreme3d/lua/freeform'}
 
-{$I 'xtreme3d/lua/object'}
-{$I 'xtreme3d/lua/input'}
+//{$I 'xtreme3d/lua/object'}
+//{$I 'xtreme3d/lua/input'}
 
+{
 procedure luaRegX3DFunctions(lua: TLua);
 begin
   // Register Engine functions
@@ -1221,6 +1225,7 @@ begin
     end;
   end;
 end;
+}
 
 function ActorProxyObjectCreate(actor, parent: real): real; stdcall;
 var
@@ -1681,12 +1686,12 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 MakeColorRGB, MakeColorRGBFloat,
 // Window
 WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
-WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
+WindowCenter, WindowResize, WindowGetPosition, WindowGetSize;
 // Squall
-SquallInit, SquallAddSound, SquallPlay, SquallStop,
+//SquallInit, SquallAddSound, SquallPlay, SquallStop,
 // Lua
-LuaManagerCreate, LuaManagerSetConstantReal, LuaManagerSetConstantString,
-LuaManagerRunScript, LuaManagerCallFunction;
+//LuaManagerCreate, LuaManagerSetConstantReal, LuaManagerSetConstantString,
+//LuaManagerRunScript, LuaManagerCallFunction;
 
 begin
 end.

@@ -55,8 +55,6 @@ Features
 * Loading resources from PAK archives
 * Keyboard and mouse input
 * Window creation
-* Integrated Squall audio engine
-* Lua scripting
 * ...plus a lot more!
 
 Asset Creation
