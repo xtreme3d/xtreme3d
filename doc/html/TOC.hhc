@@ -339,14 +339,6 @@
   <PARAM name="Name" value="Window">
   <PARAM name="Local" value="functions/window.htm">
  </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Squall">
-  <PARAM name="Local" value="functions/squall.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Lua">
-  <PARAM name="Local" value="functions/lua.htm">
- </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FAQ">
@@ -952,14 +944,6 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FreeType">
   <PARAM name="Local" value="license/license_freetype.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Squall">
-  <PARAM name="Local" value="license/license_squall.htm">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Lua">
-  <PARAM name="Local" value="license/license_lua.htm">
  </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
