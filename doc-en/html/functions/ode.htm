@@ -1,0 +1,951 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>ODE</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Open Dynamics Engine (ODE) </H1><A class=type>Class: 
+TGLODEStatic, TGLODEDynamic, TGLODEElementBox, TGLODEElementSphere 
+TGLODEElementPlane,, <BR>TGLODEElementCylinder, TGLODEElementCapsule, 
+TGLODEElementCone TGLODEElementTriMesh,, <BR>TODEJointBall, TODEJointFixed, 
+TODEJointHinge, TODEJointHinge2, TODEJointSlider, 
+TODEJointUniversal</A><BR><BR><A>Xtreme3D supports the ODE is a popular free 
+physics engine. <BR>Using the ODE you can create objects that behave like in 
+reality, i.e., are governed by the laws of physics. Such objects are called 
+bodies (body). The body in the ODE is divided into two main types of static and 
+dynamic. The dynamic of the body subordinated to the various forces (if to be 
+exact, the amount of user forces and their moments, as well as the force of 
+gravity), which result in the movement. Static bodies are motionless. 
+<BR><BR>All of the body in the ODE presented geometric objects, determining the 
+nature of their interactions. These objects (geometry) include the scope, 
+rectangular parallelepiped, the plane, cone, cylinder, the capsule and polygon 
+definition screen (mesh). Also supported are static landscapes. Please note that 
+not all of the geometry of the support collision detection with the rest - for 
+more details, see the description of the functions. <BR><BR>The body are 
+connected to each other using joints (joint). This invisible objects that hold 
+the body at some distance and/or at a certain angle relative to one another, at 
+the same time providing them with limited freedom of movement or rotation. 
+<BR><BR>When the articulation of the created, nothing prevents movement in any 
+direction. This range of movements may be limited by stops (stops) in 
+articulation. The angle or position of articulation will be preserved from 
+achieving less than the minimum threshold or exceeding the upper threshold. 
+<BR>As well as the stop, many types of joints can have engines (motors). The 
+engines have ��������� or linear force to the ����������� to achieve the desired 
+speed at speed or slip. Engines have two parameters: the desired speed and 
+maximum strength, with the help of which can be reached this speed. 
+<BR><BR>Note: To use the Ode To copy a file, ode.dll in the folder with the 
+project. </A><BR>
+<HR>
+
+<H1 class=name>OdeManagerCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerCreate =</A><A>();</A> <BR><A>Creates an ODE 
+manager.</A> 
+<HR>
+
+<H1 class=name>OdeManagerDestroy </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerDestroy =</A><A>();</A> <BR><A>Destroys The ODE 
+manager.</A> 
+<HR>
+
+<H1 class=name>OdeManagerStep </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerStep =</A><A>( dt as </A><A class=type>real</A><A> 
+);</A> <BR><A>Commits the step of integration - calculate the new statuses tel 
+ODE.</A> <BR><A>Dt is the step size in seconds.</A> 
+<HR>
+
+<H1 class=name>OdeManagerGetNumContactJoints </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeManagerGetNumContactJoints =</A><A>();</A> <BR><A>There 
+are no details.</A> 
+<HR>
+
+<H1 class=name>OdeManagerSetGravity </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetGravity =</A><A>( x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies a vector of gravity. For the 
+Earth this vector will correspond to (0,-0.981,0).</A> <BR><A>X,y,z is a vector 
+of gravity.</A> 
+<HR>
+
+<H1 class=name>OdeManagerSetSolver </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetSolver =</A><A>( osm as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the method of solving the 
+limitations (OSM). The following values: </A><BR><BR><A class=constant 
+name=osmStep>OsmStep</A><A> = 0 - using the method of large matrices, which 
+requires time calculation of order m<SUP>3</SUP> and the memory of the order of 
+m<SUP>2</SUP>, where m is the total number of rows of the matrix. For large 
+systems require a lot of memory, speed of work will be low, but at the moment it 
+is the most accurate method.</A> <BR><BR><A class=constant 
+name=osmStepFast>OsmStepFast</A><A> = 1 - for large systems </A><A 
+class=constant>osmStep</A><A> may require a lot of memory and time for the 
+calculation. </A><A class=constant>osmStepFast</A><A> provides an alternative 
+way to solve this problem, sacrificing accuracy. </A><A 
+class=constant>osmStepFast</A><A> does not depend on the number of iterations in 
+one step. Use this method when you have a few options that affect the stability, 
+and you want to take advantage of the speed or memory consumption. Another use 
+of the </A><A class=constant>osmStepFast</A><A> - this immediately focus on this 
+method, if you know what you build large worlds with lots of physical objects. 
+The last advice on the use of </A><A class=constant>osmStepFast</A><A> is to use 
+it only where it is needed. Since the </A><A class=constant>osmStepFast</A><A> 
+uses the same structure of the body and the world as the </A><A 
+class=constant>osmStep</A><A>, you can switch between them.</A> <BR><BR><A 
+class=constant name=osmQuickStep>OsmQuickStep</A><A> = 2 - use an iterative 
+method, which requires time order of m*N and the memory of the order m, where m 
+is the total number of rows of a matrix and N is the number of iterations. For 
+large systems it works much faster than the </A><A 
+class=constant>osmStep</A><A>, but less accurate. </A><A 
+class=constant>osmQuickStep</A><A> is perfectly suited for a large number of 
+objects, especially in conjunction with auto-off (see below). However, is not a 
+very good accuracy for unstable systems (near-singular). The system can become 
+unstable when used in contact with strong friction, engines and certain 
+constituent structures - for example, the Robot with multiple legs. The increase 
+in iterations in The </A><A class=constant>osmQuickStep</A><A> might help, but 
+not much, if the system is unstable. </A>
+<HR>
+
+<H1 class=name>OdeManagerSetIterations </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetIterations =</A><A>( iterations as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the number of iterations, which 
+uses the </A><A class=constant>osmQuickStep</A><A>.</A> <BR><A>Iterations - the 
+number of iterations (default 20).</A> 
+<HR>
+
+<H1 class=name>OdeManagerSetMaxContacts </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetMaxContacts =</A><A>( maxcontacts as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> 
+<BR><A>Maxcontacts - information about missing.</A> 
+<HR>
+
+<H1 class=name>OdeManagerSetVisible </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetVisible =</A><A>( mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Selects the visibility of the geometry of 
+the phone of the body are displayed in the form of frame models. By default, the 
+visibility is turned off.</A> <BR><A>Mode - </A><A class=constant>true</A><A> or 
+</A><A class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeManagerSetGeomColor </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeManagerSetGeomColor =</A><A>( color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the color of the lines of the geometry 
+of the phone By default, the color red (simply).</A> <BR><A>Color - the 
+color.</A> 
+<HR>
+
+<H1 class=name>OdeWorldSetAutoDisableFlag </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeWorldSetAutoDisableFlag =</A><A>( flag as </A><A 
+class=type>real</A><A> );</A> <BR><A>Each body can be Enabled (Enabled) or off 
+(disabled). Included the body involved in the simulation, while the body turned 
+deactivated, and their status is not updated during the simulation steps. The 
+new body are always created in the engaged position. Off the body, which are 
+connected ������������ (joint) with bodies, are included automatically in the 
+next step of the simulation. <BR>Off of the body do not waste CPU time, so the 
+guards of the body must be off. This can be done automatically using the auto 
+shut-off features (AutoDisable). <BR>If the flag auto-off the set, the body will 
+automatically turn off if: <BR>1) They will stand the specified number of 
+simulation steps; <BR>2) They will stand idly by the specified time simulation. 
+<BR>The body is considered to be dormant, if the value of the linear and angular 
+velocity is less than the specified threshold. Thus, each body has a five-off: 
+the flag (flag), the number of steps of inactivity (steps), the time of 
+inactivity (time), the thresholds of the linear (linear threshold) and the angle 
+(angular threshold) speed. Just created a body take these parameters from the 
+ODE manager.</A> <BR><A>Flag is </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (default: </A><A class=constant>false</A><A>).</A> 
+<HR>
+
+<H1 class=name>OdeWorldSetAutoDisableLinearThreshold </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>OdeWorldSetAutoDisableLinearThreshold =</A><A>( velocity as 
+</A><A class=type>real</A><A> );</A> <BR><A>Sets the threshold for linear 
+speed-off.</A> <BR><A>Velocity - the linear velocity (the default 0.01).</A> 
+<HR>
+
+<H1 class=name>OdeWorldSetAutoDisableAngularThreshold </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>OdeWorldSetAutoDisableAngularThreshold =</A><A>( velocity as 
+</A><A class=type>real</A><A> );</A> <BR><A>Sets the threshold for the angular 
+velocity of the switch off.</A> <BR><A>Velocity - angular velocity (the default 
+0.01).</A> 
+<HR>
+
+<H1 class=name>OdeWorldSetAutoDisableSteps </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeWorldSetAutoDisableSteps =</A><A>( steps as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the number of steps of 
+inactivity-off.</A> <BR><A>Steps - the number of steps (default 10).</A> 
+<HR>
+
+<H1 class=name>OdeWorldSetAutoDisableTime </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeWorldSetAutoDisableTime =</A><A>( time as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the amount of idle time-off.</A> 
+<BR><A>Time - the time (default 0).</A> 
+<HR>
+
+<H1 class=name>OdeStaticCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeStaticCreate =</A><A>( object as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a static body and returns its id. Object acts as a binding 
+object - that is, to ensure that the body was apparently, it is necessary to 
+create the corresponding object Xtreme3D. In other words, the function creates a 
+physical model in the Ode for object Xtreme3D. After bind the object to the 
+static body, it still can be moved the usual functions Xtreme3D.</A> <BR><A>The 
+object is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicCreate =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a dynamic body and returns its id. 
+Object acts as a binding object - that is, to ensure that the body was 
+apparently, it is necessary to create the corresponding object Xtreme3D. In 
+other words, the function creates a physical model in the Ode for object 
+Xtreme3D. After bind the object to a dynamic body, he fully obeys the ODE and it 
+is impossible to move the usual functions Xtreme3D.</A> <BR><A>The object is the 
+object ID.</A> 
+<HR>
+
+<H1 class=name>OdeTerrainCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeTerrainCreate =</A><A>( the terrain as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a body-landscape. This is a special 
+type of static body, which uses an object landscape (Terrain) for collisions 
+with other bodies. Collision Detection Landscape with ������ (Trimesh) is not 
+supported.</A> <BR><A>The terrain is the id of a landscape.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicCalculateMass </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicCalculateMass =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Calculates the mass and inertia tensor of 
+the dynamic of the body on the basis of its constituent geometries and their 
+densities. This function should be called, if you changed the density of its 
+geometry.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicCalibrateCenterOfMass </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicCalibrateCenterOfMass =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>The object 
+is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAlignObject </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAlignObject =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>The object 
+is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicEnable </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicEnable =</A><A>( object,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables dynamic body. Included 
+the body involved in the simulation, while the body turned deactivated and their 
+status is not updated. The new body are always created in the engaged position. 
+Off the body, which are connected ������������ with bodies, are included 
+automatically in the next step of the simulation. Therefore, if you want to turn 
+off such a body, you need to switch off and their joints. </A><BR><A>The object 
+is the object id</A> <BR><A>Mode - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAutoDisableFlag </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicSetAutoDisableFlag =</A><A>( object,flag as 
+</A><A class=type>real</A><A> );</A> <BR><A>Sets the flag-off the rolling of the 
+body.</A> <BR><A>Flag is </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAutoDisableLinearThreshold </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>OdeDynamicSetAutoDisableLinearThreshold =</A><A>( object 
+velocity,as </A><A class=type>real</A><A> );</A> <BR><A>Sets the threshold for 
+linear speed-off the rolling of the body.</A> <BR><A>Velocity is a linear 
+speed.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAutoDisableAngularThreshold </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>OdeDynamicSetAutoDisableAngularThreshold =</A><A>( object 
+velocity,as </A><A class=type>real</A><A> );</A> <BR><A>Sets the threshold for 
+the angular velocity of the dynamic auto shut-off of the body.</A> 
+<BR><A>Velocity - angular velocity.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAutoDisableSteps </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicSetAutoDisableSteps =</A><A>( object,steps as 
+</A><A class=type>real</A><A> );</A> <BR><A>Sets the number of steps of 
+inactivity-off the rolling of the body.</A> <BR><A>Steps - the number of 
+steps.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAutoDisableTime </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicSetAutoDisableTime =</A><A>( object,time as 
+</A><A class=type>real</A><A> );</A> <BR><A>Specifies the amount of idle 
+time-off the rolling of the body.</A> <BR><A>Time - the time.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddForce </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddForce =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Applies a force in the absolute coordinates 
+to the center of mass of the rolling of the body.</A> <BR><A>The object is the 
+object id</A> <BR><A>X,y,z is a vector of force.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddForceAtPos </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddForceAtPos =</A><A>( object,x,y,z,px, py, pz as 
+</A><A class=type>real</A><A> );</A> <BR><A>Applies a force in the absolute 
+coordinates to the desired point of absolute dynamic body.</A> <BR><A>The object 
+is the object id</A> <BR><A>X,y,z - the absolute force vector</A> <BR><A>Px, py, 
+pz - absolute coordinates of the point.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddForceAtRelPos </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddForceAtRelPos =</A><A>( object,x,y,z,px, py, pz as 
+</A><A class=type>real</A><A> );</A> <BR><A>Applies a force in the absolute 
+coordinates to the cruising the local point of the rolling of the body.</A> 
+<BR><A>The object is the object id</A> <BR><A>X,y,z - the absolute force 
+vector</A> <BR><A>Px, py, pz - local coordinates of the point.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForce </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddRelForce =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Applies a force in the local coordinates to 
+the center of mass of the rolling of the body.</A> <BR><A>The object is the 
+object id</A> <BR><A>X,y,z - local vector force.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForceAtPos </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddRelForceAtPos =</A><A>( object,x,y,z,px, py, pz as 
+</A><A class=type>real</A><A> );</A> <BR><A>Applies a force in the local 
+coordinates to the desired point of absolute dynamic body.</A> <BR><A>The object 
+is the object id</A> <BR><A>X,y,z - the local force vector</A> <BR><A>Px, py, pz 
+- absolute coordinates of the point.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddRelForceAtRelPos </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicAddRelForceAtRelPos =</A><A>( object,x,y,z,px, 
+py, pz as </A><A class=type>real</A><A> );</A> <BR><A>Applies a force in the 
+local coordinates to the cruising the local point of the rolling of the 
+body.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - the local force 
+vector</A> <BR><A>Px, py, pz - local coordinates of the point.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddTorque </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddTorque =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Applies to the dynamic body moment of 
+force, rolling around the absolute axis.</A> <BR><A>The object is the object 
+id</A> <BR><A>X,y,z - absolute vector rotation axis.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicAddRelTorque </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicAddRelTorque =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Applies to the dynamic body moment of 
+force, rolling around on the local axis.</A> <BR><A>The object is the object 
+id</A> <BR><A>X,y,z - local vector rotation axis.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetVelocity </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicSetVelocity =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Determines the speed of the dynamic of the 
+body.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - the absolute 
+velocity.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetAngularVelocity </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicSetAngularVelocity =</A><A>( object,x,y,z as 
+</A><A class=type>real</A><A> );</A> <BR><A>Specifies the angular velocity of 
+the rolling of the body.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z 
+- absolute vector of angular velocity.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicGetVelocity </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicGetVelocity =</A><A>( object,index as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the speed of the rolling of the 
+body.</A> <BR><A>The object is the object id</A> <BR><A>Index - the index of the 
+coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+
+<H1 class=name>OdeDynamicGetAngularVelocity </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicGetAngularVelocity =</A><A>( object,index as 
+</A><A class=type>real</A><A> );</A> <BR><A>Returns the angular velocity of the 
+rolling of the body.</A> <BR><A>The object is the object id</A> <BR><A>Index - 
+the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetPosition </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicSetPosition =</A><A>( object,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the position of the rolling of 
+the body.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z are the 
+coordinates of the position.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicSetRotationQuaternion </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeDynamicSetRotationQuaternion =</A><A>( object,x,y,z,w 
+as </A><A class=type>real</A><A> );</A> <BR><A>Specifies the rotation of the 
+dynamic of the body, pronounced ������������.</A> <BR><A>The object is the 
+object id</A> <BR><A>X,y,z,w - ���������� turn.</A> 
+<HR>
+
+<H1 class=name>OdeDynamicGetContactCount </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeDynamicGetContactCount =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the number of contact points of the 
+dynamic of the body, detected during the last test collisions.</A> <BR><A>The 
+object is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeStaticGetContactCount </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeStaticGetContactCount =</A><A>( object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the number of contact points of a 
+static body, detected during the last test collisions.</A> <BR><A>The object is 
+the object ID.</A> 
+<HR>
+<!--
+<H1 class=name>OdeDynamicGetContact</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeDynamicGetContact</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>�������� �����������.</A>
+<BR><A>object - id �������</A>
+<BR><A>ind - �������� �����������.</A>
+<HR>
+
+<H1 class=name>OdeStaticGetContact</H1>
+<A class=type>real</A><A> = </A><A class=function>OdeStaticGetContact</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>�������� �����������.</A>
+<BR><A>object - id �������</A>
+<BR><A>ind - �������� �����������.</A>
+<HR>
+-->
+<H1 class=name>OdeAddPlane </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddPlane =</A><A>( object as </A><A class=type>real</A><A> 
+);</A> <BR><A>Adds body to the geometry of the plane and returns its id. The 
+geometry of the plane of ODE, in contrast to the primitive plane of the 
+Xtreme3D, infinite. In addition, the plane is �������������� geometry. This 
+means that its position and angle is constant. Collision detection between the 
+plane and The ������ (Trimesh) does not ���������������.</A> <BR><A>The object 
+is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeAddSphere </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddSphere =</A><A>( object,x,y,z,radius server as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds the body geometry of the scope and 
+returns its id.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z are the 
+coordinates of the center of the scope relative to the center of the body 
+weight</A> <BR><A>Radius is the radius of the sphere.</A> 
+<HR>
+
+<H1 class=name>OdeAddBox </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddBox =</A><A>( object,x,y,z,width,height,depth as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds body to the geometry of the 
+rectangular parallelepiped and returns its id.</A> <BR><A>The object is the 
+object id</A> <BR><A>X,y,z are the coordinates of the center of the 
+parallelepiped relative to the center of the body weight</A> 
+<BR><A>Width,height,depth - the length of the parties to the parallelepiped 
+shape.</A> 
+<HR>
+
+<H1 class=name>OdeAddCylinder </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddCylinder =</A><A>( object,x,y,z,length radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds body to the geometry of the cylinder 
+and returns its id. Collision detection between the cylinder and the ������ 
+(Trimesh) is not supported.</A> <BR><A>The object is the object id</A> 
+<BR><A>X,y,z are the coordinates of the center of the cylinder relative to the 
+center of the body weight</A> <BR><A>Length - the length of the cylinder</A> 
+<BR><A>Radius is the radius of the base of the cylinder.</A> 
+<HR>
+
+<H1 class=name>OdeAddCone </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddCone =</A><A>( object,x,y,z,length radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds body to the geometry of the cone and 
+returns its id.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z are the 
+coordinates of the center of the cone of the center of mass of the body</A> 
+<BR><A>Length - the length of the cone</A> <BR><A>Radius is the radius of the 
+base of the cone.</A> 
+<HR>
+
+<H1 class=name>OdeAddCapsule </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddCapsule =</A><A>( object,x,y,z,length radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds body to the geometry of the capsules 
+and returns its id. The capsule is similar to the cylinder, except that at its 
+ends is in the hemisphere. In the length of the capsules tops are not included. 
+The radius of the Tops is equal to the radius of the cylinder.</A> <BR><A>The 
+object is the object id</A> <BR><A>X,y,z are the coordinates of the center of 
+the capsule relative to the center of the body weight</A> <BR><A>Length - the 
+length of the capsule</A> <BR><A>Radius is the radius of the capsule.</A> 
+<HR>
+
+<H1 class=name>OdeAddTriMesh </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddTriMesh =</A><A>( object,mesh as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds body to the geometry of the polygon 
+mesh (mesh) and returns its id. It is assumed that the object is an object of 
+free form (Freeform). Mesh strainer can be assigned as static and dynamic body, 
+however, the mutual collision of two �����, unfortunately, is not detected. Also 
+the mesh facing not landscape and geometries plane and cylinder.</A> <BR><A>The 
+object is the object ID.</A> <BR><A>Mesh - the index of ����, you want to add to 
+the body.</A> 
+<HR>
+
+<H1 class=name>OdeElementSetDensity </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeElementSetDensity =</A><A>( element,density as </A><A 
+class=type>real</A><A> );</A> <BR><A>Defines the density of the geometry.</A> 
+<BR><A>Element - the geometry id</A> <BR><A>Density is the density.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceEnableRollingFrictionCoeff </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceEnableRollingFrictionCoeff =</A><A>( body,mode as 
+</A><A class=type>real</A><A> );</A> <BR><A>Enables or disables the rolling 
+friction to the surface of the body. If enabled, the coefficient of friction 
+must be fitted with </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetRollingFrictionCoeff">OdeSurfaceSetRollingFrictionCoeff</A><A>.</A> 
+<BR><A>Body - the id of the body</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetRollingFrictionCoeff </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeSurfaceSetRollingFrictionCoeff =</A><A>( body,rfc as 
+</A><A class=type>real</A><A> );</A> <BR><A>Sets the coefficient of friction for 
+the rolling surface of the body. The value must be in the range (0..1). 0 means 
+that there is no friction (the body roll will forever), 1 is the maximum 
+friction (body does not roll).</A> <BR><A>Body - the id of the body</A> 
+<BR><A>Rfc - coefficient of friction rolling.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetBounce </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetBounce =</A><A>( body,bounce as </A><A 
+class=type>real</A><A> );</A> <BR><A>The parameter sets the elasticity of the 
+surface of the body. A value of 0 means that the surface is absolutely not 
+������, 1 - Maximum elasticity. <BR>The parameter should be defined only in the 
+case of installation of the corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Bounce - the elasticity.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetBounceVel </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetBounceVel =</A><A>( body,vel as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the minimum speed necessary for the 
+elasticity of (m/s) surface of the body. The speed is below the threshold 
+determines the elasticity parameter to 0. <BR>The parameter should be defined 
+only in the case of installation of the corresponding flag in </A><A 
+class=funclink href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> 
+<BR><A>Body - the id of the body</A> <BR><A>Vel - linear speed.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetMode </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetMode =</A><A>( 
+body,Mu2,FDir1,Bounce,SoftERP,SoftCFM,Motion1,Motion2,Slip1,Slip2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the flags of the surface of the body. 
+It is a combination of the following flags: <BR>Mu2 - if it is not installed, 
+the ? for both directions of friction. If installed, ? is used for the first 
+direction of friction, and ?2 for the second direction of friction. <BR>FDir1 - 
+If installed, The FDir1 is the first area of friction. Otherwise ��y���, FDir1 
+is automatically calculated as the perpendicular to the normal contact (in this 
+��y��� resulting unpredictable direction). <BR>Bounce - if set, the surface is 
+considered to be elastic; in other words, the body will bounce away from each 
+other. The exact value of elasticity is determined by the function of the </A><A 
+class=funclink href="ode.htm#OdeSurfaceSetBounce">OdeSurfaceSetBounce</A><A>. 
+<BR>SoftERP - if set, then the error reduction of normal contact is controlled 
+by the function of the </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetSoftERP">OdeSurfaceSetSoftERP</A><A>. <BR>SoftCFM - 
+If installed, The ����������� connection strength normal contact is controlled 
+by the function of the </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetSoftCFM">OdeSurfaceSetSoftCFM</A><A>. <BR>Motion1 - 
+if set, it is assumed that the surface geometry is moving independently of the 
+body. If this flag is set, the function of the </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMotion1">OdeSurfaceSetMotion1</A><A> specifies the 
+speed of the surface in the first direction of friction. <BR>Motion2 is the same 
+as above, but in the second direction of friction. <BR>Slip1 - gliding, 
+depending on the strength of the FDS in the first direction of friction. 
+<BR>Slip2 - gliding, depending on the strength of the FDS in the second 
+direction of friction. <BR>The first area of friction is a vector, along which 
+is attached the frictional force perpendicular to the normal contact. <BR>The 
+second direction of friction is calculated as the perpendicular to the normal 
+contact and The FDir1.</A> <BR><A>Body - the id of the body</A> <BR><A>Mu2 - 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> 
+<BR><A>FDir1 - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> <BR><A>Bounce - </A><A class=constant>true</A><A> or 
+</A><A class=constant>false</A><A> <BR><A>SoftERP - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> <BR><A>SoftCFM 
+- </A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> 
+<BR><A>Motion1 - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> <BR><A>Motion2 - </A><A class=constant>true</A><A> 
+or </A><A class=constant>false</A><A> <BR><A>Slip1 - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> <BR><A>Slip2 - 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetMu </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetMu =</A><A>( body,mu as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the coefficient of friction ? (MU) in 
+the first direction of friction surfaces of the body. A value of 0 allows the 
+absence of friction in the surface.</A> <BR><A>Body - the id of the body</A> 
+<BR><A>Mu is the coefficient of friction ?.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetMu2 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeSurfaceSetMu2</A><A>( body,mu2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets ?2 is an optional coefficient of 
+friction for the second direction of friction surfaces of the body. <BR>The 
+parameter should be defined only in the case of installation of the 
+corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Mu2 is the coefficient of friction ?2.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetSoftERP </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetSoftERP =</A><A>( body,erp as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the ERP (Error Reduction Parameter is 
+a parameter to reduce the error) the surface of the body - an option, which 
+monitors the force of the return of the bodies to the correct position during 
+each step of ���������� errors when the two articulation phone it to the body 
+occupied a certain position and orientation relative to each other. <BR>ERP 
+takes a value from 0 to 1 and determines the proportion in which the error in 
+the articulation will be corrected in the next step of the simulation. If the 
+ERP=0, then the corrective force attached will not, and the body will move in 
+accordance with the progress of the simulation. If the ERP=1, it will continue 
+to attempt to correct all the errors in the joints on the next step the 
+simulation. However, the ERP set=1 is not recommended, since errors in 
+articulation cannot be eliminated due to various internal rounding. It is 
+recommended to install the values from 0.1 to 0.8 (0.2 is the default). <BR>The 
+global importance of ERP system affects the majority of the joints simulation. 
+However, some joints may have local ERP values that control certain aspects of 
+their behavior. <BR>The parameter should be defined only in the case of 
+installation of the corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Erp is a parameter to reduce errors.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetSoftCFM </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeSurfaceSetSoftCFM =</A><A>( body,the cfm as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the CFM (�onstraint Force Mixing - 
+c���������� power connections ), the surface of the body - parameter, 
+controlling the so-called "soft" the articulation of the Tel. <BR>Most of the 
+joints by its very nature, "hard". This means that the articulation is in 
+certain conditions, which can never be violated. For example, the ball should 
+always be in the connector, and the flexion should occurs along a line. In 
+practice, the joints can be violated unintentional occurrence of errors in the 
+system, but using the parameter to reduce the errors can be corrected these 
+errors. <BR>But not all connections are rigid. "Soft" connections are designed 
+to specifically be breached. For example, contact connection, which prevents the 
+facing objects from the mutual penetration, by default, severely: it looks as 
+though facing surfaces are made of steel. But for the simulation of materials 
+������� can make a gentle connection, thus enabling the interaction of two 
+objects have a natural infiltration. <BR>If the CFM is set to 0, the connection 
+will be tough. If the CFM is a positive number, then there is an opportunity to 
+violate the articulation of the offset. In other words, the connection becomes 
+soft, and the softness will grow with the increase in the CFM. Here are the 
+following: ���������� are allowed to be disrupted in proportion to the CFM 
+times, restoring force, which is required to hold the connection. <BR>�������� 
+in the CFM negative value can lead to unpredictable consequences, including a 
+decrease in stability. <BR>The parameter should be defined only in the case of 
+installation of the corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>The Cfm - c���������� power connection.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetMotion1 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeSurfaceSetMotion1</A><A>( body,motion1 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Set the speed of the surface of the body in 
+the first direction (m/s). <BR>The parameter should be defined only in the case 
+of installation of the corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Motion1 - Linear speed.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetMotion2 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeSurfaceSetMotion2</A><A>( body,motion2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the speed of the surface of the body 
+in the second direction (m/s). <BR>The parameter should be defined only in the 
+case of installation of the corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Motion2 - Linear speed.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetSlip1 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeSurfaceSetSlip1</A><A>( body,slip1 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the slip coefficient of the surface of 
+the body, depending on the friction force of the first direction. This effect, 
+which makes the contact surface to slide relative to each other at speeds 
+proportional to the force applied tangentially to the surface. <BR>The parameter 
+should be defined only in the case of installation of the corresponding flag in 
+</A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Slip1 is the coefficient of sliding.</A> 
+<HR>
+
+<H1 class=name>OdeSurfaceSetSlip2 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeSurfaceSetSlip2</A><A>( body,slip2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the slip coefficient of the surface of 
+the body, depending on the friction force of the second direction. <BR>The 
+parameter should be defined only in the case of installation of the 
+corresponding flag in </A><A class=funclink 
+href="ode.htm#OdeSurfaceSetMode">OdeSurfaceSetMode</A><A>.</A> <BR><A>Body - the 
+id of the body</A> <BR><A>Slip2 is the coefficient of sliding.</A> 
+<HR>
+
+<H1 class=name>OdeAddJointBall </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointBall =</A><A>();</A> <BR><A>Creates the articulation 
+of the type of Ball-and-socket ("the ball-in-socket") and returns its id. 
+<BR>Allows the solids to rotate freely around the set point, but does not give 
+them disperse in the side. Reminds the pivot joint.</A> <BR><BR><IMG 
+align=center src="../data/jointball.jpg"> 
+<HR>
+
+<H1 class=name>OdeAddJointFixed </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointFixed =</A><A>();</A> <BR><A>Creates the articulation 
+of the type of fixed and returns its id. <BR>Saves a rigid fixed position and 
+orientation of the phone.</A> <BR><BR><IMG align=center 
+src="../data/jointfixed.jpg"> 
+<HR>
+
+<H1 class=name>OdeAddJointHinge </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointHinge =</A><A>();</A> <BR><A>Creates the articulation 
+of the type of Hinge (flexion) and returns its id. <BR>Allows the solids to 
+rotate around the given axis. Reminds the connection in the door hinges.</A> 
+<BR><BR><IMG align=center src="../data/jointhinge.jpg"> 
+<HR>
+
+<H1 class=name>OdeAddJointHinge2 </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointHinge =</A><A>();</A> <BR><A>Creates the articulation 
+of the Hinge type-2 (flexion-2) and returns its id. <BR>It seems the two hinge 
+joints, the United consistently, with different axes of bending. For example, it 
+can be wheel of the machine, where one axle allows the wheel to rotate, and the 
+second turn. The articulation of the flexion-2 has a connection and two axis of 
+bending. The axis 1 is determined on the body 1 (may be the axis of rotation, if 
+the body 1 - frame). The axis 2 is determined by the relative to the body 2 may 
+be the axis of rotation of the wheel, if the body 2 - wheel).</A> <BR><BR><IMG 
+align=center src="../data/jointhinge2.jpg"> 
+<HR>
+
+<H1 class=name>OdeAddJointSlider </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointSlider =</A><A>();</A> <BR><A>Creates the articulation 
+of the type of Slider (slip) and returns its id. <BR>Allows solids move along 
+one line, not allowing them to rotate relative to each other.</A> <BR><BR><IMG 
+align=center src="../data/jointslider.jpg"> 
+<HR>
+
+<H1 class=name>OdeAddJointUniversal </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeAddJointUniversal =</A><A>();</A> <BR><A>Creates the 
+articulation of the Universal type (universal) and returns its id. <BR>Has a 
+more complex structure. It is similar to the articulation of the 
+"ball-in-socket", y which ��������� degree of freedom of rotation. If you set 
+the axis 1 for one body and the Axis 2 for the second perpendicular to each 
+other, their perpendicular will persist. In other words, we can say that the 
+body will maintain perpendicular orientation with respect to its axis. The 
+universal joints manifest themselves in vehicles, namely when the engine with 
+the longitudinal shaft, rotating along the axis of the machine.</A> <BR><BR><IMG 
+align=center src="../data/jointuniversal.jpg"> 
+<HR>
+
+<H1 class=name>OdeJointSetObjects </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetObjects =</A><A>( joint,object1,object2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds to the articulation of the solids. If 
+the articulation of the already somewhere attached, at first it will be 
+disconnected from the old phone to connect the articulation of only one body, 
+you must install the object1 or object2 to zero - zero means the static 
+environment. Installing both of these parameters to zero puts the articulation 
+in the unknown status and it would not participate in the simulation. To work, 
+some joints, such as flexion-2 (hinge-2) must be connected to the two 
+bodies.</A> <BR><A>Joint is the articulation id</A> <BR><A>The object1,object2 - 
+id of objects.</A> 
+<HR>
+
+<H1 class=name>OdeJointEnable </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointEnable =</A><A>( joint,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables the articulation. 
+Included are the articulation in the simulation, while the off - deactivated and 
+their status is not updated. The new joints are always created in the engaged 
+position.</A> <BR><A>Joint is the articulation id</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeJointInitialize </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointInitialize =</A><A>( joint as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>Joint is 
+the articulation id.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetAnchor </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetAnchor =</A><A>( joint,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Establishes a connection point, or the 
+armature (anchor) joints. The articulation of the will try to keep the two 
+bodies on this point.</A> <BR><A>Joint is the articulation id</A> <BR><A>X,y,z 
+coordinates of the point.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetAnchorAtObject </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetAnchorAtObject =</A><A>( joint,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>Joint is 
+the articulation id</A> <BR><A>The object is the object ID.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetAxis1 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeJointSetAxis1</A><A>( joint,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the vector of the first articulation 
+axis (axis 1). The function can be applied to the following types of joints: 
+flexion (Hinge), gliding (Slider), universal (Universal), bending-2 
+(Hinge-2).</A> <BR><A>Joint is the articulation id</A> <BR><A>X,y,z is a unit 
+vector.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetAxis2 </H1><A class=type>Real</A><A> = </A><A 
+class=function>OdeJointSetAxis2</A><A>( joint,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the vector of the second articulation 
+axis (axis 2). The function can be applied to the following types of joints: 
+universal (Universal), bending-2 (Hinge-2).</A> <BR><A>Joint is the articulation 
+id</A> <BR><A>X,y,z is a unit vector.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetBounce </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetBounce =</A><A>( joint,axis,bounce as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the elasticity of the stops in 
+articulation. The repair option lies in the range (0..1). 0 means that the stop 
+does not ������, 1 - Maximum elasticity.</A> <BR><A>Joint is the articulation 
+id</A> <BR><A>Axis - the index of the articulation axis (1 or 2)</A> 
+<BR><A>Bounce - the elasticity.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetCFM </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetCFM =</A><A>( joint,axis,the cfm as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the ����������� force connection 
+(CFM). articulation</A> <BR><A>Joint is the articulation id</A> <BR><A>Axis - 
+the index of the articulation axis (1 or 2)</A> <BR><A>The Cfm - ����������� 
+power connection.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetFMax </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetFMax =</A><A>( joint,axis,fmax as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the maximum linear or ��������� force 
+which will use the articulation engine to achieve the desired speed. This value 
+must always be greater than or equal to zero. Setting this value to zero (the 
+default value) turns off the engine.</A> <BR><A>Joint is the articulation id</A> 
+<BR><A>Axis - the index of the articulation axis (1 or 2)</A> <BR><A>Fmax is 
+power.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetFudgeFactor </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetFudgeFactor =</A><A>( joint,axis,ffactor as </A><A 
+class=type>real</A><A> );</A> <BR><A>The current implementation of stops and 
+engines, there is a small problem: when is the articulation of the stop and the 
+engine, which tries to avoid stopping, in one step can be applied too much 
+force, causing "jumps" movement. To scale the excessive force used ������������ 
+indicator (fudge factor). Its value must be between 0 and 1 (the default value). 
+If the visible articulation jumps in movement, the value should be reduced. In 
+doing so the value is less than, you can protect the engine from the movement of 
+the joints from the stop.</A> <BR><A>Joint is the articulation id</A> 
+<BR><A>Axis - the index of the articulation axis (1 or 2)</A> <BR><A>Ffactor - 
+the value of the ������������� indicator.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetHiStop </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetHiStop =</A><A>( joint,axis,histop as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the upper threshold the angle or 
+position. For rotating joints this value must be less than the number of </A><A 
+class=constant>pi</A><A>to the effect was noticeable. If the upper threshold is 
+lower, both the threshold do not give any effect.</A> <BR><A>Joint is the 
+articulation id</A> <BR><A>Axis - the index of the articulation axis (1 or 
+2)</A> <BR><A>Histop - the upper threshold.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetLoStop </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetLoStop =</A><A>( joint,axis,lostop as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets a lower threshold for the angle or 
+position. For rotating joints, this value must be greater than the number of 
+</A><A class=constant>pi</A><A>to the effect was noticeable. If the lower 
+threshold greater than the upper, both the threshold do not give any effect.</A> 
+<BR><A>Joint is the articulation id</A> <BR><A>Axis - the index of the 
+articulation axis (1 or 2)</A> <BR><A>Lostop - lower threshold.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetStopCFM </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetStopCFM =</A><A>( joint,axis,the cfm as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the ����������� force connection 
+(CFM), which is used stops. Together with the ERP can be used to obtain more 
+soft stops.</A> <BR><A>Joint is the articulation id</A> <BR><A>Axis - the index 
+of the articulation axis (1 or 2)</A> <BR><A>The Cfm - ����������� power 
+connection.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetStopERP </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetStopERP =</A><A>( joint,axis,erp as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the parameter to reduce errors (ERP), 
+which is used stops. Together with the value of the CFM can be used to obtain 
+more soft stops.</A> <BR><A>Joint is the articulation id</A> <BR><A>Axis - the 
+index of the articulation axis (1 or 2)</A> <BR><A>Erp is a parameter to reduce 
+errors.</A> 
+<HR>
+
+<H1 class=name>OdeJointSetVel </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeJointSetVel =</A><A>( joint,axis velocity,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the desired engine speed.</A> 
+<BR><A>Joint is the articulation id</A> <BR><A>Axis - the index of the 
+articulation axis (1 or 2)</A> <BR><A>Velocity is a linear or angular 
+velocity.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollCreate =</A><A>( actor as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a so-called ragdoll ("ragdoll") - a physical controller 
+for the actor. Ragdoll lets you create from the animated model of lifeless human 
+body (and not only human), which is subject to the laws of physics - this 
+technology is very often used in ������� and other action gaming.</A> 
+<BR><A>Actor - id of the actor.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollHingeJointCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollHingeJointCreate =</A><A>( x,y,z,lostop,histop as 
+</A><A class=type>real</A><A> );</A> <BR><A>Creates a ragdoll-Type articulation 
+Hinge (flexion) and returns its id. This is the articulation of the Bones allows 
+the actor to rotate around the axis set on the parent bone - as in the elbow or 
+knee joints.</A> <BR><A>X,y,z axis (the unit vector)</A> <BR><A>Lostop,histop - 
+lower and upper corner speed thresholds (in radians).</A> 
+<HR>
+
+<H1 class=name>OdeRagdollUniversalJointCreate </H1><A class=type>Real</A><A> 
+</A><A class=function>OdeRagdollUniversalJointCreate =</A><A>( 
+x1,y1,z1,lostop1,histop1,x2,y2,z2,lostop2,histop2 as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a ragdoll-Type articulation of the 
+Universal (universal) and returns its id. This is the articulation of the Bones 
+allows the actor to rotate around two axes defined on the parent bone - as, for 
+example, in the shoulder joint.</A> <BR><A>X1,y1, z1 is the first axis (the unit 
+vector)</A> <BR><A>Lostop1,histop1 - the lower and upper corner speed thresholds 
+for the first axis (in radians).</A> <BR><A>X2,y2,z2 is the second axis (the 
+unit vector)</A> <BR><A>Lostop2,histop2 - the lower and upper corner speed 
+thresholds for the second axis (in radians).</A> 
+<HR>
+
+<H1 class=name>OdeRagdollDummyJointCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollDummyJointCreate =</A><A>();</A> <BR><A>Creates a fixed 
+ragdoll-mating. In fact, bone, instead of attaching the articulation through, 
+simply merged with its parent bone in one dynamic body of ODE.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollBoneCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollBoneCreate =</A><A>( ragdoll,ragjoint,boneid,parentbone 
+as </A><A class=type>real</A><A> );</A> <BR><A>Creates a ragdoll-bone - the 
+physical model for the bones of the actor. For adequate ragdoll need to create 
+such a for each of bones in the skeleton of the actor.</A> <BR><A>Ragdoll - the 
+object id ragdoll</A> <BR><A>Ragjoint - id ragdoll-joints that you want to use 
+for the connection of the bones to the parent</A> <BR><A>Boneid - the index of 
+the bones of the actor. This index can be found on behalf of the bone, using the 
+</A><A class=funclink 
+href="actor.htm#ActorGetBoneByName">ActorGetBoneByName</A><A>.</A> 
+<BR><A>Parentbone - id of the parent ragdoll-bone. If this parameter to 0, it 
+will be created the root bone.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollBuild </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollBuild =</A><A>( ragdoll as </A><A 
+class=type>real</A><A> );</A> <BR><A>Calculates the limiting volumes of bones 
+ragdoll. This feature, you need to call after the establishment of the 
+bones.</A> <BR><A>Ragdoll - the object id ragdoll.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollEnable </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollEnable =</A><A>( ragdoll,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Activates or deactivates the ragdoll. 
+De-activated when the ragdoll actor can play the animation. The ragdoll actor 
+moves smoothly from the current viewport animations to physics. When 
+deactivating the transition from physics to the animations will be sharp.</A> 
+<BR><A>Ragdoll - the object id ragdoll</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+
+<H1 class=name>OdeRagdollUpdate </H1><A class=type>Real</A><A> </A><A 
+class=function>OdeRagdollUpdate =</A><A>( ragdoll as </A><A 
+class=type>real</A><A> );</A> <BR><A>Updates the ragdoll physics. This function 
+must cause </A><A class=funclink href="ode.htm#OdeManagerStep">OdeManagerStep 
+after</A><A> and before the </A><A class=funclink 
+href="engine.htm#Update">update</A><A>.</A> <BR><A>Ragdoll - the object id 
+ragdoll.</A> 
+<HR>
+</DIV></BODY></HTML>

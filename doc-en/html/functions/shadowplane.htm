@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Shadowplane</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Shadowplane </H1><A class=type>Class: 
+TGLShadowPlane</A><BR><BR><A>The Shadow plane (shadowplane) is similar to the 
+normal ��������� plane, differing that other objects can throw at her shadow. 
+This method of construction of shadows is very quick and easy, but it is 
+applicable only in specific cases where objects have a limited area of movement. 
+For example, it is unlikely that the shadow plane can be used in the militants 
+or races - but it is good for the sports simulator, as well as for the logical 
+or casual games. </A><BR>
+<HR>
+<A name=ShadowplaneCreate></A>
+<H1 class=name>ShadowplaneCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>ShadowplaneCreate =</A><A>( 
+width,height,xtiles,ytiles,target,light,color,alpha,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new shadow plane and returns its 
+id.</A> <BR><A>Width,height - the width and height of the plane</A> 
+<BR><A>Xtiles,ytiles - the number of ������ horizontally and vertically</A> 
+<BR><A>Target is the id of the object, which should drop shadow (all his 
+descendants will also drop shadow)</A> <BR><A>Light is the id of the light 
+source that should be used for construction of Shadows</A> <BR><A>Color,alpha - 
+the color and transparency of Shadows</A> <BR><A>Parent - the parent id for the 
+shadow plane (0 - no parents).</A> 
+<HR>
+<A name=ShadowplaneSetLight></A>
+<H1 class=name>ShadowplaneSetLight </H1><A class=type>Real</A><A> </A><A 
+class=function>ShadowplaneSetLight =</A><A>( sp,light as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the light source, which is used to 
+build the shadows.</A> <BR><A>Sp is the id of the shadow plane</A> <BR><A>Light 
+is the id of the light source.</A> 
+<HR>
+<A name=ShadowplaneSetObject></A>
+<H1 class=name>ShadowplaneSetObject </H1><A class=type>Real</A><A> </A><A 
+class=function>ShadowplaneSetObject =</A><A>( sp,target as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the object, which should drop 
+shadow (all his descendants will also drop shadow).</A> <BR><A>Sp is the id of 
+the shadow plane</A> <BR><A>Target is the id of the object.</A> 
+<HR>
+<A name=ShadowplaneSetOptions></A>
+<H1 class=name>ShadowplaneSetOptions </H1><A class=type>Real</A><A> </A><A 
+class=function>ShadowplaneSetOptions =</A><A>( 
+sp,stencil,scissor,transparent,ignorez as </A><A class=type>real</A><A> );</A> 
+<BR><A>Specifies the options of the shadow plane.</A> <BR><A>Sp is the id of the 
+shadow plane</A> <BR><A>Stencil - Enables or disables the ����������� test: 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 
+0, respectively). When the ����������� test, the shadow will be clipped on the 
+Limits of the plane</A> <BR><A>Scissor - Enables or disables the trim of shadows 
+on the screen area in which ���������� shadow plane: </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively). A few accelerates rendering, as the shadows from objects that are 
+not entering the plane will be truncated before The ������������ dough</A> 
+<BR><A>Transparent - Enables or disables the transparency of the plane: </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0 
+respectively)</A> <BR><A>Ignorez - Enables or disables the disregard of the 
+z-buffer: </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> 
+<HR>
+</DIV></BODY></HTML>

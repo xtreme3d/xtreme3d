@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Skybox</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Skybox </H1><A class=type>Class: TGLSkyBox</A><BR><BR><A>In 
+addition to the skydome, there is another way to the re-establishment of the 
+sky. The name of the skybox speaks for itself - this is the so -called "Heavenly 
+Box" - a cube surrounding the scene from all sides. The ������ Cuba Special 
+textures with drawn back the plan. This can be not only sky, but also to the 
+mountains, the sea, the forest is any landscape. This is the advantage of the 
+skybox. </A><BR><BR><IMG align=center src="../data/skybox.jpg"> <BR><BR><A>These 
+are the textures in 3D and 2D modeling rendering by six projections on the scene 
+with a camera angle of 90 degrees. In addition to the skybox, these textures 
+(which is sometimes referred to as cubic or 3D) can be applied to static maps of 
+cubic projection (cubemaps). <BR>In the Xtreme3D in addition to the 
+above-mentioned six textures can be used another - for the clouds. As the clouds 
+creates additional plane inside Cuba. <BR>You can create several "celestial 
+boxes" with any elements: for example, only with some clouds. So you can make a 
+few layers of clouds, to be realistic. You can dynamically animate textures to 
+get the movement of the clouds. In addition, if you make any object wholly for 
+the "heavenly box", it will be fixed in relation to the sky. In this way, very 
+simply add the sun, moon, planets... Despite the apparent simplicity and 
+primitivism, the skybox is a very powerful tool. If you approach the creative, 
+you can create a fantastic beauty of landscapes. <BR>The only disadvantage of 
+skybox is the limited space of the player. The landscape is not close, how would 
+to him did not go. And to the clouds on the plane did not rise. So skybox is 
+applicable only in those games, where the Player known to be given great freedom 
+of movement. It can be action, arcade, some of the race, as well as the interior 
+scenes (where the landscape is only visible from the window). </A>
+<HR>
+<A name=SkyboxCreate></A>
+<H1 class=name>SkyboxCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>SkyboxCreate =</A><A>( parent as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a new skybox and returns its id.</A> <BR><A>Parent - the 
+id of the parent.</A> 
+<HR>
+<A name=SkyboxSetMaterial></A>
+<H1 class=name>SkyboxSetMaterial </H1><A class=type>Real</A><A> </A><A 
+class=function>SkyboxSetMaterial =</A><A>( skybox,sbm as </A><A 
+class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A> 
+<BR><A>Applies the material to the target face of the cube skybox. Edge is 
+determined by the constant of the sbm:</A> <BR><A class=constant 
+name=sbmTop>SbmTop</A><A> = 0 - upper edge</A> <BR><A class=constant 
+name=sbmBottom>SbmBottom</A><A> = 1 - Lower</A> <BR><A class=constant 
+name=sbmLeft>SbmLeft</A><A> = 2 - Left</A> <BR><A class=constant 
+name=sbmRight>SbmRight</A><A> = 3 - Right</A> <BR><A class=constant 
+name=sbmFront>SbmFront</A><A> = 4 - Front</A> <BR><A class=constant 
+name=sbmBack>SbmBack</A><A> = 5 - Rear</A> <BR><A class=constant 
+name=sbmClouds>SbmClouds</A><A> = 6 - The plane of clouds.</A> <BR><A>Skybox - 
+the object id skybox</A> <BR><A>Sbm - the index of the verge</A> <BR><A>The 
+material is the name of the material.</A> 
+<HR>
+<A name=SkyboxSetClouds></A>
+<H1 class=name>SkyboxSetClouds </H1><A class=type>Real</A><A> </A><A 
+class=function>SkyboxSetClouds =</A><A>( skybox,offset,size as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the plane of clouds - the offset 
+in the Y-axis relative to the center of Cuba, as well as scale.</A> 
+<BR><A>Skybox - the object id skybox</A> <BR><A>Offset - the offset</A> 
+<BR><A>Size is the scale.</A> 
+<HR>
+<A name=SkyboxSetStyle></A>
+<H1 class=name>SkyboxSetStyle </H1><A class=type>Real</A><A> </A><A 
+class=function>SkyboxSetStyle =</A><A>( skybox,sbs as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the style of the "heavenly box" 
+(SBS). You have the following options sbs:</A> <BR><A class=constant 
+name=sbsFull>SbsFull</A><A> = 0 is the review coincides with the center of Cuba 
+(default value)</A> <BR><A class=constant name=sbsTopHalf>SbsTopHalf</A><A> = 1 
+- cubic is shifted up to half its height</A> <BR><A class=constant 
+name=sbsBottomHalf>SbsBottomHalf</A><A> = 2 - cubic is shifted down to half its 
+height</A> <BR><A class=constant name=sbsTopTwoThirds>SbsTopTwoThirds</A><A> = 3 
+- cubic offset up to one-third of its height</A> <BR><A class=constant 
+name=sbsTopHalfClamped>SbsTopHalfClamped</A><A> = 4 - cubic is shifted up to 
+half its height, lower edge cut off.</A> <BR><A>Skybox - the object id 
+skybox</A> <BR><A>The Sbs - style.</A> 
+<HR>
+</DIV></BODY></HTML>

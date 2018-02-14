@@ -1,0 +1,57 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>A system of particles</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 17 <BR>A system of particles </H1><A><B>Level:</B> 
+medium<A> <BR><A><B>Version of the Xtreme3D:</B> 3.0.x</A> <BR><A><B>Author:</B> 
+Gecko</A><A class=ntext> <BR><BR>Particles (particles) is a small, simple in 
+form of moving objects, a lot of which simulates various complex dynamic 
+substance, for example, fire, smoke, fireworks, etc. As the particles in the 
+game engines are typically used billboards - toward the camera with the 
+rectangle texture. In the Xtreme3D there are two different systems of particles 
+- FireFX and ThorFX. FireFX - the system of particles, modeling fire (although 
+you can use it to recreate and various other effects). ThorFX is designed for 
+the simulation of lightning and various kinds of electric discharges. <BR><BR>In 
+the games is typically used many similar systems of particles. For example, in a 
+cave on the walls can hang torches, and each will burn the fire, made with the 
+help of particles. In this case, the easier it is not to create a separate 
+system for each of the spray, and just draw a one and the same system several 
+times in different positions. Specifically for such a situation, a manager of 
+The FireFX. Manager - this is something like "server" running all the 
+calculations related to the effect. A separate system of FireFX is "customers", 
+using settings specified for the manager. You simply create a manager, configure 
+it as you want, and then add any number of systems in all the right places you 
+in the scene. The changes made to the manager settings will automatically affect 
+all their reporting systems. <BR><BR>First, create The FireFX manager: 
+<BR><BR><A>Firefx </A><A class=func2link 
+href="../functions/firefx.htm#FireFXManagerCreate">FireFXManagerCreate 
+=</A><A>();</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetParticleSize">FireFXSetParticleSize</A><A>(firefx, 
+0.3);</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetRadius">FireFXSetRadius</A><A>(firefx, 
+0.1);</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetBurst">FireFXSetBurst</A><A>(firefx, 
+2.0);</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetDensity">FireFXSetDensity</A><A>(firefx, 
+1);</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetLife">FireFXSetLife</A><A>(firefx, 
+1);</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXSetColor">FireFXSetColor</A><A>(firefx, 
+</A><A class=constant>c_yellow</A><A>, 1.0, </A><A class=constant>c_red</A><A>, 
+0.0);</A> <BR><BR>You will now add the effect of fire any objects in any 
+quantity: <BR><BR><A>Fireobj1 = </A><A class=func2link 
+href="../functions/dummycube.htm#DummycubeCreate">DummycubeCreate</A><A>(<B>global</B>.scene1);</A> 
+<BR><A class=func2link 
+href="../functions/object.htm#ObjectSetPosition">ObjectSetPosition</A><A>(fireobj1, 
+2, 0, 0).</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXCreate">FireFXCreate</A><A>(firefx, 
+fireobj1);</A> <BR><BR><A>Fireobj2 = </A><A class=func2link 
+href="../functions/dummycube.htm#DummycubeCreate">DummycubeCreate</A><A>(<B>global</B>.scene1);</A> 
+<BR><A class=func2link 
+href="../functions/object.htm#ObjectSetPosition">ObjectSetPosition</A><A>(fireobj2, 
+2, 0, 0).</A> <BR><A class=func2link 
+href="../functions/firefx.htm#FireFXCreate">FireFXCreate</A><A>(firefx, 
+fireobj2);</A> <BR></DIV></BODY></HTML>

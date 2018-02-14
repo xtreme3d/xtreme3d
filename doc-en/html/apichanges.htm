@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>API Changes</TITLE>
+<META content="text/html; charset=windows-1251" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>API Changes</H1><BR>Xtreme3D 3.x is not 100% backward 
+compatible with the Branch 2.x - there are several important changes, but in 
+general the names of functions and their meaning is not changed. Implemented 
+virtually all of the old functionality of the Xtreme3D 2.0, except for: 
+<BR><BR>- questioning the positions and normal the last clashes in the DCE and 
+FPSManager <BR>- questioning the number of отрендеренных triangles <BR>- portal 
+culling'a. As he worked (and worked there) in the previous version of the 
+engine, it is not clear why this functionality was not implemented. 
+<BR><BR>Features no longer present in the Xtreme3D 3.x: <BR>- LoadB3D (function 
+worked not for all files in the format of the B3D, now this format is loaded in 
+the usual way, through The FreeformCreate) <BR>- ClearZones, ZonesVisible, 
+CullZones, ZoneAddPortal, ZoneObjectInZone, ZoneGetCurrent, ZoneGetNew, 
+ZoneAdjustSize, CreateZones, ZoneGetPortalCount, ZoneGetPortal <BR>- 
+TextSetColor, TextSetFont, TextSetText (appeared appropriate functions for each 
+type of text) <BR>- FreeformSetSecondTextureCoords, MeshOptimize, 
+MeshSmoothFaces <BR>- ObjectAlignToCamera, ObjectGetAtXY, ObjectSetDiffuseColor, 
+ObjectStructureChanged, ObjectClueToBone <BR>- ObjectIsClipped (function is the 
+reciprocal of the ObjectInFrustrum to their destination) <BR>- 
+MaterialGetFromLib <BR>- MaterialAddTextureEx, MaterialTextureExClear, 
+MaterialTextureExDelete (TextureEx was rewritten for compatibility with shaders 
+and the API was changed) <BR>- ThorFXSetTargetAsObject <BR>- DceGetGravity, 
+DceVelocityCollided, DceGravityCollided, DceCountCollisions, 
+DceGetCollidedObject, DceGetCollisionPosition, DceGetCollisionNormal <BR>- 
+FpsCountCollisions, FpsClearCollisions, FpsGetCollisionPosition, 
+FpsGetCollisionNormal, FpsGetCollidedObject <BR><BR>We are interested to return 
+some of these functions in the engine, therefore, if you have the appropriate 
+Experience, knowledge and the desire to help us, please contact by e-mail 
+(gecko0307@gmail.com) or via the forum (http://offtop.ru/xtreme3d). 
+<BR></A></DIV></BODY></HTML>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Tree</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Tree </H1><A class=type>Class: TGLTree</A><BR><BR><A>The 
+object tree represents a procedural model of wood, generated on the basis of 
+fractal. You can get almost any breed of trees, changing various settings of 
+generation, such as: height, thickness of the barrel, the number of branches, 
+the size of the leaves, etc. In addition, you can specify their own materials 
+for the stem and leaves. <BR>The tree is generated according to the principle of 
+recursion: the barrel has N branches, each branch has its own N branches, and so 
+on, up to a certain point, when the branches are no longer ������������. This 
+point is called the depth of recursion. </A>
+<HR>
+<A name=TreeCreate></A>
+<H1 class=name>TreeCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeCreate =</A><A>( parent as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a new tree and returns its id.</A> <BR><A>Parent - the id 
+of the parent.</A> 
+<HR>
+<A name=TreeSetMaterials></A>
+<H1 class=name>TreeSetMaterials </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetMaterials =</A><A>( tree as </A><A class=type>real</A><A>, 
+mfront,mback,mbranch as </A><A class=type>string</A><A> );</A> <BR><A>Specifies 
+the materials for leaves (separately for the front and rear side) and the 
+barrel.</A> <BR><A>Tree - the tree id</A> <BR><A>Mfront - the name of the 
+material for the front side of the leaves</A> <BR><A>Mback - the name of the 
+material for the back side of the leaves</A> <BR><A>Mbranch - the name of the 
+material for the trunk and branches.</A> 
+<HR>
+<A name=TreeSetBranchFacets></A>
+<H1 class=name>TreeSetBranchFacets </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchFacets =</A><A>( tree,facets as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the number of segments, which is 
+broken down each cylinder branches.</A> <BR><A>Tree - the tree id</A> 
+<BR><A>Facets - the number of segments (default: 6).</A> 
+<HR>
+<A name=TreeBuildMesh></A>
+<H1 class=name>TreeBuildMesh </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeBuildMesh =</A><A>( tree,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Converts procedural tree in mesh-free 
+object forms and returns its id.</A> <BR><A>Tree - the tree id</A> <BR><A>Parent 
+- the parent id of the generated freeform.</A> 
+<HR>
+<A name=TreeSetBranchNoise></A>
+<H1 class=name>TreeSetBranchNoise </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchNoise =</A><A>( tree,noise as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the noise from the branches. The 
+smaller the value, the more branches narrowed at the ends.</A> <BR><A>Tree - the 
+tree id</A> <BR><A>Noise - noise (default: 0.7).</A> 
+<HR>
+<A name=TreeSetBranchAngle></A>
+<H1 class=name>TreeSetBranchAngle </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchAngle =</A><A>( tree,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the tilt of the main trunk of the 
+recursion tree.</A> <BR><A>Tree - the tree id</A> <BR><A>Angle-tilt (in the 
+range of 0 to 1; the default: 1).</A> 
+<HR>
+<A name=TreeSetBranchSize></A>
+<H1 class=name>TreeSetBranchSize </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchSize =</A><A>( tree,size as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the ratio of the height of the 
+cylinder block, of which consist of a branch. In other words, determines the 
+height of the tree.</A> <BR><A>Tree - the tree id</A> <BR><A>Size - Height 
+(default: 1).</A> 
+<HR>
+<A name=TreeSetBranchRadius></A>
+<H1 class=name>TreeSetBranchRadius </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchRadius =</A><A>( tree radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the factor of radius block, of 
+which consist of a branch. In other words, determines the thickness of the 
+wood.</A> <BR><A>Tree - the tree id</A> <BR><A>Radius is the thickness of the 
+(default: 0.12).</A> 
+<HR>
+<A name=TreeSetBranchTwist></A>
+<H1 class=name>TreeSetBranchTwist </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetBranchTwist =</A><A>( tree,twist as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the ������������� recursion to 
+the barrel. For zero ������������� can personally observe the fractal nature of 
+the object tree. The larger the �������������, the less the tree recalls the 
+fractal.</A> <BR><A>Tree - the tree id</A> <BR><A>Twist - ������������� 
+(default: 45).</A> 
+<HR>
+<A name=TreeSetDepth></A>
+<H1 class=name>TreeSetDepth </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetDepth =</A><A>( tree,depth as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the depth of the recursion to the 
+barrel. The depth of the recursion to determine which branches have their own 
+branches. The larger the value, the thick crown of the tree.</A> <BR><A>Tree - 
+the tree id</A> <BR><A>Depth - the depth of the (default: 5).</A> 
+<HR>
+<A name=TreeSetLeafSize></A>
+<H1 class=name>TreeSetLeafSize </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetLeafSize =</A><A>( tree,leafsize as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the leaves.</A> 
+<BR><A>Tree - the tree id</A> <BR><A>Leafsize - the size of the leaves (default: 
+0.1).</A> 
+<HR>
+<A name=TreeSetLeafThreshold></A>
+<H1 class=name>TreeSetLeafThreshold </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetLeafThreshold =</A><A>( tree,threshold as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the threshold of leaves - a minimum 
+thickness of the branches in which it must end with the sheet.</A> <BR><A>Tree - 
+the tree id</A> <BR><A>Threshold - threshold leaves (default: 0.02).</A> 
+<HR>
+<A name=TreeSetSeed></A>
+<H1 class=name>TreeSetSeed </H1><A class=type>Real</A><A> </A><A 
+class=function>TreeSetSeed =</A><A>( tree,seed as </A><A class=type>real</A><A> 
+);</A> <BR><A>Specifies an arbitrary number that determines the initial spiral 
+bending of the elements of the recursion (this bend is well visible when zero 
+������������� recursion). In other words, this is a little bit will change the 
+appearance of the tree. This is useful when a few trees - that they were not the 
+same as the twins.</A> <BR><A>Tree - the tree id</A> <BR><A>Seed is an arbitrary 
+number (default: 0).</A> 
+<HR>
+</DIV></BODY></HTML>

@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>��������� animation</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>8. Вершинная animationLesson 8 <BR>��������� animation 
+</H1><A><B>Level:</B> Beginner</A> <BR><A><B>Version of the Xtreme3D:</B> 
+3.0.x</A> <BR><A><B>Author:</B> Gecko</A><A class=ntext> <BR><BR>The Object 
+Freeform is intended mainly for inanimate objects. This is usually the elements 
+of decoration, vehicles, various interactive objects, and so on. If we want to 
+populate our virtual world of living creatures, we cannot do without the Actor 
+objects. The name speaks for itself: the actor is a living character. In the 
+Xtreme3D actors represent the animated model. And the animation, as is well 
+known, is of two types - ���������� and skeletal. In this lesson, we look at The 
+���������� animation. <BR>���������� (or ���������) Animation is characterized 
+by the fact that for the formation of an animation sequence of the slider moves 
+each vertex of the model from one position to another. This type of animation 
+was first applied in the Quake, and since then the formats of the models in the 
+Quake (MD2, MD3) have become a standard in all ��������� cursors. Xtreme3D 
+provides full support for MD2 and MD3. The difference between them lies in the 
+fact that the MD2 stores all model entirely in one file, and the MD3 - in three 
+(Head, torso and legs). With the help of special matrices the torso is 
+synchronized with the feet, and the head - with the torso. This was done in 
+order to animate the torso and legs separately. For example, during the shooting 
+character can both run and walk slowly, and even simply stand in place. 
+<BR><BR>In this lesson, we look at The ���������� animation with the format of 
+the MD2. The actor from the MD2 is created as follows: <BR><BR><A>Actor = </A><A 
+class=func2link 
+href="../functions/actor.htm#ActorCreate">ActorCreate</A><A>('model.md2', 
+matlib, matlib,<B> global.</B>scene);</A> <BR><BR>Sometimes after loading the 
+model is that it incorrectly rotated. This is because different editors axis 
+direction is interpreted in different ways. Usually "swap" the Y axis and Z 
+model peaks are recorded so that its vector of Up is directed along the Z axis 
+(in DirectX applications, this means "up"), and, since the direction of the "up" 
+in Xtreme3D meets the Y axis, but not Z, it turns out that the model rotated 90 
+degrees on the X-axis. We can fix this misunderstanding in several ways. The 
+most simple - just turn her back: <BR><BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(actor, 90);</A> 
+<BR><BR>But in some cases this is not enough. Turning the model, we also turn 
+its Local coordinate system. This means that the vector Direction now indicates 
+along the Y-axis and Z is not as it should be. If we now move the model using <A 
+class=func2link href="../functions/object.htm#ObjectMove">ObjectMove</A>, she 
+will move up and not forward. You can, of course, instead of <A class=func2link 
+href="../functions/object.htm#ObjectMove">ObjectMove</A> <A class=func2link 
+href="../functions/object.htm#ObjectStrafe">ObjectStrafe use</A>, but this will 
+make the program less neat and tangle so long. Much better than the first place 
+the actor in the descendants of the dummy and then rotate. And, accordingly, to 
+move to use the dummy, not the actor. The code will be as follows: 
+<BR><BR><A>Player = </A><A class=func2link 
+href="../functions/dummycube.htm#DummycubeCreate">DummycubeCreate</A><A>(<B>global.</B>scene);</A> 
+<BR><A>Actor = </A><A class=func2link 
+href="../functions/actor.htm#ActorCreate">ActorCreate</A><A>('model.md2', 
+matlib, matlib, player);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(actor, 90);</A> 
+<BR><BR>The format of the MD2 provides for the separation of all frames of 
+animation in separate groups. This is done in order to separate the, say, the 
+animation runs from animation jump. By default, the Xtreme3D plays all frames 
+one after the other, not paying attention to this division. But we can at any 
+time switch to the desired animation: <BR><BR><A class=func2link 
+href="../functions/actor.htm#ActorSwitchToAnimation">ActorSwitchToAnimation</A><A>(actor, 
+1, </A><A class=constant>false</A><A>);</A> <BR><BR>And then will be played only 
+group training under number 1. The third parameter of this function is 
+responsible for the smooth change of animation: if set to <A 
+class=constant>true</A>, the change will be gradual. <BR>Approximately the same 
+makes the function, indicating the range of frames for playback: <BR><BR><A 
+class=func2link 
+href="../functions/actor.htm#ActorSetAnimationRange">ActorSetAnimationRange</A><A>(actor, 
+10, 20);</A> <BR><BR>It is not difficult to guess that will be lost only the 
+period between the tenth and twentieth frames. However, these two functions have 
+one important distinction. <A class=func2link 
+href="../functions/actor.htm#ActorSwitchToAnimation">ActorSwitchToAnimation</A> 
+every time the call switches to play the first frame of the target group, and <A 
+class=func2link 
+href="../functions/actor.htm#ActorSetAnimationRange">ActorSetAnimationRange</A> 
+does not do this (if the range is already playing). <A class=func2link 
+href="../functions/actor.htm#ActorSetAnimationRange">ActorSetAnimationRange 
+therefore</A> can be called repeatedly - for example, inside the loop that in 
+some situations turns out to be very useful. <BR><BR>By default, the animation 
+is reproduced cycle - that is, when it reaches the last frame, play starts 
+again. In most cases this is what you need (for example, the animation of 
+walking or jogging is always fixated). But we can specify and other playback 
+mode: <BR><BR><A class=func2link 
+href="../functions/actor.htm#ActorSetAnimationMode">ActorSetAnimationMode</A><A>(actor, 
+aam);</A> <BR><BR>Instead of the AAM uses one of the following constants: 
+<BR><BR><A class=constant>AamNone</A> - Animation cannot be reproduced; <BR><A 
+class=constant>AamPlayOnce</A> - Animation is reproduced once and stops when it 
+reaches the end frame. This mode is sometimes referred to as the "one shot"; 
+<BR><A class=constant>AamLoop</A> - Animation is repeated cyclically (default); 
+<BR><A class=constant>AamBounceForward</A> - Animation is repeated cyclically 
+forward until the final frame, and then in the opposite direction to the initial 
+frame, then again forward, and so on. This mode is sometimes referred to as the 
+"ping-pong". <BR><A class=constant>AamBounceBackward</A> - the same thing, but 
+in the opposite direction. <BR><A class=constant>AamLoopBackward</A> - animation 
+cycle is repeated in the opposite direction. <BR><BR>Finally, there is also the 
+possibility to disable the linear interpolation between frames: <BR><BR><A 
+class=func2link 
+href="../functions/actor.htm#ActorSetFrameInterpolation">ActorSetFrameInterpolation</A><A>(actor,</A><A 
+class=constant>false</A><A>);</A> <BR><BR>The frames will be Ousting each other 
+abruptly, without a smooth "spill". This can be useful, for example, in the 
+races, where the vehicle bodywork can be deformed - in different frames topmost 
+animations can store different variants of damage. </A></DIV></BODY></HTML>

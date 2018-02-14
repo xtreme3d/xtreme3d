@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Movement</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Movement </H1><A class=type>Class: TGLMovement, 
+TGLMovementPath, TGLPathNode</A><BR><BR><A>The Object Movement (movement) allows 
+you to specify the objects of the trajectory of the movement. The trajectory are 
+called ways (path). The path may represent a set of line segments, or spline 
+(the wave) - cubic spline, Bezier and NURBS. Own motion of an object and the 
+movement toward the ���������������� - that is, until the object moves along the 
+path, you cannot move the usual functions </A><A class=funclink 
+href="../functions/object.htm#ObjectMove">ObjectMove</A><A> , etc. The Object 
+Movement includes one or several ways, and you can switch between them. It is 
+also possible to serial passage of all paths to each other. </A>
+<HR>
+<A name=MovementCreate></A>
+<H1 class=name>MovementCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementCreate =</A><A>( object as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates an object Movement, which will control the movement of the 
+specified object and returns its id.</A> <BR><A>The object is so id of the 
+object.</A> 
+<HR>
+<A name=MovementAddPath></A>
+<H1 class=name>MovementAddPath </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementAddPath =</A><A>( movement as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds the object movement on a new path and 
+returns the id (not the index!).</A> <BR><A>Movement is the id of object 
+Movement.</A> 
+<HR>
+<A name=MovementSetActivePath></A>
+<H1 class=name>MovementSetActivePath </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementSetActivePath =</A><A>( movement,index as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the current (active) path of the 
+object Movement. </A><A class=funclink 
+href="../functions/movement.htm#MovementStart">MovementStart function</A><A> 
+always starts with the first node in this path.</A> <BR><A>Movement is the id of 
+object Movement</A> <BR><A>Index - the index of ways, starting with 0. The 
+default value is 0.</A> 
+<HR>
+<A name=MovementStart></A>
+<H1 class=name>MovementStart </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementStart =</A><A>( movement as </A><A class=type>real</A><A> 
+);</A> <BR><A>Starts the movement so the object. The position and rotation of 
+the object is always reset to the initial node of the current path.</A> 
+<BR><A>Movement is the id of object Movement.</A> 
+<HR>
+<A name=MovementStop></A>
+<H1 class=name>MovementStop </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementStop =</A><A>( movement as </A><A class=type>real</A><A> 
+);</A> <BR><A>Stops the movement. After stopping, controlled by an object, you 
+can move the usual functions.</A> <BR><A>Movement is the id of object 
+Movement.</A> 
+<HR>
+<A name=MovementAutoStartNextPath></A>
+<H1 class=name>MovementAutoStartNextPath </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementAutoStartNextPath =</A><A>( movement,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Determines whether to switch automatically 
+to the next path when the current one.</A> <BR><A>Movement is the id of object 
+Movement</A> <BR><A>Mode - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively). By default, the option is 
+enabled.</A> 
+<HR>
+<A name=MovementPathSetSplineMode></A>
+<H1 class=name>MovementPathSetSplineMode </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementPathSetSplineMode =</A><A>( path,lsm as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the type of spline path (lsm). 
+Learn more about the types of splines you can read in the section </A><A 
+class=link href="../functions/lines.htm">Lines</A><A>.</A> <BR><A class=constant 
+name=lsmLines>LsmLines</A><A> = 0 is a set of line segments</A> <BR><A 
+class=constant name=lsmCubicSpline>LsmCubicSpline</A><A> = 1 - cubic spline (the 
+default setting)</A> <BR><A class=constant 
+name=lsmBezierSpline>LsmBezierSpline</A><A> = 2 - Bezier Spline</A> <BR><A 
+class=constant name=lsmNURBSCurve>LsmNURBSCurve</A><A> = 3 - NURBS.</A> 
+<BR><A>Path is the path id</A> <BR><A>Lsm is a type of spline.</A> 
+<HR>
+<A name=MovementPathAddNode></A>
+<H1 class=name>MovementPathAddNode </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementPathAddNode =</A><A>( path as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds to the path of the new node and 
+returns its id. A site is a reference point that determines the direction of the 
+path. In addition to position, the Assembly also determines and turn - thus, the 
+object during the move can rotate smoothly from one corner to another. In 
+addition, node determines the speed of a moving object along the segment of the 
+path.</A> <BR><A>Path is the path id.</A> 
+<HR>
+<A name=MovementPathNodeSetPosition></A>
+<H1 class=name>MovementPathNodeSetPosition </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementPathNodeSetPosition =</A><A>( node,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the position of the node.</A> 
+<BR><A>Node is the node ID</A> <BR><A>X,Y,Z position.</A> 
+<HR>
+<A name=MovementPathNodeSetRotation></A>
+<H1 class=name>MovementPathNodeSetRotation </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementPathNodeSetRotation =</A><A>( node,pitch,turned,roll as 
+</A><A class=type>real</A><A> );</A> <BR><A>Specifies the rotating assembly.</A> 
+<BR><A>Node is the node ID</A> <BR><A>Pitch,turned,roll - Angle of rotation in 
+degrees along three axes.</A> 
+<HR>
+<A name=MovementPathNodeSetSpeed></A>
+<H1 class=name>MovementPathNodeSetSpeed </H1><A class=type>Real</A><A> </A><A 
+class=function>MovementPathNodeSetSpeed =</A><A>( node,speed as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the speed of the node.</A> <BR><A>Node 
+is the node ID</A> <BR><A>Speed is the speed.</A> 
+<HR>
+</DIV></BODY></HTML>

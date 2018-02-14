@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Engine</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Engine </H1><A class=type>Class: -</A><BR><BR><A 
+class=ntext>Functions of the engine (engine), unlike the others, do not apply to 
+any type of objects. Serve for the overall management of the Xtreme3D and set 
+basic settings. The engine can be regarded as the most important and priority of 
+all.</A>
+<HR>
+ <A name=EngineCreate></A>
+<H1 class=name>EngineCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineCreate =</A><A>();</A> <BR><A class=ntext>Initializes the 
+Xtreme3D. After calling this function, you can use other functions of the 
+engine. The engine initialization can occur only once for a one time, that is, 
+you can not re-call this function until you <A class=funclink 
+href="../functions/engine.htm#EngineDestroy">EngineDestroy</A>.</A> 
+<HR>
+<A name=EngineDestroy></A>
+<H1 class=name>EngineDestroy </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineDestroy =</A><A>();</A> <BR><A class=ntext>Destroys The 
+Xtreme3D, freeing up memory from under all its resources. After calling this 
+function, you can not use other functions of the engine until you <A 
+class=funclink href="../functions/engine.htm#EngineCreate">EngineCreate</A>.</A>
+<HR>
+ <A name=EngineSetObjectsSorting></A>
+<H1 class=name>EngineSetObjectsSorting </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineSetObjectsSorting =</A><A>( os as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Determines the sort mode (OS) 
+for all objects. You have the following options: os <BR><A class=constant 
+name=osInherited>OsInherited</A> = 0 - Legacy sort; <BR><A class=constant 
+name=osNone>OsNone</A> = 1 - no sort order; <BR><A class=constant 
+name=osRenderFarthestFirst>OsRenderFarthestFirst</A> = 2 - the first drawing 
+objects with the maximum disposal from the camera (the default value); <BR><A 
+class=constant name=osRenderBlendedLast>OsRenderBlendedLast</A> = 3 - opaque 
+objects are not sorted and be the first to redrawn, transparent - the latest, 
+and taking into account the depth; <BR><A class=constant 
+name=osRenderNearestFirst>OsRenderNearestFirst</A> = 4 - the first drawing 
+objects with minimal disposal from the camera. 
+<HR>
+<A name=EngineSetCulling></A>
+<H1 class=name>EngineSetCulling </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineSetCulling =</A><A>( vc as </A><A class=type>real</A><A> 
+);</A> <BR><A class=ntext>Determines the mode selection of visibility (vc) for 
+all objects. You have the following options: vc <BR><A class=constant 
+name=vcNone>VcNone</A> = 0 - lack of selection of visibility; <BR><A 
+class=constant name=vcInherited>VcInherited</A> = 1 - inherited the selection of 
+visibility; <BR><A class=constant name=vcObjectBased>VcObjectBased</A> = 2 - 
+selection is made on the basis of the object: each object can be chosen 
+depending on its position. The selection of the object does not affect the 
+visibility of its child objects; <BR><A class=constant 
+name=vcHierarchical>VcHierarchical</A> = 3 - selection is carried out according 
+to the principle of hierarchy: if the maternal object selected, all its child 
+objects will also be invisible. <BR>Depending on the structure of your scene, 
+the most effective methods will <A class=constant>vcObjectBased</A> and <A 
+class=constant>vcHierarchical</A>.</A> 
+<HR>
+<!--
+<A name="EngineGetMaxTextureUnits"></A>
+<H1 class=namenew>EngineGetMaxTextureUnits</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineGetMaxTextureUnits</A><A>( );</A>
+<BR><A>���������� ������������ ���������� ���������� ����������.</A><HR>
+
+<A name="EngineGetMaxTextureSize"></A>
+<H1 class=namenew>EngineGetMaxTextureSize</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineGetMaxTextureSize</A><A>( );</A>
+<BR><A>���������� ������������ ���������� �������, �������������� �����������.</A><HR>
+--><A name=SetPakArchive></A>
+<H1 class=name>SetPakArchive </H1><A class=type>Real</A><A> </A><A 
+class=function>SetPakArchive =</A><A>( filename as </A><A 
+class=type>string</A><A> );</A> <BR><A class=ntext>Opens the compressed archive 
+*.PAK file from which you can download resources engine. To create the archive 
+requires PakEdit Utility.exe, which is part of the Xtreme3D SDK. It is 
+recommended to create the archive and add this feature only when the final build 
+the project. <BR>Note that after calling this function, all of the resources 
+without exception will be loaded the engine from this archive. Cancel this 
+during the game is impossible. <BR>Filename is the path to the archive. </A>
+<HR>
+<A name=Update></A>
+<H1 class=name>Update </H1><A class=type>Real</A><A> = </A><A 
+class=function>Update</A><A>( dt as </A><A class=type>real</A><A> );</A> <BR><A 
+class=ntext>Commits the software update status of the engine (the calculation of 
+collisions, animation, etc.). Usually called before <A class=funclink 
+href="../functions/viewer.htm#ViewerRender">ViewerRender</A> and only once, even 
+in the presence of several types. <BR>Dt - step time in seconds. Changing this 
+parameter it is possible to change the speed of the animation. The time step, as 
+a rule, is inversely proportional to the number of frames per second (fps).</A> 
+<HR>
+<A name=EngineSaveScene></A>
+<H1 class=name>EngineSaveScene </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineSaveScene =</A><A>( filename as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Saves all scene objects to a 
+file. The experimental feature, with some types of objects may not function 
+properly. <BR>Filename is the name of the file.</A> 
+<HR>
+<A name=EngineLoadScene></A>
+<H1 class=name>EngineLoadScene </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineLoadScene =</A><A>( filename as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Removes all scene objects and 
+loads the new from the file. The experimental feature, with some types of 
+objects may not function properly. <BR>Filename is the name of the file.</A> 
+<HR>
+<A name=EngineRootObject></A>
+<H1 class=name>EngineRootObject </H1><A class=type>Real</A><A> </A><A 
+class=function>EngineRootObject =</A><A>( );</A> <BR><A class=ntext>Returns the 
+ID of the root object scene - that is, the object, whose descendants are objects 
+with zero parent. 
+<HR>
+<!--
+<A name="TrisRendered"></A>
+<H1 class=name>TrisRendered</H1>
+<A class=type>real</A><A> = </A><A class=function>TrisRendered</A><A>( );</A>
+<BR><A>���������� ���������� ������������ ��������� ���������� �����. ��������� ������ ������� ���� Actor � Freeform.
+</A><HR>
+--></DIV></A></BODY></HTML>

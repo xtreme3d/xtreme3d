@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>The creation of water</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 16 <BR>The creation of water </H1><A><B>Level:</B> 
+medium<A> <BR><A><B>Version of the Xtreme3D:</B> 3.0.x</A> <BR><A><B>Author:</B> 
+Gecko</A><A class=ntext> <BR><BR>The realistic animated water is a kind of 
+hallmark Xtreme3D. This is really beautiful, special allows you to achieve a 
+high degree of realism of the scene. However, the use of water must be 
+carefully, because the calculations associated with it, quite �����������. 
+<BR><BR>The water in the Xtreme3D is a flat surface, divided into a certain 
+number of squares, on which there are concentric wave disturbances - you get the 
+effect of "rain". Also supported are linear waves, as in the ocean - they are 
+parallel, calculated on the sinusoid and uniformly moving across the surface of 
+the water. In and of itself the water - only the geometry and any properties of 
+the fluid, in addition to the waves, do not possess. Therefore, all other 
+effects, enhancing the impression of water (reflection, sprays, physics of 
+floating objects, etc.) you have to write on their own. <BR><BR>The Code 
+creation of water looks as follows: <BR><BR><A>Water = </A><A class=func2link 
+href="../functions/water.htm#WaterCreate">WaterCreate</A><A>(<B>global</B>.scene);</A> 
+<BR><A class=func2link 
+href="../functions/water.htm#WaterSetResolution">WaterSetResolution</A><A>(water, 
+128);</A> <BR><A class=func2link 
+href="../functions/water.htm#WaterSetRainTimeInterval">WaterSetRainTimeInterval</A><A>(water, 
+1000);</A> <BR><A class=func2link 
+href="../functions/water.htm#WaterSetRainForce">WaterSetRainForce</A><A>(water, 
+1000);</A> <BR><A class=func2link 
+href="../functions/water.htm#WaterSetViscosity">WaterSetViscosity</A><A>(water, 
+0.95);</A> <BR><A class=func2link 
+href="../functions/water.htm#WaterSetElastic">WaterSetElastic</A><A>(water, 
+10);</A> <BR><A class=func2link 
+href="../functions/water.htm#ObjectSetPosition">ObjectSetPosition</A><A>(water, 
+0, 2.5, 0);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectSetScale">ObjectSetScale</A><A>(water, 1000, 
+1000, 1000);</A> <BR><BR>The Object Water has several important properties: 
+<BR><BR><B>Resolution</B> (resolution) <BR>The number of polygons on the side of 
+the grid. The geometry of the water is constructed of squares on the grid, so 
+the total number of polygons is R2, where R is the value of the Resolution. It 
+is clear that the higher the value, the higher the quality of water, and, 
+accordingly, the speed of its work. The default value is: 64. <BR><BR><B>Rain 
+time interval</B> (the time interval of rain) <BR>The effect of "Rain", when the 
+surface of the �����������, creating in random places mesh wave disturbances. 
+This option specifies the length of the pause in milliseconds between two 
+disturbances. The default value is 500. The maximum value: 1000000. The minimum 
+value is 0 (no rain). <BR><BR><B>Rain Force</B> (force of rain) <BR>The 
+intensity of the disturbances; less than this value, the faster the waves of 
+"fade". The default value is 5000. The maximum value: 1000000. The minimum 
+value: 0. <BR><BR><B>Viscosity</B> (viscosity) <BR>The amplitude of the 
+perturbation theory; in fact, the maximum height of the waves: the less the 
+value, The ������������ liquid. The default value is 0.99. The maximum value: 1. 
+The minimum value: 0. <BR><BR><B>Elastic</B> (elasticity) <BR>Speed of the 
+perturbations. In the real world this property depends on the density of the 
+substance (for example, the density of the mercury is much higher than that of 
+water, so waves spread faster). The default value is: 10. <BR><BR>Another point: 
+for the creation of water requires a mask that defines the shape of the surface. 
+The Mask in this case - material with a monochrome image, where the black dots 
+indicate lack of water, white - the presence of. Thus, we can create, for 
+example, round the pool. <BR><BR><A class=func2link 
+href="../functions/material.htm#MaterialCreate">MaterialCreate</A>('mMask', 
+'watermask.bmp');</A> <BR><A class=func2link 
+href="../functions/water.htm#WaterSetMask">WaterSetMask</A>(water, 'mMask');</A> 
+<BR><A></A></DIV></BODY></HTML>

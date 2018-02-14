@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Squall</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Squall </H1><A class=type>Class: -</A><BR><BR><A>Squall is a 
+compact and powerful sound engine, developed by Marat �������������� (studio 
+AntiTank). In the Russian �������� Squall was very popular in the "zero" and 
+compete with BASS and FMOD. In 2009, the engine was opened, but the author has 
+ceased its development, so we from a sense of nostalgia decided to make it part 
+of the Xtreme3D. Despite the lack of development, Squall still remains an 
+excellent solution for audio playback in the Games for Windows - it little 
+serious alternatives to free software. The engine is reliable, repeatedly 
+verified in practice, provides a convenient, well thought out API. Squall reads 
+the .WAV files, MP3, OGG/Vorbis, reproduces sound in a separate thread through 
+the DirectSound API (Requires DirectX 7 or higher) supports 3D-sound and 
+hardware effects HRTF (CreativeLab EAX, Sensaura ZoomFX). <BR>Squall 
+architecture is based on the separation of audio data from the actual sound 
+sources - that is, you can download the audio file once and then play at 
+different points in time and with different settings. Audio sources are referred 
+to as channels (channel). A channel can be placed in 3D space - in this case, it 
+set the position, speed, the parameters of the EAX and ZoomFX. The channels can 
+be individually set the volume and frequency. <BR>For Squall to ���������� 
+squall.dll in the directory with the project. </A>
+<HR>
+<A name=SquallInit></A>
+<H1 class=name>SquallInit </H1><A class=type>Real</A><A> </A><A 
+class=function>SquallInit =</A><A>( );</A> <BR><A>Initializes the Squall. This 
+feature, you need to call in the beginning of the game before using the 
+rest.</A> 
+<HR>
+<A name=SquallAddSound></A>
+<H1 class=name>SquallAddSound </H1><A class=type>Real</A><A> </A><A 
+class=function>SquallAddSound =</A><A>( filename as </A><A 
+class=type>string</A><A> );</A> <BR><A>Creates a new sound from file and returns 
+its id.</A> <BR><A>Filename is the name of the file.</A> 
+<HR>
+<A name=SquallPlay></A>
+<H1 class=name>SquallPlay </H1><A class=type>Real</A><A> </A><A 
+class=function>SquallPlay =</A><A>( snd,loop as </A><A class=type>real</A><A> 
+);</A> <BR><A>Starts the sound playback and returns the id channel playback.</A> 
+<BR><A>The Snd - the sound id</A> <BR><A>Loop - the loop play (</A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>).</A> 
+<HR>
+<A name=SquallStop></A>
+<H1 class=name>SquallStop </H1><A class=type>Real</A><A> </A><A 
+class=function>SquallStop =</A><A>( chan as </A><A class=type>real</A><A> );</A> 
+<BR><A>Stop playing the specified channel.</A> <BR><A>Chan - id channel.</A> 
+<HR>
+</DIV></BODY></HTML>

@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>The creation of the Landscape</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 15 <BR>The creation of the Landscape 
+</H1><A><B>Level:</B> medium<A> <BR><A><B>Version of the Xtreme3D:</B> 3.0.x</A> 
+<BR><A><B>Author:</B> Gecko</A><A class=ntext> <BR><BR>The Landscape (Terrain) 
+is an important part of the games many genres, modeling the situation in the 
+real world is Racing, Strategy, many of the shooter and the various games with 
+the open world. Usually the landscape is not modeled manually and is generated 
+from the so-called card heights - the image, where the dark areas indicate lower 
+height and bright - increase. The generation of the landscape can occur both in 
+the program of the 3D modeling as well as in the game - in the latter case, 
+there is a possibility to optimize the rendering of landscape, dynamically 
+changing the detail depending on the distance from the camera (dynamic LOD). In 
+the Xtreme3D also has support for such technology. <BR>In order to render the 
+landscape, you must first download the map heights, in the terminology of the 
+Xtreme3D - HDS (Height Data Source, the source of data about the height): 
+<BR><BR><A>The Hds </A><A class=func2link 
+href="../functions/terrain.htm#BmpHDSCreate">BmpHDSCreate 
+=</A><A>('heightmap.bmp');</A> <BR><A class=func2link 
+href="../functions/terrain.htm#BmpHDSSetInfiniteWarp">BmpHDSSetInfiniteWarp</A><A>(hds, 
+0);</A> <BR><BR><A class=func2link 
+href="../functions/terrain.htm#BmpHDSSetInfiniteWarp">BmpHDSSetInfiniteWarp 
+function</A> can make the map heights endlessly looping in all four sides - very 
+handy if you want to make a limitless world. <BR><BR>Now create the landscape is 
+the object of the Terrain: <BR><BR><A>The terrain = </A><A class=func2link 
+href="../functions/terrain.htm#TerrainCreate">TerrainCreate</A><A>(<B>global</B>.scene);</A> 
+<BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetHeightData">TerrainSetHeightData</A><A>(terrain, 
+hds);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetTileSize">TerrainSetTileSize</A><A>(terrain, 
+32);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetTilesPerTexture">TerrainSetTilesPerTexture</A><A>(terrain, 
+8);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetQualityDistance">TerrainSetQualityDistance</A><A>(terrain, 
+100);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetQualityStyle">TerrainSetQualityStyle</A><A>(terrain, 
+</A><A class=constant>hrsFullGeometry</A><A>);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetMaxCLodTriangles">TerrainSetMaxCLodTriangles</A><A>(terrain, 
+10000);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetCLodPrecision">TerrainSetCLodPrecision</A><A>(terrain, 
+50);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetOcclusionFrameSkip">TerrainSetOcclusionFrameSkip</A><A>(terrain, 
+0);</A> <BR><A class=func2link 
+href="../functions/terrain.htm#TerrainSetOcclusionTesselate">TerrainSetOcclusionTesselate</A><A>(terrain, 
+</A><A class=constant>totTesselateIfVisible</A><A>);</A> <BR><BR>If you run the 
+game at this stage, the landscape is likely to be too high and rotated 90 
+degrees. This is easy to fix by installing the desired scale in the Z axis and 
+Rotating an object on the X-axis: <BR><BR><A class=func2link 
+href="../functions/object.htm#ObjectSetScale">ObjectSetScale</A><A>(terrain, 1, 
+1, 0.1);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectRotate">ObjectRotate</A><A>(terrain, 90, 0, 
+0).</A> <BR><BR>Separate the words deserved the overlay textures on the 
+landscape. This can be done in many different ways, I propose the following: 
+first, the texture of the material (diffuse) will be tight on the whole 
+landscape, and the second (the texture of detail) will be repeated many times 
+with the magnitude of the overlying the first in the modulate (i.e., by changing 
+the brightness of the previous). Thus, there is an illusion that the landscape 
+uses huge detailed texture. <BR><BR><A class=func2link 
+href="../functions/material.htm#MaterialCreate">MaterialCreate</A><A>('mTerrain', 
+'the terrain-diffuse.jpg');</A> <BR><A class=func2link 
+href="../functions/material.htm#MaterialSetOptions">MaterialSetOptions</A><A>('mTerrain', 
+</A><A class=constant>false</A><A>, </A><A class=constant>true</A><A>);</A> 
+<BR><A class=func2link 
+href="../functions/material.htm#MaterialCreate">MaterialCreate</A><A>('detmap', 
+'the terrain detail.jpg');</A> <BR><A class=func2link 
+href="../functions/material.htm#MaterialSetTextureScale">MaterialSetTextureScale</A><A>('detmap', 
+100, 100);</A> <BR><A class=func2link 
+href="../functions/material.htm#MaterialSetSecondTexture">MaterialSetSecondTexture</A><A>('mTerrain', 
+'detmap');</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectSetMaterial">ObjectSetMaterial</A><A>(terrain, 
+'mTerrain');</A> <BR><BR>Please note that we switched lighting for landscape 
+material - the fact is that the dynamic LOD does not allows you to define normal 
+for the vertices (since the sets of vertices are constantly changing), which is 
+necessary for the correct lights polygons. Therefore, for the landscape should 
+use static lighting - the map light, combined with the diffuse texture. 
+<BR><BR>Still another challenge: movement of the character on the landscape. 
+This is easily done with the help of the designated functions - <A 
+class=func2link 
+href="../functions/object.htm#TerrainGetHeightAtObjectPosition">TerrainGetHeightAtObjectPosition</A>, 
+which returns the height of the land in the point, which coincides with the 
+absolute position of the object: <BR><BR><A class=func2link 
+href="../functions/object.htm#ObjectSetPositionY">ObjectSetPositionY</A><A>(camPos, 
+</A><A class=func2link 
+href="../functions/object.htm#TerrainGetHeightAtObjectPosition">TerrainGetHeightAtObjectPosition</A><A>(terrain, 
+camPos) + 1);</A> <BR></DIV></BODY></HTML>

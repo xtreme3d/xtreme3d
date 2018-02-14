@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Pipeline</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=name>Pipeline </H1><A class=type>Pipeline | Conveyor</A> 
+<HR>
+<A>Step-by-step method of rendering 3D graphics (rasterization). Its name was 
+due to the fact that the output of each step (stage) are the input for the next. 
+<BR><BR>1. Transformation. This stage begins to vertex conveyor, where the 
+processing unit is the top of the (point in the �������� space). A set of 
+vertices, forming a three-dimensional object is transferred from model space in 
+the world, and then in the species, where the beginning of the coordinates is 
+the position of the camera (these two conversions are usually combined into 
+one). The peaks of the transferred promising matrix into the space of 
+amputation. In the programmable pipeline stage of transformation is made in the 
+��������� �������. <BR>2. Amputation. The invisible top (outside the pyramid of 
+Visibility) is discarded and not transferred further. <BR>3. Normalization. From 
+the amputation of the vertices into normalized device coordinates (NDC) - that 
+is, in fact, in the two-dimensional coordinates on the on-screen a plane + Z 
+coordinate, indicating the depth of the screen on the plane. <BR>4. Dithering. 
+The set of points is used to rasterize polygons (usually triangles) according to 
+the rules of building the ribs. In the programmable pipeline these rules can be 
+configured in a geometrical �������. Also at this stage, the interpolation of 
+the vertex attributes (color, normal, texture coordinates, etc.) on the surface 
+of the polygon. Is perspective correction texture coordinates. From this moment 
+begins the pixel pipeline - the data is processed pixel. <BR>5. Calculation of 
+the color. In the programmable pipeline the resulting pixel color is calculated 
+in the ����������� �������. At this stage, the calculated the pixelwise 
+lighting, texturing, terrain, reflection, shadows, transparency and other 
+effects. As input used interpolated vertex attributes, as well as the texture. 
+<BR>6. Checking the depth. Before you write a pixel in the frame buffer may be 
+depth (depth test). The Z coordinate of the pixel is compared with the 
+corresponding depth in the Z-buffer. If it is less than, the pixel should be 
+���������, if not - has been ignored. <BR>7. Mixing. The color of the pixels can 
+according to the specified rules mixed with the already present color in a 
+buffer frame. The total value is written to the buffer. <BR><BR>It should also 
+be taken into account that your conveyor, there are the second most common 
+method of 3D-rendering - tracing. It is more simple and intuitive and operates 
+mainly rays. Sets of vertices are only used for determining the beam, the depth 
+buffer no, and perspective projection is performed by calculating the starting 
+direction of rays for each pixel of the image. The final pixel color is 
+calculated similar to the shader ����������� manner. </A>
+<HR>
+<!-- <img src=../data/ShadingModel.jpg align="left"> -->
+<DIV></DIV></DIV></BODY></HTML>

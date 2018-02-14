@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Mirror</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Mirror </H1><A class=type>Class: 
+TGLMirror</A><BR><BR><A>Mirror (mirror) - the plane, showing the other objects. 
+Reflections is achieved by drawing the mirror copies of objects within a 
+rectangular or ������������� clipping plane. </A><BR>
+<HR>
+<A name=MirrorCreate></A>
+<H1 class=name>MirrorCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>MirrorCreate =</A><A>( target,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new mirror and returns its id. 
+The Mirror size by default, 1x1.</A> <BR><A>Target is the id of the target, 
+which should be reflected in the mirror (all his descendants will also be 
+reflected).</A> <BR><A>Parent - the id of the parent.</A> 
+<HR>
+<A name=MirrorSetObject></A>
+<H1 class=name>MirrorSetObject </H1><A class=type>Real</A><A> </A><A 
+class=function>MirrorSetObject =</A><A>( mirror,target as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the object, which should be 
+reflected in the mirror.</A> <BR><A>Mirror Mirror id</A> <BR><A>Target is the id 
+of the object.</A> 
+<HR>
+<A name=MirrorSetOptions></A>
+<H1 class=name>MirrorSetOptions </H1><A class=type>Real</A><A> </A><A 
+class=function>MirrorSetOptions =</A><A>( 
+mirror,stencil,opaque,planeclipping,clearzbuffer as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the options of the mirror.</A> 
+<BR><A>Mirror Mirror id</A> <BR><A>Stencil - </A><A class=constant>true</A><A> 
+or </A><A class=constant>false</A><A> (1 or 0). If the option is enabled, the 
+reflection will be truncated on the plane. Default: 1</A> <BR><A>Opaque - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 or 0). If 
+the option is disabled, the mirror plane will be transparent. Default: 0</A> 
+<BR><A>Planeclipping - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 or 0). If this option is enabled, the objects in 
+the mirror, will not give back-reflection. Default: 0</A> <BR><A>Clearzbuffer - 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 or 
+0). If the option is enabled, the reflection will be completely overlap the 
+objects in the mirror. Default: 0.</A> <BR><A>Realistic mirror will give a 
+combination of 1,0,1,1.</A> 
+<HR>
+<A name=MirrorSetShape></A>
+<H1 class=name>MirrorSetShape </H1><A class=type>Real</A><A> </A><A 
+class=function>MirrorSetShape =</A><A>( mirror,ms as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the shape of the mirror - this 
+may be a rectangular plane (</A><A class=constant>msRect</A><A>) or disk (</A><A 
+class=constant>msDisk</A><A>).</A> <BR><A>Mirror Mirror id</A> <BR><A>Ms is a 
+form of mirrors: </A><A class=constant>msRect</A><A> = 0 or </A><A 
+class=constant>msDisk</A><A> = 1.</A></A> 
+<HR>
+<A name=MirrorSetDiskOptions></A>
+<H1 class=name>MirrorSetDiskOptions </H1><A class=type>Real</A><A> </A><A 
+class=function>MirrorSetDiskOptions =</A><A>( mirror radius,,slices as </A><A 
+class=type>real</A><A> );</A> <BR><A>If the mirror is in the form of disc, this 
+function sets the radius and the number of segments of the disc.</A> 
+<BR><A>Mirror Mirror id</A> <BR><A>Radius is the radius of the disk</A> 
+<BR><A>Slices - the number of segments of the disc.</A> 
+<HR>
+</DIV></BODY></HTML>

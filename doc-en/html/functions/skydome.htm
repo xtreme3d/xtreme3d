@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Skydome</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Skydome </H1><A class=type>Class: 
+TGLEarthSkyDome</A><BR><BR><A>Skydome in the literal translation means "heavenly 
+dome", "a firmament." In ancient times, people believed that the sky is a kind 
+of a round dome, the surrounding land, on which hung the sun, moon, stars and 
+planets. There is a well-known engraving with the image rights, The ������������ 
+to the edge of the light and with amazement �������������� into the hole, 
+carried out in "heavenly expanse." <BR>In reality, all that is, of course, not 
+so. But computer graphics - a funny thing. In it and the sky can be dome. And 
+why not? Skydome - the object of the background of the plan, so get to it, as 
+the man with the engraving is impossible. In addition, there are almost all the 
+effects of the atmosphere. On the dome in the literal sense of the "suspended" 
+The sun and stars. The sun goes smoothly across the sky: when it is lowered 
+toward the horizon, we are witnessing a sunset. And then the sky darkens and 
+there comes the night. Sparkling stars as the real thing. The only minus - no 
+clouds. They would have to do on their own. It probably was assumed not to 
+deprive the developer to make, for example, The �������������: so that you can 
+as fall to the ground and climb to the clouds and see them from a close 
+distance. <BR><BR>The color of the sky in the skydome is composed of three 
+components: Deep, Haze, the Night and the Sky. <BR>Deep - the color of the 
+so-called nadir - the point opposite the ������; it is located under our feet. 
+Usually in real life to see nadir is impossible, the earth obstructs :) But the 
+color of this point is important as it determines how shade mixes up the color 
+of the sky as the care of the horizon line. <BR>Haze - the color of the horizon. 
+Usually corresponds to the color of the mist. <BR>Sky is the color of the 
+zenith. In this color painted the entire heavenly bubble up to the line of the 
+horizon. <BR>Night - the color of the night. When the sun goes below the 
+horizon, this color is gradually filled in all the components of the sky, in 
+addition to the Deep. This is most often black or dark blue, although there may 
+be other options.</A> <BR><BR><IMG align=center 
+src="../data/skydomecomponents.png"> 
+<HR>
+<A name=SkydomeCreate></A>
+<H1 class=name>SkydomeCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeCreate =</A><A>( slices,stacks,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new skydome and returns its 
+id.</A> <BR><A>Slices,stacks - the number of segments the scope in the 
+horizontal and vertical (Parallels and meridian). The higher the value, the 
+better is the sky.</A> <BR><A>Parent - the id of the parent.</A> 
+<HR>
+<A name=SkydomeSetOptions></A>
+<H1 class=name>SkydomeSetOptions </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetOptions =</A><A>( sky,fade,rotate as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the two options skydome: smooth 
+the appearance of the stars and the turning of the sky. The first option, 
+essentially, determines whether you want to "hide" the stars in the daytime. The 
+second allows you to simulate the rotation of Earth on its axis. It is 
+recommended to include both options, by default they are disabled.</A> 
+<BR><A>Sky - the object id skydome</A> <BR><A>Fade - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0 
+respectively)</A> <BR><A>Rotate - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> 
+<HR>
+<A name=SkydomeSetDeepColor></A>
+<H1 class=name>SkydomeSetDeepColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetDeepColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the component of the 
+Deep.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeSetHazeColor></A>
+<H1 class=name>SkydomeSetHazeColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetHazeColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the component of the 
+haze.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeSetNightColor></A>
+<H1 class=name>SkydomeSetNightColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetNightColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the component of the 
+Night.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeSetSkyColor></A>
+<H1 class=name>SkydomeSetSkyColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetSkyColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the component of the 
+Sky.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeSetSunDawnColor></A>
+<H1 class=name>SkydomeSetSunDawnColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetSunDawnColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the sun at dusk and 
+dawn.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeSetSunZenithColor></A>
+<H1 class=name>SkydomeSetSunZenithColor </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetSunZenithColor =</A><A>( sky,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the sun in the 
+zenith.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Color - the color.</A> 
+
+<HR>
+<A name=SkydomeSetSunElevation></A>
+<H1 class=name>SkydomeSetSunElevation </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetSunElevation =</A><A>( sky,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the angle at which the sun is 
+located in relation to the horizon. The angle of 90 degrees, ������ -90 - Nader. 
+Changing this value, you can set the movement of the sun across the sky. So it 
+ascended in the east, and �������� in the West, you must enable the rotation of 
+the sky </A><A class=function>SkydomeSetOptions function</A><A>.</A> <BR><A>Sky 
+- the object id skydome</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=SkydomeSetTurbidity></A>
+<H1 class=name>SkydomeSetTurbidity </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeSetTurbidity =</A><A>( sky,turbidity as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the level of atmospheric 
+turbidity, due to which the dispersal of light rays and reducing the clarity of 
+boundaries between color components of the sky. For example, when a low 
+turbidity the sun will be small and clear, and with high - a huge and 
+blurry.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Turbidity - the level 
+of turbidity.</A> 
+<HR>
+<A name=SkydomeAddRandomStars></A>
+<H1 class=name>SkydomeAddRandomStars </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeAddRandomStars =</A><A>( sky,stars,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds to the sky set number of stars in 
+random order. By default, the stars in the sky.</A> <BR><A>Sky - the object id 
+skydome</A> <BR><A>Stars - the number of stars</A> <BR><A>Color - the color of 
+the stars.</A> 
+<HR>
+<A name=SkydomeAddStar></A>
+<H1 class=name>SkydomeAddStar </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeAddStar =</A><A>( sky,ra,dec,mag,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds to the sky a new star. The position of 
+the stars is set in the second equatorial coordinate system - the direct ascent 
+(right ascension) and the decline (declination). Both values are in degrees, 
+although the Astronomy of the direct ascent traditionally measured in hours, 
+minutes, and seconds (1 hour is equal to 360 / 24 = 15 degrees). To simplify the 
+translation of these units in degrees, in the Xtreme3D SDK is The RightAscension 
+script(hours,minutes,seconds). There is also a script(Declination degrees, 
+minutes, seconds), with which you can get a single value from the degrees of 
+angular minutes and angular seconds.</A> <BR><A>Sky - the object id skydome</A> 
+<BR><A>Ra is a direct ascent</A> <BR><A>Dec - the decline</A> <BR><A>Mag - the 
+magnitude</A> <BR><A>Color - the color.</A> 
+<HR>
+<A name=SkydomeClearStars></A>
+<H1 class=name>SkydomeClearStars </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeClearStars =</A><A>( sky as </A><A class=type>real</A><A> 
+);</A> <BR><A>Removes all the stars from the sky.</A> <BR><A>Sky - the object id 
+Skydome.</A> 
+<HR>
+<A name=SkydomeTwinkleStars></A>
+<H1 class=name>SkydomeTwinkleStars </H1><A class=type>Real</A><A> </A><A 
+class=function>SkydomeTwinkleStars =</A><A>( sky,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables and disables the twinkling 
+stars.</A> <BR><A>Sky - the object id skydome</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+</DIV></BODY></HTML>

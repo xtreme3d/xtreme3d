@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Shader</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=name>Shader </H1><A class=type>Shader | Shader</A> 
+<HR>
+<A>The firmware for one of the stages of the graphics conveyor, used to 
+determine the final parameters of an object or image. It may include arbitrary 
+complexity of the description of the absorption and scattering of light, texture 
+overlay, reflection and refraction, shading, offset surfaces and the effects of 
+post-processing. <BR><BR>Currently, shaders are divided into four types: Vertex, 
+geometry, The ����������� (pixel) and computing. <BR><BR><B>Vertex Shaders</B> 
+(Vertex Shader) <BR>Vertex Shader operates with the data, with vms with vertices 
+polyhedra. To such data, in particular, the coordinates of the vertices in 
+space, texture coordinates, the tangent-vector, normal vectors and ���������. 
+Vertex shader can be used for species and future transformation of vertices, 
+generate texture coordinates, a simple calculation of lighting, etc. 
+<BR><BR><B>The geometry shaders</B> Geometry shader) <BR>The Geometry shader, in 
+contrast to the vertex, is able to handle not only one peak, but also the whole 
+entity. This can be a piece of (two peaks) and the triangle (three tops), and if 
+the information about the related tops (adjacency) can be processed up to six 
+vertices of the triangle for the entity. In addition the geometry shader can 
+generate entities "on the fly", without using the central processor. 
+<BR><BR><B>����������� (pixel) shaders</B> (Fragment Shader) <BR>����������� 
+shader works with the fragments of the image. Under the image fragment in this 
+case refers to the pixel, which put in a line some set of attributes, such as 
+color, depth, texture coordinates. ����������� shader used on the last stage of 
+the graphics pipeline for the formation of the pixel of the image. 
+<BR><BR><B>The Compute shaders</B> (Compute Shader) <BR>Fully universal shader 
+by which it is possible to carry out arbitrary computations on the GPU not 
+related directly to the rastering polygons. �������� computing are available for 
+reading and writing data into the memory, which can then be used in the process 
+of rendering. <BR><BR>There are three main groups of programming languages for 
+the GPU. <BR>The first group includes the languages used when rendering images 
+and animation in areas such as film, television, industrial design and 
+architectural rendering: <BR><BR><B>RenderMan Shading Language (RSL)</B> - 
+developed and used by the studio Pixar. Is the de facto standard in professional 
+rendering. <BR><BR><B>Open Shading Language (OSL)</B> - designed Sony Pictures 
+Imageworks for rendering engine Arnold, however, supported and in many other 
+render engines. Focuses on the rendering using ray tracing, is intended to 
+describe the BSDF - ���������� functions of surface scattering the. 
+<BR><BR><B>Gelato</B> - developed by nVidia. Represents a hybrid system image 
+rendering and animation that uses for the calculation of the central processors 
+and hardware capabilities of professional series graphics cards Quadro FX. 
+<BR><BR><B>Vector Expressions (VEX)</B> - developed Side Effects Software as 
+part of a package of Houdini. Is the analogue of RenderMan. <BR><BR>The second 
+group includes the languages, providing access to the computing capabilities of 
+the graphics card when rendering in real time. They are widely used in the 
+development of computer games and other multimedia applications. 
+<BR><BR><B>Low-level language ��������� OpenGL (ARB)</B> - the syntax is similar 
+to the �����������. Is available in the form of extensions of 
+ARB_vertex_program, ARB_fragment_program. Is the approved industry standard. 
+<BR><BR><B>The OpenGL Shading Language (GLSL)</B> - a high-level language 
+��������� OpenGL. Based on the syntax of the ANSI C. The Majority of C has been 
+saved, the added vector and matrix data types that are often used when working 
+with 3D graphics. In the context of the GLSL shader is called regardless 
+������������� unit, written in this language. The program is a set of compiled 
+shaders are associated together. <BR>Initially, GLSL 1.10 was available in the 
+form of a set of extensions of GL_ARB_shading_language_100, 
+GL_ARB_shader_objects. Starting with the OpenGL 2.0, became part of the 
+standard. <BR>With the release of OpenGL 3.3, the GLSL is changing the numbering 
+of the versions. Now, the version number of the GLSL corresponds to the version 
+of OpenGL. <BR><BR><B>With the for graphics (CG)</B> - a high-level ��������� 
+language, developed by nVidia , jointly with Microsoft (a similar language from 
+Microsoft - The Hlsl is part of DirectX 9 and 10). Works with both OpenGL and 
+DirectX supports various software and hardware platform. <BR>Based on C, uses 
+similar data types. Supported by the functions and structure. Includes a kind of 
+optimization in the form of packed arrays (packed arrays - The announcement of 
+the "float a[4]" and "float4" in it correspond to the different types. The 
+second announcement, and there is a packed array, which are faster than normal. 
+<BR>Currently, Cg has already practically is not used, fully ����������� HLSL 
+and the GLSL. <BR><BR><B>Low-level language ��������� DirectX DirectX (ASM)</B>, 
+the syntax is similar to the �����������. There are several versions, differing 
+on a set of commands, as well as on the required equipment. <BR><BR><B>High 
+Level Shader Language (HLSL)</B> - a high-level language ��������� DirectX (also 
+supported by the game consoles Xbox and Xbox 360). Is the superstructure over 
+DirectX ASM. The syntax is similar to C, allows the use of the structure and 
+function. <BR><BR>The third group of languages of broad specialization, intended 
+mainly for scientific computing. They effectively use multi-core CPU and GPGPU 
+Support to expedite the processing of large data sets. <BR><BR><B>Sh</B> - a 
+high-level programming language for GPU, included in a subset of the language 
+C++. It was initially developed by a group RapidMind (which later became part of 
+Intel), currently is licensed under the GNU LGPL and is supported by the 
+community. <BR><BR><B>Compute Unified Device Architecture (CUDA)</B> is a 
+technology developed by NVIDIA for parallel computing on graphics cards GeForce 
+(8 and older), Quadro and Tesla. CUDA uses specialized language version C with a 
+set of instructions for the GPU. <BR><BR><B>OpenCL (Open Computing Language)</B> 
+is a cross-platform equivalent CUDA, independent of hardware computing API with 
+your own C-like programming language. OpenCL specification is currently being 
+developed by a consortium of Kronos Group in parallel with OpenGL - there is the 
+possibility of interaction between the ���� two API. <BR><BR><B>BrookGPU</B> - 
+project at Stanford University. Originally emerged as a language for programming 
+streaming architectures. Is a C-like language, which added the data type is an 
+array of special form ("Thread" in the terminology of the language). In 2004, 
+got his realization for graphics processors. <BR></A>
+<HR>
+<!-- <img src=../data/Mipmapping.jpg align="left"> -->
+<DIV></DIV></DIV></BODY></HTML>

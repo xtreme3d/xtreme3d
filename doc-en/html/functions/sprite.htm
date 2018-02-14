@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Sprite</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Sprite </H1><A class=type>Class: TGLSprite, 
+TGLHUDSprite</A><BR><BR><A>Sprite (Sprite) - 2D image. In the Xtreme3D are 
+supported by on-screen sprites (Redrawn on the screen on top of the projection) 
+and spatial (present in the 3d scene as planes - they are called �����������). 
+The main difference between spatial sprite from a simple plane lies in the fact 
+that the sprite is always turned toward the camera. This allows the use of 
+spatial sprites as various ���������������� effects such as explosions, Flash, 
+shine. On their basis, you can create your own particle system. <BR>The 
+on-screen sprites are used to display the user interface elements - the sight, 
+icons, the scale of energy, etc. <BR>All sprites are created from materials. 
+This supported their settings - Modes of mixing, alpha channel, etc.</A> <BR>
+<HR>
+<A name=HUDSpriteCreate></A>
+<H1 class=name>HUDSpriteCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDSpriteCreate =</A><A>( material as </A><A 
+class=type>string</A><A>, the width,height,parent as </A><A 
+class=type>real</A><A>);</A> <BR><A>Creates a new on-screen the sprite and 
+returns its id.</A> <BR><A>Material - the name of the material</A> 
+<BR><A>Width,height - the width and height of the sprite pixels</A> 
+<BR><A>Parent - the id of the parent sprite for (0 - lack of parents).</A> 
+<HR>
+<A name=HUDSpriteCreateEx></A>
+<H1 class=name>HUDSpriteCreateEx </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDSpriteCreateEx =</A><A>( 
+width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A> 
+<BR><A>Creates a new on-screen the sprite from the portion of the texture of the 
+material and returns its id. Function is useful when creating multiple sprites 
+comparative small in size and located on one large texture is much more 
+efficient than upload multiple textures for each sprite. <BR>The material in 
+this function is not set due to the GML (not more than 4 arguments in the DLL 
+functions when using the String argument). You can assign the ������� material 
+using the </A><A class=funclink 
+href="../functions/object.htm#ObjectSetMaterial">ObjectSetMaterial</A><A>.</A> 
+<BR><A>Width,height - the width and height of the sprite pixels</A> 
+<BR><A>Left,top - UV-coordinates of the upper left corner of the strip (on the 
+upper-left corner of the textures)</A> <BR><A>Right,bottom - UV-coordinates of 
+the bottom right corner of the strip (on the upper-left corner of the 
+textures)</A> <BR><A>Parent - the id of the parent sprite for (0 - lack of 
+parents).</A> 
+<HR>
+<A name=SpriteCreate></A>
+<H1 class=name>SpriteCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteCreate =</A><A>( material as </A><A 
+class=type>string</A><A>, the width,height,parent as </A><A 
+class=type>real</A><A>);</A> <BR><A>Creates a new spatial sprite and returns its 
+id.</A> <BR><A>Material - the name of the material</A> <BR><A>Width,height - the 
+width and height of the sprite in units of the coordinate system</A> 
+<BR><A>Parent - the id of the parent sprite for (0 - lack of parents).</A> 
+<HR>
+<A name=SpriteCreateEx></A>
+<H1 class=name>SpriteCreateEx </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteCreateEx =</A><A>( 
+width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A> 
+<BR><A>Creates a new spatial sprite strip from the texture of the material and 
+returns its id. Function is useful when creating multiple sprites comparative 
+small in size and located on one large texture is much more efficient than 
+upload multiple textures for each sprite. <BR>The material in this function is 
+not set due to the GML (not more than 4 arguments in the DLL functions when 
+using the String argument). You can assign the ������� material using the </A><A 
+class=funclink 
+href="../functions/object.htm#ObjectSetMaterial">ObjectSetMaterial</A><A>.</A> 
+<BR><A>Width,height - the width and height of the sprite in units of the 
+coordinate system</A> <BR><A>Left,top - UV-coordinates of the upper left corner 
+of the strip (on the upper-left corner of the textures)</A> <BR><A>Right,bottom 
+- UV-coordinates of the bottom right corner of the strip (on the upper-left 
+corner of the textures)</A> <BR><A>Parent - the id of the parent sprite for (0 - 
+lack of parents).</A> 
+<HR>
+<A name=SpriteSetSize></A>
+<H1 class=name>SpriteSetSize </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteSetSize =</A><A>( sprite,width,height as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the sprite.</A> 
+<BR><A>Sprite to the sprite id</A> <BR><A>Width,height - the width and height of 
+the sprite.</A> 
+<HR>
+<A name=SpriteScale></A>
+<H1 class=name>SpriteScale </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteScale =</A><A>( sprite,hscale,vscale as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the size of the sprite's current 
+size.</A> <BR><A>Sprite to the sprite id</A> <BR><A>Hscale,vscale - are added to 
+the current values of width and height.</A> 
+<HR>
+<A name=SpriteSetRotation></A>
+<H1 class=name>SpriteSetRotation </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteSetRotation =</A><A>( sprite,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the rotation angle of the sprite. 
+Please note that this angle refers only to the image and does not affect the 
+normal rotating the object along the axes XYZ.</A> <BR><A>Sprite to the sprite 
+id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=SpriteRotate></A>
+<H1 class=name>SpriteRotate </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteRotate =</A><A>( sprite,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the sprite rotation relative to the 
+current angle. Please note that this angle refers only to the image and does not 
+affect the normal rotating the object along the axes XYZ.</A> <BR><A>Sprite to 
+the sprite id</A> <BR><A>Angle is added to the current corner turn.</A> 
+<HR>
+<A name=SpriteMirror></A>
+<H1 class=name>SpriteMirror </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteMirror =</A><A>( sprite,u,v as </A><A 
+class=type>real</A><A> );</A> <BR><A>Displays the sprite mirror horizontally 
+and/or vertically. Works only for the spatial sprites.</A> <BR><A>Sprite to the 
+sprite id</A> <BR><A>U - horizontal, </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> <BR><A>V - vertical, 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 
+0, respectively).</A> 
+<HR>
+<A name=SpriteNoZWrite></A>
+<H1 class=name>SpriteNoZWrite </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteNoZWrite =</A><A>( sprite,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables the entry in the 
+Z-buffer for the sprite. Disabling this property allows us to eliminate the 
+artifact generated by overlapping each other multiple spatial sprites. This is 
+particularly true in the case of transparent images.</A> <BR><A>Sprite to the 
+sprite id</A> <BR><A>Mode - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> 
+<HR>
+<A name=SpriteSetBounds></A>
+<H1 class=name>SpriteSetBounds </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteSetBounds =</A><A>( sprite,left,top,right,bottom as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies a fragment of the textures for 
+the sprite in pixels. Feature allows you to animate the sprite, consistently 
+pushing a fragment along the recruitment. You can also use it, for example, for 
+the implementation of the mini-card.</A> <BR><A>Sprite to the sprite id</A> 
+<BR><A>Left,top - the coordinates of the upper left corner of the strip (in 
+pixels, relative to the upper left corner of the textures)</A> 
+<BR><A>Right,bottom - Coordinates the coordinates of the bottom right corner of 
+the strip (in pixels, relative to the upper left corner of the textures).</A> 
+<HR>
+<A name=SpriteSetBoundsUV></A>
+<H1 class=name>SpriteSetBoundsUV </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteSetBounds =</A><A>( sprite,left,top,right,bottom as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies a fragment of the textures for 
+the sprite UV coordinates. Coordinates (0, 0) correspond to the upper-left 
+corner of the texture (1, 1) - lower right.</A> <BR><A>Sprite to the sprite 
+id</A> <BR><A>Left,top - UV-coordinates of the upper left corner of the portion 
+of the</A> <BR><A>Right,bottom - UV-coordinates the coordinates of the bottom 
+right corner of the strip.</A> 
+<HR>
+<A name=SpriteSetOrigin></A>
+<H1 class=name>SpriteSetOrigin </H1><A class=type>Real</A><A> </A><A 
+class=function>SpriteSetOrigin =</A><A>( sprite,x,y as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the starting point sprite - that 
+is, the point around which the sprite rotation. By default, the rotation around 
+the center of the sprite.</A> <BR><A>Sprite to the sprite id</A> 
+<BR><A>X,y-coordinates of the starting point in pixels relative to the center of 
+the sprite (coordinates (0, 0) correspond to the center).</A> 
+<HR>
+</DIV></BODY></HTML>

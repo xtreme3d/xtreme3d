@@ -57,6 +57,10 @@ Features
 * Window creation
 * ...plus a lot more!
 
+Documentation
+-------------
+Xtreme3D is fully documented in Russian, the help file is [here](https://github.com/xtreme3d/xtreme3d/tree/master/doc). Machine-translated English version is also [available](https://github.com/xtreme3d/xtreme3d/tree/master/doc-en) (thanks to Bill Collins for making this).
+
 Asset Creation
 --------------
 For static geometry with lightmaps (such as levels), we recommend using B3D (Blitz3D) format. You can use B3D exporter for Blender to create models in this format - find it in tools/blender-b3d-exporter.

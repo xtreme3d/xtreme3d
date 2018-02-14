@@ -1,0 +1,68 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Skeletal Animation 1</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 9 <BR>Basics of the skeletal animation 
+</H1><A><B>Level:</B> Beginner</A> <BR><A><B>Version of the Xtreme3D:</B> 
+3.0.x</A> <BR><A><B>Author:</B> Gecko</A><A class=ntext> <BR><BR>Sometimes 
+opportunities ���������� animation is not enough. This is the case, basically, 
+games of the genre of action. For example, you may want to "give" their hero 
+into the hands of the weapons or "wear" armor. When using the topmost animations 
+it is impossible (with rare exceptions). In addition, the ��������� animation 
+can require too much memory for storage of frames. Therefore, if you are using 
+the model with a large number of polygons, wise will select the skeletal 
+animation. <BR>Instead of storing the key frames (as in the case of The 
+���������� animations) for each of the poses of the character, the use of 
+skeletal animation implies one model in the neutral position and a large set of 
+matrices that transform the various parts of the model. These matrices 
+conditionally called bones. To each of the Bones tied group of vertices. One 
+vertex can "belong" to multiple bones immediately, with varying degrees of 
+influence that makes the animation more natural (This property is called the 
+bone �����������). <BR>For the first time, this technology has been used in the 
+game Half-Life, and Xtreme3D supports the format of the models of Half-Life - 
+SMD. As an alternative to the SMD, also supported by the format of the models of 
+Doom III - the MD5. <BR><BR>To download the models with the skeletal animation 
+is used, the same object Actor. You do not need to also specify, Xtreme3D is 
+able to recognize the type of models and tune to the correct type of animation: 
+<BR><BR><A>Actor = </A><A class=func2link 
+href="../functions/actor.htm#ActorCreate">ActorCreate</A><A>('model.smd', 
+matlib, matlib,<B> global.</B>scene);</A> <BR><BR>The peculiarity of the SMD 
+format is that the animation model is stored in a separate file, which also has 
+an extension *.smd. Such files can be several. In theory, this method allows you 
+to use the same animation files for different models (if they have the same 
+skeleton). <BR>After the creation of the actor should add these files: 
+<BR><BR><A class=func2link 
+href="../functions/actor.htm#ActorAddObject">ActorAddObject</A><A>(actor, 
+'animation1.smd');</A> <BR><A class=func2link 
+href="../functions/actor.htm#ActorAddObject">ActorAddObject</A><A>(actor, 
+'animation2.smd');</A> <BR><A class=func2link 
+href="../functions/actor.htm#ActorAddObject">ActorAddObject</A><A>(actor, 
+'animation3.smd');</A> <BR><BR>When you add the next smd file, to the animations 
+of the actor adds a new group training, which is assigned a sequence number. The 
+count is 1. That is, if we now ������������ to Group 2: <BR><BR><A 
+class=func2link 
+href="../functions/actor.htm#ActorSwitchToAnimation">ActorSwitchToAnimation</A><A>(actor, 
+2, </A><A class=constant>false</A><A>);</A> <BR><BR>...It will be lost animation 
+loaded from a file animation2.smd. <BR><BR>The skeletal animation apply all the 
+features that we considered in the previous lesson. <!--
+�� ����� ������ �������� � ���������� ������� �������. ��������, ��������� ������� �������� ������������ ����� 3 �� 90 �������� �� ��� X:
+<BR>
+<BR></A><A class=func2link href=../functions/actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor, 3, 90, 0, 0);
+<BR>
+<BR>� ����� �������� ����������� �����, ��������, �� 3 ������� �� ��� Y, ����� �������� ���:
+<BR>
+<BR></A><A class=func2link href=../functions/actor.htm#ActorMoveBone>ActorMoveBone</A><A>(actor, 3, 0, 3, 0);
+<BR>
+<BR>������, �� ������ ������ ������������ ������� ������ - �� ���������� ���������. SMD ��������� ���� �����
+���������� ���, �� �������� � Xtreme3D ����� ������� �� ������:
+<BR>
+<BR>bone_hand=</A><A class=func2link href=../functions/actor.htm#ActorGetBoneByName>ActorGetBoneByName</A><A>(actor, 'boneHand');
+<BR></A><A class=func2link href=../functions/actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor, bone_hand, 90,0,0);
+<BR>
+--><!--
+������� �� ���������� ������ �������� ���������� ���������� � ���� �������� ������ - ��� ����, ����� ����� ����
+"�����������" � ��� ��������� ��������� �������.
+--></A></DIV></BODY></HTML>

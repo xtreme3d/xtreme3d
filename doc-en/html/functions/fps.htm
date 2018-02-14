@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>FPS</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>FPS </H1><A class=type>Class: 
+TGLFPSMovementManager</A><BR><BR><A>FPS is a special, fully automated method of 
+detection and processing of the clashes, optimized for gaming in the first 
+person. Although there is nothing preventing use it in games from third person. 
+The FPS environment is extremely simple to manage, so it can be safely 
+recommended as a base system clashes for both novice and experienced users 
+Xtreme3D. </A><BR>
+<HR>
+<A name=FpsManagerCreate></A>
+<H1 class=name>FpsManagerCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsManagerCreate =</A><A>();</A> <BR><A>Creates the manager of 
+the FPS and returns its id.</A> 
+<HR>
+<A name=FpsManagerSetNavigator></A>
+<H1 class=name>FpsManagerSetNavigator </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsManagerSetNavigator =</A><A>( manager,nav as a </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator indicates that you want to 
+use in the environment of FPS. If this is not done, moving objects will be 
+impossible.</A> <BR><A>Manager - manager id FPS</A> <BR><A>Nav is the id of the 
+navigator.</A> 
+<HR>
+<A name=FpsManagerSetMovementScale></A>
+<H1 class=name>FpsManagerSetMovementScale </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsManagerSetMovementScale =</A><A>( manager,scale as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the factor speed. In fact, this 
+option only affects the force of gravity.</A> <BR><A>Manager - manager id 
+FPS</A> <BR><A>Scale - the coefficient of speed.</A> 
+<HR>
+<A name=FpsManagerAddMap></A>
+<H1 class=name>FpsManagerAddMap </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsManagerAddMap =</A><A>( manager,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds the card. Map is an object of free 
+form (freeform), representing the geometry of the level used for collision 
+detection. This geometry may not be the same as the one that is directly visible 
+to the player in the form of architectural buildings and other objects as well 
+as from the point of view of optimization is much more profitable to provide 
+complex elements of the level as a simple invisible "boxes".</A> <BR><A>Manager 
+- manager id FPS</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=FpsManagerRemoveMap></A>
+<H1 class=name>FpsManagerRemoveMap </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsManagerRemoveMap =</A><A>( manager,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Removes the selected card. In fact, card 
+remains untouched, but it ceases to take into account the collision handler 
+FPS.</A> <BR><A>Manager - manager id FPS</A> <BR><A>The object is the object 
+ID.</A> 
+<HR>
+<A name=FpsManagerMapSetCollisionGroup></A>
+<H1 class=name>FpsManagerMapSetCollisionGroup </H1><A class=type>Real</A><A> 
+</A><A class=function>FpsManagerMapSetCollisionGroup =</A><A>( 
+manager,object,group as </A><A class=type>real</A><A> );</A> <BR><A>There are no 
+details.</A> <BR><A>The object is the object id</A> <BR><A>Group - information 
+about missing.</A> 
+<HR>
+<A name=FpsSetManager></A>
+<H1 class=name>FpsSetManager </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsSetManager =</A><A>( object,manager as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the manager of the FPS for the 
+object. After this procedure, the object will be taken into account when 
+checking for collisions, and his movement is controlled by the functions of the 
+FPS.</A> <BR><A>The object is the object id</A> <BR><A>Manager - manager id 
+FPS.</A> 
+<HR>
+<A name=FpsSetCollisionGroup></A>
+<H1 class=name>FpsSetCollisionGroup </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsSetCollisionGroup =</A><A>( object,group as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>The object 
+is the object id</A> <BR><A>Group - information about missing.</A> 
+<HR>
+<A name=FpsSetSphereRadius></A>
+<H1 class=name>FpsSetSphereRadius </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsSetSphereRadius =</A><A>( object radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the radius of the limiting the 
+scope of the object in the environment of FPS.</A> <BR><A>The object is the 
+object id</A> <BR><A>Radius - information about missing.</A> 
+<HR>
+<A name=FpsSetGravity></A>
+<H1 class=name>FpsSetGravity </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsSetGravity =</A><A>( object,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables the gravity of the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+<A name=FpsMove></A>
+<H1 class=name>FpsMove </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsMove =</A><A>( object,speed as </A><A class=type>real</A><A> 
+);</A> <BR><A>Moves the object in its current view direction (vector Direction) 
+at a given speed.</A> <BR><A>The object is the object id</A> <BR><A>Speed is the 
+speed.</A> 
+<HR>
+<A name=FpsStrafe></A>
+<H1 class=name>FpsStrafe </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsStrafe =</A><A>( object,speed as </A><A class=type>real</A><A> 
+);</A> <BR><A>The object moves along the vector Left, i.e. laterally relative to 
+the direction sight.</A> <BR><A>The object is the object id</A> <BR><A>Speed - 
+information about missing.</A> 
+<HR>
+<A name=FpsLift></A>
+<H1 class=name>FpsLift </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsLift =</A><A>( object,speed as </A><A class=type>real</A><A> 
+);</A> <BR><A>The object moves along the vector Up, i.e., up for the sight.</A> 
+<BR><A>The object is the object id</A> <BR><A>Speed - information about 
+missing.</A> 
+<HR>
+<A name=FpsGetVelocity></A>
+<H1 class=name>FpsGetVelocity </H1><A class=type>Real</A><A> </A><A 
+class=function>FpsGetVelocity =</A><A>( object,ind as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the speed of an object on the 
+specified axis.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the 
+index of the axis (1 = X 2 = Y 3 = Z).</A> 
+<HR>
+<!--
+<A name="FpsCountCollisions"></A>
+<H1 class=name>FpsCountCollisions</H1>
+<A class=type>real</A><A> = </A><A class=function>FpsCountCollisions</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>���������� ����� ���������� ������� ������������ ������� � ������. ���������, ��� � ��������� �����
+������ ����� ������� ���������� ������������.</A>
+<BR><A>object - id �������.</A>
+<HR>
+
+<A name="FpsClearCollisions"></A>
+<H1 class=name>FpsClearCollisions</H1>
+<A class=type>real</A><A> = </A><A class=function>FpsClearCollisions</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>���������� ��� ������������ �������.</A>
+<BR><A>object - id �������.</A>
+<HR>
+
+<A name="FpsGetCollisionPosition"></A>
+<H1 class=name>FpsGetCollisionPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>FpsGetCollisionPosition</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>���������� ���������� ����� ������������.</A>
+<BR><A>object - id �������</A>
+<BR><A>col - ����� ������������</A>
+<BR><A>ind - ������ ��� (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FpsGetCollisionNormal"></A>
+<H1 class=name>FpsGetCollisionNormal</H1>
+<A class=type>real</A><A> = </A><A class=function>FpsGetCollisionNormal</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>���������� ������� � ����������� � ����� ������������. </A>
+<BR><A>object - id �������</A>
+<BR><A>col - ����� ������������</A>
+<BR><A>ind - ������ ��� (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="FpsGetCollidedObject"></A>
+<H1 class=name>FpsGetCollidedObject</H1>
+<A class=type>real</A><A> = </A><A class=function>FpsGetCollidedObject</A><A>( object,col as </A><A class=type>real</A><A> );</A>
+<BR><A>���������� id �������, � ������� ��������� ������������. </A>
+<BR><A>object - id �������</A>
+<BR><A>col - ����� ������������.</A>
+<HR>
+--></DIV></BODY></HTML>

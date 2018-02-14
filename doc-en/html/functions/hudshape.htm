@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>HUDShape</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>HUDShape </H1><A class=type>Class: 
+TGLHUDShape</A><BR><BR><A>HUDShape is a two-dimensional figure, which is drawing 
+on the screen on top of the projection. Xtreme3D supports four types of figures: 
+a rectangle (rectangle), the circle (circle), segment (line) and the mesh 
+(mesh). The figures may or may not be material. Figures can be individually set 
+color and transparency regardless of the material. <BR>The figures can be used 
+to draw various complex interface elements - for example, the circle is well 
+suited for the creation of a circular scale of health. </A>
+<HR>
+<A name=HUDShapeRectangleCreate></A>
+<H1 class=name>HUDShapeRectangleCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeRectangleCreate =</A><A>( width,height,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates the shape of a rectangle object and 
+returns its id.</A> <BR><A>Width,height - the width and height of the rectangle 
+in pixels.</A> <BR><A>Parent - the parent id for the figures (0 - lack of 
+parents).</A> 
+<HR>
+<A name=HUDShapeCircleCreate></A>
+<H1 class=name>HUDShapeCircleCreate </H1><A class=type>Real</A><A> = </A><A 
+class=function>HUDShapeCircleCreate</A><A>radius(,slices,startAngle,endAngle,parent 
+as </A><A class=type>real</A><A> );</A> <BR><A>Creates a figure-circle and 
+returns its id.</A> <BR><A>Radius is the radius of the circle</A> <BR><A>Slices 
+- the number of contour rib</A> <BR><A>StartAngle,endAngle - starting and ending 
+angles (in degrees). These options allow you to render is not the whole 
+circumference, and its sector. If you specify 0 and 360, will ���������� the 
+entire circumference of the</A> <BR><A>Parent - the parent id for the figures (0 
+- lack of parents).</A> 
+<HR>
+<A name=HUDShapeLineCreate></A>
+<H1 class=name>HUDShapeLineCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeLineCreate =</A><A>( x1,y1,x2,y2,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a figure-piece and returns its 
+id.</A> <BR><A>X1,y1 - the starting point of the segment in the local 
+coordinates of the object (when their own amount of figures 1x1 they correspond 
+to the pixels)</A> <BR><A>X2,y2 - the end point of the segment in the local 
+coordinates of the object (when their own amount of figures 1x1 they correspond 
+to the pixels)</A> <BR><A>Parent - the parent id for the figures (0 - lack of 
+parents).</A> 
+<HR>
+<A name=HUDShapeMeshCreate></A>
+<H1 class=name>HUDShapeMeshCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeMeshCreate =</A><A>( parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a figure-mesh strainer and returns 
+its id. Mesh allows you to render an arbitrary figure of the rightmost triangles 
+using The </A><A class=funclink 
+href="../functions/hudshape.htm#HUDShapeMeshAddVertex">HUDShapeMeshAddVertex</A><A> 
+and </A><A class=funclink 
+href="../functions/hudshape.htm#HUDShapeMeshAddTriangle">HUDShapeMeshAddTriangle</A><A>.</A> 
+<BR><A>Parent - the parent id for the figures (0 - lack of parents).</A> 
+<HR>
+<A name=HUDShapeSetSize></A>
+<H1 class=name>HUDShapeSetSize </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeSetSize =</A><A>( shape,width,height as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the figures. Note 
+that the size is for different shapes of different interpretation. For 
+rectangles the size corresponds to the actual size on the screen in pixels. For 
+the size of the circles also corresponds to pixels and affects the horizontal 
+and vertical diameters (that is, using varying the width and height of the 
+circle turns into an ellipse). For pieces and ����� dimension is treated as a 
+scaling factor, while the single coefficient corresponds to the width and height 
+equal to 1. For this size of portion and have mesh original scale, and the 
+coordinates of the points would correspond to the pixels on the screen. 
+</A><BR><A>Shape - id figures</A> <BR><A>Width,height - the width and height of 
+the figures.</A> 
+<HR>
+<A name=HUDShapeScale></A>
+<H1 class=name>HUDShapeScale </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeScale =</A><A>( shape,hscale,vscale as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the size of the figures on the 
+size.</A> <BR><A>Shape - id figures</A> <BR><A>Hscale,vscale - are added to the 
+current values of width and height.</A> 
+<HR>
+<A name=HUDShapeSetRotation></A>
+<H1 class=name>HUDShapeSetRotation </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeSetRotation =</A><A>( shape,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the angle of rotation of the 
+figure.</A> <BR><A>Shape - id figures</A> <BR><A>Angle is the angle (in 
+degrees).</A> 
+<HR>
+<A name=HUDShapeRotate></A>
+<H1 class=name>HUDShapeRotate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeRotate =</A><A>( shape,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Modifies the turning figures concerning the 
+current angle.</A> <BR><A>Shape - id figures</A> <BR><A>Angle is added to the 
+current corner turn.</A> 
+<HR>
+<A name=HUDShapeSetColor></A>
+<H1 class=name>HUDShapeSetColor </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeSetColor =</A><A>( shape,color,alpha as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color and transparency of the 
+figures. This color is not dependent on the material, assigned by the figure - 
+you may not assign material and set the color of the figures individually. If 
+the material is assigned, the own color figures is mixed with the texture of the 
+material.</A> <BR><A>Shape - id figures</A> <BR><A>Color - the color of the</A> 
+<BR><A>Alpha-transparency.</A> 
+<HR>
+<A name=HUDShapeSetOrigin></A>
+<H1 class=name>HUDShapeSetOrigin </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeSetOrigin =</A><A>( shape,x,y as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the starting point shapes - that 
+is, the point around which the rotation of the figure. By default, the rotation 
+around the center of the figure.</A> <BR><A>Shape - id figures</A> 
+<BR><A>X,y-coordinates of the starting point in pixels relative to the center of 
+the figures (coordinates (0, 0) correspond to the center).</A> 
+<HR>
+<A name=HUDShapeCircleSetRadius></A>
+<H1 class=name>HUDShapeCircleSetRadius </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeCircleSetRadius =</A><A>( shape radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the radius of the figures-circle. 
+The call of this function is equivalent to setting the width and height equal to 
+the ������������ radius.</A> <BR><A>Shape - id figures</A> <BR><A>Radius is the 
+radius of the.</A> 
+<HR>
+<A name=HUDShapeCircleSetSlices></A>
+<H1 class=name>HUDShapeCircleSetSlices </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeCircleSetSlices =</A><A>( shape,slices as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the number of fins of the contour 
+shape of the circle.</A> <BR><A>Shape - id figures</A> <BR><A>Slices - the 
+number of fins on the circuit.</A> 
+<HR>
+<A name=HUDShapeCircleSetAngles></A>
+<H1 class=name>HUDShapeCircleSetAngles </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeCircleSetAngles =</A><A>( shape,startAngle,as endAngle 
+</A><A class=type>real</A><A> );</A> <BR><A>Specifies the starting and ending 
+angles of the figure-circle. These options allow you to render is not the whole 
+circumference, and its sector. If you specify 0 and 360, will ���������� the 
+entire circumference of the</A> <BR><A>Shape - id figures</A> 
+<BR><A>StartAngle,endAngle - starting and ending angles (in degrees).</A> 
+<HR>
+<A name=HUDShapeLineSetPoints></A>
+<H1 class=name>HUDShapeLineSetPoints </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeLineSetPoints =</A><A>( shape,x1,y1,x2,y2 as the </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the start and end points of the 
+figures-segment. Terms defined in the local coordinates of an object, so if you 
+change the size of the figures they may not coincide with the coordinates of the 
+pixels on the screen (they correspond to the pixels for the size 1x1).</A> 
+<BR><A>Shape - id figures</A> <BR><A>X1,y1 - the starting point of the segment 
+of the</A> <BR><A>X2,y2 - the end point of the line segment.</A> 
+<HR>
+<A name=HUDShapeLineSetWidth></A>
+<H1 class=name>HUDShapeLineSetWidth </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeLineSetWidth =</A><A>( shape,width as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the thickness of the 
+figures-segment.</A> <BR><A>Shape - id figures</A> <BR><A>Width - the thickness 
+of the lengths in pixels.</A> 
+<HR>
+<A name=HUDShapeMeshAddVertex></A>
+<H1 class=name>HUDShapeMeshAddVertex </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeMeshAddVertex =</A><A>( shape,x,y,u,v as </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds a new vertex in a figure-mesh 
+strainer.</A> <BR><A>Shape - id figures</A> <BR><A>X,Y - top of the local object 
+coordinates</A> <BR><A>U,v - texture coordinates of the vertices.</A> 
+<HR>
+<A name=HUDShapeMeshAddTriangle></A>
+<H1 class=name>HUDShapeMeshAddTriangle </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeMeshAddTriangle =</A><A>( shape,v1,v2,v3 as the </A><A 
+class=type>real</A><A> );</A> <BR><A>Adds a new triangle in a figure-mesh 
+strainer. The triangle is formed index the vertices v1, v2, v3.</A> <BR><A>Shape 
+- id figures</A> <BR><A>V1,v2,v3 - the indices of vertices.</A> 
+<HR>
+<A name=HUDShapeMeshSetVertex></A>
+<H1 class=name>HUDShapeMeshSetVertex </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeMeshSetVertex =</A><A>( shape,index,x,y as </A><A 
+class=type>real</A><A> );</A> <BR><A>Modifies an existing top figures of 
+����.</A> <BR><A>Shape - id figures</A> <BR><A>Index - the index tops</A> 
+<BR><A>X,Y is the peak in the local coordinates of the object.</A> 
+<HR>
+<A name=HUDShapeMeshSetTexCoord></A>
+<H1 class=name>HUDShapeMeshSetTexCoord </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDShapeMeshSetTexCoord =</A><A>( shape,index,u,v as </A><A 
+class=type>real</A><A> );</A> <BR><A>Modifies the texture coordinates the 
+existing top figures of ����.</A> <BR><A>Shape - id figures</A> <BR><A>Index - 
+the index tops</A> <BR><A>U,v - texture coordinates.</A> 
+<HR>
+</DIV></BODY></HTML>

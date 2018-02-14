@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Camera</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Camera </H1><A class=type>Class: TGLCamera</A><BR><BR><A>The 
+appointment of the object the camera (Camera) it is clear from the name - this 
+is the point of the scene, which, like other objects, has a position and 
+orientation in space. You can create several cameras and switch between them at 
+any time of the function of the </A><A class=funclink 
+href="../functions/viewer.htm#ViewerSetCamera">ViewerSetCamera</A><A>. You can 
+also "bind" the camera to the object or manage it using the mouse. Remember that 
+in order for the camera something has shown, it must assign a previously 
+established the function of the </A><A class=funclink 
+href="../functions/viewer.htm#ViewerSetCamera">ViewerSetCamera</A><A>.</A> 
+<HR>
+<A name=CameraCreate></A>
+<H1 class=name>CameraCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraCreate =</A><A>( parent as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a new camera and returns its id.</A> <BR><A>Parent - the 
+parent id for the camera (0 - lack of parents).</A> 
+<HR>
+<A name=CameraSetStyle></A>
+<H1 class=name>CameraSetStyle </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetStyle =</A><A>( cam,cs as </A><A class=type>real</A><A> 
+);</A> <BR><A>Defines the so-called camera style (cs) is a method of projection 
+on the screen. The available values of Cs:</A> <BR><A class=constant 
+name=csPerspective>CsPerspective</A><A> = 0 - The prospect (the default 
+value);</A> <BR><A class=constant name=csOrthogonal>CsOrthogonal</A><A> = 1 - 
+��������������� (parallel) projection (without promising reduction). 
+��������������� projection at an angle of 45 degrees is called The 
+����������;</A> <BR><A class=constant name=csOrtho2D>CsOrtho2D</A><A> = 2 - 
+infinite ��������������� projection. The reference value requested by the 
+function of the </A><A class=funclink 
+href="../functions/camera.htm#CameraSetViewDepth">CameraSetViewDepth</A><A> 
+(range) is ignored.</A> <BR><A class=constant 
+name=csInfinitePerspective>CsInfinitePerspective</A><A> = 3 - infinite 
+perspective. The reference value requested by the function of the </A><A 
+class=funclink 
+href="../functions/camera.htm#CameraSetViewDepth">CameraSetViewDepth</A><A> 
+(range) is ignored.</A> <BR><A>Cam - the camera id</A> <BR><A>Cs is a style of 
+camera.</A> 
+<HR>
+<A name=CameraSetFocal></A>
+<H1 class=name>CameraSetFocal </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetFocal =</A><A>( cam,the fov as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the angle of view camera (see 
+</A><A class=link href="../glossary/fov.htm" target=main>FOV</A><A>). Changing 
+this value, you can achieve the effect of approximations/distance.</A> 
+<BR><A>Cam - the camera id</A> <BR><A>The FOV - the angle of view (default: 
+50).</A> 
+<HR>
+<A name=CameraSetSceneScale></A>
+<H1 class=name>CameraSetSceneScale </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetSceneScale =</A><A>( cam,scale as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the scale of the image of the camera. 
+In fact, analog </A><A class=funclink 
+href="../functions/camera.htm#CameraSetFocal">CameraSetFocal</A><A>, but did not 
+address the long-term reduction.</A> <BR><A>Cam - the camera id</A> <BR><A>Scale 
+- Scale (default: 1).</A> 
+<HR>
+<A name=CameraScaleScene></A>
+<H1 class=name>CameraScaleScene </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraScaleScene =</A><A>( cam,scale as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the scale of the camera picture, as 
+</A><A class=funclink 
+href="../functions/camera.htm#CameraSetSceneScale">CameraSetSceneScale</A><A>, 
+but relative to the current value of the scale.</A> <BR><A>Cam - the camera 
+id</A> <BR><A>Scale is added to the current value of the scale.</A> 
+<HR>
+<A name=CameraSetViewDepth></A>
+<H1 class=name>CameraSetViewDepth </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetViewDepth =</A><A>( cam,depth as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the range of camera - all objects 
+beyond this distance will not ����������. This allows you to increase the speed 
+of rendering, but it can lead to some artifacts. For example, if too small 
+distance review of some objects can partially "clipped" and with too much - 
+"climb" on each other.</A> <BR><A>Cam - the camera id</A> <BR><A>Depth - 
+distance (default value: 100)</A> 
+<HR>
+<A name=CameraSetTargetObject></A>
+<H1 class=name>CameraSetTargetObject </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetTargetObject =</A><A>( cam,obj as </A><A 
+class=type>real</A><A> );</A> <BR><A>Assigns the object-The purpose of the 
+camera. This camera will always aim at goal, wherever it was, and the normal 
+functions of the signal is ignored. Purpose may be any object - for example, the 
+character, which is controlled by the player.</A> <BR><A>Please note that the 
+appointment of a goal is not "binds" the camera to the object is moving the goal 
+camera stays in place.</A> <BR><A>Cam - the camera id</A> <BR><A>Obj is the 
+object ID.</A> 
+<HR>
+<A name=CameraMoveAroundTarget></A>
+<H1 class=name>CameraMoveAroundTarget </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraMoveAroundTarget =</A><A>( cam,pitch,turn as </A><A 
+class=type>real</A><A> );</A> <BR><A>The camera rotates around its object and 
+purpose. Rotation is carried out on the two axes - X and Y.</A> <BR><A>Cam - the 
+camera id</A> <BR><A>Pitch Angle of rotation along the X-axis</A> <BR><A>Turn - 
+the angle on the Y axis.</A> 
+<HR>
+<A name=CameraSetDistanceToTarget></A>
+<H1 class=name>CameraSetDistanceToTarget </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetDistanceToTarget =</A><A>( cam,distance as </A><A 
+class=type>real</A><A> );</A> <BR><A>Changes the distance between the camera and 
+the object-purpose (brings or takes the camera on purpose). </A><BR><A>Cam - the 
+camera id</A> <BR><A>Distance is the distance.</A> 
+<HR>
+<A name=CameraGetDistanceToTarget></A>
+<H1 class=name>CameraGetDistanceToTarget </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraGetDistanceToTarget =</A><A>( cam as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the distance between the camera and 
+the object of the purpose.</A> <BR><A>Cam - id of the camera.</A> 
+<HR>
+<A name=CameraCopyToTexture></A>
+<H1 class=name>CameraCopyToTexture </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraCopyToTexture =</A><A>( cam as </A><A 
+class=type>real</A><A>, material as </A><A class=type>string</A><A>, the 
+width,height as </A><A class=type>real</A><A> ).</A> <BR><A>Copies the contents 
+of the camera (������������) image in the texture of the material. 
+</A><BR><A>Cam - the camera id</A> <BR><A>Material - the name of the 
+material</A> <BR><A>Width, height, width and height of the texture generated in 
+pixels. Must be the degree of deuce (that is, for example, 128, 256, 512, 
+etc.).</A> 
+<HR>
+<A name=CameraGetNearPlane></A>
+<H1 class=name>CameraGetNearPlane </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraGetNearPlane =</A><A>( cam as </A><A class=type>real</A><A> 
+).</A> <BR><A>Returns the distance to the near clipping plane of the camera 
+(that is, the plane closer which nothing is drawn).</A> <BR><A>Cam - id of the 
+camera.</A> 
+<HR>
+<A name=CameraSetNearPlaneBias></A>
+<H1 class=name>CameraSetNearPlaneBias </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetNearPlaneBias =</A><A>( cam,bias as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the factor the near clipping 
+plane of the camera. Directly change the near plane (as is the case for far 
+plane </A><A class=funclink 
+href="../functions/camera.htm#CameraSetViewDepth">CameraSetViewDepth 
+function</A><A>) it is impossible - it is calculated by a special formula, 
+taking into account the angle of view and permissions. Using this coefficient, 
+you can move the plane forward (the value is greater than 1) or backward (values 
+less than 1).</A> <BR><A>Cam - the camera id</A> <BR><A>Bias - the coefficient 
+(default: 1).</A> 
+<HR>
+<A name=CameraAbsoluteVectorToTarget></A>
+<H1 class=name>CameraAbsoluteVectorToTarget </H1><A class=type>Real</A><A> 
+</A><A class=function>CameraAbsoluteVectorToTarget =</A><A>( cam,ind as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns a vector Z In The ���������������� 
+baseline camera, focused on its object and purpose (in other words, the absolute 
+direction from the camera to the object and purpose). If the Chamber has no 
+purpose, returns its own absolute vector Direction.</A> <BR><A>Cam - the camera 
+id</A> <BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = 
+Z).</A> 
+<HR>
+<A name=CameraAbsoluteRightVectorToTarget></A>
+<H1 class=name>CameraAbsoluteRightVectorToTarget </H1><A class=type>Real</A><A> 
+</A><A class=function>CameraAbsoluteRightVectorToTarget =</A><A>( cam,ind as 
+</A><A class=type>real</A><A> );</A> <BR><A>Returns a vector X in the 
+���������������� baseline camera, focused on its object and purpose (in other 
+words, the absolute direction to the right of the camera relative to its object 
+and purpose). If the Chamber has no purpose, returns its own absolute vector of 
+the right.</A> <BR><A>Cam - the camera id</A> <BR><A>Ind - the index of the 
+coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=CameraAbsoluteUpVectorToTarget></A>
+<H1 class=name>CameraAbsoluteUpVectorToTarget </H1><A class=type>Real</A><A> 
+</A><A class=function>CameraAbsoluteUpVectorToTarget =</A><A>( cam,ind as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns a vector Y In The ���������������� 
+baseline camera, focused on its object and purpose (in other words, the absolute 
+direction up from the camera relative to its object and purpose). If the Chamber 
+has no purpose, returns its own absolute vector Up.</A> <BR><A>Cam - the camera 
+id</A> <BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = 
+Z).</A> 
+<HR>
+<A name=CameraZoomAll></A>
+<H1 class=name>CameraZoomAll </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraZoomAll =</A><A>( cam as </A><A class=type>real</A><A> 
+).</A> <BR><A>Has the camera so that it covered all of the objects in the 
+scene.</A> <BR><A>Cam - id of the camera.</A> 
+<HR>
+<A name=CameraScreenDeltaToVector></A>
+<H1 class=name>CameraScreenDeltaToVector </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraScreenDeltaToVector =</A><A>( cam,deltax 
+deltay,,ratio,normx,normy,normz,ind as </A><A class=type>real</A><A> );</A> 
+<BR><A>Calculates the absolute transfer vector corresponding to the OSD (On 
+Screen Display) the transfer vector of the camera. Useful function for the 
+implementation of the UI elements on the stage (the 3D Imager).</A> <BR><A>Cam - 
+the camera id</A> <BR><A>Deltax deltay,is an integer, the screen transfer 
+vector</A> <BR><A>The ratio is the coefficient, which is multiplied by the 
+vector screen</A> <BR><A>Normx,normy,normz - normal plane, in which to calculate 
+the 3d transfer</A> <BR><A>Ind - the index of the coordinates of the vector (0 = 
+X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=CameraScreenDeltaToVectorXY></A>
+<H1 class=name>CameraScreenDeltaToVectorXY </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraScreenDeltaToVectorXY =</A><A>( cam,deltax 
+deltay,,ratio,ind as </A><A class=type>real</A><A> );</A> <BR><A>The function 
+does the same as </A><A class=funclink 
+href="../functions/camera.htm#CameraScreenDeltaToVector">CameraScreenDeltaToVector</A><A>, 
+but is optimized to work in the XY plane.</A> <BR><A>Cam - the camera id</A> 
+<BR><A>Deltax deltay,is an integer, the screen transfer vector</A> <BR><A>The 
+ratio is the coefficient, which is multiplied by the vector screen</A> 
+<BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+
+<HR>
+<A name=CameraScreenDeltaToVectorXZ></A>
+<H1 class=name>CameraScreenDeltaToVectorXZ </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraScreenDeltaToVectorXZ =</A><A>( cam,deltax 
+deltay,,ratio,ind as </A><A class=type>real</A><A> );</A> <BR><A>The function 
+does the same as </A><A class=funclink 
+href="../functions/camera.htm#CameraScreenDeltaToVector">CameraScreenDeltaToVector</A><A>, 
+but is optimized for work in the xz plane.</A> <BR><A>Cam - the camera id</A> 
+<BR><A>Deltax deltay,is an integer, the screen transfer vector</A> <BR><A>The 
+ratio is the coefficient, which is multiplied by the vector screen</A> 
+<BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+
+<HR>
+<A name=CameraScreenDeltaToVectorYZ></A>
+<H1 class=name>CameraScreenDeltaToVectorYZ </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraScreenDeltaToVectorYZ =</A><A>( cam,deltax 
+deltay,,ratio,ind as </A><A class=type>real</A><A> );</A> <BR><A>The function 
+does the same as </A><A class=funclink 
+href="../functions/camera.htm#CameraScreenDeltaToVector">CameraScreenDeltaToVector</A><A>, 
+but is optimized for work in the xz plane.</A> <BR><A>Cam - the camera id</A> 
+<BR><A>Deltax deltay,is an integer, the screen transfer vector</A> <BR><A>The 
+ratio is the coefficient, which is multiplied by the vector screen</A> 
+<BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+
+<HR>
+<A name=CameraAbsoluteEyeSpaceVector></A>
+<H1 class=name>CameraAbsoluteEyeSpaceVector </H1><A class=type>Real</A><A> 
+</A><A class=function>CameraAbsoluteEyeSpaceVector =</A><A>( 
+cam,fordist,rightdist,updist,ind as </A><A class=type>real</A><A> );</A> 
+<BR><A>Calculates the absolute transfer vector that matches the specified 
+transfer vector species in the space of the camera.</A> <BR><A>Cam - the camera 
+id</A> <BR><A>Fordist,rightdist,updist - transfer forward, right and Up</A> 
+<BR><A>Ind - the index of the coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+
+<HR>
+<A name=CameraSetAutoLeveling></A>
+<H1 class=name>CameraSetAutoLeveling </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraSetAutoLeveling =</A><A>( cam,factor as </A><A 
+class=type>real</A><A> );</A> <BR><A>Change the vector of the camera direction 
+so that the vector Up pointed upwards (0, 1, 0).</A> <BR><A>Cam - the camera 
+id</A> <BR><A>Factor - the higher the value, the slower will be corrected 
+vectors.</A> 
+<HR>
+<A name=CameraMoveInEyeSpace></A>
+<H1 class=name>CameraMoveInEyeSpace </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraMoveInEyeSpace =</A><A>( cam,fordist,rightdist,updist as 
+</A><A class=type>real</A><A> );</A> <BR><A>The camera moves in its species 
+space.</A> <BR><A>Cam - the camera id</A> <BR><A>Fordist,rightdist,updist - 
+moving forward, to the right and up.</A> 
+<HR>
+<A name=CameraMoveTargetInEyeSpace></A>
+<H1 class=name>CameraMoveTargetInEyeSpace </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraMoveTargetInEyeSpace =</A><A>( cam,fordist,rightdist,updist 
+as </A><A class=type>real</A><A> );</A> <BR><A>Moves the target camera in its 
+species space.</A> <BR><A>Cam - the camera id</A> 
+<BR><A>Fordist,rightdist,updist - moving forward, to the right and up.</A> 
+<HR>
+<A name=CameraPointInFront></A>
+<H1 class=name>CameraPointInFront </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraPointInFront =</A><A>( cam,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns true if the point is in the 
+camera's field of view.</A> <BR><A>Cam - the camera id</A> <BR><A>X,y,z 
+coordinates of the point.</A> 
+<HR>
+<A name=CameraGetFieldOfView></A>
+<H1 class=name>CameraGetFieldOfView </H1><A class=type>Real</A><A> </A><A 
+class=function>CameraGetFieldOfView =</A><A>( cam,vpdim as </A><A 
+class=type>real</A><A> );</A> <BR><A>Returns the angle of view camera in 
+degrees.</A> <BR><A>Cam - the camera id</A> <BR><A>Vpdim is the size of the 
+species (the lesser of the width and height).</A> 
+<HR>
+</DIV></BODY></HTML>

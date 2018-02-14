@@ -1,0 +1,92 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Download the file from the</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 7 <BR>Download the file from the 
+</H1><A><B>Level:</B> Beginner</A> <BR><A><B>Version of the Xtreme3D:</B> 
+3.0.x</A> <BR><A><B>Author:</B> Gecko</A><A class=ntext> <BR><BR>The entities 
+is, of course, is good, but to create a full-fledged games their is not enough. 
+The most favorite occupation of everyone who starts to get acquainted with the 
+3D-�������� - clearly, loading the engine own models produced in third-party 
+editor. Xtreme3D supports loading of models of formats 3DS (3D Studio), OBJ 
+(Maya), (LWO Lightwave), BSP (Quake), MS3D (Milkshape), B3D (Blitz3D), the LOD 
+LODka (3D) and many others. <BR>Static (i.e., The ���������������) model in the 
+Xtreme3D is loaded in a special object - Freeform: <BR><BR><A>Model = </A><A 
+class=func2link 
+href="../functions/freeform.htm#FreeformCreate">FreeformCreate</A><A>('model.3ds', 
+matlib, matlib,<B> global.</B>scene);</A> <BR><BR>The second and third 
+parameters of this function are responsible for library materials, which should 
+be used, respectively, for the usual textures and lighting card model. A good 
+form is the creation of a separate library of materials for each object in the 
+Freeform to guaranteed to avoid conflict names of materials. In this case, for 
+ease of use the same library. <BR>If a file with the model includes information 
+about the textures, Xtreme3D will automatically attempt to download them. The 
+only question is exactly where the engine will search for these textures. By 
+default - in a working directory of the game. But to keep them there - not the 
+best idea. It is much more convenient to put texture in any folder �������, the 
+textures. Then we have to specify the active library of materials that the 
+textures to be found there: <BR><BR><A class=func2link 
+href="../functions/material.htm#MaterialLibrarySetTexturePaths">MaterialLibrarySetTexturePaths</A><A>(matlib, 
+'textures');</A> <BR><BR>The materials will be uploaded to the library under 
+those names, which have been specified in the 3D editor. Using these names, you 
+can adjust the characteristics of the material. This makes it possible to 
+partially change the appearance of the model. For example, imagine that you have 
+downloaded the model of the vehicle. You can change the color of the housing or 
+the salon, without affecting other parts to make transparent windows tinted, add 
+the effects of reflections on wheels and so on. <BR><BR>However, as soon as you 
+want to go, you will find that it is impossible to turn the wheel. This is not 
+surprising: they are part of the same Freeform. Therefore, in such a situation, 
+it should be split model for its constituents - the dwelling was: <BR><BR><A>Car 
+= </A><A class=func2link 
+href="../functions/dummycube.htm#DummycubeCreate">DummycubeCreate</A><A>(<B>global.</B>scene);</A> 
+<BR><A class=func2link 
+href="../functions/freeform.htm#FreeformToFreeforms">FreeformToFreeforms</A><A>(model, 
+car);</A> <BR><BR>We create a dummy, which will be a parent for all parts of the 
+vehicle, and we break the model into separate independent Freeform. Note that 
+this operation is possible only if the parts of the vehicle (bodywork, wheels, 
+doors, trunk, etc.) constitute a separate dwelling was - not all formats 
+supported models such a division. <BR>The original Freeform we have already is 
+not needed, and we delete: <BR><BR><A class=func2link 
+href="../functions/object.htm#ObjectDestroy">ObjectDestroy</A><A>(model);</A> 
+<BR><BR>To manage the created objects, we need to get their ids. You can do this 
+function of the <A class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A>. This does not 
+superfluous will know how many total ����� was in the original model. Suppose 
+that the five - four wheels and bodywork: <BR><BR><A>Car_body = </A><A 
+class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A><A>(map, 0);</A> 
+<BR><A>Car wheel_1 = </A><A class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A><A>(map, 1);</A> 
+<BR><A>Car wheel_2 = </A><A class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A><A>(map, 
+(2);</A> <BR><A>Car wheel_3 = </A><A class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A><A>(map, 3);</A> 
+<BR><A>Car wheel_4 = </A><A class=func2link 
+href="../functions/object.htm#ObjectGetChild">ObjectGetChild</A><A>(map, 4);</A> 
+<BR><BR>Remember that the count is zero, so that the first descendant - zero. 
+<BR>Thus, we have received a new hierarchy, the structure is completely 
+identical to the original model. You can now rotate the wheel: <BR><BR><A 
+class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(car_wheel1, 
+3);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(car_wheel2, 
+3);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(car_wheel3, 
+3);</A> <BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch</A><A>(car_wheel4, 
+3);</A> <BR><BR><A class=func2link 
+href="../functions/object.htm#ObjectPitch">ObjectPitch instead,</A> you can use 
+the <A class=func2link href="../functions/object.htm#ObjectRoll">ObjectRoll</A> 
+- depending on where "looks" the vehicle bodywork: along the Z-axis or X. 
+<BR><BR>You can also replace some of the models on the other. For example, if 
+you create a model with two wheels, you can hide some of the wheel, leaving the 
+other, and vice versa. Or make several versions of the body with varying degrees 
+of damage to dynamically switch between them, when the vehicle runs in an 
+obstacle. And yet, you can use the coordinates of parts in the space, to create 
+in them a variety of special effects - smoke or flame. Or, for example, if you 
+have created a tank, you can rotate the tower and shoot from the muzzles of 
+projectiles in the appropriate direction. Xtreme3D allows you to do with models 
+of anything! </A></DIV></BODY></HTML>

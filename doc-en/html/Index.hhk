@@ -1,0 +1,711 @@
+<HTML>
+ <HEAD>
+  <META name="GENERATOR" content="htm2chm 3.0.9.3">
+  <!-- Sitemap 1.0 -->
+ </HEAD>
+<BODY>
+ <OBJECT type="text/site properties">
+ </OBJECT>
+<UL>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="AABB">
+  <PARAM name="Local" value="glossary/aabb.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Actor">
+  <PARAM name="Local" value="functions/actor.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Alpha">
+  <PARAM name="Local" value="glossary/alpha.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Anti-aliasing">
+  <PARAM name="Local" value="glossary/antialiasing.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="API">
+  <PARAM name="Local" value="glossary/api.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Axis">
+  <PARAM name="Local" value="glossary/axis.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="B3D">
+  <PARAM name="Local" value="functions/b3d.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Back buffer">
+  <PARAM name="Local" value="glossary/backbuffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Backface Culling">
+  <PARAM name="Local" value="glossary/backfaceculling.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Ball Joint">
+  <PARAM name="Local" value="glossary/balljoint.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Bezier Splines">
+  <PARAM name="Local" value="glossary/beziersplines.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Bilinear Filtering">
+  <PARAM name="Local" value="glossary/bilinearfiltering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Billboard">
+  <PARAM name="Local" value="glossary/billboard.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Bitmap">
+  <PARAM name="Local" value="glossary/bitmap.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Blending">
+  <PARAM name="Local" value="glossary/blending.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Blur">
+  <PARAM name="Local" value="functions/blur.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Buffer">
+  <PARAM name="Local" value="glossary/buffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Bump Mapping">
+  <PARAM name="Local" value="glossary/bumpmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="CAD">
+  <PARAM name="Local" value="glossary/cad.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Camera">
+  <PARAM name="Local" value="functions/camera.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Camera (термин)">
+  <PARAM name="Local" value="glossary/camera.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Cartesian Coordinates">
+  <PARAM name="Local" value="glossary/cartesiancoordinates.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Cel Shader">
+  <PARAM name="Local" value="glossary/celshader.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="CFM">
+  <PARAM name="Local" value="glossary/cfm.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Channel">
+  <PARAM name="Local" value="glossary/channel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Child">
+  <PARAM name="Local" value="glossary/child.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Chroma Keying">
+  <PARAM name="Local" value="glossary/chromakeying.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Collision Detection">
+  <PARAM name="Local" value="glossary/collisiondetection.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Color">
+  <PARAM name="Local" value="glossary/color.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Color Model">
+  <PARAM name="Local" value="glossary/colormodel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Compositing">
+  <PARAM name="Local" value="glossary/compositing.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Computer Graphics">
+  <PARAM name="Local" value="glossary/computergraphics.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Constants">
+  <PARAM name="Local" value="functions/constants.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Convex">
+  <PARAM name="Local" value="glossary/convex.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="CV">
+  <PARAM name="Local" value="glossary/cv.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DCE">
+  <PARAM name="Local" value="functions/dce.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DDS">
+  <PARAM name="Local" value="glossary/dds.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DirectX">
+  <PARAM name="Local" value="glossary/directx.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Displacement Mapping">
+  <PARAM name="Local" value="glossary/displacementmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Dithering">
+  <PARAM name="Local" value="glossary/dithering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DLL">
+  <PARAM name="Local" value="glossary/dll.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Double Buffering">
+  <PARAM name="Local" value="glossary/doublebuffering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Dummycube">
+  <PARAM name="Local" value="functions/dummycube.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="DXT">
+  <PARAM name="Local" value="glossary/dxt.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Engine (термин)">
+  <PARAM name="Local" value="glossary/engine.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Engine">
+  <PARAM name="Local" value="functions/engine.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Environment Mapping">
+  <PARAM name="Local" value="glossary/environmentmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ERP">
+  <PARAM name="Local" value="glossary/erp.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="FAQ">
+  <PARAM name="Local" value="faq.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Fillrate">
+  <PARAM name="Local" value="glossary/fillrate.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="FireFX">
+  <PARAM name="Local" value="functions/firefx.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Focal Length">
+  <PARAM name="Local" value="glossary/focallength.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Fog">
+  <PARAM name="Local" value="glossary/fog.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Font &amp; Text">
+  <PARAM name="Local" value="functions/fonttext.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Forward Kinematics">
+  <PARAM name="Local" value="glossary/forwardkinematics.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="FOV">
+  <PARAM name="Local" value="glossary/fov.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="FPS (термин)">
+  <PARAM name="Local" value="glossary/fps.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="FPS">
+  <PARAM name="Local" value="functions/fps.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Frame buffer">
+  <PARAM name="Local" value="glossary/framebuffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Framework">
+  <PARAM name="Local" value="glossary/framework.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Freeform">
+  <PARAM name="Local" value="functions/freeform.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Front Buffer">
+  <PARAM name="Local" value="glossary/frontbuffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Frustum Culling">
+  <PARAM name="Local" value="glossary/frustumculling.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Geometry">
+  <PARAM name="Local" value="glossary/geometry.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Global Coordinates">
+  <PARAM name="Local" value="glossary/globalcoordinates.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="GLScene">
+  <PARAM name="Local" value="glossary/glscene.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="HDR">
+  <PARAM name="Local" value="glossary/hdr.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Hidden Surface Removal">
+  <PARAM name="Local" value="glossary/hiddensurfaceremoval.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Hierarchy">
+  <PARAM name="Local" value="glossary/hierarchy.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="HUD">
+  <PARAM name="Local" value="glossary/hud.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Interpolation">
+  <PARAM name="Local" value="glossary/interpolation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Inverse Kinematics">
+  <PARAM name="Local" value="glossary/inversekinematics.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Keyframing">
+  <PARAM name="Local" value="glossary/keyframing.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lensflare (термин)">
+  <PARAM name="Local" value="glossary/lensflare.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lensflare">
+  <PARAM name="Local" value="functions/lensflare.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Light">
+  <PARAM name="Local" value="functions/light.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Light Source">
+  <PARAM name="Local" value="glossary/lightsource.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lightmap">
+  <PARAM name="Local" value="glossary/lightmap.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Line Buffer">
+  <PARAM name="Local" value="glossary/linebuffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Lines">
+  <PARAM name="Local" value="functions/lines.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="LOD">
+  <PARAM name="Local" value="glossary/lod.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Low-Poly Modelling">
+  <PARAM name="Local" value="glossary/lowpolymodelling.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Map">
+  <PARAM name="Local" value="glossary/map.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Material">
+  <PARAM name="Local" value="functions/material.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Material (термин)">
+  <PARAM name="Local" value="glossary/material.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Matrix">
+  <PARAM name="Local" value="glossary/matrix.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Mesh">
+  <PARAM name="Local" value="functions/mesh.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Mesh (термин)">
+  <PARAM name="Local" value="glossary/mesh.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Metaball Modelling">
+  <PARAM name="Local" value="glossary/metaballmodelling.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Mipmapping">
+  <PARAM name="Local" value="glossary/mipmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Mirror">
+  <PARAM name="Local" value="functions/mirror.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Model">
+  <PARAM name="Local" value="glossary/model.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Motion Blur">
+  <PARAM name="Local" value="glossary/motionblur.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Motion Capture">
+  <PARAM name="Local" value="glossary/motioncapture.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Mouse">
+  <PARAM name="Local" value="functions/mouse.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Multitexturing">
+  <PARAM name="Local" value="glossary/multitexturing.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Navigator">
+  <PARAM name="Local" value="functions/navigator.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Normal">
+  <PARAM name="Local" value="glossary/normal.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Normal Map">
+  <PARAM name="Local" value="glossary/normalmap.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="NURBS">
+  <PARAM name="Local" value="glossary/nurbs.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Object">
+  <PARAM name="Local" value="functions/object.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Object (термин)">
+  <PARAM name="Local" value="glossary/object.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Occlusion">
+  <PARAM name="Local" value="glossary/occlusion.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Octree">
+  <PARAM name="Local" value="glossary/octree.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ODE (термин)">
+  <PARAM name="Local" value="glossary/ode.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ODE">
+  <PARAM name="Local" value="functions/ode.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="OpenGL">
+  <PARAM name="Local" value="articles/opengl.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="OpenGL (термин)">
+  <PARAM name="Local" value="glossary/opengl.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Parallax Mapping">
+  <PARAM name="Local" value="glossary/parallaxmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Particle System">
+  <PARAM name="Local" value="glossary/particlesystem.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Partition">
+  <PARAM name="Local" value="functions/partition.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Physics Engine">
+  <PARAM name="Local" value="glossary/physicsengine.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Pipeline">
+  <PARAM name="Local" value="glossary/pipeline.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Pixel">
+  <PARAM name="Local" value="glossary/pixel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Polygon">
+  <PARAM name="Local" value="functions/polygon.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Polygon (термин)">
+  <PARAM name="Local" value="glossary/polygon.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Post Processing">
+  <PARAM name="Local" value="glossary/postprocessing.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Primitive (термин)">
+  <PARAM name="Local" value="glossary/primitive.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Primitives">
+  <PARAM name="Local" value="functions/primitives.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Procedural Texture">
+  <PARAM name="Local" value="glossary/proceduraltexture.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Projection">
+  <PARAM name="Local" value="glossary/projection.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Projection Matrix">
+  <PARAM name="Local" value="glossary/projectionmatrix.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Quad">
+  <PARAM name="Local" value="glossary/quad.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Quadtree">
+  <PARAM name="Local" value="glossary/quadtree.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Ragdoll">
+  <PARAM name="Local" value="glossary/ragdoll.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Raycasting">
+  <PARAM name="Local" value="glossary/raycasting.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Real-Time">
+  <PARAM name="Local" value="glossary/realtime.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Reflection Mapping">
+  <PARAM name="Local" value="glossary/reflectionmapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Rendering">
+  <PARAM name="Local" value="glossary/rendering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Resolution">
+  <PARAM name="Local" value="glossary/resolution.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="RGB">
+  <PARAM name="Local" value="glossary/rgb.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ROAM">
+  <PARAM name="Local" value="glossary/roam.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Scene">
+  <PARAM name="Local" value="glossary/scene.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Seamless">
+  <PARAM name="Local" value="glossary/seamless.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shader (термин)">
+  <PARAM name="Local" value="glossary/shader.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shaders">
+  <PARAM name="Local" value="functions/shader.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shading Components">
+  <PARAM name="Local" value="glossary/shadingcomponents.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shading model">
+  <PARAM name="Local" value="glossary/shadingmodel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shadow Volume">
+  <PARAM name="Local" value="glossary/shadowvolume.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shadowplane">
+  <PARAM name="Local" value="functions/shadowplane.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Shadowvolume">
+  <PARAM name="Local" value="functions/shadowvolume.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Skeletal Animation">
+  <PARAM name="Local" value="glossary/skeletalanimation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Skybox">
+  <PARAM name="Local" value="functions/skybox.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Skydome">
+  <PARAM name="Local" value="functions/skydome.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Snapping">
+  <PARAM name="Local" value="glossary/snapping.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Sprite">
+  <PARAM name="Local" value="functions/sprite.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Sprite (термин)">
+  <PARAM name="Local" value="glossary/sprite.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Teapot">
+  <PARAM name="Local" value="glossary/teapot.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Terrain">
+  <PARAM name="Local" value="functions/terrain.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Tesselation">
+  <PARAM name="Local" value="glossary/tesselation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Texel">
+  <PARAM name="Local" value="glossary/texel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Texture">
+  <PARAM name="Local" value="glossary/texture.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Texture Filtering">
+  <PARAM name="Local" value="glossary/texturefiltering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="ThorFX">
+  <PARAM name="Local" value="functions/thorfx.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Tiling">
+  <PARAM name="Local" value="glossary/tiling.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Trail">
+  <PARAM name="Local" value="functions/trail.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Transformation">
+  <PARAM name="Local" value="glossary/transformation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Tree (термин)">
+  <PARAM name="Local" value="glossary/tree.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Tree">
+  <PARAM name="Local" value="functions/tree.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Triangle Strip/Fan">
+  <PARAM name="Local" value="glossary/trianglestripfan.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Triangulation">
+  <PARAM name="Local" value="glossary/triangulation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Tweening">
+  <PARAM name="Local" value="glossary/tweening.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="UV Coordinates">
+  <PARAM name="Local" value="glossary/uvcoordinates.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Vertex">
+  <PARAM name="Local" value="glossary/vertex.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Vertex Animation">
+  <PARAM name="Local" value="glossary/vertexanimation.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Viewer">
+  <PARAM name="Local" value="functions/viewer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Voxel">
+  <PARAM name="Local" value="glossary/voxel.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="VSync">
+  <PARAM name="Local" value="glossary/vsync.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Water">
+  <PARAM name="Local" value="functions/water.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Weighting">
+  <PARAM name="Local" value="glossary/weighting.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Wireframe">
+  <PARAM name="Local" value="glossary/wireframe.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Z-Buffer">
+  <PARAM name="Local" value="glossary/zbuffer.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Z-Buffering">
+  <PARAM name="Local" value="glossary/zbuffering.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Z-Sorting">
+  <PARAM name="Local" value="glossary/zsorting.htm">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="САПР">
+  <PARAM name="Local" value="glossary/sapr.htm">
+ </OBJECT>
+</BODY>
+</HTML>

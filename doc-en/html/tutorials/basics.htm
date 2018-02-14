@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Basics of Xtreme3D</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Lesson 1 <BR>Basics of Xtreme3D. The theory of 
+</H1><A><B>Level:</B> Beginner</A> <BR><A><B>Version of the Xtreme3D:</B> 
+3.0.x</A> <BR><A><B>Author:</B> Gecko</A><A class=ntext> <BR><BR>So, what is 
+Xtreme3D? <BR>First of all, this scene. The stage on which the play "actors" - 
+the objects. The object - the main concept in the Xtreme3D. This is not the same 
+as the object of Game Maker. Objects of Xtreme3D created and managed solely in 
+the software code. The three-dimensional models, entities, special effects, the 
+sky in the background, pictures and text on the screen - all this objects. The 
+objects of any type are controlled, in most cases, by the same means. 
+<BR><BR>One of them is the hierarchy. Any object can have one or more 
+subordinate objects - "the descendants". Is it becomes their "parent" (without 
+the quotes). The descendants, in turn, may have their own descendants, and so 
+on. On this principle and builds the whole scene. What are the benefits? For 
+example, if you disable any object (it will be invisible on the screen), all his 
+descendants (and, accordingly, the descendants of the descendants of the 
+default) will also be disabled. In this case, you can include any of the 
+descendants, and this will not affect the parent. This "inheritance" - the most 
+obvious from the features of the hierarchy. But this is only the tip of the 
+iceberg. The descendants of the object can inherit not only his condition, but 
+also a number of other characteristics. For example, the object becomes tied to 
+its parent - where a parent, offspring. The descendant can move at any distance, 
+but only concerning the location of its parent. It is easier to understand, 
+imagine a steamship: passengers can move freely on the deck or stand on the 
+spot, but all of them, as a matter of fact, moving along with the steamship. 
+<BR><BR>Thus, we gradually come to the displacement. In computer graphics any 
+movements, rotation, and scale are combined under the general term 
+"transformation". The transformation of the Xtreme3D is carried out by three 
+mutually perpendicular to the coordinate axes: X, Y, and Z. The X axis is 
+directed to the right, the Y axis is up, and the Z-axis - "in depth". This is a 
+coordinate system is called the Cartesian rectangular, on behalf of the French 
+mathematician Rene Descartes. The location of any point in the coordinate system 
+is defined by three of its projections on the axle. For example, points 
+(-1.0,-1), (-1,0,1), (1,0,1) and (1,0,-1) form a square 2x2, which lies on the 
+XY plane. Thus, any object of Xtreme3D has three coordinates, describing the 
+point of his position in space. Usually this point coincides with its own center 
+of the object. The position of the object in space can be transferred on the 
+absolute start coordinates scene (0,0,0), or on the coordinates of its parent, 
+if there is one. In the second case referred to the so-called local coordinates 
+of an object in which the point (0,0,0) the descendant is always the point of 
+the provisions of the parent. <BR><BR>Moving an object is carried out by means 
+of the vector. Vector - this segment, directed from the point (0,0,0), in local 
+or absolute coordinates, to any other arbitrary point in the same coordinates 
+and describes the coordinates of the point. The object can be moved to any 
+distance to the side, which shows the vector. For example, vector (0,10,0) moves 
+the object on the ten units of up. <BR>But, since it was not always easy to 
+manually calculate the vector for the desired direction of travel, used in the 
+corners of the Eulerian model (named by the name of Leonard Euler, the Swiss 
+scholar). They define the angle of rotation of the object around its local axes 
+X, Y and Z. The zero angle is perpendicular to the axis. Rotate around the 
+X-axis is called the pitch, around the Y-axis, Turn around the axis of Z - Roll. 
+It is not difficult to guess that, for example, the angle (90,0,0) tips the 
+object back to 90 degrees. <BR>Received as a result of these turns of the 
+Transformation determines the direction of the object (Direction), which also 
+describes a single vector. The unit vector is different from the normal that its 
+length equals one (for the vector describing the direction, the length does not 
+matter). For example, vector directions (0,1,0) corresponds to the corner 
+(90,0,0). <BR>Thus, we get another characteristic of the object - its direction. 
+<BR><BR>Moving an object in his direction is accomplished by multiplying the 
+vector of the direction at a distance of displacement: <BR><BR><A>(0, 0, 1) * 10 
+= (0, 0, 10)</A> <BR><A>(1, -1, 1) * 10 = (10, 10, 10)</A> <BR><BR>And, as a 
+result, we get a new object coordinates (relative to the previous). <BR><BR>In 
+addition to the vector of Direction, an object is also automatically calculated 
+vectors Up and Left, indicating, respectively, up and to the left on the 
+direction. These three mutually perpendicular vectors form a new coordinate 
+system (Left = X, Up = Y Direction = Z), which they inherit all descendants of 
+the object. For the descendant, it becomes the local and all of its 
+transformation are specified in it. Is the following: if we create a descendant 
+of the object and move it to some distance away, when the parent of the 
+descendant will rotate around it, as the earth revolves around the sun! This is 
+an incredibly useful property of the hierarchy. As you will soon make sure that 
+it is used in the Xtreme3D literally every step of the way. <BR><BR>The third is 
+the transformation - scale. It changes the size of the object on three axes (the 
+width, height, length). You can scale on the current value of the scale or 
+completely (to set a specific size in absolute units). Also scaled and 
+coordinate system, The ����������� descendants of the object. That is, the 
+descendant will not only be reduced, but also close to the parent, as if we 
+reduce the whole system of objects. Strictly speaking, the parent+descendants - 
+this is the system objects. It can be considered as one big object, consisting 
+of separate logically grouped items. <BR><BR>Thus, all of the objects in our 
+scene, there are certain mathematical patterns. If you are aware of these 
+patterns, explore the Xtreme3D will be easy. </A></DIV></BODY></HTML>

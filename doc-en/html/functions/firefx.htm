@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>FireFX</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>FireFX </H1><A class=type>Class: TGLFireFXManager, 
+TGLBFireFX</A><BR><BR><A>FireFX - the system of particles, modeling fire. While 
+using the FireFX, you can recreate and other effects: smoke, sparks, explosions, 
+rain, fireworks, and Bengal lights, etc. <BR>FireFX system consists of a finite 
+number of particles - small objects-sprites, depicting the tiny colored dots. 
+Usually the particles moving in the same direction corresponding to the 
+Direction vector object (the truth, you can "blow up" the system - then set free 
+would throw the particles in all parties). <BR><BR>In some cases, it is 
+necessary to create multiple identical effects. Not very easy to repeat all the 
+settings for each of them. Specifically for such a situation, a manager of The 
+FireFX. Manager - it is kind of a server on which performed all the calculations 
+related to the effect. A separate system of FireFX is the customers using 
+settings specified for the manager. You simply create a manager, configure it as 
+you want, and then add any number of systems in all the right places you in the 
+scene. The changes made to the manager settings will automatically affect all 
+their reporting systems.</A> <BR>
+<HR>
+<A name=FireFXManagerCreate></A>
+<H1 class=name>FireFXManagerCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXManagerCreate =</A><A>();</A> <BR><A>Creates a new manager 
+of FireFX and returns its id.</A> 
+<HR>
+<A name=FireFXCreate></A>
+<H1 class=name>FireFXCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXCreate =</A><A>( manager,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new system of FireFX and binds it 
+to the specified object.</A> <BR><A>Manager - id FireFX manager</A> <BR><A>The 
+object is the object ID.</A> 
+<HR>
+<A name=FireFXSetColor></A>
+<H1 class=name>FireFXSetColor </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetColor =</A><A>( 
+manager,incolor,inalpha,outcolor,outalpha as </A><A class=type>real</A><A> 
+);</A> <BR><A>Specifies the color of the particles.</A> <BR><A>Manager - id 
+FireFX manager</A> <BR><A>Incolor,inalpha - color and transparency in the center 
+of the particles</A> <BR><A>Outcolor,outalpha - color and transparency of the 
+periphery of the particles.</A> 
+<HR>
+<A name=FireFXSetMaxParticles></A>
+<H1 class=name>FireFXSetMaxParticles </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetMaxParticles =</A><A>( manager,particles as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the maximum number of particles, 
+are displayed at the same time.</A> <BR><A>Manager - id FireFX manager</A> 
+<BR><A>Particles - the number of particles (from 0 to 255).</A> 
+<HR>
+<A name=FireFXSetParticleSize></A>
+<H1 class=name>FireFXSetParticleSize </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetParticleSize =</A><A>( manager,size as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the particles.</A> 
+<BR><A>Manager - id FireFX manager</A> <BR><A>Size is the size.</A> 
+<HR>
+<A name=FireFXSetDensity></A>
+<H1 class=name>FireFXSetDensity </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetDensity =</A><A>( manager,density as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the density - the number of 
+particles appearing at the same time. <BR><A>Manager - id FireFX manager</A> 
+<BR><A>Density is the density.</A> 
+<HR>
+<A name=FireFXSetEvaporation></A>
+<H1 class=name>FireFXSetEvaporation </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetEvaporation =</A><A>( manager,evaporation as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the stretching of particles 
+vertically (the higher the longer will be particles). <BR><A>Manager - id FireFX 
+manager</A> <BR><A>Evaporation - stretching.</A> 
+<HR>
+<A name=FireFXSetCrown></A>
+<H1 class=name>FireFXSetCrown </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetCrown =</A><A>( manager,crown as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the so-called Corona 
+- the circle around the perimeter of the particles appear. If the size of the 
+crown is equal to zero, the particles appear from one point. <BR><A>Manager - id 
+FireFX manager</A> <BR><A>Crown - the size of the crown.</A> 
+<HR>
+<A name=FireFXSetLife></A>
+<H1 class=name>FireFXSetLife </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetLife =</A><A>( manager,life as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the time of life particles (in 
+tenths of a second). <BR><A>Manager - id FireFX manager</A> <BR><A>Life - the 
+time of life.</A> 
+<HR>
+<A name=FireFXSetBurst></A>
+<H1 class=name>FireFXSetBurst </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetBurst =</A><A>( manager,burst as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the speed of the particles. 
+<BR><A>Manager - id FireFX manager</A> <BR><A>Burst speed.</A> 
+<HR>
+<A name=FireFXSetRadius></A>
+<H1 class=name>FireFXSetRadius </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXSetRadius =</A><A>( manager radius,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the radius of the Circle, within 
+which allowed an arbitrary offset, the source of the particles. <BR><A>Manager - 
+id FireFX manager</A> <BR><A>Radius is the radius of the.</A> 
+<HR>
+<A name=FireFXExplosion></A>
+<H1 class=name>FireFXExplosion </H1><A class=type>Real</A><A> </A><A 
+class=function>FireFXExplosion =</A><A>( manager,isp,maxsp,lbf as </A><A 
+class=type>real</A><A> );</A> <BR><A>"Blasts" system of particles. The set free 
+would throw the particles in all parties. If you call this function once, there 
+will be a single explosion, after which the system will come back to normal. But 
+if the cause of its constantly, explosion and will last, recalling the Bengali 
+fire. <BR><A>Manager - id FireFX manager</A> <BR><A>Isp - initial velocity 
+scattering</A> <BR><A>Maxsp - Maximum Speed Scattering</A> <BR><A>Lbf - the 
+radius of the Sphere, beyond which the explosion should not exit.</A> 
+<HR>
+</DIV></BODY></HTML>

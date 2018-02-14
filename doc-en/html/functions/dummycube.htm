@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Dummycube</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Dummycube </H1><A class=type>Class: 
+TGLDummyCube</A><BR><BR><A class=ntext>The dummy (Dummycube) is a special 
+object, an invisible but having the position and orientation in space. 
+Processing of the dummies is carried out very quickly, and as they, like other 
+objects, may have parents and descendants, this is an ideal objects for the 
+creation of groups and hierarchies. The properties of the manikins and systems 
+constructed on their basis, are applied in areas such as the mechanisms of 
+movement of objects, the hinge design, applying effects and checking the 
+collision.</A>
+<HR>
+ <A name=DummycubeCreate></A>
+<H1 class=name>DummycubeCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>DummycubeCreate =</A><A>( parent as </A><A class=type>real</A><A> 
+);</A> <BR><A class=ntext>Creates a new mannequin and returns its id. 
+<BR><A>Parent</A> - the parent id for the dummy (0 - lack of parents).</A> 
+<HR>
+<A name=DummycubeAmalgamate></A>
+<H1 class=name>DummycubeAmalgamate </H1><A class=type>Real</A><A> = </A><A 
+class=function>DummycubeAmalgamate</A> <A>( object,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Connects all descendants of the 
+dummy in one object in OpenGL. This activates a special mode rendering, in which 
+all the descendants of the manikin will be recorded into one list display. Thus, 
+in some situations, can achieve significant performance gain, but all the 
+changes, addressing the descendants, will be ignored until the dummy will not be 
+caused by <A class=funclink 
+href="../functions/object.htm#ObjectStructureChanged">ObjectStructureChanged</A>. 
+Some of the objects of the own manage list display, may not be compatible with 
+the <A class=funclink 
+href="../functions/dummycube.htm#DummycubeAmalgamate">DummycubeAmalgamate</A>. 
+In addition, this mode does not allows you to sort and selection of visibility 
+in the usual manner. In short, this option is good for static opaque geometry, 
+or when the camera position does not change over a long period of time.</A> 
+<BR><A>Object</A> is the id of the dummy <BR><A>Mode</A> - <A 
+class=constant>true</A> or <A class=constant>false</A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=DummycubeSetCameraMode></A>
+<H1 class=name>DummycubeSetCameraMode </H1><A class=type>Real</A><A> </A><A 
+class=function>DummycubeSetCameraMode =</A><A>( object,cim as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Allows you to capture the 
+position (<A class=constant>cimPosition</A>) or the orientation of the<A 
+class=constant>cimOrientation (</A>dummy) and his descendants in relation to the 
+active camera. That is, in the first case, unable to move away or move closer to 
+the object, the second - remove the object from the view. <BR><A>Object</A> is 
+the id of the dummy <BR><A>Cim</A> - <A class=constant name=cimNone>cimNone</A> 
+(default value), The <A class=constant name=cimPosition>cimPosition</A> or <A 
+class=constant name=cimOrientation>cimOrientation</A> (0, 1 or 2, 
+respectively).</A> 
+<HR>
+<A name=DummycubeSetVisible></A>
+<H1 class=name>DummycubeSetVisible </H1><A class=type>Real</A><A> </A><A 
+class=function>DummycubeSetVisible =</A><A>( object,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Toggles the visibility of the 
+dummy. The dummy is displayed as frame cu.</A> <BR><A>Object</A> is the id of 
+the dummy <BR><A>Mode</A> - <A class=constant>true</A> or <A 
+class=constant>false</A> (1 and 0, respectively).</A> 
+<HR>
+<A name=DummycubeSetEdgeColor></A>
+<H1 class=name>DummycubeSetEdgeColor </H1><A class=type>Real</A><A> </A><A 
+class=function>DummycubeSetEdgeColor =</A><A>( object,color as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Specifies the color of the ribs 
+of Cuba, in the form is visible mannequin.</A> <BR><A>Object</A> is the id of 
+the dummy <BR><A>Color</A> - the color.</A> 
+<HR>
+<A name=DummycubeSetCubeSize></A>
+<H1 class=name>DummycubeSetCubeSize </H1><A class=type>Real</A><A> </A><A 
+class=function>DummycubeSetCubeSize =</A><A>( object,size as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Specifies the size of the face 
+of the cube, in the form is visible mannequin. The default size - 1.</A> 
+<BR><A>Object</A> is the id of the dummy <BR><A>Size</A> is the size.</A> 
+<HR>
+</DIV></BODY></HTML>

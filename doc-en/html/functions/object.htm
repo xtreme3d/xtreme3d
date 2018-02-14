@@ -1,0 +1,638 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Object</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Object </H1><A class=type>Class: 
+TGLBaseSceneObject</A><BR><BR><A>These functions manage any stage objects, 
+regardless of type. <BR>
+<HR>
+<A name=ObjectHide></A>
+<H1 class=name>ObjectHide </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectHide =</A><A>( object as </A><A class=type>real</A> );</A> 
+<BR><A>Hides the object. Hidden objects are not redrawn, but may still 
+participate in the algorithms of collision detection. </A><BR><A>The object is 
+the object ID.</A> 
+<HR>
+<A name=ObjectShow></A>
+<H1 class=name>ObjectShow </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectShow =</A><A>( object as </A><A class=type>real</A> );</A> 
+<BR><A>Shows the object.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectIsVisible></A>
+<H1 class=name>ObjectIsVisible </H1><A class=type>Boolean</A><A> = </A><A 
+class=function>ObjectIsVisible</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns TRUE (1) if the object visible, and FALSE (0) if the 
+hidden.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectCopy></A>
+<H1 class=name>ObjectCopy </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCopy =</A><A>( object,parent as </A><A class=type>real</A> 
+);</A> <BR><A>Copies the object, inheriting all of its settings, including the 
+transformation of the space, material, and so on.</A> <BR><A>The object is the 
+object id of the original</A> <BR><A>Parent - the parent id for the object 
+copy.</A> 
+<HR>
+<A name=ObjectDestroy></A>
+<H1 class=name>ObjectDestroy </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectDestroy =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Destroys the object. To safely destroy can be only those objects 
+that have no descendants. In addition, some types of objects have their own 
+functions of Destruction - In this case, the better use them.</A> <BR><A>The 
+object is the object ID.</A> 
+<HR>
+<A name=ObjectDestroyChildren></A>
+<H1 class=name>ObjectDestroyChildren </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectDestroyChildren =</A><A>( object as </A><A 
+class=type>real</A> );</A> <BR><A>Destroys the descendants of the object.</A> 
+<BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectSetPosition></A>
+<H1 class=name>ObjectSetPosition </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetPosition =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the local coordinates the position of 
+the object in space.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z 
+coordinates along three Axs.</A> 
+<HR>
+<A name=ObjectGetPosition></A>
+<H1 class=name>ObjectGetPosition </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetPosition =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the local coordinates the position of 
+the object in space.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the 
+index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetAbsolutePosition></A>
+<H1 class=name>ObjectGetAbsolutePosition </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsolutePosition =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute coordinates the position 
+of the object in space.</A> <BR><A>The object is the object id</A> <BR><A>Ind - 
+the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectSetPositionOfObject></A>
+<H1 class=name>ObjectSetPositionOfObject </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetPositionOfObject =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Synchronizes the absolute object coordinates 1 
+with absolute coordinates of the object 2.</A> <BR><A>The object is the object 
+id 1</A> <BR><A>The object is the object id 2.</A> 
+<HR>
+<A name=ObjectAlignWithObject></A>
+<H1 class=name>ObjectAlignWithObject </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectAlignWithObject =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Synchronizes the absolute object turn 1 with 
+the absolute turning the object 2.</A> <BR><A>The object is the object id 1</A> 
+<BR><A>The object is the object id 2.</A> 
+<HR>
+<A name=ObjectSetPositionX></A>
+<H1 class=name>ObjectSetPositionX </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetPositionX =</A><A>( object,x as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the local coordinate position of the 
+object in the space on the X axis.</A> <BR><A>The object is the object id</A> 
+<BR><A>X is the coordinate on the X axis.</A> 
+<HR>
+<A name=ObjectSetPositionY></A>
+<H1 class=name>ObjectSetPositionY </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetPositionY =</A><A>( object,y as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the local coordinate position of the 
+object in the space on the Y axis.</A> <BR><A>The object is the object id</A> 
+<BR><A>Y is the coordinate on the Y axis.</A> 
+<HR>
+<A name=ObjectSetPositionZ></A>
+<H1 class=name>ObjectSetPositionZ </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetPositionZ =</A><A>( object,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the local coordinate position of the 
+object in space along the Z axis.</A> <BR><A>The object is the object id</A> 
+<BR><A>Z is the coordinate along the Z axis.</A> 
+<HR>
+<A name=ObjectGetPositionX></A>
+<H1 class=name>ObjectGetPositionX </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetPositionX =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the local coordinate position of the object in the space 
+on the X axis.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectGetPositionY></A>
+<H1 class=name>ObjectGetPositionY </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetPositionY =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the local coordinate position of the object in the space 
+on the Y axis.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectGetPositionZ></A>
+<H1 class=name>ObjectGetPositionZ </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetPositionZ =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the local coordinate position of the object in space along 
+the Z axis.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectSetAbsolutePosition></A>
+<H1 class=name>ObjectSetAbsolutePosition </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetAbsolutePosition =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the absolute coordinates the position 
+of the object in space.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z 
+coordinates along three Axs.</A> 
+<HR>
+<A name=ObjectSetDirection></A>
+<H1 class=name>ObjectSetDirection </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetDirection =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the unit vector of the local 
+direction of the object.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z 
+- vector.</A> 
+<HR>
+<A name=ObjectGetDirection></A>
+<H1 class=name>ObjectGetDirection </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetDirection =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the unit vector of the local direction 
+of the object.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index 
+of the axis (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectSetAbsoluteDirection></A>
+<H1 class=name>ObjectSetAbsoluteDirection </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetAbsoluteDirection =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the unit vector of absolute direction 
+of the object.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - 
+vector.</A> 
+<HR>
+<A name=ObjectGetAbsoluteDirection></A>
+<H1 class=name>ObjectGetAbsoluteDirection </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteDirection =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the unit vector of absolute direction 
+of the object.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index 
+of the coordinates of the vector (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetPitch></A>
+<H1 class=name>ObjectGetPitch </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetPitch =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the angle of rotation of the local object on the X 
+axis.</A> <BR><A>The object is the object id</A> 
+<HR>
+<A name=ObjectGetTurn></A>
+<H1 class=name>ObjectGetTurn </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetTurn =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the angle of rotation of the local object on the Y 
+axis.</A> <BR><A>The object is the object id</A> 
+<HR>
+<A name=ObjectGetRoll></A>
+<H1 class=name>ObjectGetRoll </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetRoll =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the angle of rotation of the local object along the Z 
+axis.</A> <BR><A>The object is the object id</A> 
+<HR>
+<A name=ObjectSetRotation></A>
+<H1 class=name>ObjectSetRotation </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetRotation =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the local angle of rotation of the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - Angle of 
+rotation on three axes.</A> 
+<HR>
+<A name=ObjectMove></A>
+<H1 class=name>ObjectMove </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectMove =</A><A>( object,speed as </A><A class=type>real</A> 
+);</A> <BR><A>The object moves in the direction of the vector Direction at a 
+given speed.</A> <BR><A>The object is the object id</A> <BR><A>Speed is the 
+linear speed.</A> 
+<HR>
+<A name=ObjectLift></A>
+<H1 class=name>ObjectLift </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectLift =</A><A>( object,speed as </A><A class=type>real</A> 
+);</A> <BR><A>The object moves in the direction of the vector Up at a given 
+speed.</A> <BR><A>The object is the object id</A> <BR><A>Speed is the linear 
+speed.</A> 
+<HR>
+<A name=ObjectTranslate></A>
+<H1 class=name>ObjectTranslate </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectTranslate =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Moves the object for the specified vector.</A> 
+<BR><A>The object is the object id</A> <BR><A>X,y,z - vector.</A> 
+<HR>
+<A name=ObjectStrafe></A>
+<H1 class=name>ObjectStrafe </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectStrafe =</A><A>( object,speed as </A><A class=type>real</A> 
+);</A> <BR><A>The object moves in the direction of the vector Left at a given 
+speed.</A> <BR><A>The object is the object id</A> <BR><A>Speed is the linear 
+speed.</A> 
+<HR>
+<A name=ObjectRotate></A>
+<H1 class=name>ObjectRotate </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRotate =</A><A>( object,x,y,z as </A><A class=type>real</A> 
+);</A> <BR><A>Turns the object locally on the angle along the three Axs.</A> 
+<BR><A>The object is the object id</A> <BR><A>X,y,z - the corners on three 
+Axs.</A> 
+<HR>
+<A name=ObjectScale></A>
+<H1 class=name>ObjectScale </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectScale =</A><A>( object,x,y,z as </A><A class=type>real</A> 
+);</A> <BR><A>Modifies the local scale of the object relative to the 
+current.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z scale along the 
+three Axs.</A> 
+<HR>
+<A name=ObjectSetScale></A>
+<H1 class=name>ObjectSetScale </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetScale =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Defines the local scale of the object.</A> 
+<BR><A>The object is the object id</A> <BR><A>X,y,z scale along the three 
+Axs.</A> 
+<HR>
+<A name=ObjectSetUpVector></A>
+<H1 class=name>ObjectSetUpVector </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetUpVector =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Specifies the unit vector Up the object.</A> 
+<BR><A>The object is the object id</A> <BR><A>X,y,z - vector.</A> 
+<HR>
+<A name=ObjectPointToObject></A>
+<H1 class=name>ObjectPointToObject </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectPointToObject =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Directs the object 1 in the direction of the 
+object 2.</A> <BR><A>Object1 is the object id 1</A> <BR><A>Object2 is the object 
+id 2.</A> 
+<HR>
+<!--
+<A name="ObjectAlignToCamera"></A>
+<H1 class=name>ObjectAlignToCamera</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectAlignToCamera</A><A>( object,camera as </A><A class=type>real</A> );</A>
+<BR><A>�������������� ��������� ������� ������� � ��������� ��������� ������.</A>
+<BR><A>object - id �������</A>
+<BR><A>camera - id ������.</A>
+<HR>
+--><!--
+<A name="ObjectGetAtXY"></A>
+<H1 class=name>ObjectGetAtXY</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectGetAtXY</A><A>( viewer,x,y as </A><A class=type>real</A> );</A>
+<BR><A>���������� id �������, ������������ � �����, �������� ������ ������������ �� ������ (� ����). ���� � ���� ����� ��� �������,
+������������ 0.</A>
+<BR><A>viewer - id ����</A>
+<BR><A>x,y - ���������� �����.</A>
+<HR>
+--><A name=ObjectShowAxes></A>
+<H1 class=name>ObjectShowAxes </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectShowAxes =</A><A>( object,mode as </A><A 
+class=type>real</A> );</A> <BR><A>Enables or disables the display of the local 
+Axs of the object. The axis of the endless represented by dashed lines of three 
+colors: red, green, blue (observed by the conformity of the RGB - XYZ).</A> 
+<BR><A>The object is the object id</A> <BR><A>Mode - <A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=ObjectGetGroundHeight></A>
+<H1 class=name>ObjectGetGroundHeight </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetGroundHeight =</A><A>( object,target as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the y-coordinate of the highest point 
+on the surface of the target object (or its descendants) on the absolute 
+position of the XZ of the specified object. In other words, the height of the 
+"lands" under the object.</A> <BR><A>The object is the object id</A> 
+<BR><A>Target - target. In calculations are also involved all descendants of the 
+object with the visible geometry.</A> 
+<HR>
+<A name=ObjectSceneRaycast></A>
+<H1 class=name>ObjectSceneRaycast </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSceneRaycast =</A><A>( object,target as </A><A 
+class=type>real</A> );</A> <BR><A>Produces the beam along the vector of absolute 
+Direction of object and checks the target object and all of his descendants on 
+the crossing with the beam. Returns the ID of the first intersected object.</A> 
+<BR><A>The object is the object id</A> <BR><A>Target - target. In calculations 
+are also involved all descendants of the object with the visible geometry.</A> 
+<HR>
+<A name=ObjectRaycast></A>
+<H1 class=name>ObjectRaycast </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRaycast =</A><A>( object,target as </A><A 
+class=type>real</A> );</A> <BR><A>Produces the beam along the vector of absolute 
+Direction of object and checks the target object on the crossing with the beam. 
+Returns the truth, if detected crossing, and FALSE otherwise.</A> <BR><A>The 
+object is the object id</A> <BR><A>Target - target.</A> 
+<HR>
+<A name=ObjectGetCollisionPosition></A>
+<H1 class=name>ObjectGetCollisionPosition </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetCollisionPosition =</A><A>( ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute coordinates of the point 
+of the last intersection, detected by the functions of the </A><A class=funclink 
+href="../functions/object.htm#ObjectSceneRaycast">ObjectSceneRaycast</A><A> and 
+</A><A class=funclink 
+href="../functions/object.htm#ObjectRaycast">ObjectRaycast</A><A>.</A> 
+<BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetCollisionNormal></A>
+<H1 class=name>ObjectGetCollisionNormal </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetCollisionNormal =</A><A>( ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns a normal polygon intersection last 
+discovered functions of the </A><A class=funclink 
+href="../functions/object.htm#ObjectSceneRaycast">ObjectSceneRaycast</A><A> and 
+</A><A class=funclink 
+href="../functions/object.htm#ObjectRaycast">ObjectRaycast</A><A>.</A> 
+<BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<!--
+<A name="ObjectSetDiffuseColor"></A>
+<H1 class=namenew>ObjectSetDiffuseColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectSetDiffuseColor</A><A>( object,color,alpha as </A><A class=type>real</A> );</A>
+<BR><A>������ �������� ��������� Diffuse �������.</A>
+<BR><A>object - id �������</A>
+<BR><A>color - ����</A>
+<BR><A>alpha - ������������.</A>
+<HR>
+--><A name=ObjectSetMaterial></A>
+<H1 class=name>ObjectSetMaterial </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetMaterial =</A><A>( object as </A><A 
+class=type>real</A><A>, material as </A><A class=type>string</A> );</A> 
+<BR><A>Applies to the object of the material.</A> <BR><A>The object is the 
+object id</A> <BR><A>The material is the name of the material.</A> 
+<HR>
+<A name=ObjectGetDistance></A>
+<H1 class=name>ObjectGetDistance </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetDistance =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the distance between two objects.</A> 
+<BR><A>Object1 is the object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectCheckCubeVsCube></A>
+<H1 class=name>ObjectCheckCubeVsCube </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCheckCubeVsCube =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the clashes between oriented 
+limiting ����������������� (OBB) of two objects.</A> <BR><A>Object1 is the 
+object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectCheckSphereVsSphere></A>
+<H1 class=name>ObjectCheckSphereVsSphere </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCheckSphereVsSphere =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the clashes between the 
+limiting areas of two objects.</A> <BR><A>Object1 is the object id 1</A> 
+<BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectCheckSphereVsCube></A>
+<H1 class=name>ObjectCheckSphereVsCube </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCheckSphereVsCube =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the clashes between the 
+limiting the scope of object 1 and oriented ���������������� limiting the object 
+2.</A> <BR><A>Object1 is the object id 1</A> <BR><A>Object2 is the object id 
+2.</A> 
+<HR>
+<A name=ObjectCheckCubeVsFace></A>
+<H1 class=name>ObjectCheckCubeVsFace </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCheckCubeVsFace =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the clashes between the 
+limiting oriented ���������������� (OBB) of the object 1 and the geometry of the 
+object 2. The Object 2 must be the type of freeform.</A> <BR><A>Object1 is the 
+object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectCheckFaceVsFace></A>
+<H1 class=name>ObjectCheckFaceVsFace </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectCheckFaceVsFace =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the clashes between the 
+geometry of two objects. Objects must be the type of freeform. <BR>This test is 
+rather slow, therefore, it is recommended to optimize its use - for example, to 
+carry out an accurate test between the geometries of objects only if the 
+collision was detected between their restrictive areas.</A> <BR><A>Object1 is 
+the object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectIsPointInObject></A>
+<H1 class=name>ObjectIsPointInObject </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectIsPointInObject =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the point is inside the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z coordinates of 
+the point.</A> 
+<HR>
+<A name=ObjectSetCulling></A>
+<H1 class=name>ObjectSetCulling </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetCulling =</A><A>( object,mode as </A><A 
+class=type>real</A> );</A> <BR><A>Enables or disables the selection of the 
+visibility of an object: if an object comes from the field of view, its 
+vectorized does not occur. In some cases this may improve performance.</A> 
+<BR><A>The object is the object id</A> <BR><A>Mode - <A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=ObjectSetName></A>
+<H1 class=name>ObjectSetName </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetName =</A><A>( object as </A><A class=type>real</A><A>, 
+name as </A><A class=type>string</A> );</A> <BR><A>Specifies the name of the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>Name - the name.</A> 
+<HR>
+<A name=ObjectGetName></A>
+<H1 class=name>ObjectGetName </H1><A class=type>String</A><A> = </A><A 
+class=function>ObjectGetName</A><A>( object as </A><A class=type>real</A> );</A> 
+<BR><A>Returns the name of the object.</A> <BR><A>The object is the object 
+ID.</A> 
+<HR>
+<A name=ObjectGetClassName></A>
+<H1 class=name>ObjectGetClassName </H1><A class=type>String</A><A> = </A><A 
+class=function>ObjectGetclassName</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the object class.</A> <BR><A>The object is the object 
+ID.</A> 
+<HR>
+<A name=ObjectSetTag></A>
+<H1 class=name>ObjectSetTag </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetTag =</A><A>( object,id as </A><A class=type>real</A> 
+);</A> <BR><A>Specifies the unique identifier of the object.</A> <BR><A>The 
+object is the object id</A> <BR><A>Id is the ID.</A> 
+<HR>
+<A name=ObjectGetTag></A>
+<H1 class=name>ObjectGetTag </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetTag =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the ID of the object.</A> <BR><A>The object is the object 
+ID.</A> 
+<HR>
+<A name=ObjectGetParent></A>
+<H1 class=name>ObjectGetParent </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetParent =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the ID of the parent object.</A> <BR><A>The object is the 
+object ID.</A> 
+<HR>
+<A name=ObjectGetChildCount></A>
+<H1 class=name>ObjectGetChildCount </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetChildCount =</A><A>( object as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the number of the descendants of the 
+object.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectGetChild></A>
+<H1 class=name>ObjectGetChild </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetChild =</A><A>( object,ind as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the ID of the descendant of the object of the specified 
+numbers.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the number of 
+offspring.</A> 
+<HR>
+<A name=ObjectGetIndex></A>
+<H1 class=name>ObjectGetIndex </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetIndex =</A><A>( object as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the number of the object in the list of the descendants of 
+the parent (starting with 0), or -1 if there is no object of a parent.</A> 
+<BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectFindChild></A>
+<H1 class=name>ObjectFindChild </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectFindChild =</A><A>( object as </A><A 
+class=type>real</A><A>, name as </A><A class=type>string</A> );</A> 
+<BR><A>Returns the ID of the descendant of the object with the specified 
+name.</A> <BR><A>Object is the id of the parent.</A> <BR><A>Name is the name of 
+the object.</A> 
+<HR>
+<A name=ObjectGetBoundingsphereRadius></A>
+<H1 class=name>ObjectGetBoundingsphereRadius </H1><A class=type>Real</A><A> 
+</A><A class=function>ObjectGetBoundingsphereRadius =</A><A>( object as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the radius of limiting the scope of 
+the object.</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=ObjectGetAbsoluteUp></A>
+<H1 class=name>ObjectGetAbsoluteUp </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteUp =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute unit vector Up the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index of the 
+coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectSetAbsoluteUp></A>
+<H1 class=name>ObjectSetAbsoluteUp </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetAbsoluteUp =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Modifies the absolute unit vector Up the 
+object.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - vector.</A> 
+<HR>
+<A name=ObjectGetAbsoluteRight></A>
+<H1 class=name>ObjectGetAbsoluteRight </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteRight =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute unit vector Right 
+object.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index of the 
+coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetAbsoluteXVector></A>
+<H1 class=name>ObjectGetAbsoluteXVector </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteXVector =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute vector X, expressed in 
+local coordinates of the object.</A> <BR><A>The object is the object id</A> 
+<BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetAbsoluteYVector></A>
+<H1 class=name>ObjectGetAbsoluteYVector </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteYVector =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute vector Y, expressed in 
+local coordinates of the object.</A> <BR><A>The object is the object id</A> 
+<BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetAbsoluteZVector></A>
+<H1 class=name>ObjectGetAbsoluteZVector </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetAbsoluteZVector =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the absolute vector Z, expressed in 
+local coordinates of the object.</A> <BR><A>The object is the object id</A> 
+<BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=ObjectGetRight></A>
+<H1 class=name>ObjectGetRight </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetRight =</A><A>( object,ind as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the local unit vector Right object.</A> <BR><A>The object 
+is the object id</A> <BR><A>Ind - the index of the axis (0 = X 1 = Y 2 = Z).</A> 
+
+<HR>
+<A name=ObjectMoveChildUp></A>
+<H1 class=name>ObjectMoveChildUp </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectMoveChildUp =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Shifts the descendant of the object up in the 
+list.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index of the 
+descendant.</A> 
+<HR>
+<A name=ObjectMoveChildDown></A>
+<H1 class=name>ObjectMoveChildDown </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectMoveChildDown =</A><A>( object,ind as </A><A 
+class=type>real</A> );</A> <BR><A>Shifts the descendant of the object down in 
+the list.</A> <BR><A>The object is the object id</A> <BR><A>Ind - the index of 
+the descendant.</A> 
+<HR>
+<A name=ObjectSetParent></A>
+<H1 class=name>ObjectSetParent </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetParent =</A><A>( object,parent as </A><A 
+class=type>real</A> );</A> <BR><A>Makes the object a descendant of another 
+object.</A> <BR><A>The object is the object id</A> <BR><A>Parent - the id of the 
+parent.</A> 
+<HR>
+<A name=ObjectRemoveChild></A>
+<H1 class=name>ObjectRemoveChild </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRemoveChild =</A><A>( object,child,keepchildren as </A><A 
+class=type>real</A> );</A> <BR><A>Removes the descendant of the object.</A> 
+<BR><A>The object is the object id</A> <BR><A>Child id is a descendant of</A> 
+<BR><A>Keepchildren - Specifies whether to copy the descendants of the object of 
+its parent (otherwise the descendants will also be deleted).</A> 
+<HR>
+<A name=ObjectMoveObjectAround></A>
+<H1 class=name>ObjectMoveObjectAround </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectMoveObjectAround =</A><A>( object1,object2,x,y as </A><A 
+class=type>real</A> );</A> <BR><A>Turns the object 1 around the object 2.</A> 
+<BR><A>Object1 is the object id 1</A> <BR><A>Object2 is the object id 2</A> 
+<BR><A>X,Y is the angle of rotation in the X and Y Axs.</A> 
+<HR>
+<A name=ObjectPitch></A>
+<H1 class=name>ObjectPitch </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectPitch =</A><A>( object1,angle as </A><A class=type>real</A> 
+);</A> <BR><A>Turns the object locally on the X-axis.</A> <BR><A>The object is 
+the object id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=ObjectTurn></A>
+<H1 class=name>ObjectTurn </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectTurn =</A><A>( object1,angle as </A><A class=type>real</A> 
+);</A> <BR><A>Turns the object locally on the Y axis.</A> <BR><A>The object is 
+the object id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=ObjectRoll></A>
+<H1 class=name>ObjectRoll </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRoll =</A><A>( object1,angle as </A><A class=type>real</A> 
+);</A> <BR><A>Turns the object locally on the Z axis.</A> <BR><A>The object is 
+the object id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=ObjectGetUp></A>
+<H1 class=name>ObjectGetUp </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectGetUp =</A><A>( object,ind as </A><A class=type>real</A> 
+);</A> <BR><A>Returns the local unit vector Up the object.</A> <BR><A>The object 
+is the object id</A> <BR><A>Ind - the index of the coordinates (0 = X 1 = Y 2 = 
+Z).</A> 
+<HR>
+<!--
+<A name="ObjectStructureChanged"></A>
+<H1 class=name>ObjectStructureChanged</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectStructureChanged</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>�������� �����������.</A>
+<BR><A>object - id �������.</A>
+<HR>
+--><A name=ObjectRotateAbsolute></A>
+<H1 class=name>ObjectRotateAbsolute </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRotateAbsolute =</A><A>( object,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Turns the object absolutely angle along the 
+three Axs.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z - the corners 
+on three Axs.</A> 
+<HR>
+<A name=ObjectRotateAbsoluteVector></A>
+<H1 class=name>ObjectRotateAbsoluteVector </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectRotateAbsoluteVector =</A><A>( object,x,y,z,angle as </A><A 
+class=type>real</A> );</A> <BR><A>Turns the object absolutely angle around a 
+given axis.</A> <BR><A>The object is the object id</A> <BR><A>X,y,z is a vector 
+rotation axis.</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=ObjectInFrustrum></A>
+<H1 class=name>ObjectInFrustrum </H1><A class=type>Boolean</A><A> = </A><A 
+class=function>ObjectInFrustrum</A><A>( object,viewer as </A><A 
+class=type>real</A> );</A> <BR><A>Returns true if the object is in the field of 
+view (enters the pyramid of visibility) of the specified type, and FALSE 
+otherwise.</A> <BR><A>The object is the object id</A> <BR><A>Viewer - id 
+type.</A> 
+<HR>
+<!--
+<A name="ObjectIsClipped"></A>
+<H1 class=name>ObjectIsClipped</H1>
+<A class=type>boolean</A><A> = </A><A class=function>ObjectIsClipped</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>���������� ������, ���� ������ ��������� ��� ���� ������.</A>
+<BR><A>object - id �������.</A>
+<HR>
+--><A name=ObjectSetMatrixColumn></A>
+<H1 class=name>ObjectSetMatrixColumn </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectSetMatrixColumn =</A><A>( object,ind,x,y,z,w as </A><A 
+class=type>real</A> );</A> <BR><A>Fills the column of the local transformation 
+matrix of the object. Calling this function for each of the 4 columns, you can 
+specify an arbitrary matrix transformation.</A> <BR><A>The object is the object 
+id</A> <BR><A>Ind - the index of the column (0, 1, 2, or 3)</A> <BR><A>X,y,z,w, 
+the values of the column.</A> 
+<HR>
+<A name=ObjectExportMatrix></A>
+<H1 class=name>ObjectExportMatrix </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectExportMatrix =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Copies the local transformation matrix of the 
+object 1 in the local transformation matrix of the object 2.</A> <BR><A>Object1 
+is the object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+<A name=ObjectExportAbsoluteMatrix></A>
+<H1 class=name>ObjectExportAbsoluteMatrix </H1><A class=type>Real</A><A> </A><A 
+class=function>ObjectExportAbsoluteMatrix =</A><A>( object1,object2 as </A><A 
+class=type>real</A> );</A> <BR><A>Copies the absolute transformation matrix of 
+the object 1 in the absolute transformation matrix of the object 2.</A> 
+<BR><A>Object1 is the object id 1</A> <BR><A>Object2 is the object id 2.</A> 
+<HR>
+</DIV></BODY></HTML>

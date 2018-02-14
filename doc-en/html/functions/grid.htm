@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Grid</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Grid </H1><A class=type>Class: TGLXYZGrid</A><BR><BR><A>Grid 
+(grid) is a set of intersecting line segments, forming a uniform rectangular 
+grid, two-dimensional or three-dimensional. This facility is convenient for use 
+in debugging and subsidiary purposes, when it is necessary to visualize the 
+coordinate plane. </A>
+<HR>
+<A name=GridCreate></A>
+<H1 class=name>GridCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>GridCreate =</A><A>( x,y,z,step,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new screen and returns its 
+id.</A> <BR><A>X,y,z - ���������� grids on each of the three axes</A> 
+<BR><A>Step - the size of the grid cell</A> <BR><A>Parent - the id of the 
+parent.</A> 
+<HR>
+<A name=GridSetLineStyle></A>
+<H1 class=name>GridSetLineStyle </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetLineStyle =</A><A>( grid gls,as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the style of the grid: </A><A 
+class=constant name=cimNone>glsSegments</A><A> (there are no details) or </A><A 
+class=constant name=cimNone>glsLine</A><A> (there are no details).</A> 
+<BR><A>Grid - the grid id</A> <BR><A>Gls - style grid lines: </A><A 
+class=constant name=cimNone>glsSegments</A><A> = 0 or </A><A class=constant 
+name=cimNone>glsLine</A><A> = 1.</A> 
+<HR>
+<A name=GridSetLineSmoothing></A>
+<H1 class=name>GridSetLineSmoothing </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetLineSmoothing =</A><A>( grid,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Switches the anti-aliased lines grid.</A> 
+<BR><A>Grid - the grid id</A> <BR><A>Mode - Smoothing: </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=GridSetParts></A>
+<H1 class=name>GridSetParts </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetParts =</A><A>( grid,gp as </A><A class=type>real</A><A> 
+);</A> <BR><A>Specifies the coordinate plane grid.</A> <BR><A>Grid - the grid 
+id</A> <BR><A>Gp - the coordinate plane. You have the following options: gp</A> 
+<BR><A class=constant>GpXY</A><A> = 0 - the XY plane</A> <BR><A 
+class=constant>GpYZ</A><A> = 1 - The plane YZ</A> <BR><A 
+class=constant>GpXZ</A><A> = 2 - the xz plane</A> <BR><A 
+class=constant>GpXYZ</A><A> = 3 - in this mode the ���������� will be 
+three-dimensional grid (XYZ)</A> 
+<HR>
+<A name=GridSetColor></A>
+<H1 class=name>GridSetColor </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetColor =</A><A>( grid,color,alpha as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the grid.</A> 
+<BR><A>Grid - the grid id</A> <BR><A>Color - the color of the</A> 
+<BR><A>Alpha-transparency.</A> 
+<HR>
+<A name=GridSetSize></A>
+<H1 class=name>GridSetSize </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetSize =</A><A>( grid,size as </A><A class=type>real</A><A> 
+);</A> <BR><A>Specifies the thickness of the grid lines.</A> <BR><A>Grid - the 
+grid id</A> <BR><A>Size is the thickness of the line.</A> 
+<HR>
+<A name=GridSetPattern></A>
+<H1 class=name>GridSetPattern </H1><A class=type>Real</A><A> </A><A 
+class=function>GridSetPattern =</A><A>( grid,pattern as the </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>Grid - the 
+grid id</A> <BR><A>Pattern - there are no details.</A> 
+<HR>
+</DIV></BODY></HTML>

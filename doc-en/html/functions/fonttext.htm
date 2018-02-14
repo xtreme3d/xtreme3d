@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Font & Text</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Font &amp; Text </H1><A class=type>Class: TGLBitmapFont, 
+TGLWindowsBitmapFont, TGLFreetypeFont, TGLHUDText, TGLSpaceText, 
+TGLSpaceText</A><BR><BR><A>The font and text. Xtreme3D supports three types of 
+text objects: flat, Surround and a screen. On-screen text (HUDText) is displayed 
+on top of the ������������� images and applies for the submission of some 
+textual information in the game: the number of lives or cartridges, different 
+messages, etc. The flat text (FlatText) and volume (SpaceText) are located in 
+three-dimensional space. Surround, in contrast to the flat, has a thickness.</A> 
+<BR><A>All types of text use special font objects, storing images of text 
+characters, letters, numbers, and punctuation. In the Xtreme3D is supported by 
+three kinds of font objects: Bmpfont, WindowsBitmapfont and TTFont. <BR>The 
+font-image (Bmpfont) represents one big texture with the symbolic "mesh", in 
+which the pre-recorded images of characters. It can be created manually in the 
+graphical editor to draw symbols of any color and complexity. However, such a 
+font contains a limited range of characters - usually only the ASCII table, 
+which includes the Latin alphabet, numbers and standard punctuation. 
+Theoretically, the range can be extended with the use of the code pages, but 
+this decision will not work if you need to display the text with symbols of 
+different alphabets - that is, when used in the annex of the Russian language 
+cannot, for example, display the Greek letters. <BR>A fully solves this problem 
+using Unicode, where each character has its own unique code. In the Xtreme3D 
+Unicode support is implemented in the form of object font TTFont based on the 
+FreeType engine - it is created from arbitrary TTF file and, if necessary, to 
+dynamically uploads any characters that you want to display, even though Chinese 
+characters (if, of course, they are supported by your bold). <BR>TTFont supports 
+the input text in UTF-8, or in the desktop Windows encoding (default is the code 
+page is 1251, but you can download the file transcoding with implementation of 
+any 8-bit encoding The </A><A class=funclink 
+href="../functions/text.htm#TTFontLoadCodePage">TTFontLoadCodePage 
+function</A><A>). <BR>For the use of fonts TTFont in the folder with the game 
+must be the freetype library.dll (look for it in the Xtreme3D SDK). If you are 
+not using this functionality, the library is optional. <BR>For backward 
+compatibility (and work with surround 3D text) is left as a third type of font 
+objects - System (WindowsBitmapfont). This is, in fact, The Bmpfont, 
+automatically generated from the specified font system installed in Windows. 
+This type of fonts also works only with code pages of Windows and, moreover, 
+cannot download fonts from the arbitrary TTF files, therefore for the on-screen 
+text instead of it, it is recommended to use TTFont. <BR>The following table 
+shows clearly the capability of all font objects: <BR><BR>
+<TABLE border=1 cellSpacing=0 borderColor=#000000 cellPadding=2 width="50%">
+  <COLGROUP>
+  <COL width=51>
+  <COL width=51>
+  <COL width=51>
+  <COL width=51>
+  <COL width=51>
+  <COL width=51>
+  <TBODY>
+  <TR>
+    <TD height=16 width="20%">
+      <P><BR></P></TD>
+    <TD bgColor=#ff9966 width="20%">
+      <P align=center><B>A data source </B></P></TD>
+    <TD bgColor=#ff9966 width="20%">
+      <P align=center><B>The Text Encoding </B></P></TD>
+    <TD bgColor=#ff9966 width="20%">
+      <P align=center><B>HUDText support </B></P></TD>
+    <TD bgColor=#ff9966 width="20%">
+      <P align=center><B>FlatText support </B></P></TD>
+    <TD bgColor=#ff9966 width="20%">
+      <P align=center><B>SpaceText support </B></P></TD></TR>
+  <TR>
+    <TD bgColor=#ff9966 height=17 width="20%">
+      <P align=center><B>Bmpfont </B></P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>The texture of the </P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>Windows </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#dc2300 width="20%">
+      <P align=center>No </P></TD></TR>
+  <TR>
+    <TD bgColor=#ff9966 height=17 width="20%">
+      <P align=center><B>WindowsBitmapfont </B></P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>The Windows font </P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>Windows </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD></TR>
+  <TR>
+    <TD bgColor=#ff9966 height=17 width="20%">
+      <P align=center><B>TTFont </B></P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>The TTF font </P></TD>
+    <TD bgColor=#ffffff width="20%">
+      <P align=center>UTF-8, Windows </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#3deb3d width="20%">
+      <P align=center>Yes </P></TD>
+    <TD bgColor=#dc2300 width="20%">
+      <P align=center>No </P></TD></TR></TBODY></TABLE><BR><BR><BR>Please also note 
+that the Xtreme3D, in contrast to the built-in functions GML, does not recognize 
+in the string values of the # symbol as a transition to the next row. Instead, 
+it is recommended to use the thirteenth character ASCII - </A><A 
+class=type>chr</A><A>(13). For example: <BR></A><A class=funclink 
+href="../functions/fonttext.htm#HUDTextSetText">HUDTextSetText</A><A>(text, 
+"Line 1" + </A><A class=type>chr</A><A>(13) + "Line 2").</A> <BR>
+<HR>
+<A name=BmpfontCreate></A>
+<H1 class=name>BmpfontCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>BmpfontCreate =</A><A>( width,height,hspace and vspace,intx 
+pins,inty,start,end as </A><A class=type>real</A><A> );</A> <BR><A>Creates a new 
+font and returns its id.</A> <BR><A>Width,height - the width and height of the 
+character in pixels</A> <BR><A>Hspace and vspace - the period between the 
+characters horizontally and vertically, in pixels</A> <BR><A>Inx,inty - the 
+coordinates of the starting characters (the extreme upper left point)</A> 
+<BR><A>Start,end - the rooms are the first and last character. For the Latin 
+these values correspond to the 32 and 95.</A> 
+<HR>
+<A name=BmpfontLoad></A>
+<H1 class=name>BmpfontLoad </H1><A class=type>Real</A><A> </A><A 
+class=function>BmpfontLoad =</A><A>( font as </A><A 
+class=type>real</A><A>,material as </A><A class=type>string</A><A> );</A> 
+<BR><A>Loads the image of the font size of the texture of the material.</A> 
+<BR><A>Font - the font id</A> <BR><A>The material is the name of the 
+material.</A> 
+<HR>
+<A name=TTFontCreate></A>
+<H1 class=name>TTFontCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>TTFontCreate =</A><A>( filename as </A><A 
+class=type>string</A><A>,height as </A><A class=type>real</A><A> );</A> 
+<BR><A>Creates a new TTF-font and returns its id.</A> <BR><A>Filename is the 
+file name of a TTF</A> <BR><A>Height - font size (size) of font in pixels.</A> 
+<HR>
+<A name=TTFontSetLineGap></A>
+<H1 class=name>TTFontSetLineGap </H1><A class=type>Real</A><A> </A><A 
+class=function>TTFontSetLineGap =</A><A>( a ttf,gap as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the line spacing, the TTF font, 
+which is used in the derivation of multiline text. The interval is set not in 
+pixels, and the shares from the font point size - that is, the value of 1 
+corresponds to the time interval, which is equal to the height of one line of 
+text.</A> <BR><A>A ttf - id TTF font,</A> <BR><A>Gap - the line spacing.</A> 
+<HR>
+<A name=TTFontSetEncoding></A>
+<H1 class=name>TTFontSetEncoding </H1><A class=type>Real</A><A> </A><A 
+class=function>TTFontSetEncoding =</A><A>( a ttf,te as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the encoding to a TTF font to be 
+used for the interpretation of the text, UTF-8 or Windows. The default is UTF-8. 
+In the case of switching to the encoding Windows will by default be used 
+ISO-8859-1 (Cyrillic). You can use this feature to work with ����������� text in 
+Game Maker 8, is not supported by the UTF-8, and all lines are coded coded 
+system Windows.</A> <BR><A>A ttf - id TTF font,</A> <BR><A>Te - <A 
+class=constant name=teUTF8>teUTF8</A> (the default) or <A class=constant 
+name=teWindows>teWindows</A> (0 or 1, respectively).</A> 
+<HR>
+<A name=TTFontLoadCodePage></A>
+<H1 class=name>TTFontLoadCodePage </H1><A class=type>Real</A><A> </A><A 
+class=function>TTFontLoadCodePage =</A><A>( a ttf as </A><A 
+class=type>real</A><A>as filename as </A><A class=type>string</A><A> );</A> 
+<BR><A>Downloads the file from the description of the code page - a list of 
+Unicode characters, the relevant bytes 128-255. Each room must go on a new line. 
+This function may be required if you want to display the ��������������� coded 
+text Windows.</A> <BR><A>A ttf - id TTF font,</A> <BR><A>Filename is the name of 
+the file.</A> 
+<HR>
+<A name=WindowsBitmapfontCreate></A>
+<H1 class=name>WindowsBitmapfontCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>WindowsBitmapfontCreate =</A><A>( fontname as </A><A 
+class=type>string</A><A>, size,start,end as </A><A class=type>real</A><A> );</A> 
+<BR><A>Loads the system font of windows and returns its id.</A> <BR><A>Fontname 
+is the name of the font, for example: 'Arial'</A> <BR><A>Size is the size of the 
+Font</A> <BR><A>Start,end - the rooms are the first and last character. For the 
+Latin these values correspond to the 32 and 95.</A> 
+<HR>
+<A name=FlatTextCreate></A>
+<H1 class=name>FlatTextCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FlatTextCreate =</A><A>( font as </A><A class=type>real</A><A>, 
+string as </A><A class=type>string</A> <A>, the parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a flat 3D text and returns its 
+id.</A> <BR><A>Font - the font id</A> <BR><A>String is the text string to 
+display</A> <BR><A>Parent - the parent id for a text object (0 - lack of 
+parents).</A> 
+<HR>
+<A name=FlatTextSetFont></A>
+<H1 class=name>FlatTextSetFont </H1><A class=type>Real</A><A> </A><A 
+class=function>FlatTextSetFont =</A><A>( text,font as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the font size of the flat 
+text.</A> <BR><A>Font - id text</A> <BR><A>Font - the font id.</A> 
+<HR>
+<A name=FlatTextSetColor></A>
+<H1 class=name>FlatTextSetColor </H1><A class=type>Real</A><A> </A><A 
+class=function>FlatTextSetColor =</A><A>( text,color,alpha as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the flat text.</A> 
+<BR><A>Font - id text</A> <BR><A>Color - the color of the</A> 
+<BR><A>Alpha-transparency.</A> 
+<HR>
+<A name=FlatTextSetText></A>
+<H1 class=name>FlatTextSetText </H1><A class=type>Real</A><A> </A><A 
+class=function>FlatTextSetText =</A><A>( text as </A><A class=type>real</A> <A>, 
+string as </A><A class=type>string</A><A> );</A> <BR><A>Specifies the text 
+string to display flat-text.</A> <BR><A>Text is the id of a text object</A> 
+<BR><A>String is the text string.</A> 
+<HR>
+<A name=HUDTextCreate></A>
+<H1 class=name>HUDTextCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDTextCreate =</A><A>( font as </A><A class=type>real</A><A>, 
+string as </A><A class=type>string</A> <A>, the parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates an on-screen text and returns its 
+id.</A> <BR><A>Font - the font id</A> <BR><A>String is the text string to 
+display</A> <BR><A>Parent - the parent id for a text object (0 - lack of 
+parents).</A> 
+<HR>
+<A name=HUDTextSetRotation></A>
+<H1 class=name>HUDTextSetRotation </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDTextSetRotation =</A><A>( text,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the angle of rotation of the 
+on-screen text.</A> <BR><A>Text is the id of a text object</A> <BR><A>Angle is 
+the angle of rotation in degrees.</A> 
+<HR>
+<A name=HUDTextSetFont></A>
+<H1 class=name>HUDTextSetFont </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDTextSetFont =</A><A>( text,font as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the font size on-screen text.</A> 
+<BR><A>Font - id text</A> <BR><A>Font - the font id.</A> 
+<HR>
+<A name=HUDTextSetColor></A>
+<H1 class=name>HUDTextSetColor </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDTextSetColor =</A><A>( text,color,alpha as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the color of the on-screen 
+text.</A> <BR><A>Font - id text</A> <BR><A>Color - the color of the</A> 
+<BR><A>Alpha-transparency.</A> 
+<HR>
+<A name=HUDTextSetText></A>
+<H1 class=name>HUDTextSetText </H1><A class=type>Real</A><A> </A><A 
+class=function>HUDTextSetText =</A><A>( text as </A><A class=type>real</A> <A>, 
+string as </A><A class=type>string</A><A> );</A> <BR><A>Specifies the text 
+string to display on-screen text.</A> <BR><A>Text is the id of a text object</A> 
+<BR><A>String is the text string.</A> 
+<HR>
+<A name=SpaceTextCreate></A>
+<H1 class=name>SpaceTextCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>SpaceTextCreate =</A><A>( font as </A><A class=type>real</A><A>, 
+string as </A><A class=type>string</A> <A>, extrusion,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a surround 3D text and returns its 
+id.</A> <BR><A>Font - the font id. Only supported WindowsBitmapfont</A> 
+<BR><A>String is the text string to display</A> <BR><A>Extrusion - Thickness of 
+text</A> <BR><A>Parent - the parent id for a text object (0 - lack of 
+parents).</A> 
+<HR>
+<A name=SpaceTextSetExtrusion></A>
+<H1 class=name>SpaceTextSetExtrusion </H1><A class=type>Real</A><A> </A><A 
+class=function>SpaceTextSetExtrusion =</A><A>( text,extrusion as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the thickness of the voluminous 
+text.</A> <BR><A>Text is the id of a text object</A> <BR><A>Extrusion is the 
+thickness of the text.</A> 
+<HR>
+<A name=SpaceTextSetFont></A>
+<H1 class=name>SpaceTextSetFont </H1><A class=type>Real</A><A> </A><A 
+class=function>SpaceTextSetFont =</A><A>( text,font as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the font of the surround of the 
+text.</A> <BR><A>Font - id text</A> <BR><A>Font - the font id.</A> 
+<HR>
+<A name=SpaceTextSetText></A>
+<H1 class=name>SpaceTextSetText </H1><A class=type>Real</A><A> </A><A 
+class=function>SpaceTextSetText =</A><A>( text as </A><A class=type>real</A> 
+<A>, string as </A><A class=type>string</A><A> );</A> <BR><A>Specifies the text 
+string to display the voluminous text.</A> <BR><A>Text is the id of a text 
+object</A> <BR><A>String is the text string.</A> 
+<HR>
+<!--
+<A name="TextSetColor"></A>
+<H1 class=name>TextSetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>TextSetColor</A><A>( text,color,alpha as </A><A class=type>real</A><A> );</A>
+<BR><A>������ ���� � ������������ ��� ��������� ��� �������� ������.</A>
+<BR><A>text - id ���������� �������</A>
+<BR><A>color - ����</A>
+<BR><A>alpha - ������������.</A>
+<HR>
+
+<A name="TextSetFont"></A>
+<H1 class=name>TextSetFont</H1>
+<A class=type>real</A><A> = </A><A class=function>TextSetFont</A><A>( text,font as </A><A class=type>real</A><A> );</A>
+<BR><A>������ ����� ��� ��������� ��� �������� ������.</A>
+<BR><A>text - id ���������� �������</A>
+<BR><A>font - id ������.</A>
+<HR>
+
+<A name="TextSetText"></A>
+<H1 class=name>TextSetText</H1>
+<A class=type>real</A><A> = </A><A class=function>TextSetText</A><A>( text as </A><A class=type>real</A>
+<A>, string as </A><A class=type>string</A><A> );</A>
+<BR><A>������ ��������� ������ ��� ����������� ��������� �������� ������ ����.</A>
+<BR><A>text - id ���������� �������</A>
+<BR><A>string - ��������� ������.</A>
+<HR>
+--></DIV></BODY></HTML>

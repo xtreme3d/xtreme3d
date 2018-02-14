@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Trail</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Trail </H1><A class=type>Class: TGLTrail</A><BR><BR><A>The 
+object trail ("Trace") creates behind another object of a beautiful loop 
+resulting in fast motion. This effect can be used, for example, in the 
+���������������. </A><BR>
+<HR>
+<A name=TrailCreate></A>
+<H1 class=name>TrailCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailCreate =</A><A>( object,parent as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new trail and returns its id.</A> 
+<BR><A>Object is the id of the target, which must be applied loop effect</A> 
+<BR><A>Parent - the id of the parent.</A> 
+<HR>
+<A name=TrailSetObject></A>
+<H1 class=name>TrailSetObject </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetObject =</A><A>( trail,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Change the target object, which must be 
+applied loop effect</A> <BR><A>Trail - the object id trail</A> <BR><A>Object-ID 
+new target object.</A> 
+<HR>
+<A name=TrailSetAlpha></A>
+<H1 class=name>TrailSetAlpha </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetAlpha =</A><A>( trail,alpha,fade as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the transparency of the 
+plume.</A> <BR><A>Trail - the object id trail</A> <BR><A>Alpha - the 
+transparency of the</A> <BR><A>Fade - Determines whether you need to make the 
+loop slowly disappearing: </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> 
+<HR>
+<A name=TrailSetLimits></A>
+<H1 class=name>TrailSetLimits </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetLimits =</A><A>( trail,vl,tl as </A><A 
+class=type>real</A><A> );</A> <BR><A>Defines the limitations of the plume.</A> 
+<BR><A>Trail - the object id trail</A> <BR><A>The vl - maximum cable length</A> 
+<BR><A>Tl - time before the disappearance of the plume (in seconds).</A> 
+<HR>
+<A name=TrailSetMinDistance></A>
+<H1 class=name>TrailSetMinDistance </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetMinDistance =</A><A>( trail,distance as </A><A 
+class=type>real</A><A> );</A> <BR><A>Sets the distance at which passes the 
+target should create a regular segment of the plume. The higher this value, the 
+better the effect.</A> <BR><A>Trail - the object id trail</A> <BR><A>Distance is 
+the distance.</A> 
+<HR>
+<A name=TrailSetUVScale></A>
+<H1 class=name>TrailSetUVScale </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetUVScale =</A><A>( trail,uv as </A><A 
+class=type>real</A><A> );</A> <BR><A>There are no details.</A> <BR><A>Trail - 
+the object id trail</A> <BR><A>Uv - there are no details.</A> 
+<HR>
+<A name=TrailSetMarkStyle></A>
+<H1 class=name>TrailSetMarkStyle </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetMarkStyle =</A><A>( trail,ms as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the style of the plume (ms). You 
+have the following options: ms</A> <BR><A class=constant name=msUp>MsUp</A><A> = 
+0 - Flex is always aligned with the vertical axis</A> <BR><A class=constant 
+name=msDirection>MsDirection</A><A> = 1 - loop is similar to the radar screen: 
+to move in a circle on a local object center trail, following the target</A> 
+<BR><A class=constant name=msFaceCamera>MsFaceCamera</A><A> = 2 - Flex is always 
+aligned with the camera, and it therefore seems surround (the default 
+value).</A> <BR><A>Trail - the object id trail</A> <BR><A>Ms - the style of the 
+plume.</A> 
+<HR>
+<A name=TrailSetMarkWidth></A>
+<H1 class=name>TrailSetMarkWidth </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetMarkWidth =</A><A>( trail,width as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the size of the plume.</A> 
+<BR><A>Trail - the object id trail</A> <BR><A>Width is the size (default: 
+1).</A> 
+<HR>
+<A name=TrailSetEnabled></A>
+<H1 class=name>TrailSetEnabled </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailSetEnabled =</A><A>( trail,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables the ribbon cable.</A> 
+<BR><A>Trail - the object id trail</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=TrailClearMarks></A>
+<H1 class=name>TrailClearMarks </H1><A class=type>Real</A><A> </A><A 
+class=function>TrailClearMarks =</A><A>( trail as </A><A class=type>real</A><A> 
+);</A> <BR><A>Resets the plume. Useful when you want to stop the sharp object, 
+without waiting for the cable disappears.</A> <BR><A>Trail - the object id 
+trail.</A> 
+<HR>
+</DIV></BODY></HTML>

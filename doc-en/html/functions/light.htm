@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Light</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Light </H1><A class=type>Class: 
+TGLLightSource</A><BR><BR><A>The Object that creates the light. Light sources 
+can be of different types and have different characteristics. The analogues of 
+lighting devices in the real world, which offer additional features, 
+inaccessible real sources.</A> <BR><BR><A>Light sources can be of three 
+types:</A> <BR><A>Omni (POINT) - shines equally in all directions from one 
+point, as, for example, the lamp;</A> <BR><A>Spot (spot) - not shines in all 
+directions, and within some of the cone. Highlights the only objects that fall 
+into this cone. A simple example - the torch;</A> <BR><A>Parallel (parallel 
+light) - simulates the remote light sources, such as the sun. The light is 
+emitted in the direction of the only one axis, from the source, of the 
+infinitely great distance from the viewer, and all light rays are parallel.</A> 
+<BR><BR><A>The color of the lighted objects is calculated as the sum of the 
+components of the Ambient, diffuse and SPECULAR from all light sources in the 
+scene:</A> <BR><A>�mbient (uniform component) is the approximation of the global 
+lighting, general color for all objects that are not dependent on other 
+factors;</A> <BR><A>Diffuse (diffuse component) - depends on the position of the 
+light source and from normal surface. This component affects the color of the 
+lighted (rotated to light) parts of objects;</A> <BR><A>Specular (�������� 
+component) - determines the color of the Reflection reflection of light beams 
+from the surface. These glare significantly increase the realism of the image, 
+because rare real surface, do not reflect light, so this aspect is very 
+important.</A> <BR><A>Note that the objects themselves may also have individual 
+components of ambient, diffuse and Specular, affecting the color.</A> 
+<BR><BR><A>Xtreme3D supports up to eight dynamic light sources.</A> <BR>
+<HR>
+<A name=LightCreate></A>
+<H1 class=name>LightCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>LightCreate =</A><A>( ls,parent as </A><A class=type>real</A><A> 
+);</A> <BR><A>Creates a new light source and returns its id. </A><BR><A>Ls - the 
+type of the light source (</A><A class=constant name=lsSpot>lsSpot</A><A>, 
+</A><A class=constant name=lsOmni>lsOmni</A><A> or </A><A class=constant 
+name=lsParallel>lsParallel</A><A> - respectively, 0, 1, or 2)</A> <BR><A>Parent 
+- the parent id for the light source (0 - lack of parents).</A> 
+<HR>
+<A name=LightSetAmbientColor></A>
+<H1 class=name>LightSetAmbientColor </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetAmbientColor =</A><A>( light,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the component of �mbient light 
+source.</A> <BR><A>Light is the id of the light source</A> <BR><A>Color - the 
+color of the component.</A> 
+<HR>
+<A name=LightSetDiffuseColor></A>
+<H1 class=name>LightSetDiffuseColor </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetDiffuseColor =</A><A>( light,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the component of Diffuse light 
+source.</A> <BR><A>Light is the id of the light source</A> <BR><A>Color - the 
+color of the component.</A> 
+<HR>
+<A name=LightSetSpecularColor></A>
+<H1 class=name>LightSetSpecularColor </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetSpecularColor =</A><A>( light,color as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the component of the Specular 
+light source.</A> <BR><A>Light is the id of the light source</A> <BR><A>Color - 
+the color of the component.</A> 
+<HR>
+<A name=LightSetAttenuation></A>
+<H1 class=name>LightSetAttenuation </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetAttenuation =</A><A>( light,constant,linear, quadratic as 
+</A><A class=type>real</A><A> );</A> <BR><A>Point and directed light sources 
+have a parameter that affects the force of light - the so-called attenuation 
+(attenuation). This setting affects the decrease of light intensity with 
+distance. In the quadratic equation that determines the intensity of the light, 
+composed of three parameters: the constant, linear and quadratic components 
+(constant, linear, quadratic). By default, they are assigned a value of 1, 0 and 
+0 respectively - the intensity of the light from the source does not decrease 
+with distance. The equation is as follows:</A> <BR><BR><IMG align=center 
+src="../data/attenuation.jpg"> <BR><BR><A>Where a is the value of the 
+attenuation, is a constant component (constant), l is a linear component 
+(linear), q is the quadratic component (quadratic), d is the distance from the 
+light source.</A> <BR><A>This function sets the value of the attenuation through 
+these three components.</A> <BR><A>Light is the id of the light source</A> 
+<BR><A>Constant is a constant component of the attenuation of the</A> 
+<BR><A>Linear - linear attenuation component</A> <BR><A>Quadratic - quadratic 
+component of the damping.</A> 
+<HR>
+<A name=LightSetShining></A>
+<H1 class=name>LightSetShining </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetShining =</A><A>( light,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Enables or disables the source of 
+light.</A> <BR><A>Light is the id of the light source</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=LightSetSpotCutoff></A>
+<H1 class=name>LightSetSpotCutoff </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetSpotCutoff =</A><A>( light,cutoff as </A><A 
+class=type>real</A><A> );</A> <BR><A>For Directed light source sets the angle 
+between the axis and the party restricts the cone (he is half of the cone 
+angle). In other words, the effect on the width of the cone of light. If this 
+value is 180 degrees, aiming the light source is seen as a point.</A> 
+<BR><A>Light is the id of the light source</A> <BR><A>Cutoff - the angle.</A> 
+<HR>
+<A name=LightSetSpotExponent></A>
+<H1 class=name>LightSetSpotExponent </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetSpotExponent =</A><A>( light,SPSS self-instructor as 
+</A><A class=type>real</A><A> );</A> <BR><A>For Directed light source sets the 
+exponent of decreasing the intensity depending on the angle between the axis of 
+the limiting cone and a beam of light.</A> <BR><A>Light is the id of the light 
+source</A> <BR><A>Spss self-instructor - the exhibitor.</A> 
+<HR>
+<A name=LightSetSpotDirection></A>
+<H1 class=name>LightSetSpotDirection </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetSpotDirection =</A><A>( light,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>For Directed light source determines the 
+direction of the axis of the limiting cone.</A> <BR><A>Light is the id of the 
+light source</A> <BR><A>X,y,z is a unit vector direction.</A> 
+<HR>
+<A name=LightSetStyle></A>
+<H1 class=name>LightSetStyle </H1><A class=type>Real</A><A> </A><A 
+class=function>LightSetStyle =</A><A>( light,ls as </A><A class=type>real</A><A> 
+);</A> <BR><A>Specifies the type of the light source.</A> <BR><A>Light is the id 
+of the light source</A> <BR><A>Ls - the type of the light source (</A><A 
+class=constant>lsSpot</A><A>, </A><A class=constant>lsOmni</A><A> or </A><A 
+class=constant>lsParallel</A><A> - respectively, 0, 1, or 2).</A> 
+<HR>
+</DIV></BODY></HTML>

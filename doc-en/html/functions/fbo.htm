@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>FBO</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>FBO </H1><A class=type>Class: TGLFBO</A><BR><BR><A>(FBO 
+Frame Buffer Object) is a modern mechanism ������������ rendering, evolved from 
+the p-buffers (see <A class=link href="memviewer.htm">MemoryViewer</A>). As The 
+MemoryViewer FBO, allows you to render the scene in a separate buffer in video 
+memory, the contents of which then becomes available as a texture. This allows 
+you to control the image of various ��������� postprocessing operations, apply 
+filters and special effects. <BR>In contrast to the MemoryViewer FBO, does not 
+require relatively expensive shift operation OpenGL contexts, so the modern 
+systems it is preferable to use it. FBO also works much faster than the </A><A 
+class=funclink 
+href="../functions/viewer.htm#ViewerCopyToTexture">ViewerCopyToTexture</A><A>, 
+which in fact makes copying data from one buffer to another. Another advantage 
+is the FBO provides full access to the Z-buffer, which is essential for the 
+implementation of some of the filters. The Fbo use is no more complicated than 
+MemoryViewer. The only restriction is that access to the ��������� FBO is 
+possible only through the GLSL shaders - that is, you cannot create a material 
+which would use the FBO texture without a shader. <BR>To convey the texture in 
+the FBO the GLSL shader, use the </A><A class=funclink 
+href="../functions/shader.htm#GLSLShaderSetParameterFBOColorTexture">GLSLShaderSetParameterFBOColorTexture</A><A> 
+and </A><A class=funclink 
+href="../functions/shader.htm#GLSLShaderSetParameterFBODepthTexture">GLSLShaderSetParameterFBODepthTexture</A><A> 
+, respectively, for the color buffer and Z-buffer. <BR>FBO functions require the 
+support of OpenGL 1.4 and the expansion of the GL_ARB_framebuffer_object. </A>
+<HR>
+<A name=FBOCreate></A>
+<H1 class=name>FBOCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FBOCreate =</A><A>( width,height,viewer as </A><A 
+class=type>real</A><A> );</A> <BR><A>Creates a new FBO and returns its id.</A> 
+<BR><A>Width,height - the width and height of the buffer</A> <BR><A>Viewer - id 
+type, whose settings you want to use for rendering (background color, the fog, 
+aspect ratio, etc.).</A> 
+<HR>
+<A name=FBOSetCamera></A>
+<H1 class=name>FBOSetCamera </H1><A class=type>Real</A><A> </A><A 
+class=function>FBOSetCamera =</A><A>( fbo,camera as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the camera, through which the FBO 
+must render the scene.</A> <BR><A>Fbo - FBO id</A> <BR><A>Camera - id of the 
+camera.</A> 
+<HR>
+<A name=FBOSetViewer></A>
+<H1 class=name>FBOSetViewer </H1><A class=type>Real</A><A> </A><A 
+class=function>FBOSetViewer =</A><A>( fbo,viewer as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the type, whose settings you want 
+to use for rendering (background color, the fog, aspect ratio, etc.).</A> 
+<BR><A>Fbo - FBO id</A> <BR><A>View - id type.</A> 
+<HR>
+<A name=FBORenderObject></A>
+<H1 class=name>FBORenderObject </H1><A class=type>Real</A><A> </A><A 
+class=function>FBORenderObject =</A><A>( fbo,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Commits the rendering of the object in the 
+FBO. Note that the texture read FBO during rendering is not recommended, it will 
+lead to undefined results. In other words, avoid the situation when the 
+���������� FBO object that uses the shader, which reads the texture of the same 
+FBO.</A> <BR><A>Fbo - FBO id</A> <BR><A>Object is an object that you want to 
+render (together with his descendants). As a rule, this parameter is transmitted 
+Dummycube containing a hierarchy of the 3D scene.</A> 
+<HR>
+<A name=FBORenderObjectEx></A>
+<H1 class=name>FBORenderObjectEx </H1><A class=type>Real</A><A> </A><A 
+class=function>FBORenderObjectEx =</A><A>( 
+fbo,object,clearcolor,cleardepth,copycolor,copydepth as </A><A 
+class=type>real</A><A> );</A> <BR><A>Commits the rendering of the object in the 
+FBO with advanced options. The function allows you to organize the multipass 
+encode rendering.</A> <BR><A>Fbo - FBO id</A> <BR><A>Object is an object that 
+you want to render (together with his descendants). As a rule, this parameter is 
+transmitted Dummycube containing a hierarchy of 3D-scenes</A> <BR><A>Clearcolor 
+- Determines whether the clean FBO background color before rendering - <A 
+class=constant>true</A> or <A class=constant>false</A> (1 and 0 
+respectively)</A> <BR><A>Cleardepth - Specifies whether to clean the depth 
+buffer FBO before rendering - <A class=constant>true</A> or <A 
+class=constant>false</A> (1 and 0 respectively)</A> <BR><A>Copycolor - Specifies 
+whether to copy the contents of the color buffer in the FBO the main framebuffer 
+rendering after - <A class=constant>true</A> or <A class=constant>false</A> (1 
+and 0 respectively)</A> <BR><A>Copydepth - Specifies whether to copy the 
+contents of the depth buffer in the FBO the main framebuffer rendering after - 
+<A class=constant>true</A> or <A class=constant>false</A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=FBOSetOverrideMaterial></A>
+<H1 class=name>FBOSetOverrideMaterial </H1><A class=type>Real</A><A> </A><A 
+class=function>FBOSetOverrideMaterial =</A><A>( fbo matlib,as </A><A 
+class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A> 
+<BR><A class=ntext>Specifies the FBO replacement material. This material will be 
+used for all objects that ���������� in the FBO, and their own materials will be 
+ignored. This ability to ������������ to implement some special effects and 
+rendering techniques, such as deferred rendering. <BR><A>Fbo</A> - FBO id</A> 
+<BR><A>Matlib</A> - id of the library materials</A> <BR><A>The material</A> is 
+the name of the material in the library. If you pass an empty string, the 
+replacement material will be disabled and the objects will be, as usual, 
+rendered with their materials.</A> 
+<HR>
+<!--
+<A name="FBOUseFloatColorBuffer"></A>
+<H1 class=name>FBOUseFloatColorBuffer</H1>
+<A class=type>real</A><A> = </A><A class=function>FBOUseFloatColorBuffer</A><A>( fbo,mode as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>����������, ������������ �� �������� ����� ������� 32-bit float (�� ����, RGBA-����� � 32-������ ��������� � ��������� ������� �� ������ �����). ����� ����� �������� ��������� ��� �������� ���������� ����������.
+<BR/><A>fbo</A> - id FBO</A>
+<BR/><A>mode</A> - <A class=constant>true</A> ��� <A class=constant>false</A> (1 � 0 ��������������).</A>
+<HR>
+--><A name=FBOSetColorTextureFormat></A>
+<H1 class=name>FBOSetColorTextureFormat </H1><A class=type>Real</A><A> </A><A 
+class=function>FBOSetColorTextureFormat =</A><A>( fbo,tf as </A><A 
+class=type>real</A><A> );</A> <BR><A class=ntext>Specifies the format of the 
+texture storage buffer color FBO to video memory (tf). The function uses the 
+same constants tf that </A><A class=funclink 
+href="../functions/material.htm#MaterialSetTextureFormat">MaterialSetTextureFormat</A><A> 
+supports the following values of tf:</A> <BR><A class=constant 
+name=tfDefault>TfDefault</A><A> = 0 is the default format (</A><A 
+class=constant>tfRGBA</A><A>)</A> <BR><A class=constant name=tfRGB>TfRGB</A><A> 
+= 1 - 24-bit RGB, 8 bits on the component, without the alpha channel</A> <BR><A 
+class=constant name=tfRGBA>TfRGBA</A><A> = 2 - 32-Bit RGBA, 8-bits per component 
+that includes the alpha channel</A> <BR><A class=constant 
+name=tfRGB16>TfRGB16</A><A> = 3 - 16-bit RGB, 5-bits per component, without the 
+alpha channel</A> <BR><A class=constant name=tfRGBA16>TfRGBA16</A><A> = 4 - 
+16-Bit RGBA, 4 bits per component that includes the alpha channel</A> <BR><A 
+class=constant name=tfAlpha>TfAlpha</A><A> = 5 - only 8-bit alpha channel 
+without color</A> <BR><A class=constant name=tfLuminance>TfLuminance</A><A> = 6 
+- only 8-bit component brightness, without the alpha channel</A> <BR><A 
+class=constant name=tfLuminanceAlpha>TfLuminanceAlpha</A><A> = 7 - only 8-bit 
+component brightness, Includes Alpha Channel</A> <BR><A class=constant 
+name=tfIntensity>TfIntensity</A><A> = 8 - only 8-bit component of the 
+saturation, without the alpha channel</A> <BR><A class=constant 
+name=tfRGBAFloat16>TfRGBAFloat16</A><A> = 10 - 16-Bit RGBA for floating-point, 
+Includes Alpha Channel</A> <BR><A class=constant 
+name=tfRGBAFloat32>TfRGBAFloat32</A><A> = 11 - 32-Bit RGBA for floating-point, 
+includes the alpha channel.</A> <BR>The last two formats require the support 
+expansion of the GL_ARB_texture_float. <BR><A>Fbo</A> - FBO id</A> <BR><A>Tf - 
+format.</A> 
+<HR>
+</DIV></BODY></HTML>

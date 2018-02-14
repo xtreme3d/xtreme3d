@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Navigator</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Navigator </H1><A class=type>Class: 
+TGLNavigator</A><BR><BR><A>Navigator (navigator) is a special object that 
+facilitates the management of other objects. The object attached to the 
+Navigator, is subject to the functions of the transformation, the number you are 
+calling for the navigator. For example, you can move the navigator in the 
+different sides, rotate, and so on. You may ask, why do you need, when similar 
+features and objects? The fact is that the management of objects through the 
+standard functions of transformation in some situations difficult. Imagine that 
+you want to give the player the ability to manage the game different objects. 
+For example, sit in different vehicles, as in the GTA. In this case, it would be 
+much easier to manage the navigator and simply replace the attached object in 
+case of change of vehicle. <BR>The Navigator was originally oriented toward the 
+realization of the game control. It therefore do not even have the XYZ axes as 
+such. There are two rotation mode: horizontal and vertical. In the first case, 
+the object is rotated to the right/left, in the second - up/down. The first 
+turning determines the direction of the horizontal motion (in the plane), the 
+second flight. <BR>In addition, navigator has the useful tools, such as the 
+virtual vector Up and corner stop. <BR>The virtual vector Up (Virtual Up) is 
+very similar to the normal vector of Up, the only difference is that you can at 
+any time change its direction, by transforming in such a way and the coordinate 
+system, which moves the attached to the Navigator object. The advantage of the 
+virtual Up lies in the fact that it changes at the level of the navigator, and 
+not the object. Therefore, this possibility should be seen as a transformer of 
+the space in which there is an object. The use of the virtual vector of Up makes 
+it possible, for example, moving an object on the surface of the sphere. The 
+Local transformation of the object remains untouched and it can at any moment 
+turn in either direction without changing the vector Up. </A><BR>
+<HR>
+<A name=NavigatorCreate></A>
+<H1 class=name>NavigatorCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorCreate =</A><A>();</A> <BR><A>The navigator creates and 
+returns its id.</A> 
+<HR>
+<A name=NavigatorSetObject></A>
+<H1 class=name>NavigatorSetObject </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorSetObject =</A><A>( nav,object as </A><A 
+class=type>real</A><A> );</A> <BR><A>Attaches to the Navigator object.</A> 
+<BR><A>Nav - Navigator id</A> <BR><A>The object is the object ID.</A> 
+<HR>
+<A name=NavigatorSetUseVirtualUp></A>
+<H1 class=name>NavigatorSetUseVirtualUp </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorSetUseVirtualUp =</A><A>( nav,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Indicates the need to use a virtual vector 
+of Up.</A> <BR><A>Nav - Navigator id</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+<A name=NavigatorSetVirtualUp></A>
+<H1 class=name>NavigatorSetVirtualUp </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorSetVirtualUp =</A><A>( nav,x,y,z as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the virtual vector Up.</A> 
+<BR><A>Nav - Navigator id</A> <BR><A>X,y,z - vector.</A> 
+<HR>
+<A name=NavigatorTurnHorizontal></A>
+<H1 class=name>NavigatorTurnHorizontal </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorTurnHorizontal =</A><A>( nav,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator turns horizontally.</A> 
+<BR><A>Nav - Navigator id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=NavigatorTurnVertical></A>
+<H1 class=name>NavigatorTurnVertical </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorTurnVertical =</A><A>( nav,angle as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator turns vertically.</A> 
+<BR><A>Nav - Navigator id</A> <BR><A>Angle is the angle.</A> 
+<HR>
+<A name=NavigatorMoveForward></A>
+<H1 class=name>NavigatorMoveForward </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorMoveForward =</A><A>( nav,speed as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator moves forward/backward in the 
+horizontal plane.</A> <BR><A>Nav - Navigator id</A> <BR><A>Speed is the 
+speed.</A> 
+<HR>
+<A name=NavigatorStrafeHorizontal></A>
+<H1 class=name>NavigatorStrafeHorizontal </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorStrafeHorizontal =</A><A>( nav,speed as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator moves to the left/right in 
+the horizontal plane.</A> <BR><A>Nav - Navigator id</A> <BR><A>Speed is the 
+speed.</A> 
+<HR>
+<A name=NavigatorStrafeVertical></A>
+<H1 class=name>NavigatorStrafeVertical </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorStrafeVertical =</A><A>( nav,speed as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator moves up/down.</A> <BR><A>Nav 
+- Navigator id</A> <BR><A>Speed is the speed.</A> 
+<HR>
+<A name=NavigatorStraighten></A>
+<H1 class=name>NavigatorStraighten </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorStraighten =</A><A>( nav as a </A><A 
+class=type>real</A><A> );</A> <BR><A>Resets the turn of the navigator in its 
+original state.</A> <BR><A>Nav is the id of the navigator.</A> 
+<HR>
+<A name=NavigatorFlyForward></A>
+<H1 class=name>NavigatorFlyForward </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorFlyForward =</A><A>( nav,speed as </A><A 
+class=type>real</A><A> );</A> <BR><A>The navigator moves forward/backward.</A> 
+<BR><A>Nav - Navigator id</A> <BR><A>Speed is the speed.</A> 
+<HR>
+<A name=NavigatorMoveUpWhenMovingForward></A>
+<H1 class=name>NavigatorMoveUpWhenMovingForward </H1><A class=type>Real</A><A> 
+</A><A class=function>NavigatorMoveUpWhenMovingForward =</A><A>( nav,mode as 
+</A><A class=type>real</A><A> );</A> <BR><A>Determines whether the navigator 
+"fly" or "go" - in other words, the switches the two common management style: as 
+in the ��������������� (option is enabled), and as in the ������� from the first 
+person (the option is disabled).</A> <BR><A>Nav - Navigator id</A> <BR><A>Mode - 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+<A name=NavigatorInvertHorizontalWhenUpsideDown></A>
+<H1 class=name>NavigatorInvertHorizontalWhenUpsideDown </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>NavigatorInvertHorizontalWhenUpsideDown =</A><A>( nav,mode as 
+</A><A class=type>real</A><A> );</A> <BR><A>If the navigator ends more than 90 
+degrees to the vertical and horizontal control will be inverted - that is, turn 
+to the left will cause the steering to the right, and vice versa. This option 
+solves this problem by ���������� horizontal rotation.</A> <BR><A>Nav - 
+Navigator id</A> <BR><A>Mode - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A>.</A> 
+<HR>
+<A name=NavigatorSetAngleLock></A>
+<H1 class=name>NavigatorSetAngleLock </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorSetAngleLock =</A><A>( nav,mode as </A><A 
+class=type>real</A><A> );</A> <BR><A>Indicates the need to use angular speed 
+limiter for vertical rotation.</A> <BR><A>Nav - Navigator id</A> <BR><A>Mode - 
+</A><A class=constant>true</A><A> or </A><A class=constant>false</A><A>.</A> 
+<HR>
+<A name=NavigatorSetAngles></A>
+<H1 class=name>NavigatorSetAngles </H1><A class=type>Real</A><A> </A><A 
+class=function>NavigatorSetAngles =</A><A>( nav,min,max as </A><A 
+class=type>real</A><A> );</A> <BR><A>Specifies the angular speed limiter 
+thresholds - minimum and maximum.</A> <BR><A>Nav - Navigator id</A> 
+<BR><A>Min,max - minimum and maximum thresholds of the limiter.</A> 
+<HR>
+</DIV></BODY></HTML>

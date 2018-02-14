@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>HDR</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=name>HDR </H1><A class=type>High Dynamic Range | wide dynamic 
+range</A> 
+<HR>
+<A>Description of the color of the real physical quantities. <BR><BR>The 
+familiar model description of the image is RGB, when all colors are presented in 
+the form of the amount of the Basic colors: red, green, and blue, with different 
+intensity in the form of a possible integer values from 0 to 255 for each, the 
+encoded eight bits of the color. Attitude of the maximum intensity to the 
+minimum available to display a particular model or device is called the dynamic 
+range. Thus, the dynamic range of the RGB model is 256:1 or 100:1 cd/m2 (2). 
+This model describe the color and intensity is generally accepted is called Low 
+Dynamic Range (LDR). <BR><BR>The possible values of the LDR in all cases is not 
+enough, a person is able to see a much greater range, especially at low light 
+intensity, and the RGB model is too limited in such cases (yes, and when large 
+�������������� too). The dynamic range of vision from 10-6 up to 108 cd/m2, that 
+is, 100000000000000:1 (14 orders). At the same time, the entire range we see 
+cannot, but the range, visible eye at a time, approximately equal 10000:1 (4). 
+The vision adapts to the values from another part of the range of light 
+conditions gradually, with the help of the so-called adaptation, you can easily 
+describe the situation with the light off in the room at night - first the eyes 
+see very little, but over time, adapt to changing light conditions and see the 
+already much more. The same thing happens and when back to change the dark 
+environment in the light. <BR><BR>So, the dynamic range of the RGB descriptions 
+is not enough for the submission of images that people can see in reality, this 
+model significantly reduces the possible values of light intensity at the top 
+and bottom of the range. The most common example, driven in HDR, - the image of 
+������������ spaces with window to the bright street on a sunny day. With the 
+RGB color model can be obtained or normal display that is located outside the 
+window, or just the fact that inside the premises. Values greater than 100 cd/m 
+2 in the LDR is truncated, this is the reason that the 3D-rendering it is 
+difficult to correctly display the bright light sources aimed directly in the 
+camera. <BR><BR>The display device until that seriously cannot be improved, but 
+the failure of the LDR in the calculations of makes sense. You can use the 
+actual physical value of intensity and color (or linearly proportional), and on 
+the monitor display maximum that it can. The essence of the submission of HDR in 
+the use of intensity values and colors in real physical terms or linearly 
+proportional to use integers and floating-point numbers with great accuracy (for 
+example, 16 or 32 bits). This removes restrictions on the RGB, and the dynamic 
+range images seriously increase. Then any HDR image can be displayed on any 
+vehicle display (the same RGB monitor), with the highest quality possible for 
+him with the help of special algorithms for tone mapping. <BR><BR>HDR rendering 
+allows you to change the exposure after we ����������� image, gives an 
+opportunity to simulate the effect of the adaptation of human vision (movement 
+of bright open spaces in the dark spaces and vice versa), allows you to 
+physically correct lighting, as well as a unified solution for the application 
+of the postprocessing effects (glare, flares, bloom, motion blur). Algorithms of 
+image processing, color correction, gamma correction, motion blur, bloom and 
+other methods of qualitative processing performed in HDR view. <BR><BR>In the 
+annexs 3D rendering Real Time Gaming, mostly) HDR rendering began to use 
+relatively recently, because it requires computing and render target in the 
+formats of floating point operations, which first became available only on the 
+���������� with support for DirectX 9. The usual route HDR rendering in games is 
+as follows: the rendering of the scene in the buffer format of floating-point 
+image postprocessing in the expanded color range (changing the contrast and 
+brightness, color balance, the effects of glare and motion blur, lens flare and 
+such), the application of tone mapping for the withdrawal of the final HDR 
+images on the LDR screen. Sometimes the map used environment (environment maps) 
+in the HDR formats, for the static reflections on objects, a very interesting 
+application of HDR in the simulation of dynamic ����������� and reflections, 
+this can also be used dynamic maps in formats with a floating point. To this add 
+another �������� (light maps), pre-calculated and stored in the HDR format. Much 
+of the above made, for example, in the Half-Life 2: Lost Coast. <BR><BR>HDR 
+rendering is very useful for post-processing complex of higher quality, compared 
+with conventional methods. The same bloom will look realistic in the 
+calculations to HDR model of submission. <BR><BR>Unfortunately, in some cases, 
+game developers can hide under the name of HDR filter simply bloom, calculated 
+in the usual LDR range. Although a large part of that now make the games with 
+HDR rendering, and there is a bloom of better quality, benefit from the HDR 
+rendering is not limited to one these ������������, simply to make it easier. 
+<BR></A>
+<HR>
+<IMG align=left src="../data/hdr.jpg"> 
+<DIV></DIV></DIV></BODY></HTML>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Environment Mapping</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=name>Environment Mapping </H1><A class=type>Environment Mapping | map 
+projection environment</A> 
+<HR>
+<A>One of the forms of ibl is a method of texture overlay that simulates the 
+effect of mirror reflections on the surface. As a result of the use of the 
+environment map rendering on the reflections it takes much less time than when 
+using a "fair" tracing. <BR>Environment Mapping involves the use of one or more 
+of the textures with The ����������������� or ������������������� reflections. 
+The projection of the textures on the surface of the model occurs by the 
+specific transformation texture coordinates. There are several methods of 
+projection environment maps: <BR><B>Sphere Mapping</B> (spherical projection) - 
+as the environment map is used the only texture, forming the surface of the 
+imaginary of a hemisphere, the object from the viewer. This is the easiest and 
+most effective method, but not realistic, as with any angle the viewer sees the 
+same reflection. This method is also known as the Mirror Ball ("mirror ball"). 
+<BR><B>Cube Mapping</B> (cubic projection) - as a reader ���������� uses six 
+projection, forming the six sides of the imaginary cube surrounding the object. 
+As a result, the effect is fully reflected from any point of the surface. The 
+original images obtained by the preliminary or dynamic rendering. This method 
+allows you to get the most realistic result at the cost of the high cost of 
+video memory. <BR><B>Equirectangular Mapping</B> (������������������ projection 
+- a method of projection used in cartography. As the environment map is used 
+only the texture covering the imaginary sphere around the object. Allows you to 
+get a realistic result at minimum cost of video memory (artifacts of projection 
+are the "poles", but they are usually not very visible). In the rendering of 
+real time, this method has been widely only with the advent of shaders, as on a 
+fixed line it is not maintained. <BR><B>Dual-Paraboloid Mapping</B> (the 
+projection of dual paraboloid) is one of the most modern methods. Displays the 
+top and bottom of the hemisphere of environment in two textures. This method has 
+little artifacts (if not take a small deviation along the equator") and is the 
+best compromise between memory consumption and the quality of the result. 
+</A><BR><BR><A>See also </A><A class=link 
+href="reflectionmapping.htm">Reflection Mapping</A><A>.</A> 
+<HR>
+<IMG align=left src="../data/environmentmapping.jpg"> </DIV></BODY></HTML>

@@ -1,0 +1,521 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Freeform</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css href="../data/style.css">
+<META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
+<BODY>
+<DIV align=justify>
+<H1 class=pagetitle>Freeform </H1><A class=type>Class: 
+TGLFreeform</A><BR><BR><A>The object of free form (Freeform) - ��������������� 
+model. The objects of this type are often used as game levels, decorations and 
+interactive objects. Freeform consists of one or more of the ����� (Mesh) - sets 
+of vertices, each of which, in turn, contains one or more of the ��������� 
+(FaceGroup) - sets of facets, drawn from these vertices. ����������� and ����� 
+can assign separate materials. However, not all of the formats of the models 
+support materials such as and subdivision and dwelling was ����������. 
+<BR>Xtreme3D supports the following file formats: <BR>Game and ������������ - 
+BSP (Quake 3), B3D (Blitz3D), the LOD LODka (3D), X (Microsoft DirectX), the CSM 
+(Cartography Shop 4), LMTS (Pulsar LMTools), DXS (DeleD); <BR>The packages of 3D 
+modeling and CAD - 3DS (3D Studio), OBJ (Maya), (LWO Lightwave), MS3D 
+(Milkshape), ASE (3ds Max), OCT (FSRad), NMF (AMD NormalMapper), the WRL (VRML 
+1.0); <BR>Scientific - PLY (Stanford Triangle Format), GTS (GNU Triangulated 
+Surface), the TIN (Triangular Irregular Network), STL (Stereolithography); 
+<BR>Its own format - The GLSM GLScene (Mesh). <BR><BR>
+<HR>
+<A name=FreeformCreate></A>
+<H1 class=name>FreeformCreate </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformCreate =</A><A>( filename as </A><A 
+class=type>string</A><A>, The matlib, lmapmatlib, parent as </A><A 
+class=type>real</A> );</A> <BR><A>Creates a new object of free form and returns 
+its id.</A> <BR><A>Filename is the path to the model of</A> <BR><A>Matlib - 
+library materials in which to store the model materials</A> <BR><A>Lmapmatlib - 
+library materials in which to store the materials cards model lighting</A> 
+<BR><A>Parent - the parent id for the object of free form (0 - lack of 
+parents).</A> 
+<HR>
+<A name=FreeformCreateEmpty></A>
+<H1 class=name>FreeformCreateEmpty </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformCreateEmpty =</A><A>( matlib,lmapmatlib,parent as </A><A 
+class=type>real</A> );</A> <BR><A>Creates a new empty object of free form and 
+returns its id. The Geometry it is set using the functions below - so you can 
+create your own format of models.</A> <BR><A>Matlib - The materials library, 
+which stores the model materials</A> <BR><A>Lmapmatlib - The materials library, 
+which stores the materials cards model lighting</A> <BR><A>Parent - the parent 
+id for the object of free form (0 - lack of parents).</A> 
+<HR>
+<A name=FreeformSetMaterialLibraries></A>
+<H1 class=name>FreeformSetMaterialLibraries </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformSetMaterialLibraries =</A><A>( 
+freeform,matlib,lmapmatlib as </A><A class=type>real</A> );</A> <BR><A>Specifies 
+the library materials free Object form.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Matlib - The materials library, which stores the model 
+materials</A> <BR><A>Lmapmatlib - library materials, in which the stored 
+materials lighting card model.</A> 
+<HR>
+<A name=FreeformAddMesh></A>
+<H1 class=name>FreeformAddMesh </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformAddMesh =</A><A>( freeform as </A><A class=type>real</A> 
+);</A> <BR><A>Creates a new empty mesh object in free form and returns its 
+index.</A> <BR><A>Freeform - the object ID.</A> 
+<HR>
+<A name=FreeformMeshAddVertex></A>
+<H1 class=name>FreeformMeshAddVertex </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddVertex =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Adds a new vertex in the mesh strainer and 
+returns its index. Tops are defined in the local space of object (that is, 
+regardless of the position, rotation, and scale).</A> <BR><A>Freeform - id of 
+object form free</A> <BR><A>Mesh - the index of ����</A> <BR><A>X,y,z are the 
+coordinates of the vertices.</A> 
+<HR>
+<A name=FreeformMeshAddNormal></A>
+<H1 class=name>FreeformMeshAddNormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddNormal =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Adds a new normal in the mesh strainer and 
+returns its index. Normal set in the local space of object (that is, regardless 
+of the position, rotation, and scale).</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>X,y,z is a vector of 
+normal.</A> 
+<HR>
+<A name=FreeformMeshAddTexCoord></A>
+<H1 class=name>FreeformMeshAddTexCoord </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddTexCoord =</A><A>( freeform,mesh,u,v as </A><A 
+class=type>real</A> );</A> <BR><A>Adds a new pair of texture coordinates in the 
+mesh strainer and returns its index.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>U,v - texture 
+coordinates.</A> 
+<HR>
+<A name=FreeformMeshAddSecondTexCoord></A>
+<H1 class=name>FreeformMeshAddSecondTexCoord </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshAddSecondTexCoord =</A><A>( freeform,mesh,u,v 
+as </A><A class=type>real</A> );</A> <BR><A>Adds a new pair of second texture 
+coordinates in the mesh strainer and returns its index. The second set of 
+texture coordinates is usually used for the map overlay light (lightmap).</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>U,v - second texture coordinates.</A> 
+<HR>
+<A name=FreeformMeshAddTangent></A>
+<H1 class=name>FreeformMeshAddTangent </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddTangent =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Adds a new ����������� vector (�������) in the 
+mesh strainer and returns its index. The vectors tangents are defined in the 
+local space of object (that is, regardless of the position, rotation, and 
+scale).</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index 
+of ����</A> <BR><A>X,y,z - ����������� vector.</A> 
+<HR>
+<A name=FreeformMeshAddBinormal></A>
+<H1 class=name>FreeformMeshAddBinormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddBinormal =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Adds a new ��������� in mesh and returns its 
+index. ��������� are defined in the local space of object (that is, regardless 
+of the position, rotation, and scale).</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>X,y,z is a vector of 
+���������.</A> 
+<HR>
+<A name=FreeformMeshSetVertex></A>
+<H1 class=name>FreeformMeshSetVertex </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetVertex =</A><A>( freeform,mesh,vertex,x,y,z as 
+</A><A class=type>real</A> );</A> <BR><A>Specifies the coordinates of the 
+vertices ����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - 
+the index of ����</A> <BR><A>Vertex - index top</A> <BR><A>X,y,z 
+coordinates.</A> 
+<HR>
+<A name=FreeformMeshSetNormal></A>
+<H1 class=name>FreeformMeshSetNormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetNormal =</A><A>( freeform,mesh,normal,x,y,z as 
+</A><A class=type>real</A> );</A> <BR><A>Specifies the vector normal ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Normal - normal index</A> <BR><A>X,y,z is a vector of normal.</A> 
+<HR>
+<A name=FreeformMeshSetTexCoord></A>
+<H1 class=name>FreeformMeshSetTexCoord </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetTexCoord =</A><A>( freeform,mesh,texcoord,u,v as 
+</A><A class=type>real</A> );</A> <BR><A>Specifies a couple of texture 
+coordinates of ����.</A> <BR><A>Freeform - id of object form free</A> 
+<BR><A>Mesh - the index of ����</A> <BR><A>Texcoord - the index texture 
+coordinates</A> <BR><A>U,v - texture coordinates.</A> 
+<HR>
+<A name=FreeformMeshSetSecondTexCoord></A>
+<H1 class=name>FreeformMeshSetSecondTexCoord </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshSetSecondTexCoord =</A><A>( 
+freeform,mesh,texcoord,u,v as </A><A class=type>real</A> );</A> <BR><A>Specifies 
+a pair of second texture coordinates of ����.</A> <BR><A>Freeform - id of object 
+form free</A> <BR><A>Mesh - the index of ����</A> <BR><A>Texcoord - the index of 
+the second texture coordinates</A> <BR><A>U,v - texture coordinates.</A> 
+<HR>
+<A name=FreeformMeshSetTangent></A>
+<H1 class=name>FreeformMeshSetTangent </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetTangent =</A><A>( freeform,mesh,tangent,x,y,z as 
+</A><A class=type>real</A> );</A> <BR><A>Specifies a vector of the tangent 
+����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index 
+of ����</A> <BR><A>Tangent - the index of the vector tangent</A> <BR><A>X,y,z is 
+a vector of the tangent.</A> 
+<HR>
+<A name=FreeformMeshSetBinormal></A>
+<H1 class=name>FreeformMeshSetBinormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetBinormal =</A><A>( freeform,mesh,binormal,x,y,z as 
+</A><A class=type>real</A> );</A> <BR><A>Specifies a vector of ��������� 
+����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index 
+of ����</A> <BR><A>Binormal - the index of the vector ���������</A> <BR><A>X,y,z 
+is a vector of ���������.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupSetIndex></A>
+<H1 class=name>FreeformMeshFaceGroupSetIndex </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshFaceGroupSetIndex =</A><A>( 
+freeform,mesh,facegroup,index,i as </A><A class=type>real</A> );</A> 
+<BR><A>Specifies the index of vertices in the ����������. The indices are each 
+other, forming a "flat" a list of triangles - that is, indexes, numbered 0, 1, 2 
+form the first triangle, 3, 4, 5 is the second, and so on. For normal, texture 
+coordinates and other attributes using the same indices, the vertices.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Facegroup - Index ����������</A> <BR><A>Index - the index number of the 
+peaks</A> <BR><A>I - the index of the top.</A> 
+<HR>
+<A name=FreeformMeshGetVertex></A>
+<H1 class=name>FreeformMeshGetVertex </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGetVertex =</A><A>( freeform,mesh,vertex index,as 
+</A><A class=type>real</A> );</A> <BR><A>Returns the tops of ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Vertex - index top</A> <BR><A>Index - the index of the coordinates of 
+vertices (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=FreeformMeshGetNormal></A>
+<H1 class=name>FreeformMeshGetNormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGetNormal =</A><A>( freeform,mesh,normal,index as 
+</A><A class=type>real</A> );</A> <BR><A>Returns the coordinate of the vector 
+normal ����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the 
+index of ����</A> <BR><A>Normal - normal index</A> <BR><A>Index - the index of 
+the coordinates of the vector normal (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=FreeformMeshGetTexCoord></A>
+<H1 class=name>FreeformMeshGetTexCoord </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGetTexCoord =</A><A>( freeform,mesh,texcoord index,as 
+</A><A class=type>real</A> );</A> <BR><A>Returns the ���������� coordinate of 
+the ����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the 
+index of ����</A> <BR><A>Texcoord - index pair of texture coordinates</A> 
+<BR><A>Index - the index of the element (0 = U = 1 V).</A> 
+<HR>
+<A name=FreeformMeshGetSecondTexCoord></A>
+<H1 class=name>FreeformMeshGetSecondTexCoord </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshGetSecondTexCoord =</A><A>( 
+freeform,mesh,texcoord index,as </A><A class=type>real</A> );</A> <BR><A>Returns 
+the ���������� ���� coordinate of the second set of texture coordinates.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Texcoord - index pair of texture coordinates</A> <BR><A>Index - the index 
+of the element (0 = U = 1 V).</A> 
+<HR>
+<A name=FreeformMeshGetTangent></A>
+<H1 class=name>FreeformMeshGetTangent </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGetTangent =</A><A>( freeform,mesh,tangent,index as 
+</A><A class=type>real</A> );</A> <BR><A>Returns the tangent vector ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Tangent - the index of the vector tangent</A> <BR><A>Index - the index of 
+the coordinates of the vector tangent (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=FreeformMeshGetBinormal></A>
+<H1 class=name>FreeformMeshGetBinormal </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGetBinormal =</A><A>( freeform,mesh,binormal,index as 
+</A><A class=type>real</A> );</A> <BR><A>Returns the vector of ��������� 
+����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index 
+of ����</A> <BR><A>Binormal - the index of the vector ���������</A> <BR><A>Index 
+- the index of the coordinates of the vector ��������� (0 = X 1 = Y 2 = Z).</A> 
+<HR>
+<A name=FreeformMeshFaceGroupGetIndex></A>
+<H1 class=name>FreeformMeshFaceGroupGetIndex </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshFaceGroupGetIndex =</A><A>( 
+freeform,mesh,facegroup,index as </A><A class=type>real</A> );</A> 
+<BR><A>Returns the index of vertices in the ����������. The indices are each 
+other, forming a "flat" a list of triangles - that is, indexes, numbered 0, 1, 2 
+form the first triangle, 3, 4, 5 is the second, and so on. For normal, texture 
+coordinates and other attributes using the same indices, the vertices.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Facegroup - Index ����������</A> <BR><A>Index - the index number of the 
+peaks.</A> 
+<HR>
+<A name=FreeformMeshVerticesCount></A>
+<H1 class=name>FreeformMeshVerticesCount </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshVerticesCount =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the number of vertices in ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of 
+����.</A> 
+<HR>
+<A name=FreeformMeshTriangleCount></A>
+<H1 class=name>FreeformMeshTriangleCount </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshTriangleCount =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the number of triangles in the 
+����.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index 
+of ����.</A> 
+<HR>
+<A name=FreeformMeshObjectsCount></A>
+<H1 class=name>FreeformMeshObjectsCount </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshObjectsCount =</A><A>( freeform as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the number of ����� in the model.</A> 
+<BR><A>Freeform - the object ID.</A> 
+<HR>
+<A name=FreeformMeshAddFaceGroup></A>
+<H1 class=name>FreeformMeshAddFaceGroup </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshAddFaceGroup =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Creates a new empty ���������� in ���� and 
+returns its index.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mesh 
+- the index of ����.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupAddTriangle></A>
+<H1 class=name>FreeformMeshFaceGroupAddTriangle </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshFaceGroupAddTriangle =</A><A>( 
+freeform,mesh,fgroup,v1,v2,v3 as the </A><A class=type>real</A> );</A> 
+<BR><A>Adds a new triangle in the ���������� and returns its index. The triangle 
+is formed index the vertices v1, v2, v3. These are the same indexes are used in 
+the normal, texture coordinates and the other vertex attributes. Normal, texture 
+coordinates and other additional attributes are optional - if the ���� no, 
+nothing bad will happen, the engine will continue to operate and will render 
+mesh without these data.</A> <BR><A>Freeform - id of object form free</A> 
+<BR><A>Mesh - the index of ����</A> <BR><A>Fgroup - Index ����������</A> 
+<BR><A>V1,v2,v3 - the indices of vertices in ����.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupTriangleCount></A>
+<H1 class=name>FreeformMeshFaceGroupTriangleCount </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshFaceGroupTriangleCount =</A><A>( 
+freeform,mesh,fgroup as </A><A class=type>real</A> );</A> <BR><A>Returns the 
+number of triangles in the ����������.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>Fgroup - index 
+����������.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupSetMaterial></A>
+<H1 class=name>FreeformMeshFaceGroupSetMaterial </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformMeshFaceGroupSetMaterial =</A><A>( 
+freeform,mesh,fgroup as </A><A class=type>real</A>, material as </A><A 
+class=type>string</A> );</A> <BR><A>Assigns the ���������� material.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Fgroup - Index ����������</A> <BR><A>The material is the name of the 
+material. The material must be present in the library materials, specified when 
+creating the object.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupGetMaterial></A>
+<H1 class=name>FreeformMeshFaceGroupGetMaterial </H1><A class=type>String</A><A> 
+= </A><A class=function>FreeformMeshFaceGroupGetMaterial</A><A>( 
+freeform,mesh,fgroup as </A><A class=type>real</A> );</A> <BR><A>Returns the 
+name of the ���������� material.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>Fgroup - index 
+����������.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupSetLightmapIndex></A>
+<H1 class=name>FreeformMeshFaceGroupSetLightmapIndex </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>FreeformMeshFaceGroupSetLightmapIndex =</A><A>( 
+freeform,mesh,fgroup,index as </A><A class=type>real</A> );</A> <BR><A>Specifies 
+the index of the material, which should be used as a light map ����������. The 
+index is the ordinal number of the material in the library materials for light 
+maps, cruising when an object of free form or function of the </A><A 
+class=funclink 
+href="../functions/freeform.htm#FreeformSetMaterialLibraries">FreeformSetMaterialLibraries</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Fgroup - Index ����������</A> <BR><A>Index - the index of the 
+material.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupGetLightmapIndex></A>
+<H1 class=name>FreeformMeshFaceGroupGetLightmapIndex </H1><A 
+class=type>Real</A><A> </A><A 
+class=function>FreeformMeshFaceGroupGetLightmapIndex =</A><A>( 
+freeform,mesh,fgroup as </A><A class=type>real</A> );</A> <BR><A>Returns the 
+index of the material used as a light map ����������. The index is the ordinal 
+number of the material in the library materials for light maps, cruising when an 
+object of free form or function of the </A><A class=funclink 
+href="../functions/freeform.htm#FreeformSetMaterialLibraries">FreeformSetMaterialLibraries</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Fgroup - index ����������.</A> 
+<HR>
+<A name=FreeformMeshFaceGroupsCount></A>
+<H1 class=name>FreeformMeshFaceGroupsCount </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshFaceGroupsCount =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Returns the number of ��������� ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of 
+����.</A> 
+<HR>
+<A name=FreeformMeshGenNormals></A>
+<H1 class=name>FreeformMeshGenNormals </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGenNormals =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Generates a smooth normal to ����. This 
+feature can be applied if the �������� missing. It can only be accessed after 
+the establishment of the ��������� as normal unable to generate, not having 
+information on how the peaks are connected among themselves.</A> <BR><A>Freeform 
+- id of object form free</A> <BR><A>Mesh - the index of ����.</A> 
+<HR>
+<A name=FreeformMeshGenTangents></A>
+<H1 class=name>FreeformMeshGenTangents </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshGenTangents =</A><A>( freeform mesh,as </A><A 
+class=type>real</A> );</A> <BR><A>Generates the tangent vectors and ���������� 
+to ����. This feature can be applied if data on the tangent and ���������� 
+missing. It can only be accessed after the establishment of the ��������� 
+normal, and texture coordinates.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����.</A> 
+<HR>
+<A name=FreeformMeshSetVisible></A>
+<H1 class=name>FreeformMeshSetVisible </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetVisible =</A><A>( freeform,mesh,mode as </A><A 
+class=type>real</A> );</A> <BR><A>Toggles the visibility of ����.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>Mode - </A><A class=constant>true</A><A> or </A><A 
+class=constant>false</A><A> (1 and 0, respectively).</A> 
+<HR>
+<A name=FreeformMeshSetSecondCoords></A>
+<H1 class=name>FreeformMeshSetSecondCoords </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetSecondCoords =</A><A>( 
+freeform1,mesh1,freeform2,mesh2 as </A><A class=type>real</A> );</A> 
+<BR><A>Applies the texture coordinates specified ���� freeform object2 as the 
+second texture coordinates specified ���� freeform object1. The second set of 
+texture coordinates is usually used for the map overlay light (lightmap).</A> 
+<BR><A>Freeform1 - the object id free-form</A> <BR><A>Mesh1 - the index of 
+����</A> <BR><A>Freeform2 - the object id free-form</A> <BR><A>Mesh2 - the index 
+of ����.</A> 
+<HR>
+<A name=FreeformMeshTranslate></A>
+<H1 class=name>FreeformMeshTranslate </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshTranslate =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Moves the mesh to the specified vector. Please 
+note that this movement is applied directly to the tops of the model and does 
+not affect the normal position of the object - if you want to move the Freeform 
+without modifying the geometry, use the </A><A class=funclink 
+href="../functions/object.htm#ObjectTranslate">ObjectTranslate</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>X,y,z is a vector of the transfer.</A> 
+<HR>
+<A name=FreeformMeshRotate></A>
+<H1 class=name>FreeformMeshRotate </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshRotate =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Turns the mesh to the corners around the axes 
+X, Y, and Z. Note that this rotation is applied directly to the tops of the 
+model and does not affect the normal rotating object - if you want to rotate an 
+object Freeform without modifying the geometry, use the </A><A class=funclink 
+href="../functions/object.htm#ObjectRotate">ObjectRotate</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>X,y,z - Angle of rotation in degrees.</A> 
+<HR>
+<A name=FreeformMeshScale></A>
+<H1 class=name>FreeformMeshScale </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshScale =</A><A>( freeform,mesh,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Scales the mesh strainer. Note that this 
+scaling is applied directly to the tops of the model in the local space and does 
+not affect the normal scale of the object - if you need to scale the Freeform 
+object without modifying the geometry, use </A><A class=funclink 
+href="../functions/object.htm#ObjectScale">ObjectScale</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mesh - the index of ����</A> 
+<BR><A>X,y,z is a vector of scaling.</A> 
+<HR>
+<A name=FreeformMeshSetMaterial></A>
+<H1 class=name>FreeformMeshSetMaterial </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformMeshSetMaterial =</A><A>( freeform mesh,as </A><A 
+class=type>real</A>, material as </A><A class=type>string</A> );</A> 
+<BR><A>Assigns the ���� material.</A> <BR><A>Freeform - id of object form 
+free</A> <BR><A>Mesh - the index of ����</A> <BR><A>The material is the name of 
+the material. The material must be present in the library materials, specified 
+when creating the object.</A> 
+<HR>
+<A name=FreeformUseMeshMaterials></A>
+<H1 class=name>FreeformUseMeshMaterials </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformUseMeshMaterials =</A><A>( freeform,mode as </A><A 
+class=type>real</A> );</A> <BR><A>Toggles the use of materials �����. If you 
+disable this option, the object will be Freeform ��������� using his own 
+material, commanded The </A><A class=funclink 
+href="../functions/object.htm#ObjectSetMaterial">ObjectSetMaterial</A><A>.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=FreeformPointInMesh></A>
+<H1 class=name>FreeformPointInMesh </H1><A class=type>Boolean</A><A> = </A><A 
+class=function>FreeformPointInMesh</A><A>( freeform,x,y,z as </A><A 
+class=type>real</A> );</A> <BR><A>Returns </A><A class=constant>true</A><A> (1), 
+if the target point is inside the ���� object of free form. The function is well 
+suited, for example, to test for collisions of the object with the bullet.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>X,y,z coordinates of the 
+point.</A> 
+<HR>
+<A name=FreeformSphereSweepIntersect></A>
+<H1 class=name>FreeformSphereSweepIntersect </H1><A class=type>Real</A><A> 
+</A><A class=function>FreeformSphereSweepIntersect =</A><A>( freeform,object 
+radius,,vel as </A><A class=type>real</A> );</A> <BR><A>Returns </A><A 
+class=constant>true</A><A> (1) if the radius of the specified object moving at a 
+given speed, the next step will collide with the surface of the object.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>The object is the object 
+id</A> <BR><A>Radius is the radius of the Sphere (on the surface of the 
+object)</A> <BR><A>Vel - the speed of the object.</A> 
+<HR>
+<A name=FreeformToFreeforms></A>
+<H1 class=name>FreeformToFreeforms </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformToFreeforms =</A><A>( freeform,parent as </A><A 
+class=type>real</A> );</A> <BR><A>The object breaks free forms on its components 
+- the dwelling was, each of which becomes a separate object of free form.</A> 
+<BR><A>Freeform - id of object form free</A> <BR><A>Parent - the parent id for 
+the received objects.</A> 
+<HR>
+<A name=FreeformSave></A>
+<H1 class=name>FreeformSave </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformSave =</A><A>( freeform as </A><A class=type>real</A>as 
+filename as </A><A class=type>string</A> );</A> <BR><A>Saves the object of free 
+form in the file. Supported by the Save in formats of OBJ, GLSM, STL, and 
+nmf.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Filename is the 
+name of the file to be saved.</A> 
+<HR>
+<A name=FreeformGenTangents></A>
+<H1 class=name>FreeformGenTangents </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformGenTangents =</A><A>( freeform as </A><A 
+class=type>real</A> );</A> <BR><A>Generates the tangent vectors and ���������� 
+for all ����� object of free form. This feature can be applied if data on the 
+tangent and ���������� missing. It can only be accessed if the model is normal 
+and texture coordinates.</A> <BR><A>Freeform - the object ID.</A> 
+<HR>
+<A name=FreeformBuildOctree></A>
+<H1 class=name>FreeformBuildOctree </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformBuildOctree =</A><A>( freeform as </A><A 
+class=type>real</A> );</A> <BR><A>�������� builds a tree for the object of free 
+form. This is necessary for the work of the functions of the </A><A 
+class=funclink href="../functions/partition.htm">Partition</A><A> and verify the 
+clashes.</A> <BR><A>Freeform - the object ID.</A> 
+<HR>
+<A name=FreeformCreateExplosionFX></A>
+<H1 class=name>FreeformCreateExplosionFX </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformCreateExplosionFX =</A><A>( freeform,enable as </A><A 
+class=type>real</A> );</A> <BR><A>Creates the effect of the explosion models: 
+the polygons constituting it, fly to the side.</A> <BR><A>Freeform - id of 
+object form free</A> <BR><A>Enable determines whether to activate the explosion 
+or no: </A><A class=constant>true</A><A> or </A><A class=constant>false</A><A> 
+(1 and 0, respectively).</A> 
+<HR>
+<A name=FreeformExplosionFXReset></A>
+<H1 class=name>FreeformExplosionFXReset </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformExplosionFXReset =</A><A>( freeform as </A><A 
+class=type>real</A> );</A> <BR><A>Resets the explosion (model takes its original 
+form, the effect of the explosion of deactivated).</A> <BR><A>Freeform - the 
+object ID.</A> 
+<HR>
+<A name=FreeformExplosionFXEnable></A>
+<H1 class=name>FreeformExplosionFXEnable </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformExplosionFXEnable =</A><A>( freeform,mode as </A><A 
+class=type>real</A> );</A> <BR><A>Switches the activity of the effect of the 
+explosion.</A> <BR><A>Freeform - id of object form free</A> <BR><A>Mode - </A><A 
+class=constant>true</A><A> or </A><A class=constant>false</A><A> (1 and 0, 
+respectively).</A> 
+<HR>
+<A name=FreeformExplosionFXSetSpeed></A>
+<H1 class=name>FreeformExplosionFXSetSpeed </H1><A class=type>Real</A><A> </A><A 
+class=function>FreeformExplosionFXSetSpeed =</A><A>( freeform,speed as </A><A 
+class=type>real</A> );</A> <BR><A>Sets the speed of the scattering of polygons 
+with the explosion.</A> <BR><A>Freeform - id of object form free</A> 
+<BR><A>Speed is the speed.</A> 
+<HR>
+<!--
+<A name="MeshOptimize"></A>
+<H1 class=name>MeshOptimize</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshOptimize</A><A>( object as </A><A class=type>real</A> );</A>
+<BR><A>�������� �����������.</A>
+<BR><A>object - id �������.</A>
+<HR>
+
+<A name="MeshSmoothFaces"></A>
+<H1 class=name>MeshSmoothFaces</H1>
+<A class=type>real</A><A> = </A><A class=function>MeshSmoothFaces</A><A>( object,weld,threshold as </A><A class=type>real</A> );</A>
+<BR><A>�������� �����������.</A>
+<BR><A>object - id �������</A>
+<BR><A>weld - �������� �����������</A>
+<BR><A>threshold - �������� �����������.</A>
+<HR>
+--></DIV></BODY></HTML>
