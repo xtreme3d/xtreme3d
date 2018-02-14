@@ -15,7 +15,7 @@ Screenshots
 [![Screenshot4](/screenshots/water2-thumb.jpg)](/screenshots/water2.jpg)
 [![Screenshot4](/screenshots/bumpshadows-thumb.jpg)](/screenshots/bumpshadows.jpg)
 [![Screenshot4](/screenshots/x3d-3.0-rain-thumb.jpg)](/screenshots/x3d-3.0-rain.jpg)
-[![Screenshot4](/screenshots/superdemo-thumb.jpg)](/screenshots/superdemo.jpg)
+[![Screenshot4](/screenshots/darkarts-thumb.jpg)](/screenshots/darkarts.jpg)
 
 Features
 --------
