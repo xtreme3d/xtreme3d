@@ -13,7 +13,7 @@
     <param name="Local" value="xtreme3d.htm">
     </OBJECT>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="The history of the Xtreme3D">
+    <param name="Name" value="Version history">
     <param name="Local" value="history.htm">
     </OBJECT>
   <LI> <OBJECT type="text/sitemap">
@@ -21,7 +21,7 @@
     <param name="Local" value="apichanges.htm">
     </OBJECT>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="The authors of the">
+    <param name="Name" value="Developers">
     <param name="Local" value="authors.htm">
     </OBJECT>
   <LI> <OBJECT type="text/sitemap">
@@ -34,39 +34,39 @@
       </OBJECT>
   </UL>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="The lessons of the">
+    <param name="Name" value="Tutorials">
     </OBJECT>
   <UL>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="1. Basics of Xtreme3D">
+      <param name="Name" value="1. Xtreme3D basics">
       <param name="Local" value="tutorials/basics.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="2. The creation of a simple scene">
+      <param name="Name" value="2. Creation of a simple scene">
       <param name="Local" value="tutorials/simplescene.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="3. The hierarchy of objects">
+      <param name="Name" value="3. Object hierarchy">
       <param name="Local" value="tutorials/hierarchy.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="4. The camera from the first person">
+      <param name="Name" value="4. First person camera">
       <param name="Local" value="tutorials/firstpersoncamera.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="5. The materials library">
+      <param name="Name" value="5. Material library">
       <param name="Local" value="tutorials/matlib.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="6. The entities">
+      <param name="Name" value="6. Primitives">
       <param name="Local" value="tutorials/primitives.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="7. Download the file from the">
+      <param name="Name" value="7. Loading 3D model from file">
       <param name="Local" value="tutorials/modelfile.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="8. Вершинная animation">
+      <param name="Name" value="8. Vertex animation">
       <param name="Local" value="tutorials/vertexanim.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
@@ -74,11 +74,11 @@
       <param name="Local" value="tutorials/skeletalanim1.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="10. The camera from a third person">
+      <param name="Name" value="10. Third person camera">
       <param name="Local" value="tutorials/thirdpersoncamera.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="11. Collision test">
+      <param name="Name" value="11. Collision detection">
       <param name="Local" value="tutorials/collisionchecking.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
@@ -86,32 +86,24 @@
       <param name="Local" value="tutorials/2dgraphics.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="13. Shadows in real time">
+      <param name="Name" value="13. Real time shadows">
       <param name="Local" value="tutorials/realtimeshadows.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="14. The establishment of the Sky">
+      <param name="Name" value="14. Creating a skydome">
       <param name="Local" value="tutorials/createsky.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="15. The creation of the Landscape">
+      <param name="Name" value="15. Creating a terrain">
       <param name="Local" value="tutorials/createterrain.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="16. The creation of water">
+      <param name="Name" value="16. Creating a water plane">
       <param name="Local" value="tutorials/createwater.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="Special Effects">
-      <param name="Local" value="tutorials/specialfx.htm">
-      </OBJECT>
-    <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="17. The particles">
+      <param name="Name" value="17. Particles">
       <param name="Local" value="tutorials/particles.htm">
-      </OBJECT>
-    <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="DCE">
-      <param name="Local" value="tutorials/DCE.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
       <param name="Name" value="18. Shaders">
@@ -121,25 +113,21 @@
       <param name="Name" value="19. GLSL">
       <param name="Local" value="tutorials/glsl.htm">
       </OBJECT>
-    <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="Partitioning of space">
-      <param name="Local" value="tutorials/spacepartition.htm">
-      </OBJECT>
   </UL>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="The functions">
+    <param name="Name" value="Functions">
     </OBJECT>
   <UL>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="The list of functions">
+      <param name="Name" value="List of functions">
       <param name="Local" value="functions/funclist.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="The list of functions (A-Z)">
+      <param name="Name" value="List of functions (A-Z)">
       <param name="Local" value="functions/funclistaz.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="The list of constants">
+      <param name="Name" value="List of constants">
       <param name="Local" value="functions/constants.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
@@ -336,11 +324,11 @@
     <param name="Local" value="faq.htm">
     </OBJECT>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="Glossary of Terms">
+    <param name="Name" value="Glossary">
     </OBJECT>
   <UL>
     <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="From the Editors">
+      <param name="Name" value="Introduction">
       <param name="Local" value="glossary/glossary.htm">
       </OBJECT>
     <LI> <OBJECT type="text/sitemap">
@@ -915,13 +903,9 @@
       <param name="Name" value="Z-Sorting">
       <param name="Local" value="glossary/zsorting.htm">
       </OBJECT>
-    <LI> <OBJECT type="text/sitemap">
-      <param name="Name" value="САПР">
-      <param name="Local" value="glossary/sapr.htm">
-      </OBJECT>
   </UL>
   <LI> <OBJECT type="text/sitemap">
-    <param name="Name" value="The License Agreement">
+    <param name="Name" value="License agreements">
     </OBJECT>
   <UL>
     <LI> <OBJECT type="text/sitemap">

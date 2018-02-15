@@ -1,143 +1,98 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>History Xtreme3D</TITLE>
-<META content="text/html; charset=windows-1251" http-equiv=Content-Type><LINK 
+<META content="text/html; charset=us-ascii" http-equiv=Content-Type><LINK 
 rel=stylesheet type=text/css href="../data/style.css">
 <META name=GENERATOR content="MSHTML 8.00.6001.23536"></HEAD>
 <BODY>
 <DIV align=justify>
-<H1 class=pagetitle>History Xtreme3D</H1><BR><B>Xtreme3D 0.x to 2.x 
-(2003-2006)</B> <BR><BR><A>History Xtreme3D was launched in 2003. The engine was 
-written in Delphi Using The GLScene (de facto standard 3D engine for Object 
-Pascal) German programr under the nickname <B>Xception</B>. Unfortunately, we do 
-not know his real name. <BR><BR>The First stable version of Xtreme3D (0.9) was 
-released in 2003. Its possibilities were quite modest: supported by only the 
-animated model of MD2 and MD3, static 3DS, MS3D, and obj, the built-in 
-primitives, sprites, a two-dimensional and three-dimensional text, lensflare, 
-particles and the heavenly dome. The Engine API resembled the style of the GML 
-features. <BR><BR>The main goal of the project was the creation of the engine 
-for a 3D RPG like Dungeon Master. And while the author of the engine not 
-originally planned to further development of the Xtreme3D, in later versions of 
-the functionality of the engine quickly evolved to meet your specific needs of 
-the genre. <BR><BR>So, in version 1.7 (2004) appeared dynamic water. However, 
-the much more serious breakthrough has become version 2.0 (2006): The total 
-revision of the API, the support of libraries of materials and light maps, 
-dynamic cubemapping, support for new formats of models, rendering in the 
-texture, download resources from the compressed archive, hardware shaders (bump 
-mapping, cel shading), мультитекстурирование, octree and quadtree, DDS, as well 
-as, most importantly, the integrated physics engine Open Dynamics Engine (ODE). 
-<BR><BR>The latest release from The Xception (2.0.2.0), in addition to numerous 
-багфиксов, contained two major innovations: отрисовщик landscape and the engine 
-check the collisions of DCE. The functionality of the engine was at the level of 
-commercial games 1997-2003 - Xtreme3D 2.0 allowed to create something similar in 
-terms of graphics on the Quake 2-3, Half-Life, GTA 3, The Elder Scrolls: 
-Morrowind, and so on. - All that belongs to the "дошейдерной" era. 
-<BR><BR>Unfortunately, The Xception, ultimately, abandoned its development - the 
-engine distributed without source codes and, therefore, for a long time does not 
-grow, and technology, however, not stood on the spot... <BR><BR><B>Xtreme3D 3.0 
-(25.08.16)</B> <BR><BR>since 2009 in the Russian-speaking community of Xtreme3D 
-is constantly vital idea to recreate the engine from scratch, fix bugs and add 
-the missing functionality - bearing in mind that the Xtreme3D is a very thin 
-wrapper over The GLScene, this task seemed simple and purely technical. However, 
-unforeseen problems, and the case has been delayed. In the end, the project, 
-which began in 2009, and the surviving the long period of stagnation and a few 
-flashes of activity, was completed only in 2016. This is how the Xtreme3D 3.0. 
-<BR><BR>This version of Xtreme3D, as well as the original, written in Delphi 
-using popular GLScene library - in fact, the engine can be called almost full 
-враппером GLScene for Game Maker. The Xtreme3D 3.0 is modified and extended 
-GLScene 1.0.0.0714. <BR><BR>Here is a brief list of the innovations Xtreme3D 
-3.0: <BR><BR>- Shader in the language of the GLSL (1.1 or 1.2) <BR>- Dynamic 
-Shadows, implemented by the method of shadow mapping <BR>- Screen anti-aliasing 
-2x and 4x. There is a support for anti-aliasing technology NVIDIA Quincunx <BR>- 
-Quick внеэкранный rendering using p-buffers in <BR>- Support for proxy objects 
-<BR>- Support for models of LOD LODka (3D) and B3D (Blitz3D) <BR>- Support for 
-tags for Models MD3 <BR>- Mixing the skeletal animations <BR>- Download the 
-materials from the scripts <BR>- Integrated mixing shader textures (TexCombine) 
-<BR>- Integrated shader that implements the basic illumination to The Фонгу 
-(Phong) <BR>- procedural textures on the basis of the resonator Perlyna <BR>- 
-Support for linear waves for dynamic water <BR>- The new types of geometrical 
-primitives (a truncated pyramid, the dodecahedron, икосаэдр, kettle) <BR>- 
-Enhanced the effect of the explosion to мешей (in particular, now have the 
-opportunity to return the mesh strainer in its original condition) <BR>- The 
-Rendering nets (Grid) <BR>- Debug rendering of objects-mannequins (Dummycube) 
-<BR>- many new features for the camera (Camera) <BR>- The Ability To copy the 
-Transformation Matrix (local and absolute) From one object to another. You can 
-also copy objects of bone matrix of the model with the skeletal animation and 
-ask the local matrix of the object manually, which allows to realize any 
-mathematical model of the movement and rotation of objects that are not becoming 
-attached to the corners of the Eulerian model <BR>- The possibility of applying 
-the pulses (instant changes in speed) to the dynamic objects in the DCE. Also in 
-the DCE now supports landscape <BR>- Advanced physics of ODE. In contrast to the 
-old implementation in the Xtreme3D 2.0, now in the ODE is fully supported by the 
-Freeform objects (both for static and dynamic bodies), as well as landscape. In 
-addition, it is now possible to set the position of the геометриям at them with 
-<BR><B>Xtreme3D 3.1 (30.09.16)</B> <BR><BR>In the autumn of 2016, came the first 
-update of the new branches of Xtreme3D - version 3.1. Here is a list of the most 
-important changes in it: <BR><BR>- Superior API for Freeform objects - an 
-opportunity to build handmade Freeform of the vertices and polygons, the 
-functions of the transformation of the мешей, as well as the preservation of the 
-Freeform to file <BR>- Support for new file formats: CSM and LMTS (which was not 
-in 3.0), X, ASE, DXS <BR>- Support for Ragdoll In The ODE <BR>- The Object 
-Movement, which allows you to specify the objects trajectory of <BR>- Superior 
-BumpShader - now supports shadow maps and automatically generate the tangent 
-space <BR>- Superior PhongShader - now supports textures <BR>- the object of 
-HUDShape - 2D-shape (supported by a rectangle, circle, segment and mesh) <BR>- 
-Superior API for sprites - now supports texture atlases (i.e., the use of 
-portion of the textures for the sprite drawing), as well as drawing from the set 
-point instead of in the <BR>- Support for the alpha channel PNG for the <BR>- 
-Functions for questioning the size of the texture. <BR><BR><B>Xtreme3D 3.2 
-(21.10.16)</B> <BR><BR>- Support FBO, quick внеэкранных buffers, using which you 
-can realize the multipass encode rendering and various complex postprocessing 
-effects <BR>- New compatible with shaders мультитекстурирования mechanism for 
-the Materials. Now the materials can have up to 8 textures and the GLSL shaders 
-can automatically accept them as parameters <BR>- Function ViewerRenderObject 
-for rendering the individual objects and hierarchies of <BR>- Function 
-MaterialLoadTexture <BR>- Fixed a bug in the ObjectSetParent. 
-<BR><BR><B>Xtreme3D 3.3 (26.11.16)</B> <BR><BR>- New functions for Freeform that 
-allow you to read and modify the geometry of the model (coordinates of the 
-vertices, normal, indexes, etc.) <BR>- Support for replacement materials 
-(Override Material) for the species and FBO. Allows you to specify a single 
-material, which should be rendered objects, ignoring their own materials <BR>- 
-Support for color buffers of different formats for FBO (including 32-bit 
-floating point) <BR>- Function FBORenderObjectEx <BR>- Support for rendering of 
-shadows in The ShadowMap defined FBO instead of internal buffer <BR>- The 
-ViewerGetSize ViewerGetPosition, as well as The 
-ViewerIsOpenGLExtensionSupported. <BR><BR><B>Xtreme3D 3.4 (30.12.16)</B> 
-<BR><BR>- Added support for TTF fonts and display any characters through Unicode 
-UTF-8 encoding <BR>- Functions Added ObjectHash (hash table for storing any 
-objects Xtreme3D) <BR>- Changed API function FBORenderObjectEx - new options 
-that allow you to selectively clean the color buffer and depth buffer, and copy 
-the contents of the FBO in the main framebuffer <BR>- Support for transfer to 
-the GLSL shader species and the back of generic matrices, as well as a special 
-option, enabling the shader to learn whether there is a texture in the specified 
-unit текстурном <BR>- In order to accelerate the utilization Freeform objects 
-now does not generate октарные trees and vectors of the tangent and бинормалей 
-during boot. This must be done manually, if necessary, the functions of the 
-FreeformGenTangents and FreeformBuildOctree <BR>- Fixed a bug in the 
-MaterialCubeMapLoadImage. Also in the GLSL is now operated seamless cubic 
-projection for the IPI arbitrary levels of cubic texture, if supported by the 
-GL_ARB_seamless_cube map. <BR><BR><B>Xtreme3D 3.5 (04.02.17)</B> <BR><BR>- Added 
-ClipPlane object - the plane of amputation of the <BR>- Improved shaders 
-PhongShader and BumpShader: Added support for light sources the type of lsSpot, 
-fog, transparency, and rendering without lights (if the light is turned off in 
-the settings). Transparency is set via the alpha channel of the diffuse texture 
-- or, alternatively, through the alpha value of the diffuse components of the 
-material (only for the PhongShader) <BR>- new features have been added for the 
-materials: MaterialCullFrontFaces, MaterialSetZWrite <BR>- new features have 
-been added, ODE to manually define the speed, position and rotation of the 
-rolling bodies. <BR><BR><B>Xtreme3D 3.6 (17.12.17)</B> <BR><BR>One of the most 
-major releases in the 3.x - development of this version lasted for more than six 
-months. <BR><BR>- Added support for Windows encoding for the TTF fonts, as well 
-as custom 8-bit encodings <BR>- new features have been added for the materials: 
-MaterialSetTextureExFromLibrary, MaterialGetNameFromLibrary <BR>- new features 
-have been added to the Freeform: Functions of FreeformSetMaterialLibraries, 
-FreeformMeshFaceGroupSetLightmapIndex, FreeformMeshFaceGroupGetLightmapIndex 
-<BR>- added specialized proxy objects for actors (ActorProxy) <BR>- returned to 
-the functions of the ActorMoveBone and ActorRotateBone, added the function of 
-ActorMeshSetVisible <BR>- returned to the function of the ObjectInFrustrum <BR>- 
-returned to the functions of the mouse, added the function of reading from the 
-Keyboard <BR>- added features to create windows and their management <BR>- added 
-features to create colors from the RGB components of the <BR>- Added 
-experimental features to preserve the scene in the file and read from it <BR>- 
-When the GLSL shader is not an error message is displayed if no errors. <BR>- 
-The шейдерах PhongShader and BumpShader fixed bug with the incorrect calculation 
-of glare. <BR></A></DIV></BODY></HTML>
+<H1 class=pagetitle>Xtreme3D version history</H1><BR>
+<B>Xtreme3D 0.x to 2.x (2003-2006)</B> 
+<BR><BR>Xtreme3D project was launched in 2003. The engine was written in Delphi using GLScene, de facto standard 3D engine for Object Pascal, by German programmer known as <B>Xception</B>. Unfortunately, we don't know his real name. <BR><BR>The first stable version of Xtreme3D (0.9) was released in 2003. Its possibilities were quite modest: it supported only MD2 and MD3 animated models, 3DS, MS3D, and OBJ static models, a number of built-in primitives, sprites, 2D and 3D text, lensflare, particles and skydome. Its API resembled native GML function syntax.<BR><BR>The main goal of the project was creating an engine suitable for an RPG like Dungeon Master. While originally the author haven't planned any further development of Xtreme3D, in later versions its functionality quickly evolved to exceed the needs of a specific game genre.
+<BR><BR>For example, version 1.7 (2004) featured dynamic water. However, the much more serious breakthrough was version 2.0 (2006): it featured total API revision, material library and lightmaps support, dynamic cubemaps, whole lot of new models formats support, render-to-texture, loading assets from PAK archive, built-in shaders like bump mapping and cel shading, multitexturing, octrees and quadtrees, DDS support, and, importantly, an integrated physics engine - ODE. 
+<BR><BR>The latest release from Xception (2.0.2.0), in addition to numerous bugfixes, featured two major innovations: terrain renderer and DCE, an engine for collision detection and responce. Functionality of the engine equaled the level of 1997-2003 commercial games. Xtreme3D 2.0 allowed to create something similar in terms of graphics to Quake 2 and 3, Half-Life, GTA 3, The Elder Scrolls: Morrowind, and so on (i.e., everything from pre-shader era). 
+<BR><BR>Unfortunately, Xception abandoned his project. The engine was closed source and therefore haven't been developed for a long time. Technology, meantime, moved forward. 
+<BR><BR><B>Xtreme3D 3.0 (25.08.16)</B> 
+<BR><BR>Since 2009 Russian-speaking Xtreme3D community constantly nurtured an idea to recreate the engine from scratch, fixing bugs and adding the missing functionality. Bearing in mind that Xtreme3D is a thin wrapper of GLScene, this task seemed simple and purely technical. However, unforeseen problems arose, and the project had been delayed. Ultimately this work, begun in 2009 and experienced a long period of stagnation and a few flashes of activity, was completed only in 2016. This is how Xtreme3D 3.0 appeared.
+<BR><BR>This version of Xtreme3D, like its ancestor, is written in Delphi using popular GLScene library - in fact, the engine can be seen as almost full 
+GLScene wrapper for Game Maker. Xtreme3D 3.0 is based on modified and extended GLScene 1.0.0.0714. <BR><BR>The following is a brief list of new features in Xtreme3D 3.0: <BR><BR>
+- GLSL shaders support (GLSL version 1.1 and 1.2) <BR>
+- Shadow maps <BR>
+- MSAA anti-aliasing 2x and 4x with NVIDIA Quincunx support <BR>
+- Fast offscreen rendering using p-buffers <BR>
+- Proxy objects <BR>
+- LOD (LODka 3D) and B3D (Blitz3D) model formats support <BR>
+- MD3 tags support <BR>
+- Animation blending <BR>
+- Material scripts <BR>
+- TexCombine shader <BR>
+- Phong shader <BR>
+- Procedural textures based on Perlin noise <BR>
+- Linear waves support for the water <BR>
+- New geometric primitives including frustum, dodecahedron, icosahedron, and teapot <BR>
+- Improved explosion effect for meshes (in particular, now it is possible to return exploded mesh into its original state) <BR>
+- Rendering of grids <BR>
+- Debug rendering of Dummycube objects <BR>
+- Many new functions for Camera objects <BR>
+- An ability to copy the transformation matrix (local and absolute) from one object to another. You can also attach objects to skeleton bones and update the local matrix of an object manually, which allows to use any transformation model without restriction to Euler angles <BR>
+- An ability to apply impulses (instant velocity changes) to dynamic objects in DCE. Also DCE now supports terrain <BR>
+- Improved ODE physics. Better support for Freeform objects (both for static and dynamic bodies), as well as terrain. In addition, it is now possible to set position when creating a geometry.<BR>
+
+<B>Xtreme3D 3.1 (30.09.16)</B> <BR><BR>The first update of the new Xtreme3D branch. Most important changes include: <BR><BR>
+- Improved API for Freeform objects. It is now possible to assemble Freeform manually from vertices and triangles. There are functions to transform individual meshes, as well as to save Freeform to file <BR>
+- New file formats support: CSM and LMTS (which where absent in 3.0), X, ASE, DXS <BR>
+- Ragdoll support for ODE <BR>
+- Movement object, which allows to define movement trajectories with line segments, Bezier curves, cubic splines and NURBS <BR>
+- Improved BumpShader, which now supports shadow maps and automatic tangent space calculation <BR>
+- Improved PhongShader, which now supports textures <BR>
+- HUDShape objects - 2D shapes including rectangle, circle, line segment and polygon <BR>
+- Improved API for sprites - now they support texture atlases (i.e., using only a portion of the texture - to make an animated sprite, for example), as well as user-defined origin for sprite rotation <BR>
+- Transparency support for PNG <BR>
+- Functions for querying texture size. <BR>
+
+<BR><B>Xtreme3D 3.2 (21.10.16)</B> <BR><BR>
+- FBO support. With FBOs you can effectively implement multipass rendering and various complex postprocessing effects <BR>
+- New, shader-compatible multitexturing mechanism for materials. Now material can have up to 8 textures, and GLSL shaders can automatically accept them as parameters <BR>
+- ViewerRenderObject function for rendering individual objects and their children <BR>
+- MaterialLoadTexture function <BR>
+- Fixed a bug in ObjectSetParent function.
+ 
+<BR><BR><B>Xtreme3D 3.3 (26.11.16)</B> <BR><BR>
+- New Freeform functions that allow to read and modify geometry (vertices, normal, indices, etc.) <BR>
+- Material overriding for ordinary viewers and FBOs. This allows to specify a single material which should be applied to objects when rendering, ignoring their own materials <BR>
+- Different color formats support for FBO, including 16 and 32-bit floating point <BR>
+- FBORenderObjectEx function <BR>
+- Optional rendering shadows to user-specified FBO instead of internal one <BR>
+- ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported. <BR>
+
+<BR><B>Xtreme3D 3.4 (30.12.16)</B> <BR><BR>
+- TTF fonts support via Freetype library and rendering UTF-8 text <BR>
+- ObjectHash functions (hash table for storing any Xtreme3D objects) <BR>
+- Better FBORenderObjectEx - new arguments allow you to selectively clean color buffer and depth buffer, and copy the contents of the FBO in the main framebuffer <BR>
+- Passing view and inverse view matrices to GLSL shader, and a special parameter that allows the shader to know whether there is a texture in a specified 
+texture unit <BR>
+- For performance reasons the engine now doesn't automatically generate octree and tangents/binormals when loading Freeform from file. This should be done manually, if necessary, with FreeformGenTangents and FreeformBuildOctree functions <BR>
+- Fixed a bug in MaterialCubeMapLoadImage. Also in GLSL shaders now support seamless cubemapping for arbitrary mip levels of a cubemap (if  GL_ARB_seamless_cubemap is supported). <BR>
+
+<BR><B>Xtreme3D 3.5 (04.02.17)</B> <BR><BR>
+- ClipPlane object <BR>
+- Improved PhongShader and BumpShader, they now support lsSpot type lights, fog, transparency, and shadeless rendering (if lighting is turned off in 
+the viewer settings). Transparency is set via the alpha channel of the diffuse texture, or, alternatively, through the alpha value of material's diffuse color (only for PhongShader) <BR>
+- New material functions: MaterialCullFrontFaces, MaterialSetZWrite <BR>
+- New ODE functions to manually set velocity, position and rotation for dynamic bodies. <BR>
+
+<BR><B>Xtreme3D 3.6 (17.12.17)</B> <BR><BR>This is one of the biggest releases in 3.x branch, development of this version lasted for more than six 
+months. <BR><BR>
+- Support for Windows encoding for TTF fonts, as well as any custom 8-bit encoding <BR>
+- New material functions: MaterialSetTextureExFromLibrary, MaterialGetNameFromLibrary <BR>
+- New Freeform functions: FreeformSetMaterialLibraries, FreeformMeshFaceGroupSetLightmapIndex, FreeformMeshFaceGroupGetLightmapIndex <BR>
+- Special proxy object for Actors (ActorProxy) <BR>
+- ActorMoveBone and ActorRotateBone are back. Also there is a function to switch visibility of Actor meshes (ActorMeshSetVisible) <BR>
+- ObjectInFrustrum is back <BR>
+- Functions for getting mouse and keyboard input <BR>
+- Functions for window creation and management <BR>
+- Functions for RGB color packing <BR>
+- Experimental functions to save the scene to file and load from file <BR>
+- GLSL shaders now don't show an empty error message is there are no errors <BR>
+- Fixed bug with incorrect specular highlights in PhongShader and BumpShader. <BR>
+
+</DIV></BODY></HTML>
