@@ -1,229 +1,84 @@
-﻿<HTML>
+<HTML>
 <HEAD>
-<META http-equiv=Content-Type content="text/html;charset=UTF-8">
-<TITLE>OpenGL</title>
-<LINK href="../data/style.css" type="text/css" rel=stylesheet>
+<META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<TITLE>OpenGL</TITLE>
+<LINK href="../data/style.css" type="text/css" rel="stylesheet">
 </HEAD>
 <BODY>
 
-<div align=justify>
+<DIV ALIGN=justify>
 
-<h1 class=pagetitle>OpenGL</H1>
-
-<A>OpenGL (Open Graphics Library - Open Graphics Library) is a specification that defines a cross-platform
-software interface for creating applications using
-2D and 3D computer graphics. OpenGL includes functions for drawing a complex
-3D scenes from simple primitives. Is used in the creation of computer games, CAD, virtual reality,
-visualization in scientific research. Under Windows competes with DirectX.
+<H1 class=pagetitle>OpenGL</H1>
+<A>OpenGL (Open Graphics Library) is a specification that defines a cross-platform API for creating applications utilizing 2D and 3D computer graphics. OpenGL includes functions for rendering complex 3D scenes using simple primitives. It is used in computer games, CAD, virtual reality, scientific and industrial visualization. Under Windows OpenGL competes with Direct3D.
 <br>
-<br><B>The Specification</B>
-<br>At the basic level, OpenGL is simply the specification, that is, a document that describes the set of functions and their
-exact behavior. Equipment manufacturers on the basis of this specification create a realization - library of
-functions, the relevant features of the specification. The use of equipment, where
-it is possible. If the equipment does not allow you to realize any possibility, it should be эмулирована
-programmatically. Producers must pass specific tests (conformance tests - tests for compliance), before the
-realization of will be officially classified. Thus, the software
-is enough to learn how to use the functions described in the specification, leaving the effective implementation of the latest
-software developers hardware.
-<br>Effective implementation of OpenGL on today there are for Windows platforms, Unix (Linux, BSD, OSX),
-PlayStation 3, Android, etc. These implementations typically provided by manufacturers of video cards and actively using the
-capabilities of the latter. There are also software implementation of OpenGL, one of which is the Mesa library
-(however, Mesa fully supports and hardware acceleration). Formally, the Mesa is an informal implementation of OpenGL
-(does not have a certification), although it is fully compatible with standard.
-<br>the authors of the original specifications are Kurt Экелей and Mark Segal. Version 1.1 edited by Chris Фрэзиер,
-versions with 1.2 to 2.0 - Jon Jane Leach.
+<br><B>Specification</B>
+<br>At the basic level, OpenGL is simply a specification, that is, a document that describes a set of functions and their exact behavior. Based on this specification hardware manufacturers usually create an implementation - a development library. To accelerate graphics processing, OpenGL is designed to use specialized graphics hardware (GPU) as much as possible. If GPU does not support some feature, it can be emulated programmatically. Any particular OpenGL implementation must pass specific conformance tests before it officially sertified. Thus, graphics applications should only follow conventions provided in the specification, leaving effective implementation to a system-level driver.
+<br>Nowadays effective OpenGL implementations exist for all common platforms and operating systems, including Windows, Unix (Linux, BSD, macOS), PlayStation 3, Android, etc. These implementations are typically provided by GPU manufacturers. There are also 'non-official' OpenGL implementations - most notably, Mesa. It does not have a certification, although it is fully standard-compliant and supports hardware acceleration.
+<br>Authors of the original specification are Kurt Akeley and Mark Segal. Version 1.1 was edited by Chris Frazier, versions 1.2 to 2.0 - by Jon Leech.
 <br>
 <br><B>Architecture</B>
-<br>OpenGL is focused on the following two tasks:
-<br>- hide the complexity of the adaptation of the various 3D accelerators, giving the developer a single API;
-<BR>- hide differences in the possibilities of hardware platforms, compensating for the missing functions in
-a software emulation.
-<br>The basic principle of the work of the OpenGL is to obtain sets of vector graphic primitives in the form of points,
-lines and polygons to the follow-up of the mathematical processing of the received data and the building of the raster
-images on the screen and/or in the memory. The vector of transformation and dithering run graphical conveyor
-(pipeline), which is a digital jukebox. An absolute majority of the
-OpenGL commands fall into one of two groups: either they add graphic primitives on the entrance to the conveyor, or
-configure the conveyor to a different response to transformations.
-<br>OpenGL is a low-level, procedural API, which forces the programr to dictate the exact sequence of
-steps to build the resulting bitmap graphics (a mandatory approach). This is the main difference
-from дескрипторных approaches, when the entire scene is transmitted in the form of a data structure (usually wood), which
-is processed and is built on the screen. On the one hand a mandatory approach requires the programr a deep
-knowledge of the laws 3D graphics and mathematical models, on the other hand gives you the freedom to implement various
-innovations.
+<br>OpenGL is focused on two tasks:
+<br>- hide complexity of 3D accelerators, providing developers with a simple API;
+<BR>- hide differences of hardware platforms, compensating missing functions with software emulation.
+<br>The basic principle of OpenGL is obtaining sets of vector primitives (points, lines and polygons), processing and rasterizing them. Vector  transformations and rasterization are done by the graphics pipeline, which is a discrete automata. An absolute majority of OpenGL functions fall into one of two groups: either they add vector primitives to the pipeline's input, or configure the pipeline to do different transformations.
+<br>OpenGL is a low-level procedural API which forces the programmer to define exact sequence of steps to synthezise the resulting image. This is called an imperative approach. It is principally different from declarative approach, when the entire 3D scene is stored as a data structure (usually a tree), which
+is processed and rendered by a graphics library. Imperative approach requires the programmer to have deep knowledge of 3D graphics and its mathematical models. On the other hand, it provides freedom for various innovations.
 <br>
-<br><B>Expand</B>
-<br>Standard OpenGL with the advent of new technologies allows to individual producers to improve the functionality of the library
-through the mechanism of the extensions. Expansion of the disseminated through two components: a header file, which
-contains the prototypes of the new functions and constants, as well as a device driver that is supplied by the developer. Each
-manufacturer has the abbreviation, which is used in the naming of his new functions and constants.
-For example, a company NVIDIA has the abbreviation of the NV, which is used in the naming of new features,
-such as The glCombinerParameterfvNV as well as constants: GL_NORMAL MAP NV. It may happen that some
-extension can realize a few manufacturers. In this case, is abbreviated EXT, for example, The
-glDeleteRenderbuffersEXT. In the case when the expansion approved by the consortium ARB, it acquires the
-abbreviation ARB and becomes the standard extension. Usually the expansion, approved by the consortium, are included
-in one of the subsequent versions of the specification.
+<br><B>Extensions</B>
+<br>OpenGL allows implementers to improve its functionality through extensions mechanism. Extensions consists both of API specification (new functions and constants) and its implementation which is part of OpenGL library. Each manufacturer has abbreviation that is used in extension names. For example, NVIDIA has 'NV' abbreviation (GL_NORMAL_MAP_NV, etc). It may happen that some extension can be implemented by several manufacturers. In this case, it is abbreviated with 'EXT' - for example, GL_EXT_framebuffer_object. In case if extension is approved by the OpenGL Consortium, it is marked with 'ARB' abbreviation and becomes the standard extension. Usually standard extensions are then included in one of the subsequent versions of OpenGL specification. OpenGL applications can check if a particular extension is available on a target system and, if so, use it, thus utilizing cutting-edge graphics technologies.
 <br>
 <br><B>Additional libraries</B>
-<br>There are a number of libraries, created over or in addition to OpenGL. For example, the library of GLU, which is
-practically the standard complement OpenGL and its always the escort, built on top of the latter, it
-uses its functions for the realization of their capabilities. Other libraries, as, for example, of GLUT and SDL, created
-for the realization of the opportunities that are not available in OpenGL. Such opportunities include the establishment of a
-user interface (windows, buttons, menus, etc.), setting the context of drawing (drawing area that is used OpenGL), the
-processing of messages from the I/O devices (keyboard, mouse, etc.), as well as work with files.
-Typically, each window manager has its own library of extension for the implementation of the above opportunities,
-for example, the WGL in Windows or GLX in the X Window System, however, the GLUT library and the SDL are The кроссплатформенными that
-facilitates the transfer of written applications on other platforms. Such libraries as The GLEW and GLEE, created in order to
-facilitate the work of the with extensions and the various versions of OpenGL.
-<br>OpenGL has only a set of geometric primitives (points, lines, and polygons) of which are created all the
-3D objects. Sometimes this level of detail is not always convenient when creating scenes. So on top of OpenGL graphics
-have been established in more high-level libraries, such as the Open Inventor And The VTK. The data libraries allow you to
-operate more complex three-dimensional objects that facilitates and accelerates the creation of 3D scenes.
+<br>There are a number of libraries, created on top of or in addition to OpenGL. For example, GLU, which was virtually the standard complementation library before OpenGL 3.0. GLU uses OpenGL functions to implement its own ones (drawing 3D shapes, loading textures, extended transformation functions and others). Other libraries, such as GLUT and SDL, provide features that are not available in OpenGL. They include window creation, event handling, user input processing. Typically, each window manager has its own extension library that implement these features - for example, WGL under Windows or GLX under X Window System. However, GLUT and SDL are cross-platform libraries that make easy porting graphics applications between operating systems. Such libraries as GLEW and GLEE are created in order to facilitate work with OpenGL extensions and different versions of OpenGL itself.
+
+<br>OpenGL supports only a set of geometric primitives (points, lines, and polygons) which are used to render all 3D objects. This level of abstraction is not always convenient when creating 3D graphics applications. Therefore more high-level libraries were created on top of OpenGL, such as Open Inventor, VTK, OpenSceneGraph, and GLScene. These libraries allow programmer to operate with more abstract concepts (such as models, materials, animations) which simplifies and accelerates 3D scene creation. Such libraries often created as parts of game engines, so that programmers can focus on gameplay rather than graphics pipeline.
 <br>
-<br><B>independence from the programming language</B>
-<br>for confirmation of the independence of the programming language developed different variants bind the
-functions of OpenGL. Since the OpenGL provides a standard with the ABI (binary interface in the style of C), access to it is possible to arrange in any language that
-supports the agreement calls C and corresponding to the C-like system types. To date, support for OpenGL is practically
-in all popular languages, including Java, C#, Python, Perl, Ruby, Lisp, Pascal, Visual Basic, D, etc.
+<br><B>Language independence</B>
+<br>OpenGL can be used with almost any popular programming language. Since OpenGL specification is based on standard C ABI, it is possible to acess it from any language that supports C calling convention and has C-compatible type system (or allows to write native extensions in C, like Python does). Nowadays OpenGL support exists for C, Java, C#, Python, Perl, Ruby, Lisp, Pascal, Visual Basic, D, Rust, Go and numerous other languages.
 <br>
 <br><B>History</B>
-<br>Today computer graphics has found wide dissemination and use in everyday life.
-Scientists use it for analysis of the results of the simulation. Engineers and Architects - to create virtual models. Кинематографы create amazing special effects for film and animation films. Widespread as computer games, the
-maximum use of 3D graphics for creating virtual worlds.
+<br>Computer graphics is widely used in everyday life. Scientists use it for analysis of simulation results. Engineers, designers and architects use it to create virtual models of their products. Filmmakers create amazing special effects for movies and animations. Computer games would not even exist without computer graphics, and nowadays they heavily depend on the most advanced graphics technologies to create breathtaking virtual worlds.
 <br>
-<br>the dissemination of computer graphics accompanied their difficulties. 25 years ago, the development of the software
-product, capable to work on a large number of graphics hardware has been difficult with large
-temporal and financial costs. It was to create separate modules for each type of graphics
-adapters, which sometimes led to a large duplication of source code. This strongly тормозило development and
-dissemination of computer graphics.
+<br>But 30 years ago it wasn't so. Development of a software product capable to work on a wide range of hardware has been difficult, time-consuming and costly. It was necessary to create separate modules for each type of graphics adapters, which sometimes led to large source code duplication. This strongly slowed down development and spreading of computer graphics.
 <br>
-<br>OpenGL history has its origins in the distant 1982. It was then at Stanford University developed the
-concept vehicle graphics, on the basis of which the famous company Silicon Graphics Inc. in their workstation
-Silicon IRIS realized rendering pipeline. Silicon Graphics has specialized in creating high-tech
-graphics hardware and software and was at that time the leader in 3D graphics. As a leader, it
-increasingly confronted with barriers to the growth of the market, caused by the first large temporal and financial
-costs to develop programs that are able to work on different graphics hardware.
-It was therefore decided to standardize the method of accessing the graphics hardware at the level of the software
-interface. So was designed graphics library IRIS GL, which became the forerunner of OpenGL.
-One of the limitations of IRIS GL was that it allowed to use only the features supported by the
-equipment; if the possibility was not implemented in hardware, the application could not use it. It is on the
-basis of the library IRIS GL in 1992 was developed and approved by the graphical standard OpenGL, which means the GL
-Graphics Library, and Open hints at its openness. The problem of his predecessor OpenGL
-overcame at the expense of the software implementation opportunities that are not supported by the hardware that allows applications
-to use this interface at a relatively low-power systems.
+<br>OpenGL history began in 1982, when Stanford University developed a concept of a graphics machine, which then was implemented by famous Silicon Graphics Inc. on their Silicon IRIS workstation. SGI specialized in creating high-tech graphics hardware and software and was the leader in 3D graphics at that time. As a leader, it increasingly confronted with barriers to the market growth, caused mainly by large temporal and financial costs of developing programs that were able to work on different graphics hardware. 
+It was therefore decided to standardize access to graphics hardware at software interface level. So IRIS GL graphics library was designed, which became the predeccessor of OpenGL. 
+One of IRIS GL limitations was that it allowed to use only the features supported by the hardware. If the feature was not implemented in hardware, the application could not use it. In 1992 OpenGL was developed on the basis of IRIS GL, and it was approved as the graphics standard. The problem of its predecessor overcame at the expense of the software emulation of features that were not supported by the hardware. This allowed applications
+to use this interface even at low-end systems.
 <br>
-<br>At the same time, created a consortium of companies that support the new standard, which has received the name of the ARB
-(Architecture Review Board). He was for many years determines the development of the Graphics API, revising
-its specification as required. In the ARB in Silicon Graphics Inc., has entered a lot of large corporations
-such as IBM Corporation, Sun Microsystems Inc., Digital Equipment Corporation (DEC), Evans & Sutherland,
-Hewlett-Packard Corporation, Intel Corporation and Intergraph Corporation. Even Microsoft has made the hand to the new
-graphical standard - the same Microsoft, which a few years later, in 1995, will release to the market the first
-version of DirectX, the future of the main competitor of OpenGL. Microsoft withdrew from the ARB in 2003, but now in the
-consortium composed of all major manufacturers of video cards, including AMD and nVIDIA.
+<br>At the same time, consortium of companies that support the new standard was created, which were called ARB (Architecture Review Board). For many years it determined development of OpenGL, revising its specification. Alongside SGI it united a lot of large corporations such as IBM, Sun Microsystems, Digital Equipment Corporation, Evans & Sutherland, Hewlett-Packard, Intel and Intergraph. Even Microsoft has made a hand to the new graphical standard - the same Microsoft which a few years later, in 1995, will release the first version of DirectX, the future competitor of OpenGL. Microsoft withdrew from the ARB in 2003, but now the consortium contains all major GPU manufacturers including AMD and NVIDIA.
 <br>
-<br>OpenGL history has its origins in the distant 1982. It was then at Stanford University developed the
-concept vehicle graphics, on the basis of which the famous company Silicon Graphics Inc. in their workstation
-Silicon IRIS realized rendering pipeline. Silicon Graphics has specialized in creating high-tech
-graphics hardware and software and was at that time the leader in 3D graphics. As a leader, it
-increasingly confronted with barriers to the growth of the market, caused by the first large temporal and financial
-costs to develop programs that are able to work on different graphics hardware.
-It was therefore decided to standardize the method of accessing the graphics hardware at the level of the software
-interface. So was designed graphics library IRIS GL, which became the forerunner of OpenGL.
-One of the limitations of IRIS GL was that it allowed to use only the features supported by the
-equipment; if the possibility was not implemented in hardware, the application could not use it. It is on the
-basis of the library IRIS GL in 1992 was developed and approved by the graphical standard OpenGL, which means the GL
-Graphics Library, and Open hints at its openness. The problem of his predecessor
-overcame OpenGL at the expense of the software implementation opportunities that are not supported by the hardware that allows applications
-to use this interface at a relatively low-power systems.
+<br>Initially created for professional sector, OpenGL established in there very firmly. It was used in high-performance industrial workstations, science, education, as well as in projects where application portability between various software or hardware platforms were required. By the time ARB drew attention to the rapidly developing gaming industry, it turned out that OpenGL had serious competitors. In the game graphics accelerators market, 3DFX was a leader, which in 1994 created Glide, the first full-fledged game graphics API. Of course, it supported only chipsets produced by 3DFX itself, which allowed it for a few years to become almost a monopoly in gaming 3D graphics market. But closed API played with 3DFX a cruel trick. When OpenGL came to the gaming market in 1996, it was greeted with open arms by developers.
 <br>
-<br>At the same time, created a consortium of companies that support the new standard, which has received the name of the ARB
-(Architecture Review Board). He was for many years determines the development of the Graphics API, revising
-its specification as required. In the ARB in Silicon Graphics Inc., has entered a lot of large corporations
-such as IBM Corporation, Sun Microsystems Inc., Digital Equipment Corporation (DEC), Evans & Sutherland,
-Hewlett-Packard Corporation, Intel Corporation and Intergraph Corporation. Even Microsoft has made the hand to the new
-graphical standard - the same Microsoft, which a few years later, in 1995, will release to the market the first
-version of DirectX, the future of the main competitor of OpenGL. Microsoft withdrew from the ARB in 2003, but now in the
-consortium composed of all major manufacturers of video cards, including AMD and nVIDIA.
+<br>In the meantime, OpenGL acquired another rival - Microsoft corporation took up the development of its own proprietary graphics API. In 1995, the company released the first version of DirectX, at the time called Games SDK, running only under Windows 95. A native OpenGL driver for Windows also existed, but it worked much worse and slower than Direct3D. This was done, of course, with an eye to the fact that game developers will work with Direct3D, and not with 'less effective' OpenGL. At first it was so, but soon Silicon Graphics developed its own OpenGL ICD (Installable Client Driver), and then many GPU manufacturers began to include their OpenGL implementations into driver packages, which made possible to use graphics cards most efficiently. In addition, manufacturers could freely add new functions to their ICDs. 
 <br>
-<br>In the meantime, the OpenGL another rival - Microsoft has taken for the development of the API, which
-belonged only to her. In 1995, the company released the first version of DirectX, then called Games SDK and
-works only under Windows. However, the port of OpenGL for systems running Windows also existed, but
-he was much worse and slower than the "native" Direct3D. It so happened not because of the benefits of API from
-Microsoft, and for reasons of political rather. The port is implemented by programrs Gates Corporation, worked
-through the slow software port of the MCD, and not through quick ICD (Installable Client Driver). This was done, of
-course, with the sight that game developers will work with Direct3D, not with OpenGL, уступающим him in
-performance. At first, it was, but soon appeared ICD port, developed by Silicon Graphics, and
-then many manufacturers of accelerators to include in the package their own version of the ICD-ports,
-making the most effective use all opportunities to accelerate, which provides a video card.
-In addition, manufacturers can freely add to the ports of the new ICD not provided for in the
-OpenGL functions, thus ensuring the expansion of the list of the functions of the library and the appearance of its modifications.
-Feeling that loses control of developments, Microsoft has decided to stop the war of standards and suggested that the SGI
-to develop a unified API. The project has received the name of the Fahrenheit, and work began. Meanwhile, Microsoft demanded
-to remove from the Internet all links on the SGI-implementation of OpenGL, and stop its further support, which was
-done. Alas, but API Fahrenheit not destined to appear on the light. Microsoft, in pursuit of their benefits, decided to
-implement the new API only through Direct3D, and cooperation has not come. The OpenGL-a part of the project meets the SGI,
-but the company went through not the best times, experts went to nVidia, so the enthusiasm of the representatives of the
-SGI was not. So the OpenGL помер quietly and unobtrusively, not get it strong support from the John Carmack.
-Id Software chose as a graphical interface for its game Quake it is OpenGL, which was the
-salvation of the latter. The game was a great success, soon began to appear modifications and continue.
-Graphical engine Quake became popular, began to go out of the game using it, and,
-hence, and OpenGL. The standard has survived, the big race continued.
+<br>Feeling that it were losing control, Microsoft decided to stop the war of standards and suggested SGI to develop a common API. The project was called Fahrenheit, and the work began. Microsoft demanded to remove all references to SGI's implementation of OpenGL from the Internet, and to stop its further support, which was done. Alas, Fahrenheit was not destined to be born. Microsoft, pursuing its benefits, decided to implement the new API only through Direct3D, and the cooperation did not work out. SGI was responsible for the OpenGL part of the project, but the company was going through hard times, the specialists were leaving to NVIDIA, so SGI did not have enthusiasm. So would OpenGL have died quietly and imperceptibly, if only it haven't received a strong support from John Carmack and id Software. OpenGL was chosen as the graphical library for the famous Quake, which was the salvation for the former. The game was a great success, modifications and ports began to appear soon. Quake's graphics engine has become popular, appeared games that were using it, and, consequently, using OpenGL. The standard survived, and the big race continued.
 <br>
-<br>said that the main problem of the OpenGL, compared to DirectX is a consortium, which includes
-a large number of companies with different interests, which leads to a long period of the adoption of the new versions of the
-specification. OpenGL version 2.0 was presented to the 3DLabs in response to concerns about the slow
-development and unclear direction of OpenGL. 3DLabs proposed a number of significant additions to the standard, the most
-significant of which was adding to the core OpenGL Shader Clock language GLSL (OpenGL Shading Language). This
-allows the programr to replace the fixed conveyor small OpenGL programs on special, high-level
-language for creation of various effects, such as the bump mapping, paralax mapping, HDR, etc.
-Support for GLSL included the final version of the specifications of OpenGL 2.0, but even before that
-there was a possibility to develop special effects in assembly language (expansion of the GL_ARG_vertex_program and
-GL_ARB_fragment_program) and the Cg (NVidia C for Graphics).
+<br>It was thought that the main problem of OpenGL, compared to DirectX, was a Consortium of a large number of companies with different interests, which led to a long period of new specification versions adoption. OpenGL version 2.0 was presented by 3DLabs in response to concerns about the slow development and unclear direction of OpenGL. 3DLabs proposed a number of significant additions to the standard, the most significant of them being inclusion of OpenGL Shading Language (GLSL) to the core specification. It allows the programmer to replace the fixed pipeline with small programs written in special high-level language to create various effects, such as bump mapping, paralax mapping, HDR, etc. Interestingly, even before that there was a possibility to develop special effects in assembly language (with GL_ARG_vertex_program and GL_ARB_fragment_program extensions) and Cg language (C for graphics) from NVIDIA.
 <br>
-<br>the Consortium of same, which determines the direction of development of OpenGL, managed many times to change the composition, and now it
-includes AMD, Apple, Creative Labs, Intel, id Software, NVIDIA, Sony Computer Entertainment, Sun Microsystems and
-Texas Instruments. In addition to the permanent members, each year invited a large number of other companies,
-becoming part of the ARB for a period of one year.
+<br>The Consortium itself, which determines direction of OpenGL development, many times changed its composition, and now includes AMD, Apple, Creative Labs, Intel, id Software, NVIDIA, Sony Computer Entertainment, Sun Microsystems and Texas Instruments.
 <br>
-<br>In 2008, the Khronos Group has released a bill of OpenGL 3.0, including support for GLSL 1.3, provided the
-objects of Vertex Array Objects, arrays of textures, more flexible FBO and a number of other graphics functions. What was not
-in OpenGL 3.0, so this is a serious revision of the API, expected by many developers, and became available only
-many months later.
+<br>In 2008, the Khronos Group released OpenGL 3.0 that included support for GLSL 1.3, Vertex Array Objects, texture arrays, more flexible FBOs and a number of other features. Year later, OpenGL 3.1 was announced. This new version featured a huge API redesign and cleanup. A lot of components 
+that were declared deprecated but still remained in OpenGL 3.0 for smooth migration, were removed in 3.1. In addition, OpenGL 3.1 introduced a number of innovations, such GLSL 1.4, texture buffer objects, and so on. In the same year OpenGL 3.2 was announced with GLSL 1.50 and geometry shaders support.
 <br>
-<br>24 March 2009, the Khronos Group announced the OpenGL 3.1. In the new version made cleaning the components that
-were declared obsolete, but remained in the OpenGL 3.0 for smooth transition to the new version of the API
-(older components may continue to use through the GL_ARB_compatibility). In addition,
-OpenGL 3.1 added a number of innovations, such as support for GLSL version 1.4, the Buffer Copy, texture
-buffer objects, and so on.
+<br>In 2010 Consortium approved OpenGL 4.0. Among the new features it included integration with OpenCL (Open Computing Language), multi-threaded rendering, GLSL 4.0, support for 64-bit floating point type, as well as numerous performance improvements. At the same time OpenGL 3.3 was released to backport some functionality of top GPUs to 3.x level hardware (this included dual-source blending, shader-defined attribute locations and some new GLSL functions).
 <br>
-<br>11 March 2010 ARB approved the bill of OpenGL 4.0. Among the innovations you can mark the
-expanded integration with OpenCL (Open Computing Language), multi-threaded Rendering, update the GLSL to
-version 4.0, support for 64-bit floating point, as well as numerous performance improvements.
+<br>OpenGL 4.1, released also in 2010, included GLSL 4.10, as well as support for saving and loading compiled binaries of shader programs.
 <br>
-<br>July 26, 2010 the got OpenGL 4.1. The specification includes the GLSL update to version 4.10, as well as the support of
-save and load the compiled binary versions of shader programs.
+<br>In 2011, the Khronos Group presented OpenGL 4.2 and GLSL 4.20.
 <br>
-<br>9 August 2011, the Khronos Group presented the OpenGL 4.2 and the language of the description of the GLSL shaders 4.20.
+<br>In 2012, the Khronos Group celebrated the 20-th anniversary of OpenGL presenting vesion 4.3 of the specification. This version introduced compute
+shaders that allow using GPU for non-graphical computations, as well as the buffer data objects that can be passed between shaders.
 <br>
-<br>In 2012, the Khronos Group noted the 20-th anniversary of OpenGL, presenting the OpenGL 4.3. This version of the debut compute
-shaders that allow the use of the GPU for The неграфического nature, as well as the buffer data objects that
-can be passed between the shaders.
+<br>In 2013, OpenGL 4.4 was released. This version included tools for working video memory, asynchrony, as well as tools to simplify porting Direct3D 11 applications.
 <br>
-<br>In 2013 was submitted to the OpenGL 4.4, which includes tools for working with graphics, support of
-Asynchrony, as well as tools to simplify the porting of applications with Direct3D 11.
+<br>OpenGL 4.5, released in 2014, supports a new method of state access, allowing queries and state changes without binding objects to the context.
 <br>
-<br>OpenGL 4.5, released in 2014, supports the new method of access to the status of objects in memory,
-allowing query and change the status without binding objects to the contexts.
+<br>In 2017, OpenGL 4.6 was released. Main new feature was SPIR-V support, a portable intermediate representation of shaders originating from Vulkan API, as well as anisotropic texture filtering.
 <br>
-<br>In 2017 came the OpenGL 4.6, which now supports SPIR-V - interim submission of shaders, as well as
-Anisotropic texture filtering.
-<br>
-<br>Big race has continued for more than 20 years, and how much it will last is unknown. But OpenGL, despite
-the fact that the constantly lags behind at the half step, obstinately not descends from a distance. And will not be deflected if does not happen the
-qualitative leap, how at the time he was himself. The openness, independence from hardware and
-programming language, cross-platform and mechanisms of extensions - this is what keeps him afloat all these years.
+<br>Big race has continued for more than 20 years, and it is unknown how long it will last. But OpenGL, despite the fact that it constantly lags behind Direct3D for a half-step, obstinately doesn't exit the scene. And won't, if only a qualitative leap won't occur, the same as OpenGL itself was at its time. Even the emergence of Vulkan haven't affected its popularity. The openness, portability, extendability, and programming language independence - these are what keep OpenGL afloat all these years.
 </a>
 <br>
-<br><A class=link href="../links.htm#OpenGL">Links on article</a>
+<br><A class=link href="../links.htm#OpenGL">Links related to this article</a>
 </DIV>
 
 </BODY>
