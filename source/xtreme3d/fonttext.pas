@@ -189,3 +189,22 @@ begin
   ftfont.LineGap := gap;
   result := 1.0
 end;
+
+function TTFontSetEncoding(font, te: real): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont(trunc64(font));
+  if te = 0.0 then ftfont.Encoding := teUTF8
+  else if te = 1.0 then ftfont.Encoding := teWindows;
+  result := 1.0;
+end;
+
+function TTFontLoadCodePage(font: real; filename: pchar): real; stdcall;
+var
+  ftfont: TGLFreetypeFont;
+begin
+  ftfont := TGLFreetypeFont(trunc64(font));
+  ftfont.LoadCodePageMapping(String(filename));
+  result := 1.0;
+end;

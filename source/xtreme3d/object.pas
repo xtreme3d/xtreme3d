@@ -879,3 +879,31 @@ begin
   GLObject2.Matrix:=m;
   result:=1;
 end;
+
+function ObjectCopy(obj, parent: real): real; stdcall;
+var
+  obj1, obj2, par: TGLBaseSceneObject;
+begin
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  if not (parent=0) then
+    par := TGLBaseSceneObject(trunc64(parent))
+  else
+    par := scene.Objects;
+  obj2 := TGLBaseSceneObject(obj1.NewInstance).CreateAsChild(par);
+  result:=Integer(obj2);
+end;
+
+function ObjectInFrustum(obj, viewer: real): real; stdcall;
+var
+  obj1: TGLBaseSceneObject;
+  mvp: TMatrix;
+  frustum: TFrustum;
+  v: TGLSceneViewer;
+begin
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  v := TGLSceneViewer(trunc64(viewer));
+  mvp := MatrixMultiply(v.Buffer.ModelViewMatrix, v.Buffer.ProjectionMatrix);
+  frustum := ExtractFrustumFromModelViewProjection(mvp);
+  result := Integer(not IsVolumeClipped(
+    AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
+end;

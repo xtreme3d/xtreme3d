@@ -335,3 +335,36 @@ begin
   GLActor1.MeshObjects[trunc64(meshobject)].FaceGroups[trunc64(facegroup)].MaterialName:=mtrl;
   result:=1;
 end;
+
+function ActorMoveBone(actor, boneindex, x, y, z: real): real; stdcall;
+var
+  ac: TGLActor;
+  pos: TAffineVector;
+begin
+  ac := TGLActor(trunc64(actor));
+  pos := ac.Skeleton.Frames[ac.NextFrameIndex].Position[trunc64(boneindex)];
+  ac.Skeleton.Frames[ac.NextFrameIndex].Position[trunc64(boneindex)] :=
+    VectorAdd(pos, AffineVectorMake(x, y, z));
+  result := 1;
+end;
+
+function ActorRotateBone(actor, boneindex, x, y, z: real): real; stdcall;
+var
+  ac: TGLActor;
+  rot: TAffineVector;
+begin
+  ac := TGLActor(trunc64(actor));
+  rot := ac.Skeleton.Frames[ac.NextFrameIndex].Rotation[trunc64(boneindex)];
+  ac.Skeleton.Frames[ac.NextFrameIndex].Rotation[trunc64(boneindex)] :=
+    VectorAdd(rot, AffineVectorMake(x, y, z));
+  result := 1;
+end;
+
+function ActorMeshSetVisible(actor, mesh, mode: real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act := TGLActor(trunc64(actor));
+  act.MeshObjects[trunc64(mesh)].Visible := Boolean(trunc64(mode));
+  result := 1.0;
+end;

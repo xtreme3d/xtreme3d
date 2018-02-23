@@ -1019,3 +1019,55 @@ begin
   ragdoll.Update;
   result := 1.0;
 end;
+
+function OdeDynamicSetVelocity(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetVelocity(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetAngularVelocity(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicGetVelocity(obj, ind: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  result := dyna.GetVelocity[trunc64(ind)];
+end;
+
+function OdeDynamicGetAngularVelocity(obj, ind: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  result := dyna.GetAngularVelocity[trunc64(ind)];
+end;
+
+function OdeDynamicSetPosition(obj, x, y, z: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetPosition(AffineVectorMake(x, y, z));
+  result := 1.0;
+end;
+
+function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; stdcall;
+var
+  dyna: TGLODEDynamic;
+begin
+  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna.SetRotation(x, y, z, w);
+  result := 1.0;
+end;

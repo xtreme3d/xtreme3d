@@ -629,3 +629,41 @@ begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).NoiseRandSeed:=trunc64(s);
   result:=1;
 end;
+
+function MaterialCullFrontFaces(mtrl: pchar; culff: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.CullFrontFaces := Boolean(trunc64(culff));
+  result:=1;
+end;
+
+function MaterialSetZWrite(mtrl: pchar; zwrite: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  mat.Material.ZWrite := Boolean(trunc64(zwrite));
+  result:=1;
+end;
+
+function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; stdcall;
+var
+  mat1, mat2: TGLLibMaterial;
+  mlib: TGLMaterialLibrary;
+begin
+  mat1 := matlib.Materials.GetLibMaterialByName(String(material1));
+  mlib := TGLMaterialLibrary(trunc64(matlib2));
+  mat2 := mlib.Materials.GetLibMaterialByName(String(material2));
+  mat1.Material.SetTextureN(trunc64(index), mat2.Material.Texture);
+  result := 1.0;
+end;
+
+function MaterialGetNameFromLibrary(matlib, index: real): pchar; stdcall;
+var
+  mlib: TGLMaterialLibrary;
+begin
+  mlib := TGLMaterialLibrary(trunc64(matlib));
+  result := pchar(mlib.Materials.Items[trunc64(index)].Name);
+end;

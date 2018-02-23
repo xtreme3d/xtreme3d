@@ -16,19 +16,24 @@ begin
   GLFreeForm1.LightmapLibrary:=ml2;
   GLFreeForm1.LoadFromFile(fname);
   
-  {
-  // TODO: make separate functions for this
-  
+  result:=Integer(GLFreeForm1);
+end;
+
+function FreeformGenTangents(ff: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+  mesh1: TMeshObject;
+  mi: Integer;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
   for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
       mesh1 := GLFreeForm1.MeshObjects[mi];
       if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
         GenMeshTangents(mesh1);
   end;
-  
-  GLFreeForm1.BuildOctree;
-  }
-  
-  result:=Integer(GLFreeForm1);
+  GLFreeForm1.StructureChanged;
+  GLFreeForm1.NotifyChange(nil);
+  result:=1.0;
 end;
 
 // MeshCountObjects = FreeformMeshObjectsCount
@@ -664,6 +669,41 @@ begin
   GLFreeForm1:=TGLFreeForm(trunc64(ff));
   GLFreeForm1.BuildOctree;
   result:=1.0;
+end;
+
+function FreeformMeshFaceGroupGetLightmapIndex(ff, mesh, fg: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  meshObj: TMeshObject;
+  faceGroup: TFGVertexNormalTexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  meshObj := ffm.MeshObjects[trunc64(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  result := faceGroup.LightMapIndex;
+end;
+
+function FreeformMeshFaceGroupSetLightmapIndex(ff, mesh, fg, index: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+  meshObj: TMeshObject;
+  faceGroup: TFGVertexNormalTexIndexList;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  meshObj := ffm.MeshObjects[trunc64(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  faceGroup.LightMapIndex := trunc64(index);
+  result := 1.0;
+end;
+
+function FreeformSetMaterialLibraries(ff, matlib, lmmatlib: real): real; stdcall;
+var
+  ffm: TGLFreeForm;
+begin
+  ffm := TGLFreeForm(trunc64(ff));
+  ffm.MaterialLibrary := TGLMaterialLibrary(trunc64(matlib));
+  ffm.LightmapLibrary := TGLMaterialLibrary(trunc64(lmmatlib));
+  result := 1.0;
 end;
 
 // Unimplemented:

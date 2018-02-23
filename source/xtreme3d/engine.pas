@@ -9,6 +9,17 @@ begin
   result:=1;
 end;
 
+function EngineDestroy: real; stdcall;
+begin
+  cadencer.Enabled := false;
+  cadencer.Scene := nil;
+  cadencer.Free;
+  scene.Free;
+  empty.Free;
+  memviewer.Free;
+  result:=1;
+end;
+
 function EngineSetObjectsSorting(os: real): real; stdcall;
 begin
   if os=0 then scene.ObjectsSorting:=osInherited;
@@ -49,4 +60,21 @@ end;
 function TrisRendered: real; stdcall;
 begin
   result:=1;
+end;
+
+function EngineSaveScene(filename: pchar): real; stdcall;
+begin
+  scene.SaveToTextFile(String(filename));
+  result := 1.0;
+end;
+
+function EngineLoadScene(filename: pchar): real; stdcall;
+begin
+  scene.LoadFromTextFile(String(filename));
+  result := 1.0;
+end;
+
+function EngineRootObject: real; stdcall;
+begin
+  result := Integer(scene.Objects);
 end;

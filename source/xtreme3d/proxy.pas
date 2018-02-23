@@ -54,3 +54,24 @@ begin
   mp.MasterObjects.Add(ob, mindist, maxdist);
   result := 1.0;
 end;
+
+function ActorProxyObjectCreate(actor, parent: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  if not (parent = 0) then
+    p := TGLActorProxy.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    p := TGLActorProxy.CreateAsChild(scene.Objects);
+  p.MasterObject := TGLActor(trunc64(actor));
+  result := Integer(p);
+end;
+
+function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.SwitchToAnimation(trunc64(anim));
+  result := 1.0;
+end;
