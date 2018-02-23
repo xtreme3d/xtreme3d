@@ -14,3 +14,6 @@ dub.selections.json
 # Dub test files
 __test__library__
 tests
+bindings/dlang/freetype.dll
+bindings/dlang/ode.dll
+bindings/dlang/xtreme3d.dll
