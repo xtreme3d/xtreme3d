@@ -284,3 +284,8 @@ enum double gpXY = 0;
 enum double gpYZ = 1;
 enum double gpXZ = 2;
 enum double gpXYZ = 3;
+
+// Font
+enum double teUTF8 = 0;
+enum double teWindows = 1;
+
