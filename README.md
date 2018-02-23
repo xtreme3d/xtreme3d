@@ -52,7 +52,7 @@ Features
 * Rigid body physics using ODE engine
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
-* Loading resources from PAK archives
+* Loading resources from GLScene PAK archives
 * Keyboard and mouse input
 * Window creation
 * ...plus a lot more!
