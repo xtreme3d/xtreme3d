@@ -8,7 +8,7 @@ declStrings = []
 bindStrings = []
 
 x3d_path = '../../source/xtreme3d'
-output_path = '.'
+output_path = 'xtreme3d'
 
 directory = ''
 if len(sys.argv) < 2:
