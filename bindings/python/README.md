@@ -1,6 +1,6 @@
 Xtreme3D for Python
 ===================
-This is a work-in-progress Python binding for [Xtreme3D engine](https://github.com/xtreme3d/xtreme3d). It currently supports only minimal set of functions to get a working application. It is compatible with Python 2.7 and 3.2+ (only 32-bit!).
+This is a Python binding for [Xtreme3D engine](https://github.com/xtreme3d/xtreme3d). It is compatible with Python 2.7 and 3.2+ (only 32-bit!).
 
 The demo uses PySDL2 to create a window and handle user input. 
 
