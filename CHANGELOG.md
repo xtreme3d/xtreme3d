@@ -1,20 +1,25 @@
 Xtreme3D version history
 ========================
-v3.6.0 (by Gecko) - ??/??/????
+v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
-* Lua scripting
-* Initial Squall audio engine integration
-* Windows codepages for TTF fonts
-* New Material functions: MaterialSetTextureExFromLibrary, MaterialGetNameFromLibrary
-* New Freeform functions: FreeformMeshFaceGroupSetLightmapIndex, FreeformMeshFaceGroupGetLightmapIndex, FreeformSetMaterialLibraries
-* ActorProxy functions
-* New Actor functions: ActorMoveBone, ActorRotateBone, ActorMeshSetVisible
-* Mouse and keyboard input
-* Window creation and management
-* Color construction functions: MakeColorRGB, MakeColorRGBFloat
-* New Object function: ObjectInFrustum
-* New Engine functions: EngineSaveScene, EngineLoadScene (experimental, doesn't support all objects)
-* Fixed bug in BumpShader and PhongShader with incorrect specular highlights
+- Error message is now shown if a resource (Freeform, Actor or texture) can't be loaded
+- Help file has been translated to English
+- Python and D language bindings added
+
+v3.6.0 (by Gecko) - 17/02/2017
+------------------------------
+- Windows/ANSI encoding support for TTFont (TTFontSetEncoding)
+- New Material functions: MaterialSetTextureExFromLibrary, MaterialGetNameFromLibrary 
+- New Freeform functions: FreeformSetMaterialLibraries, FreeformMeshFaceGroupSetLightmapIndex, FreeformMeshFaceGroupGetLightmapIndex 
+- ActorProxy objects
+- New Actor functions: ActorMoveBone, ActorRotateBone, ActorMeshSetVisible 
+- New Object function: ObjectInFrustrum 
+- Mouse and keyboard input functions
+- Window creation and management functions
+- RGB color packing functions
+- Saving and loading scene files (experimental): EngineSaveScene, EngineLoadScene
+- GLSLShader doesn't show empty error message if there are no errors 
+- Fixed specular highlights in PhongShader and BumpShader
 
 v3.5.0 (by Gecko) - 04/02/2017
 ------------------------------
