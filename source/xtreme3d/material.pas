@@ -69,8 +69,16 @@ begin
 end;
 
 function MaterialCreate(mtrl,fname: pchar): real; stdcall;
-begin
-  matlib.AddTextureMaterial(String(mtrl),fname,true);
+begin  
+  try
+    matlib.AddTextureMaterial(String(mtrl),fname,true);
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('MaterialCreate:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
   result:=1;
 end;
 
@@ -99,7 +107,17 @@ begin
     if ind=3 then target:=cmtNY;
     if ind=4 then target:=cmtPZ;
     if ind=5 then target:=cmtNZ;
-    Picture[target].LoadFromFile(String(texture));
+    
+    try
+      Picture[target].LoadFromFile(String(texture));
+    except
+      On E: Exception do
+      begin
+        if showLoadingErrors then
+          ShowMessage('MaterialCubeMapLoadImage:' + #13#10 + 'Error loading ' + String(texture) + #13#10 + E.Message);
+      end;
+    end;
+    
   end;
   result:=1;
 end;
@@ -512,7 +530,17 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.Texture.Image.LoadFromFile(String(filename));
+  
+  try
+    mat.Material.Texture.Image.LoadFromFile(String(filename));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('MaterialLoadTexture:' + #13#10 + 'Error loading ' + String(filename) + #13#10 + E.Message);
+    end;
+  end;
+  
   result:=1;
 end;
 
@@ -523,7 +551,17 @@ var
 begin
   mat := matlib.Materials.GetLibMaterialByName(mtrl);
   tex := TGLTexture.Create(mat.Material);
-  tex.Image.LoadFromFile(String(filename));
+  
+  try
+    tex.Image.LoadFromFile(String(filename));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('MaterialLoadTextureEx:' + #13#10 + 'Error loading ' + String(filename) + #13#10 + E.Message);
+    end;
+  end;
+  
   tex.Disabled := False;
   mat.Material.SetTextureN(trunc64(index), tex);
   result:=1;

@@ -14,7 +14,16 @@ begin
     GLFreeForm1:=TGLFreeForm.CreateAsChild(scene.Objects);
   GLFreeForm1.MaterialLibrary:=ml;
   GLFreeForm1.LightmapLibrary:=ml2;
-  GLFreeForm1.LoadFromFile(fname);
+  
+  try
+    GLFreeForm1.LoadFromFile(fname);
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('FreeformCreate:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
   
   result:=Integer(GLFreeForm1);
 end;

@@ -9,7 +9,17 @@ begin
   else
     GLActor1:=TGLActor.CreateAsChild(scene.Objects);
   GLActor1.MaterialLibrary:=ml;
-  GLActor1.LoadFromFile(String(fname));
+  
+  try
+    GLActor1.LoadFromFile(String(fname));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('ActorCreate:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
+  
   GLActor1.AnimationMode:=aamLoop;
   result:=Integer(GLActor1);
 end;
@@ -112,7 +122,17 @@ var
   GLActor1: TGLActor;
 begin
   GLActor1:=TGLActor(trunc64(actor));
-  GLActor1.AddDataFromFile(String(fname));
+  
+  try
+    GLActor1.AddDataFromFile(String(fname));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('ActorAddObject:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
+  
   result:=1;
 end;
 
@@ -261,7 +281,17 @@ var
   tlist: TMD3TagList;
 begin
   tlist:=TMD3TagList.Create;
-  tlist.LoadFromFile(String(fname));
+  
+  try
+    tlist.LoadFromFile(String(fname));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('ActorLoadQ3TagList:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
+  
   result:=integer(tlist);
 end;
 
@@ -292,7 +322,17 @@ var
 begin
   GLActor1:=TGLActor(trunc64(actor));
   list := TStringList.Create;
-  list.Text := LoadStringFromFile2(String(fname));
+  
+  try
+    list.Text := LoadStringFromFile2(String(fname));
+  except
+    On E: Exception do
+    begin
+      if showLoadingErrors then
+        ShowMessage('ActorLoadQ3Animations:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+    end;
+  end;
+  
   LoadQ3Anims(GLActor1.Animations, list, clas);
   result:=1;
 end;

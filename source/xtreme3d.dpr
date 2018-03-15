@@ -31,6 +31,7 @@ const
    {$I 'phongshader'}
 
 var
+  showLoadingErrors: Boolean;
   scene: TGLScene;
   matlib: TGLMaterialLibrary;
   memviewer: TGLMemoryViewer;

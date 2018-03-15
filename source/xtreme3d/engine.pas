@@ -6,6 +6,7 @@ begin
   cadencer:=TGLCadencer.Create(nil);
   cadencer.Scene:=scene;
   cadencer.Mode:=cmManual;
+  showLoadingErrors := True;
   result:=1;
 end;
 
