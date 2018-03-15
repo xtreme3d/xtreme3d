@@ -4,7 +4,6 @@ v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
 - Error message is now shown if a resource (Freeform, Actor or texture) can't be loaded
 - Help file has been translated to English
-- Python and D language bindings added
 
 v3.6.0 (by Gecko) - 17/02/2017
 ------------------------------
@@ -20,6 +19,7 @@ v3.6.0 (by Gecko) - 17/02/2017
 - Saving and loading scene files (experimental): EngineSaveScene, EngineLoadScene
 - GLSLShader doesn't show empty error message if there are no errors 
 - Fixed specular highlights in PhongShader and BumpShader
+- Python and D language bindings added
 
 v3.5.0 (by Gecko) - 04/02/2017
 ------------------------------
