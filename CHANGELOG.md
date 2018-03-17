@@ -2,6 +2,7 @@ Xtreme3D version history
 ========================
 v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
+- New Object function: ObjectGetScale
 - Error message is now shown if a resource (Freeform, Actor or texture) can't be loaded
 - Help file has been translated to English
 
