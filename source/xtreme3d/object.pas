@@ -274,6 +274,14 @@ begin
   result:=1;
 end;
 
+function ObjectGetScale(obj, ind: real): real; stdcall;
+var
+  sobj: TGLBaseSceneObject;
+begin
+  sobj := TGLBaseSceneObject(trunc64(obj));
+  result := sobj.Scale.AsVector[trunc64(ind)];
+end;
+
 function ObjectSetUpVector(obj,x,y,z:real): real; stdcall;
 var
   GLObject:TGLBaseSceneObject;
