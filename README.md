@@ -8,7 +8,7 @@ The engine is written in Delphi and based on a modified version of GLScene 1.0.0
 
 Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python) and [D language](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) bindings which are automatically generated from engines's source code.
 
-Visit our Russian Xtreme3D site at [http://gecko0307.siteme.org/xtreme3d](http://gecko0307.siteme.org/xtreme3d).
+Visit Xtreme3D site at [http://xtreme3d.tk](http://xtreme3d.tk).
 
 Screenshots
 -----------
@@ -61,7 +61,7 @@ Features
 
 Documentation
 -------------
-Xtreme3D is fully documented in Russian, the help file is [here](https://github.com/xtreme3d/xtreme3d/tree/master/doc). Machine-translated English version is also [available](https://github.com/xtreme3d/xtreme3d/tree/master/doc-en) (thanks to Bill Collins for making this).
+Xtreme3D is fully documented in Russian, the help file is [here](https://github.com/xtreme3d/xtreme3d/tree/master/doc-ru). Machine-translated English version is also [available](https://github.com/xtreme3d/xtreme3d/tree/master/doc-en) (thanks to Bill Collins for making it).
 
 Asset Creation
 --------------
