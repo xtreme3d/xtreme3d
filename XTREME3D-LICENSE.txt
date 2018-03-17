@@ -14,4 +14,4 @@ such files have an explicit notice attached to them or placed in their directory
 
 ------------------------------------------------------------------------------
 GLScene, Copyright (c) 2000-2016, GLSTeam
-Xtreme3D, Copyright (c) 2016-2017, Timur Gafarov
+Xtreme3D, Copyright (c) 2016-2018, Timur Gafarov
