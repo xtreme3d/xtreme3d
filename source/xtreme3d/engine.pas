@@ -79,3 +79,9 @@ function EngineRootObject: real; stdcall;
 begin
   result := Integer(scene.Objects);
 end;
+
+function EngineShowLoadingErrors(mode: real): real; stdcall;
+begin
+  showLoadingErrors := Boolean(trunc64(mode));
+  result := 1;
+end;
