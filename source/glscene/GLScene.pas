@@ -1459,6 +1459,8 @@ type
          FOnProgress : TGLProgressEvent;
          FRenderedObject: TGLCustomSceneObject;
 
+         FMaxLights: Integer;
+
       protected
          { Protected Declarations }
          procedure AddLight(aLight : TGLLightSource);
@@ -1544,6 +1546,8 @@ type
          {: Defines default VisibilityCulling option for scene objects. }
          property VisibilityCulling : TGLVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcNone;
          property OnProgress : TGLProgressEvent read FOnProgress write FOnProgress;
+
+         property MaxLights: Integer read FMaxLights write FMaxLights;
 
    end;
 
@@ -5901,6 +5905,7 @@ begin
    FVisibilityCulling:=vcNone;
    // actual maximum number of lights is stored in TGLSceneViewer
    FLights.Count:=8;
+   FMaxLights := 8;
 end;
 
 // Destroy
@@ -6391,7 +6396,10 @@ var
    lightSource : TGLLightSource;
    nbLights : Integer;
 begin
-   nbLights:=FLights.Count;
+   if FMaxLights > 0 then
+       nbLights:=FMaxLights
+   else
+       nbLights:=FLights.Count;
    if nbLights>maxLights then
       nbLights:=maxLights;
    // setup all light sources

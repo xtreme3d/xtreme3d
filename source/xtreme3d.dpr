@@ -18,8 +18,7 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, Keyboard, Forms;
-  //Squall, CrystalLUA;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx, Keyboard, Forms;
 
 type
    TEmpty = class(TComponent)
@@ -239,6 +238,7 @@ end;
 {$I 'xtreme3d/dummycube'}
 {$I 'xtreme3d/camera'}
 {$I 'xtreme3d/light'}
+{$I 'xtreme3d/lightfx'}
 {$I 'xtreme3d/fonttext'}
 {$I 'xtreme3d/sprite'}
 {$I 'xtreme3d/hudshapes'}
@@ -318,6 +318,8 @@ CameraMoveInEyeSpace, CameraMoveTargetInEyeSpace, CameraPointInFront, CameraGetF
 LightCreate, LightSetAmbientColor, LightSetDiffuseColor, LightSetSpecularColor,
 LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
 LightSetSpotDirection, LightSetStyle,
+// LightFx
+LightFXCreate, 
 //Font & Text
 BmpFontCreate, BmpFontLoad,
 TTFontCreate, TTFontSetLineGap, TTFontSetEncoding, TTFontLoadCodePage,
