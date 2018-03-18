@@ -3,7 +3,7 @@ Xtreme3D version history
 v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
 - New Object function: ObjectGetScale
-- Error message is now shown if a resource (Freeform, Actor or texture) can't be loaded
+- Now engine doesn't crash if a resource (Freeform, Actor or texture) fails to load. Error message is now shown instead, and the game continues. Error message showing can be switched with EngineShowLoadingErrors function
 - Help file has been translated to English
 
 v3.6.0 (by Gecko) - 17/02/2017
