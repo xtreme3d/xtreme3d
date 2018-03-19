@@ -2,7 +2,7 @@ Xtreme3D version history
 ========================
 v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
-- LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. Parallel lights have higher priority over omni and spot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be created for an object (LightFXCreate).
+- LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. Parallel lights have higher priority over omni and spot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be applied to an object (LightFXCreate).
 - New Object function: ObjectGetScale
 - Now engine doesn't crash if a resource (Freeform, Actor or texture) fails to load. Error message is now shown instead, and the game continues. Error message showing can be switched with EngineShowLoadingErrors function
 - Help file has been translated to English
