@@ -259,7 +259,7 @@ interface
 {$i GLScene.inc}
 
 uses
-   Classes, Dialogs, GLMisc, GLTexture, SysUtils, VectorGeometry, XCollection,
+   Classes, Dialogs, Math, GLMisc, GLTexture, SysUtils, VectorGeometry, XCollection,
    GLGraphics, GeometryBB, GLContext, GLCrossPlatform, VectorLists,
    GLSilhouette, PersistentClasses, GLState;
 
@@ -5940,8 +5940,9 @@ begin
       if FLights.List[i]=nil then begin
          FLights.List[i]:=ALight;
          ALight.FLightID:=GL_LIGHT0+i;
-         Break;
+         Exit;
       end;
+   FLights.Add(ALight);
 end;
 
 // RemoveLight
@@ -6395,47 +6396,56 @@ var
    i : Integer;
    lightSource : TGLLightSource;
    nbLights : Integer;
+   lightId: Cardinal;
 begin
-   if FMaxLights > 0 then
-       nbLights:=FMaxLights
-   else
-       nbLights:=FLights.Count;
+   //if FMaxLights > 0 then
+   //    nbLights:=FMaxLights
+   //else
+   //    nbLights:=FLights.Count;
+   nbLights := Min(FLights.Count, FMaxLights);
+   
    if nbLights>maxLights then
       nbLights:=maxLights;
    // setup all light sources
    glPushMatrix;
    for i:=0 to nbLights-1 do begin
       lightSource:=TGLLightSource(FLights[i]);
-      if Assigned(lightSource) then with lightSource do begin
-         if Shining then begin
-            glEnable(FLightID);
-            glPopMatrix;
+
+      lightId := GL_LIGHT0+i;
+
+      if Assigned(lightSource) then begin
+         if lightSource.Shining then begin
+            glEnable(lightId);
+            
             glPushMatrix;
-            RebuildMatrix;
-            if LightStyle=lsParallel then begin
-               glMultMatrixf(PGLFloat(AbsoluteMatrixAsAddress));
-               glLightfv(FLightID, GL_POSITION, SpotDirection.AsAddress)
+            //RebuildMatrix;
+            if lightSource.LightStyle=lsParallel then begin
+               glMultMatrixf(PGLFloat(lightSource.AbsoluteMatrixAsAddress));
+               glLightfv(lightId, GL_POSITION, lightSource.SpotDirection.AsAddress)
             end else begin
-               glMultMatrixf(PGLFloat(Parent.AbsoluteMatrixAsAddress));
-               glLightfv(FLightID, GL_POSITION, Position.AsAddress);
+               glMultMatrixf(PGLFloat(lightSource.Parent.AbsoluteMatrixAsAddress));
+               glLightfv(lightId, GL_POSITION, lightSource.Position.AsAddress);
             end;
-            glLightfv(FLightID, GL_AMBIENT, FAmbient.AsAddress);
-            glLightfv(FLightID, GL_DIFFUSE, FDiffuse.AsAddress);
-            glLightfv(FLightID, GL_SPECULAR, FSpecular.AsAddress);
-            if LightStyle=lsSpot then begin
-               if FSpotCutOff<>180 then begin
-                  glLightfv(FLightID, GL_SPOT_DIRECTION, FSpotDirection.AsAddress);
-                  glLightfv(FLightID, GL_SPOT_EXPONENT, @FSpotExponent);
+            glLightfv(lightId, GL_AMBIENT, lightSource.Ambient.AsAddress);
+            glLightfv(lightId, GL_DIFFUSE, lightSource.Diffuse.AsAddress);
+            glLightfv(lightId, GL_SPECULAR, lightSource.Specular.AsAddress);
+            if lightSource.LightStyle=lsSpot then begin
+               if lightSource.SpotCutOff<>180 then begin
+                  glLightfv(lightId, GL_SPOT_DIRECTION, lightSource.SpotDirection.AsAddress);
+                  glLightfv(lightId, GL_SPOT_EXPONENT, @lightSource.SpotExponent);
                end;
-               glLightfv(FLightID, GL_SPOT_CUTOFF, @FSpotCutOff);
+               glLightfv(lightId, GL_SPOT_CUTOFF, @lightSource.SpotCutOff);
             end else begin
-               glLightf(FLightID, GL_SPOT_CUTOFF, 180);
+               glLightf(lightId, GL_SPOT_CUTOFF, 180);
             end;
-            glLightfv(FLightID, GL_CONSTANT_ATTENUATION, @FConstAttenuation);
-            glLightfv(FLightID, GL_LINEAR_ATTENUATION, @FLinearAttenuation);
-            glLightfv(FLightID, GL_QUADRATIC_ATTENUATION, @FQuadraticAttenuation);
-         end else glDisable(FLightID);
-      end else glDisable(GL_LIGHT0+i);
+            glLightfv(lightId, GL_CONSTANT_ATTENUATION, @lightSource.ConstAttenuation);
+            glLightfv(lightId, GL_LINEAR_ATTENUATION, @lightSource.LinearAttenuation);
+            glLightfv(lightId, GL_QUADRATIC_ATTENUATION, @lightSource.QuadraticAttenuation);
+
+            glPopMatrix;
+         end else glDisable(lightId);
+      end else glDisable(lightId);
+
    end;
    glPopMatrix;
    // turn off other lights

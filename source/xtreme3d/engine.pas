@@ -85,3 +85,9 @@ begin
   showLoadingErrors := Boolean(trunc64(mode));
   result := 1;
 end;
+
+function EngineSetMaxLights(lights: real): real; stdcall;
+begin
+  scene.MaxLights := trunc64(lights);
+  result := 1.0;
+end;

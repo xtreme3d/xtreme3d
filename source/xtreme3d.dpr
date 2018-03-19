@@ -288,7 +288,7 @@ EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
 SetPakArchive,
 Update, TrisRendered,
 EngineSaveScene, EngineLoadScene, EngineRootObject,
-EngineShowLoadingErrors, 
+EngineShowLoadingErrors, EngineSetMaxLights, 
 //Viewer
 ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRenderToFile,
 ViewerRender, ViewerSetAutoRender, ViewerRenderEx,

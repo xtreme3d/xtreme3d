@@ -95,26 +95,36 @@ begin
   light1 := TGLLightSource(item1);
   light2 := TGLLightSource(item2);
   if Assigned(light1) and Assigned(light2) then begin
-    ownerObj := OwnerBaseSceneObject();
-
-    light1AbsPos := AffineVectorMake(light1.AbsolutePosition);
-    light2AbsPos := AffineVectorMake(light2.AbsolutePosition);
-    objAbsPos := AffineVectorMake(ownerObj.AbsolutePosition);
-
-    d1 := VectorDistance(objAbsPos, light1AbsPos);
-    d2 := VectorDistance(objAbsPos, light2AbsPos);
-    if d1 < d2 then
+    if light1.Shining and not light2.Shining then
       result := True
-    else
-      result := False;
-    Exit;
+    else if light2.Shining and not light1.Shining then
+      result := False
+    else if light1.LightStyle = lsParallel then
+      result := True
+    else if light2.LightStyle = lsParallel then
+      result := False
+    else begin
+      ownerObj := OwnerBaseSceneObject();
+
+      light1AbsPos := AffineVectorMake(light1.AbsolutePosition);
+      light2AbsPos := AffineVectorMake(light2.AbsolutePosition);
+      objAbsPos := AffineVectorMake(ownerObj.AbsolutePosition);
+
+      d1 := VectorDistance(objAbsPos, light1AbsPos);
+      d2 := VectorDistance(objAbsPos, light2AbsPos);
+      if d1 < d2 then
+        result := True
+      else
+        result := False;
+      Exit;
+    end;
   end
   else if Assigned(light1) then
     result := True
   else if Assigned(light2) then
     result := False
   else
-    result := True;
+    result := False;
 end;
 
 procedure TGLLightFX.SortLights(list: TPersistentObjectList);
@@ -149,48 +159,60 @@ var
 begin
   ownerObj := OwnerBaseSceneObject();
   lights := ownerObj.Scene.Lights;
-  numLights := Min(lights.Count, 2); // 8
+  numLights := Min(lights.Count, 8);
 
   if Assigned(lights) then
     if lights.Count > 1 then
       SortLights(lights);
-
-  glPushAttrib(GL_ALL_ATTRIB_BITS);
-
+      
   glPushMatrix;
   // revert to the base model matrix
   glLoadMatrixf(@ownerObj.Scene.CurrentBuffer.ModelViewMatrix);
-
-  glDisable(GL_CULL_FACE);
-  glDisable(GL_TEXTURE_2D);
-  glDisable(GL_LIGHTING);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-  glEnable(GL_BLEND);
-  glDepthFunc(GL_LEQUAL);
-  glPointSize(20.0);
 
   for i := 0 to numLights - 1 do begin
     lightSource := TGLLightSource(lights[i]);
     if Assigned(lightSource) then begin
       if lightSource.Shining then begin
-        // Draw light as point
-        glColor4f(lightSource.Diffuse.Red,
-                  lightSource.Diffuse.Green,
-                  lightSource.Diffuse.Blue,
-                  1.0);
-        glBegin(GL_POINTS);
-        lightAbsPos := lightSource.AbsolutePosition;
-        glVertex3fv(@lightAbsPos);
-        glEnd();
+        glPushMatrix;
 
-        // TODO: feed light to OpenGL
+        lightId := GL_LIGHT0+i;
+        glEnable(lightId);
+
+        if lightSource.LightStyle = lsParallel then begin
+          glMultMatrixf(PGLFloat(lightSource.AbsoluteMatrixAsAddress));
+          glLightfv(lightId, GL_POSITION, lightSource.SpotDirection.AsAddress)
+        end else begin
+          glMultMatrixf(PGLFloat(lightSource.Parent.AbsoluteMatrixAsAddress));
+          glLightfv(lightId, GL_POSITION, lightSource.Position.AsAddress);
+        end;
+
+        glLightfv(lightId, GL_AMBIENT,  lightSource.Ambient.AsAddress);
+        glLightfv(lightId, GL_DIFFUSE,  lightSource.Diffuse.AsAddress);
+        glLightfv(lightId, GL_SPECULAR, lightSource.Specular.AsAddress);
+
+        if lightSource.LightStyle = lsSpot then begin
+          if lightSource.SpotCutOff <> 180 then begin
+            glLightfv(lightId, GL_SPOT_DIRECTION, lightSource.SpotDirection.AsAddress);
+            glLightfv(lightId, GL_SPOT_EXPONENT, @lightSource.SpotExponent);
+          end;
+          glLightfv(lightId, GL_SPOT_CUTOFF, @lightSource.SpotCutOff);
+        end else begin
+          glLightf(lightId, GL_SPOT_CUTOFF, 180);
+        end;
+
+        glLightfv(lightId, GL_CONSTANT_ATTENUATION, @lightSource.ConstAttenuation);
+        glLightfv(lightId, GL_LINEAR_ATTENUATION, @lightSource.LinearAttenuation);
+        glLightfv(lightId, GL_QUADRATIC_ATTENUATION, @lightSource.QuadraticAttenuation);
+
+        glPopMatrix;
       end;
     end;
   end;
 
-  glDepthFunc(GL_LESS);
   glPopMatrix;
-  glPopAttrib;
+
+  for i := numLights to 7 do
+    glDisable(GL_LIGHT0+i);
 end;
 
 initialization

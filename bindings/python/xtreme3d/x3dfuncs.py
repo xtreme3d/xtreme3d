@@ -188,6 +188,13 @@ def LightSetStyle(aLight, aLs):
     return x3d.LightSetStyle(aLight, aLs)
 
 
+# lightfx.pas
+x3d.LightFXCreate.argtypes = [ctypes.c_double]
+x3d.LightFXCreate.restype = ctypes.c_double
+def LightFXCreate(aObj):
+    return x3d.LightFXCreate(aObj)
+    
+
 # objecthash.pas
 x3d.ObjectHashCreate.argtypes = []
 x3d.ObjectHashCreate.restype = ctypes.c_double
@@ -519,7 +526,16 @@ x3d.EngineRootObject.argtypes = []
 x3d.EngineRootObject.restype = ctypes.c_double
 def EngineRootObject():
     return x3d.EngineRootObject()
+    
+x3d.EngineShowLoadingErrors.argtypes = [ctypes.c_double]
+x3d.EngineShowLoadingErrors.restype = ctypes.c_double
+def EngineShowLoadingErrors(aMode):
+    return x3d.EngineShowLoadingErrors(aMode)
 
+x3d.EngineSetMaxLights.argtypes = [ctypes.c_double]
+x3d.EngineSetMaxLights.restype = ctypes.c_double
+def EngineSetMaxLights(aLights):
+    return x3d.EngineSetMaxLights(aLights)
 
 # ode.pas
 x3d.OdeManagerCreate.argtypes = []
@@ -1723,6 +1739,11 @@ x3d.ObjectSetScale.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double
 x3d.ObjectSetScale.restype = ctypes.c_double
 def ObjectSetScale(aObj, aX, aY, aZ):
     return x3d.ObjectSetScale(aObj, aX, aY, aZ)
+    
+x3d.ObjectGetScale.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ObjectGetScale.restype = ctypes.c_double
+def ObjectGetScale(aObj, aInd):
+    return x3d.ObjectGetScale(aObj, aInd)
 
 x3d.ObjectSetUpVector.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ObjectSetUpVector.restype = ctypes.c_double
