@@ -6,7 +6,7 @@ Original Xtreme3D was a closed-source project, and it was abandoned by the autho
 
 The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. The code is compatible with Delphi 7 and higher.
 
-Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python) and [D language](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) bindings which are automatically generated from engines's source code.
+Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python) and [D language](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) bindings which are automatically generated from engine's source code.
 
 Visit Xtreme3D site at [http://xtreme3d.tk](http://xtreme3d.tk).
 
