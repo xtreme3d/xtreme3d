@@ -17,7 +17,8 @@ end;
 
 function ObjectDestroy(obj: real): real; stdcall;
 begin
-    TGLBaseSceneObject(trunc64(obj)).Free;
+    //TGLBaseSceneObject(trunc64(obj)).Free;
+    TObject(trunc64(obj)).Free;
     result:=1;
 end;
 
