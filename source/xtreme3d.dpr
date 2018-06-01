@@ -18,7 +18,8 @@ uses
   GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx, Keyboard, Forms;
+  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx,
+  Keyboard, Forms, Kraft, GLKraft;
 
 type
    TEmpty = class(TComponent)
@@ -43,6 +44,9 @@ var
   ode: TGLODEManager;
   odeRagdollWorld: TODERagdollWorld;
   jointList: TGLODEJointList;
+
+  kraftRaycastPoint: TKraftVector3;
+  kraftRaycastNormal: TKraftVector3;
 
 {$R *.res}
 
@@ -280,6 +284,266 @@ end;
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
 {$I 'xtreme3d/color'}
+
+function KraftCreate: real; stdcall;
+var
+  kraft: TKraft;
+begin
+  kraft := TKraft.Create(-1);
+  kraft.SetFrequency(60.0);
+  kraft.VelocityIterations := 8;
+  kraft.PositionIterations := 3;
+  kraft.SpeculativeIterations := 8;
+  kraft.TimeOfImpactIterations := 20;
+  kraft.Gravity.y := -9.81;
+  Result := Integer(kraft);
+end;
+
+function KraftStep(kr, dt: real): real; stdcall;
+var
+  kraft: TKraft;
+begin
+  kraft := TKraft(trunc64(kr));
+  kraft.Step(dt);
+  Result := 1.0;
+end;
+
+function KraftGetRayHitPosition(index: real): real; stdcall;
+begin
+  Result := kraftRaycastPoint.xyzw[trunc64(index)];
+end;
+
+function KraftGetRayHitNormal(index: real): real; stdcall;
+begin
+  Result := kraftRaycastNormal.xyzw[trunc64(index)];
+end;
+
+function KraftCreateRigidBody(kr, typ: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  rbt: TKraftRigidBodyType;
+begin
+  rb := TKraftRigidBody.Create(TKraft(trunc64(kr)));
+       if typ = 0 then rbt := krbtUnknown
+  else if typ = 1 then rbt := krbtStatic
+  else if typ = 2 then rbt := krbtDynamic
+  else if typ = 3 then rbt := krbtKinematic;
+  rb.SetRigidBodyType(rbt);
+  rb.SetToAwake;
+  Result := Integer(rb);
+end;
+
+function KraftRigidBodyFinish(krb: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.Finish;
+  Result := 1.0;
+end;
+
+function KraftRigidBodySetGravity(krb, x, y, z, scale: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.Gravity.x := x;
+  rb.Gravity.y := y;
+  rb.Gravity.z := z;
+  rb.GravityScale := scale;
+  Result := 1.0;
+end;
+
+function KraftRigidBodySetPosition(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.SetWorldPosition(Vector3(x, y, z));
+  rb.SetToAwake;
+  Result := 1.0;
+end;
+
+function KraftRigidBodyGetPosition(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector4;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  //rb.SynchronizeTransform;
+  v := Matrix4x4GetColumn(rb.WorldTransform, 3);
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftRigidBodySetLinearVelocity(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.LinearVelocity := Vector3(x, y, z);
+  rb.SetToAwake;
+  Result := 1.0;
+end;
+
+function KraftRigidBodyGetLinearVelocity(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector3;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  v := rb.LinearVelocity;
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftRigidBodySetRotation(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.SetOrientation(x, y, z);
+  rb.SetToAwake;
+  Result := 1.0;
+end;
+
+function KraftRigidBodySetAngularVelocity(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.AngularVelocity := Vector3(x, y, z);
+  rb.SetToAwake;
+  Result := 1.0;
+end;
+
+function KraftRayCast(kr, x, y, z, dx, dy, dz, maxTime: real): real; stdcall;
+var
+  kraft: TKraft;
+  s: TKraftShape;
+  t: TKraftScalar;
+  r: Boolean;
+begin
+  kraft := TKraft(trunc64(kr));
+  r := kraft.RayCast(Vector3(x, y, z), Vector3(dx, dy, dz), maxTime, s, t, kraftRaycastPoint, kraftRaycastNormal);
+  Result := Integer(r);
+end;
+
+function KraftObjectSetRigidBody(obj, krb: real): real; stdcall;
+var
+  ob: TGLBaseSceneObject;
+  rb: TKraftRigidBody;
+  glkrb: TGLKraftRigidBody;
+begin
+  ob := TGLBaseSceneObject(trunc64(obj));
+  rb := TKraftRigidBody(trunc64(krb));
+  glkrb := GetOrCreateKraftRigidBody(ob);
+  glkrb.RigidBody := rb;
+  Result := Integer(glkrb);
+end; 
+
+function KraftCreateShapeSphere(rbody, radius: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  ss: TKraftShapeSphere;
+begin
+  rb := TKraftRigidBody(trunc64(rbody));
+  ss := TKraftShapeSphere.Create(rb.Physics, rb, radius);
+  Result := Integer(ss);
+end;
+
+function KraftCreateShapeBox(rbody, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  sb: TKraftShapeBox;
+begin
+  rb := TKraftRigidBody(trunc64(rbody));
+  sb := TKraftShapeBox.Create(rb.Physics, rb, Vector3(x, y, z));
+  Result := Integer(sb);
+end;
+
+function KraftCreateShapePlane(rbody, x, y, z, d: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  sp: TKraftShapePlane;
+begin
+  rb := TKraftRigidBody(trunc64(rbody));
+  sp := TKraftShapePlane.Create(rb.Physics, rb, Plane(Vector3(x, y, z), d));
+  Result := Integer(sp);
+end;
+
+function KraftCreateShapeCapsule(rbody, radius, height: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  sc: TKraftShapeCapsule;
+begin
+  rb := TKraftRigidBody(trunc64(rbody));
+  sc := TKraftShapeCapsule.Create(rb.Physics, rb, radius, height);
+  Result := Integer(sc);
+end;
+
+function KraftShapeSetDensity(shape, density: real): real; stdcall;
+var
+  s: TKraftShape;
+begin
+  s := TKraftShape(trunc64(shape));
+  s.Density := density;
+  Result := 1.0;
+end;
+
+function KraftShapeSetFriction(shape, friction: real): real; stdcall;
+var
+  s: TKraftShape;
+begin
+  s := TKraftShape(trunc64(shape));
+  s.Friction := friction;
+  Result := 1.0;
+end;
+
+function KraftShapeSetRestitution(shape, rest: real): real; stdcall;
+var
+  s: TKraftShape;
+begin
+  s := TKraftShape(trunc64(shape));
+  s.Restitution := rest;
+  Result := 1.0;
+end;
+
+function KraftShapeSetPosition(shape, x, y, z: real): real; stdcall;
+var
+  s: TKraftShape;
+  m: TKraftMatrix4x4;
+  v: TKraftVector4;
+begin
+  s := TKraftShape(trunc64(shape));
+  m := s.LocalTransform;
+  v := Matrix4x4GetColumn(m, 3);
+  v.x := x;
+  v.y := y;
+  v.z := z;
+  Matrix4x4SetColumn(m, 3, v);
+  s.LocalTransform := m;
+  Result := 1.0;
+end;
+
+function KraftShapeGetPosition(shape, index: real): real; stdcall;
+var
+  s: TKraftShape;
+  m: TKraftMatrix4x4;
+  v: TKraftVector4;
+begin
+  s := TKraftShape(trunc64(shape));
+  m := s.LocalTransform;
+  v := Matrix4x4GetColumn(m, 3);
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftShapeSetRayCastable(shape, mode: real): real; stdcall;
+var
+  s: TKraftShape;
+begin
+  s := TKraftShape(trunc64(shape));
+  s.RayCastable := Boolean(trunc64(mode));
+  Result := 1.0;
+end;
 
 exports
 
@@ -658,12 +922,22 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 MakeColorRGB, MakeColorRGBFloat,
 // Window
 WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
-WindowCenter, WindowResize, WindowGetPosition, WindowGetSize;
-// Squall
-//SquallInit, SquallAddSound, SquallPlay, SquallStop,
-// Lua
-//LuaManagerCreate, LuaManagerSetConstantReal, LuaManagerSetConstantString,
-//LuaManagerRunScript, LuaManagerCallFunction;
+WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
+
+// Kraft
+KraftCreate, KraftStep,
+KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+KraftCreateRigidBody, KraftRigidBodyFinish,
+KraftRigidBodySetGravity,
+KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
+KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
+KraftRigidBodySetAngularVelocity,
+KraftRigidBodySetRotation,
+KraftObjectSetRigidBody,
+KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
+KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
+KraftShapeSetPosition, KraftShapeGetPosition,
+KraftShapeSetRayCastable;
 
 begin
 end.
