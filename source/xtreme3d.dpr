@@ -237,6 +237,10 @@ begin
   result := res;
 end;
 
+procedure onContactStay(const ContactPair: PKraftContactPair; const WithShape: TKraftShape);
+begin
+end;
+
 {$I 'xtreme3d/engine'}
 {$I 'xtreme3d/viewer'}
 {$I 'xtreme3d/dummycube'}
@@ -427,6 +431,19 @@ begin
   Result := Integer(r);
 end;
 
+function KraftPushSphere(kr, x, y, z, radius: real): real; stdcall;
+var
+  kraft: TKraft;
+  c: TKraftVector3;
+  r: Boolean;
+begin
+  kraft := TKraft(trunc64(kr));
+  c := Vector3(x, y, z);
+  r := kraft.PushSphere(c, radius);
+  kraftRaycastPoint := c;
+  Result := Integer(r);
+end;
+
 function KraftObjectSetRigidBody(obj, krb: real): real; stdcall;
 var
   ob: TGLBaseSceneObject;
@@ -541,7 +558,19 @@ var
   s: TKraftShape;
 begin
   s := TKraftShape(trunc64(shape));
-  s.RayCastable := Boolean(trunc64(mode));
+  if not Boolean(trunc64(mode)) then
+    s.Flags := s.Flags - [ksfRayCastable]
+  else
+    s.Flags := s.Flags + [ksfRayCastable];
+  Result := 1.0;
+end;
+
+function KraftShapeSetSensor(shape, mode: real): real; stdcall;
+var
+  s: TKraftShape;
+begin
+  s := TKraftShape(trunc64(shape));
+  s.Flags := s.Flags + [ksfSensor];
   Result := 1.0;
 end;
 
@@ -926,7 +955,7 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 
 // Kraft
 KraftCreate, KraftStep,
-KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal, KraftPushSphere,
 KraftCreateRigidBody, KraftRigidBodyFinish,
 KraftRigidBodySetGravity,
 KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
