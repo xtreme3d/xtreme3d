@@ -53,6 +53,7 @@
 <A class=funclink href=funclist.htm#FBO>FBO</A><A> | </A>
 <A class=funclink href=funclist.htm#ShadowMap>ShadowMap</A><A> | </A>
 <A class=funclink href=funclist.htm#ODE>ODE</A><A> | </A>
+<A class=funclink href=funclist.htm#Kraft>Kraft</A><A> | </A>
 <A class=funclink href=funclist.htm#ObjectHash>ObjectHash</A><A> | </A>
 <A class=funclink href=funclist.htm#Text>Text</A> |
 <A class=funclink href=funclist.htm#Color>Color</A> |
@@ -71,6 +72,8 @@
 <BR><A class=funclink href=engine.htm#EngineSaveScene>EngineSaveScene</A><A>(filename)</A>
 <BR><A class=funclink href=engine.htm#EngineLoadScene>EngineLoadScene</A><A>(filename)</A>
 <BR><A class=funclink href=engine.htm#EngineRootObject>EngineRootObject</A><A>()</A>
+<BR><A class=funclink href=engine.htm#EngineShowLoadingErrors>EngineShowLoadingErrors</A><A>(mode)</A>
+<BR><A class=funclink href=engine.htm#EngineSetMaxLights>EngineSetMaxLights</A><A>(lights)</A>
 <BR>
 <BR>
 <A name="Viewer"></A>
@@ -168,6 +171,7 @@
 <BR><A class=funclink href=light.htm#LightSetSpotExponent>LightSetSpotExponent</A><A>(light,exponent)</A>
 <BR><A class=funclink href=light.htm#LightSetSpotDirection>LightSetSpotDirection</A><A>(light,x,y,z)</A>
 <BR><A class=funclink href=light.htm#LightSetStyle>LightSetStyle</A><A>(light,ls)</A>
+<BR><A class=funclink href=light.htm#LightFXCreate>LightFXCreate</A><A>(obj)</A>
 <BR>
 <BR>
 <!--
@@ -1137,6 +1141,36 @@
 <BR><A class=funclink href=ode.htm#OdeRagdollBuild>OdeRagdollBuild</A><A>(ragdoll)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollEnable>OdeRagdollEnable</A><A>(ragdoll,mode)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollUpdate>OdeRagdollUpdate</A><A>(ragdoll)</A>
+
+<BR>
+<BR>
+<A name="Kraft"></A>
+<H1 class=name>Kraft</H1>
+<A class=funclink href=kraft.htm#KraftCreate>KraftCreate()</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftStep(kraft,dt)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRayCast(kraft,x,y,z,dx,dy,dz,maxTime)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftGetRayHitPosition(index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftGetRayHitNormal(index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateRigidBody(kraft,krbt)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyFinish(body)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetGravity(body,x,y,z,scale)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetPosition(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyGetPosition(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetRotation(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetLinearVelocity(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyGetLinearVelocity(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetAngularVelocity(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftObjectSetRigidBody(obj,body)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeSphere(body,radius)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeBox(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapePlane(body,x,y,z,d)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeCapsule(body,radius,height)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetDensity(shape,density)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetFriction(shape,friction)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetRestitution(shape,restitution)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetPosition(shape,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeGetPosition(shape,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetRayCastable(shape,mode)</A>
 
 <BR>
 <BR>

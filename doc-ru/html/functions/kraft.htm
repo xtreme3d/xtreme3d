@@ -1,0 +1,227 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Kraft</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Kraft</H1>
+
+<A class=type>Класс: TKraft, TKraftRigidBody, TKraftShape</A><BR><BR>
+
+<A>Функции физического движка Kraft. Это альтернатива ODE, впервые появившаяся в Xtreme3D 3.7 - современный физический движок, лишенный многих недостатков ODE, более простой и интуитивный. Для его использования вам не понадобятся дополнительные DLL, поскольку он встроен в xtreme3d.dll. Функционально он близок к ODE, хотя и имеет свои ограничения - например, в нем пока нет поддержки цилиндров и объектов Terrain.
+<BR/>Kraft разработан Benjamin Rosseaux aka BeRo.
+</A>
+<HR>
+
+<A name="KraftCreate"></A>
+<H1 class=name>KraftCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreate</A><A>( );</A>
+<BR><A>Создает физический мир Kraft и возвращает его id. Миры предназначены для разделения всей игровой физики на отдельные, не связанные между собой "параллельные пространства". Все остальные объекты Kraft (твердые тела, геометрические формы и т.д.) создаются в рамках того или иного мира.</A>
+<HR>
+
+<A name="KraftStep"></A>
+<H1 class=name>KraftStep</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftStep</A><A>( kraft,dt as </A><A class=type>real</A><A> );</A>
+<BR><A>Совершает шаг интегрирования для мира. Эта процедура обновляет состояния тел, обнаруживает столкновения между ними и рассчитывает реакцию на столкновения. Ее следует вызывать в главном игровом цикле, перед функцией <A class=funclink href=../functions/engine.htm#Update>Update</A>.</A>
+<BR><A>kraft - id мира</A>
+<BR><A>dt - шаг времени в секундах. При помощи этого параметра интегрируются ускорения и скорости тел. Обычно это время, прошедшее с момента прерыдущего обновления. Рекомендуется использовать шаг, равный 1/60 с (учитывая, что игра работает при 60 FPS).</A>
+<HR>
+
+<A name="KraftRayCast"></A>
+<H1 class=name>KraftRayCast</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRayCast</A><A>( kraft,x,y,z,dx,dy,dz,maxDistance as </A><A class=type>real</A><A> );</A>
+<BR><A>Проверяет все тела мира на пересечение с заданным лучом. Возвращает <A class=constant>true</A>, если найдено пересечение, и <A class=constant>false</A> в противном случае.</A>
+<BR><A>kraft - id мира</A>
+<BR><A>x,y,z - точка начала луча</A>
+<BR><A>dx,dy,dz - вектор направления луча</A>
+<BR><A>maxDistance - максимальное расстояние луча (все тела, находящиеся дальше этого расстояния, не подлежат проверке).</A>
+<HR>
+
+<A name="KraftGetRayHitPosition"></A>
+<H1 class=name>KraftGetRayHitPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftGetRayHitPosition</A><A>( index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает точку ближайшего пересечения, обнаруженного последним вызовом функции <A class=funclink href=../functions/kraft.htm#KraftRayCast>KraftRayCast</A>.</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftGetRayHitNormal"></A>
+<H1 class=name>KraftGetRayHitNormal</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftGetRayHitNormal</A><A>( index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает нормаль поверхности в точке ближайшего пересечения, обнаруженного последним вызовом функции <A class=funclink href=../functions/kraft.htm#KraftRayCast>KraftRayCast</A>.</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftCreateRigidBody"></A>
+<H1 class=name>KraftCreateRigidBody</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateRigidBody</A><A>( kr,krbt as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает твердое тело и возвращает его id.</A>
+<BR><A>kraft - id мира</A>
+<BR><A>krbt - тип тела. Доступны следующие значения krbt:</A>
+<BR><A class=constant name="krbtUnknown">krbtUnknown</A> = 0 - неизвестный тип;
+<BR><A class=constant name="krbtStatic">krbtStatic</A> = 1 - статическое тело (всегда имеет нулевую скорость, не реагирует на столкновения);
+<BR><A class=constant name="krbtDynamic">krbtDynamic</A> = 2 - динамическое тело (может иметь ненулевую скорость, реагирует на столкновения);
+<BR><A class=constant name="krbtKinematic">krbtKinematic</A> = 3 - кинематическое тело (может иметь ненулевую скорость, не реагирует на столкновения).
+<HR>
+
+<A name="KraftRigidBodyFinish"></A>
+<H1 class=name>KraftRigidBodyFinish</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyFinish</A><A>( body as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела.</A>
+<HR>
+
+<A name="KraftRigidBodySetGravity"></A>
+<H1 class=name>KraftRigidBodySetGravity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetGravity</A><A>( body,x,y,z,scale as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют</A>
+<BR><A>scale - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftRigidBodySetPosition"></A>
+<H1 class=name>KraftRigidBodySetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetPosition</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftRigidBodyGetPosition"></A>
+<H1 class=name>KraftRigidBodyGetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetPosition</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftRigidBodySetRotation"></A>
+<H1 class=name>KraftRigidBodySetRotation</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetRotation</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftRigidBodySetLinearVelocity"></A>
+<H1 class=name>KraftRigidBodySetLinearVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetLinearVelocity</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftRigidBodyGetLinearVelocity"></A>
+<H1 class=name>KraftRigidBodyGetLinearVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetLinearVelocity</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftRigidBodySetAngularVelocity"></A>
+<H1 class=name>KraftRigidBodySetAngularVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetAngularVelocity</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftObjectSetRigidBody"></A>
+<H1 class=name>KraftObjectSetRigidBody</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftObjectSetRigidBody</A><A>( obj,body as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>obj - id объекта</A>
+<BR><A>body - id тела.</A>
+<HR>
+
+<A name="KraftCreateShapeSphere"></A>
+<H1 class=name>KraftCreateShapeSphere</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateShapeSphere</A><A>( body,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>radius - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftCreateShapeBox"></A>
+<H1 class=name>KraftCreateShapeBox</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateShapeBox</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftCreateShapePlane"></A>
+<H1 class=name>KraftCreateShapePlane</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateShapePlane</A><A>( body,x,y,z,d as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сведения отсутствуют</A>
+<BR><A>d - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftCreateShapeCapsule"></A>
+<H1 class=name>KraftCreateShapeCapsule</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateShapeCapsule</A><A>( body,radius,height as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>body - id тела</A>
+<BR><A>radius - сведения отсутствуют</A>
+<BR><A>height - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeSetDensity"></A>
+<H1 class=name>KraftShapeSetDensity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeSetDensity</A><A>( shape,density as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>density - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeSetFriction"></A>
+<H1 class=name>KraftShapeSetFriction</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeSetFriction</A><A>( shape,friction as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>friction - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeSetRestitution"></A>
+<H1 class=name>KraftShapeSetRestitution</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeSetRestitution</A><A>( shape,restitution as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>restitution - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeSetPosition"></A>
+<H1 class=name>KraftShapeSetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeSetPosition</A><A>( shape,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>x,y,z - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeGetPosition"></A>
+<H1 class=name>KraftShapeGetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeGetPosition</A><A>( shape,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>index - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftShapeSetRayCastable"></A>
+<H1 class=name>KraftShapeSetRayCastable</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftShapeSetRayCastable</A><A>( shape,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>shape - id формы</A>
+<BR><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>
