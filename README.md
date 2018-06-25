@@ -51,7 +51,8 @@ Features
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
 * Raycasting
 * Built-in game-oriented collision systems (DCE, FPSManager)
-* Rigid body physics using ODE engine
+* Integrated rigid body physics using ODE engine
+* Work-in-progress Kraft physics engine integration
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from GLScene PAK archives
@@ -76,3 +77,5 @@ Xtreme3D 3.x and corresponding GLScene fork are both distributed under Mozilla P
 ODE is distributed under BSD-style license.
 
 FreeType is distributed under FreeType License (FTL).
+
+Kraft is distributed under zlib license.
