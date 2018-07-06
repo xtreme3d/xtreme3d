@@ -374,7 +374,6 @@ var
   v: TKraftVector4;
 begin
   rb := TKraftRigidBody(trunc64(krb));
-  //rb.SynchronizeTransform;
   v := Matrix4x4GetColumn(rb.WorldTransform, 3);
   Result := v.xyzw[trunc64(index)];
 end;
@@ -409,6 +408,36 @@ begin
   Result := 1.0;
 end;
 
+function KraftRigidBodyGetDirection(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector4;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  v := Matrix4x4GetColumn(rb.WorldTransform, 2);
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftRigidBodyGetUp(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector4;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  v := Matrix4x4GetColumn(rb.WorldTransform, 1);
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftRigidBodyGetRight(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector4;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  v := Matrix4x4GetColumn(rb.WorldTransform, 0);
+  Result := v.xyzw[trunc64(index)];
+end;
+
 function KraftRigidBodySetAngularVelocity(krb, x, y, z: real): real; stdcall;
 var
   rb: TKraftRigidBody;
@@ -416,6 +445,43 @@ begin
   rb := TKraftRigidBody(trunc64(krb));
   rb.AngularVelocity := Vector3(x, y, z);
   rb.SetToAwake;
+  Result := 1.0;
+end;
+
+function KraftRigidBodyGetAngularVelocity(krb, index: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  v: TKraftVector3;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  v := rb.AngularVelocity;
+  Result := v.xyzw[trunc64(index)];
+end;
+
+function KraftRigidBodyAddForce(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.AddWorldForce(Vector3(x, y, z));
+  Result := 1.0;
+end;
+
+function KraftRigidBodyAddForceAtPos(krb, x, y, z, px, py, pz: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.AddForceAtPosition(Vector3(x, y, z), Vector3(px, py, pz));
+  Result := 1.0;
+end;
+
+function KraftRigidBodyAddRelForce(krb, x, y, z: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+begin
+  rb := TKraftRigidBody(trunc64(krb));
+  rb.AddBodyForce(Vector3(x, y, z));
   Result := 1.0;
 end;
 
@@ -428,19 +494,6 @@ var
 begin
   kraft := TKraft(trunc64(kr));
   r := kraft.RayCast(Vector3(x, y, z), Vector3(dx, dy, dz), maxTime, s, t, kraftRaycastPoint, kraftRaycastNormal);
-  Result := Integer(r);
-end;
-
-function KraftPushSphere(kr, x, y, z, radius: real): real; stdcall;
-var
-  kraft: TKraft;
-  c: TKraftVector3;
-  r: Boolean;
-begin
-  kraft := TKraft(trunc64(kr));
-  c := Vector3(x, y, z);
-  r := kraft.PushSphere(c, radius);
-  kraftRaycastPoint := c;
   Result := Integer(r);
 end;
 
@@ -955,13 +1008,15 @@ OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 
 // Kraft
 KraftCreate, KraftStep,
-KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal, KraftPushSphere,
+KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal, 
 KraftCreateRigidBody, KraftRigidBodyFinish,
 KraftRigidBodySetGravity,
 KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
 KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
-KraftRigidBodySetAngularVelocity,
+KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
 KraftRigidBodySetRotation,
+KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
+KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
 KraftObjectSetRigidBody,
 KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
 KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
