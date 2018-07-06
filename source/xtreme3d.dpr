@@ -550,6 +550,60 @@ begin
   Result := Integer(sc);
 end;
 
+function KraftCreateShapeMesh(rbody, ff: real): real; stdcall;
+var
+  rb: TKraftRigidBody;
+  mesh: TKraftMesh;
+  sm: TKraftShapeMesh;
+  freeform: TGLFreeForm;
+  glsmesh: TMeshObject;
+  mi, vi, fgi, ii: Integer;
+  vi1, vi2, vi3: Integer;
+  vec1, vec2, vec3: TAffineVector;
+  nor1, nor2, nor3: TAffineVector; 
+  fg: TFGVertexIndexList;
+begin
+  rb := TKraftRigidBody(trunc64(rbody));
+  freeform := TGLFreeForm(trunc64(ff));
+  mesh := TKraftMesh.Create(rb.Physics);
+  for mi:=0 to freeform.MeshObjects.Count-1 do begin
+    glsmesh := freeform.MeshObjects[mi];
+
+    for fgi:=0 to glsmesh.FaceGroups.Count-1 do begin
+      fg := TFGVertexIndexList(glsmesh.FaceGroups[fgi]);
+
+      for ii:=0 to fg.TriangleCount - 1 do begin
+        vi1 := fg.VertexIndices[ii * 3 + 0];
+        vi2 := fg.VertexIndices[ii * 3 + 1];
+        vi3 := fg.VertexIndices[ii * 3 + 2];
+
+        vec1 := glsmesh.Vertices[vi1];
+        vec2 := glsmesh.Vertices[vi2];
+        vec3 := glsmesh.Vertices[vi3];
+
+        nor1 := glsmesh.Normals[vi1];
+        nor2 := glsmesh.Normals[vi2];
+        nor3 := glsmesh.Normals[vi3];
+
+        mesh.AddTriangle(
+          mesh.AddVertex(Vector3(vec1[0], vec1[1], vec1[2])),
+          mesh.AddVertex(Vector3(vec2[0], vec2[1], vec2[2])),
+          mesh.AddVertex(Vector3(vec3[0], vec3[1], vec3[2])),
+          mesh.AddNormal(Vector3(nor1[0], nor1[1], nor1[2])),
+          mesh.AddNormal(Vector3(nor2[0], nor2[1], nor2[2])),
+          mesh.AddNormal(Vector3(nor3[0], nor3[1], nor3[2])));
+      end;
+    end;
+  end;
+
+  mesh.Scale(Vector3(freeform.Scale.x, freeform.Scale.y, freeform.Scale.z));
+  mesh.DoubleSided := True;
+  mesh.Finish;
+  sm := TKraftShapeMesh.Create(rb.Physics, rb, mesh);
+  sm.Finish;
+  Result := Integer(sm);
+end;
+
 function KraftShapeSetDensity(shape, density: real): real; stdcall;
 var
   s: TKraftShape;
@@ -1019,6 +1073,7 @@ KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
 KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
 KraftObjectSetRigidBody,
 KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
+KraftCreateShapeMesh,
 KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
 KraftShapeSetPosition, KraftShapeGetPosition,
 KraftShapeSetRayCastable;
