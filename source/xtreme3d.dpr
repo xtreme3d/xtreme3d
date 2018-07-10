@@ -19,7 +19,7 @@ uses
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
   GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx,
-  Keyboard, Forms, Kraft, GLKraft;
+  Keyboard, Forms, Kraft, GLKraft, GLFileFBX;
 
 type
    TEmpty = class(TComponent)

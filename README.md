@@ -28,7 +28,7 @@ Features
 * Built-in easy to use shaders, including cel shader, bump/parallax shader, phong shader, multimaterial shader, etc.
 * Multitexturing. Materials can have up to 8 texture slots accessible from shaders. Fixed-pipeline multipass multitexturing is also supported
 * Popular image formats support for textures (BMP, JPG, PNG, TGA, DDS)
-* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD and many other)
+* Various 3D model formats support (3DS, OBJ, LWO, B3D, MD2, MD3, MD5, SMD, FBX and many other)
 * Procedural mesh construction from vertex/normal/texcoord/index lists - you are free to design your own model format
 * Model animation, per-vertex and skeletal
 * Lightmapping and dynamic lighting
