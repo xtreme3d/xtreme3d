@@ -4,7 +4,7 @@ Xtreme3D is a 3D graphics engine for Game Maker 8. It makes possible to create f
 
 Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began back in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
 
-The engine is written in Delphi and based on a modified version of GLScene 1.0.0.0714. The code is compatible with Delphi 7 and higher.
+The engine is written in Delphi and based on a modified version of [GLScene](https://sourceforge.net/projects/glscene) 1.0.0.0714. The code is compatible with Delphi 7 (and probably higher).
 
 Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python) and [D language](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) bindings which are automatically generated from engine's source code.
 
@@ -21,6 +21,8 @@ Screenshots
 
 Features
 --------
+* Extremely lightweight. It's just a DLL of 1.8 MB in size (plus three optional DLLs - ode.dll, freetype.dll, OpenFBX.dll)
+* Can be used with any language that supports DLLs and stdcall convension
 * Scene graph with object hierarchy/pivoting
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
@@ -52,7 +54,7 @@ Features
 * Raycasting
 * Built-in game-oriented collision systems (DCE, FPSManager)
 * Integrated rigid body physics using ODE engine
-* Work-in-progress Kraft physics engine integration
+* [Kraft](https://github.com/BeRo1985/kraft) physics engine integration
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
 * Loading resources from GLScene PAK archives
@@ -79,3 +81,5 @@ ODE is distributed under BSD-style license.
 FreeType is distributed under FreeType License (FTL).
 
 Kraft is distributed under zlib license.
+
+OpenFBX is distributed under MIT license.
