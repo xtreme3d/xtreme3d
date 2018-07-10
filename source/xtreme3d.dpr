@@ -298,6 +298,24 @@ begin
   result := 1.0;
 end;
 
+function ActorProxyObjectSetAnimationRange(proxy, startf, endf: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.SetAnimationRange(trunc64(startf), trunc64(endf));
+  result := 1.0;
+end;
+
+function ActorProxyObjectSetInterval(proxy, interval: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.Interval := trunc64(interval);
+  result := 1.0;
+end;
+
 function WindowIsShowing(w: real): real; stdcall;
 var
   frm: TForm;
@@ -1021,6 +1039,7 @@ PartitionResultShow, PartitionResultHide,
 ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
 MultiProxyObjectCreate, MultiProxyObjectAddTarget,
 ActorProxyObjectCreate, ActorProxyObjectSwitchToAnimation,
+ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
 //Text
 TextRead, TextConvertANSIToUTF8,
 //ObjectHash

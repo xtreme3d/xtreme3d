@@ -50,6 +50,8 @@ type
     FOnBeforeRender: TGLProgressEvent;
     FAnimationMode: TGLActorProxyAnimationMode;
 
+    FInterval: Integer;
+
     procedure SetAnimation(const Value: TActorAnimationName);
     procedure SetMasterActorObject(const Value: TGLActor);
     function GetMasterActorObject: TGLActor;
@@ -84,6 +86,7 @@ type
     procedure BoneMatricesClear;
 
     procedure SwitchToAnimation(animationIndex : Integer);
+    procedure SetAnimationRange(startIndex, endIndex : Integer);
 
     {: A standard version of the RayCastIntersect function. }
     function RayCastIntersect(const rayStart, rayVector : TVector;
@@ -124,6 +127,8 @@ type
     {: Event allowing to apply extra transformations (f.ex: bone rotations) to the referenced
        Actor on order to have the proxy render these changes.  }
     property OnBeforeRender : TGLProgressEvent read FOnBeforeRender write SetOnBeforeRender;
+
+    property Interval : Integer read FInterval write FInterval;
   end;
 
 //-------------------------------------------------------------
@@ -177,6 +182,7 @@ begin
   FBonesMatrices:=TStringList.create;
   FStoredBoneNames:=TStringList.create;
   FStoreBonesMatrix:=false; // default is false to speed up a little if we don't need bones info
+  FInterval:=100;
 end;
 
 // DoProgress
@@ -192,7 +198,8 @@ end;
 procedure TGLActorProxy.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited;
-  FCurrentTime := progressTime;
+  FCurrentTime := progressTime;  
+  //FCurrentFrameDelta := FCurrentFrameDelta + (progressTime.deltaTime * 1000) / FInterval;
 end;
 
 // DoRender
@@ -203,6 +210,7 @@ var
   // TGLActorProxy specific
   cf, sf, ef: Integer;
   cfd: Single;
+  ival: Integer;
   // General proxy stuff.
   gotMaster, masterGotEffects, oldProxySubObject: Boolean;
   MasterActor: TGLActor;
@@ -221,12 +229,11 @@ begin
           glMultMatrixf(PGLFloat(MasterActor.MatrixAsAddress));
 
         // At last TGLActorProxy specific stuff!
-        //with MasterActor do
-        //begin
           cfd := MasterActor.CurrentFrameDelta;
           cf := MasterActor.CurrentFrame;
           sf := MasterActor.startframe;
           ef := MasterActor.endframe;
+          ival := MasterActor.Interval;
 
           case FAnimationMode of
             pamInherited: MasterActor.CurrentFrameDelta := FCurrentFrameDelta;
@@ -246,6 +253,8 @@ begin
           end;
 
           MasterActor.CurrentFrameDelta := FCurrentFrameDelta;
+
+          MasterActor.Interval := FInterval;
 
           MasterActor.SetCurrentFrameDirect(FCurrentFrame);
           FLastFrame := FCurrentFrame;
@@ -269,14 +278,13 @@ begin
 
           FCurrentFrameDelta := MasterActor.CurrentFrameDelta;
           FCurrentFrame := MasterActor.CurrentFrame;
+
           MasterActor.CurrentFrameDelta := cfd;
           MasterActor.SetCurrentFrameDirect(cf);
           MasterActor.CurrentFrame := cf;
           MasterActor.startframe := sf;
           MasterActor.endframe := ef;
-
-          //MasterActor.StructureChanged;
-        //end;
+          MasterActor.Interval := ival;
 
         ARci.proxySubObject := oldProxySubObject;
       end;
@@ -500,6 +508,14 @@ begin
       FLastFrame := FCurrentFrame;
     end;
   end;
+end;
+
+procedure TGLActorProxy.SetAnimationRange(startIndex, endIndex : Integer);
+begin
+  FStartFrame := startIndex;
+  FEndFrame := endIndex;
+  //FCurrentFrame := FStartFrame;
+  //FLastFrame := FCurrentFrame;
 end;
 
 procedure TGLActorProxy.SetStoredBoneNames(const Value: TStrings);
