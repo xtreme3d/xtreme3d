@@ -154,14 +154,6 @@ begin
   result:=1;
 end;
 
-function ViewerGetFramesPerSecond(viewer:real):real; stdcall;
-var
-  fps: real;
-begin
-  fps:=TGLSceneViewer(trunc64(viewer)).FramesPerSecond;
-  result:=fps;
-end;
-
 function ViewerGetPickedObject(viewer,x,y:real):real; stdcall;
 var
   obj:TGLBaseSceneObject;
@@ -295,4 +287,14 @@ var
 begin
   v := TGLSceneViewer(trunc64(viewer));
   result := Integer(IsExtensionSupported(v, String(ext)));
+end;
+
+function ViewerGetFramesPerSecond(viewer: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+  fps: real;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  fps := v.FramesPerSecond;
+  result := fps;
 end;

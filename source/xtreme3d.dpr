@@ -289,6 +289,15 @@ end;
 {$I 'xtreme3d/window'}
 {$I 'xtreme3d/color'}
 
+function ViewerResetPerformanceMonitor(viewer: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  v.ResetPerformanceMonitor;
+  result := 1.0;
+end;
+
 function WindowIsShowing(w: real): real; stdcall;
 var
   frm: TForm;
@@ -724,6 +733,7 @@ ViewerSetOverrideMaterial,
 ViewerIsOpenGLExtensionSupported,
 ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
 ViewerGetSize, ViewerGetPosition,
+ViewerResetPerformanceMonitor,
 //Dummycube
 DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode, DummycubeSetVisible,
 DummycubeSetEdgeColor, DummycubeSetCubeSize,
