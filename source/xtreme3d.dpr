@@ -316,16 +316,51 @@ begin
   result := 1.0;
 end;
 
+function BmpHDSCreateEmpty(w, h: real): real; stdcall;
+var
+  bhds: TGLBitmapHDS;
+  bmp: TBitmap;
+  logpal: TMaxLogPalette;
+  b: integer; 
+begin
+  bhds := TGLBitmapHDS.Create(scene);
+  bmp := TBitmap.Create;
+  bmp.Width := trunc64(w);
+  bmp.Height := trunc64(h);
+  bmp.PixelFormat := pf8bit;
+  bmp.Transparent := false;
+  logpal.palVersion := $0300;
+  logpal.palNumEntries := 256;
+  for b := 0 to 255 do
+    with logpal.palPalEntry [b] do
+    begin
+      peBlue := b;
+      peGreen := b;
+      peRed := b;
+      peFlags := 0;
+    end;
+  bmp.Palette := CreatePalette(PLogPalette(@logpal)^);
+  bmp.Canvas.Brush.Color := RGB(128, 128, 128);
+  bmp.Canvas.FillRect(Rect(0, 0, bmp.Width, bmp.Height));
+  bhds.Picture.Bitmap.Assign(bmp);
+  bhds.MaxPoolSize := 8 * 1024 * 1024;
+  bhds.MarkDirty;
+  bmp.Free;
+  result := Integer(bhds);
+end;
+
 function BmpHDSSetHeight(hds, x, y, h: real): real; stdcall;
 var
   bhds: TGLBitmapHDS;
-  hb: Byte;
+  hb: Integer;
   color: TColor;
+  height: Single;
 begin
   bhds := TGLBitmapHDS(trunc64(hds));
-  if (h < 0) then h := 0;
-  if (h > 1) then h := 1;
-  hb := trunc64(h * 255.0);
+  height := h;
+  if (height < 0) then height := 0;
+  if (height > 1) then height := 1;
+  hb := trunc64(height * 255.0);
   color := RGB(hb, hb, hb);
   bhds.Picture.Bitmap.Canvas.Pixels[trunc64(x), trunc64(y)] := color;
   bhds.MarkDirty;
@@ -900,7 +935,7 @@ FreeformGenTangents, FreeformBuildOctree,
 FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 //Terrain
-BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
+BmpHDSCreate, BmpHDSCreateEmpty, BmpHDSSetInfiniteWarp, BmpHDSInvert,
 BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
 TerrainSetQualityDistance, TerrainSetQualityStyle, TerrainSetMaxCLodTriangles,
