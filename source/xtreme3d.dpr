@@ -316,12 +316,13 @@ begin
   result := 1.0;
 end;
 
-function BmpHDSCreateEmpty(w, h: real): real; stdcall;
+function BmpHDSCreateEmpty(w, h, fill: real): real; stdcall;
 var
   bhds: TGLBitmapHDS;
   bmp: TBitmap;
   logpal: TMaxLogPalette;
-  b: integer; 
+  b: integer;
+  hb: Integer; 
 begin
   bhds := TGLBitmapHDS.Create(scene);
   bmp := TBitmap.Create;
@@ -340,7 +341,8 @@ begin
       peFlags := 0;
     end;
   bmp.Palette := CreatePalette(PLogPalette(@logpal)^);
-  bmp.Canvas.Brush.Color := RGB(128, 128, 128);
+  hb := trunc64(fill * 255.0);
+  bmp.Canvas.Brush.Color := RGB(hb, hb, hb);
   bmp.Canvas.FillRect(Rect(0, 0, bmp.Width, bmp.Height));
   bhds.Picture.Bitmap.Assign(bmp);
   bhds.MaxPoolSize := 8 * 1024 * 1024;
