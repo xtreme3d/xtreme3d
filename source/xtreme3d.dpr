@@ -19,7 +19,7 @@ uses
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
   GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx,
-  Keyboard, Forms, Kraft, GLKraft, GLFileFBX;
+  Keyboard, Forms, Kraft, GLKraft, GLFileFBX, GLCrossPlatform;
 
 type
    TEmpty = class(TComponent)
@@ -314,6 +314,61 @@ begin
   p := TGLActorProxy(trunc64(proxy));
   p.Interval := trunc64(interval);
   result := 1.0;
+end;
+
+function BmpHDSSetHeight(hds, x, y, h: real): real; stdcall;
+var
+  bhds: TGLBitmapHDS;
+  hb: Byte;
+  color: TColor;
+begin
+  bhds := TGLBitmapHDS(trunc64(hds));
+  if (h < 0) then h := 0;
+  if (h > 1) then h := 1;
+  hb := trunc64(h * 255.0);
+  color := RGB(hb, hb, hb);
+  bhds.Picture.Bitmap.Canvas.Pixels[trunc64(x), trunc64(y)] := color;
+  bhds.MarkDirty;
+  result := 1.0;
+end;
+
+function BmpHDSGetHeight(hds, x, y: real): real; stdcall;
+var
+  bhds: TGLBitmapHDS;
+  color: TColor;
+begin
+  bhds := TGLBitmapHDS(trunc64(hds));
+  color := bhds.Picture.Bitmap.Canvas.Pixels[trunc64(x), trunc64(y)];
+  result := (color and 255) / 255.0;
+end;
+
+function BmpHDSSave(hds: real; filename: pchar): real; stdcall;
+var
+  bhds: TGLBitmapHDS;
+begin
+  bhds := TGLBitmapHDS(trunc64(hds));
+  bhds.Picture.SaveToFile(filename);
+  result := 1.0
+end;
+
+function TerrainGetHDSPosition(terrain, x, y, z, index: real): real; stdcall;
+var
+  terr: TGLTerrainRenderer;
+  bhds: TGLBitmapHDS;
+  p: TVector;
+  cx, cy: Integer;
+begin
+  terr := TGLTerrainRenderer(trunc64(terrain));
+  bhds := TGLBitmapHDS(terr.HeightDataSource);
+  p := terr.AbsoluteToLocal(VectorMake(x, y, z, 1.0));
+  cx := Round(p[0]);
+  cy := Round(p[1]);
+  if (cx > bhds.Picture.Width-1) then cx := bhds.Picture.Width-1;
+  if (cy > bhds.Picture.Height-1) then cy := bhds.Picture.Height-1;
+  if (cx < 0) then cx := 0;
+  if (cy < 0) then cy := 0;
+  if (index = 0) then Result := cx
+  else Result := cy;
 end;
 
 function WindowIsShowing(w: real): real; stdcall;
@@ -846,10 +901,12 @@ FreeformCreateExplosionFX, FreeformExplosionFXReset,
 FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
 //Terrain
 BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
+BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
 TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
 TerrainSetQualityDistance, TerrainSetQualityStyle, TerrainSetMaxCLodTriangles,
 TerrainSetCLodPrecision, TerrainSetOcclusionFrameSkip, TerrainSetOcclusionTesselate,
 TerrainGetHeightAtObjectPosition, TerrainGetLastTriCount,
+TerrainGetHDSPosition,
 //Object
 ObjectHide, ObjectShow, ObjectIsVisible,
 ObjectCopy, ObjectDestroy, ObjectDestroyChildren,
