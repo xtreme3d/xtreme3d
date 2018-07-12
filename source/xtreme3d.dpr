@@ -384,6 +384,28 @@ begin
   result := 1.0;
 end;
 
+function HUDSpriteGetMouseOver(sprite, viewer: real): real; stdcall;
+var
+  spr: TGLHUDSprite;
+  v: TGLSceneViewer;
+  spriteX, spriteY: single;
+  mouseInSprite: Boolean;
+  mouse: TPoint;
+begin
+  spr := TGLHUDSprite(trunc64(sprite));
+  v := TGLSceneViewer(trunc64(viewer));
+  GetCursorPos(mouse);
+  ScreenToClient(v.ParentWindow, mouse);
+  spriteX := spr.AbsolutePosition[0] - spr.Width * 0.5;
+  spriteY := spr.AbsolutePosition[1] - spr.Height * 0.5;
+  mouseInSprite :=
+    (mouse.X > spriteX) and
+    (mouse.X < (spriteX + spr.Width)) and
+    (mouse.Y > spriteY) and
+    (mouse.Y < (spriteY + spr.Height));
+  result := Integer(mouseInSprite);
+end;
+
 function BmpHDSCreateEmpty(w, h, fill: real): real; stdcall;
 var
   bhds: TGLBitmapHDS;
@@ -939,6 +961,7 @@ HUDTextCreate, FlatTextCreate,
 HUDTextSetRotation, SpaceTextCreate, SpaceTextSetExtrusion, HUDTextSetFont,
 FlatTextSetFont, SpaceTextSetFont, HUDTextSetColor, FlatTextSetColor, HUDTextSetText,
 FlatTextSetText, SpaceTextSetText,
+HUDSpriteGetMouseOver,
 //Sprite
 HUDSpriteCreate, SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
