@@ -41,15 +41,6 @@ begin
   result:=1;
 end;
 
-function SetPakArchive(fname: pchar): real; stdcall;
-var
-  pak: TGLVfsPak;
-begin
-  pak:=TGLVfsPak.Create(scene);
-  pak.LoadFromFile(String(fname), $0002 or $0020);
-  result:=1;
-end;
-
 function Update(delta: real): real; stdcall;
 begin
   cadencer.FixedDeltaTime := delta;
