@@ -912,6 +912,97 @@ begin
   Result := 1.0;
 end;
 
+function KraftCreateJointDistance(rbody1, rbody2: real): real; stdcall;
+var
+  rba, rbb: TKraftRigidBody;
+  j: TKraftConstraintJointDistance;
+begin
+  rba := TKraftRigidBody(trunc64(rbody1));
+  rbb := TKraftRigidBody(trunc64(rbody2));
+  j := TKraftConstraintJointDistance.Create(rba.Physics, rba, rbb, Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0, true);
+  Result := integer(j);
+end;
+
+function KraftCreateJointRope(rbody1, rbody2, maxlength: real): real; stdcall;
+var
+  rba, rbb: TKraftRigidBody;
+  j: TKraftConstraintJointRope;
+begin
+  rba := TKraftRigidBody(trunc64(rbody1));
+  rbb := TKraftRigidBody(trunc64(rbody2));
+  j := TKraftConstraintJointRope.Create(rba.Physics, rba, rbb, Vector3(0, 0, 0), Vector3(0, 0, 0), maxlength, true);
+  Result := integer(j);
+end;
+
+function KraftCreateJointBallSocket(rbody1, rbody2: real): real; stdcall;
+var
+  rba, rbb: TKraftRigidBody;
+  j: TKraftConstraintJointBallSocket;
+begin
+  rba := TKraftRigidBody(trunc64(rbody1));
+  rbb := TKraftRigidBody(trunc64(rbody2));
+  j := TKraftConstraintJointBallSocket.Create(rba.Physics, rba, rbb, Vector3(0, 0, 0), Vector3(0, 0, 0), true);
+  Result := integer(j);
+end;
+
+function KraftCreateJointFixed(rbody1, rbody2: real): real; stdcall;
+var
+  rba, rbb: TKraftRigidBody;
+  j: TKraftConstraintJointFixed;
+begin
+  rba := TKraftRigidBody(trunc64(rbody1));
+  rbb := TKraftRigidBody(trunc64(rbody2));
+  j := TKraftConstraintJointFixed.Create(rba.Physics, rba, rbb, Vector3(0, 0, 0));
+  Result := integer(j);
+end;
+
+function KraftCreateJointHinge(rbody1, rbody2: real): real; stdcall;
+var
+  rba, rbb: TKraftRigidBody;
+  j: TKraftConstraintJointHinge;
+begin
+  rba := TKraftRigidBody(trunc64(rbody1));
+  rbb := TKraftRigidBody(trunc64(rbody2));
+  j := TKraftConstraintJointHinge.Create(rba.Physics, rba, rbb, Vector3(0, 0, 0), Vector3(0, 0, 0), false, false, -1, 1, 0, 0, true);
+  Result := integer(j);
+end;
+
+function KraftJointSetAnchor1(joint, x, y, z: real): real; stdcall;
+var
+  j: TKraftConstraintJoint;
+begin
+  j := TKraftConstraintJoint(trunc64(joint));
+  j.SetLocalAnchorA(Vector3(x, y, z));
+  Result := 1.0;
+end;
+
+function KraftJointSetAnchor2(joint, x, y, z: real): real; stdcall;
+var
+  j: TKraftConstraintJoint;
+begin
+  j := TKraftConstraintJoint(trunc64(joint));
+  j.SetLocalAnchorB(Vector3(x, y, z));
+  Result := 1.0;
+end;
+
+function KraftJointSetHingeAxis1(joint, x, y, z: real): real; stdcall;
+var
+  j: TKraftConstraintJointHinge;
+begin
+  j := TKraftConstraintJointHinge(trunc64(joint));
+  j.SetLocalAxisA(Vector3(x, y, z));
+  Result := 1.0;
+end;
+
+function KraftJointSetHingeAxis2(joint, x, y, z: real): real; stdcall;
+var
+  j: TKraftConstraintJointHinge;
+begin
+  j := TKraftConstraintJointHinge(trunc64(joint));
+  j.SetLocalAxisB(Vector3(x, y, z));
+  Result := 1.0;
+end;
+
 exports
 
 //Engine
@@ -1314,7 +1405,12 @@ KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateS
 KraftCreateShapeMesh,
 KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
 KraftShapeSetPosition, KraftShapeGetPosition,
-KraftShapeSetRayCastable;
+KraftShapeSetRayCastable,
+
+KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
+KraftCreateJointHinge,
+KraftJointSetAnchor1, KraftJointSetAnchor2,
+KraftJointSetHingeAxis1, KraftJointSetHingeAxis2;
 
 begin
 end.

@@ -2245,6 +2245,8 @@ type PKraftForceMode=^TKraftForceMode;
        fChildren:array of TKraftConstraint;
        fCountChildren:longint;
 
+       fLocalAnchors:array[0..1] of TKraftVector3;
+
       public
       
        constructor Create(const APhysics:TKraft);
@@ -2256,6 +2258,9 @@ type PKraftForceMode=^TKraftForceMode;
 
        function GetAnchorA:TKraftVector3; virtual;
        function GetAnchorB:TKraftVector3; virtual;
+
+       procedure SetLocalAnchorA(const a:TKraftVector3);
+       procedure SetLocalAnchorB(const b:TKraftVector3); 
 
        function GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3; virtual;
        function GetReactionTorque(const InverseDeltaTime:TKraftScalar):TKraftVector3; virtual;
@@ -2378,7 +2383,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fmU:TKraftVector3;
        fAnchorDistanceLength:TKraftScalar;
        fFrequencyHz:TKraftScalar;
@@ -2410,7 +2415,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fMaximalLength:TKraftScalar;
        fAccumulatedImpulse:TKraftScalar;
        fmU:TKraftVector3;
@@ -2443,7 +2448,7 @@ type PKraftForceMode=^TKraftForceMode;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
        fGroundAnchors:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fmU:array[0..1] of TKraftVector3;
        fLengths:array[0..1] of TKraftScalar;
        fAccumulatedImpulse:TKraftScalar;
@@ -2476,7 +2481,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fAccumulatedImpulse:TKraftVector3;
        fBiasVector:TKraftVector3;
        fInverseMassMatrix:TKraftMatrix3x3;
@@ -2504,7 +2509,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fAccumulatedImpulseTranslation:TKraftVector3;
        fAccumulatedImpulseRotation:TKraftVector3;
        fBiasTranslation:TKraftVector3;
@@ -2535,7 +2540,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fLocalAxes:array[0..1] of TKraftVector3;
        fAccumulatedImpulseLowerLimit:TKraftScalar;
        fAccumulatedImpulseUpperLimit:TKraftScalar;
@@ -2578,6 +2583,8 @@ type PKraftForceMode=^TKraftForceMode;
        procedure InitializeConstraintsAndWarmStart(const Island:TKraftIsland;const TimeStep:TKraftTimeStep); override;
        procedure SolveVelocityConstraint(const Island:TKraftIsland;const TimeStep:TKraftTimeStep); override;
        function SolvePositionConstraint(const Island:TKraftIsland;const TimeStep:TKraftTimeStep):boolean; override;
+       procedure SetLocalAxisA(const a:TKraftVector3);
+       procedure SetLocalAxisB(const b:TKraftVector3); 
        function GetAnchorA:TKraftVector3; override;
        function GetAnchorB:TKraftVector3; override;
        function GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3; override;
@@ -2611,7 +2618,7 @@ type PKraftForceMode=^TKraftForceMode;
        fWorldInverseInertiaTensors:array[0..1] of TKraftMatrix3x3;
        fRelativePositions:array[0..1] of TKraftVector3;
        fLocalCenters:array[0..1] of TKraftVector3;
-       fLocalAnchors:array[0..1] of TKraftVector3;
+       //fLocalAnchors:array[0..1] of TKraftVector3;
        fAccumulatedImpulseLowerLimit:TKraftScalar;
        fAccumulatedImpulseUpperLimit:TKraftScalar;
        fAccumulatedImpulseMotor:TKraftScalar;
@@ -25661,6 +25668,16 @@ begin
  result:=Vector3Origin;
 end;
 
+procedure TKraftConstraint.SetLocalAnchorA(const a:TKraftVector3);
+begin
+ fLocalAnchors[0] := a;
+end;
+
+procedure TKraftConstraint.SetLocalAnchorB(const b:TKraftVector3);
+begin
+ fLocalAnchors[1] := b;
+end;
+
 function TKraftConstraint.GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3;
 begin
  result:=Vector3Origin;
@@ -28149,6 +28166,16 @@ begin
   
  end;
 
+end;
+
+procedure TKraftConstraintJointHinge.SetLocalAxisA(const a:TKraftVector3);
+begin
+  fLocalAxes[0] := a;
+end;
+
+procedure TKraftConstraintJointHinge.SetLocalAxisB(const b:TKraftVector3);
+begin
+  fLocalAxes[1] := b;
 end;
 
 function TKraftConstraintJointHinge.GetAnchorA:TKraftVector3;
