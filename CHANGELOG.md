@@ -2,11 +2,21 @@ Xtreme3D version history
 ========================
 v3.7.0 (by Gecko) - ??/??/????
 ------------------------------
-- LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. Parallel lights have higher priority over omni and spot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be applied to an object (LightFXCreate). It works for object's children as well.
+- LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. lsParallel lights have higher priority over lsOmni and lsSpot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be applied to an object (LightFXCreate function). It works for object's children as well
+- Total number of OpenGL lights can now be limited with EngineSetMaxLights function. This is necessary to avoid overhead when using more than 8 lights. If this number is set to 0, behaviour is the same as before: Xtreme3D uses maximum number of lights supported by the hardware. By default this number is 8, so Xtreme3D by default will use 8 lights even if the hardware supports more. This limitation does not affect LightFX, only default 8-light system
+- Initial Kraft physics engine integration. Kraft is an open source Object Pascal physics library for 3D games written by Benjamin 'BeRo' Rosseaux. It supports rigid body dynamics, all basic shapes (sphere, box, capsule, convex hull, static trimesh) and joints (grab, distance, rope, ball-socket, hinge, slider, fixed). The engine is fast, robust and game-friendly - you can implement a plausible character controller on top of Kraft with relative ease, and it will work better than with ODE. Kraft is fully integrated into xtreme3d.dll and doesn't need any additional libraries. ODE is still available, but in future it can be deprecated
+- Real-time terrain editing. The following functions have been added: BmpHDSCreateEmpty, BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave, TerrainGetHDSPosition
+- Basic FBX model format support (only for Freeforms for now, and without materials). Only binary FBX is supported. The loader is based on OpenFBX library, so OpenFBX.dll is required to use it (as always with third-party DLLs, this dependency is optional). You can find its sources at https://github.com/xtreme3d/openfbx-dll
+- New ActorProxyObject functions: ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval
+- Functions for reading and extracting PAK files: PakGetFileCount, PakGetFileName, PakExtract, PakExtractFile. SetPakArchive now returns PAK file id that is used to access it. LZRW1-compressed PAK files are now supported.
+- New HUDSprite function: HUDSpriteGetMouseOver
 - New Object function: ObjectGetScale
 - ObjectDestroy now works for all Xtreme3D objects
+- New Window functions: WindowSetIcon, WindowIsShowing
+- New Viewer function: ViewerResetPerformanceMonitor
 - Now engine doesn't crash if a resource (Freeform, Actor or texture) fails to load. Error message is now shown instead, and the game continues. Error message showing can be switched with EngineShowLoadingErrors function
-- Help file has been translated to English
+- Thanks to Bill Collins, English translation of a help file have been created. Currently it's a mere machine translation from Russian, so we need volunteers to improve it manually - pull requests are welcome. You can also send your translations to Gecko: gecko0307@gmail.com
+- PakEdit utility now supports LZRW1-compressed PAK files.
 
 v3.6.0 (by Gecko) - 17/02/2017
 ------------------------------
