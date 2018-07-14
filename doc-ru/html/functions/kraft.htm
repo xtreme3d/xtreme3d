@@ -70,31 +70,31 @@
 <A name="KraftRigidBodyFinish"></A>
 <H1 class=name>KraftRigidBodyFinish</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodyFinish</A><A>( body as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Завершает построение твердого тела, вычисляя массу, тензор инерции и некоторые другие внутренние параметры. Эту функцию необходимо вызвать после присвоения телу всех форм.</A>
 <BR><A>body - id тела.</A>
 <HR>
 
 <A name="KraftRigidBodySetGravity"></A>
 <H1 class=name>KraftRigidBodySetGravity</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetGravity</A><A>( body,x,y,z,scale as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает телу вектор и величину гравитации.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют</A>
-<BR><A>scale - сведения отсутствуют.</A>
+<BR><A>x,y,z - вектор гравитации</A>
+<BR><A>scale - величина гравитации.</A>
 <HR>
 
 <A name="KraftRigidBodySetPosition"></A>
 <H1 class=name>KraftRigidBodySetPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetPosition</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает позицию тела.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - позиция.</A>
 <HR>
 
 <A name="KraftRigidBodyGetPosition"></A>
 <H1 class=name>KraftRigidBodyGetPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetPosition</A><A>( body,index as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Возвращает позицию тела.</A>
 <BR><A>body - id тела</A>
 <BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
@@ -102,23 +102,47 @@
 <A name="KraftRigidBodySetRotation"></A>
 <H1 class=name>KraftRigidBodySetRotation</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetRotation</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает поворот тела.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - углы поворота.</A>
+<HR>
+
+<A name="KraftRigidBodyGetDirection"></A>
+<H1 class=name>KraftRigidBodyGetDirection</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetDirection</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор направления тела.</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftRigidBodyGetUp"></A>
+<H1 class=name>KraftRigidBodyGetUp</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetUp</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор Up тела (вертикальный вектор, перпендикулярный направлению).</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftRigidBodyGetRight"></A>
+<H1 class=name>KraftRigidBodyGetRight</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetRight</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает вектор Right тела (горизонтальный вектор, перпендикулярный направлению).</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="KraftRigidBodySetLinearVelocity"></A>
 <H1 class=name>KraftRigidBodySetLinearVelocity</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetLinearVelocity</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает поступательную скорость тела.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - скорость.</A>
 <HR>
 
 <A name="KraftRigidBodyGetLinearVelocity"></A>
 <H1 class=name>KraftRigidBodyGetLinearVelocity</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetLinearVelocity</A><A>( body,index as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Возвращает поступательную скорость тела.</A>
 <BR><A>body - id тела</A>
 <BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
@@ -126,15 +150,48 @@
 <A name="KraftRigidBodySetAngularVelocity"></A>
 <H1 class=name>KraftRigidBodySetAngularVelocity</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftRigidBodySetAngularVelocity</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает угловую скорость тела.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - угловая скорость.</A>
+<HR>
+
+<A name="KraftRigidBodyGetAngularVelocity"></A>
+<H1 class=name>KraftRigidBodyGetAngularVelocity</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyGetAngularVelocity</A><A>( body,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает угловую скорость тела.</A>
+<BR><A>body - id тела</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
+<HR>
+
+<A name="KraftRigidBodyAddForce"></A>
+<H1 class=name>KraftRigidBodyAddForce</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyAddForce</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает к телу силу в абсолютных координатах.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сила.</A>
+<HR>
+
+<A name="KraftRigidBodyAddForceAtPos"></A>
+<H1 class=name>KraftRigidBodyAddForceAtPos</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyAddForceAtPos</A><A>( body,x,y,z,px,py,pz as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает к телу силу в абсолютных координатах в заданной точке, вызывая вращение тела.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сила</A>
+<BR><A>px,py,pz - координаты точки.</A>
+<HR>
+
+<A name="KraftRigidBodyAddRelForce"></A>
+<H1 class=name>KraftRigidBodyAddRelForce</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftRigidBodyAddRelForce</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Прикладывает к телу силу в локальных координатах тела.</A>
+<BR><A>body - id тела</A>
+<BR><A>x,y,z - сила.</A>
 <HR>
 
 <A name="KraftObjectSetRigidBody"></A>
 <H1 class=name>KraftObjectSetRigidBody</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftObjectSetRigidBody</A><A>( obj,body as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Присваивает объекту Xtreme3D тело Kraft. После вызова этой функции объект будет подчиняться физическому движку, и обычные функции трансформации для него перестанут работать.</A>
 <BR><A>obj - id объекта</A>
 <BR><A>body - id тела.</A>
 <HR>
@@ -142,83 +199,164 @@
 <A name="KraftCreateShapeSphere"></A>
 <H1 class=name>KraftCreateShapeSphere</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftCreateShapeSphere</A><A>( body,radius as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Добавляет телу форму сферы и возвращает ее id.</A>
 <BR><A>body - id тела</A>
-<BR><A>radius - сведения отсутствуют.</A>
+<BR><A>radius - радиус.</A>
 <HR>
 
 <A name="KraftCreateShapeBox"></A>
 <H1 class=name>KraftCreateShapeBox</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftCreateShapeBox</A><A>( body,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Добавляет телу форму параллелепипеда и возвращает ее id.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - полуразмер параллелепипеда по трем осям.</A>
 <HR>
 
 <A name="KraftCreateShapePlane"></A>
 <H1 class=name>KraftCreateShapePlane</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftCreateShapePlane</A><A>( body,x,y,z,d as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Добавляет телу форму бесконечной плоскости и возвращает ее id.</A>
 <BR><A>body - id тела</A>
-<BR><A>x,y,z - сведения отсутствуют</A>
-<BR><A>d - сведения отсутствуют.</A>
+<BR><A>x,y,z - нормаль плоскости</A>
+<BR><A>d - расстояние от начала координат вдоль нормали.</A>
 <HR>
 
 <A name="KraftCreateShapeCapsule"></A>
 <H1 class=name>KraftCreateShapeCapsule</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftCreateShapeCapsule</A><A>( body,radius,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Добавляет телу форму капсулы и возвращает ее id.</A>
 <BR><A>body - id тела</A>
-<BR><A>radius - сведения отсутствуют</A>
-<BR><A>height - сведения отсутствуют.</A>
+<BR><A>radius - радиус</A>
+<BR><A>height - высота.</A>
+<HR>
+
+<A name="KraftCreateShapeMesh"></A>
+<H1 class=name>KraftCreateShapeMesh</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateShapeMesh</A><A>( body,freeform as </A><A class=type>real</A><A> );</A>
+<BR><A>Добавляет телу форму меша и возвращает ее id. Эта функция применима только к статическим телам.</A>
+<BR><A>body - id тела</A>
+<BR><A>freeform - id объекта свободной формы, чья геометрия должна быть скопирована для создания меша. Учитывается трансформация объекта.</A>
 <HR>
 
 <A name="KraftShapeSetDensity"></A>
 <H1 class=name>KraftShapeSetDensity</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeSetDensity</A><A>( shape,density as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает плотность формы, которая используется для вычисления массы.</A>
 <BR><A>shape - id формы</A>
-<BR><A>density - сведения отсутствуют.</A>
+<BR><A>density - плотность.</A>
 <HR>
 
 <A name="KraftShapeSetFriction"></A>
 <H1 class=name>KraftShapeSetFriction</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeSetFriction</A><A>( shape,friction as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает коэффициент трения формы. Чем больше этот параметр, тем больше требуется приложить силы для скольжения формы вдоль других поверхностей.</A>
 <BR><A>shape - id формы</A>
-<BR><A>friction - сведения отсутствуют.</A>
+<BR><A>friction - коэффициент трения.</A>
 <HR>
 
 <A name="KraftShapeSetRestitution"></A>
 <H1 class=name>KraftShapeSetRestitution</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeSetRestitution</A><A>( shape,restitution as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает коэффициент упругости формы. Чем больше этот параметр, тем сильнее форма отскакивает от других поверхностей.</A>
 <BR><A>shape - id формы</A>
-<BR><A>restitution - сведения отсутствуют.</A>
+<BR><A>restitution - коэффициент упругости.</A>
 <HR>
 
 <A name="KraftShapeSetPosition"></A>
 <H1 class=name>KraftShapeSetPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeSetPosition</A><A>( shape,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Задает позицию формы в локальном пространстве тела.</A>
 <BR><A>shape - id формы</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
+<BR><A>x,y,z - позиция.</A>
 <HR>
 
 <A name="KraftShapeGetPosition"></A>
 <H1 class=name>KraftShapeGetPosition</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeGetPosition</A><A>( shape,index as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Возвращает позицию формы.</A>
 <BR><A>shape - id формы</A>
-<BR><A>index - сведения отсутствуют.</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
 <A name="KraftShapeSetRayCastable"></A>
 <H1 class=name>KraftShapeSetRayCastable</H1>
 <A class=type>real</A><A> = </A><A class=function>KraftShapeSetRayCastable</A><A>( shape,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
+<BR><A>Переключает учет формы при проверке пересечения с лучом. Эта функция полезна, если нужно выпустить луч из центра формы и при этом игнорировать ее саму. По умолчанию эта опция включена.</A>
 <BR><A>shape - id формы</A>
 <BR><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="KraftCreateJointDistance"></A>
+<H1 class=name>KraftCreateJointDistance</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateJointDistance</A><A>( body1,body2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает сочленение расстояния, которое удерживает два тела на фиксированном расстоянии друг от друга, позволяя им свободно вращаться, и возвращает  id сочленения. Это похоже на виртуальную палку, на концах которой свободно болтаются тела.</A>
+<BR><A>body1 - id тела 1</A>
+<BR><A>body2 - id тела 2.</A>
+<HR>
+
+<A name="KraftCreateJointRope"></A>
+<H1 class=name>KraftCreateJointRope</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateJointRope</A><A>( body1,body2,maxdistance as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает веревочное сочленение, которое ограничивает максимально допустимое расстояние между двумя телами, позволяя им свободно вращаться, и возвращает id сочленения. Это похоже на виртуальную веревку или цепь между двумя телами.</A>
+<BR><A>body1 - id тела 1</A>
+<BR><A>body2 - id тела 2</A>
+<BR><A>maxdistance - сведения отсутствуют.</A>
+<HR>
+
+<A name="KraftCreateJointBallSocket"></A>
+<H1 class=name>KraftCreateJointBallSocket</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateJointBallSocket</A><A>( body1,body2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает шарнирное сочленение, которое ограничивает движение и поворот двух тел так, что якорная точка одного тела совпадает с якорной точкой второго, и возвращает id сочленения.</A>
+<BR><A>body1 - id тела 1</A>
+<BR><A>body2 - id тела 2.</A>
+<HR>
+
+<A name="KraftCreateJointFixed"></A>
+<H1 class=name>KraftCreateJointFixed</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateJointFixed</A><A>( body1,body2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает фиксированное сочленение, которое не позволяет двум телам двигаться и вращаться относительно друг друга, и возвращает id сочленения. Фактически, это сочленение "склеивает" два тела в единое целое.</A>
+<BR><A>body1 - id тела 1</A>
+<BR><A>body2 - id тела 2.</A>
+<HR>
+
+<A name="KraftCreateJointHinge"></A>
+<H1 class=name>KraftCreateJointHinge</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftCreateJointHinge</A><A>( body1,body2 as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает сгибательное сочленение, которое ограничивает движение и поворот двух тел так, что они могут только вращаться вокруг заданной оси относительно друг друга, и возвращает id сочленения. Это похоже на стену и дверь, а также колесо и ось.</A>
+<BR><A>body1 - id тела 1</A>
+<BR><A>body2 - id тела 2.</A>
+<HR>
+
+<A name="KraftJointSetAnchor1"></A>
+<H1 class=name>KraftJointSetAnchor1</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftJointSetAnchor1</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает первую якорную точку сочленения. Это точка в локальном пространстве первого тела сочленения. В шарнирном, сгибательном и фиксированном сочленениях тела ограничиваются так, что в абсолютном пространстве первая якорная точка совпадает со второй.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - координаты точки.</A>
+<HR>
+
+<A name="KraftJointSetAnchor2"></A>
+<H1 class=name>KraftJointSetAnchor2</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftJointSetAnchor2</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает вторую якорную точку сочленения. Это точка в локальном пространстве второго тела сочленения. В шарнирном, сгибательном и фиксированном сочленениях тела ограничиваются так, что в абсолютном пространстве первая якорная точка совпадает со второй.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - координаты точки.</A>
+<HR>
+
+<A name="KraftJointSetHingeAxis1"></A>
+<H1 class=name>KraftJointSetHingeAxis1</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftJointSetHingeAxis1</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает первую ось в сгибательном сочленении. Это вектор в локальном пространстве первого тела сочленения. Тела ограничиваются так, что в абсолютном пространстве первая ось совпадает со второй.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - вектор оси.</A>
+<HR>
+
+<A name="KraftJointSetHingeAxis2"></A>
+<H1 class=name>KraftJointSetHingeAxis2</H1>
+<A class=type>real</A><A> = </A><A class=function>KraftJointSetHingeAxis2</A><A>( joint,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает вторую ось в сгибательном сочленении. Это вектор в локальном пространстве второго тела сочленения. Тела ограничиваются так, что в абсолютном пространстве первая ось совпадает со второй.</A>
+<BR><A>joint - id сочленения</A>
+<BR><A>x,y,z - вектор оси.</A>
 <HR>
 
 </DIV>

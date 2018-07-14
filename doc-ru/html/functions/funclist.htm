@@ -1147,30 +1147,52 @@
 <A name="Kraft"></A>
 <H1 class=name>Kraft</H1>
 <A class=funclink href=kraft.htm#KraftCreate>KraftCreate()</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftStep(kraft,dt)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRayCast(kraft,x,y,z,dx,dy,dz,maxTime)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftGetRayHitPosition(index)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftGetRayHitNormal(index)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateRigidBody(kraft,krbt)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyFinish(body)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetGravity(body,x,y,z,scale)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetPosition(body,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyGetPosition(body,index)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetRotation(body,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetLinearVelocity(body,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodyGetLinearVelocity(body,index)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftRigidBodySetAngularVelocity(body,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftObjectSetRigidBody(obj,body)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeSphere(body,radius)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeBox(body,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapePlane(body,x,y,z,d)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreateShapeCapsule(body,radius,height)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetDensity(shape,density)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetFriction(shape,friction)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetRestitution(shape,restitution)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetPosition(shape,x,y,z)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeGetPosition(shape,index)</A>
-<BR><A class=funclink href=kraft.htm#KraftCreate>KraftShapeSetRayCastable(shape,mode)</A>
+<BR><A class=funclink href=kraft.htm#KraftStep>KraftStep(kraft,dt)</A>
+<BR><A class=funclink href=kraft.htm#KraftRayCast>KraftRayCast(kraft,x,y,z,dx,dy,dz,maxTime)</A>
+<BR><A class=funclink href=kraft.htm#KraftGetRayHitPosition>KraftGetRayHitPosition(index)</A>
+<BR><A class=funclink href=kraft.htm#KraftGetRayHitNormal>KraftGetRayHitNormal(index)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateRigidBody>KraftCreateRigidBody(kraft,krbt)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyFinish>KraftRigidBodyFinish(body)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodySetGravity>KraftRigidBodySetGravity(body,x,y,z,scale)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodySetPosition>KraftRigidBodySetPosition(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetPosition>KraftRigidBodyGetPosition(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodySetRotation>KraftRigidBodySetRotation(body,x,y,z)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetDirection>KraftRigidBodyGetDirection(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetUp>KraftRigidBodyGetUp(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetRight>KraftRigidBodyGetRight(body,index)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftRigidBodySetLinearVelocity>KraftRigidBodySetLinearVelocity(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetLinearVelocity>KraftRigidBodyGetLinearVelocity(body,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftRigidBodySetAngularVelocity>KraftRigidBodySetAngularVelocity(body,x,y,z)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftRigidBodyGetAngularVelocity>KraftRigidBodyGetAngularVelocity(body,index)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftObjectSetRigidBody>KraftObjectSetRigidBody(obj,body)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateShapeSphere>KraftCreateShapeSphere(body,radius)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateShapeBox>KraftCreateShapeBox(body,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateShapePlane>KraftCreateShapePlane(body,x,y,z,d)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateShapeCapsule>KraftCreateShapeCapsule(body,radius,height)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftCreateShapeMesh>KraftCreateShapeMesh(body,freeform)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftShapeSetDensity>KraftShapeSetDensity(shape,density)</A>
+<BR><A class=funclink href=kraft.htm#KraftShapeSetFriction>KraftShapeSetFriction(shape,friction)</A>
+<BR><A class=funclink href=kraft.htm#KraftShapeSetRestitution>KraftShapeSetRestitution(shape,restitution)</A>
+<BR><A class=funclink href=kraft.htm#KraftShapeSetPosition>KraftShapeSetPosition(shape,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftShapeGetPosition>KraftShapeGetPosition(shape,index)</A>
+<BR><A class=funclink href=kraft.htm#KraftShapeSetRayCastable>KraftShapeSetRayCastable(shape,mode)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftCreateJointDistance>KraftCreateJointDistance(body1,body2)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateJointRope>KraftCreateJointRope(body1,body2,maxlength)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateJointBallSocket>KraftCreateJointBallSocket(body1,body2)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateJointFixed>KraftCreateJointFixed(body1,body2)</A>
+<BR><A class=funclink href=kraft.htm#KraftCreateJointHinge>KraftCreateJointHinge(body1,body2)</A>
+
+<BR><A class=funclink href=kraft.htm#KraftJointSetAnchor1>KraftJointSetAnchor1(joint,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftJointSetAnchor2>KraftJointSetAnchor2(joint,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftJointSetHingeAxis1>KraftJointSetHingeAxis1(joint,x,y,z)</A>
+<BR><A class=funclink href=kraft.htm#KraftJointSetHingeAxis2>KraftJointSetHingeAxis2(joint,x,y,z)</A>
 
 <BR>
 <BR>
