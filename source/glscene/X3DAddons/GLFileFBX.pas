@@ -34,7 +34,9 @@ var
 
   pScene, pMesh: Pointer;
   numVerts: Integer;
-  verts, norms: PRealArray;
+  verts, norms, uvs: PRealArray;
+  gt: FBXMatrix;
+  i, j: Integer;
 
   objPos, objRot, objScale: TAffineVector;
   objTrans: TMatrix;
@@ -78,6 +80,7 @@ begin
     numVerts := fbxMeshGetVertexCount(pMesh);
     verts := PRealArray(fbxMeshGetVertices(pMesh));
     norms := PRealArray(fbxMeshGetNormals(pMesh));
+    uvs := PRealArray(fbxMeshGetUVs(pMesh));
 
     for ti := 0 to numVerts-1 do
     begin
@@ -92,13 +95,17 @@ begin
         norms^[ti*3+2]);
 
       meshObj.TexCoords.Add(
-        0,
+        uvs^[ti*2+0],
+        uvs^[ti*2+1],
         0);
       meshObj.LightMapTexCoords.Add(
-        0,
-        0);
+        uvs^[ti*2+0],
+        uvs^[ti*2+1]);
     end;
 
+    {
+    // This can be used to load meshes as separate objects:
+    
     objPos := AffineVectorMake(
       fbxObjectGetLocalPosition(pMesh, 0),
       fbxObjectGetLocalPosition(pMesh, 1),
@@ -125,7 +132,19 @@ begin
     objTrans := CreateScaleAndTranslationMatrix(VectorMake(objScale), VectorMake(objPos));
     meshObj.Vertices.TransformAsPoints(objTrans);
     meshObj.Normals.TransformAsVectors(objTrans);
-
+    }
+    
+    gt := fbxObjectGetGlobalTransform(pMesh);
+    for i := 0 to 3 do
+    begin
+      for j := 0 to 3 do
+      begin
+        objTrans[i][j] := gt.m[i*4+j];
+      end;
+    end;
+    meshObj.Vertices.TransformAsPoints(objTrans);
+    meshObj.Normals.TransformAsVectors(objTrans);
+    
     for ti := 0 to numVerts div 3 do
     begin
       faceGroup.VertexIndices.Add(ti*3, ti*3+1, ti*3+2);
