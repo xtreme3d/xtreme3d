@@ -57,9 +57,25 @@
 <A name="ActorProxyObjectSwitchToAnimation"></A>
 <H1 class=name>ActorProxyObjectSwitchToAnimation</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSwitchToAnimation</A><A>( proxy,anim as </A><A class=type>real</A><A> );</A>
-<BR><A>Переключает анимационную последовательность для прокси-Актера.</A>
+<BR><A>Переключает анимационную последовательность для прокси-Актера с указанием номера анимации.</A>
 <BR><A>proxy - id прокси</A>
 <BR><A>anim - порядковый номер анимации.</A>
+<HR>
+
+<A name="ActorProxyObjectSetAnimationRange"></A>
+<H1 class=name>ActorProxyObjectSetAnimationRange</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSetAnimationRange</A><A>( proxy,start,end as </A><A class=type>real</A><A> );</A>
+<BR><A>Переключает анимационную последовательность для прокси-Актера с указанием первого и последнего кадра.</A>
+<BR><A>proxy - id прокси</A>
+<BR><A>start,end - первый и последний кадр анимации.</A>
+<HR>
+
+<A name="ActorProxyObjectSetInterval"></A>
+<H1 class=name>ActorProxyObjectSetInterval</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSetInterval</A><A>( proxy,interval as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает интервал прокси-Актера - время в миллисекундах между двумя ключевыми кадрами. Значение по умолчанию - 100.</A>
+<BR><A>proxy - id прокси</A>
+<BR><A>interval - интервал.</A>
 <HR>
 
 <A name="MultiProxyObjectCreate"></A>

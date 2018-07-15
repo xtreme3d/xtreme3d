@@ -14,7 +14,7 @@
 
 <A>Xtreme3D поддерживает отрисовку ландшафта (terrain), состоящего из сетки прямоугольников - тайлов. При рендеринге ландшафта учитывается 
 расстояние от камеры для сокращения количества полигонов на удаленных участках (LOD). Этот процесс называется тесселяцией. 
-<BR>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, темные - снижение. HDS загружается из файла изображения. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). В противном случае ландшафт будет выглядеть ступенчатым.
+<BR>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, темные - снижение. HDS может быть загружена из файла изображения. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). В противном случае ландшафт будет выглядеть ступенчатым.
 <BR><HR>
 
 <A name="BmpHDSCreate"></A>
@@ -22,6 +22,14 @@
 <A class=type>real</A><A> = </A><A class=function>BmpHDSCreate</A><A>( filename as </A><A class=type>string</A><A> );</A>
 <BR><A>Загружает HDS из изображения и возвращает его id.</A>
 <BR><A>filename - имя файла.</A>
+<HR>
+
+<A name="BmpHDSCreateEmpty"></A>
+<H1 class=name>BmpHDSCreateEmpty</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSCreateEmpty</A><A>( width,height,fillvalue as </A><A class=type>string</A><A> );</A>
+<BR><A>Создает в памяти новый HDS и возвращает его id.</A>
+<BR><A>width,height - ширина и высота HDS. Должны быть степенями двойки</A>
+<BR><A>fillvalue - значение начальной высоты, которым заполняется HDS (от 0.0 до 1.0). Ландшафт генерируется так, что высота 0.5 соответствует нулевой плоскости.</A>
 <HR>
 
 <A name="BmpHDSSetInfiniteWarp"></A>
@@ -38,6 +46,31 @@
 <BR><A>Инвертирует HDS (обращает высоты).</A>
 <BR><A>hds - id HDS</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="BmpHDSSetHeight"></A>
+<H1 class=name>BmpHDSSetHeight</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSSetHeight</A><A>( hds,x,y,height as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает высоту в указанном пикселе HDS.</A>
+<BR><A>hds - id HDS</A>
+<BR><A>x,y - координаты пикселя</A>
+<BR><A>height - значение высоты (от 0.0 до 1.0).</A>
+<HR>
+
+<A name="BmpHDSGetHeight"></A>
+<H1 class=name>BmpHDSGetHeight</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSGetHeight</A><A>( hds,x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает высоту в указанном пикселе HDS.</A>
+<BR><A>hds - id HDS</A>
+<BR><A>x,y - координаты пикселя.</A>
+<HR>
+
+<A name="BmpHDSSave"></A>
+<H1 class=name>BmpHDSSave</H1>
+<A class=type>real</A><A> = </A><A class=function>BmpHDSSave</A><A>( hds as </A><A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
+<BR><A>Сохраняет HDS в файл BMP.</A>
+<BR><A>hds - id HDS</A>
+<BR><A>filename - имя файла.</A>
 <HR>
 
 <A name="TerrainCreate"></A>
@@ -129,6 +162,15 @@
 <BR><A>Возвращает высоту точки на поверхности ландшафта, соответствующей абсолютной позиции заданного объекта.</A>
 <BR><A>terrain - id ландшафта</A>
 <BR><A>object - id объекта.</A>
+<HR>
+
+<A name="TerrainGetHDSPosition"></A>
+<H1 class=name>TerrainGetHDSPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>TerrainGetHDSPosition</A><A>( terrain,x,y,z,index as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает координаты пикселя HDS, соответствующего точке на поверхности ландшафта.</A>
+<BR><A>terrain - id ландшафта</A>
+<BR><A>x,y,z - координаты точки</A>
+<BR><A>index - индекс координаты (0 = X, 1 = Y).</A>
 <HR>
 
 <A name="TerrainGetLastTriCount"></A>

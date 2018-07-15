@@ -116,6 +116,8 @@
 <BR><A class=funclink href=viewer.htm#ViewerGetGLSLSupported>ViewerGetGLSLSupported</A><A>(viewer)</A>
 
 <BR><A class=funclink href=viewer.htm#ViewerIsOpenGLExtensionSupported>ViewerIsOpenGLExtensionSupported</A><A>(viewer,ext)</A>
+
+<BR><A class=funclink href=viewer.htm#ViewerResetPerformanceMonitor>ViewerResetPerformanceMonitor</A><A>(viewer)</A>
 <BR>
 <BR>
 <A name="Dummycube"></A>
@@ -395,8 +397,16 @@
 <A name="Terrain"></A>
 <H1 class=name>Terrain</H1>
 <A class=funclink href=terrain.htm#BmpHDSCreate>BmpHDSCreate</A><A>(filename)</A>
+
+<BR><A class=funclink href=terrain.htm#BmpHDSCreateEmpty>BmpHDSCreateEmpty</A><A>(width,height,fillvalue)</A>
+
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A><A>(hds,mode)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInverted>BmpHDSInvert</A><A>(hds)</A>
+
+<BR><A class=funclink href=terrain.htm#BmpHDSSetHeight>BmpHDSSetHeight</A><A>(hds,x,y,height)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSGetHeight>BmpHDSGetHeight</A><A>(hds,x,y)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSSave>BmpHDSSave</A><A>(hds,filename)</A>
+
 <BR><A class=funclink href=terrain.htm#TerrainCreate>TerrainCreate</A><A>(parent)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetHeightData>TerrainSetHeightData</A><A>(terrain,hds)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetTileSize>TerrainSetTileSize</A><A>(terrain,size)</A>
@@ -408,6 +418,9 @@
 <BR><A class=funclink href=terrain.htm#TerrainSetOcclusionFrameSkip>TerrainSetOcclusionFrameSkip</A><A>(terrain,frames)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetOcclusionTesselate>TerrainSetOcclusionTesselate</A><A>(terrain,tot)</A>
 <BR><A class=funclink href=terrain.htm#TerrainGetHeightAtObjectPosition>TerrainGetHeightAtObjectPosition</A><A>(terrain,object)</A>
+
+<BR><A class=funclink href=terrain.htm#TerrainGetHDSPosition>TerrainGetHDSPosition</A><A>(terrain,x,y,z,index)</A>
+
 <BR><A class=funclink href=terrain.htm#TerrainGetLastTriCount>TerrainGetLastTriCount</A><A>(terrain)</A>
 <BR>
 <BR>
@@ -443,6 +456,7 @@
 <BR><A class=funclink href=object.htm#ObjectRotate>ObjectRotate</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectScale>ObjectScale</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectSetScale>ObjectSetScale</A><A>(object,x,y,z)</A>
+<BR><A class=funclink href=object.htm#ObjectGetScale>ObjectGetScale</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectSetUpVector>ObjectSetUpVector</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectPointToObject>ObjectPointToObject</A><A>(object1,object2)</A>
 <!--
@@ -978,8 +992,12 @@
 <A class=funclink href=proxy.htm#ProxyObjectCreate>ProxyObjectCreate</A><A>(object,parent)</A>
 <BR><A class=funclink href=proxy.htm#ProxyObjectSetOptions>ProxyObjectSetOptions</A><A>(proxy,copyeffects,copyobjects,copytransform)</A>
 <BR><A class=funclink href=proxy.htm#ProxyObjectSetTarget>ProxyObjectSetTarget</A><A>(proxy,object)</A>
-<BR><A class=funclink href=proxy.htm#ActorProxyObjectCreate>ActorProxyObjectCreate</A><A>(actor,parent)</A>
-<BR><A class=funclink href=proxy.htm#ActorProxyObjectSwitchToAnimation>ActorProxyObjectSwitchToAnimation</A><A>(actor,anim)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectCreate>ActorProxyObjectCreate</A><A>(actorproxy,parent)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSwitchToAnimation>ActorProxyObjectSwitchToAnimation</A><A>(actorproxy,anim)</A>
+
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSetAnimationRange>ActorProxyObjectSetAnimationRange</A><A>(actorproxy,start,end)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSetInterval>ActorProxyObjectSetInterval</A><A>(actorproxy,interval)</A>
+
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectCreate>MultiProxyObjectCreate</A><A>(parent)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectAddTarget>MultiProxyObjectAddTarget</A><A>(mproxy,object,mindist,maxdist)</A>
 <BR>
@@ -1243,6 +1261,10 @@
 
 <BR><A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
+
+<BR><A class=funclink href=window.htm#WindowSetIcon>WindowSetIcon</A><A>(window,filename)</A>
+<BR><A class=funclink href=window.htm#WindowIsShowing>WindowIsShowing</A><A>(window)</A>
+
 <BR><A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>(window)</A>
 
 </DIV>

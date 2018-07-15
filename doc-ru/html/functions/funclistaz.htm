@@ -62,6 +62,8 @@
 <BR><A class=funclink href=actor.htm#ActorMeshSetVisible>ActorMeshSetVisible</A><A>(actor,mesh,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorMoveBone>ActorMoveBone</A><A>(actor,boneindex,x,y,z)</A>
 <BR><A class=funclink href=proxy.htm#ActorProxyObjectCreate>ActorProxyObjectCreate</A><A>(actor,parent)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSetAnimationRange>ActorProxyObjectSetAnimationRange</A><A>(actorproxy,start,end)</A>
+<BR><A class=funclink href=proxy.htm#ActorProxyObjectSetInterval>ActorProxyObjectSetInterval</A><A>(actorproxy,interval)</A>
 <BR><A class=funclink href=proxy.htm#ActorProxyObjectSwitchToAnimation>ActorProxyObjectSwitchToAnimation</A><A>(actor,anim)</A>
 <BR><A class=funclink href=actor.htm#ActorQ3TagExportMatrix>ActorQ3TagExportMatrix</A><A>(actor,taglist,tagname,object)</A>
 <BR><A class=funclink href=actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor,boneindex,x,y,z)</A>
@@ -88,11 +90,18 @@
 <BR><A class=funclink href=blur.htm#BlurSetOptions>BlurSetOptions</A><A>(blur,delta,left,top,right,bottom)</A>
 <BR><A class=funclink href=blur.htm#BlurSetPreset>BlurSetPreset</A><A>(blur,p)</A>
 <BR><A class=funclink href=blur.htm#BlurSetResolution>BlurSetResolution</A><A>(blur,res)</A>
+
 <BR><A class=funclink href=fonttext.htm#BmpfontCreate>BmpfontCreate</A><A>(width,height,hspace,vspace,intx,inty,start,end)</A>
 <BR><A class=funclink href=fonttext.htm#BmpfontLoad>BmpfontLoad</A><A>(font,material)</A>
+
 <BR><A class=funclink href=terrain.htm#BmpHDSCreate>BmpHDSCreate</A><A>(material)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSCreateEmpty>BmpHDSCreateEmpty</A><A>(width,height,fillvalue)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSGetHeight>BmpHDSGetHeight</A><A>(hds,x,y)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInverted>BmpHDSInvert</A><A>(hds)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSSave>BmpHDSSave</A><A>(hds,filename)</A>
+<BR><A class=funclink href=terrain.htm#BmpHDSSetHeight>BmpHDSSetHeight</A><A>(hds,x,y,height)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A><A>(hds,mode)</A>
+
 <BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetDiffuseTexture>BumpShaderSetDiffuseTexture</A><A>(shader,material)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetHeightTexture>BumpShaderSetHeightTexture</A><A>(shader,material)</A>
@@ -662,6 +671,7 @@
 <BR><A class=funclink href=object.htm#ObjectGetPosition>ObjectGetPosition</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetRight>ObjectGetRight</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetRoll>ObjectGetRoll</A><A>(object)</A>
+<BR><A class=funclink href=object.htm#ObjectGetScale>ObjectGetScale</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetTag>ObjectGetTag</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetTurn>ObjectGetTurn</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetUp>ObjectGetUp</A><A>(object,ind)</A>
@@ -924,6 +934,7 @@
 <H1 class=name>T</H1>
 <A class=funclink href=primitives.htm#TeapotCreate>TeapotCreate</A><A>(parent)</A>
 <BR><A class=funclink href=terrain.htm#TerrainCreate>TerrainCreate</A><A>(parent)</A>
+<BR><A class=funclink href=terrain.htm#TerrainGetHDSPosition>TerrainGetHDSPosition</A><A>(terrain,x,y,z,index)</A>
 <BR><A class=funclink href=terrain.htm#TerrainGetLastTriCount>TerrainGetLastTriCount</A><A>(terrain)</A>
 <BR><A class=funclink href=terrain.htm#TerrainSetCLodPrecision>TerrainSetCLodPrecision</A><A>(terrain,precision)</A>
 <BR><A class=funclink href=terrain.htm#TerrainGetHeightAtObjectPosition>TerrainGetHeightAtObjectPosition</A><A>(terrain,object)</A>
@@ -1017,6 +1028,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerRender>ViewerRender</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderEx>ViewerRenderEx</A><A>(viewer,object,clear,swap,updateFPS)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderToFile>ViewerRenderToFile</A><A>(viewer,filename)</A>
+<BR><A class=funclink href=viewer.htm#ViewerResetPerformanceMonitor>ViewerResetPerformanceMonitor</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerResize>ViewerResize</A><A>(viewer,x,y,width,height)</A>
 <BR><A class=funclink href=viewer.htm#ViewerScreenToVector>ViewerScreenToVector</A><A>(viewer,x,y,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerScreenToWorld>ViewerScreenToWorld</A><A>(viewer,x,y,ind)</A>
@@ -1058,7 +1070,9 @@
 <BR><A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowGetPosition>WindowGetPosition</A><A>(window,index)</A>
 <BR><A class=funclink href=window.htm#WindowGetSize>WindowGetSize</A><A>(window,index)</A>
+<BR><A class=funclink href=window.htm#WindowIsShowing>WindowIsShowing</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowResize>WindowResize</A><A>(window,x,y,width,height)</A>
+<BR><A class=funclink href=window.htm#WindowSetIcon>WindowSetIcon</A><A>(window,filename)</A>
 <BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
 
 <BR><A class=funclink href=fonttext.htm#WindowsBitmapfontCreate>WindowsBitmapfontCreate</A><A>(fontname,size,start,end)</A>

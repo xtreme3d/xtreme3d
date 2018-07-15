@@ -949,6 +949,10 @@
   <PARAM name="Name" value="FreeType">
   <PARAM name="Local" value="license/license_freetype.htm">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="OpenFBX">
+  <PARAM name="Local" value="license/license_openfbx.htm">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="—сылки">

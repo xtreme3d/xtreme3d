@@ -1173,6 +1173,11 @@
                         <param name="Local" value="license/license_freetype.htm">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="OpenFBX">
+                        <param name="Local" value="license/license_openfbx.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
         </UL>
         <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value="—сылки">
