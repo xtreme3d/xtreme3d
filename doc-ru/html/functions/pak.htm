@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Pak</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Tree</H1>
+
+<A class=type>Класс: TGLVfsPak</A><BR><BR>
+
+<A>
+Xtreme3D поддерживает загрузку ресурсов (моделей, текстур) из PAK-архивов GLScene. Это бывает полезно для оптимизации места, занимаемого игрой на диске, а также для ускорения загрузки ресурсов. Кроме того, использование архива ресурсов усложняет воровство моделей и текстур (хотя и не делает невозможным, поскольку формат PAK не поддерживает шифрование, и его довольно легко прочитать). Для создания архива следует использовать утилиту PakEdit.exe, входящую в состав Xtreme3D SDK. 
+</A>
+<HR>
+
+<A name="SetPakArchive"></A>
+<H1 class=name>SetPakArchive</H1>
+<A class=type>real</A><A> = </A><A class=function>SetPakArchive</A><A>( filename as </A><A class=type>string</A><A> );</A>
+<BR><A class=ntext>Задает архив *.PAK, из которого движок должен загружать ресурсы, и возвращает его id. Рекомендуется создавать архив и добавлять эту функцию только при финальной сборке проекта.
+<BR>Обратите внимание, что после вызова этой функции все ресурсы без исключения будут загружаться движком из этого архива. Отменить это во время игры невозможно.
+<BR>filename - путь к файлу архива.
+</A><HR>
+
+<A name="PakGetFileCount"></A>
+<H1 class=name>PakGetFileCount</H1>
+<A class=type>real</A><A> = </A><A class=function>PakGetFileCount</A><A>( pak as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество файлов в архиве.</A>
+<BR><A>pak - id архива.</A>
+<HR>
+
+<A name="PakGetFileName"></A>
+<H1 class=name>PakGetFileName</H1>
+<A class=type>real</A><A> = </A><A class=function>PakGetFileCount</A><A>( pak,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает имя файла под заданным индексом. Функция полезна, если вы не знаете заранее содержимое архива.</A>
+<BR><A>pak - id архива</A>
+<BR><A>index - индекс файла (порядковый номер в архиве).</A>
+<HR>
+
+<A name="PakExtract"></A>
+<H1 class=name>PakExtract</H1>
+<A class=type>real</A><A> = </A><A class=function>PakExtract</A><A>( pak as </A><A class=type>real</A><A>, directory as </A><A class=type>string</A><A> );</A>
+<BR><A>Распаковывает содержимое архива в заданную папку, сохраняя его внутреннюю структуру.</A>
+<BR><A>pak - id архива</A>
+<BR><A>directory - путь к папке для распаковки архива.</A>
+<HR>
+
+<A name="PakExtractFile"></A>
+<H1 class=name>PakExtractFile</H1>
+<A class=type>real</A><A> = </A><A class=function>PakExtractFile</A><A>( pak,index as </A><A class=type>real</A><A>, newfilename as </A><A class=type>string</A><A> );</A>
+<BR><A>Распаковывает заданный файл из архива. Функция полезна, если вам нужно вручную прочитать какой-то файл, который напрямую не загружается в Xtreme3D - например, шейдер.</A>
+<BR><A>pak - id архива</A>
+<BR><A>index - индекс файла (порядковый номер в архиве)</A>
+<BR><A>newfilename - имя, под которым надо сохранить файл на диске.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

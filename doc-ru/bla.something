@@ -182,6 +182,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Pak">
+                        <param name="Local" value="functions/pak.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Viewer">
                         <param name="Local" value="functions/viewer.htm">
                         <param name="ImageNumber" value="0">
