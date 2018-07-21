@@ -20,3 +20,4 @@ bindings/dlang/freetype.dll
 bindings/dlang/ode.dll
 bindings/dlang/xtreme3d.dll
 bindings/python/xtreme3d.dll
+bindings/dlang/OpenFBX.dll

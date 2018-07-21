@@ -8,4 +8,4 @@ Usage
 -----
 Run `python app.py`. You can also use PyInstaller to make a standalone application: `pyinstaller app.py`.
 
-Do not forget to copy `xtreme3d.dll` (and also `ode.dll`, `freetype.dll` if needed) to application directory before running.
+Do not forget to copy `xtreme3d.dll` (and also `ode.dll`, `freetype.dll`, `OpenFBX.dll` if needed) to application directory before running.
