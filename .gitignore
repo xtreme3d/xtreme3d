@@ -16,8 +16,12 @@ __test__library__
 tests
 
 # DLLs
-bindings/dlang/freetype.dll
-bindings/dlang/ode.dll
 bindings/dlang/xtreme3d.dll
-bindings/python/xtreme3d.dll
+bindings/dlang/ode.dll
+bindings/dlang/freetype.dll
 bindings/dlang/OpenFBX.dll
+bindings/python/xtreme3d.dll
+bindings/python/ode.dll
+bindings/python/freetype.dll
+bindings/python/OpenFBX.dll
+
