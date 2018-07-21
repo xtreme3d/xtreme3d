@@ -10,4 +10,4 @@ If you have Python installed, just run `genbinding.py` script.
 
 Assuming Xtreme3D repository structure unchanged, it will analyze Xtreme3D source code and generate two files: `derelict/xtreme3d/xtreme3d_function_headers.txt` and `derelict/xtreme3d/xtreme3d_function_bindings.txt`, which are statically included in Derelict binding. We update these files after API changes, so it's actually not necessary to run the script if you are using release version of the source code. 
 
-Then you can use Dub to compile the demo application: `dub build`. Do not forget to copy `xtreme3d.dll` (and also `ode.dll`, `freetype.dll` if needed) to application directory before running.
+Then you can use Dub to compile the demo application: `dub build`. Do not forget to copy `xtreme3d.dll` (and also `ode.dll`, `freetype.dll`, `OpenFBX.dll` if needed) to application directory before running.

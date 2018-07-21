@@ -381,15 +381,6 @@ begin
   Result := 1.0;
 end;
 
-function KraftShapeSetSensor(shape, mode: real): real; stdcall;
-var
-  s: TKraftShape;
-begin
-  s := TKraftShape(trunc64(shape));
-  s.Flags := s.Flags + [ksfSensor];
-  Result := 1.0;
-end;
-
 function KraftCreateJointDistance(rbody1, rbody2: real): real; stdcall;
 var
   rba, rbb: TKraftRigidBody;
