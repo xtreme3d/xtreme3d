@@ -96,3 +96,25 @@ begin
   frm.Free;
   result := 1;
 end;
+
+function WindowIsShowing(w: real): real; stdcall;
+var
+  frm: TForm;
+begin
+  frm := TForm(trunc64(w));
+  result := Integer(frm.Showing);
+end;
+
+function WindowSetIcon(w: real; filename: pchar): real; stdcall;
+var
+  frm: TForm;
+  icon: HIcon;
+begin
+  frm := TForm(trunc64(w));
+  icon := LoadImage(0, filename, IMAGE_ICON,
+    GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON),
+    LR_LOADFROMFILE);
+  SendMessage(frm.Handle, WM_SETICON, 1, icon);
+  DestroyIcon(icon);
+  result := 1.0;
+end;

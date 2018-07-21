@@ -298,3 +298,12 @@ begin
   fps := v.FramesPerSecond;
   result := fps;
 end;
+
+function ViewerResetPerformanceMonitor(viewer: real): real; stdcall;
+var
+  v: TGLSceneViewer;
+begin
+  v := TGLSceneViewer(trunc64(viewer));
+  v.ResetPerformanceMonitor;
+  result := 1.0;
+end;

@@ -75,3 +75,21 @@ begin
   p.SwitchToAnimation(trunc64(anim));
   result := 1.0;
 end;
+
+function ActorProxyObjectSetAnimationRange(proxy, startf, endf: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.SetAnimationRange(trunc64(startf), trunc64(endf));
+  result := 1.0;
+end;
+
+function ActorProxyObjectSetInterval(proxy, interval: real): real; stdcall;
+var
+  p: TGLActorProxy;
+begin
+  p := TGLActorProxy(trunc64(proxy));
+  p.Interval := trunc64(interval);
+  result := 1.0;
+end;
