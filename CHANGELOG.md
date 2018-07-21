@@ -1,6 +1,6 @@
 Xtreme3D version history
 ========================
-v3.7.0 (by Gecko) - ??/??/????
+v3.7.0 (by Gecko) - 21/07/2018
 ------------------------------
 - LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. lsParallel lights have higher priority over lsOmni and lsSpot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be applied to an object (LightFXCreate function). It works for object's children as well
 - Total number of OpenGL lights can now be limited with EngineSetMaxLights function. This is necessary to avoid overhead when using more than 8 lights. If this number is set to 0, behaviour is the same as before: Xtreme3D uses maximum number of lights supported by the hardware. By default this number is 8, so Xtreme3D by default will use 8 lights even if the hardware supports more. This limitation does not affect LightFX, only default 8-light system

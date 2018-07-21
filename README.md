@@ -80,6 +80,4 @@ ODE is distributed under BSD-style license.
 
 FreeType is distributed under FreeType License (FTL).
 
-Kraft is distributed under zlib license.
-
 OpenFBX is distributed under MIT license.
