@@ -114,7 +114,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=3
 MinorVer=7
-Release=0
+Release=1
 Build=0
 Debug=0
 PreRelease=0
@@ -126,13 +126,13 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=Gecko
 FileDescription=Xtreme3D Engine
-FileVersion=3.7.0.0
+FileVersion=3.7.1.0
 InternalName=Xtreme3D
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=xtreme3d.dll
 ProductName=Xtreme3D
-ProductVersion=3.7.0.0
+ProductVersion=3.7.1.0
 Comments=
 [Excluded Packages]
 c:\users\public\programs\delphi7\Projects\Bpl\GLScene7.bpl=GLScene - OpenGL 3D library
@@ -140,9 +140,10 @@ c:\users\public\programs\delphi7\Projects\Bpl\GLScene7.bpl=GLScene - OpenGL 3D l
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=5
-Item0=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs;glscene/X3DAddons
-Item1=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item2=glscene;glscene/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item3=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
-Item4=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/CgShaders
+Count=6
+Item0=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs;glscene/X3DAddons;glscene/X3DAddons/AssimpDelphi
+Item1=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs;glscene/X3DAddons
+Item2=glscene;glscene/FileFormats/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item3=glscene;glscene/PNG;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item4=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/PhysicsAPIs
+Item5=glscene;glscene/Base;glscene/Platform;glscene/FileFormats;glscene/Shaders;glscene/CgShaders
