@@ -313,20 +313,11 @@ end;
 
 // New functions for Xtreme3D 3.7.1:
 
-function HUDSpriteSetSize(sprite, w,h: real): real; stdcall;
+function SpriteGetSize(sprite, type_val: real): real; stdcall;
 var
-  spr: TGLHUDSprite;
+  spr: TGLSprite;
 begin
-  spr := TGLHUDSprite(trunc64(sprite));
-  spr.SetSize(w, h);
-  result := 1;
-end;
-
-function HUDSpriteGetSize(sprite, type_val: real): real; stdcall;
-var
-  spr: TGLHUDSprite;
-begin
-  spr := TGLHUDSprite(trunc64(sprite));
+  spr := TGLSprite(trunc64(sprite));
   if (type_val = 0) then
     result := spr.Width;
   if (type_val = 1) then
@@ -384,8 +375,8 @@ FlatTextSetFont, SpaceTextSetFont, HUDTextSetColor, FlatTextSetColor, HUDTextSet
 FlatTextSetText, SpaceTextSetText,
 HUDSpriteGetMouseOver,
 //Sprite
-HUDSpriteCreate, HUDSpriteSetSize, HUDSpriteGetSize,
-SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
+HUDSpriteCreate, 
+SpriteCreate, SpriteSetSize, SpriteGetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
