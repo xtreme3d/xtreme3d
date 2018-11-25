@@ -1,6 +1,6 @@
 Xtreme3D v3
 ===========
-Xtreme3D is a 3D graphics engine for Game Maker 8. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate in Game Maker, a game design tool that was intended mainly for 2D games and provides only limited 3D capabilities.
+Xtreme3D is a 3D graphics engine for Game Maker 8. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate in Game Maker, a game design tool that was intended mainly for 2D games and provides limited built-in 3D capabilities.
 
 Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
 
