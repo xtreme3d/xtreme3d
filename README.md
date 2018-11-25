@@ -8,7 +8,7 @@ The engine is written in Delphi and based on a modified version of [GLScene](htt
 
 Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python) and [D language](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) bindings which are automatically generated from engine's source code.
 
-Visit Xtreme3D site at [http://xtreme3d.tk](http://xtreme3d.tk).
+Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).
 
 Screenshots
 -----------
