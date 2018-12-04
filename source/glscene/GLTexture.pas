@@ -1276,7 +1276,7 @@ type
          FFrontProperties, FGLBackProperties : TGLFaceProperties;
 			FBlendingMode : TBlendingMode;
          FTexture : TGLTexture;
-         FTextures : array[0..7] of TGLTexture;
+         FTextures : array[0..15] of TGLTexture;
          FTextureEx : TGLTextureEx;
          FMaterialLibrary : TGLMaterialLibrary;
          FLibMaterialName : TGLLibMaterialName;
@@ -4499,7 +4499,7 @@ end;
 
 function TGLMaterial.GetTextureN(i: Integer): TGLTexture;
 begin
-   if (i >= 0) and (i < 8) then
+   if (i >= 0) and (i < 16) then
      Result:=FTextures[i]
    else
      Result:=nil;
@@ -4507,7 +4507,7 @@ end;
 
 procedure TGLMaterial.SetTextureN(i: Integer; const value: TGLTexture);
 begin
-    if (i >= 0) and (i < 8) then
+    if (i >= 0) and (i < 16) then
        FTextures[i] := value;
 end;
 
@@ -4649,7 +4649,7 @@ begin
       if Assigned(FTexture) then
          	FTexture.Apply(rci);
 
-      for i := 0 to 8 do
+      for i := 0 to 16 do
       begin
         if FTextures[i] <> nil then
         begin
@@ -4705,7 +4705,7 @@ begin
       if Assigned(FTexture) then
          FTexture.UnApply(rci);
 
-      for i := 0 to 8 do
+      for i := 0 to 16 do
       begin
         if FTextures[i] <> nil then
         begin

@@ -311,7 +311,7 @@ end;
 {$I 'xtreme3d/window'}
 {$I 'xtreme3d/color'}
 
-// New functions for Xtreme3D 3.7.1:
+// New functions for Xtreme3D 3.8:
 
 function SpriteGetSize(sprite, type_val: real): real; stdcall;
 var
@@ -322,6 +322,24 @@ begin
     result := spr.Width;
   if (type_val = 1) then
     result := spr.Height;
+end;
+
+function MaterialDestroy(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat.Free;
+  result := 1;
+end;
+
+function MaterialSetName(mtrl, name: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat.Name := String(name);
+  result := 1;
 end;
 
 exports
@@ -520,6 +538,7 @@ MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
 MaterialEnableTextureEx, MaterialHasTextureEx,
 MaterialSetTextureExFromLibrary,
 MaterialCullFrontFaces, MaterialSetZWrite,
+MaterialDestroy, MaterialSetName,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate,
@@ -725,7 +744,6 @@ KraftCreateShapeMesh,
 KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
 KraftShapeSetPosition, KraftShapeGetPosition,
 KraftShapeSetRayCastable,
-
 KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
 KraftCreateJointHinge,
 KraftJointSetAnchor1, KraftJointSetAnchor2,
