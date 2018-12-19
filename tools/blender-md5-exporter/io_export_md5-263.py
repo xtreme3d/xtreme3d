@@ -644,7 +644,7 @@ def save_md5(settings):
         
       while faces:
         material_index = faces[0].material_index
-        material = Material(obj.data.materials[0].name ) #call the shader name by the material's name
+        material = Material(obj.data.materials[material_index].name) #call the shader name by the material's name
         
         submesh = SubMesh(mesh, material)
         vertices = {}
