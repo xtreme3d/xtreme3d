@@ -442,10 +442,15 @@ var
   mat:TGLLibMaterial;
   shad: TGLShader;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  shad:=TGLShader(trunc64(shd));
-  mat.Shader:=shad;
-  result:=1;
+  mat := matlib.Materials.GetLibMaterialByName(mtrl);
+  if shd > 0 then
+  begin
+    shad := TGLShader(trunc64(shd));
+    mat.Shader := shad;
+  end
+  else
+    mat.Shader := nil;
+  result := 1;
 end;
 
 function MaterialSaveTexture(mtrl,fname: pchar): real; stdcall;
