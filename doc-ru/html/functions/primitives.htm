@@ -122,6 +122,27 @@
 <BR><A>parent - id родителя для цилиндра (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="CylinderSetOptions"></A>
+<H1 class=name>CylinderSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>CylinderSetOptions</A>
+<A>( cylinder,topradius,bottomradius,height,slices,stacks,loops as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры цилиндра.</A>
+<BR><A>cylinder - id цилиндра</A>
+<BR><A>topradius - радиус верхнего основания</A>
+<BR><A>bottomradius - радиус нижнего основания</A>
+<BR><A>height - высота (значение по умолчанию: 1)</A>
+<BR><A>slices,stacks,loops - задают количество ребер, сегментов и концентрических окружностей.</A>
+<HR>
+
+<A name="CylinderGetOptions"></A>
+<H1 class=name>CylinderGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>CylinderGetOptions</A><A>( cylinder,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры цилиндра.</A>
+<BR><A>cylinder - id цилиндра</A>
+<BR><A>ind - индекс параметра (0 = topradius, 1 = bottomradius, 2 = height, 3 = slices, 4 = stacks, 5 = loops).</A>
+<HR>
+
+
 <A name="ConeCreate"></A>
 <H1 class=name>ConeCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>ConeCreate</A>
