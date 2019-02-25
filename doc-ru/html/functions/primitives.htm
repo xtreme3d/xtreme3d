@@ -282,6 +282,26 @@
 <BR><A>parent - id родителя для усеченной пирамиды (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="FrustrumSetOptions"></A>
+<H1 class=name>FrustrumSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>FrustrumSetOptions</A>
+<A>( frustrum,basewidth,basedepth,apexheight,cutheight as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры усеченной пирамиды.<A>
+<BR><A>frustrum - id пирамиды<A>
+<BR><A>basewidth,basedepth - ширина и глубина основания</A>
+<BR><A>apexheight - высота апекса (вершины, противолежащей основанию)</A>
+<BR><A>cutheight - высота отсечения.</A>
+<HR>
+
+<A name="FrustrumGetOptions"></A>
+<H1 class=name>FrustrumGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>FrustrumGetOptions</A><A>( frustrum,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры усеченной пирамиды.</A>
+<BR><A>frustrum - id пирамиды<A>
+<BR><A>ind - индекс параметра (0 = basewidth, 1 = basedepth, 2 = apexheight, 3 = cutheight).</A>
+<HR>
+
+
 <A name="DodecahedronCreate"></A>
 <H1 class=name>DodecahedronCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>DodecahedronCreate</A>
