@@ -250,6 +250,27 @@
 <BR><A>parent - id родителя для полого цилиндра (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="DiskSetOptions"></A>
+<H1 class=name>DiskSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>DiskSetOptions</A>
+<A>( disk,innerradius,outerradius,startangle,sweepangle,loops,slices as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры диска.<A>
+<BR><A>disk - id диска<A>
+<BR><A>innerradius - радиус внутренней окружности</A>
+<BR><A>outerradius - радиус внешней окружности</A>
+<BR><A>startangle,sweepangle - начальный и конечный угол сектора. Для замкнутого диска эти значения соответствуют 0, 360</A>
+<BR><A>loops,slices - задают количество концентрических окружностей и ребер.</A>
+<HR>
+
+<A name="DiskGetOptions"></A>
+<H1 class=name>DiskGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>DiskGetOptions</A><A>( disk,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры диска.</A>
+<BR><A>disk - id диска<A>
+<BR><A>ind - индекс параметра (0 = innerradius, 1 = outerradius, 2 = startangle, 3 = sweepangle, 4 = loops, 5 = slices).</A>
+<HR>
+
+
 <A name="FrustrumCreate"></A>
 <H1 class=name>FrustrumCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>FrustrumCreate</A>
