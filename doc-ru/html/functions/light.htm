@@ -64,6 +64,15 @@
 <BR><A>color - цвет компонента.</A>
 <HR>
 
+<A name="LightGetColor"></A>
+<H1 class=name>LightGetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>LightGetColor</A><A>( light,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает цветовой компонент источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>ind - индекс компонента (0 = Ambient, 1 = Diffuse, 2 = Specular).</A>
+<HR>
+
 <A name="LightSetAttenuation"></A>
 <H1 class=name>LightSetAttenuation</H1>
 <A class=type>real</A><A> = </A><A class=function>LightSetAttenuation</A><A>( light,constant,linear,quadratic  as </A>
@@ -80,12 +89,29 @@
 <BR><A>quadratic - квадратичная составляющая затухания.</A>
 <HR>
 
+<A name="LightGetAttenuation"></A>
+<H1 class=name>LightGetAttenuation</H1>
+<A class=type>real</A><A> = </A><A class=function>LightGetAttenuation</A><A>( light,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает составляющую затухания источника освещения.</A>
+<BR><A>light - id источника освещения</A>
+<BR><A>ind - индекс составляющей (0 = Constant, 1 = Linear, 2 = Quadratic).</A>
+<HR>
+
 <A name="LightSetShining"></A>
 <H1 class=name>LightSetShining</H1>
 <A class=type>real</A><A> = </A><A class=function>LightSetShining</A><A>( light,mode as </A><A class=type>real</A><A> );</A>
 <BR><A>Включает или выключает источник освещения.</A>
 <BR><A>light - id источника освещения</A>
 <BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="LightGetShining"></A>
+<H1 class=name>LightGetShining</H1>
+<A class=type>real</A><A> = </A><A class=function>LightGetShining</A><A>( light as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>Возвращает 1, если источник света включен, и 0 в противном случае.</A>
+<BR><A>light - id источника освещения.</A>
 <HR>
 
 <A name="LightSetSpotCutoff"></A>

@@ -67,6 +67,7 @@ begin
    result:=integer(GLCube1.NormalDirection);
 end;
 
+
 function PlaneSetOptions(plane,squad,xt,yt: real): real; stdcall;
 var
   GLPlane1: TGLPlane;
@@ -89,6 +90,7 @@ begin
   if index=1 then
     result:=GLPlane1.YTiles;	
 end;
+
 
 function SphereGetOptions(sph,ind: real): real; stdcall;
 var
@@ -128,6 +130,7 @@ sphr:=TGLSphere(trunc64(sphere));
   sphr.Stacks:=trunc64(staks);
   result:=1;
 end;
+
 
 function CylinderSetOptions(cyl,topr,botr,h,slic,staks,loop: real): real; stdcall;
 var
@@ -318,6 +321,7 @@ begin
   if (ind=3) then
       result:=fr1.Height;
 end;
+
 
 function ObjectGetMaterial(obj:real): pchar; stdcall;
 var

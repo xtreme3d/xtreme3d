@@ -176,8 +176,11 @@
 <BR><A class=funclink href=light.htm#LightSetAmbientColor>LightSetAmbientColor</A><A>(light,color)</A>
 <BR><A class=funclink href=light.htm#LightSetDiffuseColor>LightSetDiffuseColor</A><A>(light,color)</A>
 <BR><A class=funclink href=light.htm#LightSetSpecularColor>LightSetSpecularColor</A><A>(light,color)</A>
+<BR><A class=funclink href=light.htm#LightGetColor>LightGetColor</A><A>(light,ind)</A>
 <BR><A class=funclink href=light.htm#LightSetAttenuation>LightSetAttenuation</A><A>(light,constant,linear,quadratic)</A>
+<BR><A class=funclink href=light.htm#LightGetAttenuation>LightGetAttenuation</A><A>(light,ind)</A>
 <BR><A class=funclink href=light.htm#LightSetShining>LightSetShining</A><A>(light,mode)</A>
+<BR><A class=funclink href=light.htm#LightGetShining>LightGetShining</A><A>(light)</A>
 <BR><A class=funclink href=light.htm#LightSetSpotCutoff>LightSetSpotCutoff</A><A>(light,cutoff)</A>
 <BR><A class=funclink href=light.htm#LightSetSpotExponent>LightSetSpotExponent</A><A>(light,exponent)</A>
 <BR><A class=funclink href=light.htm#LightSetSpotDirection>LightSetSpotDirection</A><A>(light,x,y,z)</A>
@@ -240,6 +243,7 @@
 <BR><A class=funclink href=sprite.htm#SpriteCreate>SpriteCreate</A><A>(material,width,height,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteCreateEx>SpriteCreateEx</A><A>(width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetSize>SpriteSetSize</A><A>(sprite,width,height)</A>
+<BR><A class=funclink href=sprite.htm#SpriteGetSize>SpriteGetSize</A><A>(sprite,ind)</A>
 <BR><A class=funclink href=sprite.htm#SpriteScale>SpriteScale</A><A>(sprite,u,v)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetRotation>SpriteSetRotation</A><A>(sprite,angle)</A>
 <BR><A class=funclink href=sprite.htm#SpriteRotate>SpriteRotate</A><A>(sprite,angle)</A>
@@ -278,6 +282,7 @@
 <A class=funclink href=primitives.htm#PlaneCreate>PlaneCreate</A><A>(singlequad,width,height,xtiles,ytiles,parent)</A>
 <BR><A class=funclink href=primitives.htm#CubeCreate>CubeCreate</A><A>(width,height,depth,parent)</A>
 <BR><A class=funclink href=primitives.htm#CubeSetNormalDirection>CubeSetNormalDirection</A><A>(cube,nd)</A>
+<BR><A class=funclink href=primitives.htm#CubeGetNormalDirection>CubeGetNormalDirection</A><A>(cube)</A>
 <BR><A class=funclink href=primitives.htm#SphereCreate>SphereCreate</A><A>(radius,slices,stacks,parent)</A>
 <BR><A class=funclink href=primitives.htm#SphereSetAngleLimits>SphereSetAngleLimits</A><A>(sphere,start,stop,top,bottom)</A>
 <BR><A class=funclink href=primitives.htm#CylinderCreate>CylinderCreate</A><A>(topradius,bottomradius,height,slices,stacks,loops,parent)</A>
@@ -483,6 +488,8 @@
 <BR><A class=funclink href=object.htm#ObjectSetDiffuseColor>ObjectSetDiffuseColor</A><A>(object,color,alpha)</A>
 -->
 <BR><A class=funclink href=object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(object,material)</A>
+<BR><A class=funclink href=object.htm#ObjectGetMaterial>ObjectGetMaterial</A><A>(object)</A>
+
 <BR><A class=funclink href=object.htm#ObjectGetDistance>ObjectGetDistance</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckCubeVsCube>ObjectCheckCubeVsCube</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckSphereVsSphere>ObjectCheckSphereVsSphere</A><A>(object1,object2)</A>
@@ -564,10 +571,18 @@
 
 <BR><A class=funclink href=material.htm#MaterialCubeMapFromScene>MaterialCubeMapFromScene</A><A>(material,viewer,camera,res)</A>
 
+<BR><A class=funclink href=material.htm#MaterialDestroy>MaterialDestroy</A><A>(material)</A>
+
+<BR><A class=funclink href=material.htm#MaterialSetName>MaterialSetName</A><A>(material,name)</A>
+
 <BR><A class=funclink href=material.htm#MaterialSetAmbientColor>MaterialSetAmbientColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetDiffuseColor>MaterialSetDiffuseColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetEmissionColor>MaterialSetEmissionColor</A><A>(material,color,alpha)</A>
 <BR><A class=funclink href=material.htm#MaterialSetSpecularColor>MaterialSetSpecularColor</A><A>(material,color,alpha)</A>
+
+<BR><A class=funclink href=material.htm#MaterialGetColor>MaterialGetColor</A><A>(material,ind)</A>
+<BR><A class=funclink href=material.htm#MaterialGetAlpha>MaterialGetAlpha</A><A>(material,ind)</A>
+
 <BR><A class=funclink href=material.htm#MaterialSetShininess>MaterialSetShininess</A><A>(material,shininess)</A>
 <BR><A class=funclink href=material.htm#MaterialSetPolygonMode>MaterialSetPolygonMode</A><A>(material,pm)</A>
 
@@ -1021,6 +1036,9 @@
 <BR><A class=funclink href=grid.htm#GridSetColor>GridSetColor</A><A>(grid,color,alpha)</A>
 <BR><A class=funclink href=grid.htm#GridSetSize>GridSetSize</A><A>(grid,size)</A>
 <BR><A class=funclink href=grid.htm#GridSetPattern>GridSetPattern</A><A>(grid,pattern)</A>
+
+<BR><A class=funclink href=grid.htm#GridSetTile>GridSetTile</A><A>(grid,x,y,z)</A>
+<BR><A class=funclink href=grid.htm#GridSetStep>GridSetStep</A><A>(grid,step)</A>
 <BR>
 <BR>
 <A name="ClipPlane"></A>

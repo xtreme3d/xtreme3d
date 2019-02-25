@@ -1,5 +1,13 @@
 Xtreme3D version history
 ========================
+v3.7.1 (by FireRun) - 05/08/2018
+------------------------------
+- LightGetColor, LightGetShining, LightGetAttenuation
+- SphereOptions, SphereGetOptions, CylinderOptions, CylinderGetOptions, etc.
+- ObjectGetMaterial
+- MaterialGetColor, MaterialGetAlpha
+- GridSetTile, GridSetStep.
+
 v3.7.0 (by Gecko) - 21/07/2018
 ------------------------------
 - LightFX system that allows to use more than 8 light sources in a scene. Lights are sorted per object based on distance, and then 8 nearest lights are used to render an object. lsParallel lights have higher priority over lsOmni and lsSpot lights. The system is compatible with built-in shaders. To use the system, a LightFX effect should be applied to an object (LightFXCreate function). It works for object's children as well

@@ -88,6 +88,13 @@
 <BR><A>filename - путь к файлу текстуры.</A>
 <HR>
 
+<A name="MaterialDestroy"></A>
+<H1 class=name>MaterialDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialDestroy</A><A>( material as </A><A class=type>string</A><A> );</A>
+<BR><A>”дал€ет материал из активной библиотеки.</A>
+<BR><A>material - им€ материала.</A>
+<HR>
+
 <A name="MaterialAddCubeMap"></A>
 <H1 class=name>MaterialAddCubeMap</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialAddCubeMap</A><A>( material as </A><A class=type>string</A><A> );</A>
@@ -131,6 +138,14 @@ Cubemap-материалы обычно используютс€ дл€ водных поверхностей и изделий из метал
 <BR><A>res - разрешение.</A>
 <HR>
 
+<A name="MaterialSetName"></A>
+<H1 class=name>MaterialSetName</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialSetName</A><A>( material,name as </A><A class=type>string</A><A> );</A>
+<BR><A>«адает им€ материалу.</A>
+<BR><A>material - им€ материала</A>
+<BR><A>name - новое им€ материала.</A>
+<HR>
+
 <A name="MaterialSetAmbientColor"></A>
 <H1 class=name>MaterialSetAmbientColor</H1>
 <A class=type>real</A><A> = </A><A class=function>MaterialSetAmbientColor</A><A>( material as </A><A class=type>string</A><A>, color,alpha as </A><A class=type>real</A> );</A>
@@ -165,6 +180,24 @@ Cubemap-материалы обычно используютс€ дл€ водных поверхностей и изделий из метал
 <BR><A>material - им€ материала</A>
 <BR><A>color - цвет</A>
 <BR><A>alpha - прозрачность.</A>
+<HR>
+
+<A name="MaterialGetColor"></A>
+<H1 class=name>MaterialGetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGetColor</A><A>( material as </A><A class=type>string</A><A>, ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>¬озвращает цветовой компонент материала.</A>
+<BR><A>material - им€ материала</A>
+<BR><A>ind - индекс компонента (0 = Ambient, 1 = Diffuse, 2 = Specular, 3 = Emission).</A>
+<HR>
+
+<A name="MaterialGetAlpha"></A>
+<H1 class=name>MaterialGetAlpha</H1>
+<A class=type>real</A><A> = </A><A class=function>MaterialGetAlpha</A><A>( material as </A><A class=type>string</A><A>, ind as </A>
+<A class=type>real</A><A> );</A>
+<BR><A>¬озвращает значение прозрачности (alpha) цветового компонента материала.</A>
+<BR><A>material - им€ материала</A>
+<BR><A>ind - индекс компонента (0 = Ambient, 1 = Diffuse, 2 = Specular, 3 = Emission).</A>
 <HR>
 
 <A name="MaterialSetShininess"></A>

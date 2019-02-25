@@ -139,6 +139,24 @@
 <BR>- Новые функции для работы с окнами (WindowSetIcon, WindowIsShowing).
 <BR>- Функция ViewerResetPerformanceMonitor, решающая проблему с постепенным увеличением FPS.
 <BR>- Выводятся сообщения об ошибке при загрузке ресурсов (для Freeform, Actor и текстур). Вывод сообщений можно отключить функцией EngineShowLoadingErrors, в этом случае движок будет просто игнорировать ошибку и работать дальше.
+<BR>
+<BR><B>Xtreme3D 3.7.1 (05.08.18)</B>
+<BR>
+<BR>Патч для версии 3.7, добавляющий вспомогательные функции для некоторых типов объектов.
+<BR>- Функции для возврата данных о источниках света (LightGetColor, LightGetShining, LightGetAttenuation)
+<BR>- Функции для изменения и возврата опций примитивов (SphereOptions, SphereGetOptions, CylinderOptions, CylinderGetOptions и др.)
+<BR>- Функция, возвращающая имя материала объекта (ObjectGetMaterial)
+<BR>- Функции для возврата цвета и прозрачности у материалов (MaterialGetColor, MaterialGetAlpha)
+<BR>- Функции для изменения параметров сетки (GridSetTille, GridSetStep).
+<BR>
+<BR><B>Xtreme3D 3.7.2 (26.02.19)</B>
+<BR>
+<BR>Второе обновление в серии 3.7.
+<BR>- Функция HUDSpriteSetSize.
+<BR>- Функции MaterialDestroy, MaterialSetName.
+<BR>- Система TextureEx теперь поддерживает 16 текстурных слотов вместо 8 - соответственно, во фрагментный шейдер можно передавать 16 текстур, если видеокарта поддерживает такое количество текстурных блоков.
+<BR>- Добавлена возможность отвязки шейдера от материала путем вызова MaterialSetShader с нулевым указателем: MaterialSetShader('material', 0).
+<BR>- Добавлена функция LineSetNode.
 </A>
 
 </DIV>
