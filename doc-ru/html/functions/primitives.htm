@@ -19,10 +19,27 @@
 <H1 class=name>PlaneCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>PlaneCreate</A><A>( singlequad,width,height,xtiles,ytiles,parent as </A><A class=type>real</A><A>);</A>
 <BR><A>Создает плоскость и возвращает ее id.</A>
-<BR><A>singlequad - определяет, разбивать ли плоскость на сетку, или представить ее одним квадратом - </A><A class=constant>false</A><A> или </A><A class=constant>true</A><A> (0 и 1 соответственно). При использовании освещения, как правило, лучше разбить плоскость.</A>
+<BR><A>singlequad - определяет, разбивать ли плоскость на сетку, или представить ее одним квадратом - </A><A class=constant>false</A><A> или </A><A class=constant>true</A><A> (0 и 1 соответственно). При использовании освещения, как правило, лучше разбить плоскость</A>
 <BR><A>width,height - ширина и высота плоскости</A>
 <BR><A>xtiles,ytiles - при singlequad = 0 задают количество ячеек сетки по горизонтали и вертикали</A>
 <BR><A>parent - id родителя для плоскости (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="PlaneSetOptions"></A>
+<H1 class=name>PlaneSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>PlaneSetOptions</A><A>( plane,singlequad,xtiles,ytiles as </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры плоскости.</A>
+<BR><A>plane - id плоскости<A>
+<BR><A>singlequad - определяет, разбивать ли плоскость на сетку, или представить ее одним квадратом - </A><A class=constant>false</A><A> или </A><A class=constant>true</A><A> (0 и 1 соответственно). При использовании освещения, как правило, лучше разбить плоскость</A>
+<BR><A>xtiles,ytiles - при singlequad = 0 задают количество ячеек сетки по горизонтали и вертикали.</A>
+<HR>
+
+<A name="PlaneGetOptions"></A>
+<H1 class=name>PlaneGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>PlaneGetOptions</A><A>( plane,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры плоскости.</A>
+<BR><A>plane - id плоскости<A>
+<BR><A>ind - индекс параметра (0 = xtiles, 1 = ytiles).</A>
 <HR>
 
 <A name="CubeCreate"></A>
