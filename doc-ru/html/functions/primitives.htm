@@ -59,6 +59,23 @@
 <BR><A>parent - id родителя для сферы (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="SphereSetOptions"></A>
+<H1 class=name>SphereSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>SphereSetOptions</A><A>( sphere,radius,slices,stacks as </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры сферы.</A>
+<BR><A>sphere - id сферы</A>
+<BR><A>radius - радиус сферы</A>
+<BR><A>slices,stacks - задают количество меридиан и параллелей.</A>
+<HR>
+
+<A name="SphereGetOptions"></A>
+<H1 class=name>SphereGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>SphereGetOptions</A><A>( sphere,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры сферы.</A>
+<BR><A>sphere - id сферы</A>
+<BR><A>ind - индекс параметра (0 = radius, 1 = slices, 2 = stacks).</A>
+<HR>
+
 <A name="SphereSetAngleLimits"></A>
 <H1 class=name>SphereSetAngleLimits</H1>
 <A class=type>real</A><A> = </A><A class=function>SphereSetAngleLimits</A><A>( sphere,start,stop,top,bottom as </A><A class=type>real</A><A>);</A>
@@ -66,6 +83,14 @@
 <BR><A>sphere - id сферы</A>
 <BR><A>start,stop - cведения отсутствуют</A>
 <BR><A>top,bottom - cведения отсутствуют.</A>
+<HR>
+
+<A name="SphereGetAngleLimits"></A>
+<H1 class=name>SphereGetAngleLimits</H1>
+<A class=type>real</A><A> = </A><A class=function>SphereGetAngleLimits</A><A>( sphere,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>sphere - id сферы</A>
+<BR><A>ind - индекс параметра (0 = start, 1 = stop, 2 = top, 3 = bottom).</A>
 <HR>
 
 <A name="CylinderCreate"></A>
