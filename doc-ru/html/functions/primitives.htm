@@ -154,6 +154,26 @@
 <BR><A>parent - id родителя для конуса (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="ConeSetOptions"></A>
+<H1 class=name>ConeSetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>ConeSetOptions</A>
+<A>( cone,bottomradius,height,slices,stacks,loops as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает параметры конуса<A>
+<BR><A>cone - id конуса<A>
+<BR><A>bottomradius - радиус основания</A>
+<BR><A>height - высота (значение по умолчанию: 1)</A>
+<BR><A>slices,stacks,loops - задают количество ребер, сегментов и концентрических окружностей.</A>
+<HR>
+
+<A name="ConeGetOptions"></A>
+<H1 class=name>ConeGetOptions</H1>
+<A class=type>real</A><A> = </A><A class=function>ConeGetOptions</A><A>( cone,ind as </A><A class=type>real</A><A>);</A>
+<BR><A>Возвращает параметры цилиндра.</A>
+<BR><A>cone - id цилиндра</A>
+<BR><A>ind - индекс параметра (0 = bottomradius, 1 = height, 2 = slices, 3 = stacks, 4 = loops).</A>
+<HR>
+
+
 <A name="AnnulusCreate"></A>
 <H1 class=name>AnnulusCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>AnnulusCreate</A>
