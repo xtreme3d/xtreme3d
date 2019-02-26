@@ -1,7 +1,15 @@
 Xtreme3D version history
 ========================
-v3.7.1 (by FireRun) - 05/08/2018
+v3.7.2 (by Gecko) - 26/02/2019
 ------------------------------
+- SpriteGetSize.
+- MaterialDestroy, MaterialSetName.
+- TextureEx now supports up to 16 texture units instead of 8.
+- MaterialSetShader now allows to disable a shader by passing zero pointer to it: MaterialSetShader('material', 0).
+- LineSetNode.
+
+v3.7.1 (by FireRun) - 05/08/2018
+--------------------------------
 - LightGetColor, LightGetShining, LightGetAttenuation
 - SphereOptions, SphereGetOptions, CylinderOptions, CylinderGetOptions, etc.
 - ObjectGetMaterial
