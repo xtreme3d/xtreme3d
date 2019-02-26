@@ -351,6 +351,7 @@ CameraMoveInEyeSpace, CameraMoveTargetInEyeSpace, CameraPointInFront, CameraGetF
 LightCreate, LightSetAmbientColor, LightSetDiffuseColor, LightSetSpecularColor,
 LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
 LightSetSpotDirection, LightSetStyle,
+LightGetColor, LightGetAttenuation, LightGetShining,
 // LightFx
 LightFXCreate, 
 //Font & Text
@@ -368,6 +369,7 @@ SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
 SpriteRotate, SpriteMirror, SpriteNoZWrite,
 SpriteCreateEx, HUDSpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
 SpriteSetOrigin,
+SpriteGetSize,
 //HUDShapes
 HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
 HUDShapeSetRotation, HUDShapeSetColor,
@@ -380,6 +382,13 @@ HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
 CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
 CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
 DodecahedronCreate, IcosahedronCreate, TeapotCreate,
+
+CubeGetNormalDirection, PlaneSetOptions, PlaneGetOptions, SphereGetOptions,
+SphereGetAngleLimits, SphereSetOptions, CylinderSetOptions, CylinderGetOptions,
+ConeGetOptions, ConeSetOptions, AnnulusSetOptions, AnnulusGetOptions,
+TorusSetOptions, TorusGetOptions, DiskSetOptions, DiskGetOptions,
+FrustrumSetOptions, FrustrumGetOptions,
+
 //Actor
 ActorCreate, ActorCopy, ActorSetAnimationRange, ActorGetCurrentFrame, ActorSwitchToAnimation,
 ActorSwitchToAnimationName, ActorSynchronize, ActorSetInterval, ActorSetAnimationMode,
@@ -476,6 +485,8 @@ ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
 ObjectSetMatrixColumn,
 ObjectExportMatrix, ObjectExportAbsoluteMatrix,
 ObjectInFrustum,
+ObjectGetScale,
+ObjectGetMaterial,
 //Polygon
 PolygonCreate, PolygonAddVertex, PolygonSetVertexPosition, PolygonDeleteVertex,
 //Material
@@ -508,6 +519,8 @@ MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
 MaterialEnableTextureEx, MaterialHasTextureEx,
 MaterialSetTextureExFromLibrary,
 MaterialCullFrontFaces, MaterialSetZWrite,
+MaterialDestroy, MaterialSetName,
+MaterialGetColor, MaterialGetAlpha,
 //Shaders
 ShaderEnable, 
 BumpShaderCreate,
@@ -636,7 +649,7 @@ ObjectHashDeleteItem, ObjectHashGetItemCount,
 ObjectHashClear, ObjectHashDestroy,
 //Grid
 GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
-GridSetColor, GridSetSize, GridSetPattern,
+GridSetColor, GridSetSize, GridSetPattern, GridSetTile, GridSetStep,
 //ClipPlane
 ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
 //MemoryViewer
