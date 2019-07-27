@@ -108,9 +108,9 @@ function OdeDynamicCreate(obj: real): real; stdcall;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := TGLODEDynamic.Create(TGLBaseSceneObject(trunc64(obj)).Behaviours);//GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
   dyna.Manager := ode;
-  result := 1.0;
+  result := Integer(dyna);
 end;
 
 // New function

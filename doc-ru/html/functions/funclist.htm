@@ -94,6 +94,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerSetAutoRender>ViewerSetAutoRender</A><A>(viewer,mode)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRender>ViewerRender</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderToFile>ViewerRenderToFile</A><A>(viewer,filename)</A>
+<BR><A class=funclink href=viewer.htm#ViewerRenderToFilePNG>ViewerRenderToFilePNG</A><A>(viewer,filename)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderEx>ViewerRenderEx</A><A>(viewer,object,clear,swap,updateFPS)</A>
 
 <BR><A class=funclink href=viewer.htm#ViewerResize>ViewerResize</A><A>(viewer,x,y,width,height)</A>
@@ -111,6 +112,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerSetFogDistance>ViewerSetFogDistance</A><A>(viewer,start,end)</A>
 <BR><A class=funclink href=viewer.htm#ViewerScreenToWorld>ViewerScreenToWorld</A><A>(viewer,x,y,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerWorldToScreen>ViewerWorldToScreen</A><A>(viewer,x,y,ind)</A>
+<BR><A class=funclink href=viewer.htm#ViewerPixelRayToWorld>ViewerPixelRayToWorld</A><A>(viewer,x,y,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerCopyToTexture>ViewerCopyToTexture</A><A>(viewer,material)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetFramesPerSecond>ViewerGetFramesPerSecond</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetPickedObject>ViewerGetPickedObject</A><A>(viewer,x,y)</A>
@@ -120,6 +122,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerPixelToDistance>ViewerPixelToDistance</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetAntiAliasing>ViewerSetAntiAliasing</A><A>(viewer,aa)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetOverrideMaterial>ViewerSetOverrideMaterial</A><A>(viewer,matlib,material)</A>
+<BR><A class=funclink href=viewer.htm#ViewerShadeModel>ViewerShadeModel</A><A>(viewer,smooth)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetFBOSupported>ViewerGetFBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetVBOSupported>ViewerGetVBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetGLSLSupported>ViewerGetGLSLSupported</A><A>(viewer)</A>
@@ -240,6 +243,8 @@
 <A class=funclink href=sprite.htm#HUDSpriteCreate>HUDSpriteCreate</A><A>(material,width,height,parent)</A>
 <BR><A class=funclink href=sprite.htm#HUDSpriteCreateEx>HUDSpriteCreateEx</A><A>(width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#HUDSpriteGetMouseOver>HUDSpriteGetMouseOver</A><A>(sprite,viewer)</A>
+<BR><A class=funclink href=sprite.htm#HUDSpriteXTiles>HUDSpriteXTiles</A><A>(sprite,xtiles)</A>
+<BR><A class=funclink href=sprite.htm#HUDSpriteYTiles>HUDSpriteYTiles</A><A>(sprite,ytiles)</A>
 <BR><A class=funclink href=sprite.htm#SpriteCreate>SpriteCreate</A><A>(material,width,height,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteCreateEx>SpriteCreateEx</A><A>(width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteSetSize>SpriteSetSize</A><A>(sprite,width,height)</A>
@@ -332,13 +337,18 @@
 <BR><A class=funclink href=actor.htm#ActorGetCurrentFrame>ActorGetCurrentFrame</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor,anim,smooth)</A>
 <BR><A class=funclink href=actor.htm#ActorSwitchToAnimationName>ActorSwitchToAnimationName</A><A>(actor,animname,smooth)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationNextFrame>ActorAnimationNextFrame</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationPrevFrame>ActorAnimationPrevFrame</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorSynchronize>ActorSynchronize</A><A>(actor1,actor2)</A>
 <BR><A class=funclink href=actor.htm#ActorSetInterval>ActorSetInterval</A><A>(actor,interval)</A>
 <BR><A class=funclink href=actor.htm#ActorSetAnimationMode>ActorSetAnimationMode</A><A>(actor,aam)</A>
 <BR><A class=funclink href=actor.htm#ActorSetFrameInterpolation>ActorSetFrameInterpolation</A><A>(actor,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorAddObject>ActorAddObject</A><A>(actor,filename)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationDestroy>ActorAnimationDestroy</A><A>(actor,index)</A>
 <BR><A class=funclink href=actor.htm#ActorGetCurrentAnimation>ActorGetCurrentAnimation</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetFrameCount>ActorGetFrameCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorGetAnimationCount>ActorGetAnimationCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorGetAnimationName>ActorGetAnimationName</A><A>(actor,index)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneCount>ActorGetBoneCount</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneByName>ActorGetBoneByName</A><A>(actor,bonename)</A>
 <BR><A class=funclink href=actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor,boneindex,x,y,z)</A>
@@ -357,6 +367,7 @@
 <BR><A class=funclink href=actor.htm#ActorQ3TagExportMatrix>ActorQ3TagExportMatrix</A><A>(actor,taglist,tagname,object)</A>
 <BR><A class=funclink href=actor.htm#ActorLoadQ3Animations>ActorLoadQ3Animations</A><A>(actor,filename,classname)</A>
 <BR><A class=funclink href=actor.htm#ActorMeshObjectsCount>ActorMeshObjectsCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorTriangleCount>ActorTriangleCount</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorMeshSetVisible>ActorMeshSetVisible</A><A>(actor,mesh,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupsCount>ActorFaceGroupsCount</A><A>(actor,mesh)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupGetMaterialName>ActorFaceGroupGetMaterialName</A><A>(actor,mesh,fgroup)</A>
@@ -396,6 +407,9 @@
 <BR><A class=funclink href=freeform.htm#FreeformMeshVerticesCount>FreeformMeshVerticesCount</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshTriangleCount>FreeformMeshTriangleCount</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshObjectsCount>FreeformMeshObjectsCount</A><A>(freeform)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectGetName>FreeformMeshObjectGetName</A><A>(freeform,mesh)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectSetName>FreeformMeshObjectSetName</A><A>(freeform,mesh,name)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectDestroy>FreeformMeshObjectDestroy</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshAddFaceGroup>FreeformMeshAddFaceGroup</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupAddTriangle>FreeformMeshFaceGroupAddTriangle</A><A>(freeform,mesh,fgroup,v1,v2,v3)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupTriangleCount>FreeformMeshFaceGroupTriangleCount</A><A>(freeform,mesh,fgroup)</A>
@@ -538,6 +552,7 @@
 <BR><A class=funclink href=object.htm#ObjectGetChild>ObjectGetChild</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetIndex>ObjectGetIndex</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectFindChild>ObjectFindChild</A><A>(object,name)</A>
+<BR><A class=funclink href=object.htm#ObjectFindByName >ObjectFindByName</A><A>(name)</A>
 <BR><A class=funclink href=object.htm#ObjectGetBoundingsphereRadius>ObjectGetBoundingsphereRadius</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteUp>ObjectGetAbsoluteUp</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectSetAbsoluteUp>ObjectSetAbsoluteUp</A><A>(object,x,y,z)</A>
@@ -759,6 +774,7 @@
 <BR><A class=funclink href=firefx.htm#FireFXSetBurst>FireFXSetBurst</A><A>(manager,burst)</A>
 <BR><A class=funclink href=firefx.htm#FireFXSetRadius>FireFXSetRadius</A><A>(manager,radius)</A>
 <BR><A class=funclink href=firefx.htm#FireFXExplosion>FireFXExplosion</A><A>(manager,isp,maxsp,lbf)</A>
+<BR><A class=funclink href=firefx.htm#FireFXRingExplosion>FireFXRingExplosion</A><A>(manager,isp,maxsp,lbf,rx,ry,rz,sx,sy,sz)</A>
 <BR>
 <BR>
 <A name="Lensflare"></A>
@@ -936,6 +952,8 @@
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetPosition>MovementPathNodeSetPosition</A><A>(node,x,y,z)</A>
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetRotation>MovementPathNodeSetRotation</A><A>(node,pitch,turn,roll)</A>
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetSpeed>MovementPathNodeSetSpeed</A><A>(node,speed)</A>
+<BR><A class=funclink href=movement.htm#MovementPathShow>MovementPathShow</A><A>(path,show)</A>
+<BR><A class=funclink href=movement.htm#MovementPathSetLoop>MovementPathSetLoop</A><A>(path,loop)</A>
 <BR>
 <BR>
 <A name="DCE"></A>

@@ -19,7 +19,8 @@ uses
   GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
   GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
   GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx,
-  Keyboard, Forms, Kraft, GLKraft, GLFileFBX, GLCrossPlatform;
+  Keyboard, Forms, Kraft, GLKraft, GLFileFBX, GLCrossPlatform, GLExtrusion,
+  GLTilePlane,GLVerletClothify, GLVerletSkeletonColliders, VerletClasses;
 
 type
    TEmpty = class(TComponent)
@@ -659,7 +660,7 @@ MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 FBOCreate, FBOSetCamera, FBOSetViewer,
 FBORenderObject, FBORenderObjectEx,
 FBOSetOverrideMaterial,
-FBOSetColorTextureFormat,
+FBOSetColorTextureFormat ,
 //ShadowMap
 ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
 ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
@@ -732,7 +733,7 @@ KraftShapeSetPosition, KraftShapeGetPosition,
 KraftJointSetAnchor1, KraftJointSetAnchor2,
 KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 
-// New functions in 3.8
+// ----------New functions in 3.8----------
 SpriteGetSize, MaterialDestroy, MaterialSetName,
 LightGetColor, LightGetAttenuation, LightGetShining,
 CubeGetNormalDirection, PlaneSetOptions, PlaneGetOptions,
@@ -742,7 +743,31 @@ ConeGetOptions, ConeSetOptions, AnnulusSetOptions,
 AnnulusGetOptions, TorusSetOptions, TorusGetOptions,
 DiskSetOptions, DiskGetOptions, FrustrumSetOptions,
 FrustrumGetOptions, ObjectGetMaterial, MaterialGetColor,
-MaterialGetAlpha, GridSetTile, GridSetStep;
+MaterialGetAlpha, GridSetTile, GridSetStep, ViewerRenderToFilePNG,
+ViewerPixelRayToWorld, ViewerShadeModel,
+PipeCreate, PipeAddNode, PipeSetDivision, PipeSetSplineMode, PipeDeleteNode,
+PipeSetRadius, PipeSetNode, PipeSetSlices,
+ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy,
+ActorAnimationNextFrame, ActorAnimationPrevFrame,ActorTriangleCount,
+MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
+HUDSpriteXTiles, HUDSpriteYTiles,
+TilePlaneCreate, TilePlaneSetTile,
+FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
+ObjectFindByName, FireFXRingExplosion, ActorSetFrame ,
+
+//VerletWorld
+VerletWorldCreate, VerletWorldCreateOctree, VerletWorldGravityCreate, VerletWorldGravitySetDirection, VerletWorldUpdate, EdgeDetectorCreate,
+VerletConstraintFloorCreate,VerletConstraintFloorSetNormal, VerletConstraintSetPosition,
+VerletConstraintSetFrictionRatio, VerletConstraintSetEnabled ,
+VerletConstraintFloorSetObjectLocations ,VerletConstraintSphereCreate,VerletConstraintCylinderCreate,
+VerletConstraintCubeCreate, VerletConstraintCubeCreateSetCube, VerletConstraintCubeSetDirection, VerletConstraintCapsuleCreate,
+VerletConstraintCylinderSetAxis, VerletConstraintCapsuleSetAxis,
+VerletGetNodeCount, VerletNodeNailedDown,VerletNodeSetPosition, VerletNodeSetRadius,
+VerletNodeSetFriction, VerletNodeSetWeight, VerletNodeApplyFriction, EdgeDetectorSetWeldDistance,
+VerletAirResistanceCreate, VerletAirResistanceSetWindDirection,
+VerletAirResistanceSetWindMagnitude, VerletAirResistanceSetWindChaos,
+VerletConstraintGetCount, VerletConstraintSetSlack,
+VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime;
 
 begin
 end.

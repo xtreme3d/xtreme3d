@@ -121,3 +121,13 @@ begin
   ffxMngr.IsotropicExplosion(isp, maxsp, lbf);
   result := 1.0;
 end;
+
+function FireFXRingExplosion(mngr, isp, maxsp, lbf,rx,ry,rz,sx,sy,sz: real): real; stdcall;
+var
+  ffxMngr: TGLFireFXManager;
+begin
+  ffxMngr := TGLFireFXManager(trunc64(mngr));
+  ffxMngr.RingExplosion(isp, maxsp, lbf,AffineVectorMake(rx,ry,rz),AffineVectorMake(sx,sy,sz));
+  result := 1.0;
+end;
+

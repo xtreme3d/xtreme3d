@@ -12,6 +12,7 @@ begin
   
   try
     GLActor1.LoadFromFile(String(fname));
+	GLActor1.BuildSilhouetteConnectivityData;
   except
     On E: Exception do
     begin
@@ -406,5 +407,14 @@ var
 begin
   act := TGLActor(trunc64(actor));
   act.MeshObjects[trunc64(mesh)].Visible := Boolean(trunc64(mode));
+  result := 1.0;
+end;
+
+function ActorSetFrame(actor, frame: real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act := TGLActor(trunc64(actor));
+  act.CurrentFrame:=trunc64(frame);
   result := 1.0;
 end;
