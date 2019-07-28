@@ -105,12 +105,16 @@ HostApplication=
 Launcher=
 UseLauncher=0
 DebugCWD=
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=3
-MinorVer=7
-Release=2
+MinorVer=8
+Release=0
 Build=0
 Debug=0
 PreRelease=0
@@ -122,14 +126,20 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=Gecko
 FileDescription=Xtreme3D Engine
-FileVersion=3.7.2.0
+FileVersion=3.8.0.0
 InternalName=Xtreme3D
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=xtreme3d.dll
 ProductName=Xtreme3D
-ProductVersion=3.7.2.0
+ProductVersion=3.8.0.0
 Comments=
+[Excluded Packages]
+c:\program files (x86)\borland\delphi7\Projects\Bpl\GLSS_FMOD7.bpl=GLScene - FMOD Manager
+c:\program files (x86)\borland\delphi7\Projects\Bpl\GLSS_BASS7.bpl=GLScene - BASS Manager
+c:\program files (x86)\borland\delphi7\Projects\Bpl\GLS_ODE7.bpl=GLScene - ODE Manager
+c:\program files (x86)\borland\delphi7\Projects\Bpl\GLS_SDL7.bpl=GLScene - SDL Driver
+c:\program files (x86)\borland\delphi7\Projects\Bpl\GLCg7.bpl=GLScene - Cg Shaders
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

@@ -73,7 +73,7 @@ begin
   ob := TGLBaseSceneObject(trunc64(obj));
   dyn := GetOrCreateDCEDynamic(ob);
   dyn.Manager := TGLDCEManager(trunc64(man));
-  Result := 1;
+  Result := Integer(dyn);
 end;
 
 function DceDynamicSetActive(obj, mode: real): real; stdcall;
@@ -214,10 +214,14 @@ begin
 end;
 
 function DceStaticSetManager(obj, man: real): real; stdcall;
+var
+st: TGLDCEStatic;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Manager :=
-    TGLDCEManager(trunc64(man));
-  Result := 1;
+//GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Manager :=TGLDCEManager(trunc64(man));
+  st:= GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj)));
+  st.Manager:=    TGLDCEManager(trunc64(man));
+
+  Result := Integer(st);
 end;
 
 function DceStaticSetActive(obj, mode: real): real; stdcall;

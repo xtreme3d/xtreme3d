@@ -42,12 +42,21 @@
 <BR><A>start,end - начальный и конечный кадр. ќтсчет кадров начинаетс€ с нул€.</A>
 <HR>
 
+<A name="ActorSetFrame"></A>
+<H1 class=name>ActorSetFrame</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorSetFrame</A><A>( actor,frame as </A><A class=type>real</A><A> );</A>
+<BR><A>«адает текущий кадр анимации.</A>
+<BR><A>actor - id актера</A>
+<BR><A>frame - кадр</A>
+<HR>
+
 <A name="ActorGetCurrentFrame"></A>
 <H1 class=name>ActorGetCurrentFrame</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorGetCurrentFrame</A><A>( actor as </A><A class=type>real</A><A> );</A>
 <BR><A>¬озвращает текущий кадр анимации.</A>
 <BR><A>actor - id актера</A>
 <HR>
+
 
 <A name="ActorSwitchToAnimation"></A>
 <H1 class=name>ActorSwitchToAnimation</H1>
@@ -65,6 +74,20 @@
 <BR><A>actor - id актера</A>
 <BR><A>anim - им€ анимации</A>
 <BR><A>smooth - плавный или резкий переход: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ActorAnimationNextFrame"></A>
+<H1 class=name>ActorAnimationNextFrame</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorAnimationNextFrame</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>ѕереключает кадр анимации на шаг вперед.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorAnimationPrevFrame"></A>
+<H1 class=name>ActorAnimationPrevFrame</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorAnimationPrevFrame</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>ѕереключает кадр анимации на шаг назад.</A>
+<BR><A>actor - id актера</A>
 <HR>
 
 <A name="ActorSynchronize"></A>
@@ -113,6 +136,14 @@
 <BR><A>fname - путь к файлу *.smd с анимацией.</A>
 <HR>
 
+<A name="ActorAnimationDestroy"></A>
+<H1 class=name>ActorAnimationDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorAnimationDestroy</A><A>( actor,index as </A><A class=type>real</A><A> );</A>
+<BR><A>”дал€ет анимацию актера под индексом index.</A>
+<BR><A>actor - id актера</A>
+<BR><A>index - индекс анимации</A>
+<HR>
+
 <A name="ActorGetCurrentAnimation"></A>
 <H1 class=name>ActorGetCurrentAnimation</H1>
 <A class=type>string,real</A><A> = </A><A class=function>ActorGetCurrentAnimation</A><A>( actor as </A><A class=type>real</A><A> );</A>
@@ -125,6 +156,21 @@
 <A class=type>real</A><A> = </A><A class=function>ActorGetFrameCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
 <BR><A>¬озвращает общее количество кадров анимации.</A>
 <BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorGetAnimationCount"></A>
+<H1 class=name>ActorGetAnimationCount</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorGetAnimationCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>¬озвращает количество анимаций актера.</A>
+<BR><A>actor - id актера</A>
+<HR>
+
+<A name="ActorGetAnimationName"></A>
+<H1 class=name>ActorGetAnimationName</H1>
+<A class=type>string</A><A> = </A><A class=function>ActorGetAnimationName</A><A>( actor,index as </A><A class=type>real</A><A> );</A>
+<BR><A>¬озвращает им€ анимации под индексом index.</A>
+<BR><A>actor - id актера</A>
+<BR><A>index - индекс анимации</A>
 <HR>
 
 <A name="ActorGetBoneCount"></A>
@@ -271,6 +317,13 @@
 <H1 class=name>ActorMeshObjectsCount</H1>
 <A class=type>real</A><A> = </A><A class=function>ActorMeshObjectsCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
 <BR><A>¬озвращает количество мешей в модели актера.</A>
+<BR><A>actor - id актера.</A>
+<HR>
+
+<A name="ActorTriangleCount"></A>
+<H1 class=name>ActorTriangleCount</H1>
+<A class=type>real</A><A> = </A><A class=function>ActorTriangleCount</A><A>( actor as </A><A class=type>real</A><A> );</A>
+<BR><A>¬озвращает количество треугольников в модели актера.</A>
 <BR><A>actor - id актера.</A>
 <HR>
 

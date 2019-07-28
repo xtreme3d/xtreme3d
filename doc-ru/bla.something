@@ -392,6 +392,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Verlet">
+                        <param name="Local" value="functions/verlet.htm">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Mouse">
                         <param name="Local" value="functions/mouse.htm">
                         <param name="ImageNumber" value="0">

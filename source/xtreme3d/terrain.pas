@@ -8,6 +8,7 @@ begin
   result:=Integer(GLBitmapHDS1);
 end;
 
+
 function BmpHDSSetInfiniteWarp(hds,iwarp: real): real; stdcall;
 var
   GLBitmapHDS1: TGLBitmapHDS;

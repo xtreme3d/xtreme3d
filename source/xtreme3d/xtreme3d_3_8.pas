@@ -396,3 +396,718 @@ begin
   li.Nodes[trunc64(ind)].Y := z;
   result := 1.0;
 end;
+
+
+//>>>>>>>>>>Xtreme3D 3.7.3<<<<<<<<<<
+
+
+function ViewerRenderToFilePNG(viewer:real; fname:pchar): real; stdcall; //RenderToPNG
+var
+  bmp: TBitmap;
+  bufw,bufb: TBitmap;
+  png: TPNGObject;
+  i,j: integer;
+  pw,pb,pr,pa: PByteArray;
+  f: single;
+  oldColor: TColor;
+begin  
+	oldColor:=TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor;
+    TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := $ffffff;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+    bufw := TGLSceneViewer(trunc64(viewer)).Buffer.CreateSnapShotBitmap;
+
+    TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := 0;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+    bufb := TGLSceneViewer(trunc64(viewer)).Buffer.CreateSnapShotBitmap;
+
+	TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := oldColor;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+	bmp := TBitmap.Create;
+    bmp.PixelFormat := pf32bit;
+    bmp.Transparent := true;
+    bmp.Width := TGLSceneViewer(trunc64(viewer)).Width;
+    bmp.Height := TGLSceneViewer(trunc64(viewer)).Height;
+
+    for j := 0 to bufw.Height - 1 do begin
+      pw := bufw.ScanLine[ j ];
+      pb := bufb.ScanLine[ j ];
+      pr := bmp.ScanLine[ j ];
+      for i := 0 to bufw.Width - 1 do begin
+      // alpha
+        pr[i * 4 + 3] := pb[i * 4 + 1] - pw[i * 4 + 1] + 255;
+      // color
+        f := 255 / pr[i * 4 + 3];
+        pr[i * 4] := round( clampValue( pb[i * 4] * f, 0, 255 ));
+        pr[i * 4 + 1] := round( clampValue( pb[i * 4 + 1] * f, 0, 255 ));
+        pr[i * 4 + 2] := round( clampValue( pb[i * 4 + 2] * f, 0, 255 ));
+      end;
+    end;
+    png := TPNGObject.Create;
+    png.Assign( bmp );
+    png.CreateAlpha;
+	for j := 0 to png.Height - 1 do begin
+      pr := bmp.ScanLine[ j ];
+      pa := png.AlphaScanline[ j ];
+      for i := 0 to png.Width - 1 do begin
+        pa[i] := pr[i * 4 + 3];
+	  end;	
+	end;
+    png.SaveToFile(String(fname));
+    png.Free;
+	bmp.Free;
+  result:=1;
+end;
+
+
+function ViewerPixelRayToWorld(viewer,x, y,ind: real): real; stdcall;
+var
+vec: TAffineVector;
+begin
+  vec:=TGLSceneViewer(trunc64(viewer)).Buffer.PixelRayToWorld(trunc64(x),trunc64(y));
+  result:=vec[trunc64(ind)];
+end;
+
+
+function ViewerShadeModel(viewer,ind: real): real; stdcall;
+begin
+if (ind=0) then
+  TGLSceneViewer(trunc64(viewer)).Buffer.ShadeModel:=smFlat;
+if (ind=1) then
+   TGLSceneViewer(trunc64(viewer)).Buffer.ShadeModel:=smSmooth;
+result:=1;
+end;
+
+
+function PipeCreate(divs,slic, parent: real): real; stdcall;
+var
+  pipe: TGLPipe;
+begin
+    if not (parent=0) then
+    pipe:=TGLPipe.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    pipe:=TGLPipe.CreateAsChild(scene.Objects);
+	
+	pipe.Division:=trunc64(divs);
+	pipe.Slices:=trunc64(slic);
+	//pipe.NodesColorMode:=pncmAmbientAndDiffuse;
+  result:=Integer(pipe);
+end;
+
+function PipeAddNode(pipe, x,y,z: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.AddNode(x,y,z);
+  result := 1;
+end;
+
+function PipeSetDivision(pipe, divs: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.Division:=trunc64(divs);
+  result := 1;
+end;
+
+function PipeSetSplineMode(pipe, mode: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  if mode = 0 then pipeObj.SplineMode := lsmLines;
+  if mode = 1 then pipeObj.SplineMode := lsmCubicSpline;
+  if mode = 2 then pipeObj.SplineMode := lsmBezierSpline;
+  if mode = 3 then pipeObj.SplineMode := lsmNURBSCurve;
+  if mode = 4 then pipeObj.SplineMode := lsmSegments;
+  result := 1;
+end;
+
+function PipeDeleteNode(pipe, ind: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.Nodes.Delete(trunc64(ind));
+  result := 1;
+end;
+
+function PipeSetRadius(pipe, rad: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.Radius:=rad;
+  result := 1;
+end;
+
+function PipeSetNode(pipe,ind, x,y,z: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.Nodes[trunc64(ind)].X:=x;
+  pipeObj.Nodes[trunc64(ind)].Y:=y;
+  pipeObj.Nodes[trunc64(ind)].Z:=z;
+  result := 1;
+end;
+
+function PipeSetSlices(pipe,slic: real): real; stdcall;
+var
+  pipeObj: TGLPipe;
+begin
+  pipeObj:=TGLPipe(trunc64(pipe));
+  pipeObj.Slices:=trunc64(slic);
+  result := 1;
+end;
+
+
+function ActorGetAnimationName (actor,ind:real): pchar; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  result := pchar(act.Animations.Items[trunc64(ind)].Name);
+end;
+
+function ActorGetAnimationCount (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  result := act.Animations.Count;
+end;
+
+function ActorAnimationDestroy (actor,index:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  //act.Animations.Items[trunc64(index)].Destroy;
+  act.Animations.Delete(trunc64(index));
+  result := 1;
+end;
+
+function ActorAnimationNextFrame (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  act.NextFrame;
+  result := 1;
+end;
+
+function ActorAnimationPrevFrame (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  act.PrevFrame;
+  result := 1;
+end;
+
+function MovementPathShow(pat,vis: real): real; stdcall;
+var
+ path: TGLMovementPath;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  path.ShowPath := Boolean(trunc64(vis));
+  Result := 1;
+end;
+
+function MovementPathSetLoop(pat,loopn: real): real; stdcall;
+var
+ path: TGLMovementPath;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  path.Looped := Boolean(trunc64(loopn));
+  Result := 1;
+end;
+
+function MovementPathDeleteNode(pat,node: real): real; stdcall;
+var
+ path: TGLMovementPath;
+ nod: TGLPathNode;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  nod := TGLPathNode(trunc64(node));
+  path.DeleteNode(nod);
+  Result := 1;
+end;
+
+function HUDSpriteXTiles(sprite,xtls: real): real; stdcall;
+var
+ spr: TGLHUDSprite;
+begin
+  spr := TGLHUDSprite(trunc64(sprite));
+  spr.XTiles:=trunc64(xtls);
+  Result := 1;
+end;
+
+function HUDSpriteYTiles(sprite,ytls: real): real; stdcall;
+var
+ spr: TGLHUDSprite;
+begin
+  spr := TGLHUDSprite(trunc64(sprite));
+  spr.YTiles:=trunc64(ytls);
+  Result := 1;
+end;
+
+
+function TilePlaneCreate(parent: real): real; stdcall;
+var
+  tplane: TGLTilePlane;
+begin
+    if not (parent=0) then
+    tplane:=TGLTilePlane.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+  else
+    tplane:=TGLTilePlane.CreateAsChild(scene.Objects);
+	tplane.SortByMaterials:=True;
+
+  result:=Integer(tplane);
+end;
+
+function TilePlaneSetTile(tplane,x,y:real; mat: pchar): real; stdcall;
+var
+  tileplane: TGLTilePlane;
+begin
+
+  tileplane:=TGLTilePlane(trunc64(tplane));
+  tileplane.MaterialLibrary:=matlib;
+  tileplane.Tiles[trunc64(x), trunc64(y)]:=Integer(matlib.LibMaterialByName(mat).Index);
+  tileplane.StructureChanged;  
+  result:=1;
+end;
+
+
+//function TilePlaneSetTileByIndex(tplane,x,y,index:real): real; stdcall;
+//var
+//  tileplane: TGLTilePlane;
+//begin
+
+//  tileplane:=TGLTilePlane(trunc64(tplane));
+//  tileplane.MaterialLibrary:=matlib;
+//  tileplane.Tiles[trunc64(x), trunc64(y)]:=trunc64(index);
+//  tileplane.StructureChanged;
+//  result:=1;
+//end;
+
+
+
+function ActorTriangleCount(actor: real): real; stdcall;
+var
+  GLActor1: TGLActor;
+begin
+  GLActor1:=TGLActor(trunc64(actor));
+  result:=Integer(GLActor1.MeshObjects.TriangleCount);
+end;
+
+function FreeformMeshObjectGetName(ff,mesh: real): pchar; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  result:=pchar(GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name);
+end;
+
+function FreeformMeshObjectSetName(ff,mesh: real; name: pchar): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name:=name;
+  result:=1;
+end;
+
+function FreeformMeshObjectDestroy(ff,mesh: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Destroy;
+  result:=1;
+end;
+
+function ObjectFindByName (name: pchar): real; stdcall;
+begin
+  result:=Integer(scene.FindSceneObject(name));
+end;
+
+
+//----------VerletWorld----------
+
+function VerletWorldCreate (iter,UpdateSpacePartion,drag: real): real; stdcall;
+var
+world: TVerletWorld;
+begin
+world := TVerletWorld.Create;
+world.UpdateSpacePartion := uspEveryFrame;
+  world.Iterations:= trunc64(iter);
+  if UpdateSpacePartion = 0 then world.UpdateSpacePartion := uspEveryIteration;
+  if UpdateSpacePartion = 1 then world.UpdateSpacePartion := uspEveryFrame;
+  if UpdateSpacePartion = 2 then world.UpdateSpacePartion := uspNever;
+  world.Drag:=drag;
+  result:=Integer(world);
+end;
+
+function VerletWorldCreateOctree (world,xmin,ymin,zmin,xmax,ymax,zmax,leaf,depth: real): real; stdcall;
+var
+vworld: TVerletWorld;
+begin
+vworld:=TVerletWorld(trunc64(world));
+vworld.CreateOctree(
+      AffineVectorMake( xmin, ymin, zmin),
+      AffineVectorMake(  xmax,  ymax,  zmax), trunc64(leaf), trunc64(depth));
+  result:=1;
+end;
+
+
+function VerletGetNodeCount (world: real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  result:=Integer(ver.Nodes.Count);
+end;
+
+
+function VerletWorldGravityCreate (world,x,y,z: real): real; stdcall;
+var
+gr: TVFGravity;
+worldd: TVerletWorld;
+begin
+worldd:=TVerletWorld(trunc64(world));
+gr:= TVFGravity.Create(worldd);
+gr.Gravity := AffineVectorMake (x, y, z);
+  result:=Integer(gr);
+end;
+
+function VerletWorldGravitySetDirection (grv,x,y,z: real): real; stdcall;
+var
+gr: TVFGravity;
+begin
+gr:= TVFGravity(trunc64(grv));
+gr.Gravity := AffineVectorMake (x, y, z);
+  result:=1;
+end;
+
+
+function VerletWorldUpdate (world,newTime: real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+ver.Progress (ver.MaxDeltaTime, newTime);
+  result:=1;
+end;
+
+function EdgeDetectorCreate (world,obj: real): real; stdcall;
+var
+edg: TEdgeDetector;
+ver: TVerletWorld;
+mesh: TGLBaseMesh;
+begin
+mesh:=TGLBaseMesh(trunc64(obj));
+ver:=TVerletWorld(trunc64(world));
+edg := TEdgeDetector.Create (mesh);
+edg.ProcessMesh;
+edg.AddEdgesAsSticks (ver, 0.15);
+edg.AddEdgesAsSolidEdges (ver);
+  result:=Integer(edg);
+end;
+
+function EdgeDetectorSetWeldDistance (edge,dis: real): real; stdcall;
+var
+ed: TEdgeDetector;
+begin
+ed:=TEdgeDetector(trunc64(edge));
+ed.WeldDistance:=dis;
+  result:=1;
+end;
+
+function VerletConstraintFloorCreate (world,bou,level:real): real; stdcall;
+var
+ver: TVerletWorld;
+floor: TVCFloor;
+begin
+ver:=TVerletWorld(trunc64(world));
+floor:= TVCFloor.Create (ver);
+floor.BounceRatio:=bou;
+floor.FloorLevel:=level;
+  result:=Integer(floor);
+end;
+
+function VerletConstraintFloorSetNormal (flr,x,y,z:real): real; stdcall;
+var
+floor: TVCFloor;
+begin
+floor:=TVCFloor(trunc64(flr));
+floor.Normal:= AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletConstraintFloorSetObjectLocations (flr,obj:real): real; stdcall;
+var
+floor: TVCFloor;
+j: TGLSceneObject;
+begin
+j:=TGLSceneObject(trunc64(obj));
+floor:=TVCFloor(trunc64(flr));
+floor.Normal   := j.Direction.AsAffineVector;
+    floor.Location := VectorAdd (j.Position.AsAffineVector,
+      VectorScale (j.Direction.AsAffineVector, 1));
+  result:=1;
+end;
+
+function VerletConstraintSphereCreate (world,rad:real): real; stdcall;
+var
+ver: TVerletWorld;
+sphere: TVCSphere;
+begin
+ver:=TVerletWorld(trunc64(world));
+sphere:= TVCSphere.Create (ver);
+sphere.Radius:= rad;
+  result:=Integer(sphere);
+end;
+
+function VerletConstraintCylinderCreate (world,rad:real): real; stdcall;
+var
+ver: TVerletWorld;
+cylinder: TVCCylinder;
+begin
+ver:=TVerletWorld(trunc64(world));
+cylinder:= TVCCylinder.Create (ver);
+cylinder.Radius:= rad;
+  result:=Integer(cylinder);
+end;
+
+function VerletConstraintCylinderSetAxis (cyl,x,y,z:real): real; stdcall;
+var
+cylinder: TVCCylinder;
+begin
+cylinder:= TVCCylinder(trunc64(cyl));
+cylinder.Axis:= AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletConstraintCubeCreate (world,x,y,z:real): real; stdcall;
+var
+ver: TVerletWorld;
+cube: TVCCube;
+begin
+ver:=TVerletWorld(trunc64(world));
+cube:= TVCCube.Create (ver);
+cube.Sides:=AffineVectorMake(x,y,z);
+  result:=Integer(cube);
+end;
+
+function VerletConstraintCubeCreateSetCube (world,cube1:real): real; stdcall;
+var
+ver: TVerletWorld;
+pr: TGLCube;
+Cube: TVCCube;
+begin
+ver:=TVerletWorld(trunc64(world));
+    Cube := TVCCube.Create(ver);
+	pr:=TGLCube(trunc64(cube1));
+    Cube.Location := AffineVectorMake(pr.AbsolutePosition);
+    Cube.FrictionRatio := 0.1;
+    Cube.Sides:=  AffineVectorMake(pr.CubeWidth * 1.1,pr.CubeHeight * 1.1,pr.CubeDepth * 1.1);
+  result:=Integer(Cube);
+end;
+
+function VerletConstraintCubeSetDirection(cb,x,y,z:real): real; stdcall;
+var
+cube: TVCCube;
+begin
+cube:= TVCCube(trunc64(cb));
+cube.Direction:= AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletConstraintCapsuleCreate (world,rad,len:real): real; stdcall;
+var
+ver: TVerletWorld;
+caps: TVCCapsule;
+begin
+ver:=TVerletWorld(trunc64(world));
+caps:= TVCCapsule.Create (ver);
+caps.Radius:=rad;
+caps.Length:=len;
+  result:=Integer(caps);
+end;
+
+function VerletConstraintCapsuleSetAxis (cp,x,y,z:real): real; stdcall;
+var
+caps: TVCCapsule;
+begin
+caps:= TVCCapsule(trunc64(cp));
+caps.Axis:= AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletConstraintSetPosition (obj,x,y,z:real): real; stdcall;
+var
+objj: TVerletGlobalConstraint;
+begin
+objj:=TVerletGlobalConstraint(trunc64(obj));
+objj.Location:= AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletConstraintSetFrictionRatio (obj,fr:real): real; stdcall;
+var
+objj: TVerletGlobalFrictionConstraint;
+begin
+objj:=TVerletGlobalFrictionConstraint(trunc64(obj));
+objj.FrictionRatio:= fr;
+  result:=1;
+end;
+
+function VerletConstraintSetEnabled (obj,en:real): real; stdcall;
+var
+objj: TVerletConstraint;
+begin
+objj:=TVerletConstraint(trunc64(obj));
+objj.Enabled:= Boolean(trunc64(en));
+  result:=1;
+end;
+
+function VerletNodeNailedDown (world,ind,bol:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].NailedDown := Boolean(trunc64(bol));
+  result:=1;
+end;
+
+function VerletNodeSetPosition (world,ind,x,y,z:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].Location := AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletNodeSetRadius (world,ind,rad:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].Radius := rad;
+  result:=1;
+end;
+
+function VerletNodeSetFriction (world,ind,fr:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].Friction := fr;
+  result:=1;
+end;
+
+function VerletNodeSetWeight (world,ind,weight:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].Weight := weight;
+  result:=1;
+end;
+
+function VerletNodeApplyFriction (world,ind,fr,depth,x,y,z:real): real; stdcall;
+var
+ver: TVerletWorld;
+begin
+ver:=TVerletWorld(trunc64(world));
+  ver.Nodes.Items[trunc64(ind)].ApplyFriction(fr,depth,AffineVectorMake(x,y,z));
+  result:=1;
+end;
+
+
+function VerletAirResistanceCreate (world,Magnitude,Chaos:real): real; stdcall;
+var
+ver: TVerletWorld;
+air: TVFAirResistance;
+begin
+ver:=TVerletWorld(trunc64(world));
+  air:= TVFAirResistance.Create(ver);
+  air.WindDirection := AffineVectorMake(1,0,0);
+  air.WindMagnitude:=Magnitude;
+  air.WindChaos:=Chaos; 
+  result:=Integer(air);
+end;
+
+function VerletAirResistanceSetWindDirection (air,x,y,z:real): real; stdcall;
+var
+airr: TVFAirResistance;
+begin
+airr:=TVFAirResistance(trunc64(air));
+  airr.WindDirection := AffineVectorMake(x,y,z);
+  result:=1;
+end;
+
+function VerletAirResistanceSetWindMagnitude (air,mag:real): real; stdcall;
+var
+airr: TVFAirResistance;
+begin
+airr:=TVFAirResistance(trunc64(air));
+  airr.WindMagnitude := mag;
+  result:=1;
+end;
+
+function VerletAirResistanceSetWindChaos (air,ch:real): real; stdcall;
+var
+airr: TVFAirResistance;
+begin
+airr:=TVFAirResistance(trunc64(air));
+  airr.WindChaos := ch;
+  result:=1;
+end;
+
+function VerletConstraintGetCount (wr:real): real; stdcall;
+var
+world: TVerletWorld;
+begin
+world:=TVerletWorld(trunc64(wr));
+  result:=world.Constraints.Count-1;
+end;
+
+function VerletConstraintSetSlack (wr,con,sla:real): real; stdcall;
+var
+world: TVerletWorld;
+begin
+world:=TVerletWorld(trunc64(wr));
+TVCStick(world.Constraints[trunc64(con)]).Slack := sla;
+  result:=1;
+end;
+
+function VerletWorldSetSimTime (wr,tm:real): real; stdcall;
+var
+world: TVerletWorld;
+begin
+world:=TVerletWorld(trunc64(wr));
+world.SimTime:=tm;
+  result:=1;
+end;
+
+function VerletWorldSetMaxDeltaTime (wr,tm:real): real; stdcall;
+var
+world: TVerletWorld;
+begin
+world:=TVerletWorld(trunc64(wr));
+world.MaxDeltaTime:=tm;
+  result:=1;
+end;
+
+
+
+
+
+
+
+

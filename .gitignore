@@ -1,19 +1,13 @@
-
 # Executables and libraries
 *.exe
 *.a
 *.lib
 
+# Compiled units
+*.dcu
+
 # Backup files
 *~
-
-# Dub files
-.dub
-dub.selections.json
-
-# Dub test files
-__test__library__
-tests
 
 # DLLs
 bindings/dlang/xtreme3d.dll
@@ -24,4 +18,3 @@ bindings/python/xtreme3d.dll
 bindings/python/ode.dll
 bindings/python/freetype.dll
 bindings/python/OpenFBX.dll
-

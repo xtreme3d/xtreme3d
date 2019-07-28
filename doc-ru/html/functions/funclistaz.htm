@@ -41,12 +41,17 @@
 <A name="A"></A>
 <H1 class=name>A</H1>
 <A class=funclink href=actor.htm#ActorAddObject>ActorAddObject</A><A>(actor,matlib,filename)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationDestroy>ActorAnimationDestroy</A><A>(actor,index)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationNextFrame>ActorAnimationNextFrame</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorAnimationPrevFrame>ActorAnimationPrevFrame</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorBoneExportMatrix>ActorBoneExportMatrix</A><A>(actor,boneindex,object)</A>
 <BR><A class=funclink href=actor.htm#ActorCopy>ActorCopy</A><A>(actor,parent)</A>
 <BR><A class=funclink href=actor.htm#ActorCreate>ActorCreate</A><A>(filename,parent)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupGetMaterialName>ActorFaceGroupGetMaterialName</A><A>(actor,mesh,fgroup)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupsCount>ActorFaceGroupsCount</A><A>(actor,mesh)</A>
 <BR><A class=funclink href=actor.htm#ActorFaceGroupSetMaterial>ActorFaceGroupSetMaterial</A><A>(actor,mesh,fgroup,material)</A>
+<BR><A class=funclink href=actor.htm#ActorGetAnimationCount>ActorGetAnimationCount</A><A>(actor)</A>
+<BR><A class=funclink href=actor.htm#ActorGetAnimationName>ActorGetAnimationName</A><A>(actor,index)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneByName>ActorGetBoneByName</A><A>(actor,bonename)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBoneCount>ActorGetBoneCount</A><A>(actor)</A>
 <BR><A class=funclink href=actor.htm#ActorGetBonePosition>ActorGetBonePosition</A><A>(actor,boneindex,index)</A>
@@ -69,17 +74,17 @@
 <BR><A class=funclink href=actor.htm#ActorRotateBone>ActorRotateBone</A><A>(actor,boneindex,x,y,z)</A>
 <BR><A class=funclink href=actor.htm#ActorSetAnimationMode>ActorSetAnimationMode</A><A>(actor,aam)</A>
 <BR><A class=funclink href=actor.htm#ActorSetAnimationRange>ActorSetAnimationRange</A><A>(actor,start,end)</A>
+<BR><A class=funclink href=actor.htm#ActorSetFrame>ActorSetFrame</A><A>(actor,frame)</A>
 <BR><A class=funclink href=actor.htm#ActorSetFrameInterpolation>ActorSetFrameInterpolation</A><A>(actor,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorSetInterval>ActorSetInterval</A><A>(actor,interval)</A>
 <BR><A class=funclink href=actor.htm#ActorShowSkeleton>ActorShowSkeleton</A><A>(actor,mode)</A>
 <BR><A class=funclink href=actor.htm#ActorSwitchToAnimation>ActorSwitchToAnimation</A><A>(actor,anim,smooth)</A>
 <BR><A class=funclink href=actor.htm#ActorSwitchToAnimationName>ActorSwitchToAnimationName</A><A>(actor,animname,smooth)</A>
 <BR><A class=funclink href=actor.htm#ActorSynchronize>ActorSynchronize</A><A>(actor1,actor2)</A>
-
+<BR><A class=funclink href=actor.htm#ActorTriangleCount>ActorTriangleCount</A><A>(actor)</A>
 <BR><A class=funclink href=primitives.htm#AnnulusCreate>AnnulusCreate</A><A>(innerradius,outerradius,height,slices,stacks,loops,parent)</A>
 <BR><A class=funclink href=primitives.htm#AnnulusGetOptions>AnnulusGetOptions</A><A>(annulus,ind)</A>
 <BR><A class=funclink href=primitives.htm#AnnulusSetOptions>AnnulusSetOptions</A><A>(annulus,innerradius,outerradius,height,slices,stacks,loops)</A>
-
 <BR><A class=funclink href=actor.htm#AnimationBlenderCreate>AnimationBlenderCreate</A><A>()</A>
 <BR><A class=funclink href=actor.htm#AnimationBlenderSetActor>AnimationBlenderSetActor</A><A>(animblender,actor)</A>
 <BR><A class=funclink href=actor.htm#AnimationBlenderSetAnimation>AnimationBlenderSetAnimation</A><A>(animblender,animname)</A>
@@ -94,10 +99,8 @@
 <BR><A class=funclink href=blur.htm#BlurSetOptions>BlurSetOptions</A><A>(blur,delta,left,top,right,bottom)</A>
 <BR><A class=funclink href=blur.htm#BlurSetPreset>BlurSetPreset</A><A>(blur,p)</A>
 <BR><A class=funclink href=blur.htm#BlurSetResolution>BlurSetResolution</A><A>(blur,res)</A>
-
 <BR><A class=funclink href=fonttext.htm#BmpfontCreate>BmpfontCreate</A><A>(width,height,hspace,vspace,intx,inty,start,end)</A>
 <BR><A class=funclink href=fonttext.htm#BmpfontLoad>BmpfontLoad</A><A>(font,material)</A>
-
 <BR><A class=funclink href=terrain.htm#BmpHDSCreate>BmpHDSCreate</A><A>(material)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSCreateEmpty>BmpHDSCreateEmpty</A><A>(width,height,fillvalue)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSGetHeight>BmpHDSGetHeight</A><A>(hds,x,y)</A>
@@ -105,7 +108,6 @@
 <BR><A class=funclink href=terrain.htm#BmpHDSSave>BmpHDSSave</A><A>(hds,filename)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetHeight>BmpHDSSetHeight</A><A>(hds,x,y,height)</A>
 <BR><A class=funclink href=terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A><A>(hds,mode)</A>
-
 <BR><A class=funclink href=shader.htm#BumpShaderCreate>BumpShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetDiffuseTexture>BumpShaderSetDiffuseTexture</A><A>(shader,material)</A>
 <BR><A class=funclink href=shader.htm#BumpShaderSetHeightTexture>BumpShaderSetHeightTexture</A><A>(shader,material)</A>
@@ -151,22 +153,15 @@
 <BR><A class=funclink href=shader.htm#CelShaderSetLineColor>CelShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetLineWidth>CelShaderSetLineWidth</A><A>(shader,width)</A>
 <BR><A class=funclink href=shader.htm#CelShaderSetOptions>CelShaderSetOptions</A><A>(shader,outlines,textured)</A>
-<!-- <BR><A class=funclink href=b3d.htm#ClearZones>ClearZones</A><A>()</A> -->
-
 <BR><A class=funclink href=clipplane.htm#ClipPlaneCreate>ClipPlaneCreate</A><A>(parent)</A>
 <BR><A class=funclink href=clipplane.htm#ClipPlaneEnable>ClipPlaneEnable</A><A>(cp,mode)</A>
 <BR><A class=funclink href=clipplane.htm#ClipPlaneSetPlane>ClipPlaneSetPlane</A><A>(cp,px,py,px,nx,ny,nz)</A>
-
 <BR><A class=funclink href=primitives.htm#ConeCreate>ConeCreate</A><A>(bottomradius,height,slices,stacks,loops,parent)</A>
 <BR><A class=funclink href=primitives.htm#ConeGetOptions>ConeGetOptions</A><A>(cylinder,ind)</A>
 <BR><A class=funclink href=primitives.htm#ConeSetOptions>ConeSetOptions</A><A>(cylinder,bottomradius,height,slices,stacks,loops)</A>
-
-<!--  <BR><A class=funclink href=b3d.htm#CreateZones>CreateZones</A><A>(parent,clear)</A> -->
 <BR><A class=funclink href=primitives.htm#CubeCreate>CubeCreate</A><A>(width,height,depth,parent)</A>
 <BR><A class=funclink href=primitives.htm#CubeGetNormalDirection>CubeGetNormalDirection</A><A>(cube)</A>
 <BR><A class=funclink href=primitives.htm#CubeSetNormalDirection>CubeSetNormalDirection</A><A>(cube,nd)</A>
-<!-- <BR><A class=funclink href=b3d.htm#CullZones>CullZones</A><A>(zone,object)</A> -->
-
 <BR><A class=funclink href=primitives.htm#CylinderCreate>CylinderCreate</A><A>(topradius,bottomradius,height,slices,stacks,loops,parent)</A>
 <BR><A class=funclink href=primitives.htm#CylinderGetOptions>CylinderGetOptions</A><A>(cylinder,ind)</A>
 <BR><A class=funclink href=primitives.htm#CylinderSetOptions>CylinderSetOptions</A><A>(cylinder,topradius,bottomradius,height,slices,stacks,loops)</A>
@@ -178,13 +173,6 @@
 <BR><A class=funclink href=dce.htm#DceDynamicApplyAcceleration>DceDynamicApplyAcceleration</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicApplyAbsImpulse>DceDynamicApplyAbsImpulse</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicApplyImpulse>DceDynamicApplyImpulse</A><A>(object,x,y,z)</A>
-<!--
-<BR><A class=funclink href=dce.htm#DceCountCollisions>DceCountCollisions</A><A>(object)</A>
-<BR><A class=funclink href=dce.htm#DceGetCollisionNormal>DceGetCollisionNormal</A><A>(object,col,ind)</A>
-<BR><A class=funclink href=dce.htm#DceGetCollidedObject>DceGetCollidedObject</A><A>(object,col)</A>
-<BR><A class=funclink href=dce.htm#DceGetCollisionPosition>DceGetCollisionPosition</A><A>(object,col,ind)</A>
-<BR><A class=funclink href=dce.htm#DceGetGravity>DceGetGravity</A><A>(object,ind)</A>
--->
 <BR><A class=funclink href=dce.htm#DceDynamicGetAbsVelocity>DceDynamicGetAbsVelocity</A><A>(object,ind)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicGetLayer>DceDynamicGetLayer</A><A>(object)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicGetVelocity>DceDynamicGetVelocity</A><A>(object,ind)</A>
@@ -193,9 +181,6 @@
 <BR><A class=funclink href=dce.htm#DceDynamicJump>DceDynamicJump</A><A>(object,height,speed)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicMove>DceDynamicMove</A><A>(object,x,y,z,delta)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicMoveTo>DceDynamicMoveTo</A><A>(object,object,x,y,z,amount)</A>
-<!--
-<BR><A class=funclink href=dce.htm#DceGravityCollided>DceGravityCollided</A><A>(object)</A>
--->
 <BR><A class=funclink href=dce.htm#DceDynamicSetAbsVelocity>DceDynamicSetAbsVelocity</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicSetActive>DceDynamicSetActive</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicSetBounce>DceDynamicSetBounce</A><A>(object,bounce)</A>
@@ -208,7 +193,6 @@
 <BR><A class=funclink href=dce.htm#DceDynamicSetSolid>DceDynamicSetSolid</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicSetUseGravity>DceSetUseGravity</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceDynamicSetVelocity>DceDynamicSetVelocity</A><A>(object,x,y,z)</A>
-
 <BR><A class=funclink href=dce.htm#DceManagerCreate>DceManagerCreate</A><A>()</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetGravity>DceManagerSetGravity</A><A>(manager,grav)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetLayers>DceManagerSetLayers</A><A>(manager,ccs)</A>
@@ -217,7 +201,6 @@
 <BR><A class=funclink href=dce.htm#DceManagerSetWorldDirection>DceManagerSetWorldDirection</A><A>(manager,x,y,z)</A>
 <BR><A class=funclink href=dce.htm#DceManagerSetWorldScale>DceManagerSetWorldScale</A><A>(manager,scale)</A>
 <BR><A class=funclink href=dce.htm#DceManagerStep>DceManagerStep</A><A>(manager,delta)</A>
-
 <BR><A class=funclink href=dce.htm#DceStaticSetActive>DceStaticSetActive</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetBounceFactor>DceStaticSetBounceFactor</A><A>(object,bounce)</A>
 <BR><A class=funclink href=dce.htm#DceStaticSetFriction>DceStaticSetFriction</A><A>(object,friction)</A>
@@ -228,13 +211,9 @@
 <BR><A class=funclink href=dce.htm#DceStaticSetSolid>DceStaticSetSolid</A><A>(object,mode)</A>
 <BR><A class=funclink href=dce.htm#DceStopAcceleration>DceStopAcceleration</A><A>(object)</A>
 <BR><A class=funclink href=dce.htm#DceStopAbsAcceleration>DceStopAbsAcceleration</A><A>(object)</A>
-<!--
-<BR><A class=funclink href=dce.htm#DceVelocityCollided>DceVelocityCollided</A><A>(object)</A>
--->
 <BR><A class=funclink href=primitives.htm#DiskCreate>DiskCreate</A><A>(innerradius,outerradius,startangle,sweepangle,loops,slices,parent)</A>
 <BR><A class=funclink href=primitives.htm#DiskGetOptions>TorusGetOptions</A><A>(disk,ind)</A>
 <BR><A class=funclink href=primitives.htm#DiskSetOptions>TorusSetOptions</A><A>(disk,innerradius,outerradius,startangle,sweepangle,loops,slices)</A>
-
 <BR><A class=funclink href=primitives.htm#DodecahedronCreate>DodecahedronCreate</A><A>(parent)</A>
 <BR><A class=funclink href=dummycube.htm#DummycubeAmalgamate>DummycubeAmalgamate</A><A>(object,mode)</A>
 <BR><A class=funclink href=dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(parent)</A>
@@ -269,6 +248,7 @@
 <BR><A class=funclink href=firefx.htm#FireFXCreate>FireFXCreate</A><A>(manager,object)</A>
 <BR><A class=funclink href=firefx.htm#FireFXExplosion>FireFXExplosion</A><A>(manager,isp,maxsp,lbf)</A>
 <BR><A class=funclink href=firefx.htm#FireFXManagerCreate>FireFXManagerCreate</A><A>()</A>
+<BR><A class=funclink href=firefx.htm#FireFXRingExplosion>FireFXRingExplosion</A><A>(manager,isp,maxsp,lbf,rx,ry,rz,sx,sy,sz)</A>
 <BR><A class=funclink href=firefx.htm#FireFXSetBurst>FireFXSetBurst</A><A>(manager,burst)</A>
 <BR><A class=funclink href=firefx.htm#FireFXSetCrown>FireFXSetCrown</A><A>(manager,crown)</A>
 <BR><A class=funclink href=firefx.htm#FireFXSetColor>FireFXSetColor</A><A>(manager,incolor,inalpha,outcolor,outalpha)</A>
@@ -282,13 +262,6 @@
 <BR><A class=funclink href=fonttext.htm#FlatTextSetColor>FlatTextSetColor</A><A>(text,color,alpha)</A>
 <BR><A class=funclink href=fonttext.htm#FlatTextSetFont>FlatTextSetFont</A><A>(text,font)</A>
 <BR><A class=funclink href=fonttext.htm#FlatTextSetText>FlatTextSetText</A><A>(text,string)</A>
-<!--
-<BR><A class=funclink href=fps.htm#FpsClearCollisions>FpsClearCollisions</A><A>(object)</A>
-<BR><A class=funclink href=fps.htm#FpsCountCollisions>FpsCountCollisions</A><A>(object)</A>
-<BR><A class=funclink href=fps.htm#FpsGetCollidedObject>FpsGetCollidedObject</A><A>(object,col)</A>
-<BR><A class=funclink href=fps.htm#FpsGetCollisionNormal>FpsGetCollisionNormal</A><A>(object,col,ind)</A>
-<BR><A class=funclink href=fps.htm#FpsGetCollisionPosition>FpsGetCollisionPosition</A><A>(object,col,ind)</A>
--->
 <BR><A class=funclink href=fps.htm#FpsGetVelocity>FpsGetVelocity</A><A>(object,ind)</A>
 <BR><A class=funclink href=fps.htm#FpsLift>FpsLift</A><A>(object,speed)</A>
 <BR><A class=funclink href=fps.htm#FpsManagerAddMap>FpsManagerAddMap</A><A>(manager,object)</A>
@@ -303,7 +276,6 @@
 <BR><A class=funclink href=fps.htm#FpsSetManager>FpsSetManager</A><A>(object,manager)</A>
 <BR><A class=funclink href=fps.htm#FpsSetSphereRadius>FpsSetSphereRadius</A><A>(object,radius)</A>
 <BR><A class=funclink href=fps.htm#FpsStrafe>FpsStrafe</A><A>(object,speed)</A>
-
 <BR><A class=funclink href=freeform.htm#FreeformAddMesh>FreeformAddMesh</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformBuildOctree>FreeformBuildOctree</A><A>(freeform)</A>
 <BR><A class=funclink href=freeform.htm#FreeformCreate>FreeformCreate</A><A>(filename,matlib,lmapmatlib,parent)</A>
@@ -331,15 +303,16 @@
 <BR><A class=funclink href=freeform.htm#FreeformMeshFaceGroupTriangleCount>FreeformMeshFaceGroupTriangleCount</A><A>(freeform,mesh,fgroup)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGenNormals>FreeformMeshGenNormals</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGenTangents>FreeformMeshGenTangents</A><A>(freeform,mesh)</A>
-
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetBinormal>FreeformMeshGetBinormal</A><A>(freeform,mesh,binormal,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetNormal>FreeformMeshGetNormal</A><A>(freeform,mesh,normal,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetSecondTexCoord>FreeformMeshGetSecondTexCoord</A><A>(freeform,mesh,texcoord,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetTangent>FreeformMeshGetTangent</A><A>(freeform,mesh,tangent,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetTexCoord>FreeformMeshGetTexCoord</A><A>(freeform,mesh,texcoord,index)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshGetVertex>FreeformMeshGetVertex</A><A>(freeform,mesh,vertex,index)</A>
-
 <BR><A class=funclink href=freeform.htm#FreeformMeshObjectsCount>FreeformMeshObjectsCount</A><A>(freeform)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectDestroy>FreeformMeshObjectDestroy</A><A>(freeform,mesh)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectGetName>FreeformMeshObjectGetName</A><A>(freeform,mesh)</A>
+<BR><A class=funclink href=freeform.htm#FreeformMeshObjectSetName>FreeformMeshObjectSetName</A><A>(freeform,mesh,name)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshRotate>FreeformMeshRotate</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshScale>FreeformMeshScale</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetBinormal>FreeformMeshSetBinormal</A><A>(freeform,mesh,binormal,x,y,z)</A>
@@ -350,23 +323,17 @@
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetTangent>FreeformMeshSetTangent</A><A>(freeform,mesh,tangent,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetTexCoord>FreeformMeshSetTexCoord</A><A>(freeform,mesh,texcoord,u,v)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetVertex>FreeformMeshSetVertex</A><A>(freeform,mesh,vertex,x,y,z)</A>
-
 <BR><A class=funclink href=freeform.htm#FreeformMeshSetVisible>FreeformMeshSetVisible</A><A>(freeform,mesh,mode)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshTranslate>FreeformMeshTranslate</A><A>(freeform,mesh,x,y,z)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshTriangleCount>FreeformMeshTriangleCount</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformMeshVerticesCount>FreeformMeshVerticesCount</A><A>(freeform,mesh)</A>
 <BR><A class=funclink href=freeform.htm#FreeformPointInMesh>FreeformPointInMesh</A><A>(freeform,x,y,z)</A>
-<!--
-<BR><A class=funclink href=freeform.htm#FreeformSetSecondTextureCoords>FreeformSetSecondTextureCoords</A><A>(freeform1,freeform2)</A>
--->
 <BR><A class=funclink href=freeform.htm#FreeformSave>FreeformSave</A><A>(freeform,filename)</A>
 <BR><A class=funclink href=freeform.htm#FreeformSetMaterialLibraries>FreeformSetMaterialLibraries</A><A>(freeform,matlib,lmapmatlib)</A>
 <BR><A class=funclink href=freeform.htm#FreeformSphereSweepIntersect>FreeformSphereSweepIntersect</A><A>(freeform,object,radius,vel)</A>
 <BR><A class=funclink href=freeform.htm#FreeformToFreeforms>FreeformToFreeforms</A><A>(freeform,parent)</A>
 <BR><A class=funclink href=freeform.htm#FreeformUseMeshMaterials>FreeformUseMeshMaterials</A><A>(freeform,mode)</A>
-
 <BR><A class=funclink href=fonttext.htm#FTConvertANSIToUTF8>FTConvertANSIToUTF8</A><A>(text)</A>
-
 <BR><A class=funclink href=primitives.htm#FrustrumCreate>FrustrumCreate</A><A>(basewidth,basedepth,apexheight,cutheight,parent)</A>
 <BR><A class=funclink href=primitives.htm#FrustrumGetOptions>FrustrumGetOptions</A><A>(frustrum,ind)</A>
 <BR><A class=funclink href=primitives.htm#FrustrumSetOptions>FrustrumSetOptions</A><A>(frustrum,basewidth,basedepth,apexheight,cutheight)</A>
@@ -411,7 +378,6 @@
 <BR><A class=funclink href=shader.htm#HiddenLineShaderSetLineSmooth>HiddenLineShaderSetLineSmooth</A><A>(shader,mode)</A>
 <BR><A class=funclink href=shader.htm#HiddenLineShaderSetSolid>HiddenLineShaderSetSolid</A><A>(shader,mode)</A>
 <BR><A class=funclink href=shader.htm#HiddenLineShaderSetSurfaceLit>HiddenLineShaderSetSurfaceLit</A><A>(shader,mode)</A>
-
 <BR><A class=funclink href=hudshape.htm#HUDShapeCircleCreate>HUDShapeCircleCreate</A><A>(radius,slices,startAngle,endAngle,parent)</A>
 <BR><A class=funclink href=hudshape.htm#HUDShapeCircleSetAngles>HUDShapeCircleSetAngles</A><A>(shape,startAngle,endAngle)</A>
 <BR><A class=funclink href=hudshape.htm#HUDShapeCircleSetRadius>HUDShapeCircleSetRadius</A><A>(shape,radius)</A>
@@ -431,9 +397,10 @@
 <BR><A class=funclink href=hudshape.htm#HUDShapeSetOrigin>HUDShapeSetOrigin</A><A>(shape,x,y)</A>
 <BR><A class=funclink href=hudshape.htm#HUDShapeSetRotation>HUDShapeSetRotation</A><A>(shape,angle)</A>
 <BR><A class=funclink href=hudshape.htm#HUDShapeSetSize>HUDShapeSetSize</A><A>(shape,width,height)</A>
-
 <BR><A class=funclink href=sprite.htm#HUDSpriteCreate>HUDSpriteCreate</A><A>(material,width,height,parent)</A>
 <BR><A class=funclink href=sprite.htm#HUDSpriteCreateEx>HUDSpriteCreateEx</A><A>(material,width,height,left,top,right,bottom,parent)</A>
+<BR><A class=funclink href=sprite.htm#HUDSpriteXTiles>HUDSpriteXTiles</A><A>(sprite,xtiles)</A>
+<BR><A class=funclink href=sprite.htm#HUDSpriteYTiles>HUDSpriteYTiles</A><A>(sprite,ytiles)</A>
 <BR><A class=funclink href=sprite.htm#HUDSpriteGetMouseOver>HUDSpriteGetMouseOver</A><A>(sprite,viewer)</A>
 <BR><A class=funclink href=fonttext.htm#HUDTextCreate>HUDTextCreate</A><A>(font,string,parent)</A>
 <BR><A class=funclink href=fonttext.htm#HUDTextSetColor>HUDTextSetColor</A><A>(text,color)</A>
@@ -450,7 +417,6 @@
 <A name="K"></A>
 <H1 class=name>K</H1>
 <BR><A class=funclink href=input.htm#KeyIsPressed>KeyIsPressed</A><A>(vk)</A>
-
 <BR><A class=funclink href=kraft.htm#KraftCreate>KraftCreate()</A>
 <BR><A class=funclink href=kraft.htm#KraftCreateJointBallSocket>KraftCreateJointBallSocket(body1,body2)</A>
 <BR><A class=funclink href=kraft.htm#KraftCreateJointDistance>KraftCreateJointDistance(body1,body2)</A>
@@ -533,7 +499,6 @@
 <H1 class=name>M</H1>
 <BR><A class=funclink href=color.htm#MakeColorRGB>MakeColorRGB</A><A>(r,g,b)</A>
 <BR><A class=funclink href=color.htm#MakeColorRGBFloat>MakeColorRGBFloat</A><A>(r,g,b)</A>
-
 <BR><A class=funclink href=material.htm#MaterialAddCubeMap>MaterialAddCubeMap</A><A>(material)</A>
 <BR><A class=funclink href=material.htm#MaterialCreate>MaterialCreate</A><A>(material,filename)</A>
 <BR><A class=funclink href=material.htm#MaterialCubeMapFromScene>MaterialCubeMapFromScene</A><A>(material,viewer,camera,res)</A>
@@ -548,9 +513,6 @@
 <BR><A class=funclink href=material.htm#MaterialGetAlpha>MaterialGetAlpha</A><A>(material,ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetColor>MaterialGetColor</A><A>(material,ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetCount>MaterialGetCount</A><A>()</A>
-<!--
-<BR><A class=funclink href=material.htm#MaterialGetFromLib>MaterialGetFromLib</A><A>(material1,material2)</A>
--->
 <BR><A class=funclink href=material.htm#MaterialGetName>MaterialGetName</A><A>(ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetNameFromLibrary>MaterialGetNameFromLibrary</A><A>(matlib,ind)</A>
 <BR><A class=funclink href=material.htm#MaterialGetTextureHeight>MaterialGetTextureHeight</A><A>(material)</A>
@@ -600,36 +562,32 @@
 <BR><A class=funclink href=material.htm#MaterialSetTextureWrap>MaterialSetTextureWrap</A><A>(material,mode)</A>
 <BR><A class=funclink href=material.htm#MaterialSetZWrite>MaterialSetZWrite</A><A>(material,mode)</A>
 <BR><A class=funclink href=material.htm#MaterialTextureRequiredMemory>MaterialTextureRequiredMemory</A><A>(material)</A>
-
 <BR><A class=funclink href=memviewer.htm#MemoryViewerCopyToTexture>MemoryViewerCopyToTexture</A><A>(memviewer,material)</A>
 <BR><A class=funclink href=memviewer.htm#MemoryViewerCreate>MemoryViewerCreate</A><A>(width,height)</A>
 <BR><A class=funclink href=memviewer.htm#MemoryViewerRender>MemoryViewerRender</A><A>(memviewer)</A>
 <BR><A class=funclink href=memviewer.htm#MemoryViewerSetCamera>MemoryViewerSetCamera</A><A>(memviewer,camera)</A>
 <BR><A class=funclink href=memviewer.htm#MemoryViewerSetViewport>MemoryViewerSetViewport</A><A>(memviewer,x,y,width,height)</A>
-
 <BR><A class=funclink href=mirror.htm#MirrorCreate>MirrorCreate</A><A>(target,parent)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetDiskOptions>MirrorSetDiskOptions</A><A>(mirror,radius,slices)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetObject>MirrorSetObject</A><A>(mirror,target)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetOptions>MirrorSetOptions</A><A>(mirror,stencil,opaque,planeclipping,clearzbuffer)</A>
 <BR><A class=funclink href=mirror.htm#MirrorSetShape>MirrorSetShape</A><A>(mirror,ms)</A>
-
 <BR><A class=funclink href=mouse.htm#MouseGetX>MouseGetX</A><A>()</A>
 <BR><A class=funclink href=mouse.htm#MouseGetY>MouseGetY</A><A>()</A>
 <BR><A class=funclink href=mouse.htm#MouseSetPosition>MouseSetPosition</A><A>(x,y)</A>
 <BR><A class=funclink href=mouse.htm#MouseShowCursor>MouseShowCursor</A><A>(mode)</A>
-
-<BR><A class=funclink href=movement.htm#MovementCreate>MovementCreate</A><A>(object)</A>
 <BR><A class=funclink href=movement.htm#MovementAddPath>MovementAddPath</A><A>(movement)</A>
-<BR><A class=funclink href=movement.htm#MovementSetActivePath>MovementSetActivePath</A><A>(movement,index)</A>
-<BR><A class=funclink href=movement.htm#MovementStart>MovementStart</A><A>(movement)</A>
-<BR><A class=funclink href=movement.htm#MovementStop>MovementStop</A><A>(movement)</A>
 <BR><A class=funclink href=movement.htm#MovementAutoStartNextPath>MovementAutoStartNextPath</A><A>(movement,mode)</A>
-<BR><A class=funclink href=movement.htm#MovementPathSetSplineMode>MovementPathSetSplineMode</A><A>(path,lsm)</A>
+<BR><A class=funclink href=movement.htm#MovementCreate>MovementCreate</A><A>(object)</A>
 <BR><A class=funclink href=movement.htm#MovementPathAddNode>MovementPathAddNode</A><A>(path)</A>
+<BR><A class=funclink href=movement.htm#MovementPathDeleteNode>MovementPathDeleteNode</A><A>(path,node)</A>
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetPosition>MovementPathNodeSetPosition</A><A>(node,x,y,z)</A>
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetRotation>MovementPathNodeSetRotation</A><A>(node,pitch,turn,roll)</A>
 <BR><A class=funclink href=movement.htm#MovementPathNodeSetSpeed>MovementPathNodeSetSpeed</A><A>(node,speed)</A>
-
+<BR><A class=funclink href=movement.htm#MovementPathSetSplineMode>MovementPathSetSplineMode</A><A>(path,lsm)</A>
+<BR><A class=funclink href=movement.htm#MovementSetActivePath>MovementSetActivePath</A><A>(movement,index)</A>
+<BR><A class=funclink href=movement.htm#MovementStart>MovementStart</A><A>(movement)</A>
+<BR><A class=funclink href=movement.htm#MovementStop>MovementStop</A><A>(movement)</A>
 <BR><A class=funclink href=shader.htm#MultiMaterialShaderCreate>MultiMaterialShaderCreate</A><A>(matlib)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectAddTarget>MultiProxyObjectAddTarget</A><A>(mproxy,object,mindist,maxdist)</A>
 <BR><A class=funclink href=proxy.htm#MultiProxyObjectCreate>MultiProxyObjectCreate</A><A>(parent)</A>
@@ -657,9 +615,6 @@
 <A name="O"></A>
 <H1 class=name>O</H1>
 <BR><A class=funclink href=partition.htm#OctreeCreate>OctreeCreate</A><A>(maxdepth,leafthreshold,growgravy,culling)</A>
-<!--
-<BR><A class=funclink href=object.htm#ObjectAlignToCamera>ObjectAlignToCamera</A><A>(object,camera)</A>
--->
 <BR><A class=funclink href=object.htm#ObjectAlignWithObject>ObjectAlignWithObject</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckCubeVsCube>ObjectCheckCubeVsCube</A><A>(object1,object2)</A>
 <BR><A class=funclink href=object.htm#ObjectCheckCubeVsFace>ObjectCheckCubeVsFace</A><A>(object1,object2)</A>
@@ -679,9 +634,6 @@
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteXVector>ObjectGetAbsoluteXVector</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteYVector>ObjectGetAbsoluteYVector</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetAbsoluteZVector>ObjectGetAbsoluteZVector</A><A>(object,ind)</A>
-<!--
-<BR><A class=funclink href=object.htm#ObjectGetAtXY>ObjectGetAtXY</A><A>(viewer,x,y)</A>
--->
 <BR><A class=funclink href=object.htm#ObjectGetBoundingsphereRadius>ObjectGetBoundingsphereRadius</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetChild>ObjectGetChild</A><A>(object,ind)</A>
 <BR><A class=funclink href=object.htm#ObjectGetChildCount>ObjectGetChildCount</A><A>(object)</A>
@@ -703,7 +655,6 @@
 <BR><A class=funclink href=object.htm#ObjectGetTag>ObjectGetTag</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetTurn>ObjectGetTurn</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectGetUp>ObjectGetUp</A><A>(object,ind)</A>
-
 <BR><A class=funclink href=objecthash.htm#ObjectHashClear>ObjectHashClear</A><A>(hash)</A>
 <BR><A class=funclink href=objecthash.htm#ObjectHashCreate>ObjectHashCreate</A><A>()</A>
 <BR><A class=funclink href=objecthash.htm#ObjectHashDeleteItem>ObjectHashDeleteItem</A><A>(hash,key)</A>
@@ -711,13 +662,8 @@
 <BR><A class=funclink href=objecthash.htm#ObjectHashGetItem>ObjectHashGetItem</A><A>(hash,key)</A>
 <BR><A class=funclink href=objecthash.htm#ObjectHashGetItemCount>ObjectHashGetItemCount</A><A>(hash)</A>
 <BR><A class=funclink href=objecthash.htm#ObjectHashSetItem>ObjectHashSetItem</A><A>(hash,key,obj)</A>
-
 <BR><A class=funclink href=object.htm#ObjectHide>ObjectHide</A><A>(object)</A>
-
 <BR><A class=funclink href=object.htm#ObjectInFrustrum>ObjectInFrustrum</A><A>(object,viewer)</A>
-<!--
-<BR><A class=funclink href=object.htm#ObjectIsClipped>ObjectIsClipped</A><A>(object)</A>
--->
 <BR><A class=funclink href=object.htm#ObjectIsPointInObject>ObjectIsPointInObject</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectIsVisible>ObjectIsVisible</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectLift>ObjectLift</A><A>(object,speed)</A>
@@ -756,9 +702,6 @@
 <BR><A class=funclink href=object.htm#ObjectShow>ObjectShow</A><A>(object)</A>
 <BR><A class=funclink href=object.htm#ObjectShowAxes>ObjectShowAxes</A><A>(object,mode)</A>
 <BR><A class=funclink href=object.htm#ObjectStrafe>ObjectStrafe</A><A>(object,speed)</A>
-<!--
-<BR><A class=funclink href=object.htm#ObjectStructureChanged>ObjectStructureChanged</A><A>(object)</A>
--->
 <BR><A class=funclink href=object.htm#ObjectTranslate>ObjectTranslate</A><A>(object,x,y,z)</A>
 <BR><A class=funclink href=object.htm#ObjectTurn>ObjectTurn</A><A>(object,angle)</A>
 <BR><A class=funclink href=ode.htm#OdeAddBox>OdeAddBox</A><A>(object,x,y,z,width,height,depth)</A>
@@ -826,7 +769,6 @@
 <BR><A class=funclink href=ode.htm#OdeManagerSetSolver>OdeManagerSetSolver</A><A>(osm)</A>
 <BR><A class=funclink href=ode.htm#OdeManagerSetVisible>OdeManagerSetVisible</A><A>(mode)</A>
 <BR><A class=funclink href=ode.htm#OdeManagerStep>OdeManagerStep</A><A>(dt)</A>
-
 <BR><A class=funclink href=ode.htm#OdeRagdollBoneCreate>OdeRagdollBoneCreate</A><A>(ragdoll,ragjoint,boneid,parentbone)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollBuild>OdeRagdollBuild</A><A>(ragdoll)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollCreate>OdeRagdollCreate</A><A>(actor)</A>
@@ -835,7 +777,6 @@
 <BR><A class=funclink href=ode.htm#OdeRagdollHingeJointCreate>OdeRagdollHingeJointCreate</A><A>(x,y,z,lostop,histop)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollUniversalJointCreate>OdeRagdollUniversalJointCreate</A><A>(x1,y1,z1,lostop1,histop1,x2,y2,z2,lostop2,histop2)</A>
 <BR><A class=funclink href=ode.htm#OdeRagdollUpdate>OdeRagdollUpdate</A><A>(ragdoll)</A>
-
 <BR><A class=funclink href=ode.htm#OdeStaticCreate>OdeStaticCreate</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeStaticGetContactCount>OdeStaticGetContactCount</A><A>(object)</A>
 <BR><A class=funclink href=ode.htm#OdeSurfaceEnableRollingFrictionCoeff>OdeSurfaceEnableRollingFrictionCoeff</A><A>(object,mode)</A>
@@ -857,7 +798,6 @@
 <BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableLinearThreshold>OdeWorldSetAutoDisableLinearThreshold</A><A>(velocity)</A>
 <BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableSteps>OdeWorldSetAutoDisableSteps</A><A>(steps)</A>
 <BR><A class=funclink href=ode.htm#OdeWorldSetAutoDisableTime>OdeWorldSetAutoDisableTime</A><A>(time)</A>
-
 <BR><A class=funclink href=shader.htm#OutlineShaderCreate>OutlineShaderCreate</A><A>(smooth)</A>
 <BR><A class=funclink href=shader.htm#OutlineShaderSetLineColor>OutlineShaderSetLineColor</A><A>(shader,color)</A>
 <BR><A class=funclink href=shader.htm#OutlineShaderSetLineWidth>OutlineShaderSetLineWidth</A><A>(shader,width)</A>
@@ -869,7 +809,6 @@
 <BR><A class=funclink href=pak.htm#PakExtractFile>PakExtractFile</A><A>(id,index,newfilename)</A>
 <BR><A class=funclink href=pak.htm#PakGetFileCount>PakGetFileCount</A><A>(id)</A>
 <BR><A class=funclink href=pak.htm#PakGetFileName>PakGetFileName</A><A>(id,index)</A>
-
 <BR><A class=funclink href=partition.htm#PartitionAddLeaf>PartitionAddLeaf</A><A>(tree,object)</A>
 <BR><A class=funclink href=partition.htm#PartitionDestroy>PartitionDestroy</A><A>(tree)</A>
 <BR><A class=funclink href=partition.htm#PartitionGetNodeCount>PartitionGetNodeCount</A><A>(tree)</A>
@@ -886,11 +825,17 @@
 <BR><A class=funclink href=shader.htm#PhongShaderCreate>PhongShaderCreate</A><A>()</A>
 <BR><A class=funclink href=shader.htm#PhongShaderSetMaxLights>PhongShaderSetMaxLights</A><A>(shader,maxlights)</A>
 <BR><A class=funclink href=shader.htm#PhongShaderUseTexture>PhongShaderUseTexture</A><A>(shader,mode)</A>
-
+<BR><A class=funclink href=primitives.htm#PipeAddNode>PipeAddNode</A><A>(pipe,x,y,z)</A>
+<BR><A class=funclink href=primitives.htm#PipeCreate>PipeCreate</A><A>(division,slices,parent)</A>
+<BR><A class=funclink href=primitives.htm#PipeDeleteNode>PipeDeleteNode</A><A>(pipe,index)</A>
+<BR><A class=funclink href=primitives.htm#PipeSetDivision>PipeSetDivision</A><A>(pipe,division)</A> 
+<BR><A class=funclink href=primitives.htm#PipeSetNode>PipeSetNode</A><A>(pipe,index,x,y,z)</A> 
+<BR><A class=funclink href=primitives.htm#PipeSetRadius>PipeSetRadius</A><A>(pipe,rad)</A> 
+<BR><A class=funclink href=primitives.htm#PipeSetSlices>PipeSetSlices</A><A>(pipe,slic)</A> 
+<BR><A class=funclink href=primitives.htm#PipeSetSplineMode>PipeSetSplineMode</A><A>(pipe,lsm)</A>
 <BR><A class=funclink href=primitives.htm#PlaneCreate>PlaneCreate</A><A>(singlequad,width,height,xtiles,ytiles,parent)</A>
 <BR><A class=funclink href=primitives.htm#PlaneGetOptions>PlaneGetOptions</A><A>(plane,ind)</A>
 <BR><A class=funclink href=primitives.htm#PlaneSetOptions>PlaneSetOptions</A><A>(plane,singlequad,xtiles,ytiles)</A>
-
 <BR><A class=funclink href=polygon.htm#PolygonAddVertex>PolygonAddVertex</A><A>(polygon,x,y,z)</A>
 <BR><A class=funclink href=polygon.htm#PolygonCreate>PolygonCreate</A><A>(parent)</A>
 <BR><A class=funclink href=polygon.htm#PolygonDeleteVertex>PolygonDeleteVertex</A><A>(polygon,vertex)</A>
@@ -952,13 +897,11 @@
 <BR><A class=funclink href=fonttext.htm#SpaceTextSetExtrusion>SpaceTextSetExtrusion</A><A>(text,extrusion)</A>
 <BR><A class=funclink href=fonttext.htm#SpaceTextSetFont>SpaceTextSetFont</A><A>(text,font)</A>
 <BR><A class=funclink href=fonttext.htm#SpaceTextSetText>SpaceTextSetText</A><A>(text,string)</A>
-
 <BR><A class=funclink href=primitives.htm#SphereCreate>SphereCreate</A><A>(radius,slices,stacks,parent)</A>
 <BR><A class=funclink href=primitives.htm#SphereGetAngleLimits>SphereGetAngleLimits</A><A>(sphere,ind)</A>
 <BR><A class=funclink href=primitives.htm#SphereGetOptions>SphereGetOptions</A><A>(sphere,ind)</A>
 <BR><A class=funclink href=primitives.htm#SphereSetAngleLimits>SphereSetAngleLimits</A><A>(sphere,start,stop,top,bottom)</A>
 <BR><A class=funclink href=primitives.htm#SphereSetOptions>SphereSetOptions</A><A>(sphere,radius,slices,stacks)</A>
-
 <BR><A class=funclink href=sprite.htm#SpriteCreate>SpriteCreate</A><A>(material,width,height,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteCreateEx>SpriteCreateEx</A><A>(material,width,height,left,top,right,bottom,parent)</A>
 <BR><A class=funclink href=sprite.htm#SpriteGetSize>SpriteGetSize</A><A>(sprite,ind)</A>
@@ -993,14 +936,11 @@
 <BR><A class=funclink href=shader.htm#TexCombineShaderCreate>TexCombineShaderCreate</A><A>(matlib)</A>
 <BR><A class=funclink href=shader.htm#TexCombineShaderMaterial3>TexCombineShaderMaterial3</A><A>(shader,material)</A>
 <BR><A class=funclink href=shader.htm#TexCombineShaderMaterial4>TexCombineShaderMaterial4</A><A>(shader,material)</A>
-
 <BR><A class=funclink href=text.htm#TextConvertANSIToUTF8>TextConvertANSIToUTF8</A><A>(text)</A>
 <BR><A class=funclink href=text.htm#TextRead>TextRead</A><A>(filename)</A>
-
 <BR><A class=funclink href=fonttext.htm#TextSetColor>TextSetColor</A><A>(text,color,alpha)</A>
 <BR><A class=funclink href=fonttext.htm#TextSetFont>TextSetFont</A><A>(text,font)</A>
 <BR><A class=funclink href=fonttext.htm#TextSetText>TextSetText</A><A>(text,string)</A>
-
 <BR><A class=funclink href=thorfx.htm#ThorFXCreate>ThorFXCreate</A><A>(manager,object)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXEnableCore>ThorFXEnableCore</A><A>(manager,mode)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXEnableGlow>ThorFXEnableGlow</A><A>(manager,mode)</A>
@@ -1009,16 +949,13 @@
 <BR><A class=funclink href=thorfx.htm#ThorFXSetGlowSize>ThorFXSetGlowSize</A><A>(manager,size)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXSetMaxParticles>ThorFXSetMaxParticles</A><A>(manager,particles)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXSetTarget>ThorFXSetTarget</A><A>(manager,x,y,z)</A>
-<!--
-<BR><A class=funclink href=thorfx.htm#ThorFXSetTargetAsObject>ThorFXSetTargetAsObject</A><A>(manager,object)</A>
--->
 <BR><A class=funclink href=thorfx.htm#ThorFXSetVibrate>ThorFXSetVibrate</A><A>(manager,vibrate)</A>
 <BR><A class=funclink href=thorfx.htm#ThorFXSetWildness>ThorFXSetWildness</A><A>(manager,wildness)</A>
-
+<BR><A class=funclink href=primitives.htm#TilePlaneCreate>TilePlaneCreate</A><A>(parent)</A>
+<BR><A class=funclink href=primitives.htm#TilePlaneSetTile>TilePlaneSetTile</A><A>(tileplane,x,y,name)</A>
 <BR><A class=funclink href=primitives.htm#TorusCreate>TorusCreate</A><A>(innerradius,outerradius,rings,sides,parent)</A>
 <BR><A class=funclink href=primitives.htm#TorusGetOptions>TorusGetOptions</A><A>(torus,ind)</A>
 <BR><A class=funclink href=primitives.htm#TorusSetOptions>TorusSetOptions</A><A>(torus,innerradius,outerradius,rings,sides)</A>
-
 <BR><A class=funclink href=trail.htm#TrailClearMarks>TrailClearMarks</A><A>(trail)</A>
 <BR><A class=funclink href=trail.htm#TrailCreate>TrailCreate</A><A>(object,parent)</A>
 <BR><A class=funclink href=trail.htm#TrailSetAlpha>TrailSetAlpha</A><A>(trail,alpha,fade)</A>
@@ -1042,7 +979,6 @@
 <BR><A class=funclink href=tree.htm#TreeSetLeafThreshold>TreeSetLeafThreshold</A><A>(tree,threshold)</A>
 <BR><A class=funclink href=tree.htm#TreeSetMaterials>TreeSetMaterials</A><A>(tree,mfront,mback,mbranch)</A>
 <BR><A class=funclink href=tree.htm#TreeSetSeed>TreeSetSeed</A><A>(tree,seed)</A>
-
 <BR><A class=funclink href=fonttext.htm#TTFontCreate>TTFontCreate</A><A>(filename,height)</A>
 <BR><A class=funclink href=fonttext.htm#TTFontLoadCodePage>TTFontLoadCodePage</A><A>(ttf,filename)</A>
 <BR><A class=funclink href=fonttext.htm#TTFontSetEncoding>TTFontSetEncoding</A><A>(ttf,te)</A>
@@ -1056,7 +992,41 @@
 <BR>
 <A name="V"></A>
 <H1 class=name>V</H1>
-<A class=funclink href=viewer.htm#ViewerCopyToTexture>ViewerCopyToTexture</A><A>(viewer,material)</A>
+<A class=funclink href=verlet.htm#VerletAirResistanceCreate>VerletAirResistanceCreate</A><A>(VerletWorld,Magnitudå,Chaos)</A>
+<BR><A class=funclink href=verlet.htm#VerletAirResistanceSetWindChaos>VerletAirResistanceSetWindChaos</A><A>(AirResistance,Chaos)</A>
+<BR><A class=funclink href=verlet.htm#VerletAirResistanceSetWindDirection>VerletAirResistanceSetWindDirection</A><A>(AirResistance,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletAirResistanceSetWindMagnitude>VerletAirResistanceSetWindMagnitude</A><A>(AirResistance,Magnitudå)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCapsuleCreate>VerletConstraintCapsuleCreate</A><A>(VerletWorld,rad,len)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCapsuleSetAxis>VerletConstraintCapsuleSetAxis</A><A>(ConstraintCapsule,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCubeCreate>VerletConstraintCubeCreate</A><A>(VerletWorld,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCubeCreateSetCube>VerletConstraintCubeCreateSetCube</A><A>(VerletWorld,cube)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCubeSetDirection>VerletConstraintCubeSetDirection</A><A>(ConstraintCube,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCylinderCreate>VerletConstraintCylinderCreate</A><A>(VerletWorld,rad)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintCylinderSetAxis>VerletConstraintCylinderSetAxis</A><A>(ConstraintCylinder,xd,yd,zd)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintFloorCreate>VerletConstraintFloorCreate</A><A>(VerletWorld,BounceRatio,FloorLevel)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintFloorSetNormal>VerletConstraintFloorSetNormal</A><A>(ConstraintFloor,xn,yn,zn)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintFloorSetObjectLocations>VerletConstraintFloorSetObjectLocations</A><A>(ConstraintFloor,obj)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintSetEnabled>VerletConstraintSetEnabled</A><A>(Constraint,enable)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintSetFrictionRatio>VerletConstraintSetFrictionRatio</A><A>(Constraint,fr)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintSetPosition>VerletConstraintSetPosition</A><A>(Constraint,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletConstraintSphereCreate>VerletConstraintSphereCreate</A><A>(VerletWorld,rad)</A>
+<BR><A class=funclink href=verlet.htm#VerletEdgeDetectorCreate>VerletEdgeDetectorCreate</A><A>(VerletWorld,obj)</A>
+<BR><A class=funclink href=verlet.htm#VerletEdgeDetectorSetWeldDistance>VerletEdgeDetectorSetWeldDistance</A><A>(EdgeDetector,dis)</A>
+<BR><A class=funclink href=verlet.htm#VerletGetNodeCount>VerletGetNodeCount</A><A>(VerletWorld)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeApplyFriction>VerletNodeApplyFriction</A><A>(VerletWorld,nodeIndex,friction,penetrationDepth,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeNailedDown>VerletNodeNailedDown</A><A>(VerletWorld,nodeIndex,enable)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeSetFriction>VerletNodeSetFriction</A><A>(VerletWorld,nodeIndex,fr)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeSetPosition>VerletNodeSetPosition</A><A>(VerletWorld,nodeIndex,x,y,z)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeSetRadius>VerletNodeSetRadius</A><A>(VerletWorld,nodeIndex,rad)</A>
+<BR><A class=funclink href=verlet.htm#VerletNodeSetWeight>VerletNodeSetWeight</A><A>(VerletWorld,nodeIndex,weight)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldCreate>VerletWorldCreate</A><A>(Iterations,UpdateSpacePartion,Drag)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldCreateOctree>VerletWorldCreateOctree</A><A>(VerletWorld,xmin,ymin,zmin,xmax,ymax,zmax,LeafThreshold,MaxTreeDepth)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldGravityCreate>VerletWorldGravityCreate</A><A>(VerletWorld,xDir,yDir,zDir)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldGravitySetDirection>VerletWorldGravitySetDirection</A><A>(Gravity,xDir,yDir,zDir)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldSetMaxDeltaTime>VerletWorldSetMaxDeltaTime</A><A>(VerletWorld,maxTime)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldSetSimTime>VerletWorldSetSimTime</A><A>(VerletWorld,time)</A>
+<BR><A class=funclink href=verlet.htm#VerletWorldUpdate>VerletWorldUpdate</A><A>(VerletWorld,newTime)</A>
+<BR><A class=funclink href=viewer.htm#ViewerCopyToTexture>ViewerCopyToTexture</A><A>(viewer,material)</A>
 <BR><A class=funclink href=viewer.htm#ViewerCreate>ViewerCreate</A><A>(x,y,width,height,window_h)</A>
 <BR><A class=funclink href=viewer.htm#ViewerEnableFog>ViewerEnableFog</A><A>(viewer,mode)</A>
 <BR><A class=funclink href=viewer.htm#ViewerEnableVSync>ViewerEnableVSync</A><A>(viewer,vsm)</A>
@@ -1071,10 +1041,12 @@
 <BR><A class=funclink href=viewer.htm#ViewerGetSize>ViewerGetSize</A><A>(viewer,index)</A>
 <BR><A class=funclink href=viewer.htm#ViewerGetVBOSupported>ViewerGetVBOSupported</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerIsOpenGLExtensionSupported>ViewerIsOpenGLExtensionSupported</A><A>(viewer,ext)</A>
+<BR><A class=funclink href=viewer.htm#ViewerPixelRayToWorld>ViewerPixelRayToWorld</A><A>(viewer,x,y,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerPixelToDistance>ViewerPixelToDistance</A><A>(viewer,x,y)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRender>ViewerRender</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderEx>ViewerRenderEx</A><A>(viewer,object,clear,swap,updateFPS)</A>
 <BR><A class=funclink href=viewer.htm#ViewerRenderToFile>ViewerRenderToFile</A><A>(viewer,filename)</A>
+<BR><A class=funclink href=viewer.htm#ViewerRenderToFilePNG>ViewerRenderToFilePNG</A><A>(viewer,filename)</A>
 <BR><A class=funclink href=viewer.htm#ViewerResetPerformanceMonitor>ViewerResetPerformanceMonitor</A><A>(viewer)</A>
 <BR><A class=funclink href=viewer.htm#ViewerResize>ViewerResize</A><A>(viewer,x,y,width,height)</A>
 <BR><A class=funclink href=viewer.htm#ViewerScreenToVector>ViewerScreenToVector</A><A>(viewer,x,y,ind)</A>
@@ -1089,6 +1061,7 @@
 <BR><A class=funclink href=viewer.htm#ViewerSetLighting>ViewerSetLighting</A><A>(viewer,mode)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetOverrideMaterial>ViewerSetOverrideMaterial</A><A>(viewer,matlib,material)</A>
 <BR><A class=funclink href=viewer.htm#ViewerSetVisible>ViewerSetVisible</A><A>(viewer,mode)</A>
+<BR><A class=funclink href=viewer.htm#ViewerShadeModel>ViewerShadeModel</A><A>(viewer,smooth)</A>
 <BR><A class=funclink href=viewer.htm#ViewerVectorToScreen>ViewerVectorToScreen</A><A>(viewer,x,y,z,ind)</A>
 <BR><A class=funclink href=viewer.htm#ViewerWorldToScreen>ViewerWorldToScreen</A><A>(viewer,x,y,ind)</A>
 <BR>
@@ -1110,7 +1083,6 @@
 <BR><A class=funclink href=water.htm#WaterSetRainTimeInterval>WaterSetRainTimeInterval</A><A>(water,interval)</A>
 <BR><A class=funclink href=water.htm#WaterSetResolution>WaterSetResolution</A><A>(water,res)</A>
 <BR><A class=funclink href=water.htm#WaterSetViscosity>WaterSetViscosity</A><A>(water,viscosity)</A>
-
 <BR><A class=funclink href=window.htm#WindowCenter>WindowCenter</A><A>(window)</A>
 <BR><A class=funclink href=window.htm#WindowCreate>WindowCreate</A><A>(x,y,width,height,resizeable)</A>
 <BR><A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>(window)</A>
@@ -1121,7 +1093,6 @@
 <BR><A class=funclink href=window.htm#WindowResize>WindowResize</A><A>(window,x,y,width,height)</A>
 <BR><A class=funclink href=window.htm#WindowSetIcon>WindowSetIcon</A><A>(window,filename)</A>
 <BR><A class=funclink href=window.htm#WindowSetTitle>WindowSetTitle</A><A>(window,title)</A>
-
 <BR><A class=funclink href=fonttext.htm#WindowsBitmapfontCreate>WindowsBitmapfontCreate</A><A>(fontname,size,start,end)</A>
 <BR>
 <BR>
@@ -1130,4 +1101,3 @@
 
 </BODY>
 </HTML>
-
