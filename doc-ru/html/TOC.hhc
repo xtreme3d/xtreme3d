@@ -323,8 +323,8 @@
  </OBJECT>
  
    <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="VerletWorld">
-  <PARAM name="Local" value="functions/VerletWorld.htm">
+  <PARAM name="Name" value="Verlet">
+  <PARAM name="Local" value="functions/verlet.htm">
  </OBJECT>
  
 <!--
