@@ -1,8 +1,10 @@
-
 # Executables and libraries
 *.exe
 *.a
 *.lib
+
+# Compiled Delphi unit files
+*.dcu
 
 # Backup files
 *~

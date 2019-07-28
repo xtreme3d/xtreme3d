@@ -1,5 +1,17 @@
 Xtreme3D version history
 ========================
+v3.8.0 (by FireRun) - 27/07/2019
+--------------------------------
+- Verlet physics engine for soft bodies simulation
+- Pipe primitive
+- TilePlane primitive
+- ViewerPixelRayToWorld, ViewerShadeModel, ViewerRenderToFilePNG
+- ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy, ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorTriangleCount, ActorSetFrame
+- MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode
+- HUDSpriteXTiles,HUDSpriteYTiles
+- FireFXRingExplosion
+- FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy.
+
 v3.7.2 (by Gecko) - 26/02/2019
 ------------------------------
 - SpriteGetSize.
