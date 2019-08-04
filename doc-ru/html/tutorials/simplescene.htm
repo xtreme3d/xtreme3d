@@ -48,7 +48,7 @@ Global Game Settings, вкладка Constants). По негласной традиции константы Xtreme
 <BR>
 <BR>Идем дальше:
 <BR>
-<BR><A>view = </A><A class=func2link href=../functions/viewer.htm#ViewerCreate>ViewerCreate</A><A>(<A class=type>window_handle</A><A>, 0, 0, 640, 480);</A> 
+<BR><A>view = </A><A class=func2link href=../functions/viewer.htm#ViewerCreate>ViewerCreate</A><A>(0, 0, 640, 480,<A class=type>window_handle()</A><A>);</A> 
 <BR><A class=func2link href=../functions/viewer.htm#ViewerSetLighting>ViewerSetLighting</A><A>(view, 1);</A>
 <BR>
 <BR>Для того, чтобы наблюдать что-либо в окне с игрой, понадобится Вид (Viewer). Вид - это прямоугольник, в котором происходит отрисовка сцены Xtreme3D. Все, что за пределами этого прямоугольника, "принадлежит" встроенной графике Game Maker. Мы создали Вид разрешением 640х480, под размер окна, так что графики Game Maker и вовсе не будет видно. Позиция нашего Вида на экране - (0,0). По существу, это координата левого верхнего угла Вида, относительно левого верхнего угла окна. 

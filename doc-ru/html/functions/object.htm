@@ -294,27 +294,6 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
-<!--
-<A name="ObjectAlignToCamera"></A>
-<H1 class=name>ObjectAlignToCamera</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectAlignToCamera</A><A>( object,camera as </A><A class=type>real</A> );</A>
-<BR><A>Синхронизирует локальный поворот объекта с локальным поворотом камеры.</A>
-<BR><A>object - id объекта</A>
-<BR><A>camera - id камеры.</A>
-<HR>
--->
-
-<!--
-<A name="ObjectGetAtXY"></A>
-<H1 class=name>ObjectGetAtXY</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAtXY</A><A>( viewer,x,y as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает id объекта, находящегося в точке, заданной своими координатами на экране (в Виде). Если в этой точке нет объекта, 
-возвращается 0.</A>
-<BR><A>viewer - id Вида</A>
-<BR><A>x,y - координаты точки.</A>
-<HR>
--->
-
 <A name="ObjectShowAxes"></A>
 <H1 class=name>ObjectShowAxes</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectShowAxes</A><A>( object,mode as </A><A class=type>real</A> );</A>
@@ -363,17 +342,6 @@
 <BR><A>Возвращает нормаль полигона последнего пересечения, обнаруженного функциями </A><A class=funclink href=../functions/object.htm#ObjectSceneRaycast>ObjectSceneRaycast</A><A> и </A><A class=funclink href=../functions/object.htm#ObjectRaycast>ObjectRaycast</A><A>.</A>
 <BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
-
-<!--
-<A name="ObjectSetDiffuseColor"></A>
-<H1 class=namenew>ObjectSetDiffuseColor</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetDiffuseColor</A><A>( object,color,alpha as </A><A class=type>real</A> );</A>
-<BR><A>Задает цветовой компонент Diffuse объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>color - цвет</A>
-<BR><A>alpha - прозрачность.</A>
-<HR>
--->
 
 <A name="ObjectSetMaterial"></A>
 <H1 class=name>ObjectSetMaterial</H1>
@@ -530,6 +498,13 @@
 <BR><A>name - имя объекта.</A>
 <HR>
 
+<A name="ObjectFindByName "></A>
+<H1 class=name>ObjectFindByName </H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectFindByName </A><A>( name as </A><A class=type>string</A> );</A>
+<BR><A>Возвращает id объекта с заданным именем.</A>
+<BR><A>name - имя объекта.</A>
+<HR>
+
 <A name="ObjectGetBoundingsphereRadius"></A>
 <H1 class=name>ObjectGetBoundingsphereRadius</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectGetBoundingsphereRadius</A><A>( object as </A><A class=type>real</A> );</A>
@@ -667,15 +642,6 @@
 <BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
 <HR>
 
-<!--
-<A name="ObjectStructureChanged"></A>
-<H1 class=name>ObjectStructureChanged</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectStructureChanged</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>object - id объекта.</A>
-<HR>
--->
-
 <A name="ObjectRotateAbsolute"></A>
 <H1 class=name>ObjectRotateAbsolute</H1>
 <A class=type>real</A><A> = </A><A class=function>ObjectRotateAbsolute</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
@@ -700,15 +666,6 @@
 <BR><A>object - id объекта</A>
 <BR><A>viewer - id вида.</A>
 <HR>
-
-<!--
-<A name="ObjectIsClipped"></A>
-<H1 class=name>ObjectIsClipped</H1>
-<A class=type>boolean</A><A> = </A><A class=function>ObjectIsClipped</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину, если объект находится вне поля зрения.</A>
-<BR><A>object - id объекта.</A>
-<HR>
--->
 
 <A name="ObjectSetMatrixColumn"></A>
 <H1 class=name>ObjectSetMatrixColumn</H1>

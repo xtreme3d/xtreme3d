@@ -73,6 +73,15 @@
 <BR/><A>filename</A> - имя файла BMP.</A>
 <HR>
 
+<A name="ViewerRenderToFilePNG"></A>
+<H1 class=name>ViewerRenderToFilePNG </H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerRenderToFilePNG </A><A>( viewer as </A>
+<A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
+<BR/><A class=ntext>Совершает рендеринг вида в файл PNG с альфа каналом (иными словами, делает скриншот).
+<BR/><A>viewer</A> - id вида
+<BR/><A>filename</A> - имя файла PNG.</A>
+<HR>
+
 <A name="ViewerRenderEx"></A>
 <H1 class=name>ViewerRenderEx</H1>
 <A class=type>real</A><A> = </A><A class=function>ViewerRenderEx</A><A>( viewer,object,clear,swap,updateFPS as </A>
@@ -223,6 +232,16 @@
 <BR/><A>ind</A> - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1, z если ind=2.</A>
 <HR>
 
+<A name="ViewerPixelRayToWorld"></A>
+<H1 class=name>ViewerPixelRayToWorld</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerPixelRayToWorld</A><A>( viewer,x,y,ind as </A>
+<A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Конвертирует двумерные координаты вида x и y в трехмерные координаты сцены и возвращает индекс кординаты.
+<BR/><A>viewer</A> - id вида
+<BR/><A>x,y</A> - координаты на экране
+<BR/><A>ind</A> - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1.</A>
+<HR>
+
 <A name="ViewerCopyToTexture"></A>
 <H1 class=name>ViewerCopyToTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>ViewerCopyToTexture</A><A>( viewer as </A><A class=type>real</A>
@@ -306,6 +325,14 @@
 <BR/><A>viewer</A> - id вида</A>
 <BR/><A>matlib</A> - id библиотеки материалов</A>
 <BR/><A>material</A> - имя материала в библиотеке. Если передать пустую строку, то замещающий материал будет отключен, и объекты будут, как обычно, рендериться со своими материалами.</A>
+<HR>
+
+<A name="ViewerShadeModel"></A>
+<H1 class=name>ViewerShadeModel</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerShadeModel</A><A>( viewer,smooth as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Задает тип освещения на полигонах - плоское или сглаженное.
+<BR/><A>viewer</A> - id вида
+<BR/><A>smooth</A> - <A class=constant>true</A> (сглаженное освещение) или <A class=constant>false</A> (плоское освещение) (1 и 0 соответственно).</A>
 <HR>
 
 <A name="ViewerGetFBOSupported"></A>

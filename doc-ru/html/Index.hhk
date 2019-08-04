@@ -643,6 +643,12 @@
   <PARAM name="Name" value="Tree">
   <PARAM name="Local" value="functions/tree.htm">
  </OBJECT>
+ 
+  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="VerletWorld">
+  <PARAM name="Local" value="functions/VerletWorld.htm">
+ </OBJECT>
+ 
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Triangle Strip/Fan">
   <PARAM name="Local" value="glossary/trianglestripfan.htm">

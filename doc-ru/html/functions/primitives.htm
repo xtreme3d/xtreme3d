@@ -326,6 +326,103 @@
 <BR><A>parent - id родителя для чайника (0 - отсутствие родителя).</A>
 <HR>
 
+<A name="PipeCreate"></A>
+<H1 class=name>PipeCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeCreate</A>
+<A>( division,slices,parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает pipe и возвращает его id.</A>
+<BR><A>division - Сведения отсутствуют.</A>
+<BR><A>slices - задает количество ребер.</A>
+<BR><A>parent - id родителя для pipe (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="PipeAddNode"></A>
+<H1 class=name>PipeAddNode</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeAddNode</A>
+<A>( pipe,x,y,z as  </A><A class=type>real</A><A>);</A>
+<BR><A>Добавляет узел к pipe и присваивает ему порядковый номер. Отсчет начинается с нуля.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>x,y,z - локальные координаты узла.</A>
+<HR>
+
+<A name="PipeDeleteNode"></A>
+<H1 class=name>PipeDeleteNode</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeDeleteNode</A>
+<A>( pipe,index as  </A><A class=type>real</A><A>);</A>
+<BR><A>Удаляет узел из pipe.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>index - порядковый номер узла.</A>
+<HR>
+
+<A name="PipeSetNode"></A>
+<H1 class=name>PipeSetNode</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeSetNode</A>
+<A>( pipe,index,x,y,z as  </A><A class=type>real</A><A>);</A>
+<BR><A>Изменяет кординаты узла.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>index - порядковый номер узла.</A>
+<BR><A>x,y,z - локальные кординаты узла.</A>
+<HR>
+
+<A name="PipeSetDivision"></A>
+<H1 class=name>PipeSetDivision</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeSetDivision</A>
+<A>( pipe,division as  </A><A class=type>real</A><A>);</A>
+<BR><A>Сведения отсутствуют.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>division - Сведения отсутствуют.</A>
+<HR>
+
+<A name="PipeSetSlices"></A>
+<H1 class=name>PipeSetSlices</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeSetSlices</A>
+<A>( pipe,slic as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает количество ребер pipe.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>slic - Количество ребер.</A>
+<HR>
+
+<A name="PipeSetRadius"></A>
+<H1 class=name>PipeSetRadius</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeSetRadius</A>
+<A>( pipe,rad as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает радиус pipe.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>rad - Радиус.</A>
+<HR>
+
+<A name="PipeSetSplineMode"></A>
+<H1 class=name>PipeSetSplineMode</H1>
+<A class=type>real</A><A> = </A><A class=function>PipeSetSplineMode</A>
+<A>( pipe,lsm as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает тип pipe (lsm):</A>
+<BR><A class=constant name="lsmLines">lsmLines</A><A> = 0 - прямая</A>
+<BR><A class=constant name="lsmCubicSpline">lsmCubicSpline</A><A> = 1 - кубический сплайн</A>
+<BR><A class=constant name="lsmBezierSpline">lsmBezierSpline</A><A> = 2 - сплайн Безье</A>
+<BR><A class=constant name="lsmNURBSCurve">lsmNURBSCurve</A><A> = 3 - NURBS</A>
+<BR><A class=constant name="lsmSegments">lsmSegments</A><A> = 4 - пунктир.</A>
+<BR><A>pipe - id pipe.</A>
+<BR><A>lsm - тип pipe.</A>
+<HR>
+
+<A name="TilePlaneCreate"></A>
+<H1 class=name>TilePlaneCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>TilePlaneCreate</A>
+<A>( parent as  </A><A class=type>real</A><A>);</A>
+<BR><A>Создает бесконечную плоскость для тайлового текстурирования и возвращает его id.</A>
+<BR><A>parent - id родителя для TilePlane (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="TilePlaneSetTile"></A>
+<H1 class=name>TilePlaneSetTile</H1>
+<A class=type>real</A><A> = </A><A class=function>TilePlaneSetTile</A>
+<A>( tileplane, x,y,name as  </A><A class=type>real</A><A>);</A>
+<BR><A>Задает тайлу под индексом x и y материал.</A>
+<BR><A>tileplane - id TilePlane.</A>
+<BR><A>x,y - Индекс тайла.</A>
+<BR><A>name - Имя материала.</A>
+<HR>
+
 </DIV>
 
 </BODY>
