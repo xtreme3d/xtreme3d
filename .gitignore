@@ -27,3 +27,5 @@ bindings/python/ode.dll
 bindings/python/freetype.dll
 bindings/python/OpenFBX.dll
 
+# db files
+*.db
