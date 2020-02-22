@@ -16,13 +16,11 @@ Do not forget to copy `xtreme3d.dll` (and also `ode.dll`, `freetype.dll`, `OpenF
 
 2. Deployment
 
-If you have [PyInstaller](https://www.pyinstaller.org), you can build a standalone executable from any SDK demo or custom application, so that it won't require Python to run. Use `build.bat` script for that:
+You can build a standalone executable from any SDK demo or custom application, so that it won't require Python installation to run. Use `build.bat` script for that:
 
 `build demoname.py`
 
 Make sure you have write access to current directory before running the script.
-It will create a directory named `dist/app` containing all the files needed to distribute the application, including the `data` folder and all DLLs. If you use any additional files in your application, copy them there manually.
-It will also use `icon.ico` to create a `app.exe` - you can replace it with your own icon. You can rename `app.exe` to your liking.
-`dist/app` directory can then be archived or used to make an installer with third-party software.
-
-Note: if you run `build.bat` second time, it will delete `dist/app` directory, so any changes you made to it will be lost. Please, copy your build to other location if you want to keep it.
+It will create a directory named `build/exe.win32-2.7` containing all the files needed to distribute the application, including the `data` folder and all DLLs. If you use any additional files in your application, copy them there manually, or modify `setup.py`.
+It will also use `icon.ico` to create a `app.exe` - you can replace it with your own icon.
+`build/exe.win32-2.7` directory can then be archived or used to make an installer with third-party software.
