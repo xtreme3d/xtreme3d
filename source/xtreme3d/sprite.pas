@@ -34,6 +34,24 @@ begin
   result := Integer(mouseInSprite);
 end;
 
+function HUDSpriteXTiles(sprite,xtls: real): real; stdcall;
+var
+ spr: TGLHUDSprite;
+begin
+  spr := TGLHUDSprite(trunc64(sprite));
+  spr.XTiles:=trunc64(xtls);
+  Result := 1;
+end;
+
+function HUDSpriteYTiles(sprite,ytls: real): real; stdcall;
+var
+ spr: TGLHUDSprite;
+begin
+  spr := TGLHUDSprite(trunc64(sprite));
+  spr.YTiles:=trunc64(ytls);
+  Result := 1;
+end;
+
 function SpriteCreate(mtrl: pchar; w,h,parent: real): real; stdcall;
 var
   GLSprite1: TGLSprite;
@@ -55,6 +73,17 @@ begin
   GLSprite1:=TGLSprite(trunc64(sprite));
   GLSprite1.SetSize(w, h);
   result:=1;
+end;
+
+function SpriteGetSize(sprite, type_val: real): real; stdcall;
+var
+  spr: TGLSprite;
+begin
+  spr := TGLSprite(trunc64(sprite));
+  if (type_val = 0) then
+    result := spr.Width;
+  if (type_val = 1) then
+    result := spr.Height;
 end;
 
 function SpriteScale(sprite,u,v: real): real; stdcall;

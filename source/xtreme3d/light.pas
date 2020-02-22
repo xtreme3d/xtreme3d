@@ -70,3 +70,31 @@ begin
   if ls=2 then TGLLightSource(trunc64(light)).LightStyle:=lsParallel;
   result:=1;
 end;
+
+function LightGetColor(light,index: real): real; stdcall
+var 
+lght: TGLLightSource;
+begin
+lght:= TGLLightSource(trunc64(light));
+if (index=0) then
+  result:=lght.Ambient.AsWinColor;
+if (index=1) then
+  result:=lght.Diffuse.AsWinColor;
+if (index=2) then
+  result:=lght.Specular.AsWinColor;
+end;
+
+function LightGetAttenuation(light,index: real): real; stdcall
+begin
+if (index=0) then
+    result:=TGLLightSource(trunc64(light)).ConstAttenuation;
+if (index=1) then
+    result:=TGLLightSource(trunc64(light)).LinearAttenuation;
+if (index=2) then
+    result:=TGLLightSource(trunc64(light)).QuadraticAttenuation;	
+end;
+
+function LightGetShining(light: real): real; stdcall
+begin
+  result:=integer(TGLLightSource(trunc64(light)).Shining);
+end;

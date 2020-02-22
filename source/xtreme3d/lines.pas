@@ -27,6 +27,17 @@ begin
   result := 1.0;
 end;
 
+function LinesSetNode(lines, ind, x, y, z: real): real; stdcall;
+var
+  li: TGLLines;
+begin
+  li := TGLLines(trunc64(lines));
+  li.Nodes[trunc64(ind)].X := x;
+  li.Nodes[trunc64(ind)].Y := y;
+  li.Nodes[trunc64(ind)].Y := z;
+  result := 1.0;
+end;
+
 function LinesSetColors(lines,
   linecolor, linealpha,
   nodecolor, nodealpha : real): real; stdcall;

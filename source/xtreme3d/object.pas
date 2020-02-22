@@ -305,8 +305,6 @@ end;
 
 // unimplemented: ObjectAlignToCamera
 
-// ObjectGetAtXY = ViewerGetPickedObject
-
 function ObjectShowAxes(obj, mode: real): real; stdcall;
 var
   object1: TGLBaseSceneObject;
@@ -448,36 +446,22 @@ end;
 //ObjectResetCollision()
 //ObjectMoveToCollision(obj)
 
-// ObjectUseObjectColor is removed
-// ObjectSetDiffuseColor is removed
-
 function ObjectSetMaterial(obj:real; mat:pchar): real; stdcall;
 var
   object1:TGLSCeneObject;
-  //ffm: TGLFreeForm;
-  //mesh1: TMeshObject;
-  //fg1: TFaceGroup;
-  //mi, fgi: Integer;
 begin
   object1:=TGLSceneObject(trunc64(obj));
   object1.Material.MaterialLibrary:=matlib;
   object1.Material.LibMaterialName:=mat;
-{
-  if object1.ClassType = TGLFreeForm then
-  begin
-    ffm := TGLFreeForm(trunc64(obj));
-    //ffm.UseMeshMaterials := false;
-    for mi:=0 to ffm.MeshObjects.Count-1 do begin
-      mesh1 := ffm.MeshObjects[mi];
-
-      for fgi:=0 to mesh1.FaceGroups.Count-1 do begin
-        fg1 := mesh1.FaceGroups[fgi];
-        fg1.MaterialName := String(mat);
-      end;
-    end;
-  end;
- }
   result:=1;
+end;
+
+function ObjectGetMaterial(obj:real): pchar; stdcall;
+var
+  object1:TGLSCeneObject;
+begin
+  object1:=TGLSceneObject(trunc64(obj));
+  result:=pchar(object1.Material.LibMaterialName);
 end;
 
 function ObjectGetDistance(obj, target: real): real; stdcall;
@@ -916,3 +900,9 @@ begin
   result := Integer(not IsVolumeClipped(
     AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
 end;
+
+function ObjectFindByName (name: pchar): real; stdcall;
+begin
+  result:=Integer(scene.FindSceneObject(name));
+end;
+

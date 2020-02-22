@@ -83,3 +83,29 @@ begin
   GLXyzGrid1.LinePattern:=trunc64(pattern);
   result:=1;
 end;
+
+function GridSetTile(grid,x,y,z: real): real; stdcall;
+var
+  GLXyzGrid1: TGLXYZGrid;
+begin
+  GLXyzGrid1:=TGLXYZGrid(trunc64(grid));
+  GLXyzGrid1.XSamplingScale.Min:= -x;
+  GLXyzGrid1.XSamplingScale.max:=  x;
+  GLXyzGrid1.YSamplingScale.Min:=  -y;
+  GLXyzGrid1.YSamplingScale.max:=   y;
+  GLXyzGrid1.ZSamplingScale.Min:= -z;
+  GLXyzGrid1.ZSamplingScale.max:=  z;
+  result:=1;
+end;
+
+function GridSetStep(grid,step: real): real; stdcall;
+var
+  GLXyzGrid1: TGLXYZGrid;
+begin
+  GLXyzGrid1:=TGLXYZGrid(trunc64(grid));
+  GLXyzGrid1.XSamplingScale.step:= step;
+  GLXyzGrid1.YSamplingScale.step:= step;
+  GLXyzGrid1.ZSamplingScale.step:= step;
+  result:=1;
+end;
+

@@ -45,6 +45,63 @@ begin
   result:=1;
 end;
 
+function ViewerRenderToFilePNG(viewer:real; fname:pchar): real; stdcall;
+var
+  bmp: TBitmap;
+  bufw,bufb: TBitmap;
+  png: TPNGObject;
+  i,j: integer;
+  pw,pb,pr,pa: PByteArray;
+  f: single;
+  oldColor: TColor;
+begin  
+	oldColor:=TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor;
+    TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := $ffffff;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+    bufw := TGLSceneViewer(trunc64(viewer)).Buffer.CreateSnapShotBitmap;
+
+    TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := 0;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+    bufb := TGLSceneViewer(trunc64(viewer)).Buffer.CreateSnapShotBitmap;
+
+	TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor := oldColor;
+    TGLSceneViewer(trunc64(viewer)).Buffer.Render;
+	bmp := TBitmap.Create;
+    bmp.PixelFormat := pf32bit;
+    bmp.Transparent := true;
+    bmp.Width := TGLSceneViewer(trunc64(viewer)).Width;
+    bmp.Height := TGLSceneViewer(trunc64(viewer)).Height;
+
+    for j := 0 to bufw.Height - 1 do begin
+      pw := bufw.ScanLine[j];
+      pb := bufb.ScanLine[j];
+      pr := bmp.ScanLine[j];
+      for i := 0 to bufw.Width - 1 do begin
+      // alpha
+        pr[i * 4 + 3] := pb[i * 4 + 1] - pw[i * 4 + 1] + 255;
+      // color
+        f := 255 / pr[i * 4 + 3];
+        pr[i * 4] := round( clampValue( pb[i * 4] * f, 0, 255 ));
+        pr[i * 4 + 1] := round(clampValue( pb[i * 4 + 1] * f, 0, 255));
+        pr[i * 4 + 2] := round(clampValue( pb[i * 4 + 2] * f, 0, 255));
+      end;
+    end;
+    png := TPNGObject.Create;
+    png.Assign(bmp);
+    png.CreateAlpha;
+	for j := 0 to png.Height - 1 do begin
+      pr := bmp.ScanLine[j];
+      pa := png.AlphaScanline[j];
+      for i := 0 to png.Width - 1 do begin
+        pa[i] := pr[i * 4 + 3];
+	  end;	
+	end;
+    png.SaveToFile(String(fname));
+    png.Free;
+	bmp.Free;
+  result:=1;
+end;
+
 function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
@@ -306,4 +363,21 @@ begin
   v := TGLSceneViewer(trunc64(viewer));
   v.ResetPerformanceMonitor;
   result := 1.0;
+end;
+
+function ViewerPixelRayToWorld(viewer,x, y,ind: real): real; stdcall;
+var
+vec: TAffineVector;
+begin
+  vec:=TGLSceneViewer(trunc64(viewer)).Buffer.PixelRayToWorld(trunc64(x),trunc64(y));
+  result:=vec[trunc64(ind)];
+end;
+
+function ViewerShadeModel(viewer,ind: real): real; stdcall;
+begin
+if (ind=0) then
+  TGLSceneViewer(trunc64(viewer)).Buffer.ShadeModel:=smFlat;
+if (ind=1) then
+   TGLSceneViewer(trunc64(viewer)).Buffer.ShadeModel:=smSmooth;
+result:=1;
 end;

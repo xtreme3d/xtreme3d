@@ -91,6 +91,32 @@ begin
   result:=tri;
 end;
 
+function FreeformMeshObjectGetName(ff,mesh: real): pchar; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  result:=pchar(GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name);
+end;
+
+function FreeformMeshObjectSetName(ff,mesh: real; name: pchar): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name:=name;
+  result:=1;
+end;
+
+function FreeformMeshObjectDestroy(ff,mesh: real): real; stdcall;
+var
+  GLFreeForm1: TGLFreeForm;
+begin
+  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Destroy;
+  result:=1;
+end;
+
 function FreeformMeshFaceGroupsCount(ff,mesh: real): real; stdcall;
 var
   GLFreeForm1: TGLFreeForm;

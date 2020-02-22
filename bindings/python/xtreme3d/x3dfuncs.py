@@ -178,6 +178,41 @@ x3d.ActorMeshSetVisible.restype = ctypes.c_double
 def ActorMeshSetVisible(aActor, aMesh, aMode):
     return x3d.ActorMeshSetVisible(aActor, aMesh, aMode)
 
+x3d.ActorGetAnimationName.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ActorGetAnimationName.restype = ctypes.c_char_p
+def ActorGetAnimationName(aActor, aInd):
+    return x3d.ActorGetAnimationName(aActor, aInd)
+
+x3d.ActorGetAnimationCount.argtypes = [ctypes.c_double]
+x3d.ActorGetAnimationCount.restype = ctypes.c_double
+def ActorGetAnimationCount(aActor):
+    return x3d.ActorGetAnimationCount(aActor)
+
+x3d.ActorAnimationDestroy.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ActorAnimationDestroy.restype = ctypes.c_double
+def ActorAnimationDestroy(aActor, aIndex):
+    return x3d.ActorAnimationDestroy(aActor, aIndex)
+
+x3d.ActorAnimationNextFrame.argtypes = [ctypes.c_double]
+x3d.ActorAnimationNextFrame.restype = ctypes.c_double
+def ActorAnimationNextFrame(aActor):
+    return x3d.ActorAnimationNextFrame(aActor)
+
+x3d.ActorAnimationPrevFrame.argtypes = [ctypes.c_double]
+x3d.ActorAnimationPrevFrame.restype = ctypes.c_double
+def ActorAnimationPrevFrame(aActor):
+    return x3d.ActorAnimationPrevFrame(aActor)
+
+x3d.ActorSetFrame.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ActorSetFrame.restype = ctypes.c_double
+def ActorSetFrame(aActor, aFrame):
+    return x3d.ActorSetFrame(aActor, aFrame)
+
+x3d.ActorTriangleCount.argtypes = [ctypes.c_double]
+x3d.ActorTriangleCount.restype = ctypes.c_double
+def ActorTriangleCount(aActor):
+    return x3d.ActorTriangleCount(aActor)
+
 
 # blur.pas
 x3d.BlurCreate.argtypes = [ctypes.c_double, ctypes.c_double]
@@ -776,6 +811,11 @@ x3d.FireFXExplosion.restype = ctypes.c_double
 def FireFXExplosion(aMngr, aIsp, aMaxsp, aLbf):
     return x3d.FireFXExplosion(aMngr, aIsp, aMaxsp, aLbf)
 
+x3d.FireFXRingExplosion.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.FireFXRingExplosion.restype = ctypes.c_double
+def FireFXRingExplosion(aMngr, aIsp, aMaxsp, aLbf, aRx, aRy, aRz, aSx, aSy, aSz):
+    return x3d.FireFXRingExplosion(aMngr, aIsp, aMaxsp, aLbf, aRx, aRy, aRz, aSx, aSy, aSz)
+
 
 # fonttext.pas
 x3d.BmpfontCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -981,6 +1021,21 @@ x3d.FreeformMeshTriangleCount.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.FreeformMeshTriangleCount.restype = ctypes.c_double
 def FreeformMeshTriangleCount(aFf, aMesh):
     return x3d.FreeformMeshTriangleCount(aFf, aMesh)
+
+x3d.FreeformMeshObjectGetName.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FreeformMeshObjectGetName.restype = ctypes.c_char_p
+def FreeformMeshObjectGetName(aFf, aMesh):
+    return x3d.FreeformMeshObjectGetName(aFf, aMesh)
+
+x3d.FreeformMeshObjectSetName.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_char_p]
+x3d.FreeformMeshObjectSetName.restype = ctypes.c_double
+def FreeformMeshObjectSetName(aFf, aMesh, aName):
+    return x3d.FreeformMeshObjectSetName(aFf, aMesh, aName)
+
+x3d.FreeformMeshObjectDestroy.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FreeformMeshObjectDestroy.restype = ctypes.c_double
+def FreeformMeshObjectDestroy(aFf, aMesh):
+    return x3d.FreeformMeshObjectDestroy(aFf, aMesh)
 
 x3d.FreeformMeshFaceGroupsCount.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.FreeformMeshFaceGroupsCount.restype = ctypes.c_double
@@ -1258,6 +1313,16 @@ x3d.GridSetPattern.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.GridSetPattern.restype = ctypes.c_double
 def GridSetPattern(aGrid, aPattern):
     return x3d.GridSetPattern(aGrid, aPattern)
+
+x3d.GridSetTile.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.GridSetTile.restype = ctypes.c_double
+def GridSetTile(aGrid, aX, aY, aZ):
+    return x3d.GridSetTile(aGrid, aX, aY, aZ)
+
+x3d.GridSetStep.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.GridSetStep.restype = ctypes.c_double
+def GridSetStep(aGrid, aStep):
+    return x3d.GridSetStep(aGrid, aStep)
 
 
 # hudshapes.pas
@@ -1699,6 +1764,21 @@ x3d.LightSetStyle.restype = ctypes.c_double
 def LightSetStyle(aLight, aLs):
     return x3d.LightSetStyle(aLight, aLs)
 
+x3d.LightGetColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.LightGetColor.restype = ctypes.c_double
+def LightGetColor(aLight, aIndex):
+    return x3d.LightGetColor(aLight, aIndex)
+
+x3d.LightGetAttenuation.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.LightGetAttenuation.restype = ctypes.c_double
+def LightGetAttenuation(aLight, aIndex):
+    return x3d.LightGetAttenuation(aLight, aIndex)
+
+x3d.LightGetShining.argtypes = [ctypes.c_double]
+x3d.LightGetShining.restype = ctypes.c_double
+def LightGetShining(aLight):
+    return x3d.LightGetShining(aLight)
+
 
 # lightfx.pas
 x3d.LightFXCreate.argtypes = [ctypes.c_double]
@@ -1722,6 +1802,11 @@ x3d.LinesDeleteNode.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.LinesDeleteNode.restype = ctypes.c_double
 def LinesDeleteNode(aLines, aInd):
     return x3d.LinesDeleteNode(aLines, aInd)
+
+x3d.LinesSetNode.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.LinesSetNode.restype = ctypes.c_double
+def LinesSetNode(aLines, aInd, aX, aY, aZ):
+    return x3d.LinesSetNode(aLines, aInd, aX, aY, aZ)
 
 x3d.LinesSetSize.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.LinesSetSize.restype = ctypes.c_double
@@ -1785,6 +1870,11 @@ x3d.MaterialCreate.restype = ctypes.c_double
 def MaterialCreate(aMtrl, aFname):
     return x3d.MaterialCreate(aMtrl, aFname)
 
+x3d.MaterialDestroy.argtypes = [ctypes.c_char_p]
+x3d.MaterialDestroy.restype = ctypes.c_double
+def MaterialDestroy(aMtrl):
+    return x3d.MaterialDestroy(aMtrl)
+
 x3d.MaterialAddCubeMap.argtypes = [ctypes.c_char_p]
 x3d.MaterialAddCubeMap.restype = ctypes.c_double
 def MaterialAddCubeMap(aMtrl):
@@ -1804,6 +1894,11 @@ x3d.MaterialCubeMapFromScene.argtypes = [ctypes.c_char_p, ctypes.c_double, ctype
 x3d.MaterialCubeMapFromScene.restype = ctypes.c_double
 def MaterialCubeMapFromScene(aMtrl, aViewer, aCamera, aRes):
     return x3d.MaterialCubeMapFromScene(aMtrl, aViewer, aCamera, aRes)
+
+x3d.MaterialSetName.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
+x3d.MaterialSetName.restype = ctypes.c_double
+def MaterialSetName(aMtrl, aName):
+    return x3d.MaterialSetName(aMtrl, aName)
 
 x3d.MaterialSetShininess.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetShininess.restype = ctypes.c_double
@@ -1829,6 +1924,16 @@ x3d.MaterialSetEmissionColor.argtypes = [ctypes.c_char_p, ctypes.c_double, ctype
 x3d.MaterialSetEmissionColor.restype = ctypes.c_double
 def MaterialSetEmissionColor(aMtrl, aCol, aAlpha):
     return x3d.MaterialSetEmissionColor(aMtrl, aCol, aAlpha)
+
+x3d.MaterialGetColor.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialGetColor.restype = ctypes.c_double
+def MaterialGetColor(aMtrl, aIndex):
+    return x3d.MaterialGetColor(aMtrl, aIndex)
+
+x3d.MaterialGetAlpha.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialGetAlpha.restype = ctypes.c_double
+def MaterialGetAlpha(aMtrl, aIndex):
+    return x3d.MaterialGetAlpha(aMtrl, aIndex)
 
 x3d.MaterialSetBlendingMode.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetBlendingMode.restype = ctypes.c_double
@@ -2166,6 +2271,21 @@ x3d.MovementPathNodeSetSpeed.restype = ctypes.c_double
 def MovementPathNodeSetSpeed(aNode, aSpeed):
     return x3d.MovementPathNodeSetSpeed(aNode, aSpeed)
 
+x3d.MovementPathShow.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MovementPathShow.restype = ctypes.c_double
+def MovementPathShow(aPat, aVis):
+    return x3d.MovementPathShow(aPat, aVis)
+
+x3d.MovementPathSetLoop.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MovementPathSetLoop.restype = ctypes.c_double
+def MovementPathSetLoop(aPat, aLoopn):
+    return x3d.MovementPathSetLoop(aPat, aLoopn)
+
+x3d.MovementPathDeleteNode.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MovementPathDeleteNode.restype = ctypes.c_double
+def MovementPathDeleteNode(aPat, aNode):
+    return x3d.MovementPathDeleteNode(aPat, aNode)
+
 
 # navigator.pas
 x3d.NavigatorCreate.argtypes = []
@@ -2455,6 +2575,11 @@ x3d.ObjectSetMaterial.restype = ctypes.c_double
 def ObjectSetMaterial(aObj, aMat):
     return x3d.ObjectSetMaterial(aObj, aMat)
 
+x3d.ObjectGetMaterial.argtypes = [ctypes.c_double]
+x3d.ObjectGetMaterial.restype = ctypes.c_char_p
+def ObjectGetMaterial(aObj):
+    return x3d.ObjectGetMaterial(aObj)
+
 x3d.ObjectGetDistance.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ObjectGetDistance.restype = ctypes.c_double
 def ObjectGetDistance(aObj, aTarget):
@@ -2664,6 +2789,11 @@ x3d.ObjectInFrustum.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ObjectInFrustum.restype = ctypes.c_double
 def ObjectInFrustum(aObj, aViewer):
     return x3d.ObjectInFrustum(aObj, aViewer)
+
+x3d.ObjectFindByName.argtypes = [ctypes.c_char_p]
+x3d.ObjectFindByName.restype = ctypes.c_double
+def ObjectFindByName(aName):
+    return x3d.ObjectFindByName(aName)
 
 
 # objecthash.pas
@@ -3279,6 +3409,48 @@ def PartitionResultHide(aTree):
     return x3d.PartitionResultHide(aTree)
 
 
+# pipe.pas
+x3d.PipeCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.PipeCreate.restype = ctypes.c_double
+def PipeCreate(aDivs, aSlic, aParent):
+    return x3d.PipeCreate(aDivs, aSlic, aParent)
+
+x3d.PipeAddNode.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.PipeAddNode.restype = ctypes.c_double
+def PipeAddNode(aPipe, aX, aY, aZ):
+    return x3d.PipeAddNode(aPipe, aX, aY, aZ)
+
+x3d.PipeSetDivision.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PipeSetDivision.restype = ctypes.c_double
+def PipeSetDivision(aPipe, aDivs):
+    return x3d.PipeSetDivision(aPipe, aDivs)
+
+x3d.PipeSetSplineMode.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PipeSetSplineMode.restype = ctypes.c_double
+def PipeSetSplineMode(aPipe, aMode):
+    return x3d.PipeSetSplineMode(aPipe, aMode)
+
+x3d.PipeDeleteNode.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PipeDeleteNode.restype = ctypes.c_double
+def PipeDeleteNode(aPipe, aInd):
+    return x3d.PipeDeleteNode(aPipe, aInd)
+
+x3d.PipeSetRadius.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PipeSetRadius.restype = ctypes.c_double
+def PipeSetRadius(aPipe, aRad):
+    return x3d.PipeSetRadius(aPipe, aRad)
+
+x3d.PipeSetNode.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.PipeSetNode.restype = ctypes.c_double
+def PipeSetNode(aPipe, aInd, aX, aY, aZ):
+    return x3d.PipeSetNode(aPipe, aInd, aX, aY, aZ)
+
+x3d.PipeSetSlices.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PipeSetSlices.restype = ctypes.c_double
+def PipeSetSlices(aPipe, aSlic):
+    return x3d.PipeSetSlices(aPipe, aSlic)
+
+
 # polygon.pas
 x3d.PolygonCreate.argtypes = [ctypes.c_double]
 x3d.PolygonCreate.restype = ctypes.c_double
@@ -3312,10 +3484,35 @@ x3d.CubeSetNormalDirection.restype = ctypes.c_double
 def CubeSetNormalDirection(aCube, aNd):
     return x3d.CubeSetNormalDirection(aCube, aNd)
 
+x3d.CubeGetNormalDirection.argtypes = [ctypes.c_double]
+x3d.CubeGetNormalDirection.restype = ctypes.c_double
+def CubeGetNormalDirection(aCube):
+    return x3d.CubeGetNormalDirection(aCube)
+
 x3d.PlaneCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.PlaneCreate.restype = ctypes.c_double
 def PlaneCreate(aSquad, aW, aH, aXt, aYt, aParent):
     return x3d.PlaneCreate(aSquad, aW, aH, aXt, aYt, aParent)
+
+x3d.PlaneSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.PlaneSetOptions.restype = ctypes.c_double
+def PlaneSetOptions(aPlane, aSquad, aXt, aYt):
+    return x3d.PlaneSetOptions(aPlane, aSquad, aXt, aYt)
+
+x3d.PlaneGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PlaneGetOptions.restype = ctypes.c_double
+def PlaneGetOptions(aPlane, aIndex):
+    return x3d.PlaneGetOptions(aPlane, aIndex)
+
+x3d.TilePlaneCreate.argtypes = [ctypes.c_double]
+x3d.TilePlaneCreate.restype = ctypes.c_double
+def TilePlaneCreate(aParent):
+    return x3d.TilePlaneCreate(aParent)
+
+x3d.TilePlaneSetTile.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_char_p]
+x3d.TilePlaneSetTile.restype = ctypes.c_double
+def TilePlaneSetTile(aTplane, aX, aY, aMat):
+    return x3d.TilePlaneSetTile(aTplane, aX, aY, aMat)
 
 x3d.SphereCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.SphereCreate.restype = ctypes.c_double
@@ -3327,35 +3524,110 @@ x3d.SphereSetAngleLimits.restype = ctypes.c_double
 def SphereSetAngleLimits(aSphere, aStarta, aStopa, aTopa, aBottoma):
     return x3d.SphereSetAngleLimits(aSphere, aStarta, aStopa, aTopa, aBottoma)
 
+x3d.SphereGetAngleLimits.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.SphereGetAngleLimits.restype = ctypes.c_double
+def SphereGetAngleLimits(aSphere, aIndex):
+    return x3d.SphereGetAngleLimits(aSphere, aIndex)
+
+x3d.SphereSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.SphereSetOptions.restype = ctypes.c_double
+def SphereSetOptions(aSphere, aRad, aSlic, aStaks):
+    return x3d.SphereSetOptions(aSphere, aRad, aSlic, aStaks)
+
+x3d.SphereGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.SphereGetOptions.restype = ctypes.c_double
+def SphereGetOptions(aSph, aInd):
+    return x3d.SphereGetOptions(aSph, aInd)
+
 x3d.CylinderCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.CylinderCreate.restype = ctypes.c_double
 def CylinderCreate(aTopr, aBotr, aH, aSlic, aStaks, aLoop, aParent):
     return x3d.CylinderCreate(aTopr, aBotr, aH, aSlic, aStaks, aLoop, aParent)
+
+x3d.CylinderSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.CylinderSetOptions.restype = ctypes.c_double
+def CylinderSetOptions(aCyl, aTopr, aBotr, aH, aSlic, aStaks, aLoop):
+    return x3d.CylinderSetOptions(aCyl, aTopr, aBotr, aH, aSlic, aStaks, aLoop)
+
+x3d.CylinderGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.CylinderGetOptions.restype = ctypes.c_double
+def CylinderGetOptions(aCyl, aInd):
+    return x3d.CylinderGetOptions(aCyl, aInd)
 
 x3d.ConeCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ConeCreate.restype = ctypes.c_double
 def ConeCreate(aBotr, aH, aSlic, aStaks, aLoop, aParent):
     return x3d.ConeCreate(aBotr, aH, aSlic, aStaks, aLoop, aParent)
 
+x3d.ConeGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ConeGetOptions.restype = ctypes.c_double
+def ConeGetOptions(aCone, aInd):
+    return x3d.ConeGetOptions(aCone, aInd)
+
+x3d.ConeSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ConeSetOptions.restype = ctypes.c_double
+def ConeSetOptions(aCone, aBotr, aH, aSlic, aStaks, aLoop):
+    return x3d.ConeSetOptions(aCone, aBotr, aH, aSlic, aStaks, aLoop)
+
 x3d.AnnulusCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.AnnulusCreate.restype = ctypes.c_double
 def AnnulusCreate(aInr, aOutr, aH, aSlic, aStaks, aLoop, aParent):
     return x3d.AnnulusCreate(aInr, aOutr, aH, aSlic, aStaks, aLoop, aParent)
+
+x3d.AnnulusSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.AnnulusSetOptions.restype = ctypes.c_double
+def AnnulusSetOptions(aAn, aInr, aOutr, aH, aSlic, aStaks, aLoop):
+    return x3d.AnnulusSetOptions(aAn, aInr, aOutr, aH, aSlic, aStaks, aLoop)
+
+x3d.AnnulusGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AnnulusGetOptions.restype = ctypes.c_double
+def AnnulusGetOptions(aAn, aInd):
+    return x3d.AnnulusGetOptions(aAn, aInd)
 
 x3d.TorusCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.TorusCreate.restype = ctypes.c_double
 def TorusCreate(aInr, aOutr, aRing, aSide, aParent):
     return x3d.TorusCreate(aInr, aOutr, aRing, aSide, aParent)
 
+x3d.TorusSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.TorusSetOptions.restype = ctypes.c_double
+def TorusSetOptions(aTor, aInr, aOutr, aRing, aSide):
+    return x3d.TorusSetOptions(aTor, aInr, aOutr, aRing, aSide)
+
+x3d.TorusGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.TorusGetOptions.restype = ctypes.c_double
+def TorusGetOptions(aTor, aInd):
+    return x3d.TorusGetOptions(aTor, aInd)
+
 x3d.DiskCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.DiskCreate.restype = ctypes.c_double
 def DiskCreate(aInr, aOutr, aStarta, aSweepa, aLoop, aSlic, aParent):
     return x3d.DiskCreate(aInr, aOutr, aStarta, aSweepa, aLoop, aSlic, aParent)
 
+x3d.DiskSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.DiskSetOptions.restype = ctypes.c_double
+def DiskSetOptions(aDisk, aInr, aOutr, aStarta, aSweepa, aLoop, aSlic):
+    return x3d.DiskSetOptions(aDisk, aInr, aOutr, aStarta, aSweepa, aLoop, aSlic)
+
+x3d.DiskGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.DiskGetOptions.restype = ctypes.c_double
+def DiskGetOptions(aDisk, aInd):
+    return x3d.DiskGetOptions(aDisk, aInd)
+
 x3d.FrustrumCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.FrustrumCreate.restype = ctypes.c_double
 def FrustrumCreate(aBasew, aBased, aApexh, aCuth, aParent):
     return x3d.FrustrumCreate(aBasew, aBased, aApexh, aCuth, aParent)
+
+x3d.FrustrumSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.FrustrumSetOptions.restype = ctypes.c_double
+def FrustrumSetOptions(aFr, aBasew, aBased, aApexh, aCuth):
+    return x3d.FrustrumSetOptions(aFr, aBasew, aBased, aApexh, aCuth)
+
+x3d.FrustrumGetOptions.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FrustrumGetOptions.restype = ctypes.c_double
+def FrustrumGetOptions(aFr, aInd):
+    return x3d.FrustrumGetOptions(aFr, aInd)
 
 x3d.DodecahedronCreate.argtypes = [ctypes.c_double]
 x3d.DodecahedronCreate.restype = ctypes.c_double
@@ -3878,6 +4150,16 @@ x3d.HUDSpriteGetMouseOver.restype = ctypes.c_double
 def HUDSpriteGetMouseOver(aSprite, aViewer):
     return x3d.HUDSpriteGetMouseOver(aSprite, aViewer)
 
+x3d.HUDSpriteXTiles.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.HUDSpriteXTiles.restype = ctypes.c_double
+def HUDSpriteXTiles(aSprite, aXtls):
+    return x3d.HUDSpriteXTiles(aSprite, aXtls)
+
+x3d.HUDSpriteYTiles.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.HUDSpriteYTiles.restype = ctypes.c_double
+def HUDSpriteYTiles(aSprite, aYtls):
+    return x3d.HUDSpriteYTiles(aSprite, aYtls)
+
 x3d.SpriteCreate.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.SpriteCreate.restype = ctypes.c_double
 def SpriteCreate(aMtrl, aW, aH, aParent):
@@ -3887,6 +4169,11 @@ x3d.SpriteSetSize.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.SpriteSetSize.restype = ctypes.c_double
 def SpriteSetSize(aSprite, aW, aH):
     return x3d.SpriteSetSize(aSprite, aW, aH)
+
+x3d.SpriteGetSize.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.SpriteGetSize.restype = ctypes.c_double
+def SpriteGetSize(aSprite, aType_Val):
+    return x3d.SpriteGetSize(aSprite, aType_Val)
 
 x3d.SpriteScale.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.SpriteScale.restype = ctypes.c_double
@@ -4224,6 +4511,188 @@ def TreeSetSeed(aTree, aSeed):
     return x3d.TreeSetSeed(aTree, aSeed)
 
 
+# verlet.pas
+x3d.VerletWorldCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldCreate.restype = ctypes.c_double
+def VerletWorldCreate(aIter, aUpdatespacepartion, aDrag):
+    return x3d.VerletWorldCreate(aIter, aUpdatespacepartion, aDrag)
+
+x3d.VerletWorldCreateOctree.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldCreateOctree.restype = ctypes.c_double
+def VerletWorldCreateOctree(aWorld, aXmin, aYmin, aZmin, aXmax, aYmax, aZmax, aLeaf, aDepth):
+    return x3d.VerletWorldCreateOctree(aWorld, aXmin, aYmin, aZmin, aXmax, aYmax, aZmax, aLeaf, aDepth)
+
+x3d.VerletGetNodeCount.argtypes = [ctypes.c_double]
+x3d.VerletGetNodeCount.restype = ctypes.c_double
+def VerletGetNodeCount(aWorld):
+    return x3d.VerletGetNodeCount(aWorld)
+
+x3d.VerletWorldGravityCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldGravityCreate.restype = ctypes.c_double
+def VerletWorldGravityCreate(aWorld, aX, aY, aZ):
+    return x3d.VerletWorldGravityCreate(aWorld, aX, aY, aZ)
+
+x3d.VerletWorldGravitySetDirection.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldGravitySetDirection.restype = ctypes.c_double
+def VerletWorldGravitySetDirection(aGrv, aX, aY, aZ):
+    return x3d.VerletWorldGravitySetDirection(aGrv, aX, aY, aZ)
+
+x3d.VerletWorldUpdate.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldUpdate.restype = ctypes.c_double
+def VerletWorldUpdate(aWorld, aNewtime):
+    return x3d.VerletWorldUpdate(aWorld, aNewtime)
+
+x3d.EdgeDetectorCreate.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.EdgeDetectorCreate.restype = ctypes.c_double
+def EdgeDetectorCreate(aWorld, aObj):
+    return x3d.EdgeDetectorCreate(aWorld, aObj)
+
+x3d.EdgeDetectorSetWeldDistance.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.EdgeDetectorSetWeldDistance.restype = ctypes.c_double
+def EdgeDetectorSetWeldDistance(aEdge, aDis):
+    return x3d.EdgeDetectorSetWeldDistance(aEdge, aDis)
+
+x3d.VerletConstraintFloorCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintFloorCreate.restype = ctypes.c_double
+def VerletConstraintFloorCreate(aWorld, aBou, aLevel):
+    return x3d.VerletConstraintFloorCreate(aWorld, aBou, aLevel)
+
+x3d.VerletConstraintFloorSetNormal.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintFloorSetNormal.restype = ctypes.c_double
+def VerletConstraintFloorSetNormal(aFlr, aX, aY, aZ):
+    return x3d.VerletConstraintFloorSetNormal(aFlr, aX, aY, aZ)
+
+x3d.VerletConstraintFloorSetObjectLocations.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintFloorSetObjectLocations.restype = ctypes.c_double
+def VerletConstraintFloorSetObjectLocations(aFlr, aObj):
+    return x3d.VerletConstraintFloorSetObjectLocations(aFlr, aObj)
+
+x3d.VerletConstraintSphereCreate.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintSphereCreate.restype = ctypes.c_double
+def VerletConstraintSphereCreate(aWorld, aRad):
+    return x3d.VerletConstraintSphereCreate(aWorld, aRad)
+
+x3d.VerletConstraintCylinderCreate.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCylinderCreate.restype = ctypes.c_double
+def VerletConstraintCylinderCreate(aWorld, aRad):
+    return x3d.VerletConstraintCylinderCreate(aWorld, aRad)
+
+x3d.VerletConstraintCylinderSetAxis.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCylinderSetAxis.restype = ctypes.c_double
+def VerletConstraintCylinderSetAxis(aCyl, aX, aY, aZ):
+    return x3d.VerletConstraintCylinderSetAxis(aCyl, aX, aY, aZ)
+
+x3d.VerletConstraintCubeCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCubeCreate.restype = ctypes.c_double
+def VerletConstraintCubeCreate(aWorld, aX, aY, aZ):
+    return x3d.VerletConstraintCubeCreate(aWorld, aX, aY, aZ)
+
+x3d.VerletConstraintCubeCreateSetCube.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCubeCreateSetCube.restype = ctypes.c_double
+def VerletConstraintCubeCreateSetCube(aWorld, aCube1):
+    return x3d.VerletConstraintCubeCreateSetCube(aWorld, aCube1)
+
+x3d.VerletConstraintCubeSetDirection.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCubeSetDirection.restype = ctypes.c_double
+def VerletConstraintCubeSetDirection(aCb, aX, aY, aZ):
+    return x3d.VerletConstraintCubeSetDirection(aCb, aX, aY, aZ)
+
+x3d.VerletConstraintCapsuleCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCapsuleCreate.restype = ctypes.c_double
+def VerletConstraintCapsuleCreate(aWorld, aRad, aLen):
+    return x3d.VerletConstraintCapsuleCreate(aWorld, aRad, aLen)
+
+x3d.VerletConstraintCapsuleSetAxis.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintCapsuleSetAxis.restype = ctypes.c_double
+def VerletConstraintCapsuleSetAxis(aCp, aX, aY, aZ):
+    return x3d.VerletConstraintCapsuleSetAxis(aCp, aX, aY, aZ)
+
+x3d.VerletConstraintSetPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintSetPosition.restype = ctypes.c_double
+def VerletConstraintSetPosition(aObj, aX, aY, aZ):
+    return x3d.VerletConstraintSetPosition(aObj, aX, aY, aZ)
+
+x3d.VerletConstraintSetFrictionRatio.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintSetFrictionRatio.restype = ctypes.c_double
+def VerletConstraintSetFrictionRatio(aObj, aFr):
+    return x3d.VerletConstraintSetFrictionRatio(aObj, aFr)
+
+x3d.VerletConstraintSetEnabled.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintSetEnabled.restype = ctypes.c_double
+def VerletConstraintSetEnabled(aObj, aEn):
+    return x3d.VerletConstraintSetEnabled(aObj, aEn)
+
+x3d.VerletNodeNailedDown.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeNailedDown.restype = ctypes.c_double
+def VerletNodeNailedDown(aWorld, aInd, aBol):
+    return x3d.VerletNodeNailedDown(aWorld, aInd, aBol)
+
+x3d.VerletNodeSetPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeSetPosition.restype = ctypes.c_double
+def VerletNodeSetPosition(aWorld, aInd, aX, aY, aZ):
+    return x3d.VerletNodeSetPosition(aWorld, aInd, aX, aY, aZ)
+
+x3d.VerletNodeSetRadius.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeSetRadius.restype = ctypes.c_double
+def VerletNodeSetRadius(aWorld, aInd, aRad):
+    return x3d.VerletNodeSetRadius(aWorld, aInd, aRad)
+
+x3d.VerletNodeSetFriction.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeSetFriction.restype = ctypes.c_double
+def VerletNodeSetFriction(aWorld, aInd, aFr):
+    return x3d.VerletNodeSetFriction(aWorld, aInd, aFr)
+
+x3d.VerletNodeSetWeight.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeSetWeight.restype = ctypes.c_double
+def VerletNodeSetWeight(aWorld, aInd, aWeight):
+    return x3d.VerletNodeSetWeight(aWorld, aInd, aWeight)
+
+x3d.VerletNodeApplyFriction.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletNodeApplyFriction.restype = ctypes.c_double
+def VerletNodeApplyFriction(aWorld, aInd, aFr, aDepth, aX, aY, aZ):
+    return x3d.VerletNodeApplyFriction(aWorld, aInd, aFr, aDepth, aX, aY, aZ)
+
+x3d.VerletAirResistanceCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletAirResistanceCreate.restype = ctypes.c_double
+def VerletAirResistanceCreate(aWorld, aMagnitude, aChaos):
+    return x3d.VerletAirResistanceCreate(aWorld, aMagnitude, aChaos)
+
+x3d.VerletAirResistanceSetWindDirection.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletAirResistanceSetWindDirection.restype = ctypes.c_double
+def VerletAirResistanceSetWindDirection(aAir, aX, aY, aZ):
+    return x3d.VerletAirResistanceSetWindDirection(aAir, aX, aY, aZ)
+
+x3d.VerletAirResistanceSetWindMagnitude.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletAirResistanceSetWindMagnitude.restype = ctypes.c_double
+def VerletAirResistanceSetWindMagnitude(aAir, aMag):
+    return x3d.VerletAirResistanceSetWindMagnitude(aAir, aMag)
+
+x3d.VerletAirResistanceSetWindChaos.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletAirResistanceSetWindChaos.restype = ctypes.c_double
+def VerletAirResistanceSetWindChaos(aAir, aCh):
+    return x3d.VerletAirResistanceSetWindChaos(aAir, aCh)
+
+x3d.VerletConstraintGetCount.argtypes = [ctypes.c_double]
+x3d.VerletConstraintGetCount.restype = ctypes.c_double
+def VerletConstraintGetCount(aWr):
+    return x3d.VerletConstraintGetCount(aWr)
+
+x3d.VerletConstraintSetSlack.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.VerletConstraintSetSlack.restype = ctypes.c_double
+def VerletConstraintSetSlack(aWr, aCon, aSla):
+    return x3d.VerletConstraintSetSlack(aWr, aCon, aSla)
+
+x3d.VerletWorldSetSimTime.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldSetSimTime.restype = ctypes.c_double
+def VerletWorldSetSimTime(aWr, aTm):
+    return x3d.VerletWorldSetSimTime(aWr, aTm)
+
+x3d.VerletWorldSetMaxDeltaTime.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.VerletWorldSetMaxDeltaTime.restype = ctypes.c_double
+def VerletWorldSetMaxDeltaTime(aWr, aTm):
+    return x3d.VerletWorldSetMaxDeltaTime(aWr, aTm)
+
+
 # viewer.pas
 x3d.ViewerCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerCreate.restype = ctypes.c_double
@@ -4249,6 +4718,11 @@ x3d.ViewerRenderToFile.argtypes = [ctypes.c_double, ctypes.c_char_p]
 x3d.ViewerRenderToFile.restype = ctypes.c_double
 def ViewerRenderToFile(aViewer, aFname):
     return x3d.ViewerRenderToFile(aViewer, aFname)
+
+x3d.ViewerRenderToFilePNG.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.ViewerRenderToFilePNG.restype = ctypes.c_double
+def ViewerRenderToFilePNG(aViewer, aFname):
+    return x3d.ViewerRenderToFilePNG(aViewer, aFname)
 
 x3d.ViewerRenderEx.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerRenderEx.restype = ctypes.c_double
@@ -4399,6 +4873,16 @@ x3d.ViewerResetPerformanceMonitor.argtypes = [ctypes.c_double]
 x3d.ViewerResetPerformanceMonitor.restype = ctypes.c_double
 def ViewerResetPerformanceMonitor(aViewer):
     return x3d.ViewerResetPerformanceMonitor(aViewer)
+
+x3d.ViewerPixelRayToWorld.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ViewerPixelRayToWorld.restype = ctypes.c_double
+def ViewerPixelRayToWorld(aViewer, aX, aY, aInd):
+    return x3d.ViewerPixelRayToWorld(aViewer, aX, aY, aInd)
+
+x3d.ViewerShadeModel.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ViewerShadeModel.restype = ctypes.c_double
+def ViewerShadeModel(aViewer, aInd):
+    return x3d.ViewerShadeModel(aViewer, aInd)
 
 
 # water.pas

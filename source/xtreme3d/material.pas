@@ -82,6 +82,15 @@ begin
   result:=1;
 end;
 
+function MaterialDestroy(mtrl: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat.Free;
+  result := 1;
+end;
+
 function MaterialAddCubeMap(mtrl: pchar): real; stdcall;
 var
   mat:TGLLibMaterial;
@@ -158,6 +167,15 @@ begin
   Result := 1;
 end;
 
+function MaterialSetName(mtrl, name: pchar): real; stdcall;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat.Name := String(name);
+  result := 1;
+end;
+
 function MaterialSetShininess(mtrl: pchar; shin: real): real; stdcall;
 var
   mat:TGLLibMaterial;
@@ -205,6 +223,36 @@ begin
   mat.Material.FrontProperties.Emission.AsWinColor:=TColor(trunc64(col));
   mat.Material.FrontProperties.Emission.Alpha := alpha;
   result:=1;
+end;
+
+function MaterialGetColor(mtrl: pchar; index: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  if (index=0) then
+    result:=mat.Material.FrontProperties.Ambient.AsWinColor;
+  if (index=1) then
+    result:=mat.Material.FrontProperties.Diffuse.AsWinColor;
+  if (index=2) then
+    result:=mat.Material.FrontProperties.Specular.AsWinColor;
+  if (index=3) then
+    result:=mat.Material.FrontProperties.Emission.AsWinColor;	
+end;
+
+function MaterialGetAlpha(mtrl: pchar; index: real): real; stdcall;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
+  if (index=0) then
+    result:=mat.Material.FrontProperties.Ambient.Alpha;
+  if (index=1) then
+    result:=mat.Material.FrontProperties.Diffuse.Alpha;
+  if (index=2) then
+    result:=mat.Material.FrontProperties.Specular.Alpha;
+  if (index=3) then
+    result:=mat.Material.FrontProperties.Emission.Alpha;	
 end;
 
 function MaterialSetBlendingMode(mtrl: pchar; bm: real): real; stdcall;

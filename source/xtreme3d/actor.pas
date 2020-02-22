@@ -408,3 +408,66 @@ begin
   act.MeshObjects[trunc64(mesh)].Visible := Boolean(trunc64(mode));
   result := 1.0;
 end;
+
+function ActorGetAnimationName (actor,ind:real): pchar; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  result := pchar(act.Animations.Items[trunc64(ind)].Name);
+end;
+
+function ActorGetAnimationCount (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  result := act.Animations.Count;
+end;
+
+function ActorAnimationDestroy (actor,index:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  //act.Animations.Items[trunc64(index)].Destroy;
+  act.Animations.Delete(trunc64(index));
+  result := 1;
+end;
+
+function ActorAnimationNextFrame (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  act.NextFrame;
+  result := 1;
+end;
+
+function ActorAnimationPrevFrame (actor:real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act:=TGLActor(trunc64(actor));
+  act.PrevFrame;
+  result := 1;
+end;
+
+function ActorSetFrame(actor, frame: real): real; stdcall;
+var
+  act: TGLActor;
+begin
+  act := TGLActor(trunc64(actor));
+  act.CurrentFrame:=trunc64(frame);
+  result := 1.0;
+end;
+
+function ActorTriangleCount(actor: real): real; stdcall;
+var
+  GLActor1: TGLActor;
+begin
+  GLActor1:=TGLActor(trunc64(actor));
+  result:=Integer(GLActor1.MeshObjects.TriangleCount);
+end;
+
+

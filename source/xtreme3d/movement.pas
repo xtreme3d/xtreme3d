@@ -112,3 +112,33 @@ begin
   pnode.Speed := speed;
   result := 1.0;
 end;
+
+function MovementPathShow(pat,vis: real): real; stdcall;
+var
+ path: TGLMovementPath;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  path.ShowPath := Boolean(trunc64(vis));
+  Result := 1;
+end;
+
+function MovementPathSetLoop(pat,loopn: real): real; stdcall;
+var
+ path: TGLMovementPath;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  path.Looped := Boolean(trunc64(loopn));
+  Result := 1;
+end;
+
+function MovementPathDeleteNode(pat,node: real): real; stdcall;
+var
+ path: TGLMovementPath;
+ nod: TGLPathNode;
+begin
+  path := TGLMovementPath(trunc64(pat));
+  nod := TGLPathNode(trunc64(node));
+  path.DeleteNode(nod);
+  Result := 1;
+end;
+

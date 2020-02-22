@@ -29,3 +29,6 @@ bindings/python/OpenFBX.dll
 
 # db files
 *.db
+
+# Compiled Python modules
+*.pyc
