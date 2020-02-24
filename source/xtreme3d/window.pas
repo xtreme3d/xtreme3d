@@ -118,3 +118,26 @@ begin
   DestroyIcon(icon);
   result := 1.0;
 end;
+
+function WindowDispatch: real; stdcall;
+var
+  Msg: TMsg;
+  lResult: Boolean;
+begin
+  lResult := true;
+  while lResult do
+  begin
+    lResult := False;
+    if PeekMessage(Msg, 0, 0, 0, PM_REMOVE) then
+    begin
+      lResult := True;
+      if Msg.Message <> WM_QUIT then
+      begin
+        TranslateMessage(Msg);
+        DispatchMessage(Msg);
+      end;
+    end;
+  end;
+  result := 1.0;
+end;
+

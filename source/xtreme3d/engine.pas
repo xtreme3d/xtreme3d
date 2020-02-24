@@ -7,6 +7,7 @@ begin
   cadencer.Scene:=scene;
   cadencer.Mode:=cmManual;
   showLoadingErrors := True;
+  previousTicks := GetTickCount;
   result:=1;
 end;
 
@@ -82,3 +83,15 @@ begin
   scene.MaxLights := trunc64(lights);
   result := 1.0;
 end;
+
+function EngineGetTimeStep: real; stdcall;
+var
+  currentTicks: DWORD;
+  elapsedMsec: DWORD; 
+begin
+  currentTicks := GetTickCount;
+  elapsedMsec := currentTicks - previousTicks;
+  previousTicks := currentTicks;
+  result := elapsedMsec * 0.001;
+end;
+

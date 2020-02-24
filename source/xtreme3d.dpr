@@ -49,6 +49,8 @@ var
   kraftRaycastPoint: TKraftVector3;
   kraftRaycastNormal: TKraftVector3;
 
+  previousTicks: DWORD;
+
 {$R *.res}
 
 function LoadStringFromFile2(const fileName : String) : String;
@@ -852,7 +854,15 @@ VerletNodeSetFriction, VerletNodeSetWeight, VerletNodeApplyFriction, EdgeDetecto
 VerletAirResistanceCreate, VerletAirResistanceSetWindDirection,
 VerletAirResistanceSetWindMagnitude, VerletAirResistanceSetWindChaos,
 VerletConstraintGetCount, VerletConstraintSetSlack,
-VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime;
+VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
+
+//
+// 3.9.0 functions:
+//
+// Engine
+EngineGetTimeStep,
+// Window
+WindowDispatch;
 
 /////////////////////////////////////////////////////////////////////////////
 
