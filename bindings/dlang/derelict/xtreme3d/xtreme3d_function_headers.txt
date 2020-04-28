@@ -144,6 +144,7 @@ _x3d_funcP_D EngineLoadScene;
 _x3d_func0_D EngineRootObject;
 _x3d_funcD_D EngineShowLoadingErrors;
 _x3d_funcD_D EngineSetMaxLights;
+_x3d_func0_D EngineGetTimeStep;
 
 _x3d_funcDDD_D FBOCreate;
 _x3d_funcDD_D FBOSetCamera;
@@ -1030,4 +1031,5 @@ _x3d_funcDP_D WindowSetTitle;
 _x3d_funcD_D WindowDestroy;
 _x3d_funcD_D WindowIsShowing;
 _x3d_funcDP_D WindowSetIcon;
+_x3d_func0_D WindowDispatch;
 

@@ -144,6 +144,7 @@ bindFunc(cast(void**)&EngineLoadScene, "EngineLoadScene");
 bindFunc(cast(void**)&EngineRootObject, "EngineRootObject");
 bindFunc(cast(void**)&EngineShowLoadingErrors, "EngineShowLoadingErrors");
 bindFunc(cast(void**)&EngineSetMaxLights, "EngineSetMaxLights");
+bindFunc(cast(void**)&EngineGetTimeStep, "EngineGetTimeStep");
 
 bindFunc(cast(void**)&FBOCreate, "FBOCreate");
 bindFunc(cast(void**)&FBOSetCamera, "FBOSetCamera");
@@ -1030,4 +1031,5 @@ bindFunc(cast(void**)&WindowSetTitle, "WindowSetTitle");
 bindFunc(cast(void**)&WindowDestroy, "WindowDestroy");
 bindFunc(cast(void**)&WindowIsShowing, "WindowIsShowing");
 bindFunc(cast(void**)&WindowSetIcon, "WindowSetIcon");
+bindFunc(cast(void**)&WindowDispatch, "WindowDispatch");
 
