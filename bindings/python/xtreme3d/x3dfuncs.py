@@ -712,6 +712,11 @@ x3d.EngineSetMaxLights.restype = ctypes.c_double
 def EngineSetMaxLights(aLights):
     return x3d.EngineSetMaxLights(aLights)
 
+x3d.EngineGetTimeStep.argtypes = []
+x3d.EngineGetTimeStep.restype = ctypes.c_double
+def EngineGetTimeStep():
+    return x3d.EngineGetTimeStep()
+
 
 # fbo.pas
 x3d.FBOCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -5012,5 +5017,10 @@ x3d.WindowSetIcon.argtypes = [ctypes.c_double, ctypes.c_char_p]
 x3d.WindowSetIcon.restype = ctypes.c_double
 def WindowSetIcon(aW, aFilename):
     return x3d.WindowSetIcon(aW, aFilename)
+
+x3d.WindowDispatch.argtypes = []
+x3d.WindowDispatch.restype = ctypes.c_double
+def WindowDispatch():
+    return x3d.WindowDispatch()
 
 
