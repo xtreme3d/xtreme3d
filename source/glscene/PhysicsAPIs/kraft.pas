@@ -1,7 +1,7 @@
 (****************************************************************************** 
  *                            KRAFT PHYSICS ENGINE                            *
  ******************************************************************************
- *                        Version 2018-06-02-05-46-0000                       *
+ *                        Version 2019-08-26-10-17-0000                       *
  ******************************************************************************
  *                                zlib license                                *
  *============================================================================*
@@ -159,9 +159,9 @@ uses {$ifdef windows}
        BaseUnix,
        Unix,
        UnixType,
-       {$ifdef linux}
+       {$if defined(linux) or defined(android)}
         linux,
-       {$endif}
+       {$ifend}
       {$else}
        SDL,
       {$endif}
@@ -2260,7 +2260,7 @@ type PKraftForceMode=^TKraftForceMode;
        function GetAnchorB:TKraftVector3; virtual;
 
        procedure SetLocalAnchorA(const a:TKraftVector3);
-       procedure SetLocalAnchorB(const b:TKraftVector3); 
+       procedure SetLocalAnchorB(const b:TKraftVector3);
 
        function GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3; virtual;
        function GetReactionTorque(const InverseDeltaTime:TKraftScalar):TKraftVector3; virtual;
@@ -2583,8 +2583,10 @@ type PKraftForceMode=^TKraftForceMode;
        procedure InitializeConstraintsAndWarmStart(const Island:TKraftIsland;const TimeStep:TKraftTimeStep); override;
        procedure SolveVelocityConstraint(const Island:TKraftIsland;const TimeStep:TKraftTimeStep); override;
        function SolvePositionConstraint(const Island:TKraftIsland;const TimeStep:TKraftTimeStep):boolean; override;
+
        procedure SetLocalAxisA(const a:TKraftVector3);
-       procedure SetLocalAxisB(const b:TKraftVector3); 
+       procedure SetLocalAxisB(const b:TKraftVector3);
+
        function GetAnchorA:TKraftVector3; override;
        function GetAnchorB:TKraftVector3; override;
        function GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3; override;
@@ -3711,6 +3713,20 @@ type qword=int64;
      ptrint=longint;
 {$endif}
 {$endif}
+
+{$if defined(fpc) and (defined(cpu386) or defined(cpux64) or defined(cpuamd64))}
+// For to avoid "Fatal: Internal error 200604201" at the FreePascal compiler, when >= -O2 is used
+function Sign(const aValue:single):longint;
+begin
+ if aValue<0.0 then begin
+  result:=-1;
+ end else if aValue>0.0 then begin
+  result:=1;
+ end else begin
+  result:=0;
+ end;
+end;
+{$ifend}
 
 type TUInt128=packed record
 {$ifdef BIG_ENDIAN}
@@ -10403,7 +10419,7 @@ constructor TKraftHighResolutionTimer.Create(FrameRate:longint=60);
 begin
  inherited Create;
  fFrequencyShift:=0;
-{$ifdef windows}
+{$if defined(windows)}
  if QueryPerformanceFrequency(fFrequency) then begin
   while (fFrequency and $ffffffffe0000000)<>0 do begin
    fFrequency:=fFrequency shr 1;
@@ -10412,17 +10428,13 @@ begin
  end else begin
   fFrequency:=1000;
  end;
-{$else}
-{$ifdef linux}
+{$elseif defined(linux) or defined(android)}
   fFrequency:=1000000000;
-{$else}
-{$ifdef unix}
+{$elseif defined(unix)}
   fFrequency:=1000000;
 {$else}
   fFrequency:=1000;
-{$endif}
-{$endif}
-{$endif}
+{$ifend}
  fFrameInterval:=(fFrequency+((abs(FrameRate)+1) shr 1)) div abs(FrameRate);
  fMillisecondInterval:=(fFrequency+500) div 1000;
  fTwoMillisecondsInterval:=(fFrequency+250) div 500;
@@ -10442,29 +10454,25 @@ begin
 end;
 
 function TKraftHighResolutionTimer.GetTime:int64;
-{$ifdef linux}
+{$if defined(linux) or defined(android)}
 var NowTimeSpec:TimeSpec;
     ia,ib:int64;
-{$else}
-{$ifdef unix}
+{$elseif defined(unix)}
 var tv:timeval;
     tz:timezone;
     ia,ib:int64;
-{$endif}
-{$endif}
+{$ifend}
 begin
-{$ifdef windows}
+{$if defined(windows)}
  if not QueryPerformanceCounter(result) then begin
   result:=timeGetTime;
  end;
-{$else}
-{$ifdef linux}
+{$elseif defined(linux) or defined(android)}
  clock_gettime(CLOCK_MONOTONIC,@NowTimeSpec);
  ia:=int64(NowTimeSpec.tv_sec)*int64(1000000000);
  ib:=NowTimeSpec.tv_nsec;
  result:=ia+ib;
-{$else}
-{$ifdef unix}
+{$elseif defined(unix)}
   tz.tz_minuteswest:=0;
   tz.tz_dsttime:=0;
   fpgettimeofday(@tv,@tz);
@@ -10473,9 +10481,7 @@ begin
   result:=ia+ib;
 {$else}
  result:=SDL_GetTicks;
-{$endif}
-{$endif}
-{$endif}
+{$ifend}
  result:=result shr fFrequencyShift;
 end;
 
@@ -10491,7 +10497,7 @@ var EndTime,NowTime{$ifdef unix},SleepTime{$endif}:int64;
 {$endif}
 begin
  if Delay>0 then begin
-{$ifdef windows}
+{$if defined(windows)}
   NowTime:=GetTime;
   EndTime:=NowTime+Delay;
   while (NowTime+fTwoMillisecondsInterval)<EndTime do begin
@@ -10505,21 +10511,17 @@ begin
   while NowTime<EndTime do begin
    NowTime:=GetTime;
   end;
-{$else}
-{$ifdef linux}
+{$elseif defined(linux) or defined(android)}
   NowTime:=GetTime;
   EndTime:=NowTime+Delay;
-  while true do begin
-   SleepTime:=abs(EndTime-NowTime);
-   if SleepTime>=fFourMillisecondsInterval then begin
-    SleepTime:=(SleepTime+2) shr 2;
-    if SleepTime>0 then begin
-     req.tv_sec:=SleepTime div 1000000000;
-     req.tv_nsec:=SleepTime mod 10000000000;
-     fpNanoSleep(@req,@rem);
-     NowTime:=GetTime;
-     continue;
-    end;
+  while (NowTime+fFourMillisecondsInterval)<EndTime do begin
+   SleepTime:=((EndTime-NowTime)+2) shr 2;
+   if SleepTime>0 then begin
+    req.tv_sec:=SleepTime div 1000000000;
+    req.tv_nsec:=SleepTime mod 10000000000;
+    fpNanoSleep(@req,@rem);
+    NowTime:=GetTime;
+    continue;
    end;
    break;
   end;
@@ -10530,21 +10532,17 @@ begin
   while NowTime<EndTime do begin
    NowTime:=GetTime;
   end;
-{$else}
-{$ifdef unix}
+{$elseif defined(unix)}
   NowTime:=GetTime;
   EndTime:=NowTime+Delay;
-  while true do begin
-   SleepTime:=abs(EndTime-NowTime);
-   if SleepTime>=fFourMillisecondsInterval then begin
-    SleepTime:=(SleepTime+2) shr 2;
-    if SleepTime>0 then begin
-     req.tv_sec:=SleepTime div 1000000;
-     req.tv_nsec:=(SleepTime mod 1000000)*1000;
-     fpNanoSleep(@req,@rem);
-     NowTime:=GetTime;
-     continue;
-    end;
+  while (NowTime+fFourMillisecondsInterval)<EndTime do begin
+   SleepTime:=((EndTime-NowTime)+2) shr 2;
+   if SleepTime>0 then begin
+    req.tv_sec:=SleepTime div 1000000;
+    req.tv_nsec:=(SleepTime mod 1000000)*1000;
+    fpNanoSleep(@req,@rem);
+    NowTime:=GetTime;
+    continue;
    end;
    break;
   end;
@@ -10569,9 +10567,7 @@ begin
   while NowTime<EndTime do begin
    NowTime:=GetTime;
   end;
-{$endif}
-{$endif}
-{$endif}
+{$ifend}
  end;
 end;
 
@@ -25668,16 +25664,6 @@ begin
  result:=Vector3Origin;
 end;
 
-procedure TKraftConstraint.SetLocalAnchorA(const a:TKraftVector3);
-begin
- fLocalAnchors[0] := a;
-end;
-
-procedure TKraftConstraint.SetLocalAnchorB(const b:TKraftVector3);
-begin
- fLocalAnchors[1] := b;
-end;
-
 function TKraftConstraint.GetReactionForce(const InverseDeltaTime:TKraftScalar):TKraftVector3;
 begin
  result:=Vector3Origin;
@@ -28166,16 +28152,6 @@ begin
   
  end;
 
-end;
-
-procedure TKraftConstraintJointHinge.SetLocalAxisA(const a:TKraftVector3);
-begin
-  fLocalAxes[0] := a;
-end;
-
-procedure TKraftConstraintJointHinge.SetLocalAxisB(const b:TKraftVector3);
-begin
-  fLocalAxes[1] := b;
 end;
 
 function TKraftConstraintJointHinge.GetAnchorA:TKraftVector3;
@@ -33057,6 +33033,26 @@ begin
  GJK.UseRadii:=false;
  GJK.Run;
  result:=GJK.Distance;
+end;
+
+procedure TKraftConstraint.SetLocalAnchorA(const a:TKraftVector3);
+begin
+  fLocalAnchors[0] := a;
+end;
+
+procedure TKraftConstraint.SetLocalAnchorB(const b:TKraftVector3);
+begin
+  fLocalAnchors[1] := b;
+end;
+
+procedure TKraftConstraintJointHinge.SetLocalAxisA(const a:TKraftVector3);
+begin
+  fLocalAxes[0] := a;
+end;
+
+procedure TKraftConstraintJointHinge.SetLocalAxisB(const b:TKraftVector3);
+begin
+  fLocalAxes[1] := b;
 end;
 
 initialization
