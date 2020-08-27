@@ -5121,7 +5121,7 @@ begin
    // calculate projection of direction vector on the plane
    if Assigned(FTargetObject) then
       screenY:=VectorSubtract(TargetObject.AbsolutePosition, AbsolutePosition)
-   else screenY:=Direction.AsVector;
+   else screenY:=AbsoluteDirection; //.AsVector;
    screenYoutOfPlaneComponent:=VectorDotProduct(screenY, planeNormal);
    screenY:=VectorCombine(screenY, planeNormal, 1, -screenYoutOfPlaneComponent);
    NormalizeVector(screenY);
@@ -5141,7 +5141,7 @@ begin
    // calculate projection of direction vector on the plane
    if Assigned(FTargetObject) then
       screenY:=VectorSubtract(TargetObject.AbsolutePosition, AbsolutePosition)
-   else screenY:=Direction.AsVector;
+   else screenY:=AbsoluteDirection; //.AsVector;
    d:=VectorLength(screenY[0], screenY[1]);
    if d<=1e-10 then d:=ratio else d:=ratio/d;
    // and here, we're done
@@ -5163,7 +5163,7 @@ begin
    // calculate the projection of direction vector on the plane
    if Assigned(fTargetObject) then
       screenY:=VectorSubtract(TargetObject.AbsolutePosition, AbsolutePosition)
-   else screenY:=Direction.AsVector;
+   else screenY:=AbsoluteDirection; //.AsVector;
    d:=VectorLength(screenY[0], screenY[2]);
    if d<=1e-10 then d:=ratio else d:=ratio/d;
    dxr:=deltaX*d;
@@ -5184,7 +5184,7 @@ begin
    // calculate the projection of direction vector on the plane
    if Assigned(fTargetObject) then
       screenY:=VectorSubtract(TargetObject.AbsolutePosition,AbsolutePosition)
-   else screenY:=Direction.AsVector;
+   else screenY:=AbsoluteDirection; //.AsVector;
    d:=VectorLength(screenY[1], screenY[2]);
    if d<=1e-10 then d:=ratio else d:=ratio/d;
    dyr:=deltaX*d;
