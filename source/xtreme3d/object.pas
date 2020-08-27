@@ -360,12 +360,14 @@ begin
 
   for i := 0 to target.Count-1 do
   begin
-    resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
-    if resObj <> nil then
-    begin
-      isecPoint := ipoint;
-      isecNorm := inorm;
-      bestObject := resObj;
+    if target.Children[i].Visible then begin
+      resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
+      if resObj <> nil then
+      begin
+        isecPoint := ipoint;
+        isecNorm := inorm;
+        bestObject := resObj;
+      end;
     end;
   end;
 
