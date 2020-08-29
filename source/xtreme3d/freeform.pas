@@ -14,6 +14,7 @@ begin
     GLFreeForm1:=TGLFreeForm.CreateAsChild(scene.Objects);
   GLFreeForm1.MaterialLibrary:=ml;
   GLFreeForm1.LightmapLibrary:=ml2;
+  GLFreeForm1.IgnoreMissingTextures := True;
   
   try
     GLFreeForm1.LoadFromFile(fname);

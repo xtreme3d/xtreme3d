@@ -9,6 +9,7 @@ begin
   else
     GLActor1:=TGLActor.CreateAsChild(scene.Objects);
   GLActor1.MaterialLibrary:=ml;
+  GLActor1.IgnoreMissingTextures := True;
   
   try
     GLActor1.LoadFromFile(String(fname));
