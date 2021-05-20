@@ -692,6 +692,23 @@
 <BR><A>object2 - id объекта 2.</A>
 <HR>
 
+<A name="ObjectIgnoreDepthBuffer"></A>
+<H1 class=name>ObjectIgnoreDepthBuffer</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectIgnoreDepthBuffer</A><A>( object,mode as </A><A class=type>real</A> );</A>
+<BR><A>При включении этой опции объект не учитывает буфер глубины при рендеринге - то есть, всегда рендерится поверх предыдущих данных в буфере кадра.</A>
+<BR><A>object1 - id объекта</A>
+<BR><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ObjectIsPicked"></A>
+<H1 class=name>ObjectIsPicked</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectIsPicked</A><A>( object,viewer,x,y as </A><A class=type>real</A> );</A>
+<BR><A>Возвращает 1, если точка по заданным координатам принадлежит объекту. Функция аналогична ViewerGetPickedObject, но, можно сказать, выполняет обратную задачу.</A>
+<BR><A>object1 - id объекта</A>
+<BR><A>viewer</A> - id вида</A>
+<BR><A>x,y</A> - координаты точки.</A>
+<HR>
+
 </DIV>
 
 </BODY>

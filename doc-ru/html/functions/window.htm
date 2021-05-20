@@ -87,6 +87,13 @@
 <BR><A>window - id окна.</A>
 <HR>
 
+<A name="WindowDispatch"></A>
+<H1 class=name>WindowDispatch</H1>
+<A class=type>real</A><A> = </A><A class=function>WindowDispatch</A><A>( window as </A><A class=type>real</A><A> );</A>
+<BR><A>Обрабатывает события окна. Эта функция нужна, если вы пишете простое приложение (не Win32) - чтобы ваш игровой цикл не блокировал взаимодействие пользователя с окном. Вызывать ее рекомендуется в начале каждой итерации цикла. При использовании Xtreme3D в Game Maker вызывать эту функцию не нужно.<A>
+<BR><A>window - id окна.</A>
+<HR>
+
 <A name="WindowDestroy"></A>
 <H1 class=name>WindowDestroy</H1>
 <A class=type>real</A><A> = </A><A class=function>WindowDestroy</A><A>( window as </A><A class=type>real</A><A> );</A>
