@@ -1,5 +1,15 @@
 Xtreme3D version history
 ========================
+v3.9.0 (by Gecko) - 20/05/2021
+--------------------------------
+- EngineGetTimeStep 
+- ObjectIgnoreDepthBuffer, ObjectIsPicked 
+- WindowDispatch 
+- Invisible objects are now ignored in raycast queries
+- Missing textures are now ignored at model loading
+- Kraft physics engine updated to latest version
+- Lua binding added (uses LuaJIT).
+
 v3.8.0 (by FireRun) - 27/07/2019
 --------------------------------
 - Verlet physics engine for soft bodies simulation
