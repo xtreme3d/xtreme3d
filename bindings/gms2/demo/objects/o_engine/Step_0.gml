@@ -1,6 +1,6 @@
 var dt = delta_time / 1000000;
 
-if (mouselookActive) {
+if (mouselookActive and window_has_focus()) {
 	var deltax = (mx - display_mouse_get_x())/3;
 	var deltay = (my - display_mouse_get_y())/3;
 	ObjectRotate(camera, deltay, 0, 0);
@@ -13,7 +13,7 @@ if (mouselookActive) {
 	if (keyboard_check(ord("S"))) ObjectMove(camPos, 10 * dt);
 }
 
-if (keyboard_check_direct(mb_left)) {
+if (keyboard_check_direct(mb_left) and window_has_focus()) {
 	if (mb_left_released) {
 		mb_left_released = false;
 		mouselookActive = not mouselookActive;
