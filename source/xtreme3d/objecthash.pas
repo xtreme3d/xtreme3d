@@ -1,4 +1,4 @@
-function ObjectHashCreate(): real; stdcall;
+function ObjectHashCreate(): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -6,7 +6,7 @@ begin
   result := Integer(h);
 end;
 
-function ObjectHashSetItem(hash: real; key: pchar; obj: real): real; stdcall;
+function ObjectHashSetItem(hash: real; key: pchar; obj: real): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -15,7 +15,7 @@ begin
   result := 1.0;
 end;
 
-function ObjectHashGetItem(hash: real; key: pchar): real; stdcall;
+function ObjectHashGetItem(hash: real; key: pchar): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -26,7 +26,7 @@ begin
     result := 0.0;
 end;
 
-function ObjectHashDeleteItem(hash: real; key: pchar): real; stdcall;
+function ObjectHashDeleteItem(hash: real; key: pchar): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -36,7 +36,7 @@ begin
   result := 1.0;
 end;
 
-function ObjectHashGetItemCount(hash: real): real; stdcall;
+function ObjectHashGetItemCount(hash: real): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -44,7 +44,7 @@ begin
   result := h.ItemCount;
 end;
 
-function ObjectHashClear(hash: real): real; stdcall;
+function ObjectHashClear(hash: real): real; cdecl;
 var
   h: TObjectHash;
 begin
@@ -53,7 +53,7 @@ begin
   result := 1.0;
 end;
 
-function ObjectHashDestroy(hash: real): real; stdcall;
+function ObjectHashDestroy(hash: real): real; cdecl;
 var
   h: TObjectHash;
 begin

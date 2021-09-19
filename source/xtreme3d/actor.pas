@@ -1,4 +1,4 @@
-function ActorCreate(fname: pchar; matl,parent: real): real; stdcall;
+function ActorCreate(fname: pchar; matl,parent: real): real; cdecl;
 var
   GLActor1: TGLActor;
   ml: TGLMaterialLibrary;
@@ -25,7 +25,7 @@ begin
   result:=Integer(GLActor1);
 end;
 
-function ActorCopy(actor,parent: real): real; stdcall;
+function ActorCopy(actor,parent: real): real; cdecl;
 var
   GLActor1,GLActor2: TGLActor;
 begin
@@ -37,7 +37,7 @@ begin
   result:=Integer(GLActor2);
 end;
 
-function ActorSetAnimationRange(actor,astart,aend: real): real; stdcall;
+function ActorSetAnimationRange(actor,astart,aend: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -47,7 +47,7 @@ begin
   result:=1;
 end;
 
-function ActorGetCurrentFrame(actor: real): real; stdcall;
+function ActorGetCurrentFrame(actor: real): real; cdecl;
 var
   GLActor1: TGLActor;
   fr: integer;
@@ -57,7 +57,7 @@ begin
   result:=fr;
 end;
 
-function ActorSwitchToAnimation(actor,anim,smooth: real): real; stdcall;
+function ActorSwitchToAnimation(actor,anim,smooth: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -66,7 +66,7 @@ begin
   result:=1;
 end;
 
-function ActorSwitchToAnimationName(actor: real; anim: pchar; smooth: real): real; stdcall;
+function ActorSwitchToAnimationName(actor: real; anim: pchar; smooth: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -75,7 +75,7 @@ begin
   result:=1;
 end;
 
-function ActorSynchronize(actor1,actor2: real): real; stdcall;
+function ActorSynchronize(actor1,actor2: real): real; cdecl;
 var
   GLActor1,GLActor2: TGLActor;
 begin
@@ -85,7 +85,7 @@ begin
   result:=1;
 end;
 
-function ActorSetInterval(actor,interv: real): real; stdcall;
+function ActorSetInterval(actor,interv: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -94,7 +94,7 @@ begin
   result:=1;
 end;
 
-function ActorSetAnimationMode(actor,aam: real): real; stdcall;
+function ActorSetAnimationMode(actor,aam: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -108,7 +108,7 @@ begin
   result:=1;
 end;
 
-function ActorSetFrameInterpolation(actor,afp: real): real; stdcall;
+function ActorSetFrameInterpolation(actor,afp: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -118,7 +118,7 @@ begin
   result:=1;
 end;
 
-function ActorAddObject(actor: real; fname: pchar): real; stdcall;
+function ActorAddObject(actor: real; fname: pchar): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -137,7 +137,7 @@ begin
   result:=1;
 end;
 
-function ActorGetCurrentAnimation(actor: real): pchar; stdcall;
+function ActorGetCurrentAnimation(actor: real): pchar; cdecl;
 var
   GLActor1: TGLActor;
   anim: string;
@@ -147,7 +147,7 @@ begin
   result:=pchar(anim);
 end;
 
-function ActorGetFrameCount(actor: real): real; stdcall;
+function ActorGetFrameCount(actor: real): real; cdecl;
 var
   GLActor1: TGLActor;
   fcount: integer;
@@ -157,7 +157,7 @@ begin
   result:=fcount;
 end;
 
-function ActorGetBoneCount(actor: real): real; stdcall;
+function ActorGetBoneCount(actor: real): real; cdecl;
 var
   GLActor1: TGLActor;
   bcount: integer;
@@ -167,7 +167,7 @@ begin
   result:=bcount;
 end;
 
-function ActorGetBoneByName(actor: real; name: pchar): real; stdcall;
+function ActorGetBoneByName(actor: real; name: pchar): real; cdecl;
 var
   GLActor1: TGLActor;
   bone: integer;
@@ -177,7 +177,7 @@ begin
   result:=bone;
 end;
 
-function ActorGetBoneRotation(actor,bone,ind: real): real; stdcall;
+function ActorGetBoneRotation(actor,bone,ind: real): real; cdecl;
 var
   GLActor1: TGLActor;
   m: TMatrix4f;
@@ -189,7 +189,7 @@ begin
   result:=m[2][index];
 end;
 
-function ActorGetBonePosition(actor,bone,ind: real): real; stdcall;
+function ActorGetBonePosition(actor,bone,ind: real): real; cdecl;
 var
   GLActor1: TGLActor;
   m: TMatrix4f;
@@ -201,7 +201,7 @@ begin
   result:=m[3][index];
 end;
 
-function ActorBoneExportMatrix(actor,bone,obj: real): real; stdcall;
+function ActorBoneExportMatrix(actor,bone,obj: real): real; cdecl;
 var
   GLActor1: TGLActor;
   scobj: TGLSceneObject;
@@ -214,7 +214,7 @@ begin
   result:=1;
 end;
 
-function ActorMakeSkeletalTranslationStatic(actor,anim: real): real; stdcall;
+function ActorMakeSkeletalTranslationStatic(actor,anim: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -223,7 +223,7 @@ begin
   result:=1;
 end;
 
-function ActorMakeSkeletalRotationDelta(actor,anim: real): real; stdcall;
+function ActorMakeSkeletalRotationDelta(actor,anim: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -232,7 +232,7 @@ begin
   result:=1;
 end;
 
-function ActorShowSkeleton(actor,mode: real): real; stdcall;
+function ActorShowSkeleton(actor,mode: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -241,7 +241,7 @@ begin
   result:=1;
 end;
 
-function AnimationBlenderCreate: real; stdcall;
+function AnimationBlenderCreate: real; cdecl;
 var
   GLAnim1: TGLAnimationControler;
 begin
@@ -249,7 +249,7 @@ begin
   result:=Integer(GLAnim1);
 end;
 
-function AnimationBlenderSetActor(anim,actor: real): real; stdcall;
+function AnimationBlenderSetActor(anim,actor: real): real; cdecl;
 var
   GLAnim1: TGLAnimationControler;
 begin
@@ -259,7 +259,7 @@ begin
   result:=1;
 end;
 
-function AnimationBlenderSetAnimation(anim: real; name: pchar): real; stdcall;
+function AnimationBlenderSetAnimation(anim: real; name: pchar): real; cdecl;
 var
   GLAnim1: TGLAnimationControler;
 begin
@@ -268,7 +268,7 @@ begin
   result:=1;
 end;
 
-function AnimationBlenderSetRatio(anim,rat: real): real; stdcall;
+function AnimationBlenderSetRatio(anim,rat: real): real; cdecl;
 var
   GLAnim1: TGLAnimationControler;
 begin
@@ -277,7 +277,7 @@ begin
   result:=1;
 end;
 
-function ActorLoadQ3TagList(fname: pchar): real; stdcall;
+function ActorLoadQ3TagList(fname: pchar): real; cdecl;
 var
   tlist: TMD3TagList;
 begin
@@ -296,7 +296,7 @@ begin
   result:=integer(tlist);
 end;
 
-function ActorQ3TagExportMatrix(actor,taglist: real; tagname: pchar; obj: real): real; stdcall;
+function ActorQ3TagExportMatrix(actor,taglist: real; tagname: pchar; obj: real): real; cdecl;
 var
   GLActor1: TGLActor;
   GLObject: TGLSceneObject;
@@ -316,7 +316,7 @@ begin
   result:=1;
 end;
 
-function ActorLoadQ3Animations(actor: real; fname,clas: pchar): real; stdcall;
+function ActorLoadQ3Animations(actor: real; fname,clas: pchar): real; cdecl;
 var
   GLActor1: TGLActor;
   list: TStringList;
@@ -338,7 +338,7 @@ begin
   result:=1;
 end;
 
-function ActorMeshObjectsCount(actor: real): real; stdcall;
+function ActorMeshObjectsCount(actor: real): real; cdecl;
 var
   GLActor1: TGLActor;
   mobj: integer;
@@ -348,7 +348,7 @@ begin
   result:=mobj;
 end;
 
-function ActorFaceGroupsCount(actor,meshobject: real): real; stdcall;
+function ActorFaceGroupsCount(actor,meshobject: real): real; cdecl;
 var
   GLActor1: TGLActor;
   mfg: integer;
@@ -358,7 +358,7 @@ begin
   result:=mfg;
 end;
 
-function ActorFaceGroupGetMaterialName(actor,meshobject,facegroup: real): pchar; stdcall;
+function ActorFaceGroupGetMaterialName(actor,meshobject,facegroup: real): pchar; cdecl;
 var
   GLActor1: TGLActor;
   fgm: string;
@@ -368,7 +368,7 @@ begin
   result:=pchar(fgm);
 end;
 
-function ActorFaceGroupSetMaterial(actor,meshobject,facegroup: real; mtrl: pchar): real; stdcall;
+function ActorFaceGroupSetMaterial(actor,meshobject,facegroup: real; mtrl: pchar): real; cdecl;
 var
   GLActor1: TGLActor;
 begin
@@ -377,7 +377,7 @@ begin
   result:=1;
 end;
 
-function ActorMoveBone(actor, boneindex, x, y, z: real): real; stdcall;
+function ActorMoveBone(actor, boneindex, x, y, z: real): real; cdecl;
 var
   ac: TGLActor;
   pos: TAffineVector;
@@ -389,7 +389,7 @@ begin
   result := 1;
 end;
 
-function ActorRotateBone(actor, boneindex, x, y, z: real): real; stdcall;
+function ActorRotateBone(actor, boneindex, x, y, z: real): real; cdecl;
 var
   ac: TGLActor;
   rot: TAffineVector;
@@ -401,7 +401,7 @@ begin
   result := 1;
 end;
 
-function ActorMeshSetVisible(actor, mesh, mode: real): real; stdcall;
+function ActorMeshSetVisible(actor, mesh, mode: real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -410,7 +410,7 @@ begin
   result := 1.0;
 end;
 
-function ActorGetAnimationName (actor,ind:real): pchar; stdcall;
+function ActorGetAnimationName (actor,ind:real): pchar; cdecl;
 var
   act: TGLActor;
 begin
@@ -418,7 +418,7 @@ begin
   result := pchar(act.Animations.Items[trunc64(ind)].Name);
 end;
 
-function ActorGetAnimationCount (actor:real): real; stdcall;
+function ActorGetAnimationCount (actor:real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -426,7 +426,7 @@ begin
   result := act.Animations.Count;
 end;
 
-function ActorAnimationDestroy (actor,index:real): real; stdcall;
+function ActorAnimationDestroy (actor,index:real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -436,7 +436,7 @@ begin
   result := 1;
 end;
 
-function ActorAnimationNextFrame (actor:real): real; stdcall;
+function ActorAnimationNextFrame (actor:real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -445,7 +445,7 @@ begin
   result := 1;
 end;
 
-function ActorAnimationPrevFrame (actor:real): real; stdcall;
+function ActorAnimationPrevFrame (actor:real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -454,7 +454,7 @@ begin
   result := 1;
 end;
 
-function ActorSetFrame(actor, frame: real): real; stdcall;
+function ActorSetFrame(actor, frame: real): real; cdecl;
 var
   act: TGLActor;
 begin
@@ -463,7 +463,7 @@ begin
   result := 1.0;
 end;
 
-function ActorTriangleCount(actor: real): real; stdcall;
+function ActorTriangleCount(actor: real): real; cdecl;
 var
   GLActor1: TGLActor;
 begin

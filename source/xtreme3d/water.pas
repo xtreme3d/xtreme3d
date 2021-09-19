@@ -1,4 +1,4 @@
-function WaterCreate(parent: real): real; stdcall;
+function WaterCreate(parent: real): real; cdecl;
 var
   water: TGLWaterPlane;
 begin
@@ -9,31 +9,31 @@ begin
   result:=Integer(water);
 end;
 
-function WaterCreateRandomRipple(water: real): real; stdcall;
+function WaterCreateRandomRipple(water: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).CreateRippleRandom;
   result:=1;
 end;
 
-function WaterCreateRippleAtGridPosition(water, x, y: real): real; stdcall;
+function WaterCreateRippleAtGridPosition(water, x, y: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).CreateRippleAtGridPos(trunc64(x), trunc64(y));
   result:=1;
 end;
 
-function WaterCreateRippleAtWorldPosition(water, x, y, z: real): real; stdcall;
+function WaterCreateRippleAtWorldPosition(water, x, y, z: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).CreateRippleAtWorldPos(x, y, z);
   result:=1;
 end;
 
-function WaterCreateRippleAtObjectPosition(water, obj: real): real; stdcall;
+function WaterCreateRippleAtObjectPosition(water, obj: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).CreateRippleAtWorldPos(TGLBaseSceneObject(trunc64(obj)).AbsolutePosition);
   result:=1;
 end;
 
-function WaterSetMask(water: real; material: pchar): real; stdcall;
+function WaterSetMask(water: real; material: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -43,55 +43,55 @@ begin
   result:=1;
 end;
 
-function WaterSetActive(water, mode: real): real; stdcall;
+function WaterSetActive(water, mode: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).Active := Boolean(trunc64(mode));
   result:=1;
 end;
 
-function WaterReset(water: real): real; stdcall;
+function WaterReset(water: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).Reset;
   result:=1;
 end;
 
-function WaterSetRainTimeInterval(water, interval: real): real; stdcall;
+function WaterSetRainTimeInterval(water, interval: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).RainTimeInterval := trunc64(interval);
   result:=1;
 end;
 
-function WaterSetRainForce(water, force: real): real; stdcall;
+function WaterSetRainForce(water, force: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).RainForce := force;
   result:=1;
 end;
 
-function WaterSetViscosity(water, viscosity: real): real; stdcall;
+function WaterSetViscosity(water, viscosity: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).Viscosity := viscosity;
   result:=1;
 end;
 
-function WaterSetElastic(water, elastic: real): real; stdcall;
+function WaterSetElastic(water, elastic: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).Elastic := elastic;
   result:=1;
 end;
 
-function WaterSetResolution(water, res: real): real; stdcall;
+function WaterSetResolution(water, res: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).Resolution := trunc64(res);
   result:=1;
 end;
 
-function WaterSetLinearWaveHeight(water, height: real): real; stdcall;
+function WaterSetLinearWaveHeight(water, height: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).SmoothWaveHeight := height;
   result:=1;
 end;
 
-function WaterSetLinearWaveFrequency(water, freq: real): real; stdcall;
+function WaterSetLinearWaveFrequency(water, freq: real): real; cdecl;
 begin
   TGLWaterPlane(trunc64(water)).SmoothWaveFrequency := freq;
   result:=1;

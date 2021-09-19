@@ -1,4 +1,4 @@
-function MemoryViewerCreate(w,h: real): real; stdcall;
+function MemoryViewerCreate(w,h: real): real; cdecl;
 var
   mv: TGLMemoryViewer;
 begin
@@ -9,7 +9,7 @@ begin
   result:=integer(mv);
 end;
 
-function MemoryViewerSetCamera(mview,cam: real): real; stdcall;
+function MemoryViewerSetCamera(mview,cam: real): real; cdecl;
 var
   mv: TGLMemoryViewer;
 begin
@@ -18,7 +18,7 @@ begin
   result:=1;
 end;
 
-function MemoryViewerRender(mview: real): real; stdcall;
+function MemoryViewerRender(mview: real): real; cdecl;
 var
   mv: TGLMemoryViewer;
 begin
@@ -27,7 +27,7 @@ begin
   result:=1;
 end;
 
-function MemoryViewerSetViewport(mview, x, y, w, h: real): real; stdcall;
+function MemoryViewerSetViewport(mview, x, y, w, h: real): real; cdecl;
 var
   mv: TGLMemoryViewer;
   mat:TGLLibMaterial;
@@ -37,7 +37,7 @@ begin
   result:=1;
 end;
 
-function MemoryViewerCopyToTexture(mview: real; matname: pchar): real; stdcall;
+function MemoryViewerCopyToTexture(mview: real; matname: pchar): real; cdecl;
 var
   mv: TGLMemoryViewer;
   mat:TGLLibMaterial;

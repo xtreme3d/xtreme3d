@@ -1,10 +1,10 @@
-function MouseSetPosition(mx, my: real): real; stdcall;
+function MouseSetPosition(mx, my: real): real; cdecl;
 begin
   SetCursorPos(trunc64(mx), trunc64(my));
   Result := 1;
 end;
 
-function MouseGetPositionX: real; stdcall;
+function MouseGetPositionX: real; cdecl;
 var
   mouse : TPoint;
 begin
@@ -12,7 +12,7 @@ begin
   Result := Integer(mouse.X);
 end;
 
-function MouseGetPositionY: real; stdcall;
+function MouseGetPositionY: real; cdecl;
 var
   mouse : TPoint;
 begin
@@ -20,13 +20,13 @@ begin
   Result := Integer(mouse.Y);
 end;
 
-function MouseShowCursor(mode: real): real; stdcall;
+function MouseShowCursor(mode: real): real; cdecl;
 begin
   ShowCursor(LongBool(trunc64(mode)));
   Result := 1;
 end;
 
-function KeyIsPressed(key: real): real; stdcall;
+function KeyIsPressed(key: real): real; cdecl;
 begin
   Result := Integer(IsKeyDown(trunc64(key)));
 end;

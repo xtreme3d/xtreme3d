@@ -1,41 +1,51 @@
-function ViewerCreate(top,left,w,h,pw: real): real; stdcall;
+function ViewerCreate(top,left,w,h,pw: real): real; cdecl;
 var
+  Handle: HWnd;
   GLSceneViewer1: TGLSceneViewer;
 begin
-  GLSceneViewer1:=TGLSceneViewer.Create(nil);
-  GLSceneViewer1.Top:=trunc64(top);
-  GLSceneViewer1.Left:=trunc64(left);
-  GLSceneViewer1.Width:=trunc64(w);
-  GLSceneViewer1.Height:=trunc64(h);
-  GLSceneViewer1.Enabled:=false;
-  GLSceneViewer1.Visible:=true;
-  GLSceneViewer1.Buffer.Lighting:=true;
-  GLSceneViewer1.ParentWindow:=trunc64(pw);
-  GLSceneViewer1.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow];
-  GLSceneViewer1.AutoRender := False; 
-  result:=Integer(GLSceneViewer1);
+  Handle := trunc64(pw);
+  if IsWindow(Handle) then
+    begin
+      GLSceneViewer1:=TGLSceneViewer.Create(nil);
+      GLSceneViewer1.Top:=trunc64(top);
+      GLSceneViewer1.Left:=trunc64(left);
+      GLSceneViewer1.Width:=trunc64(w);
+      GLSceneViewer1.Height:=trunc64(h);
+      GLSceneViewer1.Enabled:=false;
+      GLSceneViewer1.Visible:=true;
+      GLSceneViewer1.Buffer.Lighting:=true;
+      GLSceneViewer1.ParentWindow:=Handle;
+      GLSceneViewer1.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow];
+      GLSceneViewer1.AutoRender := False;
+      result:=Integer(GLSceneViewer1);
+    end
+  else
+    begin
+      ShowMessage('Invalid parent window handle');
+      result:=0;
+    end;
 end;
 
-function ViewerSetCamera(viewer,camera: real): real; stdcall;
+function ViewerSetCamera(viewer,camera: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Camera:=TGLCamera(trunc64(camera));
   result:=1;
 end;
 
-function ViewerEnableVSync(viewer,vsm: real): real; stdcall;
+function ViewerEnableVSync(viewer,vsm: real): real; cdecl;
 begin
   if vsm=0 then TGLSceneViewer(trunc64(viewer)).VSync:=vsmSync;
   if vsm=1 then TGLSceneViewer(trunc64(viewer)).VSync:=vsmNoSync;
   result:=1;
 end;
 
-function ViewerRender(viewer: real): real; stdcall;
+function ViewerRender(viewer: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.Render();
   result:=1;
 end;
 
-function ViewerRenderToFile(viewer:real; fname:pchar): real; stdcall;
+function ViewerRenderToFile(viewer:real; fname:pchar): real; cdecl;
 var
   bmp: TBitmap;
 begin
@@ -45,7 +55,7 @@ begin
   result:=1;
 end;
 
-function ViewerRenderToFilePNG(viewer:real; fname:pchar): real; stdcall;
+function ViewerRenderToFilePNG(viewer:real; fname:pchar): real; cdecl;
 var
   bmp: TBitmap;
   bufw,bufb: TBitmap;
@@ -102,7 +112,7 @@ begin
   result:=1;
 end;
 
-function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; stdcall;
+function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
     True,
@@ -114,7 +124,7 @@ begin
   result:=1;
 end;
 
-function ViewerResize(viewer,left,top,w,h:real): real; stdcall;
+function ViewerResize(viewer,left,top,w,h:real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Top:=trunc64(top);
   TGLSceneViewer(trunc64(viewer)).Left:=trunc64(left);
@@ -123,13 +133,13 @@ begin
   result:=1;
 end;
 
-function ViewerSetVisible(viewer,mode:real): real; stdcall;
+function ViewerSetVisible(viewer,mode:real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Visible:=boolean(trunc64(mode));
   result:=1;
 end;
 
-function ViewerGetPixelColor(viewer,x,y:real): real; stdcall;
+function ViewerGetPixelColor(viewer,x,y:real): real; cdecl;
 var
   color: TColor;
 begin
@@ -137,7 +147,7 @@ begin
   result:=Integer(color);
 end;
 
-function ViewerGetPixelDepth(viewer,x,y:real): real; stdcall;
+function ViewerGetPixelDepth(viewer,x,y:real): real; cdecl;
 var
   depth: real;
 begin
@@ -145,44 +155,44 @@ begin
   result:=depth;
 end;
 
-function ViewerSetLighting(viewer,mode:real): real; stdcall;
+function ViewerSetLighting(viewer,mode:real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.Lighting:=boolean(trunc64(mode));
   result:=1;
 end;
 
-function ViewerSetBackgroundColor(viewer,color: real): real; stdcall;
+function ViewerSetBackgroundColor(viewer,color: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor:=TColor(trunc64(color));
   result:=1;
 end;
 
-function ViewerSetAmbientColor(viewer,color: real): real; stdcall;
+function ViewerSetAmbientColor(viewer,color: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.AmbientColor.AsWinColor:=TColor(trunc64(color));
   result:=1;
 end;
 
-function ViewerEnableFog(viewer,mode: real): real; stdcall;
+function ViewerEnableFog(viewer,mode: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.FogEnable:=boolean(trunc64(mode));
   result:=1;
 end;
 
-function ViewerSetFogColor(viewer,color: real): real; stdcall;
+function ViewerSetFogColor(viewer,color: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.FogEnvironment.FogColor.AsWinColor:=TColor(trunc64(color));
   result:=1;
 end;
 
-function ViewerSetFogDistance(viewer,fstart,fend: real): real; stdcall;
+function ViewerSetFogDistance(viewer,fstart,fend: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).Buffer.FogEnvironment.FogStart:=fstart;
   TGLSceneViewer(trunc64(viewer)).Buffer.FogEnvironment.FogEnd:=fend;
   result:=1;
 end;
 
-function ViewerScreenToWorld(viewer,x,y,ind:real): real; stdcall;
+function ViewerScreenToWorld(viewer,x,y,ind:real): real; cdecl;
 var
   stw: TAffineVector;
 begin
@@ -190,7 +200,7 @@ begin
   result:=stw[trunc64(ind)];
 end;
 
-function ViewerWorldToScreen(viewer,x,y,z,ind:real): real; stdcall;
+function ViewerWorldToScreen(viewer,x,y,z,ind:real): real; cdecl;
 var
   wts: TAffineVector;
 begin
@@ -199,7 +209,7 @@ begin
   result:=wts[trunc64(ind)];
 end;
 
-function ViewerCopyToTexture(viewer:real; mtrl:pchar): real; stdcall;
+function ViewerCopyToTexture(viewer:real; mtrl:pchar): real; cdecl;
 var
   mat: TGLLibMaterial;
   buf: TGLSceneBuffer;
@@ -211,7 +221,7 @@ begin
   result:=1;
 end;
 
-function ViewerGetPickedObject(viewer,x,y:real):real; stdcall;
+function ViewerGetPickedObject(viewer,x,y:real):real; cdecl;
 var
   obj:TGLBaseSceneObject;
 begin
@@ -219,7 +229,7 @@ begin
   result:=Integer(obj);
 end;
 
-function ViewerGetPickedObjectsList(viewer,x,y,w,h,num,ind:real):real; stdcall;
+function ViewerGetPickedObjectsList(viewer,x,y,w,h,num,ind:real):real; cdecl;
 var
   obj:TGLBaseSceneObject;
   plist:TGLPickList;
@@ -231,7 +241,7 @@ begin
   result:=Integer(obj);
 end;
 
-function ViewerScreenToVector(viewer,x,y,ind:real):real; stdcall;
+function ViewerScreenToVector(viewer,x,y,ind:real):real; cdecl;
 var
   vec: TVector;
 begin
@@ -239,7 +249,7 @@ begin
   result:=vec[trunc64(ind)];
 end;
 
-function ViewerVectorToScreen(viewer,x,y,z,ind:real):real; stdcall;
+function ViewerVectorToScreen(viewer,x,y,z,ind:real):real; cdecl;
 var
   dvec,rvec: TAffineVector;
 begin
@@ -248,7 +258,7 @@ begin
   result:=rvec[trunc64(ind)];
 end;
 
-function ViewerPixelToDistance(viewer,x,y:real):real; stdcall;
+function ViewerPixelToDistance(viewer,x,y:real):real; cdecl;
 var
   dist: real;
 begin
@@ -256,7 +266,7 @@ begin
   result:=dist;
 end;
 
-function ViewerSetAntiAliasing(viewer,aa: real): real; stdcall;
+function ViewerSetAntiAliasing(viewer,aa: real): real; cdecl;
 begin
   if trunc64(aa)=0 then TGLSceneViewer(trunc64(viewer)).Buffer.AntiAliasing:=aaDefault;
   if trunc64(aa)=1 then TGLSceneViewer(trunc64(viewer)).Buffer.AntiAliasing:=aaNone;
@@ -267,7 +277,7 @@ begin
   result:=1;
 end;
 
-function ViewerGetGLSLSupported(viewer:real): real; stdcall;
+function ViewerGetGLSLSupported(viewer:real): real; cdecl;
 begin
    if (GL_ARB_shader_objects and
        GL_ARB_vertex_shader and
@@ -277,7 +287,7 @@ begin
        Result := 0;
 end;
 
-function ViewerGetFBOSupported(viewer: real): real; stdcall;
+function ViewerGetFBOSupported(viewer: real): real; cdecl;
 begin
    if GL_ARB_framebuffer_object then
        Result := 1
@@ -285,7 +295,7 @@ begin
        Result := 0;
 end;
 
-function ViewerGetVBOSupported(viewer:real): real; stdcall;
+function ViewerGetVBOSupported(viewer:real): real; cdecl;
 begin
    if GL_ARB_vertex_buffer_object then
        Result := 1
@@ -293,13 +303,13 @@ begin
        Result := 0;
 end;
 
-function ViewerSetAutoRender(viewer, mode: real): real; stdcall;
+function ViewerSetAutoRender(viewer, mode: real): real; cdecl;
 begin
   TGLSceneViewer(trunc64(viewer)).AutoRender := Boolean(trunc64(mode));
   result:=1;
 end;
 
-function ViewerSetOverrideMaterial(viewer, mlb: real; mtrl: pchar): real; stdcall;
+function ViewerSetOverrideMaterial(viewer, mlb: real; mtrl: pchar): real; cdecl;
 var
   v: TGLSceneViewer;
   mlib: TGLMaterialLibrary;
@@ -316,7 +326,7 @@ begin
   result:=1;
 end;
 
-function ViewerGetSize(viewer, index: real): real; stdcall;
+function ViewerGetSize(viewer, index: real): real; cdecl;
 var
   v: TGLSceneViewer;
 begin
@@ -327,7 +337,7 @@ begin
     result := v.Height;
 end;
 
-function ViewerGetPosition(viewer, index: real): real; stdcall;
+function ViewerGetPosition(viewer, index: real): real; cdecl;
 var
   v: TGLSceneViewer;
 begin
@@ -338,7 +348,7 @@ begin
     result := v.Top;
 end;
 
-function ViewerIsOpenGLExtensionSupported(viewer: real; ext: pchar): real; stdcall;
+function ViewerIsOpenGLExtensionSupported(viewer: real; ext: pchar): real; cdecl;
 var
   v: TGLSceneViewer;
 begin
@@ -346,7 +356,7 @@ begin
   result := Integer(IsExtensionSupported(v, String(ext)));
 end;
 
-function ViewerGetFramesPerSecond(viewer: real): real; stdcall;
+function ViewerGetFramesPerSecond(viewer: real): real; cdecl;
 var
   v: TGLSceneViewer;
   fps: real;
@@ -356,7 +366,7 @@ begin
   result := fps;
 end;
 
-function ViewerResetPerformanceMonitor(viewer: real): real; stdcall;
+function ViewerResetPerformanceMonitor(viewer: real): real; cdecl;
 var
   v: TGLSceneViewer;
 begin
@@ -365,7 +375,7 @@ begin
   result := 1.0;
 end;
 
-function ViewerPixelRayToWorld(viewer,x, y,ind: real): real; stdcall;
+function ViewerPixelRayToWorld(viewer,x, y,ind: real): real; cdecl;
 var
 vec: TAffineVector;
 begin
@@ -373,7 +383,7 @@ begin
   result:=vec[trunc64(ind)];
 end;
 
-function ViewerShadeModel(viewer,ind: real): real; stdcall;
+function ViewerShadeModel(viewer,ind: real): real; cdecl;
 begin
 if (ind=0) then
   TGLSceneViewer(trunc64(viewer)).Buffer.ShadeModel:=smFlat;

@@ -1,4 +1,4 @@
-function MovementCreate(obj: real): real; stdcall;
+function MovementCreate(obj: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   mov: TGLMovement;
@@ -8,7 +8,7 @@ begin
   result := Integer(mov);
 end;
 
-function MovementStart(movement: real): real; stdcall;
+function MovementStart(movement: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
@@ -17,7 +17,7 @@ begin
   result := 1.0;
 end;
 
-function MovementStop(movement: real): real; stdcall;
+function MovementStop(movement: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
@@ -28,7 +28,7 @@ end;
 
 // Switches to next movement when the current will end
 // and continues moving. Movement will stop when no more paths left
-function MovementAutoStartNextPath(movement, mode: real): real; stdcall;
+function MovementAutoStartNextPath(movement, mode: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
@@ -37,7 +37,7 @@ begin
   result := 1.0;
 end;
 
-function MovementAddPath(movement: real): real; stdcall;
+function MovementAddPath(movement: real): real; cdecl;
 var
   mov: TGLMovement;
   path: TGLMovementPath;
@@ -49,7 +49,7 @@ end;
 
 // After switching active path, MovementStart should be called
 // to start movement
-function MovementSetActivePath(movement,ind: real): real; stdcall;
+function MovementSetActivePath(movement,ind: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
@@ -58,7 +58,7 @@ begin
   result := 1.0;
 end;
 
-function MovementPathSetSplineMode(path, lsm: real): real; stdcall;
+function MovementPathSetSplineMode(path, lsm: real): real; cdecl;
 var
   mpath: TGLMovementPath;
 begin
@@ -71,7 +71,7 @@ begin
   result := 1.0;
 end;
 
-function MovementPathAddNode(path: real): real; stdcall;
+function MovementPathAddNode(path: real): real; cdecl;
 var
   mpath: TGLMovementPath;
   node: TGLPathNode;
@@ -82,7 +82,7 @@ begin
   result := Integer(node);
 end;
 
-function MovementPathNodeSetPosition(node, x, y, z: real): real; stdcall;
+function MovementPathNodeSetPosition(node, x, y, z: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
@@ -93,7 +93,7 @@ begin
   result := 1.0;
 end;
 
-function MovementPathNodeSetRotation(node, x, y, z: real): real; stdcall;
+function MovementPathNodeSetRotation(node, x, y, z: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
@@ -104,7 +104,7 @@ begin
   result := 1.0;
 end;
 
-function MovementPathNodeSetSpeed(node, speed: real): real; stdcall;
+function MovementPathNodeSetSpeed(node, speed: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
@@ -113,7 +113,7 @@ begin
   result := 1.0;
 end;
 
-function MovementPathShow(pat,vis: real): real; stdcall;
+function MovementPathShow(pat,vis: real): real; cdecl;
 var
  path: TGLMovementPath;
 begin
@@ -122,7 +122,7 @@ begin
   Result := 1;
 end;
 
-function MovementPathSetLoop(pat,loopn: real): real; stdcall;
+function MovementPathSetLoop(pat,loopn: real): real; cdecl;
 var
  path: TGLMovementPath;
 begin
@@ -131,7 +131,7 @@ begin
   Result := 1;
 end;
 
-function MovementPathDeleteNode(pat,node: real): real; stdcall;
+function MovementPathDeleteNode(pat,node: real): real; cdecl;
 var
  path: TGLMovementPath;
  nod: TGLPathNode;

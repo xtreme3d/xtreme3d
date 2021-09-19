@@ -1,4 +1,4 @@
-function SkyboxCreate(parent: real): real; stdcall;
+function SkyboxCreate(parent: real): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
@@ -10,7 +10,7 @@ begin
   result := Integer(sb);
 end;
 
-function SkyboxSetMaterial(skybox, sbm: real; matname: pchar): real; stdcall;
+function SkyboxSetMaterial(skybox, sbm: real; matname: pchar): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
@@ -25,7 +25,7 @@ begin
   result := 1;
 end;
 
-function SkyboxSetClouds(skybox, offset, size: real): real; stdcall;
+function SkyboxSetClouds(skybox, offset, size: real): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
@@ -35,7 +35,7 @@ begin
   result := 1;
 end;
 
-function SkyboxSetStyle(skybox, sbs: real): real; stdcall;
+function SkyboxSetStyle(skybox, sbs: real): real; cdecl;
 var
   sb: TGLSkyBox;
 begin

@@ -1,4 +1,4 @@
-function FreeformCreate(fname: pchar; matl1,matl2,parent: real): real; stdcall;
+function FreeformCreate(fname: pchar; matl1,matl2,parent: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   ml: TGLMaterialLibrary;
@@ -29,7 +29,7 @@ begin
   result:=Integer(GLFreeForm1);
 end;
 
-function FreeformGenTangents(ff: real): real; stdcall;
+function FreeformGenTangents(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   mesh1: TMeshObject;
@@ -47,7 +47,7 @@ begin
 end;
 
 // MeshCountObjects = FreeformMeshObjectsCount
-function FreeformMeshObjectsCount(ff: real): real; stdcall;
+function FreeformMeshObjectsCount(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   mobj: integer;
@@ -58,7 +58,7 @@ begin
 end;
 
 // MeshSetVisible = FreeformMeshSetVisible
-function FreeformMeshSetVisible(ff,mesh,mode: real): real; stdcall;
+function FreeformMeshSetVisible(ff,mesh,mode: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -68,7 +68,7 @@ begin
   result:=1;
 end;
 
-function FreeformMeshSetSecondCoords(ff1,mesh1,ff2,mesh2: real): real; stdcall;
+function FreeformMeshSetSecondCoords(ff1,mesh1,ff2,mesh2: real): real; cdecl;
 var
   GLFreeForm1,GLFreeForm2: TGLFreeForm;
   tl: TAffineVectorList;
@@ -82,7 +82,7 @@ begin
   result:=1;
 end;
 
-function FreeformMeshTriangleCount(ff,mesh: real): real; stdcall;
+function FreeformMeshTriangleCount(ff,mesh: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   tri: integer;
@@ -92,7 +92,7 @@ begin
   result:=tri;
 end;
 
-function FreeformMeshObjectGetName(ff,mesh: real): pchar; stdcall;
+function FreeformMeshObjectGetName(ff,mesh: real): pchar; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -100,7 +100,7 @@ begin
   result:=pchar(GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name);
 end;
 
-function FreeformMeshObjectSetName(ff,mesh: real; name: pchar): real; stdcall;
+function FreeformMeshObjectSetName(ff,mesh: real; name: pchar): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -109,7 +109,7 @@ begin
   result:=1;
 end;
 
-function FreeformMeshObjectDestroy(ff,mesh: real): real; stdcall;
+function FreeformMeshObjectDestroy(ff,mesh: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -118,7 +118,7 @@ begin
   result:=1;
 end;
 
-function FreeformMeshFaceGroupsCount(ff,mesh: real): real; stdcall;
+function FreeformMeshFaceGroupsCount(ff,mesh: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   fgr: integer;
@@ -128,7 +128,7 @@ begin
   result:=fgr;
 end;
 
-function FreeformMeshFaceGroupTriangleCount(ff,mesh,fgr: real): real; stdcall;
+function FreeformMeshFaceGroupTriangleCount(ff,mesh,fgr: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   tri: integer;
@@ -139,7 +139,7 @@ begin
 end;
 
 // Change: explosion creation API changed
-function FreeformCreateExplosionFX(ff1, enable: real): real; stdcall;
+function FreeformCreateExplosionFX(ff1, enable: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
@@ -159,7 +159,7 @@ begin
   result:=Integer(exp);
 end;
 
-function FreeformExplosionFXReset(ff1: real): real; stdcall;
+function FreeformExplosionFXReset(ff1: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
@@ -173,7 +173,7 @@ begin
   result := 1;
 end;
 
-function FreeformExplosionFXEnable(ff1, mode: real): real; stdcall;
+function FreeformExplosionFXEnable(ff1, mode: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
@@ -184,7 +184,7 @@ begin
   result := 1;
 end;
 
-function FreeformExplosionFXSetSpeed(ff1, speed: real): real; stdcall;
+function FreeformExplosionFXSetSpeed(ff1, speed: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
@@ -195,7 +195,7 @@ begin
   result := 1;
 end;
 
-function FreeformSphereSweepIntersect(freeform, obj, radius, vel: real): real; stdcall;
+function FreeformSphereSweepIntersect(freeform, obj, radius, vel: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   ob: TGLBaseSceneObject;
@@ -210,7 +210,7 @@ begin
   result := Integer(res);
 end;
 
-function FreeformPointInMesh(freeform, x, y, z: real): real; stdcall;
+function FreeformPointInMesh(freeform, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   p: TVector;
@@ -222,7 +222,7 @@ begin
   result := Integer(res);
 end;
 
-function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; stdcall;
+function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   i: Integer;
@@ -238,7 +238,7 @@ begin
   result:=1;
 end;
 
-function FreeformUseMeshMaterials(ff,mode: real): real; stdcall;
+function FreeformUseMeshMaterials(ff,mode: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -247,7 +247,7 @@ begin
   result:=1;
 end;
 
-function FreeformToFreeforms(freeform, parent: real): real; stdcall;
+function FreeformToFreeforms(freeform, parent: real): real; cdecl;
 var
   ffm, ffm2: TGLFreeForm;
   mi, fgi, vi, tci: Integer;
@@ -316,7 +316,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshFaceGroupSetMaterial(ff,mesh,fg: real; matname: pchar): real; stdcall;
+function FreeformMeshFaceGroupSetMaterial(ff,mesh,fg: real; matname: pchar): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -332,7 +332,7 @@ begin
   result:=1;
 end;
 
-function FreeformMeshFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; stdcall;
+function FreeformMeshFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   me: TMeshObject;
@@ -342,7 +342,7 @@ begin
   result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
 end;
 
-function FreeformCreateEmpty(matlib1, matlib2, parent: real): real; stdcall;
+function FreeformCreateEmpty(matlib1, matlib2, parent: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   ml: TGLMaterialLibrary;
@@ -360,7 +360,7 @@ begin
   result:=Integer(freeform);
 end;
 
-function FreeformAddMesh(ff: real): real; stdcall;
+function FreeformAddMesh(ff: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -371,7 +371,7 @@ begin
   result := freeform.MeshObjects.Count - 1;
 end;
 
-function FreeformMeshAddFaceGroup(ff, mesh: real): real; stdcall;
+function FreeformMeshAddFaceGroup(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -383,7 +383,7 @@ begin
   result := meshObj.FaceGroups.Count - 1;
 end;
 
-function FreeformMeshAddVertex(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshAddVertex(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -393,7 +393,7 @@ begin
   result := meshObj.Vertices.Add(x, y, z);
 end;
 
-function FreeformMeshAddNormal(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshAddNormal(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -403,7 +403,7 @@ begin
   result := meshObj.Normals.Add(x, y, z);
 end;
 
-function FreeformMeshAddTexCoord(ff, mesh, u, v: real): real; stdcall;
+function FreeformMeshAddTexCoord(ff, mesh, u, v: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -413,7 +413,7 @@ begin
   result := meshObj.TexCoords.Add(u, v);
 end;
 
-function FreeformMeshAddSecondTexCoord(ff, mesh, u, v: real): real; stdcall;
+function FreeformMeshAddSecondTexCoord(ff, mesh, u, v: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -423,7 +423,7 @@ begin
   result := meshObj.LightMapTexCoords.Add(u, v);
 end;
 
-function FreeformMeshAddTangent(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshAddTangent(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -434,7 +434,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshAddBinormal(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshAddBinormal(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -445,7 +445,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshFaceGroupAddTriangle(ff, mesh, fg, i1, i2, i3: real): real; stdcall;
+function FreeformMeshFaceGroupAddTriangle(ff, mesh, fg, i1, i2, i3: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -460,7 +460,7 @@ begin
   result := faceGroup.VertexIndices.Count - 1;
 end;
 
-function FreeformMeshGenNormals(ff, mesh: real): real; stdcall;
+function FreeformMeshGenNormals(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -482,7 +482,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshGenTangents(ff, mesh: real): real; stdcall;
+function FreeformMeshGenTangents(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -495,7 +495,7 @@ begin
 end;
 
 // MeshCountVertices = FreeformMeshVerticesCount
-function FreeformMeshVerticesCount(ff, mesh: real): real; stdcall;
+function FreeformMeshVerticesCount(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -505,7 +505,7 @@ begin
   result := meshObj.Vertices.Count;
 end;
 
-function FreeformMeshTranslate(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshTranslate(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -521,7 +521,7 @@ begin
 end;
 
 // MeshRotate = FreeformMeshRotate
-function FreeformMeshRotate(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshRotate(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -544,7 +544,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshScale(ff, mesh, x, y, z: real): real; stdcall;
+function FreeformMeshScale(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TMeshObject;
@@ -559,7 +559,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformSave(ff: real; filename: pchar): real; stdcall;
+function FreeformSave(ff: real; filename: pchar): real; cdecl;
 var
   freeform: TGLFreeForm;
 begin
@@ -568,7 +568,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshGetVertex(ff, mesh, v, index: real): real; stdcall;
+function FreeformMeshGetVertex(ff, mesh, v, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -576,7 +576,7 @@ begin
   result := ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)][trunc64(index)];
 end;
 
-function FreeformMeshGetNormal(ff, mesh, n, index: real): real; stdcall;
+function FreeformMeshGetNormal(ff, mesh, n, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -584,7 +584,7 @@ begin
   result := ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)][trunc64(index)];
 end;
 
-function FreeformMeshGetTexCoord(ff, mesh, t, index: real): real; stdcall;
+function FreeformMeshGetTexCoord(ff, mesh, t, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -592,7 +592,7 @@ begin
   result := ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)][trunc64(index)];
 end;
 
-function FreeformMeshGetSecondTexCoord(ff, mesh, t, index: real): real; stdcall;
+function FreeformMeshGetSecondTexCoord(ff, mesh, t, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   i: Integer;
@@ -607,7 +607,7 @@ begin
     result := 0;
 end;
 
-function FreeformMeshGetTangent(ff, mesh, t, index: real): real; stdcall;
+function FreeformMeshGetTangent(ff, mesh, t, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -615,7 +615,7 @@ begin
   result := ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)][trunc64(index)];
 end;
 
-function FreeformMeshGetBinormal(ff, mesh, b, index: real): real; stdcall;
+function FreeformMeshGetBinormal(ff, mesh, b, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -623,7 +623,7 @@ begin
   result := ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)][trunc64(index)];
 end;
 
-function FreeformMeshFaceGroupGetIndex(ff, mesh, fg, index: real): real; stdcall;
+function FreeformMeshFaceGroupGetIndex(ff, mesh, fg, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   faceGroup: TFGVertexIndexList;
@@ -633,7 +633,7 @@ begin
   result := faceGroup.VertexIndices[trunc64(index)];
 end;
 
-function FreeformMeshSetVertex(ff, mesh, v, x, y, z: real): real; stdcall;
+function FreeformMeshSetVertex(ff, mesh, v, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -642,7 +642,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshSetNormal(ff, mesh, n, x, y, z: real): real; stdcall;
+function FreeformMeshSetNormal(ff, mesh, n, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -651,7 +651,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshSetTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+function FreeformMeshSetTexCoord(ff, mesh, t, u, v: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -660,7 +660,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshSetSecondTexCoord(ff, mesh, t, u, v: real): real; stdcall;
+function FreeformMeshSetSecondTexCoord(ff, mesh, t, u, v: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -669,7 +669,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshSetTangent(ff, mesh, t, x, y, z: real): real; stdcall;
+function FreeformMeshSetTangent(ff, mesh, t, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -678,7 +678,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshSetBinormal(ff, mesh, b, x, y, z: real): real; stdcall;
+function FreeformMeshSetBinormal(ff, mesh, b, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
@@ -687,7 +687,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshFaceGroupSetIndex(ff, mesh, fg, index, i: real): real; stdcall;
+function FreeformMeshFaceGroupSetIndex(ff, mesh, fg, index, i: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   faceGroup: TFGVertexIndexList;
@@ -698,7 +698,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformBuildOctree(ff: real): real; stdcall;
+function FreeformBuildOctree(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
@@ -707,7 +707,7 @@ begin
   result:=1.0;
 end;
 
-function FreeformMeshFaceGroupGetLightmapIndex(ff, mesh, fg: real): real; stdcall;
+function FreeformMeshFaceGroupGetLightmapIndex(ff, mesh, fg: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   meshObj: TMeshObject;
@@ -719,7 +719,7 @@ begin
   result := faceGroup.LightMapIndex;
 end;
 
-function FreeformMeshFaceGroupSetLightmapIndex(ff, mesh, fg, index: real): real; stdcall;
+function FreeformMeshFaceGroupSetLightmapIndex(ff, mesh, fg, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   meshObj: TMeshObject;
@@ -732,7 +732,7 @@ begin
   result := 1.0;
 end;
 
-function FreeformSetMaterialLibraries(ff, matlib, lmmatlib: real): real; stdcall;
+function FreeformSetMaterialLibraries(ff, matlib, lmmatlib: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin

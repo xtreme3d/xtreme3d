@@ -1,4 +1,4 @@
-function NavigatorCreate: real; stdcall;
+function NavigatorCreate: real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -6,7 +6,7 @@ begin
   Result := Integer(nav);
 end;
 
-function NavigatorSetObject(navigator, obj: real): real; stdcall;
+function NavigatorSetObject(navigator, obj: real): real; cdecl;
 var
   nav: TGLNavigator;
   ob: TGLBaseSceneObject;
@@ -17,7 +17,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorSetUseVirtualUp(navigator, mode: real): real; stdcall;
+function NavigatorSetUseVirtualUp(navigator, mode: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -26,7 +26,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorSetVirtualUp(navigator, x, y, z: real): real; stdcall;
+function NavigatorSetVirtualUp(navigator, x, y, z: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -35,7 +35,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorTurnHorizontal(navigator, angle: real): real; stdcall;
+function NavigatorTurnHorizontal(navigator, angle: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -44,7 +44,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorTurnVertical(navigator, angle: real): real; stdcall;
+function NavigatorTurnVertical(navigator, angle: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -53,7 +53,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorMoveForward(navigator, spd: real): real; stdcall;
+function NavigatorMoveForward(navigator, spd: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -62,7 +62,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorStrafeHorizontal(navigator, spd: real): real; stdcall;
+function NavigatorStrafeHorizontal(navigator, spd: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -71,7 +71,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorStrafeVertical(navigator, spd: real): real; stdcall;
+function NavigatorStrafeVertical(navigator, spd: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -80,7 +80,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorStraighten(navigator: real): real; stdcall;
+function NavigatorStraighten(navigator: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -89,7 +89,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorFlyForward(navigator, spd: real): real; stdcall;
+function NavigatorFlyForward(navigator, spd: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -98,7 +98,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorMoveUpWhenMovingForward(navigator, mode: real): real; stdcall;
+function NavigatorMoveUpWhenMovingForward(navigator, mode: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -107,7 +107,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorInvertHorizontalWhenUpsideDown(navigator, mode: real): real; stdcall;
+function NavigatorInvertHorizontalWhenUpsideDown(navigator, mode: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -116,7 +116,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorSetAngleLock(navigator, mode: real): real; stdcall;
+function NavigatorSetAngleLock(navigator, mode: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin
@@ -125,7 +125,7 @@ begin
   Result := 1.0;
 end;
 
-function NavigatorSetAngles(navigator, minangle, maxangle: real): real; stdcall;
+function NavigatorSetAngles(navigator, minangle, maxangle: real): real; cdecl;
 var
   nav: TGLNavigator;
 begin

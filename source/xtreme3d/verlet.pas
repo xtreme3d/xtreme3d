@@ -1,4 +1,4 @@
-function VerletWorldCreate (iter,UpdateSpacePartion,drag: real): real; stdcall;
+function VerletWorldCreate (iter,UpdateSpacePartion,drag: real): real; cdecl;
 var
 world: TVerletWorld;
 begin
@@ -12,7 +12,7 @@ world.UpdateSpacePartion := uspEveryFrame;
   result:=Integer(world);
 end;
 
-function VerletWorldCreateOctree (world,xmin,ymin,zmin,xmax,ymax,zmax,leaf,depth: real): real; stdcall;
+function VerletWorldCreateOctree (world,xmin,ymin,zmin,xmax,ymax,zmax,leaf,depth: real): real; cdecl;
 var
 vworld: TVerletWorld;
 begin
@@ -24,7 +24,7 @@ vworld.CreateOctree(
 end;
 
 
-function VerletGetNodeCount (world: real): real; stdcall;
+function VerletGetNodeCount (world: real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -33,7 +33,7 @@ ver:=TVerletWorld(trunc64(world));
 end;
 
 
-function VerletWorldGravityCreate (world,x,y,z: real): real; stdcall;
+function VerletWorldGravityCreate (world,x,y,z: real): real; cdecl;
 var
 gr: TVFGravity;
 worldd: TVerletWorld;
@@ -44,7 +44,7 @@ gr.Gravity := AffineVectorMake (x, y, z);
   result:=Integer(gr);
 end;
 
-function VerletWorldGravitySetDirection (grv,x,y,z: real): real; stdcall;
+function VerletWorldGravitySetDirection (grv,x,y,z: real): real; cdecl;
 var
 gr: TVFGravity;
 begin
@@ -54,7 +54,7 @@ gr.Gravity := AffineVectorMake (x, y, z);
 end;
 
 
-function VerletWorldUpdate (world,newTime: real): real; stdcall;
+function VerletWorldUpdate (world,newTime: real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -63,7 +63,7 @@ ver.Progress (ver.MaxDeltaTime, newTime);
   result:=1;
 end;
 
-function EdgeDetectorCreate (world,obj: real): real; stdcall;
+function EdgeDetectorCreate (world,obj: real): real; cdecl;
 var
 edg: TEdgeDetector;
 ver: TVerletWorld;
@@ -78,7 +78,7 @@ edg.AddEdgesAsSolidEdges (ver);
   result:=Integer(edg);
 end;
 
-function EdgeDetectorSetWeldDistance (edge,dis: real): real; stdcall;
+function EdgeDetectorSetWeldDistance (edge,dis: real): real; cdecl;
 var
 ed: TEdgeDetector;
 begin
@@ -87,7 +87,7 @@ ed.WeldDistance:=dis;
   result:=1;
 end;
 
-function VerletConstraintFloorCreate (world,bou,level:real): real; stdcall;
+function VerletConstraintFloorCreate (world,bou,level:real): real; cdecl;
 var
 ver: TVerletWorld;
 floor: TVCFloor;
@@ -99,7 +99,7 @@ floor.FloorLevel:=level;
   result:=Integer(floor);
 end;
 
-function VerletConstraintFloorSetNormal (flr,x,y,z:real): real; stdcall;
+function VerletConstraintFloorSetNormal (flr,x,y,z:real): real; cdecl;
 var
 floor: TVCFloor;
 begin
@@ -108,7 +108,7 @@ floor.Normal:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintFloorSetObjectLocations (flr,obj:real): real; stdcall;
+function VerletConstraintFloorSetObjectLocations (flr,obj:real): real; cdecl;
 var
 floor: TVCFloor;
 j: TGLSceneObject;
@@ -121,7 +121,7 @@ floor.Normal   := j.Direction.AsAffineVector;
   result:=1;
 end;
 
-function VerletConstraintSphereCreate (world,rad:real): real; stdcall;
+function VerletConstraintSphereCreate (world,rad:real): real; cdecl;
 var
 ver: TVerletWorld;
 sphere: TVCSphere;
@@ -132,7 +132,7 @@ sphere.Radius:= rad;
   result:=Integer(sphere);
 end;
 
-function VerletConstraintCylinderCreate (world,rad:real): real; stdcall;
+function VerletConstraintCylinderCreate (world,rad:real): real; cdecl;
 var
 ver: TVerletWorld;
 cylinder: TVCCylinder;
@@ -143,7 +143,7 @@ cylinder.Radius:= rad;
   result:=Integer(cylinder);
 end;
 
-function VerletConstraintCylinderSetAxis (cyl,x,y,z:real): real; stdcall;
+function VerletConstraintCylinderSetAxis (cyl,x,y,z:real): real; cdecl;
 var
 cylinder: TVCCylinder;
 begin
@@ -152,7 +152,7 @@ cylinder.Axis:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintCubeCreate (world,x,y,z:real): real; stdcall;
+function VerletConstraintCubeCreate (world,x,y,z:real): real; cdecl;
 var
 ver: TVerletWorld;
 cube: TVCCube;
@@ -163,7 +163,7 @@ cube.Sides:=AffineVectorMake(x,y,z);
   result:=Integer(cube);
 end;
 
-function VerletConstraintCubeCreateSetCube (world,cube1:real): real; stdcall;
+function VerletConstraintCubeCreateSetCube (world,cube1:real): real; cdecl;
 var
 ver: TVerletWorld;
 pr: TGLCube;
@@ -178,7 +178,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=Integer(Cube);
 end;
 
-function VerletConstraintCubeSetDirection(cb,x,y,z:real): real; stdcall;
+function VerletConstraintCubeSetDirection(cb,x,y,z:real): real; cdecl;
 var
 cube: TVCCube;
 begin
@@ -187,7 +187,7 @@ cube.Direction:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintCapsuleCreate (world,rad,len:real): real; stdcall;
+function VerletConstraintCapsuleCreate (world,rad,len:real): real; cdecl;
 var
 ver: TVerletWorld;
 caps: TVCCapsule;
@@ -199,7 +199,7 @@ caps.Length:=len;
   result:=Integer(caps);
 end;
 
-function VerletConstraintCapsuleSetAxis (cp,x,y,z:real): real; stdcall;
+function VerletConstraintCapsuleSetAxis (cp,x,y,z:real): real; cdecl;
 var
 caps: TVCCapsule;
 begin
@@ -208,7 +208,7 @@ caps.Axis:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintSetPosition (obj,x,y,z:real): real; stdcall;
+function VerletConstraintSetPosition (obj,x,y,z:real): real; cdecl;
 var
 objj: TVerletGlobalConstraint;
 begin
@@ -217,7 +217,7 @@ objj.Location:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintSetFrictionRatio (obj,fr:real): real; stdcall;
+function VerletConstraintSetFrictionRatio (obj,fr:real): real; cdecl;
 var
 objj: TVerletGlobalFrictionConstraint;
 begin
@@ -226,7 +226,7 @@ objj.FrictionRatio:= fr;
   result:=1;
 end;
 
-function VerletConstraintSetEnabled (obj,en:real): real; stdcall;
+function VerletConstraintSetEnabled (obj,en:real): real; cdecl;
 var
 objj: TVerletConstraint;
 begin
@@ -235,7 +235,7 @@ objj.Enabled:= Boolean(trunc64(en));
   result:=1;
 end;
 
-function VerletNodeNailedDown (world,ind,bol:real): real; stdcall;
+function VerletNodeNailedDown (world,ind,bol:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -244,7 +244,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=1;
 end;
 
-function VerletNodeSetPosition (world,ind,x,y,z:real): real; stdcall;
+function VerletNodeSetPosition (world,ind,x,y,z:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -253,7 +253,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=1;
 end;
 
-function VerletNodeSetRadius (world,ind,rad:real): real; stdcall;
+function VerletNodeSetRadius (world,ind,rad:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -262,7 +262,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=1;
 end;
 
-function VerletNodeSetFriction (world,ind,fr:real): real; stdcall;
+function VerletNodeSetFriction (world,ind,fr:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -271,7 +271,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=1;
 end;
 
-function VerletNodeSetWeight (world,ind,weight:real): real; stdcall;
+function VerletNodeSetWeight (world,ind,weight:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -280,7 +280,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=1;
 end;
 
-function VerletNodeApplyFriction (world,ind,fr,depth,x,y,z:real): real; stdcall;
+function VerletNodeApplyFriction (world,ind,fr,depth,x,y,z:real): real; cdecl;
 var
 ver: TVerletWorld;
 begin
@@ -290,7 +290,7 @@ ver:=TVerletWorld(trunc64(world));
 end;
 
 
-function VerletAirResistanceCreate (world,Magnitude,Chaos:real): real; stdcall;
+function VerletAirResistanceCreate (world,Magnitude,Chaos:real): real; cdecl;
 var
 ver: TVerletWorld;
 air: TVFAirResistance;
@@ -303,7 +303,7 @@ ver:=TVerletWorld(trunc64(world));
   result:=Integer(air);
 end;
 
-function VerletAirResistanceSetWindDirection (air,x,y,z:real): real; stdcall;
+function VerletAirResistanceSetWindDirection (air,x,y,z:real): real; cdecl;
 var
 airr: TVFAirResistance;
 begin
@@ -312,7 +312,7 @@ airr:=TVFAirResistance(trunc64(air));
   result:=1;
 end;
 
-function VerletAirResistanceSetWindMagnitude (air,mag:real): real; stdcall;
+function VerletAirResistanceSetWindMagnitude (air,mag:real): real; cdecl;
 var
 airr: TVFAirResistance;
 begin
@@ -321,7 +321,7 @@ airr:=TVFAirResistance(trunc64(air));
   result:=1;
 end;
 
-function VerletAirResistanceSetWindChaos (air,ch:real): real; stdcall;
+function VerletAirResistanceSetWindChaos (air,ch:real): real; cdecl;
 var
 airr: TVFAirResistance;
 begin
@@ -330,7 +330,7 @@ airr:=TVFAirResistance(trunc64(air));
   result:=1;
 end;
 
-function VerletConstraintGetCount (wr:real): real; stdcall;
+function VerletConstraintGetCount (wr:real): real; cdecl;
 var
 world: TVerletWorld;
 begin
@@ -338,7 +338,7 @@ world:=TVerletWorld(trunc64(wr));
   result:=world.Constraints.Count-1;
 end;
 
-function VerletConstraintSetSlack (wr,con,sla:real): real; stdcall;
+function VerletConstraintSetSlack (wr,con,sla:real): real; cdecl;
 var
 world: TVerletWorld;
 begin
@@ -347,7 +347,7 @@ TVCStick(world.Constraints[trunc64(con)]).Slack := sla;
   result:=1;
 end;
 
-function VerletWorldSetSimTime (wr,tm:real): real; stdcall;
+function VerletWorldSetSimTime (wr,tm:real): real; cdecl;
 var
 world: TVerletWorld;
 begin
@@ -356,7 +356,7 @@ world.SimTime:=tm;
   result:=1;
 end;
 
-function VerletWorldSetMaxDeltaTime (wr,tm:real): real; stdcall;
+function VerletWorldSetMaxDeltaTime (wr,tm:real): real; cdecl;
 var
 world: TVerletWorld;
 begin

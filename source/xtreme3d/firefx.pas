@@ -1,4 +1,4 @@
-function FireFXManagerCreate: real; stdcall;
+function FireFXManagerCreate: real; cdecl;
 var
   m: TGLFireFXManager;
 begin
@@ -15,7 +15,7 @@ begin
   result:=Integer(m);
 end;
 
-function FireFXCreate(mngr, obj: real): real; stdcall;
+function FireFXCreate(mngr, obj: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
   ffx: TGLBFireFX;
@@ -29,7 +29,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetColor(mngr, incolor, inalpha, outcolor, outalpha: real): real; stdcall;
+function FireFXSetColor(mngr, incolor, inalpha, outcolor, outalpha: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -41,7 +41,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetMaxParticles(mngr, particles: real): real; stdcall;
+function FireFXSetMaxParticles(mngr, particles: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -50,7 +50,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetParticleSize(mngr, size: real): real; stdcall;
+function FireFXSetParticleSize(mngr, size: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -59,7 +59,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetDensity(mngr, density: real): real; stdcall;
+function FireFXSetDensity(mngr, density: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -68,7 +68,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetEvaporation(mngr, evaporation: real): real; stdcall;
+function FireFXSetEvaporation(mngr, evaporation: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -77,7 +77,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetCrown(mngr, crown: real): real; stdcall;
+function FireFXSetCrown(mngr, crown: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -86,7 +86,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetLife(mngr, life: real): real; stdcall;
+function FireFXSetLife(mngr, life: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -95,7 +95,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetBurst(mngr, burst: real): real; stdcall;
+function FireFXSetBurst(mngr, burst: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -104,7 +104,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXSetRadius(mngr, radius: real): real; stdcall;
+function FireFXSetRadius(mngr, radius: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -113,7 +113,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXExplosion(mngr, isp, maxsp, lbf: real): real; stdcall;
+function FireFXExplosion(mngr, isp, maxsp, lbf: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin
@@ -122,7 +122,7 @@ begin
   result := 1.0;
 end;
 
-function FireFXRingExplosion(mngr, isp, maxsp, lbf,rx,ry,rz,sx,sy,sz: real): real; stdcall;
+function FireFXRingExplosion(mngr, isp, maxsp, lbf,rx,ry,rz,sx,sy,sz: real): real; cdecl;
 var
   ffxMngr: TGLFireFXManager;
 begin

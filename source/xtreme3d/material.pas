@@ -1,4 +1,4 @@
-function MaterialLibraryCreate: real; stdcall;
+function MaterialLibraryCreate: real; cdecl;
 var
   mlib:TGLMaterialLibrary;
 begin
@@ -6,13 +6,13 @@ begin
   result:=Integer(mlib);
 end;
 
-function MaterialLibraryActivate(mlib:real): real; stdcall;
+function MaterialLibraryActivate(mlib:real): real; cdecl;
 begin
   matlib:=TGLMaterialLibrary(trunc64(mlib));
   result:=1;
 end;
 
-function MaterialLibrarySetTexturePaths(mlb: real; path: pchar): real; stdcall;
+function MaterialLibrarySetTexturePaths(mlb: real; path: pchar): real; cdecl;
 var
   mlib:TGLMaterialLibrary;
 begin
@@ -21,7 +21,7 @@ begin
   result:=1;
 end;
 
-function MaterialLibraryClear(mlb: real): real; stdcall;
+function MaterialLibraryClear(mlb: real): real; cdecl;
 var
   mlib: TGLMaterialLibrary;
 begin
@@ -30,7 +30,7 @@ begin
   result:=1;
 end;
 
-function MaterialLibraryDeleteUnused(mlb: real): real; stdcall;
+function MaterialLibraryDeleteUnused(mlb: real): real; cdecl;
 var
   mlib: TGLMaterialLibrary;
 begin
@@ -39,7 +39,7 @@ begin
   result:=1;
 end;
 
-function MaterialLibraryHasMaterial(matlib: real; name: pchar): real; stdcall;
+function MaterialLibraryHasMaterial(matlib: real; name: pchar): real; cdecl;
 var
   mlib: TGLMaterialLibrary;
 begin
@@ -50,7 +50,7 @@ begin
       Result := 1;
 end;
 
-function MaterialLibraryLoadScript(matlib: real; filename: pchar): real; stdcall;
+function MaterialLibraryLoadScript(matlib: real; filename: pchar): real; cdecl;
 var
   mlib: TGLMaterialLibrary;
   list: TStringList;
@@ -68,7 +68,7 @@ begin
   Result := 1;
 end;
 
-function MaterialCreate(mtrl,fname: pchar): real; stdcall;
+function MaterialCreate(mtrl,fname: pchar): real; cdecl;
 begin  
   try
     matlib.AddTextureMaterial(String(mtrl),fname,true);
@@ -82,7 +82,7 @@ begin
   result:=1;
 end;
 
-function MaterialDestroy(mtrl: pchar): real; stdcall;
+function MaterialDestroy(mtrl: pchar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
@@ -91,7 +91,7 @@ begin
   result := 1;
 end;
 
-function MaterialAddCubeMap(mtrl: pchar): real; stdcall;
+function MaterialAddCubeMap(mtrl: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -103,7 +103,7 @@ begin
    result:=1;
 end;
 
-function MaterialCubeMapLoadImage(mtrl, texture: pchar; ind: real): real; stdcall;
+function MaterialCubeMapLoadImage(mtrl, texture: pchar; ind: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   target:TGLCubeMapTarget;
@@ -131,7 +131,7 @@ begin
   result:=1;
 end;
 
-function MaterialCubeMapGenerate(mtrl: pchar; res: real): real; stdcall;
+function MaterialCubeMapGenerate(mtrl: pchar; res: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   bmp:TBitmap;
@@ -153,7 +153,7 @@ begin
   result:=1;
 end;
 
-function MaterialCubeMapFromScene(mtrl: pchar; viewer, camera, res: real): real; stdcall;
+function MaterialCubeMapFromScene(mtrl: pchar; viewer, camera, res: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -167,7 +167,7 @@ begin
   Result := 1;
 end;
 
-function MaterialSetName(mtrl, name: pchar): real; stdcall;
+function MaterialSetName(mtrl, name: pchar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
@@ -176,7 +176,7 @@ begin
   result := 1;
 end;
 
-function MaterialSetShininess(mtrl: pchar; shin: real): real; stdcall;
+function MaterialSetShininess(mtrl: pchar; shin: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -185,7 +185,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetAmbientColor(mtrl: pchar; col, alpha: real): real; stdcall;
+function MaterialSetAmbientColor(mtrl: pchar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -195,7 +195,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetDiffuseColor(mtrl: pchar; col, alpha: real): real; stdcall;
+function MaterialSetDiffuseColor(mtrl: pchar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -205,7 +205,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetSpecularColor(mtrl: pchar; col, alpha: real): real; stdcall;
+function MaterialSetSpecularColor(mtrl: pchar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -215,7 +215,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetEmissionColor(mtrl: pchar; col, alpha: real): real; stdcall;
+function MaterialSetEmissionColor(mtrl: pchar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -225,7 +225,7 @@ begin
   result:=1;
 end;
 
-function MaterialGetColor(mtrl: pchar; index: real): real; stdcall;
+function MaterialGetColor(mtrl: pchar; index: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -240,7 +240,7 @@ begin
     result:=mat.Material.FrontProperties.Emission.AsWinColor;	
 end;
 
-function MaterialGetAlpha(mtrl: pchar; index: real): real; stdcall;
+function MaterialGetAlpha(mtrl: pchar; index: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -255,7 +255,7 @@ begin
     result:=mat.Material.FrontProperties.Emission.Alpha;	
 end;
 
-function MaterialSetBlendingMode(mtrl: pchar; bm: real): real; stdcall;
+function MaterialSetBlendingMode(mtrl: pchar; bm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -269,7 +269,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureMode(mtrl: pchar; tm: real): real; stdcall;
+function MaterialSetTextureMode(mtrl: pchar; tm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -281,7 +281,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureMappingMode(mtrl: pchar; tmm: real): real; stdcall;
+function MaterialSetTextureMappingMode(mtrl: pchar; tmm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -297,7 +297,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetPolygonMode(mtrl: pchar; pm: real): real; stdcall;
+function MaterialSetPolygonMode(mtrl: pchar; pm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -308,7 +308,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureImageAlpha(mtrl: pchar; tia: real): real; stdcall;
+function MaterialSetTextureImageAlpha(mtrl: pchar; tia: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -325,7 +325,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureScale(mtrl: pchar; u, v: real): real; stdcall;
+function MaterialSetTextureScale(mtrl: pchar; u, v: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -335,7 +335,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureOffset(mtrl: pchar; u, v: real): real; stdcall;
+function MaterialSetTextureOffset(mtrl: pchar; u, v: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -345,7 +345,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureFilter(mtrl: pchar; mi, ma: real): real; stdcall;
+function MaterialSetTextureFilter(mtrl: pchar; mi, ma: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -361,7 +361,7 @@ begin
   result:=1;
 end;
 
-function MaterialEnableTexture(mtrl: pchar; mode: real): real; stdcall;
+function MaterialEnableTexture(mtrl: pchar; mode: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -373,17 +373,17 @@ begin
   result:=1;
 end;
 
-function MaterialGetCount(): real; stdcall;
+function MaterialGetCount(): real; cdecl;
 begin
   result:=matlib.Materials.Count;
 end;
 
-function MaterialGetName(ind: real): pchar; stdcall;
+function MaterialGetName(ind: real): pchar; cdecl;
 begin
   result:=pchar(matlib.Materials.Items[trunc64(ind)].Name);
 end;
 
-function MaterialSetFaceCulling(mtrl: pchar; fc: real): real; stdcall;
+function MaterialSetFaceCulling(mtrl: pchar; fc: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -394,7 +394,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetSecondTexture(mtrl, mtrl2: pchar): real; stdcall;
+function MaterialSetSecondTexture(mtrl, mtrl2: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -403,7 +403,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureFormat(mtrl: pchar; tf: real): real; stdcall;
+function MaterialSetTextureFormat(mtrl: pchar; tf: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -423,7 +423,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureCompression(mtrl: pchar; tc: real): real; stdcall;
+function MaterialSetTextureCompression(mtrl: pchar; tc: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -436,7 +436,7 @@ begin
   result:=1;
 end;
 
-function MaterialTextureRequiredMemory(mtrl: pchar): real; stdcall;
+function MaterialTextureRequiredMemory(mtrl: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -444,7 +444,7 @@ begin
   result:=mat.Material.Texture.TextureImageRequiredMemory;
 end;
 
-function MaterialSetFilteringQuality(mtrl: pchar; tf: real): real; stdcall;
+function MaterialSetFilteringQuality(mtrl: pchar; tf: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -454,7 +454,7 @@ begin
   result:=1;
 end;
 
-function MaterialAddTextureEx(mtrl, tex: pchar): real; stdcall;
+function MaterialAddTextureEx(mtrl, tex: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
   mat2:TGLLibMaterial;
@@ -467,7 +467,7 @@ begin
   result:=1;
 end;
 
-function MaterialTextureExClear(mtrl: pchar): real; stdcall;
+function MaterialTextureExClear(mtrl: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -476,7 +476,7 @@ begin
   result:=1;
 end;
 
-function MaterialTextureExDelete(mtrl: pchar; ind: real): real; stdcall;
+function MaterialTextureExDelete(mtrl: pchar; ind: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -485,7 +485,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetShader(mtrl: pchar; shd: real): real; stdcall;
+function MaterialSetShader(mtrl: pchar; shd: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   shad: TGLShader;
@@ -501,7 +501,7 @@ begin
   result := 1;
 end;
 
-function MaterialSaveTexture(mtrl,fname: pchar): real; stdcall;
+function MaterialSaveTexture(mtrl,fname: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -510,7 +510,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetOptions(mtrl: pchar; op1,op2: real): real; stdcall;
+function MaterialSetOptions(mtrl: pchar; op1,op2: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -522,7 +522,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureWrap(mtrl: pchar; wrap: real): real; stdcall;
+function MaterialSetTextureWrap(mtrl: pchar; wrap: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -534,7 +534,7 @@ begin
   result:=1;
 end;
 
-function MaterialGenTexture(mtrl: pchar; w, h: real): real; stdcall;
+function MaterialGenTexture(mtrl: pchar; w, h: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -547,7 +547,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTexture(mtrl, mtrl2: pchar): real; stdcall;
+function MaterialSetTexture(mtrl, mtrl2: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
   mat2:TGLLibMaterial;
@@ -558,7 +558,7 @@ begin
   result:=1;
 end;
 
-function MaterialGetTextureWidth(mtrl: pchar): real; stdcall;
+function MaterialGetTextureWidth(mtrl: pchar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
@@ -568,7 +568,7 @@ begin
     result := mat.Material.Texture.Image.Width;
 end;
 
-function MaterialGetTextureHeight(mtrl: pchar): real; stdcall;
+function MaterialGetTextureHeight(mtrl: pchar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
@@ -578,7 +578,7 @@ begin
     result := mat.Material.Texture.Image.Height;
 end;
 
-function MaterialLoadTexture(mtrl, filename: pchar): real; stdcall;
+function MaterialLoadTexture(mtrl, filename: pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -597,7 +597,7 @@ begin
   result:=1;
 end;
 
-function MaterialLoadTextureEx(mtrl, filename: pchar; index: real): real; stdcall;
+function MaterialLoadTextureEx(mtrl, filename: pchar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
   tex: TGLTexture;
@@ -620,7 +620,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureEx(mtrl, mtrl2: pchar; index: real): real; stdcall;
+function MaterialSetTextureEx(mtrl, mtrl2: pchar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
   mat2: TGLLibMaterial;
@@ -631,7 +631,7 @@ begin
   result := 1;
 end;
 
-function MaterialGenTextureEx(mtrl: pchar; index, w, h: real): real; stdcall;
+function MaterialGenTextureEx(mtrl: pchar; index, w, h: real): real; cdecl;
 var
   mat: TGLLibMaterial;
   tex: TGLTexture;
@@ -648,7 +648,7 @@ begin
   result := 1;
 end;
 
-function MaterialEnableTextureEx(mtrl: pchar; index, mode: real): real; stdcall;
+function MaterialEnableTextureEx(mtrl: pchar; index, mode: real): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
@@ -657,7 +657,7 @@ begin
   result := 1;
 end;
 
-function MaterialHasTextureEx(mtrl: pchar; index: real): real; stdcall;
+function MaterialHasTextureEx(mtrl: pchar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
   tex: TGLTexture;
@@ -670,7 +670,7 @@ begin
     result := 1;
 end;
 
-function MaterialNoiseCreate(mtrl:pchar): real; stdcall;
+function MaterialNoiseCreate(mtrl:pchar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -681,7 +681,7 @@ begin
   result:=1;
 end;
 
-function MaterialNoiseSetDimensions(mtrl:pchar; w,h:real): real; stdcall;
+function MaterialNoiseSetDimensions(mtrl:pchar; w,h:real): real; cdecl;
 begin
   with TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image) do
   begin
@@ -691,37 +691,37 @@ begin
   result:=1;
 end;
 
-function MaterialNoiseAnimate(mtrl:pchar; speed:real): real; stdcall;
+function MaterialNoiseAnimate(mtrl:pchar; speed:real): real; cdecl;
 begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).NoiseAnimate(speed);
   result:=1;
 end;
 
-function MaterialNoiseSetMinCut(mtrl:pchar; m:real): real; stdcall;
+function MaterialNoiseSetMinCut(mtrl:pchar; m:real): real; cdecl;
 begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).MinCut:=trunc64(m);
   result:=1;
 end;
 
-function MaterialNoiseSetSharpness(mtrl:pchar; s:real): real; stdcall;
+function MaterialNoiseSetSharpness(mtrl:pchar; s:real): real; cdecl;
 begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).NoiseSharpness:=s;
   result:=1;
 end;
 
-function MaterialNoiseSetSeamless(mtrl:pchar; mode:real): real; stdcall;
+function MaterialNoiseSetSeamless(mtrl:pchar; mode:real): real; cdecl;
 begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).Seamless:=boolean(trunc64(mode));
   result:=1;
 end;
 
-function MaterialNoiseRandomSeed(mtrl:pchar; s:real): real; stdcall;
+function MaterialNoiseRandomSeed(mtrl:pchar; s:real): real; cdecl;
 begin
   TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(mtrl).Material.Texture.Image).NoiseRandSeed:=trunc64(s);
   result:=1;
 end;
 
-function MaterialCullFrontFaces(mtrl: pchar; culff: real): real; stdcall;
+function MaterialCullFrontFaces(mtrl: pchar; culff: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -730,7 +730,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetZWrite(mtrl: pchar; zwrite: real): real; stdcall;
+function MaterialSetZWrite(mtrl: pchar; zwrite: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -739,7 +739,7 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; stdcall;
+function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; cdecl;
 var
   mat1, mat2: TGLLibMaterial;
   mlib: TGLMaterialLibrary;
@@ -751,7 +751,7 @@ begin
   result := 1.0;
 end;
 
-function MaterialGetNameFromLibrary(matlib, index: real): pchar; stdcall;
+function MaterialGetNameFromLibrary(matlib, index: real): pchar; cdecl;
 var
   mlib: TGLMaterialLibrary;
 begin

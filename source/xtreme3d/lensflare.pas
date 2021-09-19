@@ -1,4 +1,4 @@
-function LensflareCreate(parent: real): real; stdcall;
+function LensflareCreate(parent: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -9,7 +9,7 @@ begin
   result := Integer(lf);
 end;
 
-function LensflareSetSize(lensflare, size: real): real; stdcall;
+function LensflareSetSize(lensflare, size: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -18,7 +18,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetSeed(lensflare, seed: real): real; stdcall;
+function LensflareSetSeed(lensflare, seed: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -27,7 +27,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetSqueeze(lensflare, squeeze: real): real; stdcall;
+function LensflareSetSqueeze(lensflare, squeeze: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -36,7 +36,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetStreaks(lensflare, streaks: real): real; stdcall;
+function LensflareSetStreaks(lensflare, streaks: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -45,7 +45,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetStreakWidth(lensflare, width: real): real; stdcall;
+function LensflareSetStreakWidth(lensflare, width: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -54,7 +54,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetSecs(lensflare, secs: real): real; stdcall;
+function LensflareSetSecs(lensflare, secs: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -63,7 +63,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetResolution(lensflare, res: real): real; stdcall;
+function LensflareSetResolution(lensflare, res: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -72,7 +72,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetElements(lensflare, glow, ring, streaks, rays, secs: real): real; stdcall;
+function LensflareSetElements(lensflare, glow, ring, streaks, rays, secs: real): real; cdecl;
 var
   lf: TGLLensFlare;
 begin
@@ -86,7 +86,7 @@ begin
   result := 1.0;
 end;
 
-function LensflareSetGradients(lensflare, ind, color1, alpha1, color2, alpha2 : real): real; stdcall;
+function LensflareSetGradients(lensflare, ind, color1, alpha1, color2, alpha2 : real): real; cdecl;
 var
   lf: TGLLensFlare;
   gradient: TGLFlareGradient;

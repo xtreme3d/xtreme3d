@@ -1,4 +1,4 @@
-function LinesCreate(parent: real): real; stdcall;
+function LinesCreate(parent: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -9,7 +9,7 @@ begin
   result := Integer(li);
 end;
 
-function LinesAddNode(lines, x, y, z: real): real; stdcall;
+function LinesAddNode(lines, x, y, z: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -18,7 +18,7 @@ begin
   result := 1.0;
 end;
 
-function LinesDeleteNode(lines, ind: real): real; stdcall;
+function LinesDeleteNode(lines, ind: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -27,7 +27,7 @@ begin
   result := 1.0;
 end;
 
-function LinesSetNode(lines, ind, x, y, z: real): real; stdcall;
+function LinesSetNode(lines, ind, x, y, z: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -40,7 +40,7 @@ end;
 
 function LinesSetColors(lines,
   linecolor, linealpha,
-  nodecolor, nodealpha : real): real; stdcall;
+  nodecolor, nodealpha : real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -52,7 +52,7 @@ begin
   result := 1.0;
 end;
 
-function LinesSetSize(lines, linewidth, nodesize: real): real; stdcall;
+function LinesSetSize(lines, linewidth, nodesize: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -62,7 +62,7 @@ begin
   result := 1.0;
 end;
 
-function LinesSetSplineMode(lines, lsm: real): real; stdcall;
+function LinesSetSplineMode(lines, lsm: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -75,7 +75,7 @@ begin
   result := 1.0;
 end;
 
-function LinesSetNodesAspect(lines, lna: real): real; stdcall;
+function LinesSetNodesAspect(lines, lna: real): real; cdecl;
 var
   li: TGLLines;
 begin
@@ -87,7 +87,7 @@ begin
   result := 1.0;
 end;
 
-function LinesSetDivision(lines, division: real): real; stdcall;
+function LinesSetDivision(lines, division: real): real; cdecl;
 var
   li: TGLLines;
 begin

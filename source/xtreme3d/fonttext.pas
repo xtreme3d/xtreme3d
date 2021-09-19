@@ -1,4 +1,4 @@
-function BmpfontCreate(w,h,hspace,vspace,intx,inty,chstart,chend: real): real; stdcall;
+function BmpfontCreate(w,h,hspace,vspace,intx,inty,chstart,chend: real): real; cdecl;
 var
   GLBitmapFont1: TGLBitmapFont;
 begin
@@ -17,7 +17,7 @@ begin
   result:=Integer(GLBitmapFont1);
 end;
 
-function BmpfontLoad(font: real; mtrl: pchar): real; stdcall;
+function BmpfontLoad(font: real; mtrl: pchar): real; cdecl;
 var
   GLBitmapFont1: TGLBitmapFont;
   begin
@@ -26,7 +26,7 @@ var
   result:=1;
 end;
 
-function WindowsBitmapfontCreate(nm: pchar; size,chstart,chend: real): real; stdcall;
+function WindowsBitmapfontCreate(nm: pchar; size,chstart,chend: real): real; cdecl;
 var
   WindowsBitmapFont1: TGLWindowsBitmapFont;
 begin
@@ -38,7 +38,7 @@ begin
   result:=Integer(WindowsBitmapFont1);
 end;
 
-function HUDTextCreate(font: real; txt: pchar; parent: real): real; stdcall;
+function HUDTextCreate(font: real; txt: pchar; parent: real): real; cdecl;
 var
   GLHUDText1: TGLHUDText;
 begin
@@ -51,7 +51,7 @@ begin
   result:=Integer(GLHUDText1);
 end;
 
-function HUDTextSetRotation(text,angle: real): real; stdcall;
+function HUDTextSetRotation(text,angle: real): real; cdecl;
 var
   GLHUDText1: TGLHUDText;
 begin
@@ -60,7 +60,7 @@ begin
   result:=1;
 end;
 
-function HUDTextSetFont(text,font: real): real; stdcall;
+function HUDTextSetFont(text,font: real): real; cdecl;
 var
   GLHUDText1: TGLHUDText;
 begin
@@ -69,7 +69,7 @@ begin
   result:=1;
 end;
 
-function HUDTextSetColor(text,color,alph: real): real; stdcall;
+function HUDTextSetColor(text,color,alph: real): real; cdecl;
 var
   GLHUDText1: TGLHUDText;
 begin
@@ -79,7 +79,7 @@ begin
   result:=1;
 end;
 
-function HUDTextSetText(text: real; txt: pchar): real; stdcall;
+function HUDTextSetText(text: real; txt: pchar): real; cdecl;
 var
   GLHUDText1: TGLHUDText;
 begin
@@ -88,7 +88,7 @@ begin
   result:=1;
 end;
 
-function FlatTextCreate(font: real; txt: pchar; parent: real): real; stdcall;
+function FlatTextCreate(font: real; txt: pchar; parent: real): real; cdecl;
 var
   GLFlatText1: TGLFlatText;
 begin
@@ -101,7 +101,7 @@ begin
   result:=Integer(GLFlatText1);
 end;
 
-function FlatTextSetFont(text,font: real): real; stdcall;
+function FlatTextSetFont(text,font: real): real; cdecl;
 var
   GLFlatText1: TGLFlatText;
 begin
@@ -110,7 +110,7 @@ begin
   result:=1;
 end;
 
-function FlatTextSetColor(text,color,alph: real): real; stdcall;
+function FlatTextSetColor(text,color,alph: real): real; cdecl;
 var
   GLFlatText1: TGLFlatText;
 begin
@@ -120,7 +120,7 @@ begin
   result:=1;
 end;
 
-function FlatTextSetText(text: real; txt: pchar): real; stdcall;
+function FlatTextSetText(text: real; txt: pchar): real; cdecl;
 var
   GLFlatText1: TGLFlatText;
 begin
@@ -129,7 +129,7 @@ begin
   result:=1;
 end;
 
-function SpaceTextCreate(font: real; txt: pchar; extr,parent: real): real; stdcall;
+function SpaceTextCreate(font: real; txt: pchar; extr,parent: real): real; cdecl;
 var
   GLSpaceText1: TGLSpaceText;
 begin
@@ -144,7 +144,7 @@ begin
   result:=Integer(GLSpaceText1);
 end;
 
-function SpaceTextSetExtrusion(text: real; extr: real): real; stdcall;
+function SpaceTextSetExtrusion(text: real; extr: real): real; cdecl;
 var
   GLSpaceText1: TGLSpaceText;
 begin
@@ -153,7 +153,7 @@ begin
   result:=1;
 end;
 
-function SpaceTextSetFont(text,font: real): real; stdcall;
+function SpaceTextSetFont(text,font: real): real; cdecl;
 var
   GLSpaceText1: TGLSpaceText;
 begin
@@ -163,7 +163,7 @@ begin
   result:=1;
 end;
 
-function SpaceTextSetText(text: real; txt: pchar): real; stdcall;
+function SpaceTextSetText(text: real; txt: pchar): real; cdecl;
 var
   GLSpaceText1: TGLSpaceText;
 begin
@@ -172,7 +172,7 @@ begin
   result:=1;
 end;
 
-function TTFontCreate(filename: pchar; height: real): real; stdcall;
+function TTFontCreate(filename: pchar; height: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
@@ -181,7 +181,7 @@ begin
   result := Integer(ftfont);
 end;
 
-function TTFontSetLineGap(font, gap: real): real; stdcall;
+function TTFontSetLineGap(font, gap: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
@@ -190,7 +190,7 @@ begin
   result := 1.0
 end;
 
-function TTFontSetEncoding(font, te: real): real; stdcall;
+function TTFontSetEncoding(font, te: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
@@ -200,7 +200,7 @@ begin
   result := 1.0;
 end;
 
-function TTFontLoadCodePage(font: real; filename: pchar): real; stdcall;
+function TTFontLoadCodePage(font: real; filename: pchar): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin

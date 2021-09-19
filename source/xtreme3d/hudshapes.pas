@@ -1,5 +1,5 @@
 
-function HUDShapeRectangleCreate(w, h, parent: real): real; stdcall;
+function HUDShapeRectangleCreate(w, h, parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -12,7 +12,7 @@ begin
   result := Integer(shp);
 end;
 
-function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; stdcall;
+function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
   i: Integer;
@@ -30,7 +30,7 @@ begin
   result := Integer(shp);
 end;
 
-function HUDShapeLineCreate(x1, y1, x2, y2, parent: real): real; stdcall;
+function HUDShapeLineCreate(x1, y1, x2, y2, parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -47,7 +47,7 @@ begin
   result := Integer(shp);
 end;
 
-function HUDShapeMeshCreate(parent: real): real; stdcall;
+function HUDShapeMeshCreate(parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -60,7 +60,7 @@ begin
   result := Integer(shp);
 end;
 
-function HUDShapeSetRotation(shape, angle: real): real; stdcall;
+function HUDShapeSetRotation(shape, angle: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -69,7 +69,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeRotate(shape, angle: real): real; stdcall;
+function HUDShapeRotate(shape, angle: real): real; cdecl;
 var
   shp: TGLHUDShape;
   rot: real;
@@ -80,7 +80,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeSetColor(shape, col, alpha: real): real; stdcall;
+function HUDShapeSetColor(shape, col, alpha: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -90,7 +90,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeSetOrigin(shape, x, y: real): real; stdcall;
+function HUDShapeSetOrigin(shape, x, y: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -100,7 +100,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeSetSize(shape, w, h: real): real; stdcall;
+function HUDShapeSetSize(shape, w, h: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -109,7 +109,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeScale(shape, u, v: real): real; stdcall;
+function HUDShapeScale(shape, u, v: real): real; cdecl;
 var
   shp: TGLHUDShape;
   w, h: real;
@@ -121,7 +121,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeCircleSetRadius(shape, radius: real): real; stdcall;
+function HUDShapeCircleSetRadius(shape, radius: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -130,7 +130,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeCircleSetSlices(shape, slices: real): real; stdcall;
+function HUDShapeCircleSetSlices(shape, slices: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -139,7 +139,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeCircleSetAngles(shape, startAng, endAng: real): real; stdcall;
+function HUDShapeCircleSetAngles(shape, startAng, endAng: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -149,7 +149,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeLineSetPoints(shape, x1, y1, x2, y2: real): real; stdcall;
+function HUDShapeLineSetPoints(shape, x1, y1, x2, y2: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -161,7 +161,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeLineSetWidth(shape, w: real): real; stdcall;
+function HUDShapeLineSetWidth(shape, w: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -170,7 +170,7 @@ begin
   result := 1;
 end;
 
-function HUDShapeMeshAddVertex(shape, x, y, u, v: real): real; stdcall;
+function HUDShapeMeshAddVertex(shape, x, y, u, v: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -180,7 +180,7 @@ begin
   result := shp.Vertices.Count - 1;
 end;
 
-function HUDShapeMeshAddTriangle(shape, v1, v2, v3: real): real; stdcall;
+function HUDShapeMeshAddTriangle(shape, v1, v2, v3: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -189,7 +189,7 @@ begin
   result := shp.VertexIndices.Count - 1;
 end;
 
-function HUDShapeMeshSetVertex(shape, index, x, y: real): real; stdcall;
+function HUDShapeMeshSetVertex(shape, index, x, y: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin
@@ -199,7 +199,7 @@ begin
   result := 1.0;
 end;
 
-function HUDShapeMeshSetTexCoord(shape, index, u, v: real): real; stdcall;
+function HUDShapeMeshSetTexCoord(shape, index, u, v: real): real; cdecl;
 var
   shp: TGLHUDShape;
 begin

@@ -1,4 +1,4 @@
-function WindowCreate(x, y, w, h, resizeable: real): real; stdcall;
+function WindowCreate(x, y, w, h, resizeable: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -14,7 +14,7 @@ begin
   result := Integer(frm);
 end;
 
-function WindowCenter(w: real): real; stdcall;
+function WindowCenter(w: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -23,7 +23,7 @@ begin
   result := 1.0;
 end;
 
-function WindowResize(w, x, y, width, height: real): real; stdcall;
+function WindowResize(w, x, y, width, height: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -35,7 +35,7 @@ begin
   result := 1.0;
 end;
 
-function WindowGetPosition(w, index: real): real; stdcall;
+function WindowGetPosition(w, index: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -53,7 +53,7 @@ begin
   result := 0.0;
 end;
 
-function WindowGetSize(w, index: real): real; stdcall;
+function WindowGetSize(w, index: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -71,7 +71,7 @@ begin
   result := 0.0;
 end;
 
-function WindowGetHandle(w: real): real; stdcall;
+function WindowGetHandle(w: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -79,7 +79,7 @@ begin
   result := Integer(frm.Handle);
 end;
 
-function WindowSetTitle(w: real; title: pchar): real; stdcall;
+function WindowSetTitle(w: real; title: pchar): real; cdecl;
 var
   frm: TForm;
 begin
@@ -88,7 +88,7 @@ begin
   result := 1;
 end;
 
-function WindowDestroy(w: real): real; stdcall;
+function WindowDestroy(w: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -97,7 +97,7 @@ begin
   result := 1;
 end;
 
-function WindowIsShowing(w: real): real; stdcall;
+function WindowIsShowing(w: real): real; cdecl;
 var
   frm: TForm;
 begin
@@ -105,7 +105,7 @@ begin
   result := Integer(frm.Showing);
 end;
 
-function WindowSetIcon(w: real; filename: pchar): real; stdcall;
+function WindowSetIcon(w: real; filename: pchar): real; cdecl;
 var
   frm: TForm;
   icon: HIcon;
@@ -119,7 +119,7 @@ begin
   result := 1.0;
 end;
 
-function WindowDispatch: real; stdcall;
+function WindowDispatch: real; cdecl;
 var
   Msg: TMsg;
   lResult: Boolean;

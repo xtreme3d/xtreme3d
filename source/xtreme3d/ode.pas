@@ -1,4 +1,4 @@
-function OdeManagerCreate(): real; stdcall;
+function OdeManagerCreate(): real; cdecl;
 begin
   ode := TGLODEManager.Create(nil);
   dWorldSetAutoDisableFlag(ode.World, 0);
@@ -8,30 +8,30 @@ begin
   result := 1.0;
 end;
 
-function OdeManagerDestroy(): real; stdcall;
+function OdeManagerDestroy(): real; cdecl;
 begin
   ode.Destroy;
   result := 1.0;
 end;
 
-function OdeManagerStep(dt: real): real; stdcall;
+function OdeManagerStep(dt: real): real; cdecl;
 begin
   ode.Step(dt);
   result := 1.0;
 end;
 
-function OdeManagerGetNumContactJoints(): real; stdcall;
+function OdeManagerGetNumContactJoints(): real; cdecl;
 begin
   result := ode.NumContactJoints;
 end;
 
-function OdeManagerSetGravity(x,y,z: real): real; stdcall;
+function OdeManagerSetGravity(x,y,z: real): real; cdecl;
 begin
   ode.Gravity.SetVector(x, y, z);
   result := 1.0;
 end;
 
-function OdeManagerSetSolver(osm: real): real; stdcall;
+function OdeManagerSetSolver(osm: real): real; cdecl;
 begin
   if osm = 0 then ode.Solver := osmDefault;
   if osm = 1 then ode.Solver := osmStepFast;
@@ -39,63 +39,63 @@ begin
   result := 1.0;
 end;
 
-function OdeManagerSetIterations(iterations: real): real; stdcall;
+function OdeManagerSetIterations(iterations: real): real; cdecl;
 begin
   ode.Iterations := trunc64(iterations);
   result := 1.0;
 end;
 
-function OdeManagerSetMaxContacts(maxcontacts: real): real; stdcall;
+function OdeManagerSetMaxContacts(maxcontacts: real): real; cdecl;
 begin
   ode.MaxContacts := trunc64(maxcontacts);
   result := 1.0;
 end;
 
-function OdeManagerSetVisible(mode: real): real; stdcall;
+function OdeManagerSetVisible(mode: real): real; cdecl;
 begin
   ode.Visible := Boolean(trunc64(mode));
   ode.VisibleAtRunTime := Boolean(trunc64(mode));
   result := 1.0;
 end;
 
-function OdeManagerSetGeomColor(color: real): real; stdcall;
+function OdeManagerSetGeomColor(color: real): real; cdecl;
 begin
   ode.GeomColor.AsWinColor := TColor(trunc64(color));
   ode.GeomColor.Alpha := 1.0;
   result := 1.0;
 end;
 
-function OdeWorldSetAutoDisableFlag(flag: real): real; stdcall;
+function OdeWorldSetAutoDisableFlag(flag: real): real; cdecl;
 begin
   dWorldSetAutoDisableFlag(ode.World, trunc64(flag));
   result := 1.0;
 end;
 
-function OdeWorldSetAutoDisableLinearThreshold(velocity: real): real; stdcall;
+function OdeWorldSetAutoDisableLinearThreshold(velocity: real): real; cdecl;
 begin
   dWorldSetAutoDisableLinearThreshold(ode.World, velocity);
   result := 1.0;
 end;
 
-function OdeWorldSetAutoDisableAngularThreshold(velocity: real): real; stdcall;
+function OdeWorldSetAutoDisableAngularThreshold(velocity: real): real; cdecl;
 begin
   dWorldSetAutoDisableAngularThreshold(ode.World, velocity);
   result := 1.0;
 end;
 
-function OdeWorldSetAutoDisableSteps(steps: real): real; stdcall;
+function OdeWorldSetAutoDisableSteps(steps: real): real; cdecl;
 begin
   dWorldSetAutoDisableSteps(ode.World, trunc64(steps));
   result := 1.0;
 end;
 
-function OdeWorldSetAutoDisableTime(time: real): real; stdcall;
+function OdeWorldSetAutoDisableTime(time: real): real; cdecl;
 begin
   dWorldSetAutoDisableTime(ode.World, time);
   result := 1.0;
 end;
 
-function OdeStaticCreate(obj: real): real; stdcall;
+function OdeStaticCreate(obj: real): real; cdecl;
 var
   stat: TGLODEStatic;
 begin
@@ -104,7 +104,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicCreate(obj: real): real; stdcall;
+function OdeDynamicCreate(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -115,7 +115,7 @@ end;
 
 // New function
 // Note: Terrain/Trimesh collision is not supported
-function OdeTerrainCreate(terr: real): real; stdcall;
+function OdeTerrainCreate(terr: real): real; cdecl;
 var
   hf: TGLODEHeightField;
 begin
@@ -125,7 +125,7 @@ begin
 end;
 
 // New function
-function OdeDynamicCalculateMass(obj: real): real; stdcall;
+function OdeDynamicCalculateMass(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
   m: TdMass;
@@ -135,7 +135,7 @@ begin
   dBodySetMass(dyna.Body, @m);
 end;
 
-function OdeDynamicCalibrateCenterOfMass(obj: real): real; stdcall;
+function OdeDynamicCalibrateCenterOfMass(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -144,7 +144,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAlignObject(obj: real): real; stdcall;
+function OdeDynamicAlignObject(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -153,7 +153,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicEnable(obj, mode: real): real; stdcall;
+function OdeDynamicEnable(obj, mode: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -162,7 +162,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAutoDisableFlag(obj, mode: real): real; stdcall;
+function OdeDynamicSetAutoDisableFlag(obj, mode: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -171,7 +171,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAutoDisableLinearThreshold(obj, velocity: real): real; stdcall;
+function OdeDynamicSetAutoDisableLinearThreshold(obj, velocity: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -180,7 +180,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAutoDisableAngularThreshold(obj, velocity: real): real; stdcall;
+function OdeDynamicSetAutoDisableAngularThreshold(obj, velocity: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -189,7 +189,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAutoDisableSteps(obj, steps: real): real; stdcall;
+function OdeDynamicSetAutoDisableSteps(obj, steps: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -198,7 +198,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAutoDisableTime(obj, time: real): real; stdcall;
+function OdeDynamicSetAutoDisableTime(obj, time: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -207,7 +207,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddForce(obj, x, y, z: real): real; stdcall;
+function OdeDynamicAddForce(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -216,7 +216,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddForceAtPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+function OdeDynamicAddForceAtPos(obj, x, y, z, px, py, pz: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -225,7 +225,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddForceAtRelPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+function OdeDynamicAddForceAtRelPos(obj, x, y, z, px, py, pz: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -234,7 +234,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddRelForce(obj, x, y, z: real): real; stdcall;
+function OdeDynamicAddRelForce(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -243,7 +243,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddRelForceAtPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+function OdeDynamicAddRelForceAtPos(obj, x, y, z, px, py, pz: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -252,7 +252,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddRelForceAtRelPos(obj, x, y, z, px, py, pz: real): real; stdcall;
+function OdeDynamicAddRelForceAtRelPos(obj, x, y, z, px, py, pz: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -261,7 +261,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddTorque(obj, x, y, z: real): real; stdcall;
+function OdeDynamicAddTorque(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -270,7 +270,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicAddRelTorque(obj, x, y, z: real): real; stdcall;
+function OdeDynamicAddRelTorque(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -279,7 +279,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicGetContactCount(obj: real): real; stdcall;
+function OdeDynamicGetContactCount(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -287,7 +287,7 @@ begin
   result := dyna.NumContacts;
 end;
 
-function OdeStaticGetContactCount(obj: real): real; stdcall;
+function OdeStaticGetContactCount(obj: real): real; cdecl;
 var
   stat: TGLODEStatic;
 begin
@@ -300,7 +300,7 @@ end;
 // OdeStaticGetContact
 
 // Change from Xtreme3D 2.0: position should be specified
-function OdeAddBox(obj, x, y, z, w, h, d: real): real; stdcall;
+function OdeAddBox(obj, x, y, z, w, h, d: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -330,7 +330,7 @@ begin
 end;
 
 // Change from Xtreme3D 2.0: position should be specified
-function OdeAddSphere(obj, x, y, z, r: real): real; stdcall;
+function OdeAddSphere(obj, x, y, z, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -358,7 +358,7 @@ begin
 end;
 
 // Note: Plane/Trimesh collision is not supported
-function OdeAddPlane(obj: real): real; stdcall;
+function OdeAddPlane(obj: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -382,7 +382,7 @@ end;
 
 // Change from Xtreme3D 2.0: position should be specified
 // Note: Cylinder/Trimesh collision is not supported
-function OdeAddCylinder(obj, x, y, z, len, r: real): real; stdcall;
+function OdeAddCylinder(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -411,7 +411,7 @@ begin
 end;
 
 // Change from Xtreme3D 2.0: position should be specified
-function OdeAddCone(obj, x, y, z, len, r: real): real; stdcall;
+function OdeAddCone(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -440,7 +440,7 @@ begin
 end;
 
 // Change from Xtreme3D 2.0: position should be specified
-function OdeAddCapsule(obj, x, y, z, len, r: real): real; stdcall;
+function OdeAddCapsule(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -470,7 +470,7 @@ end;
 
 // Change from Xtreme3D 2.0: mesh index should be specified
 // Note Trimes/Trimesh collision is not supported
-function OdeAddTriMesh(obj, mesh: real): real; stdcall;
+function OdeAddTriMesh(obj, mesh: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
@@ -500,7 +500,7 @@ begin
 end;
 
 // New function
-function OdeElementSetDensity(element, density: real): real; stdcall;
+function OdeElementSetDensity(element, density: real): real; cdecl;
 var
   elem: TODEElementBase;
 begin
@@ -509,7 +509,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceEnableRollingFrictionCoeff(obj, mode: real): real; stdcall;
+function OdeSurfaceEnableRollingFrictionCoeff(obj, mode: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -521,7 +521,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetRollingFrictionCoeff(obj, rfc: real): real; stdcall;
+function OdeSurfaceSetRollingFrictionCoeff(obj, rfc: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -533,7 +533,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMode(obj, Mu2, FDir1, Bounce, SoftERP, SoftCFM, Motion1, Motion2, Slip1, Slip2 : real): real; stdcall;
+function OdeSurfaceSetMode(obj, Mu2, FDir1, Bounce, SoftERP, SoftCFM, Motion1, Motion2, Slip1, Slip2 : real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -558,7 +558,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMu(obj, mu: real): real; stdcall;
+function OdeSurfaceSetMu(obj, mu: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -570,7 +570,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMu2(obj, mu2: real): real; stdcall;
+function OdeSurfaceSetMu2(obj, mu2: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -582,7 +582,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetBounce(obj, bounce: real): real; stdcall;
+function OdeSurfaceSetBounce(obj, bounce: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -594,7 +594,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetBounceVel(obj, vel: real): real; stdcall;
+function OdeSurfaceSetBounceVel(obj, vel: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -606,7 +606,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetSoftERP(obj, erp: real): real; stdcall;
+function OdeSurfaceSetSoftERP(obj, erp: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -618,7 +618,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetSoftCFM(obj, cfm: real): real; stdcall;
+function OdeSurfaceSetSoftCFM(obj, cfm: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -630,7 +630,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMotion1(obj, motion1: real): real; stdcall;
+function OdeSurfaceSetMotion1(obj, motion1: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -642,7 +642,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetMotion2(obj, motion2: real): real; stdcall;
+function OdeSurfaceSetMotion2(obj, motion2: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -654,7 +654,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetSlip1(obj, slip1: real): real; stdcall;
+function OdeSurfaceSetSlip1(obj, slip1: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -666,7 +666,7 @@ begin
   result := 1.0;
 end;
 
-function OdeSurfaceSetSlip2(obj, slip2: real): real; stdcall;
+function OdeSurfaceSetSlip2(obj, slip2: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
@@ -678,7 +678,7 @@ begin
   result := 1.0;
 end;
 
-function OdeAddJointBall: real; stdcall;
+function OdeAddJointBall: real; cdecl;
 var
   j: TODEJointBall;
 begin
@@ -687,7 +687,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeAddJointFixed: real; stdcall;
+function OdeAddJointFixed: real; cdecl;
 var
   j: TODEJointFixed;
 begin
@@ -696,7 +696,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeAddJointHinge: real; stdcall;
+function OdeAddJointHinge: real; cdecl;
 var
   j: TODEJointHinge;
 begin
@@ -705,7 +705,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeAddJointHinge2: real; stdcall;
+function OdeAddJointHinge2: real; cdecl;
 var
   j: TODEJointHinge2;
 begin
@@ -714,7 +714,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeAddJointSlider: real; stdcall;
+function OdeAddJointSlider: real; cdecl;
 var
   j: TODEJointSlider;
 begin
@@ -723,7 +723,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeAddJointUniversal: real; stdcall;
+function OdeAddJointUniversal: real; cdecl;
 var
   j: TODEJointUniversal;
 begin
@@ -732,7 +732,7 @@ begin
   result := Integer(j);
 end;
 
-function OdeJointSetObjects(joint, obj1, obj2: real): real; stdcall;
+function OdeJointSetObjects(joint, obj1, obj2: real): real; cdecl;
 var
   j: TODEJointBase;
   o1: TGLBaseSceneObject;
@@ -746,7 +746,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointEnable(joint, mode: real): real; stdcall;
+function OdeJointEnable(joint, mode: real): real; cdecl;
 var
   j: TODEJointBase;
 begin
@@ -755,7 +755,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointInitialize(joint: real): real; stdcall;
+function OdeJointInitialize(joint: real): real; cdecl;
 var
   j: TODEJointBase;
 begin
@@ -764,7 +764,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetAnchor(joint, x, y, z: real): real; stdcall;
+function OdeJointSetAnchor(joint, x, y, z: real): real; cdecl;
 var
   j: TODEJointBase;
 begin
@@ -780,7 +780,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetAnchorAtObject(joint, obj: real): real; stdcall;
+function OdeJointSetAnchorAtObject(joint, obj: real): real; cdecl;
 var
   j: TODEJointBase;
   o: TGLBaseSceneObject;
@@ -798,7 +798,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetAxis1(joint, x, y, z: real): real; stdcall;
+function OdeJointSetAxis1(joint, x, y, z: real): real; cdecl;
 var
   j: TODEJointBase;
 begin
@@ -812,7 +812,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetAxis2(joint, x, y, z: real): real; stdcall;
+function OdeJointSetAxis2(joint, x, y, z: real): real; cdecl;
 var
   j: TODEJointBase;
 begin
@@ -824,7 +824,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetBounce(joint, axis, bounce: real): real; stdcall;
+function OdeJointSetBounce(joint, axis, bounce: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -836,7 +836,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetCFM(joint, axis, cfm: real): real; stdcall;
+function OdeJointSetCFM(joint, axis, cfm: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -848,7 +848,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetFMax(joint, axis, fmax: real): real; stdcall;
+function OdeJointSetFMax(joint, axis, fmax: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -860,7 +860,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetFudgeFactor(joint, axis, ffactor: real): real; stdcall;
+function OdeJointSetFudgeFactor(joint, axis, ffactor: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -872,7 +872,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetHiStop(joint, axis, histop: real): real; stdcall;
+function OdeJointSetHiStop(joint, axis, histop: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -884,7 +884,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetLoStop(joint, axis, lostop: real): real; stdcall;
+function OdeJointSetLoStop(joint, axis, lostop: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -896,7 +896,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetStopCFM(joint, axis, cfm: real): real; stdcall;
+function OdeJointSetStopCFM(joint, axis, cfm: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -908,7 +908,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetStopERP(joint, axis, erp: real): real; stdcall;
+function OdeJointSetStopERP(joint, axis, erp: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -920,7 +920,7 @@ begin
   result := 1.0;
 end;
 
-function OdeJointSetVel(joint, axis, velocity: real): real; stdcall;
+function OdeJointSetVel(joint, axis, velocity: real): real; cdecl;
 var
   j: TODEJointBase;
   p: TODEJointParams;
@@ -932,7 +932,7 @@ begin
   result := 1.0;
 end;
 
-function OdeRagdollCreate(actor: real): real; stdcall;
+function OdeRagdollCreate(actor: real): real; cdecl;
 var
   act: TGLActor;
   ragdoll: TODERagdoll;
@@ -945,7 +945,7 @@ begin
   result := Integer(ragdoll);
 end;
 
-function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; stdcall;
+function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; cdecl;
 var
   hjoint: TODERagdollHingeJoint;
 begin
@@ -953,7 +953,7 @@ begin
   result := Integer(hjoint);
 end;
 
-function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; stdcall;
+function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; cdecl;
 var
   ujoint: TODERagdollUniversalJoint;
 begin
@@ -963,7 +963,7 @@ begin
   result := Integer(ujoint);
 end;
 
-function OdeRagdollDummyJointCreate: real; stdcall;
+function OdeRagdollDummyJointCreate: real; cdecl;
 var
   djoint: TODERagdollDummyJoint;
 begin
@@ -971,7 +971,7 @@ begin
   result := Integer(djoint);
 end;
 
-function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; stdcall;
+function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; cdecl;
 var
   ragdoll: TODERagdoll;
   bone: TODERagdollBone;
@@ -990,7 +990,7 @@ begin
   result := Integer(bone);
 end;
 
-function OdeRagdollBuild(rag: real): real; stdcall;
+function OdeRagdollBuild(rag: real): real; cdecl;
 var
   ragdoll: TODERagdoll;
 begin
@@ -999,7 +999,7 @@ begin
   result := 1.0;
 end;
 
-function OdeRagdollEnable(rag, mode: real): real; stdcall;
+function OdeRagdollEnable(rag, mode: real): real; cdecl;
 var
   ragdoll: TODERagdoll;
 begin
@@ -1011,7 +1011,7 @@ begin
   result := 1.0;
 end;
 
-function OdeRagdollUpdate(rag: real): real; stdcall;
+function OdeRagdollUpdate(rag: real): real; cdecl;
 var
   ragdoll: TODERagdoll;
 begin
@@ -1020,7 +1020,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetVelocity(obj, x, y, z: real): real; stdcall;
+function OdeDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -1029,7 +1029,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; stdcall;
+function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -1038,7 +1038,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicGetVelocity(obj, ind: real): real; stdcall;
+function OdeDynamicGetVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -1046,7 +1046,7 @@ begin
   result := dyna.GetVelocity[trunc64(ind)];
 end;
 
-function OdeDynamicGetAngularVelocity(obj, ind: real): real; stdcall;
+function OdeDynamicGetAngularVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -1054,7 +1054,7 @@ begin
   result := dyna.GetAngularVelocity[trunc64(ind)];
 end;
 
-function OdeDynamicSetPosition(obj, x, y, z: real): real; stdcall;
+function OdeDynamicSetPosition(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
@@ -1063,7 +1063,7 @@ begin
   result := 1.0;
 end;
 
-function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; stdcall;
+function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin

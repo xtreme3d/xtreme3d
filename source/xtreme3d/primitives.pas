@@ -1,4 +1,4 @@
-function CubeCreate(w,h,d,parent: real): real; stdcall;
+function CubeCreate(w,h,d,parent: real): real; cdecl;
 var
   GLCube1: TGLCube;
 begin
@@ -12,7 +12,7 @@ begin
   result:=Integer(GLCube1);
 end;
 
-function CubeSetNormalDirection(cube,nd: real): real; stdcall;
+function CubeSetNormalDirection(cube,nd: real): real; cdecl;
 var
   GLCube1: TGLCube;
 begin
@@ -22,7 +22,7 @@ begin
   result:=1;
 end;
 
-function CubeGetNormalDirection(cube: real): real; stdcall;
+function CubeGetNormalDirection(cube: real): real; cdecl;
 var
   GLCube1: TGLCube;
 begin
@@ -30,7 +30,7 @@ begin
    result:=integer(GLCube1.NormalDirection);
 end;
 
-function PlaneCreate(squad,w,h,xt,yt,parent: real): real; stdcall;
+function PlaneCreate(squad,w,h,xt,yt,parent: real): real; cdecl;
 var
   GLPlane1: TGLPlane;
 begin
@@ -47,7 +47,7 @@ begin
   result:=Integer(GLPlane1);
 end;
 
-function PlaneSetOptions(plane,squad,xt,yt: real): real; stdcall;
+function PlaneSetOptions(plane,squad,xt,yt: real): real; cdecl;
 var
   GLPlane1: TGLPlane;
 begin
@@ -59,7 +59,7 @@ begin
   result:=1;
 end;
 
-function PlaneGetOptions(plane,index: real): real; stdcall;
+function PlaneGetOptions(plane,index: real): real; cdecl;
 var
   GLPlane1: TGLPlane;
 begin
@@ -70,7 +70,7 @@ begin
     result:=GLPlane1.YTiles;	
 end;
 
-function TilePlaneCreate(parent: real): real; stdcall;
+function TilePlaneCreate(parent: real): real; cdecl;
 var
   tplane: TGLTilePlane;
 begin
@@ -83,7 +83,7 @@ begin
   result:=Integer(tplane);
 end;
 
-function TilePlaneSetTile(tplane,x,y:real; mat: pchar): real; stdcall;
+function TilePlaneSetTile(tplane,x,y:real; mat: pchar): real; cdecl;
 var
   tileplane: TGLTilePlane;
 begin
@@ -95,7 +95,7 @@ begin
   result:=1;
 end;
 
-//function TilePlaneSetTileByIndex(tplane,x,y,index:real): real; stdcall;
+//function TilePlaneSetTileByIndex(tplane,x,y,index:real): real; cdecl;
 //var
 //  tileplane: TGLTilePlane;
 //begin
@@ -107,7 +107,7 @@ end;
 //  result:=1;
 //end;
 
-function SphereCreate(rad,slic,staks,parent: real): real; stdcall;
+function SphereCreate(rad,slic,staks,parent: real): real; cdecl;
 var
   GLSphere1: TGLSphere;
 begin
@@ -121,7 +121,7 @@ begin
   result:=Integer(GLSphere1);
 end;
 
-function SphereSetAngleLimits(sphere,starta,stopa,topa,bottoma: real): real; stdcall;
+function SphereSetAngleLimits(sphere,starta,stopa,topa,bottoma: real): real; cdecl;
 var
   GLSphere1: TGLSphere;
 begin
@@ -133,7 +133,7 @@ begin
   result:=1;
 end;
 
-function SphereGetAngleLimits(sphere,index: real): real; stdcall;
+function SphereGetAngleLimits(sphere,index: real): real; cdecl;
 var
   GLSphere1: TGLSphere;
 begin
@@ -148,7 +148,7 @@ begin
    result:=GLSphere1.Bottom;   
 end;
 
-function SphereSetOptions(sphere,rad,slic,staks: real): real; stdcall;
+function SphereSetOptions(sphere,rad,slic,staks: real): real; cdecl;
 var
   sphr: TGLSphere;
 begin
@@ -159,7 +159,7 @@ sphr:=TGLSphere(trunc64(sphere));
   result:=1;
 end;
 
-function SphereGetOptions(sph,ind: real): real; stdcall;
+function SphereGetOptions(sph,ind: real): real; cdecl;
 var
   sphr: TGLSphere;
 begin
@@ -172,7 +172,7 @@ if (ind=2) then
     result:=sphr.Stacks;	
 end;
 
-function CylinderCreate(topr,botr,h,slic,staks,loop,parent: real): real; stdcall;
+function CylinderCreate(topr,botr,h,slic,staks,loop,parent: real): real; cdecl;
 var
   GLCylinder1: TGLCylinder;
 begin
@@ -189,7 +189,7 @@ begin
   result:=integer(GLCylinder1);
 end;
 
-function CylinderSetOptions(cyl,topr,botr,h,slic,staks,loop: real): real; stdcall;
+function CylinderSetOptions(cyl,topr,botr,h,slic,staks,loop: real): real; cdecl;
 var
   GLCylinder1: TGLCylinder;
 begin
@@ -203,7 +203,7 @@ begin
   result:=1;
 end;
 
-function CylinderGetOptions(cyl,ind: real): real; stdcall;
+function CylinderGetOptions(cyl,ind: real): real; cdecl;
 var
   GLCylinder1: TGLCylinder;
 begin
@@ -222,7 +222,7 @@ begin
       result:=GLCylinder1.Loops;		
 end;
 
-function ConeCreate(botr,h,slic,staks,loop,parent: real): real; stdcall;
+function ConeCreate(botr,h,slic,staks,loop,parent: real): real; cdecl;
 var
   GLCone1: TGLCone;
 begin
@@ -238,7 +238,7 @@ begin
   result:=integer(GLCone1);
 end;
 
-function ConeGetOptions(cone,ind: real): real; stdcall;
+function ConeGetOptions(cone,ind: real): real; cdecl;
 var
   cone1: TGLCone;
 begin
@@ -255,7 +255,7 @@ begin
       result:=cone1.Loops;			
 end;
 
-function ConeSetOptions(cone,botr,h,slic,staks,loop: real): real; stdcall;
+function ConeSetOptions(cone,botr,h,slic,staks,loop: real): real; cdecl;
 var
   GLCone1: TGLCone;
 begin
@@ -268,7 +268,7 @@ begin
   result:=1;
 end;
 
-function AnnulusCreate(inr,outr,h,slic,staks,loop,parent: real): real; stdcall;
+function AnnulusCreate(inr,outr,h,slic,staks,loop,parent: real): real; cdecl;
 var
   GLAnnulus1: TGLAnnulus;
 begin
@@ -287,7 +287,7 @@ begin
   result:=integer(GLAnnulus1);
 end;
 
-function AnnulusSetOptions(an,inr,outr,h,slic,staks,loop: real): real; stdcall;
+function AnnulusSetOptions(an,inr,outr,h,slic,staks,loop: real): real; cdecl;
 var
   GLAnnulus1: TGLAnnulus;
 begin
@@ -303,7 +303,7 @@ begin
   result:=1;
 end;
 
-function AnnulusGetOptions(an,ind: real): real; stdcall;
+function AnnulusGetOptions(an,ind: real): real; cdecl;
 var
   an1: TGLAnnulus;
 begin
@@ -322,7 +322,7 @@ begin
       result:=an1.Loops;		
 end;
 
-function TorusCreate(inr,outr,ring,side,parent: real): real; stdcall;
+function TorusCreate(inr,outr,ring,side,parent: real): real; cdecl;
 var
   GLTorus1: TGLTorus;
 begin
@@ -337,7 +337,7 @@ begin
   result:=integer(GLTorus1);
 end;
 
-function TorusSetOptions(tor,inr,outr,ring,side: real): real; stdcall;
+function TorusSetOptions(tor,inr,outr,ring,side: real): real; cdecl;
 var
   GLTorus1: TGLTorus;
 begin
@@ -349,7 +349,7 @@ begin
   result:=integer(GLTorus1);
 end;
 
-function TorusGetOptions(tor,ind: real): real; stdcall;
+function TorusGetOptions(tor,ind: real): real; cdecl;
 var
   tor1: TGLTorus;
 begin
@@ -364,7 +364,7 @@ begin
       result:=tor1.Sides;
 end;
 
-function DiskCreate(inr,outr,starta,sweepa,loop,slic,parent: real): real; stdcall;
+function DiskCreate(inr,outr,starta,sweepa,loop,slic,parent: real): real; cdecl;
 var
   GLDisk1: TGLDisk;
 begin
@@ -381,7 +381,7 @@ begin
   result:=integer(GLDisk1);
 end;
 
-function DiskSetOptions(disk,inr,outr,starta,sweepa,loop,slic: real): real; stdcall;
+function DiskSetOptions(disk,inr,outr,starta,sweepa,loop,slic: real): real; cdecl;
 var
   GLDisk1: TGLDisk;
 begin
@@ -395,7 +395,7 @@ begin
   result:=1;
 end;
 
-function DiskGetOptions(disk,ind: real): real; stdcall;
+function DiskGetOptions(disk,ind: real): real; cdecl;
 var
   disk1: TGLDisk;
 begin
@@ -414,7 +414,7 @@ begin
       result:=disk1.Slices;
 end;
 
-function FrustrumCreate(basew,based,apexh,cuth,parent: real): real; stdcall;
+function FrustrumCreate(basew,based,apexh,cuth,parent: real): real; cdecl;
 var
   GLFrustrum1: TGLFrustrum;
 begin
@@ -429,7 +429,7 @@ begin
   result:=integer(GLFrustrum1);
 end;
 
-function FrustrumSetOptions(fr,basew,based,apexh,cuth: real): real; stdcall;
+function FrustrumSetOptions(fr,basew,based,apexh,cuth: real): real; cdecl;
 var
   GLFrustrum1: TGLFrustrum;
 begin
@@ -441,7 +441,7 @@ begin
   result:=1;
 end;
 
-function FrustrumGetOptions(fr,ind: real): real; stdcall;
+function FrustrumGetOptions(fr,ind: real): real; cdecl;
 var
   fr1: TGLFrustrum;
 begin
@@ -456,7 +456,7 @@ begin
       result:=fr1.Height;
 end;
 
-function DodecahedronCreate(parent: real): real; stdcall;
+function DodecahedronCreate(parent: real): real; cdecl;
 var
   GLDodecahedron1: TGLDodecahedron;
 begin
@@ -467,7 +467,7 @@ begin
   result:=integer(GLDodecahedron1);
 end;
 
-function IcosahedronCreate(parent: real): real; stdcall;
+function IcosahedronCreate(parent: real): real; cdecl;
 var
   GLIcosahedron1: TGLIcosahedron;
 begin
@@ -478,7 +478,7 @@ begin
   result:=integer(GLIcosahedron1);
 end;
 
-function TeapotCreate(parent: real): real; stdcall;
+function TeapotCreate(parent: real): real; cdecl;
 var
   GLTeapot1: TGLTeapot;
 begin

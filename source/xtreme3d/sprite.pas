@@ -1,4 +1,4 @@
-function HUDSpriteCreate(mtrl: pchar; w,h,parent: real): real; stdcall;
+function HUDSpriteCreate(mtrl: pchar; w,h,parent: real): real; cdecl;
 var
   GLHUDSprite1: TGLHUDSprite;
 begin
@@ -12,7 +12,7 @@ begin
   result:=Integer(GLHUDSprite1);
 end;
 
-function HUDSpriteGetMouseOver(sprite, viewer: real): real; stdcall;
+function HUDSpriteGetMouseOver(sprite, viewer: real): real; cdecl;
 var
   spr: TGLHUDSprite;
   v: TGLSceneViewer;
@@ -34,7 +34,7 @@ begin
   result := Integer(mouseInSprite);
 end;
 
-function HUDSpriteXTiles(sprite,xtls: real): real; stdcall;
+function HUDSpriteXTiles(sprite,xtls: real): real; cdecl;
 var
  spr: TGLHUDSprite;
 begin
@@ -43,7 +43,7 @@ begin
   Result := 1;
 end;
 
-function HUDSpriteYTiles(sprite,ytls: real): real; stdcall;
+function HUDSpriteYTiles(sprite,ytls: real): real; cdecl;
 var
  spr: TGLHUDSprite;
 begin
@@ -52,7 +52,7 @@ begin
   Result := 1;
 end;
 
-function SpriteCreate(mtrl: pchar; w,h,parent: real): real; stdcall;
+function SpriteCreate(mtrl: pchar; w,h,parent: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -66,7 +66,7 @@ begin
   result:=Integer(GLSprite1);
 end;
 
-function SpriteSetSize(sprite,w,h: real): real; stdcall;
+function SpriteSetSize(sprite,w,h: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -75,7 +75,7 @@ begin
   result:=1;
 end;
 
-function SpriteGetSize(sprite, type_val: real): real; stdcall;
+function SpriteGetSize(sprite, type_val: real): real; cdecl;
 var
   spr: TGLSprite;
 begin
@@ -86,7 +86,7 @@ begin
     result := spr.Height;
 end;
 
-function SpriteScale(sprite,u,v: real): real; stdcall;
+function SpriteScale(sprite,u,v: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
   w,h: real;
@@ -98,7 +98,7 @@ begin
   result:=1;
 end;
 
-function SpriteSetRotation(sprite,angle: real): real; stdcall;
+function SpriteSetRotation(sprite,angle: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -107,7 +107,7 @@ begin
   result:=1;
 end;
 
-function SpriteRotate(sprite,angle: real): real; stdcall;
+function SpriteRotate(sprite,angle: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
   rot: real;
@@ -118,7 +118,7 @@ begin
   result:=1;
 end;
 
-function SpriteMirror(sprite,u,v: real): real; stdcall;
+function SpriteMirror(sprite,u,v: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -128,7 +128,7 @@ begin
   result:=1;
 end;
 
-function SpriteNoZWrite(sprite,mode: real): real; stdcall;
+function SpriteNoZWrite(sprite,mode: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -137,7 +137,7 @@ begin
   result:=1;
 end;
 
-function SpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; stdcall;
+function SpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; cdecl;
 var
   spr: TGLSprite;
 begin
@@ -155,7 +155,7 @@ begin
   result := Integer(spr);
 end;
 
-function HUDSpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; stdcall;
+function HUDSpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; cdecl;
 var
   spr: TGLHUDSprite;
 begin
@@ -173,7 +173,7 @@ begin
   result:= Integer(spr);
 end;
 
-function SpriteSetBounds(sprite, left, top, right, bottom: real): real; stdcall;
+function SpriteSetBounds(sprite, left, top, right, bottom: real): real; cdecl;
 var
   spr: TGLSprite;
   tw, th: Single;
@@ -199,7 +199,7 @@ begin
   result := 1;
 end;
 
-function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; stdcall;
+function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; cdecl;
 var
   spr: TGLSprite;
 begin
@@ -211,7 +211,7 @@ begin
   result := 1;
 end;
 
-function SpriteSetOrigin(sprite, x, y: real): real; stdcall;
+function SpriteSetOrigin(sprite, x, y: real): real; cdecl;
 var
   spr: TGLSprite;
 begin

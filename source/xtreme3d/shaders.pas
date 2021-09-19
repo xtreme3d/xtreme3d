@@ -1,4 +1,4 @@
-function ShaderEnable(shader,mode: real): real; stdcall;
+function ShaderEnable(shader,mode: real): real; cdecl;
 var
   GLShader: TGLShader;
 begin
@@ -7,7 +7,7 @@ begin
   result:=1;
 end;
 
-function PhongShaderCreate(): real; stdcall;
+function PhongShaderCreate(): real; cdecl;
 var
   phong: TGLSLShader;
   paramDiffTex: TGLSLShaderParameter;
@@ -53,7 +53,7 @@ begin
   result := integer(phong);
 end;
 
-function PhongShaderUseTexture(shader, mode: real): real; stdcall;
+function PhongShaderUseTexture(shader, mode: real): real; cdecl;
 var
   phong: TGLSLShader;
   paramUseTexture: TGLSLShaderParameter;
@@ -64,7 +64,7 @@ begin
   result:=1;
 end;
 
-function PhongShaderSetMaxLights(shader, maxlights: real): real; stdcall;
+function PhongShaderSetMaxLights(shader, maxlights: real): real; cdecl;
 var
   phong: TGLSLShader;
   paramMaxLights: TGLSLShaderParameter;
@@ -75,7 +75,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderCreate(): real; stdcall;
+function BumpShaderCreate(): real; cdecl;
 var
   bump: TGLSLShader;
   paramDiffTex: TGLSLShaderParameter;
@@ -163,7 +163,7 @@ begin
   result := integer(bump);
 end;
 
-function BumpShaderSetDiffuseTexture(shader: real; mtrl: pchar): real; stdcall;
+function BumpShaderSetDiffuseTexture(shader: real; mtrl: pchar): real; cdecl;
 var
   bump: TGLSLShader;
   mat: TGLLibMaterial;
@@ -182,7 +182,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetNormalTexture(shader: real; mtrl: pchar): real; stdcall;
+function BumpShaderSetNormalTexture(shader: real; mtrl: pchar): real; cdecl;
 var
   bump: TGLSLShader;
   mat: TGLLibMaterial;
@@ -201,7 +201,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetHeightTexture(shader: real; mtrl: pchar): real; stdcall;
+function BumpShaderSetHeightTexture(shader: real; mtrl: pchar): real; cdecl;
 var
   bump: TGLSLShader;
   mat: TGLLibMaterial;
@@ -220,7 +220,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetMaxLights(shader, maxlights: real): real; stdcall;
+function BumpShaderSetMaxLights(shader, maxlights: real): real; cdecl;
 var
   bump: TGLSLShader;
   paramMaxLights: TGLSLShaderParameter;
@@ -231,7 +231,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderUseParallax(shader, mode: real): real; stdcall;
+function BumpShaderUseParallax(shader, mode: real): real; cdecl;
 var
   bump: TGLSLShader;
   paramUseParallax: TGLSLShaderParameter;
@@ -242,7 +242,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetParallaxOffset(shader, height: real): real; stdcall;
+function BumpShaderSetParallaxOffset(shader, height: real): real; cdecl;
 var
   bump: TGLSLShader;
   paramParallaxHeight: TGLSLShaderParameter;
@@ -253,7 +253,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetShadowMap(shader, shadowmap: real): real; stdcall;
+function BumpShaderSetShadowMap(shader, shadowmap: real): real; cdecl;
 var
   bump: TGLSLShader;
   sm: TGLShadowMap;
@@ -289,7 +289,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderSetShadowBlurRadius(shader, radius: real): real; stdcall;
+function BumpShaderSetShadowBlurRadius(shader, radius: real): real; cdecl;
 var
   bump: TGLSLShader;
   paramShadowBlurRadius: TGLSLShaderParameter; 
@@ -300,7 +300,7 @@ begin
   result:=1;
 end;
 
-function BumpShaderUseAutoTangentSpace(shader, mode: real): real; stdcall;
+function BumpShaderUseAutoTangentSpace(shader, mode: real): real; cdecl;
 var
   bump: TGLSLShader;
   paramUseAutoTangentSpace: TGLSLShaderParameter; 
@@ -317,7 +317,7 @@ end;
 // BumpShaderSetOptions is no longer available
 
 //Cel Shader
-function CelShaderCreate(): real; stdcall;
+function CelShaderCreate(): real; cdecl;
 var
   GLCel1: TGLCelShader;
 begin
@@ -325,7 +325,7 @@ begin
   result:=integer(GLCel1);
 end;
 
-function CelShaderSetLineColor(shader,col: real): real; stdcall;
+function CelShaderSetLineColor(shader,col: real): real; cdecl;
 var
   GLCel1: TGLCelShader;
 begin
@@ -334,7 +334,7 @@ begin
   result:=1;
 end;
 
-function CelShaderSetLineWidth(shader,width: real): real; stdcall;
+function CelShaderSetLineWidth(shader,width: real): real; cdecl;
 var
   GLCel1: TGLCelShader;
 begin
@@ -343,7 +343,7 @@ begin
   result:=1;
 end;
 
-function CelShaderSetOptions(shader,outlines,textured: real): real; stdcall;
+function CelShaderSetOptions(shader,outlines,textured: real): real; cdecl;
 var
   GLCel1: TGLCelShader;
 begin
@@ -356,7 +356,7 @@ begin
 end;
 
 // Multimaterial Shader
-function MultiMaterialShaderCreate(matlib: real): real; stdcall;
+function MultiMaterialShaderCreate(matlib: real): real; cdecl;
 var
   shader: TGLMultiMaterialShader;
 begin
@@ -366,7 +366,7 @@ begin
 end;
 
 // HiddenLine Shader
-function HiddenLineShaderCreate(): real; stdcall;
+function HiddenLineShaderCreate(): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -374,7 +374,7 @@ begin
   result := integer(sh);
 end;
 
-function HiddenLineShaderSetLineSmooth(shader, mode: real): real; stdcall;
+function HiddenLineShaderSetLineSmooth(shader, mode: real): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -383,7 +383,7 @@ begin
   result := 1;
 end;
 
-function HiddenLineShaderSetSolid(shader, mode: real): real; stdcall;
+function HiddenLineShaderSetSolid(shader, mode: real): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -392,7 +392,7 @@ begin
   result := 1;
 end;
 
-function HiddenLineShaderSetSurfaceLit(shader, mode: real): real; stdcall;
+function HiddenLineShaderSetSurfaceLit(shader, mode: real): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -401,7 +401,7 @@ begin
   result := 1;
 end;
 
-function HiddenLineShaderSetFrontLine(shader, width, col, pattern, forceMat: real): real; stdcall;
+function HiddenLineShaderSetFrontLine(shader, width, col, pattern, forceMat: real): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -413,7 +413,7 @@ begin
   result := 1;
 end;
 
-function HiddenLineShaderSetBackLine(shader, width, col, pattern, forceMat: real): real; stdcall;
+function HiddenLineShaderSetBackLine(shader, width, col, pattern, forceMat: real): real; cdecl;
 var
   sh: TGLHiddenLineShader;
 begin
@@ -426,7 +426,7 @@ begin
 end;
 
 // Outline Shader
-function OutlineShaderCreate(smooth: real): real; stdcall;
+function OutlineShaderCreate(smooth: real): real; cdecl;
 var
   sh: TGLOutlineShader;
 begin
@@ -435,7 +435,7 @@ begin
   result := integer(sh);
 end;
 
-function OutlineShaderSetLineColor(shader, col: real): real; stdcall;
+function OutlineShaderSetLineColor(shader, col: real): real; cdecl;
 var
   sh: TGLOutlineShader;
 begin
@@ -444,7 +444,7 @@ begin
   result := 1;
 end;
 
-function OutlineShaderSetLineWidth(shader, width: real): real; stdcall;
+function OutlineShaderSetLineWidth(shader, width: real): real; cdecl;
 var
   sh: TGLOutlineShader;
 begin
@@ -454,7 +454,7 @@ begin
 end;
 
 //Texture Combine Shader
-function TexCombineShaderCreate(matlib: real): real; stdcall;
+function TexCombineShaderCreate(matlib: real): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
@@ -464,7 +464,7 @@ begin
   result:=integer(GLTexCombineShader);
 end;
 
-function TexCombineShaderAddCombiner(tcs: real; str: pchar): real; stdcall;
+function TexCombineShaderAddCombiner(tcs: real; str: pchar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
@@ -473,7 +473,7 @@ begin
   result:=1;
 end;
 
-function TexCombineShaderMaterial3(tcs: real; m3: pchar): real; stdcall;
+function TexCombineShaderMaterial3(tcs: real; m3: pchar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
@@ -482,7 +482,7 @@ begin
   result:=1;
 end;
 
-function TexCombineShaderMaterial4(tcs: real; m4: pchar): real; stdcall;
+function TexCombineShaderMaterial4(tcs: real; m4: pchar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
@@ -492,7 +492,7 @@ begin
 end;
 
 // GLSL shader
-function GLSLShaderCreate(vp, fp: pchar): real; stdcall;
+function GLSLShaderCreate(vp, fp: pchar): real; cdecl;
 var
   shader: TGLSLShader;
 begin
@@ -510,7 +510,7 @@ begin
   result:=integer(shader);
 end;
 
-function GLSLShaderCreateParameter(glsl: real; name: pchar): real; stdcall;
+function GLSLShaderCreateParameter(glsl: real; name: pchar): real; cdecl;
 var
   shader: TGLSLShader;
   param: TGLSLShaderParameter;
@@ -520,7 +520,7 @@ begin
   result := integer(param);
 end;
 
-function GLSLShaderSetParameter1i(par: real; val: real): real; stdcall;
+function GLSLShaderSetParameter1i(par: real; val: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -531,7 +531,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameter1f(par, x: real): real; stdcall;
+function GLSLShaderSetParameter1f(par, x: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -542,7 +542,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameter2f(par, x, y: real): real; stdcall;
+function GLSLShaderSetParameter2f(par, x, y: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -554,7 +554,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameter3f(par, x, y, z: real): real; stdcall;
+function GLSLShaderSetParameter3f(par, x, y, z: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -567,7 +567,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameter4f(par, x, y, z, w: real): real; stdcall;
+function GLSLShaderSetParameter4f(par, x, y, z, w: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -581,7 +581,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterTexture(par: real; mtrl: pchar; texUnit: real): real; stdcall;
+function GLSLShaderSetParameterTexture(par: real; mtrl: pchar; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
   mat: TGLLibMaterial;
@@ -598,7 +598,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterSecondTexture(par: real; mtrl: pchar; texUnit: real): real; stdcall;
+function GLSLShaderSetParameterSecondTexture(par: real; mtrl: pchar; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
   mat: TGLLibMaterial;
@@ -617,7 +617,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterShadowTexture(par, shadowmap: real; texUnit: real): real; stdcall;
+function GLSLShaderSetParameterShadowTexture(par, shadowmap: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -629,7 +629,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterShadowMatrix(par, shadowmap: real): real; stdcall;
+function GLSLShaderSetParameterShadowMatrix(par, shadowmap: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -641,7 +641,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterMatrix(par, obj: real): real; stdcall;
+function GLSLShaderSetParameterMatrix(par, obj: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
   sobj: TGLBaseSceneObject;
@@ -654,7 +654,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterInvMatrix(par, obj: real): real; stdcall;
+function GLSLShaderSetParameterInvMatrix(par, obj: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
   sobj: TGLBaseSceneObject;
@@ -667,7 +667,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; stdcall;
+function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -679,7 +679,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; stdcall;
+function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -691,7 +691,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterViewMatrix(par: real): real; stdcall;
+function GLSLShaderSetParameterViewMatrix(par: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -701,7 +701,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterInvViewMatrix(par: real): real; stdcall;
+function GLSLShaderSetParameterInvViewMatrix(par: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -711,7 +711,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterHasTextureEx(par, slot: real): real; stdcall;
+function GLSLShaderSetParameterHasTextureEx(par, slot: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin

@@ -1,4 +1,4 @@
-function TrailCreate(obj, parent: real): real; stdcall;
+function TrailCreate(obj, parent: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -10,7 +10,7 @@ begin
   result := Integer(t);
 end;
 
-function TrailSetObject(trail, obj: real): real; stdcall;
+function TrailSetObject(trail, obj: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -19,7 +19,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetAlpha(trail, alpha, fade: real): real; stdcall;
+function TrailSetAlpha(trail, alpha, fade: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -29,7 +29,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetLimits(trail, vl, tl: real): real; stdcall;
+function TrailSetLimits(trail, vl, tl: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -39,7 +39,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetMinDistance(trail, distance: real): real; stdcall;
+function TrailSetMinDistance(trail, distance: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -48,7 +48,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetUVScale(trail, scale: real): real; stdcall;
+function TrailSetUVScale(trail, scale: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -57,7 +57,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetMarkStyle(trail, ms: real): real; stdcall;
+function TrailSetMarkStyle(trail, ms: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -68,7 +68,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetMarkWidth(trail, width: real): real; stdcall;
+function TrailSetMarkWidth(trail, width: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -77,7 +77,7 @@ begin
   result := 1.0;
 end;
 
-function TrailSetEnabled(trail, mode: real): real; stdcall;
+function TrailSetEnabled(trail, mode: real): real; cdecl;
 var
   t: TGLTrail;
 begin
@@ -86,7 +86,7 @@ begin
   result := 1.0;
 end;
 
-function TrailClearMarks(trail: real): real; stdcall;
+function TrailClearMarks(trail: real): real; cdecl;
 var
   t: TGLTrail;
 begin

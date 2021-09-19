@@ -1,6 +1,6 @@
 // Grid functions by Ghost
 
-function GridCreate(x,y,z,step,parent: real): real; stdcall;
+function GridCreate(x,y,z,step,parent: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -21,7 +21,7 @@ begin
   result:=Integer(GLXyzGrid1);
 end;
 
-function GridSetLineStyle(grid,mode: real): real; stdcall;
+function GridSetLineStyle(grid,mode: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -31,7 +31,7 @@ begin
   result:=1;
 end;
 
-function GridSetLineSmoothing(grid,mode: real): real; stdcall;
+function GridSetLineSmoothing(grid,mode: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -41,7 +41,7 @@ begin
   result:=1;
 end;
 
-function GridSetParts(grid, mode: real): real; stdcall;
+function GridSetParts(grid, mode: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
   pts: TXYZGridParts;
@@ -55,7 +55,7 @@ begin
   result:=1;
 end;
 
-function GridSetColor(grid, color, alpha: real): real; stdcall;
+function GridSetColor(grid, color, alpha: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
   GLColor: TGLColor;
@@ -66,7 +66,7 @@ begin
   result:=1;
 end;
 
-function GridSetSize(grid, size: real): real; stdcall;
+function GridSetSize(grid, size: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -75,7 +75,7 @@ begin
     result:=1;
 end;
 
-function GridSetPattern(grid, pattern: real): real; stdcall;
+function GridSetPattern(grid, pattern: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -84,7 +84,7 @@ begin
   result:=1;
 end;
 
-function GridSetTile(grid,x,y,z: real): real; stdcall;
+function GridSetTile(grid,x,y,z: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin
@@ -98,7 +98,7 @@ begin
   result:=1;
 end;
 
-function GridSetStep(grid,step: real): real; stdcall;
+function GridSetStep(grid,step: real): real; cdecl;
 var
   GLXyzGrid1: TGLXYZGrid;
 begin

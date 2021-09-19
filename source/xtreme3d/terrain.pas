@@ -1,4 +1,4 @@
-function BmpHDSCreate(img: pchar): real; stdcall;
+function BmpHDSCreate(img: pchar): real; cdecl;
 var
   GLBitmapHDS1: TGLBitmapHDS;
 begin
@@ -8,7 +8,7 @@ begin
   result:=Integer(GLBitmapHDS1);
 end;
 
-function BmpHDSSetInfiniteWarp(hds,iwarp: real): real; stdcall;
+function BmpHDSSetInfiniteWarp(hds,iwarp: real): real; cdecl;
 var
   GLBitmapHDS1: TGLBitmapHDS;
 begin
@@ -17,7 +17,7 @@ begin
   result:=1;
 end;
 
-function BmpHDSInvert(hds: real): real; stdcall;
+function BmpHDSInvert(hds: real): real; cdecl;
 var
   GLBitmapHDS1: TGLBitmapHDS;
 begin
@@ -26,7 +26,7 @@ begin
   result:=1;
 end;
 
-function BmpHDSCreateEmpty(w, h, fill: real): real; stdcall;
+function BmpHDSCreateEmpty(w, h, fill: real): real; cdecl;
 var
   bhds: TGLBitmapHDS;
   bmp: TBitmap;
@@ -61,7 +61,7 @@ begin
   result := Integer(bhds);
 end;
 
-function BmpHDSSetHeight(hds, x, y, h: real): real; stdcall;
+function BmpHDSSetHeight(hds, x, y, h: real): real; cdecl;
 var
   bhds: TGLBitmapHDS;
   hb: Integer;
@@ -79,7 +79,7 @@ begin
   result := 1.0;
 end;
 
-function BmpHDSGetHeight(hds, x, y: real): real; stdcall;
+function BmpHDSGetHeight(hds, x, y: real): real; cdecl;
 var
   bhds: TGLBitmapHDS;
   color: TColor;
@@ -89,7 +89,7 @@ begin
   result := (color and 255) / 255.0;
 end;
 
-function BmpHDSSave(hds: real; filename: pchar): real; stdcall;
+function BmpHDSSave(hds: real; filename: pchar): real; cdecl;
 var
   bhds: TGLBitmapHDS;
 begin
@@ -98,7 +98,7 @@ begin
   result := 1.0
 end;
 
-function TerrainCreate(parent: real): real; stdcall;
+function TerrainCreate(parent: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -109,7 +109,7 @@ begin
   result:=Integer(TerrainRenderer1);
 end;
 
-function TerrainSetHeightData(terrain,hds: real): real; stdcall;
+function TerrainSetHeightData(terrain,hds: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -118,7 +118,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetTileSize(terrain,tsize: real): real; stdcall;
+function TerrainSetTileSize(terrain,tsize: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -127,7 +127,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetTilesPerTexture(terrain,tpt: real): real; stdcall;
+function TerrainSetTilesPerTexture(terrain,tpt: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -136,7 +136,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetQualityDistance(terrain,qd: real): real; stdcall;
+function TerrainSetQualityDistance(terrain,qd: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -145,7 +145,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetQualityStyle(terrain,hrs: real): real; stdcall;
+function TerrainSetQualityStyle(terrain,hrs: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -155,7 +155,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetMaxCLodTriangles(terrain,tri: real): real; stdcall;
+function TerrainSetMaxCLodTriangles(terrain,tri: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -164,7 +164,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetCLodPrecision(terrain,prec: real): real; stdcall;
+function TerrainSetCLodPrecision(terrain,prec: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -173,7 +173,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetOcclusionFrameSkip(terrain,ofs: real): real; stdcall;
+function TerrainSetOcclusionFrameSkip(terrain,ofs: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -182,7 +182,7 @@ begin
   result:=1;
 end;
 
-function TerrainSetOcclusionTesselate(terrain,tot: real): real; stdcall;
+function TerrainSetOcclusionTesselate(terrain,tot: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -192,7 +192,7 @@ begin
   result:=1;
 end;
 
-function TerrainGetHeightAtObjectPosition(terrain,obj: real): real; stdcall;
+function TerrainGetHeightAtObjectPosition(terrain,obj: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
   Object1: TGLSceneObject;
@@ -202,7 +202,7 @@ begin
   result:=TerrainRenderer1.InterpolatedHeight(Object1.Position.AsVector);
 end;
 
-function TerrainGetLastTriCount(terrain: real): real; stdcall;
+function TerrainGetLastTriCount(terrain: real): real; cdecl;
 var
   TerrainRenderer1: TGLTerrainRenderer;
 begin
@@ -210,7 +210,7 @@ begin
   result:=TerrainRenderer1.LastTriangleCount;
 end;
 
-function TerrainGetHDSPosition(terrain, x, y, z, index: real): real; stdcall;
+function TerrainGetHDSPosition(terrain, x, y, z, index: real): real; cdecl;
 var
   terr: TGLTerrainRenderer;
   bhds: TGLBitmapHDS;

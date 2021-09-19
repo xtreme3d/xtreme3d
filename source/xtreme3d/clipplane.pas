@@ -1,4 +1,4 @@
-function ClipPlaneCreate(parent: real): real; stdcall;
+function ClipPlaneCreate(parent: real): real; cdecl;
 var
   cp: TGLClipPlane;
 begin
@@ -9,7 +9,7 @@ begin
   result := Integer(cp);
 end;
 
-function ClipPlaneEnable(cplane, mode: real): real; stdcall;
+function ClipPlaneEnable(cplane, mode: real): real; cdecl;
 var
   cp: TGLClipPlane;
 begin
@@ -18,7 +18,7 @@ begin
   result := 1;
 end;
 
-function ClipPlaneSetPlane(cplane, px, py, pz, nx, ny, nz: real): real; stdcall;
+function ClipPlaneSetPlane(cplane, px, py, pz, nx, ny, nz: real): real; cdecl;
 var
   cp: TGLClipPlane;
 begin

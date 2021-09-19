@@ -316,33 +316,6 @@ end;
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
 
-function ObjectIgnoreDepthBuffer(obj, mode: real): real; stdcall;
-var
-  obj1: TGLBaseSceneObject;
-begin
-  obj1 := TGLBaseSceneObject(trunc64(obj));
-  if Boolean(trunc64(mode))=true then
-    obj1.ObjectStyle := obj1.ObjectStyle + [osIgnoreDepthBuffer]
-  else
-    obj1.ObjectStyle := obj1.ObjectStyle + [osIgnoreDepthBuffer];
-  result:=1;
-end;
-
-function ObjectIsPicked(obj, viewer, x, y: real): real; stdcall;
-var
-  viewer1: TGLSceneViewer; 
-  obj1: TGLBaseSceneObject;
-  pkList : TGLPickList;
-begin
-  viewer1 := TGLSceneViewer(trunc64(viewer));
-  obj1 := TGLBaseSceneObject(trunc64(obj));
-  result:=0;
-  pkList := viewer1.Buffer.GetPickedObjects(trunc64(x)-1, trunc64(y)-1, trunc64(x)+1, trunc64(y)+1);
-  if pkList.Count > 0 then begin
-    if pkList.FindObject(obj1) > -1 then result:=1;
-  end;
-end;
-
 exports
 
 /////////////////////////////////////////////////////////////////////////////

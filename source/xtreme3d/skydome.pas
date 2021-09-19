@@ -1,4 +1,4 @@
-function SkydomeCreate(slices, stacks, parent: real): real; stdcall;
+function SkydomeCreate(slices, stacks, parent: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -11,7 +11,7 @@ begin
   result := Integer(sd);
 end;
 
-function SkydomeSetOptions(skydome, fade, rotate: real): real; stdcall;
+function SkydomeSetOptions(skydome, fade, rotate: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -27,7 +27,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetDeepColor(skydome, color: real): real; stdcall;
+function SkydomeSetDeepColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -36,7 +36,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetHazeColor(skydome, color: real): real; stdcall;
+function SkydomeSetHazeColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -45,7 +45,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetNightColor(skydome, color: real): real; stdcall;
+function SkydomeSetNightColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -54,7 +54,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetSkyColor(skydome, color: real): real; stdcall;
+function SkydomeSetSkyColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -63,7 +63,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetSunDawnColor(skydome, color: real): real; stdcall;
+function SkydomeSetSunDawnColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -72,7 +72,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetSunZenithColor(skydome, color: real): real; stdcall;
+function SkydomeSetSunZenithColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -81,7 +81,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetSunElevation(skydome, angle: real): real; stdcall;
+function SkydomeSetSunElevation(skydome, angle: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -90,7 +90,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeSetTurbidity(skydome, turbidity: real): real; stdcall;
+function SkydomeSetTurbidity(skydome, turbidity: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -99,7 +99,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeAddRandomStars(skydome, stars, color: real): real; stdcall;
+function SkydomeAddRandomStars(skydome, stars, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -111,7 +111,7 @@ end;
 // Adds a single star to the skydome
 // rightAscension, declination - coordinates of a star in equatorial coordinate system
 // magnitude - brightness of a star
-function SkydomeAddStar(skydome, rightAscension, declination, magnitude, color: real): real; stdcall;
+function SkydomeAddStar(skydome, rightAscension, declination, magnitude, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
   star: TSkyDomeStar;
@@ -125,7 +125,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeClearStars(skydome: real): real; stdcall;
+function SkydomeClearStars(skydome: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
@@ -134,7 +134,7 @@ begin
   result := 1.0;
 end;
 
-function SkydomeTwinkleStars(skydome, mode: real): real; stdcall;
+function SkydomeTwinkleStars(skydome, mode: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin

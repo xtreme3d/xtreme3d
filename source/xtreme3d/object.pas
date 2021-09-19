@@ -1,34 +1,34 @@
-function ObjectHide(obj: real): real; stdcall;
+function ObjectHide(obj: real): real; cdecl;
 begin
     TGLBaseSceneObject(trunc64(obj)).Visible := false;
     Result:=1;
 end;
 
-function ObjectShow(obj: real): real; stdcall;
+function ObjectShow(obj: real): real; cdecl;
 begin
     TGLBaseSceneObject(trunc64(obj)).Visible := true;
     Result:=1;
 end;
 
-function ObjectIsVisible(obj: real): real; stdcall;
+function ObjectIsVisible(obj: real): real; cdecl;
 begin
     Result:=Integer(TGLBaseSceneObject(trunc64(obj)).Visible);
 end;
 
-function ObjectDestroy(obj: real): real; stdcall;
+function ObjectDestroy(obj: real): real; cdecl;
 begin
     //TGLBaseSceneObject(trunc64(obj)).Free;
     TObject(trunc64(obj)).Free;
     result:=1;
 end;
 
-function ObjectDestroyChildren(obj: real): real; stdcall;
+function ObjectDestroyChildren(obj: real): real; cdecl;
 begin
     TGLBaseSceneObject(trunc64(obj)).DeleteChildren;
     result:=1;
 end;
 
-function ObjectSetPosition(obj,x,y,z:real): real; stdcall;
+function ObjectSetPosition(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -39,7 +39,7 @@ begin
   result:=1;
 end;
 
-function ObjectGetPosition(obj, ind: real): real; stdcall;
+function ObjectGetPosition(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -47,7 +47,7 @@ begin
   result := sobj.Position.AsVector[trunc64(ind)];
 end;
 
-function ObjectGetAbsolutePosition(obj, ind: real): real; stdcall;
+function ObjectGetAbsolutePosition(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -55,7 +55,7 @@ begin
   result := sobj.AbsolutePosition[trunc64(ind)];
 end;
 
-function ObjectSetPositionOfObject(obj1, obj2: real): real; stdcall;
+function ObjectSetPositionOfObject(obj1, obj2: real): real; cdecl;
 var
   sobj1, sobj2: TGLBaseSceneObject;
 begin
@@ -65,7 +65,7 @@ begin
   result := 1;
 end;
 
-function ObjectAlignWithObject(obj1, obj2: real): real; stdcall;
+function ObjectAlignWithObject(obj1, obj2: real): real; cdecl;
 var
   sobj1, sobj2: TGLBaseSceneObject;
 begin
@@ -75,7 +75,7 @@ begin
   result := 1;
 end;
 
-function ObjectSetPositionX(obj,posx: real): real; stdcall;
+function ObjectSetPositionX(obj,posx: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -84,7 +84,7 @@ begin
   result:=1;
 end;
 
-function ObjectSetPositionY(obj,posy: real): real; stdcall;
+function ObjectSetPositionY(obj,posy: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -93,7 +93,7 @@ begin
   result:=1;
 end;
 
-function ObjectSetPositionZ(obj,posz: real): real; stdcall;
+function ObjectSetPositionZ(obj,posz: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -102,7 +102,7 @@ begin
   result:=1;
 end;
 
-function ObjectGetPositionX(obj: real): real; stdcall;
+function ObjectGetPositionX(obj: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -110,7 +110,7 @@ begin
   result:=Object1.Position.X;
 end;
 
-function ObjectGetPositionY(obj: real): real; stdcall;
+function ObjectGetPositionY(obj: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -118,7 +118,7 @@ begin
   result:=Object1.Position.Y;
 end;
 
-function ObjectGetPositionZ(obj: real): real; stdcall;
+function ObjectGetPositionZ(obj: real): real; cdecl;
 var
   Object1: TGLBaseSceneObject;
 begin
@@ -126,7 +126,7 @@ begin
   result:=Object1.Position.Z;
 end;
 
-function ObjectSetAbsolutePosition(obj, x, y, z: real): real; stdcall;
+function ObjectSetAbsolutePosition(obj, x, y, z: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -135,7 +135,7 @@ begin
   result := 1;
 end;
 
-function ObjectSetDirection(obj, x, y, z: real): real; stdcall;
+function ObjectSetDirection(obj, x, y, z: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -144,7 +144,7 @@ begin
   result := 1;
 end;
 
-function ObjectGetDirection(obj, ind: real): real; stdcall;
+function ObjectGetDirection(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -152,7 +152,7 @@ begin
   result := sobj.Direction.DirectVector[trunc64(ind)];
 end;
 
-function ObjectSetAbsoluteDirection(obj, x, y, z: real): real; stdcall;
+function ObjectSetAbsoluteDirection(obj, x, y, z: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -161,7 +161,7 @@ begin
   result := 1;
 end;
 
-function ObjectGetAbsoluteDirection(obj, ind: real): real; stdcall;
+function ObjectGetAbsoluteDirection(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -169,7 +169,7 @@ begin
   result := sobj.AbsoluteDirection[trunc64(ind)];
 end;
 
-function ObjectGetPitch(obj:real): real; stdcall;
+function ObjectGetPitch(obj:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
   p: real;
@@ -179,7 +179,7 @@ begin
   result:=p;
 end;
 
-function ObjectGetTurn(obj:real): real; stdcall;
+function ObjectGetTurn(obj:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
   p: real;
@@ -189,7 +189,7 @@ begin
   result:=p;
 end;
 
-function ObjectGetRoll(obj:real): real; stdcall;
+function ObjectGetRoll(obj:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
   p: real;
@@ -199,7 +199,7 @@ begin
   result:=p;
 end;
 
-function ObjectSetRotation(obj, x, y, z: real): real; stdcall;
+function ObjectSetRotation(obj, x, y, z: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -208,7 +208,7 @@ begin
   result := 1;
 end;
 
-function ObjectMove(obj,spd:real): real; stdcall;
+function ObjectMove(obj,spd:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -217,7 +217,7 @@ begin
   result:=1;
 end;
 
-function ObjectLift(obj,spd:real): real; stdcall;
+function ObjectLift(obj,spd:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -226,7 +226,7 @@ begin
   result:=1;
 end;
 
-function ObjectStrafe(obj,spd:real): real; stdcall;
+function ObjectStrafe(obj,spd:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -235,7 +235,7 @@ begin
   result:=1;
 end;
 
-function ObjectTranslate(obj,x,y,z:real): real; stdcall;
+function ObjectTranslate(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -244,7 +244,7 @@ begin
   result:=1;
 end;
 
-function ObjectRotate(obj,p,t,r:real): real; stdcall;
+function ObjectRotate(obj,p,t,r:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -255,7 +255,7 @@ begin
   result:=1;
 end;
 
-function ObjectScale(obj,x,y,z:real): real; stdcall;
+function ObjectScale(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -266,7 +266,7 @@ begin
   result:=1;
 end;
 
-function ObjectSetScale(obj,x,y,z:real): real; stdcall;
+function ObjectSetScale(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -275,7 +275,7 @@ begin
   result:=1;
 end;
 
-function ObjectGetScale(obj, ind: real): real; stdcall;
+function ObjectGetScale(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
 begin
@@ -283,7 +283,7 @@ begin
   result := sobj.Scale.AsVector[trunc64(ind)];
 end;
 
-function ObjectSetUpVector(obj,x,y,z:real): real; stdcall;
+function ObjectSetUpVector(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
 begin
@@ -292,7 +292,7 @@ begin
   result:=1;
 end;
 
-function ObjectPointToObject(obj1, obj2: real): real; stdcall;
+function ObjectPointToObject(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -305,7 +305,7 @@ end;
 
 // unimplemented: ObjectAlignToCamera
 
-function ObjectShowAxes(obj, mode: real): real; stdcall;
+function ObjectShowAxes(obj, mode: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -374,7 +374,7 @@ begin
   result := bestObject;
 end;
 
-function ObjectGetGroundHeight(obj, target: real): real; stdcall;
+function ObjectGetGroundHeight(obj, target: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -398,7 +398,7 @@ begin
     result:=0;
 end;
 
-function ObjectSceneRaycast(obj, target: real): real; stdcall;
+function ObjectSceneRaycast(obj, target: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -420,7 +420,7 @@ begin
     result:=0;
 end;
 
-function ObjectRaycast(obj, target: real): real; stdcall;
+function ObjectRaycast(obj, target: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -434,12 +434,12 @@ begin
   result:=Integer(res);
 end;
 
-function ObjectGetCollisionPosition(ind: real): real; stdcall;
+function ObjectGetCollisionPosition(ind: real): real; cdecl;
 begin
   result := collisionPoint[trunc64(ind)];
 end;
 
-function ObjectGetCollisionNormal(ind: real): real; stdcall;
+function ObjectGetCollisionNormal(ind: real): real; cdecl;
 begin
   result := collisionNormal[trunc64(ind)];
 end;
@@ -448,7 +448,7 @@ end;
 //ObjectResetCollision()
 //ObjectMoveToCollision(obj)
 
-function ObjectSetMaterial(obj:real; mat:pchar): real; stdcall;
+function ObjectSetMaterial(obj:real; mat:pchar): real; cdecl;
 var
   object1:TGLSCeneObject;
 begin
@@ -458,7 +458,7 @@ begin
   result:=1;
 end;
 
-function ObjectGetMaterial(obj:real): pchar; stdcall;
+function ObjectGetMaterial(obj:real): pchar; cdecl;
 var
   object1:TGLSCeneObject;
 begin
@@ -466,7 +466,7 @@ begin
   result:=pchar(object1.Material.LibMaterialName);
 end;
 
-function ObjectGetDistance(obj, target: real): real; stdcall;
+function ObjectGetDistance(obj, target: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -476,7 +476,7 @@ begin
   result:=VectorDistance(object1.AbsolutePosition, object2.AbsolutePosition);
 end;
 
-function ObjectCheckCubeVsCube(obj1, obj2: real): real; stdcall;
+function ObjectCheckCubeVsCube(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -486,7 +486,7 @@ begin
   result := Integer(FastCheckCubeVsCube(object1, object2));
 end;
 
-function ObjectCheckSphereVsSphere(obj1, obj2: real): real; stdcall;
+function ObjectCheckSphereVsSphere(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -496,7 +496,7 @@ begin
   result := Integer(FastCheckSphereVsSphere(object1, object2));
 end;
 
-function ObjectCheckSphereVsCube(obj1, obj2: real): real; stdcall;
+function ObjectCheckSphereVsCube(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -506,7 +506,7 @@ begin
   result := Integer(FastCheckSphereVsCube(object1, object2));
 end;
 
-function ObjectCheckCubeVsFace(obj1, obj2: real): real; stdcall;
+function ObjectCheckCubeVsFace(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -516,7 +516,7 @@ begin
   result := Integer(FastCheckCubeVsFace(object1, object2));
 end;
 
-function ObjectCheckFaceVsFace(obj1, obj2: real): real; stdcall;
+function ObjectCheckFaceVsFace(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -526,7 +526,7 @@ begin
   result := Integer(FastCheckFaceVsFace(object1, object2));
 end;
 
-function ObjectIsPointInObject(obj1, x, y, z: real): real; stdcall;
+function ObjectIsPointInObject(obj1, x, y, z: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   p: TVector;
@@ -540,7 +540,7 @@ begin
 end;
 
 // Change: vc now can be vcNone, vcInherited, vcObjectBased, vcHierarchical (0, 1, 2, 3)
-function ObjectSetCulling(obj1, vc: real): real; stdcall;
+function ObjectSetCulling(obj1, vc: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   culling: Integer;
@@ -554,7 +554,7 @@ begin
   result := 1;
 end;
 
-function ObjectSetName(obj1: real; name: pchar): real; stdcall;
+function ObjectSetName(obj1: real; name: pchar): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -563,7 +563,7 @@ begin
   result := 1;
 end;
 
-function ObjectGetName(obj1: real): pchar; stdcall;
+function ObjectGetName(obj1: real): pchar; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -571,7 +571,7 @@ begin
   result := pchar(object1.Name);
 end;
 
-function ObjectGetClassName(obj1: real): pchar; stdcall;
+function ObjectGetClassName(obj1: real): pchar; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -580,7 +580,7 @@ begin
 end;
 
 // ObjectSetID is now ObjectSetTag
-function ObjectSetTag(obj1, tag: real): real; stdcall;
+function ObjectSetTag(obj1, tag: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -590,7 +590,7 @@ begin
 end;
 
 // ObjectGetID is now ObjectGetTag
-function ObjectGetTag(obj1: real): real; stdcall;
+function ObjectGetTag(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -598,7 +598,7 @@ begin
   result := object1.Tag;
 end;
 
-function ObjectGetParent(obj1: real): real; stdcall;
+function ObjectGetParent(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -606,7 +606,7 @@ begin
   result := Integer(object1.Parent);
 end;
 
-function ObjectGetChildCount(obj1: real): real; stdcall;
+function ObjectGetChildCount(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -614,7 +614,7 @@ begin
   result := object1.Count;
 end;
 
-function ObjectGetChild(obj1, ind: real): real; stdcall;
+function ObjectGetChild(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -622,7 +622,7 @@ begin
   result := Integer(object1.Children[trunc64(ind)]);
 end;
 
-function ObjectGetIndex(obj1: real): real; stdcall;
+function ObjectGetIndex(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -630,7 +630,7 @@ begin
   result := object1.Index;
 end;
 
-function ObjectFindChild(obj1: real; name: pchar): real; stdcall;
+function ObjectFindChild(obj1: real; name: pchar): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   n: String;
@@ -651,7 +651,7 @@ begin
   result := 0;
 end;
 
-function ObjectGetBoundingSphereRadius(obj1: real): real; stdcall;
+function ObjectGetBoundingSphereRadius(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -659,7 +659,7 @@ begin
   result := object1.BoundingSphereRadius;
 end;
 
-function ObjectGetAbsoluteUp(obj1, ind: real): real; stdcall;
+function ObjectGetAbsoluteUp(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -667,7 +667,7 @@ begin
   result := object1.AbsoluteUp[trunc64(ind)];
 end;
 
-function ObjectSetAbsoluteUp(obj1, x, y, z: real): real; stdcall;
+function ObjectSetAbsoluteUp(obj1, x, y, z: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -676,7 +676,7 @@ begin
   result := 1;
 end;
 
-function ObjectGetAbsoluteRight(obj1, ind: real): real; stdcall;
+function ObjectGetAbsoluteRight(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -685,7 +685,7 @@ begin
 end;
 
 // Returns the Absolute X Vector expressed in object's local coordinates
-function ObjectGetAbsoluteXVector(obj1, ind: real): real; stdcall;
+function ObjectGetAbsoluteXVector(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -694,7 +694,7 @@ begin
 end;
 
 // Returns the Absolute Y Vector expressed in object's local coordinates
-function ObjectGetAbsoluteYVector(obj1, ind: real): real; stdcall;
+function ObjectGetAbsoluteYVector(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -703,7 +703,7 @@ begin
 end;
 
 // Returns the Absolute Z Vector expressed in object's local coordinates
-function ObjectGetAbsoluteZVector(obj1, ind: real): real; stdcall;
+function ObjectGetAbsoluteZVector(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -711,7 +711,7 @@ begin
   result := object1.AbsoluteZVector[trunc64(ind)];
 end;
 
-function ObjectGetRight(obj1, ind: real): real; stdcall;
+function ObjectGetRight(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -719,7 +719,7 @@ begin
   result := object1.Right[trunc64(ind)];
 end;
 
-function ObjectMoveChildUp(obj1, ind: real): real; stdcall;
+function ObjectMoveChildUp(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -728,7 +728,7 @@ begin
   result := 1;
 end;
 
-function ObjectMoveChildDown(obj1, ind: real): real; stdcall;
+function ObjectMoveChildDown(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -737,7 +737,7 @@ begin
   result := 1;
 end;
 
-function ObjectSetParent(obj1, obj2: real): real; stdcall;
+function ObjectSetParent(obj1, obj2: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -749,7 +749,7 @@ begin
 end;
 
 // keep - copy obj2's children to obj1 
-function ObjectRemoveChild(obj1, obj2, keep: real): real; stdcall;
+function ObjectRemoveChild(obj1, obj2, keep: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -760,7 +760,7 @@ begin
   result := 1;
 end;
 
-function ObjectMoveObjectAround(obj1, obj2, p, t: real): real; stdcall;
+function ObjectMoveObjectAround(obj1, obj2, p, t: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   object2: TGLBaseSceneObject;
@@ -771,7 +771,7 @@ begin
   result := 1;
 end;
 
-function ObjectPitch(obj1, angle: real): real; stdcall;
+function ObjectPitch(obj1, angle: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -780,7 +780,7 @@ begin
   result := 1;
 end;
 
-function ObjectTurn(obj1, angle: real): real; stdcall;
+function ObjectTurn(obj1, angle: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -789,7 +789,7 @@ begin
   result := 1;
 end;
 
-function ObjectRoll(obj1, angle: real): real; stdcall;
+function ObjectRoll(obj1, angle: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -799,7 +799,7 @@ begin
 end;
 
 // ObjectGetUpVector = ObjectGetUp
-function ObjectGetUp(obj1, ind: real): real; stdcall;
+function ObjectGetUp(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -809,7 +809,7 @@ end;
 
 // Unimplemented: ObjectStructureChanged
 
-function ObjectRotateAbsolute(obj1, x, y, z: real): real; stdcall;
+function ObjectRotateAbsolute(obj1, x, y, z: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
 begin
@@ -818,7 +818,7 @@ begin
   result := 1;
 end;
 
-function ObjectRotateAbsoluteVector(obj1, x, y, z, angle: real): real; stdcall;
+function ObjectRotateAbsoluteVector(obj1, x, y, z, angle: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   v: TAffineVector;
@@ -832,7 +832,7 @@ begin
 end;
 
 // Sets object's local matrix column
-function ObjectSetMatrixColumn(obj1, ind, x, y, z, w: real): real; stdcall;
+function ObjectSetMatrixColumn(obj1, ind, x, y, z, w: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
   i: Integer;
@@ -849,7 +849,7 @@ begin
   result := 1;
 end;
 
-function ObjectExportMatrix(obj1,obj2: real): real; stdcall;
+function ObjectExportMatrix(obj1,obj2: real): real; cdecl;
 var
   GLObject1:TGLSCeneObject;
   GLObject2:TGLSceneObject;
@@ -862,7 +862,7 @@ begin
   result:=1;
 end;
 
-function ObjectExportAbsoluteMatrix(obj1,obj2: real): real; stdcall;
+function ObjectExportAbsoluteMatrix(obj1,obj2: real): real; cdecl;
 var
   GLObject1:TGLSCeneObject;
   GLObject2:TGLSceneObject;
@@ -875,7 +875,7 @@ begin
   result:=1;
 end;
 
-function ObjectCopy(obj, parent: real): real; stdcall;
+function ObjectCopy(obj, parent: real): real; cdecl;
 var
   obj1, obj2, par: TGLBaseSceneObject;
 begin
@@ -888,7 +888,7 @@ begin
   result:=Integer(obj2);
 end;
 
-function ObjectInFrustum(obj, viewer: real): real; stdcall;
+function ObjectInFrustum(obj, viewer: real): real; cdecl;
 var
   obj1: TGLBaseSceneObject;
   mvp: TMatrix;
@@ -903,8 +903,35 @@ begin
     AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
 end;
 
-function ObjectFindByName (name: pchar): real; stdcall;
+function ObjectFindByName (name: pchar): real; cdecl;
 begin
   result:=Integer(scene.FindSceneObject(name));
+end;
+
+function ObjectIgnoreDepthBuffer(obj, mode: real): real; stdcall;
+var
+  obj1: TGLBaseSceneObject;
+begin
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  if Boolean(trunc64(mode))=true then
+    obj1.ObjectStyle := obj1.ObjectStyle + [osIgnoreDepthBuffer]
+  else
+    obj1.ObjectStyle := obj1.ObjectStyle + [osIgnoreDepthBuffer];
+  result:=1;
+end;
+
+function ObjectIsPicked(obj, viewer, x, y: real): real; stdcall;
+var
+  viewer1: TGLSceneViewer; 
+  obj1: TGLBaseSceneObject;
+  pkList : TGLPickList;
+begin
+  viewer1 := TGLSceneViewer(trunc64(viewer));
+  obj1 := TGLBaseSceneObject(trunc64(obj));
+  result:=0;
+  pkList := viewer1.Buffer.GetPickedObjects(trunc64(x)-1, trunc64(y)-1, trunc64(x)+1, trunc64(y)+1);
+  if pkList.Count > 0 then begin
+    if pkList.FindObject(obj1) > -1 then result:=1;
+  end;
 end;
 

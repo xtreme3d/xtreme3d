@@ -1,4 +1,4 @@
-function TreeCreate(parent: real): real; stdcall;
+function TreeCreate(parent: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -10,7 +10,7 @@ begin
   result := Integer(t);
 end;
 
-function TreeSetMaterials(tree: real; mfront, mback, mbranch: pchar): real; stdcall;
+function TreeSetMaterials(tree: real; mfront, mback, mbranch: pchar): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -22,7 +22,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetBranchFacets(tree, facets: real): real; stdcall;
+function TreeSetBranchFacets(tree, facets: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -31,7 +31,7 @@ begin
   result := 1.0;
 end;
 
-function TreeBuildMesh(tree, parent: real): real; stdcall;
+function TreeBuildMesh(tree, parent: real): real; cdecl;
 var
   t: TGLTree;
   ffm: TGLFreeForm;
@@ -57,7 +57,7 @@ begin
   result := Integer(ffm);
 end;
 
-function TreeSetBranchNoise(tree, noise: real): real; stdcall;
+function TreeSetBranchNoise(tree, noise: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -66,7 +66,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetBranchAngle(tree, angle: real): real; stdcall;
+function TreeSetBranchAngle(tree, angle: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -75,7 +75,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetBranchSize(tree, size: real): real; stdcall;
+function TreeSetBranchSize(tree, size: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -84,7 +84,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetBranchRadius(tree, radius: real): real; stdcall;
+function TreeSetBranchRadius(tree, radius: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -93,7 +93,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetBranchTwist(tree, twist: real): real; stdcall;
+function TreeSetBranchTwist(tree, twist: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -102,7 +102,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetDepth(tree, depth: real): real; stdcall;
+function TreeSetDepth(tree, depth: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -111,7 +111,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetLeafSize(tree, leafsize: real): real; stdcall;
+function TreeSetLeafSize(tree, leafsize: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -120,7 +120,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetLeafThreshold(tree, threshold: real): real; stdcall;
+function TreeSetLeafThreshold(tree, threshold: real): real; cdecl;
 var
   t: TGLTree;
 begin
@@ -129,7 +129,7 @@ begin
   result := 1.0;
 end;
 
-function TreeSetSeed(tree, seed: real): real; stdcall;
+function TreeSetSeed(tree, seed: real): real; cdecl;
 var
   t: TGLTree;
 begin

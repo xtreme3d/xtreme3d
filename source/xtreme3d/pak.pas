@@ -1,5 +1,5 @@
 
-function SetPakArchive(fname: pchar): real; stdcall;
+function SetPakArchive(fname: pchar): real; cdecl;
 var
   pak: TGLVfsPak;
 begin
@@ -8,7 +8,7 @@ begin
   result := integer(pak);
 end;
 
-function PakGetFileCount(p: real): real; stdcall;
+function PakGetFileCount(p: real): real; cdecl;
 var
   pak: TGLVfsPak;
 begin
@@ -16,7 +16,7 @@ begin
   result := pak.FileCount;
 end;
 
-function PakGetFileName(p, index: real): pchar; stdcall;
+function PakGetFileName(p, index: real): pchar; cdecl;
 var
   pak: TGLVfsPak;
 begin
@@ -24,7 +24,7 @@ begin
   result := pchar(pak.Files[trunc64(index)]);
 end;
 
-function PakExtract(p: real; dir: pchar): real; stdcall;
+function PakExtract(p: real; dir: pchar): real; cdecl;
 var
   pak: TGLVfsPak;
   i: Integer;
@@ -46,7 +46,7 @@ begin
   result := 1.0;
 end;
 
-function PakExtractFile(p, index: real; newname: pchar): real; stdcall;
+function PakExtractFile(p, index: real; newname: pchar): real; cdecl;
 var
   pak: TGLVfsPak;
 begin

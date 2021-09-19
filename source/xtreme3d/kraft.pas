@@ -1,4 +1,4 @@
-function KraftCreate: real; stdcall;
+function KraftCreate: real; cdecl;
 var
   kraft: TKraft;
 begin
@@ -12,7 +12,7 @@ begin
   Result := Integer(kraft);
 end;
 
-function KraftStep(kr, dt: real): real; stdcall;
+function KraftStep(kr, dt: real): real; cdecl;
 var
   kraft: TKraft;
 begin
@@ -21,17 +21,17 @@ begin
   Result := 1.0;
 end;
 
-function KraftGetRayHitPosition(index: real): real; stdcall;
+function KraftGetRayHitPosition(index: real): real; cdecl;
 begin
   Result := kraftRaycastPoint.xyzw[trunc64(index)];
 end;
 
-function KraftGetRayHitNormal(index: real): real; stdcall;
+function KraftGetRayHitNormal(index: real): real; cdecl;
 begin
   Result := kraftRaycastNormal.xyzw[trunc64(index)];
 end;
 
-function KraftCreateRigidBody(kr, typ: real): real; stdcall;
+function KraftCreateRigidBody(kr, typ: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   rbt: TKraftRigidBodyType;
@@ -46,7 +46,7 @@ begin
   Result := Integer(rb);
 end;
 
-function KraftRigidBodyFinish(krb: real): real; stdcall;
+function KraftRigidBodyFinish(krb: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -55,7 +55,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodySetGravity(krb, x, y, z, scale: real): real; stdcall;
+function KraftRigidBodySetGravity(krb, x, y, z, scale: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -67,7 +67,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodySetPosition(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodySetPosition(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -77,7 +77,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyGetPosition(krb, index: real): real; stdcall;
+function KraftRigidBodyGetPosition(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector4;
@@ -87,7 +87,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodySetLinearVelocity(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodySetLinearVelocity(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -97,7 +97,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyGetLinearVelocity(krb, index: real): real; stdcall;
+function KraftRigidBodyGetLinearVelocity(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector3;
@@ -107,7 +107,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodySetRotation(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodySetRotation(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -117,7 +117,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyGetDirection(krb, index: real): real; stdcall;
+function KraftRigidBodyGetDirection(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector4;
@@ -127,7 +127,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodyGetUp(krb, index: real): real; stdcall;
+function KraftRigidBodyGetUp(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector4;
@@ -137,7 +137,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodyGetRight(krb, index: real): real; stdcall;
+function KraftRigidBodyGetRight(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector4;
@@ -147,7 +147,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodySetAngularVelocity(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodySetAngularVelocity(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -157,7 +157,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyGetAngularVelocity(krb, index: real): real; stdcall;
+function KraftRigidBodyGetAngularVelocity(krb, index: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   v: TKraftVector3;
@@ -167,7 +167,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftRigidBodyAddForce(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodyAddForce(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -176,7 +176,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyAddForceAtPos(krb, x, y, z, px, py, pz: real): real; stdcall;
+function KraftRigidBodyAddForceAtPos(krb, x, y, z, px, py, pz: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -185,7 +185,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRigidBodyAddRelForce(krb, x, y, z: real): real; stdcall;
+function KraftRigidBodyAddRelForce(krb, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
 begin
@@ -194,7 +194,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftRayCast(kr, x, y, z, dx, dy, dz, maxTime: real): real; stdcall;
+function KraftRayCast(kr, x, y, z, dx, dy, dz, maxTime: real): real; cdecl;
 var
   kraft: TKraft;
   s: TKraftShape;
@@ -206,7 +206,7 @@ begin
   Result := Integer(r);
 end;
 
-function KraftObjectSetRigidBody(obj, krb: real): real; stdcall;
+function KraftObjectSetRigidBody(obj, krb: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   rb: TKraftRigidBody;
@@ -219,7 +219,7 @@ begin
   Result := Integer(glkrb);
 end; 
 
-function KraftCreateShapeSphere(rbody, radius: real): real; stdcall;
+function KraftCreateShapeSphere(rbody, radius: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   ss: TKraftShapeSphere;
@@ -229,7 +229,7 @@ begin
   Result := Integer(ss);
 end;
 
-function KraftCreateShapeBox(rbody, x, y, z: real): real; stdcall;
+function KraftCreateShapeBox(rbody, x, y, z: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   sb: TKraftShapeBox;
@@ -239,7 +239,7 @@ begin
   Result := Integer(sb);
 end;
 
-function KraftCreateShapePlane(rbody, x, y, z, d: real): real; stdcall;
+function KraftCreateShapePlane(rbody, x, y, z, d: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   sp: TKraftShapePlane;
@@ -249,7 +249,7 @@ begin
   Result := Integer(sp);
 end;
 
-function KraftCreateShapeCapsule(rbody, radius, height: real): real; stdcall;
+function KraftCreateShapeCapsule(rbody, radius, height: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   sc: TKraftShapeCapsule;
@@ -259,7 +259,7 @@ begin
   Result := Integer(sc);
 end;
 
-function KraftCreateShapeMesh(rbody, ff: real): real; stdcall;
+function KraftCreateShapeMesh(rbody, ff: real): real; cdecl;
 var
   rb: TKraftRigidBody;
   mesh: TKraftMesh;
@@ -313,7 +313,7 @@ begin
   Result := Integer(sm);
 end;
 
-function KraftShapeSetDensity(shape, density: real): real; stdcall;
+function KraftShapeSetDensity(shape, density: real): real; cdecl;
 var
   s: TKraftShape;
 begin
@@ -322,7 +322,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftShapeSetFriction(shape, friction: real): real; stdcall;
+function KraftShapeSetFriction(shape, friction: real): real; cdecl;
 var
   s: TKraftShape;
 begin
@@ -331,7 +331,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftShapeSetRestitution(shape, rest: real): real; stdcall;
+function KraftShapeSetRestitution(shape, rest: real): real; cdecl;
 var
   s: TKraftShape;
 begin
@@ -340,7 +340,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftShapeSetPosition(shape, x, y, z: real): real; stdcall;
+function KraftShapeSetPosition(shape, x, y, z: real): real; cdecl;
 var
   s: TKraftShape;
   m: TKraftMatrix4x4;
@@ -357,7 +357,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftShapeGetPosition(shape, index: real): real; stdcall;
+function KraftShapeGetPosition(shape, index: real): real; cdecl;
 var
   s: TKraftShape;
   m: TKraftMatrix4x4;
@@ -369,7 +369,7 @@ begin
   Result := v.xyzw[trunc64(index)];
 end;
 
-function KraftShapeSetRayCastable(shape, mode: real): real; stdcall;
+function KraftShapeSetRayCastable(shape, mode: real): real; cdecl;
 var
   s: TKraftShape;
 begin
@@ -381,7 +381,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftCreateJointDistance(rbody1, rbody2: real): real; stdcall;
+function KraftCreateJointDistance(rbody1, rbody2: real): real; cdecl;
 var
   rba, rbb: TKraftRigidBody;
   j: TKraftConstraintJointDistance;
@@ -392,7 +392,7 @@ begin
   Result := integer(j);
 end;
 
-function KraftCreateJointRope(rbody1, rbody2, maxlength: real): real; stdcall;
+function KraftCreateJointRope(rbody1, rbody2, maxlength: real): real; cdecl;
 var
   rba, rbb: TKraftRigidBody;
   j: TKraftConstraintJointRope;
@@ -403,7 +403,7 @@ begin
   Result := integer(j);
 end;
 
-function KraftCreateJointBallSocket(rbody1, rbody2: real): real; stdcall;
+function KraftCreateJointBallSocket(rbody1, rbody2: real): real; cdecl;
 var
   rba, rbb: TKraftRigidBody;
   j: TKraftConstraintJointBallSocket;
@@ -414,7 +414,7 @@ begin
   Result := integer(j);
 end;
 
-function KraftCreateJointFixed(rbody1, rbody2: real): real; stdcall;
+function KraftCreateJointFixed(rbody1, rbody2: real): real; cdecl;
 var
   rba, rbb: TKraftRigidBody;
   j: TKraftConstraintJointFixed;
@@ -425,7 +425,7 @@ begin
   Result := integer(j);
 end;
 
-function KraftCreateJointHinge(rbody1, rbody2: real): real; stdcall;
+function KraftCreateJointHinge(rbody1, rbody2: real): real; cdecl;
 var
   rba, rbb: TKraftRigidBody;
   j: TKraftConstraintJointHinge;
@@ -436,7 +436,7 @@ begin
   Result := integer(j);
 end;
 
-function KraftJointSetAnchor1(joint, x, y, z: real): real; stdcall;
+function KraftJointSetAnchor1(joint, x, y, z: real): real; cdecl;
 var
   j: TKraftConstraintJoint;
 begin
@@ -445,7 +445,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftJointSetAnchor2(joint, x, y, z: real): real; stdcall;
+function KraftJointSetAnchor2(joint, x, y, z: real): real; cdecl;
 var
   j: TKraftConstraintJoint;
 begin
@@ -454,7 +454,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftJointSetHingeAxis1(joint, x, y, z: real): real; stdcall;
+function KraftJointSetHingeAxis1(joint, x, y, z: real): real; cdecl;
 var
   j: TKraftConstraintJointHinge;
 begin
@@ -463,7 +463,7 @@ begin
   Result := 1.0;
 end;
 
-function KraftJointSetHingeAxis2(joint, x, y, z: real): real; stdcall;
+function KraftJointSetHingeAxis2(joint, x, y, z: real): real; cdecl;
 var
   j: TKraftConstraintJointHinge;
 begin

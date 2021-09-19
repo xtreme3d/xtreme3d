@@ -1,4 +1,4 @@
-function BlurCreate(targetObj: real; parent: real): real; stdcall;
+function BlurCreate(targetObj: real; parent: real): real; cdecl;
 var
   b: TGLBlur;
 begin
@@ -12,7 +12,7 @@ begin
   result:=Integer(b);
 end;
 
-function BlurSetPreset(blur, p: real): real; stdcall;
+function BlurSetPreset(blur, p: real): real; cdecl;
 var
   b: TGLBlur;
 begin
@@ -26,7 +26,7 @@ begin
   Result := 1;
 end;
 
-function BlurSetOptions(blur, delta, left, top, right, bottom: real): real; stdcall;
+function BlurSetOptions(blur, delta, left, top, right, bottom: real): real; cdecl;
 var
   b: TGLBlur;
 begin
@@ -39,7 +39,7 @@ begin
   Result := 1;
 end;
 
-function BlurSetResolution(blur, res: real): real; stdcall;
+function BlurSetResolution(blur, res: real): real; cdecl;
 var
   b: TGLBlur;
 begin
@@ -49,7 +49,7 @@ begin
   Result := 1;
 end;
 
-function BlurSetColor(blur, col: real): real; stdcall;
+function BlurSetColor(blur, col: real): real; cdecl;
 var
   b: TGLBlur;
 begin
@@ -58,7 +58,7 @@ begin
   Result := 1;
 end;
 
-function BlurSetBlendingMode(blur, bm: real): real; stdcall;
+function BlurSetBlendingMode(blur, bm: real): real; cdecl;
 var
   b: TGLBlur;
 begin

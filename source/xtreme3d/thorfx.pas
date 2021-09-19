@@ -1,4 +1,4 @@
-function ThorFXManagerCreate: real; stdcall;
+function ThorFXManagerCreate: real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -8,7 +8,7 @@ begin
   result:=Integer(GLTFX);
 end;
 
-function ThorFXSetColor(fx,incolor,inalpha,outcolor,outalpha,ccolor,calpha: real): real; stdcall;
+function ThorFXSetColor(fx,incolor,inalpha,outcolor,outalpha,ccolor,calpha: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -22,7 +22,7 @@ begin
   result:=1;
 end;
 
-function ThorFXEnableCore(fx,mode: real): real; stdcall;
+function ThorFXEnableCore(fx,mode: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -31,7 +31,7 @@ begin
   result:=1;
 end;
 
-function ThorFXEnableGlow(fx,mode: real): real; stdcall;
+function ThorFXEnableGlow(fx,mode: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -40,7 +40,7 @@ begin
   result:=1;
 end;
 
-function ThorFXSetMaxParticles(fx,maxp: real): real; stdcall;
+function ThorFXSetMaxParticles(fx,maxp: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -49,7 +49,7 @@ begin
   result:=1;
 end;
 
-function ThorFXSetGlowSize(fx,size: real): real; stdcall;
+function ThorFXSetGlowSize(fx,size: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -58,7 +58,7 @@ begin
   result:=1;
 end;
 
-function ThorFXSetVibrate(fx,vibr: real): real; stdcall;
+function ThorFXSetVibrate(fx,vibr: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -67,7 +67,7 @@ begin
   result:=1;
 end;
 
-function ThorFXSetWildness(fx,wild: real): real; stdcall;
+function ThorFXSetWildness(fx,wild: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -76,7 +76,7 @@ begin
   result:=1;
 end;
 
-function ThorFXSetTarget(fx,x,y,z: real): real; stdcall;
+function ThorFXSetTarget(fx,x,y,z: real): real; cdecl;
 var
   GLTFX: TGLThorFXManager;
 begin
@@ -85,7 +85,7 @@ begin
   result:=1;
 end;
 
-function ThorFXCreate(fx, obj: real): real; stdcall;
+function ThorFXCreate(fx, obj: real): real; cdecl;
 var
   tfxMngr: TGLThorFXManager;
   objct: TGLBaseSceneObject;

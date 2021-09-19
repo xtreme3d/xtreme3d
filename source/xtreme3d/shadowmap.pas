@@ -1,4 +1,4 @@
-function ShadowMapCreate(size, viewer, caster: real): real; stdcall;
+function ShadowMapCreate(size, viewer, caster: real): real; cdecl;
 var
   v: TGLSceneViewer;
   sm: TGLShadowMap;
@@ -18,7 +18,7 @@ begin
   result:=integer(sm);
 end;
 
-function ShadowMapSetCamera(shadowmap, cam: real): real; stdcall;
+function ShadowMapSetCamera(shadowmap, cam: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -27,7 +27,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapSetCaster(shadowmap, caster: real): real; stdcall;
+function ShadowMapSetCaster(shadowmap, caster: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -36,7 +36,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapSetProjectionSize(shadowmap, size: real): real; stdcall;
+function ShadowMapSetProjectionSize(shadowmap, size: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -45,7 +45,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapSetZScale(shadowmap, scale: real): real; stdcall;
+function ShadowMapSetZScale(shadowmap, scale: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -54,7 +54,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapSetZClippingPlanes(shadowmap, znear, zfar: real): real; stdcall;
+function ShadowMapSetZClippingPlanes(shadowmap, znear, zfar: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -64,7 +64,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapRender(shadowmap: real): real; stdcall;
+function ShadowMapRender(shadowmap: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
@@ -73,7 +73,7 @@ begin
   result:=1;
 end;
 
-function ShadowMapSetFBO(shadowmap, fbo: real): real; stdcall;
+function ShadowMapSetFBO(shadowmap, fbo: real): real; cdecl;
 var
   sm: TGLShadowMap;
   fb: TGLFBO;

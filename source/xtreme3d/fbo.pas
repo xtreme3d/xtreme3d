@@ -1,4 +1,4 @@
-function FBOCreate(w, h, viewer: real): real; stdcall;
+function FBOCreate(w, h, viewer: real): real; cdecl;
 var
   fbo: TGLFBO;
   v: TGLSceneViewer;
@@ -17,7 +17,7 @@ begin
   result := integer(fbo);
 end;
 
-function FBOSetCamera(fbo, cam: real): real; stdcall;
+function FBOSetCamera(fbo, cam: real): real; cdecl;
 var
   fb: TGLFBO;
 begin
@@ -26,7 +26,7 @@ begin
   result := 1;
 end;
 
-function FBORenderObject(fbo, obj: real): real; stdcall;
+function FBORenderObject(fbo, obj: real): real; cdecl;
 var
   fb: TGLFBO;
 begin
@@ -36,7 +36,7 @@ begin
   result := 1;
 end;
 
-function FBORenderObjectEx(fbo, obj, clearcolor, cleardepth, copycolor, copydepth: real): real; stdcall;
+function FBORenderObjectEx(fbo, obj, clearcolor, cleardepth, copycolor, copydepth: real): real; cdecl;
 var
   fb: TGLFBO;
 begin
@@ -47,7 +47,7 @@ begin
   result := 1;
 end;
 
-function FBOSetViewer(fbo, viewer: real): real; stdcall;
+function FBOSetViewer(fbo, viewer: real): real; cdecl;
 var
   fb: TGLFBO;
   v: TGLSceneViewer;
@@ -58,7 +58,7 @@ begin
   result := 1;
 end;
 
-function FBOSetOverrideMaterial(fbo, mlb: real; mtrl: pchar): real; stdcall;
+function FBOSetOverrideMaterial(fbo, mlb: real; mtrl: pchar): real; cdecl;
 var
   fb: TGLFBO;
   mlib: TGLMaterialLibrary;
@@ -75,7 +75,7 @@ begin
   result:=1;
 end;
 
-function FBOSetColorTextureFormat(fbo, tf: real): real; stdcall;
+function FBOSetColorTextureFormat(fbo, tf: real): real; cdecl;
 var
   fb: TGLFBO;
 begin

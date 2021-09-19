@@ -1,6 +1,6 @@
 // DCE functions wrapper by Hacker
 
-function DceManagerCreate: real; stdcall;
+function DceManagerCreate: real; cdecl;
 var
   DCEManager: TGLDCEManager;
 begin
@@ -9,19 +9,19 @@ begin
   Result := Integer(DCEManager);
 end;
 
-function DceManagerStep(man, dt: real): real; stdcall;
+function DceManagerStep(man, dt: real): real; cdecl;
 begin
   TGLDCEManager(trunc64(man)).Step(dt);
   Result := 1;
 end;
 
-function DceManagerSetGravity(man, grav: real): real; stdcall;
+function DceManagerSetGravity(man, grav: real): real; cdecl;
 begin
   TGLDCEManager(trunc64(man)).Gravity := grav;
   Result := 1;
 end;
 
-function DceManagerSetWorldDirection(man, x, y, z: real): real; stdcall;
+function DceManagerSetWorldDirection(man, x, y, z: real): real; cdecl;
 var
   DCEManager: TGLDCEManager;
 begin
@@ -32,19 +32,19 @@ begin
   Result := 1;
 end;
 
-function DceManagerSetWorldScale(man, scale: real): real; stdcall;
+function DceManagerSetWorldScale(man, scale: real): real; cdecl;
 begin
   TGLDCEManager(trunc64(man)).WorldScale := scale;
   Result := 1;
 end;
 
-function DceManagerSetMovementScale(man, scale: real): real; stdcall;
+function DceManagerSetMovementScale(man, scale: real): real; cdecl;
 begin
   TGLDCEManager(trunc64(man)).MovimentScale := scale;
   Result := 1;
 end;
 
-function DceManagerSetLayers(man, mode: real): real; stdcall;
+function DceManagerSetLayers(man, mode: real): real; cdecl;
 var
   DCEManager: TGLDCEManager;
 begin
@@ -59,13 +59,13 @@ begin
   Result := 1;
 end;
 
-function DceManagerSetManualStep(man, mode: real): real; stdcall;
+function DceManagerSetManualStep(man, mode: real): real; cdecl;
 begin
   TGLDCEManager(trunc64(man)).ManualStep := Boolean(trunc64(mode));
   Result := 1;
 end;
 
-function DceDynamicSetManager(obj, man: real): real; stdcall;
+function DceDynamicSetManager(obj, man: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   dyn: TGLDCEDynamic;
@@ -76,7 +76,7 @@ begin
   Result := 1;
 end;
 
-function DceDynamicSetActive(obj, mode: real): real; stdcall;
+function DceDynamicSetActive(obj, mode: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
 begin
@@ -85,47 +85,47 @@ begin
   Result := 1;
 end;
 
-function DceDynamicIsActive(obj: real): real; stdcall;
+function DceDynamicIsActive(obj: real): real; cdecl;
 begin
   Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Active);
 end;
 
-function DceDynamicSetUseGravity(obj, mode: real): real; stdcall;
+function DceDynamicSetUseGravity(obj, mode: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).UseGravity := Boolean(trunc64(mode));
   Result := 1;
 end;
 
-function DceDynamicSetLayer(obj, layer: real): real; stdcall;
+function DceDynamicSetLayer(obj, layer: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
   Result := 1;
 end;
 
-function DceDynamicGetLayer(obj: real): real; stdcall;
+function DceDynamicGetLayer(obj: real): real; cdecl;
 begin
   Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer;
 end;
 
-function DceDynamicSetSolid(obj, mode: real): real; stdcall;
+function DceDynamicSetSolid(obj, mode: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
   Result := 1;
 end;
 
-function DceDynamicSetFriction(obj, friction: real): real; stdcall;
+function DceDynamicSetFriction(obj, friction: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
   Result := 1;
 end;
 
-function DceDynamicSetBounce(obj, bounce: real): real; stdcall;
+function DceDynamicSetBounce(obj, bounce: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bounce;
   Result := 1;
 end;
 
-function DceDynamicSetSize(obj, x, y, z: real): real; stdcall;
+function DceDynamicSetSize(obj, x, y, z: real): real; cdecl;
 var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
@@ -138,7 +138,7 @@ begin
   Result := 1;
 end;
 
-function DceDynamicSetSlideOrBounce(obj, mode: real): real; stdcall;
+function DceDynamicSetSlideOrBounce(obj, mode: real): real; cdecl;
 var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
@@ -154,80 +154,80 @@ begin
   Result := 1;
 end;
 
-function DceDynamicApplyAcceleration(obj, x, y, z: real): real; stdcall;
+function DceDynamicApplyAcceleration(obj, x, y, z: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAccel(x, y, z);
   Result := 1;
 end;
 
-function DceDynamicApplyAbsAcceleration(obj, x, y, z: real): real; stdcall;
+function DceDynamicApplyAbsAcceleration(obj, x, y, z: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAbsAccel(x, y, z);
   Result := 1;
 end;
 
-function DceDynamicStopAcceleration(obj: real): real; stdcall;
+function DceDynamicStopAcceleration(obj: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAccel;
   Result := 1;
 end;
 
-function DceDynamicStopAbsAcceleration(obj: real): real; stdcall;
+function DceDynamicStopAbsAcceleration(obj: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAbsAccel;
   Result := 1;
 end;
 
-function DceDynamicJump(obj, height, speed: real): real; stdcall;
+function DceDynamicJump(obj, height, speed: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Jump(height, speed);
   Result := 1;
 end;
 
-function DceDynamicMove(obj, x, y, z, delta: real): real; stdcall;
+function DceDynamicMove(obj, x, y, z, delta: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Move(AffineVectorMake(x, y, z), delta);
   Result := 1;
 end;
 
-function DceDynamicMoveTo(obj, x, y, z, amount: real): real; stdcall;
+function DceDynamicMoveTo(obj, x, y, z, amount: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MoveTo(AffineVectorMake(x, y, z), amount);
   Result := 1;
 end;
 
-function DceDynamicSetVelocity(obj, x, y, z: real): real; stdcall;
+function DceDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := AffineVectorMake(x, y, z);
   Result := 1;
 end;
 
-function DceDynamicInGround(obj: real): real; stdcall;
+function DceDynamicInGround(obj: real): real; cdecl;
 begin
   Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).InGround);
 end;
 
-function DceDynamicSetMaxRecursionDepth(obj, depth: real): real; stdcall;
+function DceDynamicSetMaxRecursionDepth(obj, depth: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MaxRecursionDepth := trunc64(depth);
   Result := 1;
 end;
 
-function DceStaticSetManager(obj, man: real): real; stdcall;
+function DceStaticSetManager(obj, man: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Manager :=
     TGLDCEManager(trunc64(man));
   Result := 1;
 end;
 
-function DceStaticSetActive(obj, mode: real): real; stdcall;
+function DceStaticSetActive(obj, mode: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Active :=
     Boolean(trunc64(mode));
   Result := 1;
 end;
 
-function DceStaticSetShape(obj, mode: real): real; stdcall;
+function DceStaticSetShape(obj, mode: real): real; cdecl;
 var
   stat: TGLDCEStatic;
   ob: TGLBaseSceneObject;
@@ -241,13 +241,13 @@ begin
   Result := 1;
 end;
 
-function DceStaticSetLayer(obj, layer: real): real; stdcall;
+function DceStaticSetLayer(obj, layer: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
   Result := 1;
 end;
 
-function DceStaticSetSize(obj, x, y, z: real): real; stdcall;
+function DceStaticSetSize(obj, x, y, z: real): real; cdecl;
 var
   stat: TGLDCEStatic;
   ob: TGLBaseSceneObject;
@@ -260,25 +260,25 @@ begin
   Result := 1;
 end;
 
-function DceStaticSetSolid(obj, mode: real): real; stdcall;
+function DceStaticSetSolid(obj, mode: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
   Result := 1;
 end;
 
-function DceStaticSetFriction(obj, friction: real): real; stdcall;
+function DceStaticSetFriction(obj, friction: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
   Result := 1;
 end;
 
-function DceStaticSetBounceFactor(obj, bfactor: real): real; stdcall;
+function DceStaticSetBounceFactor(obj, bfactor: real): real; cdecl;
 begin
   GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bfactor;
   Result := 1;
 end;
 
-function DceDynamicGetVelocity(obj, ind: real): real; stdcall;
+function DceDynamicGetVelocity(obj, ind: real): real; cdecl;
 var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
@@ -288,18 +288,18 @@ begin
   Result := dyn.Speed[trunc64(ind)];
 end;
 
-function DceDynamicSetAbsVelocity(obj, x, y, z: real): real; stdcall;
+function DceDynamicSetAbsVelocity(obj, x, y, z: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := AffineVectorMake(x, y, z);
   Result := 1;
 end;
 
-function DceDynamicGetAbsVelocity(obj, ind: real): real; stdcall;
+function DceDynamicGetAbsVelocity(obj, ind: real): real; cdecl;
 begin
   Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed[trunc64(ind)];
 end;
 
-function DceDynamicApplyImpulse(obj, x, y, z: real): real; stdcall;
+function DceDynamicApplyImpulse(obj, x, y, z: real): real; cdecl;
 var
   imp: TAffineVector;
 begin
@@ -309,7 +309,7 @@ begin
   Result := 1;
 end;
 
-function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; stdcall;
+function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; cdecl;
 var
   imp: TAffineVector;
 begin

@@ -1,4 +1,4 @@
-function DummycubeCreate(parent: real): real; stdcall;
+function DummycubeCreate(parent: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
 begin
@@ -9,7 +9,7 @@ begin
   result:=Integer(GLDummyCube1);
 end;
 
-function DummycubeAmalgamate(obj,mode: real): real; stdcall;
+function DummycubeAmalgamate(obj,mode: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
 begin
@@ -18,7 +18,7 @@ begin
   result:=1;
 end;
 
-function DummycubeSetCameraMode(obj,cim: real): real; stdcall;
+function DummycubeSetCameraMode(obj,cim: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
 begin
@@ -29,7 +29,7 @@ begin
   result:=1;
 end;
 
-function DummycubeSetVisible(obj,mode: real): real; stdcall;
+function DummycubeSetVisible(obj,mode: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
 begin
@@ -38,7 +38,7 @@ begin
   result:=1;
 end;
 
-function DummycubeSetEdgeColor(obj,color: real): real; stdcall;
+function DummycubeSetEdgeColor(obj,color: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
   GLColor: TGLColor;
@@ -50,7 +50,7 @@ begin
   result:=1;
 end;
 
-function DummycubeSetCubeSize(obj,size: real): real; stdcall;
+function DummycubeSetCubeSize(obj,size: real): real; cdecl;
 var
   GLDummyCube1: TGLDummyCube;
 begin

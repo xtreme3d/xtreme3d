@@ -1,4 +1,4 @@
-function MirrorCreate(target, parent: real): real; stdcall;
+function MirrorCreate(target, parent: real): real; cdecl;
 var
   mi: TGLMirror;
 begin
@@ -10,7 +10,7 @@ begin
   Result := Integer(mi);
 end;
 
-function MirrorSetObject(mirror, target: real): real; stdcall;
+function MirrorSetObject(mirror, target: real): real; cdecl;
 var
   mi: TGLMirror;
 begin
@@ -19,7 +19,7 @@ begin
   Result := 1.0;
 end;
 
-function MirrorSetOptions(mirror, stencil, opaque, planeclipping, clearzbuffer: real): real; stdcall;
+function MirrorSetOptions(mirror, stencil, opaque, planeclipping, clearzbuffer: real): real; cdecl;
 var
   mi: TGLMirror;
 begin
@@ -32,7 +32,7 @@ begin
   Result := 1.0;
 end;
 
-function MirrorSetShape(mirror, ms: real): real; stdcall;
+function MirrorSetShape(mirror, ms: real): real; cdecl;
 var
   mi: TGLMirror;
 begin
@@ -42,7 +42,7 @@ begin
   Result := 1.0;
 end;
 
-function MirrorSetDiskOptions(mirror, radius, slices: real): real; stdcall;
+function MirrorSetDiskOptions(mirror, radius, slices: real): real; cdecl;
 var
   mi: TGLMirror;
 begin

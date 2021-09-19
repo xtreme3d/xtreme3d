@@ -1,4 +1,4 @@
-function FpsManagerCreate: real; stdcall;
+function FpsManagerCreate: real; cdecl;
 var
   FPSManager: TGLFPSMovementManager;
 begin
@@ -6,19 +6,19 @@ begin
   Result := Integer(FPSManager);
 end;
 
-function FpsManagerSetNavigator(man, nav: real): real; stdcall;
+function FpsManagerSetNavigator(man, nav: real): real; cdecl;
 begin
   TGLFPSMovementManager(trunc64(man)).Navigator := TGLNavigator(trunc64(nav));
   Result := 1;
 end;
 
-function FpsManagerSetMovementScale(man, scale: real): real; stdcall;
+function FpsManagerSetMovementScale(man, scale: real): real; cdecl;
 begin
   TGLFPSMovementManager(trunc64(man)).MovementScale := scale;
   Result := 1;
 end;
 
-function FpsManagerAddMap(man, ffm: real): real; stdcall;
+function FpsManagerAddMap(man, ffm: real): real; cdecl;
 var
   freeform: TGLFreeform;
 begin
@@ -27,19 +27,19 @@ begin
   Result := 1;
 end;
 
-function FpsManagerRemoveMap(man, ffm: real): real; stdcall;
+function FpsManagerRemoveMap(man, ffm: real): real; cdecl;
 begin
   TGLFPSMovementManager(trunc64(man)).Maps.findMap(TGLFreeform(trunc64(ffm))).Free;
   Result := 1;
 end;
 
-function FpsManagerMapSetCollisionGroup(man, ffm, group: real): real; stdcall;
+function FpsManagerMapSetCollisionGroup(man, ffm, group: real): real; cdecl;
 begin
   TGLFPSMovementManager(trunc64(man)).Maps.findMap(TGLFreeform(trunc64(ffm))).CollisionGroup := trunc64(group);
   Result := 1;
 end;
 
-function FpsSetManager(obj, man: real): real; stdcall;
+function FpsSetManager(obj, man: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -50,7 +50,7 @@ begin
   Result := 1;
 end;
 
-function FpsSetCollisionGroup(obj, group: real): real; stdcall;
+function FpsSetCollisionGroup(obj, group: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -61,7 +61,7 @@ begin
   Result := 1;
 end;
 
-function FpsSetSphereRadius(obj, radius: real): real; stdcall;
+function FpsSetSphereRadius(obj, radius: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -72,7 +72,7 @@ begin
   Result := 1;
 end;
 
-function FpsSetGravity(obj, mode: real): real; stdcall;
+function FpsSetGravity(obj, mode: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -83,7 +83,7 @@ begin
   Result := 1;
 end;
 
-function FpsMove(obj, spd: real): real; stdcall;
+function FpsMove(obj, spd: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -94,7 +94,7 @@ begin
   Result := 1;
 end;
 
-function FpsStrafe(obj, spd: real): real; stdcall;
+function FpsStrafe(obj, spd: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -105,7 +105,7 @@ begin
   Result := 1;
 end;
 
-function FpsLift(obj, spd: real): real; stdcall;
+function FpsLift(obj, spd: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
@@ -116,7 +116,7 @@ begin
   Result := 1;
 end;
 
-function FpsGetVelocity(obj, ind: real): real; stdcall;
+function FpsGetVelocity(obj, ind: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;

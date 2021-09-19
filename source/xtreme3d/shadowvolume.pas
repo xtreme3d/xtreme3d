@@ -1,4 +1,4 @@
-function ShadowvolumeCreate(parent: real): real; stdcall;
+function ShadowvolumeCreate(parent: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -9,7 +9,7 @@ begin
   result := Integer(sv);
 end;
 
-function ShadowvolumeSetActive(shadowvolume, active: real): real; stdcall;
+function ShadowvolumeSetActive(shadowvolume, active: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -18,7 +18,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeAddLight(shadowvolume, light: real): real; stdcall;
+function ShadowvolumeAddLight(shadowvolume, light: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -27,7 +27,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeRemoveLight(shadowvolume, light: real): real; stdcall;
+function ShadowvolumeRemoveLight(shadowvolume, light: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -36,7 +36,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeAddOccluder(shadowvolume, obj: real): real; stdcall;
+function ShadowvolumeAddOccluder(shadowvolume, obj: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -45,7 +45,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeRemoveOccluder(shadowvolume, obj: real): real; stdcall;
+function ShadowvolumeRemoveOccluder(shadowvolume, obj: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -54,7 +54,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeSetDarkeningColor(shadowvolume, color, alpha: real): real; stdcall;
+function ShadowvolumeSetDarkeningColor(shadowvolume, color, alpha: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -64,7 +64,7 @@ begin
   result := 1.0;
 end;
 
-function ShadowvolumeSetMode(shadowvolume, svm: real): real; stdcall;
+function ShadowvolumeSetMode(shadowvolume, svm: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
@@ -77,7 +77,7 @@ end;
 
 function ShadowvolumeSetOptions(
   shadowvolume, showvolumes, cachesilhouettes,
-  scissorclips, worldscissorclip: real): real; stdcall;
+  scissorclips, worldscissorclip: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin

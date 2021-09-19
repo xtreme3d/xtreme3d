@@ -1,4 +1,4 @@
-function PipeCreate(divs,slic, parent: real): real; stdcall;
+function PipeCreate(divs,slic, parent: real): real; cdecl;
 var
   pipe: TGLPipe;
 begin
@@ -13,7 +13,7 @@ begin
   result:=Integer(pipe);
 end;
 
-function PipeAddNode(pipe, x,y,z: real): real; stdcall;
+function PipeAddNode(pipe, x,y,z: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -22,7 +22,7 @@ begin
   result := 1;
 end;
 
-function PipeSetDivision(pipe, divs: real): real; stdcall;
+function PipeSetDivision(pipe, divs: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -31,7 +31,7 @@ begin
   result := 1;
 end;
 
-function PipeSetSplineMode(pipe, mode: real): real; stdcall;
+function PipeSetSplineMode(pipe, mode: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -44,7 +44,7 @@ begin
   result := 1;
 end;
 
-function PipeDeleteNode(pipe, ind: real): real; stdcall;
+function PipeDeleteNode(pipe, ind: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -53,7 +53,7 @@ begin
   result := 1;
 end;
 
-function PipeSetRadius(pipe, rad: real): real; stdcall;
+function PipeSetRadius(pipe, rad: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -62,7 +62,7 @@ begin
   result := 1;
 end;
 
-function PipeSetNode(pipe,ind, x,y,z: real): real; stdcall;
+function PipeSetNode(pipe,ind, x,y,z: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin
@@ -73,7 +73,7 @@ begin
   result := 1;
 end;
 
-function PipeSetSlices(pipe,slic: real): real; stdcall;
+function PipeSetSlices(pipe,slic: real): real; cdecl;
 var
   pipeObj: TGLPipe;
 begin

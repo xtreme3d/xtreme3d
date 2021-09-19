@@ -1,4 +1,4 @@
-function OctreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; stdcall;
+function OctreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; cdecl;
 var
   octree: TOctreeSpacePartition;
 begin
@@ -11,7 +11,7 @@ begin
   result := Integer(octree);
 end;
 
-function QuadtreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; stdcall;
+function QuadtreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; cdecl;
 var
   quadtree: TQuadtreeSpacePartition;
 begin
@@ -24,7 +24,7 @@ begin
   result := Integer(quadtree);
 end;
 
-function PartitionDestroy(tree: real): real; stdcall;
+function PartitionDestroy(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
 begin
@@ -33,7 +33,7 @@ begin
   result := 1.0;
 end;
 
-function PartitionAddLeaf(tree, obj: real): real; stdcall;
+function PartitionAddLeaf(tree, obj: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   tobj: TSceneObj;
@@ -43,7 +43,7 @@ begin
   result := Integer(tobj);
 end;
 
-function PartitionLeafChanged(leaf: real): real; stdcall;
+function PartitionLeafChanged(leaf: real): real; cdecl;
 var
   pleaf: TSpacePartitionLeaf;
 begin
@@ -52,7 +52,7 @@ begin
   result := 1.0;
 end;
 
-function PartitionQueryFrustum(tree, viewer: real): real; stdcall;
+function PartitionQueryFrustum(tree, viewer: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   v: TGLSceneViewer;
@@ -66,7 +66,7 @@ begin
   result := t.QueryFrustum(frustum);
 end;
 
-function PartitionQueryLeaf(tree, leaf: real): real; stdcall;
+function PartitionQueryLeaf(tree, leaf: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   pleaf: TSpacePartitionLeaf;
@@ -76,7 +76,7 @@ begin
   result := t.QueryLeaf(pleaf);
 end;
 
-function PartitionQueryAABB(tree, obj: real): real; stdcall;
+function PartitionQueryAABB(tree, obj: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   o: TGLBaseSceneObject;
@@ -86,7 +86,7 @@ begin
   result := t.QueryAABB(o.AxisAlignedBoundingBox);
 end;
 
-function PartitionQueryBSphere(tree, obj: real): real; stdcall;
+function PartitionQueryBSphere(tree, obj: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   o: TGLBaseSceneObject;
@@ -99,7 +99,7 @@ begin
   result := t.QueryBSphere(bs);
 end;
 
-function PartitionGetNodeTests(tree: real): real; stdcall;
+function PartitionGetNodeTests(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
 begin
@@ -107,7 +107,7 @@ begin
   result := t.QueryNodeTests;
 end;
 
-function PartitionGetNodeCount(tree: real): real; stdcall;
+function PartitionGetNodeCount(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
 begin
@@ -115,7 +115,7 @@ begin
   result := t.GetNodeCount;
 end;
 
-function PartitionGetResult(tree, ind: real): real; stdcall;
+function PartitionGetResult(tree, ind: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   sobj: TSceneObj;
@@ -125,7 +125,7 @@ begin
   result := Integer(sobj.Obj);
 end;
 
-function PartitionGetResultCount(tree: real): real; stdcall;
+function PartitionGetResultCount(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
 begin
@@ -133,7 +133,7 @@ begin
   result := t.QueryResult.Count;
 end;
 
-function PartitionResultShow(tree: real): real; stdcall;
+function PartitionResultShow(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   sobj: TSceneObj;
@@ -148,7 +148,7 @@ begin
   result := 1.0;
 end;
 
-function PartitionResultHide(tree: real): real; stdcall;
+function PartitionResultHide(tree: real): real; cdecl;
 var
   t: TSectoredSpacePartition;
   sobj: TSceneObj;

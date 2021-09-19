@@ -1,4 +1,4 @@
-function MakeColorRGB(r, g, b: real): real; stdcall;
+function MakeColorRGB(r, g, b: real): real; cdecl;
 var
   rb, gb, bb: Byte;
 begin
@@ -8,7 +8,7 @@ begin
   result := Integer(RGB(rb, gb, bb));
 end;
 
-function MakeColorRGBFloat(r, g, b: real): real; stdcall;
+function MakeColorRGBFloat(r, g, b: real): real; cdecl;
 var
   rb, gb, bb: Byte;
 begin

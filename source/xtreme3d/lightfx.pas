@@ -1,4 +1,4 @@
-function LightFXCreate(obj: real): real; stdcall;
+function LightFXCreate(obj: real): real; cdecl;
 var
   ffx: TGLLightFX;
   objct: TGLBaseSceneObject;

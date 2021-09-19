@@ -1,4 +1,4 @@
-function PolygonCreate(parent: real): real; stdcall;
+function PolygonCreate(parent: real): real; cdecl;
 var
   poly: TGLPolygon;
 begin
@@ -9,7 +9,7 @@ begin
   result := Integer(poly);
 end;
 
-function PolygonAddVertex(polygon, x, y, z: real): real; stdcall;
+function PolygonAddVertex(polygon, x, y, z: real): real; cdecl;
 var
   poly: TGLPolygon;
 begin
@@ -18,7 +18,7 @@ begin
   result := poly.Nodes.Count-1;
 end;
 
-function PolygonSetVertexPosition(polygon, vertex, x, y, z: real): real; stdcall;
+function PolygonSetVertexPosition(polygon, vertex, x, y, z: real): real; cdecl;
 var
   poly: TGLPolygon;
 begin
@@ -27,7 +27,7 @@ begin
   result := 1;
 end;
 
-function PolygonDeleteVertex(polygon, vertex: real): real; stdcall;
+function PolygonDeleteVertex(polygon, vertex: real): real; cdecl;
 var
   poly: TGLPolygon;
 begin

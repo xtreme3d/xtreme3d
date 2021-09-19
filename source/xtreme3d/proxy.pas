@@ -1,4 +1,4 @@
-function ProxyObjectCreate(target, parent: real): real; stdcall;
+function ProxyObjectCreate(target, parent: real): real; cdecl;
 var
   pr: TGLProxyObject;
 begin
@@ -12,7 +12,7 @@ begin
 end;
 
 function ProxyObjectSetOptions(proxy,
-  copyeffects, copyobjects, copytransform: real): real; stdcall;
+  copyeffects, copyobjects, copytransform: real): real; cdecl;
 var
   pr: TGLProxyObject;
 begin
@@ -24,7 +24,7 @@ begin
   result := 1.0;
 end;
 
-function ProxyObjectSetTarget(proxy, target: real): real; stdcall;
+function ProxyObjectSetTarget(proxy, target: real): real; cdecl;
 var
   pr: TGLProxyObject;
 begin
@@ -33,7 +33,7 @@ begin
   result := 1.0;
 end;
 
-function MultiProxyObjectCreate(parent: real): real; stdcall;
+function MultiProxyObjectCreate(parent: real): real; cdecl;
 var
   mp: TGLMultiProxy;
 begin
@@ -44,7 +44,7 @@ begin
   result := Integer(mp);
 end;
 
-function MultiProxyObjectAddTarget(mproxy, target, mindist, maxdist: real): real; stdcall;
+function MultiProxyObjectAddTarget(mproxy, target, mindist, maxdist: real): real; cdecl;
 var
   mp: TGLMultiProxy;
   ob: TGLBaseSceneObject;
@@ -55,7 +55,7 @@ begin
   result := 1.0;
 end;
 
-function ActorProxyObjectCreate(actor, parent: real): real; stdcall;
+function ActorProxyObjectCreate(actor, parent: real): real; cdecl;
 var
   p: TGLActorProxy;
 begin
@@ -67,7 +67,7 @@ begin
   result := Integer(p);
 end;
 
-function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; stdcall;
+function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; cdecl;
 var
   p: TGLActorProxy;
 begin
@@ -76,7 +76,7 @@ begin
   result := 1.0;
 end;
 
-function ActorProxyObjectSetAnimationRange(proxy, startf, endf: real): real; stdcall;
+function ActorProxyObjectSetAnimationRange(proxy, startf, endf: real): real; cdecl;
 var
   p: TGLActorProxy;
 begin
@@ -85,7 +85,7 @@ begin
   result := 1.0;
 end;
 
-function ActorProxyObjectSetInterval(proxy, interval: real): real; stdcall;
+function ActorProxyObjectSetInterval(proxy, interval: real): real; cdecl;
 var
   p: TGLActorProxy;
 begin
