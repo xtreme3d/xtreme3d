@@ -43,6 +43,7 @@ teapot = TeapotCreate(shadowObjects);
 ObjectScale(teapot, 3, 3, 3);
 ObjectSetPosition(teapot, 0, 1, 0);
 MaterialCreate("mTeapot", "textures/envmap.jpg");
+MaterialSetFaceCulling("mTeapot", fcNoCull);
 MaterialSetTextureMappingMode("mTeapot", 3);
 ObjectSetMaterial(teapot, "mTeapot");
 
