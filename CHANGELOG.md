@@ -1,7 +1,7 @@
 Xtreme3D version history
 ========================
-v3.10.0 (by Gecko) - ??/??/2021
---------------------------------
+v3.9.1 (by Gecko) - ??/??/2021
+------------------------------
 - Exported functions now use cdecl convention instead of stdcall
 - ViewerCreate checks parent window handle and shows error message if the window is not valid
 - GameMaker Studio 2 support added.
