@@ -1,12 +1,12 @@
 Xtreme3D v3
 ===========
-Xtreme3D is a 3D graphics engine for Game Maker 8. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate in Game Maker, a game design tool that was intended mainly for 2D games and provides limited built-in 3D capabilities.
+Xtreme3D is a cross-language 3D graphics engine based on GLScene. It has a rich feature set, including custom shaders, wide variety of asset formats support, built-in effects, physics, collision and ray casting.
 
-Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
+Xtreme3D originally was created for Game Maker. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate in a tool that was intended mainly for 2D games and provides limited built-in 3D capabilities. Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
 
 The engine is written in Delphi and based on a modified version of [GLScene](https://sourceforge.net/projects/glscene) 1.0.0.0714. The code should be compiled with Delphi 7 (other Delphi versions are not tested).
 
-Despite Xtreme3D was originally designed for Game Maker, you can use it with any language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python), [D](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) and [LuaJIT](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/lua) bindings which are automatically generated from engine's source code.
+You can use Xtreme3D with almost any programming language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python), [D](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) and [LuaJIT](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/lua) bindings which are automatically generated from engine's source code.
 
 Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).
 
