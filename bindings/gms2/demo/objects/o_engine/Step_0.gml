@@ -28,4 +28,7 @@ else {
 }
 
 Update(dt);
+ObjectHide(global.front);
+ShadowMapRender(shadowMap);
+ObjectShow(global.front);
 ViewerRender(viewer);

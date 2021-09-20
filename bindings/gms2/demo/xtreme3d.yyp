@@ -51,6 +51,8 @@
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"OpenFBX.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/textures","resourceVersion":"1.0","name":"ground-diffuse.jpg","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/textures","resourceVersion":"1.0","name":"ground-normal.jpg","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/fonts","resourceVersion":"1.0","name":"NotoSans-Regular.ttf","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/fonts","resourceVersion":"1.0","name":"NOTOSANS-LICENSE.txt","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.4.580",
