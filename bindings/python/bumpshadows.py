@@ -9,7 +9,7 @@ from framework import *
   Bump/parallax mapping + shadows
   -------------------------------
   Author: Gecko
-  Xtreme3D version: 3.8
+  Xtreme3D version: 3.8+
   Python version (tested): 2.7.11
   License: Public Domain (or CC-0)
   -------------------------
@@ -220,7 +220,7 @@ class CSMApplication(Framework):
 
         framerate = int(ViewerGetFramesPerSecond(self.viewer))
         
-        HUDTextSetText(self.text, 'Xtreme3D 3.8\r' + 'FPS: ' + str(framerate) + '\rPress <Enter> to restart light movement');
+        HUDTextSetText(self.text, 'Xtreme3D 3\r' + 'FPS: ' + str(framerate) + '\rPress <Enter> to restart light movement');
             
         Update(dt)
     
@@ -242,5 +242,5 @@ class CSMApplication(Framework):
             else:
                 self.screenNum += 1
 
-app = CSMApplication(1280, 720, 'Xtreme3D 3.8 Bump/Parallax Mapping + Shadows Demo')
+app = CSMApplication(1280, 720, 'Xtreme3D 3 Bump/Parallax Mapping + Shadows Demo')
 app.run()

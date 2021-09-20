@@ -9,7 +9,7 @@ from framework import *
   Water
   -------------------------------
   Author: Gecko
-  Xtreme3D version: 3.8
+  Xtreme3D version: 3.8+
   Python version (tested): 2.7.11
   License: Public Domain (or CC-0)
   -------------------------
@@ -242,7 +242,7 @@ class CSMApplication(Framework):
 
         framerate = int(ViewerGetFramesPerSecond(self.viewer))
         
-        HUDTextSetText(self.text, 'Xtreme3D 3.8\r' + 'FPS: ' + str(framerate));
+        HUDTextSetText(self.text, 'Xtreme3D 3\r' + 'FPS: ' + str(framerate));
             
         Update(dt)
     
@@ -270,5 +270,5 @@ class CSMApplication(Framework):
             else:
                 self.screenNum += 1
 
-app = CSMApplication(1280, 720, 'Xtreme3D 3.8 Water Demo')
+app = CSMApplication(1280, 720, 'Xtreme3D 3 Water Demo')
 app.run()

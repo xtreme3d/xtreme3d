@@ -10,7 +10,7 @@ from framework import *
   Dynamic Terrain Editing Demo
   -------------------------
   Author: Gecko
-  Xtreme3D version: 3.8
+  Xtreme3D version: 3.8+
   Python version (tested): 2.7.11
   License: Public Domain (or CC-0)
   -------------------------
@@ -182,7 +182,7 @@ class MyApplication(Framework):
         framerate = int(ViewerGetFramesPerSecond(self.viewer))
         
         HUDTextSetText(self.text, 
-            'Xtreme3D 3.8\r' + 'FPS: '+ str(framerate) +
+            'Xtreme3D 3\r' + 'FPS: '+ str(framerate) +
             '\rPress <LMB> to increase height' +
             '\rPress <RMB> to lower height')
 
@@ -202,5 +202,5 @@ class MyApplication(Framework):
             else:
                 self.screenNum += 1
 
-app = MyApplication(1280, 720, 'Xtreme3D 3.8 Dynamic Terrain Demo')
+app = MyApplication(1280, 720, 'Xtreme3D 3 Dynamic Terrain Demo')
 app.run()

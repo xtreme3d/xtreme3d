@@ -30,7 +30,7 @@ if not os.path.exists(outputDirectory):
 
 declStrings.append("import ctypes")
 declStrings.append("")
-declStrings.append("x3d = ctypes.windll.LoadLibrary(\'xtreme3d.dll\')")
+declStrings.append("x3d = ctypes.CDLL(\'xtreme3d.dll\')")
 declStrings.append("")
 
 for filename in os.listdir(directory):
@@ -47,7 +47,7 @@ for filename in os.listdir(directory):
             tokens = re.findall(r"[\w']+", line)
 
             callConv = tokens[-1]
-            if callConv == "stdcall":
+            if callConv == "stdcall" or callConv == "cdecl":
                 name = tokens[1]
                 retType = tokens[-2]
                 numArgTokens = len(tokens) - 4

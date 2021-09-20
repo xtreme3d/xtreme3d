@@ -9,7 +9,7 @@ from framework import *
   Kraft Physics Demo
   ------------------
   Author: Gecko
-  Xtreme3D version: 3.8
+  Xtreme3D version: 3.8+
   Python version (tested): 2.7.11
   License: Public Domain (or CC-0)
   -------------------------
@@ -233,5 +233,5 @@ class MyApplication(Framework):
             else:
                 self.screenNum += 1
 
-app = MyApplication(1280, 720, 'Xtreme3D 3.8 Kraft Demo')
+app = MyApplication(1280, 720, 'Xtreme3D 3 Kraft Demo')
 app.run()

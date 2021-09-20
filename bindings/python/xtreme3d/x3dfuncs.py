@@ -1,6 +1,6 @@
 import ctypes
 
-x3d = ctypes.windll.LoadLibrary('xtreme3d.dll')
+x3d = ctypes.CDLL('xtreme3d.dll')
 
 # actor.pas
 x3d.ActorCreate.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double]
