@@ -39,10 +39,10 @@ ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "");
 MaterialLoadTextureEx("mFloor", "textures/ground-diffuse.jpg", 0);
 MaterialLoadTextureEx("mFloor", "textures/ground-normal.jpg", 1);
-MaterialSetShininess("mFloor", 32);
-MaterialSetAmbientColor("mFloor", c_black, 1);
+MaterialSetShininess("mFloor", 16);
+MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
-MaterialSetSpecularColor("mFloor", c_ltgray, 1);
+MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
