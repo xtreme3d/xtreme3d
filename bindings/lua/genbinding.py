@@ -47,7 +47,7 @@ for filename in os.listdir(directory):
         if line.startswith("function"):
             tokens = re.findall(r"[\w']+", line)
             callConv = tokens[-1]
-            if callConv == "stdcall":
+            if callConv == "stdcall" or callConv == "cdecl":
                 name = tokens[1]
                 retType = tokens[-2]
                 numArgTokens = len(tokens) - 4

@@ -578,6 +578,8 @@ ffi.cdef[[
     double ObjectCopy(double, double);
     double ObjectInFrustum(double, double);
     double ObjectFindByName(char*);
+    double ObjectIgnoreDepthBuffer(double, double);
+    double ObjectIsPicked(double, double, double, double);
     // objecthash.pas
     double ObjectHashCreate();
     double ObjectHashSetItem(double, char*, double);
