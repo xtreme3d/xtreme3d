@@ -575,8 +575,8 @@ function dll_init(dll) {
 	global._ObjectCopy = external_define(dll, "ObjectCopy", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectInFrustum = external_define(dll, "ObjectInFrustum", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectFindByName = external_define(dll, "ObjectFindByName", dll_cdecl, ty_real, 1, ty_string);
-	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_stdcall, ty_real, 2, ty_real, ty_real);
-	global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_stdcall, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	// objecthash.pas
 	global._ObjectHashCreate = external_define(dll, "ObjectHashCreate", dll_cdecl, ty_real, 0);
 	global._ObjectHashSetItem = external_define(dll, "ObjectHashSetItem", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);

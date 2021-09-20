@@ -908,7 +908,7 @@ begin
   result:=Integer(scene.FindSceneObject(name));
 end;
 
-function ObjectIgnoreDepthBuffer(obj, mode: real): real; stdcall;
+function ObjectIgnoreDepthBuffer(obj, mode: real): real; cdecl;
 var
   obj1: TGLBaseSceneObject;
 begin
@@ -920,7 +920,7 @@ begin
   result:=1;
 end;
 
-function ObjectIsPicked(obj, viewer, x, y: real): real; stdcall;
+function ObjectIsPicked(obj, viewer, x, y: real): real; cdecl;
 var
   viewer1: TGLSceneViewer; 
   obj1: TGLBaseSceneObject;

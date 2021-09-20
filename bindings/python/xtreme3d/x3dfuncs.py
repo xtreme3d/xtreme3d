@@ -2800,6 +2800,16 @@ x3d.ObjectFindByName.restype = ctypes.c_double
 def ObjectFindByName(aName):
     return x3d.ObjectFindByName(aName)
 
+x3d.ObjectIgnoreDepthBuffer.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ObjectIgnoreDepthBuffer.restype = ctypes.c_double
+def ObjectIgnoreDepthBuffer(aObj, aMode):
+    return x3d.ObjectIgnoreDepthBuffer(aObj, aMode)
+
+x3d.ObjectIsPicked.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ObjectIsPicked.restype = ctypes.c_double
+def ObjectIsPicked(aObj, aViewer, aX, aY):
+    return x3d.ObjectIsPicked(aObj, aViewer, aX, aY)
+
 
 # objecthash.pas
 x3d.ObjectHashCreate.argtypes = []

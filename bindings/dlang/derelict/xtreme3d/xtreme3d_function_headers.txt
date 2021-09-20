@@ -573,6 +573,8 @@ _x3d_funcDD_D ObjectExportAbsoluteMatrix;
 _x3d_funcDD_D ObjectCopy;
 _x3d_funcDD_D ObjectInFrustum;
 _x3d_funcP_D ObjectFindByName;
+_x3d_funcDD_D ObjectIgnoreDepthBuffer;
+_x3d_funcDDDD_D ObjectIsPicked;
 
 _x3d_func0_D ObjectHashCreate;
 _x3d_funcDPD_D ObjectHashSetItem;

@@ -573,6 +573,8 @@ bindFunc(cast(void**)&ObjectExportAbsoluteMatrix, "ObjectExportAbsoluteMatrix");
 bindFunc(cast(void**)&ObjectCopy, "ObjectCopy");
 bindFunc(cast(void**)&ObjectInFrustum, "ObjectInFrustum");
 bindFunc(cast(void**)&ObjectFindByName, "ObjectFindByName");
+bindFunc(cast(void**)&ObjectIgnoreDepthBuffer, "ObjectIgnoreDepthBuffer");
+bindFunc(cast(void**)&ObjectIsPicked, "ObjectIsPicked");
 
 bindFunc(cast(void**)&ObjectHashCreate, "ObjectHashCreate");
 bindFunc(cast(void**)&ObjectHashSetItem, "ObjectHashSetItem");
