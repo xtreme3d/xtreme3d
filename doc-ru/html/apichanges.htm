@@ -17,14 +17,14 @@
 <BR>- portal culling'а. Как он работал (и работал ли вообще) в прежней версии движка, непонятно, поэтому эта функциональность не была реализована.
 <BR>
 <BR>Функции, которых больше нет в Xtreme3D 3.x:
-<BR>- LoadB3D (функция работала не для всех файлов формата B3D, сейчас этот формат загружается обычным способом, через FreeformCreate)
+<BR>- LoadB3D (сейчас этот формат загружается стандартным способом, через FreeformCreate)
 <BR>- ClearZones, ZonesVisible, CullZones, ZoneAddPortal, ZoneObjectInZone, ZoneGetCurrent, ZoneGetNew, ZoneAdjustSize, CreateZones, ZoneGetPortalCount, ZoneGetPortal
 <BR>- TextSetColor, TextSetFont, TextSetText (появились соответствующие функции для каждого типа текста)
 <BR>- FreeformSetSecondTextureCoords, MeshOptimize, MeshSmoothFaces
 <BR>- ObjectAlignToCamera, ObjectGetAtXY, ObjectSetDiffuseColor, ObjectStructureChanged, ObjectClueToBone
 <BR>- ObjectIsClipped (функция обратна ObjectInFrustrum по своему назначению)
 <BR>- MaterialGetFromLib
-<BR>- MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete (система TextureEx была переписана для совместимости с шейдерами, и API был изменен)
+<BR>- MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete (вся система TextureEx была переделана для совместимости с шейдерами)
 <BR>- ThorFXSetTargetAsObject
 <BR>- DceGetGravity, DceVelocityCollided, DceGravityCollided, DceCountCollisions, DceGetCollidedObject, DceGetCollisionPosition, DceGetCollisionNormal
 <BR>- FpsCountCollisions, FpsClearCollisions, FpsGetCollisionPosition, FpsGetCollisionNormal, FpsGetCollidedObject

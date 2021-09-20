@@ -20,7 +20,7 @@
 <BR><A class=funclink href=faq.htm#q8>- Почему при загрузке моделей не загружаются текстуры?</A>
 <BR><A class=funclink href=faq.htm#q9>- Что такое Манекены (Dummycubes) и для чего они нужны?</A>
 <BR><A class=funclink href=faq.htm#q10>- Почему в Xtreme3D не работают события мыши?</A>
-<BR><A class=funclink href=faq.htm#q11>- Как растянуть окно игры на весь экран? Опция Start in full-screen mode не работает!</A>
+<BR><A class=funclink href=faq.htm#q11>- Как растянуть окно игры на весь экран в Game Maker 8? Опция Start in full-screen mode не работает!</A>
 <BR><A class=funclink href=faq.htm#q12>- Как сделать проверку столкновений?</A>
 <BR><A class=funclink href=faq.htm#q13>- Как получить реалистичную перспективу камеры?</A>
 <BR><A class=funclink href=faq.htm#q14>- Как получить имена материалов, которые загружаются автоматически вместе с моделью?</A>
@@ -34,6 +34,7 @@
 <BR><A class=funclink href=faq.htm#q22>- В каких средах можно использовать Xtreme3D? Есть ли поддержка GameMaker Studio?</A>
 <BR><A class=funclink href=faq.htm#q23>- Почему при использовании Xtreme3D окно игры мерцает?</A>
 <BR><A class=funclink href=faq.htm#q24>- Как настроить Xtreme3D под GameMaker Studio 2?</A>
+<BR><A class=funclink href=faq.htm#q25>- Почему не работает BumpShader? Объект закрашивается черным / не видны текстуры / шейдер отображается неправильно.</A>
 <BR>
 <BR>
 <A name="q1"></A>
@@ -213,6 +214,34 @@ Xtreme3D основан на устаревших графических технологиях (OpenGL 1.x/2.x) и, конеч
 проблему с мерцанием экрана). Добавьте образец объекта o_engine в комнату.
 <BR>Инициализируйте библиотеку, как обычно, вызовом dll_init("xtreme3d.dll") в начале события Create. Все, теперь можно создавать объекты Xtreme3D и управлять ими! 
 Принципы работы с Xtreme3D, названия функций и констант не изменились, так что вы легко можете портировать на GameMaker Studio любой из старых примеров.
+</A>
+<BR>
+<BR>
+<A name="q25"></A>
+<A><BR><B>25. Почему не работает BumpShader? Объект закрашивается черным / не видны текстуры / шейдер отображается неправильно.</B>
+<BR>Если вы не выставляли никакие специфические настройки шейдера, то обычно это означает, что вы не задали необходимые настройки материала. Нужно обязательно указать все компоненты цвета материала 
+(MaterialSetAmbientColor, MaterialSetDiffuseColor, MaterialSetSpecularColor) и значение зеркального блеска (MaterialSetShininess), например:
+<BR>
+<BR>MaterialSetAmbientColor("material", c_black, 1);
+<BR>MaterialSetDiffuseColor("material", c_white, 1);
+<BR>MaterialSetSpecularColor("material", c_ltgray, 1);
+<BR>MaterialSetShininess("material", 32);
+<BR>
+<BR>Также, если у вашего объекта нет собственных тангент-векторов (обычно так бывает для Актеров и встроенных примитивов Xtreme3D), то нужно переключиться на автоматическое пространство касательных:
+<BR>
+<BR>BumpShaderUseAutoTangentSpace(shader, true);
+<BR>
+<BR>Убедитесь, что в материале есть, как минимум, диффузная текстура (в слоте 0) и карта нормалей (в слоте 1). Карта нормалей должна быть в пространстве касательных.
+<BR>
+<BR>MaterialCreate("material", "");
+<BR>MaterialLoadTextureEx("material", "textures/diffuse.png", 0);
+<BR>MaterialLoadTextureEx("material", "textures/normal.png", 1);
+<BR>BumpShaderSetDiffuseTexture(shader, "");
+<BR>BumpShaderSetNormalTexture(shader, "");
+<BR>
+<BR>Наконец, убедитесь, что шейдер использует количество источников света больше нуля (рекомендуется 8, так как это максимальное количество источников света, которые учитываются при рендеринге одного объекта):
+<BR>
+<BR>BumpShaderSetMaxLights(bump, 8);
 </A>
 
 <BR>

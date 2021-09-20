@@ -50,6 +50,8 @@
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"ode.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"xtreme3d.dll","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"OpenFBX.dll","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/textures","resourceVersion":"1.0","name":"ground-diffuse.jpg","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/textures","resourceVersion":"1.0","name":"ground-normal.jpg","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.4.580",

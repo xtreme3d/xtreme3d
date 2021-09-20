@@ -197,7 +197,9 @@
 <H1 class=name>MultiMaterialShaderCreate</H1>
 <A class=type>real</A><A> = </A><A class=function>MultiMaterialShaderCreate</A><A>( matlib as </A><A class=type>real</A><A> );</A>
 <BR><A>Создает мультиматериальный шейдер и возвращает его id. Этот шейдер позволяет создать материал, состоящий из нескольких слоев других материалов, с собственными текстурами и параметрами. Эти материалы загружаются из отдельной библиотеки.
-<BR>Этот чрезвычайно мощный шейдер будет главным образом полезен для имитации поверхностей, состоящих из нескольких веществ с различными свойствами: например, деревянный ящик, окованный металлом, или камень с вкраплениями лавы или кристаллов. Но ему можно найти и другие применения.</A>
+<BR>Этот чрезвычайно мощный шейдер будет главным образом полезен для имитации поверхностей, состоящих из нескольких веществ с различными свойствами: например, деревянный ящик, окованный металлом, или камень с вкраплениями лавы или кристаллов. 
+Но ему можно найти и другие применения.
+<BR>Не рекомендуется создавать слишком много слоев, иначе движок будет тормозить. Если вы хотите создать сложный многокомпонентный материал, то эффективнее будет использовать шейдер GLSL.</A>
 <BR><A>matlib - id библиотеки материалов. Материалы будут накладываться в том порядке, в каком они были добавлены в библиотеку (то есть, первый материал будет внизу).</A>
 <HR>
 
@@ -311,7 +313,7 @@
 <A name="GLSLShaderSetParameter1i"></A>
 <H1 class=name>GLSLShaderSetParameter1i</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter1i</A><A>( param,value as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр значение типа int (целое число).</A>
+<BR><A>Передает в параметр шейдера значение типа int (целое число).</A>
 <BR><A>param - id параметра</A>
 <BR><A>value - значение.</A>
 <HR>
@@ -319,7 +321,7 @@
 <A name="GLSLShaderSetParameter1f"></A>
 <H1 class=name>GLSLShaderSetParameter1f</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter1f</A><A>( param,value as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр значение типа float (вещественное число).</A>
+<BR><A>Передает в параметр шейдера значение типа float (вещественное число).</A>
 <BR><A>param - id параметра</A>
 <BR><A>value - значение.</A>
 <HR>
@@ -327,7 +329,7 @@
 <A name="GLSLShaderSetParameter2f"></A>
 <H1 class=name>GLSLShaderSetParameter2f</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter2f</A><A>( param,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр значение типа vec2 (вектор из двух вещественных чисел).</A>
+<BR><A>Передает в параметр шейдера значение типа vec2 (вектор из двух вещественных чисел).</A>
 <BR><A>param - id параметра</A>
 <BR><A>x,y - вектор.</A>
 <HR>
@@ -335,7 +337,7 @@
 <A name="GLSLShaderSetParameter3f"></A>
 <H1 class=name>GLSLShaderSetParameter3f</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter3f</A><A>( param,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр значение типа vec3 (вектор из трех вещественных чисел).</A>
+<BR><A>Передает в параметр шейдера значение типа vec3 (вектор из трех вещественных чисел).</A>
 <BR><A>param - id параметра</A>
 <BR><A>x,y,z - вектор.</A>
 <HR>
@@ -343,7 +345,7 @@
 <A name="GLSLShaderSetParameter4f"></A>
 <H1 class=name>GLSLShaderSetParameter4f</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameter4f</A><A>( param,x,y,z,w as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр значение типа vec4 (вектор из четырех вещественных чисел).</A>
+<BR><A>Передает в параметр шейдера значение типа vec4 (вектор из четырех вещественных чисел).</A>
 <BR><A>param - id параметра</A>
 <BR><A>x,y,z,w - вектор.</A>
 <HR>
@@ -351,7 +353,7 @@
 <A name="GLSLShaderSetParameterTexture"></A>
 <H1 class=name>GLSLShaderSetParameterTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterTexture</A><A>( param as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A>, texunit as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
+<BR><A>Передает в параметр шейдера текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
 <BR><A>param - id параметра</A>
 <BR><A>material - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована текстура материала, к которому подключен шейдер (текстура в слоте с индексом texunit). Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости лучше не использовать больше 8. При автоматическом использовании текстуры материала (см. пояснение к предыдущему аргументу), номер текстурного блока соответствует текстурному слоту материала, а их количество также равно 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок.</A>
@@ -360,7 +362,7 @@
 <A name="GLSLShaderSetParameterSecondTexture"></A>
 <H1 class=name>GLSLShaderSetParameterSecondTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterSecondTexture</A><A>( param as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A>, texunit as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр вторую текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
+<BR><A>Передает в параметр шейдера вторую текстуру заданного материала. Тип текстуры (sampler2D, samplerCube и пр.) устанавливается автоматически.</A>
 <BR><A>param - id параметра</A>
 <BR><A>material - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована вторая текстура материала, к которому подключен шейдер.</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
@@ -369,7 +371,7 @@
 <A name="GLSLShaderSetParameterHasTextureEx"></A>
 <H1 class=name>GLSLShaderSetParameterHasTextureEx</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterHasTextureEx</A><A>( param,index as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр (int или bool) единицу, если у материала, к которому подключен шейдер, есть текстура в заданном текстурном блоке, и ноль в противном случае.</A>
+<BR><A>Передает в параметр шейдера (int или bool) единицу, если у материала, к которому подключен шейдер, есть текстура в заданном текстурном блоке, и ноль в противном случае.</A>
 <BR><A>param - id параметра</A>
 <BR><A>index - индекс текстурного слота (от 0 до 7 включительно).</A>
 <HR>
@@ -377,7 +379,7 @@
 <A name="GLSLShaderSetParameterMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterMatrix</A><A>( param,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
+<BR><A>Передает в параметр шейдера абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
 <BR><A>param - id параметра</A>
 <BR><A>object - id объекта.</A>
 <HR>
@@ -385,7 +387,7 @@
 <A name="GLSLShaderSetParameterInvMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterInvMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterInvMatrix</A><A>( param,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр обратную абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
+<BR><A>Передает в параметр шейдера обратную абсолютную матрицу трансформации заданного объекта (тип mat4).</A>
 <BR><A>param - id параметра</A>
 <BR><A>object - id объекта.</A>
 <HR>
@@ -393,21 +395,21 @@
 <A name="GLSLShaderSetParameterViewMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterViewMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterViewMatrix</A><A>( param as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текущую видовую матрицу (тип mat4), которая переносит точки и векторы из мирового пространства в видовое, где началом координат является позиция камеры, через которую совершается рендеринг. Параметр автоматически обновляется при трансформации камеры.</A>
+<BR><A>Передает в параметр шейдера текущую видовую матрицу (тип mat4), которая переносит точки и векторы из мирового пространства в видовое, где началом координат является позиция камеры, через которую совершается рендеринг. Параметр автоматически обновляется при трансформации камеры.</A>
 <BR><A>param - id параметра.</A>
 <HR>
 
 <A name="GLSLShaderSetParameterInvViewMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterInvViewMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterInvViewMatrix</A><A>( param as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текущую обратную видовую матрицу (тип mat4), которая переносит точки и векторы из видового пространства в мировое. Параметр автоматически обновляется при трансформации камеры.</A>
+<BR><A>Передает в параметр шейдера текущую обратную видовую матрицу (тип mat4), которая переносит точки и векторы из видового пространства в мировое. Параметр автоматически обновляется при трансформации камеры.</A>
 <BR><A>param - id параметра.</A>
 <HR>
 
 <A name="GLSLShaderSetParameterShadowTexture"></A>
 <H1 class=name>GLSLShaderSetParameterShadowTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowTexture</A><A>( param,shadowmap,texunit as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текстуру буфера теневой карты. В GLSL она имеет тип sampler2DShadow. С помощью этой текстуры можно реализовать в шейдере рендеринг теней.</A>
+<BR><A>Передает в параметр шейдера текстуру буфера теневой карты. В GLSL она имеет тип sampler2DShadow. С помощью этой текстуры можно реализовать в шейдере рендеринг теней.</A>
 <BR><A>param - id параметра</A>
 <BR><A>shadowmap - id теневой карты</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
@@ -416,7 +418,7 @@
 <A name="GLSLShaderSetParameterShadowMatrix"></A>
 <H1 class=name>GLSLShaderSetParameterShadowMatrix</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterShadowMatrix</A><A>( param,shadowmap as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр теневую матрицу из теневой карты (тип mat4). Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</A>
+<BR><A>Передает в параметр шейдера теневую матрицу из теневой карты (тип mat4). Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</A>
 <BR><A>param - id параметра</A>
 <BR><A>object - id объекта.</A>
 <HR>
@@ -424,7 +426,7 @@
 <A name="GLSLShaderSetParameterFBOColorTexture"></A>
 <H1 class=name>GLSLShaderSetParameterFBOColorTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterFBOColorTexture</A><A>( param,fbo,texunit as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текстуру цветового буфера FBO.</A>
+<BR><A>Передает в параметр шейдера текстуру цветового буфера FBO.</A>
 <BR><A>param - id параметра</A>
 <BR><A>fbo - id FBO</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
@@ -433,7 +435,7 @@
 <A name="GLSLShaderSetParameterFBODepthTexture"></A>
 <H1 class=name>GLSLShaderSetParameterFBODepthTexture</H1>
 <A class=type>real</A><A> = </A><A class=function>GLSLShaderSetParameterFBODepthTexture</A><A>( param,fbo,texunit as </A><A class=type>real</A><A> );</A>
-<BR><A>Передает в параметр текстуру Z-буфера FBO.</A>
+<BR><A>Передает в параметр шейдера текстуру Z-буфера FBO.</A>
 <BR><A>param - id параметра</A>
 <BR><A>fbo - id FBO</A>
 <BR><A>texunit - определяет, через какой текстурный блок передавать текстуру.</A>
