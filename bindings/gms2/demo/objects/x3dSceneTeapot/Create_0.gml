@@ -47,7 +47,7 @@ ShadowMapSetCamera(shadowMap, shadowCamera);
 ShadowMapSetProjectionSize(shadowMap, 5);
 ShadowMapSetZClippingPlanes(shadowMap, -10.0, 200.0);
 
-plane = PlaneCreate(false, 20, 20, 5, 5, global.scene);
+plane = PlaneCreate(true, 20, 20, 5, 5, global.scene);
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/ground-diffuse.jpg");
 MaterialLoadTextureEx("mFloor", "textures/ground-normal.jpg", 1);
@@ -86,5 +86,3 @@ mx = display_get_width() / 2;
 my = display_get_height() / 2
 display_mouse_set(mx, my);
 MouseShowCursor(not mouselookActive);
-
-alarm[0] = room_speed;
