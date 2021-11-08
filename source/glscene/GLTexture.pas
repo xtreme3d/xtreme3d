@@ -4499,16 +4499,24 @@ end;
 
 function TGLMaterial.GetTextureN(i: Integer): TGLTexture;
 begin
-   if (i >= 0) and (i < 16) then
-     Result:=FTextures[i]
+   if (i >= 0) and (i < 16) then begin
+     if (i = 0) then
+         Result := Texture
+     else
+         Result := FTextures[i];
+   end
    else
-     Result:=nil;
+     Result := nil;
 end;
 
 procedure TGLMaterial.SetTextureN(i: Integer; const value: TGLTexture);
 begin
-    if (i >= 0) and (i < 16) then
-       FTextures[i] := value;
+    if (i >= 0) and (i < 16) then begin
+       if (i = 0) then
+          Texture := value
+       else
+          FTextures[i] := value;
+    end;
 end;
 
 // NotifyLibMaterialDestruction

@@ -328,6 +328,10 @@ begin
    if Assigned(FFont) and (Text<>'') then begin
       rci.GLStates.SetGLPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
       // Prepare matrices
+      glMatrixMode(GL_TEXTURE);
+      glLoadIdentity();
+      glMatrixMode(GL_MODELVIEW);
+
       glMatrixMode(GL_MODELVIEW);
       glPushMatrix;
       glLoadMatrixf(@Scene.CurrentBuffer.BaseProjectionMatrix);

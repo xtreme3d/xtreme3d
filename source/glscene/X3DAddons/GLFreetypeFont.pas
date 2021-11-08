@@ -472,10 +472,6 @@ begin
    x := 0.5 / chara.texWidth + chara.width / chara.texWidth;
    y := 0.5 / chara.texHeight + chara.height / chara.texHeight;
 
-   glDisable(GL_LIGHTING);
-   glEnable(GL_TEXTURE_2D);
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glBindTexture(GL_TEXTURE_2D, chara.textureId);
    glBegin(GL_QUADS);
    glTexCoord2f(0, 0); glVertex2f(posx + chara.left, posy + chara.top + chara.height);
@@ -509,6 +505,18 @@ begin
    y := -FCharHeight;
 
    glColor4fv(@color[0]);
+   glDisable(GL_LIGHTING);
+   glActiveTextureARB(GL_TEXTURE0_ARB);
+   glEnable(GL_TEXTURE_2D);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+   glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+   glDisable(GL_TEXTURE_GEN_S);
+   glDisable(GL_TEXTURE_GEN_T);
 
    i := 0;
    len := Length(aString);
