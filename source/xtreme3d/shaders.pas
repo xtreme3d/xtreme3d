@@ -103,17 +103,21 @@ begin
   end;
   bump := TGLSLShader.Create(scene);
   bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
+  
   paramDiffTex := bump.Param.AddUniform('diffuseMap');
   paramNormTex := bump.Param.AddUniform('normalMap');
   paramHeightTex := bump.Param.AddUniform('heightMap');
+  
   paramMaxLights := bump.Param.AddUniform('maxNumLights');
   paramMaxLights.UniformType := uniform1i;
-  paramMaxLights.UniformInteger := 1;
+  paramMaxLights.UniformInteger := 8;
   paramMaxLights.Initialized := True;
+  
   paramUseParallax := bump.Param.AddUniform('useParallax');
   paramUseParallax.UniformType := uniform1i;
   paramUseParallax.UniformInteger := 0;
   paramUseParallax.Initialized := True;
+  
   paramParallaxHeight := bump.Param.AddUniform('parallaxHeight');
   paramParallaxHeight.UniformType := uniform1f;
   paramParallaxHeight.UniformVector[0] := 0.03;
@@ -128,7 +132,6 @@ begin
   paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
   paramShadowMatrix.UniformType := uniformShadowMatrix;
   paramShadowMatrix.ShadowMap := nil;
-  //paramShadowMatrix.UniformMatrix := TGLShadowMap(trunc64(shadowmap)).ShadowMatrix;
   paramShadowMatrix.Initialized := True;
   
   paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
@@ -149,7 +152,7 @@ begin
   
   paramUseAutoTangentSpace := bump.Param.AddUniform('useAutoTangentSpace');
   paramUseAutoTangentSpace.UniformType := uniform1i;
-  paramUseAutoTangentSpace.UniformInteger := 0;
+  paramUseAutoTangentSpace.UniformInteger := 1;
   paramUseAutoTangentSpace.Initialized := True;
   
   paramFogEnabled := bump.Param.AddUniform('fogEnabled');
