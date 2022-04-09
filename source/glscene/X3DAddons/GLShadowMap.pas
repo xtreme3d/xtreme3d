@@ -85,10 +85,10 @@ begin
 
   glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, @FDepthBorderColor.color);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
   //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
+  glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY);
 
   glTexImage2D(GL_TEXTURE_2D, 0,
       GL_DEPTH_COMPONENT, Width, Height, 0,
@@ -97,9 +97,9 @@ begin
   glBindTexture(GL_TEXTURE_2D, 0);
 
   glGenFramebuffers(1, @FFramebuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
+  glBindFramebuffer(GL_FRAMEBUFFER, FFramebuffer);
   glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
+  glReadBuffer(GL_NONE);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, FDepthTextureHandle, 0);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 end;
@@ -241,6 +241,8 @@ begin
    MainBuffer.Resize(FWidth, FHeight);
    MainBuffer.SetViewPort(0, 0, FWidth, FHeight);
    MainBuffer.Camera := FShadowCamera;
+   
+   FShadowCamera.Scene.AddBuffer(MainBuffer);
 
    MainBuffer.RenderingContext.Activate;
    if not FInitialized then
@@ -273,8 +275,6 @@ begin
 
    MainBuffer.SimpleRender(FCaster);
 
-   MainBuffer.OverrideMaterial := oldOverrideMat;
-
    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
    glMatrixMode(GL_MODELVIEW);
@@ -298,7 +298,9 @@ begin
    glPopMatrix();
 
    glCullFace(GL_BACK);
-   
+
+    MainBuffer.OverrideMaterial := oldOverrideMat;
+
    MainBuffer.RenderingContext.Deactivate;
    
    MainBuffer.Resize(oldWidth, oldHeight);

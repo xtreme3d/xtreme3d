@@ -7851,13 +7851,10 @@ begin
 end;
 
 procedure TGLSceneBuffer.SimpleRender(baseObject : TGLBaseSceneObject);
-//var
-   //maxLights : Integer;
 begin
    if FRendering then Exit;
    FRendering:=True;
-   //FCamera.AbsoluteMatrixAsAddress;
-   FCamera.FScene.AddBuffer(Self);
+   //FCamera.FScene.AddBuffer(Self);
    glGetFloatv(GL_PROJECTION_MATRIX, @FProjectionMatrix);
    glGetFloatv(GL_MODELVIEW_MATRIX, @FModelViewMatrix);
    FCamera.FScene.RenderScene(self, FViewport.Width, FViewport.Height, dsRendering, baseObject);
