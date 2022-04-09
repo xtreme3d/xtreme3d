@@ -21,7 +21,7 @@ Screenshots
 
 Features
 --------
-* Extremely lightweight. It's just a DLL of 1.8 MB in size (plus three optional DLLs - ode.dll, freetype.dll, OpenFBX.dll)
+* Extremely lightweight. It's just a DLL of 2 MB in size (plus three optional DLLs - ode.dll, freetype.dll, OpenFBX.dll)
 * Can be used with any language that supports DLLs and stdcall convension
 * Scene graph with object hierarchy/pivoting
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
