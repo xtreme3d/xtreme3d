@@ -70,8 +70,8 @@ type
          procedure WMSize(var Message: TWMSize); Message WM_SIZE;
          procedure WMDestroy(var Message: TWMDestroy); message WM_DESTROY;
 
-	      procedure CMMouseEnter(var msg: TMessage); message CM_MOUSEENTER;
-	      procedure CMMouseLeave(var msg: TMessage); message CM_MOUSELEAVE;
+          procedure CMMouseEnter(var msg: TMessage); message CM_MOUSEENTER;
+          procedure CMMouseLeave(var msg: TMessage); message CM_MOUSELEAVE;
         function GetFieldOfView: single;
         procedure SetFieldOfView(const Value: single);
 
@@ -152,8 +152,8 @@ type
 
          property AutoRender: Boolean read FAutoRender write FAutoRender;
 
-			   property OnMouseLeave : TNotifyEvent read FOnMouseLeave write FOnMouseLeave;
-			   property OnMouseEnter : TNotifyEvent read FOnMouseEnter write FOnMouseEnter;
+               property OnMouseLeave : TNotifyEvent read FOnMouseLeave write FOnMouseLeave;
+               property OnMouseEnter : TNotifyEvent read FOnMouseEnter write FOnMouseEnter;
          
          property Align;
          property Anchors;

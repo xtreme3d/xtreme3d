@@ -316,6 +316,11 @@ end;
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
 
+function PtrToReal(p: pchar): real; cdecl;
+begin
+  result := Integer(p);
+end;
+
 exports
 
 /////////////////////////////////////////////////////////////////////////////
@@ -866,7 +871,12 @@ VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
 // Engine
 EngineGetTimeStep,
 // Window
-WindowDispatch;
+WindowDispatch,
+
+//
+// 3.9.2 functions:
+//
+PtrToReal;
 
 /////////////////////////////////////////////////////////////////////////////
 

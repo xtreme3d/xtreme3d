@@ -114,7 +114,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=3
 MinorVer=9
-Release=1
+Release=2
 Build=0
 Debug=0
 PreRelease=0
@@ -126,13 +126,13 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=Gecko
 FileDescription=Xtreme3D Engine
-FileVersion=3.9.1.0
+FileVersion=3.9.2.0
 InternalName=Xtreme3D
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=xtreme3d.dll
 ProductName=Xtreme3D
-ProductVersion=3.9.1.0
+ProductVersion=3.9.2.0
 Comments=
 [HistoryLists\hlUnitAliases]
 Count=1

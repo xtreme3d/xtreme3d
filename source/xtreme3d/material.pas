@@ -137,6 +137,7 @@ var
   bmp:TBitmap;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
+  mat.Material.texture.ImageClassName := TGLCubeMapImage.ClassName;
   with mat.Material.Texture.Image as TGLCubeMapImage do begin
     bmp := TBitmap.Create;
     bmp.PixelFormat := pf32bit;
@@ -162,7 +163,7 @@ begin
   memviewer.Width := trunc64(res);
   memviewer.Height := trunc64(res);
   memviewer.Buffer.BackgroundColor :=
-      TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor;
+    TGLSceneViewer(trunc64(viewer)).Buffer.BackgroundColor;
   memviewer.RenderCubeMapTextures(mat.Material.Texture);
   Result := 1;
 end;
