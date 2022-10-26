@@ -95,3 +95,7 @@ begin
   result := elapsedMsec * 0.001;
 end;
 
+function PtrToReal(p: pchar): real; cdecl;
+begin
+  result := Integer(p);
+end;

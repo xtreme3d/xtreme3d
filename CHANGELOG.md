@@ -1,6 +1,13 @@
 Xtreme3D version history
 ========================
-v3.9.1 (by Gecko) - ??/??/2021
+v3.9.2 (by Gecko) - 09/04/2022
+------------------------------
+- New function `PtrToReal` for compatibility with latest GameMaker Studio 2
+- `MouseIsPressed`
+- Fixed shadow map rendering when using with dynamic cubemaps
+- BumpShader now uses 8 light sources and auto tangent space by default. 
+
+v3.9.1 (by Gecko) - 20/09/2021
 ------------------------------
 - Exported functions now use cdecl convention instead of stdcall
 - ViewerCreate checks parent window handle and shows error message if the window is not valid
@@ -24,7 +31,7 @@ v3.8.0 (by FireRun) - 27/07/2019
 - ViewerPixelRayToWorld, ViewerShadeModel, ViewerRenderToFilePNG
 - ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy, ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorTriangleCount, ActorSetFrame
 - MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode
-- HUDSpriteXTiles,HUDSpriteYTiles
+- HUDSpriteXTiles, HUDSpriteYTiles
 - FireFXRingExplosion
 - FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy.
 
@@ -33,7 +40,7 @@ v3.7.2 (by Gecko) - 26/02/2019
 - SpriteGetSize.
 - MaterialDestroy, MaterialSetName.
 - TextureEx now supports up to 16 texture units instead of 8.
-- MaterialSetShader now allows to disable a shader by passing zero pointer to it: MaterialSetShader('material', 0).
+- MaterialSetShader now allows to disable a shader by passing zero pointer to it: `MaterialSetShader('material', 0)`.
 - LineSetNode.
 
 v3.7.1 (by FireRun) - 05/08/2018

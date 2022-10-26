@@ -6,6 +6,8 @@ Xtreme3D originally was created for Game Maker. It makes possible to create full
 
 The engine is written in Delphi and based on a modified version of [GLScene](https://sourceforge.net/projects/glscene) 1.0.0.0714. The code should be compiled with Delphi 7 (other Delphi versions are not tested).
 
+Unfortunately, Xtreme3D SDK is not compatible with Game Maker Studio 2 version 2022.800.0.161 and higher because Xtreme3D.dll is currently 32-bit only.
+
 You can use Xtreme3D with almost any programming language. We already provide [Python](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python), [D](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/dlang) and [LuaJIT](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/lua) bindings which are automatically generated from engine's source code.
 
 Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).

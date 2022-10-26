@@ -717,6 +717,11 @@ x3d.EngineGetTimeStep.restype = ctypes.c_double
 def EngineGetTimeStep():
     return x3d.EngineGetTimeStep()
 
+x3d.PtrToReal.argtypes = [ctypes.c_char_p]
+x3d.PtrToReal.restype = ctypes.c_double
+def PtrToReal(aValue):
+    return x3d.PtrToReal(aValue)
+
 
 # fbo.pas
 x3d.FBOCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -1452,6 +1457,11 @@ x3d.KeyIsPressed.argtypes = [ctypes.c_double]
 x3d.KeyIsPressed.restype = ctypes.c_double
 def KeyIsPressed(aKey):
     return x3d.KeyIsPressed(aKey)
+
+x3d.MouseIsPressed.argtypes = [ctypes.c_double]
+x3d.MouseIsPressed.restype = ctypes.c_double
+def MouseIsPressed(aBtn):
+    return x3d.MouseIsPressed(aBtn)
 
 
 # kraft.pas

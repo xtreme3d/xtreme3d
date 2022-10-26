@@ -316,11 +316,6 @@ end;
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
 
-function PtrToReal(p: pchar): real; cdecl;
-begin
-  result := Integer(p);
-end;
-
 exports
 
 /////////////////////////////////////////////////////////////////////////////
