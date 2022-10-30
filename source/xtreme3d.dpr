@@ -14,13 +14,20 @@ uses
   System.SysUtils,
   System.Classes,
   Windows,
+  Winapi.OpenGL,
   Vcl.Graphics,
   Vcl.Dialogs,
+  Vcl.Imaging.PNGImage,
   GLS.Cadencer,
+  GLS.Context,
   GLS.Material,
+  GLS.OpenGLAdapter,
+  GLS.RenderContextInfo,
   GLS.Scene,
+  GLS.VectorGeometry,
   GLS.VectorTypes,
-  GLS.SceneViewer;
+  GLS.SceneViewer,
+  GLS.Selection;
   //Physics.ODEManager,
   //Physics.ODERagdoll;
 
@@ -34,14 +41,11 @@ var
     scene: TGLScene;
     matlib: TGLMaterialLibrary;
     memviewer: TGLMemoryViewer;
-
-    // TODO: user-defined cadencer
     cadencer: TGLCadencer;
-
     empty: TEmpty;
 
-    //collisionPoint: TVector;
-    //collisionNormal: TVector;
+    collisionPoint: TGLVector;
+    collisionNormal: TGLVector;
 
     //ode: TGLODEManager;
     //odeRagdollWorld: TGLODERagdollWorld;
@@ -54,22 +58,45 @@ var
 
 {$R *.res}
 
-{$I 'xtreme3d/engine'}
-{$I 'xtreme3d/viewer'}
-
-function TestStr(param: PAnsiChar): real; cdecl;
+function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
+var
+   Buffer : String;
+   ExtPos: Integer;
 begin
-    //ShowMessage(String(AnsiString(param)));
-    result := Length(AnsiString(param));
+   v.Buffer.RenderingContext.Activate;
+   Buffer := String(glGetString(GL_EXTENSIONS));
+   // First find the position of the extension string as substring in Buffer.
+   ExtPos := Pos(Extension, Buffer);
+   Result := ExtPos > 0;
+   // Now check that it isn't only a substring of another extension.
+   if Result then
+     Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
+               or (Buffer[ExtPos + Length(Extension)]=' ');
+   v.Buffer.RenderingContext.Deactivate;
 end;
 
-exports
-    TestStr,
+{$I 'xtreme3d/engine'}
+{$I 'xtreme3d/viewer'}
+{$I 'xtreme3d/picklist'}
 
-    EngineCreate, EngineDestroy,
-    EngineUpdate,
-    ViewerCreate, ViewerRender,
-    ViewerSetBackgroundColor;
+exports
+    // Engine
+    EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
+    EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
+    EngineShowLoadingErrors, EngineGetTimeStep,
+    // Viewer
+    ViewerCreate, ViewerSetCamera, ViewerRender, ViewerRenderToFile,
+    ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
+    ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
+    ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,
+    ViewerScreenToWorld, ViewerWorldToScreen, ViewerCopyToTexture,
+    ViewerGetPickedObject, ViewerGetPickedObjectsList, ViewerScreenToVector,
+    ViewerVectorToScreen, ViewerPixelToDistance, ViewerSetAntiAliasing,
+    ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
+    ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
+    ViewerPixelRayToWorld, ViewerShadeModel,
+
+    PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
 
 begin
 end.
