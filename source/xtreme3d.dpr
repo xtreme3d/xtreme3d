@@ -1,15 +1,5 @@
 library xtreme3d;
 
-{ Important note about DLL memory management: ShareMem must be the
-  first unit in your library's USES clause AND your project's (select
-  Project-View Source) USES clause if your DLL exports any procedures or
-  functions that pass strings as parameters or function results. This
-  applies to all strings passed to and from your DLL--even those that
-  are nested in records and classes. ShareMem is the interface unit to
-  the BORLNDMM.DLL shared memory manager, which must be deployed along
-  with your DLL. To avoid using BORLNDMM.DLL, pass string information
-  using PChar or ShortString parameters. }
-
 uses
   System.SysUtils,
   System.Classes,
@@ -58,6 +48,24 @@ var
 
 {$R *.res}
 
+function ObjToReal(obj: TObject): real;
+begin
+    result := real(longint(Pointer(obj)));
+end;
+
+function PtrToReal(p: Pointer): real;
+begin
+    result := real(longint(p));
+end;
+
+function RealToPtr(v: real): Pointer;
+var
+    i: NativeInt;
+begin
+    i := Trunc(v);
+    result := Pointer(i);
+end;
+
 function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
 var
    Buffer : String;
@@ -84,6 +92,8 @@ exports
     EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
     EngineShowLoadingErrors, EngineGetTimeStep,
+    PointerToReal,
+
     // Viewer
     ViewerCreate, ViewerSetCamera, ViewerRender, ViewerRenderToFile,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
@@ -96,7 +106,7 @@ exports
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
     ViewerPixelRayToWorld, ViewerShadeModel,
 
+    // PickList
     PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
-
 begin
 end.

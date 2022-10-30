@@ -1,4 +1,4 @@
-function EngineCreate: integer; cdecl;
+function EngineCreate: real; cdecl;
 begin
     empty := TEmpty.Create(nil);
     scene := TGLScene.Create(nil);
@@ -8,10 +8,10 @@ begin
     cadencer.Mode := cmManual;
     showLoadingErrors := True;
     previousTicks := GetTickCount;
-    result := 1;
+    result := 1.0;
 end;
 
-function EngineDestroy: integer; cdecl;
+function EngineDestroy: real; cdecl;
 begin
     cadencer.Enabled := false;
     cadencer.Scene := nil;
@@ -19,65 +19,65 @@ begin
     scene.Free;
     empty.Free;
     memviewer.Free;
-    result := 1;
+    result := 1.0;
 end;
 
-function EngineSetObjectsSorting(os: integer): integer; cdecl;
+function EngineSetObjectsSorting(os: real): real; cdecl;
 begin
-    if os = 0 then scene.ObjectsSorting := osInherited;
-    if os = 1 then scene.ObjectsSorting := osNone;
-    if os = 2 then scene.ObjectsSorting := osRenderFarthestFirst;
-    if os = 3 then scene.ObjectsSorting := osRenderBlendedLast;
-    if os = 4 then scene.ObjectsSorting := osRenderNearestFirst;
-    result := 1;
+    if Trunc(os) = 0 then scene.ObjectsSorting := osInherited;
+    if Trunc(os) = 1 then scene.ObjectsSorting := osNone;
+    if Trunc(os) = 2 then scene.ObjectsSorting := osRenderFarthestFirst;
+    if Trunc(os) = 3 then scene.ObjectsSorting := osRenderBlendedLast;
+    if Trunc(os) = 4 then scene.ObjectsSorting := osRenderNearestFirst;
+    result := 1.0;
 end;
 
 // Change: vcNone and vcInherited are now 0 and 1
-function EngineSetCulling(vc: integer): integer; cdecl;
+function EngineSetCulling(vc: real): real; cdecl;
 begin
-    if vc = 0 then scene.VisibilityCulling := vcNone;
-    if vc = 1 then scene.VisibilityCulling := vcInherited;
-    if vc = 2 then scene.VisibilityCulling := vcObjectBased;
-    if vc = 3 then scene.VisibilityCulling := vcHierarchical;
-    result := 1;
+    if Trunc(vc) = 0 then scene.VisibilityCulling := vcNone;
+    if Trunc(vc) = 1 then scene.VisibilityCulling := vcInherited;
+    if Trunc(vc) = 2 then scene.VisibilityCulling := vcObjectBased;
+    if Trunc(vc) = 3 then scene.VisibilityCulling := vcHierarchical;
+    result := 1.0;
 end;
 
-function EngineUpdate(delta: real): integer; cdecl;
+function EngineUpdate(delta: real): real; cdecl;
 begin
     cadencer.FixedDeltaTime := delta;
     cadencer.Progress;
-    result := 1;
+    result := 1.0;
 end;
 
 {
 // TODO:
-function TrisRendered: integer; cdecl;
+function TrisRendered: real; cdecl;
 begin
-    result := 1;
+    result := 1.0;
 end;
 }
 
-function EngineSaveScene(filename: PAnsiChar): integer; cdecl;
+function EngineSaveScene(filename: PAnsiChar): real; cdecl;
 begin
     scene.SaveToTextFile(String(AnsiString(filename)));
-    result := 1;
+    result := 1.0;
 end;
 
-function EngineLoadScene(filename: PAnsiChar): integer; cdecl;
+function EngineLoadScene(filename: PAnsiChar): real; cdecl;
 begin
     scene.LoadFromTextFile(String(AnsiString(filename)));
-    result := 1;
+    result := 1.0;
 end;
 
-function EngineRootObject: Pointer; cdecl;
+function EngineRootObject: real; cdecl;
 begin
-    result := scene.Objects;
+    result := ObjToReal(scene.Objects);
 end;
 
-function EngineShowLoadingErrors(mode: integer): integer; cdecl;
+function EngineShowLoadingErrors(mode: real): real; cdecl;
 begin
-    showLoadingErrors := Boolean(mode);
-    result := 1;
+    showLoadingErrors := Boolean(Trunc(mode));
+    result := 1.0;
 end;
 
 {

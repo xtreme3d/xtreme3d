@@ -1,61 +1,61 @@
-function ViewerCreate(top, left, width, height: integer; winHandle: Pointer): Pointer; cdecl;
+function ViewerCreate(top, left, width, height, winHandle: real): real; cdecl;
 var
     windowHandle: HWND;
     viewer: TGLSceneViewer;
 begin
-    windowHandle := HWND(winHandle);
+    windowHandle := HWND(RealToPtr(winHandle));
     if IsWindow(windowHandle) then begin
         viewer := TGLSceneViewer.Create(nil);
-        viewer.Top := top;
-        viewer.Left := left;
-        viewer.Width := width;
-        viewer.Height := height;
+        viewer.Top := Trunc(top);
+        viewer.Left := Trunc(left);
+        viewer.Width := Trunc(width);
+        viewer.Height := Trunc(height);
         viewer.Enabled := false;
         viewer.Visible := true;
         viewer.Buffer.Lighting := true;
         viewer.ParentWindow := windowHandle;
         viewer.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow];
         //viewer.AutoRender := False;
-        result := viewer;
+        result := ObjToReal(viewer);
     end
     else begin
         ShowMessage('Invalid parent window handle');
-        result := nil;
+        result := 0.0;
     end;
 end;
 
-function ViewerSetCamera(viewer, camera: Pointer): integer; cdecl;
+function ViewerSetCamera(viewer, camera: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Camera := TGLCamera(camera);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Camera := TGLCamera(RealToPtr(camera));
+    result := 1.0;
 end;
 
-function ViewerEnableVSync(viewer: Pointer; vsm: integer): integer; cdecl;
+function ViewerEnableVSync(viewer, vsm: real): real; cdecl;
 begin
-    if vsm = 0 then TGLSceneViewer(viewer).VSync := vsmSync;
-    if vsm = 1 then TGLSceneViewer(viewer).VSync := vsmNoSync;
-    result := 1;
+    if vsm = 0 then TGLSceneViewer(RealToPtr(viewer)).VSync := vsmSync;
+    if vsm = 1 then TGLSceneViewer(RealToPtr(viewer)).VSync := vsmNoSync;
+    result := 1.0;
 end;
 
-function ViewerRender(viewer: Pointer): integer; cdecl;
+function ViewerRender(viewer: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.Render();
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.Render();
+    result := 1.0;
 end;
 
-function ViewerRenderToFile(viewer: Pointer; fname: PAnsiChar): integer; cdecl;
+function ViewerRenderToFile(viewer: real; fname: PAnsiChar): real; cdecl;
 var
     bmp: TBitmap;
 begin
-    bmp := TGLSceneViewer(viewer).Buffer.CreateSnapShotBitmap;
+    bmp := TGLSceneViewer(RealToPtr(viewer)).Buffer.CreateSnapShotBitmap;
     bmp.SaveToFile(String(AnsiString(fname)));
     bmp.Free;
-    result := 1;
+    result := 1.0;
 end;
 
 {
 // TODO
-function ViewerRenderToFilePNG(v: Pointer; fname: PAnsiChar): integer; cdecl;
+function ViewerRenderToFilePNG(v: real; fname: PAnsiChar): real; cdecl;
 var
     viewer: TGLSceneViewer;
     bmp: TBitmap;
@@ -66,7 +66,7 @@ var
     f: single;
     oldColor: TColor;
 begin
-    viewer := TGLSceneViewer(v);
+    viewer := TGLSceneViewer(ReatToPtr(v));
     oldColor := viewer.Buffer.BackgroundColor;
     viewer.Buffer.BackgroundColor := $ffffff;
     viewer.Buffer.Render;
@@ -111,7 +111,7 @@ begin
     png.SaveToFile(String(AnsiString(fname)));
     png.Free;
     bmp.Free;
-    result := 1;
+    result := 1.0;
 end;
 }
 
@@ -130,157 +130,165 @@ begin
 end;
 }
 
-function ViewerResize(v: Pointer; left, top, width, height: integer): integer; cdecl;
+function ViewerResize(v, left, top, width, height: real): real; cdecl;
 var
     viewer: TGLSceneViewer;
 begin
-    viewer := TGLSceneViewer(v);
-    viewer.Top := top;
-    viewer.Left := left;
-    viewer.Width := width;
-    viewer.Height := height;
-    result := 1;
+    viewer := TGLSceneViewer(RealToPtr(v));
+    viewer.Top := Trunc(top);
+    viewer.Left := Trunc(left);
+    viewer.Width := Trunc(width);
+    viewer.Height := Trunc(height);
+    result := 1.0;
 end;
 
-function ViewerSetVisible(viewer: Pointer; mode: integer): integer; cdecl;
+function ViewerSetVisible(viewer, mode: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Visible := boolean(mode);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Visible := boolean(Trunc(mode));
+    result := 1.0;
 end;
 
-function ViewerGetPixelColor(viewer: Pointer; x, y: integer): integer; cdecl;
+function ViewerGetPixelColor(viewer, x, y: real): real; cdecl;
 var
     color: TColor;
 begin
-    color := TGLSceneViewer(viewer).Buffer.GetPixelColor(x, y);
+    color := TGLSceneViewer(RealToPtr(viewer)).Buffer.GetPixelColor(Trunc(x), Trunc(y));
     result := Integer(color);
 end;
 
-function ViewerGetPixelDepth(viewer: Pointer; x, y: integer): real; cdecl;
+function ViewerGetPixelDepth(viewer, x, y: real): real; cdecl;
 begin
-    result := TGLSceneViewer(viewer).Buffer.GetPixelDepth(x, y);
+    result := TGLSceneViewer(RealToPtr(viewer)).Buffer.GetPixelDepth(Trunc(x), Trunc(y));
 end;
 
-function ViewerSetLighting(viewer: Pointer; mode: integer): integer; cdecl;
+function ViewerSetLighting(viewer, mode: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.Lighting := boolean(mode);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.Lighting := boolean(Trunc(mode));
+    result := 1.0;
 end;
 
-function ViewerSetBackgroundColor(viewer: Pointer; color: integer): integer; cdecl;
+function ViewerSetBackgroundColor(viewer, color: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.BackgroundColor := TColor(color);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.BackgroundColor := TColor(Trunc(color));
+    result := 1.0;
 end;
 
-function ViewerSetAmbientColor(viewer: Pointer; color: integer): integer; cdecl;
+function ViewerSetAmbientColor(viewer, color: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.AmbientColor.AsWinColor := TColor(color);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.AmbientColor.AsWinColor := TColor(Trunc(color));
+    result := 1.0;
 end;
 
-function ViewerEnableFog(viewer: Pointer; mode: integer): integer; cdecl;
+function ViewerEnableFog(viewer, mode: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.FogEnable := boolean(mode);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.FogEnable := boolean(Trunc(mode));
+    result := 1.0;
 end;
 
-function ViewerSetFogColor(viewer: Pointer; color: integer): integer; cdecl;
+function ViewerSetFogColor(viewer, color: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).Buffer.FogEnvironment.FogColor.AsWinColor := TColor(color);
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.FogEnvironment.FogColor.AsWinColor := TColor(Trunc(color));
+    result := 1.0;
 end;
 
-function ViewerSetFogDistance(viewer: Pointer; fstart, fend: real): integer; cdecl;
+function ViewerSetFogDistance(v, fstart, fend: real): real; cdecl;
+var
+    viewer: TGLSceneViewer;
 begin
-    TGLSceneViewer(viewer).Buffer.FogEnvironment.FogStart := fstart;
-    TGLSceneViewer(viewer).Buffer.FogEnvironment.FogEnd := fend;
-    result := 1;
+    viewer := TGLSceneViewer(RealToPtr(v));
+    viewer.Buffer.FogEnvironment.FogStart := fstart;
+    viewer.Buffer.FogEnvironment.FogEnd := fend;
+    result := 1.0;
 end;
 
-function ViewerScreenToWorld(viewer: Pointer; x, y, ind: integer): real; cdecl;
+function ViewerScreenToWorld(viewer, x, y, ind: real): real; cdecl;
 var
     stw: TAffineVector;
 begin
-    stw := TGLSceneViewer(viewer).Buffer.ScreenToWorld(x, y);
-    result := stw.V[ind];
+    stw := TGLSceneViewer(RealToPtr(viewer)).Buffer.ScreenToWorld(Trunc(x), Trunc(y));
+    result := stw.V[Trunc(ind)];
 end;
 
-function ViewerWorldToScreen(viewer: Pointer; x, y, z: real; ind: integer): real; cdecl;
+function ViewerWorldToScreen(viewer, x, y, z, ind: real): real; cdecl;
 var
     wts: TAffineVector;
 begin
     SetVector(wts, 0, 0, 0);
-    wts := TGLSceneViewer(viewer).Buffer.WorldToScreen(AffineVectorMake(x, y, z));
-    result := wts.V[ind];
+    wts := TGLSceneViewer(RealToPtr(viewer)).Buffer.WorldToScreen(AffineVectorMake(x, y, z));
+    result := wts.V[Trunc(ind)];
 end;
 
-function ViewerCopyToTexture(viewer: Pointer; mtrl: PAnsiChar): integer; cdecl;
+function ViewerCopyToTexture(viewer: real; mtrl: PAnsiChar): real; cdecl;
 var
     mat: TGLLibMaterial;
     buf: TGLSceneBuffer;
 begin
     mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-    buf := TGLSceneViewer(viewer).Buffer;
+    buf := TGLSceneViewer(RealToPtr(viewer)).Buffer;
     buf.CopyToTexture(mat.Material.Texture);
-    result := 1;
+    result := 1.0;
 end;
 
-function ViewerGetPickedObject(viewer: Pointer; x, y: integer): Pointer; cdecl;
+function ViewerGetPickedObject(viewer, x, y: real): real; cdecl;
 var
     obj: TGLBaseSceneObject;
 begin
-    obj := TGLSceneViewer(viewer).Buffer.GetPickedObject(x, y);
-    result := obj;
+    obj := TGLSceneViewer(RealToPtr(viewer)).Buffer.GetPickedObject(Trunc(x), Trunc(y));
+    result := ObjToReal(obj);
 end;
 
-function ViewerGetPickedObjectsList(viewer, list: Pointer; x, y, w, h, num: integer): Pointer; cdecl;
+function ViewerGetPickedObjectsList(viewer, list, x, y, w, h, num: real): real; cdecl;
+var
+    rect: TRect;
 begin
-    TGLSceneViewer(viewer).Buffer.PickObjects(TRect.Create(x, y, w, h), TGLPickList(list), num);
+    rect := TRect.Create(Trunc(x), Trunc(y), Trunc(w), Trunc(h));
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.PickObjects(rect, TGLPickList(RealToPtr(list)), Trunc(num));
     result := list;
 end;
 
-function ViewerScreenToVector(viewer: Pointer; x, y, ind: integer): real; cdecl;
+function ViewerScreenToVector(viewer, x, y, ind: real): real; cdecl;
 var
     vec: TGLVector;
 begin
-    vec := TGLSceneViewer(viewer).Buffer.ScreenToVector(x, y);
-    result := vec.V[ind];
+    vec := TGLSceneViewer(RealToPtr(viewer)).Buffer.ScreenToVector(Trunc(x), Trunc(y));
+    result := vec.V[Trunc(ind)];
 end;
 
-function ViewerVectorToScreen(viewer: Pointer; x, y, z: real; ind: integer): real; cdecl;
+function ViewerVectorToScreen(viewer, x, y, z, ind: real): real; cdecl;
 var
     dvec, rvec: TAffineVector;
 begin
     SetVector(dvec, x, y, z);
-    rvec := TGLSceneViewer(viewer).Buffer.VectorToScreen(dvec);
-    result := rvec.V[ind];
+    rvec := TGLSceneViewer(RealToPtr(viewer)).Buffer.VectorToScreen(dvec);
+    result := rvec.V[Trunc(ind)];
 end;
 
-function ViewerPixelToDistance(viewer: Pointer; x, y: integer): real; cdecl;
+function ViewerPixelToDistance(viewer, x, y: real): real; cdecl;
 begin
-    result := TGLSceneViewer(viewer).Buffer.PixelToDistance(x, y);
+    result := TGLSceneViewer(RealToPtr(viewer)).Buffer.PixelToDistance(Trunc(x), Trunc(y));
 end;
 
-function ViewerSetAntiAliasing(v: Pointer; aa: integer): integer; cdecl;
+function ViewerSetAntiAliasing(v, aa: real): real; cdecl;
 var
     viewer: TGLSceneViewer;
+    aaMode: integer;
 begin
-    viewer := TGLSceneViewer(v);
-    if aa = 0 then viewer.Buffer.AntiAliasing := aaDefault;
-    if aa = 1 then viewer.Buffer.AntiAliasing := aaNone;
-    if aa = 2 then viewer.Buffer.AntiAliasing := aa2x;
-    if aa = 3 then viewer.Buffer.AntiAliasing := aa2xHQ;
-    if aa = 4 then viewer.Buffer.AntiAliasing := aa4x;
-    if aa = 5 then viewer.Buffer.AntiAliasing := aa4xHQ;
-    if aa = 6 then viewer.Buffer.AntiAliasing := aa6x;
-    if aa = 7 then viewer.Buffer.AntiAliasing := aa8x;
-    if aa = 8 then viewer.Buffer.AntiAliasing := aa16x;
-    if aa = 9 then viewer.Buffer.AntiAliasing := csa8x;
-    if aa = 10 then viewer.Buffer.AntiAliasing := csa8xHQ;
-    if aa = 11 then viewer.Buffer.AntiAliasing := csa16x;
-    if aa = 12 then viewer.Buffer.AntiAliasing := csa16xHQ;
-    result := 1;
+    viewer := TGLSceneViewer(RealToPtr(v));
+    aaMode := Trunc(aa);
+    if aaMode = 0 then viewer.Buffer.AntiAliasing := aaDefault;
+    if aaMode = 1 then viewer.Buffer.AntiAliasing := aaNone;
+    if aaMode = 2 then viewer.Buffer.AntiAliasing := aa2x;
+    if aaMode = 3 then viewer.Buffer.AntiAliasing := aa2xHQ;
+    if aaMode = 4 then viewer.Buffer.AntiAliasing := aa4x;
+    if aaMode = 5 then viewer.Buffer.AntiAliasing := aa4xHQ;
+    if aaMode = 6 then viewer.Buffer.AntiAliasing := aa6x;
+    if aaMode = 7 then viewer.Buffer.AntiAliasing := aa8x;
+    if aaMode = 8 then viewer.Buffer.AntiAliasing := aa16x;
+    if aaMode = 9 then viewer.Buffer.AntiAliasing := csa8x;
+    if aaMode = 10 then viewer.Buffer.AntiAliasing := csa8xHQ;
+    if aaMode = 11 then viewer.Buffer.AntiAliasing := csa16x;
+    if aaMode = 12 then viewer.Buffer.AntiAliasing := csa16xHQ;
+    result := 1.0;
 end;
 
 {
@@ -341,61 +349,61 @@ begin
 end;
 }
 
-function ViewerGetSize(viewer: Pointer; index: integer): integer; cdecl;
+function ViewerGetSize(viewer, index: real): real; cdecl;
 var
     v: TGLSceneViewer;
 begin
-    v := TGLSceneViewer(viewer);
+    v := TGLSceneViewer(RealToPtr(viewer));
     if index = 0 then
         result := v.Width
     else
         result := v.Height;
 end;
 
-function ViewerGetPosition(viewer: Pointer; index: integer): integer; cdecl;
+function ViewerGetPosition(viewer, index: real): real; cdecl;
 var
     v: TGLSceneViewer;
 begin
-    v := TGLSceneViewer(viewer);
+    v := TGLSceneViewer(RealToPtr(viewer));
     if index = 0 then
         result := v.Left
     else
         result := v.Top;
 end;
 
-function ViewerIsOpenGLExtensionSupported(viewer: Pointer; ext: PAnsiChar): integer; cdecl;
+function ViewerIsOpenGLExtensionSupported(viewer: real; ext: PAnsiChar): real; cdecl;
 var
     v: TGLSceneViewer;
 begin
-    v := TGLSceneViewer(viewer);
+    v := TGLSceneViewer(RealToPtr(viewer));
     result := integer(IsExtensionSupported(v, String(AnsiString(ext))));
 end;
 
-function ViewerGetFramesPerSecond(viewer: Pointer): real; cdecl;
+function ViewerGetFramesPerSecond(viewer: real): real; cdecl;
 begin
-    result := TGLSceneViewer(viewer).FramesPerSecond;
+    result := TGLSceneViewer(RealToPtr(viewer)).FramesPerSecond;
 end;
 
-function ViewerResetPerformanceMonitor(viewer: Pointer): integer; cdecl;
+function ViewerResetPerformanceMonitor(viewer: real): real; cdecl;
 begin
-    TGLSceneViewer(viewer).ResetPerformanceMonitor;
-    result := 1;
+    TGLSceneViewer(RealToPtr(viewer)).ResetPerformanceMonitor;
+    result := 1.0;
 end;
 
-function ViewerPixelRayToWorld(viewer: Pointer; x, y, ind: integer): real; cdecl;
+function ViewerPixelRayToWorld(viewer, x, y, ind: real): real; cdecl;
 var
     vec: TAffineVector;
 begin
-    vec := TGLSceneViewer(viewer).Buffer.PixelRayToWorld(x, y);
-    result := vec.V[ind];
+    vec := TGLSceneViewer(RealToPtr(viewer)).Buffer.PixelRayToWorld(Trunc(x), Trunc(y));
+    result := vec.V[Trunc(ind)];
 end;
 
-function ViewerShadeModel(v: Pointer; ind: integer): integer; cdecl;
+function ViewerShadeModel(v, ind: real): real; cdecl;
 var
     viewer: TGLSceneViewer;
 begin
-    viewer := TGLSceneViewer(v);
-    if ind = 0 then viewer.Buffer.ShadeModel := smFlat;
-    if ind = 1 then viewer.Buffer.ShadeModel := smSmooth;
-    result := 1;
+    viewer := TGLSceneViewer(RealToPtr(v));
+    if Trunc(ind) = 0 then viewer.Buffer.ShadeModel := smFlat;
+    if Trunc(ind) = 1 then viewer.Buffer.ShadeModel := smSmooth;
+    result := 1.0;
 end;

@@ -1,4 +1,4 @@
-function PickListCreate(ps: integer): Pointer; cdecl;
+function PickListCreate(ps: real): real; cdecl;
 var
     sortType: TPickSortType;
 begin
@@ -7,21 +7,27 @@ begin
     if ps = 1 then sortType := psName;
     if ps = 2 then sortType := psMinDepth;
     if ps = 3 then sortType := psMaxDepth;
-    result := TGLPickList.Create(sortType);
+    result := ObjToReal(TGLPickList.Create(sortType));
 end;
 
-function PickListClear(list: Pointer): integer; cdecl;
+function PickListClear(list: real): real; cdecl;
 begin
-    TGLPickList(list).Clear;
-    result := 1;
+    TGLPickList(RealToPtr(list)).Clear;
+    result := 1.0;
 end;
 
-function PickListGetCount(list: Pointer): integer; cdecl;
+function PickListGetCount(list: real): real; cdecl;
 begin
-    result := TGLPickList(list).Count;
+    result := TGLPickList(RealToPtr(list)).Count;
 end;
 
-function PickListGetHit(list: Pointer; index: integer): Pointer; cdecl;
+function PickListGetHit(list, index: real): real; cdecl;
 begin
-    result := TGLPickList(list).Hit[index];
+    result := ObjToReal(TGLPickList(RealToPtr(list)).Hit[Trunc(index)]);
 end;
+
+function PointerToReal(p: pchar): real; cdecl;
+begin
+    result := real(NativeInt(p));
+end;
+
