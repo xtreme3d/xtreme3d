@@ -11,6 +11,7 @@ uses
   GLS.Cadencer,
   GLS.Context,
   GLS.Material,
+  GLS.Objects,
   GLS.OpenGLAdapter,
   GLS.RenderContextInfo,
   GLS.Scene,
@@ -66,6 +67,11 @@ begin
     result := Pointer(i);
 end;
 
+function IsKeyDown(vk: integer): Boolean;
+begin
+   result := (GetAsyncKeyState(vk)<>0);
+end;
+
 function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
 var
    Buffer : String;
@@ -85,6 +91,11 @@ end;
 
 {$I 'xtreme3d/engine'}
 {$I 'xtreme3d/viewer'}
+{$I 'xtreme3d/dummycube'}
+{$I 'xtreme3d/camera'}
+{$I 'xtreme3d/primitives'}
+{$I 'xtreme3d/object'}
+{$I 'xtreme3d/input'}
 {$I 'xtreme3d/picklist'}
 
 exports
@@ -105,6 +116,22 @@ exports
     ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
     ViewerPixelRayToWorld, ViewerShadeModel,
+
+    // Dummycube
+    DummycubeCreate,
+
+    // Primitives
+    CubeCreate,
+
+    // Camera
+    CameraCreate,
+
+    // Object
+    ObjectSetPosition, ObjectRotate, ObjectMove, ObjectLift, ObjectStrafe,
+
+    // Input
+    MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
+    MouseShowCursor, KeyIsPressed, MouseIsPressed,
 
     // PickList
     PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
