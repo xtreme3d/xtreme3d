@@ -50,6 +50,30 @@ function dll_init(dll) {
 	global._ViewerResetPerformanceMonitor = external_define(dll, "ViewerResetPerformanceMonitor", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// dummycube.pas
+	global._DummycubeCreate = external_define(dll, "DummycubeCreate", dll_cdecl, ty_real, 1, ty_real);
+	
+	// camera.pas
+	global._CameraCreate = external_define(dll, "CameraCreate", dll_cdecl, ty_real, 1, ty_real);
+	
+	// primitives.pas
+	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	
+	// Object
+	global._ObjectSetPosition = external_define(dll, "ObjectSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectRotate = external_define(dll, "ObjectRotate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectMove = external_define(dll, "ObjectMove", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectLift = external_define(dll, "ObjectLift", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectStrafe = external_define(dll, "ObjectStrafe", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// Input
+	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
+	global._MouseGetPositionY = external_define(dll, "MouseGetPositionY", dll_cdecl, ty_real, 0);
+	global._MouseShowCursor = external_define(dll, "MouseShowCursor", dll_cdecl, ty_real, 1, ty_real);
+	global._KeyIsPressed = external_define(dll, "KeyIsPressed", dll_cdecl, ty_real, 1, ty_real);
+	global._MouseIsPressed = external_define(dll, "MouseIsPressed", dll_cdecl, ty_real, 1, ty_real);
 
     // Misc
 	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);

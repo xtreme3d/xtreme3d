@@ -3,18 +3,17 @@ if (!global.canRender)
 
 var dt = delta_time / 1000000;
 
-/*
 if (mouselookActive and window_has_focus()) {
-	var deltax = (mx - MouseGetPositionX())/3;
-	var deltay = (my - MouseGetPositionY())/3;
+	var deltax = (mx - MouseGetPositionX())/6;
+	var deltay = (my - MouseGetPositionY())/6;
 	ObjectRotate(camera, deltay, 0, 0);
 	ObjectRotate(camPos, 0, -deltax, 0);
 	MouseSetPosition(mx, my);
 
-	if (keyboard_check(ord("W"))) ObjectMove(camPos, -10 * dt);
-	if (keyboard_check(ord("A"))) ObjectStrafe(camPos, 10 * dt);
-	if (keyboard_check(ord("D"))) ObjectStrafe(camPos, -10 * dt);
-	if (keyboard_check(ord("S"))) ObjectMove(camPos, 10 * dt);
+	if (keyboard_check(ord("W"))) ObjectMove(camPos, -5 * dt);
+	if (keyboard_check(ord("A"))) ObjectStrafe(camPos, 5 * dt);
+	if (keyboard_check(ord("D"))) ObjectStrafe(camPos, -5 * dt);
+	if (keyboard_check(ord("S"))) ObjectMove(camPos, 5 * dt);
 }
 
 if (MouseIsPressed(mb_left) and window_has_focus()) {
@@ -30,10 +29,7 @@ if (MouseIsPressed(mb_left) and window_has_focus()) {
 else {
 	mb_left_released = true;
 }
-*/
+
 
 EngineUpdate(dt);
-//ObjectHide(global.front);
-//ShadowMapRender(shadowMap);
-//ObjectShow(global.front);
 ViewerRender(viewer);
