@@ -12,7 +12,8 @@
 
 <A class=type>Класс: TForm</A><BR><BR>
 
-<A>Функции для создания дополнительных окон и управления ими. Вы можете рендерить в созданном окне графику Xtreme3D, если передадите при создании вида соответствующий идентификатор (HWND) при помощи функции <A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>. Обратите внимание, что перед завершением игры все созданные окна нужно удалить функцией <A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>, иначе возникнет ошибка.
+<A>Функции для создания дополнительных окон и управления ими. Вы можете рендерить в созданном окне графику Xtreme3D, если передадите при создании вида соответствующий идентификатор (HWND) при помощи функции <A class=funclink href=window.htm#WindowGetHandle>WindowGetHandle</A><A>.
+<BR>Имейте в виду, что использование дополнительных окон - это нестандартное поведение, которое не предусмотрено движком Game Maker. Нужно обязательно отключить опцию Freeze the game when the form loses focus, иначе скрипт цикла будет приостановлен, когда фокус переключается на второе окно. Также для дополнительных окон не будут работать события ввода Game Maker - нужно обрабатывать ввод встроенными функциями Xtreme3D (<A class=funclink href=input.htm#MouseGetPosition>MouseGetPosition</A>, <A class=funclink href=input.htm#MouseGetPositionY>MouseGetPositionY</A>, <A class=funclink href=input.htm#KeyIsPressed>KeyIsPressed</A>). Перед завершением игры все созданные окна нужно удалить функцией <A class=funclink href=window.htm#WindowDestroy>WindowDestroy</A><A>, иначе возникнет ошибка.
 </A>
 <HR>
 
