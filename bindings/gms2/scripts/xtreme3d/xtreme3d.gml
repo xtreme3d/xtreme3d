@@ -1,22 +1,27 @@
 function dll_init(dll) {
-	// engine.pas
+	// Engine
 	global._EngineCreate = external_define(dll, "EngineCreate", dll_cdecl, ty_real, 0);
 	global._EngineDestroy = external_define(dll, "EngineDestroy", dll_cdecl, ty_real, 0);
 	global._EngineSetObjectsSorting = external_define(dll, "EngineSetObjectsSorting", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineSetCulling = external_define(dll, "EngineSetCulling", dll_cdecl, ty_real, 1, ty_real);
+	//global._Update = external_define(dll, "Update", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineUpdate = external_define(dll, "EngineUpdate", dll_cdecl, ty_real, 1, ty_real);
+	//global._TrisRendered = external_define(dll, "TrisRendered", dll_cdecl, ty_real, 0);
 	global._EngineSaveScene = external_define(dll, "EngineSaveScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineLoadScene = external_define(dll, "EngineLoadScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineRootObject = external_define(dll, "EngineRootObject", dll_cdecl, ty_real, 0);
 	global._EngineShowLoadingErrors = external_define(dll, "EngineShowLoadingErrors", dll_cdecl, ty_real, 1, ty_real);
+	//global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	
-	// viewer.pas
+	// Viewer
 	global._ViewerCreate = external_define(dll, "ViewerCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	//global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	//global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -31,10 +36,12 @@ function dll_init(dll) {
 	global._ViewerWorldToScreen = external_define(dll, "ViewerWorldToScreen", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerCopyToTexture = external_define(dll, "ViewerCopyToTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._ViewerGetPickedObject = external_define(dll, "ViewerGetPickedObject", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	// API changed: ViewerGetPickedObjectsList
 	global._ViewerGetPickedObjectsList = external_define(dll, "ViewerGetPickedObjectsList", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerScreenToVector = external_define(dll, "ViewerScreenToVector", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerVectorToScreen = external_define(dll, "ViewerVectorToScreen", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerPixelToDistance = external_define(dll, "ViewerPixelToDistance", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	// Additional constants: ViewerSetAntiAliasing
 	global._ViewerSetAntiAliasing = external_define(dll, "ViewerSetAntiAliasing", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -43,6 +50,9 @@ function dll_init(dll) {
 	global._ViewerResetPerformanceMonitor = external_define(dll, "ViewerResetPerformanceMonitor", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+
+    // Misc
+	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
@@ -573,8 +583,8 @@ function EngineSetCulling(aVc) {
 	return external_call(global._EngineSetCulling, aVc);
 }
 
-function Update(aDelta) {
-	return external_call(global._Update, aDelta);
+function EngineUpdate(aDelta) {
+	return external_call(global._EngineUpdate, aDelta);
 }
 
 function TrisRendered() {
@@ -3993,8 +4003,8 @@ function WindowDispatch() {
 	return external_call(global._WindowDispatch);
 }
 
-function PtrToReal(p) {
-	return external_call(global._PtrToReal, p);
+function PointerToReal(p) {
+	return external_call(global._PointerToReal, p);
 }
 
 #macro osInherited 0

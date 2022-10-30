@@ -3,10 +3,9 @@
   "resourceVersion": "1.6",
   "name": "teapot",
   "resources": [
-    {"id":{"name":"x3dInit","path":"objects/x3dInit/x3dInit.yy",},"order":1,},
     {"id":{"name":"x3d","path":"sprites/x3d/x3d.yy",},"order":0,},
     {"id":{"name":"xtreme3d","path":"scripts/xtreme3d/xtreme3d.yy",},"order":0,},
-    {"id":{"name":"x3dSceneTeapot","path":"objects/x3dSceneTeapot/x3dSceneTeapot.yy",},"order":2,},
+    {"id":{"name":"x3dScene","path":"objects/x3dScene/x3dScene.yy",},"order":2,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [
