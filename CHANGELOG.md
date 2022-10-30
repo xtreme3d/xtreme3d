@@ -1,5 +1,10 @@
 Xtreme3D version history
 ========================
+v4.0.0 (by Gecko) - ??/??/????
+------------------------------
+- Use GLScene 2.1 and Delphi 10.4
+- Xtreme3D is now 64 bit by default
+
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
 - New function `PtrToReal` for compatibility with latest GameMaker Studio 2
