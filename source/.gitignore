@@ -6,6 +6,13 @@
 # Compiled Delphi unit files
 *.dcu
 
+# Output directories
+Win32/
+Win64/
+
+# Delphi history
+__history/
+
 # Backup files
 *~
 
