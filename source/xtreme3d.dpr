@@ -9,12 +9,15 @@ uses
   Vcl.Dialogs,
   Vcl.Imaging.PNGImage,
   GLS.Cadencer,
+  GLS.Color,
   GLS.Context,
+  GLS.GeomObjects,
   GLS.Material,
   GLS.Objects,
   GLS.OpenGLAdapter,
   GLS.RenderContextInfo,
   GLS.Scene,
+  GLS.TilePlane,
   GLS.VectorGeometry,
   GLS.VectorTypes,
   GLS.SceneViewer,
@@ -93,6 +96,7 @@ end;
 {$I 'xtreme3d/viewer'}
 {$I 'xtreme3d/dummycube'}
 {$I 'xtreme3d/camera'}
+{$I 'xtreme3d/light'}
 {$I 'xtreme3d/primitives'}
 {$I 'xtreme3d/object'}
 {$I 'xtreme3d/input'}
@@ -118,13 +122,36 @@ exports
     ViewerPixelRayToWorld, ViewerShadeModel,
 
     // Dummycube
-    DummycubeCreate,
-
-    // Primitives
-    CubeCreate,
+    DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode,
+    DummycubeSetVisible, DummycubeSetEdgeColor, DummycubeSetCubeSize,
 
     // Camera
-    CameraCreate,
+    CameraCreate, CameraSetStyle, CameraSetFocal, CameraSetSceneScale,
+    CameraScaleScene, CameraSetViewDepth, CameraSetTargetObject,
+    CameraMoveAroundTarget, CameraSetDistanceToTarget, CameraGetDistanceToTarget,
+    CameraCopyToTexture, CameraGetNearPlane, CameraSetNearPlaneBias,
+    CameraAbsoluteVectorToTarget, CameraAbsoluteRightVectorToTarget, CameraAbsoluteUpVectorToTarget,
+    CameraZoomAll, CameraScreenDeltaToVector, CameraScreenDeltaToVectorXY, CameraScreenDeltaToVectorXZ,
+    CameraScreenDeltaToVectorYZ, CameraAbsoluteEyeSpaceVector, CameraSetAutoLeveling,
+    CameraMoveInEyeSpace, CameraMoveTargetInEyeSpace, CameraPointInFront, CameraGetFieldOfView,
+
+    // Light
+    LightCreate, LightSetAmbientColor, LightSetDiffuseColor, LightSetSpecularColor,
+    LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
+    LightSetSpotDirection, LightSetStyle,
+    LightGetColor, LightGetAttenuation, LightGetShining,
+
+
+    // Primitives
+    CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
+    CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
+    DodecahedronCreate, IcosahedronCreate, TeapotCreate,
+    TilePlaneCreate, TilePlaneSetTile,
+    CubeGetNormalDirection, PlaneSetOptions, PlaneGetOptions, SphereGetOptions,
+    SphereGetAngleLimits, SphereSetOptions, CylinderSetOptions, CylinderGetOptions,
+    ConeGetOptions, ConeSetOptions, AnnulusSetOptions, AnnulusGetOptions,
+    TorusSetOptions, TorusGetOptions, DiskSetOptions, DiskGetOptions,
+    FrustrumSetOptions, FrustrumGetOptions,
 
     // Object
     ObjectSetPosition, ObjectRotate, ObjectMove, ObjectLift, ObjectStrafe,

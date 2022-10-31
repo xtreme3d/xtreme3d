@@ -23,19 +23,17 @@ camPos = DummycubeCreate(global.scene);
 camera = CameraCreate(camPos);
 ViewerSetCamera(viewer, camera);
 ObjectSetPosition(camPos, 0, 1, 3);
-//CameraSetViewDepth(camera, 500);
-//CameraSetFocal(camera, 100);
-//CameraSetNearPlaneBias(camera, 0.2);
+CameraSetViewDepth(camera, 500);
+CameraSetFocal(camera, 100);
+CameraSetNearPlaneBias(camera, 0.2);
 
 cube = CubeCreate(1, 1, 1, global.scene);
 
-/*
 light = LightCreate(lsOmni, global.scene);
 LightSetAmbientColor(light, c_gray);
 LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
-*/
 
 /*
 plane = PlaneCreate(true, 20, 20, 5, 5, global.scene);

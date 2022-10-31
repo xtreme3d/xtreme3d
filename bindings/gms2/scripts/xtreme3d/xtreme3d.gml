@@ -53,12 +53,92 @@ function dll_init(dll) {
 	
 	// dummycube.pas
 	global._DummycubeCreate = external_define(dll, "DummycubeCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._DummycubeAmalgamate = external_define(dll, "DummycubeAmalgamate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DummycubeSetCameraMode = external_define(dll, "DummycubeSetCameraMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DummycubeSetVisible = external_define(dll, "DummycubeSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DummycubeSetEdgeColor = external_define(dll, "DummycubeSetEdgeColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DummycubeSetCubeSize = external_define(dll, "DummycubeSetCubeSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// camera.pas
 	global._CameraCreate = external_define(dll, "CameraCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._CameraSetStyle = external_define(dll, "CameraSetStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraSetFocal = external_define(dll, "CameraSetFocal", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraSetSceneScale = external_define(dll, "CameraSetSceneScale", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraScaleScene = external_define(dll, "CameraScaleScene", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraSetViewDepth = external_define(dll, "CameraSetViewDepth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraSetTargetObject = external_define(dll, "CameraSetTargetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraMoveAroundTarget = external_define(dll, "CameraMoveAroundTarget", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._CameraSetDistanceToTarget = external_define(dll, "CameraSetDistanceToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraGetDistanceToTarget = external_define(dll, "CameraGetDistanceToTarget", dll_cdecl, ty_real, 1, ty_real);
+	global._CameraCopyToTexture = external_define(dll, "CameraCopyToTexture", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_real, ty_real);
+	global._CameraGetNearPlane = external_define(dll, "CameraGetNearPlane", dll_cdecl, ty_real, 1, ty_real);
+	global._CameraSetNearPlaneBias = external_define(dll, "CameraSetNearPlaneBias", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraAbsoluteVectorToTarget = external_define(dll, "CameraAbsoluteVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraAbsoluteRightVectorToTarget = external_define(dll, "CameraAbsoluteRightVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraAbsoluteUpVectorToTarget = external_define(dll, "CameraAbsoluteUpVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// CameraZoomAll: now requires viewer
+	global._CameraZoomAll = external_define(dll, "CameraZoomAll", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraScreenDeltaToVector = external_define(dll, "CameraScreenDeltaToVector", dll_cdecl, ty_real, 8, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CameraScreenDeltaToVectorXY = external_define(dll, "CameraScreenDeltaToVectorXY", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CameraScreenDeltaToVectorXZ = external_define(dll, "CameraScreenDeltaToVectorXZ", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CameraScreenDeltaToVectorYZ = external_define(dll, "CameraScreenDeltaToVectorYZ", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CameraAbsoluteEyeSpaceVector = external_define(dll, "CameraAbsoluteEyeSpaceVector", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CameraSetAutoLeveling = external_define(dll, "CameraSetAutoLeveling", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CameraMoveInEyeSpace = external_define(dll, "CameraMoveInEyeSpace", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._CameraMoveTargetInEyeSpace = external_define(dll, "CameraMoveTargetInEyeSpace", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._CameraPointInFront = external_define(dll, "CameraPointInFront", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._CameraGetFieldOfView = external_define(dll, "CameraGetFieldOfView", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// Light
+	global._LightCreate = external_define(dll, "LightCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetAmbientColor = external_define(dll, "LightSetAmbientColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetDiffuseColor = external_define(dll, "LightSetDiffuseColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetSpecularColor = external_define(dll, "LightSetSpecularColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetAttenuation = external_define(dll, "LightSetAttenuation", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._LightSetShining = external_define(dll, "LightSetShining", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetSpotCutoff = external_define(dll, "LightSetSpotCutoff", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetSpotExponent = external_define(dll, "LightSetSpotExponent", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightSetSpotDirection = external_define(dll, "LightSetSpotDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._LightSetStyle = external_define(dll, "LightSetStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightGetColor = external_define(dll, "LightGetColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
 	
 	// primitives.pas
 	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._CubeSetNormalDirection = external_define(dll, "CubeSetNormalDirection", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CubeGetNormalDirection = external_define(dll, "CubeGetNormalDirection", dll_cdecl, ty_real, 1, ty_real);
+	global._PlaneCreate = external_define(dll, "PlaneCreate", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._PlaneSetOptions = external_define(dll, "PlaneSetOptions", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._PlaneGetOptions = external_define(dll, "PlaneGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TilePlaneCreate = external_define(dll, "TilePlaneCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._TilePlaneSetTile = external_define(dll, "TilePlaneSetTile", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_string);
+	global._SphereCreate = external_define(dll, "SphereCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._SphereSetAngleLimits = external_define(dll, "SphereSetAngleLimits", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._SphereGetAngleLimits = external_define(dll, "SphereGetAngleLimits", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SphereSetOptions = external_define(dll, "SphereSetOptions", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._SphereGetOptions = external_define(dll, "SphereGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CylinderCreate = external_define(dll, "CylinderCreate", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CylinderSetOptions = external_define(dll, "CylinderSetOptions", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._CylinderGetOptions = external_define(dll, "CylinderGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ConeCreate = external_define(dll, "ConeCreate", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ConeGetOptions = external_define(dll, "ConeGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ConeSetOptions = external_define(dll, "ConeSetOptions", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._AnnulusCreate = external_define(dll, "AnnulusCreate", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._AnnulusSetOptions = external_define(dll, "AnnulusSetOptions", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._AnnulusGetOptions = external_define(dll, "AnnulusGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TorusCreate = external_define(dll, "TorusCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._TorusSetOptions = external_define(dll, "TorusSetOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._TorusGetOptions = external_define(dll, "TorusGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DiskCreate = external_define(dll, "DiskCreate", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._DiskSetOptions = external_define(dll, "DiskSetOptions", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._DiskGetOptions = external_define(dll, "DiskGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FrustrumCreate = external_define(dll, "FrustrumCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FrustrumSetOptions = external_define(dll, "FrustrumSetOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FrustrumGetOptions = external_define(dll, "FrustrumGetOptions", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DodecahedronCreate = external_define(dll, "DodecahedronCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._IcosahedronCreate = external_define(dll, "IcosahedronCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._TeapotCreate = external_define(dll, "TeapotCreate", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Object
 	global._ObjectSetPosition = external_define(dll, "ObjectSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
