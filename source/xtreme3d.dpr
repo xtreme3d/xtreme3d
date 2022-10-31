@@ -14,6 +14,7 @@ uses
   GLS.Color,
   GLS.Context,
   GLS.Coordinates,
+  GLS.FileVfsPAK,
   GLS.GeomObjects,
   GLS.Material,
   GLS.MaterialScript,
@@ -175,7 +176,20 @@ begin
     result := bestObject;
 end;
 
+function normalizeSlashes(s: string): string;
+var
+   i: integer;
+begin
+   SetLength(Result, Length(s));
+   for i := 1 to Length(s) do
+      if s[i] = '/' then
+         Result[i] := '\'
+      else
+         Result[i] := s[i];
+end;
+
 {$I 'xtreme3d/engine'}
+{$I 'xtreme3d/pak'}
 {$I 'xtreme3d/viewer'}
 {$I 'xtreme3d/dummycube'}
 {$I 'xtreme3d/camera'}
@@ -192,6 +206,10 @@ exports
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
     EngineShowLoadingErrors, EngineGetTimeStep,
     PointerToReal,
+
+    //Pak
+    SetPakArchive, PakGetFileCount, PakGetFileName,
+    PakExtract, PakExtractFile,
 
     // Viewer
     ViewerCreate, ViewerSetCamera, ViewerRender, ViewerRenderToFile,

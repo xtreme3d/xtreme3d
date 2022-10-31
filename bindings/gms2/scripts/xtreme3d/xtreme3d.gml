@@ -14,6 +14,13 @@ function dll_init(dll) {
 	//global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	
+	// Pak
+	global._SetPakArchive = external_define(dll, "SetPakArchive", dll_cdecl, ty_real, 1, ty_string);
+	global._PakGetFileCount = external_define(dll, "PakGetFileCount", dll_cdecl, ty_real, 1, ty_real);
+	global._PakGetFileName = external_define(dll, "PakGetFileName", dll_cdecl, ty_string, 2, ty_real, ty_real);
+	global._PakExtract = external_define(dll, "PakExtract", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._PakExtractFile = external_define(dll, "PakExtractFile", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
+	
 	// Viewer
 	global._ViewerCreate = external_define(dll, "ViewerCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
