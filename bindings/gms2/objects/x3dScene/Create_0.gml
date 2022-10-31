@@ -22,12 +22,10 @@ camPos = DummycubeCreate(global.scene);
 
 camera = CameraCreate(camPos);
 ViewerSetCamera(viewer, camera);
-ObjectSetPosition(camPos, 0, 1, 3);
+ObjectSetPosition(camPos, 0, 2, 3);
 CameraSetViewDepth(camera, 500);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
-
-cube = CubeCreate(1, 1, 1, global.scene);
 
 light = LightCreate(lsOmni, global.scene);
 LightSetAmbientColor(light, c_gray);
@@ -35,9 +33,9 @@ LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
-/*
 plane = PlaneCreate(true, 20, 20, 5, 5, global.scene);
 ObjectPitch(plane, 90);
+/*
 MaterialCreate("mFloor", "textures/ground-diffuse.jpg");
 MaterialLoadTextureEx("mFloor", "textures/ground-normal.jpg", 1);
 MaterialSetShininess("mFloor", 16);
@@ -46,10 +44,10 @@ MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 */
 
-/*
-teapot = TeapotCreate(shadowCasters);
+teapot = TeapotCreate(global.scene);
 ObjectScale(teapot, 3, 3, 3);
-ObjectSetPosition(teapot, 0, 1, 0);
+ObjectSetPosition(teapot, 0, 0, 0);
+/*
 MaterialCreate("mTeapot", "textures/envmap.jpg");
 MaterialSetFaceCulling("mTeapot", fcNoCull);
 MaterialSetTextureMappingMode("mTeapot", tmmSphere);

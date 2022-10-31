@@ -9,6 +9,7 @@ uses
   Vcl.Dialogs,
   Vcl.Imaging.PNGImage,
   GLS.Cadencer,
+  GLS.Collision,
   GLS.Color,
   GLS.Context,
   GLS.GeomObjects,
@@ -92,6 +93,66 @@ begin
    v.Buffer.RenderingContext.Deactivate;
 end;
 
+function Raycast(
+  obj, target: TGLBaseSceneObject;
+  var isecPoint, isecNorm: TGLVector): Boolean;
+var
+  rstart, rdir, ipoint, inorm: TGLVector;
+begin
+  rstart := obj.AbsolutePosition;
+  rdir := obj.AbsoluteDirection;
+  if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
+  begin
+    isecPoint := ipoint;
+    isecNorm := inorm;
+    result := True;
+  end
+  else
+    result := False;
+end;
+
+function RecursiveRaycast(
+  obj, target: TGLBaseSceneObject;
+  rstart, rdir: TGLVector;
+  var isecPoint, isecNorm: TGLVector;
+  var bestDistance: Single): TGLBaseSceneObject;
+var
+  ipoint, inorm: TGLVector;
+  bestObject: TGLBaseSceneObject;
+  resObj: TGLBaseSceneObject;
+  d: Single;
+  i: Integer;
+begin
+  bestObject := nil;
+
+  if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
+  begin
+    d := VectorDistance(rstart, ipoint);
+    if d < bestDistance then
+    begin
+      isecPoint := ipoint;
+      isecNorm := inorm;
+      bestDistance := d;
+      bestObject := target;
+    end;
+  end;
+
+  for i := 0 to target.Count-1 do
+  begin
+    if target.Children[i].Visible then begin
+      resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
+      if resObj <> nil then
+      begin
+        isecPoint := ipoint;
+        isecNorm := inorm;
+        bestObject := resObj;
+      end;
+    end;
+  end;
+
+  result := bestObject;
+end;
+
 {$I 'xtreme3d/engine'}
 {$I 'xtreme3d/viewer'}
 {$I 'xtreme3d/dummycube'}
@@ -101,6 +162,7 @@ end;
 {$I 'xtreme3d/object'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/picklist'}
+
 
 exports
     // Engine
@@ -141,7 +203,6 @@ exports
     LightSetSpotDirection, LightSetStyle,
     LightGetColor, LightGetAttenuation, LightGetShining,
 
-
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
     CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
@@ -154,7 +215,43 @@ exports
     FrustrumSetOptions, FrustrumGetOptions,
 
     // Object
-    ObjectSetPosition, ObjectRotate, ObjectMove, ObjectLift, ObjectStrafe,
+    ObjectHide, ObjectShow, ObjectIsVisible,
+    ObjectCopy, ObjectDestroy, ObjectDestroyChildren,
+    ObjectSetPosition, ObjectGetPosition, ObjectGetAbsolutePosition,
+    ObjectSetPositionOfObject, ObjectAlignWithObject,
+    ObjectSetPositionX, ObjectSetPositionY, ObjectSetPositionZ,
+    ObjectGetPositionX, ObjectGetPositionY, ObjectGetPositionZ,
+    ObjectSetAbsolutePosition,
+    ObjectSetDirection, ObjectGetDirection,
+    ObjectSetAbsoluteDirection, ObjectGetAbsoluteDirection,
+    ObjectGetPitch, ObjectGetTurn, ObjectGetRoll, ObjectSetRotation,
+    ObjectMove, ObjectLift, ObjectStrafe, ObjectTranslate, ObjectRotate,
+    ObjectScale, ObjectSetScale, ObjectGetScale,
+    ObjectSetUpVector, ObjectPointToObject,
+    ObjectShowAxes,
+    ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
+    ObjectGetCollisionPosition, ObjectGetCollisionNormal,
+    ObjectSetMaterial, ObjectGetMaterial,
+    ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
+    ObjectGetDistance,
+    ObjectCheckCubeVsCube, ObjectCheckSphereVsSphere, ObjectCheckSphereVsCube,
+    ObjectCheckCubeVsFace, ObjectCheckFaceVsFace,
+    ObjectIsPointInObject,
+    ObjectSetCulling,
+    ObjectSetName, ObjectGetName, ObjectGetClassName,
+    ObjectSetTag, ObjectGetTag,
+    ObjectGetParent, ObjectGetChildCount, ObjectGetChild, ObjectGetIndex, ObjectFindChild,
+    ObjectGetBoundingSphereRadius,
+    ObjectGetAbsoluteUp, ObjectSetAbsoluteUp, ObjectGetAbsoluteRight,
+    ObjectGetAbsoluteXVector, ObjectGetAbsoluteYVector, ObjectGetAbsoluteZVector,
+    ObjectGetRight,
+    ObjectMoveChildUp, ObjectMoveChildDown,
+    ObjectSetParent, ObjectRemoveChild,
+    ObjectMoveObjectAround,
+    ObjectPitch, ObjectTurn, ObjectRoll,
+    ObjectGetUp,
+    ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
+    ObjectIgnoreDepthBuffer, ObjectFindByName,
 
     // Input
     MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
