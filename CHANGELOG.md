@@ -4,6 +4,7 @@ v4.0.0 (by Gecko) - ??/??/????
 ------------------------------
 - Uses GLScene 2.1 and Delphi 10.4
 - Xtreme3D is now 64 bit and compatible with recent versions of GameMaker Studio 2
+- UTF-8 support for file names
 - `Update` is now `EngineUpdate`
 - `ViewerGetPickedObjectsList` now requires user-provied PickList
 - New constants for `ViewerSetAntiAliasing`: `aa6x = 6`, `aa8x = 7`, `aa16x = 8`, `csa8x = 9`, `csa8xHQ = 10`, `csa16x = 11`, `csa16xHQ = 12`
