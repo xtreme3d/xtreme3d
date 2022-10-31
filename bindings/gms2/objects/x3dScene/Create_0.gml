@@ -1,11 +1,14 @@
 window_set_caption("Xtreme3D");
+
 dll_init("xtreme3d.dll");
+
 EngineCreate();
 
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
 
-viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(window_handle()));
+windowHandle = window_handle();
+viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
 ViewerSetBackgroundColor(viewer, c_gray);
 ViewerSetLighting(viewer, true);
 ViewerEnableFog(viewer, true);

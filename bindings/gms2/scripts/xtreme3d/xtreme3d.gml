@@ -51,7 +51,7 @@ function dll_init(dll) {
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
-	// dummycube.pas
+	// Dummycube
 	global._DummycubeCreate = external_define(dll, "DummycubeCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._DummycubeAmalgamate = external_define(dll, "DummycubeAmalgamate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DummycubeSetCameraMode = external_define(dll, "DummycubeSetCameraMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -59,7 +59,7 @@ function dll_init(dll) {
 	global._DummycubeSetEdgeColor = external_define(dll, "DummycubeSetEdgeColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DummycubeSetCubeSize = external_define(dll, "DummycubeSetCubeSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
-	// camera.pas
+	// Camera
 	global._CameraCreate = external_define(dll, "CameraCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._CameraSetStyle = external_define(dll, "CameraSetStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CameraSetFocal = external_define(dll, "CameraSetFocal", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -104,7 +104,7 @@ function dll_init(dll) {
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
 	
-	// primitives.pas
+	// Primitives
 	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._CubeSetNormalDirection = external_define(dll, "CubeSetNormalDirection", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CubeGetNormalDirection = external_define(dll, "CubeGetNormalDirection", dll_cdecl, ty_real, 1, ty_real);

@@ -1,5 +1,4 @@
-if (!global.canRender)
-	exit;
+if (!global.canRender) exit;
 
 var dt = delta_time / 1000000;
 
@@ -29,7 +28,6 @@ if (MouseIsPressed(mb_left) and window_has_focus()) {
 else {
 	mb_left_released = true;
 }
-
 
 EngineUpdate(dt);
 ViewerRender(viewer);
