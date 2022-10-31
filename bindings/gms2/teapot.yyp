@@ -48,6 +48,10 @@
   ],
   "IncludedFiles": [
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"xtreme3d.dll","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"stone-normal.png","CopyToMask":-1,"filePath":"datafiles/textures",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"stone.png","CopyToMask":-1,"filePath":"datafiles/textures",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"stone-height.png","CopyToMask":-1,"filePath":"datafiles/textures",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"envmap.jpg","CopyToMask":-1,"filePath":"datafiles/textures",},
   ],
   "MetaData": {
     "IDEVersion": "2022.8.0.34",

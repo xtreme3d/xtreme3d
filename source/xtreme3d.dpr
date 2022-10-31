@@ -8,16 +8,21 @@ uses
   Vcl.Graphics,
   Vcl.Dialogs,
   Vcl.Imaging.PNGImage,
+  GLS.ApplicationFileIO,
   GLS.Cadencer,
   GLS.Collision,
   GLS.Color,
   GLS.Context,
+  GLS.Coordinates,
   GLS.GeomObjects,
   GLS.Material,
+  GLS.MaterialScript,
   GLS.Objects,
   GLS.OpenGLAdapter,
+  GLS.PersistentClasses,
   GLS.RenderContextInfo,
   GLS.Scene,
+  GLS.Texture,
   GLS.TilePlane,
   GLS.VectorGeometry,
   GLS.VectorTypes,
@@ -76,39 +81,56 @@ begin
    result := (GetAsyncKeyState(vk)<>0);
 end;
 
+function LoadStringFromFile(const fileName: String): String;
+var
+    n: Cardinal;
+	  fs: TFileStream;
+begin
+    if FileStreamExists(fileName) then begin
+   	    fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
+        try
+            n := fs.Size;
+   	        SetLength(Result, n);
+            if n > 0 then
+         	      fs.Read(Result[1], n);
+        finally
+   	        fs.Free;
+        end;
+    end
+    else Result := '';
+end;
+
 function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
 var
-   Buffer : String;
-   ExtPos: Integer;
+    Buffer : String;
+    ExtPos: Integer;
 begin
-   v.Buffer.RenderingContext.Activate;
-   Buffer := String(glGetString(GL_EXTENSIONS));
-   // First find the position of the extension string as substring in Buffer.
-   ExtPos := Pos(Extension, Buffer);
-   Result := ExtPos > 0;
-   // Now check that it isn't only a substring of another extension.
-   if Result then
-     Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
-               or (Buffer[ExtPos + Length(Extension)]=' ');
-   v.Buffer.RenderingContext.Deactivate;
+    v.Buffer.RenderingContext.Activate;
+    Buffer := String(glGetString(GL_EXTENSIONS));
+    // First find the position of the extension string as substring in Buffer.
+    ExtPos := Pos(Extension, Buffer);
+    Result := ExtPos > 0;
+    // Now check that it isn't only a substring of another extension.
+    if Result then
+        Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
+                  or (Buffer[ExtPos + Length(Extension)]=' ');
+    v.Buffer.RenderingContext.Deactivate;
 end;
 
 function Raycast(
   obj, target: TGLBaseSceneObject;
   var isecPoint, isecNorm: TGLVector): Boolean;
 var
-  rstart, rdir, ipoint, inorm: TGLVector;
+    rstart, rdir, ipoint, inorm: TGLVector;
 begin
-  rstart := obj.AbsolutePosition;
-  rdir := obj.AbsoluteDirection;
-  if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
-  begin
-    isecPoint := ipoint;
-    isecNorm := inorm;
-    result := True;
-  end
-  else
-    result := False;
+    rstart := obj.AbsolutePosition;
+    rdir := obj.AbsoluteDirection;
+    if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then begin
+        isecPoint := ipoint;
+        isecNorm := inorm;
+        result := True;
+    end
+    else result := False;
 end;
 
 function RecursiveRaycast(
@@ -117,40 +139,37 @@ function RecursiveRaycast(
   var isecPoint, isecNorm: TGLVector;
   var bestDistance: Single): TGLBaseSceneObject;
 var
-  ipoint, inorm: TGLVector;
-  bestObject: TGLBaseSceneObject;
-  resObj: TGLBaseSceneObject;
-  d: Single;
-  i: Integer;
+    ipoint, inorm: TGLVector;
+    bestObject: TGLBaseSceneObject;
+    resObj: TGLBaseSceneObject;
+    d: Single;
+    i: Integer;
 begin
-  bestObject := nil;
+    bestObject := nil;
 
-  if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then
-  begin
-    d := VectorDistance(rstart, ipoint);
-    if d < bestDistance then
+    if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then begin
+        d := VectorDistance(rstart, ipoint);
+        if d < bestDistance then begin
+            isecPoint := ipoint;
+            isecNorm := inorm;
+            bestDistance := d;
+            bestObject := target;
+        end;
+    end;
+
+    for i := 0 to target.Count-1 do
     begin
-      isecPoint := ipoint;
-      isecNorm := inorm;
-      bestDistance := d;
-      bestObject := target;
+        if target.Children[i].Visible then begin
+            resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
+            if resObj <> nil then begin
+                isecPoint := ipoint;
+                isecNorm := inorm;
+                bestObject := resObj;
+            end;
+        end;
     end;
-  end;
 
-  for i := 0 to target.Count-1 do
-  begin
-    if target.Children[i].Visible then begin
-      resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
-      if resObj <> nil then
-      begin
-        isecPoint := ipoint;
-        isecNorm := inorm;
-        bestObject := resObj;
-      end;
-    end;
-  end;
-
-  result := bestObject;
+    result := bestObject;
 end;
 
 {$I 'xtreme3d/engine'}
@@ -160,9 +179,9 @@ end;
 {$I 'xtreme3d/light'}
 {$I 'xtreme3d/primitives'}
 {$I 'xtreme3d/object'}
+{$I 'xtreme3d/material'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/picklist'}
-
 
 exports
     // Engine
@@ -252,6 +271,13 @@ exports
     ObjectGetUp,
     ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
     ObjectIgnoreDepthBuffer, ObjectFindByName,
+
+    // Material
+    MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
+    MaterialLibraryClear, MaterialLibraryDeleteUnused,
+    MaterialLibraryHasMaterial, MaterialLibraryLoadScript,
+    MaterialCreate, MaterialDestroy,
+    MaterialSetTextureMappingMode, MaterialSetFaceCulling, MaterialSetOptions,
 
     // Input
     MouseGetPositionX, MouseGetPositionY, MouseSetPosition,

@@ -230,6 +230,82 @@ function dll_init(dll) {
 	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	//global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	
+	// material.pas
+	global._MaterialLibraryCreate = external_define(dll, "MaterialLibraryCreate", dll_cdecl, ty_real, 0);
+	global._MaterialLibraryActivate = external_define(dll, "MaterialLibraryActivate", dll_cdecl, ty_real, 1, ty_real);
+	global._MaterialLibrarySetTexturePaths = external_define(dll, "MaterialLibrarySetTexturePaths", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._MaterialLibraryClear = external_define(dll, "MaterialLibraryClear", dll_cdecl, ty_real, 1, ty_real);
+	global._MaterialLibraryDeleteUnused = external_define(dll, "MaterialLibraryDeleteUnused", dll_cdecl, ty_real, 1, ty_real);
+	global._MaterialLibraryHasMaterial = external_define(dll, "MaterialLibraryHasMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._MaterialLibraryLoadScript = external_define(dll, "MaterialLibraryLoadScript", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._MaterialCreate = external_define(dll, "MaterialCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialDestroy = external_define(dll, "MaterialDestroy", dll_cdecl, ty_real, 1, ty_string);
+	/*
+	global._MaterialAddCubeMap = external_define(dll, "MaterialAddCubeMap", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialCubeMapLoadImage = external_define(dll, "MaterialCubeMapLoadImage", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialCubeMapGenerate = external_define(dll, "MaterialCubeMapGenerate", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialCubeMapFromScene = external_define(dll, "MaterialCubeMapFromScene", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._MaterialSetName = external_define(dll, "MaterialSetName", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialSetShininess = external_define(dll, "MaterialSetShininess", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetAmbientColor = external_define(dll, "MaterialSetAmbientColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetDiffuseColor = external_define(dll, "MaterialSetDiffuseColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetSpecularColor = external_define(dll, "MaterialSetSpecularColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetEmissionColor = external_define(dll, "MaterialSetEmissionColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialGetColor = external_define(dll, "MaterialGetColor", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialGetAlpha = external_define(dll, "MaterialGetAlpha", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetBlendingMode = external_define(dll, "MaterialSetBlendingMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureMode = external_define(dll, "MaterialSetTextureMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	*/
+	global._MaterialSetTextureMappingMode = external_define(dll, "MaterialSetTextureMappingMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	/*
+	global._MaterialSetPolygonMode = external_define(dll, "MaterialSetPolygonMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureImageAlpha = external_define(dll, "MaterialSetTextureImageAlpha", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureScale = external_define(dll, "MaterialSetTextureScale", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetTextureOffset = external_define(dll, "MaterialSetTextureOffset", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetTextureFilter = external_define(dll, "MaterialSetTextureFilter", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialEnableTexture = external_define(dll, "MaterialEnableTexture", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialGetCount = external_define(dll, "MaterialGetCount", dll_cdecl, ty_real, 0);
+	global._MaterialGetName = external_define(dll, "MaterialGetName", dll_cdecl, ty_string, 1, ty_real);
+	*/
+	global._MaterialSetFaceCulling = external_define(dll, "MaterialSetFaceCulling", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	/*
+	global._MaterialSetSecondTexture = external_define(dll, "MaterialSetSecondTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialSetTextureFormat = external_define(dll, "MaterialSetTextureFormat", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureCompression = external_define(dll, "MaterialSetTextureCompression", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialTextureRequiredMemory = external_define(dll, "MaterialTextureRequiredMemory", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialSetFilteringQuality = external_define(dll, "MaterialSetFilteringQuality", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialTextureExDelete = external_define(dll, "MaterialTextureExDelete", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetShader = external_define(dll, "MaterialSetShader", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSaveTexture = external_define(dll, "MaterialSaveTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	*/
+	global._MaterialSetOptions = external_define(dll, "MaterialSetOptions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	/*
+	global._MaterialSetTextureWrap = external_define(dll, "MaterialSetTextureWrap", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialGenTexture = external_define(dll, "MaterialGenTexture", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialSetTexture = external_define(dll, "MaterialSetTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialGetTextureWidth = external_define(dll, "MaterialGetTextureWidth", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._MaterialLoadTextureEx = external_define(dll, "MaterialLoadTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialSetTextureEx = external_define(dll, "MaterialSetTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialGenTextureEx = external_define(dll, "MaterialGenTextureEx", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialNoiseCreate = external_define(dll, "MaterialNoiseCreate", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialNoiseSetDimensions = external_define(dll, "MaterialNoiseSetDimensions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialNoiseAnimate = external_define(dll, "MaterialNoiseAnimate", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialNoiseSetMinCut = external_define(dll, "MaterialNoiseSetMinCut", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialNoiseSetSharpness = external_define(dll, "MaterialNoiseSetSharpness", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialNoiseSetSeamless = external_define(dll, "MaterialNoiseSetSeamless", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialNoiseRandomSeed = external_define(dll, "MaterialNoiseRandomSeed", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialCullFrontFaces = external_define(dll, "MaterialCullFrontFaces", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetZWrite = external_define(dll, "MaterialSetZWrite", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
+	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
+	*/
+	
 	// Input
 	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
@@ -4330,6 +4406,13 @@ function PointerToReal(p) {
 #macro aa2xHQ 3
 #macro aa4x 4
 #macro aa4xHQ 5
+#macro aa6x 6
+#macro aa8x 7
+#macro aa16x 8
+#macro csa8x 9
+#macro csa8xHQ 10
+#macro csa16x 11
+#macro csa16xHQ 12
 #macro afpNone 0
 #macro afpLinear 1
 #macro ccsDCEStandard 0

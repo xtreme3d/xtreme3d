@@ -2,8 +2,8 @@ window_set_caption("Xtreme3D");
 dll_init("xtreme3d.dll");
 EngineCreate();
 
-//matlib = MaterialLibraryCreate();
-//MaterialLibraryActivate(matlib);
+matlib = MaterialLibraryCreate();
+MaterialLibraryActivate(matlib);
 
 viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(window_handle()));
 ViewerSetBackgroundColor(viewer, c_gray);
@@ -11,8 +11,7 @@ ViewerSetLighting(viewer, true);
 ViewerEnableFog(viewer, true);
 ViewerSetFogColor(viewer, c_gray);
 ViewerSetFogDistance(viewer, 100, 200);
-ViewerSetAntiAliasing(viewer, aa4xHQ); //MSAA
-//ViewerSetAutoRender(viewer, false);
+ViewerSetAntiAliasing(viewer, csa8xHQ); //CSAA
 
 global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
@@ -35,25 +34,24 @@ ObjectSetPosition(light, 3, 5, 3);
 
 plane = PlaneCreate(true, 20, 20, 5, 5, global.scene);
 ObjectPitch(plane, 90);
+MaterialCreate("mFloor", "textures/stone.png");
 /*
-MaterialCreate("mFloor", "textures/ground-diffuse.jpg");
 MaterialLoadTextureEx("mFloor", "textures/ground-normal.jpg", 1);
 MaterialSetShininess("mFloor", 16);
 MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 */
+ObjectSetMaterial(plane, "mFloor");
 
 teapot = TeapotCreate(global.scene);
 ObjectScale(teapot, 3, 3, 3);
 ObjectSetPosition(teapot, 0, 0, 0);
-/*
 MaterialCreate("mTeapot", "textures/envmap.jpg");
 MaterialSetFaceCulling("mTeapot", fcNoCull);
 MaterialSetTextureMappingMode("mTeapot", tmmSphere);
 MaterialSetOptions("mTeapot", false, true);
 ObjectSetMaterial(teapot, "mTeapot");
-*/
 
 mouselookActive = true;
 mb_left_released = true;
