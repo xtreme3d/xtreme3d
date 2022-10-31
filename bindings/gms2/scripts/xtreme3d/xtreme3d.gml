@@ -135,6 +135,28 @@ function dll_init(dll) {
 	global._TTFontLoadCodePage = external_define(dll, "TTFontLoadCodePage", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	*/
 	
+	// Sprite
+	global._HUDSpriteCreate = external_define(dll, "HUDSpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._HUDSpriteGetMouseOver = external_define(dll, "HUDSpriteGetMouseOver", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDSpriteXTiles = external_define(dll, "HUDSpriteXTiles", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDSpriteYTiles = external_define(dll, "HUDSpriteYTiles", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpriteCreate = external_define(dll, "SpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._SpriteSetSize = external_define(dll, "SpriteSetSize", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SpriteGetSize = external_define(dll, "SpriteGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpriteScale = external_define(dll, "SpriteScale", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SpriteSetRotation = external_define(dll, "SpriteSetRotation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpriteRotate = external_define(dll, "SpriteRotate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpriteMirror = external_define(dll, "SpriteMirror", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//SpriteNoZWrite was removed, use MaterialSetDepthWrite instead
+	//global._SpriteNoZWrite = external_define(dll, "SpriteNoZWrite", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	/*
+	global._SpriteCreateEx = external_define(dll, "SpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HUDSpriteCreateEx = external_define(dll, "HUDSpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._SpriteSetBoundsUV = external_define(dll, "SpriteSetBoundsUV", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._SpriteSetOrigin = external_define(dll, "SpriteSetOrigin", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	*/
+	
 	// Primitives
 	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._CubeSetNormalDirection = external_define(dll, "CubeSetNormalDirection", dll_cdecl, ty_real, 2, ty_real, ty_real);

@@ -200,7 +200,7 @@ end;
 {$I 'xtreme3d/light'}
 //{$I 'xtreme3d/lightfx'}
 {$I 'xtreme3d/fonttext'}
-//{$I 'xtreme3d/sprite'}
+{$I 'xtreme3d/sprite'}
 //{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
 //{$I 'xtreme3d/actor'}
@@ -295,6 +295,9 @@ exports
     SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
 
     // Sprite
+    HUDSpriteCreate, HUDSpriteGetMouseOver, HUDSpriteXTiles, HUDSpriteYTiles,
+    SpriteCreate, SpriteSetSize, SpriteGetSize, SpriteScale, SpriteSetRotation,
+    SpriteRotate, SpriteMirror,
 
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
