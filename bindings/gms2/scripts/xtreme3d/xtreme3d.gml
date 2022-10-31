@@ -342,6 +342,7 @@ function dll_init(dll) {
 	global._MouseIsPressed = external_define(dll, "MouseIsPressed", dll_cdecl, ty_real, 1, ty_real);
 
     // Misc
+	// PtrToReal is now PointerToReal
 	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);
 }
 

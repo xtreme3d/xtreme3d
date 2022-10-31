@@ -2,8 +2,17 @@ Xtreme3D version history
 ========================
 v4.0.0 (by Gecko) - ??/??/????
 ------------------------------
-- Use GLScene 2.1 and Delphi 10.4
-- Xtreme3D is now 64 bit by default
+- Uses GLScene 2.1 and Delphi 10.4
+- Xtreme3D is now 64 bit and compatible with recent versions of GameMaker Studio 2
+- `Update` is now `EngineUpdate`
+- `ViewerGetPickedObjectsList` now requires user-provied PickList
+- New constants for `ViewerSetAntiAliasing`: `aa6x = 6`, `aa8x = 7`, `aa16x = 8`, `csa8x = 9`, `csa8xHQ = 10`, `csa16x = 11`, `csa16xHQ = 12`
+- `CameraZoomAll` now requires a Viewer as a second parameter
+- `MaterialCullFrontFaces` was removed
+- `MaterialSetZWrite` is now `MaterialSetDepthWrite`
+- New function `MaterialSetDepthTest`
+- `PtrToReal` is now `PointerToReal`
+- New functions `PickListCreate`, `PickListClear`, `PickListGetCount`, `PickListGetHit`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
