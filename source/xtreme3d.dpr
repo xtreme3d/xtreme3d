@@ -294,6 +294,8 @@ exports
     FlatTextCreate, FlatTextSetFont, FlatTextSetColor, FlatTextSetText,
     SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
 
+    // Sprite
+
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
     CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
@@ -304,6 +306,10 @@ exports
     ConeGetOptions, ConeSetOptions, AnnulusSetOptions, AnnulusGetOptions,
     TorusSetOptions, TorusGetOptions, DiskSetOptions, DiskGetOptions,
     FrustrumSetOptions, FrustrumGetOptions,
+
+    // Actor
+    // Freeform
+    // Terrain
 
     // Object
     ObjectHide, ObjectShow, ObjectIsVisible,
@@ -344,6 +350,8 @@ exports
     ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
     ObjectIgnoreDepthBuffer, ObjectFindByName,
 
+    // Polygon
+
     // Material
     MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
     MaterialLibraryClear, MaterialLibraryDeleteUnused,
@@ -368,9 +376,44 @@ exports
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
 
+    // Shaders
+    // ThorFX
+    // FireFX
+    // Lensflare
+    // Skydome
+    // Water
+    // Blur
+    // Skybox
+    // Lines
+    // Tree
+    // Trail
+    // Shadowplane
+    // Shadowvolume
+    // Navigator
+    // DCE
+    // ODE
+    // FPSManager
+    // Mirror
+    // Partition
+    // Proxy & MultiProxy
+    // Grid
+    // MemoryViewer
+    // ShadowMap
+    // Movement
+    // FBO
+    // ObjectHash
+    // Text
+    // ClipPlane
+
     // Input
     MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
     MouseShowCursor, KeyIsPressed, MouseIsPressed,
+
+    // Window
+    // Color
+    // Kraft
+    // Grid
+    // Verlet
 
     // PickList
     PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
