@@ -9,6 +9,7 @@ uses
   Vcl.Dialogs,
   Vcl.Imaging.PNGImage,
   GLS.ApplicationFileIO,
+  GLS.BitmapFont,
   GLS.Cadencer,
   GLS.Collision,
   GLS.Color,
@@ -16,6 +17,7 @@ uses
   GLS.Coordinates,
   GLS.FileVfsPAK,
   GLS.GeomObjects,
+  GLS.HUDObjects,
   GLS.Material,
   GLS.MaterialScript,
   GLS.Objects,
@@ -24,14 +26,16 @@ uses
   GLS.ProcTextures,
   GLS.RenderContextInfo,
   GLS.Scene,
+  GLS.SceneViewer,
+  GLS.Selection,
+  GLS.SpaceText,
   GLS.State,
   GLS.Texture,
   GLS.TextureFormat,
   GLS.TilePlane,
   GLS.VectorGeometry,
   GLS.VectorTypes,
-  GLS.SceneViewer,
-  GLS.Selection;
+  GLS.WindowsFont;
   //Physics.ODEManager,
   //Physics.ODERagdoll;
 
@@ -194,10 +198,51 @@ end;
 {$I 'xtreme3d/dummycube'}
 {$I 'xtreme3d/camera'}
 {$I 'xtreme3d/light'}
+//{$I 'xtreme3d/lightfx'}
+{$I 'xtreme3d/fonttext'}
+//{$I 'xtreme3d/sprite'}
+//{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
+//{$I 'xtreme3d/actor'}
+//{$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
+//{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
+//{$I 'xtreme3d/shaders'}
+//{$I 'xtreme3d/thorfx'}
+//{$I 'xtreme3d/firefx'}
+//{$I 'xtreme3d/lensflare'}
+//{$I 'xtreme3d/terrain'}
+//{$I 'xtreme3d/blur'}
+//{$I 'xtreme3d/skybox'}
+//{$I 'xtreme3d/trail'}
+//{$I 'xtreme3d/shadowplane'}
+//{$I 'xtreme3d/shadowvolume'}
+//{$I 'xtreme3d/skydome'}
+//{$I 'xtreme3d/water'}
+//{$I 'xtreme3d/lines'}
+//{$I 'xtreme3d/tree'}
+//{$I 'xtreme3d/navigator'}
+//{$I 'xtreme3d/movement'}
+//{$I 'xtreme3d/dce'}
+//{$I 'xtreme3d/fps'}
+//{$I 'xtreme3d/mirror'}
+//{$I 'xtreme3d/partition'}
+//{$I 'xtreme3d/memviewer'}
+//{$I 'xtreme3d/fbo'}
+//{$I 'xtreme3d/proxy'}
+//{$I 'xtreme3d/text'}
+//{$I 'xtreme3d/objecthash'}
+//{$I 'xtreme3d/grid'}
+//{$I 'xtreme3d/shadowmap'}
+//{$I 'xtreme3d/ode'}
+//{$I 'xtreme3d/kraft'}
+//{$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
+//{$I 'xtreme3d/window'}
+//{$I 'xtreme3d/color'}
+//{$I 'xtreme3d/pipe'}
+//{$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 
 exports
@@ -242,6 +287,12 @@ exports
     LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
     LightSetSpotDirection, LightSetStyle,
     LightGetColor, LightGetAttenuation, LightGetShining,
+
+    // Font & Text
+    BmpfontCreate, BmpfontLoad, WindowsBitmapfontCreate, HUDTextCreate,
+    HUDTextSetRotation, HUDTextSetFont, HUDTextSetColor, HUDTextSetText,
+    FlatTextCreate, FlatTextSetFont, FlatTextSetColor, FlatTextSetText,
+    SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
 
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,

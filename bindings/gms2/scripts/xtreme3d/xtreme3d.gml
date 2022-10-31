@@ -111,6 +111,30 @@ function dll_init(dll) {
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
 	
+	// Font & Text
+	global._BmpfontCreate = external_define(dll, "BmpfontCreate", dll_cdecl, ty_real, 8, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._BmpfontLoad = external_define(dll, "BmpfontLoad", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._WindowsBitmapfontCreate = external_define(dll, "WindowsBitmapfontCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._HUDTextCreate = external_define(dll, "HUDTextCreate", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	global._HUDTextSetRotation = external_define(dll, "HUDTextSetRotation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDTextSetFont = external_define(dll, "HUDTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDTextSetColor = external_define(dll, "HUDTextSetColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDTextSetText = external_define(dll, "HUDTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._FlatTextCreate = external_define(dll, "FlatTextCreate", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	global._FlatTextSetFont = external_define(dll, "FlatTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FlatTextSetColor = external_define(dll, "FlatTextSetColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FlatTextSetText = external_define(dll, "FlatTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._SpaceTextCreate = external_define(dll, "SpaceTextCreate", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_real, ty_real);
+	global._SpaceTextSetExtrusion = external_define(dll, "SpaceTextSetExtrusion", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpaceTextSetFont = external_define(dll, "SpaceTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SpaceTextSetText = external_define(dll, "SpaceTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	/*
+	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TTFontSetEncoding = external_define(dll, "TTFontSetEncoding", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TTFontLoadCodePage = external_define(dll, "TTFontLoadCodePage", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	*/
+	
 	// Primitives
 	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._CubeSetNormalDirection = external_define(dll, "CubeSetNormalDirection", dll_cdecl, ty_real, 2, ty_real, ty_real);
