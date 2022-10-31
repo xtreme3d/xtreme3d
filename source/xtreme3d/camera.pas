@@ -78,7 +78,7 @@ begin
   memviewer.Width:=Trunc(width);
   memviewer.Height:=Trunc(height);
   memviewer.Camera:=TGLCamera(RealToPtr(camera));
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.Texture.Disabled:=false;
   memviewer.Render;
   memviewer.CopyToTexture(mat.Material.Texture);

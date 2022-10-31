@@ -84,6 +84,11 @@ begin
     result := Pointer(i);
 end;
 
+function StrConv(s: PAnsiChar): String;
+begin
+    result := System.UTF8ToUnicodeString(s);
+end;
+
 function IsKeyDown(vk: integer): Boolean;
 begin
    result := (GetAsyncKeyState(vk)<>0);

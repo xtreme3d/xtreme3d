@@ -59,13 +59,13 @@ end;
 
 function EngineSaveScene(filename: PAnsiChar): real; cdecl;
 begin
-    scene.SaveToTextFile(String(AnsiString(filename)));
+    scene.SaveToTextFile(StrConv(filename));
     result := 1.0;
 end;
 
 function EngineLoadScene(filename: PAnsiChar): real; cdecl;
 begin
-    scene.LoadFromTextFile(String(AnsiString(filename)));
+    scene.LoadFromTextFile(StrConv(filename));
     result := 1.0;
 end;
 

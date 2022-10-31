@@ -22,7 +22,7 @@ var
   GLBitmapFont1: TGLBitmapFont;
   begin
   GLBitmapFont1:=TGLBitmapFont(RealToPtr(font));
-  GLBitmapFont1.Glyphs.Bitmap.LoadFromFile(String(AnsiString(mtrl)));
+  GLBitmapFont1.Glyphs.Bitmap.LoadFromFile(StrConv(mtrl));
   result:=1;
 end;
 
@@ -34,7 +34,7 @@ begin
   WindowsBitmapFont1.Ranges[0].StartASCII := Char(Trunc(chstart));
   WindowsBitmapFont1.Ranges[0].StopASCII := Char(Trunc(chend));
   WindowsBitmapFont1.Font.Height := Trunc(size);
-  WindowsBitmapFont1.Font.Name := String(AnsiString(nm));
+  WindowsBitmapFont1.Font.Name := StrConv(nm);
   result:=Integer(WindowsBitmapFont1);
 end;
 
@@ -47,7 +47,7 @@ begin
   else
     GLHUDText1:=TGLHUDText.CreateAsChild(scene.Objects);
   GLHUDText1.BitmapFont := TGLCustomBitmapFont(RealToPtr(font));
-  GLHUDText1.Text:=String(AnsiString(txt));
+  GLHUDText1.Text:=StrConv(txt);
   result:=ObjToReal(GLHUDText1);
 end;
 
@@ -84,7 +84,7 @@ var
   GLHUDText1: TGLHUDText;
 begin
   GLHUDText1:=TGLHUDText(RealToPtr(text));
-  GLHUDText1.Text:=String(AnsiString(txt));
+  GLHUDText1.Text:=StrConv(txt);
   result:=1;
 end;
 
@@ -97,7 +97,7 @@ begin
   else
     GLFlatText1:=TGLFlatText.CreateAsChild(scene.Objects);
   GLFlatText1.BitmapFont:=TGLCustomBitmapFont(RealToPtr(font));
-  GLFlatText1.Text:=String(AnsiString(txt));
+  GLFlatText1.Text:=StrConv(txt);
   result:=ObjToReal(GLFlatText1);
 end;
 
@@ -125,7 +125,7 @@ var
   GLFlatText1: TGLFlatText;
 begin
   GLFlatText1:=TGLFlatText(RealToPtr(text));
-  GLFlatText1.Text:=String(AnsiString(txt));
+  GLFlatText1.Text:=StrConv(txt);
   result:=1;
 end;
 
@@ -139,7 +139,7 @@ begin
     GLSpaceText1:=TGLSpaceText.CreateAsChild(scene.Objects);
   GLSpaceText1.Font.Name:=TGLWindowsBitmapFont(RealToPtr(font)).Font.Name;
   GLSpaceText1.Font.Height:=TGLWindowsBitmapFont(RealToPtr(font)).Font.Height;
-  GLSpaceText1.Text:=String(AnsiString(txt));
+  GLSpaceText1.Text:=StrConv(txt);
   GLSpaceText1.Extrusion:=extr;
   result:=Integer(GLSpaceText1);
 end;
@@ -168,7 +168,7 @@ var
   GLSpaceText1: TGLSpaceText;
 begin
   GLSpaceText1:=TGLSpaceText(RealToPtr(text));
-  GLSpaceText1.Text:=String(AnsiString(txt));
+  GLSpaceText1.Text:=StrConv(txt);
   result:=1;
 end;
 

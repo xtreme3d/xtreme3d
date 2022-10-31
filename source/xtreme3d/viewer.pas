@@ -48,7 +48,7 @@ var
     bmp: TBitmap;
 begin
     bmp := TGLSceneViewer(RealToPtr(viewer)).Buffer.CreateSnapShotBitmap;
-    bmp.SaveToFile(String(AnsiString(fname)));
+    bmp.SaveToFile(StrConv(fname));
     bmp.Free;
     result := 1.0;
 end;
@@ -223,7 +223,7 @@ var
     mat: TGLLibMaterial;
     buf: TGLSceneBuffer;
 begin
-    mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+    mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
     buf := TGLSceneViewer(RealToPtr(viewer)).Buffer;
     buf.CopyToTexture(mat.Material.Texture);
     result := 1.0;

@@ -3,7 +3,7 @@ var
     pak: TGLVfsPak;
 begin
     pak := TGLVfsPak.Create(scene);
-    pak.LoadFromFile(String(AnsiString(fname)), $0002 or $0020);
+    pak.LoadFromFile(StrConv(fname), $0002 or $0020);
     result := ObjToReal(pak);
 end;
 
@@ -30,7 +30,7 @@ var
     basedir, fname: String;
 begin
     pak := TGLVfsPak(RealToPtr(p));
-    basedir := GetCurrentDir + '\' + String(AnsiString(dir));
+    basedir := GetCurrentDir + '\' + StrConv(dir);
     for i:=0 to pak.Files.Count-1 do
     begin
         fname := basedir + '\' + pak.Files[i];
@@ -50,7 +50,7 @@ var
     pak: TGLVfsPak;
 begin
     pak := TGLVfsPak(RealToPtr(p));
-    pak.Extract(Trunc(index), String(AnsiString(newname)));
+    pak.Extract(Trunc(index), StrConv(newname));
     result := 1.0;
 end;
 

@@ -17,7 +17,7 @@ var
   mlib:TGLMaterialLibrary;
 begin
   mlib:=TGLMaterialLibrary(RealToPtr(mlb));
-  mlib.TexturePaths:=String(AnsiString(path));
+  mlib.TexturePaths:=StrConv(path);
   result:=1;
 end;
 
@@ -44,7 +44,7 @@ var
   mlib: TGLMaterialLibrary;
 begin
   mlib := TGLMaterialLibrary(RealToPtr(matlib));
-  if mlib.LibMaterialByName(String(AnsiString(name))) = nil then
+  if mlib.LibMaterialByName(StrConv(name)) = nil then
       Result := 0
   else
       Result := 1;
@@ -58,7 +58,7 @@ var
 begin
   mlib := TGLMaterialLibrary(RealToPtr(matlib));
   list := TStringList.Create;
-  list.Text := LoadStringFromFile(String(AnsiString(filename)));
+  list.Text := LoadStringFromFile(StrConv(filename));
   scripter := TGLMaterialScripter.Create(scene);
   scripter.MaterialLibrary := mlib;
   scripter.Script := list;
@@ -71,7 +71,7 @@ end;
 function MaterialCreate(mtrl, fname: PAnsiChar): real; cdecl;
 begin
   try
-    matlib.AddTextureMaterial(String(AnsiString(mtrl)), String(AnsiString(fname)), true);
+    matlib.AddTextureMaterial(StrConv(mtrl), StrConv(fname), true);
   except
     On E: Exception do
     begin
@@ -86,7 +86,7 @@ function MaterialDestroy(mtrl: PAnsiChar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Free;
   result := 1;
 end;
@@ -95,7 +95,7 @@ function MaterialAddCubeMap(mtrl: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat := matlib.AddTextureMaterial(String(AnsiString(mtrl)), '', true);
+  mat := matlib.AddTextureMaterial(StrConv(mtrl), '', true);
    mat.Material.Texture.ImageClassName:=TGLCubeMapImage.ClassName;
    mat.Material.Texture.MappingMode := tmmCubeMapReflection;
    mat.Material.Texture.MinFilter:=miLinear;
@@ -103,12 +103,12 @@ begin
    result:=1;
 end;
 
-function MaterialCubeMapLoadImage(mtrl, texture: PAnsiChar; ind: real): real; cdecl;
+function MaterialCubeMapLoadImage(mtrl, filename: PAnsiChar; ind: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   target:TGLCubeMapTarget;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   with mat.Material.Texture.Image as TGLCubeMapImage do begin
     target := cmtPX;
     if ind=0 then target:=cmtPX;
@@ -119,7 +119,7 @@ begin
     if ind=5 then target:=cmtNZ;
     
     try
-      Picture[target].LoadFromFile(String(AnsiString(texture)));
+      Picture[target].LoadFromFile(StrConv(filename));
     except
       On E: Exception do
       begin
@@ -137,7 +137,7 @@ var
   mat:TGLLibMaterial;
   bmp:TBitmap;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.texture.ImageClassName := TGLCubeMapImage.ClassName;
   with mat.Material.Texture.Image as TGLCubeMapImage do begin
     bmp := TBitmap.Create;
@@ -159,7 +159,7 @@ function MaterialCubeMapFromScene(mtrl: PAnsiChar; viewer, camera, res: real): r
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   memviewer.Camera := TGLCamera(RealToPtr(camera));
   memviewer.Width := Trunc(res);
   memviewer.Height := Trunc(res);
@@ -173,8 +173,8 @@ function MaterialSetName(mtrl, name: PAnsiChar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat.Name := String(AnsiString(name));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Name := StrConv(name);
   result := 1;
 end;
 
@@ -182,7 +182,7 @@ function MaterialSetShininess(mtrl: PAnsiChar; shin: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.FrontProperties.Shininess:=Trunc(shin);
   result:=1;
 end;
@@ -191,7 +191,7 @@ function MaterialSetAmbientColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.FrontProperties.Ambient.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Ambient.Alpha := alpha;
   result:=1;
@@ -201,7 +201,7 @@ function MaterialSetDiffuseColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.FrontProperties.Diffuse.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Diffuse.Alpha := alpha;
   result:=1;
@@ -211,7 +211,7 @@ function MaterialSetSpecularColor(mtrl: PAnsiChar; col, alpha: real): real; cdec
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.FrontProperties.Specular.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Specular.Alpha := alpha;
   result:=1;
@@ -221,7 +221,7 @@ function MaterialSetEmissionColor(mtrl: PAnsiChar; col, alpha: real): real; cdec
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.FrontProperties.Emission.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Emission.Alpha := alpha;
   result:=1;
@@ -231,7 +231,7 @@ function MaterialGetColor(mtrl: PAnsiChar; index: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   result := 0;
   if (index=0) then
     result:=mat.Material.FrontProperties.Ambient.AsWinColor;
@@ -247,7 +247,7 @@ function MaterialGetAlpha(mtrl: PAnsiChar; index: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   result := 0;
   if (index=0) then
     result:=mat.Material.FrontProperties.Ambient.Alpha;
@@ -263,7 +263,7 @@ function MaterialSetBlendingMode(mtrl: PAnsiChar; bm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if bm=0 then mat.Material.BlendingMode:=bmOpaque;
   if bm=1 then mat.Material.BlendingMode:=bmTransparency;
   if bm=2 then mat.Material.BlendingMode:=bmAdditive;
@@ -277,7 +277,7 @@ function MaterialSetTextureMode(mtrl: PAnsiChar; tm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tm=0 then mat.Material.Texture.TextureMode:=tmDecal;
   if tm=1 then mat.Material.Texture.TextureMode:=tmModulate;
   if tm=2 then mat.Material.Texture.TextureMode:=tmBlend;
@@ -289,7 +289,7 @@ function MaterialSetTextureMappingMode(mtrl: PAnsiChar; tmm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tmm=0 then mat.Material.Texture.MappingMode:=tmmUser;
   if tmm=1 then mat.Material.Texture.MappingMode:=tmmObjectLinear;
   if tmm=2 then mat.Material.Texture.MappingMode:=tmmEyeLinear;
@@ -305,7 +305,7 @@ function MaterialSetPolygonMode(mtrl: PAnsiChar; pm: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if pm=0 then mat.Material.PolygonMode := pmFill;
   if pm=1 then mat.Material.PolygonMode := pmLines;
   if pm=2 then mat.Material.PolygonMode := pmPoints;
@@ -316,7 +316,7 @@ function MaterialSetTextureImageAlpha(mtrl: PAnsiChar; tia: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tia=0 then mat.Material.Texture.ImageAlpha := tiaDefault;
   if tia=1 then mat.Material.Texture.ImageAlpha := tiaAlphaFromIntensity;
   if tia=2 then mat.Material.Texture.ImageAlpha := tiaSuperBlackTransparent;
@@ -333,7 +333,7 @@ function MaterialSetTextureScale(mtrl: PAnsiChar; u, v: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.TextureScale.X := u;
   mat.TextureScale.Y := v;
   result:=1;
@@ -343,7 +343,7 @@ function MaterialSetTextureOffset(mtrl: PAnsiChar; u, v: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.TextureOffset.X := u;
   mat.TextureOffset.Y := v;
   result:=1;
@@ -353,7 +353,7 @@ function MaterialSetTextureFilter(mtrl: PAnsiChar; mi, ma: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if mi=0 then mat.Material.Texture.MinFilter := miNearest;
   if mi=1 then mat.Material.Texture.MinFilter := miLinear;
   if mi=2 then mat.Material.Texture.MinFilter := miNearestMipmapNearest;
@@ -369,7 +369,7 @@ function MaterialEnableTexture(mtrl: PAnsiChar; mode: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if mode=0 then
       mat.Material.Texture.Enabled := false
   else
@@ -391,7 +391,7 @@ function MaterialSetFaceCulling(mtrl: PAnsiChar; fc: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if fc=0 then mat.Material.FaceCulling := fcBufferDefault;
   if fc=1 then mat.Material.FaceCulling := fcCull;
   if fc=2 then mat.Material.FaceCulling := fcNoCull;
@@ -402,8 +402,8 @@ function MaterialSetSecondTexture(mtrl, mtrl2: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat.Texture2Name:=String(String(AnsiString(mtrl2)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Texture2Name:=StrConv(mtrl2);
   result:=1;
 end;
 
@@ -411,7 +411,7 @@ function MaterialSetTextureFormat(mtrl: PAnsiChar; tf: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tf=0 then mat.Material.Texture.TextureFormat := tfDefault;
   if tf=1 then mat.Material.Texture.TextureFormat := tfRGB;
   if tf=2 then mat.Material.Texture.TextureFormat := tfRGBA;
@@ -431,7 +431,7 @@ function MaterialSetTextureCompression(mtrl: PAnsiChar; tc: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tc=0 then mat.Material.Texture.Compression := tcDefault;
   if tc=1 then mat.Material.Texture.Compression := tcNone;
   if tc=2 then mat.Material.Texture.Compression := tcStandard;
@@ -444,7 +444,7 @@ function MaterialTextureRequiredMemory(mtrl: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   result:=mat.Material.Texture.TextureImageRequiredMemory;
 end;
 
@@ -452,7 +452,7 @@ function MaterialSetFilteringQuality(mtrl: PAnsiChar; tf: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if tf=0 then mat.Material.Texture.FilteringQuality := tfIsotropic;
   if tf=1 then mat.Material.Texture.FilteringQuality := tfAnisotropic;
   result:=1;
@@ -465,8 +465,8 @@ var
   mat2:TGLLibMaterial;
   item:TGLTextureExItem;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat2:=matlib.Materials.GetLibMaterialByName(String(AnsiString(tex)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat2:=matlib.Materials.GetLibMaterialByName(StrConv(tex));
   item := mat.Material.TextureEx.Add;
   item.Texture := mat2.Material.Texture;
   result:=1;
@@ -477,7 +477,7 @@ function MaterialTextureExClear(mtrl: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.TextureEx.Clear;
   result:=1;
 end;
@@ -487,7 +487,7 @@ function MaterialTextureExDelete(mtrl: PAnsiChar; ind: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.TextureEx.Items[Trunc(ind)].Free;
   result:=1;
 end;
@@ -497,7 +497,7 @@ var
   mat:TGLLibMaterial;
   shad: TGLShader;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if shd > 0 then
   begin
     shad := TGLShader(RealToPtr(shd));
@@ -512,8 +512,8 @@ function MaterialSaveTexture(mtrl, fname: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat.Material.Texture.Image.SaveToFile(String(AnsiString(fname)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.Image.SaveToFile(StrConv(fname));
   result:=1;
 end;
 
@@ -521,7 +521,7 @@ function MaterialSetOptions(mtrl: PAnsiChar; op1,op2: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if (op1=1) and (op2=1) then mat.Material.MaterialOptions:=[moIgnoreFog,moNoLighting];
   if (op1=1) and (op2=0) then mat.Material.MaterialOptions:=[moIgnoreFog];
   if (op1=0) and (op2=1) then mat.Material.MaterialOptions:=[moNoLighting];
@@ -533,7 +533,7 @@ function MaterialSetTextureWrap(mtrl: PAnsiChar; wrap: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   if wrap = 0 then
     mat.Material.Texture.TextureWrap := twNone
   else
@@ -545,7 +545,7 @@ function MaterialGenTexture(mtrl: PAnsiChar; w, h: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.Texture.ImageClassName := TGLBlankImage.ClassName;
   with mat.Material.Texture.Image as TGLBlankImage do begin
     Width := Trunc(w);
@@ -559,8 +559,8 @@ var
   mat:TGLLibMaterial;
   mat2:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat2:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl2)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat2:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl2));
   mat.Material.Texture := mat2.Material.Texture;
   result:=1;
 end;
@@ -569,7 +569,7 @@ function MaterialGetTextureWidth(mtrl: PAnsiChar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   result := 0;
   if mat.Material.Texture <> nil then
     result := mat.Material.Texture.Image.Width;
@@ -579,7 +579,7 @@ function MaterialGetTextureHeight(mtrl: PAnsiChar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   result := 0;
   if mat.Material.Texture <> nil then
     result := mat.Material.Texture.Image.Height;
@@ -589,10 +589,10 @@ function MaterialLoadTexture(mtrl, filename: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   
   try
-    mat.Material.Texture.Image.LoadFromFile(String(AnsiString(filename)));
+    mat.Material.Texture.Image.LoadFromFile(StrConv(filename));
   except
     On E: Exception do
     begin
@@ -692,7 +692,7 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.Add();
-  mat.Name:=String(AnsiString(mtrl));
+  mat.Name:=StrConv(mtrl);
   mat.Material.Texture.Disabled:=false;
   mat.Material.Texture.Image:=TGLProcTextureNoise.Create(nil);
   result:=1;
@@ -700,7 +700,7 @@ end;
 
 function MaterialNoiseSetDimensions(mtrl: PAnsiChar; w, h: real): real; cdecl;
 begin
-  with TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image) do
+  with TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image) do
   begin
     Width:=Trunc(w);
     Height:=Trunc(h);
@@ -710,31 +710,31 @@ end;
 
 function MaterialNoiseAnimate(mtrl: PAnsiChar; speed: real): real; cdecl;
 begin
-  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image).NoiseAnimate(speed);
+  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image).NoiseAnimate(speed);
   result:=1;
 end;
 
 function MaterialNoiseSetMinCut(mtrl: PAnsiChar; m: real): real; cdecl;
 begin
-  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image).MinCut:=Trunc(m);
+  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image).MinCut:=Trunc(m);
   result:=1;
 end;
 
 function MaterialNoiseSetSharpness(mtrl: PAnsiChar; s: real): real; cdecl;
 begin
-  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image).NoiseSharpness:=s;
+  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image).NoiseSharpness:=s;
   result:=1;
 end;
 
 function MaterialNoiseSetSeamless(mtrl: PAnsiChar; mode: real): real; cdecl;
 begin
-  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image).Seamless:=boolean(Trunc(mode));
+  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image).Seamless:=boolean(Trunc(mode));
   result:=1;
 end;
 
 function MaterialNoiseRandomSeed(mtrl: PAnsiChar; s: real): real; cdecl;
 begin
-  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl))).Material.Texture.Image).NoiseRandSeed:=Trunc(s);
+  TGLProcTextureNoise(matlib.Materials.GetLibMaterialByName(StrConv(mtrl)).Material.Texture.Image).NoiseRandSeed:=Trunc(s);
   result:=1;
 end;
 
@@ -743,7 +743,7 @@ function MaterialCullFrontFaces(mtrl: PAnsiChar; culff: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.CullFrontFaces := Boolean(Trunc(culff));
   result:=1;
 end;
@@ -753,7 +753,7 @@ function MaterialSetDepthWrite(mtrl: PAnsiChar; mode: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.DepthProperties.DepthWrite := Boolean(Trunc(mode));
   result:=1;
 end;
@@ -762,7 +762,7 @@ function MaterialSetDepthTest(mtrl: PAnsiChar; mode: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.DepthProperties.DepthTest := Boolean(Trunc(mode));
   result:=1;
 end;

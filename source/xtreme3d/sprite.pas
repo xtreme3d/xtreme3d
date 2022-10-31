@@ -8,7 +8,7 @@ begin
     GLHUDSprite1:=TGLHUDSprite.CreateAsChild(scene.Objects);
   GLHUDSprite1.SetSize(w, h);
   GLHUDSprite1.Material.MaterialLibrary:=matlib;
-  GLHUDSprite1.Material.LibMaterialName:=String(AnsiString(mtrl));
+  GLHUDSprite1.Material.LibMaterialName:=StrConv(mtrl);
   result:=Integer(GLHUDSprite1);
 end;
 
@@ -52,7 +52,7 @@ begin
   Result := 1;
 end;
 
-function SpriteCreate(mtrl: pchar; w,h,parent: real): real; cdecl;
+function SpriteCreate(mtrl: PAnsiChar; w,h,parent: real): real; cdecl;
 var
   GLSprite1: TGLSprite;
 begin
@@ -62,7 +62,7 @@ begin
     GLSprite1:=TGLSprite.CreateAsChild(scene.Objects);
   GLSprite1.SetSize(w, h);
   GLSprite1.Material.MaterialLibrary:=matlib;
-  GLSprite1.Material.LibMaterialName:=mtrl;
+  GLSprite1.Material.LibMaterialName:=StrConv(mtrl);
   result:=Integer(GLSprite1);
 end;
 
