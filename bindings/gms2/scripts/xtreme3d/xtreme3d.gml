@@ -240,7 +240,6 @@ function dll_init(dll) {
 	global._MaterialLibraryLoadScript = external_define(dll, "MaterialLibraryLoadScript", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._MaterialCreate = external_define(dll, "MaterialCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialDestroy = external_define(dll, "MaterialDestroy", dll_cdecl, ty_real, 1, ty_string);
-	/*
 	global._MaterialAddCubeMap = external_define(dll, "MaterialAddCubeMap", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialCubeMapLoadImage = external_define(dll, "MaterialCubeMapLoadImage", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
 	global._MaterialCubeMapGenerate = external_define(dll, "MaterialCubeMapGenerate", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -251,6 +250,7 @@ function dll_init(dll) {
 	global._MaterialSetDiffuseColor = external_define(dll, "MaterialSetDiffuseColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialSetSpecularColor = external_define(dll, "MaterialSetSpecularColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialSetEmissionColor = external_define(dll, "MaterialSetEmissionColor", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+		/*
 	global._MaterialGetColor = external_define(dll, "MaterialGetColor", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetAlpha = external_define(dll, "MaterialGetAlpha", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetBlendingMode = external_define(dll, "MaterialSetBlendingMode", dll_cdecl, ty_real, 2, ty_string, ty_real);

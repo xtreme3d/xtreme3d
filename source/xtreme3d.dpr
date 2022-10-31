@@ -277,6 +277,9 @@ exports
     MaterialLibraryClear, MaterialLibraryDeleteUnused,
     MaterialLibraryHasMaterial, MaterialLibraryLoadScript,
     MaterialCreate, MaterialDestroy,
+    MaterialAddCubeMap, MaterialCubeMapLoadImage, MaterialCubeMapGenerate, MaterialCubeMapFromScene,
+    MaterialSetName, MaterialSetShininess,
+    MaterialSetDiffuseColor, MaterialSetAmbientColor, MaterialSetSpecularColor, MaterialSetEmissionColor,
     MaterialSetTextureMappingMode, MaterialSetFaceCulling, MaterialSetOptions,
 
     // Input

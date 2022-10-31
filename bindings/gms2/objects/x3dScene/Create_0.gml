@@ -32,16 +32,13 @@ LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
-plane = PlaneCreate(true, 20, 20, 5, 5, global.scene);
+plane = PlaneCreate(false, 20, 20, 5, 5, global.scene);
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/stone.png");
-/*
-MaterialLoadTextureEx("mFloor", "textures/ground-normal.jpg", 1);
 MaterialSetShininess("mFloor", 16);
 MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
-*/
 ObjectSetMaterial(plane, "mFloor");
 
 teapot = TeapotCreate(global.scene);

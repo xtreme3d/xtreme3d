@@ -91,9 +91,7 @@ begin
   result := 1;
 end;
 
-{
-
-function MaterialAddCubeMap(mtrl: pchar): real; cdecl;
+function MaterialAddCubeMap(mtrl: PAnsiChar): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
@@ -105,13 +103,14 @@ begin
    result:=1;
 end;
 
-function MaterialCubeMapLoadImage(mtrl, texture: pchar; ind: real): real; cdecl;
+function MaterialCubeMapLoadImage(mtrl, texture: PAnsiChar; ind: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   target:TGLCubeMapTarget;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
   with mat.Material.Texture.Image as TGLCubeMapImage do begin
+    target := cmtPX;
     if ind=0 then target:=cmtPX;
     if ind=1 then target:=cmtNX;
     if ind=2 then target:=cmtPY;
@@ -125,7 +124,7 @@ begin
       On E: Exception do
       begin
         if showLoadingErrors then
-          ShowMessage('MaterialCubeMapLoadImage:' + #13#10 + 'Error loading ' + String(AnsiString(texture)) + #13#10 + E.Message);
+          ShowMessage('MaterialCubeMapLoadImage:' + #13#10 + E.Message);
       end;
     end;
     
@@ -133,7 +132,7 @@ begin
   result:=1;
 end;
 
-function MaterialCubeMapGenerate(mtrl: pchar; res: real): real; cdecl;
+function MaterialCubeMapGenerate(mtrl: PAnsiChar; res: real): real; cdecl;
 var
   mat:TGLLibMaterial;
   bmp:TBitmap;
@@ -144,8 +143,8 @@ begin
     bmp := TBitmap.Create;
     bmp.PixelFormat := pf32bit;
     bmp.HandleType := bmDIB;
-    bmp.Height := RealToPtr(res);
-    bmp.Width := RealToPtr(res);
+    bmp.Height := Trunc(res);
+    bmp.Width := Trunc(res);
     Picture[cmtPX].Assign(bmp);
     Picture[cmtNX].Assign(bmp);
     Picture[cmtPY].Assign(bmp);
@@ -156,78 +155,79 @@ begin
   result:=1;
 end;
 
-function MaterialCubeMapFromScene(mtrl: pchar; viewer, camera, res: real): real; cdecl;
+function MaterialCubeMapFromScene(mtrl: PAnsiChar; viewer, camera, res: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
   memviewer.Camera := TGLCamera(RealToPtr(camera));
-  memviewer.Width := RealToPtr(res);
-  memviewer.Height := RealToPtr(res);
+  memviewer.Width := Trunc(res);
+  memviewer.Height := Trunc(res);
   memviewer.Buffer.BackgroundColor :=
     TGLSceneViewer(RealToPtr(viewer)).Buffer.BackgroundColor;
   memviewer.RenderCubeMapTextures(mat.Material.Texture);
   Result := 1;
 end;
 
-function MaterialSetName(mtrl, name: pchar): real; cdecl;
+function MaterialSetName(mtrl, name: PAnsiChar): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
   mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat.Name := String(name);
+  mat.Name := String(AnsiString(name));
   result := 1;
 end;
 
-function MaterialSetShininess(mtrl: pchar; shin: real): real; cdecl;
+function MaterialSetShininess(mtrl: PAnsiChar; shin: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.FrontProperties.Shininess:=RealToPtr(shin);
+  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat.Material.FrontProperties.Shininess:=Trunc(shin);
   result:=1;
 end;
 
-function MaterialSetAmbientColor(mtrl: pchar; col, alpha: real): real; cdecl;
+function MaterialSetAmbientColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.FrontProperties.Ambient.AsWinColor:=TColor(RealToPtr(col));
+  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat.Material.FrontProperties.Ambient.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Ambient.Alpha := alpha;
   result:=1;
 end;
 
-function MaterialSetDiffuseColor(mtrl: pchar; col, alpha: real): real; cdecl;
+function MaterialSetDiffuseColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.FrontProperties.Diffuse.AsWinColor:=TColor(RealToPtr(col));
+  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat.Material.FrontProperties.Diffuse.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Diffuse.Alpha := alpha;
   result:=1;
 end;
 
-function MaterialSetSpecularColor(mtrl: pchar; col, alpha: real): real; cdecl;
+function MaterialSetSpecularColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.FrontProperties.Specular.AsWinColor:=TColor(RealToPtr(col));
+  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat.Material.FrontProperties.Specular.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Specular.Alpha := alpha;
   result:=1;
 end;
 
-function MaterialSetEmissionColor(mtrl: pchar; col, alpha: real): real; cdecl;
+function MaterialSetEmissionColor(mtrl: PAnsiChar; col, alpha: real): real; cdecl;
 var
   mat:TGLLibMaterial;
 begin
-  mat:=matlib.Materials.GetLibMaterialByName(mtrl);
-  mat.Material.FrontProperties.Emission.AsWinColor:=TColor(RealToPtr(col));
+  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat.Material.FrontProperties.Emission.AsWinColor:=TColor(Trunc(col));
   mat.Material.FrontProperties.Emission.Alpha := alpha;
   result:=1;
 end;
 
+{
 function MaterialGetColor(mtrl: pchar; index: real): real; cdecl;
 var
   mat:TGLLibMaterial;
