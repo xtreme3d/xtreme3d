@@ -16,6 +16,7 @@ uses
   GLS.Context,
   GLS.Coordinates,
   GLS.FileVfsPAK,
+  GLS.FileQ3MD3,
   GLS.GeomObjects,
   GLS.HUDObjects,
   GLS.Material,
@@ -33,7 +34,9 @@ uses
   GLS.Texture,
   GLS.TextureFormat,
   GLS.TilePlane,
+  GLS.VectorFileObjects,
   GLS.VectorGeometry,
+  GLS.VectorLists,
   GLS.VectorTypes,
   GLS.WindowsFont;
   //Physics.ODEManager,
@@ -208,7 +211,7 @@ end;
 {$I 'xtreme3d/sprite'}
 //{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
-//{$I 'xtreme3d/actor'}
+{$I 'xtreme3d/actor'}
 //{$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
 //{$I 'xtreme3d/polygon'}
@@ -316,6 +319,21 @@ exports
     FrustrumSetOptions, FrustrumGetOptions,
 
     // Actor
+    ActorCreate, ActorCopy, ActorSetAnimationRange, ActorGetCurrentFrame, ActorSwitchToAnimation,
+    ActorSwitchToAnimationName, ActorSynchronize, ActorSetInterval, ActorSetAnimationMode,
+    ActorSetFrameInterpolation, ActorAddObject, ActorGetCurrentAnimation, ActorGetFrameCount,
+    ActorGetBoneCount, ActorGetBoneByName, ActorGetBoneRotation, ActorGetBonePosition,
+    ActorBoneExportMatrix, ActorMakeSkeletalTranslationStatic, ActorMakeSkeletalRotationDelta,
+    ActorShowSkeleton,
+    AnimationBlenderCreate, AnimationBlenderSetActor, AnimationBlenderSetAnimation,
+    AnimationBlenderSetRatio,
+    ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
+    ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
+    ActorFaceGroupSetMaterial, ActorMoveBone, ActorRotateBone, ActorMeshSetVisible,
+    ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy,
+    ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorSetFrame,
+    ActorTriangleCount,
+
     // Freeform
     // Terrain
 
@@ -356,7 +374,8 @@ exports
     ObjectPitch, ObjectTurn, ObjectRoll,
     ObjectGetUp,
     ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
-    ObjectIgnoreDepthBuffer, ObjectFindByName,
+    ObjectSetMatrixColumn, ObjectExportMatrix, ObjectExportAbsoluteMatrix,
+    ObjectIgnoreDepthBuffer, ObjectInFrustum, ObjectFindByName, ObjectIsPicked,
 
     // Polygon
 

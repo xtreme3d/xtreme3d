@@ -4,13 +4,15 @@ function dll_init(dll) {
 	global._EngineDestroy = external_define(dll, "EngineDestroy", dll_cdecl, ty_real, 0);
 	global._EngineSetObjectsSorting = external_define(dll, "EngineSetObjectsSorting", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineSetCulling = external_define(dll, "EngineSetCulling", dll_cdecl, ty_real, 1, ty_real);
-	//_Update is now EngineUpdate
+	// Update is now EngineUpdate
 	global._EngineUpdate = external_define(dll, "EngineUpdate", dll_cdecl, ty_real, 1, ty_real);
+	// TrisRendered was removed
 	//global._TrisRendered = external_define(dll, "TrisRendered", dll_cdecl, ty_real, 0);
 	global._EngineSaveScene = external_define(dll, "EngineSaveScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineLoadScene = external_define(dll, "EngineLoadScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineRootObject = external_define(dll, "EngineRootObject", dll_cdecl, ty_real, 0);
 	global._EngineShowLoadingErrors = external_define(dll, "EngineShowLoadingErrors", dll_cdecl, ty_real, 1, ty_real);
+	// Milestone II function
 	//global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	
@@ -24,11 +26,15 @@ function dll_init(dll) {
 	// Viewer
 	global._ViewerCreate = external_define(dll, "ViewerCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//ViewerEnableVSync was removed
 	//global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	//global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	//global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	// Milestone II functions
+	/*
+	global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	*/
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -129,6 +135,7 @@ function dll_init(dll) {
 	global._SpaceTextSetFont = external_define(dll, "SpaceTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpaceTextSetText = external_define(dll, "SpaceTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	/*
+	// Milestone II functions
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._TTFontSetEncoding = external_define(dll, "TTFontSetEncoding", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -150,6 +157,7 @@ function dll_init(dll) {
 	//SpriteNoZWrite was removed, use MaterialSetDepthWrite instead
 	//global._SpriteNoZWrite = external_define(dll, "SpriteNoZWrite", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	/*
+	// Milestone II functions
 	global._SpriteCreateEx = external_define(dll, "SpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._HUDSpriteCreateEx = external_define(dll, "HUDSpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -192,6 +200,50 @@ function dll_init(dll) {
 	global._DodecahedronCreate = external_define(dll, "DodecahedronCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._IcosahedronCreate = external_define(dll, "IcosahedronCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._TeapotCreate = external_define(dll, "TeapotCreate", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Actor
+	global._ActorCreate = external_define(dll, "ActorCreate", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._ActorCopy = external_define(dll, "ActorCopy", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorSetAnimationRange = external_define(dll, "ActorSetAnimationRange", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorGetCurrentFrame = external_define(dll, "ActorGetCurrentFrame", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorSwitchToAnimation = external_define(dll, "ActorSwitchToAnimation", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorSwitchToAnimationName = external_define(dll, "ActorSwitchToAnimationName", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	global._ActorSynchronize = external_define(dll, "ActorSynchronize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorSetInterval = external_define(dll, "ActorSetInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorSetAnimationMode = external_define(dll, "ActorSetAnimationMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorSetFrameInterpolation = external_define(dll, "ActorSetFrameInterpolation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorAddObject = external_define(dll, "ActorAddObject", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ActorGetCurrentAnimation = external_define(dll, "ActorGetCurrentAnimation", dll_cdecl, ty_string, 1, ty_real);
+	global._ActorGetFrameCount = external_define(dll, "ActorGetFrameCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorGetBoneCount = external_define(dll, "ActorGetBoneCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorGetBoneByName = external_define(dll, "ActorGetBoneByName", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ActorGetBoneRotation = external_define(dll, "ActorGetBoneRotation", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorGetBonePosition = external_define(dll, "ActorGetBonePosition", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorBoneExportMatrix = external_define(dll, "ActorBoneExportMatrix", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorMakeSkeletalTranslationStatic = external_define(dll, "ActorMakeSkeletalTranslationStatic", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorMakeSkeletalRotationDelta = external_define(dll, "ActorMakeSkeletalRotationDelta", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorShowSkeleton = external_define(dll, "ActorShowSkeleton", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AnimationBlenderCreate = external_define(dll, "AnimationBlenderCreate", dll_cdecl, ty_real, 0);
+	global._AnimationBlenderSetActor = external_define(dll, "AnimationBlenderSetActor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AnimationBlenderSetAnimation = external_define(dll, "AnimationBlenderSetAnimation", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._AnimationBlenderSetRatio = external_define(dll, "AnimationBlenderSetRatio", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorLoadQ3TagList = external_define(dll, "ActorLoadQ3TagList", dll_cdecl, ty_real, 1, ty_string);
+	global._ActorQ3TagExportMatrix = external_define(dll, "ActorQ3TagExportMatrix", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_string, ty_real);
+	global._ActorLoadQ3Animations = external_define(dll, "ActorLoadQ3Animations", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_string);
+	global._ActorMeshObjectsCount = external_define(dll, "ActorMeshObjectsCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorFaceGroupsCount = external_define(dll, "ActorFaceGroupsCount", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorFaceGroupGetMaterialName = external_define(dll, "ActorFaceGroupGetMaterialName", dll_cdecl, ty_string, 3, ty_real, ty_real, ty_real);
+	global._ActorFaceGroupSetMaterial = external_define(dll, "ActorFaceGroupSetMaterial", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_string);
+	global._ActorMoveBone = external_define(dll, "ActorMoveBone", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ActorRotateBone = external_define(dll, "ActorRotateBone", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ActorMeshSetVisible = external_define(dll, "ActorMeshSetVisible", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorGetAnimationName = external_define(dll, "ActorGetAnimationName", dll_cdecl, ty_string, 2, ty_real, ty_real);
+	global._ActorGetAnimationCount = external_define(dll, "ActorGetAnimationCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorAnimationDestroy = external_define(dll, "ActorAnimationDestroy", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorAnimationNextFrame = external_define(dll, "ActorAnimationNextFrame", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorAnimationPrevFrame = external_define(dll, "ActorAnimationPrevFrame", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorSetFrame = external_define(dll, "ActorSetFrame", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorTriangleCount = external_define(dll, "ActorTriangleCount", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Object
 	global._ObjectHide = external_define(dll, "ObjectHide", dll_cdecl, ty_real, 1, ty_real);
@@ -274,14 +326,14 @@ function dll_init(dll) {
 	global._ObjectGetUp = external_define(dll, "ObjectGetUp", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectRotateAbsolute = external_define(dll, "ObjectRotateAbsolute", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ObjectRotateAbsoluteVector = external_define(dll, "ObjectRotateAbsoluteVector", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
-	//global._ObjectSetMatrixColumn = external_define(dll, "ObjectSetMatrixColumn", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
-	//global._ObjectExportMatrix = external_define(dll, "ObjectExportMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._ObjectExportAbsoluteMatrix = external_define(dll, "ObjectExportAbsoluteMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectSetMatrixColumn = external_define(dll, "ObjectSetMatrixColumn", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectExportMatrix = external_define(dll, "ObjectExportMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectExportAbsoluteMatrix = external_define(dll, "ObjectExportAbsoluteMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectCopy = external_define(dll, "ObjectCopy", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._ObjectInFrustum = external_define(dll, "ObjectInFrustum", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectInFrustum = external_define(dll, "ObjectInFrustum", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectFindByName = external_define(dll, "ObjectFindByName", dll_cdecl, ty_real, 1, ty_string);
 	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	
 	// Material
 	global._MaterialLibraryCreate = external_define(dll, "MaterialLibraryCreate", dll_cdecl, ty_real, 0);
@@ -334,11 +386,15 @@ function dll_init(dll) {
 	global._MaterialGetTextureWidth = external_define(dll, "MaterialGetTextureWidth", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
-	//global._MaterialLoadTextureEx = external_define(dll, "MaterialLoadTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
-	//global._MaterialSetTextureEx = external_define(dll, "MaterialSetTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
-	//global._MaterialGenTextureEx = external_define(dll, "MaterialGenTextureEx", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
-	//global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
-	//global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	// Milestone II functions
+	/*
+	global._MaterialLoadTextureEx = external_define(dll, "MaterialLoadTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialSetTextureEx = external_define(dll, "MaterialSetTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialGenTextureEx = external_define(dll, "MaterialGenTextureEx", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
+	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
+	*/
 	global._MaterialNoiseCreate = external_define(dll, "MaterialNoiseCreate", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialNoiseSetDimensions = external_define(dll, "MaterialNoiseSetDimensions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialNoiseAnimate = external_define(dll, "MaterialNoiseAnimate", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -352,7 +408,6 @@ function dll_init(dll) {
 	global._MaterialSetDepthWrite = external_define(dll, "MaterialSetDepthWrite", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	// New function MaterialSetDepthTest
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	//global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
 	
 	// Input

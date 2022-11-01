@@ -779,7 +779,6 @@ begin
   result := 1;
 end;
 
-{
 // Sets object's local matrix column
 function ObjectSetMatrixColumn(obj1, ind, x, y, z, w: real): real; cdecl;
 var
@@ -789,17 +788,15 @@ var
 begin
   object1:=TGLBaseSceneObject(RealToPtr(obj1));
   i := Trunc(ind);
-  m := object1.Matrix;
-  m[i][0] := x;
-  m[i][1] := y;
-  m[i][2] := z;
-  m[i][3] := w;
-  object1.Matrix := m;
+  m := object1.Matrix^;
+  m.V[i].V[0] := x;
+  m.V[i].V[1] := y;
+  m.V[i].V[2] := z;
+  m.V[i].V[3] := w;
+  object1.SetMatrix(m);
   result := 1;
 end;
-}
 
-{
 function ObjectExportMatrix(obj1,obj2: real): real; cdecl;
 var
   GLObject1:TGLSCeneObject;
@@ -807,14 +804,12 @@ var
   m: TMatrix4f;
 begin
   GLObject1:=TGLSceneObject(RealToPtr(obj1));
-  m:=GLObject1.Matrix;
+  m:=GLObject1.Matrix^;
   GLObject2:=TGLSceneObject(RealToPtr(obj2));
-  GLObject2.Matrix:=m;
+  GLObject2.SetMatrix(m);
   result:=1;
 end;
-}
 
-{
 function ObjectExportAbsoluteMatrix(obj1,obj2: real): real; cdecl;
 var
   GLObject1:TGLSCeneObject;
@@ -824,12 +819,10 @@ begin
   GLObject1:=TGLSceneObject(RealToPtr(obj1));
   m:=GLObject1.AbsoluteMatrix;
   GLObject2:=TGLSceneObject(RealToPtr(obj2));
-  GLObject2.Matrix:=m;
+  GLObject2.SetMatrix(m);
   result:=1;
 end;
-}
 
-{
 function ObjectInFrustum(obj, viewer: real): real; cdecl;
 var
   obj1: TGLBaseSceneObject;
@@ -839,12 +832,11 @@ var
 begin
   obj1 := TGLBaseSceneObject(RealToPtr(obj));
   v := TGLSceneViewer(RealToPtr(viewer));
-  mvp := MatrixMultiply(v.Buffer.ModelViewMatrix, v.Buffer.ProjectionMatrix);
+  mvp := MatrixMultiply(MatrixMultiply(v.Buffer.ModelMatrix, v.Buffer.ViewMatrix), v.Buffer.ProjectionMatrix);
   frustum := ExtractFrustumFromModelViewProjection(mvp);
   result := Integer(not IsVolumeClipped(
     AffineVectorMake(obj1.AbsolutePosition), obj1.BoundingSphereRadius, frustum));
 end;
-}
 
 function ObjectFindByName(name: PAnsiChar): real; cdecl;
 begin
@@ -863,19 +855,20 @@ begin
   result:=1;
 end;
 
-{
 function ObjectIsPicked(obj, viewer, x, y: real): real; cdecl;
 var
   viewer1: TGLSceneViewer;
   obj1: TGLBaseSceneObject;
   pkList : TGLPickList;
+  rect: TRect;
 begin
   viewer1 := TGLSceneViewer(RealToPtr(viewer));
   obj1 := TGLBaseSceneObject(RealToPtr(obj));
+  rect := TRect.Create(Trunc(x)-1, Trunc(y)-1, Trunc(x)+1, Trunc(y)+1);
   result:=0;
-  pkList := viewer1.Buffer.GetPickedObjects(Trunc(x)-1, Trunc(y)-1, Trunc(x)+1, Trunc(y)+1);
+  pkList := viewer1.Buffer.GetPickedObjects(rect);
   if pkList.Count > 0 then begin
     if pkList.FindObject(obj1) > -1 then result:=1;
   end;
 end;
-}
+
