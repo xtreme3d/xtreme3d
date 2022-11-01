@@ -3,24 +3,73 @@ library xtreme3d;
 uses
   System.SysUtils,
   System.Classes,
+  System.Math,
   Windows,
   Winapi.OpenGL,
   Vcl.Graphics,
   Vcl.Dialogs,
   Vcl.Imaging.PNGImage,
   GLS.ApplicationFileIO,
+  GLS.BaseClasses,
   GLS.BitmapFont,
   GLS.Cadencer,
   GLS.Collision,
   GLS.Color,
   GLS.Context,
   GLS.Coordinates,
-  GLS.FileVfsPAK,
+  GLS.ExplosionFx,
+  GLS.VectorFileObjects,
+  GLS.File3DPDF,
+  GLS.File3DS,
+  GLS.File3DSSceneObjects,
+  GLS.FileASE,
+  GLS.FileB3D,
+  GLS.FileBMP,
+  GLS.FileDDS,
+  GLS.FileDEL,
+  GLS.FileDXF,
+  GLS.FileGL2,
+  GLS.FileGLB,
+  GLS.FileGLTF,
+  GLS.FileGRD,
+  GLS.FileGTS,
+  GLS.FileHDR,
+  GLS.FileJPEG,
+  GLS.FileLMTS,
+  GLS.FileLWO,
+  GLS.FileMD2,
+  GLS.FileMD3,
+  GLS.FileMD5,
+  GLS.FileMDC,
+  GLS.FileMP3,
+  GLS.FileMS3D,
+  GLS.FileNMF,
+  GLS.FileNurbs,
+  GLS.FileO3TC,
+  GLS.FileO3TCImage,
+  GLS.FileOBJ,
+  GLS.FileOCT,
+  GLS.FilePAK,
+  GLS.FilePGM,
+  GLS.FilePLY,
+  GLS.FilePNG,
+  GLS.FileQ3BSP,
   GLS.FileQ3MD3,
+  GLS.FileSMD,
+  GLS.FileSTL,
+  GLS.FileTGA,
+  GLS.FileTIN,
+  GLS.FileVfsPAK,
+  GLS.FileVOR,
+  GLS.FileVRML,
+  GLS.FileWAV,
+  GLS.FileX,
+  GLS.FileZLIB,
   GLS.GeomObjects,
   GLS.HUDObjects,
   GLS.Material,
   GLS.MaterialScript,
+  GLS.MeshUtils,
   GLS.Objects,
   GLS.OpenGLAdapter,
   GLS.PersistentClasses,
@@ -34,7 +83,7 @@ uses
   GLS.Texture,
   GLS.TextureFormat,
   GLS.TilePlane,
-  GLS.VectorFileObjects,
+  GLS.Utils,
   GLS.VectorGeometry,
   GLS.VectorLists,
   GLS.VectorTypes,
@@ -200,6 +249,127 @@ begin
          Result[i] := s[i];
 end;
 
+function VectorDivide(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result.V[0]:=v1.V[0]/delta;
+   Result.V[1]:=v1.V[1]/delta;
+   Result.V[2]:=v1.V[2]/delta;
+end;
+
+function VectorMultiply(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result.V[0]:=v1.V[0]*delta;
+   Result.V[1]:=v1.V[1]*delta;
+   Result.V[2]:=v1.V[2]*delta;
+end;
+
+procedure GenMeshTangents(mesh: TMeshObject);
+var
+   i: Integer;
+   v,t: array[0..2] of TAffineVector;
+
+   x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
+   sDir, tDir: TAffineVector;
+   sTan, tTan: TAffineVectorList;
+   tangents, bitangents: TVectorList;
+   sv, tv: array[0..2] of TAffineVector;
+   r, oneOverR: Single;
+   n, ta: TAffineVector;
+   tang: TAffineVector;
+
+   //tangent,
+   //binormal   : array[0..2] of TGLVector;
+   //vt,tt      : TAffineVector;
+   //interp,dot : Single;
+
+begin
+   mesh.Tangents.Clear;
+   mesh.Binormals.Clear;
+   mesh.Tangents.Count:=mesh.Vertices.Count;
+   mesh.Binormals.Count:=mesh.Vertices.Count;
+
+   tangents := TVectorList.Create;
+   tangents.Count:=mesh.Vertices.Count;
+
+   bitangents := TVectorList.Create;
+   bitangents.Count:=mesh.Vertices.Count;
+
+   sTan := TAffineVectorList.Create;
+   tTan := TAffineVectorList.Create;
+   sTan.Count := mesh.Vertices.Count;
+   tTan.Count := mesh.Vertices.Count;
+
+   for i:=0 to mesh.TriangleCount-1 do begin
+      sv[0] := AffineVectorMake(0, 0, 0);
+      tv[0] := AffineVectorMake(0, 0, 0);
+      sv[1] := AffineVectorMake(0, 0, 0);
+      tv[1] := AffineVectorMake(0, 0, 0);
+      sv[2] := AffineVectorMake(0, 0, 0);
+      tv[2] := AffineVectorMake(0, 0, 0);
+
+      mesh.SetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.SetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+   end;
+
+   for i:=0 to mesh.TriangleCount-1 do begin
+      mesh.GetTriangleData(i,mesh.Vertices,v[0],v[1],v[2]);
+      mesh.GetTriangleData(i,mesh.TexCoords,t[0],t[1],t[2]);
+
+      x1 := v[1].V[0] - v[0].V[0];
+      x2 := v[2].V[0] - v[0].V[0];
+      y1 := v[1].V[1] - v[0].V[1];
+      y2 := v[2].V[1] - v[0].V[1];
+      z1 := v[1].V[2] - v[0].V[2];
+      z2 := v[2].V[2] - v[0].V[2];
+
+      s1 := t[1].V[0] - t[0].V[0];
+      s2 := t[2].V[0] - t[0].V[0];
+      t1 := t[1].V[1] - t[0].V[1];
+      t2 := t[2].V[1] - t[0].V[1];
+
+      r := (s1 * t2) - (s2 * t1);
+
+      if r = 0.0 then
+        r := 1.0;
+
+      oneOverR := 1.0 / r;
+
+      sDir.V[0] := (t2 * x1 - t1 * x2) * oneOverR;
+      sDir.V[1] := (t2 * y1 - t1 * y2) * oneOverR;
+      sDir.V[2] := (t2 * z1 - t1 * z2) * oneOverR;
+
+      tDir.V[0] := (s1 * x2 - s2 * x1) * oneOverR;
+      tDir.V[1] := (s1 * y2 - s2 * y1) * oneOverR;
+      tDir.V[2] := (s1 * z2 - s2 * z1) * oneOverR;
+
+      mesh.GetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.GetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+
+      sv[0] := VectorAdd(sv[0], sDir);
+      tv[0] := VectorAdd(tv[0], tDir);
+      sv[1] := VectorAdd(sv[1], sDir);
+      tv[1] := VectorAdd(tv[1], tDir);
+      sv[2] := VectorAdd(sv[2], sDir);
+      tv[2] := VectorAdd(tv[2], tDir);
+
+      mesh.SetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
+      mesh.SetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
+   end;
+
+   for i:=0 to mesh.Vertices.Count-1 do begin
+      n := mesh.Normals[i];
+      ta := sTan[i];
+      tang := VectorSubtract(ta, VectorMultiply(n, VectorDotProduct(n, ta)));
+      tang := VectorNormalize(tang);
+
+      tangents[i] := VectorMake(tang, 1);
+      bitangents[i] := VectorMake(VectorCrossProduct(n, tang), 1);
+   end;
+
+   mesh.Tangents := tangents;
+   mesh.Binormals := bitangents;
+end;
+
 {$I 'xtreme3d/engine'}
 {$I 'xtreme3d/pak'}
 {$I 'xtreme3d/viewer'}
@@ -212,7 +382,7 @@ end;
 //{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
 {$I 'xtreme3d/actor'}
-//{$I 'xtreme3d/freeform'}
+{$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
 //{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
@@ -265,7 +435,7 @@ exports
     PakExtract, PakExtractFile,
 
     // Viewer
-    ViewerCreate, ViewerSetCamera, ViewerRender, ViewerRenderToFile,
+    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender, ViewerRenderToFile,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
     ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,
@@ -334,7 +504,43 @@ exports
     ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorSetFrame,
     ActorTriangleCount,
 
-    // Freeform
+    //Freeform
+    FreeformCreate,
+    FreeformMeshObjectsCount, FreeformMeshSetVisible,
+    FreeformMeshSetSecondCoords,
+    FreeformMeshFaceGroupsCount,
+    FreeformMeshSetMaterial, FreeformUseMeshMaterials,
+    FreeformSphereSweepIntersect, FreeformPointInMesh,
+    FreeformToFreeforms,
+    FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
+    FreeformCreateExplosionFX, FreeformExplosionFXReset,
+    FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
+    FreeformCreateEmpty,
+    FreeformAddMesh, FreeformMeshAddFaceGroup,
+    FreeformMeshAddVertex, FreeformMeshAddNormal,
+    FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
+    FreeformMeshAddTangent, FreeformMeshAddBinormal,
+    FreeformMeshGetVertex, FreeformMeshGetNormal,
+    FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
+    FreeformMeshGetTangent, FreeformMeshGetBinormal,
+    FreeformMeshFaceGroupGetIndex,
+    FreeformMeshSetVertex, FreeformMeshSetNormal,
+    FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
+    FreeformMeshSetTangent, FreeformMeshSetBinormal,
+    FreeformMeshFaceGroupSetIndex,
+    FreeformMeshFaceGroupAddTriangle,
+    FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+    FreeformMeshGenNormals, FreeformMeshGenTangents,
+    FreeformMeshVerticesCount,
+    FreeformMeshTriangleCount,
+    FreeformMeshFaceGroupTriangleCount,
+    FreeformSave,
+    FreeformGenTangents, FreeformBuildOctree,
+    FreeformSetMaterialLibraries,
+    FreeformMeshFaceGroupSetLightmapIndex,
+    FreeformMeshFaceGroupGetLightmapIndex,
+    FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
+
     // Terrain
 
     // Object

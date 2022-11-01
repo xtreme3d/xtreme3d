@@ -10,7 +10,7 @@ begin
   if ls=1 then GLLightSource1.LightStyle:=lsOmni;
   if ls=2 then GLLightSource1.LightStyle:=lsParallel;
   GLLightSource1.Shining := true;
-  result:=Integer(GLLightSource1);
+  result:=ObjToReal(GLLightSource1);
 end;
 
 function LightSetAmbientColor(light,color: real): real; cdecl

@@ -35,7 +35,7 @@ begin
   WindowsBitmapFont1.Ranges[0].StopASCII := Char(Trunc(chend));
   WindowsBitmapFont1.Font.Height := Trunc(size);
   WindowsBitmapFont1.Font.Name := StrConv(nm);
-  result:=Integer(WindowsBitmapFont1);
+  result:=ObjToReal(WindowsBitmapFont1);
 end;
 
 function HUDTextCreate(font: real; txt: PAnsiChar; parent: real): real; cdecl;

@@ -1,18 +1,23 @@
 function ActorCreate(fname: PAnsiChar; matl,parent: real): real; cdecl;
 var
-  GLActor1: TGLActor;
+  actor: TGLActor;
   ml: TGLMaterialLibrary;
 begin
   ml:=TGLMaterialLibrary(RealToPtr(matl));
   if not (parent=0) then
-    GLActor1:=TGLActor.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
+    actor:=TGLActor.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
-    GLActor1:=TGLActor.CreateAsChild(scene.Objects);
-  GLActor1.MaterialLibrary:=ml;
-  GLActor1.IgnoreMissingTextures := True;
-  
+    actor:=TGLActor.CreateAsChild(scene.Objects);
+  actor.MaterialLibrary:=ml;
+  //actor.IgnoreMissingTextures := True;
+  //actor.UseMeshMaterials := False;
+  if not FileExists(StrConv(fname)) then begin
+    result:=0;
+    ShowMessage('ActorCreate:' + #13#10 + 'File does not exist');
+    Exit;
+  end;
   try
-    GLActor1.LoadFromFile(StrConv(fname));
+    actor.LoadFromFile(StrConv(fname));
   except
     On E: Exception do
     begin
@@ -20,9 +25,9 @@ begin
         ShowMessage('ActorCreate:' + #13#10 + E.Message);
     end;
   end;
-  
-  GLActor1.AnimationMode:=aamLoop;
-  result:=Integer(GLActor1);
+
+  actor.AnimationMode:=aamLoop;
+  result:=ObjToReal(actor);
 end;
 
 function ActorCopy(actor,parent: real): real; cdecl;
@@ -123,7 +128,7 @@ var
   GLActor1: TGLActor;
 begin
   GLActor1:=TGLActor(RealToPtr(actor));
-  
+
   try
     GLActor1.AddDataFromFile(StrConv(fname));
   except
@@ -133,7 +138,7 @@ begin
         ShowMessage('ActorAddObject:' + #13#10 + E.Message);
     end;
   end;
-  
+
   result:=1;
 end;
 
@@ -246,7 +251,7 @@ var
   GLAnim1: TGLAnimationControler;
 begin
   GLAnim1:=TGLAnimationControler.Create(scene);
-  result:=Integer(GLAnim1);
+  result:=ObjToReal(GLAnim1);
 end;
 
 function AnimationBlenderSetActor(anim,actor: real): real; cdecl;
@@ -293,7 +298,7 @@ begin
     end;
   end;
   
-  result:=integer(tlist);
+  result:=ObjToReal(tlist);
 end;
 
 function ActorQ3TagExportMatrix(actor,taglist: real; tagname: PAnsiChar; obj: real): real; cdecl;

@@ -6,6 +6,7 @@ begin
     cadencer := TGLCadencer.Create(nil);
     cadencer.Scene := scene;
     cadencer.Mode := cmManual;
+    cadencer.enabled := true;
     showLoadingErrors := True;
     previousTicks := GetTickCount;
     result := 1.0;

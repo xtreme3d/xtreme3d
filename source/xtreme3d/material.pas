@@ -3,7 +3,7 @@ var
   mlib:TGLMaterialLibrary;
 begin
   mlib:=TGLMaterialLibrary.Create(scene);
-  result:=Integer(mlib);
+  result:=ObjToReal(mlib);
 end;
 
 function MaterialLibraryActivate(mlib: real): real; cdecl;
@@ -17,7 +17,7 @@ var
   mlib:TGLMaterialLibrary;
 begin
   mlib:=TGLMaterialLibrary(RealToPtr(mlb));
-  mlib.TexturePaths:=StrConv(path);
+  mlib.TexturePaths:=String(AnsiString(path));
   result:=1;
 end;
 

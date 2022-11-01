@@ -44,7 +44,7 @@ begin
   GLPlane1.Height:=h;
   GLPlane1.XTiles:=Trunc(xt);
   GLPlane1.YTiles:=Trunc(yt);
-  result:=Integer(GLPlane1);
+  result:=ObjToReal(GLPlane1);
 end;
 
 function PlaneSetOptions(plane,squad,xt,yt: real): real; cdecl;
@@ -81,7 +81,7 @@ begin
     tplane:=TGLTilePlane.CreateAsChild(scene.Objects);
     tplane.SortByMaterials:=True;
 
-  result:=Integer(tplane);
+  result:=ObjToReal(tplane);
 end;
 
 function TilePlaneSetTile(tplane,x,y:real; mat: PAnsiChar): real; cdecl;
@@ -107,7 +107,7 @@ begin
   GLSphere1.Radius:=rad;
   GLSphere1.Slices:=Trunc(slic);
   GLSphere1.Stacks:=Trunc(staks);
-  result:=Integer(GLSphere1);
+  result:=ObjToReal(GLSphere1);
 end;
 
 function SphereSetAngleLimits(sphere,starta,stopa,topa,bottoma: real): real; cdecl;
@@ -177,7 +177,7 @@ begin
   GLCylinder1.Slices:=Trunc(slic);
   GLCylinder1.Stacks:=Trunc(staks);
   GLCylinder1.Loops:=Trunc(loop);
-  result:=integer(GLCylinder1);
+  result:=ObjToReal(GLCylinder1);
 end;
 
 function CylinderSetOptions(cyl,topr,botr,h,slic,staks,loop: real): real; cdecl;
@@ -227,7 +227,7 @@ begin
   GLCone1.Slices:=Trunc(slic);
   GLCone1.Stacks:=Trunc(staks);
   GLCone1.Loops:=Trunc(loop);
-  result:=integer(GLCone1);
+  result:=ObjToReal(GLCone1);
 end;
 
 function ConeGetOptions(cone,ind: real): real; cdecl;
@@ -277,7 +277,7 @@ begin
   GLAnnulus1.Slices:=Trunc(slic);
   GLAnnulus1.Stacks:=Trunc(staks);
   GLAnnulus1.Loops:=Trunc(loop);
-  result:=integer(GLAnnulus1);
+  result:=ObjToReal(GLAnnulus1);
 end;
 
 function AnnulusSetOptions(an,inr,outr,h,slic,staks,loop: real): real; cdecl;
@@ -328,7 +328,7 @@ begin
   GLTorus1.MajorRadius:=outr;
   GLTorus1.Rings:=Trunc(ring);
   GLTorus1.Sides:=Trunc(side);
-  result:=integer(GLTorus1);
+  result:=ObjToReal(GLTorus1);
 end;
 
 function TorusSetOptions(tor,inr,outr,ring,side: real): real; cdecl;
@@ -340,7 +340,7 @@ begin
   GLTorus1.MajorRadius:=outr;
   GLTorus1.Rings:=Trunc(ring);
   GLTorus1.Sides:=Trunc(side);
-  result:=integer(GLTorus1);
+  result:=ObjToReal(GLTorus1);
 end;
 
 function TorusGetOptions(tor,ind: real): real; cdecl;
@@ -373,7 +373,7 @@ begin
   GLDisk1.SweepAngle:=sweepa;
   GLDisk1.Loops:=Trunc(loop);
   GLDisk1.Slices:=Trunc(slic);
-  result:=integer(GLDisk1);
+  result:=ObjToReal(GLDisk1);
 end;
 
 function DiskSetOptions(disk,inr,outr,starta,sweepa,loop,slic: real): real; cdecl;
@@ -422,7 +422,7 @@ begin
   GLFrustrum1.BaseDepth:=based;
   GLFrustrum1.ApexHeight:=apexh;
   GLFrustrum1.Height:=cuth;
-  result:=integer(GLFrustrum1);
+  result:=ObjToReal(GLFrustrum1);
 end;
 
 function FrustrumSetOptions(fr,basew,based,apexh,cuth: real): real; cdecl;
@@ -461,7 +461,7 @@ begin
     GLDodecahedron1:=TGLDodecahedron.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     GLDodecahedron1:=TGLDodecahedron.CreateAsChild(scene.Objects);
-  result:=integer(GLDodecahedron1);
+  result:=ObjToReal(GLDodecahedron1);
 end;
 
 function IcosahedronCreate(parent: real): real; cdecl;
@@ -472,7 +472,7 @@ begin
     GLIcosahedron1:=TGLIcosahedron.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     GLIcosahedron1:=TGLIcosahedron.CreateAsChild(scene.Objects);
-  result:=integer(GLIcosahedron1);
+  result:=ObjToReal(GLIcosahedron1);
 end;
 
 function TeapotCreate(parent: real): real; cdecl;
@@ -483,5 +483,5 @@ begin
     GLTeapot1:=TGLTeapot.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     GLTeapot1:=TGLTeapot.CreateAsChild(scene.Objects);
-  result:=integer(GLTeapot1);
+  result:=ObjToReal(GLTeapot1);
 end;

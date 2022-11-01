@@ -26,8 +26,7 @@ function dll_init(dll) {
 	// Viewer
 	global._ViewerCreate = external_define(dll, "ViewerCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//ViewerEnableVSync was removed
-	//global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	// Milestone II functions
@@ -244,6 +243,65 @@ function dll_init(dll) {
 	global._ActorAnimationPrevFrame = external_define(dll, "ActorAnimationPrevFrame", dll_cdecl, ty_real, 1, ty_real);
 	global._ActorSetFrame = external_define(dll, "ActorSetFrame", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ActorTriangleCount = external_define(dll, "ActorTriangleCount", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Freeform
+	global._FreeformCreate = external_define(dll, "FreeformCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
+	global._FreeformGenTangents = external_define(dll, "FreeformGenTangents", dll_cdecl, ty_real, 1, ty_real);
+	global._FreeformMeshObjectsCount = external_define(dll, "FreeformMeshObjectsCount", dll_cdecl, ty_real, 1, ty_real);
+	global._FreeformMeshSetVisible = external_define(dll, "FreeformMeshSetVisible", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetSecondCoords = external_define(dll, "FreeformMeshSetSecondCoords", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshTriangleCount = external_define(dll, "FreeformMeshTriangleCount", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshObjectGetName = external_define(dll, "FreeformMeshObjectGetName", dll_cdecl, ty_string, 2, ty_real, ty_real);
+	global._FreeformMeshObjectSetName = external_define(dll, "FreeformMeshObjectSetName", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
+	global._FreeformMeshObjectDestroy = external_define(dll, "FreeformMeshObjectDestroy", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshFaceGroupsCount = external_define(dll, "FreeformMeshFaceGroupsCount", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshFaceGroupTriangleCount = external_define(dll, "FreeformMeshFaceGroupTriangleCount", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FreeformCreateExplosionFX = external_define(dll, "FreeformCreateExplosionFX", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformExplosionFXReset = external_define(dll, "FreeformExplosionFXReset", dll_cdecl, ty_real, 1, ty_real);
+	global._FreeformExplosionFXEnable = external_define(dll, "FreeformExplosionFXEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformExplosionFXSetSpeed = external_define(dll, "FreeformExplosionFXSetSpeed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformSphereSweepIntersect = external_define(dll, "FreeformSphereSweepIntersect", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformPointInMesh = external_define(dll, "FreeformPointInMesh", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetMaterial = external_define(dll, "FreeformMeshSetMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
+	global._FreeformUseMeshMaterials = external_define(dll, "FreeformUseMeshMaterials", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformToFreeforms = external_define(dll, "FreeformToFreeforms", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshFaceGroupSetMaterial = external_define(dll, "FreeformMeshFaceGroupSetMaterial", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_string);
+	global._FreeformMeshFaceGroupGetMaterial = external_define(dll, "FreeformMeshFaceGroupGetMaterial", dll_cdecl, ty_string, 3, ty_real, ty_real, ty_real);
+	global._FreeformCreateEmpty = external_define(dll, "FreeformCreateEmpty", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FreeformAddMesh = external_define(dll, "FreeformAddMesh", dll_cdecl, ty_real, 1, ty_real);
+	global._FreeformMeshAddFaceGroup = external_define(dll, "FreeformMeshAddFaceGroup", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshAddVertex = external_define(dll, "FreeformMeshAddVertex", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshAddNormal = external_define(dll, "FreeformMeshAddNormal", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshAddTexCoord = external_define(dll, "FreeformMeshAddTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshAddSecondTexCoord = external_define(dll, "FreeformMeshAddSecondTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshAddTangent = external_define(dll, "FreeformMeshAddTangent", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshAddBinormal = external_define(dll, "FreeformMeshAddBinormal", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshFaceGroupAddTriangle = external_define(dll, "FreeformMeshFaceGroupAddTriangle", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGenNormals = external_define(dll, "FreeformMeshGenNormals", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshGenTangents = external_define(dll, "FreeformMeshGenTangents", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshVerticesCount = external_define(dll, "FreeformMeshVerticesCount", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FreeformMeshTranslate = external_define(dll, "FreeformMeshTranslate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshRotate = external_define(dll, "FreeformMeshRotate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshScale = external_define(dll, "FreeformMeshScale", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformSave = external_define(dll, "FreeformSave", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._FreeformMeshGetVertex = external_define(dll, "FreeformMeshGetVertex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGetNormal = external_define(dll, "FreeformMeshGetNormal", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGetTexCoord = external_define(dll, "FreeformMeshGetTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGetSecondTexCoord = external_define(dll, "FreeformMeshGetSecondTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGetTangent = external_define(dll, "FreeformMeshGetTangent", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshGetBinormal = external_define(dll, "FreeformMeshGetBinormal", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshFaceGroupGetIndex = external_define(dll, "FreeformMeshFaceGroupGetIndex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetVertex = external_define(dll, "FreeformMeshSetVertex", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetNormal = external_define(dll, "FreeformMeshSetNormal", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetTexCoord = external_define(dll, "FreeformMeshSetTexCoord", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetSecondTexCoord = external_define(dll, "FreeformMeshSetSecondTexCoord", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetTangent = external_define(dll, "FreeformMeshSetTangent", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshSetBinormal = external_define(dll, "FreeformMeshSetBinormal", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformMeshFaceGroupSetIndex = external_define(dll, "FreeformMeshFaceGroupSetIndex", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformBuildOctree = external_define(dll, "FreeformBuildOctree", dll_cdecl, ty_real, 1, ty_real);
+	global._FreeformMeshFaceGroupGetLightmapIndex = external_define(dll, "FreeformMeshFaceGroupGetLightmapIndex", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FreeformMeshFaceGroupSetLightmapIndex = external_define(dll, "FreeformMeshFaceGroupSetLightmapIndex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FreeformSetMaterialLibraries = external_define(dll, "FreeformSetMaterialLibraries", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
 	// Object
 	global._ObjectHide = external_define(dll, "ObjectHide", dll_cdecl, ty_real, 1, ty_real);
@@ -679,8 +737,8 @@ function CameraAbsoluteUpVectorToTarget(aCamera, aInd) {
 	return external_call(global._CameraAbsoluteUpVectorToTarget, aCamera, aInd);
 }
 
-function CameraZoomAll(aCamera) {
-	return external_call(global._CameraZoomAll, aCamera);
+function CameraZoomAll(aCamera, aViewer) {
+	return external_call(global._CameraZoomAll, aCamera, aViewer);
 }
 
 function CameraScreenDeltaToVector(aCamera, aDx, aDy, aRatio, aNx, aNy, aNz, aInd) {
