@@ -39,7 +39,7 @@ begin
   TGLScene(scene).Objects.AddChild(GLActor2);
   if not (parent=0) then GLActor2.Parent:=TGLBaseSceneObject(RealToPtr(parent));
   GLActor2.Assign(GLActor1);
-  result:=Integer(GLActor2);
+  result:=ObjToReal(GLActor2);
 end;
 
 function ActorSetAnimationRange(actor,astart,aend: real): real; cdecl;

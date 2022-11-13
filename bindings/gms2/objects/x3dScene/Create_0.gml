@@ -48,7 +48,10 @@ MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 ObjectSetMaterial(plane, "mFloor");
 
+
 matlib2 = MaterialLibraryCreate();
+
+/*
 MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");
 MaterialLibraryActivate(matlib2);
 hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, global.scene);
@@ -59,6 +62,21 @@ ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "diffuse.png");
 ObjectSetMaterial(hk, "mHellknight");
+*/
+
+MaterialLibrarySetTexturePaths(matlib2, "data/trinity");
+MaterialLibraryActivate(matlib2);
+trinity = ActorCreate("data/trinity/trinity_mesh.smd", matlib2, global.scene);
+//ActorSetFrameInterpolation(trinity, afpLinear);
+//ActorSetInterval(trinity, 45);
+//ActorAddObject(trinity, "data/trinity/trinity_walk.smd");
+ActorAddObject(trinity, "data/trinity/trinity_run.smd");
+//show_message(string(ActorGetFrameCount(trinity)));
+ActorSwitchToAnimation(trinity, 0, false);
+//ActorSetAnimationRange(trinity, 1, 23);
+ObjectSetScale(trinity, 0.03, 0.03, 0.03);
+ObjectSetPosition(trinity, 0, 0, 0);
+ObjectPitch(trinity, 90);
 
 MaterialLibraryActivate(matlib);
 
