@@ -9,8 +9,8 @@ begin
   else
     actor:=TGLActor.CreateAsChild(scene.Objects);
   actor.MaterialLibrary:=ml;
-  //actor.IgnoreMissingTextures := True;
-  //actor.UseMeshMaterials := False;
+  actor.IgnoreMissingTextures := True;
+  
   if not FileExists(StrConv(fname)) then begin
     result:=0;
     ShowMessage('ActorCreate:' + #13#10 + 'File does not exist');
