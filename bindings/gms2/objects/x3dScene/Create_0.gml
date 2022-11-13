@@ -24,8 +24,6 @@ global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
 global.front = DummycubeCreate(0);
 
-DummycubeSetVisible(global.scene, true);
-
 camPos = DummycubeCreate(global.scene);
 
 camera = CameraCreate(camPos);
@@ -50,45 +48,18 @@ MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 ObjectSetMaterial(plane, "mFloor");
 
-/*
-teapot = TeapotCreate(global.scene);
-ObjectScale(teapot, 3, 3, 3);
-ObjectSetPosition(teapot, 0, 0, 0);
-MaterialCreate("mTeapot", "textures/envmap.jpg");
-MaterialSetFaceCulling("mTeapot", fcNoCull);
-MaterialSetTextureMappingMode("mTeapot", tmmSphere);
-MaterialSetOptions("mTeapot", false, true);
-ObjectSetMaterial(teapot, "mTeapot");
-*/
-
-//ffm = FreeformCreate("data/suzanne.obj", matlib, matlib, global.scene);
-//FreeformGenTangents(ffm);
-//FreeformUseMeshMaterials(ffm, false);
-//ObjectSetMaterial(ffm, "mFloor");
-
 matlib2 = MaterialLibraryCreate();
-MaterialLibrarySetTexturePaths(matlib2, "data/trinity");
+MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");
 MaterialLibraryActivate(matlib2);
-//hk = ActorCreate("mummy/mummy.md2", matlib2, global.scene);
-actor = ActorCreate("data/trinity/trinity_mesh.smd", matlib2, global.scene);
-ActorSetAnimationMode(actor, aamNone);
-//show_message(string(ActorMeshObjectsCount(hk)));
-//ActorSetAnimationRange(hk, 0, 1);
-//ActorAddObject(hk, "data/hellknight/idle.md5anim");
-ActorAddObject(actor, "data/trinity/trinity_walk.smd");
-//ActorMakeSkeletalTranslationStatic(hk, true);
-ActorSwitchToAnimation(actor, 0, false);
-ObjectSetScale(actor, 0.05, 0.05, 0.05);
-//ObjectSetScale(hk, 0.001, 0.001, 0.001);
-//show_message(string(ObjectGetScale(hk, 0)));
-//ObjectSetPosition(actor, 0, -1.2, 0);
-ObjectPitch(actor, 90);
-ObjectShowAxes(actor, true);
-/*
+hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, global.scene);
+ActorAddObject(hk, "data/hellknight/idle.md5anim");
+ActorAddObject(hk, "data/hellknight/attack.md5anim");
+ActorSwitchToAnimation(hk, 0, true);
+ObjectSetScale(hk, 0.02, 0.02, 0.02);
+ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "diffuse.png");
 ObjectSetMaterial(hk, "mHellknight");
-MaterialSetBlendingMode("mHellknight", bmOpaque);
-*/
+
 MaterialLibraryActivate(matlib);
 
 mouselookActive = true;

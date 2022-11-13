@@ -16,7 +16,7 @@ uses
 
   GLS.VectorFileObjects,
   GLS.PersistentClasses,
-  GLS.Utils,
+  //GLS.Utils,
   GLS.ApplicationFileIO,
   GLS.VectorTypes,
   GLS.VectorGeometry,
@@ -40,6 +40,9 @@ type
   end;
 
 var
+  // Fix problem with decimal separator on non-English locales
+  fs: TFormatSettings;
+  
   vMD5TextureExtensions: TStringList;
 
 // ------------------------------------------------------------------
@@ -136,13 +139,13 @@ procedure TGLMD5VectorFile.LoadFromStream(aStream: TStream);
     bonename := FTempString[0];
     ParentBoneID := StrToInt(FTempString[1]);
 
-    pos.X := StrToFloatDef(FTempString[2]);
-    pos.Y := StrToFloatDef(FTempString[4]);
-    pos.Z := StrToFloatDef(FTempString[3]);
+    pos.X := StrToFloatDef(FTempString[2], 0, fs);
+    pos.Y := StrToFloatDef(FTempString[4], 0, fs);
+    pos.Z := StrToFloatDef(FTempString[3], 0, fs);
 
-    quat := QuaternionMakeFromImag(StrToFloatDef(FTempString[5]),
-      StrToFloatDef(FTempString[7]),
-      StrToFloatDef(FTempString[6]));
+    quat := QuaternionMakeFromImag(StrToFloatDef(FTempString[5], 0, fs),
+      StrToFloatDef(FTempString[7], 0, fs),
+      StrToFloatDef(FTempString[6], 0, fs));
 
     FFramePositions.Add(pos);
     FFrameQuaternions.Add(quat);
@@ -247,8 +250,8 @@ procedure TGLMD5VectorFile.LoadFromStream(aStream: TStream);
           begin
             vnum := StrToInt(FTempString[1]);
             mesh.TexCoords[vnum] :=
-              AffineVectorMake(StrToFloatDef(FTempString[2]),
-              1 - StrToFloatDef(FTempString[3]), 0);
+              AffineVectorMake(StrToFloatDef(FTempString[2], 0, fs),
+              1 - StrToFloatDef(FTempString[3], 0, fs), 0);
             VertexWeightID[vnum] := StrToInt(FTempString[4]);
             VertexWeightCount[vnum] := StrToInt(FTempString[5]);
             if VertexWeightCount[vnum] > mesh.BonesPerVertex then
@@ -281,11 +284,11 @@ procedure TGLMD5VectorFile.LoadFromStream(aStream: TStream);
           begin
             wnum := StrToInt(FTempString[1]);
             VertexBoneRef[wnum] := StrToInt(FTempString[2]);
-            VertexWeight[wnum] := StrToFloatDef(FTempString[3]);
+            VertexWeight[wnum] := StrToFloatDef(FTempString[3], 0, fs);
             VertexWeighted[wnum] :=
-              AffineVectorMake(StrToFloatDef(FTempString[4]),
-              StrToFloatDef(FTempString[6]),
-              StrToFloatDef(FTempString[5]));
+              AffineVectorMake(StrToFloatDef(FTempString[4], 0, fs),
+              StrToFloatDef(FTempString[6], 0, fs),
+              StrToFloatDef(FTempString[5], 0, fs));
           end;
         end;
       end;
@@ -363,12 +366,12 @@ procedure TGLMD5VectorFile.LoadFromStream(aStream: TStream);
       FTempString.CommaText := temp;
       if FTempString.Count >= 6 then
       begin
-        pos := AffineVectorMake(StrToFloatDef(FTempString[0]),
-          StrToFloatDef(FTempString[1]),
-          StrToFloatDef(FTempString[2]));
-        quat := QuaternionMakeFromImag(StrToFloatDef(FTempString[3]),
-          StrToFloatDef(FTempString[4]),
-          StrToFloatDef(FTempString[5]));
+        pos := AffineVectorMake(StrToFloatDef(FTempString[0], 0, fs),
+          StrToFloatDef(FTempString[1], 0, fs),
+          StrToFloatDef(FTempString[2], 0, fs));
+        quat := QuaternionMakeFromImag(StrToFloatDef(FTempString[3], 0, fs),
+          StrToFloatDef(FTempString[4], 0, fs),
+          StrToFloatDef(FTempString[5], 0, fs));
         FFramePositions.Add(pos);
         FFrameQuaternions.Add(quat);
       end;
@@ -400,32 +403,32 @@ procedure TGLMD5VectorFile.LoadFromStream(aStream: TStream);
 
         if FJointFlags[i] and 1 > 0 then
         begin
-          pos.X := StrToFloatDef(FTempString[j]);
+          pos.X := StrToFloatDef(FTempString[j], 0, fs);
           Inc(j);
         end;
         if FJointFlags[i] and 2 > 0 then
         begin
-          pos.Y := StrToFloatDef(FTempString[j]);
+          pos.Y := StrToFloatDef(FTempString[j], 0, fs);
           Inc(j);
         end;
         if FJointFlags[i] and 4 > 0 then
         begin
-          pos.Z := StrToFloatDef(FTempString[j]);
+          pos.Z := StrToFloatDef(FTempString[j], 0, fs);
           Inc(j);
         end;
 
         if FJointFlags[i] and 8 > 0 then
         begin
-          quat.ImagPart.X := StrToFloatDef(FTempString[j]);
+          quat.ImagPart.X := StrToFloatDef(FTempString[j], 0, fs);
           Inc(j);
         end;
         if FJointFlags[i] and 16 > 0 then
         begin
-          quat.ImagPart.Y := StrToFloatDef(FTempString[j]);
+          quat.ImagPart.Y := StrToFloatDef(FTempString[j], 0, fs);
           Inc(j);
         end;
         if FJointFlags[i] and 32 > 0 then
-          quat.ImagPart.Z := StrToFloatDef(FTempString[j]);
+          quat.ImagPart.Z := StrToFloatDef(FTempString[j], 0, fs);
       end;
 
       pos := AffineVectorMake(pos.X, pos.Z, pos.Y);
@@ -573,6 +576,9 @@ end;
 initialization
 
 // ------------------------------------------------------------------
+
+// Fix problem with decimal separator on non-English locales
+fs.DecimalSeparator := '.';
 
 RegisterVectorFileFormat('md5mesh', 'Doom3 mesh files', TGLMD5VectorFile);
 RegisterVectorFileFormat('md5anim', 'Doom3 animation files', TGLMD5VectorFile);
