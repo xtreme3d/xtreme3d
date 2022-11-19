@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.BaseMeshSilhouette;
 
 (* Silhouette classes for GLBaseMesh and FaceGroups. *)
@@ -20,16 +19,16 @@ uses
 type
   TGLFaceGroupConnectivity = class(TGLConnectivity)
   private
-    FMeshObject: TMeshObject;
+    FMeshObject: TGLMeshObject;
     FOwnsVertices: boolean;
-    procedure SetMeshObject(const Value: TMeshObject);
+    procedure SetMeshObject(const Value: TGLMeshObject);
   public
     procedure Clear; override;
     // Builds the connectivity information.
     procedure RebuildEdgeList;
-    property MeshObject: TMeshObject read FMeshObject write SetMeshObject;
+    property MeshObject: TGLMeshObject read FMeshObject write SetMeshObject;
     constructor Create(APrecomputeFaceNormal: boolean); override;
-    constructor CreateFromMesh(aMeshObject: TMeshObject; APrecomputeFaceNormal: boolean);
+    constructor CreateFromMesh(aMeshObject: TGLMeshObject; APrecomputeFaceNormal: boolean);
     destructor Destroy; override;
   end;
 
@@ -87,7 +86,7 @@ constructor TGLFaceGroupConnectivity.Create(APrecomputeFaceNormal: boolean);
     FOwnsVertices := true;
   end;
 
-procedure TGLFaceGroupConnectivity.SetMeshObject(const Value: TMeshObject);
+procedure TGLFaceGroupConnectivity.SetMeshObject(const Value: TGLMeshObject);
   begin
     Clear;
     FMeshObject := Value;
@@ -98,7 +97,7 @@ procedure TGLFaceGroupConnectivity.SetMeshObject(const Value: TMeshObject);
     RebuildEdgeList;
   end;
 
-constructor TGLFaceGroupConnectivity.CreateFromMesh(aMeshObject: TMeshObject; APrecomputeFaceNormal: boolean);
+constructor TGLFaceGroupConnectivity.CreateFromMesh(aMeshObject: TGLMeshObject; APrecomputeFaceNormal: boolean);
   begin
     Create(APrecomputeFaceNormal);
     MeshObject := aMeshObject;
@@ -203,7 +202,7 @@ constructor TGLBaseMeshConnectivity.CreateFromMesh(aBaseMesh: TGLBaseMesh);
 procedure TGLBaseMeshConnectivity.SetBaseMesh(const Value: TGLBaseMesh);
   var
     i: integer;
-    MO: TMeshObject;
+    MO: TGLMeshObject;
     Connectivity: TGLFaceGroupConnectivity;
   begin
     Clear(false);
@@ -222,7 +221,8 @@ procedure TGLBaseMeshConnectivity.SetBaseMesh(const Value: TGLBaseMesh);
     end;
   end;
 
-procedure TGLBaseMeshConnectivity.CreateSilhouette(const silhouetteParameters: TGLSilhouetteParameters; var aSilhouette: TGLSilhouette; AddToSilhouette: boolean);
+procedure TGLBaseMeshConnectivity.CreateSilhouette(const silhouetteParameters: TGLSilhouetteParameters; 
+  var aSilhouette: TGLSilhouette; AddToSilhouette: boolean);
 var
   i: integer;
 begin

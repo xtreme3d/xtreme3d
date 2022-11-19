@@ -121,7 +121,7 @@ end;
 
 procedure TGLLMTSVectorFile.LoadFromStream(aStream: TStream);
 var
-  MO: TMeshObject;
+  MO: TGLMeshObject;
   FG: TFGVertexIndexList;
   LL: TGLMaterialLibrary;
   ML: TGLMaterialLibrary;
@@ -132,7 +132,7 @@ var
   _4cc: Cardinal;
   C: Integer;
   fName: string;
-  vi: Tintegerlist;
+  vi: TGLIntegerList;
   libmat: TGLLibmaterial;
   lmnames, matnames: TStringlist;
   MatInfoHeader: array [0 .. 3] of AnsiChar;
@@ -142,10 +142,10 @@ var
 begin
   owner.MeshObjects.Clear;
 
-  MO := TMeshObject.CreateOwned(owner.MeshObjects);
+  MO := TGLMeshObject.CreateOwned(owner.MeshObjects);
   MO.Mode := momFaceGroups;
 
-  vi := Tintegerlist.create;
+  vi := TGLIntegerList.create;
 
   LL := owner.LightmapLibrary;
   ML := owner.MaterialLibrary;
@@ -418,7 +418,7 @@ end;
 
 procedure TGLLMTSVectorFile.SaveToStream(aStream: TStream);
 var
-  MO: TMeshObject;
+  MO: TGLMeshObject;
   FG: TFGVertexIndexList;
   i, j, k, l, lmstartindex, C, matindex: integer;
   h: TLMTS_Header;

@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.MeshBuilder;
 
 (*
@@ -30,9 +29,9 @@ uses
 
 (* ---------------- Mesh building routines ------------------- *)
 
-procedure BuildCube(Mesh : TMeshObject; const Position, Scale : TAffineVector);
-procedure BuildCylinder(Mesh : TMeshObject; const Position, Scale : TAffineVector; Slices : Integer);
-procedure BuildCylinder2(Mesh : TMeshObject; const Position, Scale : TAffineVector; TopRadius,BottomRadius,Height: single; Slices : Integer);
+procedure BuildCube(Mesh : TGLMeshObject; const Position, Scale : TAffineVector);
+procedure BuildCylinder(Mesh : TGLMeshObject; const Position, Scale : TAffineVector; Slices : Integer);
+procedure BuildCylinder2(Mesh : TGLMeshObject; const Position, Scale : TAffineVector; TopRadius,BottomRadius,Height: single; Slices : Integer);
 
 (* ---------------- Mesh optimization routines --------------- *)
 
@@ -45,10 +44,10 @@ type
 procedure OptimizeMesh(aList: TGLMeshObjectList; options: TGLMeshOptimizerOptions); overload;
 procedure OptimizeMesh(aList: TGLMeshObjectList); overload;
 // OptimizeMesh (object, with options)
-procedure OptimizeMesh(aMeshObject: TMeshObject; options: TGLMeshOptimizerOptions); overload;
+procedure OptimizeMesh(aMeshObject: TGLMeshObject; options: TGLMeshOptimizerOptions); overload;
 // OptimizeMesh (object, default options)
-procedure OptimizeMesh(aMeshObject: TMeshObject); overload;
-procedure FacesSmooth(aMeshObj: TMeshObject;
+procedure OptimizeMesh(aMeshObject: TGLMeshObject); overload;
+procedure FacesSmooth(aMeshObj: TGLMeshObject;
   aWeldDistance: Single = 0.0000001; aThreshold: Single = 35.0;
   InvertNormals: boolean = false);
 
@@ -68,7 +67,7 @@ begin
   Result.Z:= position.Z+Scale.Z*Z;
 end;
 
-procedure BuildCube(Mesh : TMeshObject; const Position, Scale : TAffineVector);
+procedure BuildCube(Mesh : TGLMeshObject; const Position, Scale : TAffineVector);
 var
   FGR : TFGVertexNormalTexIndexList;
   VertexOffset : Integer;
@@ -159,7 +158,7 @@ begin
   FGR.TexCoordIndices.Add(TextureOffset+2,TextureOffset+7,TextureOffset+6);
 end;
 
-procedure BuildCylinder(Mesh : TMeshObject; const Position, Scale : TAffineVector; Slices : Integer);
+procedure BuildCylinder(Mesh : TGLMeshObject; const Position, Scale : TAffineVector; Slices : Integer);
 var
   FGR : TFGVertexNormalTexIndexList;
   VertexOffset : Integer;
@@ -219,7 +218,7 @@ begin
   end;
 end;
 
-procedure BuildCylinder2(Mesh : TMeshObject; const Position, Scale : TAffineVector; TopRadius,BottomRadius,Height: single; Slices : Integer);
+procedure BuildCylinder2(Mesh : TGLMeshObject; const Position, Scale : TAffineVector; TopRadius,BottomRadius,Height: single; Slices : Integer);
 var
   FGR : TFGVertexNormalTexIndexList;
   VertexOffset : Integer;
@@ -289,7 +288,7 @@ procedure OptimizeMesh(aList: TGLMeshObjectList;
   options: TGLMeshOptimizerOptions);
 var
   i, k: Integer;
-  mob, mo: TMeshObject;
+  mob, mo: TGLMeshObject;
   fg: TGLFaceGroup;
   fgvi: TFGVertexIndexList;
 begin
@@ -335,18 +334,18 @@ begin
   end;
 end;
 
-procedure OptimizeMesh(aMeshObject: TMeshObject);
+procedure OptimizeMesh(aMeshObject: TGLMeshObject);
 begin
   OptimizeMesh(aMeshObject, vDefaultMeshOptimizerOptions);
 end;
 
-procedure OptimizeMesh(aMeshObject: TMeshObject;
+procedure OptimizeMesh(aMeshObject: TGLMeshObject;
   options: TGLMeshOptimizerOptions);
 var
   i: Integer;
   fg: TGLFaceGroup;
-  coords, TexCoords, Normals: TAffineVectorList;
-  il: TIntegerList;
+  coords, TexCoords, Normals: TGLAffineVectorList;
+  il: TGLIntegerList;
   materialName: String;
 begin
   if (mooMergeObjects in options) then
@@ -370,8 +369,8 @@ begin
     begin
       if aMeshObject.FaceGroups.Count = 1 then
         materialName := aMeshObject.FaceGroups[0].materialName;
-      TexCoords := TAffineVectorList.Create;
-      Normals := TAffineVectorList.Create;
+      TexCoords := TGLAffineVectorList.Create;
+      Normals := TGLAffineVectorList.Create;
       coords := aMeshObject.ExtractTriangles(TexCoords, Normals);
       try
         il := BuildVectorCountOptimizedIndices(coords, Normals, TexCoords);
@@ -421,25 +420,25 @@ begin
     aMeshObject.FaceGroups.SortByMaterial;
 end;
 
-procedure FacesSmooth(aMeshObj: TMeshObject;
+procedure FacesSmooth(aMeshObj: TGLMeshObject;
   aWeldDistance: Single = 0.0000001; aThreshold: Single = 35.0;
   InvertNormals: boolean = false);
 Var
   i, J, k, L: Integer;
-  WeldedVertex: TAffineVectorList;
-  TmpIntegerList: TIntegerList;
+  WeldedVertex: TGLAffineVectorList;
+  TmpIntegerList: TGLIntegerList;
   IndexMap: TStringList;
   n: TAffineVector;
-  indicesMap: TIntegerList;
+  indicesMap: TGLIntegerList;
   Index: Integer;
-  FaceList: TIntegerList;
-  NormalList: TAffineVectorList;
-  FaceNormalList: TAffineVectorList;
+  FaceList: TGLIntegerList;
+  NormalList: TGLAffineVectorList;
+  FaceNormalList: TGLAffineVectorList;
   FaceGroup: TGLFaceGroup;
   fg, FG1: TFGVertexIndexList;
   Threshold: Single;
   Angle: Single;
-  ReferenceMap: TIntegerList;
+  ReferenceMap: TGLIntegerList;
   ID1, ID2: Integer;
   Index1, Index2, Index3: Integer;
 
@@ -465,10 +464,10 @@ Var
 begin
   Threshold := aThreshold * Pi / 180.0;
   // build the vectices reference map
-  ReferenceMap := TIntegerList.Create;
-  WeldedVertex := TAffineVectorList.Create;
+  ReferenceMap := TGLIntegerList.Create;
+  WeldedVertex := TGLAffineVectorList.Create;
   WeldedVertex.Assign(aMeshObj.Vertices);
-  indicesMap := TIntegerList.Create;
+  indicesMap := TGLIntegerList.Create;
   // first of all, weld the very closed vertices
   WeldVertices(WeldedVertex, indicesMap, aWeldDistance);
   // then, rebuild the map list
@@ -476,7 +475,7 @@ begin
   for i := 0 to WeldedVertex.Count - 1 do
   begin
     ReferenceMap.Assign(indicesMap);
-    TmpIntegerList := TIntegerList.Create;
+    TmpIntegerList := TGLIntegerList.Create;
     Index := ReferenceMap.IndexOf(i);
     while Index >= 0 do
     begin
@@ -491,10 +490,10 @@ begin
   WeldedVertex.Free;
   indicesMap.Free;
   // creates a TexPoint list for save face infomation, where s=facegroup index, t=face index
-  FaceList := TIntegerList.Create;
-  NormalList := TAffineVectorList.Create;
-  FaceNormalList := TAffineVectorList.Create;
-  // NormalIndex := TIntegerList.Create;
+  FaceList := TGLIntegerList.Create;
+  NormalList := TGLAffineVectorList.Create;
+  FaceNormalList := TGLAffineVectorList.Create;
+  // NormalIndex := TGLIntegerList.Create;
   for i := 0 to aMeshObj.FaceGroups.Count - 1 do
   begin
     FaceGroup := aMeshObj.FaceGroups[i];

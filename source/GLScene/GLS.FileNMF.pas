@@ -111,13 +111,13 @@ end;
 procedure TGLNMFVectorFile.LoadFromStream(aStream: TStream);
 var
   i, j: Integer;
-  mesh: TMeshObject;
+  mesh: TGLMeshObject;
   nmf: TFileNMF;
 begin
   nmf := TFileNMF.Create;
   try
     nmf.LoadFromStream(aStream);
-    mesh := TMeshObject.CreateOwned(Owner.MeshObjects);
+    mesh := TGLMeshObject.CreateOwned(Owner.MeshObjects);
     mesh.Mode := momTriangles;
     for i := 0 to nmf.NumTris - 1 do
     begin
@@ -137,12 +137,12 @@ procedure TGLNMFVectorFile.SaveToStream(aStream: TStream);
 var
   i, j: Integer;
   nmf: TFileNMF;
-  Vertices, TempVertices, Normals, TexCoords: TAffineVectorList;
+  Vertices, TempVertices, Normals, TexCoords: TGLAffineVectorList;
 begin
   nmf := TFileNMF.Create;
-  Vertices := TAffineVectorList.Create;
-  Normals := TAffineVectorList.Create;
-  TexCoords := TAffineVectorList.Create;
+  Vertices := TGLAffineVectorList.Create;
+  Normals := TGLAffineVectorList.Create;
+  TexCoords := TGLAffineVectorList.Create;
   try
     for i := 0 to Owner.MeshObjects.Count - 1 do
     begin

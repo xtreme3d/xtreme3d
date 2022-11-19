@@ -1,7 +1,6 @@
 ﻿//
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.SkyDome;
 
 (* Skydome object *)
@@ -163,13 +162,13 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
   published
-      {Right Ascension, in degrees. }
+    // Right Ascension, in degrees.
     property RA: Single read FRA write FRA;
-    {Declination, in degrees. }
+    // Declination, in degrees.
     property Dec: Single read FDec write FDec;
-    {Absolute magnitude. }
+    // Absolute magnitude.
     property Magnitude: Single read FMagnitude write FMagnitude;
-    {Color of the star. }
+    // Color of the star.
     property Color: TColor read FColor write FColor;
   end;
 
@@ -190,7 +189,8 @@ type
     (* Adds nb random stars of the given color.
       Stars are homogenously scattered on the complete sphere, not only the band defined or visible dome. *)
     procedure AddRandomStars(const nb: Integer; const color: TColor; const limitToTopDome: Boolean = False); overload;
-    procedure AddRandomStars(const nb: Integer; const ColorMin, ColorMax:TVector3b; const Magnitude_min, Magnitude_max: Single;const limitToTopDome: Boolean = False); overload;
+    procedure AddRandomStars(const nb: Integer; const ColorMin, ColorMax:TVector3b;
+      const Magnitude_min, Magnitude_max: Single;const limitToTopDome: Boolean = False); overload;
     (* Load a 'stars' file, which is made of TGLStarRecord.
        Not that '.stars' files should already be sorted by magnitude and color. *)
     procedure LoadStarsFile(const starsFileName: string);
@@ -204,10 +204,7 @@ type
      depth buffering and overwrites everything. All children of a skydome
      are rendered in the skydome's coordinate system.
      The skydome is described by "bands", each "band" is an horizontal cut
-     of a sphere, and you can have as many bands as you wish.
-     Estimated CPU cost (K7-500, GeForce SDR, default bands):
-     800x600 fullscreen filled: 4.5 ms (220 FPS, worst case)
-      Geometry cost (0% fill): 0.7 ms (1300 FPS, best case) *)
+     of a sphere, and you can have as many bands as you wish *)
   TGLSkyDome = class(TGLCameraInvariantObject)
   private
     FOptions: TGLSkyDomeOptions;
@@ -234,7 +231,7 @@ type
   (* Render a skydome like what can be seen on earth.
      Color is based on sun position and turbidity, to "mimic" atmospheric
      Rayleigh and Mie scatterings. The colors can be adjusted to render
-     weird/extra-terrestrial atmospheres too.
+     weird/exoplanet atmospheres too.
      The default slices/stacks values make for an average quality rendering,
      for a very clean rendering, use 64/64 (more is overkill in most cases).
      The complexity is quite high though, making a T&L 3D board a necessity
@@ -243,7 +240,7 @@ type
   private
     FSunElevation: Single;
     FTurbidity: Single;
-    FCurSunColor, FCurSkyColor, FCurHazeColor: TColorVector;
+    FCurSunColor, FCurSkyColor, FCurHazeColor: TGLColorVector;
     FCurHazeTurbid, FCurSunSkyTurbid: Single;
     FSunZenithColor: TGLColor;
     FSunDawnColor: TGLColor;
@@ -269,7 +266,7 @@ type
     procedure OnColorChanged(Sender: TObject);
     procedure PreCalculate;
     procedure RenderDome;
-    function CalculateColor(const theta, cosGamma: Single): TColorVector;
+    function CalculateColor(const theta, cosGamma: Single): TGLColorVector;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -791,7 +788,7 @@ procedure TGLSkyDomeBand.BuildList(var rci: TGLRenderContextInfo);
 
 // always rendered as sphere of radius 1
   procedure RenderBand(start, stop: Single;
-    const colStart, colStop: TColorVector);
+    const colStart, colStop: TGLColorVector);
   var
     i: Integer;
     f, r, r2: Single;
@@ -1008,7 +1005,7 @@ var
   star: TGLSkyDomeStar;
   lastColor: TColor;
   lastPointSize10, pointSize10: Integer;
-  Color, twinkleColor: TColorVector;
+  Color, twinkleColor: TGLColorVector;
 
   procedure DoTwinkle;
   begin
@@ -1080,6 +1077,7 @@ begin
   rci.GLStates.SetGLAlphaFunction(cfGreater, 0);
 end;
 
+//------------------------------------------------------------
 procedure TGLSkyDomeStars.AddRandomStars(const nb: Integer; const Color: TColor;
   const limitToTopDome: Boolean = False);
 var
@@ -1105,6 +1103,7 @@ begin
   end;
 end;
 
+//------------------------------------------------------------
 procedure TGLSkyDomeStars.AddRandomStars(const nb: Integer;
   const ColorMin, ColorMax: TVector3b;
   const Magnitude_min, Magnitude_max: Single;
@@ -1144,7 +1143,7 @@ procedure TGLSkyDomeStars.LoadStarsFile(const starsFileName: string);
 var
   fs: TFileStream;
   sr: TGLStarRecord;
-  colorVector: TColorVector;
+  colorVector: TGLColorVector;
 begin
   fs := TFileStream.Create(starsFileName, fmOpenRead + fmShareDenyWrite);
   try
@@ -1559,7 +1558,7 @@ begin
 end;
 
 function TGLEarthSkyDome.CalculateColor(const theta, cosGamma: Single)
-  : TColorVector;
+  : TGLColorVector;
 var
   t: Single;
 begin
@@ -1592,7 +1591,7 @@ var
     i: Integer;
     r, thetaStart: Single;
     vertex1: TGLVector;
-    Color: TColorVector;
+    Color: TGLColorVector;
   begin
     r := 0;
     vertex1.W := 1;
@@ -1619,7 +1618,7 @@ var
     i: Integer;
     r, r2, thetaStart, thetaStop: Single;
     vertex1, vertex2: TGLVector;
-    Color: TColorVector;
+    Color: TGLColorVector;
   begin
     vertex1.W := 1;
     if stop = 90 then

@@ -269,8 +269,8 @@ type
     and Colors properties *)
   TGLPoints = class(TGLImmaterialSceneObject)
   private
-    FPositions: TAffineVectorList;
-    FColors: TVectorList;
+    FPositions: TGLAffineVectorList;
+    FColors: TGLVectorList;
     FSize: Single;
     FStyle: TGLPointStyle;
     FPointParameters: TGLPointParameters;
@@ -280,8 +280,8 @@ type
     procedure SetNoZWrite(const val: Boolean);
     procedure SetStatic(const val: Boolean);
     procedure SetSize(const val: Single);
-    procedure SetPositions(const val: TAffineVectorList); inline;
-    procedure SetColors(const val: TVectorList);
+    procedure SetPositions(const val: TGLAffineVectorList); inline;
+    procedure SetColors(const val: TGLVectorList);
     procedure SetStyle(const val: TGLPointStyle);
     procedure SetPointParameters(const val: TGLPointParameters);
   public
@@ -290,13 +290,13 @@ type
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TGLRenderContextInfo); override;
     // Points positions.  If empty, a single point is assumed at (0, 0, 0)
-    property Positions: TAffineVectorList read FPositions write SetPositions;
+    property Positions: TGLAffineVectorList read FPositions write SetPositions;
     (* Defines the points colors:
       if empty, point color will be opaque white
       if contains a single color, all points will use that color
       if contains N colors, the first N points (at max) will be rendered
       using the corresponding colors *)
-    property Colors: TVectorList read FColors write SetColors;
+    property Colors: TGLVectorList read FColors write SetColors;
   published
     // If true points do not write their Z to the depth buffer.
     property NoZWrite: Boolean read FNoZWrite write SetNoZWrite;
@@ -396,7 +396,7 @@ type
     FNodesAspect: TGLLineNodesAspect;
     FNodeColor: TGLColor;
     FNodeSize: Single;
-    FOldNodeColor: TColorVector;
+    FOldNodeColor: TGLColorVector;
   protected
     procedure SetNodesAspect(const Value: TGLLineNodesAspect);
     procedure SetNodeColor(const Value: TGLColor);
@@ -446,7 +446,7 @@ type
     FOptions: TGLLinesOptions;
     FNURBSOrder: Integer;
     FNURBSTolerance: Single;
-    FNURBSKnots: TSingleList;
+    FNURBSKnots: TGLSingleList;
   protected
     procedure SetSplineMode(const val: TGLLineSplineMode);
     procedure SetDivision(const Value: Integer);
@@ -458,7 +458,7 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TGLRenderContextInfo); override;
-    property NURBSKnots: TSingleList read FNURBSKnots;
+    property NURBSKnots: TGLSingleList read FNURBSKnots;
     property NURBSOrder: Integer read FNURBSOrder write SetNURBSOrder;
     property NURBSTolerance: Single read FNURBSTolerance
       write SetNURBSTolerance;
@@ -483,7 +483,8 @@ type
   (* A simple cube object.
     This cube use the same material for each of its faces, ie. all faces look
     the same. If you want a multi-material cube, use a mesh in conjunction
-    with a TGLFreeForm and a material library. *)
+    with a TGLFreeForm and a material library.
+    Ref: https://mathworld.wolfram.com/Cube.html *)
   TGLCube = class(TGLSceneObject)
   private
     FCubeSize: TAffineVector;
@@ -549,30 +550,31 @@ type
       write SetNormalDirection default ndOutside;
   end;
 
-  TAngleLimit1 = -90 .. 90;
-  TAngleLimit2 = 0 .. 360;
+  TGLAngleLimit180 = -90 .. 90;
+  TGLAngleLimit360 = 0 .. 360;
   TGLCapType = (ctNone, ctCenter, ctFlat);
 
   (* A sphere object.
-    The sphere can have to and bottom caps, as well as being just a slice
-    of sphere. *)
+    The sphere can have to and bottom caps, as well as being just a slice of sphere.
+    Ref: https://mathworld.wolfram.com/Sphere.html
+    Ref: https://mathworld.wolfram.com/GeodesicDome.html *)
   TGLSphere = class(TGLQuadricObject)
   private
     FRadius: TGLFloat;
     FSlices, FStacks: TGLInt;
-    FTop: TAngleLimit1;
-    FBottom: TAngleLimit1;
-    FStart: TAngleLimit2;
-    FStop: TAngleLimit2;
+    FTop: TGLAngleLimit180;
+    FBottom: TGLAngleLimit180;
+    FStart: TGLAngleLimit360;
+    FStop: TGLAngleLimit360;
     FTopCap, FBottomCap: TGLCapType;
-    procedure SetBottom(aValue: TAngleLimit1);
+    procedure SetBottom(aValue: TGLAngleLimit180);
     procedure SetBottomCap(aValue: TGLCapType);
     procedure SetRadius(const aValue: TGLFloat);
     procedure SetSlices(aValue: TGLInt);
-    procedure SetStart(aValue: TAngleLimit2);
-    procedure SetStop(aValue: TAngleLimit2);
+    procedure SetStart(aValue: TGLAngleLimit360);
+    procedure SetStop(aValue: TGLAngleLimit360);
     procedure SetStacks(aValue: TGLInt);
-    procedure SetTop(aValue: TAngleLimit1);
+    procedure SetTop(aValue: TGLAngleLimit180);
     procedure SetTopCap(aValue: TGLCapType);
   public
     constructor Create(AOwner: TComponent); override;
@@ -585,15 +587,15 @@ type
     function GenerateSilhouette(const silhouetteParameters
       : TGLSilhouetteParameters): TGLSilhouette; override;
   published
-    property Bottom: TAngleLimit1 read FBottom write SetBottom default -90;
+    property Bottom: TGLAngleLimit180 read FBottom write SetBottom default -90;
     property BottomCap: TGLCapType read FBottomCap write SetBottomCap
       default ctNone;
     property Radius: TGLFloat read FRadius write SetRadius;
     property Slices: TGLInt read FSlices write SetSlices default 16;
     property Stacks: TGLInt read FStacks write SetStacks default 16;
-    property Start: TAngleLimit2 read FStart write SetStart default 0;
-    property Stop: TAngleLimit2 read FStop write SetStop default 360;
-    property Top: TAngleLimit1 read FTop write SetTop default 90;
+    property Start: TGLAngleLimit360 read FStart write SetStart default 0;
+    property Stop: TGLAngleLimit360 read FStop write SetStop default 360;
+    property Top: TGLAngleLimit180 read FTop write SetTop default 90;
     property TopCap: TGLCapType read FTopCap write SetTopCap default ctNone;
   end;
 
@@ -630,26 +632,27 @@ type
   end;
 
   (* A Superellipsoid object. The Superellipsoid can have top and bottom caps,
-    as well as being just a slice of Superellipsoid. *)
+    as well as being just a slice of Superellipsoid.
+    Ref: https://mathworld.wolfram.com/Superellipse.html  *)
   TGLSuperellipsoid = class(TGLQuadricObject)
   private
     FRadius, FVCurve, FHCurve: TGLFloat;
     FSlices, FStacks: TGLInt;
-    FTop: TAngleLimit1;
-    FBottom: TAngleLimit1;
-    FStart: TAngleLimit2;
-    FStop: TAngleLimit2;
+    FTop: TGLAngleLimit180;
+    FBottom: TGLAngleLimit180;
+    FStart: TGLAngleLimit360;
+    FStop: TGLAngleLimit360;
     FTopCap, FBottomCap: TGLCapType;
-    procedure SetBottom(aValue: TAngleLimit1);
+    procedure SetBottom(aValue: TGLAngleLimit180);
     procedure SetBottomCap(aValue: TGLCapType);
     procedure SetRadius(const aValue: TGLFloat);
     procedure SetVCurve(const aValue: TGLFloat);
     procedure SetHCurve(const aValue: TGLFloat);
     procedure SetSlices(aValue: TGLInt);
-    procedure SetStart(aValue: TAngleLimit2);
-    procedure SetStop(aValue: TAngleLimit2);
+    procedure SetStart(aValue: TGLAngleLimit360);
+    procedure SetStop(aValue: TGLAngleLimit360);
     procedure SetStacks(aValue: TGLInt);
-    procedure SetTop(aValue: TAngleLimit1);
+    procedure SetTop(aValue: TGLAngleLimit180);
     procedure SetTopCap(aValue: TGLCapType);
   public
     constructor Create(AOwner: TComponent); override;
@@ -662,7 +665,7 @@ type
     function GenerateSilhouette(const silhouetteParameters
       : TGLSilhouetteParameters): TGLSilhouette; override;
   published
-    property Bottom: TAngleLimit1 read FBottom write SetBottom default -90;
+    property Bottom: TGLAngleLimit180 read FBottom write SetBottom default -90;
     property BottomCap: TGLCapType read FBottomCap write SetBottomCap
       default ctNone;
     property Radius: TGLFloat read FRadius write SetRadius;
@@ -670,15 +673,15 @@ type
     property HCurve: TGLFloat read FHCurve write SetHCurve;
     property Slices: TGLInt read FSlices write SetSlices default 16;
     property Stacks: TGLInt read FStacks write SetStacks default 16;
-    property Start: TAngleLimit2 read FStart write SetStart default 0;
-    property Stop: TAngleLimit2 read FStop write SetStop default 360;
-    property Top: TAngleLimit1 read FTop write SetTop default 90;
+    property Start: TGLAngleLimit360 read FStart write SetStart default 0;
+    property Stop: TGLAngleLimit360 read FStop write SetStop default 360;
+    property Top: TGLAngleLimit180 read FTop write SetTop default 90;
     property TopCap: TGLCapType read FTopCap write SetTopCap default ctNone;
   end;
 
 // Issues for a unit-size cube stippled wireframe
 procedure CubeWireframeBuildList(var rci: TGLRenderContextInfo; Size: TGLFloat;
-  Stipple: Boolean; const Color: TColorVector);
+  Stipple: Boolean; const Color: TGLColorVector);
 
 const
   TangentAttributeName: PAnsiChar = 'Tangent';
@@ -689,7 +692,7 @@ implementation
 // -------------------------------------------------------------
 
 procedure CubeWireframeBuildList(var rci: TGLRenderContextInfo; Size: TGLFloat;
-  Stipple: Boolean; const Color: TColorVector);
+  Stipple: Boolean; const Color: TGLColorVector);
 var
   mi, ma: Single;
 begin
@@ -1578,9 +1581,9 @@ begin
   ObjectStyle := ObjectStyle + [osDirectDraw, osNoVisibilityCulling];
   FStyle := psSquare;
   FSize := cDefaultPointSize;
-  FPositions := TAffineVectorList.Create;
+  FPositions := TGLAffineVectorList.Create;
   FPositions.Add(NullVector);
-  FColors := TVectorList.Create;
+  FColors := TGLVectorList.Create;
   FPointParameters := TGLPointParameters.Create(Self);
 end;
 
@@ -1726,13 +1729,13 @@ begin
   end;
 end;
 
-procedure TGLPoints.SetPositions(const val: TAffineVectorList);
+procedure TGLPoints.SetPositions(const val: TGLAffineVectorList);
 begin
   FPositions.Assign(val);
   StructureChanged;
 end;
 
-procedure TGLPoints.SetColors(const val: TVectorList);
+procedure TGLPoints.SetColors(const val: TGLVectorList);
 begin
   FColors.Assign(val);
   StructureChanged;
@@ -1977,7 +1980,8 @@ end;
 
 procedure TGLNodedLines.SetNodes(const aNodes: TGLLinesNodes);
 begin
-  FNodes.Assign(aNodes);
+  FNodes.Free;
+  FNodes := aNodes;
   StructureChanged;
 end;
 
@@ -2081,7 +2085,7 @@ begin
   inherited Create(AOwner);
   FDivision := 10;
   FSplineMode := lsmLines;
-  FNURBSKnots := TSingleList.Create;
+  FNURBSKnots := TGLSingleList.Create;
   FNURBSOrder := 0;
   FNURBSTolerance := 50;
 end;
@@ -2932,7 +2936,7 @@ begin
     Result.vertices.Add(NullHmgPoint);
 end;
 
-procedure TGLSphere.SetBottom(aValue: TAngleLimit1);
+procedure TGLSphere.SetBottom(aValue: TGLAngleLimit180);
 begin
   if FBottom <> aValue then
   begin
@@ -2983,7 +2987,7 @@ begin
   end;
 end;
 
-procedure TGLSphere.SetStart(aValue: TAngleLimit2);
+procedure TGLSphere.SetStart(aValue: TGLAngleLimit360);
 begin
   if FStart <> aValue then
   begin
@@ -2993,7 +2997,7 @@ begin
   end;
 end;
 
-procedure TGLSphere.SetStop(aValue: TAngleLimit2);
+procedure TGLSphere.SetStop(aValue: TGLAngleLimit360);
 begin
   if FStop <> aValue then
   begin
@@ -3003,7 +3007,7 @@ begin
   end;
 end;
 
-procedure TGLSphere.SetTop(aValue: TAngleLimit1);
+procedure TGLSphere.SetTop(aValue: TGLAngleLimit180);
 begin
   if FTop <> aValue then
   begin
@@ -3434,8 +3438,8 @@ begin
     rci.GLStates.InvertGLFrontFace;
 end;
 
-// This will probably not work, karamba
-// RayCastSphereIntersect -> RayCastSuperellipsoidIntersect ??????
+// This will probably not work
+// RayCastSphereIntersect -> RayCastSuperellipsoidIntersect ?
 function TGLSuperellipsoid.RayCastIntersect(const rayStart, rayVector: TGLVector;
   intersectPoint: PGLVector = nil; intersectNormal: PGLVector = nil): Boolean;
 var
@@ -3495,7 +3499,7 @@ begin
     Result.vertices.Add(NullHmgPoint);
 end;
 
-procedure TGLSuperellipsoid.SetBottom(aValue: TAngleLimit1);
+procedure TGLSuperellipsoid.SetBottom(aValue: TGLAngleLimit180);
 begin
   if FBottom <> aValue then
   begin
@@ -3555,7 +3559,7 @@ begin
   end;
 end;
 
-procedure TGLSuperellipsoid.SetStart(aValue: TAngleLimit2);
+procedure TGLSuperellipsoid.SetStart(aValue: TGLAngleLimit360);
 begin
   if FStart <> aValue then
   begin
@@ -3565,7 +3569,7 @@ begin
   end;
 end;
 
-procedure TGLSuperellipsoid.SetStop(aValue: TAngleLimit2);
+procedure TGLSuperellipsoid.SetStop(aValue: TGLAngleLimit360);
 begin
   if FStop <> aValue then
   begin
@@ -3575,7 +3579,7 @@ begin
   end;
 end;
 
-procedure TGLSuperellipsoid.SetTop(aValue: TAngleLimit1);
+procedure TGLSuperellipsoid.SetTop(aValue: TGLAngleLimit180);
 begin
   if FTop <> aValue then
   begin

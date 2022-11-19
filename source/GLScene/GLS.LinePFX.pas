@@ -34,8 +34,8 @@ type
     FLength: Single;
   protected
   public
-    procedure WriteToFiler(writer: TVirtualWriter); override;
-    procedure ReadFromFiler(reader: TVirtualReader); override;
+    procedure WriteToFiler(writer: TGLVirtualWriter); override;
+    procedure ReadFromFiler(reader: TGLVirtualReader); override;
     // Direction of the line.
     property Direction: TAffineVector read FDirection write FDirection;
     // Length of the line
@@ -135,7 +135,7 @@ procedure TGLLinePFXManager.RenderParticle(var rci: TGLRenderContextInfo;
   aParticle: TGLParticle);
 var
   lifeTime, sizeScale, fx, fy, f: Single;
-  inner, outer: TColorVector;
+  inner, outer: TGLColorVector;
   pos, dir, start, stop, dv: TAffineVector;
 begin
   lifeTime := CurrentTime - aParticle.CreationTime;
@@ -194,7 +194,7 @@ end;
 // ------------------ TGLLineParticle ------------------
 // ------------------
 
-procedure TGLLineParticle.WriteToFiler(writer: TVirtualWriter);
+procedure TGLLineParticle.WriteToFiler(writer: TGLVirtualWriter);
 begin
   inherited WriteToFiler(writer);
   with writer do
@@ -205,7 +205,7 @@ begin
   end;
 end;
 
-procedure TGLLineParticle.ReadFromFiler(reader: TVirtualReader);
+procedure TGLLineParticle.ReadFromFiler(reader: TGLVirtualReader);
 var
   archiveVersion: Integer;
 begin

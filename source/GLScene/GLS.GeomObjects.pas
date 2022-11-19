@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.GeomObjects;
 
 (*
@@ -48,32 +47,24 @@ type
 
 //-------------------- TGLBaseMesh Objects -----------------------
 
-  (* The tetrahedron has no texture coordinates defined, ie. without using
+  (* This objects has no texture coordinates defined, ie. without using
     a texture generation mode, no texture will be mapped. *)
   TGLTetrahedron = class(TGLBaseMesh)
   public
     procedure BuildList(var rci: TGLRenderContextInfo); override;
   end;
-  (* The octahedron has no texture coordinates defined, ie. without using
-    a texture generation mode, no texture will be mapped. *)
   TGLOctahedron = class(TGLBaseMesh)
   public
     procedure BuildList(var rci: TGLRenderContextInfo); override;
   end;
-  (* The hexahedron has no texture coordinates defined, ie. without using
-    a texture generation mode, no texture will be mapped. *)
   TGLHexahedron = class(TGLBaseMesh)
   public
     procedure BuildList(var rci: TGLRenderContextInfo); override;
   end;
-  (* The dodecahedron has no texture coordinates defined, ie. without using
-   a texture generation mode, no texture will be mapped. *)
   TGLDodecahedron = class(TGLBaseMesh)
   public
     procedure BuildList(var rci: TGLRenderContextInfo); override;
   end;
-  (* The icosahedron has no texture coordinates defined, ie. without using
-     a texture generation mode, no texture will be mapped. *)
   TGLIcosahedron = class(TGLBaseMesh)
   public
     procedure BuildList(var rci: TGLRenderContextInfo); override;
@@ -114,7 +105,7 @@ type
     property SweepAngle: Single read FSweepAngle write SetSweepAngle;
   end;
 
-  (*  Base class to cylinder-like objects that introduces the basic cylinder description properties.
+  (* Base class to cylinder-like objects that introduces the basic cylinder description properties.
     Be aware teh default slices and stacks make up for a high-poly cylinder,
     unless you're after high-quality lighting it is recommended to reduce the
     Stacks property to 1. *)
@@ -355,8 +346,8 @@ type
       write SetBottomArrowHeadRadius;
   end;
 
-  TArrowArcPart = (aaArc, aaTopArrow, aaBottomArrow);
-  TGLArrowArcPart = set of TArrowArcPart;
+  TGLArrowArcPart = (aaArc, aaTopArrow, aaBottomArrow);
+  TGLArrowArcParts = set of TGLArrowArcPart;
 
   (* Draws an arrowhead (Sliced Torus + cone).
     The arrow head is a cone that shares the attributes of the Torus
@@ -369,7 +360,7 @@ type
     fArcRadius: Single;
     FStartAngle: Single;
     FStopAngle: Single;
-    FParts: TGLArrowArcPart;
+    FParts: TGLArrowArcParts;
     FTopRadius: Single;
     fTopArrowHeadHeight: Single;
     fTopArrowHeadRadius: Single;
@@ -386,7 +377,7 @@ type
     procedure SetTopArrowHeadRadius(const aValue: Single);
     procedure SetBottomArrowHeadHeight(const aValue: Single);
     procedure SetBottomArrowHeadRadius(const aValue: Single);
-    procedure SetParts(aValue: TGLArrowArcPart);
+    procedure SetParts(aValue: TGLArrowArcParts);
     procedure SetHeadStackingStyle(const val: TGLArrowHeadStyle);
   public
     constructor Create(AOwner: TComponent); override;
@@ -399,7 +390,7 @@ type
     property TopRadius: Single read FTopRadius write SetTopRadius;
     property HeadStackingStyle: TGLArrowHeadStyle read FHeadStackingStyle
       write SetHeadStackingStyle default ahssStacked;
-    property Parts: TGLArrowArcPart read FParts write SetParts
+    property Parts: TGLArrowArcParts read FParts write SetParts
       default [aaArc, aaTopArrow];
     property TopArrowHeadHeight: Single read fTopArrowHeadHeight
       write SetTopArrowHeadHeight;
@@ -481,7 +472,6 @@ type
       write SetNormalDirection default ndOutside;
     property Parts: TGLFrustrumParts read FParts write SetParts default cAllFrustrumParts;
   end;
-
 //--------------------- TGLTeapot -------------------------
   (* The classic teapot.
      The only use of this object is as placeholder for testing... *)
@@ -2665,7 +2655,7 @@ begin
   end;
 end;
 
-procedure TGLArrowArc.SetParts(aValue: TGLArrowArcPart);
+procedure TGLArrowArc.SetParts(aValue: TGLArrowArcParts);
 begin
   if aValue <> FParts then
   begin
@@ -3625,9 +3615,6 @@ RegisterClasses([TGLDodecahedron, TGLIcosahedron, TGLHexahedron,
     TGLOctahedron, TGLTetrahedron]);
 
 RegisterClasses([TGLCylinder, TGLCone, TGLTorus, TGLDisk, TGLArrowLine,
-  TGLAnnulus, TGLFrustrum, TGLPolygon, TGLCapsule, TGLArrowArc]);
-
-RegisterClasses([TGLTeapot]);
+  TGLAnnulus, TGLFrustrum, TGLPolygon, TGLCapsule, TGLArrowArc, TGLTeapot]);
 
 end.
-

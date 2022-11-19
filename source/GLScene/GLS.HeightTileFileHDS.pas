@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.HeightTileFileHDS;
 
 (* HeightDataSource for the HTF (HeightTileFile) format *)
@@ -32,35 +31,29 @@ uses
 
 type
 
-  PByte = ^Byte;
-
   TIntegerArray = array [0 .. MaxInt shr 3] of Integer;
   PIntegerArray = ^TIntegerArray;
-  PInteger = ^Integer;
 
   TSmallIntArray = array [0 .. MaxInt shr 2] of SmallInt;
   PSmallIntArray = ^TSmallIntArray;
-  PSmallInt = ^SmallInt;
 
   TShortIntArray = array [0 .. MaxInt shr 2] of ShortInt;
   PShortIntArray = ^TShortIntArray;
-  PShortInt = ^ShortInt;
 
   TGLHeightTileInfo = packed record
     left, top, width, height: Integer;
     min, max, average: SmallInt;
     fileOffset: Int64; // offset to tile data in the file
   end;
-
-  PHeightTileInfo = ^TGLHeightTileInfo;
-  PPHeightTileInfo = ^PHeightTileInfo;
+  PGLHeightTileInfo = ^TGLHeightTileInfo;
+  PPHeightTileInfo = ^PGLHeightTileInfo;
 
   TGLHeightTile = packed record
     info: TGLHeightTileInfo;
     data: array of SmallInt;
   end;
 
-  PHeightTile = ^TGLHeightTile;
+  PGLHeightTile = ^TGLHeightTile;
 
   THTFHeader = packed record
     FileVersion: array [0 .. 5] of AnsiChar;
@@ -90,7 +83,7 @@ type
     FHeightTile: TGLHeightTile;
     FInBuf: array of ShortInt;
   protected
-    function GetTiles(index: Integer): PHeightTileInfo;
+    function GetTiles(index: Integer): PGLHeightTileInfo;
     function QuadTableX(x: Integer): Integer;
     function QuadTableY(y: Integer): Integer;
     procedure PackTile(aWidth, aHeight: Integer; src: PSmallIntArray);
@@ -105,7 +98,7 @@ type
     // Returns tile index for corresponding left/top.
     function GetTileIndex(aLeft, aTop: Integer): Integer;
     // Returns tile of corresponding left/top.
-    function GetTile(aLeft, aTop: Integer; pTileInfo: PPHeightTileInfo = nil): PHeightTile;
+    function GetTile(aLeft, aTop: Integer; pTileInfo: PPHeightTileInfo = nil): PGLHeightTile;
     (* Stores and compresses give tile data.
       aLeft and top MUST be a multiple of TileSize, aWidth and aHeight
       MUST be lower or equal to TileSize. *)
@@ -115,7 +108,7 @@ type
       All of the row must be contained in the world, otherwise result is undefined. *)
     procedure ExtractRow(x, y, len: Integer; dest: PSmallIntArray);
     // Returns the tile that contains x and y.
-    function XYTileInfo(anX, anY: Integer): PHeightTileInfo;
+    function XYTileInfo(anX, anY: Integer): PGLHeightTileInfo;
     (* Returns the height at given coordinates.
       This is definetely NOT the fastest way to access HTF data and should
       only be used as utility function. *)
@@ -123,8 +116,8 @@ type
     // Clears the list then add all tiles that overlap the rectangular area.
     procedure TilesInRect(aLeft, aTop, aRight, aBottom: Integer; destList: TList);
     function TileCount: Integer;
-    property Tiles[index: Integer]: PHeightTileInfo read GetTiles;
-    function IndexOfTile(aTile: PHeightTileInfo): Integer;
+    property Tiles[index: Integer]: PGLHeightTileInfo read GetTiles;
+    function IndexOfTile(aTile: PGLHeightTileInfo): Integer;
     function TileCompressedSize(tileIndex: Integer): Integer;
     property SizeX: Integer read FHeader.SizeX;
     property SizeY: Integer read FHeader.SizeY;
@@ -632,10 +625,10 @@ begin
 end;
 
 function TGLHeightTileFile.GetTile(aLeft, aTop: Integer;
-  pTileInfo: PPHeightTileInfo = nil): PHeightTile;
+  pTileInfo: PPHeightTileInfo = nil): PGLHeightTile;
 var
   I, n: Integer;
-  tileInfo: PHeightTileInfo;
+  tileInfo: PGLHeightTileInfo;
 begin
   with FHeightTile.info do
     if (left = aLeft) and (top = aTop) then
@@ -692,8 +685,8 @@ procedure TGLHeightTileFile.ExtractRow(x, y, len: Integer;
 var
   rx: Integer;
   n: Cardinal;
-  tileInfo: PHeightTileInfo;
-  tile: PHeightTile;
+  tileInfo: PGLHeightTileInfo;
+  tile: PGLHeightTile;
 begin
   while len > 0 do
   begin
@@ -712,7 +705,7 @@ begin
   end;
 end;
 
-function TGLHeightTileFile.XYTileInfo(anX, anY: Integer): PHeightTileInfo;
+function TGLHeightTileFile.XYTileInfo(anX, anY: Integer): PGLHeightTileInfo;
 var
   tileList: TList;
 begin
@@ -720,7 +713,7 @@ begin
   try
     TilesInRect(anX, anY, anX + 1, anY + 1, tileList);
     if tileList.count > 0 then
-      Result := PHeightTileInfo(tileList.First)
+      Result := PGLHeightTileInfo(tileList.First)
     else
       Result := nil;
   finally
@@ -730,8 +723,8 @@ end;
 
 function TGLHeightTileFile.XYHeight(anX, anY: Integer): SmallInt;
 var
-  tileInfo: PHeightTileInfo;
-  tile: PHeightTile;
+  tileInfo: PGLHeightTileInfo;
+  tile: PGLHeightTile;
 begin
   // Current tile per chance?
   with FHeightTile.info do
@@ -760,7 +753,7 @@ procedure TGLHeightTileFile.TilesInRect(aLeft, aTop, aRight, aBottom: Integer;
 var
   I, n, qx, qy, idx: Integer;
   p: PIntegerArray;
-  tileInfo: PHeightTileInfo;
+  tileInfo: PGLHeightTileInfo;
 begin
   destList.count := 0;
   // Clamp to world
@@ -806,12 +799,12 @@ begin
   Result := Length(FTileIndex);
 end;
 
-function TGLHeightTileFile.GetTiles(index: Integer): PHeightTileInfo;
+function TGLHeightTileFile.GetTiles(index: Integer): PGLHeightTileInfo;
 begin
   Result := @FTileIndex[index];
 end;
 
-function TGLHeightTileFile.IndexOfTile(aTile: PHeightTileInfo): Integer;
+function TGLHeightTileFile.IndexOfTile(aTile: PGLHeightTileInfo): Integer;
 var
   c: Cardinal;
 begin
@@ -904,8 +897,8 @@ end;
 procedure TGLHeightTileFileHDS.StartPreparingData(HeightData: TGLHeightData);
 var
   oldType: TGLHeightDataType;
-  htfTile: PHeightTile;
-  htfTileInfo: PHeightTileInfo;
+  htfTile: PGLHeightTile;
+  htfTileInfo: PGLHeightTileInfo;
   x, y: Integer;
   YPos: Integer;
   inY, outY: Integer;

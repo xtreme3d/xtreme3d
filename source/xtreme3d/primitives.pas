@@ -115,10 +115,10 @@ var
   GLSphere1: TGLSphere;
 begin
   GLSphere1:=TGLSphere(RealToPtr(sphere));
-  GLSphere1.Start:=TAngleLimit2(Trunc(starta));
-  GLSphere1.Stop:=TAngleLimit2(Trunc(stopa));
-  GLSphere1.Top:=TAngleLimit1(Trunc(topa));
-  GLSphere1.Bottom:=TAngleLimit1(Trunc(bottoma));
+  GLSphere1.Start:=TGLAngleLimit360(Trunc(starta));
+  GLSphere1.Stop:=TGLAngleLimit360(Trunc(stopa));
+  GLSphere1.Top:=TGLAngleLimit180(Trunc(topa));
+  GLSphere1.Bottom:=TGLAngleLimit180(Trunc(bottoma));
   result:=1;
 end;
 

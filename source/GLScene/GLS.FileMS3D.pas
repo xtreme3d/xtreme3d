@@ -123,10 +123,10 @@ type
   // *) ms3d_material_t;
   TMS3DMaterial = record
     Name: array[0..31] of AnsiChar;
-    Ambient: TColorVector;
-    Diffuse: TColorVector;
-    Specular: TColorVector;
-    Emissive: TColorVector;
+    Ambient: TGLColorVector;
+    Diffuse: TGLColorVector;
+    Specular: TGLColorVector;
+    Emissive: TGLColorVector;
     Shininess: single;
     Transparency: single;
     Mode: AnsiChar;
@@ -340,7 +340,7 @@ var
   itemp: Cardinal;
   wtemp: word;
   TexCoordID: integer;
-  MO: TMeshObject;
+  MO: TGLMeshObject;
   FaceGroup: TFGVertexNormalTexIndexList;
   Sk_MO: TGLSkeletonMeshObject;
 
@@ -477,7 +477,7 @@ begin
       TGLSkeletonMeshObject(MO).BonesPerVertex := 4;
     end
     else
-      MO := TMeshObject.CreateOwned(Owner.MeshObjects);
+      MO := TGLMeshObject.CreateOwned(Owner.MeshObjects);
     MO.Mode := momFaceGroups;
 
     // Then comes nNumVertices * sizeof (ms3d_vertex_t)

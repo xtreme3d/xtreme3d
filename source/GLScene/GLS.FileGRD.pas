@@ -1,10 +1,9 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.FileGRD;
 
-(* GRD (Grid Text Format) vector file format implementation *)
+(* GRD (Grid Format) text and binary vector file format implementation *)
 
 interface
 
@@ -18,7 +17,8 @@ uses
   GLS.VectorTypes,
   GLS.VectorFileObjects,
   GLS.ApplicationFileIO,
-  GLS.Graph;
+  GLS.Graph,
+  GLS.Utils;
 
 type
   (* The GRD file represents ascii grid formats in 2D/3D.
@@ -147,16 +147,16 @@ begin
       Ny := StrToInt(Tl[1]);
 
       TL.DelimitedText := ReadLine;
-      Xo := StrToFloat(Tl[0]);
-      Xe := StrToFloat(Tl[1]);
+      Xo := GLStrToFloatDef(Tl[0]);
+      Xe := GLStrToFloatDef(Tl[1]);
 
       TL.DelimitedText := ReadLine;
-      Yo := StrToFloat(Tl[0]);
-      Ye := StrToFloat(Tl[1]);
+      Yo := GLStrToFloatDef(Tl[0]);
+      Ye := GLStrToFloatDef(Tl[1]);
 
       TL.DelimitedText := ReadLine;
-      Zo := StrToFloat(Tl[0]);
-      Ze := StrToFloat(Tl[1]);
+      Zo := GLStrToFloatDef(Tl[0]);
+      Ze := GLStrToFloatDef(Tl[1]);
 
       Dx := (Xe - Xo) / Nx;
       Dy := (Ye - Yo) / Ny;
@@ -180,7 +180,7 @@ begin
           while (StrVal <> '') do
           begin
             if (J <= Nx - 1) then
-              Nodes[I, J] := StrToFloat(StrVal);
+              Nodes[I, J] := GLStrToFloatDef(StrVal);
             if Nodes[I, J] > MaxZ then
               MaxZ := Nodes[I, J];
             if (Nodes[I, J] >= BlankVal) then
@@ -202,14 +202,14 @@ begin
       TL.DelimitedText := SL[1];
       Nx := StrToInt(TL[1]); // nrows
       TL.DelimitedText := SL[2];
-      Xo := StrToFloat(Tl[1]); // xllcorner
+      Xo := GLStrToFloatDef(Tl[1]); // xllcorner
       TL.DelimitedText := SL[3];
-      Yo := StrToFloat(TL[1]); // yllcorner
+      Yo := GLStrToFloatDef(TL[1]); // yllcorner
       TL.DelimitedText := Sl[4];
-      Dx := StrToFloat(TL[1]);
+      Dx := GLStrToFloatDef(TL[1]);
       Dy := Dx; // cellsize
       TL.DelimitedText := SL[5];
-      NoData := StrToFloat(TL[1]); // NoData value
+      NoData := GLStrToFloatDef(TL[1]); // NoData value
 
       MaxZ := -3 * 10E38;
       SetLength(Nodes, Nx, Ny);
@@ -220,7 +220,7 @@ begin
         for J := 0 to Ny - 1 do
         begin
           StrVal := TL[J];
-          Nodes[I, J] := StrToFloat(StrVal);
+          Nodes[I, J] := GLStrToFloatDef(StrVal);
           if Nodes[I, J] > MaxZ then
             MaxZ := Nodes[I, J];
         end;

@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.DCE;
 
 (*
@@ -549,7 +548,7 @@ function TGLDCEManager.MoveByDistance(var Body: TGLDCEDynamic;
 var
   // Friction and bounce
   TotalFriction, Bounce, f, m, restitution: single;
-  ContactList: TIntegerList;
+  ContactList: TGLIntegerList;
   // Temporary properties (Static or Dynamic)
   tFriction, tBounceFactor: single;
   TObject: TGLBaseSceneObject;
@@ -669,7 +668,7 @@ begin
   // Generate events and calculate average friction
   lastobj := -1;
   TotalFriction := Body.Friction;
-  ContactList := TIntegerList.Create;
+  ContactList := TGLIntegerList.Create;
   try
     for i := 0 to High(MP.Contacts) do
       with MP do

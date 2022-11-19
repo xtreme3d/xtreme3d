@@ -25,12 +25,13 @@ uses
   GLS.PersistentClasses,
   GLS.VectorGeometry,
   GLS.Scene,  
-  GLS.VectorFileObjects, 
+  GLS.VectorFileObjects,
   GLS.VectorLists,  
   GLS.Texture,  
   GLS.Color,
   GLS.RenderContextInfo, 
-  GLS.Material;
+  GLS.Material,
+  GLS.Utils;
 
 const
   // Load input data in chunks of BufSize Bytes. 
@@ -53,7 +54,7 @@ type
     procedure ReadLine;
     // Raise a class-specific exception
     procedure Error(const msg: string);
-    procedure CalcMissingOBJNormals(mesh: TMeshObject);
+    procedure CalcMissingOBJNormals(mesh: TGLMeshObject);
   public
     class function Capabilities: TGLDataFileCapabilities; override;
     procedure LoadFromStream(aStream: TStream); override;
@@ -154,7 +155,7 @@ type
   private
     FMode: TOBJFGMode;
     FName: string;
-    FPolygonVertices: TIntegerList;
+    FPolygonVertices: TGLIntegerList;
     FCurrentVertexCount: integer;
     FShowNormals: boolean;
     procedure PolygonComplete; (* Current polygon completed. Adds FCurrentVertexCount
@@ -164,17 +165,17 @@ type
     procedure Assign(Source: TPersistent); override;
     constructor CreateOwned(aOwner: TglFaceGroups); override;
     destructor Destroy; override;
-    procedure WriteToFiler(writer: TVirtualWriter); override;
-    procedure ReadFromFiler(reader: TVirtualReader); override;
+    procedure WriteToFiler(writer: TGLVirtualWriter); override;
+    procedure ReadFromFiler(reader: TGLVirtualReader); override;
     procedure Add(VertexIdx, NormalIdx, TexCoordIdx: Integer);
     procedure BuildList(var mrci: TGLRenderContextInfo); override;
-    procedure AddToTriangles(aList: TAffineVectorList;
-      aTexCoords: TAffineVectorList = nil;
-      aNormals: TAffineVectorList = nil); override;
+    procedure AddToTriangles(aList: TGLAffineVectorList;
+      aTexCoords: TGLAffineVectorList = nil;
+      aNormals: TGLAffineVectorList = nil); override;
     function TriangleCount: Integer; override;
     property Mode: TOBJFGMode read FMode write SetMode;
     property Name: string read FName write FName;
-    property PolygonVertices: TIntegerList read FPolygonVertices;
+    property PolygonVertices: TGLIntegerList read FPolygonVertices;
     property ShowNormals: boolean read FShowNormals write FShowNormals;
   end;
 
@@ -211,7 +212,7 @@ begin
   Assert(VertexIndices.Count = 0, 'Decide on the mode before adding vertices.');
   FMode := aMode;
   if FMode = objfgmmPolygons then
-    FPolygonVertices := TIntegerList.Create
+    FPolygonVertices := TGLIntegerList.Create
   else
   begin
     FPolygonVertices.Free;
@@ -360,12 +361,12 @@ begin
   end;
 end;
 
-procedure TOBJFGVertexNormalTexIndexList.AddToTriangles(aList: TAffineVectorList;
-  aTexCoords: TAffineVectorList = nil;
-  aNormals: TAffineVectorList = nil);
+procedure TOBJFGVertexNormalTexIndexList.AddToTriangles(aList: TGLAffineVectorList;
+  aTexCoords: TGLAffineVectorList = nil;
+  aNormals: TGLAffineVectorList = nil);
 var
   i, j, n, n0: Integer;
-  vertexList, texCoordList, normalsList: TAffineVectorList;
+  vertexList, texCoordList, normalsList: TGLAffineVectorList;
 begin
   vertexList := Owner.Owner.Vertices;
   texCoordList := Owner.Owner.TexCoords;
@@ -540,7 +541,7 @@ begin
   Result := [dfcRead, dfcWrite];
 end;
 
-procedure TGLOBJVectorFile.CalcMissingOBJNormals(mesh: TMeshObject);
+procedure TGLOBJVectorFile.CalcMissingOBJNormals(mesh: TGLMeshObject);
 var
   vertexPool: PAffineVectorArray;
   n: TAffineVector;
@@ -620,7 +621,7 @@ procedure TGLOBJVectorFile.LoadFromStream(aStream: TStream);
 var
   hv: THomogeneousVector;
   av: TAffineVector;
-  mesh: TMeshObject;
+  mesh: TGLMeshObject;
   faceGroup: TOBJFGVertexNormalTexIndexList;
   faceGroupNames: TStringList;
 
@@ -811,7 +812,7 @@ var
               begin
                 Ambient.Color := objMtl.MaterialVectorProperty(matName, 'Ka', clrGray20);
                 Diffuse.Color := objMtl.MaterialVectorProperty(matName, 'Kd', clrGray80);
-                Diffuse.Alpha := StrToFloatDef(objMtl.MaterialStringProperty(matName, 'd'), 1);
+                Diffuse.Alpha := GLStrToFloatDef(objMtl.MaterialStringProperty(matName, 'd'), 1);
                 if Diffuse.Alpha < 1 then
                   libMat.Material.BlendingMode := bmTransparency;
                 case StrToIntDef(objMtl.MaterialStringProperty(matName, 'illum'), 1) of
@@ -895,7 +896,7 @@ var
   procedure SplitMesh;
   var
     i, j, count: Integer;
-    newMesh: TMeshObject;
+    newMesh: TGLMeshObject;
     newfaceGroup: TOBJFGVertexNormalTexIndexList;
     VertexIdx, NormalIdx, TexCoordIdx: Integer;
     AffineVector: TAffineVector;
@@ -904,7 +905,7 @@ var
     begin
       faceGroup := mesh.FaceGroups[i] as TOBJFGVertexNormalTexIndexList;
 
-      newMesh := TMeshObject.CreateOwned(Owner.MeshObjects);
+      newMesh := TGLMeshObject.CreateOwned(Owner.MeshObjects);
       newMesh.Mode := momFaceGroups;
       newMesh.Name := faceGroup.Name;
 
@@ -957,7 +958,7 @@ begin
   objMtlFileName := '';
   curMtlName := '';
 
-  mesh := TMeshObject.CreateOwned(Owner.MeshObjects);
+  mesh := TGLMeshObject.CreateOwned(Owner.MeshObjects);
   mesh.Mode := momFaceGroups;
 
   faceGroupNames := TStringList.Create;
@@ -1254,7 +1255,7 @@ var
   procedure WriteFaceGroups;
   var
     j, i, k: Integer;
-    fg: TglFaceGroup;
+    fg: TGLFaceGroup;
     MoName: string;
   begin
     k := 0;
@@ -1363,7 +1364,7 @@ begin
       Result := NullHmgVector;
       for i := 0 to 3 do
         if sl.Count > i then
-          Result.V[i] := StrToFloatDef(sl[i], 0)
+          Result.V[i] := GLStrToFloatDef(sl[i], 0)
         else
           Break;
     end
@@ -1388,7 +1389,7 @@ begin
     else
     begin
       if FPolygonVertices = nil then
-        FPolygonVertices := TIntegerList.Create;
+        FPolygonVertices := TGLIntegerList.Create;
       FPolygonVertices.Assign(TOBJFGVertexNormalTexIndexList(Source).FPolygonVertices);
     end;
   end
@@ -1397,7 +1398,7 @@ begin
 end;
 
 procedure TOBJFGVertexNormalTexIndexList.ReadFromFiler(
-  reader: TVirtualReader);
+  reader: TGLVirtualReader);
 var
   archiveVersion: Integer;
 begin
@@ -1412,7 +1413,7 @@ begin
 
     if FMode = objfgmmPolygons then
     begin
-      FPolygonVertices := TIntegerList.Create;
+      FPolygonVertices := TGLIntegerList.Create;
       FPolygonVertices.ReadFromFiler(reader);
     end;  
   end
@@ -1421,7 +1422,7 @@ begin
 end;
 
 procedure TOBJFGVertexNormalTexIndexList.WriteToFiler(
-  writer: TVirtualWriter);
+  writer: TGLVirtualWriter);
 begin
   inherited WriteToFiler(writer);
   with writer do

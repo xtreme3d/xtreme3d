@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.TerrainRenderer;
 
 (*
@@ -17,9 +16,9 @@ interface
 uses
   Winapi.OpenGL,
   System.Classes,
-  System.SysUtils, 
+  System.SysUtils,
   System.Types,
-  
+
   GLS.OpenGLTokens,
   GLS.Scene,
   GLS.Coordinates,
@@ -68,9 +67,9 @@ type
     FLastTriangleCount: Integer;
     FTilesPerTexture: Single;
     FMaxCLODTriangles, FCLODPrecision: Integer;
-    FBufferVertices: TAffineVectorList;
-    FBufferTexPoints: TTexPointList;
-    FBufferVertexIndices: TIntegerList;
+    FBufferVertices: TGLAffineVectorList;
+    FBufferTexPoints: TGLTexPointList;
+    FBufferVertexIndices: TGLIntegerList;
     FMaterialLibrary: TGLMaterialLibrary;
     FOnGetTerrainBounds: TGetTerrainBoundsEvent;
     FOnPatchPostRender: TPatchPostRenderEvent;
@@ -242,9 +241,9 @@ begin
   FMaxCLODTriangles := 65536;
   FCLODPrecision := 100;
   FOcclusionTesselate := totTesselateIfVisible;
-  FBufferVertices := TAffineVectorList.Create;
-  FBufferTexPoints := TTexPointList.Create;
-  FBufferVertexIndices := TIntegerList.Create;
+  FBufferVertices := TGLAffineVectorList.Create;
+  FBufferTexPoints := TGLTexPointList.Create;
+  FBufferVertexIndices := TGLIntegerList.Create;
   TileManagement := [tmClearUsedFlags, tmMarkUsedTiles, tmReleaseUnusedTiles,
     tmAllocateNewTiles];
 end;

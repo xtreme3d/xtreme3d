@@ -17,7 +17,8 @@ uses
   GLS.VectorGeometry,
   GLS.VectorLists,
   GLS.ApplicationFileIO,
-  GLS.ParametricSurfaces;
+  GLS.ParametricSurfaces,
+  GLS.Utils;
 
 type
 
@@ -53,7 +54,7 @@ procedure TGLNurbsVectorFile.LoadFromStream(stream: TStream);
   end;
 
   function ReadSingleArray(sl: TStrings; idx: Integer;
-    list: TSingleList): Integer;
+    list: TGLSingleList): Integer;
   var
     k: Integer;
     buf: String;
@@ -69,7 +70,7 @@ procedure TGLNurbsVectorFile.LoadFromStream(stream: TStream);
         vals.CommaText := buf;
         for k := 0 to vals.Count - 1 do
           if vals[k] <> '' then
-            list.Add(StrToFloatDef(vals[k], 0));
+            list.Add(GLStrToFloatDef(vals[k], 0));
         Inc(idx);
       end;
       Result := idx;
@@ -79,7 +80,7 @@ procedure TGLNurbsVectorFile.LoadFromStream(stream: TStream);
   end;
 
   function ReadVectorArray(sl: TStrings; idx: Integer;
-    list: TAffineVectorList): Integer;
+    list: TGLAffineVectorList): Integer;
   var
     buf: String;
     vals: TStringList;
@@ -93,9 +94,9 @@ procedure TGLNurbsVectorFile.LoadFromStream(stream: TStream);
           Break;
         vals.CommaText := buf;
         if vals.Count >= 3 then
-          list.Add(StrToFloatDef(vals[0], 0),
-            StrToFloatDef(vals[1], 0),
-            StrToFloatDef(vals[2], 0));
+          list.Add(GLStrToFloatDef(vals[0], 0),
+            GLStrToFloatDef(vals[1], 0),
+            GLStrToFloatDef(vals[2], 0));
         Inc(idx);
       end;
       Result := idx;
@@ -110,7 +111,7 @@ var
   i, j: Integer;
   surface: TMOParametricSurface;
   invert: Boolean;
-  invControlPoints: TAffineVectorList;
+  invControlPoints: TGLAffineVectorList;
 begin
   ss := TStringStream.Create('');
   sl := TStringList.Create;
@@ -161,7 +162,7 @@ begin
 
     if invert then
     begin
-      invControlPoints := TAffineVectorList.Create;
+      invControlPoints := TGLAffineVectorList.Create;
       for i := surface.CountV - 1 downto 0 do
         for j := 0 to surface.CountU - 1 do
           invControlPoints.Add(surface.ControlPoints[i * surface.CountU + j]);

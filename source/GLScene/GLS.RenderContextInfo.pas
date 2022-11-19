@@ -78,7 +78,7 @@ type
     GLStates: TGLStateCache;
     PipelineTransformation: TGLTransformation;
     Rcci: TRenderContextClippingInfo;
-    SceneAmbientColor: TColorVector;
+    SceneAmbientColor: TGLColorVector;
     BufferFaceCull: Boolean;
     BufferLighting: Boolean;
     BufferFog: Boolean;
@@ -88,8 +88,8 @@ type
     IgnoreBlendingRequests: Boolean;
     IgnoreDepthRequests: Boolean;
     Amalgamating: Boolean;
-    Lights: TPersistentObjectList;
-    AfterRenderEffects: TPersistentObjectList;
+    Lights: TGLPersistentObjectList;
+    AfterRenderEffects: TGLPersistentObjectList;
     CurrentMaterialLevel: TGLMaterialLevel;
     PrimitiveMask: TGLMeshPrimitives;
     OrderCounter: Integer;

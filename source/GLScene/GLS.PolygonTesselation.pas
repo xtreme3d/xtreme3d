@@ -24,21 +24,25 @@ uses
 
 (* Tesselates the polygon outlined by the Vertexes. And adds them to the first
    facegroup of the Mesh. *)
-procedure DoTesselate(Vertexes: TAffineVectorList; Mesh: TGLBaseMesh;
+procedure DoTesselate(Vertexes: TGLAffineVectorList; Mesh: TGLBaseMesh;
   normal: PAffineVector = nil; invertNormals: Boolean = False);
 
 //---------------------------------------------------------------------------
 implementation
 //---------------------------------------------------------------------------
 
+{$IFDEF USE_MULTITHREAD}
+threadvar
+{$ELSE}
 var
-  TessMesh: TMeshObject;
+{$ENDIF}
+  TessMesh: TGLMeshObject;
   TessFace: TFGIndexTexCoordList;
   TessVerticesCount, TessExtraVertices: Integer;
   TessVertices: PAffineVectorArray;
 
 procedure DoTessBegin(mode: Cardinal);
-{$IFDEF Win32} stdcall;{$ENDIF}{$IFDEF UNIX} cdecl;{$ENDIF}
+{$IFDEF MSWINDOWS} stdcall;{$ELSE} cdecl;{$ENDIF}
 begin
   TessFace := TFGIndexTexCoordList.CreateOwned(TessMesh.FaceGroups);
   case mode of
@@ -49,18 +53,18 @@ begin
 end;
 
 procedure DoTessVertex3fv(v: PAffineVector);
-{$IFDEF Win32} stdcall;{$ENDIF}{$IFDEF UNIX} cdecl;{$ENDIF}
+{$IFDEF MSWINDOWS} stdcall;{$ELSE} cdecl;{$ENDIF}
 begin
   TessFace.Add(TessMesh.Vertices.Add(v^), 0, 0);
 end;
 
 procedure DoTessEnd;
-{$IFDEF Win32} stdcall;{$ENDIF}{$IFDEF UNIX} cdecl;{$ENDIF}
+{$IFDEF MSWINDOWS} stdcall;{$ELSE} cdecl;{$ENDIF}
 begin
 end;
 
 procedure DoTessError(errno: Cardinal);
-{$IFDEF Win32} stdcall;{$ENDIF}{$IFDEF UNIX} cdecl;{$ENDIF}
+{$IFDEF MSWINDOWS} stdcall;{$ELSE} cdecl;{$ENDIF}
 begin
   Assert(False, IntToStr(errno) + ': ' + string(gluErrorString(errno)));
 end;
@@ -80,13 +84,13 @@ begin
 end;
 
 procedure DoTessCombine(coords: PDoubleVector; vertex_data: Pointer; weight: PGLFloat; var outData: Pointer);
-{$IFDEF Win32} stdcall;{$ENDIF}{$IFDEF UNIX} cdecl;{$ENDIF}
+{$IFDEF MSWINDOWS} stdcall;{$ELSE} cdecl;{$ENDIF}
 begin
   outData := AllocNewVertex;
   SetVector(PAffineVector(outData)^, coords[0], coords[1], coords[2]);
 end;
 
-procedure DoTesselate(Vertexes: TAffineVectorList; Mesh: TGLBaseMesh; normal: PAffineVector = nil; invertNormals: Boolean = False);
+procedure DoTesselate(Vertexes: TGLAffineVectorList; Mesh: TGLBaseMesh; normal: PAffineVector = nil; invertNormals: Boolean = False);
 var
   Tess: PGLUTesselator;
   i: Integer;
@@ -95,7 +99,7 @@ begin
   // Select or Create FaceGroup
   if Mesh.MeshObjects.Count = 0 then
   begin
-    TessMesh := TMeshObject.CreateOwned(Mesh.MeshObjects);
+    TessMesh := TGLMeshObject.CreateOwned(Mesh.MeshObjects);
     Mesh.MeshObjects[0].Mode := momFaceGroups;
   end
   else

@@ -319,7 +319,7 @@ type
   private
     FVertexProgramHandle: TGLARBVertexProgramHandle;
     FFragmentProgramHandle: TGLARBFragmentProgramHandle;
-    FLightIDs: TIntegerList;
+    FLightIDs: TGLIntegerList;
     FLightsEnabled: Integer;
     FBumpMethod: TBumpMethod;
     FBumpSpace: TBumpSpace;
@@ -1192,7 +1192,7 @@ end;
 constructor TGLBumpShader.Create(AOwner: TComponent);
 begin
   inherited;
-  FLightIDs := TIntegerList.Create;
+  FLightIDs := TGLIntegerList.Create;
   FBumpMethod := bmDot3TexCombiner;
   FBumpSpace := bsObject;
   FBumpOptions := [];
@@ -1667,7 +1667,7 @@ end;
 procedure TGLBumpShader.DoApply(var rci: TGLRenderContextInfo; Sender: TObject);
 var
   maxTextures, i: Integer;
-  ambient, LMaterialAmbient: TColorVector;
+  ambient, LMaterialAmbient: TGLColorVector;
   success: Boolean;
 begin
   if (csDesigning in ComponentState) and not DesignTimeEnabled then

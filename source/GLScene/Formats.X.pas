@@ -16,7 +16,8 @@ uses
   GLS.VectorTypes,
   GLS.VectorGeometry,
   GLS.VectorLists,
-  GLS.PersistentClasses;
+  GLS.PersistentClasses,
+  GLS.Utils;
 
 type
   TDXNode = class;
@@ -46,7 +47,7 @@ type
 
   TDXMaterialList = class;
 
-  TDXMaterial = class(TPersistentObject)
+  TDXMaterial = class(TGLPersistentObject)
   private
     FDiffuse: TVector4f;
     FSpecPower: Single;
@@ -81,20 +82,20 @@ type
 
   TDXMesh = class(TDXNode)
   private
-    FVertices, FNormals, FTexCoords: TAffineVectorList;
+    FVertices, FNormals, FTexCoords: TGLAffineVectorList;
     FVertexIndices, FNormalIndices, FMaterialIndices, FVertCountIndices
-      : TIntegerList;
+      : TGLIntegerList;
     FMaterialList: TDXMaterialList;
   public
     constructor Create; override;
     destructor Destroy; override;
-    property Vertices: TAffineVectorList read FVertices;
-    property Normals: TAffineVectorList read FNormals;
-    property TexCoords: TAffineVectorList read FTexCoords;
-    property VertexIndices: TIntegerList read FVertexIndices;
-    property NormalIndices: TIntegerList read FNormalIndices;
-    property MaterialIndices: TIntegerList read FMaterialIndices;
-    property VertCountIndices: TIntegerList read FVertCountIndices;
+    property Vertices: TGLAffineVectorList read FVertices;
+    property Normals: TGLAffineVectorList read FNormals;
+    property TexCoords: TGLAffineVectorList read FTexCoords;
+    property VertexIndices: TGLIntegerList read FVertexIndices;
+    property NormalIndices: TGLIntegerList read FNormalIndices;
+    property MaterialIndices: TGLIntegerList read FMaterialIndices;
+    property VertCountIndices: TGLIntegerList read FVertCountIndices;
     property MaterialList: TDXMaterialList read FMaterialList;
   end;
 
@@ -256,7 +257,7 @@ var
     if ContainsEnd(str) then
       str := StringReplace(str, '}', '', [rfReplaceAll]);
 
-    Result := StrToFloatDef(str, 0);
+    Result := GLStrToFloatDef(str, 0);
   end;
 
   function ReadMatrix: TGLMatrix;
@@ -284,13 +285,13 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
-      Result.Y := StrToFloatDef(TempBuffer[1], 0);
-      Result.Z := StrToFloatDef(TempBuffer[2], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
+      Result.Y := GLStrToFloatDef(TempBuffer[1], 0);
+      Result.Z := GLStrToFloatDef(TempBuffer[2], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
       Result.Z := ReadSingle;
     end;
@@ -305,14 +306,14 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
-      Result.Y := StrToFloatDef(TempBuffer[1], 0);
-      Result.Z := StrToFloatDef(TempBuffer[2], 0);
-      Result.W := StrToFloatDef(TempBuffer[3], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
+      Result.Y := GLStrToFloatDef(TempBuffer[1], 0);
+      Result.Z := GLStrToFloatDef(TempBuffer[2], 0);
+      Result.W := GLStrToFloatDef(TempBuffer[3], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
       Result.Z := ReadSingle;
       Result.W := ReadSingle;
@@ -328,18 +329,18 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
-      Result.Y := StrToFloatDef(TempBuffer[1], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
+      Result.Y := GLStrToFloatDef(TempBuffer[1], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.X := GLStrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
     end;
     Result.Z := 0;
   end;
 
-  procedure ReadMeshVectors(VectorList: TAffineVectorList);
+  procedure ReadMeshVectors(VectorList: TGLAffineVectorList);
   var
     i, NumVectors: Integer;
   begin
@@ -348,8 +349,8 @@ var
       VectorList.Add(ReadVector3f);
   end;
 
-  procedure ReadMeshIndices(IndexList: TIntegerList;
-    VertCountIndices: TIntegerList = nil);
+  procedure ReadMeshIndices(IndexList: TGLIntegerList;
+    VertCountIndices: TGLIntegerList = nil);
   var
     str: String;
     i, j, NumFaces, NumIndices, jStart: Integer;
@@ -390,7 +391,7 @@ var
     end;
   end;
 
-  procedure ReadTexCoords(VectorList: TAffineVectorList);
+  procedure ReadTexCoords(VectorList: TGLAffineVectorList);
   var
     i, NumVectors: Integer;
   begin
@@ -602,13 +603,13 @@ constructor TDXMesh.Create;
 begin
   inherited;
 
-  FVertices := TAffineVectorList.Create;
-  FNormals := TAffineVectorList.Create;
-  FTexCoords := TAffineVectorList.Create;
-  FVertexIndices := TIntegerList.Create;
-  FNormalIndices := TIntegerList.Create;
-  FMaterialIndices := TIntegerList.Create;
-  FVertCountIndices := TIntegerList.Create;
+  FVertices := TGLAffineVectorList.Create;
+  FNormals := TGLAffineVectorList.Create;
+  FTexCoords := TGLAffineVectorList.Create;
+  FVertexIndices := TGLIntegerList.Create;
+  FNormalIndices := TGLIntegerList.Create;
+  FMaterialIndices := TGLIntegerList.Create;
+  FVertCountIndices := TGLIntegerList.Create;
   FMaterialList := TDXMaterialList.Create;
 end;
 

@@ -1,7 +1,6 @@
 //
 // The graphics rendering engine GLScene http://glscene.org
 //
-
 unit GLS.GeometryBB;
 
 (* Calculations and manipulations on Bounding Boxes *)
@@ -40,7 +39,7 @@ type
     Radius: Single;
   end;
 
-  TClipRect = record
+  TGLClipRect = record
     Left, Top: Single;
     Right, Bottom: Single;
   end;
@@ -129,7 +128,7 @@ function PointInAABB(const P: TGLVector; const Aabb: TAABB): Boolean; overload;
 // Checks if a plane (given by the normal+d) intersects the AABB
 function PlaneIntersectAABB(const Normal: TAffineVector; D: Single; const Aabb: TAABB): Boolean;
 // Compute the intersection between a plane and the AABB
-function PlaneAABBIntersection(const plane : THmgPlane; const AABB : TAABB) : TAffineVectorList;
+function PlaneAABBIntersection(const plane : THmgPlane; const AABB : TAABB) : TGLAffineVectorList;
 (*
   Original source code by Tomas Akenine-Möller
   Based on the paper "Fast 3D Triangle-Box Overlap Testing"
@@ -178,10 +177,10 @@ function ClipToAABB(const V: TAffineVector; const AABB: TAABB): TAffineVector;
 function BSphereIntersectsBSphere(const MainBSphere, TestBSphere: TBSphere): Boolean;
 
 // Extend the clip rect to include given coordinate. 
-procedure IncludeInClipRect(var ClipRect: TClipRect; X, Y: Single);
-// Projects an AABB and determines the extent of its projection as a clip rect. 
+procedure IncludeInClipRect(var ClipRect: TGLClipRect; X, Y: Single);
+// Projects an AABB and determines the extent of its projection as a clip rect.
 function AABBToClipRect(const Aabb: TAABB; const ModelViewProjection: TGLMatrix;
-  ViewportSizeX, ViewportSizeY: Integer): TClipRect;
+  ViewportSizeX, ViewportSizeY: Integer): TGLClipRect;
 
 // Finds the intersection between a ray and an axis aligned bounding box. 
 function RayCastAABBIntersect(const RayOrigin, RayDirection: TGLVector;
@@ -752,7 +751,7 @@ begin
     Max := X2;
 end;
 
-function PlaneAABBIntersection(const plane : THmgPlane;const AABB : TAABB) : TAffineVectorList;
+function PlaneAABBIntersection(const plane : THmgPlane;const AABB : TAABB) : TGLAffineVectorList;
 var
   i, j, annexe : Integer;
   index : array[0..2] of Integer;
@@ -772,7 +771,7 @@ begin
   box[0] := AABB.min;
   box[1] := AABB.max;
 
-  Result := TAffineVectorList.Create;
+  Result := TGLAffineVectorList.Create;
 
   // loop on vertices
   for i := 0 to 7 do
@@ -1273,7 +1272,7 @@ begin
     Result.Z := AABB.Max.Z;
 end;
 
-procedure IncludeInClipRect(var ClipRect: TClipRect; X, Y: Single);
+procedure IncludeInClipRect(var ClipRect: TGLClipRect; X, Y: Single);
 begin
   with ClipRect do
   begin
@@ -1289,7 +1288,7 @@ begin
 end;
 
 function AABBToClipRect(const Aabb: TAABB; const ModelViewProjection: TGLMatrix;
-  ViewportSizeX, ViewportSizeY: Integer): TClipRect;
+  ViewportSizeX, ViewportSizeY: Integer): TGLClipRect;
 var
   I: Integer;
   V, Vt: TGLVector;

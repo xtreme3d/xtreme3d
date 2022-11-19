@@ -48,14 +48,14 @@ procedure TGLPLYVectorFile.LoadFromStream(aStream: TStream);
 var
   i, nbVertices, nbFaces: Integer;
   sl: TStringList;
-  mesh: TMeshObject;
+  mesh: TGLMeshObject;
   fg: TFGVertexIndexList;
   p: PChar;
 begin
   sl := TStringList.Create;
   try
     sl.LoadFromStream(aStream{$IFDEF Unicode}, TEncoding.ASCII{$ENDIF});
-    mesh := TMeshObject.CreateOwned(Owner.MeshObjects);
+    mesh := TGLMeshObject.CreateOwned(Owner.MeshObjects);
     mesh.Mode := momFaceGroups;
     if sl[0] <> 'ply' then
       raise Exception.Create('Not a valid ply file !');
@@ -79,7 +79,7 @@ begin
     begin
       p := PChar(sl[i]);
       mesh.Vertices.Add(ParseFloat(p), ParseFloat(p), ParseFloat(p));
-      // AffineVectorMake(StrToFloatDef(tl[0]), StrToFloatDef(tl[1]), StrToFloatDef(tl[2])));}
+      // AffineVectorMake(GLStrToFloatDef(tl[0]), GLStrToFloatDef(tl[1]), GLStrToFloatDef(tl[2])));}
       Dec(nbVertices);
       Inc(i);
     end;

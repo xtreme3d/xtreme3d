@@ -263,15 +263,15 @@ begin
    Result.V[2]:=v1.V[2]*delta;
 end;
 
-procedure GenMeshTangents(mesh: TMeshObject);
+procedure GenMeshTangents(mesh: TGLMeshObject);
 var
    i: Integer;
    v,t: array[0..2] of TAffineVector;
 
    x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
    sDir, tDir: TAffineVector;
-   sTan, tTan: TAffineVectorList;
-   tangents, bitangents: TVectorList;
+   sTan, tTan: TGLAffineVectorList;
+   tangents, bitangents: TGLVectorList;
    sv, tv: array[0..2] of TAffineVector;
    r, oneOverR: Single;
    n, ta: TAffineVector;
@@ -288,14 +288,14 @@ begin
    mesh.Tangents.Count:=mesh.Vertices.Count;
    mesh.Binormals.Count:=mesh.Vertices.Count;
 
-   tangents := TVectorList.Create;
+   tangents := TGLVectorList.Create;
    tangents.Count:=mesh.Vertices.Count;
 
-   bitangents := TVectorList.Create;
+   bitangents := TGLVectorList.Create;
    bitangents.Count:=mesh.Vertices.Count;
 
-   sTan := TAffineVectorList.Create;
-   tTan := TAffineVectorList.Create;
+   sTan := TGLAffineVectorList.Create;
+   tTan := TGLAffineVectorList.Create;
    sTan.Count := mesh.Vertices.Count;
    tTan.Count := mesh.Vertices.Count;
 

@@ -16,7 +16,8 @@ uses
 
   GLS.VectorGeometry,
   GLS.VectorTypes,
-  GLS.VectorLists;
+  GLS.VectorLists,
+  GLS.Utils;
 
 type
   TVRMLNode = class
@@ -42,20 +43,20 @@ type
 
   TVRMLSingleArray = class(TVRMLNode)
   private
-    FValues: TSingleList;
+    FValues: TGLSingleList;
   public
     constructor Create; override;
     destructor Destroy; override;
-    property Values: TSingleList read FValues;
+    property Values: TGLSingleList read FValues;
   end;
 
   TVRMLIntegerArray = class(TVRMLNode)
   private
-    FValues: TIntegerList;
+    FValues: TGLIntegerList;
   public
     constructor Create; override;
     destructor Destroy; override;
-    property Values: TIntegerList read FValues;
+    property Values: TGLIntegerList read FValues;
   end;
 
   TVRMLMaterial = class(TVRMLNode)
@@ -272,7 +273,7 @@ end;
 constructor TVRMLSingleArray.Create;
 begin
   inherited;
-  FValues := TSingleList.Create;
+  FValues := TGLSingleList.Create;
 end;
 
 destructor TVRMLSingleArray.Destroy;
@@ -289,7 +290,7 @@ end;
 constructor TVRMLIntegerArray.Create;
 begin
   inherited;
-  FValues := TIntegerList.Create;
+  FValues := TGLIntegerList.Create;
 end;
 
 destructor TVRMLIntegerArray.Destroy;
@@ -413,7 +414,7 @@ end;
 
 function TVRMLParser.ReadSingle: Single;
 begin
-  Result := StrToFloatDef(ReadToken, 0);
+  Result := GLStrToFloatDef(ReadToken, 0);
 end;
 
 function TVRMLParser.ReadVector3f: TVector3f;
@@ -450,7 +451,7 @@ begin
       exit
     else if token <> ']' then
       TVRMLSingleArray(FCurrentNode)
-        .Values.Add(StrToFloatDef(token, 0));
+        .Values.Add(GLStrToFloatDef(token, 0));
   until token = ']';
 
   FCurrentNode := FCurrentNode.Parent;
