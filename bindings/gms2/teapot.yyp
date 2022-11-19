@@ -67,6 +67,12 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"trinity_run.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"trinitypantsF.bmp","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"trinity_walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"TRINITYrage.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"long_jump.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"jump.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"run.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"look_left_right.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
   ],
   "MetaData": {
     "IDEVersion": "2022.8.0.34",
