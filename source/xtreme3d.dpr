@@ -87,9 +87,14 @@ uses
   GLS.VectorGeometry,
   GLS.VectorLists,
   GLS.VectorTypes,
-  GLS.WindowsFont;
+  GLS.WindowsFont,
+  GLSL.LineShaders,
+  GLSL.MultiMaterialShader,
+  GLSL.ShapeShaders,
+  GLSL.TextureShaders;
   //Physics.ODEManager,
-  //Physics.ODERagdoll;
+  //Physics.ODERagdoll,
+  //GLSLShader;
 
 type
     TEmpty = class(TComponent)
@@ -386,7 +391,7 @@ end;
 {$I 'xtreme3d/object'}
 //{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
-//{$I 'xtreme3d/shaders'}
+{$I 'xtreme3d/shaders'}
 //{$I 'xtreme3d/thorfx'}
 //{$I 'xtreme3d/firefx'}
 //{$I 'xtreme3d/lensflare'}
@@ -610,6 +615,15 @@ exports
     MaterialGetNameFromLibrary,
 
     // Shaders
+    ShaderEnable,
+    CelShaderCreate, CelShaderSetLineColor, CelShaderSetLineWidth, CelShaderSetOptions,
+    MultiMaterialShaderCreate,
+    HiddenLineShaderCreate, HiddenLineShaderSetLineSmooth, HiddenLineShaderSetSolid,
+    HiddenLineShaderSetSurfaceLit, HiddenLineShaderSetFrontLine, HiddenLineShaderSetBackLine,
+    OutlineShaderCreate, OutlineShaderSetLineColor, OutlineShaderSetLineWidth,
+    TexCombineShaderCreate, TexCombineShaderAddCombiner, TexCombineShaderMaterial3,
+    TexCombineShaderMaterial4,
+
     // ThorFX
     // FireFX
     // Lensflare
