@@ -72,6 +72,12 @@ buffer_delete(buf);
 simpleShader = GLSLShaderCreate(vp1, fp1);
 MaterialSetShader("mHellknight", simpleShader);
 
+fxObj = DummycubeCreate(global.scene);
+ObjectSetPosition(fxObj, 5, 1, 0);
+thorMngr = ThorFXManagerCreate();
+ThorFXSetTarget(thorMngr, 5, 1, 0);
+thor = ThorFXCreate(thorMngr, fxObj);
+
 
 /*
 MaterialLibrarySetTexturePaths(matlib2, "data/trinity");

@@ -84,6 +84,7 @@ uses
   GLS.TerrainRenderer,
   GLS.Texture,
   GLS.TextureFormat,
+  GLS.ThorFX,
   GLS.TilePlane,
   GLS.Utils,
   GLS.VectorGeometry,
@@ -402,7 +403,7 @@ end;
 //{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
 {$I 'xtreme3d/shaders'}
-//{$I 'xtreme3d/thorfx'}
+{$I 'xtreme3d/thorfx'}
 //{$I 'xtreme3d/firefx'}
 //{$I 'xtreme3d/lensflare'}
 {$I 'xtreme3d/terrain'}
@@ -650,6 +651,10 @@ exports
     GLSLShaderSetParameterHasTextureEx,
 
     // ThorFX
+    ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
+    ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
+    ThorFXSetTarget, ThorFXCreate,
+
     // FireFX
     // Lensflare
     // Skydome

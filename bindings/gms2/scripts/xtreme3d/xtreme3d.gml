@@ -546,6 +546,22 @@ function dll_init(dll) {
 	global._TerrainGetLastTriCount = external_define(dll, "TerrainGetLastTriCount", dll_cdecl, ty_real, 1, ty_real);
 	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
+	// Text
+	global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
+	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
+	
+	// ThorFX
+	global._ThorFXManagerCreate = external_define(dll, "ThorFXManagerCreate", dll_cdecl, ty_real, 0);
+	global._ThorFXSetColor = external_define(dll, "ThorFXSetColor", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ThorFXEnableCore = external_define(dll, "ThorFXEnableCore", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXEnableGlow = external_define(dll, "ThorFXEnableGlow", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXSetMaxParticles = external_define(dll, "ThorFXSetMaxParticles", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXSetGlowSize = external_define(dll, "ThorFXSetGlowSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXSetVibrate = external_define(dll, "ThorFXSetVibrate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXSetWildness = external_define(dll, "ThorFXSetWildness", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ThorFXSetTarget = external_define(dll, "ThorFXSetTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ThorFXCreate = external_define(dll, "ThorFXCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Input
 	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
@@ -553,10 +569,6 @@ function dll_init(dll) {
 	global._MouseShowCursor = external_define(dll, "MouseShowCursor", dll_cdecl, ty_real, 1, ty_real);
 	global._KeyIsPressed = external_define(dll, "KeyIsPressed", dll_cdecl, ty_real, 1, ty_real);
 	global._MouseIsPressed = external_define(dll, "MouseIsPressed", dll_cdecl, ty_real, 1, ty_real);
-	
-	// Text
-	global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
-	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
 
     // Misc
 	// PtrToReal is now PointerToReal
