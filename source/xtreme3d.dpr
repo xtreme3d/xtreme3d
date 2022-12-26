@@ -419,7 +419,7 @@ end;
 //{$I 'xtreme3d/shadowvolume'}
 {$I 'xtreme3d/skydome'}
 {$I 'xtreme3d/water'}
-//{$I 'xtreme3d/lines'}
+{$I 'xtreme3d/lines'}
 //{$I 'xtreme3d/tree'}
 //{$I 'xtreme3d/navigator'}
 //{$I 'xtreme3d/movement'}
@@ -695,6 +695,9 @@ exports
     SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
 
     // Lines
+    LinesCreate, LinesAddNode, LinesDeleteNode, LinesSetColors, LinesSetSize,
+    LinesSetSplineMode, LinesSetNodesAspect, LinesSetDivision, LinesSetNode,
+
     // Tree
     // Trail
     // Shadowplane

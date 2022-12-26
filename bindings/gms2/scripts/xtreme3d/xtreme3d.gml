@@ -605,6 +605,16 @@ function dll_init(dll) {
 	global._LensflareSetElements = external_define(dll, "LensflareSetElements", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._LensflareSetGradients = external_define(dll, "LensflareSetGradients", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
+	// Lines
+	global._LinesCreate = external_define(dll, "LinesCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._LinesAddNode = external_define(dll, "LinesAddNode", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._LinesDeleteNode = external_define(dll, "LinesDeleteNode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LinesSetNode = external_define(dll, "LinesSetNode", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._LinesSetSize = external_define(dll, "LinesSetSize", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._LinesSetSplineMode = external_define(dll, "LinesSetSplineMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LinesSetNodesAspect = external_define(dll, "LinesSetNodesAspect", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LinesSetDivision = external_define(dll, "LinesSetDivision", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Skybox
 	global._SkyboxCreate = external_define(dll, "SkyboxCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._SkyboxSetMaterial = external_define(dll, "SkyboxSetMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
