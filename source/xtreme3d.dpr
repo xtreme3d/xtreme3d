@@ -11,6 +11,7 @@ uses
   Vcl.Imaging.PNGImage,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
+  GLS.Blur,
   GLS.BitmapFont,
   GLS.Cadencer,
   GLS.Collision,
@@ -411,7 +412,7 @@ end;
 {$I 'xtreme3d/firefx'}
 {$I 'xtreme3d/lensflare'}
 {$I 'xtreme3d/terrain'}
-//{$I 'xtreme3d/blur'}
+{$I 'xtreme3d/blur'}
 //{$I 'xtreme3d/skybox'}
 //{$I 'xtreme3d/trail'}
 //{$I 'xtreme3d/shadowplane'}
@@ -687,6 +688,9 @@ exports
     //WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
 
     // Blur
+    BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,
+    BlurSetColor, BlurSetBlendingMode,
+
     // Skybox
     // Lines
     // Tree

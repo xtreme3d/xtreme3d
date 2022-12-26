@@ -244,6 +244,14 @@ function dll_init(dll) {
 	global._ActorSetFrame = external_define(dll, "ActorSetFrame", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ActorTriangleCount = external_define(dll, "ActorTriangleCount", dll_cdecl, ty_real, 1, ty_real);
 	
+	// Blur
+	global._BlurCreate = external_define(dll, "BlurCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BlurSetPreset = external_define(dll, "BlurSetPreset", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BlurSetOptions = external_define(dll, "BlurSetOptions", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._BlurSetResolution = external_define(dll, "BlurSetResolution", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BlurSetColor = external_define(dll, "BlurSetColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BlurSetBlendingMode = external_define(dll, "BlurSetBlendingMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Freeform
 	global._FreeformCreate = external_define(dll, "FreeformCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
 	global._FreeformGenTangents = external_define(dll, "FreeformGenTangents", dll_cdecl, ty_real, 1, ty_real);

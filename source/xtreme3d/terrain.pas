@@ -3,7 +3,7 @@ var
   GLBitmapHDS1: TGLBitmapHDS;
 begin
   GLBitmapHDS1 := TGLBitmapHDS.Create(scene);
-  GLBitmapHDS1.Picture.Bitmap.LoadFromFile(img);
+  GLBitmapHDS1.Picture.Bitmap.LoadFromFile(String(AnsiString(img)));
   GLBitmapHDS1.MaxPoolSize := 8 * 1024 * 1024;
   result := ObjToReal(GLBitmapHDS1);
 end;
@@ -94,7 +94,7 @@ var
   bhds: TGLBitmapHDS;
 begin
   bhds := TGLBitmapHDS(RealToPtr(hds));
-  bhds.Picture.SaveToFile(filename);
+  bhds.Picture.SaveToFile(String(AnsiString(filename)));
   result := 1.0
 end;
 
