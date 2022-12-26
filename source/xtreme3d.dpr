@@ -66,6 +66,7 @@ uses
   GLS.FileX,
   GLS.FileZLIB,
   GLS.GeomObjects,
+  GLS.HeightData,
   GLS.HUDObjects,
   GLS.Material,
   GLS.MaterialScript,
@@ -80,6 +81,7 @@ uses
   GLS.Selection,
   GLS.SpaceText,
   GLS.State,
+  GLS.TerrainRenderer,
   GLS.Texture,
   GLS.TextureFormat,
   GLS.TilePlane,
@@ -254,6 +256,14 @@ begin
          Result[i] := s[i];
 end;
 
+function InvertBitmap(Bitmap: TBitmap): TBitmap;
+begin
+   Bitmap.Canvas.CopyMode := cmDstInvert;
+   Bitmap.Canvas.CopyRect(Bitmap.Canvas.ClipRect, Bitmap.Canvas, Bitmap.Canvas.ClipRect);
+   Bitmap.Canvas.CopyMode := cmSrcCopy;
+   Result := Bitmap;
+end;
+
 function VectorDivide(const v1 : TAffineVector; delta : Single) : TAffineVector;
 begin
    Result.V[0]:=v1.V[0]/delta;
@@ -395,7 +405,7 @@ end;
 //{$I 'xtreme3d/thorfx'}
 //{$I 'xtreme3d/firefx'}
 //{$I 'xtreme3d/lensflare'}
-//{$I 'xtreme3d/terrain'}
+{$I 'xtreme3d/terrain'}
 //{$I 'xtreme3d/blur'}
 //{$I 'xtreme3d/skybox'}
 //{$I 'xtreme3d/trail'}
@@ -547,6 +557,13 @@ exports
     FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
 
     // Terrain
+    BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
+    BmpHDSCreateEmpty, BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
+    TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
+    TerrainSetQualityDistance, TerrainSetQualityStyle, TerrainSetMaxCLodTriangles,
+    TerrainSetCLodPrecision, TerrainSetOcclusionFrameSkip, TerrainSetOcclusionTesselate,
+    TerrainGetHeightAtObjectPosition, TerrainGetLastTriCount,
+    TerrainGetHDSPosition,
 
     // Object
     ObjectHide, ObjectShow, ObjectIsVisible,

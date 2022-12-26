@@ -524,6 +524,28 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// Terrain
+	global._BmpHDSCreate = external_define(dll, "BmpHDSCreate", dll_cdecl, ty_real, 1, ty_string);
+	global._BmpHDSSetInfiniteWarp = external_define(dll, "BmpHDSSetInfiniteWarp", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BmpHDSInvert = external_define(dll, "BmpHDSInvert", dll_cdecl, ty_real, 1, ty_real);
+	global._BmpHDSCreateEmpty = external_define(dll, "BmpHDSCreateEmpty", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._BmpHDSSetHeight = external_define(dll, "BmpHDSSetHeight", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._BmpHDSGetHeight = external_define(dll, "BmpHDSGetHeight", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._BmpHDSSave = external_define(dll, "BmpHDSSave", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._TerrainCreate = external_define(dll, "TerrainCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._TerrainSetHeightData = external_define(dll, "TerrainSetHeightData", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetTileSize = external_define(dll, "TerrainSetTileSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetTilesPerTexture = external_define(dll, "TerrainSetTilesPerTexture", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetQualityDistance = external_define(dll, "TerrainSetQualityDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetQualityStyle = external_define(dll, "TerrainSetQualityStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetMaxCLodTriangles = external_define(dll, "TerrainSetMaxCLodTriangles", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetCLodPrecision = external_define(dll, "TerrainSetCLodPrecision", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetOcclusionFrameSkip = external_define(dll, "TerrainSetOcclusionFrameSkip", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainSetOcclusionTesselate = external_define(dll, "TerrainSetOcclusionTesselate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainGetHeightAtObjectPosition = external_define(dll, "TerrainGetHeightAtObjectPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TerrainGetLastTriCount = external_define(dll, "TerrainGetLastTriCount", dll_cdecl, ty_real, 1, ty_real);
+	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	
 	// Input
 	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
