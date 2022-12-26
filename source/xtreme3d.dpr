@@ -413,7 +413,7 @@ end;
 {$I 'xtreme3d/lensflare'}
 {$I 'xtreme3d/terrain'}
 {$I 'xtreme3d/blur'}
-//{$I 'xtreme3d/skybox'}
+{$I 'xtreme3d/skybox'}
 //{$I 'xtreme3d/trail'}
 //{$I 'xtreme3d/shadowplane'}
 //{$I 'xtreme3d/shadowvolume'}
@@ -692,6 +692,8 @@ exports
     BlurSetColor, BlurSetBlendingMode,
 
     // Skybox
+    SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
+
     // Lines
     // Tree
     // Trail

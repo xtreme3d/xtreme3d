@@ -605,6 +605,12 @@ function dll_init(dll) {
 	global._LensflareSetElements = external_define(dll, "LensflareSetElements", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._LensflareSetGradients = external_define(dll, "LensflareSetGradients", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
+	// Skybox
+	global._SkyboxCreate = external_define(dll, "SkyboxCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._SkyboxSetMaterial = external_define(dll, "SkyboxSetMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
+	global._SkyboxSetClouds = external_define(dll, "SkyboxSetClouds", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SkyboxSetStyle = external_define(dll, "SkyboxSetStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Skydome
 	global._SkydomeCreate = external_define(dll, "SkydomeCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._SkydomeSetOptions = external_define(dll, "SkydomeSetOptions", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
