@@ -637,6 +637,21 @@ function dll_init(dll) {
 	global._SkydomeClearStars = external_define(dll, "SkydomeClearStars", dll_cdecl, ty_real, 1, ty_real);
 	global._SkydomeTwinkleStars = external_define(dll, "SkydomeTwinkleStars", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// Tree
+	global._TreeCreate = external_define(dll, "TreeCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._TreeSetMaterials = external_define(dll, "TreeSetMaterials", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_string);
+	global._TreeSetBranchFacets = external_define(dll, "TreeSetBranchFacets", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeBuildMesh = external_define(dll, "TreeBuildMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetBranchNoise = external_define(dll, "TreeSetBranchNoise", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetBranchAngle = external_define(dll, "TreeSetBranchAngle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetBranchSize = external_define(dll, "TreeSetBranchSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetBranchRadius = external_define(dll, "TreeSetBranchRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetBranchTwist = external_define(dll, "TreeSetBranchTwist", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetDepth = external_define(dll, "TreeSetDepth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetLeafSize = external_define(dll, "TreeSetLeafSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetLeafThreshold = external_define(dll, "TreeSetLeafThreshold", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TreeSetSeed = external_define(dll, "TreeSetSeed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Water
 	global._WaterCreate = external_define(dll, "WaterCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._WaterCreateRandomRipple = external_define(dll, "WaterCreateRandomRipple", dll_cdecl, ty_real, 1, ty_real);

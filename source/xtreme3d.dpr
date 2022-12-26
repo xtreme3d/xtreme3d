@@ -90,6 +90,7 @@ uses
   GLS.TextureFormat,
   GLS.ThorFX,
   GLS.TilePlane,
+  GLS.Tree,
   GLS.Utils,
   GLS.VectorGeometry,
   GLS.VectorLists,
@@ -420,7 +421,7 @@ end;
 {$I 'xtreme3d/skydome'}
 {$I 'xtreme3d/water'}
 {$I 'xtreme3d/lines'}
-//{$I 'xtreme3d/tree'}
+{$I 'xtreme3d/tree'}
 //{$I 'xtreme3d/navigator'}
 //{$I 'xtreme3d/movement'}
 //{$I 'xtreme3d/dce'}
@@ -699,6 +700,10 @@ exports
     LinesSetSplineMode, LinesSetNodesAspect, LinesSetDivision, LinesSetNode,
 
     // Tree
+    TreeCreate, TreeSetMaterials, TreeSetBranchFacets, TreeBuildMesh,
+    TreeSetBranchNoise, TreeSetBranchAngle, TreeSetBranchSize, TreeSetBranchRadius,
+    TreeSetBranchTwist, TreeSetDepth, TreeSetLeafSize, TreeSetLeafThreshold, TreeSetSeed,
+
     // Trail
     // Shadowplane
     // Shadowvolume

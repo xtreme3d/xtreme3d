@@ -70,6 +70,8 @@ fp1 = buffer_read(buf, buffer_string);
 buffer_delete(buf);
 
 simpleShader = GLSLShaderCreate(vp1, fp1);
+paramColor = GLSLShaderCreateParameter(simpleShader, "color");
+GLSLShaderSetParameter4f(paramColor, 1.0, 0.5, 0.0, 1.0);
 MaterialSetShader("mHellknight", simpleShader);
 
 fxObj = DummycubeCreate(global.scene);
