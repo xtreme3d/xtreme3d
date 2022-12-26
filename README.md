@@ -6,7 +6,7 @@ Xtreme3D originally was created for Game Maker. It makes possible to create full
 
 Currently we are porting core Xtreme3D v3 functions to current GLScene, so the 4.0 branch of the engine is not usable yet.
 
-The engine is written in Delphi and based on a modified version of [GLScene](https://sourceforge.net/projects/glscene) 2.1. The code can be compiled with free Delphi Community Edition.
+The engine is written in Delphi 10 and based on [GLScene](https://sourceforge.net/projects/glscene) 2.1. The code can be compiled with free Delphi Community Edition.
 
 Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).
 
