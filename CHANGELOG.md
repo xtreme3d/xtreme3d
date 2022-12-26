@@ -7,14 +7,14 @@ v4.0.0 (by Gecko) - ??/??/????
 - UTF-8 support for file names
 - `Update` is now `EngineUpdate`
 - `ViewerGetPickedObjectsList` now requires user-provied PickList
+- New functions `PickListCreate`, `PickListClear`, `PickListGetCount`, `PickListGetHit`
 - New constants for `ViewerSetAntiAliasing`: `aa6x = 6`, `aa8x = 7`, `aa16x = 8`, `csa8x = 9`, `csa8xHQ = 10`, `csa16x = 11`, `csa16xHQ = 12`
 - `CameraZoomAll` now requires a Viewer as a second parameter
 - `SpriteNoZWrite` was removed, use `MaterialSetDepthWrite` instead
 - `MaterialCullFrontFaces` was removed
 - `MaterialSetZWrite` is now `MaterialSetDepthWrite`
 - New function `MaterialSetDepthTest`
-- `PtrToReal` is now `PointerToReal`
-- New functions `PickListCreate`, `PickListClear`, `PickListGetCount`, `PickListGetHit`.
+- `PtrToReal` is now `PointerToReal`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------

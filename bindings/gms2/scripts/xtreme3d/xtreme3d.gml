@@ -479,11 +479,13 @@ function dll_init(dll) {
 	// Shaders
 	global._ShaderEnable = external_define(dll, "ShaderEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	/*
+	// Not yet implemented:
 	global._PhongShaderCreate = external_define(dll, "PhongShaderCreate", dll_cdecl, ty_real, 0);
 	global._PhongShaderUseTexture = external_define(dll, "PhongShaderUseTexture", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._PhongShaderSetMaxLights = external_define(dll, "PhongShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	*/
 	/*
+	// Not yet implemented:
 	global._BumpShaderCreate = external_define(dll, "BumpShaderCreate", dll_cdecl, ty_real, 0);
 	global._BumpShaderSetDiffuseTexture = external_define(dll, "BumpShaderSetDiffuseTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._BumpShaderSetNormalTexture = external_define(dll, "BumpShaderSetNormalTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -522,10 +524,12 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameter4f = external_define(dll, "GLSLShaderSetParameter4f", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._GLSLShaderSetParameterTexture = external_define(dll, "GLSLShaderSetParameterTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
 	global._GLSLShaderSetParameterSecondTexture = external_define(dll, "GLSLShaderSetParameterSecondTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	// Not yet implemented:
 	//global._GLSLShaderSetParameterShadowTexture = external_define(dll, "GLSLShaderSetParameterShadowTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//global._GLSLShaderSetParameterShadowMatrix = external_define(dll, "GLSLShaderSetParameterShadowMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameterMatrix = external_define(dll, "GLSLShaderSetParameterMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameterInvMatrix = external_define(dll, "GLSLShaderSetParameterInvMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// Not yet implemented:
 	//global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
@@ -556,6 +560,7 @@ function dll_init(dll) {
 	
 	// Text
 	global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
+	// Not yet implemented:
 	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
 	
 	// ThorFX
@@ -666,6 +671,7 @@ function dll_init(dll) {
 	global._WaterSetViscosity = external_define(dll, "WaterSetViscosity", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetElastic = external_define(dll, "WaterSetElastic", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetResolution = external_define(dll, "WaterSetResolution", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// Milestone II functions
 	//global._WaterSetLinearWaveHeight = external_define(dll, "WaterSetLinearWaveHeight", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	//global._WaterSetLinearWaveFrequency = external_define(dll, "WaterSetLinearWaveFrequency", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
