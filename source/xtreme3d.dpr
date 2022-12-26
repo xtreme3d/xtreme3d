@@ -91,10 +91,10 @@ uses
   GLSL.LineShaders,
   GLSL.MultiMaterialShader,
   GLSL.ShapeShaders,
-  GLSL.TextureShaders;
+  GLSL.TextureShaders,
   //Physics.ODEManager,
   //Physics.ODERagdoll,
-  //GLSLShader;
+  GLSLShader;
 
 type
     TEmpty = class(TComponent)
@@ -414,7 +414,7 @@ end;
 //{$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
 //{$I 'xtreme3d/proxy'}
-//{$I 'xtreme3d/text'}
+{$I 'xtreme3d/text'}
 //{$I 'xtreme3d/objecthash'}
 //{$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
@@ -623,6 +623,14 @@ exports
     OutlineShaderCreate, OutlineShaderSetLineColor, OutlineShaderSetLineWidth,
     TexCombineShaderCreate, TexCombineShaderAddCombiner, TexCombineShaderMaterial3,
     TexCombineShaderMaterial4,
+    GLSLShaderCreate, GLSLShaderCreateParameter,
+    GLSLShaderSetParameter1i, GLSLShaderSetParameter1f, GLSLShaderSetParameter2f,
+    GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
+    GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
+    GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
+    //GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
+    GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
+    GLSLShaderSetParameterHasTextureEx,
 
     // ThorFX
     // FireFX
@@ -649,7 +657,11 @@ exports
     // Movement
     // FBO
     // ObjectHash
+
     // Text
+    TextRead,
+    //TextConvertANSIToUTF8,
+
     // ClipPlane
 
     // Input

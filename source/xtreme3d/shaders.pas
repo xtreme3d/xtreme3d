@@ -428,119 +428,33 @@ begin
 end;
 
 // GLSL shader
-{
 function GLSLShaderCreate(vp, fp: PAnsiChar): real; cdecl;
 var
-    shader: TGLSLShader;
+  shader: TGLSLShader;
 begin
-    shader := TGLSLShader.Create(scene);
-    shader.LoadShaderPrograms(String(AnsiString(vp)), String(AnsiString(fp)));
-    shader.Enabled := True;
-    result := ObjToReal(shader);
+  shader := TGLSLShader.Create(scene);
+  shader.SetPrograms(vp, fp);
+  result := ObjToReal(shader);
 end;
 
 function GLSLShaderCreateParameter(glsl: real; name: PAnsiChar): real; cdecl;
 var
-    shader: TGLSLShader;
-    param: TGLSLShaderParameter;
-begin
-    shader := TGLSLShader(RealToPtr(glsl));
-    param := shader.Param[String(AnsiString(name))];
-    result := ObjToReal(param);
-end;
-
-function GLSLShaderSetParameter1i(par: real; val: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-    param.AsVector1i := Trunc(val);
-    result := 1;
-end;
-
-function GLSLShaderSetParameter1f(par, val: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-    param.AsVector1f := val;
-    result := 1;
-end;
-
-function GLSLShaderSetParameter2f(par, x, y: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-    param.AsVector2f := Vector2fMake(x, y);
-    result := 1;
-end;
-
-function GLSLShaderSetParameter3f(par, x, y, z: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-    param.AsVector3f := Vector3fMake(x, y, z);
-    result := 1;
-end;
-
-function GLSLShaderSetParameter4f(par, x, y, z, w: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-    param.AsVector4f := Vector4fMake(x, y, z, w);
-    result := 1;
-end;
-
-function GLSLShaderSetParameterTexture(par: real; mtrl: PAnsiChar; texUnit: real): real; cdecl;
-var
-    param: TGLSLShaderParameter;
-begin
-    param := TGLSLShaderParameter(RealToPtr(par));
-
-    result := 1;
-end;
-}
-
-{
-// GLSL shader
-function GLSLShaderCreate(vp, fp: pchar): real; cdecl;
-var
-  shader: TGLSLShader;
-begin
-  if not
-    (GL_ARB_shader_objects and
-     GL_ARB_vertex_shader and
-     GL_ARB_fragment_shader) then begin
-      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
-      result := 0;
-      Exit;
-  end;
-
-  shader := TGLSLShader.Create(scene);
-  shader.SetPrograms(vp, fp);
-  result:=integer(shader);
-end;
-
-function GLSLShaderCreateParameter(glsl: real; name: pchar): real; cdecl;
-var
   shader: TGLSLShader;
   param: TGLSLShaderParameter;
 begin
-  shader := TGLSLShader(trunc64(glsl));
+  shader := TGLSLShader(RealToPtr(glsl));
   param := shader.Param.AddUniform(String(name));
-  result := integer(param);
+  result := ObjToReal(param);
 end;
+
 
 function GLSLShaderSetParameter1i(par: real; val: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniform1i;
-  param.UniformInteger := trunc64(val);
+  param.UniformInteger := trunc(val);
   param.Initialized := True;
   result := 1;
 end;
@@ -549,7 +463,7 @@ function GLSLShaderSetParameter1f(par, x: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniform1f;
   param.UniformVector[0] := x;
   param.Initialized := True;
@@ -560,7 +474,7 @@ function GLSLShaderSetParameter2f(par, x, y: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniform2f;
   param.UniformVector[0] := x;
   param.UniformVector[1] := y;
@@ -572,7 +486,7 @@ function GLSLShaderSetParameter3f(par, x, y, z: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniform3f;
   param.UniformVector[0] := x;
   param.UniformVector[1] := y;
@@ -585,7 +499,7 @@ function GLSLShaderSetParameter4f(par, x, y, z, w: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniform4f;
   param.UniformVector[0] := x;
   param.UniformVector[1] := y;
@@ -600,14 +514,14 @@ var
   param: TGLSLShaderParameter;
   mat: TGLLibMaterial;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformTexture2D;
   if Length(mtrl) > 0 then
   begin
     mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
     param.Texture := mat.Material.Texture;
   end;
-  param.UniformTexture := trunc64(texUnit);
+  param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
@@ -618,7 +532,7 @@ var
   mat: TGLLibMaterial;
   mat2: TGLLibMaterial;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformSecondTexture2D;
   if Length(mtrl) > 0 then
   begin
@@ -626,42 +540,46 @@ begin
     mat2 := matlib.Materials.GetLibMaterialByName(mat.Texture2Name);
     param.Texture := mat2.Material.Texture;
   end;
-  param.UniformTexture := trunc64(texUnit);
+  param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
 
+{
 function GLSLShaderSetParameterShadowTexture(par, shadowmap: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformShadowTexture;
-  param.ShadowMap := TGLShadowMap(trunc64(shadowmap));
-  param.UniformTexture := trunc64(texUnit);
+  param.ShadowMap := TGLShadowMap(RealToPtr(shadowmap));
+  param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
+}
 
+{
 function GLSLShaderSetParameterShadowMatrix(par, shadowmap: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformShadowMatrix;
-  param.ShadowMap := TGLShadowMap(trunc64(shadowmap));
-  param.UniformMatrix := TGLShadowMap(trunc64(shadowmap)).ShadowMatrix;
+  param.ShadowMap := TGLShadowMap(RealToPtr(shadowmap));
+  param.UniformMatrix := TGLShadowMap(RealToPtr(shadowmap)).ShadowMatrix;
   param.Initialized := True;
   result := 1;
 end;
+}
 
 function GLSLShaderSetParameterMatrix(par, obj: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
   sobj: TGLBaseSceneObject;
 begin
-  sobj := TGLBaseSceneObject(trunc64(obj));
-  param := TGLSLShaderParameter(trunc64(par));
+  sobj := TGLBaseSceneObject(RealToPtr(obj));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformMatrix4f;
   param.UniformMatrix := sobj.AbsoluteMatrix;
   param.Initialized := True;
@@ -673,43 +591,47 @@ var
   param: TGLSLShaderParameter;
   sobj: TGLBaseSceneObject;
 begin
-  sobj := TGLBaseSceneObject(trunc64(obj));
-  param := TGLSLShaderParameter(trunc64(par));
+  sobj := TGLBaseSceneObject(RealToPtr(obj));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformMatrix4f;
   param.UniformMatrix := sobj.InvAbsoluteMatrix;
   param.Initialized := True;
   result := 1;
 end;
 
+{
 function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformFBOColorTexture;
   param.FBO := TGLFBO(trunc64(fbo));
-  param.UniformTexture := trunc64(texUnit);
+  param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
+}
 
+{
 function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformFBODepthTexture;
-  param.FBO := TGLFBO(trunc64(fbo));
-  param.UniformTexture := trunc64(texUnit);
+  param.FBO := TGLFBO(RealToPtr(fbo));
+  param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
+}
 
 function GLSLShaderSetParameterViewMatrix(par: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformViewMatrix;
   param.Initialized := True;
   result := 1;
@@ -719,7 +641,7 @@ function GLSLShaderSetParameterInvViewMatrix(par: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformInvViewMatrix;
   param.Initialized := True;
   result := 1;
@@ -729,10 +651,10 @@ function GLSLShaderSetParameterHasTextureEx(par, slot: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
-  param := TGLSLShaderParameter(trunc64(par));
+  param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformHaveTexture;
-  param.UniformInteger := trunc64(slot);
+  param.UniformInteger := trunc(slot);
   param.Initialized := True;
   result := 1;
 end;
-}
+

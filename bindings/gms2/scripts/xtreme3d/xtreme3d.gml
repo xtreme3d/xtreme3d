@@ -468,6 +468,62 @@ function dll_init(dll) {
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
 	
+	// Shaders
+	global._ShaderEnable = external_define(dll, "ShaderEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	/*
+	global._PhongShaderCreate = external_define(dll, "PhongShaderCreate", dll_cdecl, ty_real, 0);
+	global._PhongShaderUseTexture = external_define(dll, "PhongShaderUseTexture", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PhongShaderSetMaxLights = external_define(dll, "PhongShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	*/
+	/*
+	global._BumpShaderCreate = external_define(dll, "BumpShaderCreate", dll_cdecl, ty_real, 0);
+	global._BumpShaderSetDiffuseTexture = external_define(dll, "BumpShaderSetDiffuseTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._BumpShaderSetNormalTexture = external_define(dll, "BumpShaderSetNormalTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._BumpShaderSetHeightTexture = external_define(dll, "BumpShaderSetHeightTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._BumpShaderSetMaxLights = external_define(dll, "BumpShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BumpShaderUseParallax = external_define(dll, "BumpShaderUseParallax", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BumpShaderSetParallaxOffset = external_define(dll, "BumpShaderSetParallaxOffset", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BumpShaderSetShadowMap = external_define(dll, "BumpShaderSetShadowMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BumpShaderSetShadowBlurRadius = external_define(dll, "BumpShaderSetShadowBlurRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._BumpShaderUseAutoTangentSpace = external_define(dll, "BumpShaderUseAutoTangentSpace", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	*/
+	global._CelShaderCreate = external_define(dll, "CelShaderCreate", dll_cdecl, ty_real, 0);
+	global._CelShaderSetLineColor = external_define(dll, "CelShaderSetLineColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CelShaderSetLineWidth = external_define(dll, "CelShaderSetLineWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._CelShaderSetOptions = external_define(dll, "CelShaderSetOptions", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._MultiMaterialShaderCreate = external_define(dll, "MultiMaterialShaderCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._HiddenLineShaderCreate = external_define(dll, "HiddenLineShaderCreate", dll_cdecl, ty_real, 0);
+	global._HiddenLineShaderSetLineSmooth = external_define(dll, "HiddenLineShaderSetLineSmooth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HiddenLineShaderSetSolid = external_define(dll, "HiddenLineShaderSetSolid", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HiddenLineShaderSetSurfaceLit = external_define(dll, "HiddenLineShaderSetSurfaceLit", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HiddenLineShaderSetFrontLine = external_define(dll, "HiddenLineShaderSetFrontLine", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HiddenLineShaderSetBackLine = external_define(dll, "HiddenLineShaderSetBackLine", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OutlineShaderCreate = external_define(dll, "OutlineShaderCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._OutlineShaderSetLineColor = external_define(dll, "OutlineShaderSetLineColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OutlineShaderSetLineWidth = external_define(dll, "OutlineShaderSetLineWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TexCombineShaderCreate = external_define(dll, "TexCombineShaderCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._TexCombineShaderAddCombiner = external_define(dll, "TexCombineShaderAddCombiner", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._TexCombineShaderMaterial3 = external_define(dll, "TexCombineShaderMaterial3", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._TexCombineShaderMaterial4 = external_define(dll, "TexCombineShaderMaterial4", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._GLSLShaderCreate = external_define(dll, "GLSLShaderCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._GLSLShaderCreateParameter = external_define(dll, "GLSLShaderCreateParameter", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._GLSLShaderSetParameter1i = external_define(dll, "GLSLShaderSetParameter1i", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetParameter1f = external_define(dll, "GLSLShaderSetParameter1f", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetParameter2f = external_define(dll, "GLSLShaderSetParameter2f", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameter3f = external_define(dll, "GLSLShaderSetParameter3f", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameter4f = external_define(dll, "GLSLShaderSetParameter4f", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameterTexture = external_define(dll, "GLSLShaderSetParameterTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	global._GLSLShaderSetParameterSecondTexture = external_define(dll, "GLSLShaderSetParameterSecondTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	//global._GLSLShaderSetParameterShadowTexture = external_define(dll, "GLSLShaderSetParameterShadowTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._GLSLShaderSetParameterShadowMatrix = external_define(dll, "GLSLShaderSetParameterShadowMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetParameterMatrix = external_define(dll, "GLSLShaderSetParameterMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetParameterInvMatrix = external_define(dll, "GLSLShaderSetParameterInvMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
+	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
+	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Input
 	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
@@ -475,6 +531,10 @@ function dll_init(dll) {
 	global._MouseShowCursor = external_define(dll, "MouseShowCursor", dll_cdecl, ty_real, 1, ty_real);
 	global._KeyIsPressed = external_define(dll, "KeyIsPressed", dll_cdecl, ty_real, 1, ty_real);
 	global._MouseIsPressed = external_define(dll, "MouseIsPressed", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Text
+	global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
+	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
 
     // Misc
 	// PtrToReal is now PointerToReal

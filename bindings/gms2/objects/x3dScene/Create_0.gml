@@ -48,7 +48,6 @@ MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 ObjectSetMaterial(plane, "mFloor");
 
-
 matlib2 = MaterialLibraryCreate();
 
 MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");
@@ -61,6 +60,18 @@ ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "diffuse.png");
 ObjectSetMaterial(hk, "mHellknight");
+
+var buf = buffer_load("shaders/simple-vp.glsl");
+vp1 = buffer_read(buf, buffer_string);
+buffer_delete(buf);
+
+buf = buffer_load("shaders/simple-fp.glsl");
+fp1 = buffer_read(buf, buffer_string);
+buffer_delete(buf);
+
+simpleShader = GLSLShaderCreate(vp1, fp1);
+MaterialSetShader("mHellknight", simpleShader);
+
 
 /*
 MaterialLibrarySetTexturePaths(matlib2, "data/trinity");
