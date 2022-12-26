@@ -612,6 +612,23 @@ function dll_init(dll) {
 	global._SkydomeAddStar = external_define(dll, "SkydomeAddStar", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SkydomeClearStars = external_define(dll, "SkydomeClearStars", dll_cdecl, ty_real, 1, ty_real);
 	global._SkydomeTwinkleStars = external_define(dll, "SkydomeTwinkleStars", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// Water
+	global._WaterCreate = external_define(dll, "WaterCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._WaterCreateRandomRipple = external_define(dll, "WaterCreateRandomRipple", dll_cdecl, ty_real, 1, ty_real);
+	global._WaterCreateRippleAtGridPosition = external_define(dll, "WaterCreateRippleAtGridPosition", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._WaterCreateRippleAtWorldPosition = external_define(dll, "WaterCreateRippleAtWorldPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._WaterCreateRippleAtObjectPosition = external_define(dll, "WaterCreateRippleAtObjectPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterSetMask = external_define(dll, "WaterSetMask", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._WaterSetActive = external_define(dll, "WaterSetActive", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterReset = external_define(dll, "WaterReset", dll_cdecl, ty_real, 1, ty_real);
+	global._WaterSetRainTimeInterval = external_define(dll, "WaterSetRainTimeInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterSetRainForce = external_define(dll, "WaterSetRainForce", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterSetViscosity = external_define(dll, "WaterSetViscosity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterSetElastic = external_define(dll, "WaterSetElastic", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WaterSetResolution = external_define(dll, "WaterSetResolution", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._WaterSetLinearWaveHeight = external_define(dll, "WaterSetLinearWaveHeight", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._WaterSetLinearWaveFrequency = external_define(dll, "WaterSetLinearWaveFrequency", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
     // Misc
 	// PtrToReal is now PointerToReal

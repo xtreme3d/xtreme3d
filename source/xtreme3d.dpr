@@ -93,6 +93,7 @@ uses
   GLS.VectorGeometry,
   GLS.VectorLists,
   GLS.VectorTypes,
+  GLS.WaterPlane,
   GLS.WindowsFont,
   GLSL.LineShaders,
   GLSL.MultiMaterialShader,
@@ -416,7 +417,7 @@ end;
 //{$I 'xtreme3d/shadowplane'}
 //{$I 'xtreme3d/shadowvolume'}
 {$I 'xtreme3d/skydome'}
-//{$I 'xtreme3d/water'}
+{$I 'xtreme3d/water'}
 //{$I 'xtreme3d/lines'}
 //{$I 'xtreme3d/tree'}
 //{$I 'xtreme3d/navigator'}
@@ -677,6 +678,14 @@ exports
     SkydomeAddRandomStars, SkydomeAddStar, SkydomeClearStars, SkydomeTwinkleStars,
 
     // Water
+    WaterCreate, WaterCreateRandomRipple,
+    WaterCreateRippleAtGridPosition, WaterCreateRippleAtWorldPosition,
+    WaterCreateRippleAtObjectPosition,
+    WaterSetMask, WaterSetActive, WaterReset,
+    WaterSetRainTimeInterval, WaterSetRainForce,
+    WaterSetViscosity, WaterSetElastic, WaterSetResolution,
+    //WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
+
     // Blur
     // Skybox
     // Lines
