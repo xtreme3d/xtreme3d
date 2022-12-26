@@ -562,6 +562,21 @@ function dll_init(dll) {
 	global._ThorFXSetTarget = external_define(dll, "ThorFXSetTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ThorFXCreate = external_define(dll, "ThorFXCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// FireFX
+	global._FireFXManagerCreate = external_define(dll, "FireFXManagerCreate", dll_cdecl, ty_real, 0);
+	global._FireFXCreate = external_define(dll, "FireFXCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetColor = external_define(dll, "FireFXSetColor", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FireFXSetMaxParticles = external_define(dll, "FireFXSetMaxParticles", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetParticleSize = external_define(dll, "FireFXSetParticleSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetDensity = external_define(dll, "FireFXSetDensity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetEvaporation = external_define(dll, "FireFXSetEvaporation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetCrown = external_define(dll, "FireFXSetCrown", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetLife = external_define(dll, "FireFXSetLife", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetBurst = external_define(dll, "FireFXSetBurst", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXSetRadius = external_define(dll, "FireFXSetRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FireFXExplosion = external_define(dll, "FireFXExplosion", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._FireFXRingExplosion = external_define(dll, "FireFXRingExplosion", dll_cdecl, ty_real, 10, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	
 	// Input
 	global._MouseSetPosition = external_define(dll, "MouseSetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MouseGetPositionX = external_define(dll, "MouseGetPositionX", dll_cdecl, ty_real, 0);
@@ -569,6 +584,34 @@ function dll_init(dll) {
 	global._MouseShowCursor = external_define(dll, "MouseShowCursor", dll_cdecl, ty_real, 1, ty_real);
 	global._KeyIsPressed = external_define(dll, "KeyIsPressed", dll_cdecl, ty_real, 1, ty_real);
 	global._MouseIsPressed = external_define(dll, "MouseIsPressed", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Lensflare
+	global._LensflareCreate = external_define(dll, "LensflareCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._LensflareSetSize = external_define(dll, "LensflareSetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetSeed = external_define(dll, "LensflareSetSeed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetSqueeze = external_define(dll, "LensflareSetSqueeze", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetStreaks = external_define(dll, "LensflareSetStreaks", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetStreakWidth = external_define(dll, "LensflareSetStreakWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetSecs = external_define(dll, "LensflareSetSecs", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetResolution = external_define(dll, "LensflareSetResolution", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LensflareSetElements = external_define(dll, "LensflareSetElements", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._LensflareSetGradients = external_define(dll, "LensflareSetGradients", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	
+	// Skydome
+	global._SkydomeCreate = external_define(dll, "SkydomeCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SkydomeSetOptions = external_define(dll, "SkydomeSetOptions", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SkydomeSetDeepColor = external_define(dll, "SkydomeSetDeepColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetHazeColor = external_define(dll, "SkydomeSetHazeColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetNightColor = external_define(dll, "SkydomeSetNightColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetSkyColor = external_define(dll, "SkydomeSetSkyColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetSunDawnColor = external_define(dll, "SkydomeSetSunDawnColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetSunZenithColor = external_define(dll, "SkydomeSetSunZenithColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetSunElevation = external_define(dll, "SkydomeSetSunElevation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeSetTurbidity = external_define(dll, "SkydomeSetTurbidity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._SkydomeAddRandomStars = external_define(dll, "SkydomeAddRandomStars", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._SkydomeAddStar = external_define(dll, "SkydomeAddStar", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._SkydomeClearStars = external_define(dll, "SkydomeClearStars", dll_cdecl, ty_real, 1, ty_real);
+	global._SkydomeTwinkleStars = external_define(dll, "SkydomeTwinkleStars", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
     // Misc
 	// PtrToReal is now PointerToReal

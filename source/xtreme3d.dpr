@@ -65,9 +65,11 @@ uses
   GLS.FileWAV,
   GLS.FileX,
   GLS.FileZLIB,
+  GLS.FireFX,
   GLS.GeomObjects,
   GLS.HeightData,
   GLS.HUDObjects,
+  GLS.LensFlare,
   GLS.Material,
   GLS.MaterialScript,
   GLS.MeshUtils,
@@ -79,6 +81,7 @@ uses
   GLS.Scene,
   GLS.SceneViewer,
   GLS.Selection,
+  GLS.SkyDome,
   GLS.SpaceText,
   GLS.State,
   GLS.TerrainRenderer,
@@ -404,15 +407,15 @@ end;
 {$I 'xtreme3d/material'}
 {$I 'xtreme3d/shaders'}
 {$I 'xtreme3d/thorfx'}
-//{$I 'xtreme3d/firefx'}
-//{$I 'xtreme3d/lensflare'}
+{$I 'xtreme3d/firefx'}
+{$I 'xtreme3d/lensflare'}
 {$I 'xtreme3d/terrain'}
 //{$I 'xtreme3d/blur'}
 //{$I 'xtreme3d/skybox'}
 //{$I 'xtreme3d/trail'}
 //{$I 'xtreme3d/shadowplane'}
 //{$I 'xtreme3d/shadowvolume'}
-//{$I 'xtreme3d/skydome'}
+{$I 'xtreme3d/skydome'}
 //{$I 'xtreme3d/water'}
 //{$I 'xtreme3d/lines'}
 //{$I 'xtreme3d/tree'}
@@ -656,8 +659,23 @@ exports
     ThorFXSetTarget, ThorFXCreate,
 
     // FireFX
+    FireFXManagerCreate, FireFXCreate,
+    FireFXSetColor, FireFXSetMaxParticles, FireFXSetParticleSize,
+    FireFXSetDensity, FireFXSetEvaporation, FireFXSetCrown,
+    FireFXSetLife, FireFXSetBurst, FireFXSetRadius, FireFXExplosion,
+    FireFXRingExplosion,
+
     // Lensflare
+    LensflareCreate, LensflareSetSize, LensflareSetSeed, LensflareSetSqueeze,
+    LensflareSetStreaks, LensflareSetStreakWidth, LensflareSetSecs,
+    LensflareSetResolution, LensflareSetElements, LensflareSetGradients,
+
     // Skydome
+    SkydomeCreate, SkydomeSetOptions, SkydomeSetDeepColor, SkydomeSetHazeColor,
+    SkydomeSetNightColor, SkydomeSetSkyColor, SkydomeSetSunDawnColor, SkydomeSetSunZenithColor,
+    SkydomeSetSunElevation, SkydomeSetTurbidity,
+    SkydomeAddRandomStars, SkydomeAddStar, SkydomeClearStars, SkydomeTwinkleStars,
+
     // Water
     // Blur
     // Skybox
