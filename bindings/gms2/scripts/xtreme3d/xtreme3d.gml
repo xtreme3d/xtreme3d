@@ -649,6 +649,22 @@ function dll_init(dll) {
 	global._LinesSetNodesAspect = external_define(dll, "LinesSetNodesAspect", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LinesSetDivision = external_define(dll, "LinesSetDivision", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// Movement
+	global._MovementCreate = external_define(dll, "MovementCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._MovementStart = external_define(dll, "MovementStart", dll_cdecl, ty_real, 1, ty_real);
+	global._MovementStop = external_define(dll, "MovementStop", dll_cdecl, ty_real, 1, ty_real);
+	global._MovementAutoStartNextPath = external_define(dll, "MovementAutoStartNextPath", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementAddPath = external_define(dll, "MovementAddPath", dll_cdecl, ty_real, 1, ty_real);
+	global._MovementSetActivePath = external_define(dll, "MovementSetActivePath", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementPathSetSplineMode = external_define(dll, "MovementPathSetSplineMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementPathAddNode = external_define(dll, "MovementPathAddNode", dll_cdecl, ty_real, 1, ty_real);
+	global._MovementPathNodeSetPosition = external_define(dll, "MovementPathNodeSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._MovementPathNodeSetRotation = external_define(dll, "MovementPathNodeSetRotation", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._MovementPathNodeSetSpeed = external_define(dll, "MovementPathNodeSetSpeed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementPathShow = external_define(dll, "MovementPathShow", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementPathSetLoop = external_define(dll, "MovementPathSetLoop", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MovementPathDeleteNode = external_define(dll, "MovementPathDeleteNode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Skybox
 	global._SkyboxCreate = external_define(dll, "SkyboxCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._SkyboxSetMaterial = external_define(dll, "SkyboxSetMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);

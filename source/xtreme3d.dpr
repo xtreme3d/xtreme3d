@@ -74,6 +74,7 @@ uses
   GLS.Material,
   GLS.MaterialScript,
   GLS.MeshUtils,
+  GLS.Movement,
   GLS.Navigator,
   GLS.Objects,
   GLS.OpenGLAdapter,
@@ -427,7 +428,7 @@ end;
 {$I 'xtreme3d/lines'}
 {$I 'xtreme3d/tree'}
 {$I 'xtreme3d/navigator'}
-//{$I 'xtreme3d/movement'}
+{$I 'xtreme3d/movement'}
 //{$I 'xtreme3d/dce'}
 //{$I 'xtreme3d/fps'}
 //{$I 'xtreme3d/mirror'}
@@ -737,7 +738,15 @@ exports
     // Grid
     // MemoryViewer
     // ShadowMap
+
     // Movement
+    MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,
+    MovementAddPath, MovementSetActivePath, MovementPathSetSplineMode,
+    MovementPathAddNode,
+    MovementPathNodeSetPosition, MovementPathNodeSetRotation,
+    MovementPathNodeSetSpeed,
+    MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
+
     // FBO
     // ObjectHash
 
