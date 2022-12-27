@@ -74,6 +74,7 @@ uses
   GLS.Material,
   GLS.MaterialScript,
   GLS.MeshUtils,
+  GLS.Navigator,
   GLS.Objects,
   GLS.OpenGLAdapter,
   GLS.PersistentClasses,
@@ -425,7 +426,7 @@ end;
 {$I 'xtreme3d/water'}
 {$I 'xtreme3d/lines'}
 {$I 'xtreme3d/tree'}
-//{$I 'xtreme3d/navigator'}
+{$I 'xtreme3d/navigator'}
 //{$I 'xtreme3d/movement'}
 //{$I 'xtreme3d/dce'}
 //{$I 'xtreme3d/fps'}
@@ -721,6 +722,12 @@ exports
     ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
 
     // Navigator
+    NavigatorCreate, NavigatorSetObject, NavigatorSetUseVirtualUp, NavigatorSetVirtualUp,
+    NavigatorTurnHorizontal, NavigatorTurnVertical, NavigatorMoveForward,
+    NavigatorStrafeHorizontal, NavigatorStrafeVertical, NavigatorStraighten,
+    NavigatorFlyForward, NavigatorMoveUpWhenMovingForward, NavigatorInvertHorizontalWhenUpsideDown,
+    NavigatorSetAngleLock, NavigatorSetAngles,
+
     // DCE
     // ODE
     // FPSManager

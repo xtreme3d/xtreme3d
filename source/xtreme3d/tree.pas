@@ -35,8 +35,8 @@ function TreeBuildMesh(tree, parent: real): real; cdecl;
 var
   t: TGLTree;
   ffm: TGLFreeForm;
-  mesh1: TGLMeshObject;
-  mi: Integer;
+  //mesh1: TGLMeshObject;
+  //mi: Integer;
 begin
   t := TGLTree(RealToPtr(tree));
   if not (parent = 0) then
@@ -47,11 +47,13 @@ begin
   ffm.LightmapLibrary := t.MaterialLibrary;
   t.BuildMesh(ffm);
 
+  {
   for mi:=0 to ffm.MeshObjects.Count-1 do begin
       mesh1 := ffm.MeshObjects[mi];
       //mesh1.BuildTangentSpace();
       //GenMeshTangents(mesh1);
   end;
+  }
 
   ffm.BuildOctree;
   result := Integer(ffm);

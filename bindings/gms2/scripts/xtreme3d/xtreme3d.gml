@@ -311,6 +311,23 @@ function dll_init(dll) {
 	global._FreeformMeshFaceGroupSetLightmapIndex = external_define(dll, "FreeformMeshFaceGroupSetLightmapIndex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._FreeformSetMaterialLibraries = external_define(dll, "FreeformSetMaterialLibraries", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
+	// Navigator
+	global._NavigatorCreate = external_define(dll, "NavigatorCreate", dll_cdecl, ty_real, 0);
+	global._NavigatorSetObject = external_define(dll, "NavigatorSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorSetUseVirtualUp = external_define(dll, "NavigatorSetUseVirtualUp", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorSetVirtualUp = external_define(dll, "NavigatorSetVirtualUp", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._NavigatorTurnHorizontal = external_define(dll, "NavigatorTurnHorizontal", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorTurnVertical = external_define(dll, "NavigatorTurnVertical", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorMoveForward = external_define(dll, "NavigatorMoveForward", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorStrafeHorizontal = external_define(dll, "NavigatorStrafeHorizontal", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorStrafeVertical = external_define(dll, "NavigatorStrafeVertical", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorStraighten = external_define(dll, "NavigatorStraighten", dll_cdecl, ty_real, 1, ty_real);
+	global._NavigatorFlyForward = external_define(dll, "NavigatorFlyForward", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorMoveUpWhenMovingForward = external_define(dll, "NavigatorMoveUpWhenMovingForward", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorInvertHorizontalWhenUpsideDown = external_define(dll, "NavigatorInvertHorizontalWhenUpsideDown", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorSetAngleLock = external_define(dll, "NavigatorSetAngleLock", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._NavigatorSetAngles = external_define(dll, "NavigatorSetAngles", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	
 	// Object
 	global._ObjectHide = external_define(dll, "ObjectHide", dll_cdecl, ty_real, 1, ty_real);
 	global._ObjectShow = external_define(dll, "ObjectShow", dll_cdecl, ty_real, 1, ty_real);
