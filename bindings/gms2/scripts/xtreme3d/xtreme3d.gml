@@ -504,6 +504,15 @@ function dll_init(dll) {
 	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	
+	// ObjectHash
+	global._ObjectHashCreate = external_define(dll, "ObjectHashCreate", dll_cdecl, ty_real, 0);
+	global._ObjectHashSetItem = external_define(dll, "ObjectHashSetItem", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
+	global._ObjectHashGetItem = external_define(dll, "ObjectHashGetItem", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ObjectHashDeleteItem = external_define(dll, "ObjectHashDeleteItem", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ObjectHashGetItemCount = external_define(dll, "ObjectHashGetItemCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ObjectHashClear = external_define(dll, "ObjectHashClear", dll_cdecl, ty_real, 1, ty_real);
+	global._ObjectHashDestroy = external_define(dll, "ObjectHashDestroy", dll_cdecl, ty_real, 1, ty_real);
+	
 	// Material
 	global._MaterialLibraryCreate = external_define(dll, "MaterialLibraryCreate", dll_cdecl, ty_real, 0);
 	global._MaterialLibraryActivate = external_define(dll, "MaterialLibraryActivate", dll_cdecl, ty_real, 1, ty_real);

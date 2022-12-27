@@ -116,7 +116,8 @@ uses
   GLSL.TextureShaders,
   //Physics.ODEManager,
   //Physics.ODERagdoll,
-  GLSLShader;
+  GLSLShader,
+  Hashes;
 
 type
     TEmpty = class(TComponent)
@@ -445,7 +446,7 @@ end;
 //{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/text'}
-//{$I 'xtreme3d/objecthash'}
+{$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
 //{$I 'xtreme3d/ode'}
@@ -802,7 +803,11 @@ exports
     MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
 
     // FBO
+
     // ObjectHash
+    ObjectHashCreate, ObjectHashSetItem, ObjectHashGetItem,
+    ObjectHashDeleteItem, ObjectHashGetItemCount,
+    ObjectHashClear, ObjectHashDestroy,
 
     // Text
     TextRead,
