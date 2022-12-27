@@ -862,6 +862,19 @@ function dll_init(dll) {
     // Misc
 	// PtrToReal is now PointerToReal
 	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);
+	
+	// Window
+	global._WindowCreate = external_define(dll, "WindowCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._WindowCenter = external_define(dll, "WindowCenter", dll_cdecl, ty_real, 1, ty_real);
+	global._WindowResize = external_define(dll, "WindowResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._WindowGetPosition = external_define(dll, "WindowGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WindowGetSize = external_define(dll, "WindowGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WindowGetHandle = external_define(dll, "WindowGetHandle", dll_cdecl, ty_real, 1, ty_real);
+	global._WindowSetTitle = external_define(dll, "WindowSetTitle", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._WindowDestroy = external_define(dll, "WindowDestroy", dll_cdecl, ty_real, 1, ty_real);
+	global._WindowIsShowing = external_define(dll, "WindowIsShowing", dll_cdecl, ty_real, 1, ty_real);
+	global._WindowSetIcon = external_define(dll, "WindowSetIcon", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._WindowDispatch = external_define(dll, "WindowDispatch", dll_cdecl, ty_real, 0);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {

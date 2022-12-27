@@ -4,11 +4,13 @@ uses
   System.SysUtils,
   System.Classes,
   System.Math,
+  Messages,
   Windows,
   Winapi.OpenGL,
-  Vcl.Graphics,
-  Vcl.Dialogs,
-  Vcl.Imaging.PNGImage,
+  VCL.Forms,
+  VCL.Graphics,
+  VCL.Dialogs,
+  VCL.Imaging.PNGImage,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
   GLS.Blur,
@@ -453,7 +455,7 @@ end;
 //{$I 'xtreme3d/kraft'}
 //{$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
-//{$I 'xtreme3d/window'}
+{$I 'xtreme3d/window'}
 //{$I 'xtreme3d/color'}
 //{$I 'xtreme3d/pipe'}
 //{$I 'xtreme3d/verlet'}
@@ -820,6 +822,11 @@ exports
     MouseShowCursor, KeyIsPressed, MouseIsPressed,
 
     // Window
+    WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
+    WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
+    WindowSetIcon, WindowIsShowing,
+    WindowDispatch,
+
     // Color
     // Kraft
     // Grid
