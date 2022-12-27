@@ -18,6 +18,7 @@ uses
   GLS.Color,
   GLS.Context,
   GLS.Coordinates,
+  GLS.DCE,
   GLS.ExplosionFx,
   GLS.VectorFileObjects,
   GLS.File3DPDF,
@@ -429,7 +430,7 @@ end;
 {$I 'xtreme3d/tree'}
 {$I 'xtreme3d/navigator'}
 {$I 'xtreme3d/movement'}
-//{$I 'xtreme3d/dce'}
+{$I 'xtreme3d/dce'}
 //{$I 'xtreme3d/fps'}
 //{$I 'xtreme3d/mirror'}
 //{$I 'xtreme3d/partition'}
@@ -730,6 +731,24 @@ exports
     NavigatorSetAngleLock, NavigatorSetAngles,
 
     // DCE
+    DceManagerCreate, DceManagerStep, DceManagerSetGravity, DceManagerSetWorldDirection,
+    DceManagerSetWorldScale, DceManagerSetMovementScale,
+    DceManagerSetLayers, DceManagerSetManualStep,
+    DceDynamicSetManager, DceDynamicSetActive, DceDynamicIsActive,
+    DceDynamicSetUseGravity, DceDynamicSetLayer, DceDynamicGetLayer,
+    DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
+    DceDynamicSetSize, DceDynamicSetSlideOrBounce,
+    DceDynamicApplyAcceleration, DceDynamicApplyAbsAcceleration,
+    DceDynamicStopAcceleration, DceDynamicStopAbsAcceleration,
+    DceDynamicJump, DceDynamicMove, DceDynamicMoveTo,
+    DceDynamicSetVelocity, DceDynamicGetVelocity,
+    //DceDynamicSetAbsVelocity, DceDynamicGetAbsVelocity,
+    DceDynamicApplyImpulse,
+    //DceDynamicApplyAbsImpulse,
+    DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
+    DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
+    DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
+
     // ODE
     // FPSManager
     // Mirror

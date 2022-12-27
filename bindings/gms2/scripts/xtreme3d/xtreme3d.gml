@@ -63,6 +63,50 @@ function dll_init(dll) {
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// DCE
+	global._DceManagerCreate = external_define(dll, "DceManagerCreate", dll_cdecl, ty_real, 0);
+	global._DceManagerStep = external_define(dll, "DceManagerStep", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceManagerSetGravity = external_define(dll, "DceManagerSetGravity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceManagerSetWorldDirection = external_define(dll, "DceManagerSetWorldDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceManagerSetWorldScale = external_define(dll, "DceManagerSetWorldScale", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceManagerSetMovementScale = external_define(dll, "DceManagerSetMovementScale", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceManagerSetLayers = external_define(dll, "DceManagerSetLayers", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceManagerSetManualStep = external_define(dll, "DceManagerSetManualStep", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetManager = external_define(dll, "DceDynamicSetManager", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetActive = external_define(dll, "DceDynamicSetActive", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicIsActive = external_define(dll, "DceDynamicIsActive", dll_cdecl, ty_real, 1, ty_real);
+	global._DceDynamicSetUseGravity = external_define(dll, "DceDynamicSetUseGravity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetLayer = external_define(dll, "DceDynamicSetLayer", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicGetLayer = external_define(dll, "DceDynamicGetLayer", dll_cdecl, ty_real, 1, ty_real);
+	global._DceDynamicSetSolid = external_define(dll, "DceDynamicSetSolid", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetFriction = external_define(dll, "DceDynamicSetFriction", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetBounce = external_define(dll, "DceDynamicSetBounce", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicSetSize = external_define(dll, "DceDynamicSetSize", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicSetSlideOrBounce = external_define(dll, "DceDynamicSetSlideOrBounce", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicApplyAcceleration = external_define(dll, "DceDynamicApplyAcceleration", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicApplyAbsAcceleration = external_define(dll, "DceDynamicApplyAbsAcceleration", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicStopAcceleration = external_define(dll, "DceDynamicStopAcceleration", dll_cdecl, ty_real, 1, ty_real);
+	global._DceDynamicStopAbsAcceleration = external_define(dll, "DceDynamicStopAbsAcceleration", dll_cdecl, ty_real, 1, ty_real);
+	global._DceDynamicJump = external_define(dll, "DceDynamicJump", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._DceDynamicMove = external_define(dll, "DceDynamicMove", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicMoveTo = external_define(dll, "DceDynamicMoveTo", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicSetVelocity = external_define(dll, "DceDynamicSetVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicInGround = external_define(dll, "DceDynamicInGround", dll_cdecl, ty_real, 1, ty_real);
+	global._DceDynamicSetMaxRecursionDepth = external_define(dll, "DceDynamicSetMaxRecursionDepth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetManager = external_define(dll, "DceStaticSetManager", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetActive = external_define(dll, "DceStaticSetActive", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetShape = external_define(dll, "DceStaticSetShape", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetLayer = external_define(dll, "DceStaticSetLayer", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetSize = external_define(dll, "DceStaticSetSize", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceStaticSetSolid = external_define(dll, "DceStaticSetSolid", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetFriction = external_define(dll, "DceStaticSetFriction", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceStaticSetBounceFactor = external_define(dll, "DceStaticSetBounceFactor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicGetVelocity = external_define(dll, "DceDynamicGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._DceDynamicSetAbsVelocity = external_define(dll, "DceDynamicSetAbsVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._DceDynamicGetAbsVelocity = external_define(dll, "DceDynamicGetAbsVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._DceDynamicApplyImpulse = external_define(dll, "DceDynamicApplyImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._DceDynamicApplyAbsImpulse = external_define(dll, "DceDynamicApplyAbsImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	
 	// Dummycube
 	global._DummycubeCreate = external_define(dll, "DummycubeCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._DummycubeAmalgamate = external_define(dll, "DummycubeAmalgamate", dll_cdecl, ty_real, 2, ty_real, ty_real);
