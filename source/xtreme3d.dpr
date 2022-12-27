@@ -82,6 +82,8 @@ uses
   GLS.Scene,
   GLS.SceneViewer,
   GLS.Selection,
+  GLS.ShadowPlane,
+  GLS.ShadowVolume,
   GLS.SkyDome,
   GLS.SpaceText,
   GLS.State,
@@ -90,6 +92,7 @@ uses
   GLS.TextureFormat,
   GLS.ThorFX,
   GLS.TilePlane,
+  GLS.Trail,
   GLS.Tree,
   GLS.Utils,
   GLS.VectorGeometry,
@@ -415,9 +418,9 @@ end;
 {$I 'xtreme3d/terrain'}
 {$I 'xtreme3d/blur'}
 {$I 'xtreme3d/skybox'}
-//{$I 'xtreme3d/trail'}
-//{$I 'xtreme3d/shadowplane'}
-//{$I 'xtreme3d/shadowvolume'}
+{$I 'xtreme3d/trail'}
+{$I 'xtreme3d/shadowplane'}
+{$I 'xtreme3d/shadowvolume'}
 {$I 'xtreme3d/skydome'}
 {$I 'xtreme3d/water'}
 {$I 'xtreme3d/lines'}
@@ -705,8 +708,18 @@ exports
     TreeSetBranchTwist, TreeSetDepth, TreeSetLeafSize, TreeSetLeafThreshold, TreeSetSeed,
 
     // Trail
+    TrailCreate, TrailSetObject, TrailSetAlpha, TrailSetLimits, TrailSetMinDistance,
+    TrailSetUVScale, TrailSetMarkStyle, TrailSetMarkWidth, TrailSetEnabled, TrailClearMarks,
+
     // Shadowplane
+    ShadowplaneCreate, ShadowplaneSetLight, ShadowplaneSetObject, ShadowplaneSetOptions,
+
     // Shadowvolume
+    ShadowvolumeCreate, ShadowvolumeSetActive,
+    ShadowvolumeAddLight, ShadowvolumeRemoveLight,
+    ShadowvolumeAddOccluder, ShadowvolumeRemoveOccluder,
+    ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
+
     // Navigator
     // DCE
     // ODE

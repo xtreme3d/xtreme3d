@@ -575,6 +575,18 @@ function dll_init(dll) {
 	global._ThorFXSetTarget = external_define(dll, "ThorFXSetTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ThorFXCreate = external_define(dll, "ThorFXCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// Trail
+	global._TrailCreate = external_define(dll, "TrailCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetObject = external_define(dll, "TrailSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetAlpha = external_define(dll, "TrailSetAlpha", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._TrailSetLimits = external_define(dll, "TrailSetLimits", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._TrailSetMinDistance = external_define(dll, "TrailSetMinDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetUVScale = external_define(dll, "TrailSetUVScale", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetMarkStyle = external_define(dll, "TrailSetMarkStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetMarkWidth = external_define(dll, "TrailSetMarkWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailSetEnabled = external_define(dll, "TrailSetEnabled", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._TrailClearMarks = external_define(dll, "TrailClearMarks", dll_cdecl, ty_real, 1, ty_real);
+	
 	// FireFX
 	global._FireFXManagerCreate = external_define(dll, "FireFXManagerCreate", dll_cdecl, ty_real, 0);
 	global._FireFXCreate = external_define(dll, "FireFXCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -641,6 +653,22 @@ function dll_init(dll) {
 	global._SkydomeAddStar = external_define(dll, "SkydomeAddStar", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SkydomeClearStars = external_define(dll, "SkydomeClearStars", dll_cdecl, ty_real, 1, ty_real);
 	global._SkydomeTwinkleStars = external_define(dll, "SkydomeTwinkleStars", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// Shadowplane
+	global._ShadowplaneCreate = external_define(dll, "ShadowplaneCreate", dll_cdecl, ty_real, 9, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._ShadowplaneSetLight = external_define(dll, "ShadowplaneSetLight", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowplaneSetObject = external_define(dll, "ShadowplaneSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowplaneSetOptions = external_define(dll, "ShadowplaneSetOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	
+	// Shadowvolume
+	global._ShadowvolumeCreate = external_define(dll, "ShadowvolumeCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._ShadowvolumeSetActive = external_define(dll, "ShadowvolumeSetActive", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowvolumeAddLight = external_define(dll, "ShadowvolumeAddLight", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowvolumeRemoveLight = external_define(dll, "ShadowvolumeRemoveLight", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowvolumeAddOccluder = external_define(dll, "ShadowvolumeAddOccluder", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowvolumeRemoveOccluder = external_define(dll, "ShadowvolumeRemoveOccluder", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowvolumeSetDarkeningColor = external_define(dll, "ShadowvolumeSetDarkeningColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ShadowvolumeSetMode = external_define(dll, "ShadowvolumeSetMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// Tree
 	global._TreeCreate = external_define(dll, "TreeCreate", dll_cdecl, ty_real, 1, ty_real);
