@@ -68,6 +68,7 @@ uses
   GLS.FileX,
   GLS.FileZLIB,
   GLS.FireFX,
+  GLS.FPSMovement,
   GLS.GeomObjects,
   GLS.HeightData,
   GLS.HUDObjects,
@@ -75,6 +76,7 @@ uses
   GLS.Material,
   GLS.MaterialScript,
   GLS.MeshUtils,
+  GLS.Mirror,
   GLS.Movement,
   GLS.Navigator,
   GLS.Objects,
@@ -431,8 +433,8 @@ end;
 {$I 'xtreme3d/navigator'}
 {$I 'xtreme3d/movement'}
 {$I 'xtreme3d/dce'}
-//{$I 'xtreme3d/fps'}
-//{$I 'xtreme3d/mirror'}
+{$I 'xtreme3d/fps'}
+{$I 'xtreme3d/mirror'}
 //{$I 'xtreme3d/partition'}
 //{$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
@@ -750,8 +752,17 @@ exports
     DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
 
     // ODE
+
     // FPSManager
+    FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,
+    FpsManagerAddMap, FpsManagerRemoveMap, FpsManagerMapSetCollisionGroup,
+    FpsSetManager, FpsSetCollisionGroup, FpsSetSphereRadius, FpsSetGravity,
+    FpsMove, FpsStrafe, FpsLift, FpsGetVelocity,
+
     // Mirror
+    MirrorCreate, MirrorSetObject, MirrorSetOptions,
+    MirrorSetShape, MirrorSetDiskOptions,
+
     // Partition
     // Proxy & MultiProxy
     // Grid

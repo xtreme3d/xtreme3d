@@ -102,10 +102,11 @@ function dll_init(dll) {
 	global._DceStaticSetFriction = external_define(dll, "DceStaticSetFriction", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DceStaticSetBounceFactor = external_define(dll, "DceStaticSetBounceFactor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DceDynamicGetVelocity = external_define(dll, "DceDynamicGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// Milestone II functions
 	//global._DceDynamicSetAbsVelocity = external_define(dll, "DceDynamicSetAbsVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	//global._DceDynamicGetAbsVelocity = external_define(dll, "DceDynamicGetAbsVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._DceDynamicApplyImpulse = external_define(dll, "DceDynamicApplyImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	//global._DceDynamicApplyAbsImpulse = external_define(dll, "DceDynamicApplyAbsImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._DceDynamicApplyImpulse = external_define(dll, "DceDynamicApplyImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	
 	// Dummycube
 	global._DummycubeCreate = external_define(dll, "DummycubeCreate", dll_cdecl, ty_real, 1, ty_real);
@@ -145,6 +146,22 @@ function dll_init(dll) {
 	global._CameraPointInFront = external_define(dll, "CameraPointInFront", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._CameraGetFieldOfView = external_define(dll, "CameraGetFieldOfView", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// FPS
+	global._FpsManagerCreate = external_define(dll, "FpsManagerCreate", dll_cdecl, ty_real, 0);
+	global._FpsManagerSetNavigator = external_define(dll, "FpsManagerSetNavigator", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsManagerSetMovementScale = external_define(dll, "FpsManagerSetMovementScale", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsManagerAddMap = external_define(dll, "FpsManagerAddMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsManagerRemoveMap = external_define(dll, "FpsManagerRemoveMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsManagerMapSetCollisionGroup = external_define(dll, "FpsManagerMapSetCollisionGroup", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FpsSetManager = external_define(dll, "FpsSetManager", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsSetCollisionGroup = external_define(dll, "FpsSetCollisionGroup", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsSetSphereRadius = external_define(dll, "FpsSetSphereRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsSetGravity = external_define(dll, "FpsSetGravity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsMove = external_define(dll, "FpsMove", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsStrafe = external_define(dll, "FpsStrafe", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsLift = external_define(dll, "FpsLift", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FpsGetVelocity = external_define(dll, "FpsGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Light
 	global._LightCreate = external_define(dll, "LightCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightSetAmbientColor = external_define(dll, "LightSetAmbientColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -159,6 +176,13 @@ function dll_init(dll) {
 	global._LightGetColor = external_define(dll, "LightGetColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Mirror
+	global._MirrorCreate = external_define(dll, "MirrorCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MirrorSetObject = external_define(dll, "MirrorSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MirrorSetOptions = external_define(dll, "MirrorSetOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._MirrorSetShape = external_define(dll, "MirrorSetShape", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MirrorSetDiskOptions = external_define(dll, "MirrorSetDiskOptions", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
 	// Font & Text
 	global._BmpfontCreate = external_define(dll, "BmpfontCreate", dll_cdecl, ty_real, 8, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
