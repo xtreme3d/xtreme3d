@@ -22,6 +22,7 @@ uses
   GLS.Coordinates,
   GLS.DCE,
   GLS.ExplosionFx,
+  GLS.Extrusion,
   GLS.VectorFileObjects,
   GLS.File3DPDF,
   GLS.File3DS,
@@ -456,8 +457,8 @@ end;
 //{$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
-//{$I 'xtreme3d/color'}
-//{$I 'xtreme3d/pipe'}
+{$I 'xtreme3d/color'}
+{$I 'xtreme3d/pipe'}
 //{$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 
@@ -828,8 +829,13 @@ exports
     WindowDispatch,
 
     // Color
+    MakeColorRGB, MakeColorRGBFloat,
+
+    // Pipe
+    PipeCreate, PipeAddNode, PipeSetDivision, PipeSetSplineMode, PipeDeleteNode,
+    PipeSetRadius, PipeSetNode, PipeSetSlices,
+
     // Kraft
-    // Grid
     // Verlet
 
     // PickList

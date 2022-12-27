@@ -875,6 +875,20 @@ function dll_init(dll) {
 	global._WindowIsShowing = external_define(dll, "WindowIsShowing", dll_cdecl, ty_real, 1, ty_real);
 	global._WindowSetIcon = external_define(dll, "WindowSetIcon", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._WindowDispatch = external_define(dll, "WindowDispatch", dll_cdecl, ty_real, 0);
+	
+	// Color
+	global._MakeColorRGB = external_define(dll, "MakeColorRGB", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._MakeColorRGBFloat = external_define(dll, "MakeColorRGBFloat", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	
+	// Pipe
+	global._PipeCreate = external_define(dll, "PipeCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._PipeAddNode = external_define(dll, "PipeAddNode", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._PipeSetDivision = external_define(dll, "PipeSetDivision", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PipeSetSplineMode = external_define(dll, "PipeSetSplineMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PipeDeleteNode = external_define(dll, "PipeDeleteNode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PipeSetRadius = external_define(dll, "PipeSetRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PipeSetNode = external_define(dll, "PipeSetNode", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._PipeSetSlices = external_define(dll, "PipeSetSlices", dll_cdecl, ty_real, 2, ty_real, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
