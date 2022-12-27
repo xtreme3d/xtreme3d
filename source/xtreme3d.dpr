@@ -425,7 +425,6 @@ end;
 {$I 'xtreme3d/actor'}
 {$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
-//{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
 {$I 'xtreme3d/shaders'}
 {$I 'xtreme3d/thorfx'}
@@ -631,8 +630,6 @@ exports
     ObjectSetMatrixColumn, ObjectExportMatrix, ObjectExportAbsoluteMatrix,
     ObjectIgnoreDepthBuffer, ObjectInFrustum, ObjectFindByName, ObjectIsPicked,
 
-    // Polygon
-
     // Material
     MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
     MaterialLibraryClear, MaterialLibraryDeleteUnused,
@@ -797,8 +794,6 @@ exports
     MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
     MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 
-    // ShadowMap
-
     // Movement
     MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,
     MovementAddPath, MovementSetActivePath, MovementPathSetSplineMode,
@@ -837,7 +832,6 @@ exports
     PipeCreate, PipeAddNode, PipeSetDivision, PipeSetSplineMode, PipeDeleteNode,
     PipeSetRadius, PipeSetNode, PipeSetSlices,
 
-    // Kraft
     // Verlet
 
     // PickList

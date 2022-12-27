@@ -15,6 +15,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `MaterialSetZWrite` is now `MaterialSetDepthWrite`
 - New function `MaterialSetDepthTest`
 - `PtrToReal` is now `PointerToReal`.
+- Polygon functions were removed.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
