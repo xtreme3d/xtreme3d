@@ -108,6 +108,8 @@ uses
   GLS.Trail,
   GLS.Tree,
   GLS.Utils,
+  GLS.VerletTypes,
+  GLS.VerletClothify,
   GLS.VectorGeometry,
   GLS.VectorLists,
   GLS.VectorTypes,
@@ -459,7 +461,7 @@ end;
 {$I 'xtreme3d/window'}
 {$I 'xtreme3d/color'}
 {$I 'xtreme3d/pipe'}
-//{$I 'xtreme3d/verlet'}
+{$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 
 exports
