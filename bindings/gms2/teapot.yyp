@@ -71,6 +71,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"look_left_right.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"simple-vp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"simple-fp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles",},
   ],
   "MetaData": {
     "IDEVersion": "2022.8.0.34",

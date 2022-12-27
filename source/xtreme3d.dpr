@@ -119,8 +119,8 @@ uses
   GLSL.MultiMaterialShader,
   GLSL.ShapeShaders,
   GLSL.TextureShaders,
-  //Physics.ODEManager,
-  //Physics.ODERagdoll,
+  Physics.ODEManager,
+  Physics.ODERagdoll,
   GLSLShader,
   Hashes;
 
