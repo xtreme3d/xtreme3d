@@ -71,6 +71,7 @@ uses
   GLS.FPSMovement,
   GLS.GeometryBB,
   GLS.GeomObjects,
+  GLS.Graph,
   GLS.HeightData,
   GLS.HUDObjects,
   GLS.LensFlare,
@@ -445,7 +446,7 @@ end;
 {$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/text'}
 //{$I 'xtreme3d/objecthash'}
-//{$I 'xtreme3d/grid'}
+{$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
 //{$I 'xtreme3d/ode'}
 //{$I 'xtreme3d/kraft'}
@@ -782,6 +783,10 @@ exports
     //ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
 
     // Grid
+    GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
+    GridSetColor, GridSetSize, GridSetPattern,
+    GridSetTile, GridSetStep,
+
     // MemoryViewer
     // ShadowMap
 

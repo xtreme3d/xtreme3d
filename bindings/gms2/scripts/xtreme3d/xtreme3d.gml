@@ -379,6 +379,17 @@ function dll_init(dll) {
 	global._FreeformMeshFaceGroupSetLightmapIndex = external_define(dll, "FreeformMeshFaceGroupSetLightmapIndex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._FreeformSetMaterialLibraries = external_define(dll, "FreeformSetMaterialLibraries", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
+	// Grid
+	global._GridCreate = external_define(dll, "GridCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._GridSetLineStyle = external_define(dll, "GridSetLineStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GridSetLineSmoothing = external_define(dll, "GridSetLineSmoothing", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GridSetParts = external_define(dll, "GridSetParts", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GridSetColor = external_define(dll, "GridSetColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._GridSetSize = external_define(dll, "GridSetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GridSetPattern = external_define(dll, "GridSetPattern", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GridSetTile = external_define(dll, "GridSetTile", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._GridSetStep = external_define(dll, "GridSetStep", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Navigator
 	global._NavigatorCreate = external_define(dll, "NavigatorCreate", dll_cdecl, ty_real, 0);
 	global._NavigatorSetObject = external_define(dll, "NavigatorSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
