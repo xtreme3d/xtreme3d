@@ -802,8 +802,6 @@ exports
     MovementPathNodeSetSpeed,
     MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
 
-    // FBO
-
     // ObjectHash
     ObjectHashCreate, ObjectHashSetItem, ObjectHashGetItem,
     ObjectHashDeleteItem, ObjectHashGetItemCount,
@@ -812,8 +810,6 @@ exports
     // Text
     TextRead,
     //TextConvertANSIToUTF8,
-
-    // ClipPlane
 
     // Input
     MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
