@@ -733,6 +733,34 @@ function dll_init(dll) {
 	global._MovementPathSetLoop = external_define(dll, "MovementPathSetLoop", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MovementPathDeleteNode = external_define(dll, "MovementPathDeleteNode", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
+	// Partition
+	global._OctreeCreate = external_define(dll, "OctreeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._QuadtreeCreate = external_define(dll, "QuadtreeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._PartitionDestroy = external_define(dll, "PartitionDestroy", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionAddLeaf = external_define(dll, "PartitionAddLeaf", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionLeafChanged = external_define(dll, "PartitionLeafChanged", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionQueryFrustum = external_define(dll, "PartitionQueryFrustum", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionQueryLeaf = external_define(dll, "PartitionQueryLeaf", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionQueryAABB = external_define(dll, "PartitionQueryAABB", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionQueryBSphere = external_define(dll, "PartitionQueryBSphere", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionGetNodeTests = external_define(dll, "PartitionGetNodeTests", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionGetNodeCount = external_define(dll, "PartitionGetNodeCount", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionGetResult = external_define(dll, "PartitionGetResult", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._PartitionGetResultCount = external_define(dll, "PartitionGetResultCount", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionResultShow = external_define(dll, "PartitionResultShow", dll_cdecl, ty_real, 1, ty_real);
+	global._PartitionResultHide = external_define(dll, "PartitionResultHide", dll_cdecl, ty_real, 1, ty_real);
+	
+	// Proxy
+	global._ProxyObjectCreate = external_define(dll, "ProxyObjectCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ProxyObjectSetTarget = external_define(dll, "ProxyObjectSetTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MultiProxyObjectCreate = external_define(dll, "MultiProxyObjectCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._MultiProxyObjectAddTarget = external_define(dll, "MultiProxyObjectAddTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ActorProxyObjectCreate = external_define(dll, "ActorProxyObjectCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// Milestone II functions
+	//global._ActorProxyObjectSwitchToAnimation = external_define(dll, "ActorProxyObjectSwitchToAnimation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._ActorProxyObjectSetAnimationRange = external_define(dll, "ActorProxyObjectSetAnimationRange", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._ActorProxyObjectSetInterval = external_define(dll, "ActorProxyObjectSetInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
 	// Skybox
 	global._SkyboxCreate = external_define(dll, "SkyboxCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._SkyboxSetMaterial = external_define(dll, "SkyboxSetMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);

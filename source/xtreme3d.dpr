@@ -69,6 +69,7 @@ uses
   GLS.FileZLIB,
   GLS.FireFX,
   GLS.FPSMovement,
+  GLS.GeometryBB,
   GLS.GeomObjects,
   GLS.HeightData,
   GLS.HUDObjects,
@@ -78,11 +79,14 @@ uses
   GLS.MeshUtils,
   GLS.Mirror,
   GLS.Movement,
+  GLS.MultiProxy,
   GLS.Navigator,
   GLS.Objects,
   GLS.OpenGLAdapter,
+  GLS.SpacePartition,
   GLS.PersistentClasses,
   GLS.ProcTextures,
+  GLS.ProxyObjects,
   GLS.RenderContextInfo,
   GLS.Scene,
   GLS.SceneViewer,
@@ -435,10 +439,10 @@ end;
 {$I 'xtreme3d/dce'}
 {$I 'xtreme3d/fps'}
 {$I 'xtreme3d/mirror'}
-//{$I 'xtreme3d/partition'}
+{$I 'xtreme3d/partition'}
 //{$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
-//{$I 'xtreme3d/proxy'}
+{$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/text'}
 //{$I 'xtreme3d/objecthash'}
 //{$I 'xtreme3d/grid'}
@@ -764,7 +768,19 @@ exports
     MirrorSetShape, MirrorSetDiskOptions,
 
     // Partition
+    OctreeCreate, QuadtreeCreate, PartitionDestroy, PartitionAddLeaf,
+    PartitionLeafChanged, PartitionQueryFrustum, PartitionQueryLeaf,
+    PartitionQueryAABB, PartitionQueryBSphere, PartitionGetNodeTests,
+    PartitionGetNodeCount, PartitionGetResult, PartitionGetResultCount,
+    PartitionResultShow, PartitionResultHide,
+
     // Proxy & MultiProxy
+    ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
+    MultiProxyObjectCreate, MultiProxyObjectAddTarget,
+    ActorProxyObjectCreate,
+    //ActorProxyObjectSwitchToAnimation,
+    //ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
+
     // Grid
     // MemoryViewer
     // ShadowMap
