@@ -177,6 +177,13 @@ function dll_init(dll) {
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
 	
+	// MemoryViewer
+	global._MemoryViewerCreate = external_define(dll, "MemoryViewerCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MemoryViewerSetCamera = external_define(dll, "MemoryViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._MemoryViewerRender = external_define(dll, "MemoryViewerRender", dll_cdecl, ty_real, 1, ty_real);
+	global._MemoryViewerSetViewport = external_define(dll, "MemoryViewerSetViewport", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._MemoryViewerCopyToTexture = external_define(dll, "MemoryViewerCopyToTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	
 	// Mirror
 	global._MirrorCreate = external_define(dll, "MirrorCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._MirrorSetObject = external_define(dll, "MirrorSetObject", dll_cdecl, ty_real, 2, ty_real, ty_real);

@@ -441,7 +441,7 @@ end;
 {$I 'xtreme3d/fps'}
 {$I 'xtreme3d/mirror'}
 {$I 'xtreme3d/partition'}
-//{$I 'xtreme3d/memviewer'}
+{$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/text'}
@@ -788,6 +788,9 @@ exports
     GridSetTile, GridSetStep,
 
     // MemoryViewer
+    MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
+    MemoryViewerSetViewport, MemoryViewerCopyToTexture,
+
     // ShadowMap
 
     // Movement
