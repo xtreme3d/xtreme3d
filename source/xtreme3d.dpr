@@ -91,6 +91,7 @@ uses
   GLS.PersistentClasses,
   GLS.ProcTextures,
   GLS.ProxyObjects,
+  GLS.Ragdoll,
   GLS.RenderContextInfo,
   GLS.Scene,
   GLS.SceneViewer,
@@ -142,7 +143,7 @@ var
     collisionNormal: TGLVector;
 
     ode: TGLODEManager;
-    //odeRagdollWorld: TGLODERagdollWorld;
+    odeRagdollWorld: TGLODERagdollWorld;
     jointList: TGLODEJointList;
 
     //kraftRaycastPoint: TKraftVector3;
@@ -822,9 +823,9 @@ exports
     OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
     OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
     OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
-    //OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
-    //OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
-    //OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
+    OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
+    OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
+    OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
     //OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
     //OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
     //OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,

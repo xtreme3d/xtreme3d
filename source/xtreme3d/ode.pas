@@ -4,7 +4,7 @@ begin
   dWorldSetAutoDisableFlag(ode.World, 0);
   ode.RenderPoint := TGLRenderPoint.CreateAsChild(scene.Objects);
   jointList := TGLODEJointList.Create(nil);
-  //odeRagdollWorld := TODERagdollWorld.CreateFromManager(ode);
+  odeRagdollWorld := TGLODERagdollWorld.CreateFrom(ode.world, ode.space, ode.contactgroup);
   result := 1.0;
 end;
 
@@ -467,7 +467,6 @@ begin
   result := 0.0;
 end;
 
-// Change from Xtreme3D 2.0: mesh index should be specified
 // Note Trimes/Trimesh collision is not supported
 function OdeAddTriMesh(obj, mesh: real): real; cdecl;
 var
@@ -498,7 +497,6 @@ begin
   result := 0.0;
 end;
 
-// New function
 function OdeElementSetDensity(element, density: real): real; cdecl;
 var
   elem: TGLODEElementBase;
@@ -931,14 +929,13 @@ begin
   result := 1.0;
 end;
 
-{
 function OdeRagdollCreate(actor: real): real; cdecl;
 var
   act: TGLActor;
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
   act := TGLActor(RealToPtr(actor));
-  ragdoll := TODERagdoll.Create(act);
+  ragdoll := TGLODERagdoll.Create(act);
   ragdoll.ODEWorld := odeRagdollWorld;
   ragdoll.GLSceneRoot := scene.Objects;
   ragdoll.ShowBoundingBoxes := False;
@@ -947,17 +944,17 @@ end;
 
 function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; cdecl;
 var
-  hjoint: TODERagdollHingeJoint;
+  hjoint: TGLODERagdollHingeJoint;
 begin
-  hjoint := TODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
+  hjoint := TGLODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
   result := ObjToReal(hjoint);
 end;
 
 function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; cdecl;
 var
-  ujoint: TODERagdollUniversalJoint;
+  ujoint: TGLODERagdollUniversalJoint;
 begin
-  ujoint := TODERagdollUniversalJoint.Create(
+  ujoint := TGLODERagdollUniversalJoint.Create(
     AffineVectorMake(x1, y1, z1), lostop1, histop1,
     AffineVectorMake(x2, y2, z2), lostop2, histop2);
   result := ObjToReal(ujoint);
@@ -965,46 +962,46 @@ end;
 
 function OdeRagdollDummyJointCreate: real; cdecl;
 var
-  djoint: TODERagdollDummyJoint;
+  djoint: TGLODERagdollDummyJoint;
 begin
-  djoint := TODERagdollDummyJoint.Create;
+  djoint := TGLODERagdollDummyJoint.Create;
   result := ObjToReal(djoint);
 end;
 
 function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
-  bone: TODERagdollBone;
+  ragdoll: TGLODERagdoll;
+  bone: TGLODERagdollBone;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   if not (parentbone = 0) then
-    bone := TODERagdollBone.CreateOwned(TODERagdollBone(trunc64(parentbone)))
+    bone := TGLODERagdollBone.CreateOwned(TGLODERagdollBone(RealToPtr(parentbone)))
   else
   begin
-    bone := TODERagdollBone.Create(ragdoll);
+    bone := TGLODERagdollBone.Create(ragdoll);
     ragdoll.SetRootBone(bone);
   end;
-  bone.Joint := TGLRagdolJoint(trunc64(ragjoint));
-  bone.BoneID := trunc64(boneid);
+  bone.Joint := TGLRagdolJoint(RealToPtr(ragjoint));
+  bone.BoneID := trunc(boneid);
   //bone.Name := IntToStr(bone.BoneID);
-  result := Integer(bone);
+  result := ObjToReal(bone);
 end;
 
 function OdeRagdollBuild(rag: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   ragdoll.BuildRagdoll;
   result := 1.0;
 end;
 
 function OdeRagdollEnable(rag, mode: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  if (Boolean(trunc64(mode))) then
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
+  if (Boolean(trunc(mode))) then
     ragdoll.Start
   else
     ragdoll.Stop;
@@ -1013,13 +1010,12 @@ end;
 
 function OdeRagdollUpdate(rag: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   ragdoll.Update;
   result := 1.0;
 end;
-}
 
 {
 function OdeDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
