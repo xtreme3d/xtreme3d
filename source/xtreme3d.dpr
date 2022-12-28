@@ -125,6 +125,7 @@ uses
   Physics.ODERagdoll,
   GLSLShader,
   GLFileCSM,
+  GLFileLOD,
   Hashes;
 
 type
