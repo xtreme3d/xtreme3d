@@ -932,6 +932,7 @@ function dll_init(dll) {
 	global._OdeAddSphere = external_define(dll, "OdeAddSphere", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddPlane = external_define(dll, "OdeAddPlane", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeAddCylinder = external_define(dll, "OdeAddCylinder", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	// OdeAddCone removed
 	//global._OdeAddCone = external_define(dll, "OdeAddCone", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddCapsule = external_define(dll, "OdeAddCapsule", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddTriMesh = external_define(dll, "OdeAddTriMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -994,24 +995,24 @@ function dll_init(dll) {
 	// Verlet
 	global._VerletWorldCreate = external_define(dll, "VerletWorldCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._VerletWorldCreateOctree = external_define(dll, "VerletWorldCreateOctree", dll_cdecl, ty_real, 9, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletWorldGravityCreate = external_define(dll, "VerletWorldGravityCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletWorldGravitySetDirection = external_define(dll, "VerletWorldGravitySetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletWorldGravityCreate = external_define(dll, "VerletWorldGravityCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletWorldGravitySetDirection = external_define(dll, "VerletWorldGravitySetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._VerletWorldUpdate = external_define(dll, "VerletWorldUpdate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._EdgeDetectorCreate = external_define(dll, "EdgeDetectorCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._EdgeDetectorSetWeldDistance = external_define(dll, "EdgeDetectorSetWeldDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletConstraintFloorCreate = external_define(dll, "VerletConstraintFloorCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._VerletConstraintFloorSetNormal = external_define(dll, "VerletConstraintFloorSetNormal", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintFloorSetObjectLocations = external_define(dll, "VerletConstraintFloorSetObjectLocations", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletConstraintSphereCreate = external_define(dll, "VerletConstraintSphereCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletConstraintCylinderCreate = external_define(dll, "VerletConstraintCylinderCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletConstraintCylinderSetAxis = external_define(dll, "VerletConstraintCylinderSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintCubeCreate = external_define(dll, "VerletConstraintCubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintCubeCreateSetCube = external_define(dll, "VerletConstraintCubeCreateSetCube", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletConstraintCubeSetDirection = external_define(dll, "VerletConstraintCubeSetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintCapsuleCreate = external_define(dll, "VerletConstraintCapsuleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._VerletConstraintCapsuleSetAxis = external_define(dll, "VerletConstraintCapsuleSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintSetPosition = external_define(dll, "VerletConstraintSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletConstraintSetFrictionRatio = external_define(dll, "VerletConstraintSetFrictionRatio", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintFloorCreate = external_define(dll, "VerletConstraintFloorCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletConstraintFloorSetNormal = external_define(dll, "VerletConstraintFloorSetNormal", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintFloorSetObjectLocations = external_define(dll, "VerletConstraintFloorSetObjectLocations", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintSphereCreate = external_define(dll, "VerletConstraintSphereCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintCylinderCreate = external_define(dll, "VerletConstraintCylinderCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintCylinderSetAxis = external_define(dll, "VerletConstraintCylinderSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintCubeCreate = external_define(dll, "VerletConstraintCubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintCubeCreateSetCube = external_define(dll, "VerletConstraintCubeCreateSetCube", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintCubeSetDirection = external_define(dll, "VerletConstraintCubeSetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintCapsuleCreate = external_define(dll, "VerletConstraintCapsuleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletConstraintCapsuleSetAxis = external_define(dll, "VerletConstraintCapsuleSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintSetPosition = external_define(dll, "VerletConstraintSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletConstraintSetFrictionRatio = external_define(dll, "VerletConstraintSetFrictionRatio", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._VerletConstraintSetEnabled = external_define(dll, "VerletConstraintSetEnabled", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._VerletGetNodeCount = external_define(dll, "VerletGetNodeCount", dll_cdecl, ty_real, 1, ty_real);
 	global._VerletNodeNailedDown = external_define(dll, "VerletNodeNailedDown", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -1020,12 +1021,12 @@ function dll_init(dll) {
 	global._VerletNodeSetFriction = external_define(dll, "VerletNodeSetFriction", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._VerletNodeSetWeight = external_define(dll, "VerletNodeSetWeight", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._VerletNodeApplyFriction = external_define(dll, "VerletNodeApplyFriction", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletAirResistanceCreate = external_define(dll, "VerletAirResistanceCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._VerletAirResistanceSetWindDirection = external_define(dll, "VerletAirResistanceSetWindDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	//global._VerletAirResistanceSetWindMagnitude = external_define(dll, "VerletAirResistanceSetWindMagnitude", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._VerletAirResistanceSetWindChaos = external_define(dll, "VerletAirResistanceSetWindChaos", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletAirResistanceCreate = external_define(dll, "VerletAirResistanceCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletAirResistanceSetWindDirection = external_define(dll, "VerletAirResistanceSetWindDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletAirResistanceSetWindMagnitude = external_define(dll, "VerletAirResistanceSetWindMagnitude", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletAirResistanceSetWindChaos = external_define(dll, "VerletAirResistanceSetWindChaos", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._VerletConstraintGetCount = external_define(dll, "VerletConstraintGetCount", dll_cdecl, ty_real, 1, ty_real);
-	//global._VerletConstraintSetSlack = external_define(dll, "VerletConstraintSetSlack", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletConstraintSetSlack = external_define(dll, "VerletConstraintSetSlack", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._VerletWorldSetSimTime = external_define(dll, "VerletWorldSetSimTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._VerletWorldSetMaxDeltaTime = external_define(dll, "VerletWorldSetMaxDeltaTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
 }
