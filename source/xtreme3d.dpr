@@ -481,7 +481,6 @@ end;
 {$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
-{$I 'xtreme3d/text'}
 {$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
@@ -703,6 +702,8 @@ exports
     //GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
     GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
     GLSLShaderSetParameterHasTextureEx,
+    //GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
+    //GLSLShaderSetParameterViewMatrix,
 
     // ThorFX
     ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
@@ -828,7 +829,7 @@ exports
     //OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
     //OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 
-    // FPSManager
+    // Fps
     FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,
     FpsManagerAddMap, FpsManagerRemoveMap, FpsManagerMapSetCollisionGroup,
     FpsSetManager, FpsSetCollisionGroup, FpsSetSphereRadius, FpsSetGravity,
@@ -874,10 +875,6 @@ exports
     ObjectHashDeleteItem, ObjectHashGetItemCount,
     ObjectHashClear, ObjectHashDestroy,
 
-    // Text
-    TextRead,
-    //TextConvertANSIToUTF8,
-
     // Input
     MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
     MouseShowCursor, KeyIsPressed, MouseIsPressed,
@@ -896,6 +893,33 @@ exports
     PipeSetRadius, PipeSetNode, PipeSetSlices,
 
     // Verlet
+    VerletWorldCreate, VerletWorldCreateOctree,
+    //VerletWorldGravityCreate,
+    //VerletWorldGravitySetDirection,
+    VerletWorldUpdate, EdgeDetectorCreate, EdgeDetectorSetWeldDistance,
+    //VerletConstraintFloorCreate,
+    //VerletConstraintFloorSetNormal,
+    //VerletConstraintSetPosition,
+    //VerletConstraintSetFrictionRatio,
+    VerletConstraintSetEnabled,
+    //VerletConstraintFloorSetObjectLocations,
+    //VerletConstraintSphereCreate,
+    //VerletConstraintCylinderCreate,
+    //VerletConstraintCubeCreate,
+    //VerletConstraintCubeCreateSetCube,
+    //VerletConstraintCubeSetDirection,
+    //VerletConstraintCapsuleCreate,
+    //VerletConstraintCylinderSetAxis,
+    //VerletConstraintCapsuleSetAxis,
+    VerletGetNodeCount, VerletNodeNailedDown,VerletNodeSetPosition, VerletNodeSetRadius,
+    VerletNodeSetFriction, VerletNodeSetWeight, VerletNodeApplyFriction,
+    //VerletAirResistanceCreate,
+    //VerletAirResistanceSetWindDirection,
+    //VerletAirResistanceSetWindMagnitude,
+    //VerletAirResistanceSetWindChaos,
+    VerletConstraintGetCount,
+    //VerletConstraintSetSlack,
+    VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
 
     // PickList
     PickListCreate, PickListClear, PickListGetCount, PickListGetHit;

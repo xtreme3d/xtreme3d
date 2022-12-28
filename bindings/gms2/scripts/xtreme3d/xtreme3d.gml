@@ -671,8 +671,8 @@ function dll_init(dll) {
 	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
 	// Text
-	global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
-	// Not yet implemented:
+	// Removed:
+	//global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
 	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
 	
 	// ThorFX
@@ -990,6 +990,44 @@ function dll_init(dll) {
 	global._OdeDynamicSetPosition = external_define(dll, "OdeDynamicSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicSetRotationQuaternion = external_define(dll, "OdeDynamicSetRotationQuaternion", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	*/
+	
+	// Verlet
+	global._VerletWorldCreate = external_define(dll, "VerletWorldCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletWorldCreateOctree = external_define(dll, "VerletWorldCreateOctree", dll_cdecl, ty_real, 9, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletWorldGravityCreate = external_define(dll, "VerletWorldGravityCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletWorldGravitySetDirection = external_define(dll, "VerletWorldGravitySetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._VerletWorldUpdate = external_define(dll, "VerletWorldUpdate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._EdgeDetectorCreate = external_define(dll, "EdgeDetectorCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._EdgeDetectorSetWeldDistance = external_define(dll, "EdgeDetectorSetWeldDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletConstraintFloorCreate = external_define(dll, "VerletConstraintFloorCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._VerletConstraintFloorSetNormal = external_define(dll, "VerletConstraintFloorSetNormal", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintFloorSetObjectLocations = external_define(dll, "VerletConstraintFloorSetObjectLocations", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletConstraintSphereCreate = external_define(dll, "VerletConstraintSphereCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletConstraintCylinderCreate = external_define(dll, "VerletConstraintCylinderCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletConstraintCylinderSetAxis = external_define(dll, "VerletConstraintCylinderSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintCubeCreate = external_define(dll, "VerletConstraintCubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintCubeCreateSetCube = external_define(dll, "VerletConstraintCubeCreateSetCube", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletConstraintCubeSetDirection = external_define(dll, "VerletConstraintCubeSetDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintCapsuleCreate = external_define(dll, "VerletConstraintCapsuleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._VerletConstraintCapsuleSetAxis = external_define(dll, "VerletConstraintCapsuleSetAxis", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintSetPosition = external_define(dll, "VerletConstraintSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletConstraintSetFrictionRatio = external_define(dll, "VerletConstraintSetFrictionRatio", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintSetEnabled = external_define(dll, "VerletConstraintSetEnabled", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletGetNodeCount = external_define(dll, "VerletGetNodeCount", dll_cdecl, ty_real, 1, ty_real);
+	global._VerletNodeNailedDown = external_define(dll, "VerletNodeNailedDown", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletNodeSetPosition = external_define(dll, "VerletNodeSetPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._VerletNodeSetRadius = external_define(dll, "VerletNodeSetRadius", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletNodeSetFriction = external_define(dll, "VerletNodeSetFriction", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletNodeSetWeight = external_define(dll, "VerletNodeSetWeight", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletNodeApplyFriction = external_define(dll, "VerletNodeApplyFriction", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletAirResistanceCreate = external_define(dll, "VerletAirResistanceCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	//global._VerletAirResistanceSetWindDirection = external_define(dll, "VerletAirResistanceSetWindDirection", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._VerletAirResistanceSetWindMagnitude = external_define(dll, "VerletAirResistanceSetWindMagnitude", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._VerletAirResistanceSetWindChaos = external_define(dll, "VerletAirResistanceSetWindChaos", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletConstraintGetCount = external_define(dll, "VerletConstraintGetCount", dll_cdecl, ty_real, 1, ty_real);
+	//global._VerletConstraintSetSlack = external_define(dll, "VerletConstraintSetSlack", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._VerletWorldSetSimTime = external_define(dll, "VerletWorldSetSimTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._VerletWorldSetMaxDeltaTime = external_define(dll, "VerletWorldSetMaxDeltaTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
