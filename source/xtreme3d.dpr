@@ -119,6 +119,7 @@ uses
   GLSL.MultiMaterialShader,
   GLSL.ShapeShaders,
   GLSL.TextureShaders,
+  Physics.ODEImport,
   Physics.ODEManager,
   Physics.ODERagdoll,
   GLSLShader,
@@ -140,9 +141,9 @@ var
     collisionPoint: TGLVector;
     collisionNormal: TGLVector;
 
-    //ode: TGLODEManager;
+    ode: TGLODEManager;
     //odeRagdollWorld: TGLODERagdollWorld;
-    //jointList: TGLODEJointList;
+    jointList: TGLODEJointList;
 
     //kraftRaycastPoint: TKraftVector3;
     //kraftRaycastNormal: TKraftVector3;
@@ -411,6 +412,37 @@ begin
    mesh.Binormals := bitangents;
 end;
 
+function getODEBehaviour(obj: TGLBaseSceneObject): TGLODEBehaviour;
+begin
+  result := TGLODEBehaviour(obj.Behaviours.GetByClass(TGLODEBehaviour));
+end;
+
+function getJointAxisParams(j: TGLODEJointBase; axis: Integer): TGLODEJointParams;
+var
+  res: TGLODEJointParams;
+begin
+  if j is TGLODEJointHinge then
+  begin
+    if axis = 1 then
+      res := TGLODEJointHinge(j).AxisParams;
+  end
+  else if j is TGLODEJointHinge2 then
+  begin
+    if axis = 1 then
+      res := TGLODEJointHinge2(j).Axis1Params
+    else if axis = 2 then
+      res := TGLODEJointHinge2(j).Axis2Params;
+  end
+  else if j is TGLODEJointUniversal then
+  begin
+    if axis = 1 then
+      res := TGLODEJointUniversal(j).Axis1Params
+    else if axis = 2 then
+      res := TGLODEJointUniversal(j).Axis2Params;
+  end;
+  result := res;
+end;
+
 {$I 'xtreme3d/engine'}
 {$I 'xtreme3d/pak'}
 {$I 'xtreme3d/viewer'}
@@ -453,7 +485,7 @@ end;
 {$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
-//{$I 'xtreme3d/ode'}
+{$I 'xtreme3d/ode'}
 //{$I 'xtreme3d/kraft'}
 //{$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
@@ -760,6 +792,41 @@ exports
     DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
 
     // ODE
+    OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
+    OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
+    OdeManagerSetMaxContacts, OdeManagerSetVisible,
+    //OdeManagerSetGeomColor,
+    OdeWorldSetAutoDisableFlag, OdeWorldSetAutoDisableLinearThreshold,
+    OdeWorldSetAutoDisableAngularThreshold, OdeWorldSetAutoDisableSteps, OdeWorldSetAutoDisableTime,
+    OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
+    OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
+    OdeDynamicAlignObject, OdeDynamicEnable, OdeDynamicSetAutoDisableFlag,
+    OdeDynamicSetAutoDisableLinearThreshold, OdeDynamicSetAutoDisableAngularThreshold,
+    OdeDynamicSetAutoDisableSteps, OdeDynamicSetAutoDisableTime,
+    OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos,
+    OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
+    OdeDynamicAddTorque, OdeDynamicAddRelTorque,
+    //OdeDynamicGetContactCount, OdeStaticGetContactCount,
+    OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder,
+    //OdeAddCone,
+    OdeAddCapsule, OdeAddTriMesh,
+    OdeElementSetDensity,
+    OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
+    OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
+    OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
+    OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
+    OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
+    OdeAddJointSlider, OdeAddJointUniversal,
+    OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
+    OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
+    OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
+    OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
+    //OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
+    //OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
+    //OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
+    //OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
+    //OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
+    //OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 
     // FPSManager
     FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,

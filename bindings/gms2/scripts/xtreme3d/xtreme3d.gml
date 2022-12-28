@@ -889,6 +889,107 @@ function dll_init(dll) {
 	global._PipeSetRadius = external_define(dll, "PipeSetRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._PipeSetNode = external_define(dll, "PipeSetNode", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._PipeSetSlices = external_define(dll, "PipeSetSlices", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// ODE
+	global._OdeManagerCreate = external_define(dll, "OdeManagerCreate", dll_cdecl, ty_real, 0);
+	global._OdeManagerDestroy = external_define(dll, "OdeManagerDestroy", dll_cdecl, ty_real, 0);
+	global._OdeManagerStep = external_define(dll, "OdeManagerStep", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeManagerGetNumContactJoints = external_define(dll, "OdeManagerGetNumContactJoints", dll_cdecl, ty_real, 0);
+	global._OdeManagerSetGravity = external_define(dll, "OdeManagerSetGravity", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeManagerSetSolver = external_define(dll, "OdeManagerSetSolver", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeManagerSetIterations = external_define(dll, "OdeManagerSetIterations", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeManagerSetMaxContacts = external_define(dll, "OdeManagerSetMaxContacts", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeManagerSetVisible = external_define(dll, "OdeManagerSetVisible", dll_cdecl, ty_real, 1, ty_real);
+	//global._OdeManagerSetGeomColor = external_define(dll, "OdeManagerSetGeomColor", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeWorldSetAutoDisableFlag = external_define(dll, "OdeWorldSetAutoDisableFlag", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeWorldSetAutoDisableLinearThreshold = external_define(dll, "OdeWorldSetAutoDisableLinearThreshold", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeWorldSetAutoDisableAngularThreshold = external_define(dll, "OdeWorldSetAutoDisableAngularThreshold", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeWorldSetAutoDisableSteps = external_define(dll, "OdeWorldSetAutoDisableSteps", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeWorldSetAutoDisableTime = external_define(dll, "OdeWorldSetAutoDisableTime", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeStaticCreate = external_define(dll, "OdeStaticCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeDynamicCreate = external_define(dll, "OdeDynamicCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeTerrainCreate = external_define(dll, "OdeTerrainCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeDynamicCalculateMass = external_define(dll, "OdeDynamicCalculateMass", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeDynamicCalibrateCenterOfMass = external_define(dll, "OdeDynamicCalibrateCenterOfMass", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeDynamicAlignObject = external_define(dll, "OdeDynamicAlignObject", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeDynamicEnable = external_define(dll, "OdeDynamicEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetAutoDisableFlag = external_define(dll, "OdeDynamicSetAutoDisableFlag", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetAutoDisableLinearThreshold = external_define(dll, "OdeDynamicSetAutoDisableLinearThreshold", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetAutoDisableAngularThreshold = external_define(dll, "OdeDynamicSetAutoDisableAngularThreshold", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetAutoDisableSteps = external_define(dll, "OdeDynamicSetAutoDisableSteps", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetAutoDisableTime = external_define(dll, "OdeDynamicSetAutoDisableTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicAddForce = external_define(dll, "OdeDynamicAddForce", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddForceAtPos = external_define(dll, "OdeDynamicAddForceAtPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddForceAtRelPos = external_define(dll, "OdeDynamicAddForceAtRelPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddRelForce = external_define(dll, "OdeDynamicAddRelForce", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddRelForceAtPos = external_define(dll, "OdeDynamicAddRelForceAtPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddRelForceAtRelPos = external_define(dll, "OdeDynamicAddRelForceAtRelPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddTorque = external_define(dll, "OdeDynamicAddTorque", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicAddRelTorque = external_define(dll, "OdeDynamicAddRelTorque", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	//global._OdeDynamicGetContactCount = external_define(dll, "OdeDynamicGetContactCount", dll_cdecl, ty_real, 1, ty_real);
+	//global._OdeStaticGetContactCount = external_define(dll, "OdeStaticGetContactCount", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeAddBox = external_define(dll, "OdeAddBox", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeAddSphere = external_define(dll, "OdeAddSphere", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeAddPlane = external_define(dll, "OdeAddPlane", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeAddCylinder = external_define(dll, "OdeAddCylinder", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	//global._OdeAddCone = external_define(dll, "OdeAddCone", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeAddCapsule = external_define(dll, "OdeAddCapsule", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeAddTriMesh = external_define(dll, "OdeAddTriMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeElementSetDensity = external_define(dll, "OdeElementSetDensity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceEnableRollingFrictionCoeff = external_define(dll, "OdeSurfaceEnableRollingFrictionCoeff", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetRollingFrictionCoeff = external_define(dll, "OdeSurfaceSetRollingFrictionCoeff", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetMode = external_define(dll, "OdeSurfaceSetMode", dll_cdecl, ty_real, 10, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeSurfaceSetMu = external_define(dll, "OdeSurfaceSetMu", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetMu2 = external_define(dll, "OdeSurfaceSetMu2", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetBounce = external_define(dll, "OdeSurfaceSetBounce", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetBounceVel = external_define(dll, "OdeSurfaceSetBounceVel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetSoftERP = external_define(dll, "OdeSurfaceSetSoftERP", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetSoftCFM = external_define(dll, "OdeSurfaceSetSoftCFM", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetMotion1 = external_define(dll, "OdeSurfaceSetMotion1", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetMotion2 = external_define(dll, "OdeSurfaceSetMotion2", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetSlip1 = external_define(dll, "OdeSurfaceSetSlip1", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeSurfaceSetSlip2 = external_define(dll, "OdeSurfaceSetSlip2", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeAddJointBall = external_define(dll, "OdeAddJointBall", dll_cdecl, ty_real, 0);
+	global._OdeAddJointFixed = external_define(dll, "OdeAddJointFixed", dll_cdecl, ty_real, 0);
+	global._OdeAddJointHinge = external_define(dll, "OdeAddJointHinge", dll_cdecl, ty_real, 0);
+	global._OdeAddJointHinge2 = external_define(dll, "OdeAddJointHinge2", dll_cdecl, ty_real, 0);
+	global._OdeAddJointSlider = external_define(dll, "OdeAddJointSlider", dll_cdecl, ty_real, 0);
+	global._OdeAddJointUniversal = external_define(dll, "OdeAddJointUniversal", dll_cdecl, ty_real, 0);
+	global._OdeJointSetObjects = external_define(dll, "OdeJointSetObjects", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointEnable = external_define(dll, "OdeJointEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeJointInitialize = external_define(dll, "OdeJointInitialize", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeJointSetAnchor = external_define(dll, "OdeJointSetAnchor", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeJointSetAnchorAtObject = external_define(dll, "OdeJointSetAnchorAtObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeJointSetAxis1 = external_define(dll, "OdeJointSetAxis1", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeJointSetAxis2 = external_define(dll, "OdeJointSetAxis2", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeJointSetBounce = external_define(dll, "OdeJointSetBounce", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetCFM = external_define(dll, "OdeJointSetCFM", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetFMax = external_define(dll, "OdeJointSetFMax", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetFudgeFactor = external_define(dll, "OdeJointSetFudgeFactor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetHiStop = external_define(dll, "OdeJointSetHiStop", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetLoStop = external_define(dll, "OdeJointSetLoStop", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetStopCFM = external_define(dll, "OdeJointSetStopCFM", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetStopERP = external_define(dll, "OdeJointSetStopERP", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._OdeJointSetVel = external_define(dll, "OdeJointSetVel", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	/*
+	global._OdeRagdollCreate = external_define(dll, "OdeRagdollCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeRagdollHingeJointCreate = external_define(dll, "OdeRagdollHingeJointCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeRagdollUniversalJointCreate = external_define(dll, "OdeRagdollUniversalJointCreate", dll_cdecl, ty_real, 10, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._OdeRagdollDummyJointCreate = external_define(dll, "OdeRagdollDummyJointCreate", dll_cdecl, ty_real, 0);
+	global._OdeRagdollBoneCreate = external_define(dll, "OdeRagdollBoneCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeRagdollBuild = external_define(dll, "OdeRagdollBuild", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeRagdollEnable = external_define(dll, "OdeRagdollEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeRagdollUpdate = external_define(dll, "OdeRagdollUpdate", dll_cdecl, ty_real, 1, ty_real);
+	*/
+	/*
+	// Milestone II functions
+	global._OdeDynamicSetVelocity = external_define(dll, "OdeDynamicSetVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicSetAngularVelocity = external_define(dll, "OdeDynamicSetAngularVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicGetVelocity = external_define(dll, "OdeDynamicGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicGetAngularVelocity = external_define(dll, "OdeDynamicGetAngularVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._OdeDynamicSetPosition = external_define(dll, "OdeDynamicSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._OdeDynamicSetRotationQuaternion = external_define(dll, "OdeDynamicSetRotationQuaternion", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	*/
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
