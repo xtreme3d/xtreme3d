@@ -124,6 +124,7 @@ uses
   Physics.ODEManager,
   Physics.ODERagdoll,
   GLSLShader,
+  GLFileCSM,
   Hashes;
 
 type
@@ -814,15 +815,23 @@ exports
     OdeAddCapsule, OdeAddTriMesh,
     OdeElementSetDensity,
     OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
-    OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
-    OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
+
+    OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
+
+    OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
     OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
-    OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
-    OdeAddJointSlider, OdeAddJointUniversal,
-    OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
-    OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
-    OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
-    OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
+
+    OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
+
+    OdeAddJointSlider, OdeAddJointUniversal,
+
+    OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
+
+    OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
+
+    OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
+
+    OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
     OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
     OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
     OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
