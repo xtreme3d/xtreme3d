@@ -1,5 +1,5 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
 unit GLS.Collision;
 
@@ -830,7 +830,6 @@ begin
 end;
 
 // new CheckCollisions / Dan Bartlett -----]
-
 
 
 // ------------------

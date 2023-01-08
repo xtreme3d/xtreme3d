@@ -1,5 +1,5 @@
 ﻿//
-// The graphics rendering engine GLScene http://glscene.org
+// The graphics platform GLScene https://github.com/glscene
 //
 unit OpenCL.Platform;
 

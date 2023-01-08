@@ -1,14 +1,11 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
-
 unit GLS.CurvesAndSurfaces;
 
 (* Bezier and B-Spline Curve and Surface Routines *)
 
 interface
-
-{$I GLScene.inc}
 
 uses
   System.SysUtils,

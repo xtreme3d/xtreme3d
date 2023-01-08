@@ -1,12 +1,11 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
 unit GLS.Mesh;
 
 (*
   This unit is for simple meshes and legacy support,
-  GLS.VectorFileObjects implements more efficient
-  (though more complex) mesh tools.
+  GLS.VectorFileObjects implements more efficient (though more complex) mesh tools.
 *)
 
 interface

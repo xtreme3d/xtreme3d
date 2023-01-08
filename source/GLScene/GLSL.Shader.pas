@@ -1,7 +1,6 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
-
 unit GLSL.Shader;
 
 (* TGLSLShader is a wrapper for GLS shaders. *)
@@ -15,7 +14,7 @@ uses
   Winapi.OpenGLext,
   System.Classes,
   System.SysUtils,
-  
+
   GLS.OpenGLTokens,
   GLS.VectorGeometry,
   GLS.VectorTypes,

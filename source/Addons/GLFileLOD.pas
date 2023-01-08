@@ -19,7 +19,7 @@ interface
 
 uses
   System.Classes, System.SysUtils, GLS.VectorFileObjects, GLS.Texture, GLS.ApplicationFileIO,
-  GLS.VectorGeometry, ULODkaUtilsA1;
+  GLS.PersistentClasses, GLS.VectorGeometry, ULODkaUtilsA1;
 
 type
     // TGLLODVectorFile

@@ -1,5 +1,5 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
 unit Physics.Register;
 
@@ -10,8 +10,8 @@ interface
 uses
   System.Classes,
   Physics.ODEManager,
-  Physics.NGDManager,
-  Physics.SPIManager;
+  Physics.SPIManager,
+  NGD.Manager;
 
 procedure Register;
 
@@ -21,11 +21,10 @@ implementation
 
 procedure Register;
 begin
-  RegisterClasses([TGLODEManager, TGLODEJointList,  TGLODEJoints, TGLODEElements,
-                   TGLNGDManager, TGLNGDDynamic, TGLNGDStatic,
-                   TGLSPIManager]);
-  RegisterComponents('GLScene Physics Managers',[TGLODEManager,TGLODEJointList,
-                                TGLNGDManager, TGLSPIManager]);
+  RegisterClasses([TGLODEManager, TGLODEJointList, TGLODEJoints, TGLODEElements, TGLSPIManager,
+    TGLNGDManager, TGLNGDDynamic, TGLNGDStatic]);
+  RegisterComponents('GLScene Physics Managers', [TGLODEManager, TGLODEJointList, TGLSPIManager,
+    TGLNGDManager]);
 end;
 
 end.

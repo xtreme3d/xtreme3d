@@ -18,6 +18,7 @@ uses
   GLS.RenderContextInfo,
   GLS.OpenGLTokens,
   GLS.Scene,
+  GLS.PipelineTransformation,
   TypInfo,
   Variants;
 

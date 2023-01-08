@@ -28,7 +28,7 @@ interface
 
 uses
   Windows, System.SysUtils, System.Classes, GLS.VectorFileObjects, GLS.Texture,
-  GLS.VectorGeometry, GLS.VectorTypes, GLS.Scene, GLS.Material;
+  GLS.VectorGeometry, GLS.VectorTypes, GLS.VectorLists, GLS.Scene, GLS.Material;
 
 const
   LODkaSignature1   = 'LODka3D1';

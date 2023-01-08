@@ -1,5 +1,5 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
 unit GLS.MeshBSP;
 
@@ -35,7 +35,7 @@ type
   TBSPRenderContextInfo = record
     // Local coordinates of the camera (can be a vector or point)
     cameraLocal: TGLVector;
-    rci: PRenderContextInfo;
+    rci: PGLRenderContextInfo;
     faceGroups: TList;
     cullingSpheres: array of TBSPCullingSphere;
   end;

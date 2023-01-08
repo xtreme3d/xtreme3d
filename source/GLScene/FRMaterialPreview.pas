@@ -1,9 +1,9 @@
 //
-// The graphics rendering engine GLScene http://glscene.org
+// The multimedia graphics platform GLScene https://github.com/glscene
 //
 unit FRMaterialPreview;
 
-(* Material Preview frame. *)
+(* Material Preview frame *)
 
 interface
 
@@ -12,17 +12,17 @@ interface
 uses
   System.Types,
   System.Classes,
-  VCL.Graphics,
-  VCL.Forms,
-  VCL.StdCtrls,
-  VCL.ComCtrls,
-  VCL.Controls,
+  Vcl.Graphics,
+  Vcl.Forms,
+  Vcl.StdCtrls,
+  Vcl.ComCtrls,
+  Vcl.Controls,
 
   GLS.Scene,
   GLS.VectorTypes,
   GLS.Objects,
   GLS.Texture,
-  GLS.HudObjects,
+  GLS.HUDObjects,
   GLS.SceneViewer,
   GLS.GeomObjects,
   GLS.Color,
@@ -33,6 +33,7 @@ uses
 type
   TRMaterialPreview = class(TFrame)
     GLScene: TGLScene;
+    GLSceneViewer: TGLSceneViewer;
     CBObject: TComboBox;
     Camera: TGLCamera;
     Cube: TGLCube;
@@ -40,13 +41,12 @@ type
     LightSource: TGLLightSource;
     CBBackground: TComboBox;
     BackGroundSprite: TGLHUDSprite;
-    Cone: TGLCone;
     Teapot: TGLTeapot;
     World: TGLDummyCube;
     Light: TGLDummyCube;
     FireSphere: TGLSphere;
     GLMaterialLibrary: TGLMaterialLibrary;
-    GLSceneViewer: TGLSceneViewer;
+   
     procedure CBObjectChange(Sender: TObject);
     procedure CBBackgroundChange(Sender: TObject);
     procedure SceneViewerMouseMove(Sender: TObject; Shift: TShiftState;
@@ -64,8 +64,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     property Material: TGLMaterial read GetMaterial write SetMaterial;
-    property LibMaterial: TGLAbstractLibMaterial read GetLibMaterial
-      write SetLibMaterial;
+    property LibMaterial: TGLAbstractLibMaterial read GetLibMaterial write SetLibMaterial;
   end;
 
 // ------------------------------------------------------------------
@@ -98,8 +97,7 @@ begin
   i := CBObject.ItemIndex;
   Cube.Visible := i = 0;
   Sphere.Visible := i = 1;
-  Cone.Visible := i = 2;
-  Teapot.Visible := i = 3;
+  Teapot.Visible := i = 2;
 end;
 
 procedure TRMaterialPreview.CBBackgroundChange(Sender: TObject);
@@ -155,8 +153,7 @@ end;
 
 procedure TRMaterialPreview.SetMaterial(const Value: TGLMaterial);
 begin
-  GLMaterialLibrary.Materials[0].Material.Assign
-    (Value.GetActualPrimaryMaterial);
+  GLMaterialLibrary.Materials[0].Material.Assign(Value.GetActualPrimaryMaterial);
 end;
 
 function TRMaterialPreview.GetLibMaterial: TGLAbstractLibMaterial;
