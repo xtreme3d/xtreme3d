@@ -133,6 +133,10 @@ type
         private
     end;
 
+const
+   {$I 'shaders/bumpshader'}
+   {$I 'shaders/phongshader'}
+
 var
     showLoadingErrors: Boolean;
     scene: TGLScene;
@@ -707,6 +711,7 @@ exports
     GLSLShaderSetParameterHasTextureEx,
     //GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
     //GLSLShaderSetParameterViewMatrix,
+    PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
 
     // ThorFX
     ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,

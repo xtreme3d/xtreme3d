@@ -590,12 +590,9 @@ function dll_init(dll) {
 	
 	// Shaders
 	global._ShaderEnable = external_define(dll, "ShaderEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	/*
-	// Not yet implemented:
 	global._PhongShaderCreate = external_define(dll, "PhongShaderCreate", dll_cdecl, ty_real, 0);
 	global._PhongShaderUseTexture = external_define(dll, "PhongShaderUseTexture", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._PhongShaderSetMaxLights = external_define(dll, "PhongShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	*/
 	/*
 	// Not yet implemented:
 	global._BumpShaderCreate = external_define(dll, "BumpShaderCreate", dll_cdecl, ty_real, 0);

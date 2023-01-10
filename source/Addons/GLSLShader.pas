@@ -204,7 +204,7 @@ begin
       gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
       gl.ActiveTexture(GL_TEXTURE0_ARB);
     end;
-    glUniform1iARB(FUniformLocation, FUniformTexture);
+    gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
   if FUniformType = uniformSecondTexture2D then
@@ -215,7 +215,7 @@ begin
       gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
       gl.ActiveTexture(GL_TEXTURE0_ARB);
     end;
-    glUniform1iARB(FUniformLocation, FUniformTexture);
+    gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
   {
@@ -353,9 +353,9 @@ begin
   //begin
     //if FTexture <> Nil then
    // begin
-      gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-      gl.BindTexture(GL_TEXTURE_2D, 0);   //FTexture.Image.NativeTextureTarget
-      gl.ActiveTexture(GL_TEXTURE0_ARB);
+   //   gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+   //   gl.BindTexture(GL_TEXTURE_2D, 0);   //FTexture.Image.NativeTextureTarget
+   //   gl.ActiveTexture(GL_TEXTURE0_ARB);
    // end;
   //end;
 end;

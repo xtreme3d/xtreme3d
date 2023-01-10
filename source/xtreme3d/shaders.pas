@@ -7,10 +7,6 @@ begin
   result:=1;
 end;
 
-// PhongShaderCreate: function removed
-// PhongShaderUseTexture: function removed
-// PhongShaderSetMaxLights: function removed
-
 {
 function BumpShaderCreate(): real; cdecl;
 var
@@ -509,16 +505,18 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterTexture(par: real; mtrl: pchar; texUnit: real): real; cdecl;
+function GLSLShaderSetParameterTexture(par: real; mtrl: PAnsiChar; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
+  matName: String;
   mat: TGLLibMaterial;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformTexture2D;
-  if Length(mtrl) > 0 then
+  matName := StrConv(mtrl);
+  if Length(matName) > 0 then
   begin
-    mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+    mat := matlib.Materials.GetLibMaterialByName(matName);
     param.Texture := mat.Material.Texture;
   end;
   param.UniformTexture := trunc(texUnit);
@@ -526,17 +524,19 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterSecondTexture(par: real; mtrl: pchar; texUnit: real): real; cdecl;
+function GLSLShaderSetParameterSecondTexture(par: real; mtrl: PAnsiChar; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
+  matName: String;
   mat: TGLLibMaterial;
   mat2: TGLLibMaterial;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformSecondTexture2D;
-  if Length(mtrl) > 0 then
+  matName := StrConv(mtrl);
+  if Length(matName) > 0 then
   begin
-    mat := matlib.Materials.GetLibMaterialByName(String(mtrl));
+    mat := matlib.Materials.GetLibMaterialByName(matName);
     mat2 := matlib.Materials.GetLibMaterialByName(mat.Texture2Name);
     param.Texture := mat2.Material.Texture;
   end;
@@ -656,5 +656,77 @@ begin
   param.UniformInteger := trunc(slot);
   param.Initialized := True;
   result := 1;
+end;
+
+
+function PhongShaderCreate(): real; cdecl;
+var
+  phong: TGLSLShader;
+  paramDiffTex: TGLSLShaderParameter;
+  paramUseTexture: TGLSLShaderParameter;
+  paramMaxLights: TGLSLShaderParameter;
+  paramFogEnabled: TGLSLShaderParameter;
+  paramLightingEnabled: TGLSLShaderParameter;
+begin
+  {
+  if not
+    (GL_ARB_shader_objects and
+     GL_ARB_vertex_shader and
+     GL_ARB_fragment_shader) then begin
+      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
+      result := 0;
+      Exit;
+  end;
+  }
+
+  phong := TGLSLShader.Create(scene);
+  phong.SetPrograms(phongVertexProgram, phongFragmentProgram);
+
+  paramDiffTex := phong.Param.AddUniform('diffuseMap');
+  paramDiffTex.UniformType := uniformTexture2D;
+  paramDiffTex.UniformTexture := 0;
+  paramDiffTex.Initialized := True;
+
+  paramUseTexture := phong.Param.AddUniform('useTexture');
+  paramUseTexture.UniformType := uniform1i;
+  paramUseTexture.UniformInteger := 0;
+  paramUseTexture.Initialized := True;
+
+  paramMaxLights := phong.Param.AddUniform('maxNumLights');
+  paramMaxLights.UniformType := uniform1i;
+  paramMaxLights.UniformInteger := 1;
+  paramMaxLights.Initialized := True;
+
+  paramFogEnabled := phong.Param.AddUniform('fogEnabled');
+  paramFogEnabled.UniformType := uniformFogEnabled;
+  paramFogEnabled.Initialized := True;
+
+  paramLightingEnabled := phong.Param.AddUniform('lightingEnabled');
+  paramLightingEnabled.UniformType := uniformLightingEnabled;
+  paramLightingEnabled.Initialized := True;
+
+  result := ObjToReal(phong);
+end;
+
+function PhongShaderUseTexture(shader, mode: real): real; cdecl;
+var
+  phong: TGLSLShader;
+  paramUseTexture: TGLSLShaderParameter;
+begin
+  phong := TGLSLShader(RealToPtr(shader));
+  paramUseTexture := phong.Param.Items[1];
+  paramUseTexture.UniformInteger := trunc(mode);
+  result:=1;
+end;
+
+function PhongShaderSetMaxLights(shader, maxlights: real): real; cdecl;
+var
+  phong: TGLSLShader;
+  paramMaxLights: TGLSLShaderParameter;
+begin
+  phong := TGLSLShader(RealToPtr(shader));
+  paramMaxLights := phong.Param.Items[2];
+  paramMaxLights.UniformInteger := trunc(maxlights);
+  result:=1;
 end;
 
