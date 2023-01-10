@@ -1,83 +1,90 @@
-function ActorCreate(fname: PAnsiChar; matl,parent: real): real; cdecl;
+function ActorCreate(fname: PAnsiChar; matl, parent: real): real; cdecl;
 var
-  actor: TGLActor;
-  ml: TGLMaterialLibrary;
+    actor: TGLActor;
+    ml: TGLMaterialLibrary;
 begin
-  ml:=TGLMaterialLibrary(RealToPtr(matl));
-  if not (parent=0) then
-    actor:=TGLActor.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
-  else
-    actor:=TGLActor.CreateAsChild(scene.Objects);
-  actor.MaterialLibrary:=ml;
-  actor.IgnoreMissingTextures := True;
-  
-  if not FileExists(StrConv(fname)) then begin
-    result:=0;
-    ShowMessage('ActorCreate:' + #13#10 + 'File does not exist');
-    Exit;
-  end;
-  try
-    actor.LoadFromFile(StrConv(fname));
-  except
-    On E: Exception do
-    begin
-      if showLoadingErrors then
-        ShowMessage('ActorCreate:' + #13#10 + E.Message);
+    ml := TGLMaterialLibrary(RealToPtr(matl));
+    
+    if not (parent = 0) then
+        actor := TGLActor.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
+    else
+        actor := TGLActor.CreateAsChild(scene.Objects);
+    
+    actor.MaterialLibrary := ml;
+    actor.IgnoreMissingTextures := True;
+    
+    if not FileExists(StrConv(fname)) then begin
+        result := 0;
+        ShowMessage('ActorCreate:' + #13#10 + 'File does not exist');
+        Exit;
     end;
-  end;
-
-  actor.AnimationMode:=aamLoop;
-  result:=ObjToReal(actor);
+    try
+        actor.LoadFromFile(StrConv(fname));
+    except
+        On E: Exception do
+        begin
+            if showLoadingErrors then
+            ShowMessage('ActorCreate:' + #13#10 + E.Message);
+        end;
+    end;
+    
+    actor.AnimationMode := aamLoop;
+    result := ObjToReal(actor);
 end;
 
-function ActorCopy(actor,parent: real): real; cdecl;
+function ActorCopy(actor, parent: real): real; cdecl;
 var
-  GLActor1,GLActor2: TGLActor;
+    actor1, actor2: TGLActor;
 begin
-  GLActor1:=TGLActor(RealToPtr(actor));
-  GLActor2:=TGLActor.Create(scene);
-  TGLScene(scene).Objects.AddChild(GLActor2);
-  if not (parent=0) then GLActor2.Parent:=TGLBaseSceneObject(RealToPtr(parent));
-  GLActor2.Assign(GLActor1);
-  result:=ObjToReal(GLActor2);
+    actor1 := TGLActor(RealToPtr(actor));
+    actor2 := TGLActor.Create(scene);
+    
+    TGLScene(scene).Objects.AddChild(actor2);
+    
+    if not (parent = 0) then 
+        actor2.Parent := TGLBaseSceneObject(RealToPtr(parent));
+    
+    actor2.Assign(actor1);
+    
+    result := ObjToReal(actor2);
 end;
 
-function ActorSetAnimationRange(actor,astart,aend: real): real; cdecl;
+function ActorSetAnimationRange(actor, frameStart, frameEnd: real): real; cdecl;
 var
-  GLActor1: TGLActor;
+    actor1: TGLActor;
 begin
-  GLActor1:=TGLActor(RealToPtr(actor));
-  GLActor1.StartFrame:=Trunc(astart);
-  GLActor1.EndFrame:=Trunc(aend);
-  result:=1;
+    actor1 := TGLActor(RealToPtr(actor));
+    actor1.StartFrame := Trunc(frameStart);
+    actor1.EndFrame := Trunc(frameEnd);
+    result := 1.0;
 end;
 
 function ActorGetCurrentFrame(actor: real): real; cdecl;
 var
-  GLActor1: TGLActor;
-  fr: integer;
+    actor1: TGLActor;
+    fr: integer;
 begin
-  GLActor1:=TGLActor(RealToPtr(actor));
-  fr:=GLActor1.CurrentFrame;
-  result:=fr;
+    actor1 := TGLActor(RealToPtr(actor));
+    fr := actor1.CurrentFrame;
+    result := fr;
 end;
 
-function ActorSwitchToAnimation(actor,anim,smooth: real): real; cdecl;
+function ActorSwitchToAnimation(actor, anim, smooth: real): real; cdecl;
 var
-  GLActor1: TGLActor;
+    actor1: TGLActor;
 begin
-  GLActor1:=TGLActor(RealToPtr(actor));
-  GLActor1.SwitchToAnimation(Trunc(anim),boolean(Trunc(smooth)));
-  result:=1;
+    actor1 := TGLActor(RealToPtr(actor));
+    actor1.SwitchToAnimation(Trunc(anim), boolean(Trunc(smooth)));
+    result := 1.0;
 end;
 
 function ActorSwitchToAnimationName(actor: real; anim: PAnsiChar; smooth: real): real; cdecl;
 var
-  GLActor1: TGLActor;
+    actor1: TGLActor;
 begin
-  GLActor1:=TGLActor(RealToPtr(actor));
-  GLActor1.SwitchToAnimation(String(AnsiString(anim)), boolean(Trunc(smooth)));
-  result:=1;
+    actor1 := TGLActor(RealToPtr(actor));
+    actor1.SwitchToAnimation(String(AnsiString(anim)), boolean(Trunc(smooth)));
+    result := 1.0;
 end;
 
 function ActorSynchronize(actor1,actor2: real): real; cdecl;
