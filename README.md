@@ -4,7 +4,7 @@ Xtreme3D is a cross-language 3D graphics engine based on [GLScene](https://githu
 
 Xtreme3D originally was created for Game Maker. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate in a tool that was intended mainly for 2D games and provides limited built-in 3D capabilities. Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
 
-The engine is written in Delphi 10 and based on GLScene 2.1. The code can be compiled with free Delphi Community Edition.
+The engine is written in Delphi 10 and based on GLScene 2.2. The code can be compiled with free Delphi Community Edition.
 
 Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).
 
