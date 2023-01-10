@@ -505,7 +505,9 @@ exports
     // Engine
     EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
-    EngineShowLoadingErrors, EngineGetTimeStep,
+    EngineShowLoadingErrors,
+    // EngineSetMaxLights,
+    EngineGetTimeStep,
     PointerToReal,
 
     //Pak
@@ -513,13 +515,17 @@ exports
     PakExtract, PakExtractFile,
 
     // Viewer
-    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender, ViewerRenderToFile,
+    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
+    ViewerRenderToFile,
+    // ViewerRenderToFilePNG, ViewerRenderEx,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
     ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,
     ViewerScreenToWorld, ViewerWorldToScreen, ViewerCopyToTexture,
     ViewerGetPickedObject, ViewerGetPickedObjectsList, ViewerScreenToVector,
     ViewerVectorToScreen, ViewerPixelToDistance, ViewerSetAntiAliasing,
+    //ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
+    //ViewerSetAutoRender, ViewerSetOverrideMaterial,
     ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
     ViewerPixelRayToWorld, ViewerShadeModel,
@@ -549,11 +555,22 @@ exports
     HUDTextSetRotation, HUDTextSetFont, HUDTextSetColor, HUDTextSetText,
     FlatTextCreate, FlatTextSetFont, FlatTextSetColor, FlatTextSetText,
     SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
+    //TTFontCreate, TTFontSetLineGap, TTFontSetEncoding, TTFontLoadCodePage,
 
     // Sprite
     HUDSpriteCreate, HUDSpriteGetMouseOver, HUDSpriteXTiles, HUDSpriteYTiles,
     SpriteCreate, SpriteSetSize, SpriteGetSize, SpriteScale, SpriteSetRotation,
     SpriteRotate, SpriteMirror,
+    //HUDSpriteCreateEx, SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV, SpriteSetOrigin,
+
+    // HUDShape
+    //HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
+    //HUDShapeSetRotation, HUDShapeSetColor,
+    //HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
+    //HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
+    //HUDShapeLineSetPoints, HUDShapeLineSetWidth,
+    //HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
+    //HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
 
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
@@ -618,6 +635,26 @@ exports
     FreeformMeshFaceGroupSetLightmapIndex,
     FreeformMeshFaceGroupGetLightmapIndex,
     FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
+    FreeformCreateEmpty,
+    FreeformAddMesh, FreeformMeshAddFaceGroup,
+    FreeformMeshAddVertex, FreeformMeshAddNormal,
+    FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
+    FreeformMeshAddTangent, FreeformMeshAddBinormal,
+    FreeformMeshGetVertex, FreeformMeshGetNormal,
+    FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
+    FreeformMeshGetTangent, FreeformMeshGetBinormal,
+    FreeformMeshFaceGroupGetIndex,
+    FreeformMeshSetVertex, FreeformMeshSetNormal,
+    FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
+    FreeformMeshSetTangent, FreeformMeshSetBinormal,
+    FreeformMeshFaceGroupSetIndex,
+    FreeformMeshFaceGroupAddTriangle,
+    FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+    FreeformMeshGenNormals, FreeformMeshGenTangents,
+    FreeformMeshVerticesCount,
+    FreeformMeshTriangleCount,
+    FreeformMeshFaceGroupTriangleCount,
+    FreeformSave,
 
     // Terrain
     BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
@@ -691,6 +728,9 @@ exports
     MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
+    //MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
+    //MaterialEnableTextureEx, MaterialHasTextureEx, MaterialSetTextureExFromLibrary,
+    MaterialGetTextureWidth, MaterialGetTextureHeight,
 
     // Shaders
     ShaderEnable,
@@ -717,6 +757,14 @@ exports
     BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
     //BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius,
     BumpShaderUseAutoTangentSpace,
+
+    // FBO
+    //FBOCreate, FBOSetCamera, FBOSetViewer,
+    //FBORenderObject, FBORenderObjectEx,
+    //FBOSetColorTextureFormat, FBOSetOverrideMaterial
+
+    //ClipPlane
+    //ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
 
     // ThorFX
     ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
@@ -875,6 +923,11 @@ exports
     MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
     MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 
+    // ShadowMap
+    //ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
+    //ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
+    //ShadowMapRender, ShadowMapSetFBO,
+
     // Movement
     MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,
     MovementAddPath, MovementSetActivePath, MovementPathSetSplineMode,
@@ -926,5 +979,27 @@ exports
 
     // PickList
     PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
+
+    // Kraft
+    //KraftCreate, KraftStep,
+    //KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+    //KraftCreateRigidBody, KraftRigidBodyFinish,
+    //KraftRigidBodySetGravity,
+    //KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
+    //KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
+    //KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
+    //KraftRigidBodySetRotation,
+    //KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
+    //KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
+    //KraftObjectSetRigidBody,
+    //KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
+    //KraftCreateShapeMesh,
+    //KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution,
+    //KraftShapeSetPosition, KraftShapeGetPosition,
+    //KraftShapeSetRayCastable,
+    //KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
+    //KraftCreateJointHinge,
+    //KraftJointSetAnchor1, KraftJointSetAnchor2,
+    //KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 begin
 end.

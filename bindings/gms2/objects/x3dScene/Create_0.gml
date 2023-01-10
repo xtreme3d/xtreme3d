@@ -65,19 +65,12 @@ MaterialSetAmbientColor("mHellknight", c_dkgray, 1);
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_grey, 1); 
 MaterialSetShininess("mHellknight", 8); 
+MaterialCreate("mHellknightNormal", "normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 
-MaterialCreate("mHellknightNormal", "normal.png");
-
 /*
-var buf = buffer_load("shaders/simple-vp.glsl");
-vp1 = buffer_read(buf, buffer_string);
-buffer_delete(buf);
-
-buf = buffer_load("shaders/simple-fp.glsl");
-fp1 = buffer_read(buf, buffer_string);
-buffer_delete(buf);
-
+vp1 = TextRead("shaders/simple-vp.glsl");
+fp1 = TextRead("shaders/simple-fp.glsl");
 simpleShader = GLSLShaderCreate(vp1, fp1);
 paramColor = GLSLShaderCreateParameter(simpleShader, "color");
 GLSLShaderSetParameter4f(paramColor, 1.0, 0.5, 0.0, 1.0);
@@ -94,7 +87,6 @@ ObjectSetPosition(fxObj, 5, 1, 3);
 thorMngr = ThorFXManagerCreate();
 ThorFXSetTarget(thorMngr, 5, 1, 0);
 thor = ThorFXCreate(thorMngr, fxObj);
-
 
 /*
 MaterialLibrarySetTexturePaths(matlib2, "data/trinity");

@@ -15,7 +15,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `MaterialCullFrontFaces` was removed
 - `MaterialSetZWrite` is deprecated, use `MaterialSetDepthWrite` instead
 - New function `MaterialSetDepthTest`
-- `PtrToReal` is now `PointerToReal`
+- `PtrToReal` is deprecated, use `PointerToReal` instead
 - Polygon functions were removed
 - `TextRead`, `TextConvertANSIToUTF8` were removed
 - `OdeAddCone` was removed.

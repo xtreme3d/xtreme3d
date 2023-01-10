@@ -25,9 +25,3 @@ function PickListGetHit(list, index: real): real; cdecl;
 begin
     result := ObjToReal(TGLPickList(RealToPtr(list)).Hit[Trunc(index)]);
 end;
-
-function PointerToReal(p: pchar): real; cdecl;
-begin
-    result := real(NativeInt(p));
-end;
-

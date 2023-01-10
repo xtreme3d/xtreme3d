@@ -55,6 +55,12 @@ function dll_init(dll) {
 	global._ViewerPixelToDistance = external_define(dll, "ViewerPixelToDistance", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	// Additional constants: ViewerSetAntiAliasing
 	global._ViewerSetAntiAliasing = external_define(dll, "ViewerSetAntiAliasing", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	// Milestone II functions:
+	//global._ViewerGetGLSLSupported = external_define(dll, "ViewerGetGLSLSupported", dll_cdecl, ty_real, 1, ty_real);
+	//global._ViewerGetFBOSupported = external_define(dll, "ViewerGetFBOSupported", dll_cdecl, ty_real, 1, ty_real);
+	//global._ViewerGetVBOSupported = external_define(dll, "ViewerGetVBOSupported", dll_cdecl, ty_real, 1, ty_real);
+	//global._ViewerSetAutoRender = external_define(dll, "ViewerSetAutoRender", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//global._ViewerSetOverrideMaterial = external_define(dll, "ViewerSetOverrideMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerIsOpenGLExtensionSupported = external_define(dll, "ViewerIsOpenGLExtensionSupported", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -62,6 +68,13 @@ function dll_init(dll) {
 	global._ViewerResetPerformanceMonitor = external_define(dll, "ViewerResetPerformanceMonitor", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// PickList
+	// New functions:
+	global._PickListCreate = external_define(dll, "PickListCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._PickListClear = external_define(dll, "PickListClear", dll_cdecl, ty_real, 1, ty_real);
+	global._PickListGetCount = external_define(dll, "PickListGetCount", dll_cdecl, ty_real, 1, ty_real);
+	global._PickListGetHit = external_define(dll, "PickListGetHit", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// DCE
 	global._DceManagerCreate = external_define(dll, "DceManagerCreate", dll_cdecl, ty_real, 0);
@@ -237,6 +250,30 @@ function dll_init(dll) {
 	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBoundsUV = external_define(dll, "SpriteSetBoundsUV", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetOrigin = external_define(dll, "SpriteSetOrigin", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	*/
+	
+	// HUDShape
+	/*
+	// Milestone II functions:
+	global._HUDShapeRectangleCreate = external_define(dll, "HUDShapeRectangleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeCircleCreate = external_define(dll, "HUDShapeCircleCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeLineCreate = external_define(dll, "HUDShapeLineCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeMeshCreate = external_define(dll, "HUDShapeMeshCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._HUDShapeSetRotation = external_define(dll, "HUDShapeSetRotation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDShapeRotate = external_define(dll, "HUDShapeRotate", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDShapeSetColor = external_define(dll, "HUDShapeSetColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeSetOrigin = external_define(dll, "HUDShapeSetOrigin", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeSetSize = external_define(dll, "HUDShapeSetSize", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeScale = external_define(dll, "HUDShapeScale", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeCircleSetRadius = external_define(dll, "HUDShapeCircleSetRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDShapeCircleSetSlices = external_define(dll, "HUDShapeCircleSetSlices", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDShapeCircleSetAngles = external_define(dll, "HUDShapeCircleSetAngles", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._HUDShapeLineSetPoints = external_define(dll, "HUDShapeLineSetPoints", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeLineSetWidth = external_define(dll, "HUDShapeLineSetWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._HUDShapeMeshAddVertex = external_define(dll, "HUDShapeMeshAddVertex", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeMeshAddTriangle = external_define(dll, "HUDShapeMeshAddTriangle", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeMeshSetVertex = external_define(dll, "HUDShapeMeshSetVertex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._HUDShapeMeshSetTexCoord = external_define(dll, "HUDShapeMeshSetTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	*/
 	
 	// Primitives
@@ -668,8 +705,9 @@ function dll_init(dll) {
 	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
 	// Text
-	// Removed:
+	// Removed from DLL:
 	//global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
+	// Removed:
 	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
 	
 	// ThorFX
@@ -1564,9 +1602,11 @@ function Update(aDelta) {
 	return external_call(global._EngineUpdate, aDelta);
 }
 
+/*
 function TrisRendered() {
 	return external_call(global._TrisRendered);
 }
+*/
 
 function EngineSaveScene(aFilename) {
 	return external_call(global._EngineSaveScene, aFilename);
@@ -4449,12 +4489,17 @@ function TerrainGetHDSPosition(aTerrain, aX, aY, aZ, aIndex) {
 }
 
 function TextRead(aFilename) {
-	return external_call(global._TextRead, aFilename);
+	var buf = buffer_load(aFilename);
+	var str = buffer_read(buf, buffer_string);
+	buffer_delete(buf);
+	return str;
 }
 
+/*
 function TextConvertANSIToUTF8(aStr) {
 	return external_call(global._TextConvertANSIToUTF8, aStr);
 }
+*/
 
 function ThorFXManagerCreate() {
 	return external_call(global._ThorFXManagerCreate);
@@ -4732,6 +4777,22 @@ function VerletWorldSetMaxDeltaTime(aWr, aTm) {
 	return external_call(global._VerletWorldSetMaxDeltaTime, aWr, aTm);
 }
 
+function PickListCreate(aPs) {
+	return external_call(global._PickListCreate, aPs);
+}
+
+function PickListClear(aPickList) {
+	return external_call(global._PickListClear, aPickList);
+}
+
+function PickListGetCount(aPickList) {
+	return external_call(global._PickListGetCount, aPickList);
+}
+
+function PickListGetHit(aPickList, aIndex) {
+	return external_call(global._PickListGetHit, aPickList, aIndex);
+}
+
 function ViewerCreate(aTop, aLeft, aW, aH, aPw) {
 	return external_call(global._ViewerCreate, aTop, aLeft, aW, aH, aPw);
 }
@@ -4816,8 +4877,8 @@ function ViewerGetPickedObject(aViewer, aX, aY) {
 	return external_call(global._ViewerGetPickedObject, aViewer, aX, aY);
 }
 
-function ViewerGetPickedObjectsList(aViewer, aX, aY, aW, aH, aNum, aInd) {
-	return external_call(global._ViewerGetPickedObjectsList, aViewer, aX, aY, aW, aH, aNum, aInd);
+function ViewerGetPickedObjectsList(aViewer, aList, aX, aY, aW, aH, aNum) {
+	return external_call(global._ViewerGetPickedObjectsList, aViewer, aList, aX, aY, aW, aH, aNum);
 }
 
 function ViewerScreenToVector(aViewer, aX, aY, aInd) {
@@ -4992,6 +5053,10 @@ function PointerToReal(p) {
 	return external_call(global._PointerToReal, p);
 }
 
+function PtrToReal(p) {
+	return external_call(global._PointerToReal, p);
+}
+
 #macro osInherited 0
 #macro osNone 1
 #macro osRenderFarthestFirst 2
@@ -5161,4 +5226,7 @@ function PointerToReal(p) {
 #macro uspEveryIteration 0
 #macro uspEveryFrame 1
 #macro uspNever 2
-
+#macro psDefault 0
+#macro psName 1
+#macro psMinDepth 2
+#macro psMaxDepth 2
