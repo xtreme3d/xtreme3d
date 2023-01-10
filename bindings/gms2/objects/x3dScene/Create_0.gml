@@ -39,7 +39,9 @@ LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
-plane = PlaneCreate(false, 20, 20, 5, 5, global.scene);
+shadowCasters = DummycubeCreate(global.scene);
+
+plane = ShadowplaneCreate(20, 20, 5, 5, shadowCasters, light, c_black, 0.5, global.scene);
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/stone.png");
 MaterialSetShininess("mFloor", 16);
@@ -52,16 +54,16 @@ matlib2 = MaterialLibraryCreate();
 
 MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");
 MaterialLibraryActivate(matlib2);
-hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, global.scene);
+hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, shadowCasters);
 ActorAddObject(hk, "data/hellknight/idle.md5anim");
 ActorAddObject(hk, "data/hellknight/attack.md5anim");
 ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "diffuse.png");
-MaterialSetAmbientColor("mHellknight", c_black, 1); 
+MaterialSetAmbientColor("mHellknight", c_dkgray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
-MaterialSetSpecularColor("mHellknight", c_ltgray, 1); 
+MaterialSetSpecularColor("mHellknight", c_white, 1); 
 MaterialSetShininess("mHellknight", 32); 
 ObjectSetMaterial(hk, "mHellknight");
 
@@ -85,7 +87,7 @@ PhongShaderUseTexture(phong, true);
 MaterialSetShader("mHellknight", phong);
 
 fxObj = DummycubeCreate(global.scene);
-ObjectSetPosition(fxObj, 5, 1, 0);
+ObjectSetPosition(fxObj, 5, 1, 3);
 thorMngr = ThorFXManagerCreate();
 ThorFXSetTarget(thorMngr, 5, 1, 0);
 thor = ThorFXCreate(thorMngr, fxObj);

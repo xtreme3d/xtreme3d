@@ -443,7 +443,6 @@ begin
   result := ObjToReal(param);
 end;
 
-
 function GLSLShaderSetParameter1i(par: real; val: real): real; cdecl;
 var
   param: TGLSLShaderParameter;

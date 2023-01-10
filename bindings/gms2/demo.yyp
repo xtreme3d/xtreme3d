@@ -1,7 +1,7 @@
 {
   "resourceType": "GMProject",
   "resourceVersion": "1.6",
-  "name": "teapot",
+  "name": "demo",
   "resources": [
     {"id":{"name":"x3d","path":"sprites/x3d/x3d.yy",},"order":0,},
     {"id":{"name":"xtreme3d","path":"scripts/xtreme3d/xtreme3d.yy",},"order":0,},
