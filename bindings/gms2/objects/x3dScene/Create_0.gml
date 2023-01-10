@@ -42,7 +42,6 @@ LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
 plane = ShadowplaneCreate(20, 20, 5, 5, shadowCasters, light, c_black, 0.5, global.scene);
-//ObjectHide(plane);
 //plane = PlaneCreate(false, 20, 20, 10, 10, global.scene); 
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/stone.png");
@@ -119,16 +118,12 @@ cloth = FreeformCreate("data/cloth/cloth.3ds", 0, 0, shadowCasters);
 ObjectSetPosition(cloth, 5, 3, 0);
 ObjectPitch(cloth, -90);
 ObjectSetMaterial(cloth, "mCloth");
-//BaseMeshBuildSilhouetteConnectivityData(cloth);
 
 verlet = VerletWorldCreate(3, uspEveryFrame, 0.02);
 VerletWorldSetMaxDeltaTime(verlet, 1.0 / 60.0);
 //VerletWorldCreateOctree(verlet, -20, -5.5, -20, 20, 20, 20, 25, 5);
 VerletWorldGravityCreate(verlet, 0, -9.81, 0);
 VerletWorldSetSimTime(verlet, 0.0);
-
-//air = VerletAirResistanceCreate(verlet, 3, 2);
-//VerletAirResistanceSetWindDirection(air, 0, 0, 1);
 
 flr = VerletConstraintFloorCreate(verlet, 0, 0);
 VerletConstraintSetFrictionRatio(flr, 1);
@@ -145,12 +140,6 @@ for (i = 0; i < numNodes; i += 1) {
 
 playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
 VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
-
-/*
-cube = CubeCreate(2, 1, 2, 0);
-ObjectSetPosition(cube, 0, 2, -1.7);
-cubeCollider = VerletConstraintCubeCreateSetCube(verlet, cube);
-*/
 
 mouselookActive = true;
 mb_left_released = true;
