@@ -18,7 +18,9 @@ v4.0.0 (by Gecko) - ??/??/????
 - `PtrToReal` is deprecated, use `PointerToReal` instead
 - Polygon functions were removed
 - `TextRead`, `TextConvertANSIToUTF8` were removed
-- `OdeAddCone` was removed.
+- `OdeAddCone` was removed
+- New function `BaseMeshBuildSilhouetteConnectivityData`
+- New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
