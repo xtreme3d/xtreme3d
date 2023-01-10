@@ -641,7 +641,7 @@ function dll_init(dll) {
 	// Milestone II functions
 	//global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
+	global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
@@ -1555,6 +1555,10 @@ function EngineSetCulling(aVc) {
 }
 
 function EngineUpdate(aDelta) {
+	return external_call(global._EngineUpdate, aDelta);
+}
+
+function Update(aDelta) {
 	return external_call(global._EngineUpdate, aDelta);
 }
 
