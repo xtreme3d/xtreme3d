@@ -63,9 +63,11 @@ ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "diffuse.png");
 MaterialSetAmbientColor("mHellknight", c_dkgray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
-MaterialSetSpecularColor("mHellknight", c_white, 1); 
-MaterialSetShininess("mHellknight", 32); 
+MaterialSetSpecularColor("mHellknight", c_grey, 1); 
+MaterialSetShininess("mHellknight", 8); 
 ObjectSetMaterial(hk, "mHellknight");
+
+MaterialCreate("mHellknightNormal", "normal.png");
 
 /*
 var buf = buffer_load("shaders/simple-vp.glsl");
@@ -82,9 +84,10 @@ GLSLShaderSetParameter4f(paramColor, 1.0, 0.5, 0.0, 1.0);
 MaterialSetShader("mHellknight", simpleShader);
 */
 
-phong = PhongShaderCreate();
-PhongShaderUseTexture(phong, true);
-MaterialSetShader("mHellknight", phong);
+shader = BumpShaderCreate();
+BumpShaderSetDiffuseTexture(shader, "mHellknight");
+BumpShaderSetNormalTexture(shader, "mHellknightNormal");
+MaterialSetShader("mHellknight", shader);
 
 fxObj = DummycubeCreate(global.scene);
 ObjectSetPosition(fxObj, 5, 1, 3);

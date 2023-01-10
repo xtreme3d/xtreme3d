@@ -135,6 +135,7 @@ begin
   dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   m := dyna.CalculateMass;
   dBodySetMass(dyna.Body, @m);
+  result := 1.0;
 end;
 
 function OdeDynamicCalibrateCenterOfMass(obj: real): real; cdecl;

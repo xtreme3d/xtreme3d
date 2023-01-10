@@ -7,247 +7,6 @@ begin
   result:=1;
 end;
 
-{
-function BumpShaderCreate(): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramDiffTex: TGLSLShaderParameter;
-  paramNormTex: TGLSLShaderParameter;
-  paramHeightTex: TGLSLShaderParameter;
-  paramMaxLights: TGLSLShaderParameter;
-  paramUseParallax: TGLSLShaderParameter;
-  paramParallaxHeight: TGLSLShaderParameter; 
-  paramShadowMap: TGLSLShaderParameter; 
-  paramShadowMatrix: TGLSLShaderParameter; 
-  paramUseShadowMap: TGLSLShaderParameter; 
-  paramShadowMapSize: TGLSLShaderParameter; 
-  paramShadowBlurRadius: TGLSLShaderParameter;
-  paramUseAutoTangentSpace: TGLSLShaderParameter;
-  paramFogEnabled: TGLSLShaderParameter;
-  paramLightingEnabled: TGLSLShaderParameter;
-begin
-  if not
-    (GL_ARB_shader_objects and
-     GL_ARB_vertex_shader and
-     GL_ARB_fragment_shader) then begin
-      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
-      result := 0;
-      Exit;
-  end;
-  bump := TGLSLShader.Create(scene);
-  bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
-  
-  paramDiffTex := bump.Param.AddUniform('diffuseMap');
-  paramNormTex := bump.Param.AddUniform('normalMap');
-  paramHeightTex := bump.Param.AddUniform('heightMap');
-  
-  paramMaxLights := bump.Param.AddUniform('maxNumLights');
-  paramMaxLights.UniformType := uniform1i;
-  paramMaxLights.UniformInteger := 8;
-  paramMaxLights.Initialized := True;
-  
-  paramUseParallax := bump.Param.AddUniform('useParallax');
-  paramUseParallax.UniformType := uniform1i;
-  paramUseParallax.UniformInteger := 0;
-  paramUseParallax.Initialized := True;
-  
-  paramParallaxHeight := bump.Param.AddUniform('parallaxHeight');
-  paramParallaxHeight.UniformType := uniform1f;
-  paramParallaxHeight.UniformVector[0] := 0.03;
-  paramParallaxHeight.Initialized := True;
-  
-  paramShadowMap := bump.Param.AddUniform('shadowMap');
-  paramShadowMap.UniformType := uniformShadowTexture;
-  paramShadowMap.UniformTexture := 7;
-  paramShadowMap.ShadowMap := nil;
-  paramShadowMap.Initialized := True;
-  
-  paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
-  paramShadowMatrix.UniformType := uniformShadowMatrix;
-  paramShadowMatrix.ShadowMap := nil;
-  paramShadowMatrix.Initialized := True;
-  
-  paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
-  paramUseShadowMap.UniformType := uniform1i;
-  paramUseShadowMap.UniformInteger := 0;
-  paramUseShadowMap.Initialized := True;
-  
-  paramShadowMapSize := bump.Param.AddUniform('shadowMapSize');
-  paramShadowMapSize.UniformType := uniform2f;
-  paramShadowMapSize.UniformVector[0] := 1.0;
-  paramShadowMapSize.UniformVector[1] := 1.0;
-  paramShadowMapSize.Initialized := True;
-  
-  paramShadowBlurRadius := bump.Param.AddUniform('shadowBlurRadius');
-  paramShadowBlurRadius.UniformType := uniform1f;
-  paramShadowBlurRadius.UniformVector[0] := 0.0;
-  paramShadowBlurRadius.Initialized := True;
-  
-  paramUseAutoTangentSpace := bump.Param.AddUniform('useAutoTangentSpace');
-  paramUseAutoTangentSpace.UniformType := uniform1i;
-  paramUseAutoTangentSpace.UniformInteger := 1;
-  paramUseAutoTangentSpace.Initialized := True;
-  
-  paramFogEnabled := bump.Param.AddUniform('fogEnabled');
-  paramFogEnabled.UniformType := uniformFogEnabled;
-  paramFogEnabled.Initialized := True;
-  
-  paramLightingEnabled := bump.Param.AddUniform('lightingEnabled');
-  paramLightingEnabled.UniformType := uniformLightingEnabled;
-  paramLightingEnabled.Initialized := True;
-
-  result := integer(bump);
-end;
-
-function BumpShaderSetDiffuseTexture(shader: real; mtrl: pchar): real; cdecl;
-var
-  bump: TGLSLShader;
-  mat: TGLLibMaterial;
-  paramDiffTex: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramDiffTex := bump.Param.Items[0];
-  paramDiffTex.UniformType := uniformTexture2D;
-  if Length(mtrl) > 0 then
-  begin
-    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-    paramDiffTex.Texture := mat.Material.Texture;
-  end;
-  paramDiffTex.UniformTexture := 0;
-  paramDiffTex.Initialized := True;
-  result:=1;
-end;
-
-function BumpShaderSetNormalTexture(shader: real; mtrl: pchar): real; cdecl;
-var
-  bump: TGLSLShader;
-  mat: TGLLibMaterial;
-  paramNormTex: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramNormTex := bump.Param.Items[1];
-  paramNormTex.UniformType := uniformTexture2D;
-  if Length(mtrl) > 0 then
-  begin
-    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-    paramNormTex.Texture := mat.Material.Texture;
-  end;
-  paramNormTex.UniformTexture := 1;
-  paramNormTex.Initialized := True;
-  result:=1;
-end;
-
-function BumpShaderSetHeightTexture(shader: real; mtrl: pchar): real; cdecl;
-var
-  bump: TGLSLShader;
-  mat: TGLLibMaterial;
-  paramHeightTex: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramHeightTex := bump.Param.Items[2];
-  paramHeightTex.UniformType := uniformTexture2D;
-  if Length(mtrl) > 0 then
-  begin
-    mat:=matlib.Materials.GetLibMaterialByName(String(mtrl));
-    paramHeightTex.Texture := mat.Material.Texture;
-  end;
-  paramHeightTex.UniformTexture := 2;
-  paramHeightTex.Initialized := True;
-  result:=1;
-end;
-
-function BumpShaderSetMaxLights(shader, maxlights: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramMaxLights: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramMaxLights := bump.Param.Items[3];
-  paramMaxLights.UniformInteger := trunc64(maxlights);
-  result:=1;
-end;
-
-function BumpShaderUseParallax(shader, mode: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramUseParallax: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramUseParallax := bump.Param.Items[4];
-  paramUseParallax.UniformInteger := trunc64(mode);
-  result:=1;
-end;
-
-function BumpShaderSetParallaxOffset(shader, height: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramParallaxHeight: TGLSLShaderParameter;
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramParallaxHeight := bump.Param.Items[5];
-  paramParallaxHeight.UniformVector[0] := height;
-  result:=1;
-end;
-
-function BumpShaderSetShadowMap(shader, shadowmap: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  sm: TGLShadowMap;
-  paramShadowMap: TGLSLShaderParameter; 
-  paramShadowMatrix: TGLSLShaderParameter; 
-  paramUseShadowMap: TGLSLShaderParameter; 
-  paramShadowMapSize: TGLSLShaderParameter; 
-begin
-  bump := TGLSLShader(trunc64(shader));
-  if shadowmap <> 0 then
-    sm := TGLShadowMap(trunc64(shadowmap));
-  paramShadowMap := bump.Param.Items[6];
-  paramShadowMatrix := bump.Param.Items[7];
-  paramUseShadowMap := bump.Param.Items[8];
-  paramShadowMapSize := bump.Param.Items[9];
-  
-  if shadowmap <> 0 then
-  begin
-    paramShadowMap.ShadowMap := sm;
-    paramShadowMatrix.ShadowMap := sm;
-    paramUseShadowMap.UniformInteger := 1;
-    paramShadowMapSize.UniformVector[0] := sm.Width;
-    paramShadowMapSize.UniformVector[1] := sm.Height;
-  end
-  else
-  begin
-    paramShadowMap.ShadowMap := nil;
-    paramShadowMatrix.ShadowMap := nil;
-    paramUseShadowMap.UniformInteger := 0;
-    paramShadowMapSize.UniformVector[0] := 1.0;
-    paramShadowMapSize.UniformVector[1] := 1.0;
-  end;
-  result:=1;
-end;
-
-function BumpShaderSetShadowBlurRadius(shader, radius: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramShadowBlurRadius: TGLSLShaderParameter; 
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramShadowBlurRadius := bump.Param.Items[10];
-  paramShadowBlurRadius.UniformVector[0] := radius;
-  result:=1;
-end;
-
-function BumpShaderUseAutoTangentSpace(shader, mode: real): real; cdecl;
-var
-  bump: TGLSLShader;
-  paramUseAutoTangentSpace: TGLSLShaderParameter; 
-begin
-  bump := TGLSLShader(trunc64(shader));
-  paramUseAutoTangentSpace := bump.Param.Items[11];
-  paramUseAutoTangentSpace.UniformInteger := trunc64(mode);
-  result:=1;
-end;
-}
-
 //Cel Shader
 function CelShaderCreate(): real; cdecl;
 var
@@ -396,30 +155,30 @@ begin
   result:=ObjToReal(GLTexCombineShader);
 end;
 
-function TexCombineShaderAddCombiner(tcs: real; str: pchar): real; cdecl;
+function TexCombineShaderAddCombiner(tcs: real; str: PAnsiChar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
   GLTexCombineShader:=TGLTexCombineShader(RealToPtr(tcs));
-  GLTexCombineShader.Combiners.Add(str);
+  GLTexCombineShader.Combiners.Add(String(AnsiString(str)));
   result:=1;
 end;
 
-function TexCombineShaderMaterial3(tcs: real; m3: pchar): real; cdecl;
+function TexCombineShaderMaterial3(tcs: real; m3: PAnsiChar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
   GLTexCombineShader:=TGLTexCombineShader(RealToPtr(tcs));
-  GLTexCombineShader.LibMaterial3Name:=m3;
+  GLTexCombineShader.LibMaterial3Name:=String(AnsiString(m3));
   result:=1;
 end;
 
-function TexCombineShaderMaterial4(tcs: real; m4: pchar): real; cdecl;
+function TexCombineShaderMaterial4(tcs: real; m4: PAnsiChar): real; cdecl;
 var
   GLTexCombineShader: TGLTexCombineShader;
 begin
   GLTexCombineShader:=TGLTexCombineShader(RealToPtr(tcs));
-  GLTexCombineShader.LibMaterial4Name:=m4;
+  GLTexCombineShader.LibMaterial4Name:=String(AnsiString(m4));
   result:=1;
 end;
 
@@ -439,7 +198,7 @@ var
   param: TGLSLShaderParameter;
 begin
   shader := TGLSLShader(RealToPtr(glsl));
-  param := shader.Param.AddUniform(String(name));
+  param := shader.Param.AddUniform(String(AnsiString(name)));
   result := ObjToReal(param);
 end;
 
@@ -658,7 +417,7 @@ begin
 end;
 
 
-function PhongShaderCreate(): real; cdecl;
+function PhongShaderCreate: real; cdecl;
 var
   phong: TGLSLShader;
   paramDiffTex: TGLSLShaderParameter;
@@ -726,6 +485,260 @@ begin
   phong := TGLSLShader(RealToPtr(shader));
   paramMaxLights := phong.Param.Items[2];
   paramMaxLights.UniformInteger := trunc(maxlights);
+  result:=1;
+end;
+
+function BumpShaderCreate: real; cdecl;
+var
+  bump: TGLSLShader;
+  paramDiffTex: TGLSLShaderParameter;
+  paramNormTex: TGLSLShaderParameter;
+  paramHeightTex: TGLSLShaderParameter;
+  paramMaxLights: TGLSLShaderParameter;
+  paramUseParallax: TGLSLShaderParameter;
+  paramParallaxHeight: TGLSLShaderParameter;
+  //paramShadowMap: TGLSLShaderParameter;
+  //paramShadowMatrix: TGLSLShaderParameter;
+  //paramUseShadowMap: TGLSLShaderParameter;
+  //paramShadowMapSize: TGLSLShaderParameter;
+  //paramShadowBlurRadius: TGLSLShaderParameter;
+  paramUseAutoTangentSpace: TGLSLShaderParameter;
+  paramFogEnabled: TGLSLShaderParameter;
+  paramLightingEnabled: TGLSLShaderParameter;
+begin
+  {
+  if not
+    (GL_ARB_shader_objects and
+     GL_ARB_vertex_shader and
+     GL_ARB_fragment_shader) then begin
+      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
+      result := 0;
+      Exit;
+  end;
+  }
+
+  bump := TGLSLShader.Create(scene);
+  bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
+
+  paramDiffTex := bump.Param.AddUniform('diffuseMap');
+  paramNormTex := bump.Param.AddUniform('normalMap');
+  paramHeightTex := bump.Param.AddUniform('heightMap');
+
+  paramMaxLights := bump.Param.AddUniform('maxNumLights');
+  paramMaxLights.UniformType := uniform1i;
+  paramMaxLights.UniformInteger := 8;
+  paramMaxLights.Initialized := True;
+
+  paramUseParallax := bump.Param.AddUniform('useParallax');
+  paramUseParallax.UniformType := uniform1i;
+  paramUseParallax.UniformInteger := 0;
+  paramUseParallax.Initialized := True;
+
+  paramParallaxHeight := bump.Param.AddUniform('parallaxHeight');
+  paramParallaxHeight.UniformType := uniform1f;
+  paramParallaxHeight.UniformVector[0] := 0.03;
+  paramParallaxHeight.Initialized := True;
+
+  {
+  paramShadowMap := bump.Param.AddUniform('shadowMap');
+  paramShadowMap.UniformType := uniformShadowTexture;
+  paramShadowMap.UniformTexture := 7;
+  paramShadowMap.ShadowMap := nil;
+  paramShadowMap.Initialized := True;
+
+  paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
+  paramShadowMatrix.UniformType := uniformShadowMatrix;
+  paramShadowMatrix.ShadowMap := nil;
+  paramShadowMatrix.Initialized := True;
+
+  paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
+  paramUseShadowMap.UniformType := uniform1i;
+  paramUseShadowMap.UniformInteger := 0;
+  paramUseShadowMap.Initialized := True;
+
+  paramShadowMapSize := bump.Param.AddUniform('shadowMapSize');
+  paramShadowMapSize.UniformType := uniform2f;
+  paramShadowMapSize.UniformVector[0] := 1.0;
+  paramShadowMapSize.UniformVector[1] := 1.0;
+  paramShadowMapSize.Initialized := True;
+
+  paramShadowBlurRadius := bump.Param.AddUniform('shadowBlurRadius');
+  paramShadowBlurRadius.UniformType := uniform1f;
+  paramShadowBlurRadius.UniformVector[0] := 0.0;
+  paramShadowBlurRadius.Initialized := True;
+  }
+
+  paramUseAutoTangentSpace := bump.Param.AddUniform('useAutoTangentSpace');
+  paramUseAutoTangentSpace.UniformType := uniform1i;
+  paramUseAutoTangentSpace.UniformInteger := 1;
+  paramUseAutoTangentSpace.Initialized := True;
+
+  paramFogEnabled := bump.Param.AddUniform('fogEnabled');
+  paramFogEnabled.UniformType := uniformFogEnabled;
+  paramFogEnabled.Initialized := True;
+
+  paramLightingEnabled := bump.Param.AddUniform('lightingEnabled');
+  paramLightingEnabled.UniformType := uniformLightingEnabled;
+  paramLightingEnabled.Initialized := True;
+
+  result := ObjToReal(bump);
+end;
+
+function BumpShaderSetDiffuseTexture(shader: real; mtrl: PAnsiChar): real; cdecl;
+var
+  bump: TGLSLShader;
+  matName: String;
+  mat: TGLLibMaterial;
+  paramDiffTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  matName := StrConv(mtrl);
+  paramDiffTex := bump.Param.Items[0];
+  paramDiffTex.UniformType := uniformTexture2D;
+  if Length(matName) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(matName);
+    paramDiffTex.Texture := mat.Material.Texture;
+  end;
+  paramDiffTex.UniformTexture := 0;
+  paramDiffTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetNormalTexture(shader: real; mtrl: PAnsiChar): real; cdecl;
+var
+  bump: TGLSLShader;
+  matName: String;
+  mat: TGLLibMaterial;
+  paramNormTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  matName := StrConv(mtrl);
+  paramNormTex := bump.Param.Items[1];
+  paramNormTex.UniformType := uniformTexture2D;
+  if Length(matName) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(matName);
+    paramNormTex.Texture := mat.Material.Texture;
+  end;
+  paramNormTex.UniformTexture := 1;
+  paramNormTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetHeightTexture(shader: real; mtrl: PAnsiChar): real; cdecl;
+var
+  bump: TGLSLShader;
+  matName: String;
+  mat: TGLLibMaterial;
+  paramHeightTex: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  matName := StrConv(mtrl);
+  paramHeightTex := bump.Param.Items[2];
+  paramHeightTex.UniformType := uniformTexture2D;
+  if Length(matName) > 0 then
+  begin
+    mat:=matlib.Materials.GetLibMaterialByName(matName);
+    paramHeightTex.Texture := mat.Material.Texture;
+  end;
+  paramHeightTex.UniformTexture := 2;
+  paramHeightTex.Initialized := True;
+  result:=1;
+end;
+
+function BumpShaderSetMaxLights(shader, maxlights: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  paramMaxLights: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  paramMaxLights := bump.Param.Items[3];
+  paramMaxLights.UniformInteger := trunc(maxlights);
+  result:=1;
+end;
+
+function BumpShaderUseParallax(shader, mode: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  paramUseParallax: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  paramUseParallax := bump.Param.Items[4];
+  paramUseParallax.UniformInteger := trunc(mode);
+  result:=1;
+end;
+
+function BumpShaderSetParallaxOffset(shader, height: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  paramParallaxHeight: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  paramParallaxHeight := bump.Param.Items[5];
+  paramParallaxHeight.UniformVector[0] := height;
+  result:=1;
+end;
+
+{
+function BumpShaderSetShadowMap(shader, shadowmap: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  sm: TGLShadowMap;
+  paramShadowMap: TGLSLShaderParameter;
+  paramShadowMatrix: TGLSLShaderParameter;
+  paramUseShadowMap: TGLSLShaderParameter;
+  paramShadowMapSize: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  if shadowmap <> 0 then
+    sm := TGLShadowMap(RealToPtr(shadowmap));
+  paramShadowMap := bump.Param.Items[6];
+  paramShadowMatrix := bump.Param.Items[7];
+  paramUseShadowMap := bump.Param.Items[8];
+  paramShadowMapSize := bump.Param.Items[9];
+
+  if shadowmap <> 0 then
+  begin
+    paramShadowMap.ShadowMap := sm;
+    paramShadowMatrix.ShadowMap := sm;
+    paramUseShadowMap.UniformInteger := 1;
+    paramShadowMapSize.UniformVector[0] := sm.Width;
+    paramShadowMapSize.UniformVector[1] := sm.Height;
+  end
+  else
+  begin
+    paramShadowMap.ShadowMap := nil;
+    paramShadowMatrix.ShadowMap := nil;
+    paramUseShadowMap.UniformInteger := 0;
+    paramShadowMapSize.UniformVector[0] := 1.0;
+    paramShadowMapSize.UniformVector[1] := 1.0;
+  end;
+  result:=1;
+end;
+}
+
+{
+function BumpShaderSetShadowBlurRadius(shader, radius: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  paramShadowBlurRadius: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  paramShadowBlurRadius := bump.Param.Items[10];
+  paramShadowBlurRadius.UniformVector[0] := radius;
+  result:=1;
+end;
+}
+
+function BumpShaderUseAutoTangentSpace(shader, mode: real): real; cdecl;
+var
+  bump: TGLSLShader;
+  paramUseAutoTangentSpace: TGLSLShaderParameter;
+begin
+  bump := TGLSLShader(RealToPtr(shader));
+  paramUseAutoTangentSpace := bump.Param.Items[11];
+  paramUseAutoTangentSpace.UniformInteger := trunc(mode);
   result:=1;
 end;
 

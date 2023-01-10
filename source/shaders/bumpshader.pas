@@ -2,15 +2,15 @@ bumpVertexProgram =
   'varying vec3 position;' + #13#10 +
   'varying vec3 n, t, b, e;' + #13#10 + 
   'varying vec4 shadowCoord;' + #13#10 + 
-  'uniform mat4 shadowMatrix;' + #13#10 + 
-  'uniform bool useShadowMap;' + #13#10 + 
+  //'uniform mat4 shadowMatrix;' + #13#10 + 
+  //'uniform bool useShadowMap;' + #13#10 + 
   'uniform bool useAutoTangentSpace;' + #13#10 +
   
   'void main()' + #13#10 +
   '{' + #13#10 +
   '  gl_TexCoord[0] = gl_MultiTexCoord0;' + #13#10 +
   '  position = (gl_ModelViewMatrix * gl_Vertex).xyz;' + #13#10 +
-  '  n = normalize(gl_NormalMatrix * gl_Normal);' + #13#10 +  
+  '  n = normalize(gl_NormalMatrix * gl_Normal);' + #13#10 + 
   '  e = position;' + #13#10 +
   '  if (!useAutoTangentSpace)' + #13#10 +
   '  {' + #13#10 +
@@ -21,7 +21,8 @@ bumpVertexProgram =
   '    e.z = dot(position, n);' + #13#10 +
   '  }' + #13#10 +
   '  e = -e;' + #13#10 +
-  '  shadowCoord = useShadowMap? shadowMatrix * (gl_ModelViewMatrix * gl_Vertex) : vec4(0.0, 0.0, 0.0, 0.0);' + #13#10 +
+  //'  shadowCoord = useShadowMap? shadowMatrix * (gl_ModelViewMatrix * gl_Vertex) : vec4(0.0, 0.0, 0.0, 0.0);' + #13#10 +
+  '  shadowCoord = vec4(0.0, 0.0, 0.0, 0.0);' + #13#10 +
   '  gl_Position = ftransform();' + #13#10 +
   '  gl_ClipVertex = gl_ModelViewMatrix * gl_Vertex;' + #13#10 +
   '}' + #13#10;
@@ -34,25 +35,25 @@ bumpFragmentProgram =
   'uniform sampler2D diffuseMap;' + #13#10 +
   'uniform sampler2D normalMap;' + #13#10 +
   'uniform sampler2D heightMap;' + #13#10 +
-  'uniform sampler2DShadow shadowMap;' + #13#10 +
+  //'uniform sampler2DShadow shadowMap;' + #13#10 +
   'uniform int maxNumLights;' + #13#10 +
   'uniform bool useParallax;' + #13#10 +
   'uniform float parallaxHeight;' + #13#10 +
-  'uniform vec2 shadowMapSize;' + #13#10 +
-  'uniform float shadowBlurRadius;' + #13#10 +
+  //'uniform vec2 shadowMapSize;' + #13#10 +
+  //'uniform float shadowBlurRadius;' + #13#10 +
   'uniform bool useAutoTangentSpace;' + #13#10 +
   'uniform bool fogEnabled;' + #13#10 +
   'uniform bool lightingEnabled;' + #13#10 +
 
   'const float parallaxBias = -0.01;' + #13#10 +
   
-  'float shadowLookup(sampler2DShadow depths, vec4 coord, vec2 offset)' + #13#10 +
-  '{' + #13#10 +
-    'vec2 texelSize = 1.0 / shadowMapSize;' + #13#10 +
-    'vec2 v = offset * texelSize * coord.w;' + #13#10 +
-    'float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0.0, 0.0)).z;' + #13#10 +
-    'return z;' + #13#10 +
-  '}' + #13#10 +
+  //'float shadowLookup(sampler2DShadow depths, vec4 coord, vec2 offset)' + #13#10 +
+  //'{' + #13#10 +
+  //  'vec2 texelSize = 1.0 / shadowMapSize;' + #13#10 +
+  //  'vec2 v = offset * texelSize * coord.w;' + #13#10 +
+  //  'float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0.0, 0.0)).z;' + #13#10 +
+  //  'return z;' + #13#10 +
+  //'}' + #13#10 +
   
   'mat3 cotangentFrame(vec3 N, vec3 p, vec2 uv)' + #13#10 +
   '{' + #13#10 +
@@ -91,22 +92,22 @@ bumpFragmentProgram =
     'float fogFactor = fogEnabled? clamp((gl_Fog.end - fogDistance) / (gl_Fog.end - gl_Fog.start), 0.0, 1.0) : 1.0; ' + #13#10 +
     
     'float shadow = 1.0;' + #13#10 +
-    'if (shadowCoord.w > 0.0)' + #13#10 +
-    '{' + #13#10 +
-      'shadow = 0.0;' + #13#10 +
-      'if (shadowBlurRadius > 0.0)' + #13#10 +
-      '{' + #13#10 +
-        'float x, y;' + #13#10 +
-	    'for (y = -shadowBlurRadius ; y < shadowBlurRadius ; y += 1.0)' + #13#10 +
-	    'for (x = -shadowBlurRadius ; x < shadowBlurRadius ; x += 1.0)' + #13#10 +
-        '{' + #13#10 +
-	        'shadow += shadowLookup(shadowMap, shadowCoord, vec2(x, y));' + #13#10 +
-        '}' + #13#10 +
-	      'shadow /= shadowBlurRadius * shadowBlurRadius * 4.0;' + #13#10 +
-      '}' + #13#10 +
-      'else' + #13#10 +
-        'shadow = shadowLookup(shadowMap, shadowCoord, vec2(0.0, 0.0));' + #13#10 +
-    '}' + #13#10 +
+    //'if (shadowCoord.w > 0.0)' + #13#10 +
+    //'{' + #13#10 +
+    //  'shadow = 0.0;' + #13#10 +
+    //  'if (shadowBlurRadius > 0.0)' + #13#10 +
+    //  '{' + #13#10 +
+    //    'float x, y;' + #13#10 +
+    //    'for (y = -shadowBlurRadius ; y < shadowBlurRadius ; y += 1.0)' + #13#10 +
+    //    'for (x = -shadowBlurRadius ; x < shadowBlurRadius ; x += 1.0)' + #13#10 +
+    //    '{' + #13#10 +
+    //        'shadow += shadowLookup(shadowMap, shadowCoord, vec2(x, y));' + #13#10 +
+    //    '}' + #13#10 +
+    //      'shadow /= shadowBlurRadius * shadowBlurRadius * 4.0;' + #13#10 +
+    //  '}' + #13#10 +
+    //  'else' + #13#10 +
+    //    'shadow = shadowLookup(shadowMap, shadowCoord, vec2(0.0, 0.0));' + #13#10 +
+    //'}' + #13#10 +
 
     'vec4 diffuseTex = texture2D(diffuseMap, texCoords);' + #13#10 +
     'vec3 tN = normalize(texture2D(normalMap, texCoords).rgb * 2.0 - 1.0);' + #13#10 +

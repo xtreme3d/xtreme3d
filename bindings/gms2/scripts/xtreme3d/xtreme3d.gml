@@ -593,8 +593,6 @@ function dll_init(dll) {
 	global._PhongShaderCreate = external_define(dll, "PhongShaderCreate", dll_cdecl, ty_real, 0);
 	global._PhongShaderUseTexture = external_define(dll, "PhongShaderUseTexture", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._PhongShaderSetMaxLights = external_define(dll, "PhongShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	/*
-	// Not yet implemented:
 	global._BumpShaderCreate = external_define(dll, "BumpShaderCreate", dll_cdecl, ty_real, 0);
 	global._BumpShaderSetDiffuseTexture = external_define(dll, "BumpShaderSetDiffuseTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._BumpShaderSetNormalTexture = external_define(dll, "BumpShaderSetNormalTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -602,10 +600,12 @@ function dll_init(dll) {
 	global._BumpShaderSetMaxLights = external_define(dll, "BumpShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderUseParallax = external_define(dll, "BumpShaderUseParallax", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetParallaxOffset = external_define(dll, "BumpShaderSetParallaxOffset", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	/*
+	// Milestone II functions:
 	global._BumpShaderSetShadowMap = external_define(dll, "BumpShaderSetShadowMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetShadowBlurRadius = external_define(dll, "BumpShaderSetShadowBlurRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._BumpShaderUseAutoTangentSpace = external_define(dll, "BumpShaderUseAutoTangentSpace", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	*/
+	global._BumpShaderUseAutoTangentSpace = external_define(dll, "BumpShaderUseAutoTangentSpace", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CelShaderCreate = external_define(dll, "CelShaderCreate", dll_cdecl, ty_real, 0);
 	global._CelShaderSetLineColor = external_define(dll, "CelShaderSetLineColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CelShaderSetLineWidth = external_define(dll, "CelShaderSetLineWidth", dll_cdecl, ty_real, 2, ty_real, ty_real);

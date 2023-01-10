@@ -712,6 +712,11 @@ exports
     //GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
     //GLSLShaderSetParameterViewMatrix,
     PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
+    BumpShaderCreate,
+    BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,
+    BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
+    //BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius,
+    BumpShaderUseAutoTangentSpace,
 
     // ThorFX
     ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
