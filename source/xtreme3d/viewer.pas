@@ -14,7 +14,7 @@ begin
         viewer.Visible := true;
         viewer.Buffer.Lighting := true;
         viewer.ParentWindow := windowHandle;
-        viewer.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow];
+        viewer.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting];
         //viewer.AutoRender := False;
         result := ObjToReal(viewer);
     end

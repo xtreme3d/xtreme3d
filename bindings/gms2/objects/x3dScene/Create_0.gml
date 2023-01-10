@@ -59,6 +59,7 @@ MaterialLibraryActivate(matlib2);
 hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, shadowCasters);
 ActorAddObject(hk, "data/hellknight/idle.md5anim");
 ActorAddObject(hk, "data/hellknight/attack.md5anim");
+ActorSetAnimationMode(hk, aamLoop);
 ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
