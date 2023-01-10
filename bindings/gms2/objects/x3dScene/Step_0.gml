@@ -29,5 +29,17 @@ else {
 	mb_left_released = true;
 }
 
+VerletConstraintSetPosition(playerCollider,
+    ObjectGetAbsolutePosition(camera, 0),
+	ObjectGetAbsolutePosition(camera, 1) - 1,
+	ObjectGetAbsolutePosition(camera, 2));
+
+/*
+VerletConstraintSetPosition(cubeCollider,
+	ObjectGetAbsolutePosition(cube, 0),
+	ObjectGetAbsolutePosition(cube, 1),
+	ObjectGetAbsolutePosition(cube, 2));
+*/
 EngineUpdate(dt);
+VerletWorldUpdate(verlet, current_time / 1000);
 ViewerRender(viewer);

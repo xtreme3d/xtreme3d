@@ -746,3 +746,13 @@ end;
 // Unimplemented:
 // MeshOptimize
 // MeshSmoothFaces
+
+function BaseMeshBuildSilhouetteConnectivityData(obj: real): real; cdecl;
+var
+    baseMesh: TGLBaseMesh;
+begin
+    baseMesh := TGLBaseMesh(RealToPtr(obj));
+    baseMesh.BuildSilhouetteConnectivityData;
+    result := 1.0;
+end;
+

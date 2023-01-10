@@ -755,8 +755,6 @@ begin
   result := object1.Up.AsVector.V[Trunc(ind)];
 end;
 
-// Unimplemented: ObjectStructureChanged
-
 function ObjectRotateAbsolute(obj1, x, y, z: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
@@ -872,3 +870,29 @@ begin
   end;
 end;
 
+function ObjectStructureChanged(obj: real): real; cdecl;
+var
+  GLObject1: TGLSCeneObject;
+begin
+  GLObject1 := TGLSceneObject(RealToPtr(obj));
+  GLObject1.StructureChanged;
+  result:=1;
+end;
+
+function ObjectClearStructureChanged(obj: real): real; cdecl;
+var
+  GLObject1: TGLSCeneObject;
+begin
+  GLObject1 := TGLSceneObject(RealToPtr(obj));
+  GLObject1.ClearStructureChanged;
+  result:=1;
+end;
+
+function ObjectNotifyChange(obj: real): real; cdecl;
+var
+  GLObject1:TGLSCeneObject;
+begin
+  GLObject1:=TGLSceneObject(RealToPtr(obj));
+  GLObject1.NotifyChange(GLObject1);
+  result:=1;
+end;

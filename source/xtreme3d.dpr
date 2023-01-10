@@ -656,6 +656,9 @@ exports
     FreeformMeshFaceGroupTriangleCount,
     FreeformSave,
 
+    // BaseMesh
+    BaseMeshBuildSilhouetteConnectivityData,
+
     // Terrain
     BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
     BmpHDSCreateEmpty, BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
@@ -704,6 +707,7 @@ exports
     ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
     ObjectSetMatrixColumn, ObjectExportMatrix, ObjectExportAbsoluteMatrix,
     ObjectIgnoreDepthBuffer, ObjectInFrustum, ObjectFindByName, ObjectIsPicked,
+    ObjectStructureChanged, ObjectClearStructureChanged, ObjectNotifyChange,
 
     // Material
     MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,

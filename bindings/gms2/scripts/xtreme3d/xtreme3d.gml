@@ -423,6 +423,9 @@ function dll_init(dll) {
 	global._FreeformMeshFaceGroupSetLightmapIndex = external_define(dll, "FreeformMeshFaceGroupSetLightmapIndex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._FreeformSetMaterialLibraries = external_define(dll, "FreeformSetMaterialLibraries", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
+	// BaseMesh
+	global._BaseMeshBuildSilhouetteConnectivityData = external_define(dll, "BaseMeshBuildSilhouetteConnectivityData", dll_cdecl, ty_real, 1, ty_real);
+	
 	// Grid
 	global._GridCreate = external_define(dll, "GridCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._GridSetLineStyle = external_define(dll, "GridSetLineStyle", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -540,6 +543,9 @@ function dll_init(dll) {
 	global._ObjectFindByName = external_define(dll, "ObjectFindByName", dll_cdecl, ty_real, 1, ty_string);
 	global._ObjectIgnoreDepthBuffer = external_define(dll, "ObjectIgnoreDepthBuffer", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectIsPicked = external_define(dll, "ObjectIsPicked", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ObjectNotifyChange = external_define(dll, "ObjectNotifyChange", dll_cdecl, ty_real, 1, ty_real);
+	global._ObjectStructureChanged = external_define(dll, "ObjectStructureChanged", dll_cdecl, ty_real, 1, ty_real);
+	global._ObjectClearStructureChanged = external_define(dll, "ObjectClearStructureChanged", dll_cdecl, ty_real, 1, ty_real);
 	
 	// ObjectHash
 	global._ObjectHashCreate = external_define(dll, "ObjectHashCreate", dll_cdecl, ty_real, 0);
@@ -2076,6 +2082,10 @@ function FreeformSetMaterialLibraries(aFf, aMatlib, aLmmatlib) {
 	return external_call(global._FreeformSetMaterialLibraries, aFf, aMatlib, aLmmatlib);
 }
 
+function BaseMeshBuildSilhouetteConnectivityData(aObj) {
+	return external_call(global._BaseMeshBuildSilhouetteConnectivityData, aObj);
+}
+
 function GridCreate(aX, aY, aZ, aStep, aParent) {
 	return external_call(global._GridCreate, aX, aY, aZ, aStep, aParent);
 }
@@ -3286,6 +3296,18 @@ function ObjectIgnoreDepthBuffer(aObj, aMode) {
 
 function ObjectIsPicked(aObj, aViewer, aX, aY) {
 	return external_call(global._ObjectIsPicked, aObj, aViewer, aX, aY);
+}
+
+function ObjectNotifyChange(aObj) {
+	return external_call(global._ObjectNotifyChange, aObj);
+}
+
+function ObjectStructureChanged(aObj) {
+	return external_call(global._ObjectStructureChanged, aObj);
+}
+
+function ObjectClearStructureChanged(aObj) {
+	return external_call(global._ObjectClearStructureChanged, aObj);
 }
 
 function ObjectHashCreate() {

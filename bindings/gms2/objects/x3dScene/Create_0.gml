@@ -24,6 +24,8 @@ global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
 global.front = DummycubeCreate(0);
 
+shadowCasters = DummycubeCreate(global.scene);
+
 camPos = DummycubeCreate(global.scene);
 
 camera = CameraCreate(camPos);
@@ -39,9 +41,9 @@ LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
-shadowCasters = DummycubeCreate(global.scene);
-
 plane = ShadowplaneCreate(20, 20, 5, 5, shadowCasters, light, c_black, 0.5, global.scene);
+//ObjectHide(plane);
+//plane = PlaneCreate(false, 20, 20, 10, 10, global.scene); 
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/stone.png");
 MaterialSetShininess("mFloor", 16);
@@ -103,6 +105,51 @@ ObjectPitch(trinity, 90);
 */
 
 MaterialLibraryActivate(matlib);
+
+MaterialCreate("mCloth", "data/cloth/tartan.jpg");
+MaterialSetFaceCulling("mCloth", fcNoCull);
+MaterialSetOptions("mCloth", true, true);
+MaterialSetAmbientColor("mCloth", c_dkgray, 1);
+MaterialSetDiffuseColor("mCloth", c_white, 1);
+MaterialSetSpecularColor("mCloth", c_white, 1);
+MaterialSetEmissionColor("mCloth", c_white, 1);
+
+cloth = FreeformCreate("data/cloth/cloth.3ds", 0, 0, shadowCasters);
+ObjectSetPosition(cloth, 5, 3, 0);
+ObjectPitch(cloth, -90);
+ObjectSetMaterial(cloth, "mCloth");
+//BaseMeshBuildSilhouetteConnectivityData(cloth);
+
+verlet = VerletWorldCreate(3, uspEveryFrame, 0.02);
+VerletWorldSetMaxDeltaTime(verlet, 1.0 / 60.0);
+//VerletWorldCreateOctree(verlet, -20, -5.5, -20, 20, 20, 20, 25, 5);
+VerletWorldGravityCreate(verlet, 0, -9.81, 0);
+VerletWorldSetSimTime(verlet, 0.0);
+
+//air = VerletAirResistanceCreate(verlet, 3, 2);
+//VerletAirResistanceSetWindDirection(air, 0, 0, 1);
+
+flr = VerletConstraintFloorCreate(verlet, 0, 0);
+VerletConstraintSetFrictionRatio(flr, 1);
+VerletConstraintSetPosition(flr, 0, 0.06, 0);
+
+EdgeDetectorCreate(verlet, cloth);
+VerletNodeNailedDown(verlet, 0, true);
+VerletNodeNailedDown(verlet, 7, true);
+VerletNodeNailedDown(verlet, 14, true);
+numNodes = VerletGetNodeCount(verlet);
+for (i = 0; i < numNodes; i += 1) {
+    VerletNodeSetWeight(verlet, i, 0.1);
+}
+
+playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
+VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
+
+/*
+cube = CubeCreate(2, 1, 2, 0);
+ObjectSetPosition(cube, 0, 2, -1.7);
+cubeCollider = VerletConstraintCubeCreateSetCube(verlet, cube);
+*/
 
 mouselookActive = true;
 mb_left_released = true;

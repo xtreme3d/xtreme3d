@@ -72,6 +72,8 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"simple-vp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"simple-fp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"cloth.3ds","CopyToMask":-1,"filePath":"datafiles/data/cloth",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"tartan.jpg","CopyToMask":-1,"filePath":"datafiles/data/cloth",},
   ],
   "MetaData": {
     "IDEVersion": "2022.8.0.34",
