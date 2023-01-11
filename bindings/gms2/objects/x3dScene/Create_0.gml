@@ -41,9 +41,9 @@ LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
-plane = ShadowplaneCreate(20, 20, 5, 5, shadowCasters, light, c_black, 0.5, global.scene);
+plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
 ObjectPitch(plane, 90);
-MaterialCreate("mFloor", "textures/stone.png");
+MaterialCreate("mFloor", "textures/ground.jpg");
 MaterialSetShininess("mFloor", 16);
 MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
@@ -82,12 +82,6 @@ shader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(shader, "mHellknight");
 BumpShaderSetNormalTexture(shader, "mHellknightNormal");
 MaterialSetShader("mHellknight", shader);
-
-fxObj = DummycubeCreate(global.scene);
-ObjectSetPosition(fxObj, 5, 1, 3);
-thorMngr = ThorFXManagerCreate();
-ThorFXSetTarget(thorMngr, 5, 1, 0);
-thor = ThorFXCreate(thorMngr, fxObj);
 
 /*
 MaterialLibrarySetTexturePaths(matlib2, "data/trinity");
