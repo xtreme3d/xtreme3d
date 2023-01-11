@@ -20,6 +20,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `TextRead`, `TextConvertANSIToUTF8` were removed
 - `OdeAddCone` was removed
 - New function `BaseMeshBuildSilhouetteConnectivityData`
+- New function `ActorSetReference`
 - New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`.
 
 v3.9.2 (by Gecko) - 09/04/2022
