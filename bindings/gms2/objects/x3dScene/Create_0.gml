@@ -42,7 +42,6 @@ LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
 
 plane = ShadowplaneCreate(20, 20, 5, 5, shadowCasters, light, c_black, 0.5, global.scene);
-//plane = PlaneCreate(false, 20, 20, 10, 10, global.scene); 
 ObjectPitch(plane, 90);
 MaterialCreate("mFloor", "textures/stone.png");
 MaterialSetShininess("mFloor", 16);
