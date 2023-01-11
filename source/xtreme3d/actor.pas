@@ -483,3 +483,16 @@ begin
   GLActor1:=TGLActor(RealToPtr(actor));
   result:=Integer(GLActor1.MeshObjects.TriangleCount);
 end;
+
+function ActorSetReference(actor, aar: real): real; cdecl;
+var
+  GLActor1: TGLActor;
+begin
+  GLActor1:=TGLActor(RealToPtr(actor));
+  case trunc(aar) of
+    0: GLActor1.Reference := aarMorph;
+    1: GLActor1.Reference := aarSkeleton;
+    2: GLActor1.Reference := aarNone;
+  end;
+  result:=1.0;
+end;

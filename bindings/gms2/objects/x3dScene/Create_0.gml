@@ -68,6 +68,10 @@ MaterialSetSpecularColor("mHellknight", c_grey, 1);
 MaterialSetShininess("mHellknight", 8); 
 MaterialCreate("mHellknightNormal", "normal.png");
 ObjectSetMaterial(hk, "mHellknight");
+shader = BumpShaderCreate();
+BumpShaderSetDiffuseTexture(shader, "mHellknight");
+BumpShaderSetNormalTexture(shader, "mHellknightNormal");
+MaterialSetShader("mHellknight", shader);
 
 /*
 vp1 = TextRead("shaders/simple-vp.glsl");
@@ -77,11 +81,6 @@ paramColor = GLSLShaderCreateParameter(simpleShader, "color");
 GLSLShaderSetParameter4f(paramColor, 1.0, 0.5, 0.0, 1.0);
 MaterialSetShader("mHellknight", simpleShader);
 */
-
-shader = BumpShaderCreate();
-BumpShaderSetDiffuseTexture(shader, "mHellknight");
-BumpShaderSetNormalTexture(shader, "mHellknightNormal");
-MaterialSetShader("mHellknight", shader);
 
 /*
 MaterialLibrarySetTexturePaths(matlib2, "data/trinity");

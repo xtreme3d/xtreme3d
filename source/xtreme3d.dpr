@@ -598,6 +598,7 @@ exports
     ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy,
     ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorSetFrame,
     ActorTriangleCount,
+    ActorSetReference,
 
     //Freeform
     FreeformCreate,

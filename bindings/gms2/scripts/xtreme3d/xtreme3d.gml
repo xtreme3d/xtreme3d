@@ -355,6 +355,7 @@ function dll_init(dll) {
 	global._ActorAnimationPrevFrame = external_define(dll, "ActorAnimationPrevFrame", dll_cdecl, ty_real, 1, ty_real);
 	global._ActorSetFrame = external_define(dll, "ActorSetFrame", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ActorTriangleCount = external_define(dll, "ActorTriangleCount", dll_cdecl, ty_real, 1, ty_real);
+	global._ActorSetReference = external_define(dll, "ActorSetReference", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// Blur
 	global._BlurCreate = external_define(dll, "BlurCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -1238,6 +1239,10 @@ function ActorSetFrame(aActor, aFrame) {
 
 function ActorTriangleCount(aActor) {
 	return external_call(global._ActorTriangleCount, aActor);
+}
+
+function ActorSetReference(aActor, aAar) {
+	return external_call(global._ActorSetReference, aActor, aAar);
 }
 
 function BlurCreate(aTargetobj, aParent) {
@@ -5252,3 +5257,6 @@ function PtrToReal(p) {
 #macro psName 1
 #macro psMinDepth 2
 #macro psMaxDepth 2
+#macro aarMorph 0
+#macro aarSkeleton 1
+#macro aarNone 2
