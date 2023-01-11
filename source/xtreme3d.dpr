@@ -767,7 +767,7 @@ exports
     //FBORenderObject, FBORenderObjectEx,
     //FBOSetColorTextureFormat, FBOSetOverrideMaterial
 
-    //ClipPlane
+    // ClipPlane
     //ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
 
     // ThorFX
@@ -986,8 +986,8 @@ exports
 
     // Kraft
     //KraftCreate, KraftStep,
-    //KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
-    //KraftCreateRigidBody, KraftRigidBodyFinish,
+    //KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+    //KraftCreateRigidBody, KraftRigidBodyFinish,
     //KraftRigidBodySetGravity,
     //KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
     //KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
@@ -1000,10 +1000,10 @@ exports
     //KraftCreateShapeMesh,
     //KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution,
     //KraftShapeSetPosition, KraftShapeGetPosition,
-    //KraftShapeSetRayCastable,
-    //KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
-    //KraftCreateJointHinge,
-    //KraftJointSetAnchor1, KraftJointSetAnchor2,
-    //KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
+    //KraftShapeSetRayCastable,
+    //KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
+    //KraftCreateJointHinge,
+    //KraftJointSetAnchor1, KraftJointSetAnchor2,
+    //KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 begin
 end.
