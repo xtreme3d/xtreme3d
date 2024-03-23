@@ -13,6 +13,7 @@ uses
   GLS.VectorTypes,
   GLS.VectorGeometry,
   GLS.Texture,
+  GLS.TextureFormat,
   GLS.Material,
   GLS.Utils,
   GLS.RenderContextInfo,
@@ -55,6 +56,7 @@ type
       FName: String;
       FInitialized: Boolean;
       FTexture: TGLTexture;
+      FTextureTarget: TGLEnum;
       //FShadowMap: TGLShadowMap;
       //FFBO: TGLFBO;
       FUniformLocation: Integer;
@@ -78,6 +80,7 @@ type
       property UniformInteger: Integer read FUniformInteger write FUniformInteger;
       property UniformTexture: Integer read FUniformTexture write FUniformTexture;
       property Texture: TGLTexture read FTexture write FTexture;
+      property TextureTarget: TGLEnum read FTextureTarget write FTextureTarget;
       //property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
       //property FBO: TGLFBO read FFBO write FFBO;
       property MaterialPropertyName: String read FMaterialPropertyName write FMaterialPropertyName;
@@ -198,18 +201,19 @@ begin
 
   if FUniformType = uniformTexture2D then
   begin
-    if FTexture <> Nil then
+    if Assigned(FTexture) then
     begin
       gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
       gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
       gl.ActiveTexture(GL_TEXTURE0_ARB);
     end;
+    //rci.GLStates.TextureBinding[FUniformTexture, TextureTarget] := Value;
     gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
   if FUniformType = uniformSecondTexture2D then
   begin
-    if FTexture <> Nil then
+    if Assigned(FTexture) then
     begin
       gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
       gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
@@ -443,6 +447,7 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformTexture2D, name);
+  param.TextureTarget := GL_TEXTURE_2D;
   param.Initialized := False;
   Result := param;
 end;

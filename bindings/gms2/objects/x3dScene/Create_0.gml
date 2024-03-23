@@ -61,16 +61,18 @@ ActorSetAnimationMode(hk, aamLoop);
 ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
-MaterialCreate("mHellknight", "diffuse.png");
+MaterialCreate("mHellknight", "");
 MaterialSetAmbientColor("mHellknight", c_dkgray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_grey, 1); 
-MaterialSetShininess("mHellknight", 8); 
-MaterialCreate("mHellknightNormal", "normal.png");
+MaterialSetShininess("mHellknight", 8);
+MaterialLoadTextureEx("mHellknight", "data/hellknight/diffuse.png", 0);
+MaterialLoadTextureEx("mHellknight", "data/hellknight/normal.png", 1);
+//MaterialCreate("mHellknightNormal", "normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 shader = BumpShaderCreate();
-BumpShaderSetDiffuseTexture(shader, "mHellknight");
-BumpShaderSetNormalTexture(shader, "mHellknightNormal");
+BumpShaderSetDiffuseTexture(shader, "");
+BumpShaderSetNormalTexture(shader, "");
 MaterialSetShader("mHellknight", shader);
 
 /*

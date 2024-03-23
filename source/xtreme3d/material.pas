@@ -604,17 +604,17 @@ begin
   result:=1;
 end;
 
-{
 function MaterialLoadTextureEx(mtrl, filename: PAnsiChar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
   tex: TGLTexture;
+  item: TGLTextureExItem;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   tex := TGLTexture.Create(mat.Material);
-  
+
   try
-    tex.Image.LoadFromFile(String(AnsiString(filename)));
+    tex.Image.LoadFromFile(StrConv(filename));
   except
     On E: Exception do
     begin
@@ -624,10 +624,11 @@ begin
   end;
   
   tex.Disabled := False;
-  mat.Material.SetTextureN(Trunc(index), tex);
-  result:=1;
+  item := mat.Material.TextureEx.Add();
+  item.Texture := tex;
+  item.TextureIndex := Trunc(index);
+  result := ObjToReal(item);
 end;
-}
 
 {
 function MaterialSetTextureEx(mtrl, mtrl2: PAnsiChar; index: real): real; cdecl;

@@ -733,7 +733,8 @@ exports
     MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
-    //MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
+    MaterialLoadTextureEx,
+    //MaterialSetTextureEx, MaterialGenTextureEx,
     //MaterialEnableTextureEx, MaterialHasTextureEx, MaterialSetTextureExFromLibrary,
     MaterialGetTextureWidth, MaterialGetTextureHeight,
 

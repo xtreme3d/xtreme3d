@@ -276,6 +276,7 @@ begin
   begin
     mat := matlib.Materials.GetLibMaterialByName(matName);
     param.Texture := mat.Material.Texture;
+    param.TextureTarget := cGLTexTypeToGLEnum[param.Texture.Image.NativeTextureTarget];
   end;
   param.UniformTexture := trunc(texUnit);
   param.Initialized := True;

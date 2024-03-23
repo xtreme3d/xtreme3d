@@ -609,8 +609,8 @@ function dll_init(dll) {
 	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	// Milestone II functions:
-	/*
 	global._MaterialLoadTextureEx = external_define(dll, "MaterialLoadTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	/*
 	global._MaterialSetTextureEx = external_define(dll, "MaterialSetTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
 	global._MaterialGenTextureEx = external_define(dll, "MaterialGenTextureEx", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
 	global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
