@@ -608,13 +608,15 @@ function dll_init(dll) {
 	// Milestone II functions:
 	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
+	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TextureExLoad = external_define(dll, "TextureExLoad", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._TextureExSetFromMaterial = external_define(dll, "TextureExSetFromMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._TextureExGenerate = external_define(dll, "TextureExGenerate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._TextureExDelete = external_define(dll, "TextureExDelete", dll_cdecl, ty_real, 1, ty_real);
+	global._TextureExSetTextureScale = external_define(dll, "TextureExSetTextureScale", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._TextureExSetTextureOffset = external_define(dll, "TextureExSetTextureOffset", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._TextureExEnable = external_define(dll, "TextureExEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	/*
-	global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
-	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
 	*/
 	global._MaterialNoiseCreate = external_define(dll, "MaterialNoiseCreate", dll_cdecl, ty_real, 1, ty_string);
@@ -2719,6 +2721,10 @@ function MaterialTextureExClear(aMtrl) {
 	return external_call(global._MaterialTextureExClear, aMtrl);
 }
 
+function MaterialHasTextureEx(aMtrl, aIndex) {
+	return external_call(global._MaterialHasTextureEx, aMtrl, aIndex);
+}
+
 function TextureExLoad(aTextureExItem, aFilename) {
 	return external_call(global._TextureExLoad, aTextureExItem, aFilename);
 }
@@ -2735,15 +2741,17 @@ function TextureExDelete(aTextureExItem) {
 	return external_call(global._TextureExDelete, aTextureExItem);
 }
 
-/*
-function MaterialEnableTextureEx(aMtrl, aIndex, aMode) {
-	return external_call(global._MaterialEnableTextureEx, aMtrl, aIndex, aMode);
+function TextureExSetTextureScale(aTextureExItem, aScaleX, aScaleY) {
+	return external_call(global._TextureExSetTextureScale, aTextureExItem, aScaleX, aScaleY);
 }
 
-function MaterialHasTextureEx(aMtrl, aIndex) {
-	return external_call(global._MaterialHasTextureEx, aMtrl, aIndex);
+function TextureExSetTextureOffset(aTextureExItem, aOffsetX, aOffsetY) {
+	return external_call(global._TextureExSetTextureOffset, aTextureExItem, aOffsetX, aOffsetY);
 }
-*/
+
+function TextureExEnable(aTextureExItem, aMode) {
+	return external_call(global._TextureExEnable, aTextureExItem, aMode);
+}
 
 function MaterialNoiseCreate(aMtrl) {
 	return external_call(global._MaterialNoiseCreate, aMtrl);

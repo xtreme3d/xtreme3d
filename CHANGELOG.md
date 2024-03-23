@@ -15,6 +15,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `MaterialCullFrontFaces` was removed
 - `MaterialSetZWrite` is deprecated, use `MaterialSetDepthWrite` instead
 - New function `MaterialSetDepthTest`
+- TextureEx system was redesigned. `MaterialLoadTextureEx`, `MaterialSetTextureEx`, `MaterialSetTextureExFromLibrary`, `MaterialGenTextureEx`, `MaterialEnableTextureEx` were removed. New functions `MaterialAddTextureEx`, `MaterialTextureExClear`, `TextureExLoad`, `TextureExSetFromMaterial`, `TextureExGenerate`, `TextureExDelete`, `TextureExSetTextureScale`, `TextureExSetTextureOffset`, `TextureExEnable`.
 - `PtrToReal` is deprecated, use `PointerToReal` instead
 - Polygon functions were removed
 - `TextRead`, `TextConvertANSIToUTF8` were removed

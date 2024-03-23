@@ -591,6 +591,19 @@ begin
   result := 1;
 end;
 
+function MaterialHasTextureEx(mtrl: PAnsiChar; index: real): real; cdecl;
+var
+  mat: TGLLibMaterial;
+  tex: TGLTexture;
+  i: Integer;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  result := 0;
+  for i := 0 to mat.Material.TextureEx.Count - 1 do
+    if mat.Material.TextureEx.Items[i].TextureIndex = Trunc(index) then
+       result := 1;
+end;
+
 function TextureExLoad(textureItem: real; filename: PAnsiChar): real; cdecl;
 var
   item: TGLTextureExItem;
@@ -653,31 +666,34 @@ begin
   result := 1;
 end;
 
-{
-function MaterialEnableTextureEx(mtrl: PAnsiChar; index, mode: real): real; cdecl;
+function TextureExSetTextureScale(textureItem, x, y: real): real; cdecl;
 var
-  mat: TGLLibMaterial;
+  item: TGLTextureExItem;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat.Material.GetTextureN(Trunc(index)).Disabled := not Boolean(RealToPtr(mode));
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  item.TextureScale.X := x;
+  item.TextureScale.Y := y;
   result := 1;
 end;
-}
 
-{
-function MaterialHasTextureEx(mtrl: PAnsiChar; index: real): real; cdecl;
+function TextureExSetTextureOffset(textureItem, x, y: real): real; cdecl;
 var
-  mat: TGLLibMaterial;
-  tex: TGLTexture;
+  item: TGLTextureExItem;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  tex := mat.Material.GetTextureN(Trunc(index));
-  if tex = nil then
-    result := 0
-  else 
-    result := 1;
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  item.TextureOffset.X := x;
+  item.TextureOffset.Y := y;
+  result := 1;
 end;
-}
+
+function TextureExEnable(textureItem, mode: real): real; cdecl;
+var
+  item: TGLTextureExItem;
+begin
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  item.Texture.Disabled := not Boolean(Trunc(mode));
+  result := 1;
+end;
 
 function MaterialNoiseCreate(mtrl: PAnsiChar): real; cdecl;
 var

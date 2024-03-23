@@ -733,8 +733,9 @@ exports
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
     MaterialGetTextureWidth, MaterialGetTextureHeight,
-    MaterialAddTextureEx, MaterialTextureExClear,
+    MaterialAddTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
     TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
+    TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable,
 
     // Shaders
     ShaderEnable,
