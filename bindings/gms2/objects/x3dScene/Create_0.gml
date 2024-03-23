@@ -143,5 +143,6 @@ my = display_get_height() / 2;
 MouseSetPosition(mx, my);
 MouseShowCursor(not mouselookActive);
 
+visible = false;
 alarm[0] = room_speed;
 global.canRender = false;

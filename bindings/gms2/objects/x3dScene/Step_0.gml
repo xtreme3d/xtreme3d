@@ -1,5 +1,3 @@
-if (!global.canRender) exit;
-
 var dt = delta_time / 1000000;
 
 if (mouselookActive and window_has_focus()) {
@@ -36,4 +34,7 @@ VerletConstraintSetPosition(playerCollider,
 
 EngineUpdate(dt);
 VerletWorldUpdate(verlet, current_time / 1000);
-ViewerRender(viewer);
+
+if (global.canRender) {
+	ViewerRender(viewer);
+}
