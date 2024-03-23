@@ -596,9 +596,6 @@ function dll_init(dll) {
 	global._MaterialSetTextureCompression = external_define(dll, "MaterialSetTextureCompression", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureRequiredMemory = external_define(dll, "MaterialTextureRequiredMemory", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialSetFilteringQuality = external_define(dll, "MaterialSetFilteringQuality", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_string);
-	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
-	global._MaterialTextureExDelete = external_define(dll, "MaterialTextureExDelete", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetShader = external_define(dll, "MaterialSetShader", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSaveTexture = external_define(dll, "MaterialSaveTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialSetOptions = external_define(dll, "MaterialSetOptions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
@@ -609,10 +606,13 @@ function dll_init(dll) {
 	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	// Milestone II functions:
-	global._MaterialLoadTextureEx = external_define(dll, "MaterialLoadTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
+	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
+	global._TextureExLoad = external_define(dll, "TextureExLoad", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._TextureExSetFromMaterial = external_define(dll, "TextureExSetFromMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._TextureExGenerate = external_define(dll, "TextureExGenerate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._TextureExDelete = external_define(dll, "TextureExDelete", dll_cdecl, ty_real, 1, ty_real);
 	/*
-	global._MaterialSetTextureEx = external_define(dll, "MaterialSetTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_string, ty_real);
-	global._MaterialGenTextureEx = external_define(dll, "MaterialGenTextureEx", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
 	global._MaterialEnableTextureEx = external_define(dll, "MaterialEnableTextureEx", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
@@ -2675,18 +2675,6 @@ function MaterialSetFilteringQuality(aMtrl, aTf) {
 	return external_call(global._MaterialSetFilteringQuality, aMtrl, aTf);
 }
 
-function MaterialAddTextureEx(aMtrl, aTex) {
-	return external_call(global._MaterialAddTextureEx, aMtrl, aTex);
-}
-
-function MaterialTextureExClear(aMtrl) {
-	return external_call(global._MaterialTextureExClear, aMtrl);
-}
-
-function MaterialTextureExDelete(aMtrl, aInd) {
-	return external_call(global._MaterialTextureExDelete, aMtrl, aInd);
-}
-
 function MaterialSetShader(aMtrl, aShd) {
 	return external_call(global._MaterialSetShader, aMtrl, aShd);
 }
@@ -2723,18 +2711,31 @@ function MaterialLoadTexture(aMtrl, aFilename) {
 	return external_call(global._MaterialLoadTexture, aMtrl, aFilename);
 }
 
-function MaterialLoadTextureEx(aMtrl, aFilename, aIndex) {
-	return external_call(global._MaterialLoadTextureEx, aMtrl, aFilename, aIndex);
+function MaterialAddTextureEx(aMtrl, aIndex) {
+	return external_call(global._MaterialAddTextureEx, aMtrl, aIndex);
 }
 
-function MaterialSetTextureEx(aMtrl, aMtrl2, aIndex) {
-	return external_call(global._MaterialSetTextureEx, aMtrl, aMtrl2, aIndex);
+function MaterialTextureExClear(aMtrl) {
+	return external_call(global._MaterialTextureExClear, aMtrl);
 }
 
-function MaterialGenTextureEx(aMtrl, aIndex, aW, aH) {
-	return external_call(global._MaterialGenTextureEx, aMtrl, aIndex, aW, aH);
+function TextureExLoad(aTextureExItem, aFilename) {
+	return external_call(global._TextureExLoad, aTextureExItem, aFilename);
 }
 
+function TextureTextureExSetFromMaterialExLoad(aTextureExItem, aMtrl) {
+	return external_call(global._TextureExSetFromMaterial, aTextureExItem, aMtrl);
+}
+
+function TextureExGenerate(aTextureExItem, aWidth, aHeight) {
+	return external_call(global._TextureExGenerate, aTextureExItem, aWidth, aHeight);
+}
+
+function TextureExDelete(aTextureExItem) {
+	return external_call(global._TextureExDelete, aTextureExItem);
+}
+
+/*
 function MaterialEnableTextureEx(aMtrl, aIndex, aMode) {
 	return external_call(global._MaterialEnableTextureEx, aMtrl, aIndex, aMode);
 }
@@ -2742,6 +2743,7 @@ function MaterialEnableTextureEx(aMtrl, aIndex, aMode) {
 function MaterialHasTextureEx(aMtrl, aIndex) {
 	return external_call(global._MaterialHasTextureEx, aMtrl, aIndex);
 }
+*/
 
 function MaterialNoiseCreate(aMtrl) {
 	return external_call(global._MaterialNoiseCreate, aMtrl);

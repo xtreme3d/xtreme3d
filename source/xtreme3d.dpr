@@ -725,7 +725,6 @@ exports
     MaterialSetFaceCulling, MaterialSetSecondTexture, MaterialSetTextureFormat,
     MaterialSetTextureCompression, MaterialTextureRequiredMemory,
     MaterialSetFilteringQuality,
-    MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete,
     MaterialSetShader, MaterialSaveTexture, MaterialSetOptions,
     MaterialSetTextureWrap, MaterialGenTexture, MaterialSetTexture,
     MaterialGetTextureWidth, MaterialGetTextureHeight, MaterialLoadTexture,
@@ -733,10 +732,9 @@ exports
     MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
-    MaterialLoadTextureEx,
-    //MaterialSetTextureEx, MaterialGenTextureEx,
-    //MaterialEnableTextureEx, MaterialHasTextureEx, MaterialSetTextureExFromLibrary,
     MaterialGetTextureWidth, MaterialGetTextureHeight,
+    MaterialAddTextureEx, MaterialTextureExClear,
+    TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
 
     // Shaders
     ShaderEnable,

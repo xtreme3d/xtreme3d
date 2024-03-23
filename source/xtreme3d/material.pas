@@ -458,40 +458,6 @@ begin
   result:=1;
 end;
 
-// Needs test
-function MaterialAddTextureEx(mtrl, tex: PAnsiChar): real; cdecl;
-var
-  mat:TGLLibMaterial;
-  mat2:TGLLibMaterial;
-  item:TGLTextureExItem;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  mat2:=matlib.Materials.GetLibMaterialByName(StrConv(tex));
-  item := mat.Material.TextureEx.Add;
-  item.Texture := mat2.Material.Texture;
-  result:=1;
-end;
-
-// Needs test
-function MaterialTextureExClear(mtrl: PAnsiChar): real; cdecl;
-var
-  mat:TGLLibMaterial;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  mat.Material.TextureEx.Clear;
-  result:=1;
-end;
-
-// Needs test
-function MaterialTextureExDelete(mtrl: PAnsiChar; ind: real): real; cdecl;
-var
-  mat:TGLLibMaterial;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  mat.Material.TextureEx.Items[Trunc(ind)].Free;
-  result:=1;
-end;
-
 function MaterialSetShader(mtrl: PAnsiChar; shd: real): real; cdecl;
 var
   mat:TGLLibMaterial;
@@ -604,14 +570,34 @@ begin
   result:=1;
 end;
 
-function MaterialLoadTextureEx(mtrl, filename: PAnsiChar; index: real): real; cdecl;
+// Redesigned TextureEx system
+function MaterialAddTextureEx(mtrl: PAnsiChar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
-  tex: TGLTexture;
   item: TGLTextureExItem;
 begin
   mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  tex := TGLTexture.Create(mat.Material);
+  item := mat.Material.TextureEx.Add();
+  item.TextureIndex := Trunc(index);
+  result := ObjToReal(item);
+end;
+
+function MaterialTextureExClear(mtrl: PAnsiChar): real; cdecl;
+var
+  mat: TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.TextureEx.Clear;
+  result := 1;
+end;
+
+function TextureExLoad(textureItem: real; filename: PAnsiChar): real; cdecl;
+var
+  item: TGLTextureExItem;
+  tex: TGLTexture;
+begin
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  tex := TGLTexture.Create(scene);
 
   try
     tex.Image.LoadFromFile(StrConv(filename));
@@ -620,47 +606,52 @@ begin
     begin
       if showLoadingErrors then
         ShowMessage('MaterialLoadTextureEx:' + #13#10 + E.Message);
+      result := 0;
+      exit;
     end;
   end;
-  
-  tex.Disabled := False;
-  item := mat.Material.TextureEx.Add();
-  item.Texture := tex;
-  item.TextureIndex := Trunc(index);
-  result := ObjToReal(item);
-end;
 
-{
-function MaterialSetTextureEx(mtrl, mtrl2: PAnsiChar; index: real): real; cdecl;
-var
-  mat: TGLLibMaterial;
-  mat2: TGLLibMaterial;
-begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  mat2 := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl2)));
-  mat.Material.SetTextureN(Trunc(index), mat2.Material.Texture);
+  tex.Disabled := False;
+  item.Texture := tex;
   result := 1;
 end;
-}
 
-{
-function MaterialGenTextureEx(mtrl: PAnsiChar; index, w, h: real): real; cdecl;
+function TextureExSetFromMaterial(textureItem: real; mtrl: PAnsiChar): real; cdecl;
 var
+  item: TGLTextureExItem;
   mat: TGLLibMaterial;
+begin
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  item.Texture := mat.Material.Texture;
+  result := 1;
+end;
+
+function TextureExGenerate(textureItem, w, h: real): real; cdecl;
+var
+  item: TGLTextureExItem;
   tex: TGLTexture;
 begin
-  mat := matlib.Materials.GetLibMaterialByName(String(AnsiString(mtrl)));
-  tex := TGLTexture.Create(mat.Material);
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  tex := TGLTexture.Create(scene);
   tex.ImageClassName := TGLBlankImage.ClassName;
   with tex.Image as TGLBlankImage do begin
     Width := Trunc(w);
     Height := Trunc(h);
   end;
   tex.Disabled := False;
-  mat.Material.SetTextureN(Trunc(index), tex);
+  item.Texture := tex;
   result := 1;
 end;
-}
+
+function TextureExDelete(textureItem: real): real; cdecl;
+var
+  item: TGLTextureExItem;
+begin
+  item := TGLTextureExItem(RealToPtr(textureItem));
+  item.Free;
+  result := 1;
+end;
 
 {
 function MaterialEnableTextureEx(mtrl: PAnsiChar; index, mode: real): real; cdecl;
