@@ -6,6 +6,7 @@ EngineCreate();
 EngineShowLoadingErrors(true);
 EngineSetCulling(vcNone);
 EngineSetObjectsSorting(osNone);
+EngineSetMaxLights(64);
 
 windowHandle = window_handle();
 viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
@@ -35,20 +36,67 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
+/*
 light = LightCreate(lsOmni, global.scene);
 LightSetAmbientColor(light, c_gray);
 LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
+*/
 
-plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
-ObjectPitch(plane, 90);
+bumpShader = BumpShaderCreate();
+BumpShaderSetDiffuseTexture(bumpShader, "");
+BumpShaderSetNormalTexture(bumpShader, "");
+BumpShaderSetMaxLights(bumpShader, 8);
+
+MaterialCreate("mStone", "");
+TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
+TextureExLoad(MaterialAddTextureEx("mStone", 1), "textures/stone-normal.png");
+MaterialSetShininess("mStone", 32);
+MaterialSetAmbientColor("mStone", c_dkgray, 1);
+MaterialSetDiffuseColor("mStone", c_white, 1);
+MaterialSetSpecularColor("mStone", c_ltgray, 1);
+MaterialSetShader("mStone", bumpShader);
+
 MaterialCreate("mFloor", "textures/ground.jpg");
 MaterialSetShininess("mFloor", 16);
 MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
+
+var gridSize, gx, gy, p, li, col;
+gridSize = 4;
+for (gy = -gridSize; gy < gridSize+1; gy = gy + 1)
+{
+	for (gx = -gridSize; gx < gridSize+1; gx = gx + 1)
+	{
+	    p = PlaneCreate(1, 3, 3, 1, 1, global.scene);
+	    ObjectSetPosition(p, gx * 3, 0, gy * 3);
+	    ObjectPitch(p, 90);
+	    ObjectSetMaterial(p, "mStone");
+	    fx = LightFXCreate(p);
+                
+	    li = LightCreate(lsOmni, global.scene);
+	    col = MakeColorRGBFloat(random(256) / 255.0, random(256) / 255.0, random(256) / 255.0);
+	    LightSetAmbientColor(li, c_black);
+	    LightSetDiffuseColor(li, col);
+	    LightSetSpecularColor(li, col);
+	    LightSetAttenuation(li, 2.0, 0.0, 0.8);
+	    ObjectSetPosition(li, gx * 3, 1, gy * 3);
+	}
+}
+
+s1 = SphereCreate(0.5, 16, 8, camPos)
+ObjectSetPosition(s1, 0, -1.8 + 0.5, -2)
+ObjectSetMaterial(s1, "mStone")
+fx = LightFXCreate(s1);
+
+/*
+plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
+ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mFloor");
+*/
+
 
 matlib2 = MaterialLibraryCreate();
 
@@ -71,10 +119,9 @@ tex1 = MaterialAddTextureEx("mHellknight", 1);
 TextureExLoad(tex0, "data/hellknight/diffuse.png");
 TextureExLoad(tex1, "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
-shader = BumpShaderCreate();
-BumpShaderSetDiffuseTexture(shader, "");
-BumpShaderSetNormalTexture(shader, "");
-MaterialSetShader("mHellknight", shader);
+MaterialSetShader("mHellknight", bumpShader);
+LightFXCreate(hk);
+
 
 /*
 vp1 = TextRead("shaders/simple-vp.glsl");
@@ -109,6 +156,7 @@ MaterialSetDiffuseColor("mCloth", c_white, 1);
 MaterialSetSpecularColor("mCloth", c_white, 1);
 MaterialSetEmissionColor("mCloth", c_white, 1);
 
+/*
 cloth = FreeformCreate("data/cloth/cloth.3ds", 0, 0, shadowCasters);
 ObjectSetPosition(cloth, 5, 3, 0);
 ObjectPitch(cloth, -90);
@@ -135,6 +183,7 @@ for (i = 0; i < numNodes; i += 1) {
 
 playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
 VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
+*/
 
 mouselookActive = true;
 mb_left_released = true;

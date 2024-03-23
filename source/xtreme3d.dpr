@@ -126,6 +126,7 @@ uses
   GLSLShader,
   GLFileCSM,
   GLFileLOD,
+  GLLightFx,
   Hashes;
 
 type
@@ -456,7 +457,7 @@ end;
 {$I 'xtreme3d/dummycube'}
 {$I 'xtreme3d/camera'}
 {$I 'xtreme3d/light'}
-//{$I 'xtreme3d/lightfx'}
+{$I 'xtreme3d/lightfx'}
 {$I 'xtreme3d/fonttext'}
 {$I 'xtreme3d/sprite'}
 //{$I 'xtreme3d/hudshapes'}
@@ -488,6 +489,7 @@ end;
 {$I 'xtreme3d/memviewer'}
 //{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
+{$I 'xtreme3d/objectlist'}
 {$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
 //{$I 'xtreme3d/shadowmap'}
@@ -505,9 +507,7 @@ exports
     // Engine
     EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
-    EngineShowLoadingErrors,
-    // EngineSetMaxLights,
-    EngineGetTimeStep,
+    EngineShowLoadingErrors, EngineSetMaxLights, EngineGetTimeStep,
     PointerToReal,
 
     //Pak
@@ -549,6 +549,7 @@ exports
     LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
     LightSetSpotDirection, LightSetStyle,
     LightGetColor, LightGetAttenuation, LightGetShining,
+    LightFXCreate,
 
     // Font & Text
     BmpfontCreate, BmpfontLoad, WindowsBitmapfontCreate, HUDTextCreate,
@@ -940,6 +941,9 @@ exports
     MovementPathNodeSetPosition, MovementPathNodeSetRotation,
     MovementPathNodeSetSpeed,
     MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
+
+    // ObjectList
+    ObjectListCreate, ObjectListAdd, ObjectListGetCount,
 
     // ObjectHash
     ObjectHashCreate, ObjectHashSetItem, ObjectHashGetItem,

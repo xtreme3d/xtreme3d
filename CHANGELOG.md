@@ -22,7 +22,8 @@ v4.0.0 (by Gecko) - ??/??/????
 - `OdeAddCone` was removed
 - New function `BaseMeshBuildSilhouetteConnectivityData`
 - New function `ActorSetReference`
-- New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`.
+- New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`
+- New functions `ObjectListCreate`, `ObjectListAdd`, `ObjectListGetCount`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------

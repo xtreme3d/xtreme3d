@@ -13,7 +13,7 @@ function dll_init(dll) {
 	global._EngineRootObject = external_define(dll, "EngineRootObject", dll_cdecl, ty_real, 0);
 	global._EngineShowLoadingErrors = external_define(dll, "EngineShowLoadingErrors", dll_cdecl, ty_real, 1, ty_real);
 	// Milestone II function:
-	//global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
+	global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	
 	// Pak
@@ -189,6 +189,12 @@ function dll_init(dll) {
 	global._LightGetColor = external_define(dll, "LightGetColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
+	// Milestone II functions:
+	global._LightFXCreate = external_define(dll, "LightFXCreate", dll_cdecl, ty_real, 1, ty_real);
+	
+	global._ObjectListCreate = external_define(dll, "ObjectListCreate", dll_cdecl, ty_real, 0);
+	global._ObjectListAdd = external_define(dll, "ObjectListAdd", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ObjectListGetCount = external_define(dll, "ObjectListGetCount", dll_cdecl, ty_real, 1, ty_real);
 	
 	// MemoryViewer
 	global._MemoryViewerCreate = external_define(dll, "MemoryViewerCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -2491,6 +2497,18 @@ function LightGetShining(aLight) {
 
 function LightFXCreate(aObj) {
 	return external_call(global._LightFXCreate, aObj);
+}
+
+function ObjectListCreate() {
+	return external_call(global._ObjectListCreate);
+}
+
+function ObjectListAdd(aList, aObj) {
+	return external_call(global._ObjectListAdd, aList, aObj);
+}
+
+function ObjectListGetCount(aList) {
+	return external_call(global._ObjectListGetCount, aList);
 }
 
 function LinesCreate(aParent) {

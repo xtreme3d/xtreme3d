@@ -27,13 +27,15 @@ else {
 	mb_left_released = true;
 }
 
+/*
 VerletConstraintSetPosition(playerCollider,
     ObjectGetAbsolutePosition(camera, 0),
 	ObjectGetAbsolutePosition(camera, 1) - 1,
 	ObjectGetAbsolutePosition(camera, 2));
+*/
 
 EngineUpdate(dt);
-VerletWorldUpdate(verlet, current_time / 1000);
+//VerletWorldUpdate(verlet, current_time / 1000);
 
 if (global.canRender) {
 	ViewerRender(viewer);

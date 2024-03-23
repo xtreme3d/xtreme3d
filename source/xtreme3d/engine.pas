@@ -81,13 +81,11 @@ begin
     result := 1.0;
 end;
 
-{
-function EngineSetMaxLights(lights: integer): integer; cdecl;
+function EngineSetMaxLights(lights: real): integer; cdecl;
 begin
-    scene.MaxLights := lights;
+    scene.Lights.Count := Trunc(lights);
     result := 1;
 end;
-}
 
 function EngineGetTimeStep: real; cdecl;
 var
