@@ -7,6 +7,7 @@ uses
   Messages,
   Windows,
   Winapi.OpenGL,
+  Winapi.OpenGLext,
   VCL.Forms,
   VCL.Graphics,
   VCL.Dialogs,
@@ -116,6 +117,7 @@ uses
   GLS.VectorTypes,
   GLS.WaterPlane,
   GLS.WindowsFont,
+  GLS.FBORenderer,
   GLSL.LineShaders,
   GLSL.MultiMaterialShader,
   GLSL.ShapeShaders,
@@ -127,6 +129,7 @@ uses
   GLFileCSM,
   GLFileLOD,
   GLLightFx,
+  //GLFBO,
   Hashes;
 
 type
@@ -487,7 +490,7 @@ end;
 {$I 'xtreme3d/mirror'}
 {$I 'xtreme3d/partition'}
 {$I 'xtreme3d/memviewer'}
-//{$I 'xtreme3d/fbo'}
+{$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
 {$I 'xtreme3d/objectlist'}
 {$I 'xtreme3d/objecthash'}
@@ -516,7 +519,7 @@ exports
 
     // Viewer
     ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
-    ViewerRenderToFile,
+    ViewerRenderObject, ViewerRenderToFile,
     // ViewerRenderToFilePNG, ViewerRenderEx,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
@@ -715,6 +718,7 @@ exports
     MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
     MaterialLibraryClear, MaterialLibraryDeleteUnused,
     MaterialLibraryHasMaterial, MaterialLibraryLoadScript,
+    MaterialLibraryGetTextureByName,
     MaterialCreate, MaterialDestroy,
     MaterialAddCubeMap, MaterialCubeMapLoadImage, MaterialCubeMapGenerate, MaterialCubeMapFromScene,
     MaterialSetName, MaterialSetShininess,
@@ -755,7 +759,7 @@ exports
     //GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
     GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
     GLSLShaderSetParameterHasTextureEx,
-    //GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
+    GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
     //GLSLShaderSetParameterViewMatrix,
     PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
     BumpShaderCreate,
@@ -765,9 +769,11 @@ exports
     BumpShaderUseAutoTangentSpace,
 
     // FBO
-    //FBOCreate, FBOSetCamera, FBOSetViewer,
-    //FBORenderObject, FBORenderObjectEx,
-    //FBOSetColorTextureFormat, FBOSetOverrideMaterial
+    FBOCreate, FBOSetActive, FBOSetAspect, FBOSetPickableTarget, FBOSetSize, FBOSetCamera,
+    FBOSetRootObject, FBOSetBackgroundColor, FBOSetEnabledRenderBuffers,
+    FBOSetSceneScaleFactor, FBOSetTargetVisibility, FBOSetMaterialLibrary,
+    FBOSetColorTextureName, FBOSetDepthTextureName, FBOSetClearOptions,
+    FBOSetStencilPrecision,
 
     // ClipPlane
     //ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,

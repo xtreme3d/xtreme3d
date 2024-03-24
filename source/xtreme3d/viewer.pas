@@ -43,6 +43,12 @@ begin
     result := 1.0;
 end;
 
+function ViewerRenderObject(viewer, obj: real): real; cdecl;
+begin
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.Render(TGLBaseSceneObject(RealToPtr(obj)));
+    result := 1.0;
+end;
+
 function ViewerRenderToFile(viewer: real; fname: PAnsiChar): real; cdecl;
 var
     bmp: TBitmap;

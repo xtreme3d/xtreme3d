@@ -20,6 +20,7 @@ uses
   GLS.OpenGLTokens,
   GLS.Scene,
   GLS.PipelineTransformation,
+  GLS.FBORenderer,
   TypInfo,
   Variants;
 
@@ -58,7 +59,7 @@ type
       FTexture: TGLTexture;
       FTextureTarget: TGLEnum;
       //FShadowMap: TGLShadowMap;
-      //FFBO: TGLFBO;
+      FFBORenderer: TGLFBORenderer;
       FUniformLocation: Integer;
       FUniformType: TGLSLShaderParameterType;
       FUniformInteger: Integer;
@@ -82,7 +83,7 @@ type
       property Texture: TGLTexture read FTexture write FTexture;
       property TextureTarget: TGLEnum read FTextureTarget write FTextureTarget;
       //property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
-      //property FBO: TGLFBO read FFBO write FFBO;
+      property FBORenderer: TGLFBORenderer read FFBORenderer write FFBORenderer;
       property MaterialPropertyName: String read FMaterialPropertyName write FMaterialPropertyName;
       property Initialized: Boolean read FInitialized write FInitialized;
       function GetMaterialField(mat: TGLLibMaterial; name: string): variant;
@@ -106,8 +107,8 @@ type
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
       //function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
-      //function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
-      //function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
+      function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
+      function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
       function AddUniformViewMatrix(name: String): TGLSLShaderParameter;
       procedure Bind(mat: TGLLibMaterial; var rci: TGLRenderContextInfo);
       procedure Unbind;
@@ -235,31 +236,35 @@ begin
   end;
   }
 
-  {
   if FUniformType = uniformFBOColorTexture then
   begin
-    if FFBO <> Nil then
+    if FFBORenderer <> Nil then
     begin
-      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-      glBindTexture(GL_TEXTURE_2D, FFBO.ColorTextureHandle);
-      glActiveTextureARB(GL_TEXTURE0_ARB);
+      FTexture := TGLMaterialLibrary(FFBORenderer.MaterialLibrary).TextureByName(FFBORenderer.ColorTextureName);
+      if FTexture <> Nil then
+      begin
+        gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+        gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
+        gl.ActiveTexture(GL_TEXTURE0_ARB);
+      end;
     end;
-    glUniform1iARB(FUniformLocation, FUniformTexture);
+    gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
-  }
 
-  {
   if FUniformType = uniformFBODepthTexture then
   begin
-    if FFBO <> Nil then
+    if FFBORenderer <> Nil then
     begin
-      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-      glBindTexture(GL_TEXTURE_2D, FFBO.DepthTextureHandle);
-      glActiveTextureARB(GL_TEXTURE0_ARB);
+      FTexture := TGLMaterialLibrary(FFBORenderer.MaterialLibrary).TextureByName(FFBORenderer.DepthTextureName);
+      if FTexture <> Nil then
+      begin
+        gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+        gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
+        gl.ActiveTexture(GL_TEXTURE0_ARB);
+      end;
     end;
-    glUniform1iARB(FUniformLocation, FUniformTexture);
+    gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
-  }
 
   {
   if FUniformType = uniformShadowMatrix then
@@ -474,7 +479,6 @@ begin
 end;
 }
 
-{
 function TGLSLShaderParameters.AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
 var
   param: TGLSLShaderParameter;
@@ -484,9 +488,7 @@ begin
   param.Initialized := False;
   Result := param;
 end;
-}
 
-{
 function TGLSLShaderParameters.AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
 var
   param: TGLSLShaderParameter;
@@ -496,7 +498,6 @@ begin
   param.Initialized := False;
   Result := param;
 end;
-}
 
 function TGLSLShaderParameters.AddUniformViewMatrix(name: String): TGLSLShaderParameter;
 var

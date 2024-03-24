@@ -36,13 +36,11 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
-/*
 light = LightCreate(lsOmni, global.scene);
 LightSetAmbientColor(light, c_gray);
 LightSetDiffuseColor(light, c_white);
 LightSetSpecularColor(light, c_white);
 ObjectSetPosition(light, 3, 5, 3);
-*/
 
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
@@ -52,18 +50,19 @@ BumpShaderSetMaxLights(bumpShader, 8);
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
 TextureExLoad(MaterialAddTextureEx("mStone", 1), "textures/stone-normal.png");
-MaterialSetShininess("mStone", 32);
+MaterialSetShininess("mStone", 8);
 MaterialSetAmbientColor("mStone", c_dkgray, 1);
 MaterialSetDiffuseColor("mStone", c_white, 1);
-MaterialSetSpecularColor("mStone", c_ltgray, 1);
+MaterialSetSpecularColor("mStone", c_dkgray, 1);
 MaterialSetShader("mStone", bumpShader);
 
 MaterialCreate("mFloor", "textures/ground.jpg");
-MaterialSetShininess("mFloor", 16);
+MaterialSetShininess("mFloor", 8);
 MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 
+/*
 var gridSize, gx, gy, p, li, col;
 gridSize = 4;
 for (gy = -gridSize; gy < gridSize+1; gy = gy + 1)
@@ -90,13 +89,11 @@ s1 = SphereCreate(0.5, 16, 8, camPos)
 ObjectSetPosition(s1, 0, -1.8 + 0.5, -2)
 ObjectSetMaterial(s1, "mStone")
 fx = LightFXCreate(s1);
-
-/*
-plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
-ObjectPitch(plane, 90);
-ObjectSetMaterial(plane, "mFloor");
 */
 
+plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
+ObjectPitch(plane, 90);
+ObjectSetMaterial(plane, "mStone");
 
 matlib2 = MaterialLibraryCreate();
 
@@ -148,6 +145,7 @@ ObjectPitch(trinity, 90);
 
 MaterialLibraryActivate(matlib);
 
+/*
 MaterialCreate("mCloth", "data/cloth/tartan.jpg");
 MaterialSetFaceCulling("mCloth", fcNoCull);
 MaterialSetOptions("mCloth", true, true);
@@ -155,6 +153,7 @@ MaterialSetAmbientColor("mCloth", c_dkgray, 1);
 MaterialSetDiffuseColor("mCloth", c_white, 1);
 MaterialSetSpecularColor("mCloth", c_white, 1);
 MaterialSetEmissionColor("mCloth", c_white, 1);
+*/
 
 /*
 cloth = FreeformCreate("data/cloth/cloth.3ds", 0, 0, shadowCasters);
@@ -184,6 +183,52 @@ for (i = 0; i < numNodes; i += 1) {
 playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
 VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
 */
+
+fboCamera = CameraCreate(global.scene);
+ObjectSetPosition(fboCamera, 0, 0, 0);
+
+fboRootObject = DummycubeCreate(0);
+
+fboWidth = window_get_width();
+fboHeight = window_get_height();
+fboAspect = 1/1; //16/9;
+matlib3 = MaterialLibraryCreate();
+MaterialLibraryActivate(matlib3);
+MaterialCreate("fboColor", "");
+MaterialGenTexture("fboColor", fboWidth, fboHeight);
+MaterialSetOptions("fboColor", false, false);
+MaterialSetTextureWrap("fboColor", false); 
+MaterialCreate("fboDepth", "");
+MaterialGenTexture("fboDepth", fboWidth, fboHeight);
+MaterialSetOptions("fboDepth", false, false);
+MaterialSetTextureWrap("fboDepth", false); 
+
+fbo = FBOCreate(fboWidth, fboHeight, global.scene);
+FBOSetMaterialLibrary(fbo, matlib3);
+FBOSetCamera(fbo, camera);
+FBOSetAspect(fbo, fboAspect);
+//FBOSetEnabledRenderBuffers(fbo, true, true);
+//FBOSetClearOptions(fbo, true, true, true, true);
+FBOSetStencilPrecision(fbo, 3);
+FBOSetRootObject(fbo, global.scene);
+FBOSetColorTextureName(fbo, "fboColor");
+FBOSetDepthTextureName(fbo, "fboDepth");
+FBOSetTargetVisibility(fbo, 0);
+
+vp1 = TextRead("shaders/fbo-vp.glsl");
+fp1 = TextRead("shaders/fbo-fp.glsl");
+simpleShader = GLSLShaderCreate(vp1, fp1);
+paramTexture = GLSLShaderCreateParameter(simpleShader, "fboColor");
+GLSLShaderSetParameterFBOColorTexture(paramTexture, fbo, 0);
+MaterialCreate("mSimple", "");
+MaterialSetOptions("mSimple", true, true);
+MaterialSetTextureWrap("mSimple", false);
+MaterialSetShader("mSimple", simpleShader);
+
+spr = HUDSpriteCreate("mSimple", window_get_width(), window_get_height(), global.front); 
+ObjectSetPosition(spr, window_get_width() / 2, window_get_height() / 2, 0);
+
+MaterialLibraryActivate(matlib);
 
 mouselookActive = true;
 mb_left_released = true;

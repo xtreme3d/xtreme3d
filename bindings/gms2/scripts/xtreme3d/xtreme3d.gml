@@ -28,6 +28,7 @@ function dll_init(dll) {
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
+	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	// Milestone II functions:
 	/*
@@ -571,6 +572,8 @@ function dll_init(dll) {
 	global._MaterialLibraryDeleteUnused = external_define(dll, "MaterialLibraryDeleteUnused", dll_cdecl, ty_real, 1, ty_real);
 	global._MaterialLibraryHasMaterial = external_define(dll, "MaterialLibraryHasMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._MaterialLibraryLoadScript = external_define(dll, "MaterialLibraryLoadScript", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	// Milestone II function:
+	global._MaterialLibraryGetTextureByName = external_define(dll, "MaterialLibraryGetTextureByName", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._MaterialCreate = external_define(dll, "MaterialCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialDestroy = external_define(dll, "MaterialDestroy", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialAddCubeMap = external_define(dll, "MaterialAddCubeMap", dll_cdecl, ty_real, 1, ty_string);
@@ -691,8 +694,8 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameterMatrix = external_define(dll, "GLSLShaderSetParameterMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameterInvMatrix = external_define(dll, "GLSLShaderSetParameterInvMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	// Milestone II functions:
-	//global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -1079,6 +1082,24 @@ function dll_init(dll) {
 	global._VerletConstraintSetSlack = external_define(dll, "VerletConstraintSetSlack", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._VerletWorldSetSimTime = external_define(dll, "VerletWorldSetSimTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._VerletWorldSetMaxDeltaTime = external_define(dll, "VerletWorldSetMaxDeltaTime", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// FBO
+	global._FBOCreate = external_define(dll, "FBOCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FBOSetActive = external_define(dll, "FBOSetActive", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetAspect = external_define(dll, "FBOSetAspect", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetPickableTarget = external_define(dll, "FBOSetPickableTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetSize = external_define(dll, "FBOSetSize", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FBOSetCamera = external_define(dll, "FBOSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetRootObject = external_define(dll, "FBOSetRootObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetBackgroundColor = external_define(dll, "FBOSetBackgroundColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetEnabledRenderBuffers = external_define(dll, "FBOSetEnabledRenderBuffers", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._FBOSetSceneScaleFactor = external_define(dll, "FBOSetSceneScaleFactor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetTargetVisibility = external_define(dll, "FBOSetTargetVisibility", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetMaterialLibrary = external_define(dll, "FBOSetMaterialLibrary", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetColorTextureName = external_define(dll, "FBOSetColorTextureName", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._FBOSetDepthTextureName = external_define(dll, "FBOSetDepthTextureName", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._FBOSetClearOptions = external_define(dll, "FBOSetClearOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._FBOSetStencilPrecision = external_define(dll, "FBOSetStencilPrecision", dll_cdecl, ty_real, 2, ty_real, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
@@ -1651,32 +1672,68 @@ function EngineGetTimeStep() {
 	return external_call(global._EngineGetTimeStep);
 }
 
-function FBOCreate(aW, aH, aViewer) {
-	return external_call(global._FBOCreate, aW, aH, aViewer);
+function FBOCreate(aWidth, aHeight, aParent) {
+	return external_call(global._FBOCreate, aWidth, aHeight, aParent);
 }
 
-function FBOSetCamera(aFbo, aCam) {
-	return external_call(global._FBOSetCamera, aFbo, aCam);
+function FBOSetActive(aFBO, aMode) {
+	return external_call(global._FBOSetActive, aFBO, aMode);
 }
 
-function FBORenderObject(aFbo, aObj) {
-	return external_call(global._FBORenderObject, aFbo, aObj);
+function FBOSetAspect(aFBO, aAspect) {
+	return external_call(global._FBOSetAspect, aFBO, aAspect);
 }
 
-function FBORenderObjectEx(aFbo, aObj, aClearcolor, aCleardepth, aCopycolor, aCopydepth) {
-	return external_call(global._FBORenderObjectEx, aFbo, aObj, aClearcolor, aCleardepth, aCopycolor, aCopydepth);
+function FBOSetPickableTarget(aFBO, aMode) {
+	return external_call(global._FBOSetPickableTarget, aFBO, aMode);
 }
 
-function FBOSetViewer(aFbo, aViewer) {
-	return external_call(global._FBOSetViewer, aFbo, aViewer);
+function FBOSetSize(aFBO, aWidth, aHeight) {
+	return external_call(global._FBOSetSize, aFBO, aWidth, aHeight);
 }
 
-function FBOSetOverrideMaterial(aFbo, aMlb, aMtrl) {
-	return external_call(global._FBOSetOverrideMaterial, aFbo, aMlb, aMtrl);
+function FBOSetCamera(aFBO, aCamera) {
+	return external_call(global._FBOSetCamera, aFBO, aCamera);
 }
 
-function FBOSetColorTextureFormat(aFbo, aTf) {
-	return external_call(global._FBOSetColorTextureFormat, aFbo, aTf);
+function FBOSetRootObject(aFBO, aObj) {
+	return external_call(global._FBOSetRootObject, aFBO, aObj);
+}
+
+function FBOSetBackgroundColor(aFBO, aColor) {
+	return external_call(global._FBOSetBackgroundColor, aFBO, aColor);
+}
+
+function FBOSetEnabledRenderBuffers(aFBO, aDepth, aStencil) {
+	return external_call(global._FBOSetEnabledRenderBuffers, aFBO, aDepth, aStencil);
+}
+
+function FBOSetSceneScaleFactor(aFBO, aScaleFactor) {
+	return external_call(global._FBOSetSceneScaleFactor, aFBO, aScaleFactor);
+}
+
+function FBOSetTargetVisibility(aFBO, aTv) {
+	return external_call(global._FBOSetTargetVisibility, aFBO, aTv);
+}
+
+function FBOSetMaterialLibrary(aFBO, aMatlib) {
+	return external_call(global._FBOSetMaterialLibrary, aFBO, aMatlib);
+}
+
+function FBOSetColorTextureName(aFBO, aName) {
+	return external_call(global._FBOSetColorTextureName, aFBO, aName);
+}
+
+function FBOSetDepthTextureName(aFBO, aName) {
+	return external_call(global._FBOSetDepthTextureName, aFBO, aName);
+}
+
+function FBOSetClearOptions(aFBO, aClearColor, aClearDepth, aClearStencil, aUseBufferBackground) {
+	return external_call(global._FBOSetClearOptions, aFBO, aClearColor, aClearDepth, aClearStencil, aUseBufferBackground);
+}
+
+function FBOSetStencilPrecision(aFBO, aSp) {
+	return external_call(global._FBOSetStencilPrecision, aFBO, aSp);
 }
 
 function FireFXManagerCreate() {
@@ -2569,6 +2626,10 @@ function MaterialLibraryHasMaterial(aMatlib, aName) {
 
 function MaterialLibraryLoadScript(aMatlib, aFilename) {
 	return external_call(global._MaterialLibraryLoadScript, aMatlib, aFilename);
+}
+
+function MaterialLibraryGetTextureByName(aMatlib, aName) {
+	return external_call(global._MaterialLibraryGetTextureByName, aMatlib, aName);
 }
 
 function MaterialCreate(aMtrl, aFname) {
@@ -4862,6 +4923,10 @@ function ViewerEnableVSync(aViewer, aVsm) {
 
 function ViewerRender(aViewer) {
 	return external_call(global._ViewerRender, aViewer);
+}
+
+function ViewerRenderObject(aViewer, aObj) {
+	return external_call(global._ViewerRenderObject, aViewer, aObj);
 }
 
 function ViewerRenderToFile(aViewer, aFname) {

@@ -68,6 +68,17 @@ begin
   Result := 1;
 end;
 
+function MaterialLibraryGetTextureByName(matlib: real; name: PAnsiChar): real; cdecl;
+var
+  mlib: TGLMaterialLibrary;
+  tex: TGLTexture;
+begin
+  mlib := TGLMaterialLibrary(RealToPtr(matlib));
+  tex := mlib.TextureByName(StrConv(name));
+  if tex = nil then Result := 0
+  else Result := PtrToReal(tex);
+end;
+
 function MaterialCreate(mtrl, fname: PAnsiChar): real; cdecl;
 begin
   try

@@ -358,33 +358,29 @@ begin
   result := 1;
 end;
 
-{
 function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformFBOColorTexture;
-  param.FBO := TGLFBO(trunc64(fbo));
+  param.FBORenderer := TGLFBORenderer(RealToPtr(fbo));
   param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
-}
 
-{
 function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
   param.UniformType := uniformFBODepthTexture;
-  param.FBO := TGLFBO(RealToPtr(fbo));
+  param.FBORenderer := TGLFBORenderer(RealToPtr(fbo));
   param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
-}
 
 function GLSLShaderSetParameterViewMatrix(par: real): real; cdecl;
 var
