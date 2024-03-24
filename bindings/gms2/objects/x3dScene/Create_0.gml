@@ -6,7 +6,7 @@ EngineCreate();
 EngineShowLoadingErrors(true);
 EngineSetCulling(vcNone);
 EngineSetObjectsSorting(osNone);
-EngineSetMaxLights(64);
+EngineSetMaxLights(8);
 
 windowHandle = window_handle();
 viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
@@ -36,11 +36,11 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
-light = LightCreate(lsOmni, global.scene);
-LightSetAmbientColor(light, c_gray);
-LightSetDiffuseColor(light, c_white);
-LightSetSpecularColor(light, c_white);
-ObjectSetPosition(light, 3, 5, 3);
+light1 = LightCreate(lsOmni, global.scene);
+LightSetAmbientColor(light1, c_gray);
+LightSetDiffuseColor(light1, c_white);
+LightSetSpecularColor(light1, c_white);
+ObjectSetPosition(light1, 3, 5, 3);
 
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
@@ -91,7 +91,8 @@ ObjectSetMaterial(s1, "mStone")
 fx = LightFXCreate(s1);
 */
 
-plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
+plane = PlaneCreate(0, 20, 20, 10, 10,  global.scene);
+//ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
@@ -191,42 +192,43 @@ fboRootObject = DummycubeCreate(0);
 
 fboWidth = window_get_width();
 fboHeight = window_get_height();
-fboAspect = 1/1; //16/9;
+fboAspect = 1/1; //16/9 if using square texture
 matlib3 = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib3);
 MaterialCreate("fboColor", "");
 MaterialGenTexture("fboColor", fboWidth, fboHeight);
 MaterialSetOptions("fboColor", false, false);
 MaterialSetTextureWrap("fboColor", false); 
+MaterialSetTextureFilter("fboColor", miLinear, maLinear);
 MaterialCreate("fboDepth", "");
 MaterialGenTexture("fboDepth", fboWidth, fboHeight);
 MaterialSetOptions("fboDepth", false, false);
-MaterialSetTextureWrap("fboDepth", false); 
+MaterialSetTextureWrap("fboDepth", false);
+MaterialSetTextureFilter("fboDepth", miLinear, maLinear);
 
 fbo = FBOCreate(fboWidth, fboHeight, global.scene);
 FBOSetMaterialLibrary(fbo, matlib3);
 FBOSetCamera(fbo, camera);
 FBOSetAspect(fbo, fboAspect);
-//FBOSetEnabledRenderBuffers(fbo, true, true);
-//FBOSetClearOptions(fbo, true, true, true, true);
-FBOSetStencilPrecision(fbo, 3);
 FBOSetRootObject(fbo, global.scene);
 FBOSetColorTextureName(fbo, "fboColor");
 FBOSetDepthTextureName(fbo, "fboDepth");
 FBOSetTargetVisibility(fbo, 0);
 
-vp1 = TextRead("shaders/fbo-vp.glsl");
-fp1 = TextRead("shaders/fbo-fp.glsl");
-simpleShader = GLSLShaderCreate(vp1, fp1);
-paramTexture = GLSLShaderCreateParameter(simpleShader, "fboColor");
-GLSLShaderSetParameterFBOColorTexture(paramTexture, fbo, 0);
-MaterialCreate("mSimple", "");
-MaterialSetOptions("mSimple", true, true);
-MaterialSetTextureWrap("mSimple", false);
-MaterialSetShader("mSimple", simpleShader);
+fxaa_vp1 = TextRead("shaders/fxaa-vp.glsl");
+fxaa_fp1 = TextRead("shaders/fxaa-fp.glsl");
+fxaaShader = GLSLShaderCreate(fxaa_vp1, fxaa_fp1);
+fxaaParamTexture = GLSLShaderCreateParameter(fxaaShader, "colorBuffer");
+GLSLShaderSetParameterFBOColorTexture(fxaaParamTexture, fbo, 0);
+fxaaParamViewSize = GLSLShaderCreateParameter(fxaaShader, "viewSize");
+GLSLShaderSetParameter2f(fxaaParamViewSize, window_get_width(), window_get_height());
+MaterialCreate("mFXAA", "");
+MaterialSetOptions("mFXAA", true, true);
+MaterialSetTextureWrap("mFXAA", false);
+MaterialSetShader("mFXAA", fxaaShader);
 
-spr = HUDSpriteCreate("mSimple", window_get_width(), window_get_height(), global.front); 
-ObjectSetPosition(spr, window_get_width() / 2, window_get_height() / 2, 0);
+screenSprite = HUDSpriteCreate("mFXAA", window_get_width(), window_get_height(), global.front); 
+ObjectSetPosition(screenSprite, window_get_width() / 2, window_get_height() / 2, 0);
 
 MaterialLibraryActivate(matlib);
 
