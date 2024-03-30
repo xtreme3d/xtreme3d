@@ -702,6 +702,7 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderForceDisableStencilTest = external_define(dll, "GLSLShaderForceDisableStencilTest", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// Terrain
 	global._BmpHDSCreate = external_define(dll, "BmpHDSCreate", dll_cdecl, ty_real, 1, ty_string);
@@ -4309,6 +4310,10 @@ function GLSLShaderSetParameterInvViewMatrix(aPar) {
 
 function GLSLShaderSetParameterHasTextureEx(aPar, aSlot) {
 	return external_call(global._GLSLShaderSetParameterHasTextureEx, aPar, aSlot);
+}
+
+function GLSLShaderForceDisableStencilTest(aShader, aMode) {
+	return external_call(global._GLSLShaderForceDisableStencilTest, aShader, aMode);
 }
 
 function ShadowMapCreate(aSize, aViewer, aCaster) {

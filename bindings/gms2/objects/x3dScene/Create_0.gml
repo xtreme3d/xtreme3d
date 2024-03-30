@@ -42,10 +42,16 @@ LightSetDiffuseColor(light1, c_white);
 LightSetSpecularColor(light1, c_white);
 ObjectSetPosition(light1, 3, 5, 3);
 
+bumpShaderPlane = BumpShaderCreate();
+BumpShaderSetDiffuseTexture(bumpShaderPlane, "");
+BumpShaderSetNormalTexture(bumpShaderPlane, "");
+BumpShaderSetMaxLights(bumpShaderPlane, 8);
+
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
 BumpShaderSetNormalTexture(bumpShader, "");
 BumpShaderSetMaxLights(bumpShader, 8);
+GLSLShaderForceDisableStencilTest(bumpShader, true);
 
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
@@ -54,18 +60,11 @@ MaterialSetShininess("mStone", 8);
 MaterialSetAmbientColor("mStone", c_dkgray, 1);
 MaterialSetDiffuseColor("mStone", c_white, 1);
 MaterialSetSpecularColor("mStone", c_dkgray, 1);
-MaterialSetShader("mStone", bumpShader);
-
-MaterialCreate("mFloor", "textures/ground.jpg");
-MaterialSetShininess("mFloor", 8);
-MaterialSetAmbientColor("mFloor", c_dkgray, 1);
-MaterialSetDiffuseColor("mFloor", c_white, 1);
-MaterialSetSpecularColor("mFloor", c_dkgray, 1);
+MaterialSetShader("mStone", bumpShaderPlane);
 
 plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
-//ShadowplaneSetOptions(plane, true, true, true, true);
+//ShadowplaneSetOptions(plane, true, true, false, false);
 //PlaneCreate(0, 20, 20, 10, 10, global.scene);
-//ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 

@@ -761,6 +761,7 @@ exports
     GLSLShaderSetParameterHasTextureEx,
     GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
     //GLSLShaderSetParameterViewMatrix,
+    GLSLShaderForceDisableStencilTest,
     PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
     BumpShaderCreate,
     BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,

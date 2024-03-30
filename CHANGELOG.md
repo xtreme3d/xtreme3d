@@ -29,7 +29,8 @@ v4.0.0 (by Gecko) - ??/??/????
 - New function `ActorSetReference`
 - New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`
 - New functions `ObjectListCreate`, `ObjectListAdd`, `ObjectListGetCount`
-- FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`.
+- FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`
+- New function `GLSLShaderForceDisableStencilTest`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------

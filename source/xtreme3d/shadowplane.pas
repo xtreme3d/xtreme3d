@@ -42,24 +42,14 @@ var
   sp: TGLShadowPlane;
 begin
   sp := TGLShadowPlane(RealToPtr(shadowplane));
-
-  if (stencil = 1) and (scissor = 1) and (transparent = 1) then
-      sp.ShadowOptions := [spoUseStencil, spoScissor, spoTransparent]
-  else if (stencil = 1) and (scissor = 1) and (transparent = 0) then
-      sp.ShadowOptions := [spoUseStencil, spoScissor]
-  else if (stencil = 1) and (scissor = 0) and (transparent = 1) then
-      sp.ShadowOptions := [spoUseStencil, spoTransparent]
-  else if (stencil = 0) and (scissor = 1) and (transparent = 1) then
-      sp.ShadowOptions := [spoScissor, spoTransparent]
-  else if (stencil = 1) and (scissor = 0) and (transparent = 0) then
-      sp.ShadowOptions := [spoUseStencil]
-  else if (stencil = 0) and (scissor = 1) and (transparent = 0) then
-      sp.ShadowOptions := [spoScissor]
-  else if (stencil = 0) and (scissor = 0) and (transparent = 1) then
-      sp.ShadowOptions := [spoTransparent]
-  else if (stencil = 0) and (scissor = 0) and (transparent = 0) then
-      sp.ShadowOptions := [];
-      
-  //sp.NoZWrite := Boolean(trunc(ignorez));
+  sp.ShadowOptions := [];
+  if Boolean(Trunc(stencil)) = true then
+    sp.ShadowOptions := sp.ShadowOptions + [spoUseStencil];
+  if Boolean(Trunc(scissor)) = true then
+    sp.ShadowOptions := sp.ShadowOptions + [spoScissor];
+  if Boolean(Trunc(transparent)) = true then
+    sp.ShadowOptions := sp.ShadowOptions + [spoTransparent];
+  if Boolean(Trunc(ignorez)) = true then
+    sp.ShadowOptions := sp.ShadowOptions + [spoIgnoreZ];
   result := 1.0;
 end;

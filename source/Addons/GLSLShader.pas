@@ -106,7 +106,7 @@ type
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
-      //function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
+      function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
       function AddUniformViewMatrix(name: String): TGLSLShaderParameter;
@@ -126,6 +126,8 @@ type
       shaderFrag: GLenum;
       FFogEnabled: Boolean;
       FLightingEnabled: Boolean;
+      FForceDisableStencilTest: Boolean;
+      FStencilTestState: Boolean;
     public
       constructor Create(AOwner: TComponent); override;
       procedure SetPrograms(vp, fp: PAnsiChar);
@@ -138,6 +140,7 @@ type
       property Prog: GLenum read shaderProg;
       property FogEnabled: Boolean read FFogEnabled;
       property LightingEnabled: Boolean read FLightingEnabled;
+      property ForceDisableStencilTest: Boolean read FForceDisableStencilTest write FForceDisableStencilTest;
   end;
 
 procedure Register;
@@ -208,7 +211,6 @@ begin
       gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
       gl.ActiveTexture(GL_TEXTURE0_ARB);
     end;
-    //rci.GLStates.TextureBinding[FUniformTexture, TextureTarget] := Value;
     gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
@@ -297,14 +299,14 @@ begin
     begin
       if FTexture <> Nil then
         glUniform1iARB(FUniformLocation, 1)
-      else if mat.Material.GetTextureN(FUniformInteger) <> nil then
+      else if mat.Material.GetTextureEx(FUniformInteger) <> nil then
         glUniform1iARB(FUniformLocation, 1)
       else
         glUniform1iARB(FUniformLocation, 0);
     end
     else
     begin
-      if mat.Material.GetTextureN(FUniformInteger) <> nil then
+      if mat.Material.GetTextureEx(FUniformInteger) <> nil then
         glUniform1iARB(FUniformLocation, 1)
       else
         glUniform1iARB(FUniformLocation, 0);
@@ -467,7 +469,6 @@ begin
   Result := param;
 end;
 
-{
 function TGLSLShaderParameters.AddUniformShadowTexture(name: String): TGLSLShaderParameter;
 var
   param: TGLSLShaderParameter;
@@ -477,7 +478,6 @@ begin
   param.Initialized := False;
   Result := param;
 end;
-}
 
 function TGLSLShaderParameters.AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
 var
@@ -543,6 +543,7 @@ begin
    Enabled := true;
    haveSrc := false;
    shaderSane := false;
+   FForceDisableStencilTest := false;
 end;
 
 procedure TGLSLShader.DoInitialize;
@@ -555,8 +556,6 @@ var
 begin
    if not haveSrc then
        Exit;
-
-    //glDisable(GL_STENCIL_TEST);
 
    shaderProg := gl.CreateProgram();
    shaderVert := gl.CreateShader(GL_VERTEX_SHADER_ARB);
@@ -586,10 +585,7 @@ begin
      SetLength(log, maxLength);
      gl.GetInfoLog(shaderVert, maxLength, @maxLength, @log[1]);
      SetLength(log, maxLength);
-     //if infobuffer[0] <> #0 then begin
-       ShowMessage('GLSL vertex shader error: ' + #13#10 + String(log));
-       //Exit;
-     //end;
+     ShowMessage('GLSL vertex shader error: ' + #13#10 + String(log));
    end;
 
    success := 0;
@@ -602,13 +598,8 @@ begin
      SetLength(log, maxLength);
      gl.GetInfoLog(shaderVert, maxLength, @maxLength, @log[1]);
      SetLength(log, maxLength);
-     //if infobuffer[0] <> #0 then begin
-       ShowMessage('GLSL fragment shader error: ' + #13#10 + String(log));
-       //Exit;
-     //end;
+     ShowMessage('GLSL fragment shader error: ' + #13#10 + String(log));
    end;
-
-   //glEnable(GL_STENCIL_TEST);
 
    // TODO: make this switchable
    gl.Enable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -628,12 +619,14 @@ begin
   mat := TGLLibMaterial(Sender);
   if not (csDesigning in ComponentState) and shaderSane then
   begin
-      //glDisable(GL_STENCIL_TEST);
       FFogEnabled := gl.IsEnabled(GL_FOG);
       FLightingEnabled := gl.IsEnabled(GL_LIGHTING);
+      if FForceDisableStencilTest then begin
+        FStencilTestState := gl.IsEnabled(GL_STENCIL_TEST);
+        gl.Disable(GL_STENCIL_TEST);
+      end;
       gl.UseProgram(shaderProg);
       Parameters.Bind(mat, rci);
-      //glEnable(GL_STENCIL_TEST);
   end;
 end;
 
@@ -641,10 +634,12 @@ function TGLSLShader.DoUnApply(var rci: TGLRenderContextInfo): Boolean;
 begin
   if not (csDesigning in ComponentState) and shaderSane then
   begin
-      //glDisable(GL_STENCIL_TEST);
       Parameters.Unbind;
       gl.UseProgram(0);
-     // glEnable(GL_STENCIL_TEST);
+      if FForceDisableStencilTest then begin
+        if FStencilTestState then
+          gl.Enable(GL_STENCIL_TEST);
+      end;
   end;
   Result:=False;
 end;

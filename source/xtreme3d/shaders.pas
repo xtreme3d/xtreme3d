@@ -413,6 +413,15 @@ begin
   result := 1;
 end;
 
+function GLSLShaderForceDisableStencilTest(shader, mode: real): real; cdecl;
+var
+  shadr: TGLSLShader;
+begin
+  shadr := TGLSLShader(RealToPtr(shader));
+  shadr.ForceDisableStencilTest := Boolean(Trunc(mode));
+  result := 1;
+end;
+
 
 function PhongShaderCreate: real; cdecl;
 var
@@ -495,10 +504,10 @@ var
   paramUseParallax: TGLSLShaderParameter;
   paramParallaxHeight: TGLSLShaderParameter;
   //paramShadowMap: TGLSLShaderParameter;
-  //paramShadowMatrix: TGLSLShaderParameter;
-  //paramUseShadowMap: TGLSLShaderParameter;
-  //paramShadowMapSize: TGLSLShaderParameter;
-  //paramShadowBlurRadius: TGLSLShaderParameter;
+  paramShadowMatrix: TGLSLShaderParameter;
+  paramUseShadowMap: TGLSLShaderParameter;
+  paramShadowMapSize: TGLSLShaderParameter;
+  paramShadowBlurRadius: TGLSLShaderParameter;
   paramUseAutoTangentSpace: TGLSLShaderParameter;
   paramFogEnabled: TGLSLShaderParameter;
   paramLightingEnabled: TGLSLShaderParameter;
@@ -542,10 +551,12 @@ begin
   paramShadowMap.UniformTexture := 7;
   paramShadowMap.ShadowMap := nil;
   paramShadowMap.Initialized := True;
+  }
 
   paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
-  paramShadowMatrix.UniformType := uniformShadowMatrix;
-  paramShadowMatrix.ShadowMap := nil;
+  //paramShadowMatrix.UniformType := uniformShadowMatrix;
+  //paramShadowMatrix.ShadowMap := nil;
+  paramShadowMatrix.UniformType := uniformMatrix4f;
   paramShadowMatrix.Initialized := True;
 
   paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
@@ -563,7 +574,6 @@ begin
   paramShadowBlurRadius.UniformType := uniform1f;
   paramShadowBlurRadius.UniformVector[0] := 0.0;
   paramShadowBlurRadius.Initialized := True;
-  }
 
   paramUseAutoTangentSpace := bump.Param.AddUniform('useAutoTangentSpace');
   paramUseAutoTangentSpace.UniformType := uniform1i;
