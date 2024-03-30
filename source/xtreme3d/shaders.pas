@@ -310,7 +310,7 @@ var
   param: TGLSLShaderParameter;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
-  param.UniformType := uniformShadowTexture;
+  param.UniformType := uniformTexture2D;
   param.ShadowMap := TGLShadowMap(RealToPtr(shadowmap));
   param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
@@ -546,13 +546,14 @@ begin
   paramParallaxHeight.Initialized := True;
 
   paramShadowMap := bump.Param.AddUniform('shadowMap');
-  paramShadowMap.UniformType := uniformTexture2D;
+  paramShadowMap.UniformType := uniformShadowTexture;
   paramShadowMap.UniformTexture := 7;
   paramShadowMap.ShadowMap := nil;
   paramShadowMap.Initialized := True;
 
   paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
   paramShadowMatrix.UniformType := uniformShadowMatrix;
+  paramShadowMatrix.ShadowMap := nil;
   paramShadowMatrix.Initialized := True;
 
   paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
@@ -693,8 +694,6 @@ var
   paramShadowMapSize: TGLSLShaderParameter;
 begin
   bump := TGLSLShader(RealToPtr(shader));
-  if shadowmap <> 0 then
-    sm := TGLShadowMap(RealToPtr(shadowmap));
   paramShadowMap := bump.Param.Items[6];
   paramShadowMatrix := bump.Param.Items[7];
   paramUseShadowMap := bump.Param.Items[8];
@@ -702,6 +701,7 @@ begin
 
   if shadowmap <> 0 then
   begin
+    sm := TGLShadowMap(RealToPtr(shadowmap));
     paramShadowMap.ShadowMap := sm;
     paramShadowMatrix.ShadowMap := sm;
     paramUseShadowMap.UniformInteger := 1;

@@ -21,6 +21,7 @@ ViewerEnableVSync(viewer, vsmNoSync);
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
 
+global.preprocess = DummycubeCreate(0);
 global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
 global.front = DummycubeCreate(0);
@@ -36,35 +37,88 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
-light1 = LightCreate(lsOmni, global.scene);
-LightSetAmbientColor(light1, c_gray);
+shadowMapSize = 512;
+shadowFboMatlib = MaterialLibraryCreate();
+MaterialLibraryActivate(shadowFboMatlib);
+MaterialCreate("fboShadowColor", "");
+MaterialGenTexture("fboShadowColor", shadowMapSize, shadowMapSize);
+MaterialSetOptions("fboShadowColor", false, false);
+MaterialSetTextureWrap("fboShadowColor", false); 
+MaterialSetTextureFilter("fboShadowColor", miLinear, maLinear);
+MaterialCreate("fboShadowDepth", "");
+MaterialGenTexture("fboShadowDepth", shadowMapSize, shadowMapSize);
+MaterialSetOptions("fboShadowDepth", false, false);
+MaterialSetTextureFormat("fboShadowDepth", tfExtended);
+//MaterialSetTextureFormatEx("fboShadowDepth", 73); //tfDEPTH24_STENCIL8
+MaterialSetTextureFormatEx("fboShadowDepth", 5); //tfDEPTH_COMPONENT24
+MaterialSetTextureWrap("fboShadowDepth", false);
+MaterialSetTextureFilter("fboShadowDepth", miLinear, maLinear);
+MaterialSetTextureMode("fboShadowDepth", tmReplace);
+MaterialSetTextureCompareMode("fboShadowDepth", 1); //tcmCompareRtoTexture
+
+shadowCamera = ShadowCameraCreate(global.scene);
+ObjectPitch(shadowCamera, -45);
+ObjectSetPosition(shadowCamera, 0, 5, 5);
+CameraSetViewDepth(shadowCamera, 1000);
+ObjectShowAxes(shadowCamera, true);
+//target = DummycubeCreate(global.scene);
+//ObjectSetPosition(target, 0, 10, 10);
+//ObjectPointToObject(shadowCamera, target);
+//ViewerSetCamera(viewer, shadowCamera);
+
+shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
+FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);
+FBOSetCamera(shadowFbo, shadowCamera);
+FBOSetAspect(shadowFbo, 1);
+FBOSetRootObject(shadowFbo, shadowCasters);
+FBOSetColorTextureName(shadowFbo, "fboShadowColor");
+FBOSetDepthTextureName(shadowFbo, "fboShadowDepth");
+FBOSetTargetVisibility(shadowFbo, 0);
+FBOSetClearOptions(shadowFbo, true, true, true, true);
+FBOSetStencilPrecision(shadowFbo, 3); //sp8bits
+
+shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
+
+light1 = LightCreate(lsParallel, global.scene);
+ObjectPitch(light1, -135);
+LightSetAmbientColor(light1, c_black);
 LightSetDiffuseColor(light1, c_white);
 LightSetSpecularColor(light1, c_white);
 ObjectSetPosition(light1, 3, 5, 3);
 
+shadowMapSprite = HUDSpriteCreate("fboShadowDepth", 256, 256, global.front); 
+ObjectSetPosition(shadowMapSprite, 128, 128, 0);
+
+MaterialLibraryActivate(matlib);
+
+/*
 bumpShaderPlane = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShaderPlane, "");
 BumpShaderSetNormalTexture(bumpShaderPlane, "");
 BumpShaderSetMaxLights(bumpShaderPlane, 8);
+GLSLShaderForceDisableStencilTest(bumpShaderPlane, true);
+*/
 
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
 BumpShaderSetNormalTexture(bumpShader, "");
-BumpShaderSetMaxLights(bumpShader, 8);
+BumpShaderSetMaxLights(bumpShader, 1);
 GLSLShaderForceDisableStencilTest(bumpShader, true);
+BumpShaderSetShadowMap(bumpShader, shadowMap);
+BumpShaderSetShadowBlurRadius(bumpShader, 2);
 
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
 TextureExLoad(MaterialAddTextureEx("mStone", 1), "textures/stone-normal.png");
-MaterialSetShininess("mStone", 8);
-MaterialSetAmbientColor("mStone", c_dkgray, 1);
+MaterialSetAmbientColor("mStone", c_black, 1);
 MaterialSetDiffuseColor("mStone", c_white, 1);
 MaterialSetSpecularColor("mStone", c_dkgray, 1);
-MaterialSetShader("mStone", bumpShaderPlane);
+MaterialSetShininess("mStone", 8);
+MaterialSetShader("mStone", bumpShader);
 
-plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
+//plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
 //ShadowplaneSetOptions(plane, true, true, false, false);
-//PlaneCreate(0, 20, 20, 10, 10, global.scene);
+plane = PlaneCreate(0, 20, 20, 10, 10, global.scene);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
@@ -109,15 +163,12 @@ ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
-MaterialSetAmbientColor("mHellknight", c_dkgray, 1); 
+MaterialSetAmbientColor("mHellknight", c_black, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_grey, 1); 
 MaterialSetShininess("mHellknight", 8);
-MaterialSetZWrite("mHellknight", true);
-tex0 = MaterialAddTextureEx("mHellknight", 0);
-tex1 = MaterialAddTextureEx("mHellknight", 1);
-TextureExLoad(tex0, "data/hellknight/diffuse.png");
-TextureExLoad(tex1, "data/hellknight/normal.png");
+TextureExLoad(MaterialAddTextureEx("mHellknight", 0), "data/hellknight/diffuse.png");
+TextureExLoad(MaterialAddTextureEx("mHellknight", 1), "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 MaterialSetShader("mHellknight", bumpShader);
 LightFXCreate(hk);
@@ -187,11 +238,7 @@ playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
 VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
 */
 
-fboCamera = CameraCreate(global.scene);
-ObjectSetPosition(fboCamera, 0, 0, 0);
-
-fboRootObject = DummycubeCreate(0);
-
+/*
 fboWidth = window_get_width();
 fboHeight = window_get_height();
 fboAspect = 1/1; //16/9 if using square texture
@@ -238,6 +285,7 @@ screenSprite = HUDSpriteCreate("mFXAA", window_get_width(), window_get_height(),
 ObjectSetPosition(screenSprite, window_get_width() / 2, window_get_height() / 2, 0);
 
 MaterialLibraryActivate(matlib);
+*/
 
 mouselookActive = true;
 mb_left_released = true;

@@ -807,3 +807,15 @@ begin
   mlib := TGLMaterialLibrary(RealToPtr(matlib));
   result := PAnsiChar(AnsiString(mlib.Materials.Items[Trunc(index)].Name));
 end;
+
+function MaterialSetTextureCompareMode(mtrl: PAnsiChar; tcm: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  if tcm = 0 then
+    mat.Material.Texture.TextureCompareMode := tcmNone
+  else if tcm = 1 then
+    mat.Material.Texture.TextureCompareMode := tcmCompareRtoTexture;
+  result:=1;
+end;

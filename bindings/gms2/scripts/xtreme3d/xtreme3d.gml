@@ -645,6 +645,8 @@ function dll_init(dll) {
 	// New function MaterialSetDepthTest
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
+	// Milestone II functions:
+	global._MaterialSetTextureCompareMode = external_define(dll, "MaterialSetTextureCompareMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	
 	// Shaders
 	global._ShaderEnable = external_define(dll, "ShaderEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -658,11 +660,10 @@ function dll_init(dll) {
 	global._BumpShaderSetMaxLights = external_define(dll, "BumpShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderUseParallax = external_define(dll, "BumpShaderUseParallax", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetParallaxOffset = external_define(dll, "BumpShaderSetParallaxOffset", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	/*
 	// Milestone II functions:
 	global._BumpShaderSetShadowMap = external_define(dll, "BumpShaderSetShadowMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetShadowBlurRadius = external_define(dll, "BumpShaderSetShadowBlurRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	*/
+	
 	global._BumpShaderUseAutoTangentSpace = external_define(dll, "BumpShaderUseAutoTangentSpace", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CelShaderCreate = external_define(dll, "CelShaderCreate", dll_cdecl, ty_real, 0);
 	global._CelShaderSetLineColor = external_define(dll, "CelShaderSetLineColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -882,6 +883,12 @@ function dll_init(dll) {
 	global._ShadowvolumeRemoveOccluder = external_define(dll, "ShadowvolumeRemoveOccluder", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ShadowvolumeSetDarkeningColor = external_define(dll, "ShadowvolumeSetDarkeningColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._ShadowvolumeSetMode = external_define(dll, "ShadowvolumeSetMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// ShadowMap
+	// Milestone II functions:
+	global._ShadowMapCreate = external_define(dll, "ShadowMapCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ShadowMapUpdate = external_define(dll, "ShadowMapUpdate", dll_cdecl, ty_real, 1, ty_real);
+	global._ShadowCameraCreate = external_define(dll, "ShadowCameraCreate", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Tree
 	global._TreeCreate = external_define(dll, "TreeCreate", dll_cdecl, ty_real, 1, ty_real);
@@ -2892,6 +2899,10 @@ function MaterialGetNameFromLibrary(aMatlib, aIndex) {
 	return external_call(global._MaterialGetNameFromLibrary, aMatlib, aIndex);
 }
 
+function MaterialSetTextureCompareMode(aMaterial, aTcm) {
+	return external_call(global.MaterialSetTextureCompareMode, aMaterial, aTcm);
+}
+
 function MemoryViewerCreate(aW, aH) {
 	return external_call(global._MemoryViewerCreate, aW, aH);
 }
@@ -4316,10 +4327,19 @@ function GLSLShaderForceDisableStencilTest(aShader, aMode) {
 	return external_call(global._GLSLShaderForceDisableStencilTest, aShader, aMode);
 }
 
-function ShadowMapCreate(aSize, aViewer, aCaster) {
-	return external_call(global._ShadowMapCreate, aSize, aViewer, aCaster);
+function ShadowMapCreate(aFBO, aViewer, aShadowCamera) {
+	return external_call(global._ShadowMapCreate, aFBO, aViewer, aShadowCamera);
 }
 
+function ShadowMapUpdate(aShadowMap) {
+	return external_call(global._ShadowMapUpdate, aShadowMap);
+}
+
+function ShadowCameraCreate(aParent) {
+	return external_call(global._CameraCreate, aParent);
+}
+
+/*
 function ShadowMapSetCamera(aShadowmap, aCam) {
 	return external_call(global._ShadowMapSetCamera, aShadowmap, aCam);
 }
@@ -4347,6 +4367,7 @@ function ShadowMapRender(aShadowmap) {
 function ShadowMapSetFBO(aShadowmap, aFbo) {
 	return external_call(global._ShadowMapSetFBO, aShadowmap, aFbo);
 }
+*/
 
 function ShadowplaneCreate(aWidth, aHeight, aXtiles, aYtiles, aTarget, aLight, aColor, aAlpha, aParent) {
 	return external_call(global._ShadowplaneCreate, aWidth, aHeight, aXtiles, aYtiles, aTarget, aLight, aColor, aAlpha, aParent);

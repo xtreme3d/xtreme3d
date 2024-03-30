@@ -38,6 +38,7 @@ EngineUpdate(dt);
 //VerletWorldUpdate(verlet, current_time / 1000);
 
 if (global.canRender) {
+	ShadowMapUpdate(shadowMap);
 	ViewerRender(viewer);
 	//ObjectHide(global.front);
 	//ViewerRenderObject(viewer, fbo);

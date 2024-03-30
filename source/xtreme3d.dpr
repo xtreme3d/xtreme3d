@@ -130,6 +130,7 @@ uses
   GLFileLOD,
   GLLightFx,
   GLShadowMap,
+  GLShadowCamera,
   Hashes;
 
 type
@@ -495,7 +496,7 @@ end;
 {$I 'xtreme3d/objectlist'}
 {$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
-//{$I 'xtreme3d/shadowmap'}
+{$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 //{$I 'xtreme3d/kraft'}
 //{$I 'xtreme3d/clipplane'}
@@ -741,6 +742,7 @@ exports
     MaterialAddTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
     TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
     TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable,
+    MaterialSetTextureCompareMode,
 
     // Shaders
     ShaderEnable,
@@ -766,7 +768,7 @@ exports
     BumpShaderCreate,
     BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,
     BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
-    //BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius,
+    BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius,
     BumpShaderUseAutoTangentSpace,
 
     // FBO
@@ -937,7 +939,9 @@ exports
     MemoryViewerSetViewport, MemoryViewerCopyToTexture,
 
     // ShadowMap
-    //ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
+    ShadowMapCreate, ShadowMapUpdate,
+    ShadowCameraCreate,
+    //ShadowMapSetCamera, ShadowMapSetCaster,
     //ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
     //ShadowMapRender, ShadowMapSetFBO,
 

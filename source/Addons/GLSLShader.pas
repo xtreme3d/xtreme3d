@@ -39,6 +39,7 @@ type
       uniformMatrix4f,
       uniformTexture2D,
       uniformSecondTexture2D,
+      uniformShadowTexture,
       uniformFBOColorTexture,
       uniformFBODepthTexture,
       uniformShadowMatrix,
@@ -106,6 +107,7 @@ type
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
+      function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
       function AddUniformViewMatrix(name: String): TGLSLShaderParameter;
@@ -224,6 +226,21 @@ begin
     gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
+  if FUniformType = uniformShadowTexture then
+  begin
+    if FShadowMap <> Nil then
+    begin
+       FTexture := TGLMaterialLibrary(FShadowMap.FBO.MaterialLibrary).TextureByName(FShadowMap.FBO.DepthTextureName);
+       if FTexture <> Nil then
+       begin
+         gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
+         gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
+         gl.ActiveTexture(GL_TEXTURE0_ARB);
+       end;
+    end;
+    gl.Uniform1i(FUniformLocation, FUniformTexture);
+  end;
+
   if FUniformType = uniformFBOColorTexture then
   begin
     if FFBORenderer <> Nil then
@@ -257,9 +274,7 @@ begin
   if FUniformType = uniformShadowMatrix then
   begin
     if FShadowMap <> Nil then
-    begin
       FUniformMatrix := FShadowMap.ShadowMatrix;
-    end;
     gl.UniformMatrix4fv(FUniformLocation, 1, false, @FUniformMatrix);
   end;
 
@@ -449,6 +464,16 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformSecondTexture2D, name);
+  param.Initialized := False;
+  Result := param;
+end;
+
+function TGLSLShaderParameters.AddUniformShadowTexture(name: String): TGLSLShaderParameter;
+var
+  param: TGLSLShaderParameter;
+begin
+  param := Add as TGLSLShaderParameter;
+  param.Init(uniformShadowTexture, name);
   param.Initialized := False;
   Result := param;
 end;
