@@ -503,7 +503,7 @@ var
   paramMaxLights: TGLSLShaderParameter;
   paramUseParallax: TGLSLShaderParameter;
   paramParallaxHeight: TGLSLShaderParameter;
-  //paramShadowMap: TGLSLShaderParameter;
+  paramShadowMap: TGLSLShaderParameter;
   paramShadowMatrix: TGLSLShaderParameter;
   paramUseShadowMap: TGLSLShaderParameter;
   paramShadowMapSize: TGLSLShaderParameter;
@@ -545,18 +545,14 @@ begin
   paramParallaxHeight.UniformVector[0] := 0.03;
   paramParallaxHeight.Initialized := True;
 
-  {
   paramShadowMap := bump.Param.AddUniform('shadowMap');
-  paramShadowMap.UniformType := uniformShadowTexture;
+  paramShadowMap.UniformType := uniformTexture2D;
   paramShadowMap.UniformTexture := 7;
   paramShadowMap.ShadowMap := nil;
   paramShadowMap.Initialized := True;
-  }
 
   paramShadowMatrix := bump.Param.AddUniform('shadowMatrix');
-  //paramShadowMatrix.UniformType := uniformShadowMatrix;
-  //paramShadowMatrix.ShadowMap := nil;
-  paramShadowMatrix.UniformType := uniformMatrix4f;
+  paramShadowMatrix.UniformType := uniformShadowMatrix;
   paramShadowMatrix.Initialized := True;
 
   paramUseShadowMap := bump.Param.AddUniform('useShadowMap');
@@ -687,7 +683,6 @@ begin
   result:=1;
 end;
 
-{
 function BumpShaderSetShadowMap(shader, shadowmap: real): real; cdecl;
 var
   bump: TGLSLShader;
@@ -710,8 +705,8 @@ begin
     paramShadowMap.ShadowMap := sm;
     paramShadowMatrix.ShadowMap := sm;
     paramUseShadowMap.UniformInteger := 1;
-    paramShadowMapSize.UniformVector[0] := sm.Width;
-    paramShadowMapSize.UniformVector[1] := sm.Height;
+    paramShadowMapSize.UniformVector[0] := sm.FBO.Width;
+    paramShadowMapSize.UniformVector[1] := sm.FBO.Height;
   end
   else
   begin
@@ -723,9 +718,7 @@ begin
   end;
   result:=1;
 end;
-}
 
-{
 function BumpShaderSetShadowBlurRadius(shader, radius: real): real; cdecl;
 var
   bump: TGLSLShader;
@@ -736,7 +729,6 @@ begin
   paramShadowBlurRadius.UniformVector[0] := radius;
   result:=1;
 end;
-}
 
 function BumpShaderUseAutoTangentSpace(shader, mode: real): real; cdecl;
 var

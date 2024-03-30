@@ -129,7 +129,7 @@ uses
   GLFileCSM,
   GLFileLOD,
   GLLightFx,
-  //GLFBO,
+  GLShadowMap,
   Hashes;
 
 type

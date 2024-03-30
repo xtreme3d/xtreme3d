@@ -21,6 +21,7 @@ uses
   GLS.Scene,
   GLS.PipelineTransformation,
   GLS.FBORenderer,
+  GLShadowMap,
   TypInfo,
   Variants;
 
@@ -38,7 +39,6 @@ type
       uniformMatrix4f,
       uniformTexture2D,
       uniformSecondTexture2D,
-      uniformShadowTexture,
       uniformFBOColorTexture,
       uniformFBODepthTexture,
       uniformShadowMatrix,
@@ -58,7 +58,7 @@ type
       FInitialized: Boolean;
       FTexture: TGLTexture;
       FTextureTarget: TGLEnum;
-      //FShadowMap: TGLShadowMap;
+      FShadowMap: TGLShadowMap;
       FFBORenderer: TGLFBORenderer;
       FUniformLocation: Integer;
       FUniformType: TGLSLShaderParameterType;
@@ -82,7 +82,7 @@ type
       property UniformTexture: Integer read FUniformTexture write FUniformTexture;
       property Texture: TGLTexture read FTexture write FTexture;
       property TextureTarget: TGLEnum read FTextureTarget write FTextureTarget;
-      //property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
+      property ShadowMap: TGLShadowMap read FShadowMap write FShadowMap;
       property FBORenderer: TGLFBORenderer read FFBORenderer write FFBORenderer;
       property MaterialPropertyName: String read FMaterialPropertyName write FMaterialPropertyName;
       property Initialized: Boolean read FInitialized write FInitialized;
@@ -106,7 +106,6 @@ type
       function AddUniform4f(name: String): TGLSLShaderParameter;
       function AddUniformTexture2D(name: String): TGLSLShaderParameter;
       function AddUniformSecondTexture2D(name: String): TGLSLShaderParameter;
-      function AddUniformShadowTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBOColorTexture(name: String): TGLSLShaderParameter;
       function AddUniformFBODepthTexture(name: String): TGLSLShaderParameter;
       function AddUniformViewMatrix(name: String): TGLSLShaderParameter;
@@ -165,7 +164,7 @@ begin
    FUniformVector[2] := 0.0;
    FUniformVector[3] := 0.0;
    FUniformMatrix := IdentityHmgMatrix;
-   //FShadowMap := nil;
+   FShadowMap := nil;
    FInitialized := False;
 end;
 
@@ -225,19 +224,6 @@ begin
     gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
-  {
-  if FUniformType = uniformShadowTexture then
-  begin
-    if FShadowMap <> Nil then
-    begin
-      glActiveTextureARB(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-      glBindTexture(GL_TEXTURE_2D, FShadowMap.DepthTextureHandle);
-      glActiveTextureARB(GL_TEXTURE0_ARB);
-    end;
-    glUniform1iARB(FUniformLocation, FUniformTexture);
-  end;
-  }
-
   if FUniformType = uniformFBOColorTexture then
   begin
     if FFBORenderer <> Nil then
@@ -268,16 +254,14 @@ begin
     gl.Uniform1i(FUniformLocation, FUniformTexture);
   end;
 
-  {
   if FUniformType = uniformShadowMatrix then
   begin
     if FShadowMap <> Nil then
     begin
       FUniformMatrix := FShadowMap.ShadowMatrix;
     end;
-    glUniformMatrix4fvARB(FUniformLocation, 1, false, @FUniformMatrix[0]);
+    gl.UniformMatrix4fv(FUniformLocation, 1, false, @FUniformMatrix);
   end;
-  }
 
   if FUniformType = uniformViewMatrix then
   begin
@@ -465,16 +449,6 @@ var
 begin
   param := Add as TGLSLShaderParameter;
   param.Init(uniformSecondTexture2D, name);
-  param.Initialized := False;
-  Result := param;
-end;
-
-function TGLSLShaderParameters.AddUniformShadowTexture(name: String): TGLSLShaderParameter;
-var
-  param: TGLSLShaderParameter;
-begin
-  param := Add as TGLSLShaderParameter;
-  param.Init(uniformShadowTexture, name);
   param.Initialized := False;
   Result := param;
 end;
