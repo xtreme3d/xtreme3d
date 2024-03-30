@@ -727,7 +727,7 @@ exports
     MaterialSetTextureMappingMode, MaterialSetPolygonMode, MaterialSetTextureImageAlpha,
     MaterialSetTextureScale, MaterialSetTextureOffset, MaterialSetTextureFilter,
     MaterialEnableTexture, MaterialGetCount, MaterialGetName,
-    MaterialSetFaceCulling, MaterialSetSecondTexture, MaterialSetTextureFormat,
+    MaterialSetFaceCulling, MaterialSetSecondTexture, MaterialSetTextureFormat, MaterialSetTextureFormatEx,
     MaterialSetTextureCompression, MaterialTextureRequiredMemory,
     MaterialSetFilteringQuality,
     MaterialSetShader, MaterialSaveTexture, MaterialSetOptions,

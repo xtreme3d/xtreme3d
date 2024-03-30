@@ -18,7 +18,7 @@ begin
         fbor := TGLFBORenderer.Create(scene.Objects);
   fbor.Width := Trunc(w);
   fbor.Height := Trunc(h);
-  //fbor.EnabledRenderBuffers := [erbDepth, erbStencil];
+  fbor.EnabledRenderBuffers := [erbDepth]; //erbStencil
   fbor.PostGenerateMipmap := False;
   result := PtrToReal(fbor);
 end;

@@ -602,6 +602,9 @@ function dll_init(dll) {
 	global._MaterialSetFaceCulling = external_define(dll, "MaterialSetFaceCulling", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetSecondTexture = external_define(dll, "MaterialSetSecondTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialSetTextureFormat = external_define(dll, "MaterialSetTextureFormat", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	// Milestone II function:
+	global._MaterialSetTextureFormatEx = external_define(dll, "MaterialSetTextureFormatEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	
 	global._MaterialSetTextureCompression = external_define(dll, "MaterialSetTextureCompression", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureRequiredMemory = external_define(dll, "MaterialTextureRequiredMemory", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialSetFilteringQuality = external_define(dll, "MaterialSetFilteringQuality", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -2742,6 +2745,10 @@ function MaterialSetSecondTexture(aMtrl, aMtrl2) {
 
 function MaterialSetTextureFormat(aMtrl, aTf) {
 	return external_call(global._MaterialSetTextureFormat, aMtrl, aTf);
+}
+
+function MaterialSetTextureFormatEx(aMtrl, aTfEx) {
+	return external_call(global._MaterialSetTextureFormatEx, aMtrl, aTfEx);
 }
 
 function MaterialSetTextureCompression(aMtrl, aTc) {
@@ -5227,6 +5234,7 @@ function PtrToReal(p) {
 #macro tiaTopLeftPointColorTransparent 6
 #macro tiaInverseLuminance 7
 #macro tiaInverseLuminanceSqrt 8
+#macro tiaBottomRightPointColorTransparent 9
 #macro tmDecal 0
 #macro tmModulate 1
 #macro tmBlend 2
@@ -5260,6 +5268,7 @@ function PtrToReal(p) {
 #macro tfNormalMap 9
 #macro tfRGBAFloat16 10
 #macro tfRGBAFloat32 11
+#macro tfExtended 12
 #macro tcDefault 0
 #macro tcNone 1
 #macro tcStandard 2

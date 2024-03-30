@@ -121,13 +121,13 @@ var
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   with mat.Material.Texture.Image as TGLCubeMapImage do begin
-    target := cmtPX;
-    if ind=0 then target:=cmtPX;
-    if ind=1 then target:=cmtNX;
-    if ind=2 then target:=cmtPY;
-    if ind=3 then target:=cmtNY;
-    if ind=4 then target:=cmtPZ;
-    if ind=5 then target:=cmtNZ;
+    if ind=0 then target:=cmtPX
+    else if ind=1 then target:=cmtNX
+    else if ind=2 then target:=cmtPY
+    else if ind=3 then target:=cmtNY
+    else if ind=4 then target:=cmtPZ
+    else if ind=5 then target:=cmtNZ
+    else target := cmtPX;
     
     try
       Picture[target].LoadFromFile(StrConv(filename));
@@ -243,15 +243,11 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  result := 0;
-  if (index=0) then
-    result:=mat.Material.FrontProperties.Ambient.AsWinColor;
-  if (index=1) then
-    result:=mat.Material.FrontProperties.Diffuse.AsWinColor;
-  if (index=2) then
-    result:=mat.Material.FrontProperties.Specular.AsWinColor;
-  if (index=3) then
-    result:=mat.Material.FrontProperties.Emission.AsWinColor;
+  if (index=0) then result:=mat.Material.FrontProperties.Ambient.AsWinColor
+  else if (index=1) then result:=mat.Material.FrontProperties.Diffuse.AsWinColor
+  else if (index=2) then result:=mat.Material.FrontProperties.Specular.AsWinColor
+  else if (index=3) then result:=mat.Material.FrontProperties.Emission.AsWinColor
+  else result := 0;
 end;
 
 function MaterialGetAlpha(mtrl: PAnsiChar; index: real): real; cdecl;
@@ -259,15 +255,11 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  result := 0;
-  if (index=0) then
-    result:=mat.Material.FrontProperties.Ambient.Alpha;
-  if (index=1) then
-    result:=mat.Material.FrontProperties.Diffuse.Alpha;
-  if (index=2) then
-    result:=mat.Material.FrontProperties.Specular.Alpha;
-  if (index=3) then
-    result:=mat.Material.FrontProperties.Emission.Alpha;
+  if (index=0) then result:=mat.Material.FrontProperties.Ambient.Alpha
+  else if (index=1) then result:=mat.Material.FrontProperties.Diffuse.Alpha
+  else if (index=2) then result:=mat.Material.FrontProperties.Specular.Alpha
+  else if (index=3) then result:=mat.Material.FrontProperties.Emission.Alpha
+  else result := 0;
 end;
 
 function MaterialSetBlendingMode(mtrl: PAnsiChar; bm: real): real; cdecl;
@@ -275,12 +267,12 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if bm=0 then mat.Material.BlendingMode:=bmOpaque;
-  if bm=1 then mat.Material.BlendingMode:=bmTransparency;
-  if bm=2 then mat.Material.BlendingMode:=bmAdditive;
-  if bm=3 then mat.Material.BlendingMode:=bmAlphaTest50;
-  if bm=4 then mat.Material.BlendingMode:=bmAlphaTest100;
-  if bm=5 then mat.Material.BlendingMode:=bmModulate;
+  if bm=0 then mat.Material.BlendingMode:=bmOpaque
+  else if bm=1 then mat.Material.BlendingMode:=bmTransparency
+  else if bm=2 then mat.Material.BlendingMode:=bmAdditive
+  else if bm=3 then mat.Material.BlendingMode:=bmAlphaTest50
+  else if bm=4 then mat.Material.BlendingMode:=bmAlphaTest100
+  else if bm=5 then mat.Material.BlendingMode:=bmModulate;
   result:=1;
 end;
 
@@ -289,10 +281,10 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tm=0 then mat.Material.Texture.TextureMode:=tmDecal;
-  if tm=1 then mat.Material.Texture.TextureMode:=tmModulate;
-  if tm=2 then mat.Material.Texture.TextureMode:=tmBlend;
-  if tm=3 then mat.Material.Texture.TextureMode:=tmReplace;
+  if tm=0 then mat.Material.Texture.TextureMode:=tmDecal
+  else if tm=1 then mat.Material.Texture.TextureMode:=tmModulate
+  else if tm=2 then mat.Material.Texture.TextureMode:=tmBlend
+  else if tm=3 then mat.Material.Texture.TextureMode:=tmReplace;
   result:=1;
 end;
 
@@ -301,14 +293,14 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tmm=0 then mat.Material.Texture.MappingMode:=tmmUser;
-  if tmm=1 then mat.Material.Texture.MappingMode:=tmmObjectLinear;
-  if tmm=2 then mat.Material.Texture.MappingMode:=tmmEyeLinear;
-  if tmm=3 then mat.Material.Texture.MappingMode:=tmmSphere;
-  if tmm=4 then mat.Material.Texture.MappingMode:=tmmCubeMapReflection;
-  if tmm=5 then mat.Material.Texture.MappingMode:=tmmCubeMapNormal;
-  if tmm=6 then mat.Material.Texture.MappingMode:=tmmCubeMapLight0;
-  if tmm=7 then mat.Material.Texture.MappingMode:=tmmCubeMapCamera;
+  if tmm=0 then mat.Material.Texture.MappingMode:=tmmUser
+  else if tmm=1 then mat.Material.Texture.MappingMode:=tmmObjectLinear
+  else if tmm=2 then mat.Material.Texture.MappingMode:=tmmEyeLinear
+  else if tmm=3 then mat.Material.Texture.MappingMode:=tmmSphere
+  else if tmm=4 then mat.Material.Texture.MappingMode:=tmmCubeMapReflection
+  else if tmm=5 then mat.Material.Texture.MappingMode:=tmmCubeMapNormal
+  else if tmm=6 then mat.Material.Texture.MappingMode:=tmmCubeMapLight0
+  else if tmm=7 then mat.Material.Texture.MappingMode:=tmmCubeMapCamera;
   result:=1;
 end;
 
@@ -317,9 +309,9 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if pm=0 then mat.Material.PolygonMode := pmFill;
-  if pm=1 then mat.Material.PolygonMode := pmLines;
-  if pm=2 then mat.Material.PolygonMode := pmPoints;
+  if pm=0 then mat.Material.PolygonMode := pmFill
+  else if pm=1 then mat.Material.PolygonMode := pmLines
+  else if pm=2 then mat.Material.PolygonMode := pmPoints;
   result:=1;
 end;
 
@@ -328,15 +320,16 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tia=0 then mat.Material.Texture.ImageAlpha := tiaDefault;
-  if tia=1 then mat.Material.Texture.ImageAlpha := tiaAlphaFromIntensity;
-  if tia=2 then mat.Material.Texture.ImageAlpha := tiaSuperBlackTransparent;
-  if tia=3 then mat.Material.Texture.ImageAlpha := tiaLuminance;
-  if tia=4 then mat.Material.Texture.ImageAlpha := tiaLuminanceSqrt;
-  if tia=5 then mat.Material.Texture.ImageAlpha := tiaOpaque;
-  if tia=6 then mat.Material.Texture.ImageAlpha := tiaTopLeftPointColorTransparent;
-  if tia=7 then mat.Material.Texture.ImageAlpha := tiaInverseLuminance;
-  if tia=8 then mat.Material.Texture.ImageAlpha := tiaInverseLuminanceSqrt;
+  if tia=0 then mat.Material.Texture.ImageAlpha := tiaDefault
+  else if tia=1 then mat.Material.Texture.ImageAlpha := tiaAlphaFromIntensity
+  else if tia=2 then mat.Material.Texture.ImageAlpha := tiaSuperBlackTransparent
+  else if tia=3 then mat.Material.Texture.ImageAlpha := tiaLuminance
+  else if tia=4 then mat.Material.Texture.ImageAlpha := tiaLuminanceSqrt
+  else if tia=5 then mat.Material.Texture.ImageAlpha := tiaOpaque
+  else if tia=6 then mat.Material.Texture.ImageAlpha := tiaTopLeftPointColorTransparent
+  else if tia=7 then mat.Material.Texture.ImageAlpha := tiaInverseLuminance
+  else if tia=8 then mat.Material.Texture.ImageAlpha := tiaInverseLuminanceSqrt
+  else if tia=9 then mat.Material.Texture.ImageAlpha := tiaBottomRightPointColorTransparent;
   result:=1;
 end;
 
@@ -365,14 +358,14 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if mi=0 then mat.Material.Texture.MinFilter := miNearest;
-  if mi=1 then mat.Material.Texture.MinFilter := miLinear;
-  if mi=2 then mat.Material.Texture.MinFilter := miNearestMipmapNearest;
-  if mi=3 then mat.Material.Texture.MinFilter := miLinearMipmapNearest;
-  if mi=4 then mat.Material.Texture.MinFilter := miNearestMipmapLinear;
-  if mi=5 then mat.Material.Texture.MinFilter := miLinearMipmapLinear;
-  if ma=0 then mat.Material.Texture.MagFilter := maNearest;
-  if ma=1 then mat.Material.Texture.MagFilter := maLinear;
+  if mi=0 then mat.Material.Texture.MinFilter := miNearest
+  else if mi=1 then mat.Material.Texture.MinFilter := miLinear
+  else if mi=2 then mat.Material.Texture.MinFilter := miNearestMipmapNearest
+  else if mi=3 then mat.Material.Texture.MinFilter := miLinearMipmapNearest
+  else if mi=4 then mat.Material.Texture.MinFilter := miNearestMipmapLinear
+  else if mi=5 then mat.Material.Texture.MinFilter := miLinearMipmapLinear
+  else if ma=0 then mat.Material.Texture.MagFilter := maNearest
+  else if ma=1 then mat.Material.Texture.MagFilter := maLinear;
   result:=1;
 end;
 
@@ -381,10 +374,8 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if mode=0 then
-      mat.Material.Texture.Enabled := false
-  else
-      mat.Material.Texture.Enabled := true;
+  if mode=0 then mat.Material.Texture.Enabled := false
+  else mat.Material.Texture.Enabled := true;
   result:=1;
 end;
 
@@ -403,9 +394,9 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if fc=0 then mat.Material.FaceCulling := fcBufferDefault;
-  if fc=1 then mat.Material.FaceCulling := fcCull;
-  if fc=2 then mat.Material.FaceCulling := fcNoCull;
+  if fc=0 then mat.Material.FaceCulling := fcBufferDefault
+  else if fc=1 then mat.Material.FaceCulling := fcCull
+  else if fc=2 then mat.Material.FaceCulling := fcNoCull;
   result:=1;
 end;
 
@@ -420,22 +411,31 @@ end;
 
 function MaterialSetTextureFormat(mtrl: PAnsiChar; tf: real): real; cdecl;
 var
-  mat:TGLLibMaterial;
+  mat: TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tf=0 then mat.Material.Texture.TextureFormat := tfDefault;
-  if tf=1 then mat.Material.Texture.TextureFormat := tfRGB;
-  if tf=2 then mat.Material.Texture.TextureFormat := tfRGBA;
-  if tf=3 then mat.Material.Texture.TextureFormat := tfRGB16;
-  if tf=4 then mat.Material.Texture.TextureFormat := tfRGBA16;
-  if tf=5 then mat.Material.Texture.TextureFormat := tfAlpha;
-  if tf=6 then mat.Material.Texture.TextureFormat := tfLuminance;
-  if tf=7 then mat.Material.Texture.TextureFormat := tfLuminanceAlpha;
-  if tf=8 then mat.Material.Texture.TextureFormat := tfIntensity;
-  if tf=9 then mat.Material.Texture.TextureFormat := tfNormalMap;
-  if tf=10 then mat.Material.Texture.TextureFormat := tfRGBAFloat16;
-  if tf=11 then mat.Material.Texture.TextureFormat := tfRGBAFloat32;
+  if tf=0 then mat.Material.Texture.TextureFormat := tfDefault
+  else if tf=1 then mat.Material.Texture.TextureFormat := tfRGB
+  else if tf=2 then mat.Material.Texture.TextureFormat := tfRGBA
+  else if tf=3 then mat.Material.Texture.TextureFormat := tfRGB16
+  else if tf=4 then mat.Material.Texture.TextureFormat := tfRGBA16
+  else if tf=5 then mat.Material.Texture.TextureFormat := tfAlpha
+  else if tf=6 then mat.Material.Texture.TextureFormat := tfLuminance
+  else if tf=7 then mat.Material.Texture.TextureFormat := tfLuminanceAlpha
+  else if tf=8 then mat.Material.Texture.TextureFormat := tfIntensity
+  else if tf=9 then mat.Material.Texture.TextureFormat := tfNormalMap
+  else if tf=10 then mat.Material.Texture.TextureFormat := tfRGBAFloat16
+  else if tf=11 then mat.Material.Texture.TextureFormat := tfRGBAFloat32
+  else if tf=12 then mat.Material.Texture.TextureFormat := tfExtended;
   result:=1;
+end;
+
+function MaterialSetTextureFormatEx(mtrl: PAnsiChar; tf_ex: real): real; cdecl;
+var
+  mat: TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.TextureFormatEx := TGLInternalFormat(Ord(Trunc(tf_ex)));
 end;
 
 function MaterialSetTextureCompression(mtrl: PAnsiChar; tc: real): real; cdecl;
@@ -443,11 +443,11 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tc=0 then mat.Material.Texture.Compression := tcDefault;
-  if tc=1 then mat.Material.Texture.Compression := tcNone;
-  if tc=2 then mat.Material.Texture.Compression := tcStandard;
-  if tc=3 then mat.Material.Texture.Compression := tcHighQuality;
-  if tc=4 then mat.Material.Texture.Compression := tcHighSpeed;
+  if tc=0 then mat.Material.Texture.Compression := tcDefault
+  else if tc=1 then mat.Material.Texture.Compression := tcNone
+  else if tc=2 then mat.Material.Texture.Compression := tcStandard
+  else if tc=3 then mat.Material.Texture.Compression := tcHighQuality
+  else if tc=4 then mat.Material.Texture.Compression := tcHighSpeed;
   result:=1;
 end;
 
@@ -464,8 +464,8 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tf=0 then mat.Material.Texture.FilteringQuality := tfIsotropic;
-  if tf=1 then mat.Material.Texture.FilteringQuality := tfAnisotropic;
+  if tf=0 then mat.Material.Texture.FilteringQuality := tfIsotropic
+  else if tf=1 then mat.Material.Texture.FilteringQuality := tfAnisotropic;
   result:=1;
 end;
 
@@ -499,10 +499,10 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if (op1=1) and (op2=1) then mat.Material.MaterialOptions:=[moIgnoreFog,moNoLighting];
-  if (op1=1) and (op2=0) then mat.Material.MaterialOptions:=[moIgnoreFog];
-  if (op1=0) and (op2=1) then mat.Material.MaterialOptions:=[moNoLighting];
-  if (op1=0) and (op2=0) then mat.Material.MaterialOptions:=[];
+  if (op1=1) and (op2=1) then mat.Material.MaterialOptions:=[moIgnoreFog,moNoLighting]
+  else if (op1=1) and (op2=0) then mat.Material.MaterialOptions:=[moIgnoreFog]
+  else if (op1=0) and (op2=1) then mat.Material.MaterialOptions:=[moNoLighting]
+  else if (op1=0) and (op2=0) then mat.Material.MaterialOptions:=[];
   result:=1;
 end;
 

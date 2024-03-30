@@ -62,6 +62,13 @@ MaterialSetAmbientColor("mFloor", c_dkgray, 1);
 MaterialSetDiffuseColor("mFloor", c_white, 1);
 MaterialSetSpecularColor("mFloor", c_dkgray, 1);
 
+plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
+//ShadowplaneSetOptions(plane, true, true, true, true);
+//PlaneCreate(0, 20, 20, 10, 10, global.scene);
+//ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
+ObjectPitch(plane, 90);
+ObjectSetMaterial(plane, "mStone");
+
 /*
 var gridSize, gx, gy, p, li, col;
 gridSize = 4;
@@ -91,11 +98,6 @@ ObjectSetMaterial(s1, "mStone")
 fx = LightFXCreate(s1);
 */
 
-plane = PlaneCreate(0, 20, 20, 10, 10,  global.scene);
-//ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light, c_black, 0.5, global.scene);
-ObjectPitch(plane, 90);
-ObjectSetMaterial(plane, "mStone");
-
 matlib2 = MaterialLibraryCreate();
 
 MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");
@@ -112,6 +114,7 @@ MaterialSetAmbientColor("mHellknight", c_dkgray, 1);
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_grey, 1); 
 MaterialSetShininess("mHellknight", 8);
+MaterialSetZWrite("mHellknight", true);
 tex0 = MaterialAddTextureEx("mHellknight", 0);
 tex1 = MaterialAddTextureEx("mHellknight", 1);
 TextureExLoad(tex0, "data/hellknight/diffuse.png");
@@ -193,8 +196,8 @@ fboRootObject = DummycubeCreate(0);
 fboWidth = window_get_width();
 fboHeight = window_get_height();
 fboAspect = 1/1; //16/9 if using square texture
-matlib3 = MaterialLibraryCreate();
-MaterialLibraryActivate(matlib3);
+fboMatlib = MaterialLibraryCreate();
+MaterialLibraryActivate(fboMatlib);
 MaterialCreate("fboColor", "");
 MaterialGenTexture("fboColor", fboWidth, fboHeight);
 MaterialSetOptions("fboColor", false, false);
@@ -203,17 +206,22 @@ MaterialSetTextureFilter("fboColor", miLinear, maLinear);
 MaterialCreate("fboDepth", "");
 MaterialGenTexture("fboDepth", fboWidth, fboHeight);
 MaterialSetOptions("fboDepth", false, false);
+MaterialSetTextureFormat("fboDepth", tfExtended);
+MaterialSetTextureFormatEx("fboDepth", 73); //tfDEPTH24_STENCIL8
 MaterialSetTextureWrap("fboDepth", false);
-MaterialSetTextureFilter("fboDepth", miLinear, maLinear);
+MaterialSetTextureFilter("fboDepth", miNearest, maNearest);
+MaterialSetTextureMode("fboDepth", tmReplace);
 
 fbo = FBOCreate(fboWidth, fboHeight, global.scene);
-FBOSetMaterialLibrary(fbo, matlib3);
+FBOSetMaterialLibrary(fbo, fboMatlib);
 FBOSetCamera(fbo, camera);
 FBOSetAspect(fbo, fboAspect);
 FBOSetRootObject(fbo, global.scene);
 FBOSetColorTextureName(fbo, "fboColor");
 FBOSetDepthTextureName(fbo, "fboDepth");
 FBOSetTargetVisibility(fbo, 0);
+FBOSetClearOptions(fbo, true, true, true, true);
+FBOSetStencilPrecision(fbo, 3); //sp8bits
 
 fxaa_vp1 = TextRead("shaders/fxaa-vp.glsl");
 fxaa_fp1 = TextRead("shaders/fxaa-fp.glsl");
