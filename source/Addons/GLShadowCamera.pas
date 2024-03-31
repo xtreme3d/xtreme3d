@@ -8,9 +8,6 @@ uses
   System.Classes,
   GLS.VectorTypes,
   GLS.VectorGeometry,
-  GLS.RenderContextInfo,
-  GLS.FBORenderer,
-  GLS.SceneViewer,
   GLS.Scene,
   GLS.Context;
 
@@ -38,11 +35,11 @@ implementation
 constructor TGLShadowCamera.Create(aOwner: TComponent);
 begin
   inherited;
+  OnCustomPerspective := ApplyShadowProjection;
   CameraStyle := csCustom;
-  FProjectionSize := 20.0;
+  FProjectionSize := 5.0;
   FZNear := -1000.0;
   FZFar := 1000.0;
-  OnCustomPerspective := ApplyShadowProjection;
 end;
 
 procedure TGLShadowCamera.ApplyShadowProjection(const viewport: TRectangle; width, height: Integer; DPI: Integer; var viewPortRadius: Single);
@@ -52,7 +49,7 @@ begin
   //viewPortRadius := FZFar;
   mat := CreateOrthoMatrix(-FProjectionSize, FProjectionSize, -FProjectionSize, FProjectionSize, FZNear, FZFar);
   with CurrentGLContext.PipelineTransformation do
-      SetProjectionMatrix(MatrixMultiply(mat, ProjectionMatrix^));
+      SetProjectionMatrix(mat);
 end;
 
 end.

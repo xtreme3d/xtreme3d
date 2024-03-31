@@ -4336,7 +4336,7 @@ function ShadowMapUpdate(aShadowMap) {
 }
 
 function ShadowCameraCreate(aParent) {
-	return external_call(global._CameraCreate, aParent);
+	return external_call(global._ShadowCameraCreate, aParent);
 }
 
 /*

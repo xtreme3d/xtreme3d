@@ -42,12 +42,12 @@ shadowFboMatlib = MaterialLibraryCreate();
 MaterialLibraryActivate(shadowFboMatlib);
 MaterialCreate("fboShadowColor", "");
 MaterialGenTexture("fboShadowColor", shadowMapSize, shadowMapSize);
-MaterialSetOptions("fboShadowColor", false, false);
+MaterialSetOptions("fboShadowColor", true, true);
 MaterialSetTextureWrap("fboShadowColor", false); 
 MaterialSetTextureFilter("fboShadowColor", miLinear, maLinear);
 MaterialCreate("fboShadowDepth", "");
 MaterialGenTexture("fboShadowDepth", shadowMapSize, shadowMapSize);
-MaterialSetOptions("fboShadowDepth", false, false);
+MaterialSetOptions("fboShadowDepth", true, true);
 MaterialSetTextureFormat("fboShadowDepth", tfExtended);
 //MaterialSetTextureFormatEx("fboShadowDepth", 73); //tfDEPTH24_STENCIL8
 MaterialSetTextureFormatEx("fboShadowDepth", 5); //tfDEPTH_COMPONENT24
@@ -59,12 +59,7 @@ MaterialSetTextureCompareMode("fboShadowDepth", 1); //tcmCompareRtoTexture
 shadowCamera = ShadowCameraCreate(global.scene);
 ObjectPitch(shadowCamera, -45);
 ObjectSetPosition(shadowCamera, 0, 5, 5);
-CameraSetViewDepth(shadowCamera, 1000);
 ObjectShowAxes(shadowCamera, true);
-//target = DummycubeCreate(global.scene);
-//ObjectSetPosition(target, 0, 10, 10);
-//ObjectPointToObject(shadowCamera, target);
-//ViewerSetCamera(viewer, shadowCamera);
 
 shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
 FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);
@@ -79,17 +74,17 @@ FBOSetStencilPrecision(shadowFbo, 3); //sp8bits
 
 shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
 
-light1 = LightCreate(lsParallel, global.scene);
-ObjectPitch(light1, -135);
-LightSetAmbientColor(light1, c_black);
-LightSetDiffuseColor(light1, c_white);
-LightSetSpecularColor(light1, c_white);
-ObjectSetPosition(light1, 3, 5, 3);
-
 shadowMapSprite = HUDSpriteCreate("fboShadowDepth", 256, 256, global.front); 
 ObjectSetPosition(shadowMapSprite, 128, 128, 0);
 
 MaterialLibraryActivate(matlib);
+
+light1 = LightCreate(lsParallel, global.scene);
+ObjectPitch(light1, -135);
+LightSetAmbientColor(light1, c_gray);
+LightSetDiffuseColor(light1, c_white);
+LightSetSpecularColor(light1, c_white);
+ObjectSetPosition(light1, 3, 5, 3);
 
 /*
 bumpShaderPlane = BumpShaderCreate();
@@ -110,7 +105,7 @@ BumpShaderSetShadowBlurRadius(bumpShader, 2);
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
 TextureExLoad(MaterialAddTextureEx("mStone", 1), "textures/stone-normal.png");
-MaterialSetAmbientColor("mStone", c_black, 1);
+MaterialSetAmbientColor("mStone", c_gray, 1);
 MaterialSetDiffuseColor("mStone", c_white, 1);
 MaterialSetSpecularColor("mStone", c_dkgray, 1);
 MaterialSetShininess("mStone", 8);
@@ -121,35 +116,6 @@ MaterialSetShader("mStone", bumpShader);
 plane = PlaneCreate(0, 20, 20, 10, 10, global.scene);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
-
-/*
-var gridSize, gx, gy, p, li, col;
-gridSize = 4;
-for (gy = -gridSize; gy < gridSize+1; gy = gy + 1)
-{
-	for (gx = -gridSize; gx < gridSize+1; gx = gx + 1)
-	{
-	    p = PlaneCreate(1, 3, 3, 1, 1, global.scene);
-	    ObjectSetPosition(p, gx * 3, 0, gy * 3);
-	    ObjectPitch(p, 90);
-	    ObjectSetMaterial(p, "mStone");
-	    fx = LightFXCreate(p);
-                
-	    li = LightCreate(lsOmni, global.scene);
-	    col = MakeColorRGBFloat(random(256) / 255.0, random(256) / 255.0, random(256) / 255.0);
-	    LightSetAmbientColor(li, c_black);
-	    LightSetDiffuseColor(li, col);
-	    LightSetSpecularColor(li, col);
-	    LightSetAttenuation(li, 2.0, 0.0, 0.8);
-	    ObjectSetPosition(li, gx * 3, 1, gy * 3);
-	}
-}
-
-s1 = SphereCreate(0.5, 16, 8, camPos)
-ObjectSetPosition(s1, 0, -1.8 + 0.5, -2)
-ObjectSetMaterial(s1, "mStone")
-fx = LightFXCreate(s1);
-*/
 
 matlib2 = MaterialLibraryCreate();
 
@@ -163,7 +129,7 @@ ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
-MaterialSetAmbientColor("mHellknight", c_black, 1); 
+MaterialSetAmbientColor("mHellknight", c_gray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_grey, 1); 
 MaterialSetShininess("mHellknight", 8);
@@ -171,72 +137,9 @@ TextureExLoad(MaterialAddTextureEx("mHellknight", 0), "data/hellknight/diffuse.p
 TextureExLoad(MaterialAddTextureEx("mHellknight", 1), "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 MaterialSetShader("mHellknight", bumpShader);
-LightFXCreate(hk);
-
-
-/*
-vp1 = TextRead("shaders/simple-vp.glsl");
-fp1 = TextRead("shaders/simple-fp.glsl");
-simpleShader = GLSLShaderCreate(vp1, fp1);
-paramColor = GLSLShaderCreateParameter(simpleShader, "color");
-GLSLShaderSetParameter4f(paramColor, 1.0, 0.5, 0.0, 1.0);
-MaterialSetShader("mHellknight", simpleShader);
-*/
-
-/*
-MaterialLibrarySetTexturePaths(matlib2, "data/trinity");
-MaterialLibraryActivate(matlib2);
-trinity = ActorCreate("data/trinity/TRINITYrage.smd", matlib2, global.scene);
-ActorAddObject(trinity, "data/trinity/walk.smd");
-ActorAddObject(trinity, "data/trinity/run.smd");
-ActorMakeSkeletalTranslationStatic(trinity, 1);
-ActorMakeSkeletalTranslationStatic(trinity, 2);
-ActorSwitchToAnimation(trinity, 1, false);
-ObjectSetScale(trinity, 0.03, 0.03, 0.03);
-ObjectSetPosition(trinity, 0, 0, 0);
-ObjectPitch(trinity, 90);
-*/
+//LightFXCreate(hk);
 
 MaterialLibraryActivate(matlib);
-
-/*
-MaterialCreate("mCloth", "data/cloth/tartan.jpg");
-MaterialSetFaceCulling("mCloth", fcNoCull);
-MaterialSetOptions("mCloth", true, true);
-MaterialSetAmbientColor("mCloth", c_dkgray, 1);
-MaterialSetDiffuseColor("mCloth", c_white, 1);
-MaterialSetSpecularColor("mCloth", c_white, 1);
-MaterialSetEmissionColor("mCloth", c_white, 1);
-*/
-
-/*
-cloth = FreeformCreate("data/cloth/cloth.3ds", 0, 0, shadowCasters);
-ObjectSetPosition(cloth, 5, 3, 0);
-ObjectPitch(cloth, -90);
-ObjectSetMaterial(cloth, "mCloth");
-
-verlet = VerletWorldCreate(3, uspEveryFrame, 0.02);
-VerletWorldSetMaxDeltaTime(verlet, 1.0 / 60.0);
-//VerletWorldCreateOctree(verlet, -20, -5.5, -20, 20, 20, 20, 25, 5);
-VerletWorldGravityCreate(verlet, 0, -9.81, 0);
-VerletWorldSetSimTime(verlet, 0.0);
-
-flr = VerletConstraintFloorCreate(verlet, 0, 0);
-VerletConstraintSetFrictionRatio(flr, 1);
-VerletConstraintSetPosition(flr, 0, 0.06, 0);
-
-EdgeDetectorCreate(verlet, cloth);
-VerletNodeNailedDown(verlet, 0, true);
-VerletNodeNailedDown(verlet, 7, true);
-VerletNodeNailedDown(verlet, 14, true);
-numNodes = VerletGetNodeCount(verlet);
-for (i = 0; i < numNodes; i += 1) {
-    VerletNodeSetWeight(verlet, i, 0.1);
-}
-
-playerCollider = VerletConstraintCapsuleCreate(verlet, 1, 2);
-VerletConstraintCapsuleSetAxis(playerCollider, 0, 1, 0);
-*/
 
 /*
 fboWidth = window_get_width();

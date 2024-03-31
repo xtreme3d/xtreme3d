@@ -82,29 +82,20 @@ end;
 
 procedure TGLShadowMap.Update();
 var
-  FInvCameraMatrix, FShadowCameraMatrix: TGLMatrix;
-  FProjectionMatrix, FBiasMatrix: TMatrix4f;
+  FInvViewMatrix, FShadowViewMatrix: TGLMatrix;
+  FShadowProjectionMatrix, FBiasMatrix: TMatrix4f;
 begin
-  FProjectionMatrix := CreateOrthoMatrix(
+  FShadowProjectionMatrix := CreateOrthoMatrix(
     -FShadowCamera.ProjectionSize, FShadowCamera.ProjectionSize,
     -FShadowCamera.ProjectionSize, FShadowCamera.ProjectionSize,
      FShadowCamera.ZNear, FShadowCamera.ZFar);
 
-  FInvCameraMatrix := cameraGetViewMatrix(viewer.Camera);
-  InvertMatrix(FInvCameraMatrix);
-  FShadowCameraMatrix := cameraGetViewMatrix(FShadowCamera);
-  //InvertMatrix(FShadowCameraMatrix);
-  //FShadowMatrix := MatrixMultiply(FInvCameraMatrix, CreateScaleMatrix(AffineVectorMake(ZScale, ZScale, ZScale)));
+  FInvViewMatrix := cameraGetViewMatrix(viewer.Camera);
+  InvertMatrix(FInvViewMatrix);
+  FShadowViewMatrix := cameraGetViewMatrix(FShadowCamera);
 
-  {
-  FShadowMatrix := CreateScaleAndTranslationMatrix(VectorMake(0.5, 0.5, 0.5), VectorMake(0.5, 0.5, 0.5));
-  FShadowMatrix := MatrixMultiply(FProjectionMatrix, FShadowMatrix);
-  FShadowMatrix := MatrixMultiply(FShadowCameraMatrix, FShadowMatrix);
-  FShadowMatrix := MatrixMultiply(FInvCameraMatrix, FShadowMatrix);
-  }
-
-  FShadowMatrix := MatrixMultiply(FInvCameraMatrix, FShadowCameraMatrix);
-  FShadowMatrix := MatrixMultiply(FShadowMatrix, FProjectionMatrix);
+  FShadowMatrix := MatrixMultiply(FInvViewMatrix, FShadowViewMatrix);
+  FShadowMatrix := MatrixMultiply(FShadowMatrix, FShadowProjectionMatrix);
   FBiasMatrix := CreateScaleAndTranslationMatrix(VectorMake(0.5, 0.5, 0.5), VectorMake(0.5, 0.5, 0.5));
   FShadowMatrix := MatrixMultiply(FShadowMatrix, FBiasMatrix);
 
