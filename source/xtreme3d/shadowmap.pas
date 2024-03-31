@@ -2,7 +2,7 @@ function ShadowMapCreate(fbo, viewer, shadowCamera: real): real; cdecl;
 var
   sm: TGLShadowMap;
 begin
-  sm := TGLShadowMap.Create(scene, TGLFBORenderer(RealToPtr(fbo)), TGLSceneViewer(RealToPtr(viewer)), TGLShadowCamera(RealToPtr(shadowCamera)));
+  sm := TGLShadowMap.Create(scene, TGLFBORendererEx(RealToPtr(fbo)), TGLSceneViewer(RealToPtr(viewer)), TGLShadowCamera(RealToPtr(shadowCamera)));
   result := PtrToReal(sm);
 end;
 

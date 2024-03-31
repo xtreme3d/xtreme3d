@@ -50,8 +50,9 @@ bumpFragmentProgram =
   '{' + #13#10 +
     'vec2 texelSize = 1.0 / shadowMapSize;' + #13#10 +
     'vec2 v = offset * texelSize * coord.w;' + #13#10 +
-    'float z = shadow2DProj(depths, coord + vec4(v.x, v.y, 0.0, 0.0)).z;' + #13#10 +
-    'return z;' + #13#10 +
+    'vec4 coordNew = vec4(coord.x + v.x, coord.y + v.y, coord.z - 0.005, coord.w);' + #13#10 +
+    'float shadow = shadow2DProj(depths, coordNew).r;' + #13#10 +
+    'return shadow;' + #13#10 +
   '}' + #13#10 +
   
   'mat3 cotangentFrame(vec3 N, vec3 p, vec2 uv)' + #13#10 +
@@ -102,7 +103,7 @@ bumpFragmentProgram =
         '{' + #13#10 +
             'shadow += shadowLookup(shadowMap, shadowCoord, vec2(x, y));' + #13#10 +
         '}' + #13#10 +
-          'shadow /= shadowBlurRadius * shadowBlurRadius * 4.0;' + #13#10 +
+        'shadow /= shadowBlurRadius * shadowBlurRadius * 4.0;' + #13#10 +
       '}' + #13#10 +
       'else' + #13#10 +
         'shadow = shadowLookup(shadowMap, shadowCoord, vec2(0.0, 0.0));' + #13#10 +
@@ -145,12 +146,12 @@ bumpFragmentProgram =
     '    {' + #13#10 +
     '      float spotCos = dot(directionToLight, normalize(gl_LightSource[i].spotDirection));' + #13#10 +
     '      spotEffect = clamp(pow(spotCos, gl_LightSource[i].spotExponent) * step(gl_LightSource[i].spotCosCutoff, spotCos), 0.0, 1.0);' + #13#10 +
-    '    }' + #13#10 + 
+    '    }' + #13#10 +
     '  }' + #13#10 +
     '  else' + #13#10 +
     '  {' + #13#10 +
     '    directionToLight = gl_LightSource[i].position.xyz;' + #13#10 +
-    '    attenuation = 1.0;' + #13#10 +
+    '    attenuation = shadow; shadow = 1.0;' + #13#10 +
     '  }' + #13#10 +
         
     '  L = useAutoTangentSpace? directionToLight :' + #13#10 +
@@ -158,7 +159,7 @@ bumpFragmentProgram =
     '         dot(directionToLight, bn),' + #13#10 +
     '         dot(directionToLight, nn));' + #13#10 +
     '  diffuse = clamp(dot(N, L), 0.0, 1.0);' + #13#10 +
-    
+
     '  H = normalize(L + E);' + #13#10 +
     '  NH = dot(N, H);' + #13#10 +
     '  specular = pow(max(NH, 0.0), 3.0 * gl_FrontMaterial.shininess);' + #13#10 +
@@ -170,8 +171,8 @@ bumpFragmentProgram =
     
     'vec4 finalColor = lightingEnabled?' + #13#10 +
     '  diffuseTex * gl_FrontMaterial.ambient +' + #13#10 +
-    '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum * shadow +' + #13#10 +
-    '  gl_FrontMaterial.specular * specularSum * shadow : diffuseTex * shadow;' + #13#10 +
+    '  diffuseTex * gl_FrontMaterial.diffuse * diffuseSum +' + #13#10 +
+    '  gl_FrontMaterial.specular * specularSum : diffuseTex;' + #13#10 +
     
     'gl_FragColor = mix(gl_Fog.color, finalColor, fogFactor);' + #13#10 +
     'gl_FragColor.a = mix(1.0, diffuseTex.a, fogFactor);' + #13#10 +

@@ -38,15 +38,14 @@ begin
   OnCustomPerspective := ApplyShadowProjection;
   CameraStyle := csCustom;
   FProjectionSize := 5.0;
-  FZNear := -1000.0;
-  FZFar := 1000.0;
+  FZNear := -100.0;
+  FZFar := 100.0;
 end;
 
 procedure TGLShadowCamera.ApplyShadowProjection(const viewport: TRectangle; width, height: Integer; DPI: Integer; var viewPortRadius: Single);
 var
   mat: TGLMatrix;
 begin
-  //viewPortRadius := FZFar;
   mat := CreateOrthoMatrix(-FProjectionSize, FProjectionSize, -FProjectionSize, FProjectionSize, FZNear, FZFar);
   with CurrentGLContext.PipelineTransformation do
       SetProjectionMatrix(mat);

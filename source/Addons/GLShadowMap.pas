@@ -13,7 +13,8 @@ uses
   GLS.SceneViewer,
   GLS.Scene,
   GLS.Context,
-  GLShadowCamera;
+  GLShadowCamera,
+  GLFBORendererEx;
 
 type
 
@@ -23,15 +24,15 @@ type
     protected
         { Protected Declarations }
         FShadowMatrix: TMatrix4f;
-        FFBO: TGLFBORenderer;
+        FFBO: TGLFBORendererEx;
         FViewer: TGLSceneViewer;
         FShadowCamera: TGLShadowCamera;
     public
         { Public Declarations }
-        constructor Create(AOwner: TComponent; fbo: TGLFBORenderer; viewer: TGLSceneViewer; camera: TGLShadowCamera) overload;
+        constructor Create(AOwner: TComponent; fbo: TGLFBORendererEx; viewer: TGLSceneViewer; camera: TGLShadowCamera) overload;
         destructor Destroy; override;
         property ShadowMatrix: TMatrix4f read FShadowMatrix;
-        property FBO: TGLFBORenderer read FFBO write FFBO;
+        property FBO: TGLFBORendererEx read FFBO write FFBO;
         property Viewer: TGLSceneViewer read FViewer write FViewer;
         property ShadowCamera: TGLShadowCamera read FShadowCamera write FShadowCamera;
         procedure Update;
@@ -39,7 +40,7 @@ type
 
 implementation
 
-constructor TGLShadowMap.Create(AOwner: TComponent; fbo: TGLFBORenderer; viewer: TGLSceneViewer; camera: TGLShadowCamera);
+constructor TGLShadowMap.Create(AOwner: TComponent; fbo: TGLFBORendererEx; viewer: TGLSceneViewer; camera: TGLShadowCamera);
 begin
   inherited Create(AOwner);
   FShadowMatrix := IdentityHmgMatrix;
@@ -98,16 +99,6 @@ begin
   FShadowMatrix := MatrixMultiply(FShadowMatrix, FShadowProjectionMatrix);
   FBiasMatrix := CreateScaleAndTranslationMatrix(VectorMake(0.5, 0.5, 0.5), VectorMake(0.5, 0.5, 0.5));
   FShadowMatrix := MatrixMultiply(FShadowMatrix, FBiasMatrix);
-
-  // push geometry back a bit, prevents false self-shadowing
-  {
-  with rci.GLStates do
-  begin
-    Enable(stPolygonOffsetFill);
-    PolygonOffsetFactor := 2;
-    PolygonOffsetUnits := 2;
-  end;
-  }
 end;
 
 end.

@@ -131,6 +131,7 @@ uses
   GLLightFx,
   GLShadowMap,
   GLShadowCamera,
+  GLFBORendererEx,
   Hashes;
 
 type
