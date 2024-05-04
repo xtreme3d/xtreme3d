@@ -50,8 +50,8 @@ bumpFragmentProgram =
   '{' + #13#10 +
     'vec2 texelSize = 1.0 / shadowMapSize;' + #13#10 +
     'vec2 v = offset * texelSize * coord.w;' + #13#10 +
-    'vec4 coordNew = vec4(coord.x + v.x, coord.y + v.y, coord.z - 0.005, coord.w);' + #13#10 +
-    'float shadow = shadow2DProj(depths, coordNew).r;' + #13#10 +
+    'vec4 coordNew = vec4(coord.x + v.x, coord.y + v.y, coord.z, coord.w);' + #13#10 +
+    'float shadow = shadow2D(depths, coordNew.xyz / coordNew.w).r;' + #13#10 +
     'return shadow;' + #13#10 +
   '}' + #13#10 +
   

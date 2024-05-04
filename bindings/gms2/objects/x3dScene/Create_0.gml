@@ -49,16 +49,15 @@ MaterialCreate("fboShadowDepth", "");
 MaterialGenTexture("fboShadowDepth", shadowMapSize, shadowMapSize);
 MaterialSetOptions("fboShadowDepth", true, true);
 MaterialSetTextureFormat("fboShadowDepth", tfExtended);
-//MaterialSetTextureFormatEx("fboShadowDepth", 73); //tfDEPTH24_STENCIL8
-MaterialSetTextureFormatEx("fboShadowDepth", 5); //tfDEPTH_COMPONENT24
-MaterialSetTextureWrap("fboShadowDepth", false);
+MaterialSetTextureFormatEx("fboShadowDepth", tfDEPTH24_STENCIL8);
+MaterialSetTextureWrap("fboShadowDepth", twNone);
 MaterialSetTextureFilter("fboShadowDepth", miLinear, maLinear);
 MaterialSetTextureMode("fboShadowDepth", tmReplace);
-MaterialSetTextureCompareMode("fboShadowDepth", 1); //tcmCompareRtoTexture
+MaterialSetTextureCompareMode("fboShadowDepth", tcmCompareRtoTexture);
 
 shadowCamera = ShadowCameraCreate(global.scene);
 ObjectPitch(shadowCamera, -45);
-ObjectSetPosition(shadowCamera, 0, 5, 5);
+ObjectSetPosition(shadowCamera, 0, 2, 2);
 ObjectShowAxes(shadowCamera, true);
 
 shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
@@ -100,12 +99,12 @@ BumpShaderSetNormalTexture(bumpShader, "");
 BumpShaderSetMaxLights(bumpShader, 1);
 GLSLShaderForceDisableStencilTest(bumpShader, true);
 BumpShaderSetShadowMap(bumpShader, shadowMap);
-BumpShaderSetShadowBlurRadius(bumpShader, 2);
+BumpShaderSetShadowBlurRadius(bumpShader, 1);
 
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
 TextureExLoad(MaterialAddTextureEx("mStone", 1), "textures/stone-normal.png");
-MaterialSetAmbientColor("mStone", c_black, 1);
+MaterialSetAmbientColor("mStone", c_gray, 1);
 MaterialSetDiffuseColor("mStone", c_white, 1);
 MaterialSetSpecularColor("mStone", c_white, 1);
 MaterialSetShininess("mStone", 8);
@@ -129,7 +128,7 @@ ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
-MaterialSetAmbientColor("mHellknight", c_black, 1); 
+MaterialSetAmbientColor("mHellknight", c_gray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_white, 1); 
 MaterialSetShininess("mHellknight", 8);
