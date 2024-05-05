@@ -542,6 +542,15 @@ begin
   result:=1;
 end;
 
+function MaterialSetTextureBorderColor(mtrl: PAnsiChar; col: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.BorderColor.AsWinColor := TColor(Trunc(col));
+  result := 1;
+end;
+
 function MaterialGenTexture(mtrl: PAnsiChar; w, h: real): real; cdecl;
 var
   mat:TGLLibMaterial;

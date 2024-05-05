@@ -610,6 +610,7 @@ function dll_init(dll) {
 	global._MaterialSetTextureWrapS = external_define(dll, "MaterialSetTextureWrapS", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetTextureWrapT = external_define(dll, "MaterialSetTextureWrapT", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetTextureWrapR = external_define(dll, "MaterialSetTextureWrapR", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureBorderColor = external_define(dll, "MaterialSetTextureBorderColor", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGenTexture = external_define(dll, "MaterialGenTexture", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialSetTexture = external_define(dll, "MaterialSetTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialGetTextureWidth = external_define(dll, "MaterialGetTextureWidth", dll_cdecl, ty_real, 1, ty_string);
@@ -2795,6 +2796,10 @@ function MaterialSetTextureWrapT(aMtrl, aWrap) {
 
 function MaterialSetTextureWrapR(aMtrl, aWrap) {
 	return external_call(global._MaterialSetTextureWrapR, aMtrl, aWrap);
+}
+
+function MaterialSetTextureBorderColor(aMtrl, aColor) {
+	return external_call(global._MaterialSetTextureBorderColor, aMtrl, aColor);
 }
 
 function MaterialGenTexture(aMtrl, aW, aH) {

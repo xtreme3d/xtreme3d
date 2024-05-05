@@ -727,6 +727,7 @@ exports
     MaterialSetFilteringQuality,
     MaterialSetShader, MaterialSaveTexture, MaterialSetOptions,
     MaterialSetTextureWrap, MaterialSetTextureWrapS, MaterialSetTextureWrapT, MaterialSetTextureWrapR,
+    MaterialSetTextureBorderColor,
     MaterialGenTexture, MaterialSetTexture,
     MaterialGetTextureWidth, MaterialGetTextureHeight, MaterialLoadTexture,
     MaterialNoiseCreate, MaterialNoiseSetDimensions, MaterialNoiseAnimate,
