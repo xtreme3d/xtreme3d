@@ -430,12 +430,12 @@ begin
   result:=1;
 end;
 
-function MaterialSetTextureFormatEx(mtrl: PAnsiChar; tf_ex: real): real; cdecl;
+function MaterialSetTextureFormatEx(mtrl: PAnsiChar; tfex: real): real; cdecl;
 var
   mat: TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  mat.Material.Texture.TextureFormatEx := TGLInternalFormat(Ord(Trunc(tf_ex)));
+  mat.Material.Texture.TextureFormatEx := TGLInternalFormat(Ord(Trunc(tfex)));
 end;
 
 function MaterialSetTextureCompression(mtrl: PAnsiChar; tc: real): real; cdecl;
@@ -511,10 +511,34 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if wrap = 0 then
-    mat.Material.Texture.TextureWrap := twNone
-  else
-    mat.Material.Texture.TextureWrap := twBoth;
+  mat.Material.Texture.TextureWrap := TGLTextureWrap(Trunc(wrap));
+  result:=1;
+end;
+
+function MaterialSetTextureWrapS(mtrl: PAnsiChar; wrap: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.TextureWrapS := TGLSeparateTextureWrap(Trunc(wrap));
+  result:=1;
+end;
+
+function MaterialSetTextureWrapT(mtrl: PAnsiChar; wrap: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.TextureWrapT := TGLSeparateTextureWrap(Trunc(wrap));
+  result:=1;
+end;
+
+function MaterialSetTextureWrapR(mtrl: PAnsiChar; wrap: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.TextureWrapR := TGLSeparateTextureWrap(Trunc(wrap));
   result:=1;
 end;
 
@@ -819,3 +843,5 @@ begin
     mat.Material.Texture.TextureCompareMode := tcmCompareRtoTexture;
   result:=1;
 end;
+
+

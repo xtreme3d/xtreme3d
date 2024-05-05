@@ -51,6 +51,10 @@ MaterialSetOptions("fboShadowDepth", true, true);
 MaterialSetTextureFormat("fboShadowDepth", tfExtended);
 MaterialSetTextureFormatEx("fboShadowDepth", tfDEPTH24_STENCIL8);
 MaterialSetTextureWrap("fboShadowDepth", twNone);
+//MaterialSetTextureWrapS("fboShadowDepth", twClampToBorder);
+//MaterialSetTextureWrapT("fboShadowDepth", twClampToBorder);
+//MaterialSetTextureWrapR("fboShadowDepth", twClampToBorder);
+//MaterialSetTextureBorderColor("fboShadowDepth", cWhite);
 MaterialSetTextureFilter("fboShadowDepth", miLinear, maLinear);
 MaterialSetTextureMode("fboShadowDepth", tmReplace);
 MaterialSetTextureCompareMode("fboShadowDepth", tcmCompareRtoTexture);
@@ -69,7 +73,7 @@ FBOSetColorTextureName(shadowFbo, "fboShadowColor");
 FBOSetDepthTextureName(shadowFbo, "fboShadowDepth");
 FBOSetTargetVisibility(shadowFbo, 0);
 FBOSetClearOptions(shadowFbo, true, true, true, true);
-FBOSetStencilPrecision(shadowFbo, 3); //sp8bits
+//FBOSetStencilPrecision(shadowFbo, sp8bits);
 
 shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
 

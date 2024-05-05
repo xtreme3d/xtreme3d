@@ -57,11 +57,6 @@ function dll_init(dll) {
 	// Additional constants: ViewerSetAntiAliasing
 	global._ViewerSetAntiAliasing = external_define(dll, "ViewerSetAntiAliasing", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	// Milestone II functions:
-	//global._ViewerGetGLSLSupported = external_define(dll, "ViewerGetGLSLSupported", dll_cdecl, ty_real, 1, ty_real);
-	//global._ViewerGetFBOSupported = external_define(dll, "ViewerGetFBOSupported", dll_cdecl, ty_real, 1, ty_real);
-	//global._ViewerGetVBOSupported = external_define(dll, "ViewerGetVBOSupported", dll_cdecl, ty_real, 1, ty_real);
-	//global._ViewerSetAutoRender = external_define(dll, "ViewerSetAutoRender", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._ViewerSetOverrideMaterial = external_define(dll, "ViewerSetOverrideMaterial", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerIsOpenGLExtensionSupported = external_define(dll, "ViewerIsOpenGLExtensionSupported", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -612,6 +607,9 @@ function dll_init(dll) {
 	global._MaterialSaveTexture = external_define(dll, "MaterialSaveTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialSetOptions = external_define(dll, "MaterialSetOptions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialSetTextureWrap = external_define(dll, "MaterialSetTextureWrap", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureWrapS = external_define(dll, "MaterialSetTextureWrapS", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureWrapT = external_define(dll, "MaterialSetTextureWrapT", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureWrapR = external_define(dll, "MaterialSetTextureWrapR", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGenTexture = external_define(dll, "MaterialGenTexture", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialSetTexture = external_define(dll, "MaterialSetTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialGetTextureWidth = external_define(dll, "MaterialGetTextureWidth", dll_cdecl, ty_real, 1, ty_string);
@@ -2785,6 +2783,18 @@ function MaterialSetOptions(aMtrl, aOp1, aOp2) {
 
 function MaterialSetTextureWrap(aMtrl, aWrap) {
 	return external_call(global._MaterialSetTextureWrap, aMtrl, aWrap);
+}
+
+function MaterialSetTextureWrapS(aMtrl, aWrap) {
+	return external_call(global._MaterialSetTextureWrapS, aMtrl, aWrap);
+}
+
+function MaterialSetTextureWrapT(aMtrl, aWrap) {
+	return external_call(global._MaterialSetTextureWrapT, aMtrl, aWrap);
+}
+
+function MaterialSetTextureWrapR(aMtrl, aWrap) {
+	return external_call(global._MaterialSetTextureWrapR, aMtrl, aWrap);
 }
 
 function MaterialGenTexture(aMtrl, aW, aH) {
@@ -5565,3 +5575,9 @@ function PtrToReal(p) {
 #macro aarMorph 0
 #macro aarSkeleton 1
 #macro aarNone 2
+
+#macro spDefault 0
+#macro sp1bit 1
+#macro sp4bits 2
+#macro sp8bits 3
+#macro sp16bits 4

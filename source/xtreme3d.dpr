@@ -322,7 +322,6 @@ procedure GenMeshTangents(mesh: TGLMeshObject);
 var
    i: Integer;
    v,t: array[0..2] of TAffineVector;
-
    x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
    sDir, tDir: TAffineVector;
    sTan, tTan: TGLAffineVectorList;
@@ -331,12 +330,6 @@ var
    r, oneOverR: Single;
    n, ta: TAffineVector;
    tang: TAffineVector;
-
-   //tangent,
-   //binormal   : array[0..2] of TGLVector;
-   //vt,tt      : TAffineVector;
-   //interp,dot : Single;
-
 begin
    mesh.Tangents.Clear;
    mesh.Binormals.Clear;
@@ -733,7 +726,8 @@ exports
     MaterialSetTextureCompression, MaterialTextureRequiredMemory,
     MaterialSetFilteringQuality,
     MaterialSetShader, MaterialSaveTexture, MaterialSetOptions,
-    MaterialSetTextureWrap, MaterialGenTexture, MaterialSetTexture,
+    MaterialSetTextureWrap, MaterialSetTextureWrapS, MaterialSetTextureWrapT, MaterialSetTextureWrapR,
+    MaterialGenTexture, MaterialSetTexture,
     MaterialGetTextureWidth, MaterialGetTextureHeight, MaterialLoadTexture,
     MaterialNoiseCreate, MaterialNoiseSetDimensions, MaterialNoiseAnimate,
     MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
