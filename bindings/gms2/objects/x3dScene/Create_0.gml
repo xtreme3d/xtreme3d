@@ -77,8 +77,8 @@ FBOSetClearOptions(shadowFbo, true, true, true, true);
 
 shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
 
-shadowMapSprite = HUDSpriteCreate("fboShadowDepth", 256, 256, global.front); 
-ObjectSetPosition(shadowMapSprite, 128, 128, 0);
+//shadowMapSprite = HUDSpriteCreate("fboShadowDepth", 256, 256, global.front); 
+//ObjectSetPosition(shadowMapSprite, 128, 128, 0);
 
 MaterialLibraryActivate(matlib);
 
@@ -155,6 +155,11 @@ ObjectSetMaterial(rect, "mWilber");
 circle = HUDShapeCircleCreate(50, 32, 0, 360, global.front);
 ObjectSetPosition(circle, 500, 50, 0);
 */
+
+ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
+text = HUDTextCreate(ftfont, "Xtreme3D 4.0", global.front);
+//HUDTextSetColor(text, c_yellow, 0.7);
+//ObjectSetPosition(text, 20, 20, 0);
 
 /*
 fboWidth = window_get_width();

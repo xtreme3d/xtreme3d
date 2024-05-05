@@ -13,7 +13,6 @@ uses
   Winapi.OpenGL,
   System.Classes,
   Vcl.StdCtrls,
-
   GLS.OpenGLTokens,
   GLS.Scene,
   GLS.VectorTypes,

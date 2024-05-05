@@ -223,13 +223,12 @@ function dll_init(dll) {
 	global._SpaceTextSetExtrusion = external_define(dll, "SpaceTextSetExtrusion", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpaceTextSetFont = external_define(dll, "SpaceTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpaceTextSetText = external_define(dll, "SpaceTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	/*
+
 	// Milestone II functions:
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._TTFontSetEncoding = external_define(dll, "TTFontSetEncoding", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._TTFontLoadCodePage = external_define(dll, "TTFontLoadCodePage", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	*/
 	
 	// Sprite
 	global._HUDSpriteCreate = external_define(dll, "HUDSpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);

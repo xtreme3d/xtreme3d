@@ -44,7 +44,7 @@ begin
   shp.Point2Y := y2;
   shp.SetSize(1, 1);
   shp.ShapeType := hstLine;
-  result := Integer(shp);
+  result := ObjToReal(shp);
 end;
 
 function HUDShapeMeshCreate(parent: real): real; cdecl;
@@ -57,7 +57,7 @@ begin
     shp := TGLHUDShape.CreateAsChild(scene.Objects);
   shp.SetSize(1, 1);
   shp.ShapeType := hstMesh;
-  result := Integer(shp);
+  result := ObjToReal(shp);
 end;
 
 function HUDShapeSetRotation(shape, angle: real): real; cdecl;

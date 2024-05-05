@@ -96,6 +96,16 @@ type
   TCharInfo = record
     l, t, w: word;
   end;
+  
+  TGLFont = class(TGLUpdateAbleComponent)
+  public
+    procedure RegisterUser(anObject: TGLBaseSceneObject); virtual; abstract;
+    procedure UnRegisterUser(anObject: TGLBaseSceneObject); virtual; abstract;
+    procedure RenderString(var ARci: TGLRenderContextInfo;
+                           const aText: UnicodeString; aAlignment: TAlignment;
+                           aLayout: TTextLayout; const aColor: TGLColorVector;
+                           aPosition: PGLVector = nil; aReverseY: boolean = False); virtual; abstract;
+  end;
 
   (* Provides access to individual characters in a BitmapFont.
     Only fixed-width bitmap fonts are supported, the characters are enumerated
@@ -106,7 +116,7 @@ type
     dimensions should be close to a power of two, and have at least 1 pixel
     spacing between characters (horizontally and vertically) to avoid artefacts
     when rendering with linear filtering. *)
-  TGLCustomBitmapFont = class(TGLUpdateAbleComponent)
+  TGLCustomBitmapFont = class(TGLFont)
   private
     FRanges: TGLBitmapFontRanges;
     FGlyphs: TPicture;

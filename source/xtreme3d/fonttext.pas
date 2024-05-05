@@ -40,40 +40,42 @@ end;
 
 function HUDTextCreate(font: real; txt: PAnsiChar; parent: real): real; cdecl;
 var
-  GLHUDText1: TGLHUDText;
+  GLHUDText1: TGLHUDText2;
+  GLFont: TGLFont;
 begin
   if not (parent=0) then
-    GLHUDText1:=TGLHUDText.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
+    GLHUDText1:=TGLHUDText2.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
-    GLHUDText1:=TGLHUDText.CreateAsChild(scene.Objects);
-  GLHUDText1.BitmapFont := TGLCustomBitmapFont(RealToPtr(font));
-  GLHUDText1.Text:=StrConv(txt);
+    GLHUDText1:=TGLHUDText2.CreateAsChild(scene.Objects);
+  GLFont := TGLFont(RealToPtr(font));
+  GLHUDText1.Font := GLFont;
+  GLHUDText1.Text := StrConv(txt);
   result:=ObjToReal(GLHUDText1);
 end;
 
 function HUDTextSetRotation(text,angle: real): real; cdecl;
 var
-  GLHUDText1: TGLHUDText;
+  GLHUDText1: TGLHUDText2;
 begin
-  GLHUDText1:=TGLHUDText(RealToPtr(text));
+  GLHUDText1:=TGLHUDText2(RealToPtr(text));
   GLHUDText1.Rotation:=angle;
   result:=1;
 end;
 
 function HUDTextSetFont(text,font: real): real; cdecl;
 var
-  GLHUDText1: TGLHUDText;
+  GLHUDText1: TGLHUDText2;
 begin
-  GLHUDText1:=TGLHUDText(RealToPtr(text));
-  GLHUDText1.BitmapFont:=TGLCustomBitmapFont(RealToPtr(font));
+  GLHUDText1:=TGLHUDText2(RealToPtr(text));
+  GLHUDText1.Font:=TGLFont(RealToPtr(font));
   result:=1;
 end;
 
 function HUDTextSetColor(text,color,alph: real): real; cdecl;
 var
-  GLHUDText1: TGLHUDText;
+  GLHUDText1: TGLHUDText2;
 begin
-  GLHUDText1:=TGLHUDText(RealToPtr(text));
+  GLHUDText1:=TGLHUDText2(RealToPtr(text));
   GLHUDText1.ModulateColor.AsWinColor:=Trunc(color);
   GLHUDText1.ModulateColor.Alpha:=alph;
   result:=1;
@@ -81,9 +83,9 @@ end;
 
 function HUDTextSetText(text: real; txt: PAnsiChar): real; cdecl;
 var
-  GLHUDText1: TGLHUDText;
+  GLHUDText1: TGLHUDText2;
 begin
-  GLHUDText1:=TGLHUDText(RealToPtr(text));
+  GLHUDText1:=TGLHUDText2(RealToPtr(text));
   GLHUDText1.Text:=StrConv(txt);
   result:=1;
 end;
@@ -172,21 +174,20 @@ begin
   result:=1;
 end;
 
-{
-function TTFontCreate(filename: pchar; height: real): real; cdecl;
+function TTFontCreate(filename: PAnsiChar; height: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
   ftfont := TGLFreetypeFont.Create(scene);
-  ftfont.LoadFont(String(filename), trunc64(height));
-  result := Integer(ftfont);
+  ftfont.LoadFont(StrConv(filename), Trunc(height));
+  result := ObjToReal(ftfont);
 end;
 
 function TTFontSetLineGap(font, gap: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
-  ftfont := TGLFreetypeFont(trunc64(font));
+  ftfont := TGLFreetypeFont(RealToPtr(font));
   ftfont.LineGap := gap;
   result := 1.0
 end;
@@ -195,18 +196,18 @@ function TTFontSetEncoding(font, te: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
-  ftfont := TGLFreetypeFont(trunc64(font));
+  ftfont := TGLFreetypeFont(RealToPtr(font));
   if te = 0.0 then ftfont.Encoding := teUTF8
   else if te = 1.0 then ftfont.Encoding := teWindows;
   result := 1.0;
 end;
 
-function TTFontLoadCodePage(font: real; filename: pchar): real; cdecl;
+function TTFontLoadCodePage(font: real; filename: PAnsiChar): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
-  ftfont := TGLFreetypeFont(trunc64(font));
-  ftfont.LoadCodePageMapping(String(filename));
+  ftfont := TGLFreetypeFont(RealToPtr(font));
+  ftfont.LoadCodePageMapping(StrConv(filename));
   result := 1.0;
 end;
-}
+

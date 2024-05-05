@@ -29,6 +29,10 @@
   "IncludedFiles": [
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"cloth.3ds","CopyToMask":-1,"filePath":"datafiles/data/cloth",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"tartan.jpg","CopyToMask":-1,"filePath":"datafiles/data/cloth",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"DroidSans-License.txt","CopyToMask":-1,"filePath":"datafiles/data/fonts",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"DroidSans.ttf","CopyToMask":-1,"filePath":"datafiles/data/fonts",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"NOTOSANS-LICENSE.txt","CopyToMask":-1,"filePath":"datafiles/data/fonts",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"NotoSans-Regular.ttf","CopyToMask":-1,"filePath":"datafiles/data/fonts",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"attack.md5anim","CopyToMask":-1,"filePath":"datafiles/data/hellknight",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"attack2.md5anim","CopyToMask":-1,"filePath":"datafiles/data/hellknight",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"diffuse.png","CopyToMask":-1,"filePath":"datafiles/data/hellknight",},
@@ -47,6 +51,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"trinityskin3.bmp","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"wilber.png","CopyToMask":-1,"filePath":"datafiles/data",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"freetype.dll","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"fxaa-fp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"fxaa-vp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
