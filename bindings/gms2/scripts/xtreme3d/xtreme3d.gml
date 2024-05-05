@@ -255,7 +255,6 @@ function dll_init(dll) {
 	*/
 	
 	// HUDShape
-	/*
 	// Milestone II functions:
 	global._HUDShapeRectangleCreate = external_define(dll, "HUDShapeRectangleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._HUDShapeCircleCreate = external_define(dll, "HUDShapeCircleCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -276,7 +275,6 @@ function dll_init(dll) {
 	global._HUDShapeMeshAddTriangle = external_define(dll, "HUDShapeMeshAddTriangle", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._HUDShapeMeshSetVertex = external_define(dll, "HUDShapeMeshSetVertex", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._HUDShapeMeshSetTexCoord = external_define(dll, "HUDShapeMeshSetTexCoord", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	*/
 	
 	// Primitives
 	global._CubeCreate = external_define(dll, "CubeCreate", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);

@@ -46,6 +46,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"TRINITYrage.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"trinityskin3.bmp","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"wilber.png","CopyToMask":-1,"filePath":"datafiles/data",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"fxaa-fp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"fxaa-vp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders",},

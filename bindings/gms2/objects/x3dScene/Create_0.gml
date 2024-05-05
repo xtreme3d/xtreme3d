@@ -145,6 +145,18 @@ MaterialSetShader("mHellknight", bumpShader);
 MaterialLibraryActivate(matlib);
 
 /*
+rect = HUDShapeRectangleCreate(100, 100, global.front);
+ObjectSetPosition(rect, 500, 50, 0);
+MaterialCreate("mWilber", "data/wilber.png");
+ObjectSetMaterial(rect, "mWilber");
+*/
+
+/*
+circle = HUDShapeCircleCreate(50, 32, 0, 360, global.front);
+ObjectSetPosition(circle, 500, 50, 0);
+*/
+
+/*
 fboWidth = window_get_width();
 fboHeight = window_get_height();
 fboAspect = 1/1; //16/9 if using square texture

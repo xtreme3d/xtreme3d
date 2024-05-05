@@ -132,6 +132,7 @@ uses
   GLShadowMap,
   GLShadowCamera,
   GLFBORendererEx,
+  GLHUDShapes,
   Hashes;
 
 type
@@ -458,7 +459,7 @@ end;
 {$I 'xtreme3d/lightfx'}
 {$I 'xtreme3d/fonttext'}
 {$I 'xtreme3d/sprite'}
-//{$I 'xtreme3d/hudshapes'}
+{$I 'xtreme3d/hudshapes'}
 {$I 'xtreme3d/primitives'}
 {$I 'xtreme3d/actor'}
 {$I 'xtreme3d/freeform'}
@@ -563,13 +564,13 @@ exports
     //HUDSpriteCreateEx, SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV, SpriteSetOrigin,
 
     // HUDShape
-    //HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
-    //HUDShapeSetRotation, HUDShapeSetColor,
-    //HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
-    //HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
-    //HUDShapeLineSetPoints, HUDShapeLineSetWidth,
-    //HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
-    //HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
+    HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
+    HUDShapeSetRotation, HUDShapeSetColor,
+    HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
+    HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
+    HUDShapeLineSetPoints, HUDShapeLineSetWidth,
+    HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
+    HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
 
     // Primitives
     CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
