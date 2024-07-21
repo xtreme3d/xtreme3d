@@ -40,6 +40,7 @@ interface
 {$I jedi.inc}
 
 uses
+  supertypes,
   {$IFDEF FPC}
   ctypes,
   {$ENDIF}

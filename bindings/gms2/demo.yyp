@@ -47,7 +47,6 @@
     {"$GMIncludedFile":"","%Name":"TRINITYrage.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"TRINITYrage.smd","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"trinityskin3.bmp","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"trinityskin3.bmp","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"walk.smd","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"freetype.dll","CopyToMask":-1,"filePath":"datafiles","name":"freetype.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles","name":"ode64s.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"SDL2_ttf.dll","CopyToMask":-1,"filePath":"datafiles","name":"SDL2_ttf.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"SDL2.dll","CopyToMask":-1,"filePath":"datafiles","name":"SDL2.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

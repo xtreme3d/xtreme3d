@@ -62,7 +62,7 @@ MaterialSetTextureCompareMode("fboShadowDepth", tcmCompareRtoTexture);
 shadowCamera = ShadowCameraCreate(global.scene);
 ObjectPitch(shadowCamera, -45);
 ObjectSetPosition(shadowCamera, 0, 2, 2);
-ObjectShowAxes(shadowCamera, true);
+//ObjectShowAxes(shadowCamera, true);
 
 shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
 FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);

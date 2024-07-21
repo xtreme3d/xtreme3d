@@ -84,54 +84,6 @@ begin
   result := rval;
 end;
 
-function utf8DecodeNext(s: String; var bytePos: Integer): Integer;
-var
-  c: Integer; // the first byte of the character
-  c1, c2, c3: Integer;
-begin
-  c := Integer(s[bytePos]) and $FF;
-  bytePos := bytePos + 1;
-
-  // Zero continuation (0 to 127)
-  if (c and $80) = 0 then
-  begin
-    result := c;
-    Exit;
-  end;
-  // One continuation (128 to 2047)
-  if (c and $E0) = $C0 then
-  begin
-    c1 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    result := ((c and $1F) shl 6) or c1;
-    Exit;
-  end
-  // Two continuation (2048 to 55295 and 57344 to 65535)
-  else if (c and $F0) = $E0 then
-  begin
-    c1 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    c2 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    result := ((c and $0F) shl 12) or (c1 shl 6) or c2;
-    Exit;
-  end
-  // Three continuation (65536 to 1114111)
-  else if (c and $F8) = $F0 then
-  begin
-    c1 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    c2 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    c3 := (Integer(s[bytePos]) and $FF) and $3F;
-    bytePos := bytePos + 1;
-    result := (((c and $0F) shl 18) or (c1 shl 12) or (c2 shl 6) or c3);
-    Exit;
-  end;
-
-  result := 0;
-end;
-
 constructor TFreetypeCharacter.Create;
 begin
   CodePoint := 0;
