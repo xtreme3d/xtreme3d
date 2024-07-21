@@ -317,7 +317,9 @@ begin
       SetBlendFunc(bfOne, bfOneMinusSrcAlpha);
     end;
 
-   gl.TexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+   gl.TexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+   //gl.TexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, @aColor); // TODO
+   gl.Color4fv(@aColor);
 
    i := 0;
    len := Length(aText);

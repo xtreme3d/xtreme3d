@@ -162,8 +162,8 @@ ObjectSetPosition(circle, 500, 50, 0);
 //ObjectSetPosition(text, 20, 20, 0);
 
 ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
-text = HUDTextCreate(ftfont, "Hello! Текст\rСтрока", global.front);
-//HUDTextSetColor(text, c_yellow, 0.7);
+text = HUDTextCreate(ftfont, "Hello World!\rПривет, мир!", global.front);
+HUDTextSetColor(text, c_white, 1.0);
 ObjectSetPosition(text, 20, 20, 0);
 
 /*

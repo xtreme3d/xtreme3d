@@ -66,8 +66,7 @@ begin
     gl.LoadMatrixf(@TGLSceneBuffer(rci.buffer).BaseProjectionMatrix);
     f := rci.renderDPI / 96;
     gl.Scalef(2 / rci.viewPortSize.cx, 2 / rci.viewPortSize.cy, 1);
-    gl.Translatef(X * f - rci.viewPortSize.cx / 2, rci.viewPortSize.cy / 2 -
-      Y * f, Z);
+    gl.Translatef(X * f - rci.viewPortSize.cx / 2, rci.viewPortSize.cy / 2 - Y * f, Z);
     if Rotation <> 0 then
       gl.Rotatef(Rotation, 0, 0, 1);
     gl.Scalef(Scale.DirectX * f, Scale.DirectY * f, 1);
