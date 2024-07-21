@@ -13,11 +13,13 @@ uses
   GLS.VectorGeometry,
   GLS.Scene,
   GLS.Texture,
+  GLS.TextureFormat,
   GLS.Utils,
   GLS.Color,
   GLS.ApplicationFileIO,
   GLS.BitmapFont,
   GLS.RenderContextInfo,
+  GLS.State,
   GLS.Context,
   supertypes,
   sdl2,
@@ -145,7 +147,7 @@ begin
   inherited Create(AOwner);
   FCharHeight := 12;
   FWhitespaceWidthEm := 0.25;
-  LineGap := 2.0;
+  LineGap := 1.2;
   FCharacters := TSimpleObjectDictionary.Create();
   FIgnore := False;
 end;
@@ -218,11 +220,11 @@ begin
    psurface := TTF_RenderGlyph_Blended(FFont, code, color);
 
    if psurface <> Nil then begin
-     charWidth := nextPowerOfTwo(psurface.w); //maxx - minx   //psurface.w;
-     charHeight := nextPowerOfTwo(psurface.h); //maxy - miny   // psurface.h;
+     charWidth := nextPowerOfTwo(psurface.w);
+     charHeight := nextPowerOfTwo(psurface.h);
 
-     character.Width := psurface.w;  //maxx - minx;
-     character.Height := psurface.h; //maxy - miny;
+     character.Width := psurface.w;
+     character.Height := psurface.h;
 
      pglyphSurface := SDL_CreateRGBSurface(0, charWidth, charHeight, 32, $000000ff, $0000ff00, $00ff0000, $ff000000);
      SDL_BlitSurface(psurface, Nil, pglyphSurface, Nil);
@@ -307,25 +309,22 @@ begin
 
    whitespaceWidth := FCharHeight * FWhitespaceWidthEm;
 
-   gl.Color4fv(@aColor);
-   gl.Disable(GL_LIGHTING);
-   gl.ActiveTexture(GL_TEXTURE0);
-   gl.Enable(GL_TEXTURE_2D);
-   gl.Enable(GL_BLEND);
-   gl.BlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-   gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-   gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-   //gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-   //gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+   with ARci.GLStates do
+    begin
+      ActiveTextureEnabled[ttTexture2D] := true;
+      Disable(stLighting);
+      Enable(stBlend);
+      SetBlendFunc(bfOne, bfOneMinusSrcAlpha);
+    end;
+
    gl.TexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-   gl.Disable(GL_TEXTURE_GEN_S);
-   gl.Disable(GL_TEXTURE_GEN_T);
 
    i := 0;
    len := Length(aText);
    while i < len+1 do
    begin
-     c := utf8DecodeNext(aText, i);
+     c := Integer(WideChar(aText[i]));
+     Inc(i);
 
      if not FCharacters.Contains(c) then
        LoadCharacter(c);
