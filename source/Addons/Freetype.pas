@@ -44,6 +44,7 @@ const
  FT_FACE_FLAG_KERNING  = 1 shl 6;
 
  FT_ENCODING_NONE : FT_Encoding = (#0 ,#0 ,#0 ,#0 );
+ FT_ENCODING_UNICODE: FT_Encoding = ('u', 'n', 'i', 'c');
 
  FT_LOAD_DEFAULT        = $0000;
  FT_LOAD_NO_HINTING     = $0002;
@@ -291,6 +292,14 @@ type
   size    : FT_Size_ptr;
   charmap : FT_CharMap_ptr;
 
+  driver: Pointer;
+  memory: Pointer;
+  stream: Pointer;
+  sizes_list: Pointer;
+  autohint: FT_Generic;
+  extensions: Pointer;
+  internal: Pointer;
+
  end;
 
  FT_Charmap = packed record
@@ -359,8 +368,10 @@ type
    FT_Init_FreeType: function(alibrary: FT_Library_ptr): FT_Error; cdecl;
    FT_New_Face: function(library_: FT_Library_ptr; filepathname: PChar; face_index: FT_Long; out aface: FT_Face_ptr): FT_Error; cdecl;
    FT_New_Memory_Face: function(library_ : FT_Library_ptr; file_base : FT_Byte_ptr; file_size , face_index : FT_Long; out aface : FT_Face_ptr ) : FT_Error; cdecl;
+   FT_Select_Charmap: function(face : FT_Face_ptr; encoding : FT_Encoding) : FT_Error; cdecl;
    FT_Set_Char_Size: function(face : FT_Face_ptr; char_width, char_height : FT_F26dot6; horz_res, vert_res : FT_UInt): FT_Error; cdecl;
    FT_Get_Char_Index: function(face : FT_Face_ptr; charcode : FT_ULong): FT_UInt; cdecl;
+   FT_Get_First_Char: function(face: FT_Face_ptr; out glyphIndex: FT_UInt): LongWord; cdecl;
    FT_Load_Glyph: function(face : FT_Face_ptr; glyph_index : FT_UInt; load_flags : FT_Int32) : FT_Error; cdecl;
    FT_Get_Glyph: function(slot: FT_GlyphSlot_ptr; out aglyph: FT_Glyph): FT_Error; cdecl;
    FT_Glyph_To_Bitmap: function(var the_glyph: FT_Glyph; render_mode: FT_Render_Mode; origin: FT_Vector_ptr; destroy: FT_Bool): FT_Error; cdecl;
@@ -385,10 +396,6 @@ type
  function  FT_Attach_File(face : FT_Face_ptr; filepathname : PChar ) : FT_Error; cdecl; external ft_lib name 'FT_Attach_File';
 
  function  FT_Done_Face(face : FT_Face_ptr ) : FT_Error; cdecl; external ft_lib name 'FT_Done_Face';
-
- function  FT_Select_Charmap(face : FT_Face_ptr; encoding : FT_Encoding ) : FT_Error; cdecl; external ft_lib name 'FT_Select_Charmap';
-
- function  FT_Render_Glyph(slot : FT_GlyphSlot_ptr; render_mode : FT_Render_Mode ) : FT_Error; cdecl; external ft_lib name 'FT_Render_Glyph';
 
  function  FT_Get_Kerning(
             face : FT_Face_ptr;
@@ -441,8 +448,10 @@ begin
     FT_Init_FreeType := GetModuleSymbol(vFreetypeHandle, 'FT_Init_FreeType');
     FT_New_Face := GetModuleSymbol(vFreetypeHandle, 'FT_New_Face');
     FT_New_Memory_Face := GetModuleSymbol(vFreetypeHandle, 'FT_New_Memory_Face');
+    FT_Select_Charmap := GetModuleSymbol(vFreetypeHandle, 'FT_Select_Charmap');
     FT_Set_Char_Size := GetModuleSymbol(vFreetypeHandle, 'FT_Set_Char_Size');
     FT_Get_Char_Index := GetModuleSymbol(vFreetypeHandle, 'FT_Get_Char_Index');
+    FT_Get_First_Char := GetModuleSymbol(vFreetypeHandle, 'FT_Get_First_Char');
     FT_Load_Glyph := GetModuleSymbol(vFreetypeHandle, 'FT_Load_Glyph');
     FT_Get_Glyph := GetModuleSymbol(vFreetypeHandle, 'FT_Get_Glyph');
     FT_Glyph_To_Bitmap := GetModuleSymbol(vFreetypeHandle, 'FT_Glyph_To_Bitmap');

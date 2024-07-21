@@ -19,7 +19,7 @@ uses
   GLS.BitmapFont,
   GLS.RenderContextInfo,
   GLS.Context,
-  Freetype,
+  rpfreetype2,
   SimpleDictionary;
 
 type
@@ -32,7 +32,7 @@ type
       CodePoint: Integer;
       Initialized: Boolean;
       TextureId: GLuint;
-      Glyph: FT_Glyph;
+      //Glyph: FT_Glyph;
       Width: Single;
       Height: Single;
       texWidth: Single;
@@ -50,7 +50,8 @@ type
     protected
       { Protected Declarations }
       FFontFilename: String;
-      FFace: FT_Face_ptr;
+      FFace: FT_Face;
+      //FFirstChar: FT_UInt;
       FCharHeight: Integer;
       FCharacters: TSimpleObjectDictionary;
       FWinEnc: array[128..255] of Integer;
@@ -74,6 +75,10 @@ type
                              aPosition: PGLVector = nil; aReverseY: boolean = False); override;
       property Encoding: TFTTextEncoding read FEncoding write FEncoding;
   end;
+
+var
+  IsFreetypeInitialized: boolean = False;
+  ftLibrary: FT_Library;
 
 implementation
 
@@ -140,7 +145,7 @@ begin
   CodePoint := 0;
   Initialized := False;
   TextureId := 0;
-  Glyph := Nil;
+  //Glyph := Nil;
   Width := 0;
   Height := 0;
   AdvanceX := 0;
@@ -358,11 +363,9 @@ begin
 
    if not IsFreetypeInitialized then
    begin
-     if not InitFreetype('freetype.dll') then
-     begin
-       result := 0;
-       Exit;
-     end;
+     LoadFreeType;
+     FT_Init_FreeType(ftLibrary);
+     IsFreetypeInitialized := true;
    end;
 
    n := 0;
@@ -397,6 +400,8 @@ begin
      end;
 
      FT_Set_Char_Size(FFace, FCharHeight shl 6, FCharHeight shl 6, 96, 96);
+     FT_Select_Charmap(FFace, FT_ENCODING_UNICODE);
+
      result := 1;
    end
    else
@@ -406,9 +411,9 @@ end;
 function TGLFreetypeFont.LoadCharacter(code: Integer): Integer;
 var
    charIndex: Integer;
-   glyph: FT_Glyph;
-   bitmapGlyph: FT_BitmapGlyph;
-   bitmap: FT_Bitmap_ptr;
+   // glyph: FT_Glyph;
+   // bitmapGlyph: FT_BitmapGlyph;
+   bitmap: FT_Bitmap;
    charWidth, charHeight: Integer;
    tex: GLuint;
    img: Array of Byte;
@@ -424,12 +429,11 @@ begin
    end;
 
    FT_Load_Glyph(FFace, charIndex, FT_LOAD_DEFAULT);
-   FT_Get_Glyph(FFace.glyph, glyph);
-   {
+   //FT_Get_Glyph(FFace.glyph, glyph);
+
    FT_Render_Glyph(FFace.glyph, FT_RENDER_MODE_NORMAL); //FT_RENDER_MODE_LCD
 
-   bitmap := @FFace.glyph.bitmap;
-
+   bitmap := FFace.glyph.bitmap;
    charWidth := nextPowerOfTwo(bitmap.width);
    charHeight := nextPowerOfTwo(bitmap.rows);
 
@@ -455,7 +459,6 @@ begin
        end;
      end;
    end;
-   }
 
    gl.Enable(GL_TEXTURE_2D);
 
@@ -466,27 +469,25 @@ begin
    gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
    gl.TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-   {
    gl.PixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
    gl.TexImage2D(GL_TEXTURE_2D,
       0, GL_RGBA, charWidth, charHeight,
       0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, @img[0]);
-   }
 
    character := TFreetypeCharacter.Create();
    character.CodePoint := code;
    character.Initialized := True;
    character.TextureId := tex;
    //character.Glyph := glyph;
-   character.Width := 0; //bitmap.width;
-   character.Height := 0; //bitmap.rows;
-   character.texWidth := 0; //charWidth;
-   character.texHeight := 0; //charHeight;
-   character.AdvanceX := 0; //FFace.glyph.advance.x shr 6;
-   character.AdvanceY := 0; //FFace.glyph.advance.y shr 6;
-   character.top := 0; //-(character.Height - FFace.glyph.bitmap_top);
-   character.left := 0; //FFace.glyph.bitmap_left;
+   character.Width := bitmap.width;
+   character.Height := bitmap.rows;
+   character.texWidth := charWidth;
+   character.texHeight := charHeight;
+   character.AdvanceX := FFace.glyph.advance.x shr 6;
+   character.AdvanceY := FFace.glyph.advance.y shr 6;
+   character.top := -(character.Height - FFace.glyph.bitmap_top);
+   character.left := FFace.glyph.bitmap_left;
 
    FCharacters.Values[code] := character;
 
@@ -531,7 +532,7 @@ begin
        end;
      end;
    end;
-   {
+
    x := 0.0;
    y := -FCharHeight;
 
@@ -582,7 +583,6 @@ begin
        end;
      end;
    end;
-   }
 end;
 
 end.

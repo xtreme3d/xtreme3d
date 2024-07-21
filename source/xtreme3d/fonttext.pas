@@ -85,8 +85,8 @@ function HUDTextSetText(text: real; txt: PAnsiChar): real; cdecl;
 var
   GLHUDText1: TGLHUDText2;
 begin
-  GLHUDText1:=TGLHUDText2(RealToPtr(text));
-  GLHUDText1.Text:=StrConv(txt);
+  GLHUDText1 := TGLHUDText2(RealToPtr(text));
+  GLHUDText1.Text := StrConv(txt);
   result:=1;
 end;
 
@@ -190,24 +190,5 @@ begin
   ftfont := TGLFreetypeFont(RealToPtr(font));
   ftfont.LineGap := gap;
   result := 1.0
-end;
-
-function TTFontSetEncoding(font, te: real): real; cdecl;
-var
-  ftfont: TGLFreetypeFont;
-begin
-  ftfont := TGLFreetypeFont(RealToPtr(font));
-  if te = 0.0 then ftfont.Encoding := teUTF8
-  else if te = 1.0 then ftfont.Encoding := teWindows;
-  result := 1.0;
-end;
-
-function TTFontLoadCodePage(font: real; filename: PAnsiChar): real; cdecl;
-var
-  ftfont: TGLFreetypeFont;
-begin
-  ftfont := TGLFreetypeFont(RealToPtr(font));
-  ftfont.LoadCodePageMapping(StrConv(filename));
-  result := 1.0;
 end;
 

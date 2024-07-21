@@ -156,10 +156,15 @@ circle = HUDShapeCircleCreate(50, 32, 0, 360, global.front);
 ObjectSetPosition(circle, 500, 50, 0);
 */
 
-ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
-text = HUDTextCreate(ftfont, "Xtreme3D 4.0", global.front);
-//HUDTextSetColor(text, c_yellow, 0.7);
+//WindowsBitmapfontAdd("data/fonts/DroidSans.ttf");
+//font = WindowsBitmapfontCreate("Arial", 16, 32, 95);
+//text = HUDTextCreate(font, "Xtreme3D 4.0", global.front);
 //ObjectSetPosition(text, 20, 20, 0);
+
+ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
+text = HUDTextCreate(ftfont, "Hello! Текст", global.front);
+//HUDTextSetColor(text, c_yellow, 0.7);
+ObjectSetPosition(text, 20, 20, 0);
 
 /*
 fboWidth = window_get_width();

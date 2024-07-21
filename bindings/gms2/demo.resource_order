@@ -1,6 +1,6 @@
 {
-  "FolderOrderSettings": [],
-  "ResourceOrderSettings": [
+  "FolderOrderSettings":[],
+  "ResourceOrderSettings":[
     {"name":"x3dScene","order":2,"path":"objects/x3dScene/x3dScene.yy",},
   ],
 }

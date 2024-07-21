@@ -1,5 +1,7 @@
 function EngineCreate: real; cdecl;
 begin
+    SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
     empty := TEmpty.Create(nil);
     scene := TGLScene.Create(nil);
     memviewer := TGLMemoryViewer.Create(nil);

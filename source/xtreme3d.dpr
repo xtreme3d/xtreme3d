@@ -133,10 +133,12 @@ uses
   GLShadowCamera,
   GLFBORendererEx,
   GLHUDShapes,
-  GLFreetypeFont,
+  //GLFreetypeFont
+  GLTTF,
   GLHUDText2,
   Hashes,
-  Freetype;
+  sdl2,
+  sdl2_ttf;
 
 type
     TEmpty = class(TComponent)
@@ -558,7 +560,7 @@ exports
     HUDTextSetRotation, HUDTextSetFont, HUDTextSetColor, HUDTextSetText,
     FlatTextCreate, FlatTextSetFont, FlatTextSetColor, FlatTextSetText,
     SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
-    TTFontCreate, TTFontSetLineGap, TTFontSetEncoding, TTFontLoadCodePage,
+    TTFontCreate, TTFontSetLineGap,
 
     // Sprite
     HUDSpriteCreate, HUDSpriteGetMouseOver, HUDSpriteXTiles, HUDSpriteYTiles,

@@ -227,8 +227,6 @@ function dll_init(dll) {
 	// Milestone II functions:
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._TTFontSetEncoding = external_define(dll, "TTFontSetEncoding", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._TTFontLoadCodePage = external_define(dll, "TTFontLoadCodePage", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	
 	// Sprite
 	global._HUDSpriteCreate = external_define(dll, "HUDSpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
@@ -1865,14 +1863,6 @@ function TTFontCreate(aFilename, aHeight) {
 
 function TTFontSetLineGap(aFont, aGap) {
 	return external_call(global._TTFontSetLineGap, aFont, aGap);
-}
-
-function TTFontSetEncoding(aFont, aTe) {
-	return external_call(global._TTFontSetEncoding, aFont, aTe);
-}
-
-function TTFontLoadCodePage(aFont, aFilename) {
-	return external_call(global._TTFontLoadCodePage, aFont, aFilename);
 }
 
 function FpsManagerCreate() {
