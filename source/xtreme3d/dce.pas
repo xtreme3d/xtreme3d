@@ -286,20 +286,16 @@ begin
   Result := dyn.Speed.v[trunc(ind)];
 end;
 
-{
 function DceDynamicSetAbsVelocity(obj, x, y, z: real): real; cdecl;
 begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed := AffineVectorMake(x, y, z);
   Result := 1;
 end;
-}
 
-{
 function DceDynamicGetAbsVelocity(obj, ind: real): real; cdecl;
 begin
-  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed[trunc64(ind)];
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed.V[trunc(ind)];
 end;
-}
 
 function DceDynamicApplyImpulse(obj, x, y, z: real): real; cdecl;
 var
@@ -311,7 +307,6 @@ begin
   Result := 1;
 end;
 
-{
 function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; cdecl;
 var
   imp: TAffineVector;
@@ -321,5 +316,4 @@ begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed := imp;
   Result := 1;
 end;
-}
 
