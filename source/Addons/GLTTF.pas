@@ -51,6 +51,7 @@ type
       { Protected Declarations }
       FFontFilename: String;
       FFont: PTTF_Font;
+      FLineWidth: Real;
       FCharHeight: Integer;
       FWhitespaceWidthEm: Real;
       FCharacters: TSimpleObjectDictionary;
@@ -98,6 +99,7 @@ constructor TGLFreetypeFont.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FCharHeight := 12;
+  FLineWidth := 0;
   FWhitespaceWidthEm := 0.25;
   LineGap := 1.2;
   FCharacters := TSimpleObjectDictionary.Create();
@@ -270,7 +272,6 @@ begin
     end;
 
    gl.TexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-   //gl.TexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, @aColor); // TODO
    gl.Color4fv(@aColor);
 
    i := 0;
@@ -288,18 +289,20 @@ begin
      case c of
        0..12, 14..31: ; // ignore non-printable characters
        32: begin // whitespace
-         x := x + whitespaceWidth;
+          x := x + whitespaceWidth;
        end;
        13: begin // CR
-         x := 0;
-         y := y - (FCharHeight * LineGap);
+          x := 0;
+          y := y - (FCharHeight * LineGap);
        end;
-       else begin
+       else begin // Normal character
          if chara.Initialized then begin
            RenderCharacter(chara, x, y);
            x := x + chara.advance;
+         end
+         else begin
+           // TODO: render placeholder shape instead of invalid character
          end;
-         // TODO: render placeholder shape instead of invalid character
        end;
      end;
    end;
