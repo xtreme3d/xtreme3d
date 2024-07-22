@@ -1018,7 +1018,6 @@ begin
   result := 1.0;
 end;
 
-{
 function OdeDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
@@ -1027,9 +1026,7 @@ begin
   dyna.SetVelocity(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
-}
 
-{
 function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
@@ -1038,29 +1035,23 @@ begin
   dyna.SetAngularVelocity(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
-}
 
-{
 function OdeDynamicGetVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
   dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
-  result := dyna.GetVelocity[trunc(ind)];
+  result := dyna.GetVelocity.V[trunc(ind)];
 end;
-}
 
-{
 function OdeDynamicGetAngularVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
   dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
-  result := dyna.GetAngularVelocity[trunc64(ind)];
+  result := dyna.GetAngularVelocity.V[trunc(ind)];
 end;
-}
 
-{
 function OdeDynamicSetPosition(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
@@ -1069,9 +1060,7 @@ begin
   dyna.SetPosition(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
-}
 
-{
 function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
@@ -1080,5 +1069,4 @@ begin
   dyna.SetRotation(x, y, z, w);
   result := 1.0;
 end;
-}
 

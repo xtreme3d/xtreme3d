@@ -902,9 +902,9 @@ exports
     OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
     OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
     OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
-    //OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
-    //OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
-    //OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
+    OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
+    OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
+    OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
 
     // Fps
     FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,

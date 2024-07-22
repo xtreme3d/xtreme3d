@@ -1036,7 +1036,6 @@ function dll_init(dll) {
 	global._OdeRagdollBuild = external_define(dll, "OdeRagdollBuild", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeRagdollEnable = external_define(dll, "OdeRagdollEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._OdeRagdollUpdate = external_define(dll, "OdeRagdollUpdate", dll_cdecl, ty_real, 1, ty_real);
-	/*
 	// Milestone II functions:
 	global._OdeDynamicSetVelocity = external_define(dll, "OdeDynamicSetVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicSetAngularVelocity = external_define(dll, "OdeDynamicSetAngularVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
@@ -1044,7 +1043,6 @@ function dll_init(dll) {
 	global._OdeDynamicGetAngularVelocity = external_define(dll, "OdeDynamicGetAngularVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._OdeDynamicSetPosition = external_define(dll, "OdeDynamicSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicSetRotationQuaternion = external_define(dll, "OdeDynamicSetRotationQuaternion", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
-	*/
 	
 	// Verlet
 	global._VerletWorldCreate = external_define(dll, "VerletWorldCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
