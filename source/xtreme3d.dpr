@@ -136,6 +136,7 @@ uses
   //GLFreetypeFont
   GLTTF,
   GLHUDText2,
+  GLClipPlane,
   Hashes,
   sdl2,
   sdl2_ttf;
@@ -499,7 +500,7 @@ end;
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
 //{$I 'xtreme3d/kraft'}
-//{$I 'xtreme3d/clipplane'}
+{$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
 {$I 'xtreme3d/color'}
@@ -781,7 +782,7 @@ exports
     FBOSetStencilPrecision,
 
     // ClipPlane
-    //ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
+    ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
 
     // ThorFX
     ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,

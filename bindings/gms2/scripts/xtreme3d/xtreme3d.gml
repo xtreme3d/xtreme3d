@@ -227,6 +227,8 @@ function dll_init(dll) {
 	// Milestone II functions:
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	//TTFontSetEncoding was removed
+	//TTFontLoadCodePage was removed
 	
 	// Sprite
 	global._HUDSpriteCreate = external_define(dll, "HUDSpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
@@ -622,9 +624,7 @@ function dll_init(dll) {
 	global._TextureExSetTextureScale = external_define(dll, "TextureExSetTextureScale", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._TextureExSetTextureOffset = external_define(dll, "TextureExSetTextureOffset", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._TextureExEnable = external_define(dll, "TextureExEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	/*
-	global._MaterialSetTextureExFromLibrary = external_define(dll, "MaterialSetTextureExFromLibrary", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_string, ty_real);
-	*/
+	// MaterialSetTextureExFromLibrary was removed
 	global._MaterialNoiseCreate = external_define(dll, "MaterialNoiseCreate", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialNoiseSetDimensions = external_define(dll, "MaterialNoiseSetDimensions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialNoiseAnimate = external_define(dll, "MaterialNoiseAnimate", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -633,7 +633,6 @@ function dll_init(dll) {
 	global._MaterialNoiseSetSeamless = external_define(dll, "MaterialNoiseSetSeamless", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialNoiseRandomSeed = external_define(dll, "MaterialNoiseRandomSeed", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	// MaterialCullFrontFaces was removed
-	//global._MaterialCullFrontFaces = external_define(dll, "MaterialCullFrontFaces", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	// MaterialSetZWrite is now MaterialSetDepthWrite
 	global._MaterialSetDepthWrite = external_define(dll, "MaterialSetDepthWrite", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	// New function MaterialSetDepthTest
@@ -722,10 +721,8 @@ function dll_init(dll) {
 	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	
 	// Text
-	// Removed from DLL:
-	//global._TextRead = external_define(dll, "TextRead", dll_cdecl, ty_string, 1, ty_string);
-	// Removed:
-	//global._TextConvertANSIToUTF8 = external_define(dll, "TextConvertANSIToUTF8", dll_cdecl, ty_string, 1, ty_string);
+	// TextRead was removed
+	// TextConvertANSIToUTF8 was removed
 	
 	// ThorFX
 	global._ThorFXManagerCreate = external_define(dll, "ThorFXManagerCreate", dll_cdecl, ty_real, 0);
@@ -992,8 +989,7 @@ function dll_init(dll) {
 	global._OdeAddSphere = external_define(dll, "OdeAddSphere", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddPlane = external_define(dll, "OdeAddPlane", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeAddCylinder = external_define(dll, "OdeAddCylinder", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
-	// OdeAddCone removed
-	//global._OdeAddCone = external_define(dll, "OdeAddCone", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	// OdeAddCone was removed
 	global._OdeAddCapsule = external_define(dll, "OdeAddCapsule", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddTriMesh = external_define(dll, "OdeAddTriMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._OdeElementSetDensity = external_define(dll, "OdeElementSetDensity", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -1105,6 +1101,11 @@ function dll_init(dll) {
 	global._FBOSetDepthTextureName = external_define(dll, "FBOSetDepthTextureName", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._FBOSetClearOptions = external_define(dll, "FBOSetClearOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._FBOSetStencilPrecision = external_define(dll, "FBOSetStencilPrecision", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// ClipPlane
+	global._ClipPlaneCreate = external_define(dll, "ClipPlaneCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._ClipPlaneEnable = external_define(dll, "ClipPlaneEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ClipPlaneSetPlane = external_define(dll, "ClipPlaneSetPlane", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
