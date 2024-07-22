@@ -120,6 +120,19 @@ plane = PlaneCreate(0, 20, 20, 10, 10, global.scene);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
+MaterialCreate("mWater", "textures/envmap.jpg");
+MaterialSetTextureMappingMode("mWater", tmmSphere);
+MaterialSetOptions("mWater", true, true);
+
+water = WaterCreate(global.scene);
+ObjectScale(water, 5, 5, 5);
+ObjectSetPositionY(water, 0.5);
+ObjectSetMaterial(water, "mWater");
+//WaterCreateRandomRipple(water);
+//WaterSetLinearWaveFrequency(water, 1.0);
+//WaterSetLinearWaveHeight(water, 1.0);
+//WaterSetRainTimeInterval(water, 0);
+
 matlib2 = MaterialLibraryCreate();
 
 MaterialLibrarySetTexturePaths(matlib2, "data/hellknight");

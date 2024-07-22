@@ -813,7 +813,7 @@ exports
     WaterSetMask, WaterSetActive, WaterReset,
     WaterSetRainTimeInterval, WaterSetRainForce,
     WaterSetViscosity, WaterSetElastic, WaterSetResolution,
-    //WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
+    WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
 
     // Blur
     BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,

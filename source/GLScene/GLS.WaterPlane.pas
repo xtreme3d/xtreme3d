@@ -15,6 +15,7 @@ interface
 {$I GLScene.inc}
 
 uses
+  Windows,
   Winapi.OpenGL,
   System.Classes,
   Vcl.Graphics,
@@ -58,6 +59,8 @@ const
      FLastIterationStepTime: Single;
      FMask: TPicture;
      FOptions: TGLWaterPlaneOptions;
+     FSmoothWaveHeight : Single;
+     FSmoothWaveFrequency : single;
    protected
      procedure SetElastic(const value: Single);
      procedure SetResolution(const value: Integer);
@@ -74,6 +77,7 @@ const
      procedure IterComputeNormals;
      procedure Iterate;
    public
+     iTick:Longint;
      constructor Create(AOwner: TComponent); override;
      destructor Destroy; override;
      procedure DoProgress(const progressTime: TGLProgressTimes); override;
@@ -99,6 +103,8 @@ const
        default 64;
      property Options: TGLWaterPlaneOptions read FOptions write SetOptions
        default cDefaultWaterPlaneOptions;
+     property SmoothwaveHeight:Single read FSmoothWaveHeight write FSmoothWaveHeight;
+     property SmoothwaveFrequency:Single read FSmoothWaveFrequency write FSmoothWaveFrequency;
      (* A picture whose pixels determine what part of the waterplane is active.
        Pixels with a green/gray component beyond 128 are active, the others
        are not (in short, white = active, black = inactive).
@@ -138,6 +144,11 @@ begin
   FPlaneQuadNormals := TGLAffineVectorList.Create;
   FMask := TPicture.Create;
   FMask.OnChange := DoMaskChanged;
+
+  FSmoothWaveHeight:=1;
+  FSmoothWaveFrequency:=0;
+  iTick:=getTickCount;
+
   SetResolution(64);
 end;
 
@@ -392,6 +403,7 @@ begin
   end;
 end;
 
+{
 procedure TGLWaterPlane.IterComputeNormals;
 var
   i, j, ij: Integer;
@@ -413,6 +425,48 @@ begin
       pv.z := posList[ij + Resolution] - posList[ij - Resolution];
     end;
   end;
+end;
+}
+
+// IterComputeNormals
+//
+procedure TGLWaterPlane.IterComputeNormals;
+var
+   i, j, ij : Integer;
+   pv : PAffineVector;
+   posList : PSingleArray;
+   normList : PAffineVectorArray;
+   ijm1, ijp1, ijpresolution, ijmresolution: Single;
+   FrequencyFactor: Single;
+   tickdiff: Integer;
+begin
+   // Calculate the new vertex normals (not normalized, the hardware will handle that)
+   posList := @FPositions[0];
+   normList := FPlaneQuadNormals.List;
+   tickdiff := gettickcount - iTick;
+   for i := 1 to Resolution - 2 do begin
+      ij := i * Resolution;
+      for j := 1 to Resolution - 2 do begin
+         Inc(ij);
+         pv := @normList[ij];
+         ijm1 := posList[ij - 1];
+         ijp1 := posList[ij + 1];
+         ijmresolution := posList[ij - Resolution];
+         ijpresolution := posList[ij + Resolution];
+
+         if FSmoothWaveFrequency > 0 then
+         begin
+           FrequencyFactor := 3 / FSmoothWaveFrequency;
+           ijm1 := ijm1 + FSmoothWaveHeight * 2000 * sin((ij-1)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijp1 := ijp1 + FSmoothWaveHeight * 2000 * sin((ij+1)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijmresolution := ijmresolution + FSmoothWaveHeight*2000*sin((ij-Resolution)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+           ijpresolution := ijpresolution + FSmoothWaveHeight*2000*sin((ij+Resolution)/FrequencyFactor-0.01*tickdiff/FrequencyFactor);
+         end;
+
+         pv.X := ijp1 - ijm1;
+         pv.Z := ijpresolution - ijmresolution;
+      end;
+   end;
 end;
 
 procedure TGLWaterPlane.Iterate;

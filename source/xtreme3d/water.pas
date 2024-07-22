@@ -85,18 +85,14 @@ begin
   result:=1;
 end;
 
-{
 function WaterSetLinearWaveHeight(water, height: real): real; cdecl;
 begin
   TGLWaterPlane(RealToPtr(water)).SmoothWaveHeight := height;
   result:=1;
 end;
-}
 
-{
 function WaterSetLinearWaveFrequency(water, freq: real): real; cdecl;
 begin
   TGLWaterPlane(RealToPtr(water)).SmoothWaveFrequency := freq;
   result:=1;
 end;
-}
