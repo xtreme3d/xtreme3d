@@ -1,4 +1,4 @@
-var dt = delta_time / 1000000;
+var dt = 1.0 / 60; //delta_time / 1000000;
 
 if (mouselookActive and window_has_focus()) {
 	var deltax = (mx - MouseGetPositionX())/6;
@@ -36,6 +36,8 @@ VerletConstraintSetPosition(playerCollider,
 
 EngineUpdate(dt);
 //VerletWorldUpdate(verlet, current_time / 1000);
+
+HUDTextSetText(text, string(fps));
 
 if (global.canRender) {
 	ShadowMapUpdate(shadowMap);

@@ -16,7 +16,7 @@ ViewerEnableFog(viewer, false);
 ViewerSetFogColor(viewer, c_gray);
 ViewerSetFogDistance(viewer, 100, 200);
 ViewerSetAntiAliasing(viewer, csa8xHQ); //CSAA
-ViewerEnableVSync(viewer, vsmNoSync);
+ViewerEnableVSync(viewer, vsmNoSync); 
 
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
@@ -124,10 +124,12 @@ MaterialCreate("mWater", "textures/envmap.jpg");
 MaterialSetTextureMappingMode("mWater", tmmSphere);
 MaterialSetOptions("mWater", true, true);
 
+/*
 water = WaterCreate(global.scene);
 ObjectScale(water, 5, 5, 5);
 ObjectSetPositionY(water, 0.5);
 ObjectSetMaterial(water, "mWater");
+*/
 //WaterCreateRandomRipple(water);
 //WaterSetLinearWaveFrequency(water, 1.0);
 //WaterSetLinearWaveHeight(water, 1.0);
@@ -153,6 +155,7 @@ TextureExLoad(MaterialAddTextureEx("mHellknight", 0), "data/hellknight/diffuse.p
 TextureExLoad(MaterialAddTextureEx("mHellknight", 1), "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 MaterialSetShader("mHellknight", bumpShader);
+
 //LightFXCreate(hk);
 
 MaterialLibraryActivate(matlib);
@@ -235,6 +238,10 @@ my = display_get_height() / 2;
 MouseSetPosition(mx, my);
 MouseShowCursor(not mouselookActive);
 
+application_surface_draw_enable(false);
+game_set_speed(60, gamespeed_fps);
+
 visible = false;
 alarm[0] = room_speed;
 global.canRender = false;
+
