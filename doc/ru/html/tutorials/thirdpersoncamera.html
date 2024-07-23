@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Камера от третьего лица</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Урок 10<BR>Камера от третьего лица</H1>
+
+<A><B>Уровень:</B> средний<A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
+<BR>
+<BR>Многие игры используют вид от третьего лица, где камера показывает персонажа "со спины" - это, например, многие игры жанров Action и RPG, 3D-платформеры типа Spyro или Crash Bandicoot, спортивные симуляторы и т.д. При этом, как правило, камера не является жестко зафиксированной на определенном расстоянии от персонажа - она обычно перемещается плавно, с некоторым запаздыванием, что добавляет реализма и кинематографичности. 
+<BR>
+<BR>На Xtreme3D подобную механику реализовать ненамного сложнее, чем вид от первого лица. Нижеследующий код создаст иерархию из персонажа, которым игрок будет управлять, и камеры, которая будет за ним следить. В качестве условного персонажа используется простой куб.
+<BR>
+<BR>Код в событии Create:
+<BR>
+<BR><A>camera = <A class=func2link href=../functions/camera.htm#CameraCreate>CameraCreate</A><A>(<B>global</B>.scene);</A>
+<BR><A class=func2link href=../functions/camera.htm#CameraSetViewDepth>CameraSetViewDepth</A><A>(camera, 800);</A>
+<BR><A class=func2link href=../functions/camera.htm#CameraSetFocal>CameraSetFocal</A><A>(camera, 80);</A>
+<BR><A class=func2link href=../functions/viewer.htm#ViewerSetCamera>ViewerSetCamera</A><A>(view1, camera);</A>
+<BR>
+<BR><A>actor = <A class=func2link href=../functions/primitives.htm#CubeCreate>CubeCreate</A><A>(1, 1, 1, <B>global</B>.scene);</A>
+<BR>
+<BR><A>target = <A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A>(actor);</A>
+<BR><A class=func2link href=../functions/object.htm#ObjectSetPosition>ObjectSetPosition</A><A>(target, 0, 1, -4);</A>
+<BR><A class=func2link href=../functions/camera.htm#CameraSetTargetObject>CameraSetTargetObject</A><A>(camera, actor);</A>
+<BR>
+<BR>Код в событии Step:
+<BR>
+<BR><A><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_up</A>) <A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(actor, 10 * dt);</A>
+<BR><A><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_down</A>) <A class=func2link href=../functions/object.htm#ObjectMove>ObjectMove</A><A>(actor, -10 * dt);</A>
+<BR><A><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_left</A>) <A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(actor, -200 * dt);</A>
+<BR><A><B>if</B> <A class=type>keyboard_check</A>(<A class=constant>vk_right</A>) <A class=func2link href=../functions/object.htm#ObjectTurn>ObjectTurn</A><A>(actor, 200 * dt);</A>
+<BR>
+<BR><A>cx = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(camera, 0);</A>
+<BR><A>cy = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(camera, 1);</A>
+<BR><A>cz = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(camera, 2);</A>
+<BR><A>tx = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(target, 0);</A>
+<BR><A>ty = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(target, 1);</A>
+<BR><A>tz = <A class=func2link href=../functions/object.htm#ObjectGetAbsolutePosition>ObjectGetAbsolutePosition</A><A>(target, 2);</A>
+<BR><A>dx = tx - cx;</A>
+<BR><A>dy = ty - cy;</A>
+<BR><A>dz = tz - cz;</A>
+<BR><A class=func2link href=../functions/object.htm#ObjectTranslate>ObjectTranslate</A><A>(camera, dx * 0.05, dy * 0.05, dz * 0.05);</A>
+<BR>
+<BR>Логика камеры устроена так, что ее наиболее дальняя дистанция от персонажа - при движении вперед (чтобы можно было хорошо видеть, что творится вокруг), а самая близкая - при движении назад. При повороте персонажа камера позволяет рассмотреть его сбоку. Примерно такой же прием используется в гоночных симуляторах, так что на основе этого кода вполне можно сделать и движок гонок.
+</A>
+
+</DIV>
+
+</BODY>
+</HTML>

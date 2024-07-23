@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Tree</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Tree</H1>
+
+<A class=type>Класс: TGLTree</A><BR><BR>
+
+<A>
+Объект tree представляет собой процедурную модель дерева, сгенерированного на основе фрактала. 
+Вы можете получить практически любую породу деревьев, изменяя различные параметры генерации, как то: 
+высота, толщина ствола, количество веток, размер листьев и т.д. Кроме того, можно указать свои 
+собственные материалы для ствола и листьев.
+<BR>Дерево генерируется по принципу рекурсии: ствол имеет N веток, каждая ветка имеет свои N веток, и так далее, 
+до определенного момента, когда ветки больше не ответвляются. Этот момент называется глубиной рекурсии.
+</A>
+<HR>
+
+<A name="TreeCreate"></A>
+<H1 class=name>TreeCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новое дерево и возвращает его id.</A>
+<BR><A>parent - id родителя.</A>
+<HR>
+
+<A name="TreeSetMaterials"></A>
+<H1 class=name>TreeSetMaterials</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetMaterials</A><A>( tree as </A><A class=type>real</A><A>, mfront,mback,mbranch as </A><A class=type>string</A><A> );</A>
+<BR><A>Задает материалы для листьев (отдельно для передней и задней стороны) и ствола.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>mfront - имя материала для передней стороны листьев</A>
+<BR><A>mback - имя материала для задней стороны листьев</A>
+<BR><A>mbranch - имя материала для ствола и веток.</A>
+<HR>
+
+<A name="TreeSetBranchFacets"></A>
+<H1 class=name>TreeSetBranchFacets</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchFacets</A><A>( tree,facets as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество сегментов, на которые разбивается каждый цилиндр веток.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>facets - количество сегментов (по умолчанию: 6).</A>
+<HR>
+
+<A name="TreeBuildMesh"></A>
+<H1 class=name>TreeBuildMesh</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeBuildMesh</A><A>( tree,parent as </A><A class=type>real</A><A> );</A>
+<BR><A>Конвертирует процедурное дерево в меш объекта свободной формы и возвращает его id.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>parent - id родителя для созданного freeform.</A>
+<HR>
+
+<A name="TreeSetBranchNoise"></A>
+<H1 class=name>TreeSetBranchNoise</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchNoise</A><A>( tree,noise as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает шум веток. Чем меньше это значение, тем сильнее ветки сужаются на концах.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>noise - шум (по умолчанию: 0.7).</A>
+<HR>
+
+<A name="TreeSetBranchAngle"></A>
+<H1 class=name>TreeSetBranchAngle</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchAngle</A><A>( tree,angle as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает наклон главного ствола рекурсии дерева.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>angle - наклон (в диапазоне от 0 до 1; по умолчанию: 1).</A>
+<HR>
+
+<A name="TreeSetBranchSize"></A>
+<H1 class=name>TreeSetBranchSize</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchSize</A><A>( tree,size as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает коэффициент высоты цилиндров, из которых состоят ветки. Иными словами, определяет высоту дерева.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>size - высота (по умолчанию: 1).</A>
+<HR>
+
+<A name="TreeSetBranchRadius"></A>
+<H1 class=name>TreeSetBranchRadius</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchRadius</A><A>( tree,radius as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает коэффициент радиуса цилиндров, из которых состоят ветки. Иными словами, определяет толщину дерева.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>radius - толщина (по умолчанию: 0.12).</A>
+<HR>
+
+<A name="TreeSetBranchTwist"></A>
+<H1 class=name>TreeSetBranchTwist</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetBranchTwist</A><A>( tree,twist as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает закрученность рекурсии ствола. При нулевой закрученности можно воочию наблюдать фрактальную природу объекта tree. 
+Чем больше значение закрученности, тем меньше дерево напоминает фрактал.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>twist - закрученность (по умолчанию: 45).</A>
+<HR>
+
+<A name="TreeSetDepth"></A>
+<H1 class=name>TreeSetDepth</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetDepth</A><A>( tree,depth as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает глубину рекурсии ствола. Глубина рекурсии определяет, какие ветки уже не имеют собственных ответвлений. 
+Чем больше это значение, тем гуще крона дерева.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>depth - глубина (по умолчанию: 5).</A>
+<HR>
+
+<A name="TreeSetLeafSize"></A>
+<H1 class=name>TreeSetLeafSize</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetLeafSize</A><A>( tree,leafsize as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает размер листьев.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>leafsize - размер листьев (по умолчанию: 0.1).</A>
+<HR>
+
+<A name="TreeSetLeafThreshold"></A>
+<H1 class=name>TreeSetLeafThreshold</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetLeafThreshold</A><A>( tree,threshold as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает порог листьев - минимальную толщину ветки, при которой она должна заканчиваться листом.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>threshold - порог листьев (по умолчанию: 0.02).</A>
+<HR>
+
+<A name="TreeSetSeed"></A>
+<H1 class=name>TreeSetSeed</H1>
+<A class=type>real</A><A> = </A><A class=function>TreeSetSeed</A><A>( tree,seed as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает произвольное число, которое определит первоначальный спиралевидный изгиб элементов рекурсии (этот изгиб хорошо 
+заметен при нулевой закрученности рекурсии). Иными словами, это значение немного изменит внешний вид дерева. Это 
+полезно, когда создается несколько деревьев - чтобы они не были одинаковыми, как близнецы.</A>
+<BR><A>tree - id дерева</A>
+<BR><A>seed - произвольное число (по умолчанию: 0).</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

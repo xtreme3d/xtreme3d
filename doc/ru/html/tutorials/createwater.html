@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Создание воды</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Урок 16<BR>Создание воды</H1>
+
+<A><B>Уровень:</B> средний<A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
+<BR>
+<BR>Реалистичная анимированная вода является своего рода визитной карточкой Xtreme3D. Это и в самом деле красивый спецэффект, позволяющий добиться высокой степени реализма сцены. Однако использовать воду надо осторожно, так как вычисления, связанные с ней, довольно ресурсоемки.
+<BR> 
+<BR>Вода в Xtreme3D представляет собой плоскую поверхность, разбитую на определенное количество квадратов, на которых возникают концентрические волновые возмущения - получается эффект "дождя". Также поддерживаются линейные волны, как в океане - они параллельны, вычисляются по синусоиде и равномерно движутся по всей поверхности воды. Сама по себе вода - всего лишь геометрия и никакими свойствами жидкости, кроме волн, не обладает. Поэтому все остальные эффекты, усиливающие впечатление от воды (отражение, брызги, физику плавающих объектов и т.д.) вам придется писать самостоятельно. 
+<BR>
+<BR>Код создания воды выглядит следующим образом:
+<BR>
+<BR><A>water = </A><A class=func2link href=../functions/water.htm#WaterCreate>WaterCreate</A><A>(<B>global</B>.scene);</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetResolution>WaterSetResolution</A><A>(water, 128);</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetRainTimeInterval>WaterSetRainTimeInterval</A><A>(water, 1000);</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetRainForce>WaterSetRainForce</A><A>(water, 1000);</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetViscosity>WaterSetViscosity</A><A>(water, 0.95);</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetElastic>WaterSetElastic</A><A>(water, 10);</A>
+<BR><A class=func2link href=../functions/water.htm#ObjectSetPosition>ObjectSetPosition</A><A>(water, 0, 2.5, 0);</A>
+<BR><A class=func2link href=../functions/object.htm#ObjectSetScale>ObjectSetScale</A><A>(water, 1000, 1000, 1000);</A>
+<BR>
+<BR>Объект Water имеет несколько важных свойств:
+<BR>
+<BR><B>Resolution</B> (разрешение)
+<BR>Число полигонов по стороне сетки. Геометрия воды строится из квадратов в сетке, поэтому общее число полигонов равно R2, где R - значение Resolution. Ясно, что, чем выше это значение, тем выше качество воды, и, соответственно, ниже скорость ее работы. Значение по умолчанию: 64.
+<BR>
+<BR><B>Rain time interval</B> (временной интервал дождя)
+<BR>Эффект "дождя", когда поверхность анимируется, создавая в случайных местах сетки волновые возмущения. Данная опция задает длину паузы в миллисекундах между двумя возмущениями. Значение по умолчанию: 500. Максимальное значение: 1000000. Минимальное значение: 0 (нет дождя).
+<BR>
+<BR><B>Rain Force</B> (сила дождя)
+<BR>Интенсивность возмущений; чем меньше это значение, тем быстрее волны "затухают". Значение по умолчанию: 5000. Максимальное значение: 1000000. Минимальное значение: 0.
+<BR>
+<BR><B>Viscosity</B> (вязкость)
+<BR>Амплитуда возмущений; фактически, максимальная высота волн: чем меньше это значение, тем гелеобразнее жидкость. Значение по умолчанию: 0.99. Максимальное значение: 1. Минимальное значение: 0.
+<BR>
+<BR><B>Elastic</B> (эластичность)
+<BR>Скорость распространения возмущений. В реальном мире это свойство зависит от плотности вещества (например, у ртути плотность гораздо выше, чем у воды, поэтому волны распространяются быстрее). Значение по умолчанию: 10.
+<BR>
+<BR>Еще один момент: для создания воды требуется маска, определяющая форму поверхности. Маска в данном случае - материал с монохромным изображением, где черные точки означают отсутствие воды, белые - наличие. Таким образом, мы можем создать, например, круглый бассейн.
+<BR>
+<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A>('mMask', 'watermask.bmp');</A>
+<BR><A class=func2link href=../functions/water.htm#WaterSetMask>WaterSetMask</A>(water, 'mMask');</A>
+<BR>
+
+<A></A>
+
+</DIV>
+
+</BODY>
+</HTML>

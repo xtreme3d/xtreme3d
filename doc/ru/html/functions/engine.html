@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Engine</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Engine</H1>
+
+<A class=type>Класс: -</A><BR><BR>
+
+<A class=ntext>Функции движка (Engine), в отличие от остальных, не относятся к какому-либо типу объектов. 
+Служат для общего управления Xtreme3D и задания базовых параметров. Функции движка можно 
+считать наиболее важными и первоочередными из всех.</A><HR>
+
+<A name="EngineCreate"></A>
+<H1 class=name>EngineCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineCreate</A><A>();</A>
+<BR><A class=ntext>Инициализирует Xtreme3D. После вызова этой функции вы можете использовать другие функции движка. 
+Инициализация движка может происходить только один раз за одно время, то есть, вы не можете снова вызвать 
+эту функцию, пока не будет выполнена <A class=funclink href=../functions/engine.htm#EngineDestroy>EngineDestroy</A>.</A>
+<HR>
+
+<A name="EngineDestroy"></A>
+<H1 class=name>EngineDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineDestroy</A><A>();</A>
+<BR><A class=ntext>Уничтожает Xtreme3D, освобождая память из-под всех его ресурсов. После вызова этой функции вы не 
+можете использовать другие функции движка, пока не будет выполнена 
+<A class=funclink href=../functions/engine.htm#EngineCreate>EngineCreate</A>.</A><HR>
+
+<A name="EngineSetObjectsSorting"></A>
+<H1 class=name>EngineSetObjectsSorting</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineSetObjectsSorting</A><A>( os as </A>
+<A class=type>real</A><A> );</A>
+<BR><A class=ntext>Определяет режим сортировки (os) для всех объектов. Доступны следующие значения os:
+<BR><A class=constant name="osInherited">osInherited</A> = 0 - унаследованная сортировка;
+<BR><A class=constant name="osNone">osNone</A> = 1 - отсутствие сортировки;
+<BR><A class=constant name="osRenderFarthestFirst">osRenderFarthestFirst</A> = 2 - отрисовка первыми объектов с максимальным удалением от камеры (значение по умолчанию);
+<BR><A class=constant name="osRenderBlendedLast">osRenderBlendedLast</A> = 3 - непрозрачные объекты не сортируются и отрисовываются первыми, прозрачные - последними, и с учетом глубины;
+<BR><A class=constant name="osRenderNearestFirst">osRenderNearestFirst</A> = 4 - отрисовка первыми объектов с минимальным удалением от камеры.
+<HR>
+
+<A name="EngineSetCulling"></A>
+<H1 class=name>EngineSetCulling</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineSetCulling</A><A>( vc as </A>
+<A class=type>real</A><A> );</A>
+<BR><A class=ntext>Определяет режим отбора видимости (vc) для всех объектов. Доступны следующие значения vc:
+<BR><A class=constant name="vcNone">vcNone</A> = 0 - отсутствие отбора видимости;
+<BR><A class=constant name="vcInherited">vcInherited</A> = 1 - унаследованный отбор видимости;
+<BR><A class=constant name="vcObjectBased">vcObjectBased</A> = 2 - отбор совершается на основе объекта: каждый объект может быть отобран в зависимости от своей позиции. Отбор объекта не затрагивает видимость его дочерних объектов;
+<BR><A class=constant name="vcHierarchical">vcHierarchical</A> = 3 - отбор осуществляется по принципу иерархии: если материнский объект отобран, все его дочерние объекты также будут невидимы.
+<BR>В зависимости от структуры вашей сцены, наиболее эффективными методами будут <A class=constant>vcObjectBased</A> и <A class=constant>vcHierarchical</A>.</A>
+<HR>
+
+<!--
+<A name="EngineGetMaxTextureUnits"></A>
+<H1 class=namenew>EngineGetMaxTextureUnits</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineGetMaxTextureUnits</A><A>( );</A>
+<BR><A>Возвращает максимальное количество текстурных конвейеров.</A><HR>
+
+<A name="EngineGetMaxTextureSize"></A>
+<H1 class=namenew>EngineGetMaxTextureSize</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineGetMaxTextureSize</A><A>( );</A>
+<BR><A>Возвращает максимальное разрешение текстур, поддерживаемое видеокартой.</A><HR>
+-->
+
+<A name="Update"></A>
+<H1 class=name>Update</H1>
+<A class=type>real</A><A> = </A><A class=function>Update</A><A>( dt as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Совершает программное обновление состояния движка (вычисление столкновений, анимации и т.д.). 
+Обычно вызывается перед <A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A> и только один раз, даже при наличии нескольких 
+Видов.
+<BR>dt - шаг времени в секундах. Меняя этот параметр, можно менять скорость анимации. Шаг времени, как правило, обратно пропорционален количеству кадров в секунду (1 / fps).</A>
+<HR>
+
+<A name="EngineSaveScene"></A>
+<H1 class=name>EngineSaveScene</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineSaveScene</A><A>( filename as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Сохраняет все объекты сцены в файл. Функция экспериментальная - с некоторыми типами объектов может работать некорректно.
+<BR>filename - имя файла.</A>
+<HR>
+
+<A name="EngineLoadScene"></A>
+<H1 class=name>EngineLoadScene</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineLoadScene</A><A>( filename as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Удаляет все объекты сцены и загружает новые из файла. Функция экспериментальная - с некоторыми типами объектов может работать некорректно.
+<BR>filename - имя файла.</A>
+<HR>
+
+<A name="EngineRootObject"></A>
+<H1 class=name>EngineRootObject</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineRootObject</A><A>( );</A>
+<BR><A class=ntext>Возвращает id корневого объекта сцены - то есть, объекта, потомками которого являются объекты с нулевым родителем.
+<HR>
+
+<A name="EngineShowLoadingErrors"></A>
+<H1 class=name>EngineShowLoadingErrors</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineShowLoadingErrors</A><A>( mode as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Переключает вывод сообщений об ошибках при неудачных загрузках моделей и текстур.
+<BR><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="EngineSetMaxLights"></A>
+<H1 class=name>EngineSetMaxLights</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineSetMaxLights</A><A>( lights as </A><A class=type>real</A><A> );</A>
+<BR><A class=ntext>Задает максимальное количество источников света, которые учитываются движком для сцены (если для не используется система LightFX). По умолчанию это число равно 8. Если установить его в 0, то Xtreme3D задействует максимальное количество источников света OpenGL, поддерживаемое видеодрайвером. 
+<BR><A>lights</A> - количество источников света.</A>
+<HR>
+
+<A name="EngineGetTimeStep"></A>
+<H1 class=name>EngineGetTimeStep</H1>
+<A class=type>real</A><A> = </A><A class=function>EngineGetTimeStep</A><A>( );</A>
+<BR><A class=ntext>Возвращает реальный шаг времени - время в секундах, прошедшее с предыдущего вызова EngineGetTimeStep (или с вызова EngineCreate, если функция вызывается впервые). Это значение можно использовать для реализации таймера - например, чтобы рендерить или производить вычисления с фиксированной частотой.</A>
+<HR>
+
+<A name="PtrToReal"></A>
+<H1 class=name>PtrToReal</H1>
+<A class=type>real</A><A> = </A><A class=function>PtrToReal</A><A>( ptr as </A><A class=type>string</A><A> );</A>
+<BR><A class=ntext>Конвертирует указатель на строку в вещественное значение. Строковой указатель используется только для совместимости - вместо него может быть любой указатель.
+<BR><A>ptr</A> - указатель.</A>
+</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

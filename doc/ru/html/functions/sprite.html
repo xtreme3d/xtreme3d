@@ -1,0 +1,170 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Sprite</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Sprite</H1>
+
+<A class=type>Класс: TGLSprite, TGLHUDSprite</A><BR><BR>
+
+<A>Спрайт (Sprite) - двумерное изображение. В Xtreme3D поддерживаются экранные спрайты (отрисовываются на экране поверх проекции) и пространственные (присутствуют в трехмерной сцене в качестве плоскостей - их еще называют биллбордами). Главное отличие пространственного спрайта от простой плоскости заключается в том, что спрайт всегда повернут в сторону камеры. Это позволяет использовать пространственные спрайты в качестве различных псевдотрехмерных эффектов, такие как взрывы, вспышки, сияния. На их основе можно создать собственную систему частиц. 
+<BR>Экранные спрайты применяются для отображения элементов интерфейса - прицел, иконки, шкала энергии и т.д.
+<BR>Все спрайты создаются из материалов. При этом поддерживаются их настройки - режимы смешивания, альфа-канал и др.</A>
+<BR><HR>
+
+<A name="HUDSpriteCreate"></A>
+<H1 class=name>HUDSpriteCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteCreate</A><A>( material as </A><A class=type>string</A><A>, width,height,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый экранный спрайт и возвращает его id.</A>
+<BR><A>material - имя материала</A>
+<BR><A>width,height - ширина и высота спрайта в пикселях</A>
+<BR><A>parent - id родителя для спрайта (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="HUDSpriteCreateEx"></A>
+<H1 class=name>HUDSpriteCreateEx</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteCreateEx</A><A>( width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый экранный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.
+<BR>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
+<BR><A>width,height - ширина и высота спрайта в пикселях</A>
+<BR><A>left,top - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
+<BR><A>right,bottom - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
+<BR><A>parent - id родителя для спрайта (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="HUDSpriteGetMouseOver"></A>
+<H1 class=name>HUDSpriteGetMouseOver</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteGetMouseOver</A><A>( sprite,viewer as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает 1, если курсор мыши находится над спрайтом в заданном виде, и 0 в противном случае.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>viewer - id вида.</A>
+<HR>
+
+<A name="HUDSpriteXTiles"></A>
+<H1 class=name>HUDSpriteXTiles</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteXTiles</A><A>( sprite,xtiles as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает тайлинг (количество повторений) текстуры по оси X</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>xtiles - тайлинг по оси X.</A>
+<HR>
+
+<A name="HUDSpriteYTiles"></A>
+<H1 class=name>HUDSpriteYTiles</H1>
+<A class=type>real</A><A> = </A><A class=function>HUDSpriteYTiles</A><A>( sprite,ytiles as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает тайлинг (количество повторений) текстуры по оси Y</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>ytiles - тайлинг по оси Y.</A>
+<HR>
+
+<A name="SpriteCreate"></A>
+<H1 class=name>SpriteCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteCreate</A><A>( material as </A><A class=type>string</A><A>, width,height,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый пространственный спрайт и возвращает его id.</A>
+<BR><A>material - имя материала</A>
+<BR><A>width,height - ширина и высота спрайта в единицах координатной системы</A>
+<BR><A>parent - id родителя для спрайта (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="SpriteCreateEx"></A>
+<H1 class=name>SpriteCreateEx</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteCreateEx</A><A>( width,height,left,top,right,bottom,parent as </A><A class=type>real</A><A>);</A>
+<BR><A>Создает новый пространственный спрайт из фрагмента текстуры материала и возвращает его id. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.
+<BR>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции </A><A class=funclink href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>.</A>
+<BR><A>width,height - ширина и высота спрайта в единицах координатной системы</A>
+<BR><A>left,top - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
+<BR><A>right,bottom - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</A>
+<BR><A>parent - id родителя для спрайта (0 - отсутствие родителя).</A>
+<HR>
+
+<A name="SpriteSetSize"></A>
+<H1 class=name>SpriteSetSize</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteSetSize</A><A>( sprite,width,height as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает размер спрайта.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>width,height - ширина и высота спрайта.</A>
+<HR>
+
+<A name="SpriteGetSize"></A>
+<H1 class=name>SpriteGetSize</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteGetSize</A><A>( sprite,ind as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает размер спрайта - ширину или высоту, в зависимости от заданного индекса размерности.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>ind - индекс размерности (0 = ширина, 1 = высота).</A>
+<HR>
+
+<A name="SpriteScale"></A>
+<H1 class=name>SpriteScale</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteScale</A><A>( sprite,hscale,vscale as </A><A class=type>real</A><A> );</A>
+<BR><A>Изменяет размер спрайта относительно текущего размера.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>hscale,vscale - добавляются к текущим значениям ширины и высоты.</A>
+<HR>
+
+<A name="SpriteSetRotation"></A>
+<H1 class=name>SpriteSetRotation</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteSetRotation</A><A>( sprite,angle as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает угол поворота спрайта. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>angle - угол поворота.</A>
+<HR>
+
+<A name="SpriteRotate"></A>
+<H1 class=name>SpriteRotate</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteRotate</A><A>( sprite,angle as </A><A class=type>real</A><A> );</A>
+<BR><A>Изменяет поворот спрайта относительно текущего угла. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>angle - добавляется к текущему углу поворота.</A>
+<HR>
+
+<A name="SpriteMirror"></A>
+<H1 class=name>SpriteMirror</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteMirror</A><A>( sprite,u,v as </A><A class=type>real</A><A> );</A>
+<BR><A>Отображает спрайт зеркально по горизонтали и/или вертикали. Работает только для пространственных спрайтов.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>u - горизонталь, </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<BR><A>v - вертикаль, </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="SpriteNoZWrite"></A>
+<H1 class=name>SpriteNoZWrite</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteNoZWrite</A><A>( sprite,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает запись в Z-буфер для спрайта. Отключение этого свойства позволяет устранить артефакты, возникающие при перекрытии друг друга несколькими пространственными спрайтами. Это особенно заметно в случае с прозрачными изображениями.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="SpriteSetBounds"></A>
+<H1 class=name>SpriteSetBounds</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteSetBounds</A><A>( sprite,left,top,right,bottom as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает фрагмент текстуры для спрайта в пикселях. Функция позволяет анимировать спрайт, последовательно сдвигая фрагмент вдоль набора кадров. Также можно использовать ее, например, для реализации мини-карты.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>left,top - координаты левого верхнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры)</A>
+<BR><A>right,bottom - координаты координаты правого нижнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры).</A>
+<HR>
+
+<A name="SpriteSetBoundsUV"></A>
+<H1 class=name>SpriteSetBoundsUV</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteSetBounds</A><A>( sprite,left,top,right,bottom as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает фрагмент текстуры для спрайта в UV-координатах. Координаты (0, 0) соответствуют левому верхнему углу текстуры, (1, 1) - правому нижнему.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>left,top - UV-координаты левого верхнего угла фрагмента</A>
+<BR><A>right,bottom - UV-координаты координаты правого нижнего угла фрагмента.</A>
+<HR>
+
+<A name="SpriteSetOrigin"></A>
+<H1 class=name>SpriteSetOrigin</H1>
+<A class=type>real</A><A> = </A><A class=function>SpriteSetOrigin</A><A>( sprite,x,y as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает исходную точку спрайта - то есть, точку, вокруг которой осуществляется вращение спрайта. По умолчанию вращение осуществляется вокруг центра спрайта.</A>
+<BR><A>sprite - id спрайта</A>
+<BR><A>x,y - координаты исходной точки в пикселях относительно центра спрайта (координаты (0, 0) соответствуют центру).</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>
