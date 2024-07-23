@@ -191,7 +191,7 @@ procedure TGLHUDSprite.DoRender(var rci: TGLRenderContextInfo;
   renderSelf, renderChildren: Boolean);
 var
   vx, vy, vx1, vy1, f: Single;
-  u0, v0, u1, v1: Integer;
+  u0, v0, u1, v1: Single;
 begin
   if rci.ignoreMaterials then
     Exit;
@@ -218,6 +218,7 @@ begin
       rci.viewPortSize.cy * 0.5 - f * Position.Y, Position.Z);
     if Rotation <> 0 then
       gl.Rotatef(Rotation, 0, 0, 1);
+    glTranslatef(-OriginX, OriginY, 0.0);
     gl.MatrixMode(GL_PROJECTION);
     gl.PushMatrix;
     gl.LoadIdentity;
@@ -233,24 +234,24 @@ begin
     // Texture coordinates
     if MirrorU then
     begin
-      u0 := FXTiles;
-      u1 := 0;
+      u0 := UVRight * FXTiles;
+      u1 := UVLeft * FXTiles;
     end
     else
     begin
-      u0 := 0;
-      u1 := FXTiles;
+      u0 := UVLeft * FXTiles;
+      u1 := UVRight * FXTiles;
     end;
 
     if MirrorV then
     begin
-      v0 := FYTiles;
-      v1 := 0;
+      v0 := UVBottom * FYTiles;
+      v1 := UVTop * FYTiles;
     end
     else
     begin
-      v0 := 0;
-      v1 := FYTiles;
+      v0 := UVTop * FYTiles;
+      v1 := UVBottom * FYTiles;
     end;
 
     // issue quad

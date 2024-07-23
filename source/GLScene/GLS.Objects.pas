@@ -194,6 +194,12 @@ type
     FRotation: TGLFloat;
     FAlphaChannel: Single;
     FMirrorU, FMirrorV: Boolean;
+    FUVTop: TGLFloat;
+    FUVLeft: TGLFloat;
+    FUVBottom: TGLFloat;
+    FUVRight: TGLFloat;
+    FOriginX: TGLFloat;
+    FOriginY: TGLFloat;
   protected
     procedure SetWidth(const val: TGLFloat);
     procedure SetHeight(const val: TGLFloat);
@@ -224,6 +230,12 @@ type
     // Reverses the texture coordinates in the U and V direction to mirror the texture.
     property MirrorU: Boolean read FMirrorU write SetMirrorU default False;
     property MirrorV: Boolean read FMirrorV write SetMirrorV default False;
+    property UVTop: TGLFloat read FUVTop write FUVTop;
+    property UVLeft: TGLFloat read FUVLeft write FUVLeft;
+    property UVBottom: TGLFloat read FUVBottom write FUVBottom;
+    property UVRight: TGLFloat read FUVRight write FUVRight;
+    property OriginX: TGLFloat read FOriginX write FOriginX;
+    property OriginY: TGLFloat read FOriginY write FOriginY;
   end;
 
   TGLPointStyle = (psSquare, psRound, psSmooth, psSmoothAdditive,
@@ -1279,6 +1291,12 @@ begin
   FAlphaChannel := 1;
   FWidth := 1;
   FHeight := 1;
+  FUVTop := 0;
+  FUVLeft := 0;
+  FUVBottom := 1;
+  FUVRight := 1;
+  FOriginX := 0.0;
+  FOriginY := 0.0;
 end;
 
 procedure TGLSprite.Assign(Source: TPersistent);
@@ -1307,7 +1325,7 @@ var
   vx, vy: TAffineVector;
   W, h: Single;
   mat: TGLMatrix;
-  u0, v0, u1, v1: Integer;
+  u0, v0, u1, v1: Single;
 begin
   if FAlphaChannel <> 1 then
     rci.GLStates.SetGLMaterialAlphaChannel(GL_FRONT, FAlphaChannel);
@@ -1326,23 +1344,23 @@ begin
   ScaleVector(vy, h / VectorLength(vy));
   if FMirrorU then
   begin
-    u0 := 1;
-    u1 := 0;
+    u0 := FUVRight;
+    u1 := FUVLeft;
   end
   else
   begin
-    u0 := 0;
-    u1 := 1;
+    u0 := FUVLeft;
+    u1 := FUVRight;
   end;
   if FMirrorV then
   begin
-    v0 := 1;
-    v1 := 0;
+    v0 := FUVBottom;
+    v1 := FUVTop;
   end
   else
   begin
-    v0 := 0;
-    v1 := 1;
+    v0 := FUVTop;
+    v1 := FUVBottom;
   end;
 
   if FRotation <> 0 then
@@ -1350,6 +1368,7 @@ begin
     gl.PushMatrix;
     gl.Rotatef(FRotation, mat.v[0].Z, mat.v[1].Z, mat.v[2].Z);
   end;
+  gl.Translatef(-FOriginX, -FOriginY, 0.0);
   gl.Begin_(GL_QUADS);
   xgl.TexCoord2f(u1, v1);
   gl.Vertex3f(vx.X + vy.X, vx.Y + vy.Y, vx.Z + vy.Z);

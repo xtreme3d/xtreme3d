@@ -243,15 +243,12 @@ function dll_init(dll) {
 	global._SpriteRotate = external_define(dll, "SpriteRotate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpriteMirror = external_define(dll, "SpriteMirror", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//SpriteNoZWrite was removed, use MaterialSetDepthWrite instead
-	//global._SpriteNoZWrite = external_define(dll, "SpriteNoZWrite", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	/*
 	// Milestone II functions:
 	global._SpriteCreateEx = external_define(dll, "SpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._HUDSpriteCreateEx = external_define(dll, "HUDSpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBoundsUV = external_define(dll, "SpriteSetBoundsUV", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetOrigin = external_define(dll, "SpriteSetOrigin", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	*/
 	
 	// HUDShape
 	// Milestone II functions:

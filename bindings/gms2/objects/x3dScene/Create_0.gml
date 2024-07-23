@@ -182,6 +182,14 @@ text = HUDTextCreate(ftfont, "Hello World!\rПривет, мир!", global.front
 HUDTextSetColor(text, c_white, 1.0);
 ObjectSetPosition(text, 20, 20, 0);
 
+MaterialCreate("mSprites", "textures/sprites.png");
+MaterialSetOptions("mSprites", true, true);
+MaterialSetTextureImageAlpha("mSprites", tiaDefault);
+MaterialSetBlendingMode("mSprites", bmTransparency);
+crosshair = HUDSpriteCreate("mSprites", 64, 64, global.front);
+SpriteSetBounds(crosshair, 0, 0, 64, 64);
+ObjectSetPosition(crosshair, window_get_width() / 2, window_get_height() / 2, 0);
+
 /*
 fboWidth = window_get_width();
 fboHeight = window_get_height();

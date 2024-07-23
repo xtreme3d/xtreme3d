@@ -566,7 +566,7 @@ exports
     HUDSpriteCreate, HUDSpriteGetMouseOver, HUDSpriteXTiles, HUDSpriteYTiles,
     SpriteCreate, SpriteSetSize, SpriteGetSize, SpriteScale, SpriteSetRotation,
     SpriteRotate, SpriteMirror,
-    //HUDSpriteCreateEx, SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV, SpriteSetOrigin,
+    HUDSpriteCreateEx, SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV, SpriteSetOrigin,
 
     // HUDShape
     HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,

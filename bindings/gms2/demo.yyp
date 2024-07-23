@@ -56,6 +56,7 @@
     {"$GMIncludedFile":"","%Name":"simple-vp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders","name":"simple-vp.glsl","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"envmap.jpg","CopyToMask":-1,"filePath":"datafiles/textures","name":"envmap.jpg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ground.jpg","CopyToMask":-1,"filePath":"datafiles/textures","name":"ground.jpg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"sprites.png","CopyToMask":-1,"filePath":"datafiles/textures","name":"sprites.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"stone-height.png","CopyToMask":-1,"filePath":"datafiles/textures","name":"stone-height.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"stone-normal.png","CopyToMask":-1,"filePath":"datafiles/textures","name":"stone-normal.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"stone.png","CopyToMask":-1,"filePath":"datafiles/textures","name":"stone.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

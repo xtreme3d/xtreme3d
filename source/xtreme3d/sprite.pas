@@ -129,18 +129,6 @@ begin
   result:=1;
 end;
 
-{
-function SpriteNoZWrite(sprite,mode: real): real; cdecl;
-var
-  GLSprite1: TGLSprite;
-begin
-  GLSprite1:=TGLSprite(RealToPtr(sprite));
-  GLSprite1.NoZWrite:=boolean(Trunc(mode));
-  result:=1;
-end;
-}
-
-{
 function SpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; cdecl;
 var
   spr: TGLSprite;
@@ -156,9 +144,7 @@ begin
   spr.UVBottom := 1.0 - top;
   result := Integer(spr);
 end;
-}
 
-{
 function HUDSpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; cdecl;
 var
   spr: TGLHUDSprite;
@@ -174,9 +160,7 @@ begin
   spr.UVBottom := 1.0 - top;
   result:= Integer(spr);
 end;
-}
 
-{
 function SpriteSetBounds(sprite, left, top, right, bottom: real): real; cdecl;
 var
   spr: TGLSprite;
@@ -184,7 +168,7 @@ var
   mat: TGLLibMaterial;
 begin
   spr := TGLSprite(RealToPtr(sprite));
-  mat := spr.Material.MaterialLibrary.LibMaterialByName(spr.Material.LibMaterialName);
+  mat := TGLMaterialLibrary(spr.Material.MaterialLibrary).Materials.GetLibMaterialByName(spr.Material.LibMaterialName);
   if mat <> nil then
   begin
     if mat.Material.Texture <> nil then
@@ -194,7 +178,7 @@ begin
         tw := mat.Material.Texture.Image.Width;
         th := mat.Material.Texture.Image.Height;
         spr.UVLeft := left / tw;
-        spr.UVTop := (th - bottom) / th; 
+        spr.UVTop := (th - bottom) / th;
         spr.UVRight := right / tw;
         spr.UVBottom := (th - top) / th;
       end;
@@ -202,9 +186,7 @@ begin
   end;
   result := 1;
 end;
-}
 
-{
 function SpriteSetBoundsUV(sprite, left, top, right, bottom: real): real; cdecl;
 var
   spr: TGLSprite;
@@ -216,9 +198,7 @@ begin
   spr.UVBottom := 1.0 - top;
   result := 1;
 end;
-}
 
-{
 function SpriteSetOrigin(sprite, x, y: real): real; cdecl;
 var
   spr: TGLSprite;
@@ -228,4 +208,4 @@ begin
   spr.OriginY := y;
   result := 1;
 end;
-}
+
