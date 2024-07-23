@@ -27,6 +27,14 @@ else {
 	mb_left_released = true;
 }
 
+if ObjectSceneRaycast(camera, raycastObjects)
+{    
+    var rx = ObjectGetCollisionPosition(0);
+    var ry = ObjectGetCollisionPosition(1);
+    var rz = ObjectGetCollisionPosition(2);
+    ObjectSetPosition(sphereMarker, rx, ry, rz);
+}
+
 /*
 VerletConstraintSetPosition(playerCollider,
     ObjectGetAbsolutePosition(camera, 0),
@@ -49,3 +57,5 @@ if (global.canRender) {
 	//ViewerRenderObject(viewer, global.front);
 	//ObjectShow(fbo);
 }
+
+ViewerResetPerformanceMonitor(viewer);

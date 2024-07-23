@@ -26,7 +26,8 @@ global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
 global.front = DummycubeCreate(0);
 
-shadowCasters = DummycubeCreate(global.scene);
+raycastObjects = DummycubeCreate(global.scene);
+shadowCasters = DummycubeCreate(raycastObjects);
 
 camPos = DummycubeCreate(global.scene);
 
@@ -116,7 +117,7 @@ MaterialSetShader("mStone", bumpShader);
 
 //plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
 //ShadowplaneSetOptions(plane, true, true, false, false);
-plane = PlaneCreate(0, 20, 20, 10, 10, global.scene);
+plane = PlaneCreate(0, 20, 20, 10, 10, raycastObjects);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
@@ -170,6 +171,12 @@ ActorProxyObjectSwitchToAnimation(hk3, 1);
 //LightFXCreate(hk);
 
 MaterialLibraryActivate(matlib);
+
+sphereMarker = SphereCreate(0.1, 8, 4, global.scene);
+MaterialCreate("mRed", "");
+MaterialSetAmbientColor("mRed", c_red, 1);
+MaterialSetDiffuseColor("mRed", c_red, 1);
+ObjectSetMaterial(sphereMarker, "mRed");
 
 /*
 rect = HUDShapeRectangleCreate(100, 100, global.front);

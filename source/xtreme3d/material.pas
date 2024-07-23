@@ -80,17 +80,28 @@ begin
 end;
 
 function MaterialCreate(mtrl, fname: PAnsiChar): real; cdecl;
+var
+  mat: TGLLibMaterial;
+  materialName, filename: String;
 begin
+  materialName := StrConv(mtrl);
+  filename := StrConv(fname);
   try
-    matlib.AddTextureMaterial(StrConv(mtrl), StrConv(fname), true);
+    if length(filename) > 0 then
+      mat := matlib.AddTextureMaterial(materialName, filename, true)
+    else begin
+      mat := matlib.Materials.Add;
+      mat.Name := materialName;
+    end;
+    result := PtrToReal(mat);
   except
     On E: Exception do
     begin
       if showLoadingErrors then
         ShowMessage('MaterialCreate:' + #13#10 + E.Message);
+      result := 0.0;
     end;
   end;
-  result:=1;
 end;
 
 function MaterialDestroy(mtrl: PAnsiChar): real; cdecl;
