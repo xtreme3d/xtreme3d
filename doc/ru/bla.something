@@ -20,11 +20,6 @@
                 <param name="ImageNumber" value="0">
              </OBJECT>
         <LI> <OBJECT type="text/sitemap">
-                <param name="Name" value="Изменения API">
-                <param name="Local" value="apichanges.html">
-                <param name="ImageNumber" value="0">
-             </OBJECT>
-        <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value="Авторы">
                 <param name="Local" value="authors.html">
                 <param name="ImageNumber" value="0">

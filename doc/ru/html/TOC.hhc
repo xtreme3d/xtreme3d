@@ -18,10 +18,6 @@
   <PARAM name="Local" value="history.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Изменения API">
-  <PARAM name="Local" value="apichanges.html">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Авторы">
   <PARAM name="Local" value="authors.html">
  </OBJECT>
