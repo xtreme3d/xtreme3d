@@ -927,8 +927,8 @@ exports
     ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
     MultiProxyObjectCreate, MultiProxyObjectAddTarget,
     ActorProxyObjectCreate,
-    //ActorProxyObjectSwitchToAnimation,
-    //ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
+    ActorProxyObjectSwitchToAnimation,
+    ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
 
     // Grid
     GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
@@ -942,9 +942,7 @@ exports
     // ShadowMap
     ShadowMapCreate, ShadowMapUpdate,
     ShadowCameraCreate,
-    //ShadowMapSetCamera, ShadowMapSetCaster,
     //ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
-    //ShadowMapRender, ShadowMapSetFBO,
 
     // Movement
     MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,

@@ -830,9 +830,9 @@ function dll_init(dll) {
 	global._MultiProxyObjectAddTarget = external_define(dll, "MultiProxyObjectAddTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ActorProxyObjectCreate = external_define(dll, "ActorProxyObjectCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	// Milestone II functions:
-	//global._ActorProxyObjectSwitchToAnimation = external_define(dll, "ActorProxyObjectSwitchToAnimation", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//global._ActorProxyObjectSetAnimationRange = external_define(dll, "ActorProxyObjectSetAnimationRange", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._ActorProxyObjectSetInterval = external_define(dll, "ActorProxyObjectSetInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorProxyObjectSwitchToAnimation = external_define(dll, "ActorProxyObjectSwitchToAnimation", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ActorProxyObjectSetAnimationRange = external_define(dll, "ActorProxyObjectSetAnimationRange", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._ActorProxyObjectSetInterval = external_define(dll, "ActorProxyObjectSetInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// Skybox
 	global._SkyboxCreate = external_define(dll, "SkyboxCreate", dll_cdecl, ty_real, 1, ty_real);

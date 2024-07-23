@@ -142,8 +142,8 @@ MaterialLibraryActivate(matlib2);
 hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, shadowCasters);
 ActorAddObject(hk, "data/hellknight/idle.md5anim");
 ActorAddObject(hk, "data/hellknight/attack.md5anim");
-ActorSetAnimationMode(hk, aamLoop);
-ActorSwitchToAnimation(hk, 0, true);
+//ActorSetAnimationMode(hk, aamLoop);
+//ActorSwitchToAnimation(hk, 0, true);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
@@ -155,6 +155,17 @@ TextureExLoad(MaterialAddTextureEx("mHellknight", 0), "data/hellknight/diffuse.p
 TextureExLoad(MaterialAddTextureEx("mHellknight", 1), "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
 MaterialSetShader("mHellknight", bumpShader);
+ObjectHide(hk);
+
+hk2 = ActorProxyObjectCreate(hk, shadowCasters);
+ObjectSetScale(hk2, 0.02, 0.02, 0.02);
+ObjectSetPosition(hk2, 0, 0, 0);
+ActorProxyObjectSwitchToAnimation(hk2, 0);
+
+hk3 = ActorProxyObjectCreate(hk, shadowCasters);
+ObjectSetScale(hk3, 0.02, 0.02, 0.02);
+ObjectSetPosition(hk3, 2, 0, 0);
+ActorProxyObjectSwitchToAnimation(hk3, 1);
 
 //LightFXCreate(hk);
 

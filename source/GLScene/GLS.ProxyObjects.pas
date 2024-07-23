@@ -145,6 +145,7 @@ type
     FStoredBoneNames: TStrings;
     FOnBeforeRender: TGLProgressEvent;
     FAnimationMode: TGLActorProxyAnimationMode;
+    FInterval: Integer;
     procedure SetAnimation(const Value: TGLActorAnimationName);
     procedure SetMasterActorObject(const Value: TGLActor);
     function GetMasterActorObject: TGLActor;
@@ -175,6 +176,10 @@ type
     function BoneMatrix(BoneIndex: integer): TGLMatrix; overload;
     function BoneMatrix(BoneName: string): TGLMatrix; overload;
     procedure BoneMatricesClear;
+
+    procedure SwitchToAnimation(animationIndex : Integer);
+    procedure SetAnimationRange(startIndex, endIndex : Integer);
+
     // A standard version of the RayCastIntersect function. 
     function RayCastIntersect(const rayStart, rayVector: TGLVector;
       intersectPoint: PGLVector = nil;
@@ -210,6 +215,8 @@ type
     (* Event allowing to apply extra transformations (f.ex: bone rotations) to the referenced
        Actor on order to have the proxy render these changes. *)
     property OnBeforeRender: TGLProgressEvent read FOnBeforeRender write SetOnBeforeRender;
+
+    property Interval : Integer read FInterval write FInterval;
   end;
 
 //-------------------------------------------------------------
@@ -423,6 +430,7 @@ begin
   FStoredBoneNames := TStringList.create;
   FStoreBonesMatrix := false;
     // default is false to speed up a little if we don't need bones info
+  FInterval:=100;
 end;
 
 destructor TGLActorProxy.Destroy;
@@ -445,6 +453,7 @@ var
   // TGLActorProxy specific
   cf, sf, ef: Integer;
   cfd: Single;
+  ival: Integer;
   // General proxy stuff.
   gotMaster, masterGotEffects, oldProxySubObject: Boolean;
   MasterActor: TGLActor;
@@ -465,57 +474,63 @@ begin
             SetModelMatrix(MatrixMultiply(MasterActor.Matrix^, ModelMatrix^));
 
         // At last TGLActorProxy specific stuff!
-        with MasterActor do
-        begin
-          cfd := CurrentFrameDelta;
-          cf := CurrentFrame;
-          sf := startframe;
-          ef := endframe;
+        //with MasterActor do
+        //begin
+          cfd := MasterActor.CurrentFrameDelta;
+          cf := MasterActor.CurrentFrame;
+          sf := MasterActor.startframe;
+          ef := MasterActor.endframe;
+          ival := MasterActor.Interval;
 
           case FAnimationMode of
-            pamInherited: CurrentFrameDelta := FCurrentFrameDelta;
+            pamInherited: MasterActor.CurrentFrameDelta := FCurrentFrameDelta;
             pamPlayOnce:
               begin
                 if (FLastFrame <> FEndFrame - 1) then
-                  CurrentFrameDelta := FCurrentFrameDelta
+                  MasterActor.CurrentFrameDelta := FCurrentFrameDelta
                 else
                 begin
                   FCurrentFrameDelta := 0;
                   FAnimationMode := pamNone;
                 end;
               end;
-            pamNone: CurrentFrameDelta := 0;
+            pamNone: MasterActor.CurrentFrameDelta := 0;
           else
             Assert(False, strUnknownType);
           end;
 
-          SetCurrentFrameDirect(FCurrentFrame);
+          MasterActor.CurrentFrameDelta := FCurrentFrameDelta;
+
+          MasterActor.Interval := FInterval;
+
+          MasterActor.SetCurrentFrameDirect(FCurrentFrame);
           FLastFrame := FCurrentFrame;
-          StartFrame := FStartFrame;
-          EndFrame := FEndFrame;
+          MasterActor.StartFrame := FStartFrame;
+          MasterActor.EndFrame := FEndFrame;
 
           if (FMasterLibMaterial <> nil) and (FMaterialLibrary <> nil) then
             MasterActor.Material.QuickAssignMaterial(
               FMaterialLibrary, FMasterLibMaterial);
 
-          DoProgress(FCurrentTime);
+          MasterActor.DoProgress(FCurrentTime);
 
           if Assigned(FOnBeforeRender) then
             FOnBeforeRender(self, FCurrentTime.deltaTime, FCurrentTime.newTime);
 
-          DoRender(ARci, ARenderSelf, Count > 0);
+          MasterActor.DoRender(ARci, ARenderSelf, MasterActor.Count > 0);
 
           // Stores Bones matrices of the current frame
           if (FStoreBonesMatrix) and (MasterActor.Skeleton <> nil) then
             DoStoreBonesMatrices;
 
-          FCurrentFrameDelta := CurrentFrameDelta;
-          FCurrentFrame := CurrentFrame;
-          CurrentFrameDelta := cfd;
-          SetCurrentFrameDirect(cf);
-          startframe := sf;
-          endframe := ef;
-        end;
+          FCurrentFrameDelta := MasterActor.CurrentFrameDelta;
+          FCurrentFrame := MasterActor.CurrentFrame;
+          MasterActor.CurrentFrameDelta := cfd;
+          MasterActor.SetCurrentFrameDirect(cf);
+          MasterActor.startframe := sf;
+          MasterActor.endframe := ef;
+          MasterActor.Interval := ival;
+        //end;
 
         ARci.proxySubObject := oldProxySubObject;
       end;
@@ -721,6 +736,29 @@ begin
       FLastFrame := FCurrentFrame;
     end;
   end;
+end;
+
+procedure TGLActorProxy.SwitchToAnimation(animationIndex : Integer);
+var
+  anAnimation : TGLActorAnimation;
+begin
+  if Assigned(MasterObject) then
+  begin
+    anAnimation := GetMasterActorObject.Animations[animationIndex];
+    if Assigned(anAnimation) then
+    begin
+      FStartFrame := anAnimation.StartFrame;
+      FEndFrame := anAnimation.EndFrame;
+      FCurrentFrame := FStartFrame;
+      FLastFrame := FCurrentFrame;
+    end;
+  end;
+end;
+
+procedure TGLActorProxy.SetAnimationRange(startIndex, endIndex : Integer);
+begin
+  FStartFrame := startIndex;
+  FEndFrame := endIndex;
 end;
 
 procedure TGLActorProxy.SetStoredBoneNames(const Value: TStrings);

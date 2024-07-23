@@ -67,7 +67,6 @@ begin
   result := Integer(p);
 end;
 
-{
 function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; cdecl;
 var
   p: TGLActorProxy;
@@ -76,9 +75,7 @@ begin
   p.SwitchToAnimation(trunc(anim));
   result := 1.0;
 end;
-}
 
-{
 function ActorProxyObjectSetAnimationRange(proxy, startf, endf: real): real; cdecl;
 var
   p: TGLActorProxy;
@@ -87,9 +84,7 @@ begin
   p.SetAnimationRange(trunc(startf), trunc(endf));
   result := 1.0;
 end;
-}
 
-{
 function ActorProxyObjectSetInterval(proxy, interval: real): real; cdecl;
 var
   p: TGLActorProxy;
@@ -98,4 +93,4 @@ begin
   p.Interval := trunc(interval);
   result := 1.0;
 end;
-}
+
