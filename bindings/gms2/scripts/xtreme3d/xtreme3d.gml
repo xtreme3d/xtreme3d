@@ -15,6 +15,8 @@ function dll_init(dll) {
 	// Milestone II function:
 	global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
+	global._EngineGetLastRaycastPosition = external_define(dll, "EngineGetLastRaycastPosition", dll_cdecl, ty_real, 1, ty_real);
+	global._EngineGetLastRaycastNormal = external_define(dll, "EngineGetLastRaycastNormal", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Pak
 	global._SetPakArchive = external_define(dll, "SetPakArchive", dll_cdecl, ty_real, 1, ty_string);
@@ -489,8 +491,6 @@ function dll_init(dll) {
 	global._ObjectGetGroundHeight = external_define(dll, "ObjectGetGroundHeight", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectSceneRaycast = external_define(dll, "ObjectSceneRaycast", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ObjectRaycast = external_define(dll, "ObjectRaycast", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	global._ObjectGetCollisionPosition = external_define(dll, "ObjectGetCollisionPosition", dll_cdecl, ty_real, 1, ty_real);
-	global._ObjectGetCollisionNormal = external_define(dll, "ObjectGetCollisionNormal", dll_cdecl, ty_real, 1, ty_real);
 	global._ObjectSetMaterial = external_define(dll, "ObjectSetMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._ObjectGetMaterial = external_define(dll, "ObjectGetMaterial", dll_cdecl, ty_string, 1, ty_real);
 	global._ObjectGetDistance = external_define(dll, "ObjectGetDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -1669,6 +1669,14 @@ function EngineSetMaxLights(aLights) {
 
 function EngineGetTimeStep() {
 	return external_call(global._EngineGetTimeStep);
+}
+
+function EngineGetLastRaycastPosition(aInd) {
+	return external_call(global._EngineGetLastRaycastPosition, aInd);
+}
+
+function EngineGetLastRaycastNormal(aInd) {
+	return external_call(global._EngineGetLastRaycastNormal, aInd);
 }
 
 function FBOCreate(aWidth, aHeight, aParent) {
@@ -3209,14 +3217,6 @@ function ObjectSceneRaycast(aObj, aTarget) {
 
 function ObjectRaycast(aObj, aTarget) {
 	return external_call(global._ObjectRaycast, aObj, aTarget);
-}
-
-function ObjectGetCollisionPosition(aInd) {
-	return external_call(global._ObjectGetCollisionPosition, aInd);
-}
-
-function ObjectGetCollisionNormal(aInd) {
-	return external_call(global._ObjectGetCollisionNormal, aInd);
 }
 
 function ObjectSetMaterial(aObj, aMat) {

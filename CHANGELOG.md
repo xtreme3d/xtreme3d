@@ -31,6 +31,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `OdeAddCone` was removed
 - New function `BaseMeshBuildSilhouetteConnectivityData`
 - New function `ActorSetReference`
+- `ObjectGetCollisionPosition` and `ObjectGetCollisionNormal` are now `EngineGetLastRaycastPosition` and `EngineGetLastRaycastNormal`
 - New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`
 - New functions `ObjectListCreate`, `ObjectListAdd`, `ObjectListGetCount`
 - FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`

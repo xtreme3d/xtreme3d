@@ -29,9 +29,9 @@ else {
 
 if ObjectSceneRaycast(camera, raycastObjects)
 {    
-    var rx = ObjectGetCollisionPosition(0);
-    var ry = ObjectGetCollisionPosition(1);
-    var rz = ObjectGetCollisionPosition(2);
+    var rx = EngineGetLastRaycastPosition(0);
+    var ry = EngineGetLastRaycastPosition(1);
+    var rz = EngineGetLastRaycastPosition(2);
     ObjectSetPosition(sphereMarker, rx, ry, rz);
 }
 

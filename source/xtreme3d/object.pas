@@ -382,19 +382,7 @@ begin
   result:=Integer(res);
 end;
 
-function ObjectGetCollisionPosition(ind: real): real; cdecl;
-begin
-  result := collisionPoint.V[Trunc(ind)];
-end;
-
-function ObjectGetCollisionNormal(ind: real): real; cdecl;
-begin
-  result := collisionNormal.V[Trunc(ind)];
-end;
-
-//TODO:
-//ObjectResetCollision()
-//ObjectMoveToCollision(obj)
+// TODO: ObjectMoveToLastRaycastPosition(obj)
 
 function ObjectSetMaterial(obj: real; mat: PAnsiChar): real; cdecl;
 var

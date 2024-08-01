@@ -100,6 +100,19 @@ begin
     result := elapsedMsec * 0.001;
 end;
 
+function EngineGetLastRaycastPosition(ind: real): real; cdecl;
+begin
+  result := collisionPoint.V[Trunc(ind)];
+end;
+
+function EngineGetLastRaycastNormal(ind: real): real; cdecl;
+begin
+  result := collisionNormal.V[Trunc(ind)];
+end;
+
+//TODO:
+//EngineResetRaycastData()
+
 function PointerToReal(p: pchar): real; cdecl;
 begin
     result := real(NativeInt(p));

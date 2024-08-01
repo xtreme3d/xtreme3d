@@ -512,6 +512,7 @@ exports
     EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
     EngineShowLoadingErrors, EngineSetMaxLights, EngineGetTimeStep,
+    EngineGetLastRaycastPosition, EngineGetLastRaycastNormal,
     PointerToReal,
 
     //Pak
@@ -690,7 +691,6 @@ exports
     ObjectSetUpVector, ObjectPointToObject,
     ObjectShowAxes,
     ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
-    ObjectGetCollisionPosition, ObjectGetCollisionNormal,
     ObjectSetMaterial, ObjectGetMaterial,
     ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
     ObjectGetDistance,
