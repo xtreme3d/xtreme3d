@@ -21,6 +21,8 @@ ViewerEnableVSync(viewer, vsmNoSync);
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
 
+kraft = KraftCreate();
+
 global.preprocess = DummycubeCreate(0);
 global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
@@ -121,20 +123,25 @@ plane = PlaneCreate(0, 20, 20, 10, 10, raycastObjects);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
-MaterialCreate("mWater", "textures/envmap.jpg");
-MaterialSetTextureMappingMode("mWater", tmmSphere);
-MaterialSetOptions("mWater", true, true);
+rbPlane = KraftCreateRigidBody(kraft, 1);
+sPlane = KraftCreateShapePlane(rbPlane, 0, 1, 0, 0);
+KraftRigidBodyFinish(rbPlane);
 
-/*
-water = WaterCreate(global.scene);
-ObjectScale(water, 5, 5, 5);
-ObjectSetPositionY(water, 0.5);
-ObjectSetMaterial(water, "mWater");
-*/
-//WaterCreateRandomRipple(water);
-//WaterSetLinearWaveFrequency(water, 1.0);
-//WaterSetLinearWaveHeight(water, 1.0);
-//WaterSetRainTimeInterval(water, 0);
+MaterialCreate("mCrate", "textures/crate.png")
+MaterialSetAmbientColor("mCrate", c_ltgray, 1.0)
+
+var i, cube, rbCube, sCube;
+for (i = 0; i < 5; i += 1)
+{
+    var cube = CubeCreate(1, 1, 1, raycastObjects);
+    ObjectSetPosition(cube, -2, 2 + i * 1.8, i * 0.05);
+    ObjectSetMaterial(cube, "mCrate");
+    rbCube = KraftCreateRigidBody(kraft, 2);
+    KraftObjectSetRigidBody(cube, rbCube);
+    sCube = KraftCreateShapeBox(rbCube, 0.5, 0.5, 0.5);
+    KraftShapeSetDensity(sCube, 200.0);
+    KraftRigidBodyFinish(rbCube);
+}
 
 matlib2 = MaterialLibraryCreate();
 

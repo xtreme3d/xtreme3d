@@ -1104,6 +1104,50 @@ function dll_init(dll) {
 	global._ClipPlaneCreate = external_define(dll, "ClipPlaneCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._ClipPlaneEnable = external_define(dll, "ClipPlaneEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ClipPlaneSetPlane = external_define(dll, "ClipPlaneSetPlane", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	
+	// Kraft
+	global._KraftCreate = external_define(dll, "KraftCreate", dll_cdecl, ty_real, 0);
+	global._KraftStep = external_define(dll, "KraftStep", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftGetRayHitPosition = external_define(dll, "KraftGetRayHitPosition", dll_cdecl, ty_real, 1, ty_real);
+	global._KraftGetRayHitNormal = external_define(dll, "KraftGetRayHitNormal", dll_cdecl, ty_real, 1, ty_real);
+	global._KraftCreateRigidBody = external_define(dll, "KraftCreateRigidBody", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodyFinish = external_define(dll, "KraftRigidBodyFinish", dll_cdecl, ty_real, 1, ty_real);
+	global._KraftRigidBodySetGravity = external_define(dll, "KraftRigidBodySetGravity", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodySetPosition = external_define(dll, "KraftRigidBodySetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyGetPosition = external_define(dll, "KraftRigidBodyGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodySetLinearVelocity = external_define(dll, "KraftRigidBodySetLinearVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyGetLinearVelocity = external_define(dll, "KraftRigidBodyGetLinearVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodySetRotation = external_define(dll, "KraftRigidBodySetRotation", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyGetDirection = external_define(dll, "KraftRigidBodyGetDirection", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodyGetUp = external_define(dll, "KraftRigidBodyGetUp", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodyGetRight = external_define(dll, "KraftRigidBodyGetRight", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodySetAngularVelocity = external_define(dll, "KraftRigidBodySetAngularVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyGetAngularVelocity = external_define(dll, "KraftRigidBodyGetAngularVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftRigidBodyAddForce = external_define(dll, "KraftRigidBodyAddForce", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyAddForceAtPos = external_define(dll, "KraftRigidBodyAddForceAtPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRigidBodyAddRelForce = external_define(dll, "KraftRigidBodyAddRelForce", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftRayCast = external_define(dll, "KraftRayCast", dll_cdecl, ty_real, 8, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._KraftObjectSetRigidBody = external_define(dll, "KraftObjectSetRigidBody", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateShapeSphere = external_define(dll, "KraftCreateShapeSphere", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateShapeBox = external_define(dll, "KraftCreateShapeBox", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftCreateShapePlane = external_define(dll, "KraftCreateShapePlane", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._KraftCreateShapeCapsule = external_define(dll, "KraftCreateShapeCapsule", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._KraftCreateShapeMesh = external_define(dll, "KraftCreateShapeMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftShapeSetDensity = external_define(dll, "KraftShapeSetDensity", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftShapeSetFriction = external_define(dll, "KraftShapeSetFriction", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftShapeSetRestitution = external_define(dll, "KraftShapeSetRestitution", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftShapeSetPosition = external_define(dll, "KraftShapeSetPosition", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftShapeGetPosition = external_define(dll, "KraftShapeGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftShapeSetRayCastable = external_define(dll, "KraftShapeSetRayCastable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateJointDistance = external_define(dll, "KraftCreateJointDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateJointRope = external_define(dll, "KraftCreateJointRope", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._KraftCreateJointBallSocket = external_define(dll, "KraftCreateJointBallSocket", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateJointFixed = external_define(dll, "KraftCreateJointFixed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftCreateJointHinge = external_define(dll, "KraftCreateJointHinge", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._KraftJointSetAnchor1 = external_define(dll, "KraftJointSetAnchor1", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftJointSetAnchor2 = external_define(dll, "KraftJointSetAnchor2", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftJointSetHingeAxis1 = external_define(dll, "KraftJointSetHingeAxis1", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._KraftJointSetHingeAxis2 = external_define(dll, "KraftJointSetHingeAxis2", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {

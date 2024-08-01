@@ -42,6 +42,8 @@ VerletConstraintSetPosition(playerCollider,
 	ObjectGetAbsolutePosition(camera, 2));
 */
 
+KraftStep(kraft, dt);
+
 EngineUpdate(dt);
 //VerletWorldUpdate(verlet, current_time / 1000);
 

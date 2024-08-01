@@ -137,8 +137,10 @@ uses
   GLHUDText2,
   GLClipPlane,
   Hashes,
-  sdl2,
-  sdl2_ttf;
+  SDL2,
+  SDL2_TTF,
+  Kraft,
+  GLKraft;
 
 type
     TEmpty = class(TComponent)
@@ -164,8 +166,8 @@ var
     odeRagdollWorld: TGLODERagdollWorld;
     jointList: TGLODEJointList;
 
-    //kraftRaycastPoint: TKraftVector3;
-    //kraftRaycastNormal: TKraftVector3;
+    kraftRaycastPoint: TKraftVector3;
+    kraftRaycastNormal: TKraftVector3;
 
     previousTicks: Longint;
 
@@ -498,7 +500,7 @@ end;
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
 {$I 'xtreme3d/ode'}
-//{$I 'xtreme3d/kraft'}
+{$I 'xtreme3d/kraft'}
 {$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
@@ -522,15 +524,12 @@ exports
     // Viewer
     ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
     ViewerRenderObject, ViewerRenderToFile,
-    //ViewerRenderEx,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
     ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,
     ViewerScreenToWorld, ViewerWorldToScreen, ViewerCopyToTexture,
     ViewerGetPickedObject, ViewerGetPickedObjectsList, ViewerScreenToVector,
     ViewerVectorToScreen, ViewerPixelToDistance, ViewerSetAntiAliasing,
-    //ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
-    //ViewerSetAutoRender, ViewerSetOverrideMaterial,
     ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
     ViewerPixelRayToWorld, ViewerShadeModel,
@@ -998,28 +997,28 @@ exports
     VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
 
     // PickList
-    PickListCreate, PickListClear, PickListGetCount, PickListGetHit;
+    PickListCreate, PickListClear, PickListGetCount, PickListGetHit,
 
     // Kraft
-    //KraftCreate, KraftStep,
-    //KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
-    //KraftCreateRigidBody, KraftRigidBodyFinish,
-    //KraftRigidBodySetGravity,
-    //KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
-    //KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
-    //KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
-    //KraftRigidBodySetRotation,
-    //KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
-    //KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
-    //KraftObjectSetRigidBody,
-    //KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
-    //KraftCreateShapeMesh,
-    //KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution,
-    //KraftShapeSetPosition, KraftShapeGetPosition,
-    //KraftShapeSetRayCastable,
-    //KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
-    //KraftCreateJointHinge,
-    //KraftJointSetAnchor1, KraftJointSetAnchor2,
-    //KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
+    KraftCreate, KraftStep,
+    KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+    KraftCreateRigidBody, KraftRigidBodyFinish,
+    KraftRigidBodySetGravity,
+    KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
+    KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
+    KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
+    KraftRigidBodySetRotation,
+    KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
+    KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
+    KraftObjectSetRigidBody,
+    KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
+    KraftCreateShapeMesh,
+    KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution,
+    KraftShapeSetPosition, KraftShapeGetPosition,
+    KraftShapeSetRayCastable,
+    KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
+    KraftCreateJointHinge,
+    KraftJointSetAnchor1, KraftJointSetAnchor2,
+    KraftJointSetHingeAxis1, KraftJointSetHingeAxis2;
 begin
 end.
