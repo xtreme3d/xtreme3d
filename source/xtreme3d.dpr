@@ -941,8 +941,9 @@ exports
 
     // ShadowMap
     ShadowMapCreate, ShadowMapUpdate,
-    ShadowCameraCreate,
-    //ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
+    ShadowMapSetCamera, ShadowMapSetViewer, ShadowMapSetFBO,
+    ShadowCameraCreate, ShadowCameraSetProjectionSize,
+    ShadowCameraSetZClippingPlanes,
 
     // Movement
     MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,

@@ -874,7 +874,12 @@ function dll_init(dll) {
 	// Milestone II functions:
 	global._ShadowMapCreate = external_define(dll, "ShadowMapCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._ShadowMapUpdate = external_define(dll, "ShadowMapUpdate", dll_cdecl, ty_real, 1, ty_real);
+	global._ShadowMapSetCamera = external_define(dll, "ShadowMapSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowMapSetViewer = external_define(dll, "ShadowMapSetViewer", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowMapSetFBO = external_define(dll, "ShadowMapSetFBO", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ShadowCameraCreate = external_define(dll, "ShadowCameraCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._ShadowCameraSetProjectionSize = external_define(dll, "ShadowCameraSetProjectionSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ShadowCameraSetZClippingPlanes = external_define(dll, "ShadowCameraSetZClippingPlanes", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
 	// Tree
 	global._TreeCreate = external_define(dll, "TreeCreate", dll_cdecl, ty_real, 1, ty_real);
