@@ -521,7 +521,7 @@ exports
     // Viewer
     ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
     ViewerRenderObject, ViewerRenderToFile,
-    // ViewerRenderToFilePNG, ViewerRenderEx,
+    //ViewerRenderEx,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
     ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,

@@ -49,77 +49,30 @@ begin
     result := 1.0;
 end;
 
-function ViewerRenderToFile(viewer: real; fname: PAnsiChar): real; cdecl;
-var
-    bmp: TBitmap;
-begin
-    bmp := TGLSceneViewer(RealToPtr(viewer)).Buffer.CreateSnapShotBitmap;
-    bmp.SaveToFile(StrConv(fname));
-    bmp.Free;
-    result := 1.0;
-end;
-
-{
-// TODO
-function ViewerRenderToFilePNG(v: real; fname: PAnsiChar): real; cdecl;
+function ViewerRenderToFile(v: real; fname: PAnsiChar): real; cdecl;
 var
     viewer: TGLSceneViewer;
+    filename, ext: string;
     bmp: TBitmap;
-    bufw, bufb: TBitmap;
     png: TPNGObject;
-    i, j: integer;
-    pw, pb, pr, pa: pByteArray;
-    f: single;
-    oldColor: TColor;
 begin
-    viewer := TGLSceneViewer(ReatToPtr(v));
-    oldColor := viewer.Buffer.BackgroundColor;
-    viewer.Buffer.BackgroundColor := $ffffff;
-    viewer.Buffer.Render;
-    bufw := viewer.Buffer.CreateSnapShotBitmap;
-
-    viewer.Buffer.BackgroundColor := 0;
-    viewer.Buffer.Render;
-    bufb := viewer.Buffer.CreateSnapShotBitmap;
-
-    viewer.Buffer.BackgroundColor := oldColor;
-    viewer.Buffer.Render;
-    bmp := TBitmap.Create;
-    bmp.PixelFormat := pf32bit;
-    bmp.Transparent := true;
-    bmp.Width := viewer.Width;
-    bmp.Height := viewer.Height;
-
-    for j := 0 to bufw.Height - 1 do begin
-        pw := bufw.ScanLine[j];
-        pb := bufb.ScanLine[j];
-        pr := bmp.ScanLine[j];
-        for i := 0 to bufw.Width - 1 do begin
-            // alpha
-            pr[i * 4 + 3] := pb[i * 4 + 1] - pw[i * 4 + 1] + 255;
-            // color
-            f := 255 / pr[i * 4 + 3];
-            pr[i * 4] := round(ClampValue( pb[i * 4] * f, 0, 255));
-            pr[i * 4 + 1] := round(ClampValue( pb[i * 4 + 1] * f, 0, 255));
-            pr[i * 4 + 2] := round(ClampValue( pb[i * 4 + 2] * f, 0, 255));
-        end;
+    viewer := TGLSceneViewer(RealToPtr(v));
+    filename := StrConv(fname);
+    bmp := viewer.Buffer.CreateSnapShotBitmap;
+    ext := ExtractFileExt(filename);
+    if CompareText(ext, '.png') = 0 then begin
+      png := TPNGObject.Create;
+      png.Assign(bmp);
+      png.CreateAlpha;
+      png.SaveToFile(filename);
+      png.Free;
+    end
+    else begin
+      bmp.SaveToFile(filename)
     end;
-    png := TPNGObject.Create;
-    png.Assign(bmp);
-    png.CreateAlpha;
-    for j := 0 to png.Height - 1 do begin
-        pr := bmp.ScanLine[j];
-        pa := png.AlphaScanline[j];
-        for i := 0 to png.Width - 1 do begin
-           pa[i] := pr[i * 4 + 3];
-        end;
-    end;
-    png.SaveToFile(String(AnsiString(fname)));
-    png.Free;
     bmp.Free;
     result := 1.0;
 end;
-}
 
 {
 // TODO

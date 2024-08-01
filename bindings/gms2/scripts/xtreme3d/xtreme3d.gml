@@ -30,11 +30,9 @@ function dll_init(dll) {
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	// Milestone II functions:
-	/*
-	global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
-	*/
+	// Removed:
+	//global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	//global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -4964,9 +4962,11 @@ function ViewerRenderToFile(aViewer, aFname) {
 	return external_call(global._ViewerRenderToFile, aViewer, aFname);
 }
 
+/*
 function ViewerRenderToFilePNG(aViewer, aFname) {
 	return external_call(global._ViewerRenderToFilePNG, aViewer, aFname);
 }
+*/
 
 function ViewerRenderEx(aViewer, aObj, aClear, aSwap, aUpdatefps) {
 	return external_call(global._ViewerRenderEx, aViewer, aObj, aClear, aSwap, aUpdatefps);

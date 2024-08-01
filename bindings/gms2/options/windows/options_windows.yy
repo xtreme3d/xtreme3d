@@ -8,7 +8,7 @@
   "option_windows_copyright_info":"",
   "option_windows_copy_exe_to_dest":true,
   "option_windows_description_info":"A GameMaker Studio 2 Game",
-  "option_windows_disable_sandbox":false,
+  "option_windows_disable_sandbox":true,
   "option_windows_display_cursor":true,
   "option_windows_display_name":"Created with GameMaker Studio 2",
   "option_windows_enable_steam":false,
