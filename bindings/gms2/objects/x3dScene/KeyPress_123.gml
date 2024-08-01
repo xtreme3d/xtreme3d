@@ -1,15 +1,15 @@
 /// @description Take screenshot
-var x3dHomePath = environment_get_variable("userprofile") + "/Documents/Xtreme3D/screenshots";
-if (not directory_exists(x3dHomePath))
+var screenshotsPath = environment_get_variable("userprofile") + "/Documents/Xtreme3D/screenshots";
+if (not directory_exists(screenshotsPath))
 {
-	directory_create(x3dHomePath);
+	directory_create(screenshotsPath);
 }
 
 var screenshotNumber = 0;
 var scrFilename;
 do 
 {
-	scrFilename = x3dHomePath + "/screenshot_" + string(screenshotNumber) + ".png";
+	scrFilename = screenshotsPath + "/screenshot_" + string(screenshotNumber) + ".png";
 	screenshotNumber += 1;
 }
 until (not file_exists(scrFilename));
