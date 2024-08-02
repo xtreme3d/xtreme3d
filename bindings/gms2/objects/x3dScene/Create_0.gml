@@ -123,7 +123,7 @@ plane = PlaneCreate(0, 20, 20, 10, 10, raycastObjects);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
 
-rbPlane = KraftCreateRigidBody(kraft, 1);
+rbPlane = KraftCreateRigidBody(kraft, krbtStatic);
 sPlane = KraftCreateShapePlane(rbPlane, 0, 1, 0, 0);
 KraftRigidBodyFinish(rbPlane);
 
@@ -136,7 +136,7 @@ for (i = 0; i < 5; i += 1)
     var cube = CubeCreate(1, 1, 1, raycastObjects);
     ObjectSetPosition(cube, -2, 2 + i * 1.8, i * 0.05);
     ObjectSetMaterial(cube, "mCrate");
-    rbCube = KraftCreateRigidBody(kraft, 2);
+    rbCube = KraftCreateRigidBody(kraft, krbtDynamic);
     KraftObjectSetRigidBody(cube, rbCube);
     sCube = KraftCreateShapeBox(rbCube, 0.5, 0.5, 0.5);
     KraftShapeSetDensity(sCube, 200.0);
