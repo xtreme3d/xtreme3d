@@ -304,21 +304,18 @@ begin
   result := 1;
 end;
 
-{
 function GLSLShaderSetParameterShadowTexture(par, shadowmap: real; texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
   param := TGLSLShaderParameter(RealToPtr(par));
-  param.UniformType := uniformTexture2D;
+  param.UniformType := uniformShadowTexture;
   param.ShadowMap := TGLShadowMap(RealToPtr(shadowmap));
   param.UniformTexture := trunc(texUnit);
   param.Initialized := True;
   result := 1;
 end;
-}
 
-{
 function GLSLShaderSetParameterShadowMatrix(par, shadowmap: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
@@ -330,7 +327,6 @@ begin
   param.Initialized := True;
   result := 1;
 end;
-}
 
 function GLSLShaderSetParameterMatrix(par, obj: real): real; cdecl;
 var

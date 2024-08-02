@@ -760,7 +760,7 @@ exports
     GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
     GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
     GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
-    //GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
+    GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
     GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
     GLSLShaderSetParameterHasTextureEx,
     GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,

@@ -7,12 +7,10 @@ function dll_init(dll) {
 	// Update is deprecated, use EngineUpdate instead
 	global._EngineUpdate = external_define(dll, "EngineUpdate", dll_cdecl, ty_real, 1, ty_real);
 	// TrisRendered was removed
-	//global._TrisRendered = external_define(dll, "TrisRendered", dll_cdecl, ty_real, 0);
 	global._EngineSaveScene = external_define(dll, "EngineSaveScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineLoadScene = external_define(dll, "EngineLoadScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineRootObject = external_define(dll, "EngineRootObject", dll_cdecl, ty_real, 0);
 	global._EngineShowLoadingErrors = external_define(dll, "EngineShowLoadingErrors", dll_cdecl, ty_real, 1, ty_real);
-	// Milestone II function:
 	global._EngineSetMaxLights = external_define(dll, "EngineSetMaxLights", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	global._EngineGetLastRaycastPosition = external_define(dll, "EngineGetLastRaycastPosition", dll_cdecl, ty_real, 1, ty_real);
@@ -32,9 +30,8 @@ function dll_init(dll) {
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	// Removed:
-	//global._ViewerRenderToFilePNG = external_define(dll, "ViewerRenderToFilePNG", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	//global._ViewerRenderEx = external_define(dll, "ViewerRenderEx", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	// ViewerRenderToFilePNG was removed
+	// ViewerRenderEx was removed
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -56,7 +53,6 @@ function dll_init(dll) {
 	global._ViewerPixelToDistance = external_define(dll, "ViewerPixelToDistance", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	// Additional constants: ViewerSetAntiAliasing
 	global._ViewerSetAntiAliasing = external_define(dll, "ViewerSetAntiAliasing", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerIsOpenGLExtensionSupported = external_define(dll, "ViewerIsOpenGLExtensionSupported", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -114,7 +110,6 @@ function dll_init(dll) {
 	global._DceStaticSetFriction = external_define(dll, "DceStaticSetFriction", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DceStaticSetBounceFactor = external_define(dll, "DceStaticSetBounceFactor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DceDynamicGetVelocity = external_define(dll, "DceDynamicGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._DceDynamicSetAbsVelocity = external_define(dll, "DceDynamicSetAbsVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._DceDynamicGetAbsVelocity = external_define(dll, "DceDynamicGetAbsVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._DceDynamicApplyAbsImpulse = external_define(dll, "DceDynamicApplyAbsImpulse", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
@@ -188,7 +183,6 @@ function dll_init(dll) {
 	global._LightGetColor = external_define(dll, "LightGetColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetAttenuation = external_define(dll, "LightGetAttenuation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LightGetShining = external_define(dll, "LightGetShining", dll_cdecl, ty_real, 1, ty_real);
-	// Milestone II functions:
 	global._LightFXCreate = external_define(dll, "LightFXCreate", dll_cdecl, ty_real, 1, ty_real);
 	
 	global._ObjectListCreate = external_define(dll, "ObjectListCreate", dll_cdecl, ty_real, 0);
@@ -226,8 +220,6 @@ function dll_init(dll) {
 	global._SpaceTextSetExtrusion = external_define(dll, "SpaceTextSetExtrusion", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpaceTextSetFont = external_define(dll, "SpaceTextSetFont", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpaceTextSetText = external_define(dll, "SpaceTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
-
-	// Milestone II functions:
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	//TTFontSetEncoding was removed
@@ -246,7 +238,6 @@ function dll_init(dll) {
 	global._SpriteRotate = external_define(dll, "SpriteRotate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpriteMirror = external_define(dll, "SpriteMirror", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	//SpriteNoZWrite was removed, use MaterialSetDepthWrite instead
-	// Milestone II functions:
 	global._SpriteCreateEx = external_define(dll, "SpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._HUDSpriteCreateEx = external_define(dll, "HUDSpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -254,7 +245,6 @@ function dll_init(dll) {
 	global._SpriteSetOrigin = external_define(dll, "SpriteSetOrigin", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
 	// HUDShape
-	// Milestone II functions:
 	global._HUDShapeRectangleCreate = external_define(dll, "HUDShapeRectangleCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._HUDShapeCircleCreate = external_define(dll, "HUDShapeCircleCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._HUDShapeLineCreate = external_define(dll, "HUDShapeLineCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -562,7 +552,6 @@ function dll_init(dll) {
 	global._MaterialLibraryDeleteUnused = external_define(dll, "MaterialLibraryDeleteUnused", dll_cdecl, ty_real, 1, ty_real);
 	global._MaterialLibraryHasMaterial = external_define(dll, "MaterialLibraryHasMaterial", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._MaterialLibraryLoadScript = external_define(dll, "MaterialLibraryLoadScript", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	// Milestone II function:
 	global._MaterialLibraryGetTextureByName = external_define(dll, "MaterialLibraryGetTextureByName", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._MaterialCreate = external_define(dll, "MaterialCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialDestroy = external_define(dll, "MaterialDestroy", dll_cdecl, ty_real, 1, ty_string);
@@ -592,9 +581,7 @@ function dll_init(dll) {
 	global._MaterialSetFaceCulling = external_define(dll, "MaterialSetFaceCulling", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialSetSecondTexture = external_define(dll, "MaterialSetSecondTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialSetTextureFormat = external_define(dll, "MaterialSetTextureFormat", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	// Milestone II function:
 	global._MaterialSetTextureFormatEx = external_define(dll, "MaterialSetTextureFormatEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	
 	global._MaterialSetTextureCompression = external_define(dll, "MaterialSetTextureCompression", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureRequiredMemory = external_define(dll, "MaterialTextureRequiredMemory", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialSetFilteringQuality = external_define(dll, "MaterialSetFilteringQuality", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -611,7 +598,6 @@ function dll_init(dll) {
 	global._MaterialGetTextureWidth = external_define(dll, "MaterialGetTextureWidth", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
-	// Milestone II functions:
 	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -636,7 +622,6 @@ function dll_init(dll) {
 	// New function MaterialSetDepthTest
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._MaterialSetTextureCompareMode = external_define(dll, "MaterialSetTextureCompareMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	
 	// Shaders
@@ -651,7 +636,6 @@ function dll_init(dll) {
 	global._BumpShaderSetMaxLights = external_define(dll, "BumpShaderSetMaxLights", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderUseParallax = external_define(dll, "BumpShaderUseParallax", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetParallaxOffset = external_define(dll, "BumpShaderSetParallaxOffset", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._BumpShaderSetShadowMap = external_define(dll, "BumpShaderSetShadowMap", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._BumpShaderSetShadowBlurRadius = external_define(dll, "BumpShaderSetShadowBlurRadius", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
@@ -683,12 +667,10 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameter4f = external_define(dll, "GLSLShaderSetParameter4f", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._GLSLShaderSetParameterTexture = external_define(dll, "GLSLShaderSetParameterTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
 	global._GLSLShaderSetParameterSecondTexture = external_define(dll, "GLSLShaderSetParameterSecondTexture", dll_cdecl, ty_real, 3, ty_real, ty_string, ty_real);
-	// Milestone II functions:
-	//global._GLSLShaderSetParameterShadowTexture = external_define(dll, "GLSLShaderSetParameterShadowTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//global._GLSLShaderSetParameterShadowMatrix = external_define(dll, "GLSLShaderSetParameterShadowMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetParameterShadowTexture = external_define(dll, "GLSLShaderSetParameterShadowTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._GLSLShaderSetParameterShadowMatrix = external_define(dll, "GLSLShaderSetParameterShadowMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameterMatrix = external_define(dll, "GLSLShaderSetParameterMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameterInvMatrix = external_define(dll, "GLSLShaderSetParameterInvMatrix", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._GLSLShaderSetParameterFBOColorTexture = external_define(dll, "GLSLShaderSetParameterFBOColorTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._GLSLShaderSetParameterFBODepthTexture = external_define(dll, "GLSLShaderSetParameterFBODepthTexture", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._GLSLShaderSetParameterViewMatrix = external_define(dll, "GLSLShaderSetParameterViewMatrix", dll_cdecl, ty_real, 1, ty_real);
@@ -830,7 +812,6 @@ function dll_init(dll) {
 	global._MultiProxyObjectCreate = external_define(dll, "MultiProxyObjectCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._MultiProxyObjectAddTarget = external_define(dll, "MultiProxyObjectAddTarget", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ActorProxyObjectCreate = external_define(dll, "ActorProxyObjectCreate", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._ActorProxyObjectSwitchToAnimation = external_define(dll, "ActorProxyObjectSwitchToAnimation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ActorProxyObjectSetAnimationRange = external_define(dll, "ActorProxyObjectSetAnimationRange", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._ActorProxyObjectSetInterval = external_define(dll, "ActorProxyObjectSetInterval", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -874,12 +855,13 @@ function dll_init(dll) {
 	global._ShadowvolumeSetMode = external_define(dll, "ShadowvolumeSetMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// ShadowMap
-	// Milestone II functions:
 	global._ShadowMapCreate = external_define(dll, "ShadowMapCreate", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._ShadowMapUpdate = external_define(dll, "ShadowMapUpdate", dll_cdecl, ty_real, 1, ty_real);
 	global._ShadowMapSetCamera = external_define(dll, "ShadowMapSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ShadowMapSetViewer = external_define(dll, "ShadowMapSetViewer", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ShadowMapSetFBO = external_define(dll, "ShadowMapSetFBO", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// ShadowCamera
 	global._ShadowCameraCreate = external_define(dll, "ShadowCameraCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._ShadowCameraSetProjectionSize = external_define(dll, "ShadowCameraSetProjectionSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ShadowCameraSetZClippingPlanes = external_define(dll, "ShadowCameraSetZClippingPlanes", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -913,7 +895,6 @@ function dll_init(dll) {
 	global._WaterSetViscosity = external_define(dll, "WaterSetViscosity", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetElastic = external_define(dll, "WaterSetElastic", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetResolution = external_define(dll, "WaterSetResolution", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// Milestone II functions:
 	global._WaterSetLinearWaveHeight = external_define(dll, "WaterSetLinearWaveHeight", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetLinearWaveFrequency = external_define(dll, "WaterSetLinearWaveFrequency", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
@@ -1038,7 +1019,6 @@ function dll_init(dll) {
 	global._OdeRagdollBuild = external_define(dll, "OdeRagdollBuild", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeRagdollEnable = external_define(dll, "OdeRagdollEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._OdeRagdollUpdate = external_define(dll, "OdeRagdollUpdate", dll_cdecl, ty_real, 1, ty_real);
-	// Milestone II functions:
 	global._OdeDynamicSetVelocity = external_define(dll, "OdeDynamicSetVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicSetAngularVelocity = external_define(dll, "OdeDynamicSetAngularVelocity", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicGetVelocity = external_define(dll, "OdeDynamicGetVelocity", dll_cdecl, ty_real, 2, ty_real, ty_real);
