@@ -8,7 +8,6 @@ begin
   b.RenderHeight := 256;
   b.Preset := pGlossy;
   b.Visible := True;
-  //b.BlurDeltaTime := 0.01;
   result:=ObjToReal(b);
 end;
 

@@ -47,8 +47,7 @@ begin
   result := ObjToReal(path);
 end;
 
-// After switching active path, MovementStart should be called
-// to start movement
+// After switching active path, MovementStart should be called to start movement
 function MovementSetActivePath(movement,ind: real): real; cdecl;
 var
   mov: TGLMovement;

@@ -52,14 +52,6 @@ begin
     result := 1.0;
 end;
 
-{
-// TODO:
-function TrisRendered: real; cdecl;
-begin
-    result := 1.0;
-end;
-}
-
 function EngineSaveScene(filename: PAnsiChar): real; cdecl;
 begin
     scene.SaveToTextFile(StrConv(filename));

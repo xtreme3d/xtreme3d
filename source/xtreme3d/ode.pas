@@ -115,7 +115,6 @@ begin
   result := 1.0;
 end;
 
-// New function
 // Note: Terrain/Trimesh collision is not supported
 function OdeTerrainCreate(terr: real): real; cdecl;
 var
@@ -126,7 +125,6 @@ begin
   result := 1.0;
 end;
 
-// New function
 function OdeDynamicCalculateMass(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;

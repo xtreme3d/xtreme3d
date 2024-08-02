@@ -512,17 +512,6 @@ var
   paramFogEnabled: TGLSLShaderParameter;
   paramLightingEnabled: TGLSLShaderParameter;
 begin
-  {
-  if not
-    (GL_ARB_shader_objects and
-     GL_ARB_vertex_shader and
-     GL_ARB_fragment_shader) then begin
-      ShowMessage('GL_ARB_shader_objects, GL_ARB_vertex_shader, GL_ARB_fragment_shader required');
-      result := 0;
-      Exit;
-  end;
-  }
-
   bump := TGLSLShader.Create(scene);
   bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
 

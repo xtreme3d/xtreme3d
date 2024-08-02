@@ -324,7 +324,6 @@ begin
   for j:=0 to 3 do
     for i:=0 to 3 do
       m3.V[i].V[j] := m1.V[i].V[j] + (m2.V[i].V[j] - m1.V[i].V[j]) * GLActor1.CurrentFrameDelta;
-  //GLObject.Matrix:=m3;
   GLObject.SetMatrix(m3);
   result:=1;
 end;
@@ -444,7 +443,6 @@ var
   act: TGLActor;
 begin
   act:=TGLActor(RealToPtr(actor));
-  //act.Animations.Items[Trunc(index)].Destroy;
   act.Animations.Delete(Trunc(index));
   result := 1;
 end;

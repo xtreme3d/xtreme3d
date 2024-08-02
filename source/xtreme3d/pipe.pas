@@ -1,3 +1,5 @@
+// Pipe functions by FireRun
+
 function PipeCreate(divs,slic, parent: real): real; cdecl;
 var
   pipe: TGLPipe;
@@ -9,7 +11,6 @@ begin
 	
 	pipe.Division:=trunc(divs);
 	pipe.Slices:=trunc(slic);
-	//pipe.NodesColorMode:=pncmAmbientAndDiffuse;
   result:=ObjToReal(pipe);
 end;
 

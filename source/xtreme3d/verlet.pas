@@ -1,3 +1,5 @@
+// Verlet functions by FireRun
+
 function VerletWorldCreate (iter,UpdateSpacePartion,drag: real): real; cdecl;
 var
   world: TGLVerletWorld;
@@ -22,7 +24,6 @@ begin
     AffineVectorMake(xmax, ymax, zmax), trunc(leaf), trunc(depth));
   result:=1;
 end;
-
 
 function VerletGetNodeCount (world: real): real; cdecl;
 var

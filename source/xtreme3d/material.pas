@@ -801,17 +801,6 @@ begin
   result:=1;
 end;
 
-{
-function MaterialCullFrontFaces(mtrl: PAnsiChar; culff: real): real; cdecl;
-var
-  mat:TGLLibMaterial;
-begin
-  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  mat.Material.CullFrontFaces := Boolean(Trunc(culff));
-  result:=1;
-end;
-}
-
 function MaterialSetDepthWrite(mtrl: PAnsiChar; mode: real): real; cdecl;
 var
   mat:TGLLibMaterial;
@@ -829,20 +818,6 @@ begin
   mat.Material.DepthProperties.DepthTest := Boolean(Trunc(mode));
   result:=1;
 end;
-
-{
-function MaterialSetTextureExFromLibrary(material1: pchar; matlib2: real; material2: pchar; index: real): real; cdecl;
-var
-  mat1, mat2: TGLLibMaterial;
-  mlib: TGLMaterialLibrary;
-begin
-  mat1 := matlib.Materials.GetLibMaterialByName(String(material1));
-  mlib := TGLMaterialLibrary(RealToPtr(matlib2));
-  mat2 := mlib.Materials.GetLibMaterialByName(String(material2));
-  mat1.Material.SetTextureN(RealToPtr(index), mat2.Material.Texture);
-  result := 1.0;
-end;
-}
 
 function MaterialGetNameFromLibrary(matlib, index: real): PAnsiChar; cdecl;
 var

@@ -2,15 +2,6 @@ function FBOCreate(w, h, parent: real): real; cdecl;
 var
   fbor: TGLFBORendererEx;
 begin
-  {
-  // TODO
-  if not GL_ARB_framebuffer_object then
-  begin
-      ShowMessage('GL_ARB_frame_buffer_object required');
-      result := 0;
-      Exit;
-  end;
-  }
   if not (parent = 0) then
         fbor := TGLFBORendererEx.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
     else

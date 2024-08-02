@@ -1,4 +1,4 @@
-// DCE functions wrapper by Hacker
+// DCE functions by Rutraple aka Hacker
 
 function DceManagerCreate: real; cdecl;
 var

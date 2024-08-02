@@ -47,7 +47,6 @@ begin
   result:=1.0;
 end;
 
-// MeshCountObjects = FreeformMeshObjectsCount
 function FreeformMeshObjectsCount(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
@@ -58,7 +57,6 @@ begin
   result:=mobj;
 end;
 
-// MeshSetVisible = FreeformMeshSetVisible
 function FreeformMeshSetVisible(ff,mesh,mode: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
@@ -73,7 +71,7 @@ function FreeformMeshSetSecondCoords(ff1,mesh1,ff2,mesh2: real): real; cdecl;
 var
   GLFreeForm1,GLFreeForm2: TGLFreeForm;
   tl: TGLAffineVectorList;
-  sc: TGLAffineVectorList; //TTexPointList;
+  sc: TGLAffineVectorList;
 begin
   GLFreeForm1:=TGLFreeForm(RealToPtr(ff1));
   GLFreeForm2:=TGLFreeForm(RealToPtr(ff2));
@@ -254,10 +252,9 @@ var
   mi, fgi, vi: Integer;
   mesh, mesh2: TGLMeshObject;
   fg: TFGVertexIndexList;
-  fg2: TFGVertexIndexList; //TFGVertexNormalTexIndexList;
+  fg2: TFGVertexIndexList;
   centroid: TAffineVector;
   one: TAffineVector;
-  //divisor: Single;
 begin
   ffm := TGLFreeForm(RealToPtr(freeform));
   one := AffineVectorMake(1, 1, 1);
@@ -303,7 +300,7 @@ begin
     mesh2.Mode := momFaceGroups;
     for fgi:=0 to mesh.FaceGroups.Count-1 do begin
       fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
-      fg2 := TFGVertexIndexList.CreateOwned(mesh2.FaceGroups); //TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
+      fg2 := TFGVertexIndexList.CreateOwned(mesh2.FaceGroups);
       fg2.Mode := fgmmTriangles;
       fg2.VertexIndices := fg.VertexIndices;
       //fg2.NormalIndices := fg.VertexIndices;
@@ -376,7 +373,6 @@ function FreeformMeshAddFaceGroup(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
   meshObj: TGLMeshObject;
-  //faceGroup: TFGVertexNormalTexIndexList;
 begin
   freeform := TGLFreeForm(RealToPtr(ff));
   meshObj := freeform.MeshObjects[Trunc(mesh)];
@@ -495,7 +491,6 @@ begin
   result := 1.0;
 end;
 
-// MeshCountVertices = FreeformMeshVerticesCount
 function FreeformMeshVerticesCount(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
@@ -521,7 +516,6 @@ begin
   result := 1.0;
 end;
 
-// MeshRotate = FreeformMeshRotate
 function FreeformMeshRotate(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
@@ -742,10 +736,6 @@ begin
   ffm.LightmapLibrary := TGLMaterialLibrary(Trunc(lmmatlib));
   result := 1.0;
 end;
-
-// Unimplemented:
-// MeshOptimize
-// MeshSmoothFaces
 
 function BaseMeshBuildSilhouetteConnectivityData(obj: real): real; cdecl;
 var

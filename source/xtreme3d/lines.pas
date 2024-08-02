@@ -83,7 +83,6 @@ begin
   if lna = 0 then li.NodesAspect := lnaInvisible;
   if lna = 1 then li.NodesAspect := lnaAxes;
   if lna = 2 then li.NodesAspect := lnaCube;
-  //if lna = 3 then li.NodesAspect := lnaDodecahedron;
   result := 1.0;
 end;
 

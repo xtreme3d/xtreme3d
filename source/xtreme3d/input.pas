@@ -1,3 +1,5 @@
+// Input functions by Rutraple aka Hacker
+
 function MouseGetPositionX: real; cdecl;
 var
     mouse: TPoint;

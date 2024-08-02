@@ -1,4 +1,3 @@
-
 function HUDShapeRectangleCreate(w, h, parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
