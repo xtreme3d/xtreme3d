@@ -15,7 +15,6 @@ begin
         viewer.Buffer.Lighting := true;
         viewer.ParentWindow := windowHandle;
         viewer.Buffer.ContextOptions := [roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting];
-        //viewer.AutoRender := False;
         result := ObjToReal(viewer);
     end
     else begin
@@ -73,21 +72,6 @@ begin
     bmp.Free;
     result := 1.0;
 end;
-
-{
-// TODO
-function ViewerRenderEx(viewer, obj, clear, swap, updateFPS: real): real; cdecl;
-begin
-  TGLSceneViewer(trunc64(viewer)).Buffer.SimpleRender2(TGLBaseSceneObject(trunc64(obj)),
-    True,
-    Boolean(trunc64(updateFPS)),
-    Boolean(trunc64(clear)),
-    Boolean(trunc64(clear)),
-    Boolean(trunc64(clear)),
-    Boolean(trunc64(swap)));
-  result:=1;
-end;
-}
 
 function ViewerResize(v, left, top, width, height: real): real; cdecl;
 var
@@ -250,43 +234,40 @@ begin
     result := 1.0;
 end;
 
-{
-// TODO:
 function ViewerGetGLSLSupported(viewer:real): real; cdecl;
+var
+   v: TGLSceneViewer;
 begin
-   if (GL_ARB_shader_objects and
-       GL_ARB_vertex_shader and
-       GL_ARB_fragment_shader) then
+   v := TGLSceneViewer(RealToPtr(viewer));
+   if (IsExtensionSupported(v, 'GL_ARB_shader_objects') and
+       IsExtensionSupported(v, 'GL_ARB_vertex_shader') and
+       IsExtensionSupported(v, 'GL_ARB_fragment_shader')) then
        Result := 1
    else
        Result := 0;
 end;
 
-function ViewerGetFBOSupported(viewer: real): real; cdecl;
+function ViewerGetFBOSupported(viewer:real): real; cdecl;
+var
+   v: TGLSceneViewer;
 begin
-   if GL_ARB_framebuffer_object then
+   v := TGLSceneViewer(RealToPtr(viewer));
+   if IsExtensionSupported(v, 'GL_ARB_framebuffer_object') then
        Result := 1
    else
        Result := 0;
 end;
 
 function ViewerGetVBOSupported(viewer:real): real; cdecl;
+var
+   v: TGLSceneViewer;
 begin
-   if GL_ARB_vertex_buffer_object then
+   v := TGLSceneViewer(RealToPtr(viewer));
+   if IsExtensionSupported(v, 'GL_ARB_vertex_buffer_object') then
        Result := 1
    else
        Result := 0;
 end;
-}
-
-{
-// TODO
-function ViewerSetAutoRender(viewer: Pointer; mode: integer): integer; cdecl;
-begin
-    TGLSceneViewer(viewer).AutoRender := Boolean(mode);
-    result := 1;
-end;
-}
 
 {
 // TODO

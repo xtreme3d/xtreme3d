@@ -531,6 +531,7 @@ exports
     ViewerGetPickedObject, ViewerGetPickedObjectsList, ViewerScreenToVector,
     ViewerVectorToScreen, ViewerPixelToDistance, ViewerSetAntiAliasing,
     ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
+    ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
     ViewerPixelRayToWorld, ViewerShadeModel,
 

@@ -12,7 +12,7 @@
 
 <A class=type>Класс: TGLSceneViewer</A><BR/><BR/>
 
-<A class=ntext>Видом (Viewer) в Xtreme3D называется прямоугольная область окна, в которой происходит отрисовка 3D-сцены. Вы можете создать несколько независимых видов, и все они могут отображать сцену с различных ракурсов. Функции вида стоят на втором месте по значимости после функций движка, так как именно они в первую очередь отвечают за вывод графики.</A><HR>
+<A class=ntext>Видом (Viewer) в Xtreme3D называется область окна, в которой происходит отрисовка 3D-сцены. Вы можете создать несколько независимых видов, и все они могут отображать сцену с различных ракурсов.</A><HR>
 
 <A name="ViewerCreate"></A>
 <H1 class=name>ViewerCreate</H1>
@@ -47,55 +47,30 @@
 <BR/><A>vsm</A> - <A class=constant name="vsmSync">vsmSync</A> или <A class=constant name="vsmNoSync">vsmNoSync</A> (0 и 1 соответственно).</A>
 <HR>
 
-<A name="ViewerSetAutoRender"></A>
-<H1 class=name>ViewerSetAutoRender</H1>
-<A class=type>real</A><A> = </A><A class=function>ViewerSetAutoRender</A><A>( viewer,mode as </A>
-<A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Включает или выключает автоматический рендеринг вида. Если эта опция выключена (по умолчанию так и есть), то необходимо рендерить вид вручную функцией <A class=funclink href=../functions/viewer.htm#ViewerRender>ViewerRender</A>.
-<BR/><A>viewer</A> - id вида
-<BR/><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
-<HR>
-
 <A name="ViewerRender"></A>
 <H1 class=name>ViewerRender</H1>
 <A class=type>real</A><A> = </A><A class=function>ViewerRender</A><A>( viewer as </A>
 <A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Совершает рендеринг вида - отрисовку проекции и вывод на экран.
+<BR/><A class=ntext>Совершает рендеринг вида - отрисовку проекции и вывод на экран. Эта функция рендерит все существующие объекты сцены.
 <BR/><A>viewer</A> - id вида</A>
+<HR>
+
+<A name="ViewerRenderObject"></A>
+<H1 class=name>ViewerRenderObject</H1>
+<A class=type>real</A><A> = </A><A class=function>ViewerRenderObject</A><A>( viewer,obj as </A>
+<A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Совершает рендеринг указанного объекта в виде.
+<BR/><A>viewer</A> - id вида</A>
+<BR/><A>obj</A> - id объекта<A>
 <HR>
 
 <A name="ViewerRenderToFile"></A>
 <H1 class=name>ViewerRenderToFile</H1>
 <A class=type>real</A><A> = </A><A class=function>ViewerRenderToFile</A><A>( viewer as </A>
 <A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
-<BR/><A class=ntext>Совершает рендеринг вида в файл BMP (иными словами, делает скриншот).
+<BR/><A class=ntext>Совершает рендеринг вида в файл BMP или PNG (иными словами, делает скриншот).
 <BR/><A>viewer</A> - id вида
-<BR/><A>filename</A> - имя файла BMP.</A>
-<HR>
-
-<A name="ViewerRenderToFilePNG"></A>
-<H1 class=name>ViewerRenderToFilePNG </H1>
-<A class=type>real</A><A> = </A><A class=function>ViewerRenderToFilePNG </A><A>( viewer as </A>
-<A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
-<BR/><A class=ntext>Совершает рендеринг вида в файл PNG с альфа каналом (иными словами, делает скриншот).
-<BR/><A>viewer</A> - id вида
-<BR/><A>filename</A> - имя файла PNG.</A>
-<HR>
-
-<A name="ViewerRenderEx"></A>
-<H1 class=name>ViewerRenderEx</H1>
-<A class=type>real</A><A> = </A><A class=function>ViewerRenderEx</A><A>( viewer,object,clear,swap,updateFPS as </A>
-<A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Совершает рендеринг вида с расширенными опциями, позволяет организовать многопроходный рендеринг. Функция предназначена для опытных пользователей - не вызывайте ее, если не уверены в том, что делаете. 
-<BR/><A>viewer</A> - id вида</A>
-<BR/><A>object</A> - id объекта, который нужно отрендерить (со всеми его потомками)</A>
-<BR/><A>clear</A> - определяет, заполнять ли вид фоновым цветом перед рендерингом - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
-<BR/><A>swap</A> - определяет, совершать ли переключение первичного и вторичного буферов после рендеринга - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно). Данная операция, фактически, выводит изображение на экран. Если вы хотите вызвать эту функцию несколько раз за один шаг игрового цикла, чтобы отрендерить несколько объектов по отдельности, в этот параметр следует передать <A class=constant>true</A> только один раз, в момент последнего вызова</A>
-<BR/><A>updateFPS</A> - определяет, обновлять ли счетчик частоты кадров - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно). Для этого параметра справедливо все то же, что и для предыдущего - передавайте в него <A class=constant>true</A> только один раз за шаг, иначе функция 
-<A class=funclink href=../functions/viewer.htm#ViewerGetFramesPerSecond>ViewerGetFramesPerSecond</A> будет выдавать неправильный результат.</A>
+<BR/><A>filename</A> - имя файла.</A>
 <HR>
 
 <A name="ViewerResize"></A>
@@ -269,13 +244,13 @@
 
 <A name="ViewerGetPickedObjectsList"></A>
 <H1 class=name>ViewerGetPickedObjectsList</H1>
-<A class=type>real</A><A> = </A><A class=function>ViewerGetPickedObjectsList</A><A>( viewer,x,y,w,h,num,ind as </A><A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Возвращает объект из списка объектов, которые попадают в заданную прямоугольную область на экране.
+<A class=type>real</A><A> = </A><A class=function>ViewerGetPickedObjectsList</A><A>( viewer,list,x,y,w,h,num as </A><A class=type>real</A><A> );</A>
+<BR/><A class=ntext>Сохраняет в список объекты, которые попадают в заданную прямоугольную область на экране.
 <BR/><A>viewer</A> - id вида
+<BR/><A>list</A> - id списка PickList
 <BR/><A>x,y</A> - координаты верхнего левого угла прямоугольника
 <BR/><A>w,h</A> - ширина и высота прямоугольника
-<BR/><A>num</A> - приблизительное ожидаемое количество объектов
-<BR/><A>ind</A> - индекс объекта в списке.</A>
+<BR/><A>num</A> - приблизительное ожидаемое количество объектов.</A>
 <HR>
 
 <A name="ViewerScreenToVector"></A>
@@ -312,10 +287,17 @@
 <BR/><A>aa</A> - режим антиалиасинга. Доступны следующие значения aa:
 <BR/><A class=constant name="aaDefault">aaDefault</A> = 0 - значение по умолчанию (использовать настройку драйвера);
 <BR/><A class=constant name="aaNone">aaNone</A> = 1 - антиалиасинг отключен;
-<BR/><A class=constant name="aa2x">aa2x</A> = 2 - удваивает горизонтальное и вертикальное разрешение;
-<BR/><A class=constant name="aa2xHQ">aa2xHQ</A> = 3 - то же, что <A class=constant name="aa2x">aa2x</A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания;
-<BR/><A class=constant name="aa4x">aa4x</A> = 4 - учетверяет горизонтальное и вертикальное разрешение;
-<BR/><A class=constant name="aa4xHQ">aa4xHQ</A><A> = 5 - то же, что <A class=constant name="aa2x">aa4x</A>, но со включенной технологией Quincunx на видеокартах от NVIDIA, повышающей качество сглаживания.</A>
+<BR/><A class=constant name="aa2x">aa2x</A> = 2 - двойной MSAA;
+<BR/><A class=constant name="aa2xHQ">aa2xHQ</A> = 3 - двойной MSAA с технологией Quincunx (на видеокартах от NVIDIA);
+<BR/><A class=constant name="aa4x">aa4x</A> = 4 - четвертной MSAA;
+<BR/><A class=constant name="aa4xHQ">aa4xHQ</A><A> = 5 - четвертной MSAA с технологией Quincunx (на видеокартах от NVIDIA);
+<BR/><A class=constant name="aa6x">aa6x</A> = 6 - 6-кратный MSAA;
+<BR/><A class=constant name="aa8x">aa8x</A> = 7 - 8-кратный MSAA;
+<BR/><A class=constant name="aa16x">aa16x</A> = 8 - 16-кратный MSAA;
+<BR/><A class=constant name="csa8x">csa8x</A> = 9 - 8-кратный CSAA;
+<BR/><A class=constant name="csa8xHQ">csa8xHQ</A> = 10 - 8-кратный CSAA с технологией Quincunx (на видеокартах от NVIDIA);
+<BR/><A class=constant name="csa16x">csa16x</A> = 11 - 16-кратный CSAA;
+<BR/><A class=constant name="csa16xHQ">csa16xHQ</A> = 12 - 16-кратный CSAA с технологией Quincunx (на видеокартах от NVIDIA).</A>
 <HR>
 
 <A name="ViewerSetOverrideMaterial"></A>

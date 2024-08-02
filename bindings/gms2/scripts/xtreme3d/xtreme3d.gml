@@ -60,6 +60,9 @@ function dll_init(dll) {
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerIsOpenGLExtensionSupported = external_define(dll, "ViewerIsOpenGLExtensionSupported", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ViewerGetGLSLSupported = external_define(dll, "ViewerGetGLSLSupported", dll_cdecl, ty_real, 1, ty_real);
+	global._ViewerGetFBOSupported = external_define(dll, "ViewerGetFBOSupported", dll_cdecl, ty_real, 1, ty_real);
+	global._ViewerGetVBOSupported = external_define(dll, "ViewerGetVBOSupported", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerGetFramesPerSecond = external_define(dll, "ViewerGetFramesPerSecond", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerResetPerformanceMonitor = external_define(dll, "ViewerResetPerformanceMonitor", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
@@ -5017,9 +5020,11 @@ function ViewerRenderToFilePNG(aViewer, aFname) {
 }
 */
 
+/*
 function ViewerRenderEx(aViewer, aObj, aClear, aSwap, aUpdatefps) {
 	return external_call(global._ViewerRenderEx, aViewer, aObj, aClear, aSwap, aUpdatefps);
 }
+*/
 
 function ViewerResize(aViewer, aLeft, aTop, aW, aH) {
 	return external_call(global._ViewerResize, aViewer, aLeft, aTop, aW, aH);
@@ -5109,13 +5114,17 @@ function ViewerGetVBOSupported(aViewer) {
 	return external_call(global._ViewerGetVBOSupported, aViewer);
 }
 
+/*
 function ViewerSetAutoRender(aViewer, aMode) {
 	return external_call(global._ViewerSetAutoRender, aViewer, aMode);
 }
+*/
 
+/*
 function ViewerSetOverrideMaterial(aViewer, aMlb, aMtrl) {
 	return external_call(global._ViewerSetOverrideMaterial, aViewer, aMlb, aMtrl);
 }
+*/
 
 function ViewerGetSize(aViewer, aIndex) {
 	return external_call(global._ViewerGetSize, aViewer, aIndex);
