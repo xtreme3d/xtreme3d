@@ -3,18 +3,18 @@ var
   FPSManager: TGLFPSMovementManager;
 begin
   FPSManager := TGLFPSMovementManager.Create(scene);
-  Result := Integer(FPSManager);
+  Result := ObjToReal(FPSManager);
 end;
 
 function FpsManagerSetNavigator(man, nav: real): real; cdecl;
 begin
-  TGLFPSMovementManager(trunc64(man)).Navigator := TGLNavigator(trunc64(nav));
+  TGLFPSMovementManager(RealToPtr(man)).Navigator := TGLNavigator(RealToPtr(nav));
   Result := 1;
 end;
 
 function FpsManagerSetMovementScale(man, scale: real): real; cdecl;
 begin
-  TGLFPSMovementManager(trunc64(man)).MovementScale := scale;
+  TGLFPSMovementManager(RealToPtr(man)).MovementScale := scale;
   Result := 1;
 end;
 
@@ -22,20 +22,20 @@ function FpsManagerAddMap(man, ffm: real): real; cdecl;
 var
   freeform: TGLFreeform;
 begin
-  freeform := TGLFreeform(trunc64(ffm));
-  TGLFPSMovementManager(trunc64(man)).Maps.addMap(freeform);
+  freeform := TGLFreeform(RealToPtr(ffm));
+  TGLFPSMovementManager(RealToPtr(man)).Maps.addMap(freeform);
   Result := 1;
 end;
 
 function FpsManagerRemoveMap(man, ffm: real): real; cdecl;
 begin
-  TGLFPSMovementManager(trunc64(man)).Maps.findMap(TGLFreeform(trunc64(ffm))).Free;
+  TGLFPSMovementManager(RealToPtr(man)).Maps.findMap(TGLFreeform(RealToPtr(ffm))).Free;
   Result := 1;
 end;
 
 function FpsManagerMapSetCollisionGroup(man, ffm, group: real): real; cdecl;
 begin
-  TGLFPSMovementManager(trunc64(man)).Maps.findMap(TGLFreeform(trunc64(ffm))).CollisionGroup := trunc64(group);
+  TGLFPSMovementManager(RealToPtr(man)).Maps.findMap(TGLFreeform(RealToPtr(ffm))).CollisionGroup := trunc(group);
   Result := 1;
 end;
 
@@ -44,9 +44,9 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
-  fps.Manager := TGLFPSMovementManager(trunc64(man));
+  fps.Manager := TGLFPSMovementManager(RealToPtr(man));
   Result := 1;
 end;
 
@@ -55,9 +55,9 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
-  fps.CollisionGroup := trunc64(group);
+  fps.CollisionGroup := trunc(group);
   Result := 1;
 end;
 
@@ -66,7 +66,7 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
   fps.SphereRadius := radius;
   Result := 1;
@@ -77,9 +77,9 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
-  fps.GravityEnabled := Boolean(trunc64(mode));
+  fps.GravityEnabled := Boolean(trunc(mode));
   Result := 1;
 end;
 
@@ -88,7 +88,7 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
   fps.MoveForward(spd);
   Result := 1;
@@ -99,7 +99,7 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
   fps.StrafeHorizontal(spd);
   Result := 1;
@@ -110,7 +110,7 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
   fps.StrafeVertical(spd);
   Result := 1;
@@ -121,14 +121,8 @@ var
   ob: TGLBaseSceneObject;
   fps: TGLBFPSMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   fps := GetOrCreateFPSMovement(ob);
-  Result := fps.velocity[trunc64(ind)];
+  Result := fps.velocity.v[trunc(ind)];
 end;
 
-// TODO:
-// FpsCountCollisions
-// FpsClearCollisions
-// FpsGetCollisionPosition
-// FpsGetCollisionNormal
-// FpsGetCollidedObject

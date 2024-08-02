@@ -1,4 +1,4 @@
-// DCE functions wrapper by Hacker
+// DCE functions by Rutraple aka Hacker
 
 function DceManagerCreate: real; cdecl;
 var
@@ -6,18 +6,18 @@ var
 begin
   DCEManager := TGLDCEManager.Create(scene);
   DCEManager.ManualStep := true;
-  Result := Integer(DCEManager);
+  Result := ObjToReal(DCEManager);
 end;
 
 function DceManagerStep(man, dt: real): real; cdecl;
 begin
-  TGLDCEManager(trunc64(man)).Step(dt);
+  TGLDCEManager(RealToPtr(man)).Step(dt);
   Result := 1;
 end;
 
 function DceManagerSetGravity(man, grav: real): real; cdecl;
 begin
-  TGLDCEManager(trunc64(man)).Gravity := grav;
+  TGLDCEManager(RealToPtr(man)).Gravity := grav;
   Result := 1;
 end;
 
@@ -25,7 +25,7 @@ function DceManagerSetWorldDirection(man, x, y, z: real): real; cdecl;
 var
   DCEManager: TGLDCEManager;
 begin
-  DCEManager := TGLDCEManager(trunc64(man));
+  DCEManager := TGLDCEManager(RealToPtr(man));
   DCEManager.WorldDirection.X := x;
   DCEManager.WorldDirection.Y := y;
   DCEManager.WorldDirection.Z := z;
@@ -34,13 +34,13 @@ end;
 
 function DceManagerSetWorldScale(man, scale: real): real; cdecl;
 begin
-  TGLDCEManager(trunc64(man)).WorldScale := scale;
+  TGLDCEManager(RealToPtr(man)).WorldScale := scale;
   Result := 1;
 end;
 
 function DceManagerSetMovementScale(man, scale: real): real; cdecl;
 begin
-  TGLDCEManager(trunc64(man)).MovimentScale := scale;
+  TGLDCEManager(RealToPtr(man)).MovimentScale := scale;
   Result := 1;
 end;
 
@@ -48,8 +48,8 @@ function DceManagerSetLayers(man, mode: real): real; cdecl;
 var
   DCEManager: TGLDCEManager;
 begin
-  DCEManager := TGLDCEManager(trunc64(man));
-  case trunc64(mode) of
+  DCEManager := TGLDCEManager(RealToPtr(man));
+  case trunc(mode) of
     0: DCEManager.StandardiseLayers := ccsDCEStandard;
     1: DCEManager.StandardiseLayers := ccsCollisionStandard;
     2: DCEManager.StandardiseLayers := ccsHybrid;
@@ -61,7 +61,7 @@ end;
 
 function DceManagerSetManualStep(man, mode: real): real; cdecl;
 begin
-  TGLDCEManager(trunc64(man)).ManualStep := Boolean(trunc64(mode));
+  TGLDCEManager(RealToPtr(man)).ManualStep := Boolean(trunc(mode));
   Result := 1;
 end;
 
@@ -70,9 +70,9 @@ var
   ob: TGLBaseSceneObject;
   dyn: TGLDCEDynamic;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   dyn := GetOrCreateDCEDynamic(ob);
-  dyn.Manager := TGLDCEManager(trunc64(man));
+  dyn.Manager := TGLDCEManager(RealToPtr(man));
   Result := 1;
 end;
 
@@ -80,48 +80,48 @@ function DceDynamicSetActive(obj, mode: real): real; cdecl;
 var
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
-  GetOrCreateDCEDynamic(ob).Active := Boolean(trunc64(mode));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
+  GetOrCreateDCEDynamic(ob).Active := Boolean(trunc(mode));
   Result := 1;
 end;
 
 function DceDynamicIsActive(obj: real): real; cdecl;
 begin
-  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Active);
+  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Active);
 end;
 
 function DceDynamicSetUseGravity(obj, mode: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).UseGravity := Boolean(trunc64(mode));
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).UseGravity := Boolean(trunc(mode));
   Result := 1;
 end;
 
 function DceDynamicSetLayer(obj, layer: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Layer := trunc(layer);
   Result := 1;
 end;
 
 function DceDynamicGetLayer(obj: real): real; cdecl;
 begin
-  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Layer;
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Layer;
 end;
 
 function DceDynamicSetSolid(obj, mode: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Solid := Boolean(trunc(mode));
   Result := 1;
 end;
 
 function DceDynamicSetFriction(obj, friction: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Friction := friction;
   Result := 1;
 end;
 
 function DceDynamicSetBounce(obj, bounce: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bounce;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).BounceFactor := bounce;
   Result := 1;
 end;
 
@@ -130,7 +130,7 @@ var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   dyn := GetOrCreateDCEDynamic(ob);
   dyn.Size.X := x;
   dyn.Size.Y := y;
@@ -143,9 +143,9 @@ var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   dyn := GetOrCreateDCEDynamic(ob);
-  case trunc64(mode) of
+  case trunc(mode) of
     0: dyn.SlideOrBounce := csbSlide;
     1: dyn.SlideOrBounce := csbBounce;
   else
@@ -156,74 +156,72 @@ end;
 
 function DceDynamicApplyAcceleration(obj, x, y, z: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAccel(x, y, z);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).ApplyAccel(x, y, z);
   Result := 1;
 end;
 
 function DceDynamicApplyAbsAcceleration(obj, x, y, z: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).ApplyAbsAccel(x, y, z);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).ApplyAbsAccel(x, y, z);
   Result := 1;
 end;
 
 function DceDynamicStopAcceleration(obj: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAccel;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).StopAccel;
   Result := 1;
 end;
 
 function DceDynamicStopAbsAcceleration(obj: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).StopAbsAccel;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).StopAbsAccel;
   Result := 1;
 end;
 
 function DceDynamicJump(obj, height, speed: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Jump(height, speed);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Jump(height, speed);
   Result := 1;
 end;
 
 function DceDynamicMove(obj, x, y, z, delta: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Move(AffineVectorMake(x, y, z), delta);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Move(AffineVectorMake(x, y, z), delta);
   Result := 1;
 end;
 
 function DceDynamicMoveTo(obj, x, y, z, amount: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MoveTo(AffineVectorMake(x, y, z), amount);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).MoveTo(AffineVectorMake(x, y, z), amount);
   Result := 1;
 end;
 
 function DceDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := AffineVectorMake(x, y, z);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Speed := AffineVectorMake(x, y, z);
   Result := 1;
 end;
 
 function DceDynamicInGround(obj: real): real; cdecl;
 begin
-  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).InGround);
+  Result := Integer(GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).InGround);
 end;
 
 function DceDynamicSetMaxRecursionDepth(obj, depth: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).MaxRecursionDepth := trunc64(depth);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).MaxRecursionDepth := trunc(depth);
   Result := 1;
 end;
 
 function DceStaticSetManager(obj, man: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Manager :=
-    TGLDCEManager(trunc64(man));
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).Manager := TGLDCEManager(RealToPtr(man));
   Result := 1;
 end;
 
 function DceStaticSetActive(obj, mode: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Active :=
-    Boolean(trunc64(mode));
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).Active := Boolean(trunc(mode));
   Result := 1;
 end;
 
@@ -232,7 +230,7 @@ var
   stat: TGLDCEStatic;
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOrCreateDCEStatic(ob);
   if mode = 0 then stat.Shape := csEllipsoid;
   if mode = 1 then stat.Shape := csBox;
@@ -243,7 +241,7 @@ end;
 
 function DceStaticSetLayer(obj, layer: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Layer := trunc64(layer);
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).Layer := trunc(layer);
   Result := 1;
 end;
 
@@ -252,7 +250,7 @@ var
   stat: TGLDCEStatic;
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOrCreateDCEStatic(ob);
   stat.Size.X := x;
   stat.Size.Y := y;
@@ -262,19 +260,19 @@ end;
 
 function DceStaticSetSolid(obj, mode: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Solid := Boolean(trunc64(mode));
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).Solid := Boolean(trunc(mode));
   Result := 1;
 end;
 
 function DceStaticSetFriction(obj, friction: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).Friction := friction;
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).Friction := friction;
   Result := 1;
 end;
 
 function DceStaticSetBounceFactor(obj, bfactor: real): real; cdecl;
 begin
-  GetOrCreateDCEStatic(TGLBaseSceneObject(trunc64(obj))).BounceFactor := bfactor;
+  GetOrCreateDCEStatic(TGLBaseSceneObject(RealToPtr(obj))).BounceFactor := bfactor;
   Result := 1;
 end;
 
@@ -283,29 +281,29 @@ var
   dyn: TGLDCEDynamic;
   ob: TGLBaseSceneObject;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   dyn := GetOrCreateDCEDynamic(ob);
-  Result := dyn.Speed[trunc64(ind)];
+  Result := dyn.Speed.v[trunc(ind)];
 end;
 
 function DceDynamicSetAbsVelocity(obj, x, y, z: real): real; cdecl;
 begin
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := AffineVectorMake(x, y, z);
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed := AffineVectorMake(x, y, z);
   Result := 1;
 end;
 
 function DceDynamicGetAbsVelocity(obj, ind: real): real; cdecl;
 begin
-  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed[trunc64(ind)];
+  Result := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed.V[trunc(ind)];
 end;
 
 function DceDynamicApplyImpulse(obj, x, y, z: real): real; cdecl;
 var
   imp: TAffineVector;
 begin
-  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed;
+  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Speed;
   imp := VectorAdd(imp, AffineVectorMake(x, y, z));
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).Speed := imp;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).Speed := imp;
   Result := 1;
 end;
 
@@ -313,18 +311,9 @@ function DceDynamicApplyAbsImpulse(obj, x, y, z: real): real; cdecl;
 var
   imp: TAffineVector;
 begin
-  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed;
+  imp := GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed;
   imp := VectorAdd(imp, AffineVectorMake(x, y, z));
-  GetOrCreateDCEDynamic(TGLBaseSceneObject(trunc64(obj))).AbsSpeed := imp;
+  GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed := imp;
   Result := 1;
 end;
 
-// DceDynamicGetGravity is no longer available
-
-// TODO:
-// DceDynamicVelocityCollided
-// DceDynamicGravityCollided
-// DceDynamicCountCollisions
-// DceDynamicGetCollidedObject
-// DceDynamicGetCollisionPosition
-// DceDynamicGetCollisionNormal

@@ -1,367 +1,364 @@
+// Verlet functions by FireRun
+
 function VerletWorldCreate (iter,UpdateSpacePartion,drag: real): real; cdecl;
 var
-world: TVerletWorld;
+  world: TGLVerletWorld;
 begin
-world := TVerletWorld.Create;
-world.UpdateSpacePartion := uspEveryFrame;
-  world.Iterations:= trunc64(iter);
+  world := TGLVerletWorld.Create;
+  world.UpdateSpacePartion := uspEveryFrame;
+  world.Iterations := trunc(iter);
   if UpdateSpacePartion = 0 then world.UpdateSpacePartion := uspEveryIteration;
   if UpdateSpacePartion = 1 then world.UpdateSpacePartion := uspEveryFrame;
   if UpdateSpacePartion = 2 then world.UpdateSpacePartion := uspNever;
   world.Drag:=drag;
-  result:=Integer(world);
+  result:=ObjToReal(world);
 end;
 
 function VerletWorldCreateOctree (world,xmin,ymin,zmin,xmax,ymax,zmax,leaf,depth: real): real; cdecl;
 var
-vworld: TVerletWorld;
+  vworld: TGLVerletWorld;
 begin
-vworld:=TVerletWorld(trunc64(world));
-vworld.CreateOctree(
-      AffineVectorMake( xmin, ymin, zmin),
-      AffineVectorMake(  xmax,  ymax,  zmax), trunc64(leaf), trunc64(depth));
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  vworld.CreateOctree(
+    AffineVectorMake(xmin, ymin, zmin),
+    AffineVectorMake(xmax, ymax, zmax), trunc(leaf), trunc(depth));
   result:=1;
 end;
 
-
 function VerletGetNodeCount (world: real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  result:=Integer(ver.Nodes.Count);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  result := Integer(ver.Nodes.Count);
 end;
-
 
 function VerletWorldGravityCreate (world,x,y,z: real): real; cdecl;
 var
-gr: TVFGravity;
-worldd: TVerletWorld;
+  gr: TGLVerletGravity;
+  worldd: TGLVerletWorld;
 begin
-worldd:=TVerletWorld(trunc64(world));
-gr:= TVFGravity.Create(worldd);
-gr.Gravity := AffineVectorMake (x, y, z);
-  result:=Integer(gr);
+  worldd := TGLVerletWorld(RealToPtr(world));
+  gr := TGLVerletGravity.Create(worldd);
+  gr.Gravity := AffineVectorMake (x, y, z);
+  result := ObjToReal(gr);
 end;
 
 function VerletWorldGravitySetDirection (grv,x,y,z: real): real; cdecl;
 var
-gr: TVFGravity;
+  gr: TGLVerletGravity;
 begin
-gr:= TVFGravity(trunc64(grv));
-gr.Gravity := AffineVectorMake (x, y, z);
+  gr:= TGLVerletGravity(RealToPtr(grv));
+  gr.Gravity := AffineVectorMake (x, y, z);
   result:=1;
 end;
 
-
 function VerletWorldUpdate (world,newTime: real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-ver.Progress (ver.MaxDeltaTime, newTime);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Progress(ver.MaxDeltaTime, newTime);
   result:=1;
 end;
 
 function EdgeDetectorCreate (world,obj: real): real; cdecl;
 var
-edg: TEdgeDetector;
-ver: TVerletWorld;
-mesh: TGLBaseMesh;
+  edg: TGLEdgeDetector;
+  ver: TGLVerletWorld;
+  mesh: TGLBaseMesh;
 begin
-mesh:=TGLBaseMesh(trunc64(obj));
-ver:=TVerletWorld(trunc64(world));
-edg := TEdgeDetector.Create (mesh);
-edg.ProcessMesh;
-edg.AddEdgesAsSticks (ver, 0.15);
-edg.AddEdgesAsSolidEdges (ver);
-  result:=Integer(edg);
+  mesh:=TGLBaseMesh(RealToPtr(obj));
+  ver:=TGLVerletWorld(RealToPtr(world));
+  edg := TGLEdgeDetector.Create (mesh);
+  edg.ProcessMesh;
+  edg.AddEdgesAsSticks (ver, 0.15);
+  edg.AddEdgesAsSolidEdges (ver);
+  result:=ObjToReal(edg);
 end;
 
 function EdgeDetectorSetWeldDistance (edge,dis: real): real; cdecl;
 var
-ed: TEdgeDetector;
+  ed: TGLEdgeDetector;
 begin
-ed:=TEdgeDetector(trunc64(edge));
-ed.WeldDistance:=dis;
+  ed:=TGLEdgeDetector(RealToPtr(edge));
+  ed.WeldDistance:=dis;
   result:=1;
 end;
 
 function VerletConstraintFloorCreate (world,bou,level:real): real; cdecl;
 var
-ver: TVerletWorld;
-floor: TVCFloor;
+  ver: TGLVerletWorld;
+  floor: TGLVerletFloor;
 begin
-ver:=TVerletWorld(trunc64(world));
-floor:= TVCFloor.Create (ver);
-floor.BounceRatio:=bou;
-floor.FloorLevel:=level;
-  result:=Integer(floor);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  floor:= TGLVerletFloor.Create (ver);
+  floor.BounceRatio:=bou;
+  floor.FloorLevel:=level;
+  result:=ObjToReal(floor);
 end;
 
 function VerletConstraintFloorSetNormal (flr,x,y,z:real): real; cdecl;
 var
-floor: TVCFloor;
+  floor: TGLVerletFloor;
 begin
-floor:=TVCFloor(trunc64(flr));
-floor.Normal:= AffineVectorMake(x,y,z);
+  floor:=TGLVerletFloor(RealToPtr(flr));
+  floor.Normal:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletConstraintFloorSetObjectLocations (flr,obj:real): real; cdecl;
 var
-floor: TVCFloor;
-j: TGLSceneObject;
+  floor: TGLVerletFloor;
+  j: TGLSceneObject;
 begin
-j:=TGLSceneObject(trunc64(obj));
-floor:=TVCFloor(trunc64(flr));
-floor.Normal   := j.Direction.AsAffineVector;
-    floor.Location := VectorAdd (j.Position.AsAffineVector,
-      VectorScale (j.Direction.AsAffineVector, 1));
+  j:=TGLSceneObject(RealToPtr(obj));
+  floor:=TGLVerletFloor(RealToPtr(flr));
+  floor.Normal   := j.Direction.AsAffineVector;
+  floor.Location := VectorAdd (j.Position.AsAffineVector, VectorScale (j.Direction.AsAffineVector, 1));
   result:=1;
 end;
 
 function VerletConstraintSphereCreate (world,rad:real): real; cdecl;
 var
-ver: TVerletWorld;
-sphere: TVCSphere;
+  ver: TGLVerletWorld;
+  sphere: TGLVerletFrictionSphere;
 begin
-ver:=TVerletWorld(trunc64(world));
-sphere:= TVCSphere.Create (ver);
-sphere.Radius:= rad;
-  result:=Integer(sphere);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  sphere:= TGLVerletFrictionSphere.Create (ver);
+  sphere.Radius:= rad;
+  result:=ObjToReal(sphere);
 end;
 
 function VerletConstraintCylinderCreate (world,rad:real): real; cdecl;
 var
-ver: TVerletWorld;
-cylinder: TVCCylinder;
+  ver: TGLVerletWorld;
+  cylinder: TGLVerletFrictionCylinder;
 begin
-ver:=TVerletWorld(trunc64(world));
-cylinder:= TVCCylinder.Create (ver);
-cylinder.Radius:= rad;
-  result:=Integer(cylinder);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  cylinder:= TGLVerletFrictionCylinder.Create(ver);
+  cylinder.Radius:= rad;
+  result:=ObjToReal(cylinder);
 end;
 
 function VerletConstraintCylinderSetAxis (cyl,x,y,z:real): real; cdecl;
 var
-cylinder: TVCCylinder;
+  cylinder: TGLVerletFrictionCylinder;
 begin
-cylinder:= TVCCylinder(trunc64(cyl));
-cylinder.Axis:= AffineVectorMake(x,y,z);
+  cylinder:= TGLVerletFrictionCylinder(RealToPtr(cyl));
+  cylinder.Axis:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletConstraintCubeCreate (world,x,y,z:real): real; cdecl;
 var
-ver: TVerletWorld;
-cube: TVCCube;
+  ver: TGLVerletWorld;
+  cube: TGLVerletFrictionCube;
 begin
-ver:=TVerletWorld(trunc64(world));
-cube:= TVCCube.Create (ver);
-cube.Sides:=AffineVectorMake(x,y,z);
-  result:=Integer(cube);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  cube:= TGLVerletFrictionCube.Create (ver);
+  cube.Sides:=AffineVectorMake(x,y,z);
+  result:=ObjToReal(cube);
 end;
 
-function VerletConstraintCubeCreateSetCube (world,cube1:real): real; cdecl;
+function VerletConstraintCubeCreateSetCube(world,cube1:real): real; cdecl;
 var
-ver: TVerletWorld;
-pr: TGLCube;
-Cube: TVCCube;
+  ver: TGLVerletWorld;
+  pr: TGLCube;
+  Cube: TGLVerletFrictionCube;
 begin
-ver:=TVerletWorld(trunc64(world));
-    Cube := TVCCube.Create(ver);
-	pr:=TGLCube(trunc64(cube1));
-    Cube.Location := AffineVectorMake(pr.AbsolutePosition);
-    Cube.FrictionRatio := 0.1;
-    Cube.Sides:=  AffineVectorMake(pr.CubeWidth * 1.1,pr.CubeHeight * 1.1,pr.CubeDepth * 1.1);
-  result:=Integer(Cube);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  Cube := TGLVerletFrictionCube.Create(ver);
+	pr:=TGLCube(RealToPtr(cube1));
+  Cube.Location := AffineVectorMake(pr.AbsolutePosition);
+  Cube.FrictionRatio := 0.1;
+  Cube.Sides:=  AffineVectorMake(pr.CubeWidth * 1.1,pr.CubeHeight * 1.1,pr.CubeDepth * 1.1);
+  result:=ObjToReal(Cube);
 end;
 
 function VerletConstraintCubeSetDirection(cb,x,y,z:real): real; cdecl;
 var
-cube: TVCCube;
+  cube: TGLVerletFrictionCube;
 begin
-cube:= TVCCube(trunc64(cb));
-cube.Direction:= AffineVectorMake(x,y,z);
+  cube:= TGLVerletFrictionCube(RealToPtr(cb));
+  cube.Direction:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletConstraintCapsuleCreate (world,rad,len:real): real; cdecl;
 var
-ver: TVerletWorld;
-caps: TVCCapsule;
+  ver: TGLVerletWorld;
+  caps: TGLVerletFrictionCapsule;
 begin
-ver:=TVerletWorld(trunc64(world));
-caps:= TVCCapsule.Create (ver);
-caps.Radius:=rad;
-caps.Length:=len;
-  result:=Integer(caps);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  caps:= TGLVerletFrictionCapsule.Create (ver);
+  caps.Radius:=rad;
+  caps.Length:=len;
+  result:=ObjToReal(caps);
 end;
 
 function VerletConstraintCapsuleSetAxis (cp,x,y,z:real): real; cdecl;
 var
-caps: TVCCapsule;
+  caps: TGLVerletFrictionCapsule;
 begin
-caps:= TVCCapsule(trunc64(cp));
-caps.Axis:= AffineVectorMake(x,y,z);
+  caps:= TGLVerletFrictionCapsule(RealToPtr(cp));
+  caps.Axis:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
-function VerletConstraintSetPosition (obj,x,y,z:real): real; cdecl;
+function VerletConstraintSetPosition(obj,x,y,z:real): real; cdecl;
 var
-objj: TVerletGlobalConstraint;
+  objj: TGLVerletGlobalConstraint;
 begin
-objj:=TVerletGlobalConstraint(trunc64(obj));
-objj.Location:= AffineVectorMake(x,y,z);
+  objj:=TGLVerletGlobalConstraint(RealToPtr(obj));
+  objj.Location:= AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletConstraintSetFrictionRatio (obj,fr:real): real; cdecl;
 var
-objj: TVerletGlobalFrictionConstraint;
+  objj: TGLVerletGlobalFrictionConstraint;
 begin
-objj:=TVerletGlobalFrictionConstraint(trunc64(obj));
-objj.FrictionRatio:= fr;
+  objj:=TGLVerletGlobalFrictionConstraint(RealToPtr(obj));
+  objj.FrictionRatio:= fr;
   result:=1;
 end;
 
 function VerletConstraintSetEnabled (obj,en:real): real; cdecl;
 var
-objj: TVerletConstraint;
+  objj: TGLVerletConstraint;
 begin
-objj:=TVerletConstraint(trunc64(obj));
-objj.Enabled:= Boolean(trunc64(en));
+  objj:=TGLVerletConstraint(RealToPtr(obj));
+  objj.Enabled:= Boolean(trunc(en));
   result:=1;
 end;
 
 function VerletNodeNailedDown (world,ind,bol:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].NailedDown := Boolean(trunc64(bol));
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].NailedDown := Boolean(trunc(bol));
   result:=1;
 end;
 
 function VerletNodeSetPosition (world,ind,x,y,z:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].Location := AffineVectorMake(x,y,z);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].Location := AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletNodeSetRadius (world,ind,rad:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].Radius := rad;
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].Radius := rad;
   result:=1;
 end;
 
 function VerletNodeSetFriction (world,ind,fr:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].Friction := fr;
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].Friction := fr;
   result:=1;
 end;
 
 function VerletNodeSetWeight (world,ind,weight:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].Weight := weight;
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].Weight := weight;
   result:=1;
 end;
 
 function VerletNodeApplyFriction (world,ind,fr,depth,x,y,z:real): real; cdecl;
 var
-ver: TVerletWorld;
+  ver: TGLVerletWorld;
 begin
-ver:=TVerletWorld(trunc64(world));
-  ver.Nodes.Items[trunc64(ind)].ApplyFriction(fr,depth,AffineVectorMake(x,y,z));
+  ver:=TGLVerletWorld(RealToPtr(world));
+  ver.Nodes.Items[trunc(ind)].ApplyFriction(fr,depth,AffineVectorMake(x,y,z));
   result:=1;
 end;
 
-
 function VerletAirResistanceCreate (world,Magnitude,Chaos:real): real; cdecl;
 var
-ver: TVerletWorld;
-air: TVFAirResistance;
+  ver: TGLVerletWorld;
+  air: TGLVerletAirResistance;
 begin
-ver:=TVerletWorld(trunc64(world));
-  air:= TVFAirResistance.Create(ver);
+  ver:=TGLVerletWorld(RealToPtr(world));
+  air:= TGLVerletAirResistance.Create(ver);
   air.WindDirection := AffineVectorMake(1,0,0);
   air.WindMagnitude:=Magnitude;
   air.WindChaos:=Chaos; 
-  result:=Integer(air);
+  result:=ObjToReal(air);
 end;
 
 function VerletAirResistanceSetWindDirection (air,x,y,z:real): real; cdecl;
 var
-airr: TVFAirResistance;
+  airr: TGLVerletAirResistance;
 begin
-airr:=TVFAirResistance(trunc64(air));
+  airr:=TGLVerletAirResistance(RealToPtr(air));
   airr.WindDirection := AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletAirResistanceSetWindMagnitude (air,mag:real): real; cdecl;
 var
-airr: TVFAirResistance;
+  airr: TGLVerletAirResistance;
 begin
-airr:=TVFAirResistance(trunc64(air));
+  airr:=TGLVerletAirResistance(RealToPtr(air));
   airr.WindMagnitude := mag;
   result:=1;
 end;
 
 function VerletAirResistanceSetWindChaos (air,ch:real): real; cdecl;
 var
-airr: TVFAirResistance;
+  airr: TGLVerletAirResistance;
 begin
-airr:=TVFAirResistance(trunc64(air));
+  airr:=TGLVerletAirResistance(RealToPtr(air));
   airr.WindChaos := ch;
   result:=1;
 end;
 
 function VerletConstraintGetCount (wr:real): real; cdecl;
 var
-world: TVerletWorld;
+  world: TGLVerletWorld;
 begin
-world:=TVerletWorld(trunc64(wr));
+  world:=TGLVerletWorld(RealToPtr(wr));
   result:=world.Constraints.Count-1;
 end;
 
 function VerletConstraintSetSlack (wr,con,sla:real): real; cdecl;
 var
-world: TVerletWorld;
+  world: TGLVerletWorld;
 begin
-world:=TVerletWorld(trunc64(wr));
-TVCStick(world.Constraints[trunc64(con)]).Slack := sla;
+  world:=TGLVerletWorld(RealToPtr(wr));
+  TGLVerletStick(world.Constraints[trunc(con)]).Slack := sla;
   result:=1;
 end;
 
 function VerletWorldSetSimTime (wr,tm:real): real; cdecl;
 var
-world: TVerletWorld;
+  world: TGLVerletWorld;
 begin
-world:=TVerletWorld(trunc64(wr));
-world.SimTime:=tm;
+  world:=TGLVerletWorld(RealToPtr(wr));
+  world.SimTime:=tm;
   result:=1;
 end;
 
 function VerletWorldSetMaxDeltaTime (wr,tm:real): real; cdecl;
 var
-world: TVerletWorld;
+  world: TGLVerletWorld;
 begin
-world:=TVerletWorld(trunc64(wr));
-world.MaxDeltaTime:=tm;
+  world:=TGLVerletWorld(RealToPtr(wr));
+  world.MaxDeltaTime:=tm;
   result:=1;
 end;
 

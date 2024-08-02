@@ -1,101 +1,111 @@
 function EngineCreate: real; cdecl;
 begin
-  empty:=TEmpty.Create(nil);
-  scene:=TGLScene.Create(nil);
-  memviewer:=TGLMemoryViewer.Create(nil);
-  cadencer:=TGLCadencer.Create(nil);
-  cadencer.Scene:=scene;
-  cadencer.Mode:=cmManual;
-  showLoadingErrors := True;
-  previousTicks := GetTickCount;
-  result:=1;
+    SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
+    empty := TEmpty.Create(nil);
+    scene := TGLScene.Create(nil);
+    memviewer := TGLMemoryViewer.Create(nil);
+    cadencer := TGLCadencer.Create(nil);
+    cadencer.Scene := scene;
+    cadencer.Mode := cmManual;
+    cadencer.enabled := true;
+    showLoadingErrors := True;
+    previousTicks := GetTickCount;
+    result := 1.0;
 end;
 
 function EngineDestroy: real; cdecl;
 begin
-  cadencer.Enabled := false;
-  cadencer.Scene := nil;
-  cadencer.Free;
-  scene.Free;
-  empty.Free;
-  memviewer.Free;
-  result:=1;
+    cadencer.Enabled := false;
+    cadencer.Scene := nil;
+    cadencer.Free;
+    scene.Free;
+    empty.Free;
+    memviewer.Free;
+    result := 1.0;
 end;
 
 function EngineSetObjectsSorting(os: real): real; cdecl;
 begin
-  if os=0 then scene.ObjectsSorting:=osInherited;
-  if os=1 then scene.ObjectsSorting:=osNone;
-  if os=2 then scene.ObjectsSorting:=osRenderFarthestFirst;
-  if os=3 then scene.ObjectsSorting:=osRenderBlendedLast;
-  if os=4 then scene.ObjectsSorting:=osRenderNearestFirst;
-  result:=1;
+    if Trunc(os) = 0 then scene.ObjectsSorting := osInherited;
+    if Trunc(os) = 1 then scene.ObjectsSorting := osNone;
+    if Trunc(os) = 2 then scene.ObjectsSorting := osRenderFarthestFirst;
+    if Trunc(os) = 3 then scene.ObjectsSorting := osRenderBlendedLast;
+    if Trunc(os) = 4 then scene.ObjectsSorting := osRenderNearestFirst;
+    result := 1.0;
 end;
 
 // Change: vcNone and vcInherited are now 0 and 1
 function EngineSetCulling(vc: real): real; cdecl;
 begin
-  if vc=0 then scene.VisibilityCulling:=vcNone;
-  if vc=1 then scene.VisibilityCulling:=vcInherited;
-  if vc=2 then scene.VisibilityCulling:=vcObjectBased;
-  if vc=3 then scene.VisibilityCulling:=vcHierarchical;
-  result:=1;
+    if Trunc(vc) = 0 then scene.VisibilityCulling := vcNone;
+    if Trunc(vc) = 1 then scene.VisibilityCulling := vcInherited;
+    if Trunc(vc) = 2 then scene.VisibilityCulling := vcObjectBased;
+    if Trunc(vc) = 3 then scene.VisibilityCulling := vcHierarchical;
+    result := 1.0;
 end;
 
-function Update(delta: real): real; cdecl;
+function EngineUpdate(delta: real): real; cdecl;
 begin
-  cadencer.FixedDeltaTime := delta;
-  cadencer.Progress;
-  result:=1;
+    cadencer.FixedDeltaTime := delta;
+    cadencer.Progress;
+    result := 1.0;
 end;
 
-//todo
-function TrisRendered: real; cdecl;
+function EngineSaveScene(filename: PAnsiChar): real; cdecl;
 begin
-  result:=1;
+    scene.SaveToTextFile(StrConv(filename));
+    result := 1.0;
 end;
 
-function EngineSaveScene(filename: pchar): real; cdecl;
+function EngineLoadScene(filename: PAnsiChar): real; cdecl;
 begin
-  scene.SaveToTextFile(String(filename));
-  result := 1.0;
-end;
-
-function EngineLoadScene(filename: pchar): real; cdecl;
-begin
-  scene.LoadFromTextFile(String(filename));
-  result := 1.0;
+    scene.LoadFromTextFile(StrConv(filename));
+    result := 1.0;
 end;
 
 function EngineRootObject: real; cdecl;
 begin
-  result := Integer(scene.Objects);
+    result := ObjToReal(scene.Objects);
 end;
 
 function EngineShowLoadingErrors(mode: real): real; cdecl;
 begin
-  showLoadingErrors := Boolean(trunc64(mode));
-  result := 1;
+    showLoadingErrors := Boolean(Trunc(mode));
+    result := 1.0;
 end;
 
-function EngineSetMaxLights(lights: real): real; cdecl;
+function EngineSetMaxLights(lights: real): integer; cdecl;
 begin
-  scene.MaxLights := trunc64(lights);
-  result := 1.0;
+    scene.Lights.Count := Trunc(lights);
+    result := 1;
 end;
 
 function EngineGetTimeStep: real; cdecl;
 var
-  currentTicks: DWORD;
-  elapsedMsec: DWORD; 
+    currentTicks: Longint;
+    elapsedMsec: Longint;
 begin
-  currentTicks := GetTickCount;
-  elapsedMsec := currentTicks - previousTicks;
-  previousTicks := currentTicks;
-  result := elapsedMsec * 0.001;
+    currentTicks := GetTickCount;
+    elapsedMsec := currentTicks - previousTicks;
+    previousTicks := currentTicks;
+    result := elapsedMsec * 0.001;
 end;
 
-function PtrToReal(p: pchar): real; cdecl;
+function EngineGetLastRaycastPosition(ind: real): real; cdecl;
 begin
-  result := Integer(p);
+  result := collisionPoint.V[Trunc(ind)];
+end;
+
+function EngineGetLastRaycastNormal(ind: real): real; cdecl;
+begin
+  result := collisionNormal.V[Trunc(ind)];
+end;
+
+//TODO:
+//EngineResetRaycastData()
+
+function PointerToReal(p: pchar): real; cdecl;
+begin
+    result := real(NativeInt(p));
 end;

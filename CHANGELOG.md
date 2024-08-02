@@ -1,5 +1,45 @@
 Xtreme3D version history
 ========================
+v4.0.0 (by Gecko) - ??/??/????
+------------------------------
+- Uses GLScene 2.1 and Delphi 10.4
+- Xtreme3D is now 64 bit and compatible with recent versions of GameMaker Studio 2
+- UTF-8 support for all strings
+- `Update` is deprecated, use `EngineUpdate` instead
+- `TrisRendered` was removed
+- `ViewerRenderEx` was removed
+- New function `ViewerRenderObject`
+- `ViewerGetPickedObjectsList` now requires user-provied PickList
+- New functions `PickListCreate`, `PickListClear`, `PickListGetCount`, `PickListGetHit`
+- New constants for `ViewerSetAntiAliasing`: `aa6x = 6`, `aa8x = 7`, `aa16x = 8`, `csa8x = 9`, `csa8xHQ = 10`, `csa16x = 11`, `csa16xHQ = 12`
+- `ViewerRenderToFile` now supports PNG, `ViewerRenderToFilePNG` was removed
+- `CameraZoomAll` now requires a Viewer as a second parameter
+- New function `MaterialLibraryGetTextureByName`
+- `SpriteNoZWrite` was removed, use `MaterialSetDepthWrite` instead
+- `MaterialCullFrontFaces` was removed
+- `MaterialSetZWrite` is deprecated, use `MaterialSetDepthWrite` instead
+- New function `MaterialSetDepthTest`
+- TextureEx system was redesigned. `MaterialLoadTextureEx`, `MaterialSetTextureEx`, `MaterialSetTextureExFromLibrary`, `MaterialGenTextureEx`, `MaterialEnableTextureEx` were removed. New functions `MaterialAddTextureEx`, `MaterialTextureExClear`, `TextureExLoad`, `TextureExSetFromMaterial`, `TextureExGenerate`, `TextureExDelete`, `TextureExSetTextureScale`, `TextureExSetTextureOffset`, `TextureExEnable`
+- New function `MaterialSetTextureFormatEx`
+- New constant for `MaterialSetTextureFormat`: `tfExtended = 12`
+- New constant for `MaterialSetTextureImageAlpha`: `tiaBottomRightPointColorTransparent = 9`
+- New function `MaterialSetTextureCompareMode`
+- `PtrToReal` is deprecated, use `PointerToReal` instead
+- Polygon functions were removed
+- `TTFontSetEncoding`, `TTFontLoadCodePage` were removed
+- `TextRead`, `TextConvertANSIToUTF8` were removed
+- `OdeAddCone` was removed
+- `OdeManagerSetGeomColor` now sets three colors separately: for enabled dynamic bodies, disabled dynamic bodies and static bodies
+- New function `BaseMeshBuildSilhouetteConnectivityData`
+- New function `ActorSetReference`
+- `ObjectGetCollisionPosition` and `ObjectGetCollisionNormal` are now `EngineGetLastRaycastPosition` and `EngineGetLastRaycastNormal`
+- New functions `ObjectNotifyChange`, `ObjectStructureChanged`, `ObjectClearStructureChanged`
+- New functions `ObjectListCreate`, `ObjectListAdd`, `ObjectListGetCount`
+- FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`
+- ShadowMap was redesigned. `ShadowMapSetCaster`, `ShadowMapSetProjectionSize`, `ShadowMapSetZScale`, `ShadowMapSetZClippingPlanes`, `ShadowMapRender` were removed. New functions `ShadowMapUpdate`, `ShadowMapSetViewer`. `ShadowMapSetCamera` now uses special ShadowCamera object
+- New functions `ShadowCameraCreate`, `ShadowCameraSetProjectionSize`, `ShadowCameraSetZClippingPlanes`
+- New function `GLSLShaderForceDisableStencilTest`.
+
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
 - New function `PtrToReal` for compatibility with latest GameMaker Studio 2

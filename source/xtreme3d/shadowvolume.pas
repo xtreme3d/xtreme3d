@@ -3,18 +3,18 @@ var
   sv: TGLShadowVolume;
 begin
   if not (parent=0) then
-    sv := TGLShadowVolume.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    sv := TGLShadowVolume.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     sv := TGLShadowVolume.CreateAsChild(scene.Objects);
-  result := Integer(sv);
+  result := ObjToReal(sv);
 end;
 
 function ShadowvolumeSetActive(shadowvolume, active: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.Active := Boolean(trunc64(active));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.Active := Boolean(trunc(active));
   result := 1.0;
 end;
 
@@ -22,8 +22,8 @@ function ShadowvolumeAddLight(shadowvolume, light: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.Lights.AddCaster(TGLBaseSceneObject(trunc64(light)));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.Lights.AddCaster(TGLBaseSceneObject(RealToPtr(light)));
   result := 1.0;
 end;
 
@@ -31,8 +31,8 @@ function ShadowvolumeRemoveLight(shadowvolume, light: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.Lights.RemoveCaster(TGLBaseSceneObject(trunc64(light)));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.Lights.RemoveCaster(TGLBaseSceneObject(RealToPtr(light)));
   result := 1.0;
 end;
 
@@ -40,8 +40,8 @@ function ShadowvolumeAddOccluder(shadowvolume, obj: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.Occluders.AddCaster(TGLBaseSceneObject(trunc64(obj)));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.Occluders.AddCaster(TGLBaseSceneObject(RealToPtr(obj)));
   result := 1.0;
 end;
 
@@ -49,8 +49,8 @@ function ShadowvolumeRemoveOccluder(shadowvolume, obj: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.Occluders.RemoveCaster(TGLBaseSceneObject(trunc64(obj)));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.Occluders.RemoveCaster(TGLBaseSceneObject(RealToPtr(obj)));
   result := 1.0;
 end;
 
@@ -58,8 +58,8 @@ function ShadowvolumeSetDarkeningColor(shadowvolume, color, alpha: real): real; 
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
-  sv.DarkeningColor.AsWinColor := TColor(trunc64(color));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
+  sv.DarkeningColor.AsWinColor := TColor(trunc(color));
   sv.DarkeningColor.Alpha := alpha;
   result := 1.0;
 end;
@@ -68,7 +68,7 @@ function ShadowvolumeSetMode(shadowvolume, svm: real): real; cdecl;
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
   if svm = 0 then sv.Mode := svmAccurate;
   if svm = 1 then sv.Mode := svmDarkening;
   if svm = 2 then sv.Mode := svmOff;
@@ -81,7 +81,7 @@ function ShadowvolumeSetOptions(
 var
   sv: TGLShadowVolume;
 begin
-  sv := TGLShadowVolume(trunc64(shadowvolume));
+  sv := TGLShadowVolume(RealToPtr(shadowvolume));
   sv.Options := [];
   if showvolumes = 1      then sv.Options := sv.Options + [svoShowVolumes];
   if cachesilhouettes = 1 then sv.Options := sv.Options + [svoCacheSilhouettes];

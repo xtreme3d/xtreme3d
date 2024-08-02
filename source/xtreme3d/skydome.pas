@@ -3,11 +3,11 @@ var
   sd: TGLEarthSkyDome;
 begin
   if not (parent=0) then
-    sd := TGLEarthSkyDome.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    sd := TGLEarthSkyDome.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     sd := TGLEarthSkyDome.CreateAsChild(scene.Objects);
-  sd.Slices := trunc64(slices);
-  sd.Stacks := trunc64(stacks);
+  sd.Slices := trunc(slices);
+  sd.Stacks := trunc(stacks);
   result := Integer(sd);
 end;
 
@@ -15,7 +15,7 @@ function SkydomeSetOptions(skydome, fade, rotate: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   if (fade = 1) and (rotate = 1) then
     sd.ExtendedOptions := [esoFadeStarsWithSun, esoRotateOnTwelveHours]
   else if (fade = 1) and (rotate = 0) then
@@ -31,8 +31,8 @@ function SkydomeSetDeepColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.DeepColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.DeepColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -40,8 +40,8 @@ function SkydomeSetHazeColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.HazeColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.HazeColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -49,8 +49,8 @@ function SkydomeSetNightColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.NightColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.NightColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -58,8 +58,8 @@ function SkydomeSetSkyColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.SkyColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.SkyColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -67,8 +67,8 @@ function SkydomeSetSunDawnColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.SunDawnColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.SunDawnColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -76,8 +76,8 @@ function SkydomeSetSunZenithColor(skydome, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.SunZenithColor.AsWinColor := TColor(trunc64(color));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.SunZenithColor.AsWinColor := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -85,7 +85,7 @@ function SkydomeSetSunElevation(skydome, angle: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   sd.SunElevation := angle;
   result := 1.0;
 end;
@@ -94,7 +94,7 @@ function SkydomeSetTurbidity(skydome, turbidity: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   sd.Turbidity := turbidity;
   result := 1.0;
 end;
@@ -103,8 +103,8 @@ function SkydomeAddRandomStars(skydome, stars, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
-  sd.Stars.AddRandomStars(trunc64(stars), TColor(trunc64(color)));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
+  sd.Stars.AddRandomStars(trunc(stars), TColor(trunc(color)));
   result := 1.0;
 end;
 
@@ -114,14 +114,14 @@ end;
 function SkydomeAddStar(skydome, rightAscension, declination, magnitude, color: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
-  star: TSkyDomeStar;
+  star: TGLSkyDomeStar;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   star := sd.Stars.Add;
   star.RA := rightAscension;
   star.Dec := declination;
   star.Magnitude := magnitude;
-  star.Color := TColor(trunc64(color));
+  star.Color := TColor(trunc(color));
   result := 1.0;
 end;
 
@@ -129,7 +129,7 @@ function SkydomeClearStars(skydome: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   sd.Stars.Clear;
   result := 1.0;
 end;
@@ -138,7 +138,7 @@ function SkydomeTwinkleStars(skydome, mode: real): real; cdecl;
 var
   sd: TGLEarthSkyDome;
 begin
-  sd := TGLEarthSkyDome(trunc64(skydome));
+  sd := TGLEarthSkyDome(RealToPtr(skydome));
   if mode = 1 then
     sd.Options := [sdoTwinkle]
   else

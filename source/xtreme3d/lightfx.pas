@@ -1,9 +1,10 @@
 function LightFXCreate(obj: real): real; cdecl;
 var
-  ffx: TGLLightFX;
+  fx: TGLLightFX;
   objct: TGLBaseSceneObject;
 begin
-  objct := TGLBaseSceneObject(trunc64(obj));
-  ffx := GetOrCreateLightFX(objct);
-  result := Integer(ffx);
+  objct := TGLBaseSceneObject(RealToPtr(obj));
+  fx := GetOrCreateLightFX(objct);
+  result := PtrToReal(fx);
 end;
+

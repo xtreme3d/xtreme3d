@@ -1,90 +1,75 @@
-function ShadowMapCreate(size, viewer, caster: real): real; cdecl;
+function ShadowMapCreate(fbo, viewer, shadowCamera: real): real; cdecl;
 var
-  v: TGLSceneViewer;
-  sm: TGLShadowMap;
+    sm: TGLShadowMap;
 begin
-  if not GL_ARB_framebuffer_object then
-  begin
-      ShowMessage('GL_ARB_frame_buffer_object required');
-      result := 0;
-      Exit;
-  end;
-  v := TGLSceneViewer(trunc64(viewer));
-  sm := TGLShadowMap.Create(scene);
-  sm.Width := trunc64(size);
-  sm.Height := trunc64(size);
-  sm.MainBuffer := v.Buffer;
-  sm.Caster := TGLBaseSceneObject(trunc64(caster));
-  result:=integer(sm);
+    sm := TGLShadowMap.Create(scene, TGLFBORendererEx(RealToPtr(fbo)), TGLSceneViewer(RealToPtr(viewer)), TGLShadowCamera(RealToPtr(shadowCamera)));
+    result := PtrToReal(sm);
 end;
 
-function ShadowMapSetCamera(shadowmap, cam: real): real; cdecl;
+function ShadowMapUpdate(shadowMap: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    sm: TGLShadowMap;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ShadowCamera := TGLCamera(trunc64(cam));
-  result:=1;
+    sm := TGLShadowMap(RealToPtr(shadowMap));
+    sm.Update();
+    result := 1;
 end;
 
-function ShadowMapSetCaster(shadowmap, caster: real): real; cdecl;
+function ShadowMapSetCamera(sm, sc: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    shadowMap: TGLShadowMap;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.Caster := TGLBaseSceneObject(trunc64(caster));
-  result:=1;
+    shadowMap := TGLShadowMap(RealToPtr(sm));
+    shadowMap.ShadowCamera := TGLShadowCamera(RealToPtr(sc));
+    result := 1;
 end;
 
-function ShadowMapSetProjectionSize(shadowmap, size: real): real; cdecl;
+function ShadowMapSetViewer(sm, v: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    shadowMap: TGLShadowMap;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ProjectionSize := size;
-  result:=1;
+    shadowMap := TGLShadowMap(RealToPtr(sm));
+    shadowMap.Viewer := TGLSceneViewer(RealToPtr(v));
+    result := 1;
 end;
 
-function ShadowMapSetZScale(shadowmap, scale: real): real; cdecl;
+function ShadowMapSetFBO(sm, fbo: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    shadowMap: TGLShadowMap;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ZScale := scale;
-  result:=1;
+    shadowMap := TGLShadowMap(RealToPtr(sm));
+    shadowMap.FBO := TGLFBORendererEx(RealToPtr(fbo));
+    result := 1;
 end;
 
-function ShadowMapSetZClippingPlanes(shadowmap, znear, zfar: real): real; cdecl;
+function ShadowCameraCreate(parent: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    shadowCamera: TGLShadowCamera;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.ZNear := znear;
-  sm.ZFar := zfar;
-  result:=1;
+    if not (parent = 0) then
+        shadowCamera := TGLShadowCamera.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
+    else
+        shadowCamera := TGLShadowCamera.CreateAsChild(scene.Objects);
+    result := ObjToReal(shadowCamera);
 end;
 
-function ShadowMapRender(shadowmap: real): real; cdecl;
+function ShadowCameraSetProjectionSize(sc, size: real): real; cdecl;
 var
-  sm: TGLShadowMap;
+    shadowCamera: TGLShadowCamera;
 begin
-  sm:=TGLShadowMap(trunc64(shadowmap));
-  sm.Render();
-  result:=1;
+    shadowCamera := TGLShadowCamera(RealToPtr(sc));
+    shadowCamera.ProjectionSize := size;
+    result := 1.0;
 end;
 
-function ShadowMapSetFBO(shadowmap, fbo: real): real; cdecl;
+function ShadowCameraSetZClippingPlanes(sc, znear, zfar: real): real; cdecl;
 var
-  sm: TGLShadowMap;
-  fb: TGLFBO;
+    shadowCamera: TGLShadowCamera;
 begin
-  sm := TGLShadowMap(trunc64(shadowmap));
-  if not (fbo = 0) then
-  begin
-    fb := TGLFBO(trunc64(fbo));
-    sm.FBO := fb;
-  end
-  else
-    sm.FBO := nil;
-  result := 1;
+    shadowCamera := TGLShadowCamera(RealToPtr(sc));
+    shadowCamera.ZNear := znear;
+    shadowCamera.ZFar := zfar;
+    result := 1.0;
 end;
+
+

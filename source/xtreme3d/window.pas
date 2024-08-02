@@ -3,22 +3,22 @@ var
   frm: TForm;
 begin
   frm := TForm.Create(nil);
-  frm.Width := trunc64(w);
-  frm.Height := trunc64(h);
-  frm.Left := trunc64(x);
-  frm.Top := trunc64(y);
-  if trunc64(resizeable) = 0 then
+  frm.Width := trunc(w);
+  frm.Height := trunc(h);
+  frm.Left := trunc(x);
+  frm.Top := trunc(y);
+  if trunc(resizeable) = 0 then
     frm.BorderStyle := bsSingle;
   frm.Show;
   frm.Enabled := True;
-  result := Integer(frm);
+  result := ObjToReal(frm);
 end;
 
 function WindowCenter(w: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
+  frm := TForm(RealToPtr(w));
   frm.Position := poDesktopCenter;
   result := 1.0;
 end;
@@ -27,11 +27,11 @@ function WindowResize(w, x, y, width, height: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
-  frm.Left := trunc64(x);
-  frm.Top := trunc64(y);
-  frm.Width := trunc64(width);
-  frm.Height := trunc64(height);
+  frm := TForm(RealToPtr(w));
+  frm.Left := trunc(x);
+  frm.Top := trunc(y);
+  frm.Width := trunc(width);
+  frm.Height := trunc(height);
   result := 1.0;
 end;
 
@@ -39,13 +39,13 @@ function WindowGetPosition(w, index: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
-  if trunc64(index) = 0 then
+  frm := TForm(RealToPtr(w));
+  if trunc(index) = 0 then
   begin
     result := frm.Left;
     exit;
   end;
-  if trunc64(index) = 1 then
+  if trunc(index) = 1 then
   begin
     result := frm.Top;
     exit;
@@ -57,13 +57,13 @@ function WindowGetSize(w, index: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
-  if trunc64(index) = 0 then
+  frm := TForm(RealToPtr(w));
+  if trunc(index) = 0 then
   begin
     result := frm.Width;
     exit;
   end;
-  if trunc64(index) = 1 then
+  if trunc(index) = 1 then
   begin
     result := frm.Height;
     exit;
@@ -75,16 +75,16 @@ function WindowGetHandle(w: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
+  frm := TForm(RealToPtr(w));
   result := Integer(frm.Handle);
 end;
 
-function WindowSetTitle(w: real; title: pchar): real; cdecl;
+function WindowSetTitle(w: real; title: PAnsiChar): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
-  frm.Caption := String(title);
+  frm := TForm(RealToPtr(w));
+  frm.Caption := String(AnsiString(title));
   result := 1;
 end;
 
@@ -92,7 +92,7 @@ function WindowDestroy(w: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
+  frm := TForm(RealToPtr(w));
   frm.Free;
   result := 1;
 end;
@@ -101,17 +101,17 @@ function WindowIsShowing(w: real): real; cdecl;
 var
   frm: TForm;
 begin
-  frm := TForm(trunc64(w));
+  frm := TForm(RealToPtr(w));
   result := Integer(frm.Showing);
 end;
 
-function WindowSetIcon(w: real; filename: pchar): real; cdecl;
+function WindowSetIcon(w: real; filename: PAnsiChar): real; cdecl;
 var
   frm: TForm;
   icon: HIcon;
 begin
-  frm := TForm(trunc64(w));
-  icon := LoadImage(0, filename, IMAGE_ICON,
+  frm := TForm(RealToPtr(w));
+  icon := LoadImage(0, PWideChar(String(AnsiString(filename))), IMAGE_ICON,
     GetSystemMetrics(SM_CXSMICON), GetSystemMetrics(SM_CYSMICON),
     LR_LOADFROMFILE);
   SendMessage(frm.Handle, WM_SETICON, 1, icon);

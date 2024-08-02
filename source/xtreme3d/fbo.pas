@@ -1,85 +1,167 @@
-function FBOCreate(w, h, viewer: real): real; cdecl;
+function FBOCreate(w, h, parent: real): real; cdecl;
 var
-  fbo: TGLFBO;
-  v: TGLSceneViewer;
+  fbor: TGLFBORendererEx;
 begin
-  if not GL_ARB_framebuffer_object then
-  begin
-      ShowMessage('GL_ARB_frame_buffer_object required');
-      result := 0;
-      Exit;
-  end;
-  v := TGLSceneViewer(trunc64(viewer));
-  fbo := TGLFBO.Create;
-  fbo.Width := trunc64(w);
-  fbo.Height := trunc64(h);
-  fbo.MainBuffer := v.Buffer;
-  result := integer(fbo);
+  if not (parent = 0) then
+        fbor := TGLFBORendererEx.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
+    else
+        fbor := TGLFBORendererEx.Create(scene.Objects);
+  fbor.Width := Trunc(w);
+  fbor.Height := Trunc(h);
+  fbor.PostGenerateMipmap := False;
+  result := PtrToReal(fbor);
+end;
+
+function FBOSetActive(fbo, mode: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.Active := Boolean(Trunc(mode));
+  result := 1;
+end;
+
+function FBOSetAspect(fbo, aspect: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.Aspect := aspect;
+  result := 1;
+end;
+
+function FBOSetPickableTarget(fbo, mode: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.PickableTarget := Boolean(Trunc(mode));
+  result := 1;
+end;
+
+function FBOSetSize(fbo, width, height: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.Width := Trunc(width);
+  fbor.Height := Trunc(height);
+  result := 1;
 end;
 
 function FBOSetCamera(fbo, cam: real): real; cdecl;
 var
-  fb: TGLFBO;
+  fbor: TGLFBORendererEx;
 begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.Camera := TGLCamera(trunc64(cam));
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.Camera := TGLCamera(RealToPtr(cam));
   result := 1;
 end;
 
-function FBORenderObject(fbo, obj: real): real; cdecl;
+function FBOSetRootObject(fbo, obj: real): real; cdecl;
 var
-  fb: TGLFBO;
+  fbor: TGLFBORendererEx;
 begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
-  fb.Render(True);
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.RootObject := TGLBaseSceneObject(RealToPtr(obj));
   result := 1;
 end;
 
-function FBORenderObjectEx(fbo, obj, clearcolor, cleardepth, copycolor, copydepth: real): real; cdecl;
+function FBOSetBackgroundColor(fbo, color: real): real; cdecl;
 var
-  fb: TGLFBO;
+  fbor: TGLFBORendererEx;
 begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.RenderObject := TGLBaseSceneObject(trunc64(obj));
-  fb.RenderEx(Boolean(trunc64(clearcolor)), Boolean(trunc64(cleardepth)),
-    Boolean(trunc64(copycolor)), Boolean(trunc64(copydepth)));
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.BackgroundColor.AsWinColor := TColor(Trunc(color));
   result := 1;
 end;
 
-function FBOSetViewer(fbo, viewer: real): real; cdecl;
+function FBOSetEnabledRenderBuffers(fbo, depth, stencil: real): real; cdecl;
 var
-  fb: TGLFBO;
-  v: TGLSceneViewer;
+  fbor: TGLFBORendererEx;
 begin
-  fb := TGLFBO(trunc64(fbo));
-  v := TGLSceneViewer(trunc64(viewer));
-  fb.MainBuffer := v.Buffer;
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.EnabledRenderBuffers := [];
+  if Boolean(Trunc(depth)) = true then
+    fbor.EnabledRenderBuffers := fbor.EnabledRenderBuffers + [erbDepth];
+  if Boolean(Trunc(stencil)) = true then
+    fbor.EnabledRenderBuffers := fbor.EnabledRenderBuffers + [erbStencil];
   result := 1;
 end;
 
-function FBOSetOverrideMaterial(fbo, mlb: real; mtrl: pchar): real; cdecl;
+function FBOSetSceneScaleFactor(fbo, scaleFactor: real): real; cdecl;
 var
-  fb: TGLFBO;
-  mlib: TGLMaterialLibrary;
-  mat: TGLLibMaterial;
+  fbor: TGLFBORendererEx;
 begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.OverrideMaterial := nil;
-  if Length(mtrl) > 0 then
-  begin
-    mlib := TGLMaterialLibrary(trunc64(mlb));
-    mat := mlib.Materials.GetLibMaterialByName(String(mtrl)); 
-    fb.OverrideMaterial := mat;
-  end;
-  result:=1;
-end;
-
-function FBOSetColorTextureFormat(fbo, tf: real): real; cdecl;
-var
-  fb: TGLFBO;
-begin
-  fb := TGLFBO(trunc64(fbo));
-  fb.SetColorBufferFormat(TGLTextureFormat(trunc64(tf)));
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.SceneScaleFactor := scaleFactor;
   result := 1;
 end;
+
+function FBOSetTargetVisibility(fbo, tv: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  if tv = 0 then fbor.TargetVisibility := tvDefault;
+  if tv = 1 then fbor.TargetVisibility := tvFBOOnly;
+  result := 1;
+end;
+
+function FBOSetMaterialLibrary(fbo, matlib: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.MaterialLibrary := TGLAbstractMaterialLibrary(RealToPtr(matlib));
+  result := 1;
+end;
+
+function FBOSetColorTextureName(fbo: real; name: PAnsiChar): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.ColorTextureName := StrConv(name);
+  result := 1;
+end;
+
+function FBOSetDepthTextureName(fbo: real; name: PAnsiChar): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.DepthTextureName := StrConv(name);
+  result := 1;
+end;
+
+function FBOSetClearOptions(fbo, clearColor, clearDepth, clearStencil, useBufferBackground: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.ClearOptions := [];
+  if Boolean(Trunc(clearColor)) = true then
+    fbor.ClearOptions := fbor.ClearOptions + [coColorBufferClear];
+  if Boolean(Trunc(clearDepth)) = true then
+    fbor.ClearOptions := fbor.ClearOptions + [coDepthBufferClear];
+  if Boolean(Trunc(clearStencil)) = true then
+    fbor.ClearOptions := fbor.ClearOptions + [coStencilBufferClear];
+  if Boolean(Trunc(useBufferBackground)) = true then
+    fbor.ClearOptions := fbor.ClearOptions + [coUseBufferBackground];
+  result := 1;
+end;
+
+function FBOSetStencilPrecision(fbo, sp: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  if sp = 0 then fbor.StencilPrecision := spDefault;
+  if sp = 1 then fbor.StencilPrecision := sp1bit;
+  if sp = 2 then fbor.StencilPrecision := sp4bits;
+  if sp = 3 then fbor.StencilPrecision := sp8bits;
+  if sp = 4 then fbor.StencilPrecision := sp16bits;
+  result := 1;
+end;
+

@@ -3,16 +3,16 @@ var
   ob: TGLBaseSceneObject;
   mov: TGLMovement;
 begin
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   mov := GetOrCreateMovement(ob);
-  result := Integer(mov);
+  result := ObjToReal(mov);
 end;
 
 function MovementStart(movement: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
-  mov := TGLMovement(trunc64(movement));
+  mov := TGLMovement(RealToPtr(movement));
   mov.StartPathTravel;
   result := 1.0;
 end;
@@ -21,7 +21,7 @@ function MovementStop(movement: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
-  mov := TGLMovement(trunc64(movement));
+  mov := TGLMovement(RealToPtr(movement));
   mov.StopPathTravel;
   result := 1.0;
 end;
@@ -32,8 +32,8 @@ function MovementAutoStartNextPath(movement, mode: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
-  mov := TGLMovement(trunc64(movement));
-  mov.AutoStartNextPath := Boolean(trunc64(mode));
+  mov := TGLMovement(RealToPtr(movement));
+  mov.AutoStartNextPath := Boolean(trunc(mode));
   result := 1.0;
 end;
 
@@ -42,19 +42,18 @@ var
   mov: TGLMovement;
   path: TGLMovementPath;
 begin
-  mov := TGLMovement(trunc64(movement));
+  mov := TGLMovement(RealToPtr(movement));
   path := mov.AddPath;
-  result := Integer(path);
+  result := ObjToReal(path);
 end;
 
-// After switching active path, MovementStart should be called
-// to start movement
+// After switching active path, MovementStart should be called to start movement
 function MovementSetActivePath(movement,ind: real): real; cdecl;
 var
   mov: TGLMovement;
 begin
-  mov := TGLMovement(trunc64(movement));
-  mov.ActivePathIndex := trunc64(ind);
+  mov := TGLMovement(RealToPtr(movement));
+  mov.ActivePathIndex := trunc(ind);
   result := 1.0;
 end;
 
@@ -62,7 +61,7 @@ function MovementPathSetSplineMode(path, lsm: real): real; cdecl;
 var
   mpath: TGLMovementPath;
 begin
-  mpath := TGLMovementPath(trunc64(path));
+  mpath := TGLMovementPath(RealToPtr(path));
   if lsm = 0 then mpath.PathSplineMode := lsmLines;
   if lsm = 1 then mpath.PathSplineMode := lsmCubicSpline; // default mode
   if lsm = 2 then mpath.PathSplineMode := lsmBezierSpline;
@@ -76,17 +75,17 @@ var
   mpath: TGLMovementPath;
   node: TGLPathNode;
 begin
-  mpath := TGLMovementPath(trunc64(path));
+  mpath := TGLMovementPath(RealToPtr(path));
   node := mpath.AddNode;
   node.Speed := 1.0;
-  result := Integer(node);
+  result := ObjToReal(node);
 end;
 
 function MovementPathNodeSetPosition(node, x, y, z: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
-  pnode := TGLPathNode(trunc64(node));
+  pnode := TGLPathNode(RealToPtr(node));
   pnode.X := x;
   pnode.Y := y;
   pnode.Z := z;
@@ -97,7 +96,7 @@ function MovementPathNodeSetRotation(node, x, y, z: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
-  pnode := TGLPathNode(trunc64(node));
+  pnode := TGLPathNode(RealToPtr(node));
   pnode.PitchAngle := x;
   pnode.TurnAngle := y;
   pnode.RollAngle := z;
@@ -108,7 +107,7 @@ function MovementPathNodeSetSpeed(node, speed: real): real; cdecl;
 var
   pnode: TGLPathNode;
 begin
-  pnode := TGLPathNode(trunc64(node));
+  pnode := TGLPathNode(RealToPtr(node));
   pnode.Speed := speed;
   result := 1.0;
 end;
@@ -117,8 +116,8 @@ function MovementPathShow(pat,vis: real): real; cdecl;
 var
  path: TGLMovementPath;
 begin
-  path := TGLMovementPath(trunc64(pat));
-  path.ShowPath := Boolean(trunc64(vis));
+  path := TGLMovementPath(RealToPtr(pat));
+  path.ShowPath := Boolean(trunc(vis));
   Result := 1;
 end;
 
@@ -126,8 +125,8 @@ function MovementPathSetLoop(pat,loopn: real): real; cdecl;
 var
  path: TGLMovementPath;
 begin
-  path := TGLMovementPath(trunc64(pat));
-  path.Looped := Boolean(trunc64(loopn));
+  path := TGLMovementPath(RealToPtr(pat));
+  path.Looped := Boolean(trunc(loopn));
   Result := 1;
 end;
 
@@ -136,8 +135,8 @@ var
  path: TGLMovementPath;
  nod: TGLPathNode;
 begin
-  path := TGLMovementPath(trunc64(pat));
-  nod := TGLPathNode(trunc64(node));
+  path := TGLMovementPath(RealToPtr(pat));
+  nod := TGLPathNode(trunc(node));
   path.DeleteNode(nod);
   Result := 1;
 end;

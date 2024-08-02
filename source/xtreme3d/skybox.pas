@@ -3,18 +3,18 @@ var
   sb: TGLSkyBox;
 begin
   if not (parent=0) then
-    sb := TGLSkyBox.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    sb := TGLSkyBox.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     sb := TGLSkyBox.CreateAsChild(scene.Objects);
   sb.MaterialLibrary := matlib;
-  result := Integer(sb);
+  result := ObjToReal(sb);
 end;
 
-function SkyboxSetMaterial(skybox, sbm: real; matname: pchar): real; cdecl;
+function SkyboxSetMaterial(skybox, sbm: real; matname: PAnsiChar): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
-  sb := TGLSkyBox(trunc64(skybox));
+  sb := TGLSkyBox(RealToPtr(skybox));
   if sbm = 0 then sb.MatNameTop := String(matname);
   if sbm = 1 then sb.MatNameBottom := String(matname);
   if sbm = 2 then sb.MatNameLeft := String(matname);
@@ -29,7 +29,7 @@ function SkyboxSetClouds(skybox, offset, size: real): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
-  sb := TGLSkyBox(trunc64(skybox));
+  sb := TGLSkyBox(RealToPtr(skybox));
   sb.CloudsPlaneOffset := offset;
   sb.CloudsPlaneSize := size;
   result := 1;
@@ -39,7 +39,7 @@ function SkyboxSetStyle(skybox, sbs: real): real; cdecl;
 var
   sb: TGLSkyBox;
 begin
-  sb := TGLSkyBox(trunc64(skybox));
+  sb := TGLSkyBox(RealToPtr(skybox));
   if sbs = 0 then sb.Style := sbsFull;
   if sbs = 1 then sb.Style := sbsTopHalf;
   if sbs = 2 then sb.Style := sbsBottomHalf;

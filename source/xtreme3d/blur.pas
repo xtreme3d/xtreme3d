@@ -2,21 +2,20 @@ function BlurCreate(targetObj: real; parent: real): real; cdecl;
 var
   b: TGLBlur;
 begin
-  b:=TGLBlur.CreateAsChild(TGLBaseSceneObject(trunc64(parent)));
-  b.Parent := TGLBaseSceneObject(trunc64(targetObj));
+  b:=TGLBlur.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)));
+  b.Parent := TGLBaseSceneObject(RealToPtr(targetObj));
   b.RenderWidth := 256;
   b.RenderHeight := 256;
   b.Preset := pGlossy;
   b.Visible := True;
-  //b.BlurDeltaTime := 0.01;
-  result:=Integer(b);
+  result:=ObjToReal(b);
 end;
 
 function BlurSetPreset(blur, p: real): real; cdecl;
 var
   b: TGLBlur;
 begin
-  b := TGLBlur(trunc64(blur));
+  b := TGLBlur(RealToPtr(blur));
   if p=0 then b.Preset := pNone;
   if p=1 then b.Preset := pGlossy;
   if p=2 then b.Preset := pBeastView;
@@ -30,7 +29,7 @@ function BlurSetOptions(blur, delta, left, top, right, bottom: real): real; cdec
 var
   b: TGLBlur;
 begin
-  b := TGLBlur(trunc64(blur));
+  b := TGLBlur(RealToPtr(blur));
   b.BlurDeltaTime := delta;
   b.BlurLeft := left;
   b.BlurTop := top;
@@ -43,9 +42,9 @@ function BlurSetResolution(blur, res: real): real; cdecl;
 var
   b: TGLBlur;
 begin
-  b := TGLBlur(trunc64(blur));
-  b.RenderWidth := trunc64(res);
-  b.RenderHeight := trunc64(res);
+  b := TGLBlur(RealToPtr(blur));
+  b.RenderWidth := trunc(res);
+  b.RenderHeight := trunc(res);
   Result := 1;
 end;
 
@@ -53,8 +52,8 @@ function BlurSetColor(blur, col: real): real; cdecl;
 var
   b: TGLBlur;
 begin
-  b := TGLBlur(trunc64(blur));
-  b.Material.FrontProperties.Diffuse.AsWinColor:=TColor(trunc64(col));
+  b := TGLBlur(RealToPtr(blur));
+  b.Material.FrontProperties.Diffuse.AsWinColor:=TColor(trunc(col));
   Result := 1;
 end;
 
@@ -62,7 +61,7 @@ function BlurSetBlendingMode(blur, bm: real): real; cdecl;
 var
   b: TGLBlur;
 begin
-  b := TGLBlur(trunc64(blur));
+  b := TGLBlur(RealToPtr(blur));
   if bm=0 then b.Material.BlendingMode:=bmOpaque;
   if bm=1 then b.Material.BlendingMode:=bmTransparency;
   if bm=2 then b.Material.BlendingMode:=bmAdditive;

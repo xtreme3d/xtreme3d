@@ -4,7 +4,7 @@ begin
   dWorldSetAutoDisableFlag(ode.World, 0);
   ode.RenderPoint := TGLRenderPoint.CreateAsChild(scene.Objects);
   jointList := TGLODEJointList.Create(nil);
-  odeRagdollWorld := TODERagdollWorld.CreateFromManager(ode);
+  odeRagdollWorld := TGLODERagdollWorld.CreateFrom(ode.world, ode.space, ode.contactgroup);
   result := 1.0;
 end;
 
@@ -41,33 +41,37 @@ end;
 
 function OdeManagerSetIterations(iterations: real): real; cdecl;
 begin
-  ode.Iterations := trunc64(iterations);
+  ode.Iterations := trunc(iterations);
   result := 1.0;
 end;
 
 function OdeManagerSetMaxContacts(maxcontacts: real): real; cdecl;
 begin
-  ode.MaxContacts := trunc64(maxcontacts);
+  ode.MaxContacts := trunc(maxcontacts);
   result := 1.0;
 end;
 
 function OdeManagerSetVisible(mode: real): real; cdecl;
 begin
-  ode.Visible := Boolean(trunc64(mode));
-  ode.VisibleAtRunTime := Boolean(trunc64(mode));
+  ode.Visible := Boolean(trunc(mode));
+  ode.VisibleAtRunTime := Boolean(trunc(mode));
   result := 1.0;
 end;
 
-function OdeManagerSetGeomColor(color: real): real; cdecl;
+function OdeManagerSetGeomColor(colorDynamicDisabled, colorDynamicEnabled, colorStatic: real): real; cdecl;
 begin
-  ode.GeomColor.AsWinColor := TColor(trunc64(color));
-  ode.GeomColor.Alpha := 1.0;
+  ode.GeomColorDynD.AsWinColor := TColor(trunc(colorDynamicDisabled));
+  ode.GeomColorDynD.Alpha := 1.0;
+  ode.GeomColorDynE.AsWinColor := TColor(trunc(colorDynamicEnabled));
+  ode.GeomColorDynE.Alpha := 1.0;
+  ode.GeomColorStat.AsWinColor := TColor(trunc(colorStatic));
+  ode.GeomColorStat.Alpha := 1.0;
   result := 1.0;
 end;
 
 function OdeWorldSetAutoDisableFlag(flag: real): real; cdecl;
 begin
-  dWorldSetAutoDisableFlag(ode.World, trunc64(flag));
+  dWorldSetAutoDisableFlag(ode.World, trunc(flag));
   result := 1.0;
 end;
 
@@ -85,7 +89,7 @@ end;
 
 function OdeWorldSetAutoDisableSteps(steps: real): real; cdecl;
 begin
-  dWorldSetAutoDisableSteps(ode.World, trunc64(steps));
+  dWorldSetAutoDisableSteps(ode.World, trunc(steps));
   result := 1.0;
 end;
 
@@ -99,7 +103,7 @@ function OdeStaticCreate(obj: real): real; cdecl;
 var
   stat: TGLODEStatic;
 begin
-  stat := GetOrCreateOdeStatic(TGLBaseSceneObject(trunc64(obj)));
+  stat := GetOrCreateOdeStatic(TGLBaseSceneObject(RealToPtr(obj)));
   stat.Manager := ode;
   result := 1.0;
 end;
@@ -108,38 +112,37 @@ function OdeDynamicCreate(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOrCreateOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.Manager := ode;
   result := 1.0;
 end;
 
-// New function
 // Note: Terrain/Trimesh collision is not supported
 function OdeTerrainCreate(terr: real): real; cdecl;
 var
   hf: TGLODEHeightField;
 begin
-  hf := GetOrCreateODEHeightField(TGLBaseSceneObject(trunc64(terr)));
+  hf := GetOrCreateODEHeightField(TGLBaseSceneObject(RealToPtr(terr)));
   hf.Manager := ode;
   result := 1.0;
 end;
 
-// New function
 function OdeDynamicCalculateMass(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
   m: TdMass;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   m := dyna.CalculateMass;
   dBodySetMass(dyna.Body, @m);
+  result := 1.0;
 end;
 
 function OdeDynamicCalibrateCenterOfMass(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.CalibrateCenterOfMass;
   result := 1.0;
 end;
@@ -148,7 +151,7 @@ function OdeDynamicAlignObject(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AlignObject;
   result := 1.0;
 end;
@@ -157,8 +160,8 @@ function OdeDynamicEnable(obj, mode: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  dyna.Enabled := Boolean(trunc64(mode));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
+  dyna.Enabled := Boolean(trunc(mode));
   result := 1.0;
 end;
 
@@ -166,8 +169,8 @@ function OdeDynamicSetAutoDisableFlag(obj, mode: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  dBodySetAutoDisableFlag(dyna.Body, trunc64(mode));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
+  dBodySetAutoDisableFlag(dyna.Body, trunc(mode));
   result := 1.0;
 end;
 
@@ -175,7 +178,7 @@ function OdeDynamicSetAutoDisableLinearThreshold(obj, velocity: real): real; cde
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dBodySetAutoDisableLinearThreshold(dyna.Body, velocity);
   result := 1.0;
 end;
@@ -184,7 +187,7 @@ function OdeDynamicSetAutoDisableAngularThreshold(obj, velocity: real): real; cd
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dBodySetAutoDisableAngularThreshold(dyna.Body, velocity);
   result := 1.0;
 end;
@@ -193,8 +196,8 @@ function OdeDynamicSetAutoDisableSteps(obj, steps: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  dBodySetAutoDisableSteps(dyna.Body, trunc64(steps));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
+  dBodySetAutoDisableSteps(dyna.Body, trunc(steps));
   result := 1.0;
 end;
 
@@ -202,7 +205,7 @@ function OdeDynamicSetAutoDisableTime(obj, time: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dBodySetAutoDisableTime(dyna.Body, time);
   result := 1.0;
 end;
@@ -211,7 +214,7 @@ function OdeDynamicAddForce(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddForce(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -220,7 +223,7 @@ function OdeDynamicAddForceAtPos(obj, x, y, z, px, py, pz: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddForceAtPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
   result := 1.0;
 end;
@@ -229,7 +232,7 @@ function OdeDynamicAddForceAtRelPos(obj, x, y, z, px, py, pz: real): real; cdecl
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddForceAtRelPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
   result := 1.0;
 end;
@@ -238,7 +241,7 @@ function OdeDynamicAddRelForce(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddRelForce(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -247,7 +250,7 @@ function OdeDynamicAddRelForceAtPos(obj, x, y, z, px, py, pz: real): real; cdecl
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddRelForceAtPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
   result := 1.0;
 end;
@@ -256,7 +259,7 @@ function OdeDynamicAddRelForceAtRelPos(obj, x, y, z, px, py, pz: real): real; cd
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddRelForceAtRelPos(AffineVectorMake(x, y, z), AffineVectorMake(px, py, pz));
   result := 1.0;
 end;
@@ -265,7 +268,7 @@ function OdeDynamicAddTorque(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddTorque(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -274,46 +277,45 @@ function OdeDynamicAddRelTorque(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.AddRelTorque(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
 
+{
 function OdeDynamicGetContactCount(obj: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   result := dyna.NumContacts;
 end;
+}
 
+{
 function OdeStaticGetContactCount(obj: real): real; cdecl;
 var
   stat: TGLODEStatic;
 begin
-  stat := TGLODEStatic(TGLBaseSceneObject(trunc64(obj)));
+  stat := TGLODEStatic(TGLBaseSceneObject(RealToPtr(obj)));
   result := stat.NumContacts;
 end;
+}
 
-// TODO:
-// OdeDynamicGetContact
-// OdeStaticGetContact
-
-// Change from Xtreme3D 2.0: position should be specified
 function OdeAddBox(obj, x, y, z, w, h, d: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementBox;
+  elem: TGLODEElementBox;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementBox(stat.AddNewElement(TODEElementBox));
+    elem := TGLODEElementBox(stat.AddNewElement(TGLODEElementBox));
   if dyna <> nil then
-    elem := TODEElementBox(dyna.AddNewElement(TODEElementBox));
+    elem := TGLODEElementBox(dyna.AddNewElement(TGLODEElementBox));
   if elem <> nil then
   begin
     with elem do
@@ -329,21 +331,20 @@ begin
   result := 0.0;
 end;
 
-// Change from Xtreme3D 2.0: position should be specified
 function OdeAddSphere(obj, x, y, z, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementSphere;
+  elem: TGLODEElementSphere;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementSphere(stat.AddNewElement(TODEElementSphere));
+    elem := TGLODEElementSphere(stat.AddNewElement(TGLODEElementSphere));
   if dyna <> nil then
-    elem := TODEElementSphere(dyna.AddNewElement(TODEElementSphere));
+    elem := TGLODEElementSphere(dyna.AddNewElement(TGLODEElementSphere));
   if elem <> nil then
   begin
     with elem do
@@ -363,15 +364,15 @@ var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementBase;
+  elem: TGLODEElementBase;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := stat.AddNewElement(TODEElementPlane);
+    elem := stat.AddNewElement(TGLODEElementBase);
   if dyna <> nil then
-    elem := dyna.AddNewElement(TODEElementPlane);
+    elem := dyna.AddNewElement(TGLODEElementBase);
   if elem <> nil then
   begin  
     result := Integer(elem);
@@ -380,22 +381,21 @@ begin
   result := 0.0;
 end;
 
-// Change from Xtreme3D 2.0: position should be specified
 // Note: Cylinder/Trimesh collision is not supported
 function OdeAddCylinder(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementCylinder;
+  elem: TGLODEElementCylinder;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementCylinder(stat.AddNewElement(TODEElementCylinder));
+    elem := TGLODEElementCylinder(stat.AddNewElement(TGLODEElementCylinder));
   if dyna <> nil then
-    elem := TODEElementCylinder(dyna.AddNewElement(TODEElementCylinder));
+    elem := TGLODEElementCylinder(dyna.AddNewElement(TGLODEElementCylinder));
   if elem <> nil then
   begin
     with elem do
@@ -410,21 +410,21 @@ begin
   result := 0.0;
 end;
 
-// Change from Xtreme3D 2.0: position should be specified
+{
 function OdeAddCone(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementCone;
+  elem: TGLODEElementCone;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementCone(stat.AddNewElement(TODEElementCone));
+    elem := TGLODEElementCone(stat.AddNewElement(TGLODEElementCone));
   if dyna <> nil then
-    elem := TODEElementCone(dyna.AddNewElement(TODEElementCone));
+    elem := TGLODEElementCone(dyna.AddNewElement(TGLODEElementCone));
   if elem <> nil then
   begin
     with elem do
@@ -438,22 +438,22 @@ begin
   end;
   result := 0.0;
 end;
+}
 
-// Change from Xtreme3D 2.0: position should be specified
 function OdeAddCapsule(obj, x, y, z, len, r: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementCapsule;
+  elem: TGLODEElementCapsule;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementCapsule(stat.AddNewElement(TODEElementCapsule));
+    elem := TGLODEElementCapsule(stat.AddNewElement(TGLODEElementCapsule));
   if dyna <> nil then
-    elem := TODEElementCapsule(dyna.AddNewElement(TODEElementCapsule));
+    elem := TGLODEElementCapsule(dyna.AddNewElement(TGLODEElementCapsule));
   if elem <> nil then
   begin
     with elem do
@@ -468,24 +468,23 @@ begin
   result := 0.0;
 end;
 
-// Change from Xtreme3D 2.0: mesh index should be specified
 // Note Trimes/Trimesh collision is not supported
 function OdeAddTriMesh(obj, mesh: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
   stat: TGLODEStatic;
   dyna: TGLODEDynamic;
-  elem: TODEElementTriMesh;
+  elem: TGLODEElementTriMesh;
   m: Integer;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
   if stat <> nil then
-    elem := TODEElementTriMesh(stat.AddNewElement(TODEElementTriMesh));
+    elem := TGLODEElementTriMesh(stat.AddNewElement(TGLODEElementTriMesh));
   if dyna <> nil then
-    elem := TODEElementTriMesh(dyna.AddNewElement(TODEElementTriMesh));
-  m := trunc64(mesh);
+    elem := TGLODEElementTriMesh(dyna.AddNewElement(TGLODEElementTriMesh));
+  m := trunc(mesh);
   if elem <> nil then
   begin
     with elem do
@@ -499,12 +498,11 @@ begin
   result := 0.0;
 end;
 
-// New function
 function OdeElementSetDensity(element, density: real): real; cdecl;
 var
-  elem: TODEElementBase;
+  elem: TGLODEElementBase;
 begin
-  elem := TODEElementBase(trunc64(element));
+  elem := TGLODEElementBase(RealToPtr(element));
   elem.Density := density;
   result := 1.0;
 end;
@@ -514,10 +512,10 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
-    beh.Surface.RollingFrictionEnabled := Boolean(trunc64(mode));
+    beh.Surface.RollingFrictionEnabled := Boolean(trunc(mode));
   result := 1.0;
 end;
 
@@ -526,7 +524,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.RollingFrictionCoeff := rfc;
@@ -537,9 +535,9 @@ function OdeSurfaceSetMode(obj, Mu2, FDir1, Bounce, SoftERP, SoftCFM, Motion1, M
 var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
-  surf: TODECollisionSurface;
+  surf: TGLODECollisionSurface;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
   begin
@@ -563,7 +561,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Mu := mu;
@@ -575,7 +573,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Mu2 := mu2;
@@ -587,7 +585,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Bounce := bounce;
@@ -599,7 +597,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Bounce_Vel := vel;
@@ -611,7 +609,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.SoftERP := erp;
@@ -623,7 +621,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.SoftCFM := cfm;
@@ -635,7 +633,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Motion1 := motion1;
@@ -647,7 +645,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Motion2 := motion2;
@@ -659,7 +657,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Slip1 := slip1;
@@ -671,7 +669,7 @@ var
   o: TGLBaseSceneObject;
   beh: TGLODEBehaviour;
 begin
-  o := TGLBaseSceneObject(trunc64(obj));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   beh := getODEBehaviour(o);
   if beh <> nil then
     beh.Surface.Slip2 := slip2;
@@ -680,67 +678,67 @@ end;
 
 function OdeAddJointBall: real; cdecl;
 var
-  j: TODEJointBall;
+  j: TGLODEJointBall;
 begin
-  j := TODEJointBall.Create(jointList.Joints);
+  j := TGLODEJointBall.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeAddJointFixed: real; cdecl;
 var
-  j: TODEJointFixed;
+  j: TGLODEJointFixed;
 begin
-  j := TODEJointFixed.Create(jointList.Joints);
+  j := TGLODEJointFixed.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeAddJointHinge: real; cdecl;
 var
-  j: TODEJointHinge;
+  j: TGLODEJointHinge;
 begin
-  j := TODEJointHinge.Create(jointList.Joints);
+  j := TGLODEJointHinge.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeAddJointHinge2: real; cdecl;
 var
-  j: TODEJointHinge2;
+  j: TGLODEJointHinge2;
 begin
-  j := TODEJointHinge2.Create(jointList.Joints);
+  j := TGLODEJointHinge2.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeAddJointSlider: real; cdecl;
 var
-  j: TODEJointSlider;
+  j: TGLODEJointSlider;
 begin
-  j := TODEJointSlider.Create(jointList.Joints);
+  j := TGLODEJointSlider.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeAddJointUniversal: real; cdecl;
 var
-  j: TODEJointUniversal;
+  j: TGLODEJointUniversal;
 begin
-  j := TODEJointUniversal.Create(jointList.Joints);
+  j := TGLODEJointUniversal.Create(jointList.Joints);
   j.Manager := ode;
-  result := Integer(j);
+  result := ObjToReal(j);
 end;
 
 function OdeJointSetObjects(joint, obj1, obj2: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
   o1: TGLBaseSceneObject;
   o2: TGLBaseSceneObject;
 begin
-  j := TODEJointBase(trunc64(joint));
-  o1 := TGLBaseSceneObject(trunc64(obj1));
-  o2 := TGLBaseSceneObject(trunc64(obj2));
+  j := TGLODEJointBase(RealToPtr(joint));
+  o1 := TGLBaseSceneObject(RealToPtr(obj1));
+  o2 := TGLBaseSceneObject(RealToPtr(obj2));
   j.Object1 := o1;
   j.Object2 := o2;
   result := 1.0;
@@ -748,89 +746,89 @@ end;
 
 function OdeJointEnable(joint, mode: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
 begin
-  j := TODEJointBase(trunc64(joint));
-  j.Enabled := Boolean(trunc64(mode));
+  j := TGLODEJointBase(RealToPtr(joint));
+  j.Enabled := Boolean(trunc(mode));
   result := 1.0;
 end;
 
 function OdeJointInitialize(joint: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
 begin
-  j := TODEJointBase(trunc64(joint));
+  j := TGLODEJointBase(RealToPtr(joint));
   j.Initialize;
   result := 1.0;
 end;
 
 function OdeJointSetAnchor(joint, x, y, z: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
 begin
-  j := TODEJointBase(trunc64(joint));
-  if j is TODEJointHinge then
-    TODEJointHinge(j).Anchor.SetPoint(x, y, z)
-  else if j is TODEJointBall then
-    TODEJointBall(j).Anchor.SetPoint(x, y, z)
-  else if j is TODEJointHinge2 then
-    TODEJointHinge2(j).Anchor.SetPoint(x, y, z)
-  else if j is TODEJointUniversal then
-    TODEJointUniversal(j).Anchor.SetPoint(x, y, z);
+  j := TGLODEJointBase(RealToPtr(joint));
+  if j is TGLODEJointHinge then
+    TGLODEJointHinge(j).Anchor.SetPoint(x, y, z)
+  else if j is TGLODEJointBall then
+    TGLODEJointBall(j).Anchor.SetPoint(x, y, z)
+  else if j is TGLODEJointHinge2 then
+    TGLODEJointHinge2(j).Anchor.SetPoint(x, y, z)
+  else if j is TGLODEJointUniversal then
+    TGLODEJointUniversal(j).Anchor.SetPoint(x, y, z);
   result := 1.0;
 end;
 
 function OdeJointSetAnchorAtObject(joint, obj: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
   o: TGLBaseSceneObject;
 begin
-  j := TODEJointBase(trunc64(joint));
-  o := TGLBaseSceneObject(trunc64(obj));
-  if j is TODEJointHinge then
-    TODEJointHinge(j).Anchor.SetPoint(o.AbsolutePosition)
-  else if j is TODEJointBall then
-    TODEJointBall(j).Anchor.SetPoint(o.AbsolutePosition)
-  else if j is TODEJointHinge2 then
-    TODEJointHinge2(j).Anchor.SetPoint(o.AbsolutePosition)
-  else if j is TODEJointUniversal then
-    TODEJointUniversal(j).Anchor.SetPoint(o.AbsolutePosition);
+  j := TGLODEJointBase(RealToPtr(joint));
+  o := TGLBaseSceneObject(RealToPtr(obj));
+  if j is TGLODEJointHinge then
+    TGLODEJointHinge(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TGLODEJointBall then
+    TGLODEJointBall(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TGLODEJointHinge2 then
+    TGLODEJointHinge2(j).Anchor.SetPoint(o.AbsolutePosition)
+  else if j is TGLODEJointUniversal then
+    TGLODEJointUniversal(j).Anchor.SetPoint(o.AbsolutePosition);
   result := 1.0;
 end;
 
 function OdeJointSetAxis1(joint, x, y, z: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
 begin
-  j := TODEJointBase(trunc64(joint));
-  if j is TODEJointHinge then
-    TODEJointHinge(j).Axis.SetVector(x, y, z)
-  else if j is TODEJointHinge2 then
-    TODEJointHinge2(j).Axis1.SetVector(x, y, z)
-  else if j is TODEJointUniversal then
-    TODEJointUniversal(j).Axis1.SetVector(x, y, z);
+  j := TGLODEJointBase(RealToPtr(joint));
+  if j is TGLODEJointHinge then
+    TGLODEJointHinge(j).Axis.SetVector(x, y, z)
+  else if j is TGLODEJointHinge2 then
+    TGLODEJointHinge2(j).Axis1.SetVector(x, y, z)
+  else if j is TGLODEJointUniversal then
+    TGLODEJointUniversal(j).Axis1.SetVector(x, y, z);
   result := 1.0;
 end;
 
 function OdeJointSetAxis2(joint, x, y, z: real): real; cdecl;
 var
-  j: TODEJointBase;
+  j: TGLODEJointBase;
 begin
-  j := TODEJointBase(trunc64(joint));
-  if j is TODEJointHinge2 then
-    TODEJointHinge2(j).Axis2.SetVector(x, y, z)
-  else if j is TODEJointUniversal then
-    TODEJointUniversal(j).Axis2.SetVector(x, y, z);
+  j := TGLODEJointBase(RealToPtr(joint));
+  if j is TGLODEJointHinge2 then
+    TGLODEJointHinge2(j).Axis2.SetVector(x, y, z)
+  else if j is TGLODEJointUniversal then
+    TGLODEJointUniversal(j).Axis2.SetVector(x, y, z);
   result := 1.0;
 end;
 
 function OdeJointSetBounce(joint, axis, bounce: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.Bounce := bounce;
   result := 1.0;
@@ -838,11 +836,11 @@ end;
 
 function OdeJointSetCFM(joint, axis, cfm: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.CFM := cfm;
   result := 1.0;
@@ -850,11 +848,11 @@ end;
 
 function OdeJointSetFMax(joint, axis, fmax: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.FMax := fmax;
   result := 1.0;
@@ -862,11 +860,11 @@ end;
 
 function OdeJointSetFudgeFactor(joint, axis, ffactor: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.FudgeFactor := ffactor;
   result := 1.0;
@@ -874,11 +872,11 @@ end;
 
 function OdeJointSetHiStop(joint, axis, histop: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.HiStop := histop;
   result := 1.0;
@@ -886,11 +884,11 @@ end;
 
 function OdeJointSetLoStop(joint, axis, lostop: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.LoStop := lostop;
   result := 1.0;
@@ -898,11 +896,11 @@ end;
 
 function OdeJointSetStopCFM(joint, axis, cfm: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.StopCFM := cfm;
   result := 1.0;
@@ -910,11 +908,11 @@ end;
 
 function OdeJointSetStopERP(joint, axis, erp: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.StopERP := erp;
   result := 1.0;
@@ -922,11 +920,11 @@ end;
 
 function OdeJointSetVel(joint, axis, velocity: real): real; cdecl;
 var
-  j: TODEJointBase;
-  p: TODEJointParams;
+  j: TGLODEJointBase;
+  p: TGLODEJointParams;
 begin
-  j := TODEJointBase(trunc64(joint));
-  p := getJointAxisParams(j, trunc64(axis));
+  j := TGLODEJointBase(RealToPtr(joint));
+  p := getJointAxisParams(j, trunc(axis));
   if p <> nil then
     p.Vel := velocity;
   result := 1.0;
@@ -935,76 +933,76 @@ end;
 function OdeRagdollCreate(actor: real): real; cdecl;
 var
   act: TGLActor;
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  act := TGLActor(trunc64(actor));
-  ragdoll := TODERagdoll.Create(act);
+  act := TGLActor(RealToPtr(actor));
+  ragdoll := TGLODERagdoll.Create(act);
   ragdoll.ODEWorld := odeRagdollWorld;
   ragdoll.GLSceneRoot := scene.Objects;
   ragdoll.ShowBoundingBoxes := False;
-  result := Integer(ragdoll);
+  result := ObjToReal(ragdoll);
 end;
 
 function OdeRagdollHingeJointCreate(x, y, z, lostop, histop: real): real; cdecl;
 var
-  hjoint: TODERagdollHingeJoint;
+  hjoint: TGLODERagdollHingeJoint;
 begin
-  hjoint := TODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
-  result := Integer(hjoint);
+  hjoint := TGLODERagdollHingeJoint.Create(AffineVectorMake(x, y, z), lostop, histop);
+  result := ObjToReal(hjoint);
 end;
 
 function OdeRagdollUniversalJointCreate(x1, y1, z1, lostop1, histop1, x2, y2, z2, lostop2, histop2: real): real; cdecl;
 var
-  ujoint: TODERagdollUniversalJoint;
+  ujoint: TGLODERagdollUniversalJoint;
 begin
-  ujoint := TODERagdollUniversalJoint.Create(
+  ujoint := TGLODERagdollUniversalJoint.Create(
     AffineVectorMake(x1, y1, z1), lostop1, histop1,
     AffineVectorMake(x2, y2, z2), lostop2, histop2);
-  result := Integer(ujoint);
+  result := ObjToReal(ujoint);
 end;
 
 function OdeRagdollDummyJointCreate: real; cdecl;
 var
-  djoint: TODERagdollDummyJoint;
+  djoint: TGLODERagdollDummyJoint;
 begin
-  djoint := TODERagdollDummyJoint.Create;
-  result := Integer(djoint);
+  djoint := TGLODERagdollDummyJoint.Create;
+  result := ObjToReal(djoint);
 end;
 
 function OdeRagdollBoneCreate(rag, ragjoint, boneid, parentbone: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
-  bone: TODERagdollBone;
+  ragdoll: TGLODERagdoll;
+  bone: TGLODERagdollBone;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   if not (parentbone = 0) then
-    bone := TODERagdollBone.CreateOwned(TODERagdollBone(trunc64(parentbone)))
+    bone := TGLODERagdollBone.CreateOwned(TGLODERagdollBone(RealToPtr(parentbone)))
   else
   begin
-    bone := TODERagdollBone.Create(ragdoll);
+    bone := TGLODERagdollBone.Create(ragdoll);
     ragdoll.SetRootBone(bone);
   end;
-  bone.Joint := TGLRagdolJoint(trunc64(ragjoint));
-  bone.BoneID := trunc64(boneid);
+  bone.Joint := TGLRagdolJoint(RealToPtr(ragjoint));
+  bone.BoneID := trunc(boneid);
   //bone.Name := IntToStr(bone.BoneID);
-  result := Integer(bone);
+  result := ObjToReal(bone);
 end;
 
 function OdeRagdollBuild(rag: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   ragdoll.BuildRagdoll;
   result := 1.0;
 end;
 
 function OdeRagdollEnable(rag, mode: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
-  if (Boolean(trunc64(mode))) then
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
+  if (Boolean(trunc(mode))) then
     ragdoll.Start
   else
     ragdoll.Stop;
@@ -1013,9 +1011,9 @@ end;
 
 function OdeRagdollUpdate(rag: real): real; cdecl;
 var
-  ragdoll: TODERagdoll;
+  ragdoll: TGLODERagdoll;
 begin
-  ragdoll := TODERagdoll(trunc64(rag));
+  ragdoll := TGLODERagdoll(RealToPtr(rag));
   ragdoll.Update;
   result := 1.0;
 end;
@@ -1024,7 +1022,7 @@ function OdeDynamicSetVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.SetVelocity(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -1033,7 +1031,7 @@ function OdeDynamicSetAngularVelocity(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.SetAngularVelocity(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -1042,23 +1040,23 @@ function OdeDynamicGetVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  result := dyna.GetVelocity[trunc64(ind)];
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
+  result := dyna.GetVelocity.V[trunc(ind)];
 end;
 
 function OdeDynamicGetAngularVelocity(obj, ind: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
-  result := dyna.GetAngularVelocity[trunc64(ind)];
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
+  result := dyna.GetAngularVelocity.V[trunc(ind)];
 end;
 
 function OdeDynamicSetPosition(obj, x, y, z: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.SetPosition(AffineVectorMake(x, y, z));
   result := 1.0;
 end;
@@ -1067,7 +1065,8 @@ function OdeDynamicSetRotationQuaternion(obj, x, y, z, w: real): real; cdecl;
 var
   dyna: TGLODEDynamic;
 begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(trunc64(obj)));
+  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
   dyna.SetRotation(x, y, z, w);
   result := 1.0;
 end;
+

@@ -1,41 +1,41 @@
-function MouseSetPosition(mx, my: real): real; cdecl;
-begin
-  SetCursorPos(trunc64(mx), trunc64(my));
-  Result := 1;
-end;
+// Input functions by Rutraple aka Hacker
 
 function MouseGetPositionX: real; cdecl;
 var
-  mouse : TPoint;
+    mouse: TPoint;
 begin
-  GetCursorPos(mouse);
-  Result := Integer(mouse.X);
+    GetCursorPos(mouse);
+    Result := Integer(mouse.X);
 end;
 
 function MouseGetPositionY: real; cdecl;
 var
-  mouse : TPoint;
+    mouse: TPoint;
 begin
-  GetCursorPos(mouse);
-  Result := Integer(mouse.Y);
+    GetCursorPos(mouse);
+    Result := Integer(mouse.Y);
+end;
+
+function MouseSetPosition(mx, my: real): real; cdecl;
+begin
+    SetCursorPos(Trunc(mx), Trunc(my));
+    result := 1;
 end;
 
 function MouseShowCursor(mode: real): real; cdecl;
 begin
-  ShowCursor(LongBool(trunc64(mode)));
-  Result := 1;
+    ShowCursor(LongBool(Trunc(mode)));
+    Result := 1;
 end;
 
 function KeyIsPressed(key: real): real; cdecl;
 begin
-  Result := Integer(IsKeyDown(trunc64(key)));
+    result := integer(IsKeyDown(Trunc(key)));
 end;
 
 function MouseIsPressed(btn: real): real; cdecl;
 begin
-  // translate to VK_MBUTTON (4) in case of mb_middle (3)
-  if btn = 3
-    then btn := 4;
-  Result := Integer(IsKeyDown(trunc64(btn)));
+    // translate to VK_MBUTTON (4) in case of mb_middle (3)
+    if btn = 3 then btn := 4;
+    result := integer(IsKeyDown(Trunc(btn)));
 end;
-

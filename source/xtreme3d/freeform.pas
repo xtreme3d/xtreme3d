@@ -1,41 +1,42 @@
-function FreeformCreate(fname: pchar; matl1,matl2,parent: real): real; cdecl;
+function FreeformCreate(fname: PAnsiChar; matl1,matl2,parent: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   ml: TGLMaterialLibrary;
   ml2: TGLMaterialLibrary;
-  mesh1: TMeshObject;
-  mi: Integer;
 begin
-  ml:=TGLMaterialLibrary(trunc64(matl1));
-  ml2:=TGLMaterialLibrary(trunc64(matl2));
+  ml:=TGLMaterialLibrary(RealToPtr(matl1));
+  ml2:=TGLMaterialLibrary(RealToPtr(matl2));
   if not (parent=0) then
-    GLFreeForm1:=TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    GLFreeForm1:=TGLFreeForm.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     GLFreeForm1:=TGLFreeForm.CreateAsChild(scene.Objects);
   GLFreeForm1.MaterialLibrary:=ml;
   GLFreeForm1.LightmapLibrary:=ml2;
   GLFreeForm1.IgnoreMissingTextures := True;
+  GLFreeForm1.AutoScaling.X := 1.0;
+  GLFreeForm1.AutoScaling.Y := 1.0;
+  GLFreeForm1.AutoScaling.Z := 1.0;
   
   try
-    GLFreeForm1.LoadFromFile(fname);
+    GLFreeForm1.LoadFromFile(StrConv(fname));
   except
     On E: Exception do
     begin
       if showLoadingErrors then
-        ShowMessage('FreeformCreate:' + #13#10 + 'Error loading ' + String(fname) + #13#10 + E.Message);
+        ShowMessage('FreeformCreate:' + #13#10 + E.Message);
     end;
   end;
   
-  result:=Integer(GLFreeForm1);
+  result:=ObjToReal(GLFreeForm1);
 end;
 
 function FreeformGenTangents(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
-  mesh1: TMeshObject;
+  mesh1: TGLMeshObject;
   mi: Integer;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
   for mi:=0 to GLFreeForm1.MeshObjects.Count-1 do begin
       mesh1 := GLFreeForm1.MeshObjects[mi];
       if (mesh1.Vertices.Count > 0) and (mesh1.TexCoords.Count > 0) then
@@ -46,24 +47,22 @@ begin
   result:=1.0;
 end;
 
-// MeshCountObjects = FreeformMeshObjectsCount
 function FreeformMeshObjectsCount(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   mobj: integer;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
   mobj:=GLFreeForm1.MeshObjects.Count;
   result:=mobj;
 end;
 
-// MeshSetVisible = FreeformMeshSetVisible
 function FreeformMeshSetVisible(ff,mesh,mode: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  GLFreeForm1.MeshObjects[trunc64(mesh)].Visible:=boolean(trunc64(mode));
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  GLFreeForm1.MeshObjects[Trunc(mesh)].Visible:=boolean(Trunc(mode));
   GLFreeForm1.StructureChanged;
   result:=1;
 end;
@@ -71,14 +70,14 @@ end;
 function FreeformMeshSetSecondCoords(ff1,mesh1,ff2,mesh2: real): real; cdecl;
 var
   GLFreeForm1,GLFreeForm2: TGLFreeForm;
-  tl: TAffineVectorList;
-  sc: TTexPointList;
+  tl: TGLAffineVectorList;
+  sc: TGLAffineVectorList;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff1));
-  GLFreeForm2:=TGLFreeForm(trunc64(ff2));
-  tl:=GLFreeForm2.MeshObjects[trunc64(mesh2)].TexCoords;
-  sc:=TTexPointList(tl);
-  GLFreeForm1.MeshObjects[trunc64(mesh1)].LightMapTexCoords:=sc;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff1));
+  GLFreeForm2:=TGLFreeForm(RealToPtr(ff2));
+  tl:=GLFreeForm2.MeshObjects[Trunc(mesh2)].TexCoords;
+  sc:=TGLAffineVectorList(tl);
+  GLFreeForm1.MeshObjects[Trunc(mesh1)].LightMapTexCoords:=sc;
   result:=1;
 end;
 
@@ -87,25 +86,25 @@ var
   GLFreeForm1: TGLFreeForm;
   tri: integer;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  tri:=GLFreeForm1.MeshObjects[trunc64(mesh)].TriangleCount;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  tri:=GLFreeForm1.MeshObjects[Trunc(mesh)].TriangleCount;
   result:=tri;
 end;
 
-function FreeformMeshObjectGetName(ff,mesh: real): pchar; cdecl;
+function FreeformMeshObjectGetName(ff,mesh: real): PAnsiChar; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  result:=pchar(GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name);
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  result:=PAnsiChar(AnsiString(GLFreeForm1.MeshObjects.Items[Trunc(mesh)].Name));
 end;
 
-function FreeformMeshObjectSetName(ff,mesh: real; name: pchar): real; cdecl;
+function FreeformMeshObjectSetName(ff,mesh: real; name: PAnsiChar): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Name:=name;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  GLFreeForm1.MeshObjects.Items[Trunc(mesh)].Name:=String(AnsiString(name));
   result:=1;
 end;
 
@@ -113,8 +112,8 @@ function FreeformMeshObjectDestroy(ff,mesh: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  GLFreeForm1.MeshObjects.Items[trunc64(mesh)].Destroy;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  GLFreeForm1.MeshObjects.Items[Trunc(mesh)].Destroy;
   result:=1;
 end;
 
@@ -123,8 +122,8 @@ var
   GLFreeForm1: TGLFreeForm;
   fgr: integer;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  fgr:=GLFreeForm1.MeshObjects[trunc64(mesh)].FaceGroups.Count;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  fgr:=GLFreeForm1.MeshObjects[Trunc(mesh)].FaceGroups.Count;
   result:=fgr;
 end;
 
@@ -133,8 +132,8 @@ var
   GLFreeForm1: TGLFreeForm;
   tri: integer;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  tri:=GLFreeForm1.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fgr)].TriangleCount;
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  tri:=GLFreeForm1.MeshObjects[Trunc(mesh)].FaceGroups[Trunc(fgr)].TriangleCount;
   result:=tri;
 end;
 
@@ -143,20 +142,20 @@ function FreeformCreateExplosionFX(ff1, enable: real): real; cdecl;
 var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
-  cache: TMeshObjectList;
+  cache: TGLMeshObjectList;
 begin
-  ffm:=TGLFreeForm(trunc64(ff1));
+  ffm:=TGLFreeForm(RealToPtr(ff1));
   result:=0;
   if ffm.Effects.Count > 0 then
       Exit;
-  cache:=TMeshObjectList.Create;
+  cache:=TGLMeshObjectList.Create;
   cache.Assign(ffm.MeshObjects);
   ffm.TagObject := cache;
   exp:= TGLBExplosionFX.Create(ffm.Effects);
   exp.MaxSteps:= 0;
   exp.Speed:= 0.1;
-  exp.Enabled:=Boolean(trunc64(enable));
-  result:=Integer(exp);
+  exp.Enabled:=Boolean(Trunc(enable));
+  result:=ObjToReal(exp);
 end;
 
 function FreeformExplosionFXReset(ff1: real): real; cdecl;
@@ -164,11 +163,11 @@ var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
 begin
-  ffm:=TGLFreeForm(trunc64(ff1));
+  ffm:=TGLFreeForm(RealToPtr(ff1));
   exp:=TGLBExplosionFx(ffm.effects.items[0]);
   exp.Reset;
   exp.Enabled:=false;
-  ffm.MeshObjects.Assign(TMeshObjectList(ffm.TagObject));
+  ffm.MeshObjects.Assign(TGLMeshObjectList(ffm.TagObject));
   ffm.StructureChanged;
   result := 1;
 end;
@@ -178,9 +177,9 @@ var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
 begin
-  ffm:=TGLFreeForm(trunc64(ff1));
+  ffm:=TGLFreeForm(RealToPtr(ff1));
   exp:=TGLBExplosionFx(ffm.effects.items[0]);
-  exp.Enabled:=Boolean(trunc64(mode));
+  exp.Enabled:=Boolean(RealToPtr(mode));
   result := 1;
 end;
 
@@ -189,7 +188,7 @@ var
   ffm: TGLFreeForm;
   exp: TGLBExplosionFx;
 begin
-  ffm:=TGLFreeForm(trunc64(ff1));
+  ffm:=TGLFreeForm(RealToPtr(ff1));
   exp:=TGLBExplosionFx(ffm.effects.items[0]);
   exp.Speed := speed;
   result := 1;
@@ -199,11 +198,11 @@ function FreeformSphereSweepIntersect(freeform, obj, radius, vel: real): real; c
 var
   ffm: TGLFreeForm;
   ob: TGLBaseSceneObject;
-  start, dir: TVector;
+  start, dir: TGLVector;
   res: Boolean;
 begin
-  ffm := TGLFreeForm(trunc64(freeform));
-  ob := TGLBaseSceneObject(trunc64(obj));
+  ffm := TGLFreeForm(RealToPtr(freeform));
+  ob := TGLBaseSceneObject(RealToPtr(obj));
   start := ob.Position.AsVector;
   dir := ob.Direction.AsVector;
   res := ffm.OctreeSphereSweepIntersect(start, dir, vel, radius);
@@ -213,26 +212,26 @@ end;
 function FreeformPointInMesh(freeform, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
-  p: TVector;
+  p: TGLVector;
   res: Boolean;
 begin
-  ffm := TGLFreeForm(trunc64(freeform));
+  ffm := TGLFreeForm(RealToPtr(freeform));
   p := VectorMake(x, y, z);
   res := ffm.OctreePointInMesh(p);
   result := Integer(res);
 end;
 
-function FreeformMeshSetMaterial(ff,mesh: real; material: pchar): real; cdecl;
+function FreeformMeshSetMaterial(ff,mesh: real; material: PAnsiChar): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
   i: Integer;
-  me: TMeshObject;
+  me: TGLMeshObject;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  me := GLFreeForm1.MeshObjects[Trunc(mesh)];
   for i:=0 to me.FaceGroups.Count-1 do
   begin
-    me.FaceGroups[i].MaterialName := String(material); 
+    me.FaceGroups[i].MaterialName := String(AnsiString(material));
   end;
   GLFreeForm1.StructureChanged;
   result:=1;
@@ -242,33 +241,32 @@ function FreeformUseMeshMaterials(ff,mode: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  GLFreeForm1.UseMeshMaterials:=boolean(trunc64(mode));
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  GLFreeForm1.UseMeshMaterials:=boolean(Trunc(mode));
   result:=1;
 end;
 
 function FreeformToFreeforms(freeform, parent: real): real; cdecl;
 var
   ffm, ffm2: TGLFreeForm;
-  mi, fgi, vi, tci: Integer;
-  mesh, mesh2: TMeshObject;
+  mi, fgi, vi: Integer;
+  mesh, mesh2: TGLMeshObject;
   fg: TFGVertexIndexList;
-  fg2: TFGVertexIndexList; //TFGVertexNormalTexIndexList;
+  fg2: TFGVertexIndexList;
   centroid: TAffineVector;
   one: TAffineVector;
-  divisor: Single;
 begin
-  ffm := TGLFreeForm(trunc64(freeform));
+  ffm := TGLFreeForm(RealToPtr(freeform));
   one := AffineVectorMake(1, 1, 1);
   
   for mi:=0 to ffm.MeshObjects.Count-1 do begin
     mesh := ffm.MeshObjects[mi];
 
     if not (parent=0) then
-      ffm2 := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+      ffm2 := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
     else
       ffm2 := TGLFreeForm.CreateAsChild(scene.Objects);
-    mesh2 := TMeshObject.CreateOwned(ffm2.MeshObjects);
+    mesh2 := TGLMeshObject.CreateOwned(ffm2.MeshObjects);
     
     ffm2.MaterialLibrary:=ffm.MaterialLibrary;
     ffm2.LightmapLibrary:=ffm.LightmapLibrary;
@@ -302,7 +300,7 @@ begin
     mesh2.Mode := momFaceGroups;
     for fgi:=0 to mesh.FaceGroups.Count-1 do begin
       fg := TFGVertexIndexList(mesh.FaceGroups[fgi]);
-      fg2 := TFGVertexIndexList.CreateOwned(mesh2.FaceGroups); //TFGVertexNormalTexIndexList.CreateOwned(mesh2.FaceGroups);
+      fg2 := TFGVertexIndexList.CreateOwned(mesh2.FaceGroups);
       fg2.Mode := fgmmTriangles;
       fg2.VertexIndices := fg.VertexIndices;
       //fg2.NormalIndices := fg.VertexIndices;
@@ -316,30 +314,30 @@ begin
   result := 1.0;
 end;
 
-function FreeformMeshFaceGroupSetMaterial(ff,mesh,fg: real; matname: pchar): real; cdecl;
+function FreeformMeshFaceGroupSetMaterial(ff,mesh,fg: real; matname: PAnsiChar): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   faceGroup: TFGVertexNormalTexIndexList;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[Trunc(fg)]);
 
-  faceGroup.MaterialName := String(matname);
+  faceGroup.MaterialName := String(AnsiString(matname));
   faceGroup.PrepareMaterialLibraryCache(freeform.MaterialLibrary);
   freeform.StructureChanged;
   result:=1;
 end;
 
-function FreeformMeshFaceGroupGetMaterial(ff,mesh,fgroup: real): pchar; cdecl;
+function FreeformMeshFaceGroupGetMaterial(ff,mesh,fgroup: real): PAnsiChar; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
-  me: TMeshObject;
+  me: TGLMeshObject;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
-  me := GLFreeForm1.MeshObjects[trunc64(mesh)];
-  result:=pchar(me.FaceGroups[trunc64(fgroup)].MaterialName);
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
+  me := GLFreeForm1.MeshObjects[Trunc(mesh)];
+  result:=PAnsiChar(AnsiString(me.FaceGroups[Trunc(fgroup)].MaterialName));
 end;
 
 function FreeformCreateEmpty(matlib1, matlib2, parent: real): real; cdecl;
@@ -348,25 +346,25 @@ var
   ml: TGLMaterialLibrary;
   ml2: TGLMaterialLibrary;
 begin
-  ml := TGLMaterialLibrary(trunc64(matlib1));
-  ml2 := TGLMaterialLibrary(trunc64(matlib2));
+  ml := TGLMaterialLibrary(RealToPtr(matlib1));
+  ml2 := TGLMaterialLibrary(RealToPtr(matlib2));
   if not (parent=0) then
-    freeform := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    freeform := TGLFreeForm.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     freeform := TGLFreeForm.CreateAsChild(scene.Objects);
   freeform.MaterialLibrary := ml;
   freeform.LightmapLibrary := ml2;
   freeform.UseMeshMaterials := True;
-  result:=Integer(freeform);
+  result:=ObjToReal(freeform);
 end;
 
 function FreeformAddMesh(ff: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := TMeshObject.CreateOwned(freeform.MeshObjects);
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := TGLMeshObject.CreateOwned(freeform.MeshObjects);
   meshObj.Mode := momFaceGroups;
   result := freeform.MeshObjects.Count - 1;
 end;
@@ -374,62 +372,61 @@ end;
 function FreeformMeshAddFaceGroup(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
-  faceGroup: TFGVertexNormalTexIndexList;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList.CreateOwned(meshObj.FaceGroups);
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
+  TFGVertexNormalTexIndexList.CreateOwned(meshObj.FaceGroups);
   result := meshObj.FaceGroups.Count - 1;
 end;
 
 function FreeformMeshAddVertex(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   result := meshObj.Vertices.Add(x, y, z);
 end;
 
 function FreeformMeshAddNormal(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   result := meshObj.Normals.Add(x, y, z);
 end;
 
 function FreeformMeshAddTexCoord(ff, mesh, u, v: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   result := meshObj.TexCoords.Add(u, v);
 end;
 
 function FreeformMeshAddSecondTexCoord(ff, mesh, u, v: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   result := meshObj.LightMapTexCoords.Add(u, v);
 end;
 
 function FreeformMeshAddTangent(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   meshObj.Tangents.Add(x, y, z, 1.0);
   result := 1.0;
 end;
@@ -437,10 +434,10 @@ end;
 function FreeformMeshAddBinormal(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   meshObj.Binormals.Add(x, y, z, 1.0);
   result := 1.0;
 end;
@@ -448,30 +445,30 @@ end;
 function FreeformMeshFaceGroupAddTriangle(ff, mesh, fg, i1, i2, i3: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   faceGroup: TFGVertexNormalTexIndexList;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
-  faceGroup.VertexIndices.Add(trunc64(i1), trunc64(i2), trunc64(i3));
-  faceGroup.NormalIndices.Add(trunc64(i1), trunc64(i2), trunc64(i3));
-  faceGroup.TexCoordIndices.Add(trunc64(i1), trunc64(i2), trunc64(i3));
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[Trunc(fg)]);
+  faceGroup.VertexIndices.Add(Trunc(i1), Trunc(i2), Trunc(i3));
+  faceGroup.NormalIndices.Add(Trunc(i1), Trunc(i2), Trunc(i3));
+  faceGroup.TexCoordIndices.Add(Trunc(i1), Trunc(i2), Trunc(i3));
   result := faceGroup.VertexIndices.Count - 1;
 end;
 
 function FreeformMeshGenNormals(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
-  indices: TIntegerList;
+  meshObj: TGLMeshObject;
+  indices: TGLIntegerList;
   i: Integer;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   if (meshObj.Vertices.Count > 0) and (meshObj.FaceGroups.Count > 0) then
   begin
-    indices := TIntegerList.Create;
+    indices := TGLIntegerList.Create;
     for i:=0 to meshObj.FaceGroups.Count-1 do
     begin
       indices.Add(TFGVertexNormalTexIndexList(meshObj.FaceGroups[i]).VertexIndices);
@@ -485,50 +482,48 @@ end;
 function FreeformMeshGenTangents(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   if (meshObj.Vertices.Count > 0) and (meshObj.TexCoords.Count > 0) then
     GenMeshTangents(meshObj);
   result := 1.0;
 end;
 
-// MeshCountVertices = FreeformMeshVerticesCount
 function FreeformMeshVerticesCount(ff, mesh: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   result := meshObj.Vertices.Count;
 end;
 
 function FreeformMeshTranslate(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   v: TAffineVector;
-  m: TMatrix;
+  m: TGLMatrix;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   v := AffineVectorMake(x, y, z);
   m := CreateTranslationMatrix(v);
   meshObj.Vertices.TransformAsPoints(m);
   result := 1.0;
 end;
 
-// MeshRotate = FreeformMeshRotate
 function FreeformMeshRotate(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
-  m: TMatrix;
+  meshObj: TGLMeshObject;
+  m: TGLMatrix;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   
   m := MatrixMultiply(
     MatrixMultiply(
@@ -547,24 +542,24 @@ end;
 function FreeformMeshScale(ff, mesh, x, y, z: real): real; cdecl;
 var
   freeform: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   v: TAffineVector;
-  m: TMatrix;
+  m: TGLMatrix;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  meshObj := freeform.MeshObjects[trunc64(mesh)];
+  freeform := TGLFreeForm(RealToPtr(ff));
+  meshObj := freeform.MeshObjects[Trunc(mesh)];
   v := AffineVectorMake(x, y, z);
   m := CreateScaleMatrix(v);
   meshObj.Vertices.TransformAsPoints(m);
   result := 1.0;
 end;
 
-function FreeformSave(ff: real; filename: pchar): real; cdecl;
+function FreeformSave(ff: real; filename: PAnsiChar): real; cdecl;
 var
   freeform: TGLFreeForm;
 begin
-  freeform := TGLFreeForm(trunc64(ff));
-  freeform.SaveToFile(String(filename));
+  freeform := TGLFreeForm(RealToPtr(ff));
+  freeform.SaveToFile(StrConv(filename));
   result := 1.0;
 end;
 
@@ -572,24 +567,24 @@ function FreeformMeshGetVertex(ff, mesh, v, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  result := ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)][trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  result := ffm.MeshObjects[Trunc(mesh)].Vertices.Items[Trunc(v)].V[Trunc(index)];
 end;
 
 function FreeformMeshGetNormal(ff, mesh, n, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  result := ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)][trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  result := ffm.MeshObjects[Trunc(mesh)].Normals.Items[Trunc(n)].V[Trunc(index)];
 end;
 
 function FreeformMeshGetTexCoord(ff, mesh, t, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  result := ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)][trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  result := ffm.MeshObjects[Trunc(mesh)].TexCoords.Items[Trunc(t)].V[Trunc(index)];
 end;
 
 function FreeformMeshGetSecondTexCoord(ff, mesh, t, index: real): real; cdecl;
@@ -597,12 +592,12 @@ var
   ffm: TGLFreeForm;
   i: Integer;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  i := trunc64(index);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  i := Trunc(index);
   if i = 0 then
-    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].S
+    result := ffm.MeshObjects[Trunc(mesh)].LightMapTexCoords.Items[Trunc(t)].X
   else if i = 1 then
-    result := ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)].T
+    result := ffm.MeshObjects[Trunc(mesh)].LightMapTexCoords.Items[Trunc(t)].Y
   else
     result := 0;
 end;
@@ -611,16 +606,16 @@ function FreeformMeshGetTangent(ff, mesh, t, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  result := ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)][trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  result := ffm.MeshObjects[Trunc(mesh)].Tangents.Items[Trunc(t)].V[Trunc(index)];
 end;
 
 function FreeformMeshGetBinormal(ff, mesh, b, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  result := ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)][trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  result := ffm.MeshObjects[Trunc(mesh)].Binormals.Items[Trunc(b)].V[Trunc(index)];
 end;
 
 function FreeformMeshFaceGroupGetIndex(ff, mesh, fg, index: real): real; cdecl;
@@ -628,17 +623,17 @@ var
   ffm: TGLFreeForm;
   faceGroup: TFGVertexIndexList;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
-  result := faceGroup.VertexIndices[trunc64(index)];
+  ffm := TGLFreeForm(RealToPtr(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[Trunc(mesh)].FaceGroups[Trunc(fg)]);
+  result := faceGroup.VertexIndices[Trunc(index)];
 end;
 
 function FreeformMeshSetVertex(ff, mesh, v, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].Vertices[trunc64(v)] := AffineVectorMake(x, y, z);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].Vertices[Trunc(v)] := AffineVectorMake(x, y, z);
   result := 1.0;
 end;
 
@@ -646,8 +641,8 @@ function FreeformMeshSetNormal(ff, mesh, n, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].Normals[trunc64(n)] := AffineVectorMake(x, y, z);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].Normals[Trunc(n)] := AffineVectorMake(x, y, z);
   result := 1.0;
 end;
 
@@ -655,8 +650,8 @@ function FreeformMeshSetTexCoord(ff, mesh, t, u, v: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].TexCoords[trunc64(t)] := AffineVectorMake(u, v, 1); 
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].TexCoords[Trunc(t)] := AffineVectorMake(u, v, 1); 
   result := 1.0;
 end;
 
@@ -664,8 +659,8 @@ function FreeformMeshSetSecondTexCoord(ff, mesh, t, u, v: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].LightMapTexCoords[trunc64(t)] := TexPointMake(u, v); 
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].LightMapTexCoords.Items[Trunc(t)] := AffineVectorMake(u, v, 1); //TexPointMake(u, v);
   result := 1.0;
 end;
 
@@ -673,8 +668,8 @@ function FreeformMeshSetTangent(ff, mesh, t, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].Tangents[trunc64(t)] := VectorMake(x, y, z, 0.0);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].Tangents[Trunc(t)] := VectorMake(x, y, z, 0.0);
   result := 1.0;
 end;
 
@@ -682,8 +677,8 @@ function FreeformMeshSetBinormal(ff, mesh, b, x, y, z: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MeshObjects[trunc64(mesh)].Binormals[trunc64(b)] := VectorMake(x, y, z, 0.0);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MeshObjects[Trunc(mesh)].Binormals[Trunc(b)] := VectorMake(x, y, z, 0.0);
   result := 1.0;
 end;
 
@@ -692,9 +687,9 @@ var
   ffm: TGLFreeForm;
   faceGroup: TFGVertexIndexList;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  faceGroup := TFGVertexIndexList(ffm.MeshObjects[trunc64(mesh)].FaceGroups[trunc64(fg)]);
-  faceGroup.VertexIndices[trunc64(index)] := trunc64(i);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  faceGroup := TFGVertexIndexList(ffm.MeshObjects[Trunc(mesh)].FaceGroups[Trunc(fg)]);
+  faceGroup.VertexIndices[Trunc(index)] := Trunc(i);
   result := 1.0;
 end;
 
@@ -702,7 +697,7 @@ function FreeformBuildOctree(ff: real): real; cdecl;
 var
   GLFreeForm1: TGLFreeForm;
 begin
-  GLFreeForm1:=TGLFreeForm(trunc64(ff));
+  GLFreeForm1:=TGLFreeForm(RealToPtr(ff));
   GLFreeForm1.BuildOctree;
   result:=1.0;
 end;
@@ -710,25 +705,25 @@ end;
 function FreeformMeshFaceGroupGetLightmapIndex(ff, mesh, fg: real): real; cdecl;
 var
   ffm: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   faceGroup: TFGVertexNormalTexIndexList;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  meshObj := ffm.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  meshObj := ffm.MeshObjects[Trunc(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[Trunc(fg)]);
   result := faceGroup.LightMapIndex;
 end;
 
 function FreeformMeshFaceGroupSetLightmapIndex(ff, mesh, fg, index: real): real; cdecl;
 var
   ffm: TGLFreeForm;
-  meshObj: TMeshObject;
+  meshObj: TGLMeshObject;
   faceGroup: TFGVertexNormalTexIndexList;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  meshObj := ffm.MeshObjects[trunc64(mesh)];
-  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[trunc64(fg)]);
-  faceGroup.LightMapIndex := trunc64(index);
+  ffm := TGLFreeForm(RealToPtr(ff));
+  meshObj := ffm.MeshObjects[Trunc(mesh)];
+  faceGroup := TFGVertexNormalTexIndexList(meshObj.FaceGroups[Trunc(fg)]);
+  faceGroup.LightMapIndex := Trunc(index);
   result := 1.0;
 end;
 
@@ -736,12 +731,18 @@ function FreeformSetMaterialLibraries(ff, matlib, lmmatlib: real): real; cdecl;
 var
   ffm: TGLFreeForm;
 begin
-  ffm := TGLFreeForm(trunc64(ff));
-  ffm.MaterialLibrary := TGLMaterialLibrary(trunc64(matlib));
-  ffm.LightmapLibrary := TGLMaterialLibrary(trunc64(lmmatlib));
+  ffm := TGLFreeForm(RealToPtr(ff));
+  ffm.MaterialLibrary := TGLMaterialLibrary(Trunc(matlib));
+  ffm.LightmapLibrary := TGLMaterialLibrary(Trunc(lmmatlib));
   result := 1.0;
 end;
 
-// Unimplemented:
-// MeshOptimize
-// MeshSmoothFaces
+function BaseMeshBuildSilhouetteConnectivityData(obj: real): real; cdecl;
+var
+    baseMesh: TGLBaseMesh;
+begin
+    baseMesh := TGLBaseMesh(RealToPtr(obj));
+    baseMesh.BuildSilhouetteConnectivityData;
+    result := 1.0;
+end;
+

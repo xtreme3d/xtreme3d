@@ -1,140 +1,357 @@
 library xtreme3d;
+
 uses
-  Windows, Messages, Classes, Controls, StdCtrls, ExtCtrls, Dialogs, SysUtils, TypInfo,
-  GLScene, GLObjects, GLWin32FullScreenViewer, GLMisc, GLGraph,
-  GLCollision, GLTexture, OpenGL1x, VectorGeometry, Graphics,
-  GLVectorFileObjects, GLWin32Viewer, GLSpaceText, GLGeomObjects, GLCadencer,
-  Jpeg, Tga, DDS, PNG, GLProcTextures, Spin, GLVfsPAK, GLCanvas, GLGraphics, GLPortal,
-  GLHUDObjects, GLBitmapFont, GLWindowsFont, GLImposter, VectorTypes, GLUtils,
-  GLPolyhedron, GLTeapot, GLzBuffer, GLFile3DS, GLFileGTS, GLFileLWO, GLFileMD2,
-  GLFileMD3, Q3MD3, GLFileMS3D, GLFileMD5, GLFileNMF, GLFileNurbs, GLFileObj, GLFileOCT,
-  GLFilePLY, GLFileQ3BSP, GLFileSMD, GLFileSTL, GLFileTIN, GLFileB3D,
-  GLFileMDC, GLFileVRML, GLFileLOD, GLFileX, GLFileCSM, GLFileLMTS, GLFileASE, GLFileDXS,
-  GLPhongShader, VectorLists, GLThorFX, GLFireFX,
-  GLTexCombineShader, GLBumpShader, GLCelShader, GLContext, GLTerrainRenderer, GLHeightData,
-  GLBlur, GLSLShader, GLMultiMaterialShader, GLOutlineShader, GLHiddenLineShader,
-  ApplicationFileIO, GLMaterialScript, GLWaterPlane, GeometryBB, GLExplosionFx,
-  GLSkyBox, GLShadowPlane, GLShadowVolume, GLSkydome, GLLensFlare, GLDCE,
-  GLNavigator, GLFPSMovement, GLMirror, SpatialPartitioning, GLSpatialPartitioning,
-  GLTrail, GLTree, GLMultiProxy, GLODEManager, dynode, GLODECustomColliders,
-  GLShadowMap, MeshUtils, pngimage, GLRagdoll, GLODERagdoll, GLMovement, GLHUDShapes, GLActorProxy,
-  GLFBO, Hashes, Freetype, GLFreetypeFont, GLClippingPlane, GLLightFx,
-  Keyboard, Forms, Kraft, GLKraft, GLFileFBX, GLCrossPlatform,
-  GLExtrusion, GLTilePlane, GLVerletClothify, GLVerletSkeletonColliders, VerletClasses;
+  System.SysUtils,
+  System.Classes,
+  System.Math,
+  Messages,
+  Windows,
+  Winapi.OpenGL,
+  Winapi.OpenGLext,
+  VCL.Forms,
+  VCL.Graphics,
+  VCL.Dialogs,
+  VCL.Imaging.PNGImage,
+  GLS.ApplicationFileIO,
+  GLS.BaseClasses,
+  GLS.Blur,
+  GLS.BitmapFont,
+  GLS.Cadencer,
+  GLS.Collision,
+  GLS.Color,
+  GLS.Context,
+  GLS.Coordinates,
+  GLS.DCE,
+  GLS.ExplosionFx,
+  GLS.Extrusion,
+  GLS.VectorFileObjects,
+  GLS.File3DPDF,
+  GLS.File3DS,
+  GLS.File3DSSceneObjects,
+  GLS.FileASE,
+  GLS.FileB3D,
+  GLS.FileBMP,
+  GLS.FileDDS,
+  GLS.FileDEL,
+  GLS.FileDXF,
+  GLS.FileGL2,
+  GLS.FileGLB,
+  GLS.FileGLTF,
+  GLS.FileGRD,
+  GLS.FileGTS,
+  GLS.FileHDR,
+  GLS.FileJPEG,
+  GLS.FileLMTS,
+  GLS.FileLWO,
+  GLS.FileMD2,
+  GLS.FileMD3,
+  GLS.FileMD5,
+  GLS.FileMDC,
+  GLS.FileMP3,
+  GLS.FileMS3D,
+  GLS.FileNMF,
+  GLS.FileNurbs,
+  GLS.FileO3TC,
+  GLS.FileO3TCImage,
+  GLS.FileOBJ,
+  GLS.FileOCT,
+  GLS.FilePAK,
+  GLS.FilePGM,
+  GLS.FilePLY,
+  GLS.FilePNG,
+  GLS.FileQ3BSP,
+  GLS.FileQ3MD3,
+  GLS.FileSMD,
+  GLS.FileSTL,
+  GLS.FileTGA,
+  GLS.FileTIN,
+  GLS.FileVfsPAK,
+  GLS.FileVOR,
+  GLS.FileVRML,
+  GLS.FileWAV,
+  GLS.FileX,
+  GLS.FileZLIB,
+  GLS.FireFX,
+  GLS.FPSMovement,
+  GLS.GeometryBB,
+  GLS.GeomObjects,
+  GLS.Graph,
+  GLS.HeightData,
+  GLS.HUDObjects,
+  GLS.LensFlare,
+  GLS.Material,
+  GLS.MaterialScript,
+  GLS.MeshUtils,
+  GLS.Mirror,
+  GLS.Movement,
+  GLS.MultiProxy,
+  GLS.Navigator,
+  GLS.Objects,
+  GLS.OpenGLAdapter,
+  GLS.SpacePartition,
+  GLS.PersistentClasses,
+  GLS.ProcTextures,
+  GLS.ProxyObjects,
+  GLS.Ragdoll,
+  GLS.RenderContextInfo,
+  GLS.Scene,
+  GLS.SceneViewer,
+  GLS.Selection,
+  GLS.ShadowPlane,
+  GLS.ShadowVolume,
+  GLS.SkyDome,
+  GLS.SpaceText,
+  GLS.State,
+  GLS.TerrainRenderer,
+  GLS.Texture,
+  GLS.TextureFormat,
+  GLS.ThorFX,
+  GLS.TilePlane,
+  GLS.Trail,
+  GLS.Tree,
+  GLS.Utils,
+  GLS.VerletTypes,
+  GLS.VerletClothify,
+  GLS.VectorGeometry,
+  GLS.VectorLists,
+  GLS.VectorTypes,
+  GLS.WaterPlane,
+  GLS.WindowsFont,
+  GLS.FBORenderer,
+  GLSL.LineShaders,
+  GLSL.MultiMaterialShader,
+  GLSL.ShapeShaders,
+  GLSL.TextureShaders,
+  Physics.ODEImport,
+  Physics.ODEManager,
+  Physics.ODERagdoll,
+  GLSLShader,
+  GLFileCSM,
+  GLFileLOD,
+  GLLightFx,
+  GLShadowMap,
+  GLShadowCamera,
+  GLFBORendererEx,
+  GLHUDShapes,
+  GLTTF,
+  GLHUDText2,
+  GLClipPlane,
+  Hashes,
+  SDL2,
+  SDL2_TTF,
+  Kraft,
+  GLKraft;
 
 type
-   TEmpty = class(TComponent)
-    private
-   end;
+    TEmpty = class(TComponent)
+        private
+    end;
 
 const
-   {$I 'bumpshader'}
-   {$I 'phongshader'}
+   {$I 'shaders/bumpshader'}
+   {$I 'shaders/phongshader'}
 
 var
-  showLoadingErrors: Boolean;
-  scene: TGLScene;
-  matlib: TGLMaterialLibrary;
-  memviewer: TGLMemoryViewer;
-  cadencer: TGLCadencer;
-  empty: TEmpty;
+    showLoadingErrors: Boolean;
+    scene: TGLScene;
+    matlib: TGLMaterialLibrary;
+    memviewer: TGLMemoryViewer;
+    cadencer: TGLCadencer;
+    empty: TEmpty;
 
-  collisionPoint: TVector;
-  collisionNormal: TVector;
+    collisionPoint: TGLVector;
+    collisionNormal: TGLVector;
 
-  ode: TGLODEManager;
-  odeRagdollWorld: TODERagdollWorld;
-  jointList: TGLODEJointList;
+    ode: TGLODEManager;
+    odeRagdollWorld: TGLODERagdollWorld;
+    jointList: TGLODEJointList;
 
-  kraftRaycastPoint: TKraftVector3;
-  kraftRaycastNormal: TKraftVector3;
+    kraftRaycastPoint: TKraftVector3;
+    kraftRaycastNormal: TKraftVector3;
 
-  previousTicks: DWORD;
+    previousTicks: Longint;
 
 {$R *.res}
 
-function LoadStringFromFile2(const fileName : String) : String;
+function ObjToReal(obj: TObject): real;
+begin
+    result := real(longint(Pointer(obj)));
+end;
+
+function PtrToReal(p: Pointer): real;
+begin
+    result := real(longint(p));
+end;
+
+function RealToPtr(v: real): Pointer;
 var
-   n : Cardinal;
-	fs : TStream;
+    i: NativeInt;
 begin
-   if FileStreamExists(fileName) then begin
-   	fs:=CreateFileStream(fileName, fmOpenRead+fmShareDenyNone);
-      try
-         n:=fs.Size;
-   	   SetLength(Result, n);
-         if n>0 then
-         	fs.Read(Result[1], n);
-      finally
-   	   fs.Free;
-      end;
-   end else Result:='';
+    i := Trunc(v);
+    result := Pointer(i);
 end;
 
-function VectorDivide(const v1 : TAffineVector; delta : Single) : TAffineVector;
+function StrConv(s: PAnsiChar): String;
 begin
-   Result[0]:=v1[0]/delta;
-   Result[1]:=v1[1]/delta;
-   Result[2]:=v1[2]/delta;
+    result := System.UTF8ToUnicodeString(s);
 end;
 
-function VectorMultiply(const v1 : TAffineVector; delta : Single) : TAffineVector;
+function IsKeyDown(vk: integer): Boolean;
 begin
-   Result[0]:=v1[0]*delta;
-   Result[1]:=v1[1]*delta;
-   Result[2]:=v1[2]*delta;
+   result := (GetAsyncKeyState(vk)<>0);
+end;
+
+function LoadStringFromFile(const fileName: String): String;
+var
+    n: Cardinal;
+	  fs: TFileStream;
+begin
+    if FileStreamExists(fileName) then begin
+   	    fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
+        try
+            n := fs.Size;
+   	        SetLength(Result, n);
+            if n > 0 then
+         	      fs.Read(Result[1], n);
+        finally
+   	        fs.Free;
+        end;
+    end
+    else Result := '';
 end;
 
 function IsExtensionSupported(v: TGLSceneViewer; const Extension: string): Boolean;
 var
-   Buffer : String;
-   ExtPos: Integer;
+    Buffer : String;
+    ExtPos: Integer;
 begin
-   v.Buffer.RenderingContext.Activate;
-   Buffer := StrPas(glGetString(GL_EXTENSIONS));
-   // First find the position of the extension string as substring in Buffer.
-   ExtPos := Pos(Extension, Buffer);
-   Result := ExtPos > 0;
-   // Now check that it isn't only a substring of another extension.
-   if Result then
-     Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
-               or (Buffer[ExtPos + Length(Extension)]=' ');
-   v.Buffer.RenderingContext.Deactivate;
+    v.Buffer.RenderingContext.Activate;
+    Buffer := String(glGetString(GL_EXTENSIONS));
+    // First find the position of the extension string as substring in Buffer.
+    ExtPos := Pos(Extension, Buffer);
+    Result := ExtPos > 0;
+    // Now check that it isn't only a substring of another extension.
+    if Result then
+        Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
+                  or (Buffer[ExtPos + Length(Extension)]=' ');
+    v.Buffer.RenderingContext.Deactivate;
 end;
 
-procedure GenMeshTangents(mesh: TMeshObject);
+function Raycast(
+  obj, target: TGLBaseSceneObject;
+  var isecPoint, isecNorm: TGLVector): Boolean;
 var
-   i,j: Integer;
-   v,t: array[0..2] of TAffineVector;
+    rstart, rdir, ipoint, inorm: TGLVector;
+begin
+    rstart := obj.AbsolutePosition;
+    rdir := obj.AbsoluteDirection;
+    if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then begin
+        isecPoint := ipoint;
+        isecNorm := inorm;
+        result := True;
+    end
+    else result := False;
+end;
 
+function RecursiveRaycast(
+  obj, target: TGLBaseSceneObject;
+  rstart, rdir: TGLVector;
+  var isecPoint, isecNorm: TGLVector;
+  var bestDistance: Single): TGLBaseSceneObject;
+var
+    ipoint, inorm: TGLVector;
+    bestObject: TGLBaseSceneObject;
+    resObj: TGLBaseSceneObject;
+    d: Single;
+    i: Integer;
+begin
+    bestObject := nil;
+
+    if target.RayCastIntersect(rstart, rdir, @ipoint, @inorm) then begin
+        d := VectorDistance(rstart, ipoint);
+        if d < bestDistance then begin
+            isecPoint := ipoint;
+            isecNorm := inorm;
+            bestDistance := d;
+            bestObject := target;
+        end;
+    end;
+
+    for i := 0 to target.Count-1 do
+    begin
+        if target.Children[i].Visible then begin
+            resObj := RecursiveRaycast(obj, target.Children[i], rstart, rdir, ipoint, inorm, bestDistance);
+            if resObj <> nil then begin
+                isecPoint := ipoint;
+                isecNorm := inorm;
+                bestObject := resObj;
+            end;
+        end;
+    end;
+
+    result := bestObject;
+end;
+
+function normalizeSlashes(s: string): string;
+var
+   i: integer;
+begin
+   SetLength(Result, Length(s));
+   for i := 1 to Length(s) do
+      if s[i] = '/' then
+         Result[i] := '\'
+      else
+         Result[i] := s[i];
+end;
+
+function InvertBitmap(Bitmap: TBitmap): TBitmap;
+begin
+   Bitmap.Canvas.CopyMode := cmDstInvert;
+   Bitmap.Canvas.CopyRect(Bitmap.Canvas.ClipRect, Bitmap.Canvas, Bitmap.Canvas.ClipRect);
+   Bitmap.Canvas.CopyMode := cmSrcCopy;
+   Result := Bitmap;
+end;
+
+function VectorDivide(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result.V[0]:=v1.V[0]/delta;
+   Result.V[1]:=v1.V[1]/delta;
+   Result.V[2]:=v1.V[2]/delta;
+end;
+
+function VectorMultiply(const v1 : TAffineVector; delta : Single) : TAffineVector;
+begin
+   Result.V[0]:=v1.V[0]*delta;
+   Result.V[1]:=v1.V[1]*delta;
+   Result.V[2]:=v1.V[2]*delta;
+end;
+
+procedure GenMeshTangents(mesh: TGLMeshObject);
+var
+   i: Integer;
+   v,t: array[0..2] of TAffineVector;
    x1, x2, y1, y2, z1, z2, t1, t2, s1, s2: Single;
    sDir, tDir: TAffineVector;
-   sTan, tTan: TAffineVectorList;
-   tangents, bitangents: TVectorList;
+   sTan, tTan: TGLAffineVectorList;
+   tangents, bitangents: TGLVectorList;
    sv, tv: array[0..2] of TAffineVector;
    r, oneOverR: Single;
    n, ta: TAffineVector;
    tang: TAffineVector;
-
-   tangent,
-   binormal   : array[0..2] of TVector;
-   vt,tt      : TAffineVector;
-   interp,dot : Single;
-
 begin
    mesh.Tangents.Clear;
    mesh.Binormals.Clear;
    mesh.Tangents.Count:=mesh.Vertices.Count;
    mesh.Binormals.Count:=mesh.Vertices.Count;
 
-   tangents := TVectorList.Create;
+   tangents := TGLVectorList.Create;
    tangents.Count:=mesh.Vertices.Count;
 
-   bitangents := TVectorList.Create;
-   bitangents.Count:=mesh.Vertices.Count; 
+   bitangents := TGLVectorList.Create;
+   bitangents.Count:=mesh.Vertices.Count;
 
-   sTan := TAffineVectorList.Create;
-   tTan := TAffineVectorList.Create;
+   sTan := TGLAffineVectorList.Create;
+   tTan := TGLAffineVectorList.Create;
    sTan.Count := mesh.Vertices.Count;
    tTan.Count := mesh.Vertices.Count;
 
@@ -154,17 +371,17 @@ begin
       mesh.GetTriangleData(i,mesh.Vertices,v[0],v[1],v[2]);
       mesh.GetTriangleData(i,mesh.TexCoords,t[0],t[1],t[2]);
 
-      x1 := v[1][0] - v[0][0];
-      x2 := v[2][0] - v[0][0];
-      y1 := v[1][1] - v[0][1];
-      y2 := v[2][1] - v[0][1];
-      z1 := v[1][2] - v[0][2];
-      z2 := v[2][2] - v[0][2];
+      x1 := v[1].V[0] - v[0].V[0];
+      x2 := v[2].V[0] - v[0].V[0];
+      y1 := v[1].V[1] - v[0].V[1];
+      y2 := v[2].V[1] - v[0].V[1];
+      z1 := v[1].V[2] - v[0].V[2];
+      z2 := v[2].V[2] - v[0].V[2];
 
-      s1 := t[1][0] - t[0][0];
-      s2 := t[2][0] - t[0][0];
-      t1 := t[1][1] - t[0][1];
-      t2 := t[2][1] - t[0][1];
+      s1 := t[1].V[0] - t[0].V[0];
+      s2 := t[2].V[0] - t[0].V[0];
+      t1 := t[1].V[1] - t[0].V[1];
+      t2 := t[2].V[1] - t[0].V[1];
 
       r := (s1 * t2) - (s2 * t1);
 
@@ -173,13 +390,13 @@ begin
 
       oneOverR := 1.0 / r;
 
-      sDir[0] := (t2 * x1 - t1 * x2) * oneOverR;
-      sDir[1] := (t2 * y1 - t1 * y2) * oneOverR;
-      sDir[2] := (t2 * z1 - t1 * z2) * oneOverR;
+      sDir.V[0] := (t2 * x1 - t1 * x2) * oneOverR;
+      sDir.V[1] := (t2 * y1 - t1 * y2) * oneOverR;
+      sDir.V[2] := (t2 * z1 - t1 * z2) * oneOverR;
 
-      tDir[0] := (s1 * x2 - s2 * x1) * oneOverR;
-      tDir[1] := (s1 * y2 - s2 * y1) * oneOverR;
-      tDir[2] := (s1 * z2 - s2 * z1) * oneOverR;
+      tDir.V[0] := (s1 * x2 - s2 * x1) * oneOverR;
+      tDir.V[1] := (s1 * y2 - s2 * y1) * oneOverR;
+      tDir.V[2] := (s1 * z2 - s2 * z1) * oneOverR;
 
       mesh.GetTriangleData(i,sTan,sv[0],sv[1],sv[2]);
       mesh.GetTriangleData(i,tTan,tv[0],tv[1],tv[2]);
@@ -214,54 +431,30 @@ begin
   result := TGLODEBehaviour(obj.Behaviours.GetByClass(TGLODEBehaviour));
 end;
 
-function getJointAxisParams(j: TODEJointBase; axis: Integer): TODEJointParams;
+function getJointAxisParams(j: TGLODEJointBase; axis: Integer): TGLODEJointParams;
 var
-  res: TODEJointParams;
+  res: TGLODEJointParams;
 begin
-  if j is TODEJointHinge then
+  if j is TGLODEJointHinge then
   begin
     if axis = 1 then
-      res := TODEJointHinge(j).AxisParams;
+      res := TGLODEJointHinge(j).AxisParams;
   end
-  else if j is TODEJointHinge2 then
+  else if j is TGLODEJointHinge2 then
   begin
     if axis = 1 then
-      res := TODEJointHinge2(j).Axis1Params
+      res := TGLODEJointHinge2(j).Axis1Params
     else if axis = 2 then
-      res := TODEJointHinge2(j).Axis2Params;
+      res := TGLODEJointHinge2(j).Axis2Params;
   end
-  else if j is TODEJointUniversal then
+  else if j is TGLODEJointUniversal then
   begin
     if axis = 1 then
-      res := TODEJointUniversal(j).Axis1Params
+      res := TGLODEJointUniversal(j).Axis1Params
     else if axis = 2 then
-      res := TODEJointUniversal(j).Axis2Params;
+      res := TGLODEJointUniversal(j).Axis2Params;
   end;
   result := res;
-end;
-
-procedure onContactStay(const ContactPair: PKraftContactPair; const WithShape: TKraftShape);
-begin
-end;
-
-function normalizeSlashes(s: string): string;
-var
-   i: integer;
-begin
-   SetLength(Result, Length(s));
-   for i := 1 to Length(s) do
-      if s[i] = '/' then
-         Result[i] := '\'
-      else
-         Result[i] := s[i];
-end;
-
-function InvertBitmap(Bitmap:TBitmap): TBitmap;
-begin
-  Bitmap.Canvas.CopyMode := cmDstInvert;
-  Bitmap.Canvas.CopyRect(Bitmap.Canvas.ClipRect, Bitmap.Canvas, Bitmap.Canvas.ClipRect);
-  Bitmap.Canvas.CopyMode := cmSrcCopy;
-  Result := Bitmap;
 end;
 
 {$I 'xtreme3d/engine'}
@@ -278,7 +471,6 @@ end;
 {$I 'xtreme3d/actor'}
 {$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
-{$I 'xtreme3d/polygon'}
 {$I 'xtreme3d/material'}
 {$I 'xtreme3d/shaders'}
 {$I 'xtreme3d/thorfx'}
@@ -303,7 +495,7 @@ end;
 {$I 'xtreme3d/memviewer'}
 {$I 'xtreme3d/fbo'}
 {$I 'xtreme3d/proxy'}
-{$I 'xtreme3d/text'}
+{$I 'xtreme3d/objectlist'}
 {$I 'xtreme3d/objecthash'}
 {$I 'xtreme3d/grid'}
 {$I 'xtreme3d/shadowmap'}
@@ -315,568 +507,517 @@ end;
 {$I 'xtreme3d/color'}
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
+{$I 'xtreme3d/picklist'}
 
 exports
+    // Engine
+    EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
+    EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
+    EngineShowLoadingErrors, EngineSetMaxLights, EngineGetTimeStep,
+    EngineGetLastRaycastPosition, EngineGetLastRaycastNormal,
+    PointerToReal,
 
-/////////////////////////////////////////////////////////////////////////////
+    //Pak
+    SetPakArchive, PakGetFileCount, PakGetFileName,
+    PakExtract, PakExtractFile,
 
-//
-// 2.x - 3.0.0 functions:
-//
-// Engine
-EngineCreate, EngineDestroy, EngineSetObjectsSorting, EngineSetCulling,
-Update, TrisRendered,
-// Pak
-SetPakArchive,
-// Viewer
-ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRenderToFile,
-ViewerRender, ViewerSetAutoRender,
-ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
-ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor, ViewerEnableFog,
-ViewerSetFogColor, ViewerSetFogDistance, ViewerScreenToWorld, ViewerWorldToScreen,
-ViewerCopyToTexture, ViewerGetFramesPerSecond, ViewerGetPickedObject,
-ViewerScreenToVector, ViewerVectorToScreen, ViewerPixelToDistance, ViewerGetPickedObjectsList,
-ViewerSetAntiAliasing,
-// Dummycube
-DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode, DummycubeSetVisible,
-DummycubeSetEdgeColor, DummycubeSetCubeSize,
-// Camera
-CameraCreate, CameraSetStyle, CameraSetFocal, CameraSetSceneScale,
-CameraScaleScene, CameraSetViewDepth, CameraSetTargetObject,
-CameraMoveAroundTarget, CameraSetDistanceToTarget, CameraGetDistanceToTarget,
-CameraCopyToTexture, CameraGetNearPlane, CameraSetNearPlaneBias,
-CameraAbsoluteVectorToTarget, CameraAbsoluteRightVectorToTarget, CameraAbsoluteUpVectorToTarget,
-CameraZoomAll, CameraScreenDeltaToVector, CameraScreenDeltaToVectorXY, CameraScreenDeltaToVectorXZ,
-CameraScreenDeltaToVectorYZ, CameraAbsoluteEyeSpaceVector, CameraSetAutoLeveling,
-CameraMoveInEyeSpace, CameraMoveTargetInEyeSpace, CameraPointInFront, CameraGetFieldOfView,
-// Light
-LightCreate, LightSetAmbientColor, LightSetDiffuseColor, LightSetSpecularColor,
-LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
-LightSetSpotDirection, LightSetStyle,
-// Font & Text
-BmpFontCreate, BmpFontLoad,
-WindowsBitmapfontCreate,
-HUDTextCreate, FlatTextCreate,
-HUDTextSetRotation, SpaceTextCreate, SpaceTextSetExtrusion, HUDTextSetFont,
-FlatTextSetFont, SpaceTextSetFont, HUDTextSetColor, FlatTextSetColor, HUDTextSetText,
-FlatTextSetText, SpaceTextSetText,
-// Sprite
-HUDSpriteCreate, 
-SpriteCreate, SpriteSetSize, SpriteScale, SpriteSetRotation,
-SpriteRotate, SpriteMirror, SpriteNoZWrite,
-// Primitives
-CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
-CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
-DodecahedronCreate, IcosahedronCreate, TeapotCreate,
-// Actor
-ActorCreate, ActorCopy, ActorSetAnimationRange, ActorGetCurrentFrame, ActorSwitchToAnimation,
-ActorSwitchToAnimationName, ActorSynchronize, ActorSetInterval, ActorSetAnimationMode,
-ActorSetFrameInterpolation, ActorAddObject, ActorGetCurrentAnimation, ActorGetFrameCount,
-ActorGetBoneCount, ActorGetBoneByName, ActorGetBoneRotation, ActorGetBonePosition,
-ActorBoneExportMatrix, ActorMakeSkeletalTranslationStatic, ActorMakeSkeletalRotationDelta, 
-ActorShowSkeleton, 
-AnimationBlenderCreate, AnimationBlenderSetActor, AnimationBlenderSetAnimation,
-AnimationBlenderSetRatio,
-ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
-ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
-ActorFaceGroupSetMaterial,
-//Freeform
-FreeformCreate,
-FreeformMeshObjectsCount, FreeformMeshSetVisible,
-FreeformMeshSetSecondCoords,
-FreeformMeshFaceGroupsCount,
-FreeformMeshSetMaterial, FreeformUseMeshMaterials,
-FreeformSphereSweepIntersect, FreeformPointInMesh,
-FreeformToFreeforms,
-FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
-FreeformCreateExplosionFX, FreeformExplosionFXReset,
-FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
-// Terrain
-BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
-TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
-TerrainSetQualityDistance, TerrainSetQualityStyle, TerrainSetMaxCLodTriangles,
-TerrainSetCLodPrecision, TerrainSetOcclusionFrameSkip, TerrainSetOcclusionTesselate,
-TerrainGetHeightAtObjectPosition, TerrainGetLastTriCount,
-// Object
-ObjectHide, ObjectShow, ObjectIsVisible,
-ObjectCopy, ObjectDestroy, ObjectDestroyChildren,
-ObjectSetPosition, ObjectGetPosition, ObjectGetAbsolutePosition,
-ObjectSetPositionOfObject, ObjectAlignWithObject,
-ObjectSetPositionX, ObjectSetPositionY, ObjectSetPositionZ,
-ObjectGetPositionX, ObjectGetPositionY, ObjectGetPositionZ,
-ObjectSetAbsolutePosition,
-ObjectSetDirection, ObjectGetDirection,
-ObjectSetAbsoluteDirection, ObjectGetAbsoluteDirection,
-ObjectGetPitch, ObjectGetTurn, ObjectGetRoll, ObjectSetRotation,
-ObjectMove, ObjectLift, ObjectStrafe, ObjectTranslate, ObjectRotate,
-ObjectScale, ObjectSetScale, ObjectGetScale,
-ObjectSetUpVector, ObjectPointToObject, 
-ObjectShowAxes,
-ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
-ObjectGetCollisionPosition, ObjectGetCollisionNormal, 
-ObjectSetMaterial,
-ObjectGetDistance,
-ObjectCheckCubeVsCube, ObjectCheckSphereVsSphere, ObjectCheckSphereVsCube,
-ObjectCheckCubeVsFace, ObjectCheckFaceVsFace,
-ObjectIsPointInObject,
-ObjectSetCulling,
-ObjectSetName, ObjectGetName, ObjectGetClassName,
-ObjectSetTag, ObjectGetTag,
-ObjectGetParent, ObjectGetChildCount, ObjectGetChild, ObjectGetIndex, ObjectFindChild,
-ObjectGetBoundingSphereRadius,
-ObjectGetAbsoluteUp, ObjectSetAbsoluteUp, ObjectGetAbsoluteRight,
-ObjectGetAbsoluteXVector, ObjectGetAbsoluteYVector, ObjectGetAbsoluteZVector,
-ObjectGetRight,
-ObjectMoveChildUp, ObjectMoveChildDown,
-ObjectSetParent, ObjectRemoveChild,
-ObjectMoveObjectAround,
-ObjectPitch, ObjectTurn, ObjectRoll,
-ObjectGetUp,
-ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
-ObjectSetMatrixColumn,
-ObjectExportMatrix, ObjectExportAbsoluteMatrix,
-ObjectInFrustum,
+    // Viewer
+    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
+    ViewerRenderObject, ViewerRenderToFile,
+    ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
+    ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
+    ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,
+    ViewerScreenToWorld, ViewerWorldToScreen, ViewerCopyToTexture,
+    ViewerGetPickedObject, ViewerGetPickedObjectsList, ViewerScreenToVector,
+    ViewerVectorToScreen, ViewerPixelToDistance, ViewerSetAntiAliasing,
+    ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
+    ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
+    ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
+    ViewerPixelRayToWorld, ViewerShadeModel,
 
-ObjectIgnoreDepthBuffer,
-ObjectIsPicked,
+    // Dummycube
+    DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode,
+    DummycubeSetVisible, DummycubeSetEdgeColor, DummycubeSetCubeSize,
 
-// Polygon
-PolygonCreate, PolygonAddVertex, PolygonSetVertexPosition, PolygonDeleteVertex,
-// Material
-MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
-MaterialLibraryClear, MaterialLibraryDeleteUnused,
-MaterialLibraryHasMaterial, MaterialLibraryLoadScript, 
-MaterialCreate,
-MaterialAddCubeMap, MaterialCubeMapLoadImage, MaterialCubeMapGenerate, MaterialCubeMapFromScene,
-MaterialSaveTexture, MaterialSetBlendingMode, MaterialSetOptions,
-MaterialSetTextureMappingMode, MaterialSetTextureMode,
-MaterialSetShader, MaterialSetSecondTexture,
-MaterialSetDiffuseColor, MaterialSetAmbientColor, MaterialSetSpecularColor, MaterialSetEmissionColor,
-MaterialSetShininess,
-MaterialSetPolygonMode, MaterialSetTextureImageAlpha,
-MaterialSetTextureScale, MaterialSetTextureOffset,
-MaterialSetTextureFilter, MaterialEnableTexture,
-MaterialGetCount, MaterialGetName, MaterialGetNameFromLibrary,
-MaterialSetFaceCulling,
-MaterialSetTexture, MaterialSetSecondTexture,
-MaterialSetTextureFormat, MaterialSetTextureCompression,
-MaterialTextureRequiredMemory, MaterialSetFilteringQuality,
-MaterialAddTextureEx, MaterialTextureExClear, MaterialTextureExDelete,
-MaterialNoiseCreate, MaterialNoiseAnimate, MaterialNoiseSetDimensions,
-MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
-MaterialNoiseRandomSeed,
-MaterialGenTexture, MaterialSetTextureWrap,
-MaterialLoadTexture,
-MaterialDestroy, MaterialSetName,
-MaterialGetColor, MaterialGetAlpha,
-// Shaders
-ShaderEnable, 
-BumpShaderCreate,
-BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,
-BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
-BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius, BumpShaderUseAutoTangentSpace,
-CelShaderCreate, CelShaderSetLineColor, CelShaderSetLineWidth, CelShaderSetOptions,
-MultiMaterialShaderCreate,
-HiddenLineShaderCreate, HiddenLineShaderSetLineSmooth, HiddenLineShaderSetSolid,
-HiddenLineShaderSetSurfaceLit, HiddenLineShaderSetFrontLine, HiddenLineShaderSetBackLine,
-OutlineShaderCreate, OutlineShaderSetLineColor, OutlineShaderSetLineWidth,
-TexCombineShaderCreate, TexCombineShaderAddCombiner,
-TexCombineShaderMaterial3, TexCombineShaderMaterial4,
-PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
-GLSLShaderCreate, GLSLShaderCreateParameter,
-GLSLShaderSetParameter1i, GLSLShaderSetParameter1f, GLSLShaderSetParameter2f,
-GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
-GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
-GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
-GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
-// ThorFX
-ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
-ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
-ThorFXSetTarget, ThorFXCreate,
-// FireFX
-FireFXManagerCreate, FireFXCreate,
-FireFXSetColor, FireFXSetMaxParticles, FireFXSetParticleSize,
-FireFXSetDensity, FireFXSetEvaporation, FireFXSetCrown,
-FireFXSetLife, FireFXSetBurst, FireFXSetRadius, FireFXExplosion,
-// Lensflare
-LensflareCreate, LensflareSetSize, LensflareSetSeed, LensflareSetSqueeze,
-LensflareSetStreaks, LensflareSetStreakWidth, LensflareSetSecs,
-LensflareSetResolution, LensflareSetElements, LensflareSetGradients,
-// Skydome
-SkydomeCreate, SkydomeSetOptions, SkydomeSetDeepColor, SkydomeSetHazeColor,
-SkydomeSetNightColor, SkydomeSetSkyColor, SkydomeSetSunDawnColor, SkydomeSetSunZenithColor,
-SkydomeSetSunElevation, SkydomeSetTurbidity,
-SkydomeAddRandomStars, SkydomeAddStar, SkydomeClearStars, SkydomeTwinkleStars, 
-// Water
-WaterCreate, WaterCreateRandomRipple,
-WaterCreateRippleAtGridPosition, WaterCreateRippleAtWorldPosition,
-WaterCreateRippleAtObjectPosition,
-WaterSetMask, WaterSetActive, WaterReset,
-WaterSetRainTimeInterval, WaterSetRainForce,
-WaterSetViscosity, WaterSetElastic, WaterSetResolution,
-WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
-// Blur
-BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,
-BlurSetColor, BlurSetBlendingMode,
-// Skybox
-SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
-// Lines
-LinesCreate, LinesAddNode, LinesDeleteNode, LinesSetColors, LinesSetSize,
-LinesSetSplineMode, LinesSetNodesAspect, LinesSetDivision,
-// Tree
-TreeCreate, TreeSetMaterials, TreeSetBranchFacets, TreeBuildMesh,
-TreeSetBranchNoise, TreeSetBranchAngle, TreeSetBranchSize, TreeSetBranchRadius,
-TreeSetBranchTwist, TreeSetDepth, TreeSetLeafSize, TreeSetLeafThreshold, TreeSetSeed,
-// Trail
-TrailCreate, TrailSetObject, TrailSetAlpha, TrailSetLimits, TrailSetMinDistance,
-TrailSetUVScale, TrailSetMarkStyle, TrailSetMarkWidth, TrailSetEnabled, TrailClearMarks,
-// Shadowplane
-ShadowplaneCreate, ShadowplaneSetLight, ShadowplaneSetObject, ShadowplaneSetOptions,
-// Shadowvolume
-ShadowvolumeCreate, ShadowvolumeSetActive,
-ShadowvolumeAddLight, ShadowvolumeRemoveLight,
-ShadowvolumeAddOccluder, ShadowvolumeRemoveOccluder,
-ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
-// Navigator
-NavigatorCreate, NavigatorSetObject, NavigatorSetUseVirtualUp, NavigatorSetVirtualUp,  
-NavigatorTurnHorizontal, NavigatorTurnVertical, NavigatorMoveForward,
-NavigatorStrafeHorizontal, NavigatorStrafeVertical, NavigatorStraighten,
-NavigatorFlyForward, NavigatorMoveUpWhenMovingForward, NavigatorInvertHorizontalWhenUpsideDown,
-NavigatorSetAngleLock, NavigatorSetAngles,
-// DCE
-DceManagerCreate, DceManagerStep, DceManagerSetGravity, DceManagerSetWorldDirection,
-DceManagerSetWorldScale, DceManagerSetMovementScale,
-DceManagerSetLayers, DceManagerSetManualStep,
-DceDynamicSetManager, DceDynamicSetActive, DceDynamicIsActive,
-DceDynamicSetUseGravity, DceDynamicSetLayer, DceDynamicGetLayer,
-DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
-DceDynamicSetSize, DceDynamicSetSlideOrBounce,
-DceDynamicApplyAcceleration, DceDynamicApplyAbsAcceleration,
-DceDynamicStopAcceleration, DceDynamicStopAbsAcceleration,
-DceDynamicJump, DceDynamicMove, DceDynamicMoveTo,
-DceDynamicSetVelocity, DceDynamicGetVelocity,
-DceDynamicSetAbsVelocity, DceDynamicGetAbsVelocity,
-DceDynamicApplyImpulse, DceDynamicApplyAbsImpulse,
-DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
-DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
-DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
-// ODE
-OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
-OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
-OdeManagerSetMaxContacts, OdeManagerSetVisible, OdeManagerSetGeomColor,
-OdeWorldSetAutoDisableFlag, OdeWorldSetAutoDisableLinearThreshold,
-OdeWorldSetAutoDisableAngularThreshold, OdeWorldSetAutoDisableSteps, OdeWorldSetAutoDisableTime,
-OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
-OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
-OdeDynamicAlignObject, OdeDynamicEnable, OdeDynamicSetAutoDisableFlag,
-OdeDynamicSetAutoDisableLinearThreshold, OdeDynamicSetAutoDisableAngularThreshold,
-OdeDynamicSetAutoDisableSteps, OdeDynamicSetAutoDisableTime,
-OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos, 
-OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
-OdeDynamicAddTorque, OdeDynamicAddRelTorque,
-OdeDynamicGetContactCount, OdeStaticGetContactCount,
-OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder, OdeAddCone, OdeAddCapsule, OdeAddTriMesh,
-OdeElementSetDensity,
-OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
-OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
-OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
-OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
-OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
-OdeAddJointSlider, OdeAddJointUniversal, 
-OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
-OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
-OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
-OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
-// FPSManager
-FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,
-FpsManagerAddMap, FpsManagerRemoveMap, FpsManagerMapSetCollisionGroup,
-FpsSetManager, FpsSetCollisionGroup, FpsSetSphereRadius, FpsSetGravity,
-FpsMove, FpsStrafe, FpsLift, FpsGetVelocity,
-// Mirror
-MirrorCreate, MirrorSetObject, MirrorSetOptions,
-MirrorSetShape, MirrorSetDiskOptions,
-// Partition
-OctreeCreate, QuadtreeCreate, PartitionDestroy, PartitionAddLeaf,
-PartitionLeafChanged, PartitionQueryFrustum, PartitionQueryLeaf,
-PartitionQueryAABB, PartitionQueryBSphere, PartitionGetNodeTests,
-PartitionGetNodeCount, PartitionGetResult, PartitionGetResultCount,
-PartitionResultShow, PartitionResultHide,
-// Proxy & MultiProxy
-ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
-MultiProxyObjectCreate, MultiProxyObjectAddTarget,
-// Grid
-GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
-GridSetColor, GridSetSize, GridSetPattern,
-// MemoryViewer
-MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
-MemoryViewerSetViewport, MemoryViewerCopyToTexture,
-// ShadowMap
-ShadowMapCreate, ShadowMapSetCamera, ShadowMapSetCaster,
-ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes,
-ShadowMapRender,
+    // Camera
+    CameraCreate, CameraSetStyle, CameraSetFocal, CameraSetSceneScale,
+    CameraScaleScene, CameraSetViewDepth, CameraSetTargetObject,
+    CameraMoveAroundTarget, CameraSetDistanceToTarget, CameraGetDistanceToTarget,
+    CameraCopyToTexture, CameraGetNearPlane, CameraSetNearPlaneBias,
+    CameraAbsoluteVectorToTarget, CameraAbsoluteRightVectorToTarget, CameraAbsoluteUpVectorToTarget,
+    CameraZoomAll, CameraScreenDeltaToVector, CameraScreenDeltaToVectorXY, CameraScreenDeltaToVectorXZ,
+    CameraScreenDeltaToVectorYZ, CameraAbsoluteEyeSpaceVector, CameraSetAutoLeveling,
+    CameraMoveInEyeSpace, CameraMoveTargetInEyeSpace, CameraPointInFront, CameraGetFieldOfView,
 
-//
-// 3.1.0 functions:
-//
-//Sprite
-HUDSpriteCreateEx,
-SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV,
-SpriteSetOrigin,
-//HUDShape
-HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
-HUDShapeSetRotation, HUDShapeSetColor,
-HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
-HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
-HUDShapeLineSetPoints, HUDShapeLineSetWidth,
-HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
-HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
-// Freeform
-FreeformCreateEmpty,
-FreeformAddMesh, FreeformMeshAddFaceGroup, 
-FreeformMeshAddVertex, FreeformMeshAddNormal,
-FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
-FreeformMeshAddTangent, FreeformMeshAddBinormal,
-FreeformMeshGetVertex, FreeformMeshGetNormal,
-FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
-FreeformMeshGetTangent, FreeformMeshGetBinormal,
-FreeformMeshFaceGroupGetIndex,
-FreeformMeshSetVertex, FreeformMeshSetNormal,
-FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
-FreeformMeshSetTangent, FreeformMeshSetBinormal,
-FreeformMeshFaceGroupSetIndex,
-FreeformMeshFaceGroupAddTriangle,
-FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
-FreeformMeshGenNormals, FreeformMeshGenTangents,
-FreeformMeshVerticesCount,
-FreeformMeshTriangleCount,
-FreeformMeshFaceGroupTriangleCount,
-FreeformSave,
-// Material
-MaterialGetTextureWidth, MaterialGetTextureHeight,
-// Movement
-MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath, 
-MovementAddPath, MovementSetActivePath, MovementPathSetSplineMode,
-MovementPathAddNode,
-MovementPathNodeSetPosition, MovementPathNodeSetRotation,
-MovementPathNodeSetSpeed,
-// ODE
-OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
-OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
-OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
+    // Light
+    LightCreate, LightSetAmbientColor, LightSetDiffuseColor, LightSetSpecularColor,
+    LightSetAttenuation, LightSetShining, LightSetSpotCutoff, LightSetSpotExponent,
+    LightSetSpotDirection, LightSetStyle,
+    LightGetColor, LightGetAttenuation, LightGetShining,
+    LightFXCreate,
 
-//
-// 3.2.0 functions:
-//
-// Viewer
-ViewerRenderEx,
-// Material
-MaterialLoadTextureEx, MaterialSetTextureEx, MaterialGenTextureEx,
-MaterialEnableTextureEx, MaterialHasTextureEx,
-MaterialSetTextureExFromLibrary,
-// Shaders
-GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
-// FBO
-FBOCreate, FBOSetCamera, FBOSetViewer,
-FBORenderObject, FBORenderObjectEx,
-FBOSetColorTextureFormat,
+    // Font & Text
+    BmpfontCreate, BmpfontLoad, WindowsBitmapfontCreate, HUDTextCreate,
+    HUDTextSetRotation, HUDTextSetFont, HUDTextSetColor, HUDTextSetText,
+    FlatTextCreate, FlatTextSetFont, FlatTextSetColor, FlatTextSetText,
+    SpaceTextCreate, SpaceTextSetExtrusion, SpaceTextSetFont, SpaceTextSetText,
+    TTFontCreate, TTFontSetLineGap,
 
-//
-// 3.3.0 functions:
-//
-// Viewer
-ViewerGetSize, ViewerGetPosition, ViewerSetOverrideMaterial,
-ViewerIsOpenGLExtensionSupported,
-ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
-// FBO
-FBOSetOverrideMaterial,
-// ShadowMap
-ShadowMapSetFBO,
+    // Sprite
+    HUDSpriteCreate, HUDSpriteGetMouseOver, HUDSpriteXTiles, HUDSpriteYTiles,
+    SpriteCreate, SpriteSetSize, SpriteGetSize, SpriteScale, SpriteSetRotation,
+    SpriteRotate, SpriteMirror,
+    HUDSpriteCreateEx, SpriteCreateEx, SpriteSetBounds, SpriteSetBoundsUV, SpriteSetOrigin,
 
-//
-// 3.4.0 functions:
-//
-// Font & Text
-TTFontCreate, TTFontSetLineGap, TTFontSetEncoding, TTFontLoadCodePage,
-// Freeform
-FreeformGenTangents, FreeformBuildOctree,
-// ObjectHash
-ObjectHashCreate, ObjectHashSetItem, ObjectHashGetItem,
-ObjectHashDeleteItem, ObjectHashGetItemCount,
-ObjectHashClear, ObjectHashDestroy,
-// Shaders
-GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
-GLSLShaderSetParameterHasTextureEx,
-// Text
-TextRead, TextConvertANSIToUTF8,
+    // HUDShape
+    HUDShapeRectangleCreate, HUDShapeCircleCreate, HUDShapeLineCreate, HUDShapeMeshCreate,
+    HUDShapeSetRotation, HUDShapeSetColor,
+    HUDShapeRotate, HUDShapeSetOrigin, HUDShapeSetSize, HUDShapeScale,
+    HUDShapeCircleSetRadius, HUDShapeCircleSetSlices, HUDShapeCircleSetAngles,
+    HUDShapeLineSetPoints, HUDShapeLineSetWidth,
+    HUDShapeMeshAddVertex, HUDShapeMeshAddTriangle,
+    HUDShapeMeshSetVertex, HUDShapeMeshSetTexCoord,
 
-//
-// 3.5.0 functions:
-//
-// Material
-MaterialCullFrontFaces, MaterialSetZWrite,
-//ClipPlane
-ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
-// ODE
-OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
-OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
-OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
+    // Primitives
+    CubeCreate, CubeSetNormalDirection, PlaneCreate, SphereCreate, SphereSetAngleLimits,
+    CylinderCreate, ConeCreate, AnnulusCreate, TorusCreate, DiskCreate, FrustrumCreate,
+    DodecahedronCreate, IcosahedronCreate, TeapotCreate,
+    TilePlaneCreate, TilePlaneSetTile,
+    CubeGetNormalDirection, PlaneSetOptions, PlaneGetOptions, SphereGetOptions,
+    SphereGetAngleLimits, SphereSetOptions, CylinderSetOptions, CylinderGetOptions,
+    ConeGetOptions, ConeSetOptions, AnnulusSetOptions, AnnulusGetOptions,
+    TorusSetOptions, TorusGetOptions, DiskSetOptions, DiskGetOptions,
+    FrustrumSetOptions, FrustrumGetOptions,
 
-//
-// 3.6.0 functions:
-//
-//Engine
-EngineSaveScene, EngineLoadScene, EngineRootObject,
-// Actor
-ActorMoveBone, ActorRotateBone, ActorMeshSetVisible,
-// Proxy
-ActorProxyObjectCreate, ActorProxyObjectSwitchToAnimation,
-// Freeform
-FreeformSetMaterialLibraries,
-FreeformMeshFaceGroupSetLightmapIndex,
-FreeformMeshFaceGroupGetLightmapIndex,
-// Input
-MouseSetPosition, MouseGetPositionX, MouseGetPositionY, MouseShowCursor, 
-KeyIsPressed,
-// Window
-WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
-WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
-// Color
-MakeColorRGB, MakeColorRGBFloat,
+    // Actor
+    ActorCreate, ActorCopy, ActorSetAnimationRange, ActorGetCurrentFrame, ActorSwitchToAnimation,
+    ActorSwitchToAnimationName, ActorSynchronize, ActorSetInterval, ActorSetAnimationMode,
+    ActorSetFrameInterpolation, ActorAddObject, ActorGetCurrentAnimation, ActorGetFrameCount,
+    ActorGetBoneCount, ActorGetBoneByName, ActorGetBoneRotation, ActorGetBonePosition,
+    ActorBoneExportMatrix, ActorMakeSkeletalTranslationStatic, ActorMakeSkeletalRotationDelta,
+    ActorShowSkeleton,
+    AnimationBlenderCreate, AnimationBlenderSetActor, AnimationBlenderSetAnimation,
+    AnimationBlenderSetRatio,
+    ActorLoadQ3TagList, ActorLoadQ3Animations, ActorQ3TagExportMatrix,
+    ActorMeshObjectsCount, ActorFaceGroupsCount, ActorFaceGroupGetMaterialName,
+    ActorFaceGroupSetMaterial, ActorMoveBone, ActorRotateBone, ActorMeshSetVisible,
+    ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy,
+    ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorSetFrame,
+    ActorTriangleCount,
+    ActorSetReference,
 
-//
-// 3.7.0 functions:
-//
-// Engine
-EngineSetMaxLights, EngineShowLoadingErrors,
-// Pak
-PakGetFileCount, PakGetFileName, PakExtract, PakExtractFile,
-// Viewer
-ViewerResetPerformanceMonitor,
-// LightFx
-LightFXCreate,
-// Sprite
-HUDSpriteGetMouseOver,
-// Actor
-ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
-// Terrain
-BmpHDSCreateEmpty, BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
-TerrainGetHDSPosition,
-// Object
-ObjectGetScale,
-// Kraft
-KraftCreate, KraftStep,
-KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal, 
-KraftCreateRigidBody, KraftRigidBodyFinish,
-KraftRigidBodySetGravity,
-KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
-KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
-KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
-KraftRigidBodySetRotation,
-KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
-KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
-KraftObjectSetRigidBody,
-KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
-KraftCreateShapeMesh,
-KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution, 
-KraftShapeSetPosition, KraftShapeGetPosition,
-KraftShapeSetRayCastable,
-KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
-KraftCreateJointHinge,
-KraftJointSetAnchor1, KraftJointSetAnchor2,
-KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
-// Window
-WindowSetIcon, WindowIsShowing,
+    //Freeform
+    FreeformCreate,
+    FreeformMeshObjectsCount, FreeformMeshSetVisible,
+    FreeformMeshSetSecondCoords,
+    FreeformMeshFaceGroupsCount,
+    FreeformMeshSetMaterial, FreeformUseMeshMaterials,
+    FreeformSphereSweepIntersect, FreeformPointInMesh,
+    FreeformToFreeforms,
+    FreeformMeshTranslate, FreeformMeshRotate, FreeformMeshScale,
+    FreeformCreateExplosionFX, FreeformExplosionFXReset,
+    FreeformExplosionFXEnable, FreeformExplosionFXSetSpeed,
+    FreeformCreateEmpty,
+    FreeformAddMesh, FreeformMeshAddFaceGroup,
+    FreeformMeshAddVertex, FreeformMeshAddNormal,
+    FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
+    FreeformMeshAddTangent, FreeformMeshAddBinormal,
+    FreeformMeshGetVertex, FreeformMeshGetNormal,
+    FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
+    FreeformMeshGetTangent, FreeformMeshGetBinormal,
+    FreeformMeshFaceGroupGetIndex,
+    FreeformMeshSetVertex, FreeformMeshSetNormal,
+    FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
+    FreeformMeshSetTangent, FreeformMeshSetBinormal,
+    FreeformMeshFaceGroupSetIndex,
+    FreeformMeshFaceGroupAddTriangle,
+    FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+    FreeformMeshGenNormals, FreeformMeshGenTangents,
+    FreeformMeshVerticesCount,
+    FreeformMeshTriangleCount,
+    FreeformMeshFaceGroupTriangleCount,
+    FreeformSave,
+    FreeformGenTangents, FreeformBuildOctree,
+    FreeformSetMaterialLibraries,
+    FreeformMeshFaceGroupSetLightmapIndex,
+    FreeformMeshFaceGroupGetLightmapIndex,
+    FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
+    FreeformCreateEmpty,
+    FreeformAddMesh, FreeformMeshAddFaceGroup,
+    FreeformMeshAddVertex, FreeformMeshAddNormal,
+    FreeformMeshAddTexCoord, FreeformMeshAddSecondTexCoord,
+    FreeformMeshAddTangent, FreeformMeshAddBinormal,
+    FreeformMeshGetVertex, FreeformMeshGetNormal,
+    FreeformMeshGetTexCoord, FreeformMeshGetSecondTexCoord,
+    FreeformMeshGetTangent, FreeformMeshGetBinormal,
+    FreeformMeshFaceGroupGetIndex,
+    FreeformMeshSetVertex, FreeformMeshSetNormal,
+    FreeformMeshSetTexCoord, FreeformMeshSetSecondTexCoord,
+    FreeformMeshSetTangent, FreeformMeshSetBinormal,
+    FreeformMeshFaceGroupSetIndex,
+    FreeformMeshFaceGroupAddTriangle,
+    FreeformMeshFaceGroupGetMaterial, FreeformMeshFaceGroupSetMaterial,
+    FreeformMeshGenNormals, FreeformMeshGenTangents,
+    FreeformMeshVerticesCount,
+    FreeformMeshTriangleCount,
+    FreeformMeshFaceGroupTriangleCount,
+    FreeformSave,
 
-//
-// 3.7.1 functions:
-//
-// Light
-LightGetColor, LightGetAttenuation, LightGetShining,
-// Primitives
-CubeGetNormalDirection,
-PlaneSetOptions, PlaneGetOptions,
-SphereGetOptions, SphereGetAngleLimits, SphereSetOptions,
-CylinderSetOptions, CylinderGetOptions,
-ConeGetOptions, ConeSetOptions,
-AnnulusSetOptions, AnnulusGetOptions,
-TorusSetOptions, TorusGetOptions,
-DiskSetOptions, DiskGetOptions,
-FrustrumSetOptions, FrustrumGetOptions,
-// Object
-ObjectGetMaterial,
-// Material
-MaterialGetColor, MaterialGetAlpha,
-// Grid
-GridSetTile, GridSetStep,
+    // BaseMesh
+    BaseMeshBuildSilhouetteConnectivityData,
 
-//
-// 3.7.2 functions:
-//
-// Sprite
-SpriteGetSize,
-// Material
-MaterialDestroy, MaterialSetName,
-// Lines
-LinesSetNode,
+    // Terrain
+    BmpHDSCreate, BmpHDSSetInfiniteWarp, BmpHDSInvert,
+    BmpHDSCreateEmpty, BmpHDSSetHeight, BmpHDSGetHeight, BmpHDSSave,
+    TerrainCreate, TerrainSetHeightData, TerrainSetTileSize, TerrainSetTilesPerTexture,
+    TerrainSetQualityDistance, TerrainSetQualityStyle, TerrainSetMaxCLodTriangles,
+    TerrainSetCLodPrecision, TerrainSetOcclusionFrameSkip, TerrainSetOcclusionTesselate,
+    TerrainGetHeightAtObjectPosition, TerrainGetLastTriCount,
+    TerrainGetHDSPosition,
 
-//
-// 3.8.0 functions:
-//
-// Viewer
-ViewerRenderToFilePNG, ViewerPixelRayToWorld, ViewerShadeModel,
-// Sprite
-HUDSpriteXTiles, HUDSpriteYTiles,
-// Primitives
-TilePlaneCreate, TilePlaneSetTile,
-// Pipe
-PipeCreate, PipeAddNode, PipeSetDivision, PipeSetSplineMode, PipeDeleteNode,
-PipeSetRadius, PipeSetNode, PipeSetSlices,
-// Freeform
-FreeformMeshObjectGetName, FreeformMeshObjectSetName, FreeformMeshObjectDestroy,
-// Actor
-ActorGetAnimationName, ActorGetAnimationCount, ActorAnimationDestroy,
-ActorAnimationNextFrame, ActorAnimationPrevFrame, ActorTriangleCount,
-ActorSetFrame,
-// FireFX
-FireFXRingExplosion,
-// Object
-ObjectFindByName,
-// Movement
-MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
-// Verlet
-VerletWorldCreate, VerletWorldCreateOctree, VerletWorldGravityCreate,
-VerletWorldGravitySetDirection, VerletWorldUpdate, EdgeDetectorCreate,
-VerletConstraintFloorCreate,VerletConstraintFloorSetNormal, VerletConstraintSetPosition,
-VerletConstraintSetFrictionRatio, VerletConstraintSetEnabled,
-VerletConstraintFloorSetObjectLocations, VerletConstraintSphereCreate,
-VerletConstraintCylinderCreate,
-VerletConstraintCubeCreate, VerletConstraintCubeCreateSetCube,
-VerletConstraintCubeSetDirection, VerletConstraintCapsuleCreate,
-VerletConstraintCylinderSetAxis, VerletConstraintCapsuleSetAxis,
-VerletGetNodeCount, VerletNodeNailedDown,VerletNodeSetPosition, VerletNodeSetRadius,
-VerletNodeSetFriction, VerletNodeSetWeight, VerletNodeApplyFriction, EdgeDetectorSetWeldDistance,
-VerletAirResistanceCreate, VerletAirResistanceSetWindDirection,
-VerletAirResistanceSetWindMagnitude, VerletAirResistanceSetWindChaos,
-VerletConstraintGetCount, VerletConstraintSetSlack,
-VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
+    // Object
+    ObjectHide, ObjectShow, ObjectIsVisible,
+    ObjectCopy, ObjectDestroy, ObjectDestroyChildren,
+    ObjectSetPosition, ObjectGetPosition, ObjectGetAbsolutePosition,
+    ObjectSetPositionOfObject, ObjectAlignWithObject,
+    ObjectSetPositionX, ObjectSetPositionY, ObjectSetPositionZ,
+    ObjectGetPositionX, ObjectGetPositionY, ObjectGetPositionZ,
+    ObjectSetAbsolutePosition,
+    ObjectSetDirection, ObjectGetDirection,
+    ObjectSetAbsoluteDirection, ObjectGetAbsoluteDirection,
+    ObjectGetPitch, ObjectGetTurn, ObjectGetRoll, ObjectSetRotation,
+    ObjectMove, ObjectLift, ObjectStrafe, ObjectTranslate, ObjectRotate,
+    ObjectScale, ObjectSetScale, ObjectGetScale,
+    ObjectSetUpVector, ObjectPointToObject,
+    ObjectShowAxes,
+    ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
+    ObjectSetMaterial, ObjectGetMaterial,
+    ObjectGetGroundHeight, ObjectSceneRaycast, ObjectRaycast,
+    ObjectGetDistance,
+    ObjectCheckCubeVsCube, ObjectCheckSphereVsSphere, ObjectCheckSphereVsCube,
+    ObjectCheckCubeVsFace, ObjectCheckFaceVsFace,
+    ObjectIsPointInObject,
+    ObjectSetCulling,
+    ObjectSetName, ObjectGetName, ObjectGetClassName,
+    ObjectSetTag, ObjectGetTag,
+    ObjectGetParent, ObjectGetChildCount, ObjectGetChild, ObjectGetIndex, ObjectFindChild,
+    ObjectGetBoundingSphereRadius,
+    ObjectGetAbsoluteUp, ObjectSetAbsoluteUp, ObjectGetAbsoluteRight,
+    ObjectGetAbsoluteXVector, ObjectGetAbsoluteYVector, ObjectGetAbsoluteZVector,
+    ObjectGetRight,
+    ObjectMoveChildUp, ObjectMoveChildDown,
+    ObjectSetParent, ObjectRemoveChild,
+    ObjectMoveObjectAround,
+    ObjectPitch, ObjectTurn, ObjectRoll,
+    ObjectGetUp,
+    ObjectRotateAbsolute, ObjectRotateAbsoluteVector,
+    ObjectSetMatrixColumn, ObjectExportMatrix, ObjectExportAbsoluteMatrix,
+    ObjectIgnoreDepthBuffer, ObjectInFrustum, ObjectFindByName, ObjectIsPicked,
+    ObjectStructureChanged, ObjectClearStructureChanged, ObjectNotifyChange,
 
-//
-// 3.9.0 functions:
-//
-// Engine
-EngineGetTimeStep,
-// Window
-WindowDispatch,
+    // Material
+    MaterialLibraryCreate, MaterialLibraryActivate, MaterialLibrarySetTexturePaths,
+    MaterialLibraryClear, MaterialLibraryDeleteUnused,
+    MaterialLibraryHasMaterial, MaterialLibraryLoadScript,
+    MaterialLibraryGetTextureByName,
+    MaterialCreate, MaterialDestroy,
+    MaterialAddCubeMap, MaterialCubeMapLoadImage, MaterialCubeMapGenerate, MaterialCubeMapFromScene,
+    MaterialSetName, MaterialSetShininess,
+    MaterialSetDiffuseColor, MaterialSetAmbientColor, MaterialSetSpecularColor, MaterialSetEmissionColor,
+    MaterialGetColor, MaterialGetAlpha, MaterialSetBlendingMode, MaterialSetTextureMode,
+    MaterialSetTextureMappingMode, MaterialSetPolygonMode, MaterialSetTextureImageAlpha,
+    MaterialSetTextureScale, MaterialSetTextureOffset, MaterialSetTextureFilter,
+    MaterialEnableTexture, MaterialGetCount, MaterialGetName,
+    MaterialSetFaceCulling, MaterialSetSecondTexture, MaterialSetTextureFormat, MaterialSetTextureFormatEx,
+    MaterialSetTextureCompression, MaterialTextureRequiredMemory,
+    MaterialSetFilteringQuality,
+    MaterialSetShader, MaterialSaveTexture, MaterialSetOptions,
+    MaterialSetTextureWrap, MaterialSetTextureWrapS, MaterialSetTextureWrapT, MaterialSetTextureWrapR,
+    MaterialSetTextureBorderColor,
+    MaterialGenTexture, MaterialSetTexture,
+    MaterialGetTextureWidth, MaterialGetTextureHeight, MaterialLoadTexture,
+    MaterialNoiseCreate, MaterialNoiseSetDimensions, MaterialNoiseAnimate,
+    MaterialNoiseSetMinCut, MaterialNoiseSetSharpness, MaterialNoiseSetSeamless,
+    MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
+    MaterialGetNameFromLibrary,
+    MaterialGetTextureWidth, MaterialGetTextureHeight,
+    MaterialAddTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
+    TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
+    TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable,
+    MaterialSetTextureCompareMode,
 
-//
-// 3.9.2 functions:
-//
-// Engine
-PtrToReal,
-// Input
-MouseIsPressed;
+    // Shaders
+    ShaderEnable,
+    CelShaderCreate, CelShaderSetLineColor, CelShaderSetLineWidth, CelShaderSetOptions,
+    MultiMaterialShaderCreate,
+    HiddenLineShaderCreate, HiddenLineShaderSetLineSmooth, HiddenLineShaderSetSolid,
+    HiddenLineShaderSetSurfaceLit, HiddenLineShaderSetFrontLine, HiddenLineShaderSetBackLine,
+    OutlineShaderCreate, OutlineShaderSetLineColor, OutlineShaderSetLineWidth,
+    TexCombineShaderCreate, TexCombineShaderAddCombiner, TexCombineShaderMaterial3,
+    TexCombineShaderMaterial4,
+    GLSLShaderCreate, GLSLShaderCreateParameter,
+    GLSLShaderSetParameter1i, GLSLShaderSetParameter1f, GLSLShaderSetParameter2f,
+    GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
+    GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
+    GLSLShaderSetParameterMatrix, GLSLShaderSetParameterInvMatrix,
+    GLSLShaderSetParameterShadowTexture, GLSLShaderSetParameterShadowMatrix,
+    GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
+    GLSLShaderSetParameterHasTextureEx,
+    GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
+    GLSLShaderForceDisableStencilTest,
+    PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
+    BumpShaderCreate,
+    BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,
+    BumpShaderSetMaxLights, BumpShaderUseParallax, BumpShaderSetParallaxOffset,
+    BumpShaderSetShadowMap, BumpShaderSetShadowBlurRadius,
+    BumpShaderUseAutoTangentSpace,
 
-/////////////////////////////////////////////////////////////////////////////
+    // FBO
+    FBOCreate, FBOSetActive, FBOSetAspect, FBOSetPickableTarget, FBOSetSize, FBOSetCamera,
+    FBOSetRootObject, FBOSetBackgroundColor, FBOSetEnabledRenderBuffers,
+    FBOSetSceneScaleFactor, FBOSetTargetVisibility, FBOSetMaterialLibrary,
+    FBOSetColorTextureName, FBOSetDepthTextureName, FBOSetClearOptions,
+    FBOSetStencilPrecision,
 
+    // ClipPlane
+    ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,
+
+    // ThorFX
+    ThorFXManagerCreate, ThorFXSetColor, ThorFXEnableCore, ThorFXEnableGlow,
+    ThorFXSetMaxParticles, ThorFXSetGlowSize, ThorFXSetVibrate, ThorFXSetWildness,
+    ThorFXSetTarget, ThorFXCreate,
+
+    // FireFX
+    FireFXManagerCreate, FireFXCreate,
+    FireFXSetColor, FireFXSetMaxParticles, FireFXSetParticleSize,
+    FireFXSetDensity, FireFXSetEvaporation, FireFXSetCrown,
+    FireFXSetLife, FireFXSetBurst, FireFXSetRadius, FireFXExplosion,
+    FireFXRingExplosion,
+
+    // Lensflare
+    LensflareCreate, LensflareSetSize, LensflareSetSeed, LensflareSetSqueeze,
+    LensflareSetStreaks, LensflareSetStreakWidth, LensflareSetSecs,
+    LensflareSetResolution, LensflareSetElements, LensflareSetGradients,
+
+    // Skydome
+    SkydomeCreate, SkydomeSetOptions, SkydomeSetDeepColor, SkydomeSetHazeColor,
+    SkydomeSetNightColor, SkydomeSetSkyColor, SkydomeSetSunDawnColor, SkydomeSetSunZenithColor,
+    SkydomeSetSunElevation, SkydomeSetTurbidity,
+    SkydomeAddRandomStars, SkydomeAddStar, SkydomeClearStars, SkydomeTwinkleStars,
+
+    // Water
+    WaterCreate, WaterCreateRandomRipple,
+    WaterCreateRippleAtGridPosition, WaterCreateRippleAtWorldPosition,
+    WaterCreateRippleAtObjectPosition,
+    WaterSetMask, WaterSetActive, WaterReset,
+    WaterSetRainTimeInterval, WaterSetRainForce,
+    WaterSetViscosity, WaterSetElastic, WaterSetResolution,
+    WaterSetLinearWaveHeight, WaterSetLinearWaveFrequency,
+
+    // Blur
+    BlurCreate, BlurSetPreset, BlurSetOptions, BlurSetResolution,
+    BlurSetColor, BlurSetBlendingMode,
+
+    // Skybox
+    SkyboxCreate, SkyboxSetMaterial, SkyboxSetClouds, SkyboxSetStyle,
+
+    // Lines
+    LinesCreate, LinesAddNode, LinesDeleteNode, LinesSetColors, LinesSetSize,
+    LinesSetSplineMode, LinesSetNodesAspect, LinesSetDivision, LinesSetNode,
+
+    // Tree
+    TreeCreate, TreeSetMaterials, TreeSetBranchFacets, TreeBuildMesh,
+    TreeSetBranchNoise, TreeSetBranchAngle, TreeSetBranchSize, TreeSetBranchRadius,
+    TreeSetBranchTwist, TreeSetDepth, TreeSetLeafSize, TreeSetLeafThreshold, TreeSetSeed,
+
+    // Trail
+    TrailCreate, TrailSetObject, TrailSetAlpha, TrailSetLimits, TrailSetMinDistance,
+    TrailSetUVScale, TrailSetMarkStyle, TrailSetMarkWidth, TrailSetEnabled, TrailClearMarks,
+
+    // Shadowplane
+    ShadowplaneCreate, ShadowplaneSetLight, ShadowplaneSetObject, ShadowplaneSetOptions,
+
+    // Shadowvolume
+    ShadowvolumeCreate, ShadowvolumeSetActive,
+    ShadowvolumeAddLight, ShadowvolumeRemoveLight,
+    ShadowvolumeAddOccluder, ShadowvolumeRemoveOccluder,
+    ShadowvolumeSetDarkeningColor, ShadowvolumeSetMode, ShadowvolumeSetOptions,
+
+    // Navigator
+    NavigatorCreate, NavigatorSetObject, NavigatorSetUseVirtualUp, NavigatorSetVirtualUp,
+    NavigatorTurnHorizontal, NavigatorTurnVertical, NavigatorMoveForward,
+    NavigatorStrafeHorizontal, NavigatorStrafeVertical, NavigatorStraighten,
+    NavigatorFlyForward, NavigatorMoveUpWhenMovingForward, NavigatorInvertHorizontalWhenUpsideDown,
+    NavigatorSetAngleLock, NavigatorSetAngles,
+
+    // DCE
+    DceManagerCreate, DceManagerStep, DceManagerSetGravity, DceManagerSetWorldDirection,
+    DceManagerSetWorldScale, DceManagerSetMovementScale,
+    DceManagerSetLayers, DceManagerSetManualStep,
+    DceDynamicSetManager, DceDynamicSetActive, DceDynamicIsActive,
+    DceDynamicSetUseGravity, DceDynamicSetLayer, DceDynamicGetLayer,
+    DceDynamicSetSolid, DceDynamicSetFriction, DceDynamicSetBounce,
+    DceDynamicSetSize, DceDynamicSetSlideOrBounce,
+    DceDynamicApplyAcceleration, DceDynamicApplyAbsAcceleration,
+    DceDynamicStopAcceleration, DceDynamicStopAbsAcceleration,
+    DceDynamicJump, DceDynamicMove, DceDynamicMoveTo,
+    DceDynamicSetVelocity, DceDynamicGetVelocity,
+    DceDynamicSetAbsVelocity, DceDynamicGetAbsVelocity,
+    DceDynamicApplyImpulse, DceDynamicApplyAbsImpulse,
+    DceDynamicInGround, DceDynamicSetMaxRecursionDepth,
+    DceStaticSetManager, DceStaticSetActive, DceStaticSetShape, DceStaticSetLayer,
+    DceStaticSetSize, DceStaticSetSolid, DceStaticSetFriction, DceStaticSetBounceFactor,
+
+    // ODE
+    OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
+    OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
+    OdeManagerSetMaxContacts, OdeManagerSetVisible,
+    OdeManagerSetGeomColor,
+    OdeWorldSetAutoDisableFlag, OdeWorldSetAutoDisableLinearThreshold,
+    OdeWorldSetAutoDisableAngularThreshold, OdeWorldSetAutoDisableSteps, OdeWorldSetAutoDisableTime,
+    OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,
+    OdeDynamicCalculateMass, OdeDynamicCalibrateCenterOfMass,
+    OdeDynamicAlignObject, OdeDynamicEnable, OdeDynamicSetAutoDisableFlag,
+    OdeDynamicSetAutoDisableLinearThreshold, OdeDynamicSetAutoDisableAngularThreshold,
+    OdeDynamicSetAutoDisableSteps, OdeDynamicSetAutoDisableTime,
+    OdeDynamicAddForce, OdeDynamicAddForceAtPos, OdeDynamicAddForceAtRelPos,
+    OdeDynamicAddRelForce, OdeDynamicAddRelForceAtPos, OdeDynamicAddRelForceAtRelPos,
+    OdeDynamicAddTorque, OdeDynamicAddRelTorque,
+    OdeAddBox, OdeAddSphere, OdeAddPlane, OdeAddCylinder,
+    //OdeAddCone,
+    OdeAddCapsule, OdeAddTriMesh,
+    OdeElementSetDensity,
+    OdeSurfaceEnableRollingFrictionCoeff, OdeSurfaceSetRollingFrictionCoeff,
+    OdeSurfaceSetMode, OdeSurfaceSetMu, OdeSurfaceSetMu2,
+    OdeSurfaceSetBounce, OdeSurfaceSetBounceVel, OdeSurfaceSetSoftERP, OdeSurfaceSetSoftCFM,
+    OdeSurfaceSetMotion1, OdeSurfaceSetMotion2, OdeSurfaceSetSlip1, OdeSurfaceSetSlip2,
+    OdeAddJointBall, OdeAddJointFixed, OdeAddJointHinge, OdeAddJointHinge2,
+    OdeAddJointSlider, OdeAddJointUniversal,
+    OdeJointSetObjects, OdeJointEnable, OdeJointInitialize,
+    OdeJointSetAnchor, OdeJointSetAnchorAtObject, OdeJointSetAxis1, OdeJointSetAxis2,
+    OdeJointSetBounce, OdeJointSetCFM, OdeJointSetFMax, OdeJointSetFudgeFactor,
+    OdeJointSetHiStop, OdeJointSetLoStop, OdeJointSetStopCFM, OdeJointSetStopERP, OdeJointSetVel,
+    OdeRagdollCreate, OdeRagdollHingeJointCreate, OdeRagdollUniversalJointCreate,
+    OdeRagdollDummyJointCreate, OdeRagdollBoneCreate,
+    OdeRagdollBuild, OdeRagdollEnable, OdeRagdollUpdate,
+    OdeDynamicSetVelocity, OdeDynamicSetAngularVelocity,
+    OdeDynamicGetVelocity, OdeDynamicGetAngularVelocity,
+    OdeDynamicSetPosition, OdeDynamicSetRotationQuaternion,
+
+    // Fps
+    FpsManagerCreate, FpsManagerSetNavigator, FpsManagerSetMovementScale,
+    FpsManagerAddMap, FpsManagerRemoveMap, FpsManagerMapSetCollisionGroup,
+    FpsSetManager, FpsSetCollisionGroup, FpsSetSphereRadius, FpsSetGravity,
+    FpsMove, FpsStrafe, FpsLift, FpsGetVelocity,
+
+    // Mirror
+    MirrorCreate, MirrorSetObject, MirrorSetOptions,
+    MirrorSetShape, MirrorSetDiskOptions,
+
+    // Partition
+    OctreeCreate, QuadtreeCreate, PartitionDestroy, PartitionAddLeaf,
+    PartitionLeafChanged, PartitionQueryFrustum, PartitionQueryLeaf,
+    PartitionQueryAABB, PartitionQueryBSphere, PartitionGetNodeTests,
+    PartitionGetNodeCount, PartitionGetResult, PartitionGetResultCount,
+    PartitionResultShow, PartitionResultHide,
+
+    // Proxy & MultiProxy
+    ProxyObjectCreate, ProxyObjectSetOptions, ProxyObjectSetTarget,
+    MultiProxyObjectCreate, MultiProxyObjectAddTarget,
+    ActorProxyObjectCreate,
+    ActorProxyObjectSwitchToAnimation,
+    ActorProxyObjectSetAnimationRange, ActorProxyObjectSetInterval,
+
+    // Grid
+    GridCreate, GridSetLineStyle, GridSetLineSmoothing, GridSetParts,
+    GridSetColor, GridSetSize, GridSetPattern,
+    GridSetTile, GridSetStep,
+
+    // MemoryViewer
+    MemoryViewerCreate, MemoryViewerSetCamera, MemoryViewerRender,
+    MemoryViewerSetViewport, MemoryViewerCopyToTexture,
+
+    // ShadowMap
+    ShadowMapCreate, ShadowMapUpdate,
+    ShadowMapSetCamera, ShadowMapSetViewer, ShadowMapSetFBO,
+    ShadowCameraCreate, ShadowCameraSetProjectionSize,
+    ShadowCameraSetZClippingPlanes,
+
+    // Movement
+    MovementCreate, MovementStart, MovementStop, MovementAutoStartNextPath,
+    MovementAddPath, MovementSetActivePath, MovementPathSetSplineMode,
+    MovementPathAddNode,
+    MovementPathNodeSetPosition, MovementPathNodeSetRotation,
+    MovementPathNodeSetSpeed,
+    MovementPathShow, MovementPathSetLoop, MovementPathDeleteNode,
+
+    // ObjectList
+    ObjectListCreate, ObjectListAdd, ObjectListGetCount,
+
+    // ObjectHash
+    ObjectHashCreate, ObjectHashSetItem, ObjectHashGetItem,
+    ObjectHashDeleteItem, ObjectHashGetItemCount,
+    ObjectHashClear, ObjectHashDestroy,
+
+    // Input
+    MouseGetPositionX, MouseGetPositionY, MouseSetPosition,
+    MouseShowCursor, KeyIsPressed, MouseIsPressed,
+
+    // Window
+    WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
+    WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
+    WindowSetIcon, WindowIsShowing,
+    WindowDispatch,
+
+    // Color
+    MakeColorRGB, MakeColorRGBFloat,
+
+    // Pipe
+    PipeCreate, PipeAddNode, PipeSetDivision, PipeSetSplineMode, PipeDeleteNode,
+    PipeSetRadius, PipeSetNode, PipeSetSlices,
+
+    // Verlet
+    VerletWorldCreate, VerletWorldCreateOctree,
+    VerletWorldGravityCreate, VerletWorldGravitySetDirection,
+    VerletWorldUpdate, EdgeDetectorCreate, EdgeDetectorSetWeldDistance,
+    VerletConstraintFloorCreate, VerletConstraintFloorSetNormal,
+    VerletConstraintFloorSetObjectLocations,
+    VerletConstraintSetPosition, VerletConstraintSetFrictionRatio,
+    VerletConstraintSetEnabled, VerletConstraintSphereCreate,
+    VerletConstraintCylinderCreate, VerletConstraintCubeCreate,
+    VerletConstraintCubeCreateSetCube, VerletConstraintCubeSetDirection,
+    VerletConstraintCapsuleCreate, VerletConstraintCylinderSetAxis,
+    VerletConstraintCapsuleSetAxis,
+    VerletGetNodeCount, VerletNodeNailedDown,VerletNodeSetPosition, VerletNodeSetRadius,
+    VerletNodeSetFriction, VerletNodeSetWeight, VerletNodeApplyFriction,
+    VerletAirResistanceCreate, VerletAirResistanceSetWindDirection,
+    VerletAirResistanceSetWindMagnitude, VerletAirResistanceSetWindChaos,
+    VerletConstraintGetCount, VerletConstraintSetSlack,
+    VerletWorldSetSimTime, VerletWorldSetMaxDeltaTime,
+
+    // PickList
+    PickListCreate, PickListClear, PickListGetCount, PickListGetHit,
+
+    // Kraft
+    KraftCreate, KraftStep,
+    KraftRayCast, KraftGetRayHitPosition, KraftGetRayHitNormal,
+    KraftCreateRigidBody, KraftRigidBodyFinish,
+    KraftRigidBodySetGravity,
+    KraftRigidBodySetPosition, KraftRigidBodyGetPosition,
+    KraftRigidBodySetLinearVelocity, KraftRigidBodyGetLinearVelocity,
+    KraftRigidBodySetAngularVelocity, KraftRigidBodyGetAngularVelocity,
+    KraftRigidBodySetRotation,
+    KraftRigidBodyGetDirection, KraftRigidBodyGetUp, KraftRigidBodyGetRight,
+    KraftRigidBodyAddForce, KraftRigidBodyAddForceAtPos, KraftRigidBodyAddRelForce,
+    KraftObjectSetRigidBody,
+    KraftCreateShapeSphere, KraftCreateShapeBox, KraftCreateShapePlane, KraftCreateShapeCapsule,
+    KraftCreateShapeMesh,
+    KraftShapeSetDensity, KraftShapeSetFriction, KraftShapeSetRestitution,
+    KraftShapeSetPosition, KraftShapeGetPosition,
+    KraftShapeSetRayCastable,
+    KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
+    KraftCreateJointHinge,
+    KraftJointSetAnchor1, KraftJointSetAnchor2,
+    KraftJointSetHingeAxis1, KraftJointSetHingeAxis2;
 begin
 end.

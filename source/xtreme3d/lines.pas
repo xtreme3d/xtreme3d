@@ -3,7 +3,7 @@ var
   li: TGLLines;
 begin
   if not (parent=0) then
-    li := TGLLines.CreateAsChild(TGLBaseSceneObject(trunc64(parent)))
+    li := TGLLines.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     li := TGLLines.CreateAsChild(scene.Objects);
   result := Integer(li);
@@ -13,7 +13,7 @@ function LinesAddNode(lines, x, y, z: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
+  li := TGLLines(RealToPtr(lines));
   li.AddNode(x, y, z);
   result := 1.0;
 end;
@@ -22,8 +22,8 @@ function LinesDeleteNode(lines, ind: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
-  li.Nodes.Delete(trunc64(ind));
+  li := TGLLines(RealToPtr(lines));
+  li.Nodes.Delete(trunc(ind));
   result := 1.0;
 end;
 
@@ -31,10 +31,10 @@ function LinesSetNode(lines, ind, x, y, z: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
-  li.Nodes[trunc64(ind)].X := x;
-  li.Nodes[trunc64(ind)].Y := y;
-  li.Nodes[trunc64(ind)].Y := z;
+  li := TGLLines(RealToPtr(lines));
+  li.Nodes[trunc(ind)].X := x;
+  li.Nodes[trunc(ind)].Y := y;
+  li.Nodes[trunc(ind)].Y := z;
   result := 1.0;
 end;
 
@@ -44,10 +44,10 @@ function LinesSetColors(lines,
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
-  li.LineColor.AsWinColor := TColor(trunc64(linecolor));
+  li := TGLLines(RealToPtr(lines));
+  li.LineColor.AsWinColor := TColor(trunc(linecolor));
   li.LineColor.Alpha := linealpha;
-  li.NodeColor.AsWinColor := TColor(trunc64(nodecolor));
+  li.NodeColor.AsWinColor := TColor(trunc(nodecolor));
   li.NodeColor.Alpha := nodealpha;
   result := 1.0;
 end;
@@ -56,7 +56,7 @@ function LinesSetSize(lines, linewidth, nodesize: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
+  li := TGLLines(RealToPtr(lines));
   li.LineWidth := linewidth;
   li.NodeSize := nodesize;
   result := 1.0;
@@ -66,7 +66,7 @@ function LinesSetSplineMode(lines, lsm: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
+  li := TGLLines(RealToPtr(lines));
   if lsm = 0 then li.SplineMode := lsmLines;
   if lsm = 1 then li.SplineMode := lsmCubicSpline;
   if lsm = 2 then li.SplineMode := lsmBezierSpline;
@@ -79,11 +79,10 @@ function LinesSetNodesAspect(lines, lna: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
+  li := TGLLines(RealToPtr(lines));
   if lna = 0 then li.NodesAspect := lnaInvisible;
   if lna = 1 then li.NodesAspect := lnaAxes;
   if lna = 2 then li.NodesAspect := lnaCube;
-  if lna = 3 then li.NodesAspect := lnaDodecahedron;
   result := 1.0;
 end;
 
@@ -91,8 +90,8 @@ function LinesSetDivision(lines, division: real): real; cdecl;
 var
   li: TGLLines;
 begin
-  li := TGLLines(trunc64(lines));
-  li.Division := trunc64(division);
+  li := TGLLines(RealToPtr(lines));
+  li.Division := trunc(division);
   result := 1.0;
 end;
 

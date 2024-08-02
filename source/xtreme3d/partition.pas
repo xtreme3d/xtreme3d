@@ -1,99 +1,99 @@
 function OctreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; cdecl;
 var
-  octree: TOctreeSpacePartition;
+  octree: TGLOctreeSpacePartition;
 begin
-  octree := TOctreeSpacePartition.Create();
-  octree.MaxTreeDepth := trunc64(maxdepth);
-  octree.LeafThreshold := trunc64(leafthreshold);
+  octree := TGLOctreeSpacePartition.Create();
+  octree.MaxTreeDepth := trunc(maxdepth);
+  octree.LeafThreshold := trunc(leafthreshold);
   octree.GrowGravy := growgravy;
   if culling = 0 then octree.CullingMode := cmFineCulling;
   if culling = 1 then octree.CullingMode := cmGrossCulling;
-  result := Integer(octree);
+  result := ObjToReal(octree);
 end;
 
 function QuadtreeCreate(maxdepth, leafthreshold, growgravy, culling: real): real; cdecl;
 var
-  quadtree: TQuadtreeSpacePartition;
+  quadtree: TGLQuadtreeSpacePartition;
 begin
-  quadtree := TQuadtreeSpacePartition.Create();
-  quadtree.MaxTreeDepth := trunc64(maxdepth);
-  quadtree.LeafThreshold := trunc64(leafthreshold);
+  quadtree := TGLQuadtreeSpacePartition.Create();
+  quadtree.MaxTreeDepth := trunc(maxdepth);
+  quadtree.LeafThreshold := trunc(leafthreshold);
   quadtree.GrowGravy := growgravy;
   if culling = 0 then quadtree.CullingMode := cmFineCulling;
   if culling = 1 then quadtree.CullingMode := cmGrossCulling;
-  result := Integer(quadtree);
+  result := ObjToReal(quadtree);
 end;
 
 function PartitionDestroy(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   t.Free;
   result := 1.0;
 end;
 
 function PartitionAddLeaf(tree, obj: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
-  tobj: TSceneObj;
+  t: TGLSectoredSpacePartition;
+  tobj: TGLSceneObj;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
-  tobj := TSceneObj.CreateObj(t, TGLBaseSceneObject(trunc64(obj)));
-  result := Integer(tobj);
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  tobj := TGLSceneObj.CreateObj(t, TGLBaseSceneObject(RealToPtr(obj)));
+  result := ObjToReal(tobj);
 end;
 
 function PartitionLeafChanged(leaf: real): real; cdecl;
 var
-  pleaf: TSpacePartitionLeaf;
+  pleaf: TGLSpacePartitionLeaf;
 begin
-  pleaf := TSpacePartitionLeaf(trunc64(leaf));
+  pleaf := TGLSpacePartitionLeaf(RealToPtr(leaf));
   pleaf.Changed;
   result := 1.0;
 end;
 
 function PartitionQueryFrustum(tree, viewer: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
   v: TGLSceneViewer;
-  mvp: TMatrix;
+  mvp: TGLMatrix;
   frustum : TFrustum;
 begin
-  v := TGLSceneViewer(trunc64(viewer));
-  t := TSectoredSpacePartition(trunc64(tree));
-  mvp := MatrixMultiply(v.Buffer.ModelViewMatrix, v.Buffer.ProjectionMatrix);
+  v := TGLSceneViewer(RealToPtr(viewer));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  mvp := MatrixMultiply(MatrixMultiply(v.Buffer.ModelMatrix, v.Buffer.ViewMatrix), v.Buffer.ProjectionMatrix);
   frustum := ExtractFrustumFromModelViewProjection(mvp);
   result := t.QueryFrustum(frustum);
 end;
 
 function PartitionQueryLeaf(tree, leaf: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
-  pleaf: TSpacePartitionLeaf;
+  t: TGLSectoredSpacePartition;
+  pleaf: TGLSpacePartitionLeaf;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
-  pleaf := TSpacePartitionLeaf(trunc64(leaf));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  pleaf := TGLSpacePartitionLeaf(RealToPtr(leaf));
   result := t.QueryLeaf(pleaf);
 end;
 
 function PartitionQueryAABB(tree, obj: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
   o: TGLBaseSceneObject;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
-  o := TGLBaseSceneObject(trunc64(obj));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   result := t.QueryAABB(o.AxisAlignedBoundingBox);
 end;
 
 function PartitionQueryBSphere(tree, obj: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
   o: TGLBaseSceneObject;
   bs: TBSphere;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
-  o := TGLBaseSceneObject(trunc64(obj));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  o := TGLBaseSceneObject(RealToPtr(obj));
   bs.Center := AffineVectorMake(o.AbsolutePosition);
   bs.Radius := o.BoundingSphereRadius;
   result := t.QueryBSphere(bs);
@@ -101,48 +101,48 @@ end;
 
 function PartitionGetNodeTests(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   result := t.QueryNodeTests;
 end;
 
 function PartitionGetNodeCount(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   result := t.GetNodeCount;
 end;
 
 function PartitionGetResult(tree, ind: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
-  sobj: TSceneObj;
+  t: TGLSectoredSpacePartition;
+  sobj: TGLSceneObj;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
-  sobj := t.QueryResult[trunc64(ind)] as TSceneObj;
-  result := Integer(sobj.Obj);
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
+  sobj := t.QueryResult[trunc(ind)] as TGLSceneObj;
+  result := ObjToReal(sobj.Obj);
 end;
 
 function PartitionGetResultCount(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
+  t: TGLSectoredSpacePartition;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   result := t.QueryResult.Count;
 end;
 
 function PartitionResultShow(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
-  sobj: TSceneObj;
+  t: TGLSectoredSpacePartition;
+  sobj: TGLSceneObj;
   i: Integer;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   for i := 0 to t.QueryResult.Count-1 do
   begin
-    sobj := t.QueryResult[i] as TSceneObj;
+    sobj := t.QueryResult[i] as TGLSceneObj;
     sobj.Obj.Visible := true;
   end;
   result := 1.0;
@@ -150,14 +150,14 @@ end;
 
 function PartitionResultHide(tree: real): real; cdecl;
 var
-  t: TSectoredSpacePartition;
-  sobj: TSceneObj;
+  t: TGLSectoredSpacePartition;
+  sobj: TGLSceneObj;
   i: Integer;
 begin
-  t := TSectoredSpacePartition(trunc64(tree));
+  t := TGLSectoredSpacePartition(RealToPtr(tree));
   for i := 0 to t.QueryResult.Count-1 do
   begin
-    sobj := t.QueryResult[i] as TSceneObj;
+    sobj := t.QueryResult[i] as TGLSceneObj;
     sobj.Obj.Visible := false;
   end;
   result := 1.0;
