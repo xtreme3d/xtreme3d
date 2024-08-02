@@ -157,16 +157,6 @@
              </OBJECT>
         <UL>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Список функций">
-                        <param name="Local" value="functions/funclist.html">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Список функций (A-Z)">
-                        <param name="Local" value="functions/funclistaz.html">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Список констант">
                         <param name="Local" value="functions/constants.html">
                         <param name="ImageNumber" value="0">

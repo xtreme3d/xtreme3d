@@ -134,14 +134,6 @@
  </OBJECT>
 <UL>
  <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Список функций">
-  <PARAM name="Local" value="functions/funclist.html">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Список функций (A-Z)">
-  <PARAM name="Local" value="functions/funclistaz.html">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Список констант">
   <PARAM name="Local" value="functions/constants.html">
  </OBJECT>

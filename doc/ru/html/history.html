@@ -210,24 +210,30 @@
 <BR>
 <BR><B>Xtreme3D 4.0.0 (??.??.??)</B>
 <BR>
+<BR>- Переход на 64-битную архитектуру. 32-битная архитектура больше не поддерживается
+<BR>- Совместимость с 64-битным GameMaker (бывший GameMaker: Studio 2)
+<BR>- Все строки в движке принимаются только в UTF-8, поддержка других кодировок удалена
 <BR>- Функция Update теперь называется EngineUpdate
 <BR>- Функция TrisRendered удалена
+<BR>- Функция ViewerRenderEx удалена
 <BR>- Новая функция ViewerRenderObject
+<BR>- Изменился смысл функции EngineSetMaxLights. Теперь она задает максимальное количество источников света, которые учитываются основной системой освещения и системой LightFX. По умолчанию это количество равно 8 (максимум для основной системы освещения). Если вы хотите использовать больше источников света для системы LightFX, нужно использовать эту функцию
 <BR>- Функция ViewerGetPickedObjectsList теперь работает с объектами-списками PickList, которые нужно создавать вручную
 <BR>- Новые функции PickListCreate, PickListClear, PickListGetCount, PickListGetHit
+<BR>- Функция ViewerRenderToFilePNG удалена - сохранение в PNG теперь поддерживается в ViewerRenderToFile
 <BR>- Поддерживаются новые константы для ViewerSetAntiAliasing: aa6x = 6, aa8x = 7, aa16x = 8, csa8x = 9, csa8xHQ = 10, csa16x = 11, csa16xHQ = 12
 <BR>- Функция CameraZoomAll теперь требует указания Viewer во втором параметре
 <BR>- Новая функция MaterialLibraryGetTextureByName
 <BR>- Функция SpriteNoZWrite удалена, используйте вместо нее MaterialSetDepthWrite
 <BR>- Функция MaterialCullFrontFaces удалена
-<BR>- MaterialSetZWrite не рекомендуется к использованию и вскоре будет удалена, используйте вместо нее новую функцию MaterialSetDepthWrite
+<BR>- Функция MaterialSetZWrite теперь называется MaterialSetDepthWrite
 <BR>- Новая функция MaterialSetDepthTest
 <BR>- Система TextureEx переделана. Удалены функции MaterialLoadTextureEx, MaterialSetTextureEx, MaterialSetTextureExFromLibrary, MaterialGenTextureEx, MaterialEnableTextureEx. Добавлены функции MaterialAddTextureEx, MaterialTextureExClear, TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete, TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable
 <BR>- Новая функция MaterialSetTextureFormatEx и соответствующие константы
 <BR>- Новая константа для MaterialSetTextureFormat: tfExtended = 12
 <BR>- Новая константа для MaterialSetTextureImageAlpha: tiaBottomRightPointColorTransparent = 9
 <BR>- Новая функция MaterialSetTextureCompareMode
-<BR>- Функция PtrToReal теперь называется PointerToReal
+<BR>- Удалены функции ObjectGetCollisionPosition, ObjectGetCollisionNormal - вместо них теперь EngineGetLastRaycastPosition, EngineGetLastRaycastNormal, которые делают то же самое
 <BR>- Функции Polygon удалены
 <BR>- Функции TTFontSetEncoding, TTFontLoadCodePage удалены. TTFont теперь поддерживает только UTF-8
 <BR>- Функции TextRead, TextConvertANSIToUTF8 удалены
@@ -238,7 +244,10 @@
 <BR>- Новые функции ObjectListCreate, ObjectListAdd, ObjectListGetCount
 <BR>- Система FBO переделана. УДалены функции FBOSetViewer, FBORenderObject, FBORenderObjectEx, FBOSetOverrideMaterial, FBOSetColorTextureFormat. Добавлены функции FBOSetActive, FBOSetAspect, FBOSetPickableTarget, FBOSetSize, FBOSetRootObject, FBOSetBackgroundColor, FBOSetEnabledRenderBuffers, FBOSetSceneScaleFactor, FBOSetTargetVisibility, FBOSetMaterialLibrary, FBOSetColorTextureName, FBOSetDepthTextureName, FBOSetClearOptions, FBOSetStencilPrecision
 <BR>- Новая функция GLSLShaderForceDisableStencilTest
-<BR>- Переделана система ShadowMap.
+<BR>- Переделаны тени ShadowMap. Удалены функции ShadowMapSetCaster, ShadowMapSetProjectionSize, ShadowMapSetZScale, ShadowMapSetZClippingPlanes, ShadowMapRender. Новые функции ShadowMapUpdate, ShadowMapSetViewer
+<BR>- Добавлен новый объект ShadowCamera, который используется в ShadowMap. Новые функции ShadowCameraCreate, ShadowCameraSetProjectionSize, ShadowCameraSetZClippingPlanes
+<BR>- Новая функция GLSLShaderForceDisableStencilTest
+<BR>- Функция PtrToReal теперь называется PointerToReal.
 </A>
 
 </DIV>
