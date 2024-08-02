@@ -29,6 +29,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `TTFontSetEncoding`, `TTFontLoadCodePage` were removed
 - `TextRead`, `TextConvertANSIToUTF8` were removed
 - `OdeAddCone` was removed
+- `OdeManagerSetGeomColor` now sets three colors separately: for enabled dynamic bodies, disabled dynamic bodies and static bodies
 - New function `BaseMeshBuildSilhouetteConnectivityData`
 - New function `ActorSetReference`
 - `ObjectGetCollisionPosition` and `ObjectGetCollisionNormal` are now `EngineGetLastRaycastPosition` and `EngineGetLastRaycastNormal`

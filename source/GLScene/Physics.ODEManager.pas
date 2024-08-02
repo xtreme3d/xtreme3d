@@ -2335,7 +2335,6 @@ begin
     dBodySetLinearVel(FBody, Vel.V[0], Vel.V[1], Vel.V[2]);
   end;
 end;
-
 procedure TGLODEDynamic.SetAngularVelocity(Vel: TAffineVector);
 begin
   if Assigned(FBody) then
@@ -2343,7 +2342,6 @@ begin
     dBodySetAngularVel(FBody, Vel.V[0], Vel.V[1], Vel.V[2]);
   end;
 end;
-
 function TGLODEDynamic.GetVelocity(): TAffineVector;
 begin
   if Assigned(FBody) then
@@ -2351,7 +2349,6 @@ begin
   else
     result := AffineVectorMake(0, 0, 0);
 end;
-
 function TGLODEDynamic.GetAngularVelocity(): TAffineVector;
 begin
   if Assigned(FBody) then
@@ -2359,7 +2356,6 @@ begin
   else
     result := AffineVectorMake(0, 0, 0);
 end;
-
 procedure TGLODEDynamic.SetPosition(Pos: TAffineVector);
 begin
   if Assigned(FBody) then
@@ -2367,7 +2363,6 @@ begin
     dBodySetPosition(FBody, Pos.V[0], Pos.V[1], Pos.V[2]);
   end;
 end;
-
 procedure TGLODEDynamic.SetRotation(qx, qy, qz, qw: Single);
 var
   q: TdQuaternion;

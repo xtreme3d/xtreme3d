@@ -958,8 +958,7 @@ function dll_init(dll) {
 	global._OdeManagerSetIterations = external_define(dll, "OdeManagerSetIterations", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeManagerSetMaxContacts = external_define(dll, "OdeManagerSetMaxContacts", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeManagerSetVisible = external_define(dll, "OdeManagerSetVisible", dll_cdecl, ty_real, 1, ty_real);
-	// Not yet implemented:
-	//global._OdeManagerSetGeomColor = external_define(dll, "OdeManagerSetGeomColor", dll_cdecl, ty_real, 1, ty_real);
+	global._OdeManagerSetGeomColor = external_define(dll, "OdeManagerSetGeomColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._OdeWorldSetAutoDisableFlag = external_define(dll, "OdeWorldSetAutoDisableFlag", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeWorldSetAutoDisableLinearThreshold = external_define(dll, "OdeWorldSetAutoDisableLinearThreshold", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeWorldSetAutoDisableAngularThreshold = external_define(dll, "OdeWorldSetAutoDisableAngularThreshold", dll_cdecl, ty_real, 1, ty_real);
@@ -3535,8 +3534,8 @@ function OdeManagerSetVisible(aMode) {
 	return external_call(global._OdeManagerSetVisible, aMode);
 }
 
-function OdeManagerSetGeomColor(aColor) {
-	return external_call(global._OdeManagerSetGeomColor, aColor);
+function OdeManagerSetGeomColor(aColorDynamicDisabled, aColorDynamicEnabled, aColorStatic) {
+	return external_call(global._OdeManagerSetGeomColor, aColorDynamicDisabled, aColorDynamicEnabled, aColorStatic);
 }
 
 function OdeWorldSetAutoDisableFlag(aFlag) {

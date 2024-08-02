@@ -873,7 +873,7 @@ exports
     OdeManagerCreate, OdeManagerDestroy, OdeManagerStep, OdeManagerGetNumContactJoints,
     OdeManagerSetGravity, OdeManagerSetSolver, OdeManagerSetIterations,
     OdeManagerSetMaxContacts, OdeManagerSetVisible,
-    //OdeManagerSetGeomColor,
+    OdeManagerSetGeomColor,
     OdeWorldSetAutoDisableFlag, OdeWorldSetAutoDisableLinearThreshold,
     OdeWorldSetAutoDisableAngularThreshold, OdeWorldSetAutoDisableSteps, OdeWorldSetAutoDisableTime,
     OdeStaticCreate, OdeDynamicCreate, OdeTerrainCreate,

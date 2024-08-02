@@ -58,14 +58,16 @@ begin
   result := 1.0;
 end;
 
-{
-function OdeManagerSetGeomColor(color: real): real; cdecl;
+function OdeManagerSetGeomColor(colorDynamicDisabled, colorDynamicEnabled, colorStatic: real): real; cdecl;
 begin
-  ode.GeomColor.AsWinColor := TColor(trunc(color));
-  ode.GeomColor.Alpha := 1.0;
+  ode.GeomColorDynD.AsWinColor := TColor(trunc(colorDynamicDisabled));
+  ode.GeomColorDynD.Alpha := 1.0;
+  ode.GeomColorDynE.AsWinColor := TColor(trunc(colorDynamicEnabled));
+  ode.GeomColorDynE.Alpha := 1.0;
+  ode.GeomColorStat.AsWinColor := TColor(trunc(colorStatic));
+  ode.GeomColorStat.Alpha := 1.0;
   result := 1.0;
 end;
-}
 
 function OdeWorldSetAutoDisableFlag(flag: real): real; cdecl;
 begin
