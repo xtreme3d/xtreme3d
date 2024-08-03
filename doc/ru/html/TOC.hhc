@@ -150,6 +150,10 @@
   <PARAM name="Local" value="functions/viewer.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="PickList">
+  <PARAM name="Local" value="functions/picklist.html">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Dummycube">
   <PARAM name="Local" value="functions/dummycube.html">
  </OBJECT>
@@ -192,10 +196,6 @@
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Object">
   <PARAM name="Local" value="functions/object.html">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Polygon">
-  <PARAM name="Local" value="functions/polygon.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Material">
@@ -309,25 +309,13 @@
   <PARAM name="Name" value="Kraft">
   <PARAM name="Local" value="functions/kraft.html">
  </OBJECT>
- 
-   <LI><OBJECT type="text/sitemap">
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Verlet">
   <PARAM name="Local" value="functions/verlet.html">
  </OBJECT>
- 
-<!--
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Mouse">
-  <PARAM name="Local" value="functions/mouse.html">
- </OBJECT>
--->
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="ObjectHash">
   <PARAM name="Local" value="functions/objecthash.html">
- </OBJECT>
- <LI><OBJECT type="text/sitemap">
-  <PARAM name="Name" value="Text">
-  <PARAM name="Local" value="functions/text.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Color">

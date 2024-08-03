@@ -177,6 +177,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="PickList">
+                        <param name="Local" value="functions/picklist.html">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Dummycube">
                         <param name="Local" value="functions/dummycube.html">
                         <param name="ImageNumber" value="0">
@@ -229,11 +234,6 @@
                 <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Object">
                         <param name="Local" value="functions/object.html">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Polygon">
-                        <param name="Local" value="functions/polygon.html">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
@@ -382,18 +382,8 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Mouse">
-                        <param name="Local" value="functions/mouse.html">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="ObjectHash">
                         <param name="Local" value="functions/objecthash.html">
-                        <param name="ImageNumber" value="0">
-                     </OBJECT>
-                <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="Text">
-                        <param name="Local" value="functions/text.html">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
