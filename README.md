@@ -19,7 +19,7 @@ Screenshots
 
 Features
 --------
-* Can be used with any language that supports DLLs and stdcall convension
+* Can be used with any language that supports DLLs
 * Scene graph with object hierarchy/pivoting
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
 * Materials and textures. Materials can be loaded from script files
