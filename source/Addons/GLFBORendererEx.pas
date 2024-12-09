@@ -41,24 +41,31 @@ begin
 end;
 
 procedure TGLFBORendererEx.OnBeforeRender(fbo: TObject; var rci: TGLRenderContextInfo);
+var
+  buffer: TGLSceneBuffer;
 begin
-  // push geometry back a bit, prevents false self-shadowing
   with rci.GLStates do
   begin
-    Enable(stPolygonOffsetFill);
-    PolygonOffsetFactor := 1;
-    PolygonOffsetUnits := 1;
+    // push geometry back a bit, prevents false self-shadowing
+    //Enable(stPolygonOffsetFill);
+    //SetPolygonOffset(0.0, 1.0);
+    //Disable(stCullFace);
+    //Enable(stCullFace);
+    //CullFaceMode := cmFront;
+    //DepthFunc := cfLEqual;
   end;
-  gl.CullFace(GL_FRONT);
 end;
 
 procedure TGLFBORendererEx.OnAfterRender(fbo: TObject; var rci: TGLRenderContextInfo);
 begin
   with rci.GLStates do
   begin
-    Disable(stPolygonOffsetFill);
+    //SetPolygonOffset(0.0, 0.0);
+    //Disable(stPolygonOffsetFill);
+    //Enable(stCullFace);
+    //CullFaceMode := cmBack;
+    //DepthFunc := cfLess;
   end;
-  gl.CullFace(GL_BACK);
 end;
 
 end.

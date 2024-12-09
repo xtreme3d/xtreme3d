@@ -472,6 +472,7 @@ end;
 {$I 'xtreme3d/freeform'}
 {$I 'xtreme3d/object'}
 {$I 'xtreme3d/material'}
+{$I 'xtreme3d/texture'}
 {$I 'xtreme3d/shaders'}
 {$I 'xtreme3d/thorfx'}
 {$I 'xtreme3d/firefx'}
