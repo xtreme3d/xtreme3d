@@ -165,3 +165,11 @@ begin
   result := 1;
 end;
 
+function FBOSetShadowMapMode(fbo, mode: real): real; cdecl;
+var
+  fbor: TGLFBORendererEx;
+begin
+  fbor := TGLFBORendererEx(RealToPtr(fbo));
+  fbor.ShadowMapMode := Boolean(Trunc(mode));
+  result := 1;
+end;

@@ -623,6 +623,7 @@ function dll_init(dll) {
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
 	global._MaterialSetTextureCompareMode = external_define(dll, "MaterialSetTextureCompareMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialSetTextureDepthCompareFunc = external_define(dll, "MaterialSetTextureDepthCompareFunc", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	
 	// Shaders
 	global._ShaderEnable = external_define(dll, "ShaderEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -1081,6 +1082,7 @@ function dll_init(dll) {
 	global._FBOSetDepthTextureName = external_define(dll, "FBOSetDepthTextureName", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._FBOSetClearOptions = external_define(dll, "FBOSetClearOptions", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._FBOSetStencilPrecision = external_define(dll, "FBOSetStencilPrecision", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._FBOSetShadowMapMode = external_define(dll, "FBOSetShadowMapMode", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// ClipPlane
 	global._ClipPlaneCreate = external_define(dll, "ClipPlaneCreate", dll_cdecl, ty_real, 1, ty_real);
@@ -1772,6 +1774,10 @@ function FBOSetClearOptions(aFBO, aClearColor, aClearDepth, aClearStencil, aUseB
 
 function FBOSetStencilPrecision(aFBO, aSp) {
 	return external_call(global._FBOSetStencilPrecision, aFBO, aSp);
+}
+
+function FBOSetShadowMapMode(aFBO, aMode) {
+	return external_call(global._FBOSetShadowMapMode, aFBO, aMode);
 }
 
 function FireFXManagerCreate() {
@@ -2936,6 +2942,10 @@ function MaterialGetNameFromLibrary(aMatlib, aIndex) {
 
 function MaterialSetTextureCompareMode(aMaterial, aTcm) {
 	return external_call(global.MaterialSetTextureCompareMode, aMaterial, aTcm);
+}
+
+function MaterialSetTextureDepthCompareFunc(aMaterial, aCf) {
+	return external_call(global.MaterialSetTextureDepthCompareFunc, aMaterial, aCf);
 }
 
 function MemoryViewerCreate(aW, aH) {
@@ -4366,6 +4376,14 @@ function ShadowCameraCreate(aParent) {
 	return external_call(global._ShadowCameraCreate, aParent);
 }
 
+function ShadowCameraSetProjectionSize(aShadowCamera, aSize) {
+	return external_call(global._ShadowCameraSetProjectionSize, aShadowCamera, aSize);
+}
+
+function ShadowCameraSetZClippingPlanes(aShadowCamera, aZNear, aZFar) {
+	return external_call(global._ShadowCameraSetZClippingPlanes, aShadowCamera, aZNear, aZFar);
+}
+
 /*
 function ShadowMapSetCamera(aShadowmap, aCam) {
 	return external_call(global._ShadowMapSetCamera, aShadowmap, aCam);
@@ -5506,6 +5524,15 @@ function PtrToReal(p) {
 
 #macro tcmNone 0
 #macro tcmCompareRtoTexture 1
+
+#macro cfNever 0
+#macro cfAlways 1
+#macro cfLess 2
+#macro cfLEqual 3
+#macro cfEqual 4
+#macro cfGreater 5
+#macro cfNotEqual 6
+#macro cfGEqual 7
 
 #macro tcDefault 0
 #macro tcNone 1

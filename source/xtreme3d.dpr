@@ -778,7 +778,7 @@ exports
     FBOSetRootObject, FBOSetBackgroundColor, FBOSetEnabledRenderBuffers,
     FBOSetSceneScaleFactor, FBOSetTargetVisibility, FBOSetMaterialLibrary,
     FBOSetColorTextureName, FBOSetDepthTextureName, FBOSetClearOptions,
-    FBOSetStencilPrecision,
+    FBOSetStencilPrecision, FBOSetShadowMapMode,
 
     // ClipPlane
     ClipPlaneCreate, ClipPlaneEnable, ClipPlaneSetPlane,

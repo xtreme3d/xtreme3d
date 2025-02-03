@@ -24,9 +24,11 @@ type
         { Private Declarations }
     protected
         { Protected Declarations }
+        FShadowMapMode: Boolean;
     public
         { Public Declarations }
         constructor Create(AOwner: TComponent); override;
+        property ShadowMapMode: Boolean read FShadowMapMode write FShadowMapMode;
         procedure OnBeforeRender(fbo: TObject; var rci: TGLRenderContextInfo);
         procedure OnAfterRender(fbo: TObject; var rci: TGLRenderContextInfo);
   end;
@@ -36,6 +38,7 @@ implementation
 constructor TGLFBORendererEx.Create(AOwner: TComponent);
 begin
   inherited;
+  FShadowMapMode := false;
   BeforeRender := OnBeforeRender;
   AfterRender := OnAfterRender;
 end;
@@ -46,9 +49,11 @@ var
 begin
   with rci.GLStates do
   begin
-    //Enable(stPolygonOffsetFill);
-    //SetPolygonOffset(3.0, 0.0);
-    //CullFaceMode := cmFront;
+    if FShadowMapMode then begin
+      Enable(stPolygonOffsetFill);
+      SetPolygonOffset(3.0, 0.0);
+      CullFaceMode := cmFront;
+    end;
   end;
 end;
 
@@ -56,9 +61,11 @@ procedure TGLFBORendererEx.OnAfterRender(fbo: TObject; var rci: TGLRenderContext
 begin
   with rci.GLStates do
   begin
-    //SetPolygonOffset(0.0, 0.0);
-    //Disable(stPolygonOffsetFill);
-    //CullFaceMode := cmBack;
+    if FShadowMapMode then begin
+      SetPolygonOffset(0.0, 0.0);
+      Disable(stPolygonOffsetFill);
+      CullFaceMode := cmBack;
+    end;
   end;
 end;
 
