@@ -745,7 +745,7 @@ exports
     MaterialAddTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
     TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
     TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable,
-    MaterialSetTextureCompareMode,
+    MaterialSetTextureCompareMode, MaterialSetTextureDepthCompareFunc,
 
     // Shaders
     ShaderEnable,

@@ -757,10 +757,16 @@ var
   mat:TGLLibMaterial;
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
-  if tcm = 0 then
-    mat.Material.Texture.TextureCompareMode := tcmNone
-  else if tcm = 1 then
-    mat.Material.Texture.TextureCompareMode := tcmCompareRtoTexture;
+  mat.Material.Texture.TextureCompareMode := TGLTextureCompareMode(Trunc(tcm));
+  result:=1;
+end;
+
+function MaterialSetTextureDepthCompareFunc(mtrl: PAnsiChar; tcf: real): real; cdecl;
+var
+  mat:TGLLibMaterial;
+begin
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
+  mat.Material.Texture.TextureCompareFunc := TGLDepthCompareFunc(Trunc(tcf));
   result:=1;
 end;
 
