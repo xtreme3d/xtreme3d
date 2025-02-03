@@ -46,13 +46,9 @@ var
 begin
   with rci.GLStates do
   begin
-    // push geometry back a bit, prevents false self-shadowing
     //Enable(stPolygonOffsetFill);
-    //SetPolygonOffset(0.0, 1.0);
-    //Disable(stCullFace);
-    //Enable(stCullFace);
+    //SetPolygonOffset(3.0, 0.0);
     //CullFaceMode := cmFront;
-    //DepthFunc := cfLEqual;
   end;
 end;
 
@@ -62,9 +58,7 @@ begin
   begin
     //SetPolygonOffset(0.0, 0.0);
     //Disable(stPolygonOffsetFill);
-    //Enable(stCullFace);
     //CullFaceMode := cmBack;
-    //DepthFunc := cfLess;
   end;
 end;
 

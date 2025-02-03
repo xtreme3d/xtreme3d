@@ -235,6 +235,7 @@ begin
        begin
          gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
          gl.BindTexture(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], FTexture.Handle);
+         gl.TexParameteri(cGLTexTypeToGLEnum[FTexture.Image.NativeTextureTarget], GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
          gl.ActiveTexture(GL_TEXTURE0_ARB);
        end;
     end;
