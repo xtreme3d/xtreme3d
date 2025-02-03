@@ -43,11 +43,6 @@ CameraSetNearPlaneBias(camera, 0.2);
 shadowMapSize = 2048;
 shadowFboMatlib = MaterialLibraryCreate();
 MaterialLibraryActivate(shadowFboMatlib);
-MaterialCreate("fboShadowColor", "");
-MaterialGenTexture("fboShadowColor", shadowMapSize, shadowMapSize);
-MaterialSetOptions("fboShadowColor", true, true);
-MaterialSetTextureWrap("fboShadowColor", false); 
-MaterialSetTextureFilter("fboShadowColor", miLinear, maLinear);
 MaterialCreate("fboShadowDepth", "");
 MaterialGenTexture("fboShadowDepth", shadowMapSize, shadowMapSize);
 MaterialSetOptions("fboShadowDepth", true, true);
@@ -75,9 +70,8 @@ FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);
 FBOSetCamera(shadowFbo, shadowCamera);
 FBOSetAspect(shadowFbo, 1);
 FBOSetRootObject(shadowFbo, shadowCasters);
-FBOSetColorTextureName(shadowFbo, "fboShadowColor");
 FBOSetDepthTextureName(shadowFbo, "fboShadowDepth");
-FBOSetTargetVisibility(shadowFbo, 0);
+FBOSetTargetVisibility(shadowFbo, tvDefault);
 FBOSetClearOptions(shadowFbo, true, true, true, true);
 FBOSetShadowMapMode(shadowFbo, true);
 
@@ -91,14 +85,6 @@ LightSetAmbientColor(light1, c_black);
 LightSetDiffuseColor(light1, c_white);
 LightSetSpecularColor(light1, c_white);
 ObjectSetPosition(light1, 3, 5, 3);
-
-/*
-bumpShaderPlane = BumpShaderCreate();
-BumpShaderSetDiffuseTexture(bumpShaderPlane, "");
-BumpShaderSetNormalTexture(bumpShaderPlane, "");
-BumpShaderSetMaxLights(bumpShaderPlane, 8);
-GLSLShaderForceDisableStencilTest(bumpShaderPlane, true);
-*/
 
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
@@ -117,8 +103,6 @@ MaterialSetSpecularColor("mStone", c_white, 1);
 MaterialSetShininess("mStone", 8);
 MaterialSetShader("mStone", bumpShader);
 
-//plane = ShadowplaneCreate(20, 20, 10, 10, shadowCasters, light1, c_black, 0.5, global.scene);
-//ShadowplaneSetOptions(plane, true, true, false, false);
 plane = PlaneCreate(0, 20, 20, 10, 10, raycastObjects);
 ObjectPitch(plane, 90);
 ObjectSetMaterial(plane, "mStone");
@@ -152,13 +136,14 @@ ActorAddObject(hk, "data/hellknight/idle.md5anim");
 ActorAddObject(hk, "data/hellknight/attack.md5anim");
 //ActorSetAnimationMode(hk, aamLoop);
 //ActorSwitchToAnimation(hk, 0, true);
+//ActorMakeSkeletalTranslationStatic(hk, 1);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
 MaterialSetAmbientColor("mHellknight", c_gray, 1); 
 MaterialSetDiffuseColor("mHellknight", c_white, 1); 
 MaterialSetSpecularColor("mHellknight", c_white, 1); 
-MaterialSetShininess("mHellknight", 8);
+MaterialSetShininess("mHellknight", 64);
 TextureExLoad(MaterialAddTextureEx("mHellknight", 0), "data/hellknight/diffuse.png");
 TextureExLoad(MaterialAddTextureEx("mHellknight", 1), "data/hellknight/normal.png");
 ObjectSetMaterial(hk, "mHellknight");
@@ -169,13 +154,13 @@ hk2 = ActorProxyObjectCreate(hk, shadowCasters);
 ObjectSetScale(hk2, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk2, 0, 0, 0);
 ActorProxyObjectSwitchToAnimation(hk2, 0);
+ActorProxyObjectSetInterval(hk2, 200);
 
 hk3 = ActorProxyObjectCreate(hk, shadowCasters);
 ObjectSetScale(hk3, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk3, 2, 0, 0);
 ActorProxyObjectSwitchToAnimation(hk3, 1);
-
-//LightFXCreate(hk);
+ActorProxyObjectSetInterval(hk3, 200);
 
 MaterialLibraryActivate(matlib);
 
@@ -196,11 +181,6 @@ ObjectSetMaterial(rect, "mWilber");
 circle = HUDShapeCircleCreate(50, 32, 0, 360, global.front);
 ObjectSetPosition(circle, 500, 50, 0);
 */
-
-//WindowsBitmapfontAdd("data/fonts/DroidSans.ttf");
-//font = WindowsBitmapfontCreate("Arial", 16, 32, 95);
-//text = HUDTextCreate(font, "Xtreme3D 4.0", global.front);
-//ObjectSetPosition(text, 20, 20, 0);
 
 ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
 text = HUDTextCreate(ftfont, "Hello World!\rПривет, мир!", global.front);
