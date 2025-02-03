@@ -5633,3 +5633,6 @@ function PtrToReal(p) {
 #macro sp4bits 2
 #macro sp8bits 3
 #macro sp16bits 4
+
+#macro tvDefault 0
+#macro tvFBOOnly 1

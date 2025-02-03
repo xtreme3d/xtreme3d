@@ -40,7 +40,7 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
-shadowMapSize = 512;
+shadowMapSize = 2048;
 shadowFboMatlib = MaterialLibraryCreate();
 MaterialLibraryActivate(shadowFboMatlib);
 MaterialCreate("fboShadowColor", "");
@@ -61,8 +61,11 @@ MaterialSetTextureBorderColor("fboShadowDepth", c_white);
 MaterialSetTextureFilter("fboShadowDepth", miLinear, maLinear);
 MaterialSetTextureMode("fboShadowDepth", tmReplace);
 MaterialSetTextureCompareMode("fboShadowDepth", tcmCompareRtoTexture);
+MaterialSetTextureDepthCompareFunc("fboShadowDepth", cfLess);
 
 shadowCamera = ShadowCameraCreate(global.scene);
+ShadowCameraSetProjectionSize(shadowCamera, 20);
+ShadowCameraSetZClippingPlanes(shadowCamera, -100, 100)
 ObjectPitch(shadowCamera, -45);
 ObjectSetPosition(shadowCamera, 0, 2, 2);
 //ObjectShowAxes(shadowCamera, true);
@@ -76,12 +79,9 @@ FBOSetColorTextureName(shadowFbo, "fboShadowColor");
 FBOSetDepthTextureName(shadowFbo, "fboShadowDepth");
 FBOSetTargetVisibility(shadowFbo, 0);
 FBOSetClearOptions(shadowFbo, true, true, true, true);
-//FBOSetStencilPrecision(shadowFbo, sp8bits);
+FBOSetShadowMapMode(shadowFbo, true);
 
 shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
-
-//shadowMapSprite = HUDSpriteCreate("fboShadowDepth", 256, 256, global.front); 
-//ObjectSetPosition(shadowMapSprite, 128, 128, 0);
 
 MaterialLibraryActivate(matlib);
 
@@ -106,7 +106,7 @@ BumpShaderSetNormalTexture(bumpShader, "");
 BumpShaderSetMaxLights(bumpShader, 1);
 GLSLShaderForceDisableStencilTest(bumpShader, true);
 BumpShaderSetShadowMap(bumpShader, shadowMap);
-BumpShaderSetShadowBlurRadius(bumpShader, 1);
+BumpShaderSetShadowBlurRadius(bumpShader, 3);
 
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");

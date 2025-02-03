@@ -52,12 +52,6 @@ HUDTextSetText(text, string(fps));
 if (global.canRender) {
 	ShadowMapUpdate(shadowMap);
 	ViewerRender(viewer);
-	//ObjectHide(global.front);
-	//ViewerRenderObject(viewer, fbo);
-	//ObjectShow(global.front);
-	//ObjectHide(fbo);
-	//ViewerRenderObject(viewer, global.front);
-	//ObjectShow(fbo);
 }
 
 ViewerResetPerformanceMonitor(viewer);
