@@ -23,7 +23,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - New function `MaterialSetTextureFormatEx`
 - New constant for `MaterialSetTextureFormat`: `tfExtended = 12`
 - New constant for `MaterialSetTextureImageAlpha`: `tiaBottomRightPointColorTransparent = 9`
-- New function `MaterialSetTextureCompareMode`
+- New functions `MaterialSetTextureCompareMode`, `MaterialSetTextureDepthCompareFunc`
 - `PtrToReal` is deprecated, use `PointerToReal` instead
 - Polygon functions were removed
 - `TTFontSetEncoding`, `TTFontLoadCodePage` were removed
