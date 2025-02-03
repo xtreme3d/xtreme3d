@@ -44,15 +44,13 @@ begin
 end;
 
 procedure TGLFBORendererEx.OnBeforeRender(fbo: TObject; var rci: TGLRenderContextInfo);
-var
-  buffer: TGLSceneBuffer;
 begin
   with rci.GLStates do
   begin
     if FShadowMapMode then begin
       Enable(stPolygonOffsetFill);
       SetPolygonOffset(3.0, 0.0);
-      CullFaceMode := cmFront;
+      Disable(stCullFace);
     end;
   end;
 end;
@@ -64,9 +62,15 @@ begin
     if FShadowMapMode then begin
       SetPolygonOffset(0.0, 0.0);
       Disable(stPolygonOffsetFill);
-      CullFaceMode := cmBack;
+      Enable(stCullFace);
     end;
   end;
 end;
+
+//-------------------------------------------------
+initialization
+//-------------------------------------------------
+
+RegisterClasses([TGLFBORendererEx]);
 
 end.

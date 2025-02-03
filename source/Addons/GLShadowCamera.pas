@@ -51,4 +51,10 @@ begin
       SetProjectionMatrix(mat);
 end;
 
+//-------------------------------------------------
+initialization
+//-------------------------------------------------
+
+RegisterClasses([TGLShadowCamera]);
+
 end.

@@ -101,4 +101,10 @@ begin
   FShadowMatrix := MatrixMultiply(FShadowMatrix, FBiasMatrix);
 end;
 
+//-------------------------------------------------
+initialization
+//-------------------------------------------------
+
+RegisterClasses([TGLShadowMap]);
+
 end.
