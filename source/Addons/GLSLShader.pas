@@ -194,6 +194,7 @@ end;
 procedure TGLSLShaderParameter.Bind(mat: TGLLibMaterial; shader: TGLSLShader; var rci: TGLRenderContextInfo);
 var
   propValue: variant;
+  i, hasTexture: integer;
 begin
   if not FInitialized then
     Exit;
@@ -292,27 +293,17 @@ begin
     gl.UniformMatrix4fv(FUniformLocation, 1, false, @FUniformMatrix);
   end;
 
-  {
   if FUniformType = uniformHaveTexture then
   begin
-    if (FUniformInteger = 0) or (FUniformInteger = 1) then
-    begin
-      if FTexture <> Nil then
-        glUniform1iARB(FUniformLocation, 1)
-      else if mat.Material.GetTextureEx(FUniformInteger) <> nil then
-        glUniform1iARB(FUniformLocation, 1)
-      else
-        glUniform1iARB(FUniformLocation, 0);
-    end
-    else
-    begin
-      if mat.Material.GetTextureEx(FUniformInteger) <> nil then
-        glUniform1iARB(FUniformLocation, 1)
-      else
-        glUniform1iARB(FUniformLocation, 0);
+    hasTexture := 0;
+    for i := 0 to mat.Material.TextureEx.Count - 1 do begin
+      if mat.Material.TextureEx.Items[i].TextureIndex = FUniformInteger then begin
+       hasTexture := 1;
+       break;
+      end;
     end;
+    glUniform1iARB(FUniformLocation, hasTexture);
   end;
-  }
 
   if FUniformType = uniformFogEnabled then
   begin
@@ -325,6 +316,7 @@ begin
   end;
 
   {
+  // TODO
   if FUniformType = uniformMaterialProperty then
   begin
     //FUniformMatrix := rci.modelViewMatrix^;
@@ -360,15 +352,6 @@ procedure TGLSLShaderParameter.Unbind(shader: TGLSLShader);
 begin
   if not FInitialized then
     Exit;
-  //if FUniformType = uniformTexture2D then
-  //begin
-    //if FTexture <> Nil then
-   // begin
-   //   gl.ActiveTexture(GL_TEXTURE0_ARB + GLUint(FUniformTexture));
-   //   gl.BindTexture(GL_TEXTURE_2D, 0);   //FTexture.Image.NativeTextureTarget
-   //   gl.ActiveTexture(GL_TEXTURE0_ARB);
-   // end;
-  //end;
 end;
 
 constructor TGLSLShaderParameters.Create(AOwner: TGLSLShader);
