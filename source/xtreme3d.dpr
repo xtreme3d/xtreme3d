@@ -534,7 +534,7 @@ exports
     ViewerGetSize, ViewerGetPosition, ViewerIsOpenGLExtensionSupported,
     ViewerGetGLSLSupported, ViewerGetFBOSupported, ViewerGetVBOSupported,
     ViewerGetFramesPerSecond, ViewerResetPerformanceMonitor,
-    ViewerPixelRayToWorld, ViewerShadeModel,
+    ViewerPixelRayToWorld, ViewerShadeModel, ViewerSetAutoRender,
 
     // Dummycube
     DummycubeCreate, DummycubeAmalgamate, DummycubeSetCameraMode,
@@ -765,7 +765,7 @@ exports
     GLSLShaderSetParameterViewMatrix, GLSLShaderSetParameterInvViewMatrix,
     GLSLShaderSetParameterHasTextureEx,
     GLSLShaderSetParameterFBOColorTexture, GLSLShaderSetParameterFBODepthTexture,
-    GLSLShaderForceDisableStencilTest,
+    GLSLShaderForceDisableStencilTest, GLSLShaderSetOptions,
     PhongShaderCreate, PhongShaderUseTexture, PhongShaderSetMaxLights,
     BumpShaderCreate,
     BumpShaderSetDiffuseTexture, BumpShaderSetNormalTexture, BumpShaderSetHeightTexture,

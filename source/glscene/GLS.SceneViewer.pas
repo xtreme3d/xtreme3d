@@ -49,6 +49,7 @@ type
     FOnTouchMove: TTouchEvent;
     FOnTouchUp: TTouchEvent;
     FOnTouchDown: TTouchEvent;
+    FAutoRender: Boolean;
     procedure WMEraseBkgnd(var Message: TWMEraseBkgnd); message WM_ERASEBKGND;
     procedure WMPaint(var Message: TWMPaint); message WM_PAINT;
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
@@ -160,6 +161,7 @@ type
     property OnExit;
     property OnGesture;
     property Touch;
+    property AutoRender: Boolean read FAutoRender write FAutoRender;
   end;
 
 procedure SetupVSync(const AVSyncMode : TGLVSyncMode);
@@ -200,6 +202,7 @@ begin
   FBuffer.ViewerBeforeRender := DoBeforeRender;
   FBuffer.OnChange := DoBufferChange;
   FBuffer.OnStructuralChange := DoBufferStructuralChange;
+  FAutoRender := true;
 end;
 
 destructor TGLSceneViewer.Destroy;
@@ -405,7 +408,8 @@ begin
   BeginPaint(Handle, PS);
   try
     if IsRenderingContextAvailable and (Width > 0) and (Height > 0) then
-      FBuffer.Render;
+      if FAutoRender then
+        FBuffer.Render;
   finally
     EndPaint(Handle, PS);
     Message.Result := 0;

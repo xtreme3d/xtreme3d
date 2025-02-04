@@ -418,6 +418,16 @@ begin
   result := 1;
 end;
 
+function GLSLShaderSetOptions(shader, lightingEnabled, fogEnabled: real): real; cdecl;
+var
+  shadr: TGLSLShader;
+begin
+  shadr := TGLSLShader(RealToPtr(shader));
+  shadr.LightingEnabled := Boolean(Trunc(lightingEnabled));
+  shadr.FogEnabled := Boolean(Trunc(fogEnabled));
+  result := 1;
+end;
+
 
 function PhongShaderCreate: real; cdecl;
 var

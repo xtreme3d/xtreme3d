@@ -139,8 +139,8 @@ type
     published
       property Param: TGLSLShaderParameters read Parameters;
       property Prog: GLenum read shaderProg;
-      property FogEnabled: Boolean read FFogEnabled;
-      property LightingEnabled: Boolean read FLightingEnabled;
+      property FogEnabled: Boolean read FFogEnabled write FFogEnabled;
+      property LightingEnabled: Boolean read FLightingEnabled write FLightingEnabled;
       property ForceDisableStencilTest: Boolean read FForceDisableStencilTest write FForceDisableStencilTest;
   end;
 

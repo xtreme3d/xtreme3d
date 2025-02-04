@@ -63,6 +63,7 @@ function dll_init(dll) {
 	global._ViewerResetPerformanceMonitor = external_define(dll, "ViewerResetPerformanceMonitor", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerPixelRayToWorld = external_define(dll, "ViewerPixelRayToWorld", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerShadeModel = external_define(dll, "ViewerShadeModel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ViewerSetAutoRender = external_define(dll, "ViewerSetAutoRender", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// PickList
 	// New functions:
@@ -678,6 +679,7 @@ function dll_init(dll) {
 	global._GLSLShaderSetParameterInvViewMatrix = external_define(dll, "GLSLShaderSetParameterInvViewMatrix", dll_cdecl, ty_real, 1, ty_real);
 	global._GLSLShaderSetParameterHasTextureEx = external_define(dll, "GLSLShaderSetParameterHasTextureEx", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderForceDisableStencilTest = external_define(dll, "GLSLShaderForceDisableStencilTest", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._GLSLShaderSetOptions = external_define(dll, "GLSLShaderSetOptions", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	
 	// Terrain
 	global._BmpHDSCreate = external_define(dll, "BmpHDSCreate", dll_cdecl, ty_real, 1, ty_string);
@@ -4364,6 +4366,10 @@ function GLSLShaderForceDisableStencilTest(aShader, aMode) {
 	return external_call(global._GLSLShaderForceDisableStencilTest, aShader, aMode);
 }
 
+function GLSLShaderSetOptions(aShader, aEnableLighting, aEnableFog) {
+	return external_call(global._GLSLShaderSetOptions, aShader, aEnableLighting, aEnableFog);
+}
+
 function ShadowMapCreate(aFBO, aViewer, aShadowCamera) {
 	return external_call(global._ShadowMapCreate, aFBO, aViewer, aShadowCamera);
 }
@@ -5149,6 +5155,10 @@ function ViewerPixelRayToWorld(aViewer, aX, aY, aInd) {
 
 function ViewerShadeModel(aViewer, aInd) {
 	return external_call(global._ViewerShadeModel, aViewer, aInd);
+}
+
+function ViewerSetAutoRender(aViewer, aMode) {
+	return external_call(global._ViewerSetAutoRender, aViewer, aMode);
 }
 
 function WaterCreate(aParent) {

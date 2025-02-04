@@ -1,4 +1,4 @@
-window_set_caption("Xtreme3D");
+window_set_caption("Xtreme3D 4 Demo");
 
 dll_init("xtreme3d.dll");
 
@@ -12,11 +12,12 @@ windowHandle = window_handle();
 viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
 ViewerSetBackgroundColor(viewer, c_gray);
 ViewerSetLighting(viewer, true);
-ViewerEnableFog(viewer, false);
+ViewerEnableFog(viewer, true);
 ViewerSetFogColor(viewer, c_gray);
-ViewerSetFogDistance(viewer, 100, 200);
+ViewerSetFogDistance(viewer, 0, 50);
 ViewerSetAntiAliasing(viewer, csa8xHQ); //CSAA
 ViewerEnableVSync(viewer, vsmNoSync); 
+ViewerSetAutoRender(viewer, false);
 
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
@@ -63,7 +64,6 @@ ShadowCameraSetProjectionSize(shadowCamera, 20);
 ShadowCameraSetZClippingPlanes(shadowCamera, -100, 100)
 ObjectPitch(shadowCamera, -45);
 ObjectSetPosition(shadowCamera, 0, 2, 2);
-//ObjectShowAxes(shadowCamera, true);
 
 shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
 FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);
@@ -90,9 +90,10 @@ bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
 BumpShaderSetNormalTexture(bumpShader, "");
 BumpShaderSetMaxLights(bumpShader, 1);
-GLSLShaderForceDisableStencilTest(bumpShader, true);
 BumpShaderSetShadowMap(bumpShader, shadowMap);
 BumpShaderSetShadowBlurRadius(bumpShader, 3);
+GLSLShaderForceDisableStencilTest(bumpShader, true);
+GLSLShaderSetOptions(bumpShader, true, true);
 
 MaterialCreate("mStone", "");
 TextureExLoad(MaterialAddTextureEx("mStone", 0), "textures/stone.png");
@@ -134,9 +135,6 @@ MaterialLibraryActivate(matlib2);
 hk = ActorCreate("data/hellknight/hellknight.md5mesh", matlib2, shadowCasters);
 ActorAddObject(hk, "data/hellknight/idle.md5anim");
 ActorAddObject(hk, "data/hellknight/attack.md5anim");
-//ActorSetAnimationMode(hk, aamLoop);
-//ActorSwitchToAnimation(hk, 0, true);
-//ActorMakeSkeletalTranslationStatic(hk, 1);
 ObjectSetScale(hk, 0.02, 0.02, 0.02);
 ObjectSetPosition(hk, 0, 0, 0);
 MaterialCreate("mHellknight", "");
@@ -170,20 +168,8 @@ MaterialSetAmbientColor("mRed", c_red, 1);
 MaterialSetDiffuseColor("mRed", c_red, 1);
 ObjectSetMaterial(sphereMarker, "mRed");
 
-/*
-rect = HUDShapeRectangleCreate(100, 100, global.front);
-ObjectSetPosition(rect, 500, 50, 0);
-MaterialCreate("mWilber", "data/wilber.png");
-ObjectSetMaterial(rect, "mWilber");
-*/
-
-/*
-circle = HUDShapeCircleCreate(50, 32, 0, 360, global.front);
-ObjectSetPosition(circle, 500, 50, 0);
-*/
-
 ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
-text = HUDTextCreate(ftfont, "Hello World!\rПривет, мир!", global.front);
+text = HUDTextCreate(ftfont, "FPS: 0", global.front);
 HUDTextSetColor(text, c_white, 1.0);
 ObjectSetPosition(text, 20, 20, 0);
 
@@ -194,55 +180,6 @@ MaterialSetBlendingMode("mSprites", bmTransparency);
 crosshair = HUDSpriteCreate("mSprites", 64, 64, global.front);
 SpriteSetBounds(crosshair, 0, 0, 64, 64);
 ObjectSetPosition(crosshair, window_get_width() / 2, window_get_height() / 2, 0);
-
-/*
-fboWidth = window_get_width();
-fboHeight = window_get_height();
-fboAspect = 1/1; //16/9 if using square texture
-fboMatlib = MaterialLibraryCreate();
-MaterialLibraryActivate(fboMatlib);
-MaterialCreate("fboColor", "");
-MaterialGenTexture("fboColor", fboWidth, fboHeight);
-MaterialSetOptions("fboColor", false, false);
-MaterialSetTextureWrap("fboColor", false); 
-MaterialSetTextureFilter("fboColor", miLinear, maLinear);
-MaterialCreate("fboDepth", "");
-MaterialGenTexture("fboDepth", fboWidth, fboHeight);
-MaterialSetOptions("fboDepth", false, false);
-MaterialSetTextureFormat("fboDepth", tfExtended);
-MaterialSetTextureFormatEx("fboDepth", 73); //tfDEPTH24_STENCIL8
-MaterialSetTextureWrap("fboDepth", false);
-MaterialSetTextureFilter("fboDepth", miNearest, maNearest);
-MaterialSetTextureMode("fboDepth", tmReplace);
-
-fbo = FBOCreate(fboWidth, fboHeight, global.scene);
-FBOSetMaterialLibrary(fbo, fboMatlib);
-FBOSetCamera(fbo, camera);
-FBOSetAspect(fbo, fboAspect);
-FBOSetRootObject(fbo, global.scene);
-FBOSetColorTextureName(fbo, "fboColor");
-FBOSetDepthTextureName(fbo, "fboDepth");
-FBOSetTargetVisibility(fbo, 0);
-FBOSetClearOptions(fbo, true, true, true, true);
-FBOSetStencilPrecision(fbo, 3); //sp8bits
-
-fxaa_vp1 = TextRead("shaders/fxaa-vp.glsl");
-fxaa_fp1 = TextRead("shaders/fxaa-fp.glsl");
-fxaaShader = GLSLShaderCreate(fxaa_vp1, fxaa_fp1);
-fxaaParamTexture = GLSLShaderCreateParameter(fxaaShader, "colorBuffer");
-GLSLShaderSetParameterFBOColorTexture(fxaaParamTexture, fbo, 0);
-fxaaParamViewSize = GLSLShaderCreateParameter(fxaaShader, "viewSize");
-GLSLShaderSetParameter2f(fxaaParamViewSize, window_get_width(), window_get_height());
-MaterialCreate("mFXAA", "");
-MaterialSetOptions("mFXAA", true, true);
-MaterialSetTextureWrap("mFXAA", false);
-MaterialSetShader("mFXAA", fxaaShader);
-
-screenSprite = HUDSpriteCreate("mFXAA", window_get_width(), window_get_height(), global.front); 
-ObjectSetPosition(screenSprite, window_get_width() / 2, window_get_height() / 2, 0);
-
-MaterialLibraryActivate(matlib);
-*/
 
 mouselookActive = true;
 mb_left_released = true;
@@ -256,5 +193,3 @@ game_set_speed(60, gamespeed_fps);
 
 visible = false;
 alarm[0] = room_speed;
-global.canRender = false;
-

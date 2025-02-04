@@ -1,4 +1,4 @@
-var dt = 1.0 / 60; //delta_time / 1000000;
+var dt = 1.0 / 60;
 
 if (mouselookActive and window_has_focus()) {
 	var deltax = (mx - MouseGetPositionX())/6;
@@ -35,23 +35,11 @@ if ObjectSceneRaycast(camera, raycastObjects)
     ObjectSetPosition(sphereMarker, rx, ry, rz);
 }
 
-/*
-VerletConstraintSetPosition(playerCollider,
-    ObjectGetAbsolutePosition(camera, 0),
-	ObjectGetAbsolutePosition(camera, 1) - 1,
-	ObjectGetAbsolutePosition(camera, 2));
-*/
-
 KraftStep(kraft, dt);
 
 EngineUpdate(dt);
-//VerletWorldUpdate(verlet, current_time / 1000);
 
-HUDTextSetText(text, string(fps));
+HUDTextSetText(text, "FPS: " + string(fps));
 
-if (global.canRender) {
-	ShadowMapUpdate(shadowMap);
-	ViewerRender(viewer);
-}
-
-ViewerResetPerformanceMonitor(viewer);
+ShadowMapUpdate(shadowMap);
+ViewerRender(viewer);

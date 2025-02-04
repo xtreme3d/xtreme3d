@@ -269,26 +269,6 @@ begin
        Result := 0;
 end;
 
-{
-// TODO
-function ViewerSetOverrideMaterial(viewer, mlb: Pointer; mtrl: PAnsiChar): integer; cdecl;
-var
-    v: TGLSceneViewer;
-    mlib: TGLMaterialLibrary;
-    mat: TGLLibMaterial;
-begin
-    v := TGLSceneViewer(viewer);
-    v.Buffer.OverrideMaterial := nil;
-    if Length(mtrl) > 0 then
-    begin
-        mlib := TGLMaterialLibrary(mlb);
-        mat := mlib.Materials.GetLibMaterialByName(String(mtrl));
-        v.Buffer.OverrideMaterial := mat;
-    end;
-    result := 1;
-end;
-}
-
 function ViewerGetSize(viewer, index: real): real; cdecl;
 var
     v: TGLSceneViewer;
@@ -347,3 +327,13 @@ begin
     if Trunc(ind) = 1 then viewer.Buffer.ShadeModel := smSmooth;
     result := 1.0;
 end;
+
+function ViewerSetAutoRender(v, mode: real): real; cdecl;
+var
+    viewer: TGLSceneViewer;
+begin
+    viewer := TGLSceneViewer(RealToPtr(v));
+    viewer.AutoRender := Boolean(Trunc(mode));
+    result := 1.0;
+end;
+
