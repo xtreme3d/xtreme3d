@@ -119,6 +119,7 @@ uses
   GLS.WaterPlane,
   GLS.WindowsFont,
   GLS.FBORenderer,
+  GLS.Logger,
   GLSL.LineShaders,
   GLSL.MultiMaterialShader,
   GLSL.ShapeShaders,
@@ -171,6 +172,8 @@ var
     kraftRaycastNormal: TKraftVector3;
 
     previousTicks: Longint;
+
+    logger: TLogSession;
 
 {$R *.res}
 
@@ -517,6 +520,7 @@ exports
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
     EngineShowLoadingErrors, EngineSetMaxLights, EngineGetTimeStep,
     EngineGetLastRaycastPosition, EngineGetLastRaycastNormal,
+    EngineSetLog,
     PointerToReal,
 
     //Pak

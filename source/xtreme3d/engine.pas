@@ -105,6 +105,24 @@ end;
 //TODO:
 //EngineResetRaycastData()
 
+function EngineSetLog(fname: PAnsiChar; loglevel: real): real; cdecl;
+var
+  levelCode: integer;
+  levels: TLogLevels;
+begin
+  levelCode := Trunc(loglevel);
+  if levelCode = 0 then
+    levels := llMin
+  else if levelCode = 1 then
+    levels := llMedium
+  else
+    levels := llMax;
+  logger := TLogSession.Init(StrConv(fname), lfDateTime, levels, False);
+  logger.Enabled := true;
+  UseCustomGLSLogger(logger);
+  result := 1;
+end;
+
 function PointerToReal(p: pchar): real; cdecl;
 begin
     result := real(NativeInt(p));

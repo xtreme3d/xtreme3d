@@ -13,6 +13,7 @@ function dll_init(dll) {
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	global._EngineGetLastRaycastPosition = external_define(dll, "EngineGetLastRaycastPosition", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetLastRaycastNormal = external_define(dll, "EngineGetLastRaycastNormal", dll_cdecl, ty_real, 1, ty_real);
+	global._EngineSetLog = external_define(dll, "EngineSetLog", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	
 	// Pak
 	global._SetPakArchive = external_define(dll, "SetPakArchive", dll_cdecl, ty_real, 1, ty_string);
@@ -1688,6 +1689,10 @@ function EngineGetLastRaycastPosition(aInd) {
 
 function EngineGetLastRaycastNormal(aInd) {
 	return external_call(global._EngineGetLastRaycastNormal, aInd);
+}
+
+function EngineSetLog(aFilename, aLogLevel) {
+	return external_call(global._EngineSetLog, aFilename, aLogLevel);
 }
 
 function FBOCreate(aWidth, aHeight, aParent) {
@@ -5580,3 +5585,7 @@ function PtrToReal(p) {
 
 #macro tvDefault 0
 #macro tvFBOOnly 1
+
+#macro llMin 0
+#macro llMedium 1
+#macro llMax 3
