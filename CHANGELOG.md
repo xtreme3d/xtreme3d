@@ -38,7 +38,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`, `FBOSetShadowMapMode`
 - ShadowMap was redesigned. `ShadowMapSetCaster`, `ShadowMapSetProjectionSize`, `ShadowMapSetZScale`, `ShadowMapSetZClippingPlanes`, `ShadowMapRender` were removed. New functions `ShadowMapUpdate`, `ShadowMapSetViewer`. `ShadowMapSetCamera` now uses special ShadowCamera object
 - New functions `ShadowCameraCreate`, `ShadowCameraSetProjectionSize`, `ShadowCameraSetZClippingPlanes`
-- New function `GLSLShaderForceDisableStencilTest`.
+- New functions `GLSLShaderForceDisableStencilTest`, `GLSLShaderSetOptions`.
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------

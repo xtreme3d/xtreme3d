@@ -63,7 +63,7 @@ shadowCamera = ShadowCameraCreate(global.scene);
 ShadowCameraSetProjectionSize(shadowCamera, 20);
 ShadowCameraSetZClippingPlanes(shadowCamera, -100, 100)
 ObjectPitch(shadowCamera, -45);
-ObjectSetPosition(shadowCamera, 0, 2, 2);
+ObjectSetPosition(shadowCamera, 0, 2, 0);
 
 shadowFbo = FBOCreate(shadowMapSize, shadowMapSize, global.preprocess);
 FBOSetMaterialLibrary(shadowFbo, shadowFboMatlib);

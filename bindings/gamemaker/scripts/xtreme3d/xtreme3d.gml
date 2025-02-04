@@ -4,9 +4,7 @@ function dll_init(dll) {
 	global._EngineDestroy = external_define(dll, "EngineDestroy", dll_cdecl, ty_real, 0);
 	global._EngineSetObjectsSorting = external_define(dll, "EngineSetObjectsSorting", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineSetCulling = external_define(dll, "EngineSetCulling", dll_cdecl, ty_real, 1, ty_real);
-	// Update is deprecated, use EngineUpdate instead
 	global._EngineUpdate = external_define(dll, "EngineUpdate", dll_cdecl, ty_real, 1, ty_real);
-	// TrisRendered was removed
 	global._EngineSaveScene = external_define(dll, "EngineSaveScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineLoadScene = external_define(dll, "EngineLoadScene", dll_cdecl, ty_real, 1, ty_string);
 	global._EngineRootObject = external_define(dll, "EngineRootObject", dll_cdecl, ty_real, 0);
@@ -30,8 +28,6 @@ function dll_init(dll) {
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
-	// ViewerRenderToFilePNG was removed
-	// ViewerRenderEx was removed
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -46,12 +42,10 @@ function dll_init(dll) {
 	global._ViewerWorldToScreen = external_define(dll, "ViewerWorldToScreen", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerCopyToTexture = external_define(dll, "ViewerCopyToTexture", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._ViewerGetPickedObject = external_define(dll, "ViewerGetPickedObject", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	// API changed: ViewerGetPickedObjectsList
 	global._ViewerGetPickedObjectsList = external_define(dll, "ViewerGetPickedObjectsList", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerScreenToVector = external_define(dll, "ViewerScreenToVector", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerVectorToScreen = external_define(dll, "ViewerVectorToScreen", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerPixelToDistance = external_define(dll, "ViewerPixelToDistance", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	// Additional constants: ViewerSetAntiAliasing
 	global._ViewerSetAntiAliasing = external_define(dll, "ViewerSetAntiAliasing", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetSize = external_define(dll, "ViewerGetSize", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPosition = external_define(dll, "ViewerGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -66,7 +60,6 @@ function dll_init(dll) {
 	global._ViewerSetAutoRender = external_define(dll, "ViewerSetAutoRender", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// PickList
-	// New functions:
 	global._PickListCreate = external_define(dll, "PickListCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._PickListClear = external_define(dll, "PickListClear", dll_cdecl, ty_real, 1, ty_real);
 	global._PickListGetCount = external_define(dll, "PickListGetCount", dll_cdecl, ty_real, 1, ty_real);
@@ -141,7 +134,6 @@ function dll_init(dll) {
 	global._CameraAbsoluteVectorToTarget = external_define(dll, "CameraAbsoluteVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CameraAbsoluteRightVectorToTarget = external_define(dll, "CameraAbsoluteRightVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CameraAbsoluteUpVectorToTarget = external_define(dll, "CameraAbsoluteUpVectorToTarget", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// CameraZoomAll: now requires viewer
 	global._CameraZoomAll = external_define(dll, "CameraZoomAll", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._CameraScreenDeltaToVector = external_define(dll, "CameraScreenDeltaToVector", dll_cdecl, ty_real, 8, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._CameraScreenDeltaToVectorXY = external_define(dll, "CameraScreenDeltaToVectorXY", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -223,8 +215,6 @@ function dll_init(dll) {
 	global._SpaceTextSetText = external_define(dll, "SpaceTextSetText", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._TTFontCreate = external_define(dll, "TTFontCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TTFontSetLineGap = external_define(dll, "TTFontSetLineGap", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	//TTFontSetEncoding was removed
-	//TTFontLoadCodePage was removed
 	
 	// Sprite
 	global._HUDSpriteCreate = external_define(dll, "HUDSpriteCreate", dll_cdecl, ty_real, 4, ty_string, ty_real, ty_real, ty_real);
@@ -238,7 +228,6 @@ function dll_init(dll) {
 	global._SpriteSetRotation = external_define(dll, "SpriteSetRotation", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpriteRotate = external_define(dll, "SpriteRotate", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._SpriteMirror = external_define(dll, "SpriteMirror", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
-	//SpriteNoZWrite was removed, use MaterialSetDepthWrite instead
 	global._SpriteCreateEx = external_define(dll, "SpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._HUDSpriteCreateEx = external_define(dll, "HUDSpriteCreateEx", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._SpriteSetBounds = external_define(dll, "SpriteSetBounds", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
@@ -609,7 +598,6 @@ function dll_init(dll) {
 	global._TextureExSetTextureScale = external_define(dll, "TextureExSetTextureScale", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._TextureExSetTextureOffset = external_define(dll, "TextureExSetTextureOffset", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
 	global._TextureExEnable = external_define(dll, "TextureExEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
-	// MaterialSetTextureExFromLibrary was removed
 	global._MaterialNoiseCreate = external_define(dll, "MaterialNoiseCreate", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialNoiseSetDimensions = external_define(dll, "MaterialNoiseSetDimensions", dll_cdecl, ty_real, 3, ty_string, ty_real, ty_real);
 	global._MaterialNoiseAnimate = external_define(dll, "MaterialNoiseAnimate", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -617,10 +605,7 @@ function dll_init(dll) {
 	global._MaterialNoiseSetSharpness = external_define(dll, "MaterialNoiseSetSharpness", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialNoiseSetSeamless = external_define(dll, "MaterialNoiseSetSeamless", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialNoiseRandomSeed = external_define(dll, "MaterialNoiseRandomSeed", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	// MaterialCullFrontFaces was removed
-	// MaterialSetZWrite is now MaterialSetDepthWrite
 	global._MaterialSetDepthWrite = external_define(dll, "MaterialSetDepthWrite", dll_cdecl, ty_real, 2, ty_string, ty_real);
-	// New function MaterialSetDepthTest
 	global._MaterialSetDepthTest = external_define(dll, "MaterialSetDepthTest", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialGetNameFromLibrary = external_define(dll, "MaterialGetNameFromLibrary", dll_cdecl, ty_string, 2, ty_real, ty_real);
 	global._MaterialSetTextureCompareMode = external_define(dll, "MaterialSetTextureCompareMode", dll_cdecl, ty_real, 2, ty_string, ty_real);
@@ -702,10 +687,6 @@ function dll_init(dll) {
 	global._TerrainGetHeightAtObjectPosition = external_define(dll, "TerrainGetHeightAtObjectPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._TerrainGetLastTriCount = external_define(dll, "TerrainGetLastTriCount", dll_cdecl, ty_real, 1, ty_real);
 	global._TerrainGetHDSPosition = external_define(dll, "TerrainGetHDSPosition", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
-	
-	// Text
-	// TextRead was removed
-	// TextConvertANSIToUTF8 was removed
 	
 	// ThorFX
 	global._ThorFXManagerCreate = external_define(dll, "ThorFXManagerCreate", dll_cdecl, ty_real, 0);
@@ -902,7 +883,6 @@ function dll_init(dll) {
 	global._WaterSetLinearWaveFrequency = external_define(dll, "WaterSetLinearWaveFrequency", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
     // Misc
-	// PtrToReal is now PointerToReal
 	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);
 	
 	// Window
@@ -968,14 +948,10 @@ function dll_init(dll) {
 	global._OdeDynamicAddRelForceAtRelPos = external_define(dll, "OdeDynamicAddRelForceAtRelPos", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicAddTorque = external_define(dll, "OdeDynamicAddTorque", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._OdeDynamicAddRelTorque = external_define(dll, "OdeDynamicAddRelTorque", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
-	// Not yet implemented:
-	//global._OdeDynamicGetContactCount = external_define(dll, "OdeDynamicGetContactCount", dll_cdecl, ty_real, 1, ty_real);
-	//global._OdeStaticGetContactCount = external_define(dll, "OdeStaticGetContactCount", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeAddBox = external_define(dll, "OdeAddBox", dll_cdecl, ty_real, 7, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddSphere = external_define(dll, "OdeAddSphere", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddPlane = external_define(dll, "OdeAddPlane", dll_cdecl, ty_real, 1, ty_real);
 	global._OdeAddCylinder = external_define(dll, "OdeAddCylinder", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
-	// OdeAddCone was removed
 	global._OdeAddCapsule = external_define(dll, "OdeAddCapsule", dll_cdecl, ty_real, 6, ty_real, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._OdeAddTriMesh = external_define(dll, "OdeAddTriMesh", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._OdeElementSetDensity = external_define(dll, "OdeElementSetDensity", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -4390,36 +4366,6 @@ function ShadowCameraSetZClippingPlanes(aShadowCamera, aZNear, aZFar) {
 	return external_call(global._ShadowCameraSetZClippingPlanes, aShadowCamera, aZNear, aZFar);
 }
 
-/*
-function ShadowMapSetCamera(aShadowmap, aCam) {
-	return external_call(global._ShadowMapSetCamera, aShadowmap, aCam);
-}
-
-function ShadowMapSetCaster(aShadowmap, aCaster) {
-	return external_call(global._ShadowMapSetCaster, aShadowmap, aCaster);
-}
-
-function ShadowMapSetProjectionSize(aShadowmap, aSize) {
-	return external_call(global._ShadowMapSetProjectionSize, aShadowmap, aSize);
-}
-
-function ShadowMapSetZScale(aShadowmap, aScale) {
-	return external_call(global._ShadowMapSetZScale, aShadowmap, aScale);
-}
-
-function ShadowMapSetZClippingPlanes(aShadowmap, aZnear, aZfar) {
-	return external_call(global._ShadowMapSetZClippingPlanes, aShadowmap, aZnear, aZfar);
-}
-
-function ShadowMapRender(aShadowmap) {
-	return external_call(global._ShadowMapRender, aShadowmap);
-}
-
-function ShadowMapSetFBO(aShadowmap, aFbo) {
-	return external_call(global._ShadowMapSetFBO, aShadowmap, aFbo);
-}
-*/
-
 function ShadowplaneCreate(aWidth, aHeight, aXtiles, aYtiles, aTarget, aLight, aColor, aAlpha, aParent) {
 	return external_call(global._ShadowplaneCreate, aWidth, aHeight, aXtiles, aYtiles, aTarget, aLight, aColor, aAlpha, aParent);
 }
@@ -5116,18 +5062,6 @@ function ViewerGetFBOSupported(aViewer) {
 function ViewerGetVBOSupported(aViewer) {
 	return external_call(global._ViewerGetVBOSupported, aViewer);
 }
-
-/*
-function ViewerSetAutoRender(aViewer, aMode) {
-	return external_call(global._ViewerSetAutoRender, aViewer, aMode);
-}
-*/
-
-/*
-function ViewerSetOverrideMaterial(aViewer, aMlb, aMtrl) {
-	return external_call(global._ViewerSetOverrideMaterial, aViewer, aMlb, aMtrl);
-}
-*/
 
 function ViewerGetSize(aViewer, aIndex) {
 	return external_call(global._ViewerGetSize, aViewer, aIndex);
