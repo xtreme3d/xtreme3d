@@ -5,6 +5,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - Uses GLScene 2.1 and Delphi 10.4
 - Xtreme3D is now 64 bit and compatible with recent versions of GameMaker Studio 2
 - UTF-8 support for all strings
+- New function `EngineSetLog`
 - `Update` is deprecated, use `EngineUpdate` instead
 - `TrisRendered` was removed
 - `ViewerRenderEx` was removed
