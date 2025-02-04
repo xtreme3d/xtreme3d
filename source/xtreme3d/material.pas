@@ -17,7 +17,7 @@ var
   mlib:TGLMaterialLibrary;
 begin
   mlib:=TGLMaterialLibrary(RealToPtr(mlb));
-  mlib.TexturePaths:=String(AnsiString(path));
+  mlib.TexturePaths := StrConv(path);
   result:=1;
 end;
 

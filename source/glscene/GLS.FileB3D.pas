@@ -10,6 +10,7 @@ interface
 uses
   System.Classes, 
   System.SysUtils,
+  Math,
    
   GLS.VectorFileObjects, 
   GLS.ApplicationFileIO, 
@@ -136,15 +137,13 @@ var
         begin
           LightName := ALightmap.GetTextureName;
           // add base material
-          LibMat := LightLib.Materials.GetLibMaterialByName(LightName
-            { + IntToStr(MaterialNum) } );
+          LibMat := LightLib.Materials.GetLibMaterialByName(LightName);
           if not Assigned(LibMat) then
           begin
             if not FileExists(LightName) then
               LightName := ExtractFileName(LightName);
 
-            LibMat := LightLib.AddTextureMaterial(LightName
-              { + IntToStr(MaterialNum) } , LightName, False);
+            LibMat := LightLib.AddTextureMaterial(LightName, LightName, False);
             LibMat.Material.Texture.TextureMode := TmReplace;
             if Assigned(ALightMap) then
             begin
@@ -257,11 +256,9 @@ begin
                     Mo.TexCoords.Add(Vertex^.Tex_coords[0],
                       -Vertex^.Tex_coords[1], Vertex^.Tex_coords[2]);
                 end;
-                Mo.LightMapTexCoords.Add
-                  (Vertex^.Tex_coords
-                  [Node^.Meshes^.Vertices.Tex_coord_set_size],
-                  -Vertex^.Tex_coords
-                  [Node^.Meshes^.Vertices.Tex_coord_set_size + 1]);
+                Mo.LightMapTexCoords.Add(
+                  Vertex^.Tex_coords[Node^.Meshes^.Vertices.Tex_coord_set_size],
+                  -Vertex^.Tex_coords[Node^.Meshes^.Vertices.Tex_coord_set_size + 1]);
               end;
           end;
           Vertex := Vertex^.Next;
@@ -310,6 +307,10 @@ begin
         V1 := AffineVectorMake(Node^.Scale.Y, Node^.Scale.X, Node^.Scale.Z);
         Matrix := CreateScaleAndTranslationMatrix(VectorMake(V1), VectorMake(V));
         Mo.Vertices.TransformAsPoints(Matrix);
+
+        RotMat := CreateRotationMatrixZ(DegToRad(90));
+        mo.Vertices.TransformAsVectors(RotMat);
+        mo.Normals.TransformAsVectors(RotMat);
       end;
       Node := Node^.Next;
     end;

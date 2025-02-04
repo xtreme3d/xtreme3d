@@ -1,5 +1,6 @@
-function FreeformCreate(fname: PAnsiChar; matl1,matl2,parent: real): real; cdecl;
+function FreeformCreate(fname: PAnsiChar; matl1, matl2,parent: real): real; cdecl;
 var
+  filename: String;
   GLFreeForm1: TGLFreeForm;
   ml: TGLMaterialLibrary;
   ml2: TGLMaterialLibrary;
@@ -16,18 +17,30 @@ begin
   GLFreeForm1.AutoScaling.X := 1.0;
   GLFreeForm1.AutoScaling.Y := 1.0;
   GLFreeForm1.AutoScaling.Z := 1.0;
-  
+
+  filename := StrConv(fname);
+
+  if not FileExists(filename) then begin
+    ShowMessage('FreeformCreate:' + #13#10 + 'File does not exist');
+    GLFreeForm1.Destroy();
+    result := 0;
+    Exit;
+  end;
   try
-    GLFreeForm1.LoadFromFile(StrConv(fname));
+    GLFreeForm1.LoadFromFile(filename);
   except
     On E: Exception do
     begin
-      if showLoadingErrors then
+      if showLoadingErrors then begin
         ShowMessage('FreeformCreate:' + #13#10 + E.Message);
+        GLFreeForm1.Destroy();
+        result := 0;
+        Exit;
+      end;
     end;
   end;
   
-  result:=ObjToReal(GLFreeForm1);
+  result := ObjToReal(GLFreeForm1);
 end;
 
 function FreeformGenTangents(ff: real): real; cdecl;

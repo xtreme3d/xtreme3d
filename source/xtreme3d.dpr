@@ -12,6 +12,7 @@ uses
   VCL.Graphics,
   VCL.Dialogs,
   VCL.Imaging.PNGImage,
+  Vcl.Imaging.Jpeg,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
   GLS.Blur,

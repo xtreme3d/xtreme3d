@@ -210,6 +210,8 @@ begin
 
      SDL_FreeSurface(pglyphSurface);
 
+     gl.BindTexture(GL_TEXTURE_2D, 0);
+
      result := 1;
    end
    else begin
@@ -232,6 +234,7 @@ begin
    gl.TexCoord2f(x, y); gl.Vertex2f(posx + chara.width, posy);
    gl.TexCoord2f(x, 0); gl.Vertex2f(posx + chara.width, posy + chara.height);
    gl.End_();
+   gl.BindTexture(GL_TEXTURE_2D, 0);
 end;
 
 procedure TGLFreetypeFont.RenderString(var ARci: TGLRenderContextInfo;
