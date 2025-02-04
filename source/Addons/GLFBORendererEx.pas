@@ -45,25 +45,27 @@ end;
 
 procedure TGLFBORendererEx.OnBeforeRender(fbo: TObject; var rci: TGLRenderContextInfo);
 begin
-  with rci.GLStates do
-  begin
-    if FShadowMapMode then begin
+  if FShadowMapMode then begin
+    with rci.GLStates do
+    begin
       Enable(stPolygonOffsetFill);
       SetPolygonOffset(3.0, 0.0);
       Disable(stCullFace);
     end;
+    rci.ignoreMaterials := true;
   end;
 end;
 
 procedure TGLFBORendererEx.OnAfterRender(fbo: TObject; var rci: TGLRenderContextInfo);
 begin
-  with rci.GLStates do
-  begin
-    if FShadowMapMode then begin
+  if FShadowMapMode then begin
+    with rci.GLStates do
+    begin
       SetPolygonOffset(0.0, 0.0);
       Disable(stPolygonOffsetFill);
       Enable(stCullFace);
     end;
+    rci.ignoreMaterials := false;
   end;
 end;
 
