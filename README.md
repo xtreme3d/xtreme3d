@@ -65,6 +65,6 @@ Xtreme3D is fully documented in Russian, the help file is [here](https://github.
 
 License
 -------
-Xtreme3D 3.x and corresponding GLScene fork are both distributed under Mozilla Public License 1.1. This license allows you to create commercial closed-source applications with the engine.
+Xtreme3D and corresponding GLScene fork are both distributed under Mozilla Public License 1.1. This license allows you to create commercial closed-source applications with the engine.
 
 ODE is distributed under BSD-style license.

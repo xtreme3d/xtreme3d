@@ -13,5 +13,5 @@ but are not part of GLScene, may use different licensing scheme and have differe
 such files have an explicit notice attached to them or placed in their directory.
 
 ------------------------------------------------------------------------------
-GLScene, Copyright (c) 2000-2024 GLS Team, based on Eric Grange and Mike Lischke's GLScene
-Xtreme3D, Copyright (c) 2016-2024 Timur Gafarov
+GLScene, Copyright (c) 2000-2025 GLS Team, based on Eric Grange and Mike Lischke's GLScene
+Xtreme3D, Copyright (c) 2016-2025 Timur Gafarov
