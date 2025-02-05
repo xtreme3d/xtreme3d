@@ -404,15 +404,15 @@ begin
       for vi := 0 to csm.meshes[mi].facegroups[fgi].numVertices-1 do
       begin
         meshObj.Vertices.Add(
-          csm.meshes[mi].facegroups[fgi].vertices[vi].v.X,
-          csm.meshes[mi].facegroups[fgi].vertices[vi].v.Y,
-          csm.meshes[mi].facegroups[fgi].vertices[vi].v.Z);
+          csm.meshes[mi].facegroups[fgi].vertices[vi].v.X * 0.01,
+          csm.meshes[mi].facegroups[fgi].vertices[vi].v.Y * 0.01,
+          -csm.meshes[mi].facegroups[fgi].vertices[vi].v.Z * 0.01);
         meshObj.Normals.Add(
           csm.meshes[mi].facegroups[fgi].vertices[vi].n.X,
           csm.meshes[mi].facegroups[fgi].vertices[vi].n.Y,
-          csm.meshes[mi].facegroups[fgi].vertices[vi].n.Z);
+          -csm.meshes[mi].facegroups[fgi].vertices[vi].n.Z);
         meshObj.TexCoords.Add(
-          csm.meshes[mi].facegroups[fgi].vertices[vi].texCoord1.X,
+          1.0 - csm.meshes[mi].facegroups[fgi].vertices[vi].texCoord1.X,
           csm.meshes[mi].facegroups[fgi].vertices[vi].texCoord1.Y);
         meshObj.LightMapTexCoords.Add(
           csm.meshes[mi].facegroups[fgi].vertices[vi].texCoord2.X,
@@ -423,9 +423,9 @@ begin
       for ti := 0 to csm.meshes[mi].facegroups[fgi].numTriangles-1 do
       begin
         faceGroup.VertexIndices.Add(
-          csm.meshes[mi].facegroups[fgi].triangles[ti].i3 + startIdx,
+          csm.meshes[mi].facegroups[fgi].triangles[ti].i1 + startIdx,
           csm.meshes[mi].facegroups[fgi].triangles[ti].i2 + startIdx,
-          csm.meshes[mi].facegroups[fgi].triangles[ti].i1 + startIdx);
+          csm.meshes[mi].facegroups[fgi].triangles[ti].i3 + startIdx);
       end;
 
       matName := csm.meshes[mi].facegroups[fgi].textureFilename;

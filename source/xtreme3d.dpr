@@ -4,6 +4,7 @@ uses
   System.SysUtils,
   System.Classes,
   System.Math,
+  TypInfo,
   Messages,
   Windows,
   Winapi.OpenGL,
