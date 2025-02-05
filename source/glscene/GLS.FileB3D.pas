@@ -63,6 +63,9 @@ var
   RotQuat: TQuaternion;
   RotMat: TGLMatrix;
 
+  mat: String;
+  materialTmp: TGLLibMaterial;
+
   function GetOrAllocateMaterial(MaterialNum: Integer; AMat: TB3DMaterial;
     ATex: TB3DTexture; ALightmap: TB3DTexture): string;
   var
@@ -173,6 +176,7 @@ begin
   try
     // first, load the b3d model sturctures from stream
     B3d.LoadFromStream(AStream);
+
     // then add all the materials and lightmaps from b3d structures
     for I := 0 to B3d.Materials.Count - 1 do
     begin
@@ -193,14 +197,17 @@ begin
               TB3DTexture(B3d.Textures.Objects
               [B3DMat.MaterialData.Texture_id[1]])
           else
-            { //check if there are three texture layer }
+            //check if there are three texture layer
             if B3DMat.MaterialData.N_texs > 2 then
               if B3DMat.MaterialData.Texture_id[2] >= 0 then
                 B3DLightTex :=
                   TB3DTexture(B3d.Textures.Objects
                   [B3DMat.MaterialData.Texture_id[2]]);
       end;
-      GetOrAllocateMaterial(I, B3DMat, B3DTex, B3DLightTex);
+
+      // Fixme:
+      mat := GetOrAllocateMaterial(I, B3DMat, B3DTex, B3DLightTex);
+
     end;
 
     if GetOwner is TGLBaseMesh then
@@ -214,6 +221,7 @@ begin
         Mo := TGLMeshObject.CreateOwned(Owner.MeshObjects);
 
         SetString(S, Node^.Name, Strlen(Node^.Name));
+
         // if Pos('16', s)>1 then
         // Pos('17', s);
         Mo.Name := S;
@@ -271,32 +279,28 @@ begin
           if Triangles^.Brush_id >= 0 then
           begin
             FaceGroup.MaterialName := B3d.Materials[Triangles^.Brush_id] +
-              InttoStr(Triangles^.Brush_id);
-            FaceGroup.LightMapIndex :=
-              TB3DMaterial(B3d.Materials.Objects[Triangles^.Brush_id])
-              .MaterialData.Texture_id[1];
+              IntToStr(Triangles^.Brush_id);
+            //FaceGroup.LightMapIndex :=
+            //  TB3DMaterial(B3d.Materials.Objects[Triangles^.Brush_id])
+            //  .MaterialData.Texture_id[1];
           end
           else
           begin
             FaceGroup.MaterialName := '';
             FaceGroup.LightMapIndex := -1;
           end;
+
           for J := 0 to Length(Triangles^.Vertex_id) - 1 do
             FaceGroup.VertexIndices.Add(Triangles^.Vertex_id[J]);
           while FaceGroup.VertexIndices.Count mod 3 <> 0 do
             FaceGroup.VertexIndices.Delete(FaceGroup.VertexIndices.Count - 1);
           Triangles := Triangles.Next;
           FaceGroup.Reverse;
-
         end;
         RotQuat := QuaternionMake([Node^.Rotation.Z, Node^.Rotation.Y,
           Node^.Rotation.W], Node^.Rotation.X);
         RotMat := QuaternionToMatrix(RotQuat);
         Mo.Vertices.TransformAsVectors(RotMat);
-        (*
-          mo.SetPosition( Node^.Position[1], Node^.Position[0], Node^.Position[2]);
-          mo.SetScale( Node^.Scale[1], Node^.Scale[0], Node^.Scale[2]);
-        *)
         if Pos('ENT_', UpperCase(Mo.Name)) = 0 then
           V := AffineVectorMake(Node^.Position.Y,
             Node^.Position.X, Node^.Position.Z)

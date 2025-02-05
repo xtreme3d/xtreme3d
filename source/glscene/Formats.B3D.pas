@@ -15,9 +15,8 @@ uses
   System.SysUtils,
    
   GLS.VectorGeometry, 
-  GLS.VectorTypes, 
+  GLS.VectorTypes,
   GLS.VectorLists;
-
 
 type
   TB3DChunkType = (bctUnknown, bctHeader, bctTexture, bctBrush, bctNode, bctVertex, bctTriangle,
@@ -25,7 +24,7 @@ type
 
   PB3DChunk = ^TB3DChunk;
   TB3DChunk = record
-    chunk: array[0..3] of char;
+    chunk: array[0..3] of AnsiChar;
     length: Integer;
   end;
 
@@ -36,7 +35,7 @@ type
 
   PTEXSChunk = ^TTEXSChunk;
   TTEXSChunk = record
-    fileName: array[0..255] of char; //texture file name this is the filename of the texture, ie "wall.bmp"  Has to be in the local Directory
+    fileName: array[0..255] of AnsiChar; //texture file name this is the filename of the texture, ie "wall.bmp"  Has to be in the local Directory
     flags, blend: Integer;  //blitz3D TextureFLags and TextureBlend: default=1,2
   		            //these are the same as far as I know as the flags for a texture in Blitz3D
     x_pos, y_pos: Single;   //x and y position of texture: default=0,0
@@ -47,7 +46,7 @@ type
   PBRUSChunk = ^TBRUSChunk;
   TBRUSChunk = record
     n_texs: Integer;
-    name: array[0..255] of Char; //eg "WATER" - just use texture name by default
+    name: array[0..255] of AnsiChar; //eg "WATER" - just use texture name by default
     red, green, blue, alpha: Single;  //Blitz3D Brushcolor and Brushalpha: default=1,1,1,1
     shininess: Single; //Blitz3D BrushShininess: default=0
     blend, fx: Integer; //Blitz3D Brushblend and BrushFX: default=1,0
@@ -111,7 +110,7 @@ type
 
   PNODEChunk = ^TNODEChunk;
   TNODEChunk = record
-    name: array[0..255] of char; //name of node
+    name: array[0..255] of AnsiChar; //name of node
     position: TAffineVector;  //local...
     scale: TAffineVector; //coord...
     rotation: TGLVector; //system...
@@ -335,12 +334,12 @@ begin
   Result := aChunk.length;
 end;
 
-function ReadString(aStream: TStream; buffer: PChar; MaxCount: Integer): Integer;
+function ReadString(aStream: TStream; buffer: PAnsiChar; MaxCount: Integer): Integer;
 begin
   Result := 0;
   while Result<MaxCount do
   begin
-    aStream.Read(buffer[Result], sizeof(char));
+    aStream.Read(buffer[Result], sizeof(AnsiChar));
     Inc(result);
     if buffer[result-1]=#0 then
       break;
@@ -638,22 +637,22 @@ end;
 procedure TFileB3D.Check;
 var
   NodeLevel: Integer;
-//  NodeCount: Integer;
+  NodeCount: Integer;
   Node: PNODEChunk;
-//  VerticesCount: Integer;
-//  FaceCount: Integer;
+  VerticesCount: Integer;
+  FaceCount: Integer;
   Face: PTRISChunk;
   Vertex: PVertexData;
 begin
   NodeLevel := 0;
-//  NodeCount := 0;
-//  VerticesCount := 0;
-//  FaceCount := 0;
+  NodeCount := 0;
+  VerticesCount := 0;
+  FaceCount := 0;
   Node := fNodes.NodeData;
   while Node<>nil do
   begin
     if Node^.meshes<>nil then
-//      Inc(NodeCount);
+      Inc(NodeCount);
     if Node^.level>NodeLevel then
       NodeLevel := Node^.level;
     if Node^.meshes<>nil then
@@ -661,23 +660,18 @@ begin
       Vertex := Node^.meshes.vertices.vertices;
       while Vertex<>nil do
       begin
-//        Inc(VerticesCount);
+        Inc(VerticesCount);
         Vertex := Vertex.next;
       end;
       Face := Node^.meshes.triangles;
       while Face<>nil do
       begin
-//        Inc(FaceCount);
+        Inc(FaceCount);
         Face := Face.next;
       end;
     end;
     Node := Node^.next;
   end;
-
-  //MessageBeep(FaceCount);
-  //MessageBeep(VerticesCount);
-  //MessageBeep(NodeLevel);
-  //MessageBeep(NodeCount);
 end;
 
 end.
