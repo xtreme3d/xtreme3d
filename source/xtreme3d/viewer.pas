@@ -42,10 +42,35 @@ begin
     result := 1.0;
 end;
 
+function ViewerBeginRender(viewer: real): real; cdecl;
+begin
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.BeginRender;
+    result:=1;
+end;
+
+function ViewerClear(viewer, clearColor, clearDepth, clearStencil: real): real; cdecl;
+var
+    mask: GLbitfield;
+begin
+    mask := 0;
+    if clearColor > 0   then mask := GL_COLOR_BUFFER_BIT;
+    if clearDepth > 0   then mask := mask or GL_DEPTH_BUFFER_BIT;
+    if clearStencil > 0 then mask := mask or GL_STENCIL_BUFFER_BIT;
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.Clear(mask);
+    result:=1;
+end;
+
 function ViewerRenderObject(viewer, obj: real): real; cdecl;
 begin
-    TGLSceneViewer(RealToPtr(viewer)).Buffer.Render(TGLBaseSceneObject(RealToPtr(obj)));
-    result := 1.0;
+    if obj > 0 then
+        TGLSceneViewer(RealToPtr(viewer)).Buffer.RenderBaseObject(TGLBaseSceneObject(RealToPtr(obj)));
+    result:=1;
+end;
+
+function ViewerEndRender(viewer: real): real; cdecl;
+begin
+    TGLSceneViewer(RealToPtr(viewer)).Buffer.EndRender;
+    result:=1;
 end;
 
 function ViewerRenderToFile(v: real; fname: PAnsiChar): real; cdecl;

@@ -527,8 +527,8 @@ exports
     PakExtract, PakExtractFile,
 
     // Viewer
-    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender,
-    ViewerRenderObject, ViewerRenderToFile,
+    ViewerCreate, ViewerSetCamera, ViewerEnableVSync, ViewerRender, ViewerRenderToFile,
+    ViewerBeginRender, ViewerClear, ViewerRenderObject, ViewerEndRender,
     ViewerResize, ViewerSetVisible, ViewerGetPixelColor, ViewerGetPixelDepth,
     ViewerSetLighting, ViewerSetBackgroundColor, ViewerSetAmbientColor,
     ViewerEnableFog, ViewerSetFogColor, ViewerSetFogDistance,

@@ -8,7 +8,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - `Update` is deprecated, use `EngineUpdate` instead
 - `TrisRendered` was removed
 - `ViewerRenderEx` was removed
-- New function `ViewerRenderObject`
+- New functions `ViewerBeginRender`, `ViewerClear`, `ViewerRenderObject`, `ViewerEndRender`
 - `ViewerGetPickedObjectsList` now requires user-provied PickList
 - New functions `PickListCreate`, `PickListClear`, `PickListGetCount`, `PickListGetHit`
 - New constants for `ViewerSetAntiAliasing`: `aa6x = 6`, `aa8x = 7`, `aa16x = 8`, `csa8x = 9`, `csa8xHQ = 10`, `csa16x = 11`, `csa16xHQ = 12`

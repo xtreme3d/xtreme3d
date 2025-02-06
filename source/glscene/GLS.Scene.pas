@@ -1395,6 +1395,10 @@ type
        render at a specific time. If you just want the control to get
        refreshed, use Invalidate instead. *)
     procedure Render(baseObject: TGLBaseSceneObject); overload;
+    procedure BeginRender;
+    procedure Clear(mask: GLbitfield);
+    procedure RenderBaseObject(baseObject: TGLBaseSceneObject);
+    procedure EndRender;
     procedure Render; overload; inline;
     procedure RenderScene(aScene: TGLScene;
       const viewPortSizeX, viewPortSizeY: Integer;
@@ -7375,6 +7379,68 @@ begin
   finally
     FRendering := False;
   end;
+end;
+
+procedure TGLSceneBuffer.BeginRender;
+begin
+  if FRendering then
+    Exit;
+
+  FRendering := True;
+
+  if Assigned(FCamera) and Assigned(FCamera.FScene) then
+  begin
+    FCamera.AbsoluteMatrixAsAddress;
+    FCamera.FScene.AddBuffer(Self);
+  end;
+
+   FRenderingContext.Activate;
+
+   FRenderDPI := 96;
+end;
+
+procedure TGLSceneBuffer.Clear(mask: GLbitfield);
+var
+  backColor: TGLColorVector;
+begin
+  if not FRendering then
+    Exit;
+  if not Assigned(FRenderingContext) then
+    Exit;
+
+  backColor := ConvertWinColor(FBackgroundColor, FBackgroundAlpha);
+  FRenderingContext.GLStates.ColorClearValue := backColor;
+  glClearColor(backColor.v[0], backColor.v[1], backColor.v[2], backColor.v[3]);
+  glClear(mask);
+end;
+
+procedure TGLSceneBuffer.RenderBaseObject(baseObject: TGLBaseSceneObject);
+begin
+  if not FRendering then
+    Exit;
+  if not Assigned(FRenderingContext) then
+    Exit;
+
+  DoBaseRender(FViewport, RenderDPI, dsRendering, baseObject);
+end;
+
+procedure TGLSceneBuffer.EndRender;
+begin
+  if not FRendering then
+    Exit;
+  if not Assigned(FRenderingContext) then
+    Exit;
+
+  if not (roNoSwapBuffers in ContextOptions) then
+    RenderingContext.SwapBuffers;
+
+  FRenderingContext.Deactivate;
+
+  if Assigned(FAfterRender) and (Owner is TComponent) then
+    if not (csDesigning in TComponent(Owner).ComponentState) then
+      FAfterRender(Self);
+
+  FRendering := False;
 end;
 
 procedure TGLSceneBuffer.RenderScene(aScene: TGLScene;

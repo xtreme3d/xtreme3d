@@ -26,8 +26,11 @@ function dll_init(dll) {
 	global._ViewerSetCamera = external_define(dll, "ViewerSetCamera", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerEnableVSync = external_define(dll, "ViewerEnableVSync", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRender = external_define(dll, "ViewerRender", dll_cdecl, ty_real, 1, ty_real);
-	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerRenderToFile = external_define(dll, "ViewerRenderToFile", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._ViewerBeginRender = external_define(dll, "ViewerBeginRender", dll_cdecl, ty_real, 1, ty_real);
+	global._ViewerClear = external_define(dll, "ViewerClear", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	global._ViewerRenderObject = external_define(dll, "ViewerRenderObject", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._ViewerEndRender = external_define(dll, "ViewerEndRender", dll_cdecl, ty_real, 1, ty_real);
 	global._ViewerResize = external_define(dll, "ViewerResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._ViewerSetVisible = external_define(dll, "ViewerSetVisible", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._ViewerGetPixelColor = external_define(dll, "ViewerGetPixelColor", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -4960,25 +4963,25 @@ function ViewerRender(aViewer) {
 	return external_call(global._ViewerRender, aViewer);
 }
 
+function ViewerBeginRender(aViewer) {
+	return external_call(global._ViewerBeginRender, aViewer);
+}
+
+function ViewerClear(aViewer, aClearColor, aClearDepth, aClearStencil) {
+	return external_call(global._ViewerClear, aViewer, aClearColor, aClearDepth, aClearStencil);
+}
+
 function ViewerRenderObject(aViewer, aObj) {
 	return external_call(global._ViewerRenderObject, aViewer, aObj);
+}
+
+function ViewerEndRender(aViewer) {
+	return external_call(global._ViewerEndRender, aViewer);
 }
 
 function ViewerRenderToFile(aViewer, aFname) {
 	return external_call(global._ViewerRenderToFile, aViewer, aFname);
 }
-
-/*
-function ViewerRenderToFilePNG(aViewer, aFname) {
-	return external_call(global._ViewerRenderToFilePNG, aViewer, aFname);
-}
-*/
-
-/*
-function ViewerRenderEx(aViewer, aObj, aClear, aSwap, aUpdatefps) {
-	return external_call(global._ViewerRenderEx, aViewer, aObj, aClear, aSwap, aUpdatefps);
-}
-*/
 
 function ViewerResize(aViewer, aLeft, aTop, aW, aH) {
 	return external_call(global._ViewerResize, aViewer, aLeft, aTop, aW, aH);
