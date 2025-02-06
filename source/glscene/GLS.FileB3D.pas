@@ -11,7 +11,6 @@ uses
   System.Classes, 
   System.SysUtils,
   Math,
-   
   GLS.VectorFileObjects, 
   GLS.ApplicationFileIO, 
   GLS.Texture, 
@@ -49,7 +48,6 @@ var
   Mo: TGLMeshObject;
   I, J: Integer;
   FaceGroup: TFGVertexIndexList;
-  // lightmapBmp : TBitmap;
   Node: PNODEChunk;
   B3DMat: TB3DMaterial;
   B3DTex: TB3DTexture;
@@ -70,6 +68,7 @@ var
     ATex: TB3DTexture; ALightmap: TB3DTexture): string;
   var
     LibMat: TGLLibMaterial;
+    LightmapMat: TGLLibMaterial;
     TexName: string;
     LightName: string;
   begin
@@ -89,31 +88,28 @@ var
             TexName := ATex.GetTextureName
           else
             TexName := '';
+
           if not FileExists(TexName) then
             TexName := ExtractFileName(TexName);
+
           if TexName <> '' then
-            LibMat := MatLib.AddTextureMaterial(Result + IntToStr(MaterialNum),
-              TexName, False)
-          else
-          begin
+            LibMat := MatLib.AddTextureMaterial(Result + IntToStr(MaterialNum), TexName, true)
+          else begin
             LibMat := MatLib.Materials.Add;
             LibMat.Name := Result + IntToStr(MaterialNum);
           end;
+
           Libmat.Material.FrontProperties.Diffuse.Red := AMat.MaterialData.Red;
-          Libmat.Material.FrontProperties.Diffuse.Green :=
-            AMat.MaterialData.Green;
-          Libmat.Material.FrontProperties.Diffuse.Blue :=
-            AMat.MaterialData.Blue;
-          Libmat.Material.FrontProperties.Diffuse.Alpha :=
-            AMat.MaterialData.Alpha;
-          Libmat.Material.FrontProperties.Shininess :=
-            Round(AMat.MaterialData.Shininess * 100.0);
-          Libmat.Material.MaterialOptions := [MoNoLighting];
+          Libmat.Material.FrontProperties.Diffuse.Green := AMat.MaterialData.Green;
+          Libmat.Material.FrontProperties.Diffuse.Blue := AMat.MaterialData.Blue;
+          Libmat.Material.FrontProperties.Diffuse.Alpha := AMat.MaterialData.Alpha;
+          Libmat.Material.FrontProperties.Shininess := Round(AMat.MaterialData.Shininess * 100.0);
           if AMat.MaterialData.Alpha <> 1 then
           begin
             Libmat.Material.FaceCulling := FcNoCull;
             Libmat.Material.BlendingMode := BmTransparency;
           end;
+
           if Assigned(ATex) then
           begin
             LibMat.TextureOffset.AsAffineVector :=
@@ -135,33 +131,35 @@ var
             end;
           end;
         end;
+
         // add lightmap material
         if (Assigned(LightLib)) and (Assigned(ALightmap)) then
         begin
           LightName := ALightmap.GetTextureName;
-          // add base material
-          LibMat := LightLib.Materials.GetLibMaterialByName(LightName);
-          if not Assigned(LibMat) then
+          LightmapMat := LightLib.Materials.GetLibMaterialByName(LightName);
+          if not Assigned(LightmapMat) then
           begin
             if not FileExists(LightName) then
               LightName := ExtractFileName(LightName);
 
-            LibMat := LightLib.AddTextureMaterial(LightName, LightName, False);
-            LibMat.Material.Texture.TextureMode := TmReplace;
+            LightmapMat := LightLib.AddTextureMaterial(LightName, LightName, true);
+            //LightmapMat.Material.Texture.TextureMode := TmReplace;
+            LightmapMat.Material.Texture.TextureMode := TmModulate;
             if Assigned(ALightMap) then
             begin
-
-              LibMat.TextureOffset.AsAffineVector :=
+              LightmapMat.TextureOffset.AsAffineVector :=
                 AffineVectorMake(ALightMap.TextureData.X_pos,
                 ALightMap.TextureData.Y_pos, 0);
 
-              LibMat.TextureScale.AsAffineVector :=
+              LightmapMat.TextureScale.AsAffineVector :=
                 AffineVectorMake(ALightMap.TextureData.X_scale,
                 ALightMap.TextureData.Y_scale, 1);
             end;
           end;
           // modify the material lightmap index
-          AMat.MaterialData.Texture_id[1] := LibMat.Index;
+          AMat.MaterialData.Texture_id[1] := LightmapMat.Index;
+
+          Libmat.Material.MaterialOptions := [MoNoLighting];
         end;
       end
       else
@@ -205,7 +203,6 @@ begin
                   [B3DMat.MaterialData.Texture_id[2]]);
       end;
 
-      // Fixme:
       mat := GetOrAllocateMaterial(I, B3DMat, B3DTex, B3DLightTex);
 
     end;
@@ -280,9 +277,9 @@ begin
           begin
             FaceGroup.MaterialName := B3d.Materials[Triangles^.Brush_id] +
               IntToStr(Triangles^.Brush_id);
-            //FaceGroup.LightMapIndex :=
-            //  TB3DMaterial(B3d.Materials.Objects[Triangles^.Brush_id])
-            //  .MaterialData.Texture_id[1];
+            FaceGroup.LightMapIndex :=
+              TB3DMaterial(B3d.Materials.Objects[Triangles^.Brush_id])
+              .MaterialData.Texture_id[1];
           end
           else
           begin
