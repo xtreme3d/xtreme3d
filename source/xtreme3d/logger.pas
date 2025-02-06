@@ -30,7 +30,6 @@ var
 begin
   loggerSession := TLogSession(RealToPtr(logger));
   loggerSession.Log(StrConv(msg), TLogLevel(Trunc(loglevel)));
-  //loggerSession.FlushBuffer;
   result := 1;
 end;
 
