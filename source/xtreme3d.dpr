@@ -174,8 +174,6 @@ var
 
     previousTicks: Longint;
 
-    logger: TLogSession;
-
 {$R *.res}
 
 function ObjToReal(obj: TObject): real;
@@ -514,6 +512,7 @@ end;
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
+{$I 'xtreme3d/logger'}
 
 exports
     // Engine
@@ -521,7 +520,6 @@ exports
     EngineUpdate, EngineSaveScene, EngineLoadScene, EngineRootObject,
     EngineShowLoadingErrors, EngineSetMaxLights, EngineGetTimeStep,
     EngineGetLastRaycastPosition, EngineGetLastRaycastNormal,
-    EngineSetLog,
     PointerToReal,
 
     //Pak
@@ -1025,6 +1023,9 @@ exports
     KraftCreateJointDistance, KraftCreateJointRope, KraftCreateJointBallSocket, KraftCreateJointFixed,
     KraftCreateJointHinge,
     KraftJointSetAnchor1, KraftJointSetAnchor2,
-    KraftJointSetHingeAxis1, KraftJointSetHingeAxis2;
+    KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
+
+    //Logger
+    LoggerCreate, LoggerEnable, LoggerLog;
 begin
 end.

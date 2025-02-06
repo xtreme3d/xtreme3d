@@ -13,7 +13,6 @@ function dll_init(dll) {
 	global._EngineGetTimeStep = external_define(dll, "EngineGetTimeStep", dll_cdecl, ty_real, 0);
 	global._EngineGetLastRaycastPosition = external_define(dll, "EngineGetLastRaycastPosition", dll_cdecl, ty_real, 1, ty_real);
 	global._EngineGetLastRaycastNormal = external_define(dll, "EngineGetLastRaycastNormal", dll_cdecl, ty_real, 1, ty_real);
-	global._EngineSetLog = external_define(dll, "EngineSetLog", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	
 	// Pak
 	global._SetPakArchive = external_define(dll, "SetPakArchive", dll_cdecl, ty_real, 1, ty_string);
@@ -1111,6 +1110,11 @@ function dll_init(dll) {
 	global._KraftJointSetAnchor2 = external_define(dll, "KraftJointSetAnchor2", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._KraftJointSetHingeAxis1 = external_define(dll, "KraftJointSetHingeAxis1", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
 	global._KraftJointSetHingeAxis2 = external_define(dll, "KraftJointSetHingeAxis2", dll_cdecl, ty_real, 4, ty_real, ty_real, ty_real, ty_real);
+	
+	// Logger
+	global._LoggerCreate = external_define(dll, "LoggerCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._LoggerEnable = external_define(dll, "LoggerEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._LoggerLog = external_define(dll, "LoggerLog", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
@@ -1689,10 +1693,6 @@ function EngineGetLastRaycastPosition(aInd) {
 
 function EngineGetLastRaycastNormal(aInd) {
 	return external_call(global._EngineGetLastRaycastNormal, aInd);
-}
-
-function EngineSetLog(aFilename, aLogLevel) {
-	return external_call(global._EngineSetLog, aFilename, aLogLevel);
 }
 
 function FBOCreate(aWidth, aHeight, aParent) {
@@ -5212,6 +5212,18 @@ function PtrToReal(p) {
 	return external_call(global._PointerToReal, p);
 }
 
+function LoggerCreate(aFilename, aLogLevel) {
+	return external_call(global._LoggerCreate, aFilename, aLogLevel);
+}
+
+function LoggerEnable(aLogger, aMode) {
+	return external_call(global._LoggerEnable, aLogger, aMode);
+}
+
+function LoggerLog(aLogger, aLogLevel, aMessage) {
+	return external_call(global._LoggerLog, aLogger, aLogLevel, aMessage);
+}
+
 #macro osInherited 0
 #macro osNone 1
 #macro osRenderFarthestFirst 2
@@ -5589,3 +5601,10 @@ function PtrToReal(p) {
 #macro llMin 0
 #macro llMedium 1
 #macro llMax 3
+
+#macro lkDebug 0
+#macro lkInfo 1
+#macro lkNotice 2
+#macro lkWarning 3
+#macro lkError 4
+#macro lkFatalError 5

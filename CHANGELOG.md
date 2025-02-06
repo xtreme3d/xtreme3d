@@ -5,7 +5,6 @@ v4.0.0 (by Gecko) - ??/??/????
 - Uses GLScene 2.1 and Delphi 10.4
 - Xtreme3D is now 64 bit and compatible with recent versions of GameMaker Studio 2
 - UTF-8 support for all strings
-- New function `EngineSetLog`
 - `Update` is deprecated, use `EngineUpdate` instead
 - `TrisRendered` was removed
 - `ViewerRenderEx` was removed
@@ -40,7 +39,8 @@ v4.0.0 (by Gecko) - ??/??/????
 - ShadowMap was redesigned. `ShadowMapSetCaster`, `ShadowMapSetProjectionSize`, `ShadowMapSetZScale`, `ShadowMapSetZClippingPlanes`, `ShadowMapRender` were removed. New functions `ShadowMapUpdate`, `ShadowMapSetViewer`. `ShadowMapSetCamera` now uses special ShadowCamera object
 - New functions `ShadowCameraCreate`, `ShadowCameraSetProjectionSize`, `ShadowCameraSetZClippingPlanes`
 - New functions `GLSLShaderForceDisableStencilTest`, `GLSLShaderSetOptions`
-- Fixed CSM loader (correct Z-axis and UV mapping).
+- Fixed CSM loader (correct Z-axis and UV mapping)
+- New functions `LoggerCreate`, `LoggerEnable`, `LoggerLog`
 
 v3.9.2 (by Gecko) - 09/04/2022
 ------------------------------
