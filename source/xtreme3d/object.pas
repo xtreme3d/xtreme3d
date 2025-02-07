@@ -51,7 +51,6 @@ begin
     result:=1;
 end;
 
-
 function ObjectGetPosition(obj, ind: real): real; cdecl;
 var
   sobj: TGLBaseSceneObject;
@@ -268,7 +267,6 @@ begin
     result := 1;
 end;
 
-
 function ObjectScale(obj,x,y,z:real): real; cdecl;
 var
   GLObject:TGLBaseSceneObject;
@@ -316,8 +314,6 @@ begin
   object1.PointTo(object2, object1.Up.AsVector);
   result:=1;
 end;
-
-// unimplemented: ObjectAlignToCamera
 
 function ObjectShowAxes(obj, mode: real): real; cdecl;
 var
@@ -475,7 +471,6 @@ begin
       result := 0;
 end;
 
-// Change: vc now can be vcNone, vcInherited, vcObjectBased, vcHierarchical (0, 1, 2, 3)
 function ObjectSetCulling(obj1, vc: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
@@ -515,7 +510,6 @@ begin
   result := PAnsiChar(AnsiString(object1.ClassName));
 end;
 
-// ObjectSetID is now ObjectSetTag
 function ObjectSetTag(obj1, tag: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
@@ -525,7 +519,6 @@ begin
   result := 1;
 end;
 
-// ObjectGetID is now ObjectGetTag
 function ObjectGetTag(obj1: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
@@ -684,7 +677,7 @@ begin
   result := 1;
 end;
 
-// keep - copy obj2's children to obj1 
+// keep - copy obj2's children to obj1
 function ObjectRemoveChild(obj1, obj2, keep: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;
@@ -734,7 +727,6 @@ begin
   result := 1;
 end;
 
-// ObjectGetUpVector = ObjectGetUp
 function ObjectGetUp(obj1, ind: real): real; cdecl;
 var
   object1: TGLBaseSceneObject;

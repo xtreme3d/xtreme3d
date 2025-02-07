@@ -107,4 +107,3 @@ begin
   GLXyzGrid1.ZSamplingScale.step:= step;
   result:=1;
 end;
-

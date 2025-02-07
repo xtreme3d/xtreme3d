@@ -140,4 +140,3 @@ begin
   end;
   result := 1.0;
 end;
-

@@ -71,5 +71,3 @@ begin
     shadowCamera.ZFar := zfar;
     result := 1.0;
 end;
-
-

@@ -75,7 +75,7 @@ begin
     result := 1.0;
 end;
 
-function EngineSetMaxLights(lights: real): integer; cdecl;
+function EngineSetMaxLights(lights: real): real; cdecl;
 begin
     scene.Lights.Count := Trunc(lights);
     result := 1;
@@ -105,7 +105,7 @@ end;
 //TODO:
 //EngineResetRaycastData()
 
-function PointerToReal(p: pchar): real; cdecl;
+function PointerToReal(p: PAnsiChar): real; cdecl;
 begin
     result := real(NativeInt(p));
 end;

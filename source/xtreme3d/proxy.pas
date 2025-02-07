@@ -93,4 +93,3 @@ begin
   p.Interval := trunc(interval);
   result := 1.0;
 end;
-

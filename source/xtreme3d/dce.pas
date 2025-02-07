@@ -316,4 +316,3 @@ begin
   GetOrCreateDCEDynamic(TGLBaseSceneObject(RealToPtr(obj))).AbsSpeed := imp;
   Result := 1;
 end;
-

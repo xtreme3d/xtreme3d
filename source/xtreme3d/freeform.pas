@@ -21,22 +21,23 @@ begin
   filename := StrConv(fname);
 
   if not FileExists(filename) then begin
-    ShowMessage('FreeformCreate:' + #13#10 + 'File does not exist');
+    if showLoadingErrors then
+      ShowMessage('FreeformCreate:' + #13#10 + 'File does not exist');
     GLFreeForm1.Destroy();
     result := 0;
     Exit;
   end;
+  
   try
     GLFreeForm1.LoadFromFile(filename);
   except
     On E: Exception do
     begin
-      if showLoadingErrors then begin
+      if showLoadingErrors then
         ShowMessage('FreeformCreate:' + #13#10 + E.Message);
-        GLFreeForm1.Destroy();
-        result := 0;
-        Exit;
-      end;
+      GLFreeForm1.Destroy();
+      result := 0;
+      Exit;
     end;
   end;
   
@@ -150,7 +151,6 @@ begin
   result:=tri;
 end;
 
-// Change: explosion creation API changed
 function FreeformCreateExplosionFX(ff1, enable: real): real; cdecl;
 var
   ffm: TGLFreeForm;

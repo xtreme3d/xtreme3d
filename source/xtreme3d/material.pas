@@ -769,4 +769,3 @@ begin
   mat.Material.Texture.TextureCompareFunc := TGLDepthCompareFunc(Trunc(tcf));
   result:=1;
 end;
-

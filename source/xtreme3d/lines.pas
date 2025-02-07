@@ -94,4 +94,3 @@ begin
   li.Division := trunc(division);
   result := 1.0;
 end;
-

@@ -140,4 +140,3 @@ begin
   path.DeleteNode(nod);
   Result := 1;
 end;
-

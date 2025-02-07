@@ -125,4 +125,3 @@ begin
   fps := GetOrCreateFPSMovement(ob);
   Result := fps.velocity.v[trunc(ind)];
 end;
-

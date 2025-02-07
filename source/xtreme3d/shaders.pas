@@ -304,7 +304,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterShadowTexture(par, shadowmap: real; texUnit: real): real; cdecl;
+function GLSLShaderSetParameterShadowTexture(par, shadowmap, texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -354,7 +354,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterFBOColorTexture(par, fbo: real; texUnit: real): real; cdecl;
+function GLSLShaderSetParameterFBOColorTexture(par, fbo, texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -366,7 +366,7 @@ begin
   result := 1;
 end;
 
-function GLSLShaderSetParameterFBODepthTexture(par, fbo: real; texUnit: real): real; cdecl;
+function GLSLShaderSetParameterFBODepthTexture(par, fbo, texUnit: real): real; cdecl;
 var
   param: TGLSLShaderParameter;
 begin
@@ -735,4 +735,3 @@ begin
   paramUseAutoTangentSpace.UniformInteger := trunc(mode);
   result:=1;
 end;
-

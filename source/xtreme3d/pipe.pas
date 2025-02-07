@@ -4,13 +4,13 @@ function PipeCreate(divs,slic, parent: real): real; cdecl;
 var
   pipe: TGLPipe;
 begin
-    if not (parent=0) then
+  if not (parent=0) then
     pipe:=TGLPipe.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     pipe:=TGLPipe.CreateAsChild(scene.Objects);
-	
-	pipe.Division:=trunc(divs);
-	pipe.Slices:=trunc(slic);
+  
+  pipe.Division:=trunc(divs);
+  pipe.Slices:=trunc(slic);
   result:=ObjToReal(pipe);
 end;
 
