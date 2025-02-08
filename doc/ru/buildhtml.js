@@ -1,0 +1,33 @@
+const fs = require("fs");
+const showdown = require("showdown");
+const Mustache = require("mustache");
+const iconv = require("iconv-lite");
+
+const mdConverter = new showdown.Converter();
+const pageTemplate = fs.readFileSync("template.html", "utf8");
+
+function generatePage(title, markdown, encoding="utf8") {
+    const pageContent = mdConverter.makeHtml(markdown);
+    const data = {
+        language: "ru",
+        title: title,
+        encoding: encoding,
+        content: pageContent
+    };
+    return Mustache.render(pageTemplate, data);
+}
+
+const functions = [
+    { title: "Engine", inFilename: "markdown/functions/engine.md", outFilename: "html/functions/engine.html" }
+];
+
+const outputEncoding = "win1251";
+const metaEncoding = "windows-1251";
+
+for (const f of functions)
+{
+    const markdown = fs.readFileSync(f.inFilename, "utf8");
+    const output = generatePage(f.title, markdown, metaEncoding);
+    const encodedData = iconv.encode(output, outputEncoding);
+    fs.writeFileSync(f.outFilename, encodedData);
+}
