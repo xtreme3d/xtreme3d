@@ -6,10 +6,10 @@ const iconv = require("iconv-lite");
 const mdConverter = new showdown.Converter();
 const pageTemplate = fs.readFileSync("template.html", "utf8");
 
-function generatePage(title, markdown, encoding="utf8") {
+function generatePage(title, markdown, language, encoding="utf8") {
     const pageContent = mdConverter.makeHtml(markdown);
     const data = {
-        language: "ru",
+        language: language,
         title: title,
         encoding: encoding,
         content: pageContent
@@ -27,7 +27,7 @@ const metaEncoding = "windows-1251";
 for (const f of functions)
 {
     const markdown = fs.readFileSync(f.inFilename, "utf8");
-    const output = generatePage(f.title, markdown, metaEncoding);
+    const output = generatePage(f.title, markdown, "ru", metaEncoding);
     const encodedData = iconv.encode(output, outputEncoding);
     fs.writeFileSync(f.outFilename, encodedData);
 }
