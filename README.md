@@ -2,7 +2,7 @@ Xtreme3D
 ========
 Xtreme3D is a cross-language 3D graphics engine for Windows based on [GLScene](https://github.com/GLScene/GLScene). It has a rich feature set, including custom shaders, wide variety of asset formats support, built-in effects, physics, collision and ray casting.
 
-Xtreme3D originally was created for Game Maker. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate with Game Maker that was intended mainly for 2D games and provides limited built-in 3D capabilities. Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
+Xtreme3D originally was created for [Game Maker](https://gamemaker.io/) Classic. It makes possible to create full-featured 3D games with modern graphics and reasonable framerate with Game Maker that was intended mainly for 2D games and provides limited built-in 3D capabilities. Original Xtreme3D was a closed-source project, and it was abandoned by the author. Xtreme3D 2.0.2.0 (2006) was the last official release. So we in Russian Xtreme3D community made an attempt to rewrite the engine, maintaining the API as close to original as possible. This work began in 2009 and was completed in 2016. This project is not connected in any way with the original Xtreme3D developer, all code was written from scratch.
 
 The engine is written in Delphi 11 and based on a modified version of GLScene 2.2. The code can be compiled with free Delphi Community Edition.
 
@@ -19,6 +19,7 @@ Screenshots
 
 Features
 --------
+* Built for modern 64-bit GameMaker
 * Can be used with any language that supports DLLs
 * Scene graph with object hierarchy/pivoting
 * Built-in primitives (such as box, sphere, cylinder, teapot, etc.)
