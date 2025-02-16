@@ -60,6 +60,10 @@ Features
 * Window creation and management
 * ...plus a lot more!
 
+Language Bindings
+-----------------
+Despite Xtreme3D was created primarily for GameMaker, it can be used with almost any language. Currently we provide [Python 3 binding](https://github.com/xtreme3d/xtreme3d/tree/master/bindings/python3).
+
 Documentation
 -------------
 Xtreme3D is fully documented in Russian, the help file is [here](https://github.com/xtreme3d/xtreme3d/tree/master/doc/ru).
