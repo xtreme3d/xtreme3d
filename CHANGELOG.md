@@ -40,6 +40,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - New functions `ShadowCameraCreate`, `ShadowCameraSetProjectionSize`, `ShadowCameraSetZClippingPlanes`
 - New functions `GLSLShaderForceDisableStencilTest`, `GLSLShaderSetOptions`
 - New functions `LoggerCreate`, `LoggerEnable`, `LoggerLog`
+- New function `WindowIsActive`
 - Fixed CSM loader (correct Z-axis and UV mapping)
 
 v3.9.2 (by Gecko) - 09/04/2022
