@@ -282,26 +282,6 @@ begin
   result := 1.0;
 end;
 
-{
-function OdeDynamicGetContactCount(obj: real): real; cdecl;
-var
-  dyna: TGLODEDynamic;
-begin
-  dyna := GetOdeDynamic(TGLBaseSceneObject(RealToPtr(obj)));
-  result := dyna.NumContacts;
-end;
-}
-
-{
-function OdeStaticGetContactCount(obj: real): real; cdecl;
-var
-  stat: TGLODEStatic;
-begin
-  stat := TGLODEStatic(TGLBaseSceneObject(RealToPtr(obj)));
-  result := stat.NumContacts;
-end;
-}
-
 function OdeAddBox(obj, x, y, z, w, h, d: real): real; cdecl;
 var
   o: TGLBaseSceneObject;
@@ -409,36 +389,6 @@ begin
   end;
   result := 0.0;
 end;
-
-{
-function OdeAddCone(obj, x, y, z, len, r: real): real; cdecl;
-var
-  o: TGLBaseSceneObject;
-  stat: TGLODEStatic;
-  dyna: TGLODEDynamic;
-  elem: TGLODEElementCone;
-begin
-  o := TGLBaseSceneObject(RealToPtr(obj));
-  stat := GetOdeStatic(o);
-  dyna := GetOdeDynamic(o);
-  if stat <> nil then
-    elem := TGLODEElementCone(stat.AddNewElement(TGLODEElementCone));
-  if dyna <> nil then
-    elem := TGLODEElementCone(dyna.AddNewElement(TGLODEElementCone));
-  if elem <> nil then
-  begin
-    with elem do
-    begin
-      Position.SetPoint(x, y, z);
-      Radius := r;
-      Length := len;
-    end;
-    result := Integer(elem);
-    Exit;
-  end;
-  result := 0.0;
-end;
-}
 
 function OdeAddCapsule(obj, x, y, z, len, r: real): real; cdecl;
 var

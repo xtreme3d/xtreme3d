@@ -2,7 +2,6 @@ import ctypes
 
 x3d = ctypes.CDLL('./xtreme3d.dll')
 
-"""
 # actor.pas
 x3d.ActorCreate.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double]
 x3d.ActorCreate.restype = ctypes.c_double
@@ -16,8 +15,8 @@ def ActorCopy(aActor, aParent):
 
 x3d.ActorSetAnimationRange.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ActorSetAnimationRange.restype = ctypes.c_double
-def ActorSetAnimationRange(aActor, aAstart, aAend):
-    return x3d.ActorSetAnimationRange(aActor, aAstart, aAend)
+def ActorSetAnimationRange(aActor, aFramestart, aFrameend):
+    return x3d.ActorSetAnimationRange(aActor, aFramestart, aFrameend)
 
 x3d.ActorGetCurrentFrame.argtypes = [ctypes.c_double]
 x3d.ActorGetCurrentFrame.restype = ctypes.c_double
@@ -214,6 +213,11 @@ x3d.ActorTriangleCount.restype = ctypes.c_double
 def ActorTriangleCount(aActor):
     return x3d.ActorTriangleCount(aActor)
 
+x3d.ActorSetReference.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ActorSetReference.restype = ctypes.c_double
+def ActorSetReference(aActor, aAar):
+    return x3d.ActorSetReference(aActor, aAar)
+
 
 # blur.pas
 x3d.BlurCreate.argtypes = [ctypes.c_double, ctypes.c_double]
@@ -245,7 +249,7 @@ x3d.BlurSetBlendingMode.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.BlurSetBlendingMode.restype = ctypes.c_double
 def BlurSetBlendingMode(aBlur, aBm):
     return x3d.BlurSetBlendingMode(aBlur, aBm)
-"""
+
 
 # camera.pas
 x3d.CameraCreate.argtypes = [ctypes.c_double]
@@ -328,10 +332,10 @@ x3d.CameraAbsoluteUpVectorToTarget.restype = ctypes.c_double
 def CameraAbsoluteUpVectorToTarget(aCamera, aInd):
     return x3d.CameraAbsoluteUpVectorToTarget(aCamera, aInd)
 
-x3d.CameraZoomAll.argtypes = [ctypes.c_double]
+x3d.CameraZoomAll.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.CameraZoomAll.restype = ctypes.c_double
-def CameraZoomAll(aCamera):
-    return x3d.CameraZoomAll(aCamera)
+def CameraZoomAll(aCamera, aViewer):
+    return x3d.CameraZoomAll(aCamera, aViewer)
 
 x3d.CameraScreenDeltaToVector.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.CameraScreenDeltaToVector.restype = ctypes.c_double
@@ -383,7 +387,7 @@ x3d.CameraGetFieldOfView.restype = ctypes.c_double
 def CameraGetFieldOfView(aCamera, aVpdim):
     return x3d.CameraGetFieldOfView(aCamera, aVpdim)
 
-"""
+
 # clipplane.pas
 x3d.ClipPlaneCreate.argtypes = [ctypes.c_double]
 x3d.ClipPlaneCreate.restype = ctypes.c_double
@@ -623,7 +627,7 @@ x3d.DceDynamicApplyAbsImpulse.argtypes = [ctypes.c_double, ctypes.c_double, ctyp
 x3d.DceDynamicApplyAbsImpulse.restype = ctypes.c_double
 def DceDynamicApplyAbsImpulse(aObj, aX, aY, aZ):
     return x3d.DceDynamicApplyAbsImpulse(aObj, aX, aY, aZ)
-"""
+
 
 # dummycube.pas
 x3d.DummycubeCreate.argtypes = [ctypes.c_double]
@@ -655,6 +659,7 @@ x3d.DummycubeSetCubeSize.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.DummycubeSetCubeSize.restype = ctypes.c_double
 def DummycubeSetCubeSize(aObj, aSize):
     return x3d.DummycubeSetCubeSize(aObj, aSize)
+
 
 # engine.pas
 x3d.EngineCreate.argtypes = []
@@ -722,43 +727,97 @@ x3d.EngineGetLastRaycastNormal.restype = ctypes.c_double
 def EngineGetLastRaycastNormal(aInd):
     return x3d.EngineGetLastRaycastNormal(aInd)
 
-"""
+x3d.PointerToReal.argtypes = [ctypes.c_char_p]
+x3d.PointerToReal.restype = ctypes.c_double
+def PointerToReal(aP):
+    return x3d.PointerToReal(aP)
+
 
 # fbo.pas
 x3d.FBOCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.FBOCreate.restype = ctypes.c_double
-def FBOCreate(aW, aH, aViewer):
-    return x3d.FBOCreate(aW, aH, aViewer)
+def FBOCreate(aW, aH, aParent):
+    return x3d.FBOCreate(aW, aH, aParent)
+
+x3d.FBOSetActive.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetActive.restype = ctypes.c_double
+def FBOSetActive(aFbo, aMode):
+    return x3d.FBOSetActive(aFbo, aMode)
+
+x3d.FBOSetAspect.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetAspect.restype = ctypes.c_double
+def FBOSetAspect(aFbo, aAspect):
+    return x3d.FBOSetAspect(aFbo, aAspect)
+
+x3d.FBOSetPickableTarget.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetPickableTarget.restype = ctypes.c_double
+def FBOSetPickableTarget(aFbo, aMode):
+    return x3d.FBOSetPickableTarget(aFbo, aMode)
+
+x3d.FBOSetSize.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.FBOSetSize.restype = ctypes.c_double
+def FBOSetSize(aFbo, aWidth, aHeight):
+    return x3d.FBOSetSize(aFbo, aWidth, aHeight)
 
 x3d.FBOSetCamera.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.FBOSetCamera.restype = ctypes.c_double
 def FBOSetCamera(aFbo, aCam):
     return x3d.FBOSetCamera(aFbo, aCam)
 
-x3d.FBORenderObject.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.FBORenderObject.restype = ctypes.c_double
-def FBORenderObject(aFbo, aObj):
-    return x3d.FBORenderObject(aFbo, aObj)
+x3d.FBOSetRootObject.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetRootObject.restype = ctypes.c_double
+def FBOSetRootObject(aFbo, aObj):
+    return x3d.FBOSetRootObject(aFbo, aObj)
 
-x3d.FBORenderObjectEx.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.FBORenderObjectEx.restype = ctypes.c_double
-def FBORenderObjectEx(aFbo, aObj, aClearcolor, aCleardepth, aCopycolor, aCopydepth):
-    return x3d.FBORenderObjectEx(aFbo, aObj, aClearcolor, aCleardepth, aCopycolor, aCopydepth)
+x3d.FBOSetBackgroundColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetBackgroundColor.restype = ctypes.c_double
+def FBOSetBackgroundColor(aFbo, aColor):
+    return x3d.FBOSetBackgroundColor(aFbo, aColor)
 
-x3d.FBOSetViewer.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.FBOSetViewer.restype = ctypes.c_double
-def FBOSetViewer(aFbo, aViewer):
-    return x3d.FBOSetViewer(aFbo, aViewer)
+x3d.FBOSetEnabledRenderBuffers.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.FBOSetEnabledRenderBuffers.restype = ctypes.c_double
+def FBOSetEnabledRenderBuffers(aFbo, aDepth, aStencil):
+    return x3d.FBOSetEnabledRenderBuffers(aFbo, aDepth, aStencil)
 
-x3d.FBOSetOverrideMaterial.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_char_p]
-x3d.FBOSetOverrideMaterial.restype = ctypes.c_double
-def FBOSetOverrideMaterial(aFbo, aMlb, aMtrl):
-    return x3d.FBOSetOverrideMaterial(aFbo, aMlb, aMtrl)
+x3d.FBOSetSceneScaleFactor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetSceneScaleFactor.restype = ctypes.c_double
+def FBOSetSceneScaleFactor(aFbo, aScalefactor):
+    return x3d.FBOSetSceneScaleFactor(aFbo, aScalefactor)
 
-x3d.FBOSetColorTextureFormat.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.FBOSetColorTextureFormat.restype = ctypes.c_double
-def FBOSetColorTextureFormat(aFbo, aTf):
-    return x3d.FBOSetColorTextureFormat(aFbo, aTf)
+x3d.FBOSetTargetVisibility.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetTargetVisibility.restype = ctypes.c_double
+def FBOSetTargetVisibility(aFbo, aTv):
+    return x3d.FBOSetTargetVisibility(aFbo, aTv)
+
+x3d.FBOSetMaterialLibrary.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetMaterialLibrary.restype = ctypes.c_double
+def FBOSetMaterialLibrary(aFbo, aMatlib):
+    return x3d.FBOSetMaterialLibrary(aFbo, aMatlib)
+
+x3d.FBOSetColorTextureName.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.FBOSetColorTextureName.restype = ctypes.c_double
+def FBOSetColorTextureName(aFbo, aName):
+    return x3d.FBOSetColorTextureName(aFbo, aName)
+
+x3d.FBOSetDepthTextureName.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.FBOSetDepthTextureName.restype = ctypes.c_double
+def FBOSetDepthTextureName(aFbo, aName):
+    return x3d.FBOSetDepthTextureName(aFbo, aName)
+
+x3d.FBOSetClearOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.FBOSetClearOptions.restype = ctypes.c_double
+def FBOSetClearOptions(aFbo, aClearcolor, aCleardepth, aClearstencil, aUsebufferbackground):
+    return x3d.FBOSetClearOptions(aFbo, aClearcolor, aCleardepth, aClearstencil, aUsebufferbackground)
+
+x3d.FBOSetStencilPrecision.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetStencilPrecision.restype = ctypes.c_double
+def FBOSetStencilPrecision(aFbo, aSp):
+    return x3d.FBOSetStencilPrecision(aFbo, aSp)
+
+x3d.FBOSetShadowMapMode.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.FBOSetShadowMapMode.restype = ctypes.c_double
+def FBOSetShadowMapMode(aFbo, aMode):
+    return x3d.FBOSetShadowMapMode(aFbo, aMode)
 
 
 # firefx.pas
@@ -918,16 +977,6 @@ x3d.TTFontSetLineGap.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.TTFontSetLineGap.restype = ctypes.c_double
 def TTFontSetLineGap(aFont, aGap):
     return x3d.TTFontSetLineGap(aFont, aGap)
-
-x3d.TTFontSetEncoding.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.TTFontSetEncoding.restype = ctypes.c_double
-def TTFontSetEncoding(aFont, aTe):
-    return x3d.TTFontSetEncoding(aFont, aTe)
-
-x3d.TTFontLoadCodePage.argtypes = [ctypes.c_double, ctypes.c_char_p]
-x3d.TTFontLoadCodePage.restype = ctypes.c_double
-def TTFontLoadCodePage(aFont, aFilename):
-    return x3d.TTFontLoadCodePage(aFont, aFilename)
 
 
 # fps.pas
@@ -1288,6 +1337,11 @@ x3d.FreeformSetMaterialLibraries.restype = ctypes.c_double
 def FreeformSetMaterialLibraries(aFf, aMatlib, aLmmatlib):
     return x3d.FreeformSetMaterialLibraries(aFf, aMatlib, aLmmatlib)
 
+x3d.BaseMeshBuildSilhouetteConnectivityData.argtypes = [ctypes.c_double]
+x3d.BaseMeshBuildSilhouetteConnectivityData.restype = ctypes.c_double
+def BaseMeshBuildSilhouetteConnectivityData(aObj):
+    return x3d.BaseMeshBuildSilhouetteConnectivityData(aObj)
+
 
 # grid.pas
 x3d.GridCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -1432,14 +1486,8 @@ x3d.HUDShapeMeshSetTexCoord.restype = ctypes.c_double
 def HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV):
     return x3d.HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV)
 
-"""
 
 # input.pas
-x3d.MouseSetPosition.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.MouseSetPosition.restype = ctypes.c_double
-def MouseSetPosition(aMx, aMy):
-    return x3d.MouseSetPosition(aMx, aMy)
-
 x3d.MouseGetPositionX.argtypes = []
 x3d.MouseGetPositionX.restype = ctypes.c_double
 def MouseGetPositionX():
@@ -1449,6 +1497,11 @@ x3d.MouseGetPositionY.argtypes = []
 x3d.MouseGetPositionY.restype = ctypes.c_double
 def MouseGetPositionY():
     return x3d.MouseGetPositionY()
+
+x3d.MouseSetPosition.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MouseSetPosition.restype = ctypes.c_double
+def MouseSetPosition(aMx, aMy):
+    return x3d.MouseSetPosition(aMx, aMy)
 
 x3d.MouseShowCursor.argtypes = [ctypes.c_double]
 x3d.MouseShowCursor.restype = ctypes.c_double
@@ -1460,7 +1513,11 @@ x3d.KeyIsPressed.restype = ctypes.c_double
 def KeyIsPressed(aKey):
     return x3d.KeyIsPressed(aKey)
 
-"""
+x3d.MouseIsPressed.argtypes = [ctypes.c_double]
+x3d.MouseIsPressed.restype = ctypes.c_double
+def MouseIsPressed(aBtn):
+    return x3d.MouseIsPressed(aBtn)
+
 
 # kraft.pas
 x3d.KraftCreate.argtypes = []
@@ -1842,6 +1899,23 @@ def LinesSetDivision(aLines, aDivision):
     return x3d.LinesSetDivision(aLines, aDivision)
 
 
+# logger.pas
+x3d.LoggerCreate.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.LoggerCreate.restype = ctypes.c_double
+def LoggerCreate(aFname, aLoglevel):
+    return x3d.LoggerCreate(aFname, aLoglevel)
+
+x3d.LoggerEnable.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.LoggerEnable.restype = ctypes.c_double
+def LoggerEnable(aLogger, aMode):
+    return x3d.LoggerEnable(aLogger, aMode)
+
+x3d.LoggerLog.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_char_p]
+x3d.LoggerLog.restype = ctypes.c_double
+def LoggerLog(aLogger, aLoglevel, aMsg):
+    return x3d.LoggerLog(aLogger, aLoglevel, aMsg)
+
+
 # material.pas
 x3d.MaterialLibraryCreate.argtypes = []
 x3d.MaterialLibraryCreate.restype = ctypes.c_double
@@ -1878,6 +1952,11 @@ x3d.MaterialLibraryLoadScript.restype = ctypes.c_double
 def MaterialLibraryLoadScript(aMatlib, aFilename):
     return x3d.MaterialLibraryLoadScript(aMatlib, aFilename)
 
+x3d.MaterialLibraryGetTextureByName.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.MaterialLibraryGetTextureByName.restype = ctypes.c_double
+def MaterialLibraryGetTextureByName(aMatlib, aName):
+    return x3d.MaterialLibraryGetTextureByName(aMatlib, aName)
+
 x3d.MaterialCreate.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
 x3d.MaterialCreate.restype = ctypes.c_double
 def MaterialCreate(aMtrl, aFname):
@@ -1895,8 +1974,8 @@ def MaterialAddCubeMap(aMtrl):
 
 x3d.MaterialCubeMapLoadImage.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialCubeMapLoadImage.restype = ctypes.c_double
-def MaterialCubeMapLoadImage(aMtrl, aTexture, aInd):
-    return x3d.MaterialCubeMapLoadImage(aMtrl, aTexture, aInd)
+def MaterialCubeMapLoadImage(aMtrl, aFilename, aInd):
+    return x3d.MaterialCubeMapLoadImage(aMtrl, aFilename, aInd)
 
 x3d.MaterialCubeMapGenerate.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialCubeMapGenerate.restype = ctypes.c_double
@@ -2018,6 +2097,11 @@ x3d.MaterialSetTextureFormat.restype = ctypes.c_double
 def MaterialSetTextureFormat(aMtrl, aTf):
     return x3d.MaterialSetTextureFormat(aMtrl, aTf)
 
+x3d.MaterialSetTextureFormatEx.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureFormatEx.restype = ctypes.c_double
+def MaterialSetTextureFormatEx(aMtrl, aTfex):
+    return x3d.MaterialSetTextureFormatEx(aMtrl, aTfex)
+
 x3d.MaterialSetTextureCompression.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetTextureCompression.restype = ctypes.c_double
 def MaterialSetTextureCompression(aMtrl, aTc):
@@ -2032,21 +2116,6 @@ x3d.MaterialSetFilteringQuality.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetFilteringQuality.restype = ctypes.c_double
 def MaterialSetFilteringQuality(aMtrl, aTf):
     return x3d.MaterialSetFilteringQuality(aMtrl, aTf)
-
-x3d.MaterialAddTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_char_p]
-x3d.MaterialAddTextureEx.restype = ctypes.c_double
-def MaterialAddTextureEx(aMtrl, aTex):
-    return x3d.MaterialAddTextureEx(aMtrl, aTex)
-
-x3d.MaterialTextureExClear.argtypes = [ctypes.c_char_p]
-x3d.MaterialTextureExClear.restype = ctypes.c_double
-def MaterialTextureExClear(aMtrl):
-    return x3d.MaterialTextureExClear(aMtrl)
-
-x3d.MaterialTextureExDelete.argtypes = [ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialTextureExDelete.restype = ctypes.c_double
-def MaterialTextureExDelete(aMtrl, aInd):
-    return x3d.MaterialTextureExDelete(aMtrl, aInd)
 
 x3d.MaterialSetShader.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetShader.restype = ctypes.c_double
@@ -2067,6 +2136,26 @@ x3d.MaterialSetTextureWrap.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialSetTextureWrap.restype = ctypes.c_double
 def MaterialSetTextureWrap(aMtrl, aWrap):
     return x3d.MaterialSetTextureWrap(aMtrl, aWrap)
+
+x3d.MaterialSetTextureWrapS.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureWrapS.restype = ctypes.c_double
+def MaterialSetTextureWrapS(aMtrl, aWrap):
+    return x3d.MaterialSetTextureWrapS(aMtrl, aWrap)
+
+x3d.MaterialSetTextureWrapT.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureWrapT.restype = ctypes.c_double
+def MaterialSetTextureWrapT(aMtrl, aWrap):
+    return x3d.MaterialSetTextureWrapT(aMtrl, aWrap)
+
+x3d.MaterialSetTextureWrapR.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureWrapR.restype = ctypes.c_double
+def MaterialSetTextureWrapR(aMtrl, aWrap):
+    return x3d.MaterialSetTextureWrapR(aMtrl, aWrap)
+
+x3d.MaterialSetTextureBorderColor.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureBorderColor.restype = ctypes.c_double
+def MaterialSetTextureBorderColor(aMtrl, aCol):
+    return x3d.MaterialSetTextureBorderColor(aMtrl, aCol)
 
 x3d.MaterialGenTexture.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double]
 x3d.MaterialGenTexture.restype = ctypes.c_double
@@ -2093,25 +2182,20 @@ x3d.MaterialLoadTexture.restype = ctypes.c_double
 def MaterialLoadTexture(aMtrl, aFilename):
     return x3d.MaterialLoadTexture(aMtrl, aFilename)
 
-x3d.MaterialLoadTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialLoadTextureEx.restype = ctypes.c_double
-def MaterialLoadTextureEx(aMtrl, aFilename, aIndex):
-    return x3d.MaterialLoadTextureEx(aMtrl, aFilename, aIndex)
+x3d.MaterialAddTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialAddTextureEx.restype = ctypes.c_double
+def MaterialAddTextureEx(aMtrl, aIndex):
+    return x3d.MaterialAddTextureEx(aMtrl, aIndex)
 
-x3d.MaterialSetTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialSetTextureEx.restype = ctypes.c_double
-def MaterialSetTextureEx(aMtrl, aMtrl2, aIndex):
-    return x3d.MaterialSetTextureEx(aMtrl, aMtrl2, aIndex)
+x3d.MaterialGetTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialGetTextureEx.restype = ctypes.c_double
+def MaterialGetTextureEx(aMtrl, aIndex):
+    return x3d.MaterialGetTextureEx(aMtrl, aIndex)
 
-x3d.MaterialGenTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.MaterialGenTextureEx.restype = ctypes.c_double
-def MaterialGenTextureEx(aMtrl, aIndex, aW, aH):
-    return x3d.MaterialGenTextureEx(aMtrl, aIndex, aW, aH)
-
-x3d.MaterialEnableTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_double]
-x3d.MaterialEnableTextureEx.restype = ctypes.c_double
-def MaterialEnableTextureEx(aMtrl, aIndex, aMode):
-    return x3d.MaterialEnableTextureEx(aMtrl, aIndex, aMode)
+x3d.MaterialTextureExClear.argtypes = [ctypes.c_char_p]
+x3d.MaterialTextureExClear.restype = ctypes.c_double
+def MaterialTextureExClear(aMtrl):
+    return x3d.MaterialTextureExClear(aMtrl)
 
 x3d.MaterialHasTextureEx.argtypes = [ctypes.c_char_p, ctypes.c_double]
 x3d.MaterialHasTextureEx.restype = ctypes.c_double
@@ -2153,25 +2237,30 @@ x3d.MaterialNoiseRandomSeed.restype = ctypes.c_double
 def MaterialNoiseRandomSeed(aMtrl, aS):
     return x3d.MaterialNoiseRandomSeed(aMtrl, aS)
 
-x3d.MaterialCullFrontFaces.argtypes = [ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialCullFrontFaces.restype = ctypes.c_double
-def MaterialCullFrontFaces(aMtrl, aCulff):
-    return x3d.MaterialCullFrontFaces(aMtrl, aCulff)
+x3d.MaterialSetDepthWrite.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetDepthWrite.restype = ctypes.c_double
+def MaterialSetDepthWrite(aMtrl, aMode):
+    return x3d.MaterialSetDepthWrite(aMtrl, aMode)
 
-x3d.MaterialSetZWrite.argtypes = [ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialSetZWrite.restype = ctypes.c_double
-def MaterialSetZWrite(aMtrl, aZwrite):
-    return x3d.MaterialSetZWrite(aMtrl, aZwrite)
-
-x3d.MaterialSetTextureExFromLibrary.argtypes = [ctypes.c_char_p, ctypes.c_double, ctypes.c_char_p, ctypes.c_double]
-x3d.MaterialSetTextureExFromLibrary.restype = ctypes.c_double
-def MaterialSetTextureExFromLibrary(aMaterial1, aMatlib2, aMaterial2, aIndex):
-    return x3d.MaterialSetTextureExFromLibrary(aMaterial1, aMatlib2, aMaterial2, aIndex)
+x3d.MaterialSetDepthTest.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetDepthTest.restype = ctypes.c_double
+def MaterialSetDepthTest(aMtrl, aMode):
+    return x3d.MaterialSetDepthTest(aMtrl, aMode)
 
 x3d.MaterialGetNameFromLibrary.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.MaterialGetNameFromLibrary.restype = ctypes.c_char_p
 def MaterialGetNameFromLibrary(aMatlib, aIndex):
     return x3d.MaterialGetNameFromLibrary(aMatlib, aIndex)
+
+x3d.MaterialSetTextureCompareMode.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureCompareMode.restype = ctypes.c_double
+def MaterialSetTextureCompareMode(aMtrl, aTcm):
+    return x3d.MaterialSetTextureCompareMode(aMtrl, aTcm)
+
+x3d.MaterialSetTextureDepthCompareFunc.argtypes = [ctypes.c_char_p, ctypes.c_double]
+x3d.MaterialSetTextureDepthCompareFunc.restype = ctypes.c_double
+def MaterialSetTextureDepthCompareFunc(aMtrl, aTcf):
+    return x3d.MaterialSetTextureDepthCompareFunc(aMtrl, aTcf)
 
 
 # memviewer.pas
@@ -2376,7 +2465,6 @@ x3d.NavigatorSetAngles.restype = ctypes.c_double
 def NavigatorSetAngles(aNavigator, aMinangle, aMaxangle):
     return x3d.NavigatorSetAngles(aNavigator, aMinangle, aMaxangle)
 
-"""
 
 # object.pas
 x3d.ObjectHide.argtypes = [ctypes.c_double]
@@ -2393,6 +2481,11 @@ x3d.ObjectIsVisible.argtypes = [ctypes.c_double]
 x3d.ObjectIsVisible.restype = ctypes.c_double
 def ObjectIsVisible(aObj):
     return x3d.ObjectIsVisible(aObj)
+
+x3d.ObjectCopy.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ObjectCopy.restype = ctypes.c_double
+def ObjectCopy(aObj, aParent):
+    return x3d.ObjectCopy(aObj, aParent)
 
 x3d.ObjectDestroy.argtypes = [ctypes.c_double]
 x3d.ObjectDestroy.restype = ctypes.c_double
@@ -2784,11 +2877,6 @@ x3d.ObjectExportAbsoluteMatrix.restype = ctypes.c_double
 def ObjectExportAbsoluteMatrix(aObj1, aObj2):
     return x3d.ObjectExportAbsoluteMatrix(aObj1, aObj2)
 
-x3d.ObjectCopy.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.ObjectCopy.restype = ctypes.c_double
-def ObjectCopy(aObj, aParent):
-    return x3d.ObjectCopy(aObj, aParent)
-
 x3d.ObjectInFrustum.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ObjectInFrustum.restype = ctypes.c_double
 def ObjectInFrustum(aObj, aViewer):
@@ -2799,7 +2887,31 @@ x3d.ObjectFindByName.restype = ctypes.c_double
 def ObjectFindByName(aName):
     return x3d.ObjectFindByName(aName)
 
-"""
+x3d.ObjectIgnoreDepthBuffer.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ObjectIgnoreDepthBuffer.restype = ctypes.c_double
+def ObjectIgnoreDepthBuffer(aObj, aMode):
+    return x3d.ObjectIgnoreDepthBuffer(aObj, aMode)
+
+x3d.ObjectIsPicked.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ObjectIsPicked.restype = ctypes.c_double
+def ObjectIsPicked(aObj, aViewer, aX, aY):
+    return x3d.ObjectIsPicked(aObj, aViewer, aX, aY)
+
+x3d.ObjectStructureChanged.argtypes = [ctypes.c_double]
+x3d.ObjectStructureChanged.restype = ctypes.c_double
+def ObjectStructureChanged(aObj):
+    return x3d.ObjectStructureChanged(aObj)
+
+x3d.ObjectClearStructureChanged.argtypes = [ctypes.c_double]
+x3d.ObjectClearStructureChanged.restype = ctypes.c_double
+def ObjectClearStructureChanged(aObj):
+    return x3d.ObjectClearStructureChanged(aObj)
+
+x3d.ObjectNotifyChange.argtypes = [ctypes.c_double]
+x3d.ObjectNotifyChange.restype = ctypes.c_double
+def ObjectNotifyChange(aObj):
+    return x3d.ObjectNotifyChange(aObj)
+
 
 # objecthash.pas
 x3d.ObjectHashCreate.argtypes = []
@@ -2807,20 +2919,20 @@ x3d.ObjectHashCreate.restype = ctypes.c_double
 def ObjectHashCreate():
     return x3d.ObjectHashCreate()
 
-x3d.ObjectHashSetItem.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_double]
+x3d.ObjectHashSetItem.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ObjectHashSetItem.restype = ctypes.c_double
-def ObjectHashSetItem(aHash, aKey, aObj):
-    return x3d.ObjectHashSetItem(aHash, aKey, aObj)
+def ObjectHashSetItem(aHash, aKey, aPchar, aObj):
+    return x3d.ObjectHashSetItem(aHash, aKey, aPchar, aObj)
 
-x3d.ObjectHashGetItem.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.ObjectHashGetItem.argtypes = [ctypes.c_double]
 x3d.ObjectHashGetItem.restype = ctypes.c_double
-def ObjectHashGetItem(aHash, aKey):
-    return x3d.ObjectHashGetItem(aHash, aKey)
+def ObjectHashGetItem(aHash, aKey, aPchar):
+    return x3d.ObjectHashGetItem(aHash, aKey, aPchar)
 
-x3d.ObjectHashDeleteItem.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.ObjectHashDeleteItem.argtypes = [ctypes.c_double]
 x3d.ObjectHashDeleteItem.restype = ctypes.c_double
-def ObjectHashDeleteItem(aHash, aKey):
-    return x3d.ObjectHashDeleteItem(aHash, aKey)
+def ObjectHashDeleteItem(aHash, aKey, aPchar):
+    return x3d.ObjectHashDeleteItem(aHash, aKey, aPchar)
 
 x3d.ObjectHashGetItemCount.argtypes = [ctypes.c_double]
 x3d.ObjectHashGetItemCount.restype = ctypes.c_double
@@ -2836,6 +2948,23 @@ x3d.ObjectHashDestroy.argtypes = [ctypes.c_double]
 x3d.ObjectHashDestroy.restype = ctypes.c_double
 def ObjectHashDestroy(aHash):
     return x3d.ObjectHashDestroy(aHash)
+
+
+# objectlist.pas
+x3d.ObjectListCreate.argtypes = []
+x3d.ObjectListCreate.restype = ctypes.c_double
+def ObjectListCreate():
+    return x3d.ObjectListCreate()
+
+x3d.ObjectListAdd.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ObjectListAdd.restype = ctypes.c_double
+def ObjectListAdd(aList, aObj):
+    return x3d.ObjectListAdd(aList, aObj)
+
+x3d.ObjectListGetCount.argtypes = [ctypes.c_double]
+x3d.ObjectListGetCount.restype = ctypes.c_double
+def ObjectListGetCount(aList):
+    return x3d.ObjectListGetCount(aList)
 
 
 # ode.pas
@@ -2884,10 +3013,10 @@ x3d.OdeManagerSetVisible.restype = ctypes.c_double
 def OdeManagerSetVisible(aMode):
     return x3d.OdeManagerSetVisible(aMode)
 
-x3d.OdeManagerSetGeomColor.argtypes = [ctypes.c_double]
+x3d.OdeManagerSetGeomColor.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.OdeManagerSetGeomColor.restype = ctypes.c_double
-def OdeManagerSetGeomColor(aColor):
-    return x3d.OdeManagerSetGeomColor(aColor)
+def OdeManagerSetGeomColor(aColordynamicdisabled, aColordynamicenabled, aColorstatic):
+    return x3d.OdeManagerSetGeomColor(aColordynamicdisabled, aColordynamicenabled, aColorstatic)
 
 x3d.OdeWorldSetAutoDisableFlag.argtypes = [ctypes.c_double]
 x3d.OdeWorldSetAutoDisableFlag.restype = ctypes.c_double
@@ -3014,16 +3143,6 @@ x3d.OdeDynamicAddRelTorque.restype = ctypes.c_double
 def OdeDynamicAddRelTorque(aObj, aX, aY, aZ):
     return x3d.OdeDynamicAddRelTorque(aObj, aX, aY, aZ)
 
-x3d.OdeDynamicGetContactCount.argtypes = [ctypes.c_double]
-x3d.OdeDynamicGetContactCount.restype = ctypes.c_double
-def OdeDynamicGetContactCount(aObj):
-    return x3d.OdeDynamicGetContactCount(aObj)
-
-x3d.OdeStaticGetContactCount.argtypes = [ctypes.c_double]
-x3d.OdeStaticGetContactCount.restype = ctypes.c_double
-def OdeStaticGetContactCount(aObj):
-    return x3d.OdeStaticGetContactCount(aObj)
-
 x3d.OdeAddBox.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.OdeAddBox.restype = ctypes.c_double
 def OdeAddBox(aObj, aX, aY, aZ, aW, aH, aD):
@@ -3043,11 +3162,6 @@ x3d.OdeAddCylinder.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double
 x3d.OdeAddCylinder.restype = ctypes.c_double
 def OdeAddCylinder(aObj, aX, aY, aZ, aLen, aR):
     return x3d.OdeAddCylinder(aObj, aX, aY, aZ, aLen, aR)
-
-x3d.OdeAddCone.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.OdeAddCone.restype = ctypes.c_double
-def OdeAddCone(aObj, aX, aY, aZ, aLen, aR):
-    return x3d.OdeAddCone(aObj, aX, aY, aZ, aLen, aR)
 
 x3d.OdeAddCapsule.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.OdeAddCapsule.restype = ctypes.c_double
@@ -3414,6 +3528,28 @@ def PartitionResultHide(aTree):
     return x3d.PartitionResultHide(aTree)
 
 
+# picklist.pas
+x3d.PickListCreate.argtypes = [ctypes.c_double]
+x3d.PickListCreate.restype = ctypes.c_double
+def PickListCreate(aPs):
+    return x3d.PickListCreate(aPs)
+
+x3d.PickListClear.argtypes = [ctypes.c_double]
+x3d.PickListClear.restype = ctypes.c_double
+def PickListClear(aList):
+    return x3d.PickListClear(aList)
+
+x3d.PickListGetCount.argtypes = [ctypes.c_double]
+x3d.PickListGetCount.restype = ctypes.c_double
+def PickListGetCount(aList):
+    return x3d.PickListGetCount(aList)
+
+x3d.PickListGetHit.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PickListGetHit.restype = ctypes.c_double
+def PickListGetHit(aList, aIndex):
+    return x3d.PickListGetHit(aList, aIndex)
+
+
 # pipe.pas
 x3d.PipeCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.PipeCreate.restype = ctypes.c_double
@@ -3455,28 +3591,6 @@ x3d.PipeSetSlices.restype = ctypes.c_double
 def PipeSetSlices(aPipe, aSlic):
     return x3d.PipeSetSlices(aPipe, aSlic)
 
-
-# polygon.pas
-x3d.PolygonCreate.argtypes = [ctypes.c_double]
-x3d.PolygonCreate.restype = ctypes.c_double
-def PolygonCreate(aParent):
-    return x3d.PolygonCreate(aParent)
-
-x3d.PolygonAddVertex.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.PolygonAddVertex.restype = ctypes.c_double
-def PolygonAddVertex(aPolygon, aX, aY, aZ):
-    return x3d.PolygonAddVertex(aPolygon, aX, aY, aZ)
-
-x3d.PolygonSetVertexPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.PolygonSetVertexPosition.restype = ctypes.c_double
-def PolygonSetVertexPosition(aPolygon, aVertex, aX, aY, aZ):
-    return x3d.PolygonSetVertexPosition(aPolygon, aVertex, aX, aY, aZ)
-
-x3d.PolygonDeleteVertex.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.PolygonDeleteVertex.restype = ctypes.c_double
-def PolygonDeleteVertex(aPolygon, aVertex):
-    return x3d.PolygonDeleteVertex(aPolygon, aVertex)
-"""
 
 # primitives.pas
 x3d.CubeCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -3649,7 +3763,6 @@ x3d.TeapotCreate.restype = ctypes.c_double
 def TeapotCreate(aParent):
     return x3d.TeapotCreate(aParent)
 
-"""
 
 # proxy.pas
 x3d.ProxyObjectCreate.argtypes = [ctypes.c_double, ctypes.c_double]
@@ -3698,71 +3811,6 @@ x3d.ShaderEnable.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ShaderEnable.restype = ctypes.c_double
 def ShaderEnable(aShader, aMode):
     return x3d.ShaderEnable(aShader, aMode)
-
-x3d.PhongShaderCreate.argtypes = []
-x3d.PhongShaderCreate.restype = ctypes.c_double
-def PhongShaderCreate():
-    return x3d.PhongShaderCreate()
-
-x3d.PhongShaderUseTexture.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.PhongShaderUseTexture.restype = ctypes.c_double
-def PhongShaderUseTexture(aShader, aMode):
-    return x3d.PhongShaderUseTexture(aShader, aMode)
-
-x3d.PhongShaderSetMaxLights.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.PhongShaderSetMaxLights.restype = ctypes.c_double
-def PhongShaderSetMaxLights(aShader, aMaxlights):
-    return x3d.PhongShaderSetMaxLights(aShader, aMaxlights)
-
-x3d.BumpShaderCreate.argtypes = []
-x3d.BumpShaderCreate.restype = ctypes.c_double
-def BumpShaderCreate():
-    return x3d.BumpShaderCreate()
-
-x3d.BumpShaderSetDiffuseTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
-x3d.BumpShaderSetDiffuseTexture.restype = ctypes.c_double
-def BumpShaderSetDiffuseTexture(aShader, aMtrl):
-    return x3d.BumpShaderSetDiffuseTexture(aShader, aMtrl)
-
-x3d.BumpShaderSetNormalTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
-x3d.BumpShaderSetNormalTexture.restype = ctypes.c_double
-def BumpShaderSetNormalTexture(aShader, aMtrl):
-    return x3d.BumpShaderSetNormalTexture(aShader, aMtrl)
-
-x3d.BumpShaderSetHeightTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
-x3d.BumpShaderSetHeightTexture.restype = ctypes.c_double
-def BumpShaderSetHeightTexture(aShader, aMtrl):
-    return x3d.BumpShaderSetHeightTexture(aShader, aMtrl)
-
-x3d.BumpShaderSetMaxLights.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderSetMaxLights.restype = ctypes.c_double
-def BumpShaderSetMaxLights(aShader, aMaxlights):
-    return x3d.BumpShaderSetMaxLights(aShader, aMaxlights)
-
-x3d.BumpShaderUseParallax.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderUseParallax.restype = ctypes.c_double
-def BumpShaderUseParallax(aShader, aMode):
-    return x3d.BumpShaderUseParallax(aShader, aMode)
-
-x3d.BumpShaderSetParallaxOffset.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderSetParallaxOffset.restype = ctypes.c_double
-def BumpShaderSetParallaxOffset(aShader, aHeight):
-    return x3d.BumpShaderSetParallaxOffset(aShader, aHeight)
-
-x3d.BumpShaderSetShadowMap.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderSetShadowMap.restype = ctypes.c_double
-def BumpShaderSetShadowMap(aShader, aShadowmap):
-    return x3d.BumpShaderSetShadowMap(aShader, aShadowmap)
-
-x3d.BumpShaderSetShadowBlurRadius.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderSetShadowBlurRadius.restype = ctypes.c_double
-def BumpShaderSetShadowBlurRadius(aShader, aRadius):
-    return x3d.BumpShaderSetShadowBlurRadius(aShader, aRadius)
-
-x3d.BumpShaderUseAutoTangentSpace.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.BumpShaderUseAutoTangentSpace.restype = ctypes.c_double
-def BumpShaderUseAutoTangentSpace(aShader, aMode):
-    return x3d.BumpShaderUseAutoTangentSpace(aShader, aMode)
 
 x3d.CelShaderCreate.argtypes = []
 x3d.CelShaderCreate.restype = ctypes.c_double
@@ -3944,47 +3992,122 @@ x3d.GLSLShaderSetParameterHasTextureEx.restype = ctypes.c_double
 def GLSLShaderSetParameterHasTextureEx(aPar, aSlot):
     return x3d.GLSLShaderSetParameterHasTextureEx(aPar, aSlot)
 
+x3d.GLSLShaderForceDisableStencilTest.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.GLSLShaderForceDisableStencilTest.restype = ctypes.c_double
+def GLSLShaderForceDisableStencilTest(aShader, aMode):
+    return x3d.GLSLShaderForceDisableStencilTest(aShader, aMode)
+
+x3d.GLSLShaderSetOptions.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.GLSLShaderSetOptions.restype = ctypes.c_double
+def GLSLShaderSetOptions(aShader, aLightingenabled, aFogenabled):
+    return x3d.GLSLShaderSetOptions(aShader, aLightingenabled, aFogenabled)
+
+x3d.PhongShaderCreate.argtypes = []
+x3d.PhongShaderCreate.restype = ctypes.c_double
+def PhongShaderCreate():
+    return x3d.PhongShaderCreate()
+
+x3d.PhongShaderUseTexture.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PhongShaderUseTexture.restype = ctypes.c_double
+def PhongShaderUseTexture(aShader, aMode):
+    return x3d.PhongShaderUseTexture(aShader, aMode)
+
+x3d.PhongShaderSetMaxLights.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.PhongShaderSetMaxLights.restype = ctypes.c_double
+def PhongShaderSetMaxLights(aShader, aMaxlights):
+    return x3d.PhongShaderSetMaxLights(aShader, aMaxlights)
+
+x3d.BumpShaderCreate.argtypes = []
+x3d.BumpShaderCreate.restype = ctypes.c_double
+def BumpShaderCreate():
+    return x3d.BumpShaderCreate()
+
+x3d.BumpShaderSetDiffuseTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.BumpShaderSetDiffuseTexture.restype = ctypes.c_double
+def BumpShaderSetDiffuseTexture(aShader, aMtrl):
+    return x3d.BumpShaderSetDiffuseTexture(aShader, aMtrl)
+
+x3d.BumpShaderSetNormalTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.BumpShaderSetNormalTexture.restype = ctypes.c_double
+def BumpShaderSetNormalTexture(aShader, aMtrl):
+    return x3d.BumpShaderSetNormalTexture(aShader, aMtrl)
+
+x3d.BumpShaderSetHeightTexture.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.BumpShaderSetHeightTexture.restype = ctypes.c_double
+def BumpShaderSetHeightTexture(aShader, aMtrl):
+    return x3d.BumpShaderSetHeightTexture(aShader, aMtrl)
+
+x3d.BumpShaderSetMaxLights.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderSetMaxLights.restype = ctypes.c_double
+def BumpShaderSetMaxLights(aShader, aMaxlights):
+    return x3d.BumpShaderSetMaxLights(aShader, aMaxlights)
+
+x3d.BumpShaderUseParallax.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderUseParallax.restype = ctypes.c_double
+def BumpShaderUseParallax(aShader, aMode):
+    return x3d.BumpShaderUseParallax(aShader, aMode)
+
+x3d.BumpShaderSetParallaxOffset.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderSetParallaxOffset.restype = ctypes.c_double
+def BumpShaderSetParallaxOffset(aShader, aHeight):
+    return x3d.BumpShaderSetParallaxOffset(aShader, aHeight)
+
+x3d.BumpShaderSetShadowMap.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderSetShadowMap.restype = ctypes.c_double
+def BumpShaderSetShadowMap(aShader, aShadowmap):
+    return x3d.BumpShaderSetShadowMap(aShader, aShadowmap)
+
+x3d.BumpShaderSetShadowBlurRadius.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderSetShadowBlurRadius.restype = ctypes.c_double
+def BumpShaderSetShadowBlurRadius(aShader, aRadius):
+    return x3d.BumpShaderSetShadowBlurRadius(aShader, aRadius)
+
+x3d.BumpShaderUseAutoTangentSpace.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.BumpShaderUseAutoTangentSpace.restype = ctypes.c_double
+def BumpShaderUseAutoTangentSpace(aShader, aMode):
+    return x3d.BumpShaderUseAutoTangentSpace(aShader, aMode)
+
 
 # shadowmap.pas
 x3d.ShadowMapCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ShadowMapCreate.restype = ctypes.c_double
-def ShadowMapCreate(aSize, aViewer, aCaster):
-    return x3d.ShadowMapCreate(aSize, aViewer, aCaster)
+def ShadowMapCreate(aFbo, aViewer, aShadowcamera):
+    return x3d.ShadowMapCreate(aFbo, aViewer, aShadowcamera)
+
+x3d.ShadowMapUpdate.argtypes = [ctypes.c_double]
+x3d.ShadowMapUpdate.restype = ctypes.c_double
+def ShadowMapUpdate(aShadowmap):
+    return x3d.ShadowMapUpdate(aShadowmap)
 
 x3d.ShadowMapSetCamera.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ShadowMapSetCamera.restype = ctypes.c_double
-def ShadowMapSetCamera(aShadowmap, aCam):
-    return x3d.ShadowMapSetCamera(aShadowmap, aCam)
+def ShadowMapSetCamera(aSm, aSc):
+    return x3d.ShadowMapSetCamera(aSm, aSc)
 
-x3d.ShadowMapSetCaster.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.ShadowMapSetCaster.restype = ctypes.c_double
-def ShadowMapSetCaster(aShadowmap, aCaster):
-    return x3d.ShadowMapSetCaster(aShadowmap, aCaster)
-
-x3d.ShadowMapSetProjectionSize.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.ShadowMapSetProjectionSize.restype = ctypes.c_double
-def ShadowMapSetProjectionSize(aShadowmap, aSize):
-    return x3d.ShadowMapSetProjectionSize(aShadowmap, aSize)
-
-x3d.ShadowMapSetZScale.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.ShadowMapSetZScale.restype = ctypes.c_double
-def ShadowMapSetZScale(aShadowmap, aScale):
-    return x3d.ShadowMapSetZScale(aShadowmap, aScale)
-
-x3d.ShadowMapSetZClippingPlanes.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.ShadowMapSetZClippingPlanes.restype = ctypes.c_double
-def ShadowMapSetZClippingPlanes(aShadowmap, aZnear, aZfar):
-    return x3d.ShadowMapSetZClippingPlanes(aShadowmap, aZnear, aZfar)
-
-x3d.ShadowMapRender.argtypes = [ctypes.c_double]
-x3d.ShadowMapRender.restype = ctypes.c_double
-def ShadowMapRender(aShadowmap):
-    return x3d.ShadowMapRender(aShadowmap)
+x3d.ShadowMapSetViewer.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ShadowMapSetViewer.restype = ctypes.c_double
+def ShadowMapSetViewer(aSm, aV):
+    return x3d.ShadowMapSetViewer(aSm, aV)
 
 x3d.ShadowMapSetFBO.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ShadowMapSetFBO.restype = ctypes.c_double
-def ShadowMapSetFBO(aShadowmap, aFbo):
-    return x3d.ShadowMapSetFBO(aShadowmap, aFbo)
+def ShadowMapSetFBO(aSm, aFbo):
+    return x3d.ShadowMapSetFBO(aSm, aFbo)
+
+x3d.ShadowCameraCreate.argtypes = [ctypes.c_double]
+x3d.ShadowCameraCreate.restype = ctypes.c_double
+def ShadowCameraCreate(aParent):
+    return x3d.ShadowCameraCreate(aParent)
+
+x3d.ShadowCameraSetProjectionSize.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ShadowCameraSetProjectionSize.restype = ctypes.c_double
+def ShadowCameraSetProjectionSize(aSc, aSize):
+    return x3d.ShadowCameraSetProjectionSize(aSc, aSize)
+
+x3d.ShadowCameraSetZClippingPlanes.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ShadowCameraSetZClippingPlanes.restype = ctypes.c_double
+def ShadowCameraSetZClippingPlanes(aSc, aZnear, aZfar):
+    return x3d.ShadowCameraSetZClippingPlanes(aSc, aZnear, aZfar)
 
 
 # shadowplane.pas
@@ -4201,11 +4324,6 @@ x3d.SpriteMirror.restype = ctypes.c_double
 def SpriteMirror(aSprite, aU, aV):
     return x3d.SpriteMirror(aSprite, aU, aV)
 
-x3d.SpriteNoZWrite.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.SpriteNoZWrite.restype = ctypes.c_double
-def SpriteNoZWrite(aSprite, aMode):
-    return x3d.SpriteNoZWrite(aSprite, aMode)
-
 x3d.SpriteCreateEx.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.SpriteCreateEx.restype = ctypes.c_double
 def SpriteCreateEx(aW, aH, aLeft, aTop, aRight, aBottom, aParent):
@@ -4334,6 +4452,45 @@ def TerrainGetHDSPosition(aTerrain, aX, aY, aZ, aIndex):
     return x3d.TerrainGetHDSPosition(aTerrain, aX, aY, aZ, aIndex)
 
 
+# text.pas
+
+# texture.pas
+x3d.TextureExLoad.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.TextureExLoad.restype = ctypes.c_double
+def TextureExLoad(aTextureitem, aFilename):
+    return x3d.TextureExLoad(aTextureitem, aFilename)
+
+x3d.TextureExSetFromMaterial.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.TextureExSetFromMaterial.restype = ctypes.c_double
+def TextureExSetFromMaterial(aTextureitem, aMtrl):
+    return x3d.TextureExSetFromMaterial(aTextureitem, aMtrl)
+
+x3d.TextureExGenerate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.TextureExGenerate.restype = ctypes.c_double
+def TextureExGenerate(aTextureitem, aW, aH):
+    return x3d.TextureExGenerate(aTextureitem, aW, aH)
+
+x3d.TextureExDelete.argtypes = [ctypes.c_double]
+x3d.TextureExDelete.restype = ctypes.c_double
+def TextureExDelete(aTextureitem):
+    return x3d.TextureExDelete(aTextureitem)
+
+x3d.TextureExSetTextureScale.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.TextureExSetTextureScale.restype = ctypes.c_double
+def TextureExSetTextureScale(aTextureitem, aX, aY):
+    return x3d.TextureExSetTextureScale(aTextureitem, aX, aY)
+
+x3d.TextureExSetTextureOffset.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.TextureExSetTextureOffset.restype = ctypes.c_double
+def TextureExSetTextureOffset(aTextureitem, aX, aY):
+    return x3d.TextureExSetTextureOffset(aTextureitem, aX, aY)
+
+x3d.TextureExEnable.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.TextureExEnable.restype = ctypes.c_double
+def TextureExEnable(aTextureitem, aMode):
+    return x3d.TextureExEnable(aTextureitem, aMode)
+
+
 # thorfx.pas
 x3d.ThorFXManagerCreate.argtypes = []
 x3d.ThorFXManagerCreate.restype = ctypes.c_double
@@ -4444,10 +4601,10 @@ x3d.TreeCreate.restype = ctypes.c_double
 def TreeCreate(aParent):
     return x3d.TreeCreate(aParent)
 
-x3d.TreeSetMaterials.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+x3d.TreeSetMaterials.argtypes = [ctypes.c_double]
 x3d.TreeSetMaterials.restype = ctypes.c_double
-def TreeSetMaterials(aTree, aMfront, aMback, aMbranch):
-    return x3d.TreeSetMaterials(aTree, aMfront, aMback, aMbranch)
+def TreeSetMaterials(aTree, aMfront, aMback, aMbranch, aPchar):
+    return x3d.TreeSetMaterials(aTree, aMfront, aMback, aMbranch, aPchar)
 
 x3d.TreeSetBranchFacets.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.TreeSetBranchFacets.restype = ctypes.c_double
@@ -4686,13 +4843,12 @@ x3d.VerletWorldSetMaxDeltaTime.restype = ctypes.c_double
 def VerletWorldSetMaxDeltaTime(aWr, aTm):
     return x3d.VerletWorldSetMaxDeltaTime(aWr, aTm)
 
-"""
 
 # viewer.pas
 x3d.ViewerCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerCreate.restype = ctypes.c_double
-def ViewerCreate(aTop, aLeft, aW, aH, aPw):
-    return x3d.ViewerCreate(aTop, aLeft, aW, aH, aPw)
+def ViewerCreate(aTop, aLeft, aWidth, aHeight, aWinhandle):
+    return x3d.ViewerCreate(aTop, aLeft, aWidth, aHeight, aWinhandle)
 
 x3d.ViewerSetCamera.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ViewerSetCamera.restype = ctypes.c_double
@@ -4709,15 +4865,35 @@ x3d.ViewerRender.restype = ctypes.c_double
 def ViewerRender(aViewer):
     return x3d.ViewerRender(aViewer)
 
+x3d.ViewerBeginRender.argtypes = [ctypes.c_double]
+x3d.ViewerBeginRender.restype = ctypes.c_double
+def ViewerBeginRender(aViewer):
+    return x3d.ViewerBeginRender(aViewer)
+
+x3d.ViewerClear.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.ViewerClear.restype = ctypes.c_double
+def ViewerClear(aViewer, aClearcolor, aCleardepth, aClearstencil):
+    return x3d.ViewerClear(aViewer, aClearcolor, aCleardepth, aClearstencil)
+
+x3d.ViewerRenderObject.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ViewerRenderObject.restype = ctypes.c_double
+def ViewerRenderObject(aViewer, aObj):
+    return x3d.ViewerRenderObject(aViewer, aObj)
+
+x3d.ViewerEndRender.argtypes = [ctypes.c_double]
+x3d.ViewerEndRender.restype = ctypes.c_double
+def ViewerEndRender(aViewer):
+    return x3d.ViewerEndRender(aViewer)
+
 x3d.ViewerRenderToFile.argtypes = [ctypes.c_double, ctypes.c_char_p]
 x3d.ViewerRenderToFile.restype = ctypes.c_double
-def ViewerRenderToFile(aViewer, aFname):
-    return x3d.ViewerRenderToFile(aViewer, aFname)
+def ViewerRenderToFile(aV, aFname):
+    return x3d.ViewerRenderToFile(aV, aFname)
 
 x3d.ViewerResize.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerResize.restype = ctypes.c_double
-def ViewerResize(aViewer, aLeft, aTop, aW, aH):
-    return x3d.ViewerResize(aViewer, aLeft, aTop, aW, aH)
+def ViewerResize(aV, aLeft, aTop, aWidth, aHeight):
+    return x3d.ViewerResize(aV, aLeft, aTop, aWidth, aHeight)
 
 x3d.ViewerSetVisible.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ViewerSetVisible.restype = ctypes.c_double
@@ -4761,8 +4937,8 @@ def ViewerSetFogColor(aViewer, aColor):
 
 x3d.ViewerSetFogDistance.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerSetFogDistance.restype = ctypes.c_double
-def ViewerSetFogDistance(aViewer, aFstart, aFend):
-    return x3d.ViewerSetFogDistance(aViewer, aFstart, aFend)
+def ViewerSetFogDistance(aV, aFstart, aFend):
+    return x3d.ViewerSetFogDistance(aV, aFstart, aFend)
 
 x3d.ViewerScreenToWorld.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerScreenToWorld.restype = ctypes.c_double
@@ -4786,8 +4962,8 @@ def ViewerGetPickedObject(aViewer, aX, aY):
 
 x3d.ViewerGetPickedObjectsList.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerGetPickedObjectsList.restype = ctypes.c_double
-def ViewerGetPickedObjectsList(aViewer, aX, aY, aW, aH, aNum, aInd):
-    return x3d.ViewerGetPickedObjectsList(aViewer, aX, aY, aW, aH, aNum, aInd)
+def ViewerGetPickedObjectsList(aViewer, aList, aX, aY, aW, aH, aNum):
+    return x3d.ViewerGetPickedObjectsList(aViewer, aList, aX, aY, aW, aH, aNum)
 
 x3d.ViewerScreenToVector.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerScreenToVector.restype = ctypes.c_double
@@ -4806,8 +4982,8 @@ def ViewerPixelToDistance(aViewer, aX, aY):
 
 x3d.ViewerSetAntiAliasing.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ViewerSetAntiAliasing.restype = ctypes.c_double
-def ViewerSetAntiAliasing(aViewer, aAa):
-    return x3d.ViewerSetAntiAliasing(aViewer, aAa)
+def ViewerSetAntiAliasing(aV, aAa):
+    return x3d.ViewerSetAntiAliasing(aV, aAa)
 
 x3d.ViewerGetGLSLSupported.argtypes = [ctypes.c_double]
 x3d.ViewerGetGLSLSupported.restype = ctypes.c_double
@@ -4823,11 +4999,6 @@ x3d.ViewerGetVBOSupported.argtypes = [ctypes.c_double]
 x3d.ViewerGetVBOSupported.restype = ctypes.c_double
 def ViewerGetVBOSupported(aViewer):
     return x3d.ViewerGetVBOSupported(aViewer)
-
-x3d.ViewerSetAutoRender.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.ViewerSetAutoRender.restype = ctypes.c_double
-def ViewerSetAutoRender(aViewer, aMode):
-    return x3d.ViewerSetAutoRender(aViewer, aMode)
 
 x3d.ViewerGetSize.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ViewerGetSize.restype = ctypes.c_double
@@ -4861,10 +5032,14 @@ def ViewerPixelRayToWorld(aViewer, aX, aY, aInd):
 
 x3d.ViewerShadeModel.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ViewerShadeModel.restype = ctypes.c_double
-def ViewerShadeModel(aViewer, aInd):
-    return x3d.ViewerShadeModel(aViewer, aInd)
+def ViewerShadeModel(aV, aInd):
+    return x3d.ViewerShadeModel(aV, aInd)
 
-"""
+x3d.ViewerSetAutoRender.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.ViewerSetAutoRender.restype = ctypes.c_double
+def ViewerSetAutoRender(aV, aMode):
+    return x3d.ViewerSetAutoRender(aV, aMode)
+
 
 # water.pas
 x3d.WaterCreate.argtypes = [ctypes.c_double]
@@ -4942,7 +5117,6 @@ x3d.WaterSetLinearWaveFrequency.restype = ctypes.c_double
 def WaterSetLinearWaveFrequency(aWater, aFreq):
     return x3d.WaterSetLinearWaveFrequency(aWater, aFreq)
 
-"""
 
 # window.pas
 x3d.WindowCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
@@ -4999,3 +5173,5 @@ x3d.WindowDispatch.argtypes = []
 x3d.WindowDispatch.restype = ctypes.c_double
 def WindowDispatch():
     return x3d.WindowDispatch()
+
+

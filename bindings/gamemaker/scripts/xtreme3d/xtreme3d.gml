@@ -592,6 +592,7 @@ function dll_init(dll) {
 	global._MaterialGetTextureHeight = external_define(dll, "MaterialGetTextureHeight", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialLoadTexture = external_define(dll, "MaterialLoadTexture", dll_cdecl, ty_real, 2, ty_string, ty_string);
 	global._MaterialAddTextureEx = external_define(dll, "MaterialAddTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
+	global._MaterialGetTextureEx = external_define(dll, "MaterialGetTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._MaterialTextureExClear = external_define(dll, "MaterialTextureExClear", dll_cdecl, ty_real, 1, ty_string);
 	global._MaterialHasTextureEx = external_define(dll, "MaterialHasTextureEx", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._TextureExLoad = external_define(dll, "TextureExLoad", dll_cdecl, ty_real, 2, ty_real, ty_string);
@@ -2836,6 +2837,10 @@ function MaterialLoadTexture(aMtrl, aFilename) {
 
 function MaterialAddTextureEx(aMtrl, aIndex) {
 	return external_call(global._MaterialAddTextureEx, aMtrl, aIndex);
+}
+
+function MaterialGetTextureEx(aMtrl, aIndex) {
+	return external_call(global._MaterialGetTextureEx, aMtrl, aIndex);
 }
 
 function MaterialTextureExClear(aMtrl) {

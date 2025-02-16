@@ -747,7 +747,7 @@ exports
     MaterialNoiseRandomSeed, MaterialSetDepthWrite, MaterialSetDepthTest,
     MaterialGetNameFromLibrary,
     MaterialGetTextureWidth, MaterialGetTextureHeight,
-    MaterialAddTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
+    MaterialAddTextureEx, MaterialGetTextureEx, MaterialTextureExClear, MaterialHasTextureEx,
     TextureExLoad, TextureExSetFromMaterial, TextureExGenerate, TextureExDelete,
     TextureExSetTextureScale, TextureExSetTextureOffset, TextureExEnable,
     MaterialSetTextureCompareMode, MaterialSetTextureDepthCompareFunc,
