@@ -68,7 +68,7 @@ MouseShowCursor(not mouselookActive);
 
 running = True
 timer = 0.0
-dt = 1.0 / 60.0 #0.015
+dt = 1.0 / 60.0
 
 while(running):
     WindowDispatch()
