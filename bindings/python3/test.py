@@ -23,7 +23,7 @@ ViewerSetLighting(viewer, True)
 ViewerEnableFog(viewer, True)
 ViewerSetFogColor(viewer, c_gray)
 ViewerSetFogDistance(viewer, 0, 50)
-# ViewerSetAntiAliasing(viewer, csa8xHQ) #CSAA
+ViewerSetAntiAliasing(viewer, csa8xHQ) # CSAA
 ViewerEnableVSync(viewer, vsmSync)
 ViewerSetAutoRender(viewer, False)
 
@@ -38,7 +38,7 @@ camPos = DummycubeCreate(scene)
 
 camera = CameraCreate(camPos)
 ViewerSetCamera(viewer, camera)
-ObjectSetPosition(camPos, 0, 2, 3)
+ObjectSetPosition(camPos, 0, 1.8, 3)
 CameraSetViewDepth(camera, 1000)
 CameraSetFocal(camera, 100)
 CameraSetNearPlaneBias(camera, 0.2)
@@ -47,13 +47,15 @@ light1 = LightCreate(lsOmni, scene)
 LightSetAmbientColor(light1, c_black)
 LightSetDiffuseColor(light1, c_white)
 LightSetSpecularColor(light1, c_white)
-ObjectSetPosition(light1, 3, 5, 3)
+ObjectSetPosition(light1, 1, 3, 1)
 
 plane = PlaneCreate(0, 20, 20, 10, 10, scene)
 ObjectPitch(plane, 90)
-MaterialCreate(b'mPlane', b'')
-MaterialSetDiffuseColor(b'mPlane', c_red, 1.0)
+MaterialCreate(b'mPlane', b'data/ground.jpg')
 ObjectSetMaterial(plane, b'mPlane')
+
+cube = CubeCreate(1, 1, 1, scene)
+ObjectSetPosition(cube, 0, 0.5, 0)
 
 mouselookActive = True
 mbLeftReleased = True

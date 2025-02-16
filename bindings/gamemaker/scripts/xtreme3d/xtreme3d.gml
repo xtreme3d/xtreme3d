@@ -5597,7 +5597,7 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro psDefault 0
 #macro psName 1
 #macro psMinDepth 2
-#macro psMaxDepth 2
+#macro psMaxDepth 3
 #macro aarMorph 0
 #macro aarSkeleton 1
 #macro aarNone 2
