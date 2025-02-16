@@ -6,7 +6,7 @@ begin
     lf := TGLLensFlare.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     lf := TGLLensFlare.CreateAsChild(scene.Objects);
-  result := Integer(lf);
+  result := ObjToReal(lf);
 end;
 
 function LensflareSetSize(lensflare, size: real): real; cdecl;

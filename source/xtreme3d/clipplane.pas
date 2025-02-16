@@ -6,7 +6,7 @@ begin
     cp := TGLClipPlane.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     cp := TGLClipPlane.CreateAsChild(scene.Objects);
-  result := Integer(cp);
+  result := ObjToReal(cp);
 end;
 
 function ClipPlaneEnable(cplane, mode: real): real; cdecl;

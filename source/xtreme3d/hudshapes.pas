@@ -8,7 +8,7 @@ begin
     shp := TGLHUDShape.CreateAsChild(scene.Objects);
   shp.SetSize(w, h);
   shp.ShapeType := hstRectangle;
-  result := Integer(shp);
+  result := ObjToReal(shp);
 end;
 
 function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; cdecl;
@@ -26,7 +26,7 @@ begin
   shp.NumSlices := Trunc(slices);
   shp.StartAngle := startAng;
   shp.EndAngle := endAng;
-  result := Integer(shp);
+  result := ObjToReal(shp);
 end;
 
 function HUDShapeLineCreate(x1, y1, x2, y2, parent: real): real; cdecl;

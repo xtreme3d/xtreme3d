@@ -4,6 +4,7 @@ begin
     TTF_Init();
     empty := TEmpty.Create(nil);
     scene := TGLScene.Create(nil);
+    PtrToReal(scene);
     memviewer := TGLMemoryViewer.Create(nil);
     cadencer := TGLCadencer.Create(nil);
     cadencer.Scene := scene;

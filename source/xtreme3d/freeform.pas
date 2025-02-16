@@ -758,4 +758,3 @@ begin
     baseMesh.BuildSilhouetteConnectivityData;
     result := 1.0;
 end;
-

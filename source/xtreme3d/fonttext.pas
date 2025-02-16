@@ -143,7 +143,7 @@ begin
   GLSpaceText1.Font.Height:=TGLWindowsBitmapFont(RealToPtr(font)).Font.Height;
   GLSpaceText1.Text:=StrConv(txt);
   GLSpaceText1.Extrusion:=extr;
-  result:=Integer(GLSpaceText1);
+  result:=ObjToReal(GLSpaceText1);
 end;
 
 function SpaceTextSetExtrusion(text: real; extr: real): real; cdecl;

@@ -6,7 +6,7 @@ begin
     li := TGLLines.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     li := TGLLines.CreateAsChild(scene.Objects);
-  result := Integer(li);
+  result := ObjToReal(li);
 end;
 
 function LinesAddNode(lines, x, y, z: real): real; cdecl;

@@ -7,7 +7,7 @@ begin
   else
     mi := TGLMirror.CreateAsChild(scene.Objects);
   mi.MirrorObject := TGLBaseSceneObject(RealToPtr(target));
-  Result := Integer(mi);
+  Result := ObjToReal(mi);
 end;
 
 function MirrorSetObject(mirror, target: real): real; cdecl;

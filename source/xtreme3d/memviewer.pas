@@ -42,7 +42,7 @@ var
   mat:TGLLibMaterial;
 begin
   mv:=TGLMemoryViewer(RealToPtr(mview));
-  mat:=matlib.Materials.GetLibMaterialByName(String(AnsiString(matname)));
+  mat:=matlib.Materials.GetLibMaterialByName(StrConv(matname));
   Assert(mat.Material.Texture.IsHandleAllocated);
   mv.CopyToTexture(mat.Material.Texture);
   result:=1;

@@ -4,6 +4,7 @@ uses
   System.SysUtils,
   System.Classes,
   System.Math,
+  System.Generics.Collections,
   TypInfo,
   Messages,
   Windows,
@@ -178,12 +179,12 @@ var
 
 function ObjToReal(obj: TObject): real;
 begin
-    result := real(longint(Pointer(obj)));
+    result := real(NativeInt(Pointer(obj)));
 end;
 
 function PtrToReal(p: Pointer): real;
 begin
-    result := real(longint(p));
+    result := real(NativeInt(p));
 end;
 
 function RealToPtr(v: real): Pointer;

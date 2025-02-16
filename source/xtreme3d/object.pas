@@ -25,7 +25,7 @@ begin
   else
     par := scene.Objects;
   obj2 := TGLBaseSceneObject(obj1.NewInstance).CreateAsChild(par);
-  result:=Integer(obj2);
+  result:=ObjToReal(obj2);
 end;
 
 function ObjectDestroy(obj: real): real; cdecl;
@@ -532,7 +532,7 @@ var
   object1: TGLBaseSceneObject;
 begin
   object1:=TGLBaseSceneObject(RealToPtr(obj1));
-  result := Integer(object1.Parent);
+  result := ObjToReal(object1.Parent);
 end;
 
 function ObjectGetChildCount(obj1: real): real; cdecl;
@@ -548,7 +548,7 @@ var
   object1: TGLBaseSceneObject;
 begin
   object1:=TGLBaseSceneObject(RealToPtr(obj1));
-  result := Integer(object1.Children[Trunc(ind)]);
+  result := ObjToReal(object1.Children[Trunc(ind)]);
 end;
 
 function ObjectGetIndex(obj1: real): real; cdecl;
@@ -566,13 +566,13 @@ var
   i: Integer;
 begin
   object1:=TGLBaseSceneObject(RealToPtr(obj1));
-  n := String(AnsiString(name));
+  n := StrConv(name);
 
   for i := 0 to object1.Count do
   begin
      if AnsiCompareText(object1.Children[i].Name, n) = 0 then
      begin
-         result := Integer(object1.Children[i]);
+         result := ObjToReal(object1.Children[i]);
          Exit;
      end;
   end;
@@ -818,7 +818,7 @@ end;
 
 function ObjectFindByName(name: PAnsiChar): real; cdecl;
 begin
-  result:=Integer(scene.FindSceneObject(String(AnsiString(name))));
+  result:=ObjToReal(scene.FindSceneObject(StrConv(name)));
 end;
 
 function ObjectIgnoreDepthBuffer(obj, mode: real): real; cdecl;
