@@ -901,6 +901,7 @@ function dll_init(dll) {
 	global._WindowIsShowing = external_define(dll, "WindowIsShowing", dll_cdecl, ty_real, 1, ty_real);
 	global._WindowSetIcon = external_define(dll, "WindowSetIcon", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._WindowDispatch = external_define(dll, "WindowDispatch", dll_cdecl, ty_real, 0);
+	global._WindowIsActive = external_define(dll, "WindowIsActive", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Color
 	global._MakeColorRGB = external_define(dll, "MakeColorRGB", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -5210,6 +5211,10 @@ function WindowSetIcon(aW, aFilename) {
 
 function WindowDispatch() {
 	return external_call(global._WindowDispatch);
+}
+
+function WindowIsActive(aW) {
+	return external_call(global._WindowIsActive, aW);
 }
 
 function PointerToReal(p) {

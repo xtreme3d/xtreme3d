@@ -17,6 +17,7 @@ uses
   Vcl.Imaging.Jpeg,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
+  GLS.Keyboard,
   GLS.Blur,
   GLS.BitmapFont,
   GLS.Cadencer,
@@ -173,7 +174,7 @@ var
     kraftRaycastPoint: TKraftVector3;
     kraftRaycastNormal: TKraftVector3;
 
-    previousTicks: Longint;
+    previousTicks: Cardinal;
 
 {$R *.res}
 
@@ -973,7 +974,7 @@ exports
     WindowCreate, WindowGetHandle, WindowSetTitle, WindowDestroy,
     WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
     WindowSetIcon, WindowIsShowing,
-    WindowDispatch,
+    WindowDispatch, WindowIsActive,
 
     // Color
     MakeColorRGB, MakeColorRGBFloat,

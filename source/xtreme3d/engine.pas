@@ -84,13 +84,13 @@ end;
 
 function EngineGetTimeStep: real; cdecl;
 var
-    currentTicks: Longint;
-    elapsedMsec: Longint;
+    currentTicks: Cardinal;
+    elapsedMsec: Cardinal;
 begin
     currentTicks := GetTickCount;
     elapsedMsec := currentTicks - previousTicks;
     previousTicks := currentTicks;
-    result := elapsedMsec * 0.001;
+    result := real(elapsedMsec) * 0.001;
 end;
 
 function EngineGetLastRaycastPosition(ind: real): real; cdecl;

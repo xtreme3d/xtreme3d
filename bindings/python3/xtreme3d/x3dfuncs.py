@@ -5174,4 +5174,9 @@ x3d.WindowDispatch.restype = ctypes.c_double
 def WindowDispatch():
     return x3d.WindowDispatch()
 
+x3d.WindowIsActive.argtypes = [ctypes.c_double]
+x3d.WindowIsActive.restype = ctypes.c_double
+def WindowIsActive(aW):
+    return x3d.WindowIsActive(aW)
+
 

@@ -8,7 +8,7 @@ begin
   frm.Left := trunc(x);
   frm.Top := trunc(y);
   if trunc(resizeable) = 0 then
-    frm.BorderStyle := bsSingle;
+    frm.BorderStyle := bsDialog;
   frm.Show;
   frm.Enabled := True;
   result := ObjToReal(frm);
@@ -140,3 +140,12 @@ begin
   end;
   result := 1.0;
 end;
+
+function WindowIsActive(w: real): real; cdecl;
+var
+  frm: TForm;
+begin
+  frm := TForm(RealToPtr(w));
+  Result := integer(frm.Active);
+end;
+
