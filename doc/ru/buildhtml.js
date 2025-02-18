@@ -18,7 +18,8 @@ function generatePage(title, markdown, language, encoding="utf8") {
 }
 
 const functions = [
-    { title: "Engine", inFilename: "markdown/functions/engine.md", outFilename: "html/functions/engine.html" }
+    { title: "Engine", inFilename: "markdown/functions/engine.md", outFilename: "html/functions/engine.html" },
+    { title: "Viewer", inFilename: "markdown/functions/viewer.md", outFilename: "html/functions/viewer.html" }
 ];
 
 const outputEncoding = "win1251";
