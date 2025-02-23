@@ -38,7 +38,7 @@ v4.0.0 (by Gecko) - ??/??/????
 - FBO system was redesigned. `FBOSetViewer`, `FBORenderObject`, `FBORenderObjectEx`, `FBOSetOverrideMaterial`, `FBOSetColorTextureFormat` were removed. New functions `FBOSetActive`, `FBOSetAspect`, `FBOSetPickableTarget`, `FBOSetSize`, `FBOSetRootObject`, `FBOSetBackgroundColor`, `FBOSetEnabledRenderBuffers`, `FBOSetSceneScaleFactor`, `FBOSetTargetVisibility`, `FBOSetMaterialLibrary`, `FBOSetColorTextureName`, `FBOSetDepthTextureName`, `FBOSetClearOptions`, `FBOSetStencilPrecision`, `FBOSetShadowMapMode`
 - ShadowMap was redesigned. `ShadowMapSetCaster`, `ShadowMapSetProjectionSize`, `ShadowMapSetZScale`, `ShadowMapSetZClippingPlanes`, `ShadowMapRender` were removed. New functions `ShadowMapUpdate`, `ShadowMapSetViewer`. `ShadowMapSetCamera` now uses special ShadowCamera object
 - New functions `ShadowCameraCreate`, `ShadowCameraSetProjectionSize`, `ShadowCameraSetZClippingPlanes`
-- New functions `GLSLShaderForceDisableStencilTest`, `GLSLShaderSetOptions`
+- New functions `GLSLShaderSetLogger`, `GLSLShaderForceDisableStencilTest`, `GLSLShaderSetOptions`
 - New functions `LoggerCreate`, `LoggerEnable`, `LoggerLog`
 - New function `WindowIsActive`
 - Fixed CSM loader (correct Z-axis and UV mapping)
