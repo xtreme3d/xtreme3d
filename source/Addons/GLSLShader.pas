@@ -21,6 +21,7 @@ uses
   GLS.Scene,
   GLS.PipelineTransformation,
   GLS.FBORenderer,
+  GLS.Logger,
   GLShadowMap,
   TypInfo,
   Variants;
@@ -130,12 +131,17 @@ type
       FForceDisableStencilTest: Boolean;
       FStencilTestState: Boolean;
     public
+      vertexShaderInfo: AnsiString;
+      fragmentShaderInfo: AnsiString;
+      logger: TLogSession;
       constructor Create(AOwner: TComponent); override;
       procedure SetPrograms(vp, fp: PAnsiChar);
     protected
       procedure DoApply(var rci : TGLRenderContextInfo; Sender : TObject); override;
       function DoUnApply(var rci : TGLRenderContextInfo) : Boolean; override;
       procedure DoInitialize(var rci: TGLRenderContextInfo; Sender: TObject); override;
+      function ValidateVertexShader: Boolean;
+      function ValidateFragmentShader: Boolean;
     published
       property Param: TGLSLShaderParameters read Parameters;
       property Prog: GLenum read shaderProg;
@@ -541,8 +547,8 @@ begin
        Exit;
 
    shaderProg := gl.CreateProgram();
-   shaderVert := gl.CreateShader(GL_VERTEX_SHADER_ARB);
-   shaderFrag := gl.CreateShader(GL_FRAGMENT_SHADER_ARB);
+   shaderVert := gl.CreateShader(GL_VERTEX_SHADER);
+   shaderFrag := gl.CreateShader(GL_FRAGMENT_SHADER);
 
    pl := -1;
    p := PAnsiChar(AnsiString(vps));
@@ -551,41 +557,62 @@ begin
    gl.ShaderSource(shaderFrag, 1, @p, nil);
 
    gl.CompileShader(shaderVert);
-   gl.CompileShader(shaderFrag);
-   gl.AttachShader(shaderProg, shaderVert);
-   gl.AttachShader(shaderProg, shaderFrag);
-   gl.LinkProgram(shaderProg);
+   shaderSane := ValidateVertexShader;
 
-   shaderSane := true;
-
-   success := 0;
-   gl.GetObjectParameteriv(shaderVert, GL_OBJECT_COMPILE_STATUS_ARB, @success);
-   if success = 0 then
+   if shaderSane then
    begin
-     shaderSane := false;
-     maxLength := 0;
-     gl.GetObjectParameteriv(shaderVert, GL_OBJECT_INFO_LOG_LENGTH_ARB, @maxLength);
-     SetLength(log, maxLength);
-     gl.GetInfoLog(shaderVert, maxLength, @maxLength, @log[1]);
-     SetLength(log, maxLength);
-     ShowMessage('GLSL vertex shader error: ' + #13#10 + String(log));
+     gl.CompileShader(shaderFrag);
+     shaderSane := ValidateFragmentShader;
    end;
 
-   success := 0;
-   gl.GetObjectParameteriv(shaderFrag, GL_OBJECT_COMPILE_STATUS_ARB, @success);
-   if success = 0 then
+   if shaderSane then
    begin
-     shaderSane := false;
-     maxLength := 0;
-     gl.GetObjectParameteriv(shaderFrag, GL_OBJECT_INFO_LOG_LENGTH_ARB, @maxLength);
-     SetLength(log, maxLength);
-     gl.GetInfoLog(shaderVert, maxLength, @maxLength, @log[1]);
-     SetLength(log, maxLength);
-     ShowMessage('GLSL fragment shader error: ' + #13#10 + String(log));
+     gl.AttachShader(shaderProg, shaderVert);
+     gl.AttachShader(shaderProg, shaderFrag);
+     gl.LinkProgram(shaderProg);
    end;
 
-   // TODO: make this switchable
    gl.Enable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+end;
+
+function TGLSLShader.ValidateVertexShader: Boolean;
+var
+   status: Integer;
+   infoLength: Integer;
+begin
+   status := GL_FALSE;
+   gl.GetShaderiv(shaderVert, GL_COMPILE_STATUS, @status);
+   result := status <> GL_FALSE;
+   infoLength := 0;
+   gl.GetShaderiv(shaderVert, GL_INFO_LOG_LENGTH, @infoLength);
+   if infoLength > 1 then
+   begin
+     SetLength(VertexShaderInfo, 1024);
+     gl.GetShaderInfoLog(shaderVert, infoLength, Nil, @VertexShaderInfo[1]);
+     SetLength(VertexShaderInfo, infoLength - 1);
+     if logger <> Nil then
+       logger.Log('[Vertex shader] ' + String(VertexShaderInfo), lkError);
+   end;
+end;
+
+function TGLSLShader.ValidateFragmentShader: Boolean;
+var
+   status: Integer;
+   infoLength: Integer;
+begin
+   status := GL_FALSE;
+   gl.GetShaderiv(shaderFrag, GL_COMPILE_STATUS, @status);
+   result := status <> GL_FALSE;
+   infoLength := 0;
+   gl.GetShaderiv(shaderFrag, GL_INFO_LOG_LENGTH, @infoLength);
+   if infoLength > 1 then
+   begin
+     SetLength(FragmentShaderInfo, 1024);
+     gl.GetShaderInfoLog(shaderFrag, infoLength, Nil, @FragmentShaderInfo[1]);
+     SetLength(FragmentShaderInfo, infoLength - 1);
+     if logger <> Nil then
+       logger.Log('[Fragment shader] ' + String(FragmentShaderInfo), lkError);
+   end;
 end;
 
 procedure TGLSLShader.SetPrograms(vp, fp: PAnsiChar);

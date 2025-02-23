@@ -3907,6 +3907,11 @@ x3d.GLSLShaderCreate.restype = ctypes.c_double
 def GLSLShaderCreate(aVp, aFp):
     return x3d.GLSLShaderCreate(aVp, aFp)
 
+x3d.GLSLShaderSetLogger.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.GLSLShaderSetLogger.restype = ctypes.c_double
+def GLSLShaderSetLogger(aShader, aLogger):
+    return x3d.GLSLShaderSetLogger(aShader, aLogger)
+
 x3d.GLSLShaderCreateParameter.argtypes = [ctypes.c_double, ctypes.c_char_p]
 x3d.GLSLShaderCreateParameter.restype = ctypes.c_double
 def GLSLShaderCreateParameter(aGlsl, aName):

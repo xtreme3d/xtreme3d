@@ -650,6 +650,7 @@ function dll_init(dll) {
 	global._TexCombineShaderMaterial3 = external_define(dll, "TexCombineShaderMaterial3", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._TexCombineShaderMaterial4 = external_define(dll, "TexCombineShaderMaterial4", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._GLSLShaderCreate = external_define(dll, "GLSLShaderCreate", dll_cdecl, ty_real, 2, ty_string, ty_string);
+	global._GLSLShaderSetLogger = external_define(dll, "GLSLShaderSetLogger", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderCreateParameter = external_define(dll, "GLSLShaderCreateParameter", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._GLSLShaderSetParameter1i = external_define(dll, "GLSLShaderSetParameter1i", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._GLSLShaderSetParameter1f = external_define(dll, "GLSLShaderSetParameter1f", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -4282,6 +4283,10 @@ function TexCombineShaderMaterial4(aTcs, aM4) {
 
 function GLSLShaderCreate(aVp, aFp) {
 	return external_call(global._GLSLShaderCreate, aVp, aFp);
+}
+
+function GLSLShaderSetLogger(aGlsl, aLogger) {
+	return external_call(global._GLSLShaderSetLogger, aGlsl, aLogger);
 }
 
 function GLSLShaderCreateParameter(aGlsl, aName) {

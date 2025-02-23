@@ -192,6 +192,16 @@ begin
   result := ObjToReal(shader);
 end;
 
+function GLSLShaderSetLogger(shader, logger: real): real; cdecl;
+var
+  shadr: TGLSLShader;
+  loggerSession: TLogSession;
+begin
+  shadr := TGLSLShader(RealToPtr(shader));
+  shadr.logger := TLogSession(RealToPtr(logger));
+  result := 1.0;
+end;
+
 function GLSLShaderCreateParameter(glsl: real; name: PAnsiChar): real; cdecl;
 var
   shader: TGLSLShader;
@@ -735,3 +745,4 @@ begin
   paramUseAutoTangentSpace.UniformInteger := trunc(mode);
   result:=1;
 end;
+

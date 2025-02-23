@@ -762,7 +762,7 @@ exports
     OutlineShaderCreate, OutlineShaderSetLineColor, OutlineShaderSetLineWidth,
     TexCombineShaderCreate, TexCombineShaderAddCombiner, TexCombineShaderMaterial3,
     TexCombineShaderMaterial4,
-    GLSLShaderCreate, GLSLShaderCreateParameter,
+    GLSLShaderCreate, GLSLShaderSetLogger, GLSLShaderCreateParameter,
     GLSLShaderSetParameter1i, GLSLShaderSetParameter1f, GLSLShaderSetParameter2f,
     GLSLShaderSetParameter3f, GLSLShaderSetParameter4f,
     GLSLShaderSetParameterTexture, GLSLShaderSetParameterSecondTexture,
