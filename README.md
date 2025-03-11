@@ -77,7 +77,7 @@ Team & Credits
 * Author of the Grid functions - **Ghost**
 * Author of the WindowSetIcon function - **gadmaker**
 
-Special thanks to **gadmaker**, **van88268**, **FireRun**, **JunkerKun**, **Alexander Demchenko** and other community members for bug reports, valuable ideas and suggestions. Also kudos to **Mike Lischke**, **Eric Grange** and all the contributors of GLScene project for creating such a wonderful free graphics library.
+Special thanks to **gadmaker**, **van88268**, **FireRun**, **JunkerKun**, **Alexander Demchenko** and other community members for bug reports, valuable ideas and suggestions. Also kudos to **Mike Lischke**, **Eric Grange**, **GLS Team** and all the contributors of GLScene project for creating such a wonderful free graphics library.
 
 License
 -------
