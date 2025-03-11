@@ -10,7 +10,7 @@ To run a demo:
 
 You can run *.pyw file directly from Windows Explorer if you don't need the command line window.
 
-Do not forget to copy `xtreme3d.dll, `ode64s.dll`, `SDL2.dll`, `SDL2_ttf.dll` to application directory before running.
+Do not forget to copy `xtreme3d.dll`, `ode64s.dll`, `SDL2.dll`, `SDL2_ttf.dll` to application directory before running.
 
 Deployment
 ----------
