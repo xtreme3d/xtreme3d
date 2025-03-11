@@ -6,7 +6,7 @@ Basic usage
 -----------
 To run a demo:
 
-`python test.pyw`
+`python app.pyw`
 
 You can run *.pyw file directly from Windows Explorer if you don't need the command line window.
 
@@ -18,7 +18,7 @@ To distribute your game, you can build a standalone executable from your script,
 
 First, install [cx_Freeze](https://pypi.org/project/cx-Freeze/). Then use `build.bat`:
 
-`build test.pyw`
+`build app.pyw`
 
 Make sure you have write access to working directory before running `build.bat`. It will create a directory named `build/exe.win-amd64-3.9` containing the bindle ready for distribution, including the `data` folder and all DLLs. If you use any additional files in your application, if copy them to the `data` folder, or modify `setup.py` to include other folders. It will also use `icon.ico` to create a `app.exe` - you can replace it with your own icon.
 

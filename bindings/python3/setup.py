@@ -8,7 +8,7 @@ base = None
 if (sys.platform == 'win32'):
     base = 'Win32GUI'
 
-mainScript = 'test.pyw'
+mainScript = 'app.pyw'
 
 if '--script' in sys.argv:
     index = sys.argv.index('--script')
