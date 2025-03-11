@@ -84,3 +84,5 @@ License
 Xtreme3D and corresponding GLScene fork are both distributed under Mozilla Public License 1.1. This license allows you to create commercial closed-source applications with the engine.
 
 ODE is distributed under BSD-style license.
+
+SDL2 is distributed under zlib license.
