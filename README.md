@@ -68,6 +68,17 @@ Documentation
 -------------
 Xtreme3D is fully documented in Russian, the help file is [here](https://github.com/xtreme3d/xtreme3d/tree/master/doc/ru).
 
+Team & Credits
+---------------
+* Initial developer (before 3.0) - **Xception**
+* Key developer of the 3.x-4.x branches - **Gecko**
+* Xtreme3D 3.8 developer, author of the Pipe, TilePlane, VerletWorld functions, additional Viewer, Light, Grid, Material, Actor, Freeform, HUDSprite, Sprite, FireFX, Lines, Movement functions - **FireRun**
+* Author of the DCE and Input functions - **Rutraple** aka **Hacker**
+* Author of the Grid functions - **Ghost**
+* Author of the WindowSetIcon function - **gadmaker**
+
+Special thanks to **gadmaker**, **van88268**, **FireRun**, **JunkerKun**, **Alexander Demchenko** and other community members for bug reports, valuable ideas and suggestions. Also kudos to **Mike Lischke**, **Eric Grange** and all the contributors of GLScene project for creating such a wonderful free graphics library.
+
 License
 -------
 Xtreme3D and corresponding GLScene fork are both distributed under Mozilla Public License 1.1. This license allows you to create commercial closed-source applications with the engine.
