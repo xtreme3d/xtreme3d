@@ -24,7 +24,7 @@ Make sure you have write access to working directory before running `build.bat`.
 
 Mods/plugins
 ------------
-The example script shows how to add a modding system to the game using [pluginbase](https://github.com/mitsuhiko/pluginbase) framework. Put your Python scripts to `plugins` folder, and the core application will run `setup` and `update` functions from them. They have access to Xtreme3D functions as well as the application's data. Plugins can create and manipulate Xtreme3D objects, keep their own state, and update their logics. This will work in the bundle: users can add their own plugins to modify the game at runtime.
+The example script shows how to add a modding system to the game using [PluginBase](https://github.com/mitsuhiko/pluginbase) framework. Put your Python scripts to `plugins` folder, and the core application will run `setup` and `update` functions from them. They have access to Xtreme3D functions as well as the application's data. Plugins can create and manipulate Xtreme3D objects, keep their own state, and update their logics. This will work in the bundle: users can add their own plugins to modify the game at runtime.
 
 Binding Generator
 -----------------
