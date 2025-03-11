@@ -18,7 +18,7 @@ if '--script' in sys.argv:
 executable = Executable(script = mainScript, icon = 'icon.ico', base = base)
 
 exclude = ['tkinter', 'tcl', 'tk', 'sqlite3', 'xml', 'xmlrpc', 'http', 'html', 'urllib', 'email', 'unittest', 'xtreme3d.dll', 'ode64s.dll', 'SDL2.dll', 'SDL2_ttf.dll']
-include = ['data', 'xtreme3d.dll', 'ode64s.dll', 'SDL2.dll', 'SDL2_ttf.dll']
+include = ['data', 'plugins', 'xtreme3d.dll', 'ode64s.dll', 'SDL2.dll', 'SDL2_ttf.dll']
 
 setup(
     name = 'Xtreme3D SDK Demo',

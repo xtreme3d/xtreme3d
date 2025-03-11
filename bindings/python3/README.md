@@ -22,6 +22,10 @@ First, install [cx_Freeze](https://pypi.org/project/cx-Freeze/). Then use `build
 
 Make sure you have write access to working directory before running `build.bat`. It will create a directory named `build/exe.win-amd64-3.9` containing the bindle ready for distribution, including the `data` folder and all DLLs. If you use any additional files in your application, if copy them to the `data` folder, or modify `setup.py` to include other folders. It will also use `icon.ico` to create a `app.exe` - you can replace it with your own icon.
 
+Mods/plugins
+------------
+The example script shows how to add a modding system to the game using [pluginbase](https://github.com/mitsuhiko/pluginbase) framework. Put your Python scripts to `plugins` folder, and the core application will run `setup` and `update` functions from them. They have access to Xtreme3D functions as well as the application's data. Plugins can create and manipulate Xtreme3D objects, keep their own state, and update their logics. This will work in the bundle: users can add their own plugins to modify the game at runtime.
+
 Binding Generator
 -----------------
 The binding script (`xtreme3d/x3dfuncs.py`) can be automatically regenerated from the Xtreme3D source code. Use `genbinding.py` for that (given the repo directory structure remains unchanged).
