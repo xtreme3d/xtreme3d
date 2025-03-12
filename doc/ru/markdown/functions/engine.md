@@ -127,7 +127,7 @@
 
 ---
 
-## PointerToReal(pchar pointer)
+## PointerToReal
 
 `real PointerToReal(string pointer)`
 

@@ -1,55 +1,49 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>PickList</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>PickList</H1>
-
-<A class=type>Класс: TGLPickList</A><BR><BR>
-
-<A>Объект PickList предназначен для хранения списков выборки. Он используется для сохранения результата функции ViewerGetPickedObjectsList, чтобы не пересоздавать в памяти массивы объектов в игровом цикле. При помощи функций PickList вы можете извлечь из списка объект по индексу.
-</A>
-<HR>
-
-<A name="PickListCreate"></A>
-<H1 class=name>PickListCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>PickListCreate</A><A>( ps as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый список выборки и возвращает его id.</A>
-<BR><A>ps - режим сортировки списка. Доступны следующие значения ps:</A>
-<BR><A class=constant name="psDefault">psDefault</A><A> = 0 - режим по умолчанию</A>
-<BR><A class=constant name="psName">psName</A><A> = 1 - сортировка по именам объектов</A>
-<BR><A class=constant name="psMinDepth">psMinDepth</A><A> = 2 - сортировка по приближению к камере</A>
-<BR><A class=constant name="psMaxDepth">psMaxDepth</A><A> = 3 - сортировка по отдалению от камеры</A>
-<HR>
-
-<A name="PickListClear"></A>
-<H1 class=name>PickListClear</H1>
-<A class=type>real</A><A> = </A><A class=function>PickListClear</A><A>( picklist as </A><A class=type>real</A><A> );</A>
-<BR><A>Очищает список выборки.</A>
-<BR><A>picklist - id списка.</A>
-<HR>
-
-<A name="PickListGetCount"></A>
-<H1 class=name>PickListGetCount</H1>
-<A class=type>real</A><A> = </A><A class=function>PickListGetCount</A><A>( picklist as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает количество объектов в списке выборки.</A>
-<BR><A>picklist - id списка.</A>
-<HR>
-
-<A name="PickListGetHit"></A>
-<H1 class=name>PickListGetHit</H1>
-<A class=type>real</A><A> = </A><A class=function>PickListGetHit</A><A>( picklist,index as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает объект из списка по заданному индексу.</A>
-<BR><A>picklist - id списка</A>
-<BR><A>index - индекс (начиная с 0).</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>PickList</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="picklist">PickList</h1>
+<p>Объект PickList предназначен для хранения списков выборки. Он используется для сохранения результата функции ViewerGetPickedObjectsList, чтобы не пересоздавать в памяти массивы объектов в игровом цикле. При помощи функций PickList вы можете извлечь из списка объект по индексу. </p>
+<hr />
+<h2 id="picklistcreate">PickListCreate</h2>
+<p><code>real PickListCreate(real ps);</code></p>
+<p>Создает новый список выборки и возвращает указатель на него.</p>
+<ul>
+<li><code>ps</code> - режим сортировки списка. Доступны следующие значения <code>ps</code>:<ul>
+<li><code>psDefault = 0</code> - режим по умолчанию</li>
+<li><code>psName = 1</code> - сортировка по именам объектов</li>
+<li><code>psMinDepth = 2</code> - сортировка по приближению к камере</li>
+<li><code>psMaxDepth = 3</code> - сортировка по отдалению от камеры.</li></ul></li>
+</ul>
+<hr />
+<h2 id="picklistclear">PickListClear</h2>
+<p><code>real PickListClear(real picklist);</code></p>
+<p>Очищает список выборки.</p>
+<ul>
+<li><code>picklist</code> - указатель на список.</li>
+</ul>
+<hr />
+<h2 id="picklistgetcount">PickListGetCount</h2>
+<p><code>real PickListGetCount(real picklist);</code></p>
+<p>Возвращает количество объектов в списке выборки.</p>
+<ul>
+<li><code>picklist</code> - указатель на список.</li>
+</ul>
+<hr />
+<h2 id="picklistgethit">PickListGetHit</h2>
+<p><code>real PickListGetHit(real picklist, real index);</code></p>
+<p>Возвращает объект из списка по заданному индексу.</p>
+<ul>
+<li><code>picklist</code> - указатель на список</li>
+<li><code>index</code> - индекс (начиная с 0).</li>
+</ul>
+</body>
+</html>
