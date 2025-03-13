@@ -204,6 +204,7 @@
 
 <h2>Xtreme3D 4.0.0 (??.??.2025)</h2>
 <ul>
+  <li>Переход на GLScene 2.2 и Delphi 10+</li>
   <li>Переход на 64-битную архитектуру. 32-битная архитектура больше не поддерживается</li>
   <li>Совместимость с 64-битным GameMaker (бывший GameMaker: Studio 2)</li>
   <li>Все строки в движке принимаются только в UTF-8, поддержка других кодировок удалена</li>
@@ -237,10 +238,11 @@
   <li>Новые функции <code>ObjectNotifyChange</code>, <code>ObjectStructureChanged</code>, <code>ObjectClearStructureChanged</code></li>
   <li>Новые функции <code>ObjectListCreate</code>, <code>ObjectListAdd</code>, <code>ObjectListGetCount</code></li>
   <li>Система FBO переделана. УДалены функции <code>FBOSetViewer</code>, <code>FBORenderObject</code>, <code>FBORenderObjectEx</code>, <code>FBOSetOverrideMaterial</code>, <code>FBOSetColorTextureFormat</code>. Добавлены функции <code>FBOSetActive</code>, <code>FBOSetAspect</code>, <code>FBOSetPickableTarget</code>, <code>FBOSetSize</code>, <code>FBOSetRootObject</code>, <code>FBOSetBackgroundColor</code>, <code>FBOSetEnabledRenderBuffers</code>, <code>FBOSetSceneScaleFactor</code>, <code>FBOSetTargetVisibility</code>, <code>FBOSetMaterialLibrary</code>, <code>FBOSetColorTextureName</code>, <code>FBOSetDepthTextureName</code>, <code>FBOSetClearOptions</code>, <code>FBOSetStencilPrecision</code></li>
-  <li>Новая функция <code>GLSLShaderForceDisableStencilTest</code></li>
+  <li>Новые функции <code>GLSLShaderSetLogger</code>, <code>GLSLShaderForceDisableStencilTest</code>, <code>GLSLShaderSetOptions</code></li>
   <li>Переделаны тени <code>ShadowMap</code>. Удалены функции <code>ShadowMapSetCaster</code>, <code>ShadowMapSetProjectionSize</code>, <code>ShadowMapSetZScale</code>, <code>ShadowMapSetZClippingPlanes</code>, <code>ShadowMapRender</code>. Новые функции <code>ShadowMapUpdate</code>, <code>ShadowMapSetViewer</code></li>
   <li>Добавлен новый объект <code>ShadowCamera</code>, который используется в <code>ShadowMap</code>. Новые функции <code>ShadowCameraCreate</code>, <code>ShadowCameraSetProjectionSize</code>, <code>ShadowCameraSetZClippingPlanes</code></li>
-  <li>Новая функция <code>GLSLShaderForceDisableStencilTest</code></li>
+  <li>Функции логгера: <code>LoggerCreate</code>, <code>LoggerEnable</code>, <code>LoggerLog</code></li>
+  <li>Новая функция <code>WindowIsActive</code></li>
   <li>Функция <code>PtrToReal</code> теперь называется <code>PointerToReal</code>.</li>
 </ul>
 

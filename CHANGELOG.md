@@ -2,7 +2,7 @@ Xtreme3D version history
 ========================
 v4.0.0 (by Gecko) - ??/??/????
 ------------------------------
-- Uses GLScene 2.1 and Delphi 10.4
+- Based on GLScene 2.2 and Delphi 10.4
 - Xtreme3D is now 64 bit and compatible with recent versions of GameMaker and Python 3
 - UTF-8 support for all strings
 - `Update` is deprecated, use `EngineUpdate` instead
