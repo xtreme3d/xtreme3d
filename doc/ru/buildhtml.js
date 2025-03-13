@@ -25,7 +25,8 @@ const functions =
     { title: "Pak", inFilename: "markdown/functions/pak.md", outFilename: "html/functions/pak.html" },
     { title: "Viewer", inFilename: "markdown/functions/viewer.md", outFilename: "html/functions/viewer.html" },
     { title: "PickList", inFilename: "markdown/functions/picklist.md", outFilename: "html/functions/picklist.html" },
-    { title: "Dummycube", inFilename: "markdown/functions/dummycube.md", outFilename: "html/functions/dummycube.html" }
+    { title: "Dummycube", inFilename: "markdown/functions/dummycube.md", outFilename: "html/functions/dummycube.html" },
+    { title: "Camera", inFilename: "markdown/functions/camera.md", outFilename: "html/functions/camera.html" }
 ];
 
 const outputEncoding = "win1251";
