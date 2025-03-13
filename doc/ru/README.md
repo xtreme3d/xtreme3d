@@ -6,4 +6,4 @@ To compile the CHM file on Windows, `buildchm.bat` can be used. If you opened `h
 
 Documentation Generator
 -----------------------
-The efforts are currently being made to rewrite documentation in Markdown and autogenerate HTML pages. This is done with Node.js. Run `node buildhtml.js` to generate pages that already have Markdown sources.
+The efforts are currently being made to rewrite documentation in Markdown and autogenerate HTML pages. This is done with Node.js. Run `npm install`, and then `node buildhtml.js` to generate pages that already have Markdown sources.
