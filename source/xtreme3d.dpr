@@ -176,6 +176,8 @@ var
 
     previousTicks: Cardinal;
 
+    ttfInitialized: Boolean;
+
 {$R *.res}
 
 function ObjToReal(obj: TObject): real;
@@ -1027,7 +1029,7 @@ exports
     KraftJointSetAnchor1, KraftJointSetAnchor2,
     KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 
-    //Logger
+    // Logger
     LoggerCreate, LoggerEnable, LoggerLog;
 begin
 end.

@@ -1,7 +1,6 @@
 function EngineCreate: real; cdecl;
 begin
     SDL_Init(SDL_INIT_EVERYTHING);
-    TTF_Init();
     empty := TEmpty.Create(nil);
     scene := TGLScene.Create(nil);
     PtrToReal(scene);
@@ -12,6 +11,7 @@ begin
     cadencer.enabled := true;
     showLoadingErrors := True;
     previousTicks := GetTickCount;
+    ttfInitialized := False;
     result := 1.0;
 end;
 
@@ -102,9 +102,6 @@ function EngineGetLastRaycastNormal(ind: real): real; cdecl;
 begin
   result := collisionNormal.V[Trunc(ind)];
 end;
-
-//TODO:
-//EngineResetRaycastData()
 
 function PointerToReal(p: PAnsiChar): real; cdecl;
 begin

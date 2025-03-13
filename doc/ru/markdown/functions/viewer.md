@@ -37,6 +37,16 @@ viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToRe
 - `vsm` - `vsmSync` или `vsmNoSync` (0 и 1 соответственно).
 
 ---
+## ViewerSetAutoRender
+
+`real ViewerSetAutoRender(real viewer, real mode);`
+
+Переключает автоматический рендеринг вида. В автоматическом режиме не нужно вызывать `ViewerRender` - рендеринг вида осуществляется в событии перерисовки окна. Отключите этот режим, если вам нужна строгая синхронизация рендеринга и обновления игрового состояния.
+
+- `viewer` - ссылка на вид;
+- `mode` - ссылка на вид.
+
+---
 ## ViewerRender
 
 `real ViewerRender(real viewer);`
@@ -46,14 +56,53 @@ viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToRe
 - `viewer` - ссылка на вид.
 
 ---
+## ViewerBeginRender
+
+`real ViewerBeginRender(real viewer);`
+
+Начинает режим ручного рендеринга. В этом режиме вы можете рендерить в вид объекты в любом порядке, независимо от порядка их создания. Режим нужно обязательно завершить функцией `ViewerEndRender`.
+
+- `viewer` - ссылка на вид.
+
+Вот базовый пример рендеринга в ручном режиме - ручной аналог вызова `ViewerRender(viewer)`:
+
+```
+ViewerBeginRender(viewer);
+ViewerClear(viewer, true, true, true);
+ViewerRenderObject(viewer, EngineRootObject());
+ViewerEndRender(viewer);
+```
+
+---
+## ViewerClear
+
+`real ViewerClear(real viewer, real clearColor, real clearDepth, real clearStencil);`
+
+Очищает буферы вида. Функция корректно работает только в режиме ручного рендеринга. Эта функция, как правило, вызывается перед тем, как рендерить объекты.
+
+- `viewer` - ссылка на вид;
+- `clearColor` - очищать ли цветовой буфер;
+- `clearDepth` - очищать ли буфер глубины;
+- `clearStencil` - очищать ли трафаретный буфер.
+
+---
 ## ViewerRenderObject
 
 `real ViewerRenderObject(real viewer, real obj);`
 
-Совершает рендеринг указанного объекта в виде.
+Совершает рендеринг указанного объекта и его потомков в виде. Функция корректно работает только в режиме ручного рендеринга.
 
 - `viewer` - ссылка на вид;
 - `obj` - ссылка на объект.
+
+---
+## ViewerEndRender
+
+`real ViewerEndRender(real viewer);`
+
+Завершает режим ручного рендеринга.
+
+- `viewer` - ссылка на вид.
 
 ---
 ## ViewerRenderToFile

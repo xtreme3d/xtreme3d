@@ -178,6 +178,11 @@ function TTFontCreate(filename: PAnsiChar; height: real): real; cdecl;
 var
   ftfont: TGLFreetypeFont;
 begin
+  if not ttfInitialized then begin
+    TTF_Init();
+    ttfInitialized := true;
+  end;
+
   ftfont := TGLFreetypeFont.Create(scene);
   ftfont.LoadFont(StrConv(filename), Trunc(height));
   result := ObjToReal(ftfont);

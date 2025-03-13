@@ -361,4 +361,3 @@ begin
     viewer.AutoRender := Boolean(Trunc(mode));
     result := 1.0;
 end;
-

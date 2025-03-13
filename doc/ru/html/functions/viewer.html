@@ -40,6 +40,14 @@
 <li><code>vsm</code> - <code>vsmSync</code> или <code>vsmNoSync</code> (0 и 1 соответственно).</li>
 </ul>
 <hr />
+<h2 id="viewersetautorender">ViewerSetAutoRender</h2>
+<p><code>real ViewerSetAutoRender(real viewer, real mode);</code></p>
+<p>Переключает автоматический рендеринг вида. В автоматическом режиме не нужно вызывать <code>ViewerRender</code> - рендеринг вида осуществляется в событии перерисовки окна. Отключите этот режим, если вам нужна строгая синхронизация рендеринга и обновления игрового состояния.</p>
+<ul>
+<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>mode</code> - ссылка на вид.</li>
+</ul>
+<hr />
 <h2 id="viewerrender">ViewerRender</h2>
 <p><code>real ViewerRender(real viewer);</code></p>
 <p>Совершает рендеринг вида - отрисовку проекции и вывод на экран. Эта функция рендерит все существующие объекты сцены.</p>
@@ -47,12 +55,42 @@
 <li><code>viewer</code> - ссылка на вид.</li>
 </ul>
 <hr />
+<h2 id="viewerbeginrender">ViewerBeginRender</h2>
+<p><code>real ViewerBeginRender(real viewer);</code></p>
+<p>Начинает режим ручного рендеринга. В этом режиме вы можете рендерить в вид объекты в любом порядке, независимо от порядка их создания. Режим нужно обязательно завершить функцией <code>ViewerEndRender</code>.</p>
+<ul>
+<li><code>viewer</code> - ссылка на вид.</li>
+</ul>
+<p>Вот базовый пример рендеринга в ручном режиме - ручной аналог вызова <code>ViewerRender(viewer)</code>:</p>
+<pre><code>ViewerBeginRender(viewer);
+ViewerClear(viewer, true, true, true);
+ViewerRenderObject(viewer, EngineRootObject());
+ViewerEndRender(viewer);
+</code></pre>
+<hr />
+<h2 id="viewerclear">ViewerClear</h2>
+<p><code>real ViewerClear(real viewer, real clearColor, real clearDepth, real clearStencil);</code></p>
+<p>Очищает буферы вида. Функция корректно работает только в режиме ручного рендеринга. Эта функция, как правило, вызывается перед тем, как рендерить объекты.</p>
+<ul>
+<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>clearColor</code> - очищать ли цветовой буфер;</li>
+<li><code>clearDepth</code> - очищать ли буфер глубины;</li>
+<li><code>clearStencil</code> - очищать ли трафаретный буфер.</li>
+</ul>
+<hr />
 <h2 id="viewerrenderobject">ViewerRenderObject</h2>
 <p><code>real ViewerRenderObject(real viewer, real obj);</code></p>
-<p>Совершает рендеринг указанного объекта в виде.</p>
+<p>Совершает рендеринг указанного объекта и его потомков в виде. Функция корректно работает только в режиме ручного рендеринга.</p>
 <ul>
 <li><code>viewer</code> - ссылка на вид;</li>
 <li><code>obj</code> - ссылка на объект.</li>
+</ul>
+<hr />
+<h2 id="viewerendrender">ViewerEndRender</h2>
+<p><code>real ViewerEndRender(real viewer);</code></p>
+<p>Завершает режим ручного рендеринга.</p>
+<ul>
+<li><code>viewer</code> - ссылка на вид.</li>
 </ul>
 <hr />
 <h2 id="viewerrendertofile">ViewerRenderToFile</h2>
