@@ -122,13 +122,14 @@ class App:
                 self.mouselookActive = not self.mouselookActive
                 if not self.mouselookActive:
                     MouseSetPosition(self.pmx, self.pmy)
+                    MouseShowCursor(True)
                 else:
                     self.pmx = MouseGetPositionX()
                     self.pmy = MouseGetPositionY()
                     self.mx = WindowGetPosition(self.window, 0) + self.windowWidth * 0.5
                     self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
-                    self.MouseSetPosition(self.mx, self.my)
-                    MouseShowCursor(not mouselookActive)
+                    MouseSetPosition(self.mx, self.my)
+                    MouseShowCursor(False)
             else:
                 self.mbLeftReleased = True
         
