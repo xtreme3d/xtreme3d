@@ -427,8 +427,8 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
-                        <param name="Name" value="FreeType">
-                        <param name="Local" value="license/license_freetype.html">
+                        <param name="Name" value="SDL">
+                        <param name="Local" value="license/license_sdl.html">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
         </UL>
