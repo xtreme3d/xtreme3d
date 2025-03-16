@@ -28,7 +28,8 @@ const functions =
     { title: "Dummycube", inFilename: "markdown/functions/dummycube.md", outFilename: "html/functions/dummycube.html" },
     { title: "Camera", inFilename: "markdown/functions/camera.md", outFilename: "html/functions/camera.html" },
     { title: "Light", inFilename: "markdown/functions/light.md", outFilename: "html/functions/light.html" },
-    { title: "Font and Text", inFilename: "markdown/functions/fonttext.md", outFilename: "html/functions/fonttext.html" }
+    { title: "Font and Text", inFilename: "markdown/functions/fonttext.md", outFilename: "html/functions/fonttext.html" },
+    { title: "Sprite", inFilename: "markdown/functions/sprite.md", outFilename: "html/functions/sprite.html" }
 ];
 
 const outputEncoding = "win1251";
