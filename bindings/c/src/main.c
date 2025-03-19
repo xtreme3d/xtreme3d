@@ -3,10 +3,14 @@
  */
 
 #include <stdio.h>
+#include <windows.h>
 #include <xtreme3d.h>
 
 int main(int argc, char** argv)
 {
+    /* If you don't need the console window, uncomment the following: */
+    /* ShowWindow(GetConsoleWindow(), SW_HIDE); */
+
     printf("Xtreme3D example\n");
 
     EngineCreate();
