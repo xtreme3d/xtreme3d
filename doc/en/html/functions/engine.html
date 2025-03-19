@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Engine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="engine">Engine</h1>
+<p>Функции движка (Engine), в отличие от остальных, не относятся к какому-либо классу объектов. Они служат для общего управления Xtreme3D и задания базовых параметров движка.</p>
+<hr />
+<h2 id="enginecreate">EngineCreate</h2>
+<p><code>real EngineCreate();</code></p>
+<p>Инициализирует Xtreme3D. После вызова этой функции вы можете использовать другие функции движка. Инициализация движка может происходить только один раз за одно время, то есть, вы не можете снова вызвать эту функцию, пока не будет выполнена <a href="engine.html#enginedestroy">EngineDestroy</a>.</p>
+<hr />
+<h2 id="enginedestroy">EngineDestroy</h2>
+<p><code>real EngineDestroy();</code></p>
+<p>Уничтожает Xtreme3D, освобождая память из-под всех его ресурсов. После вызова этой функции вы не можете использовать другие функции движка, пока не будет выполнена <a href="engine.html#enginecreate">EngineCreate</a>.</p>
+<hr />
+<h2 id="enginesetobjectssorting">EngineSetObjectsSorting</h2>
+<p><code>real EngineSetObjectsSorting(real os);</code></p>
+<p>Определяет режим сортировки (<code>os</code>) для всех объектов. Доступны следующие константы для os:</p>
+<ul>
+<li><code>osInherited = 0</code> - унаследованная сортировка;</li>
+<li><code>osNone = 1</code> - отсутствие сортировки;</li>
+<li><code>osRenderFarthestFirst = 2</code> - отрисовка первыми объектов с максимальным удалением от камеры (значение по умолчанию);</li>
+<li><code>osRenderBlendedLast = 3</code> - непрозрачные объекты не сортируются и отрисовываются первыми, прозрачные - последними, и с учетом глубины;</li>
+<li><code>osRenderNearestFirst = 4</code> - отрисовка первыми объектов с минимальным удалением от камеры.</li>
+</ul>
+<hr />
+<h2 id="enginesetculling">EngineSetCulling</h2>
+<p><code>real EngineSetCulling(real vs);</code></p>
+<p>Определяет режим отбора видимости (<code>vc</code>) для всех объектов. Доступны следующие константы для vc:</p>
+<ul>
+<li><code>vcNone = 0</code> - отсутствие отбора видимости;</li>
+<li><code>vcInherited = 1</code> - унаследованный отбор видимости;</li>
+<li><code>vcObjectBased = 2</code> - отбор совершается на основе объекта: каждый объект может быть отобран в зависимости от своей позиции. Отбор объекта не затрагивает видимость его дочерних объектов;</li>
+<li><code>vcHierarchical = 3</code> - отбор осуществляется по принципу иерархии: если материнский объект отобран, все его дочерние объекты также будут невидимы.
+В зависимости от структуры вашей сцены, наиболее эффективными методами будут <code>vcObjectBased</code> и <code>vcHierarchical</code>.</li>
+</ul>
+<hr />
+<h2 id="engineupdate">EngineUpdate</h2>
+<p><code>real EngineUpdate(real delta);</code></p>
+<p>Совершает шаг итерации движка. В этой функции происходит обновление анимированных объектов - таких, как актеры, эффекты частиц и др. Функция обычно вызывается перед <a href="viewer.html#viewerrender">ViewerRender</a>.</p>
+<ul>
+<li><code>dt</code> - шаг времени в секундах (дельта времени). Обычно шаг времени обратно пропорционален количеству кадров в секунду (1 / FPS). Например, при 60 FPS шаг времени должен быть равен 1/60. Меняя этот параметр, можно менять скорость анимации и сделать эффект замедления или ускорения событий.</li>
+</ul>
+<hr />
+<h2 id="enginesavescene">EngineSaveScene</h2>
+<p><code>real EngineSaveScene(string filename);</code></p>
+<p>Сохраняет все объекты сцены в файл. Функция экспериментальная, с некоторыми типами объектов она может работать некорректно.</p>
+<ul>
+<li><code>filename</code> - имя файла.</li>
+</ul>
+<hr />
+<h2 id="engineloadscene">EngineLoadScene</h2>
+<p><code>real EngineLoadScene(string filename);</code></p>
+<p>Удаляет все объекты сцены и загружает новые из файла. Функция экспериментальная, с некоторыми типами объектов она может работать некорректно.</p>
+<ul>
+<li><code>filename</code> - имя файла.</li>
+</ul>
+<hr />
+<h2 id="enginerootobject">EngineRootObject</h2>
+<p><code>real EngineRootObject();</code></p>
+<p>Возвращает указатель корневого объекта сцены - то есть, объекта, потомками которого являются объекты с нулевым родителем. Манипуляции с этим объектом нужно производить крайне осторожно, с четким пониманием того, что вы делаете! Ни в коем случае не удаляйте корневой объект - это приведет к неработоспособности движка.</p>
+<hr />
+<h2 id="engineshowloadingerrors">EngineShowLoadingErrors</h2>
+<p><code>real EngineShowLoadingErrors(real mode);</code></p>
+<p>Переключает вывод сообщений об ошибках при неудачных загрузках моделей и текстур.</p>
+<ul>
+<li>mode - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="enginesetmaxlights">EngineSetMaxLights</h2>
+<p><code>real EngineSetMaxLights(real lights);</code></p>
+<p>Задает максимальное количество динамических источников света в движке. По умолчанию это значение равно 8. Если вы используете систему LightFX, то функция задает общее количество источников в системе, и оно не ограничено. Если же вы используете базовую систему освещения, то функция все равно сработает, но максимальное количество источников будет ограничено возможностями видеодрайвера.</p>
+<ul>
+<li><code>lights</code> - количество источников света.</li>
+</ul>
+<hr />
+<h2 id="enginegettimestep">EngineGetTimeStep</h2>
+<p><code>real EngineGetTimeStep();</code></p>
+<p>Возвращает время в секундах, прошедшее с предыдущего вызова EngineGetTimeStep (или с вызова <a href="engine.html#enginecreate">EngineCreate</a>, если функция вызывается впервые). Функцию можно использовать для реализации таймера, который необходим практически в любой игре. Например, если вы не используете GameMaker, то с помощью EngineGetTimeStep можете легко сделать таймер для обновления логики игры и вызова <a href="engine.html#engineupdate">EngineUpdate</a> с фиксированной частотой 60 раз в секунду.</p>
+<hr />
+<h2 id="enginegetlastraycastposition">EngineGetLastRaycastPosition</h2>
+<p><code>real EngineGetLastRaycastPosition(real index);</code></p>
+<p>Возвращает абсолютные координаты точки пересечения объекта с лучом, обнаруженного последним вызовом функции <a href="engine.html#objectsceneraycast">ObjectSceneRaycast</a> или <a href="engine.html#objectraycast">ObjectRaycast</a>.</p>
+<ul>
+<li><code>index</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="enginegetlastraycastnormal">EngineGetLastRaycastNormal</h2>
+<p><code>real EngineGetLastRaycastNormal(real index);</code></p>
+<p>Возвращает нормаль полигона пересечения объекта с лучом, обнаруженного последним вызовом функции <a href="engine.html#objectsceneraycast">ObjectSceneRaycast</a> или <a href="engine.html#objectraycast">ObjectRaycast</a>.</p>
+<ul>
+<li><code>index</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="pointertoreal">PointerToReal</h2>
+<p><code>real PointerToReal(string pointer)</code></p>
+<p>Конвертирует указатель на строку в вещественное значение. Строковой указатель используется только для совместимости - вместо него может быть любой указатель. Функция нужна для удобства взаимодействия с GameMaker: Studio, где появился отдельный тип указателей.</p>
+<ul>
+<li><code>pointer</code> - указатель.</li>
+</ul>
+</body>
+</html>

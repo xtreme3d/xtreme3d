@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>FAQ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta charset="windows-1251">
+<meta name="author" content="Gecko">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="sakura.css" inline>
+</head>
+<body>
+
+<h1>Frequently Asked Questions (FAQ)</h1>
+
+<ul>
+<li><a href="#q1">Is it still relevant today to use Xtreme3D?</a></li>
+<li><a href="#q2">Which engine is better - Xtreme3D, Ultimate3D or GMOgre?</a></li>
+<li><a href="#q3">Why the engine does not start or works too slowly?</a></li>
+<li><a href="#q4">Why the engine crashes with an error?</a></li>
+<li><a href="#q5">Does Xtreme3D support shaders?</a></li>
+<li><a href="#q6">Does Xtreme3D support dynamic shadows?</a></li>
+<li><a href="#q7">How to improve the performance of games on Xtreme3D?</a></li>
+<li><a href="#q8">Why are the models in the game rotated incorrectly?</a></li>
+<li><a href="#q9">Why models do not load when loading textures?</a></li>
+<li><a href="#q10">What are Dummycubes and what are they for?</a></li>
+<li><a href="#q11">Why don't mouse events work in Xtreme3D?</a></li>
+<li><a href="#q12">How do I stretch the game window to full screen in Game Maker 8? Start in full-screen mode option doesn't work!</a></li>
+<li><a href="#q13">How to do collision checking?</a></li>
+<li><a href="#q14">How to get a realistic camera perspective?</a></li>
+<li><a href="#q15">How to get the names of materials that are loaded automatically with the model?</a></li>
+<li><a href="#q16">Why does the terrain look stepped?</a></li>
+<li><a href="#q17">How to specify a line break in text objects?</a></li>
+<li><a href="#q18">How to display Cyrillic in text objects?</a></li>
+<li><a href="#q19">Does Xtreme3D support video playback?</a></li>
+<li><a href="#q20">Why are ODE bodies not attached strength?</a></li>
+<li><a href="#q21">Does ODE support ragdolls?</a></li>
+<li><a href="#q22">Why doesn't the material respect the texture alpha channel?</a></li>
+<li><a href="#q23">In what environments can Xtreme3D be used? Is there support for GameMaker Studio?</a></li>
+<li><a href="#q24">Why does the game window flicker when using Xtreme3D?</a></li>
+<li><a href="#q25">How do I set up Xtreme3D for GameMaker Studio 2?</a></li>
+<li><a href="#q26">Why isn't BumpShader working? The object is painted black / textures are not visible / the shader is not displayed correctly.</a></li>
+</ul>
+<hr>
+
+<h2 id="q1">1. Is Xtreme3D still relevant today?</h2>
+<p>For serious use in the industry (creating commercial game projects) - rather no than yes. Xtreme3D is based on outdated graphics technologies (OpenGL 1.x/2.x) and, of course, cannot compete with modern engines like Unity and Unreal Engine in terms of performance and graphics level. However, amateur game projects, as a rule, do not even try to compare with AAA titles, so Xtreme3D 4.x is quite suitable for creating simple indie games. The engine is interesting and attractive in its own way - theoretically, with its help you can create a game no worse than Doom 3 or Half-Life 2.
+But if you need a cross-platform engine (assembly for mobile platforms, Linux, macOS, etc.), then Xtreme3D will not work, since it only supports Windows.</p>
+
+<hr>
+
+<h2 id="q2">2. Which engine is better - Xtreme3D, Ultimate3D or GMOgre?</h2>
+<p>It all depends on the requirements regarding ease of learning, flexibility and convenience. Ultimate3D is very easy to learn, but technologically it is much inferior to the others. GMOgre is a fairly complex engine with a very peculiar API, but very powerful, with its help you can do if not everything, then a lot. Xtreme3D in the latest versions (3.0 and higher) is approaching GMOgre in functionality and can now do almost everything that it can do - while Xtreme3D has a simpler architecture, inherited from GLScene, and an intuitive API.</p>
+<p>If you are just starting to learn 3D graphics, we recommend Ultimate3D. If you already have sufficient experience in GM's built-in 3D graphics, if you are not afraid of difficulties and lack of documentation - you can take a look at GMOgre. If you just need a lightweight, but at the same time powerful and well-documented 3D engine that is easy to learn and convenient to use - then take Xtreme3D.</p>
+<p>Also keep in mind that Xtreme3D is currently the only relevant 3D engine for Game Maker - if you are missing something, you can make a request on the forum, and we will try to implement the functions you need. Ultimate3D and GMOgre have long ceased to develop.</p>
+
+<hr>
+
+<h2 id="q3">3. Why does the engine not start or work too slowly?</h2>
+<p>The latest versions of Xtreme3D (3.x-4.x) are fully functional on modern Windows. Some problems may be related to the video driver. Xtreme3D requires a driver with OpenGL 1.3 support (plus several extensions for individual functions) - if Xtreme3D does not start or works slowly, we recommend updating the video driver.</p>
+
+<hr>
+
+<h2 id="q4">4. Why does the engine crash with an error?</h2>
+<p>The most common error message about an unknown error ("Unexpected error occurred while running the game") is caused by passing invalid parameters to Xtreme3D functions. For example, the engine does not check pointers for validity, since such a check cannot be made effectively. The engine assumes that you will not pass it invalid pointers.</p>
+<p>The error also occurs if you try to load a non-existent texture or model. If your model contains texture data, make sure that the engine can find it - set the texture folder with <code>MaterialLibrarySetTexturePaths</code>.</p>
+<p>Finally, the error can occur if you try to delete an object that has children. Always detach children first or delete them with <code>ObjectDestroyChildren</code>.</p>
+
+<hr>
+
+<h2 id="q5">5. Does Xtreme3D support shaders?</h2>
+<p>Yes, Xtreme3D 3.x-4.x has full support for shaders in GLSL 1.1 and 1.2. The engine also has many built-in shaders that implement various popular effects.</p>
+
+<hr>
+
+<h2 id="q6">6. Does Xtreme3D support dynamic shadows?</h2>
+<p>Yes, Xtreme3D 3.x-4.x has support for three types of shadows (shadow plane, shadow volume, shadow map). We recommend using shadow maps (ShadowMap object) as the most modern and efficient.</p>
+
+<hr>
+
+<h2 id="q7">7. How to improve game performance on Xtreme3D?</h2>
+<p>It depends on the game mechanics, but there are several common methods:</p>
+<ul>
+<li>Use less detailed models and lower resolution textures;</li>
+<li>Divide the entire game space into parts and disable individual parts as needed;</li>
+<li>Disable or delete unnecessary/currently invisible objects;</li>
+<li>Reduce the resolution of resource-intensive effects (water, blur, etc.);</li>
+<li>Instead of loading the same model several times, use duplication. This will significantly save memory. Also in Xtreme3D 3.x-4.x you can use proxies (ProxyObject), which allow you to create as many copies of a model as you want without duplicating it in memory;</li>
+<li>Do not create new objects in the loop (Step event) for things like projectiles, bullets, lasers, sprites for explosions and particle effects. Creating and deleting an object is slow. Use arrays of pre-created objects, and then enable/disable them as needed;</li>
+<li>For large quantities of similar objects (such as prizes), enter them into an Octree or Quadtree, and then use <code>PartitionQueryFrustrum</code> to filter out invisible objects and <code>PartitionQueryBSphere</code> or <code>PartitionQueryAABB</code> to optimize collision checking with these objects;</li>
+<li>In Xtreme3D 3.x-4.x, you can implement LOD (level of detail) using a multi-proxy (MultiProxyObject). Near the camera, the multi-proxy will render a high-poly model, and far away - a low-poly model;</li>
+<li>In Xtreme3D 3.x-4.x, you can use the ClipPlane object to clip graphics with arbitrary planes. For example, you can split the level into a dungeon and an overworld - when the player is in the dungeon, the overworld is cut off by the plane, and vice versa.</li>
+</ul>
+
+<hr>
+
+<h2 id="q8">8. Why are the models in the game rotated incorrectly?</h2>
+<p>The reason lies in the differences between the coordinate systems. Xtreme3D uses a coordinate system where the Z axis points forward relative to the screen (Z-forward), and the Y axis points up (Y-up). You can easily fix the situation by</p>
+<p>a) reorienting the model in the 3D editor so that it is rotated correctly when loaded into Xtreme3D;</p>
+<p>b) making the model a child of the Dummycube and rotating the model using <code>ObjectRotate</code> (in this case, the Dummycube is used instead of the model for all other actions</p>
+<p>c) rotating the model using <code>FreeformMeshRotate</code> (only for Freeform models).</p>
+
+<hr>
+
+<h2 id="q9">9. Why textures are not loaded when loading models?</h2>
+<p>By default, Xtreme3D material libraries load all textures from the game's working directory. If the model is located in some folder (for example, data/models), then you should specify it as a path to the textures using <code>MaterialLibrarySetTexturePaths</code>. If models from different folders are loaded at the same time, you should create several material libraries and switch between them when loading using <code>MaterialLibraryActivate</code>. For each of them, you need to specify the path to the textures of the corresponding model. In Xtreme3D 3.x, libraries are specified individually when creating a model, so switching using <code>MaterialLibraryActivate</code> is not necessary.
+</A>
+
+<hr>
+
+<h2 id="q10">10. What are Dummycubes and what are they for?</h2>
+<p>Dummycubes are a very important type of object. They are invisible and are used to create hierarchical structures. By making a dummycube parent for one or more objects, you can control them all at once by controlling the dummycube. For example, if you disable the dummycube, all its child objects will also be disabled. This is very convenient for representing a group of objects of the same type. The second main purpose of dummycubes is to create so-called pivot structures, when the secondary states of an object depend on the primary ones. If, say, you need to get or set the rotation of an object regardless of the direction vector, it will be easier to make the object a child of the dummycube and use the dummycube to work with the direction and the object to rotate. A similar structure is also used in skeletal animation.</p>
+
+<hr>
+
+<h2 id="q11">11. Why don't mouse events work in Xtreme3D?</h2>
+<p>Mouse button presses should only be checked by the <code>keyboard_check_direct(mb_left)</code> or <code>keyboard_check_direct(mb_right)</code> function. In Game Maker 8, you can also use the <code>mouse_check_button_pressed</code> function.</p>
+
+<hr>
+
+<h2 id="q12">12. How to stretch the game window to full screen in Game Maker 8? The Start in full-screen mode option does not work!</h2>
+<p>In Global Game Settings, on the Resolution tab, check the Set the resolution of the screen box. In the Resolution list, select the resolution you need (usually the one specified in the <code>ViewerCreate</code> function). In the Graphics tab, select Start in full-screen mode, since without full-screen mode, the window borders will be visible.<p>
+
+<hr>
+
+<h2 id="q13">13. How to check for collisions?</h2>
+<p>There are several ways to do this in Xtreme3D.</p>
+<ul>
+<li>ObjectCheck... functions (<code>ObjectCheckCubeVsCube</code>, <code>ObjectCheckSphereVsFace</code>, etc.). They determine the fact of a collision between two objects (or rather, their bounding cubes or spheres). Such a check can be useful for checking the type of projectile/target, player/prize, etc.</li>
+<li>Raycasting can be used for shooting in shooters (as well as for implementing player interaction with interactive objects and triggers). A given object emits a ray, and other objects are checked for intersection with this ray. In this case, you can get the coordinates of the point and the normal of the intersection polygon.</li>
+<li>For kinematics (so that the character moves around the map and does not pass through walls), there are special collision checking engines - DCE and FpsManager.</li>
+</ul>
+<p>You can also connect any external library with an implementation of collision checking.</p>
+
+<hr>
+
+<h2 id="q14">14. How to get a realistic camera perspective?</h2>
+<p>Sometimes, to achieve a realistic perspective, you need to correct the "optical" characteristics of the game camera. The following example of such correction reduces perspective distortions to a minimum:</p>
+<code><pre>
+CameraSetFocal(camera,120);
+CameraSetSceneScale(camera,0.5);
+</pre></code>
+
+<hr>
+
+<h2 id="q15">15. How do I get the names of the materials that are loaded automatically with the model?</h2>
+<p>The materials are loaded into the currently active library under the names that were specified in the 3D editor. You can use these names to change the parameters of the model's materials.</p>
+
+<hr>
+
+<h2 id="q16">16. Why does the terrain look jagged?</h2>
+<p>If the terrain looks jagged when you create it, then the original height map is encoded in 24 bits per pixel, not 8, as it should be. The image needs to be converted to black and white (256 colors). For example, in GIMP this is done like this: Image -> Mode -> Grayscale.</p>
+
+<hr>
+
+<h2 id="q17">17. How do I specify a line break in text objects?</h2>
+<p>In Xtreme3D text objects, the '#' character does NOT mean a line break. The thirteenth ASCII character (carriage return) is used for this - <code>chr(13)</code>, for example:</p>
+<code><pre>
+TextSetText(text, 'Line1' + chr(13) + 'Line2');
+</pre></code>
+
+<hr>
+
+<h2 id="q18">18. How do I display Cyrillic in text objects?</h2>
+<p>Use the TTFont font and pass UTF-8 encoded strings to text objects.</p>
+
+<hr>
+
+<h2 id="q19">19. Does Xtreme3D support video playback?</h2>
+<p>No. To play videos, you will have to use specialized DLLs.</p>
+
+<hr>
+
+<h2 id="q20">20. Why are forces not applied to ODE bodies?</h2>
+<p>The thing is that in Xtreme3D 2.0.2.0, there is an option to automatically turn off bodies if they are inactive for a certain period of time, and it is impossible to apply forces to turned off bodies. Auto-off is enabled by default, you just need to turn it off:</p>
+<code><pre>
+OdeWorldSetAutoDisableFlag(false);
+</pre></code>
+
+<hr>
+
+<h2 id="q21">21. Does ODE support ragdolls?</h2>
+<p>Yes, ODE in Xtreme3D 3.1 supports Ragdoll for Actors.</p>
+
+<hr>
+
+<h2 id="q22">22. Why doesn't the material take the texture's alpha channel into account?</h2>
+<p>You need to set the blending mode to <code>bmTransparency</code> with the <code>MaterialSetBlendingMode</code> function.</p>
+
+<hr>
+
+<h2 id="q23">23. In which environments can Xtreme3D be used? Is there GameMaker Studio support?</h2>
+<p>Xtreme3D 3.x was originally created for Game Maker 8, but it can be used in almost any language that supports calls from DLLs. For example, there is an SDK for Python 2.7, Lua, D, and PHP (DevelNext). Since version 3.9.1, GameMaker Studio 2 is supported, since 4.0 - 64-bit GameMaker (former GameMaker Studio 2) and Python 3.</p>
+
+<hr>
+
+<h2 id="q24">24. Why does the game window flicker when using Xtreme3D?</h2>
+<p>This happens when two graphics systems draw an image into the same window. To eliminate flickering, you need to disable the integrated graphics of Game Maker. In Game Maker 8, this is done with the <code>set_automatic_draw(false)</code> function, which disables automatic redrawing. Unfortunately, <code>GameMaker Studio</code> does not have this function, but the problem can be solved in another way. In the Create event, set the counter <code>alarm[0] = room_speed</code>. Then, in the Alarm 0 event, disable the redraw event with <code>draw_enable_drawevent(false)</code>. The counter is needed so that the function is called after the first frame is drawn, otherwise the game window will not appear.</p>
+<p>When using a window created by the WindowCreate function, this problem does not occur. If you do not use Game Maker and your platform allows you to create applications without a standard window, we recommend creating a window for Xtreme3D using WindowCreate, or you can use SDL or other similar libraries.</p>
+
+<hr>
+
+<h2 id="q25">25. How to set up Xtreme3D for GameMaker (GameMaker Studio 2)?</h2>
+<p>Create a new GameMaker Language project (Drag and Drop projects are not supported). Copy the libraries xtreme3d.dll, ode64s.dll, SDL2.dll, SDL2_ttf.dll to the folder with the project data files (datafiles). Textures and models should be stored in the same folder. When building, all files from there will be copied to the working directory of the game.</p>
+<p>Move the xtreme3d.gml script from the SDK example to the project. Create a new object, say called o_engine, and disable Game Maker's built-in graphics rendering in it, as described in question 23 (this is to fix the screen flickering issue). Add an instance of the o_engine object to the room.</p>
+<p>Initialize the library as usual by calling <code>dll_init("xtreme3d.dll")</code> at the start of the Create event. That's it, now you can create and manage Xtreme3D objects!</p>
+<p>The principles of working with Xtreme3D, the names of functions and constants have not changed, so you can easily port any of the old examples to GameMaker Studio.</p>
+<p>Note: to pass the GM window handle to the <code>ViewerCreate</code> function, use <code>PointerToReal</code> to convert the pointer to real: <code>PtrToReal(window_handle())</code>.</p>
+
+<hr>
+
+<h2 id="q26">26. Why doesn't BumpShader work? The object is painted black / textures are not visible / the shader is displayed incorrectly.</h2>
+<p>If you have not set any specific shader settings, this usually means that you have not set the necessary material settings. It is necessary to specify all the color components of the material (MaterialSetAmbientColor, MaterialSetDiffuseColor, MaterialSetSpecularColor) and the specular shine value (MaterialSetShininess), for example:</p>
+<code><pre>
+MaterialSetAmbientColor("material", c_black, 1);
+MaterialSetDiffuseColor("material", c_white, 1);
+MaterialSetSpecularColor("material", c_ltgray, 1);
+MaterialSetShininess("material", 32);
+</pre></code>
+<p>Also, if your object does not have its own tangent vectors (usually this is the case for Actors and built-in Xtreme3D primitives), then you need to switch to the automatic tangent space:</p>
+<code><pre>
+BumpShaderUseAutoTangentSpace(shader, true);
+</pre></code>
+<p>Make sure the material has at least a diffuse texture (in slot 0) and a normal map (in slot 1). The normal map must be in tangent space.</p>
+<code><pre>
+MaterialCreate("material", "");
+MaterialLoadTextureEx("material", "textures/diffuse.png", 0);
+MaterialLoadTextureEx("material", "textures/normal.png", 1);
+BumpShaderSetDiffuseTexture(shader, "");
+BumpShaderSetNormalTexture(shader, "");
+</pre></code>
+<p>Finally, make sure the shader uses a number of lights greater than zero (8 is recommended, as this is the maximum number of lights that are considered when rendering a single object):</p>
+<code><pre>
+BumpShaderSetMaxLights(bump, 8);
+</pre></code>
+
+</body>
+</html>

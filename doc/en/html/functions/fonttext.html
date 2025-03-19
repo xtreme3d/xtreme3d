@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Font and Text</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="fontandtext">Font and Text</h1>
+<p>Шрифт и текст. Xtreme3D поддерживает три типа текстовых объектов: плоский, объемный и экранный. Экранный текст (HUDText) отображается поверх отрендеренной картинки и применяется для представления некоей текстовой информации в игре: количество жизней или патронов, различных сообщений и пр. Плоский текст (FlatText) и объемный (SpaceText) располагаются в трехмерном пространстве. Объемный, в отличие от плоского, имеет толщину.</p>
+<p>Все типы текста используют специальные шрифтовые объекты, хранящие изображения текстовых символов - букв, цифр и знаков препинания. В Xtreme3D поддерживается три вида шрифтовых объектов: Bmpfont, WindowsBitmapfont и TTFont. 
+Шрифт-изображение (Bmpfont) представляет собой одну большую текстуру с символьной "сеткой", в которую заранее записаны изображения символов. Ее можно создать вручную в графическом редакторе, нарисовать символы любого цвета и сложности. Однако такой шрифт содержит ограниченный диапазон символов - обычно только таблицу ASCII, которая включает латинский алфавит, цифры и стандартные знаки препинания. Теоретически, диапазон может быть расширен с использованием кодовых страниц, но это решение не сработает, если вам нужно выводить текст с символами из нескольких разных алфавитов - то есть, при использовании в приложении русского языка нельзя, например, выводить греческие буквы.</p>
+<p>Полноценно эта проблема решается только с использованием Юникода, где каждый символ имеет свой уникальный код. В Xtreme3D поддержка Юникода реализована в виде шрифтового объекта TTFont, основанного на библиотеке <a href="https://github.com/libsdl-org/SDL_ttf">SDL_ttf</a> - он создается из произвольного TTF-файла и по необходимости динамически подгружает любые символы, которые вы захотите вывести, хоть китайские иероглифы (если, конечно, они поддерживаются вашим шрифтом).</p>
+<p>TTFont поддерживает входной текст в кодировке UTF-8, либо в системной кодировке Windows (по умолчанию используется кодовая страница 1251, но вы можете загрузить файл перекодирования с реализацией любой 8-битной кодировки функцией <code>TTFontLoadCodePage</code>).</p>
+<p>В целях обратной совместимости (и работы с объемным 3D-текстом) оставлен также третий вид шрифтовых объектов - системный (WindowsBitmapfont). Это, фактически, Bmpfont, который автоматически генерируется из указанного системного шрифта, установленного в Windows. Данный вид шрифтов также работает только с кодовыми страницами Windows и, к тому же, не может загружать шрифты из произвольных TTF-файлов, поэтому для экранного текста вместо него рекомендуется использовать TTFont.</p>
+<p>Обратите также внимание, что Xtreme3D, в отличие от встроенных функций GML, не распознает в строковых значениях символ # как переход на следующую строку. Вместо него рекомендуется использовать тринадцатый символ ASCII - <code>chr(13)</code>. Например:</p>
+<pre><code class="gml language-gml">HUDTextSetText(text, "line 1" + chr(13) + "line 2").
+</code></pre>
+<hr />
+<h2 id="bmpfontcreate">BmpfontCreate</h2>
+<p><code>real BmpfontCreate(real width, real height, real hspace, real vspace, real intx, real inty, real start, real end);</code></p>
+<p>Создает новый шрифт и возвращает ссылку на него.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота символа в пикселях</li>
+<li><code>hspace</code>, <code>vspace</code> - промежуток между символами по горизонтали и вертикали в пикселях</li>
+<li><code>inx</code>, <code>inty</code> - координаты начала отсчета символов (крайняя верхняя левая точка)</li>
+<li><code>start</code>, <code>end</code> - номера первого и последнего символа. Для латиницы эти значения соответствуют 32 и 95.</li>
+</ul>
+<hr />
+<h2 id="bmpfontload">BmpfontLoad</h2>
+<p><code>real BmpfontLoad(real font, string material);</code></p>
+<p>Загружает изображение шрифта из текстуры указанного материала.</p>
+<ul>
+<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="ttfontcreate">TTFontCreate</h2>
+<p><code>real TTFontCreate(string filename, real height);</code></p>
+<p>Создает новый TTF-шрифт и возвращает ссылку на него.</p>
+<ul>
+<li><code>filename</code> - имя файла TTF</li>
+<li><code>height</code> - кегль (размер) шрифта в пикселях.</li>
+</ul>
+<hr />
+<h2 id="ttfontsetlinegap">TTFontSetLineGap</h2>
+<p><code>real TTFontSetLineGap(real ttf, real gap);</code></p>
+<p>Задает междустрочный интервал TTF-шрифта, который используется при выводе многострочного текста. Интервал задается не в пикселях, а в долях от кегля шрифта - то есть, значение 1 соответствует интервалу, равному высоте одной строки текста.</p>
+<ul>
+<li><code>ttf</code> - ссылка на TTF-шрифт</li>
+<li><code>gap</code> - междустрочный интервал.</li>
+</ul>
+<hr />
+<h2 id="windowsbitmapfontcreate">WindowsBitmapfontCreate</h2>
+<p><code>real WindowsBitmapfontCreate(string fontname, real size, real start, real end);</code></p>
+<p>Загружает системный шрифт Windows и возвращает ссылку на него.</p>
+<ul>
+<li><code>fontname</code> - название шрифта, например: "Arial"</li>
+<li><code>size</code> - размер шрифта</li>
+<li><code>start</code>, <code>end</code> - номера первого и последнего символа. Для латиницы эти значения соответствуют 32 и 95.</li>
+</ul>
+<hr />
+<h2 id="flattextcreate">FlatTextCreate</h2>
+<p><code>real FlatTextCreate(real font, string str, real parent);</code></p>
+<p>Создает плоский трехмерный текст и возвращает ссылку на него.</p>
+<ul>
+<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>str</code> - текстовая строка для отображения</li>
+<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="flattextsetfont">FlatTextSetFont</h2>
+<p><code>real FlatTextSetFont(real text, real font);</code></p>
+<p>Задает шрифт плоского текста.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>font</code> - ссылка на объект шрифта.</li>
+</ul>
+<hr />
+<h2 id="flattextsetcolor">FlatTextSetColor</h2>
+<p><code>real FlatTextSetColor(real text, real color, real alpha);</code></p>
+<p>Задает цвет плоского текста.</p>
+<ul>
+<li><code>font</code> - ссылка на объект текста</li>
+<li><code>color</code> - цвет</li>
+<li><code>alpha</code> - прозрачность.</li>
+</ul>
+<hr />
+<h2 id="flattextsettext">FlatTextSetText</h2>
+<p>`real FlatTextSetText(real text, string str);</p>
+<p>Задает текстовую строку для отображения плоским текстом.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>str</code> - текстовая строка.</li>
+</ul>
+<hr />
+<h2 id="hudtextcreate">HUDTextCreate</h2>
+<p><code>real HUDTextCreate(real font, string str, real parent);</code></p>
+<p>Создает экранный текст и возвращает ссылку на него.</p>
+<ul>
+<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>str</code> - текстовая строка для отображения</li>
+<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudtextsetrotation">HUDTextSetRotation</h2>
+<p><code>real HUDTextSetRotation(real text, real angle);</code></p>
+<p>Задает угол поворота экранного текста.</p>
+<p><code>text</code> - ссылка на объект текста
+<code>angle</code> - угол поворота в градусах.</p>
+<hr />
+<h2 id="hudtextsetfont">HUDTextSetFont</h2>
+<p><code>real HUDTextSetFont(real text, real font);</code></p>
+<p>Задает шрифт экранного текста.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>font</code> - ссылка на объект шрифта.</li>
+</ul>
+<hr />
+<h2 id="hudtextsetcolor">HUDTextSetColor</h2>
+<p><code>real HUDTextSetColor(real text, real color, real alpha);</code></p>
+<p>Задает цвет экранного текста.</p>
+<ul>
+<li><code>font</code> - ссылка на объект текста</li>
+<li><code>color</code> - цвет</li>
+<li><code>alpha</code> - прозрачность.</li>
+</ul>
+<hr />
+<h2 id="hudtextsettext">HUDTextSetText</h2>
+<p>`real HUDTextSetText(real text, string str);</p>
+<p>Задает текстовую строку для отображения экранным текстом.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>str</code> - текстовая строка.</li>
+</ul>
+<hr />
+<h2 id="spacetextcreate">SpaceTextCreate</h2>
+<p><code>real SpaceTextCreate(real font, string str, real extrusion, real parent);</code></p>
+<p>Создает объемный трехмерный текст и возвращает ссылку на него.</p>
+<ul>
+<li><code>font</code> - ссылка на объект шрифта. Поддерживается только WindowsBitmapfont</li>
+<li><code>str</code> - текстовая строка для отображения</li>
+<li><code>extrusion</code> - толщина текста</li>
+<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="spacetextsetextrusion">SpaceTextSetExtrusion</h2>
+<p><code>real SpaceTextSetExtrusion(real text, real extrusion);</code></p>
+<p>Задает толщину объемного текста.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>extrusion</code> - толщина текста.</li>
+</ul>
+<hr />
+<h2 id="spacetextsetfont">SpaceTextSetFont</h2>
+<p><code>real SpaceTextSetFont(real text, real font);</code></p>
+<p>Задает шрифт объемного текста.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>font</code> - ссылка на объект шрифта.</li>
+</ul>
+<hr />
+<h2 id="spacetextsettext">SpaceTextSetText</h2>
+<p><code>real SpaceTextSetText(real text, string str);</code></p>
+<p>Задает текстовую строку для отображения объемным текстом.</p>
+<ul>
+<li><code>text</code> - ссылка на объект текста</li>
+<li><code>str</code> - текстовая строка.</li>
+</ul>
+</body>
+</html>

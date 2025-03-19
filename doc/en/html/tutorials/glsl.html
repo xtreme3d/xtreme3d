@@ -1,0 +1,175 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>GLSL</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Урок 19<BR>Основы GLSL</H1>
+
+<A><B>Уровень:</B> опытный</A>
+<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A><A>
+<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
+<BR>
+<BR>GLSL (OpenGL Shading Language) - это высокоуровневый язык описания шейдеров. С его помощью вы можете запрограммировать графический конвейер - иными словами, управлять рендерингом объектов на вершинном и пиксельном уровне. За обработку вершин отвечает вершинная программа GLSL, за обработку пикселей - фрагментная. 
+<BR>Работа с GLSL подразумевает знание принципов растеризации и графического конвейера OpenGL, а также линейной алгебры. Поскольку сам Xtreme3D не требует этих знаний, использование GLSL может быть весьма трудной задачей для начинающего, поэтому рекомендуем предварительно почитать книги или руководства по данной теме. Очень полезным будет знакомство с принципами работы в OpenGL, а также хотя бы базовое знание C/C++.
+<BR>
+<H1 class=name>Типы данных GLSL</H1>
+<BR>
+<BR>GLSL является строго типизированным языком - любая переменная в нем имеет определенный тип. Язык поддерживает следующие основные типы: 
+<BR>
+<BR><A class=type>bool</A> - логическое значение
+<BR><A class=type>int</A> - целое число со знаком
+<BR><A class=type>uint</A> - беззнаковое целое число
+<BR><A class=type>float</A> - число с плавающей запятой одинарной точности
+<BR><A class=type>double</A> - число с плавающей запятой двойной точности
+<BR><A class=type>bvec2</A>, <A class=type>bvec3</A>, <A class=type>bvec4</A> - вектор логических значений (размерности 2, 3 и 4)
+<BR><A class=type>ivec2</A>, <A class=type>ivec3</A>, <A class=type>ivec4</A> - вектор целых чисел
+<BR><A class=type>uvec2</A>, <A class=type>uvec3</A>, <A class=type>uvec4</A> - вектор беззнаковых целых чисел
+<BR><A class=type>vec2</A>, <A class=type>vec3</A>, <A class=type>vec4</A> - вектор чисел с плавающей запятой
+<BR><A class=type>dvecn2</A>, <A class=type>dvecn3</A>, <A class=type>dvecn4</A> - вектор чисел с плавающей запятой двойной точности
+<BR><A class=type>mat2</A>, <A class=type>mat3</A>, <A class=type>mat4</A> - матрица 2x2, 3x3, 4x4
+<BR><A class=type>sampler2D</A> - текстура
+<BR><A class=type>sampler2DCube</A> - кубическая текстура
+<BR><A class=type>sampler2DShadow</A> - теневая текстура
+<BR><A class=type>void</A> - ключевое слово, обозначающее отсутствие типа (для функций без возвращаемого результата).
+<BR>
+<H1 class=name>Вершинный шейдер</H1>
+<BR>Вершинная программа принимает координаты вершин и их атрибуты (такие как нормали и тангенты) и, как правило, переводит их из объектного пространства в пространство отсечения, в мировое или в видовое пространство. 
+<BR>
+<BR>- <B>Объектное пространство</B> (object space) - это локальное пространство объекта. Центром координатной системы в нем является центр объекта - вершины модели заданы относительно этого центра. 
+<BR>- <B>Мировое пространство</B> (world space) - другое название для абсолютного пространства. Центром координатной системы в нем является точка (0, 0, 0). Совокупная трансформация объекта (перенос, поворот и масштабирование) переводит вершины из локального в мировое пространство. Эта трансформация обычно хранится и передается в шейдер в виде матрицы 4x4 - так называемой модельной матрицы (model matrix).
+<BR>- <B>Видовое пространство</B> (eye space) - пространство, в котором центром координатной системы является позиция камеры. Перевод вершин из мирового в видовое пространство осуществляется при помощи обратной матрицы преобразования камеры - так называемой видовой матрицы (view matrix). В OpenGL, как правило, модельная матрица и видовая совмещены в одну - модельно-видовую (modelview matrix).
+<BR>- <B>Пространство отсечения</B> (clip space) - пространство, в которое вершины переводятся матрицей проекции (projection matrix).
+<BR>Необходимо отметить, что вершины в GLSL хранятся в так называемых однородных координатах (homogeneous coordinates) - то есть, имеют дополнительную четвертую координату W. Такими координатами можно выражать бесконечно удаленные точки, когда W равна нулю. Обычные точки имеют W равную 1.
+<BR>Вершины в пространстве отсечения являются главным результатом работы вершинного шейдера. Простейший вершинный шейдер, выполняющий только перевод вершин из объектного пространства в пространство отсечения, выглядит следующим образом:
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;<A class=constant>gl_Position</A><A> = </A><A class=constant>gl_ModelViewProjectionMatrix</A><A> * </A><A class=constant>gl_Vertex</A><A>;</A>
+<BR><A>}</A>
+<BR>
+<BR><A class=constant>gl_Vertex</A> - входные координаты вершины
+<BR><A class=constant>gl_Position</A> - выходные координаты вершины
+<BR><A class=constant>gl_ModelViewProjectionMatrix</A> - встроенная матрица 4х4, комбинация модельно-видовой и проекционной матриц OpenGL.
+<BR>Для данной операции, кстати, в GLSL имеется встроенная функция ftransform:
+<BR>
+<BR><A><A class=constant>gl_Position</A><A> = </A><A class=type>ftransform</A><A>();</A>
+<BR>
+<BR>Вершинному шейдеру также доступны другие атрибуты вершины - нормаль, цвет и текстурные координаты: <A class=constant>gl_Normal</A>, <A class=constant>gl_Color</A>, <A class=constant>gl_MultiTexCoordN</A> (где N - номер от 0 до 7). Обычно эти атрибуты интерполируются между тремя вершинами треугольника, а затем поступают во фрагментный шейдер. Чтобы передать какое-либо значение на интерполяцию, используются промежуточные varying-переменные. Например, так выглядит шейдер, передающий на интерполяцию нормали:
+<BR>
+<BR><A class=type>varying vec3</A><A> normal;</A>
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;normal = </A><A class=constant>gl_NormalMatrix</A><A> * </A><A class=constant>gl_Normal</A><A>;</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_Position</A> = </A><A class=type>ftransform</A><A>();</A>
+<BR><A>}</A>
+<BR>
+<BR>Обратите внимание, что мы переводим нормаль вершины из объектного пространства в видовое при помощи специальной встроенной матрицы 3x3 <A class=constant>gl_NormalMatrix</A>. Это необходимо для того, чтобы оптимальным образом рассчитывать освещение в пиксельном шейдере - это делается именно в видовом пространстве: тот факт, что камера находится в точке (0,0,0), значительно облегчает вычисления, связанные с бликовой компонентой освещенности.
+<BR>С передачей текстурных координат шейдер будет выглядеть так:
+<BR>
+<BR><A class=type>varying vec3</A><A> normal;</A>
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;normal = </A><A class=constant>gl_NormalMatrix</A><A> * </A><A class=constant>gl_Normal</A><A>;</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_TexCoord</A><A>[0] = </A><A class=constant>gl_MultiTexCoord0</A><A>;</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_Position</A> = </A><A class=type>ftransform</A><A>();</A>
+<BR><A>}</A>
+<BR>
+<BR><A class=constant>gl_TexCoord</A> - это встроенная varying-переменная, массив, через который вы можете передавать любые данные, не только текстурные координаты.
+<BR>
+<H1 class=name>Фрагментный шейдер</H1>
+<BR>Фрагментная программа принимает интерполированные varying-переменные (а также различные параметры состояния OpenGL) и выводит в качестве результата цвет пикселя. Она выполняется для каждого видимого на экране пикселя объекта. Обратите внимание, что проверка видимости (Z-test) для пикселя осуществляется видеокартой до того, как будет выполнена фрагментная программа - если пиксель отбрасывается как невидимый, то программа не выполняется.
+<BR>Простейший фрагментный шейдер, закрашивающий объект сплошным цветом, выглядит так:
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_FragColor</A><A> = </A><A class=type>vec4</A><A>(1.0, 0.0, 0.0, 1.0);</A>
+<BR><A>}</A>
+<BR>
+<BR><A class=constant>gl_FragColor</A> - выходной цвет пикселя.
+<BR>В данном случае <A class=type>vec4</A><A>(1.0, 0.0, 0.0, 1.0)</A> обозначает красный цвет с прозрачностью 1.0 (полная непрозрачность).
+<BR>
+<H1 class=name>Использование шейдеров в Xtreme3D</H1>
+<BR>Создавать шейдеры GLSL и подключать их к материалам очень просто:
+<BR>
+<BR><A>vp = </A><A class=func2link href=../functions/text.htm#TextRead>TextRead</A><A>('my_vertex_shader.glsl');</A>
+<BR><A>fp = </A><A class=func2link href=../functions/text.htm#TextRead>TextRead</A><A>('my_fragment_shader.glsl');</A>
+<BR><A>shader = </A><A class=func2link href=../functions/shader.htm#GLSLShaderCreate>GLSLShaderCreate</A><A>(vp, fp);</A>
+<BR><A class=func2link href=../functions/material.htm#MaterialSetShader>MaterialSetShader</A><A>('myMaterial', shader);</A>
+<BR>
+<BR>
+<H1 class=name>Освещение на GLSL</H1>
+<BR>Чтобы реализовать простейшее освещение по формуле Ламберта, нам нужны координаты точки поверхности, нормаль в этой точке, а также координаты источника света. Таким образом, нам понадобятся, по меньшей мере, две varying-переменные - нормаль и интерполированные координаты вершины.
+<BR>Вершинный шейдер:
+<BR>
+<BR><A class=type>varying vec3</A><A> normal;</A>
+<BR><A class=type>varying vec3</A><A> position;</A>
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;normal = </A><A class=constant>gl_NormalMatrix</A><A> * </A><A class=constant>gl_Normal</A>;</A>
+<BR><A>&nbsp;&nbsp;position = (</A><A class=constant>gl_ModelViewMatrix</A><A> * </A><A class=constant>gl_Vertex</A><A>).xyz;</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_Position</A><A> = </A></A><A class=type>ftransform</A><A>();</A>
+<BR><A>}</A>
+</PRE>
+<BR><A class=constant>gl_ModelViewMatrix</A> - это встроенная матрица 4x4, модельно-видовая матрица OpenGL. Она переводит координаты из объектного пространства в видовое, в котором мы будем вычислять освещение. Поскольку результат этого перевода - однородный вектор <A class=constant>vec4</A>, мы отбрасываем координату W и берем только вектор XYZ.
+<BR>Фрагментный шейдер:
+<BR>
+<BR><A>varying vec3 normal;</A>
+<BR><A>varying vec3 position;</A>
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;</A><A class=type>vec3</A><A> N = </A><A class=type>normalize</A><A>(normal);</A>
+<BR><A>&nbsp;&nbsp;</A><A class=type>vec3</A><A> L = </A><A class=type>normalize</A><A>(</A><A class=constant>gl_LightSource</A><A>[0].position.xyz - position);</A>
+<BR><A>&nbsp;&nbsp;</A><A class=type>float</A><A> diffuse = </A><A class=type>clamp</A><A>(</A><A class=type>dot</A><A>(N, L), 0.0, 1.0);</A>
+<BR><A>&nbsp;&nbsp;</A><A class=type>vec4</A><A> color = </A><A class=constant>gl_FrontMaterial</A><A>.diffuse * diffuse;</A>
+<BR><A>&nbsp;&nbsp;color.a = 1.0;</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_FragColor</A><A> = color;</A>
+<BR><A>}</A>
+<BR>
+<BR>Обратите внимание, что при передаче во фрагментый щейдер единичные векторы (такие, как нормаль) после интерполяции нужно обязательно нормировать - видеокарта не делает это за вас. Для этого в GLSL есть функция <A class=type>normalize</A>.
+<BR>Доступ к координатам источника света осуществляется при помощи атрибута position встроенного объекта <A class=constant>gl_LightSource</A> (массив из 8 элементов, по числу источников света OpenGL). Эти координаты во фрагментном шейдере уже автоматически переведены в видовое пространство, что очень удобно - не нужно делать это вручную. Но если вам, по тем или иным причинам, нужно вычислять освещение в другом пространстве - например, в пространстве касательных - то не забудьте соответствующим образом трансформировать их. Эти координаты также однородные: точечный источник света, как правило, имеет координату W равную 1, направленный - равную 0. 
+<BR>Операция <A class=type>dot</A><A>(N, L)</A> - это и есть расчет освещенности по формуле Ламберта: освещенность в точке определяется плотностью света, а она линейно зависит от косинуса угла падения света. Косинус угла между двумя единичными векторами равен их скалярному произведению (dot product).
+<BR>Поскольку результат этой операции - скаляр (<A class=type>float</A>), для передачи в <A class=constant>gl_FragColor</A> нужно помножить это значение на какой-нибудь цвет. Лучше всего использовать диффузный цвет материала - <A class=constant>gl_FrontMaterial</A><A>.diffuse</A>: таким образом, вы можете контролировать цвет объекта вне шейдера, функцией <A class=func2link href=../functions/material.htm#MaterialSetDiffuseColor>MaterialSetDiffuseColor</A>.
+<BR>
+<H1 class=name>Текстуры</H1>
+<BR>Во фрагментном шейдере можно читать цвет из текстур - для этого используется функция <A class=type>texture2D</A>:
+<BR>
+<BR><A class=type>uniform sampler2D</A><A> diffuseTexture;</A>
+<BR>
+<BR><A class=type>void</A><A> main()</A>
+<BR><A>{</A>
+<BR><A>&nbsp;&nbsp;</A><A class=type>vec4</A><A> texColor = </A><A class=type>texture2D</A><A>(diffuseTexture, </A><A class=constant>gl_TexCoord</A><A>[0].xy);</A>
+<BR><A>&nbsp;&nbsp;</A><A class=constant>gl_FragColor</A><A> = texColor;</A>
+<BR><A>}</A>
+<BR>
+<BR>Текстуры объявляются как uniform-объекты - то есть, неизменяемые параметры, которые передаются шейдеру основной программой. Это могут быть не только текстуры, но и вообще любые типы данных.
+<BR>Передача текстуры в шейдер делается следующим образом:
+<BR>
+<BR><A>param = </A><A class=func2link href=../functions/shader.htm#GLSLShaderCreateParameter>GLSLShaderCreateParameter</A><A>(shader, 'diffuseTexture');</A>
+<BR><A class=func2link href=../functions/shader.htm#GLSLShaderSetParameterTexture>GLSLShaderSetParameterTexture</A><A>(param, 'myMaterial', 0);</A>
+<BR>
+<BR>
+<BR>В функцию GLSLShaderCreateParameter передается имя uniform-объекта. В функцию 
+<A class=func2link href=../functions/shader.htm#GLSLShaderSetParameterTexture>GLSLShaderSetParameterTexture</A> передается имя материала, из которого нужно прочитать текстуру, а также текстурный блок, через который нужно передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости рекомендуется не использовать больше 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок  - то есть, если вы передаете несколько текстур в разные uniform-параметры, используйте для них разные блоки.
+<BR>
+<H1 class=name>О версиях GLSL</H1>
+<BR>Xtreme3D базируется на OpenGL 1.x и некоторых функциях из OpenGL 2.х, которые подключаются через расширения ARB. Таким образом, движок поддерживает GLSL версий 1.1 и 1.2 - более поздние версии языка определены уже в рамках спецификации OpenGL 3.0.
+<BR>По умолчанию используется GLSL 1.1. Чтобы переключиться на 1.2, используйте директиву препроцессора (на первой строке шейдера):
+<BR>
+<BR><A class=green>#version 120</A>
+<BR>
+<BR>Версия 1.2 отличается встроенной поддержкой транспонирования матриц (функция transpose), неквадратных матриц, а также массивов.
+</A>
+
+</DIV>
+
+</BODY>
+</HTML>

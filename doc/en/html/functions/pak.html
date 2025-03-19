@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pak</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="pak">PAK</h1>
+<p>Xtreme3D поддерживает загрузку ресурсов (моделей, текстур) из PAK-архивов GLScene. Это бывает полезно для оптимизации места, занимаемого игрой на диске, а также для ускорения загрузки ресурсов. Кроме того, использование архива ресурсов усложняет воровство моделей и текстур (хотя и не делает невозможным, поскольку формат PAK не поддерживает шифрование, и его довольно легко прочитать). Для создания архива следует использовать утилиту PakEdit.exe, входящую в состав Xtreme3D SDK.</p>
+<hr />
+<h2 id="setpakarchive">SetPakArchive</h2>
+<p><code>real SetPakArchive(string filename);</code></p>
+<p>Задает архив *.PAK, из которого движок должен загружать ресурсы, и возвращает ссылку на него. Рекомендуется создавать архив и добавлять эту функцию только при финальной сборке проекта. После вызова этой функции все ресурсы без исключения будут загружаться движком из этого архива. Отменить это во время игры невозможно.</p>
+<ul>
+<li><code>filename</code> - путь к файлу архива.</li>
+</ul>
+<hr />
+<h2 id="pakgetfilecount">PakGetFileCount</h2>
+<p><code>real PakGetFileCount(real pak);</code></p>
+<p>Возвращает количество файлов в архиве.</p>
+<ul>
+<li><code>pak</code> - ссылка на объект архива.</li>
+</ul>
+<hr />
+<h2 id="pakgetfilename">PakGetFileName</h2>
+<p><code>real PakGetFileCount(real pak, real index);</code></p>
+<p>Возвращает имя файла под заданным индексом. Функция полезна, если вы не знаете заранее содержимое архива.</p>
+<ul>
+<li><code>pak</code> - ссылка на объект архива</li>
+<li><code>index</code> - индекс файла (порядковый номер в архиве).</li>
+</ul>
+<hr />
+<h2 id="pakextract">PakExtract</h2>
+<p><code>real PakExtract(real pak, string directory);</code></p>
+<p>Распаковывает содержимое архива в заданную папку, сохраняя его внутреннюю структуру.</p>
+<ul>
+<li><code>pak</code> - ссылка на объект архива</li>
+<li><code>directory</code> - путь к папке для распаковки архива.</li>
+</ul>
+<hr />
+<h2 id="pakextractfile">PakExtractFile</h2>
+<p><code>real PakExtractFile(real pak, real index, string newfilename);</code></p>
+<p>Распаковывает заданный файл из архива. Функция полезна, если вам нужно вручную прочитать какой-то файл, который напрямую не загружается в Xtreme3D - например, шейдер. </p>
+<ul>
+<li><code>pak</code> - ссылка на объект архива</li>
+<li><code>index</code> - индекс файла (порядковый номер в архиве)</li>
+<li><code>newfilename</code> - имя, под которым надо сохранить файл на диске.</li>
+</ul>
+</body>
+</html>

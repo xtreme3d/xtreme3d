@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Light</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="light">Light</h1>
+<p>Объект, создающий освещение. Источники освещения могут быть различных типов и иметь различные характеристики. Это аналоги осветительных приборов реального мира, которые обладают дополнительными возможностями, недоступными реальным источникам.</p>
+<p>Источники света могут быть трех типов:</p>
+<ul>
+<li>Omni (точечный свет) - светит одинаково во всех направлениях из одной точки, как, например, лампочка;</li>
+<li>Spot (направленный свет) - светит не во всех направлениях, а в пределах некоего конуса. Освещаются только объекты, попадающие в этот конус. Простой пример - фонарик;</li>
+<li>Parallel (параллельный свет) - имитирует удаленные источники света, например, солнце. Свет излучается в направлении только одной оси, из источника, находящегося на бесконечно большом расстоянии от зрителя, а все световые лучи являются параллельными.</li>
+</ul>
+<p>Цвет освещаемых объектов рассчитывается как сумма компонентов Ambient, Diffuse и Specular от всех Источников света в сцене:</p>
+<ul>
+<li>Аmbient (равномерный компонент) - аппроксимация глобального освещения, общий цвет для всех объектов, не зависящий от других факторов;</li>
+<li>Diffuse (диффузный компонент) - зависит от положения источника освещения и от нормали поверхности. Этот компонент влияет на цвет освещенных (повернутых к свету) частей объектов;
+-Specular (бликовый компонент) - определяет цвет бликов отражения лучей света от поверхности. Эти блики существенно увеличивают реалистичность изображения, ведь редкие реальные поверхности не отражают свет, поэтому данная составляющая очень важна.</li>
+</ul>
+<p>Обратите внимание, что сами объекты также могут иметь индивидуальные компоненты Ambient, Diffuse и Specular, влияющие на цвет.</p>
+<p>Xtreme3D поддерживает до восьми динамических источников освещения. Чтобы создать большее количество, воспользуйтесь эффектом LightFX.</p>
+<hr />
+<h2 id="lightcreate">LightCreate</h2>
+<p><code>real LightCreate(real ls, real parent);</code></p>
+<p>Создает новый источник освещения и возвращает ссылку на него.</p>
+<ul>
+<li><code>ls</code> - тип источника освещения (<code>lsSpot</code>, <code>lsOmni</code> или <code>lsParallel</code> - соответственно, 0, 1 или 2)</li>
+<li><code>parent</code> - ссылка на родителя для источника освещения (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="lightsetambientcolor">LightSetAmbientColor</h2>
+<p><code>real LightSetAmbientColor(real light, real color);</code></p>
+<p>Задает компонент Аmbient источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>color</code> - цвет компонента.</li>
+</ul>
+<hr />
+<h2 id="lightsetdiffusecolor">LightSetDiffuseColor</h2>
+<p><code>real LightSetDiffuseColor(real light, real color);</code></p>
+<p>Задает компонент Diffuse источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>color</code> - цвет компонента.</li>
+</ul>
+<hr />
+<h2 id="lightsetspecularcolor">LightSetSpecularColor</h2>
+<p><code>real LightSetSpecularColor(real light, real color);</code></p>
+<p>Задает компонент Specular источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>color</code> - цвет компонента.</li>
+</ul>
+<hr />
+<h2 id="lightgetcolor">LightGetColor</h2>
+<p><code>real LightGetColor(real light, real ind);</code></p>
+<p>Возвращает цветовой компонент источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>ind</code> - индекс компонента (0 = Ambient, 1 = Diffuse, 2 = Specular).</li>
+</ul>
+<hr />
+<h2 id="lightsetattenuation">LightSetAttenuation</h2>
+<p><code>real LightSetAttenuation(real light, real constant, real linear, real quadratic);</code></p>
+<p>Точечные и направленные источники света обладают параметром, влияющим на силу освещения - так называемое затухание (attenuation). Этот параметр влияет на убывание интенсивности света с расстоянием. В квадратное уравнение, определяющее интенсивность света, входят три параметра: постоянная, линейная и квадратичная составляющие (constant, linear, quadratic). По умолчанию им присваиваются значения 1, 0 и 0 соответственно - интенсивность света от такого источника не убывает с расстоянием. Уравнение выглядит следующим образом:</p>
+<p><img src="../data/attenuation.jpg" alt="Attenuation formula" /></p>
+<p>где а - величина затухания, с - постоянная составляющая (constant), l - линейная составляющая (linear), q - квадратичная составляющая (quadratic), d - расстояние от источника света. 
+Данная функция задает величину затухания через эти три составляющие.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>constant</code> - постоянная составляющая затухания</li>
+<li><code>linear</code> - линейная составляющая затухания</li>
+<li><code>quadratic</code> - квадратичная составляющая затухания.</li>
+</ul>
+<hr />
+<h2 id="lightgetattenuation">LightGetAttenuation</h2>
+<p><code>real LightGetAttenuation(real light, real ind);</code></p>
+<p>Возвращает составляющую затухания источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>ind</code> - индекс составляющей (0 = Constant, 1 = Linear, 2 = Quadratic).</li>
+</ul>
+<hr />
+<h2 id="lightsetshining">LightSetShining</h2>
+<p><code>real LightSetShining(real light, real mode);</code></p>
+<p>Включает или выключает источник освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="lightgetshining">LightGetShining</h2>
+<p><code>real LightGetShining(real light);</code></p>
+<p>Возвращает 1, если источник света включен, и 0 в противном случае.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения.</li>
+</ul>
+<hr />
+<h2 id="lightsetspotcutoff">LightSetSpotCutoff</h2>
+<p><code>real LightSetSpotCutoff(real light, real cutoff);</code></p>
+<p>Для направленного источника освещения задает угол между осью и стороной ограничивающего конуса (он же половина угла конуса). Иными словами, влияет на ширину конуса света. Если данное значение соответствует 180 градусам, направленный источник света рассматривается как точечный.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>cutoff</code> - угол.</li>
+</ul>
+<hr />
+<h2 id="lightsetspotexponent">LightSetSpotExponent</h2>
+<p><code>real LightSetSpotExponent(real light, real exponent);</code></p>
+<p>Для направленного источника освещения задает экспоненту убывания интенсивности в зависимости от угла между осью ограничивающего конуса и лучом распространения света.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>exponent</code> - экспонента.</li>
+</ul>
+<hr />
+<h2 id="lightsetspotdirection">LightSetSpotDirection</h2>
+<p><code>real LightSetSpotDirection(real light, real x, real y, real z);</code></p>
+<p>Для направленного источника освещения задает направление оси ограничивающего конуса.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - единичный вектор направления.</li>
+</ul>
+<hr />
+<h2 id="lightsetstyle">LightSetStyle</h2>
+<p><code>real LightSetStyle(real light, real ls);</code></p>
+<p>Задает тип источника освещения.</p>
+<ul>
+<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>ls</code> - тип источника освещения (<code>lsSpot</code>, <code>lsOmni</code> или <code>lsParallel</code> - соответственно, 0, 1 или 2).</li>
+</ul>
+<hr />
+<h2 id="lightfxcreate">LightFXCreate</h2>
+<p><code>real LightFXCreate(real obj);</code></p>
+<p>Добавляет объекту эффект LightFX. LightFX - это система виртуализированного освещения, позволяющая использовать до 8 ближайших источников света для освещения объекта. Общее количество источников света при этом не ограничено - то есть, ограничение в 8 источников касается только каждого объекта, использующего эту систему, а не всей сцены целиком. Источники света создаются как обычно, функцией LightCreate. Наибольшим приоритетом обладают источники типа <code>lsParallel</code> - они всегда учитываются первыми при сортировке источников. Источники типа <code>lsSpot</code> и <code>lsOmni</code> сортируются в зависимости от удаленности от объекта.</p>
+<ul>
+<li><code>obj</code> - указатель на объект.</li>
+</ul>
+</body>
+</html>

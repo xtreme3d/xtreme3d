@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PickList</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="picklist">PickList</h1>
+<p>Объект PickList предназначен для хранения списков выборки. Он используется для сохранения результата функции ViewerGetPickedObjectsList, чтобы не пересоздавать в памяти массивы объектов в игровом цикле. При помощи функций PickList вы можете извлечь из списка объект по индексу. </p>
+<hr />
+<h2 id="picklistcreate">PickListCreate</h2>
+<p><code>real PickListCreate(real ps);</code></p>
+<p>Создает новый список выборки и возвращает ссылку на него.</p>
+<ul>
+<li><code>ps</code> - режим сортировки списка. Доступны следующие значения <code>ps</code>:<ul>
+<li><code>psDefault = 0</code> - режим по умолчанию</li>
+<li><code>psName = 1</code> - сортировка по именам объектов</li>
+<li><code>psMinDepth = 2</code> - сортировка по приближению к камере</li>
+<li><code>psMaxDepth = 3</code> - сортировка по отдалению от камеры.</li></ul></li>
+</ul>
+<hr />
+<h2 id="picklistclear">PickListClear</h2>
+<p><code>real PickListClear(real picklist);</code></p>
+<p>Очищает список выборки.</p>
+<ul>
+<li><code>picklist</code> - ссылка на список.</li>
+</ul>
+<hr />
+<h2 id="picklistgetcount">PickListGetCount</h2>
+<p><code>real PickListGetCount(real picklist);</code></p>
+<p>Возвращает количество объектов в списке выборки.</p>
+<ul>
+<li><code>picklist</code> - ссылка на список.</li>
+</ul>
+<hr />
+<h2 id="picklistgethit">PickListGetHit</h2>
+<p><code>real PickListGetHit(real picklist, real index);</code></p>
+<p>Возвращает объект из списка по заданному индексу.</p>
+<ul>
+<li><code>picklist</code> - ссылка на список</li>
+<li><code>index</code> - индекс (начиная с 0).</li>
+</ul>
+</body>
+</html>

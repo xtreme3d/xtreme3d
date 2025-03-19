@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Camera</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="camera">Camera</h1>
+<p>The purpose of the Camera object is clear from its name - it is a point of view of the scene, which, like other objects, has a position and orientation in space. You can create several cameras and switch between them at any time using the <code>ViewerSetCamera</code> function. You can also bind the camera to an object or control it with the mouse.</p>
+<p>Remember that in order for the camera to show something, it must be assigned to the previously created viewer using the <code>ViewerSetCamera</code> function.</p>
+<hr />
+<h2 id="cameracreate">CameraCreate</h2>
+<p><code>real CameraCreate(real parent);</code></p>
+<p>Creates a new camera and returns a reference to it.</p>
+<ul>
+<li><code>parent</code> - a reference to the parent for the camera (0 - no parent).</li>
+</ul>
+<hr />
+<h2 id="camerasetstyle">CameraSetStyle</h2>
+<p><code>real CameraSetStyle(real cam, real cs);</code></p>
+<p>Sets the so-called camera style (<code>cs</code>) - the method of projection on the screen. The following <code>cs</code> values ??are available:</p>
+<ul>
+<li><p><code>csPerspective = 0</code> - perspective (default value);</p></li>
+<li><p><code>csOrthogonal = 1</code> - orthographic (parallel) projection (without perspective reduction). Orthographic projection at 45 degrees is called isometric;</p></li>
+<li><p><code>csOrtho2D = 2</code> - infinite orthographic projection. The value set by the <code>CameraSetViewDepth</code> function (view distance) is ignored;</p></li>
+<li><p><code>csInfinitePerspective = 3</code> - infinite perspective. The value set by the <code>CameraSetViewDepth</code> function (view distance) is ignored.</p></li>
+<li><p><code>cam</code> - camera reference</p></li>
+<li><p><code>cs</code> - camera style.</p></li>
+</ul>
+<hr />
+<h2 id="camerasetfocal">CameraSetFocal</h2>
+<p><code>real CameraSetFocal(real cam, real fov);</code></p>
+<p>Sets the camera angle. By changing this value, you can achieve the effect of zooming in and out.</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>fov</code> - angle of view (default value: 50).</li>
+</ul>
+<hr />
+<h2 id="camerasetscenescale">CameraSetSceneScale</h2>
+<p><code>real CameraSetSceneScale(real cam, real scale);</code></p>
+<p>Sets the camera image scale. Essentially, an analogue of <code>CameraSetFocal</code>, but does not affect perspective reduction.</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>scale</code> - scale (default value: 1).</li>
+</ul>
+<hr />
+<h2 id="camerascalescene">CameraScaleScene</h2>
+<p><code>real CameraScaleScene(real cam, real scale);</code></p>
+<p>Sets the camera image scale, like <code>CameraSetSceneScale</code>, but relative to the current scale value.</p>
+<ul>
+<li><code>cam</code> - link to camera</li>
+<li><code>scale</code> - added to current scale value.</li>
+</ul>
+<hr />
+<h2 id="camerasetviewdepth">CameraSetViewDepth</h2>
+<p><code>real CameraSetViewDepth(real cam, real depth);</code></p>
+<p>Sets the camera view distance - all objects further than this distance will not be drawn. This allows to increase rendering speed, but may lead to some artifacts. For example, if the view distance is too small, some objects may be partially "cut off", and if it is too large, they may "overlap" each other.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>depth</code> - view distance (default value: 100).</li>
+</ul>
+<hr />
+<h2 id="camerasettargetobject">CameraSetTargetObject</h2>
+<p><code>real CameraSetTargetObject(real cam, real obj);</code></p>
+<p>Assigns the camera target object. In this case, the camera will always be directed at the target, wherever it is, and the usual rotation functions are ignored. The target can be any object - for example, a character controlled by the player.</p>
+<p>Note that assigning a target object does not bind the camera position to the object - when you move the target, the camera will remain in place, and you need to move it yourself.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>obj</code> - reference to the target object.</li>
+</ul>
+<hr />
+<h2 id="cameramovearoundtarget">CameraMoveAroundTarget</h2>
+<p>`real CameraMoveAroundTarget(real cam, real pitch, real turn)</p>
+<p>Rotates the camera around its target object. Rotation is performed along two axes - X and Y.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>pitch</code> - rotation angle along the X axis</li>
+<li><code>turn</code> - rotation angle along the Y axis.</li>
+</ul>
+<hr />
+<h2 id="camerasetdistancetotarget">CameraSetDistanceToTarget</h2>
+<p><code>real CameraSetDistanceToTarget(real cam, real distance);</code></p>
+<p>Changes the distance between the camera and its target object (moves the camera closer or farther away from the target).</p>
+<ul>
+<li><code>cam</code> - link to camera</li>
+<li><code>distance</code> - distance.</li>
+</ul>
+<hr />
+<h2 id="cameragetdistancetotarget">CameraGetDistanceToTarget</h2>
+<p><code>real CameraGetDistanceToTarget(real cam);</code></p>
+<p>Returns the distance between the camera and its target object.</p>
+<ul>
+<li><code>cam</code> - reference to the camera.</li>
+</ul>
+<hr />
+<h2 id="cameracopytotexture">CameraCopyToTexture</h2>
+<p><code>real CameraCopyToTexture(real cam, string material, real width, real height);</code></p>
+<p>Copies the camera contents (rendered image) to the material texture.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>material</code> - name of the material</li>
+<li><code>width</code>, <code>height</code> - width and height of the generated texture in pixels. Must be a power of two (i.e. 128, 256, 512, etc.).</li>
+</ul>
+<hr />
+<h2 id="cameragetnearplane">CameraGetNearPlane</h2>
+<p><code>real CameraGetNearPlane(real cam);</code></p>
+<p>Returns the distance to the camera's near clipping plane (that is, the plane closer to which nothing is drawn).</p>
+<ul>
+<li><code>cam</code> - a reference to the camera.</li>
+</ul>
+<p>--</p>
+<h2 id="camerasetnearplanebias">CameraSetNearPlaneBias</h2>
+<p><code>real CameraSetNearPlaneBias(real cam, real bias);</code></p>
+<p>Sets the coefficient of the camera's near clipping plane. It is impossible to change the near plane directly (as is done for the far plane by the CameraSetViewDepth function) - it is calculated using a special formula taking into account the viewing angle and the view resolution. Using this coefficient, you can shift the plane forward (values ??greater than 1) or backward (values ??less than 1).</p>
+<ul>
+<li><code>cam</code> - a reference to the camera.</li>
+<li><code>bias</code> - coefficient (default value: 1).</li>
+</ul>
+<hr />
+<h2 id="cameraabsolutevectortotarget">CameraAbsoluteVectorToTarget</h2>
+<p><code>real CameraAbsoluteVectorToTarget(real cam, real ind);</code></p>
+<p>Returns the Z vector in the orthonomial basis of the camera oriented to its target object (in other words, the absolute direction from the camera to the target object). If the camera has no target, its own absolute Direction vector is returned.</p>
+<ul>
+<li><code>cam</code> is a reference to the camera.</li>
+<li><code>ind</code> is the index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="cameraabsoluterightvectortotarget">CameraAbsoluteRightVectorToTarget</h2>
+<p><code>real CameraAbsoluteRightVectorToTarget(real cam, real ind);</code></p>
+<p>Returns the X vector in the orthonomial basis of the camera oriented to its target object (in other words, the absolute direction to the right of the camera relative to its target object). If the camera has no target, its own absolute Right vector is returned.</p>
+<ul>
+<li><code>cam</code> is a reference to the camera</li>
+<li><code>ind</code> is the index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="cameraabsoluteupvectortotarget">CameraAbsoluteUpVectorToTarget</h2>
+<p><code>real CameraAbsoluteUpVectorToTarget(real cam, real ind);</code></p>
+<p>Returns the Y vector in the orthogonal basis of the camera oriented to its target object (in other words, the absolute up direction from the camera relative to its target object). If the camera has no target, its own absolute Up vector is returned.</p>
+<ul>
+<li><code>cam</code> is a reference to the camera</li>
+<li><code>ind</code> is the index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="camerazoomall">CameraZoomAll</h2>
+<p><code>real CameraZoomAll(real cam, real viewer);</code></p>
+<p>Positions the camera in space so that the view displaying the scene covers all objects.</p>
+<ul>
+<li><code>cam</code> is a reference to the camera</li>
+<li><code>viewer</code> is a reference to the view.</li>
+</ul>
+<p>--</p>
+<h2 id="camerascreendeltatovector">CameraScreenDeltaToVector</h2>
+<p>`real CameraScreenDeltaToVector(real cam, real deltax, real deltay, real ratio, real normx, real normy, real normz, real ind);</p>
+<p>Calculates the absolute translation vector corresponding to the on-screen translation vector of the camera. Useful function for implementing user interface elements on the scene (3D manipulators).</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>deltax</code>, <code>deltay</code> - integer screen translation vector</li>
+<li><code>ratio</code> - coefficient by which the screen vector is multiplied</li>
+<li><code>normx</code>, <code>normy</code>, <code>normz</code> - normal of the plane in which the three-dimensional translation should be calculated</li>
+<li><code>ind</code> - vector coordinate index (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="camerascreendeltatovectorxy">CameraScreenDeltaToVectorXY</h2>
+<p><code>real CameraScreenDeltaToVectorXY(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
+<p>The function does the same as <code>CameraScreenDeltaToVector</code>, but is optimized for working in the XY plane.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>deltax</code>, <code>deltay</code> - integer screen translation vector</li>
+<li><code>ratio</code> - coefficient by which the screen vector is multiplied</li>
+<li><code>ind</code> - index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="camerascreendeltatovectorxz">CameraScreenDeltaToVectorXZ</h2>
+<p><code>real CameraScreenDeltaToVectorXZ(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
+<p>The function does the same as <code>CameraScreenDeltaToVector</code>, but is optimized for working in the XZ plane.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>deltax</code>, <code>deltay</code> - integer screen translation vector</li>
+<li><code>ratio</code> - coefficient by which the screen vector is multiplied</li>
+<li><code>ind</code> - index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="camerascreendeltatovectoryz">CameraScreenDeltaToVectorYZ</h2>
+<p><code>real CameraScreenDeltaToVectorYZ(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
+<p>The function does the same as <code>CameraScreenDeltaToVector</code>, but is optimized for working in the YZ plane.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>deltax</code>, <code>deltay</code> - integer screen translation vector</li>
+<li><code>ratio</code> - coefficient by which the screen vector is multiplied</li>
+<li><code>ind</code> - index of the vector coordinate (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="cameraabsoluteeyespacevector">CameraAbsoluteEyeSpaceVector</h2>
+<p><code>real CameraAbsoluteEyeSpaceVector(real cam, real fordist, real rightdist, real updist, real ind);</code></p>
+<p>Calculates the absolute translation vector corresponding to the given translation vector in the camera view space.</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - translation forward, right and up</li>
+<li><code>ind</code> - vector coordinate index (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<p>--</p>
+<h2 id="camerasetautoleveling">CameraSetAutoLeveling</h2>
+<p><code>real CameraSetAutoLeveling(real cam, real factor);</code></p>
+<p>Changes the camera's Direction vector so that the Up vector points up (0, 1, 0).</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>factor</code> - the higher this value, the slower the vectors will be adjusted.</li>
+</ul>
+<hr />
+<h2 id="cameramoveineyespace">CameraMoveInEyeSpace</h2>
+<p><code>real CameraMoveInEyeSpace(real cam, real fordist, real rightdist, real updist);</code></p>
+<p>Moves the camera in its view space.</p>
+<ul>
+<li><code>cam</code> - reference to the camera</li>
+<li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - moves forward, right, and up.</li>
+</ul>
+<p>--</p>
+<h2 id="cameramovetargetineyespace">CameraMoveTargetInEyeSpace</h2>
+<p><code>real CameraMoveTargetInEyeSpace(real cam, real fordist, real rightdist, real updist);</code></p>
+<p>Moves the camera target in its view space.</p>
+<p><code>cam</code> - reference to the camera</p>
+<ul>
+<li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - moves forward, right, and up.</li>
+</ul>
+<hr />
+<h2 id="camerapointinfront">CameraPointInFront</h2>
+<p><code>real CameraPointInFront(real cam, real x, real y, real z);</code></p>
+<p>Returns true if the given point is in the camera's field of view.</p>
+<ul>
+<li><code>cam</code> - camera reference</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - point coordinates.</li>
+</ul>
+<p>--</p>
+<h2 id="cameragetfieldofview">CameraGetFieldOfView</h2>
+<p><code>real CameraGetFieldOfView(real cam, real vpdim);</code></p>
+<p>Returns the camera's field of view angle in degrees.</p>
+<p><code>cam</code> - camera reference
+<code>vpdim</code> - view dimension (the smaller of width and height).</p>
+</body>
+</html>

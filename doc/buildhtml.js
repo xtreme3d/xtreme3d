@@ -19,7 +19,7 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "ru";
+const lang = "en";
 
 const functions =
 [

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Xtreme3D version history</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+ <meta charset="windows-1251">
+ <meta name="author" content="Gecko">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <link rel="stylesheet" type="text/css" href="sakura.css" inline>
+</head>
+<body>
+<h1>Xtreme3D version history</h1>
+
+<h2>Xtreme3D 0.x-2.x (2003-2006)</h2>
+<p>The history of Xtreme3D began in 2003. The engine was written in Delphi using the GLScene library (the de facto standard 3D engine for Object Pascal) by a German programmer nicknamed <b>Xception</b>. Unfortunately, we do not know his real name.</p>
+<p>The first stable version of Xtreme3D (0.9) was released in 2003. Its capabilities were rather modest: it supported only animated MD2 and MD3 models, static 3DS, MS3D and OBJ, built-in primitives, sprites, 2D and 3D text, lensflare, particles and a sky dome. The engine API resembled the style of GML functions.</p>
+<p>The main goal of the project was to create an engine for a 3D RPG like Dungeon Master. And, although the author of the engine did not initially plan further development of Xtreme3D, in later versions the functionality of the engine quickly outgrew the needs of a specific genre.</p>
+<p>Thus, dynamic water appeared in version 1.7 (2004). However, a much more serious breakthrough was version 2.0 (2006): a total revision of the API, support for types, material libraries and light maps, dynamic cubemapping, support for new model formats, rendering to texture, loading resources from a compressed archive, hardware shaders (bump mapping, cel shading), multitexturing, octree and quadtree, DDS support, and, most importantly, an integrated Open Dynamics Engine (ODE) physics engine.</p>
+<p>The latest release from Xception (2.0.2.0), in addition to numerous bug fixes, contained two important innovations: a landscape renderer and a DCE collision checking engine. The engine's functionality was at the level of commercial games from 1997-2003 - Xtreme3D 2.0 allowed creating something similar in terms of graphics to Quake 2-3, Half-Life, GTA 3, The Elder Scrolls: Morrowind, etc. — everything related to the "pre-shader" era.</p>
+<p>Unfortunately, Xception eventually abandoned its development — the engine was distributed without source code, and therefore did not develop for a long time, while technologies, meanwhile, did not stand still...</p>
+
+<h2>Xtreme3D 3.0 (08/25/2016)</h2>
+<p>Since 2009, the idea of ??recreating the engine from scratch, fixing bugs and adding missing functionality has been constantly floating around the Russian-speaking Xtreme3D community — considering that Xtreme3D is a very thin wrapper over GLScene, this task seemed simple and purely technical. However, unforeseen problems arose, and the matter dragged on. As a result, the project, which began in 2009 and experienced a long period of stagnation and several bursts of activity, was completed only in 2016. This is how Xtreme3D 3.0 was born.</p>
+<p>This version of Xtreme3D, like the original, is written in Delphi using the popular GLScene library - in fact, the engine can be called almost a complete GLScene wrapper for Game Maker. Xtreme3D 3.0 is based on a modified and extended GLScene 1.0.0.0714.</p>
+<p>Here is a short list of innovations in Xtreme3D 3.0:</p>
+<ul>
+<li>Support for shaders in GLSL (1.1 or 1.2)</li>
+<li>Dynamic shadows implemented using shadow mapping</li>
+<li>2x and 4x screen antialiasing. NVIDIA Quincunx antialiasing technology is supported</li>
+<li>Fast off-screen rendering using p-buffers</li>
+<li>Proxy object support</li>
+<li>LOD (LODka 3D) and B3D (Blitz3D) model formats support</li>
+<li>MD3 model tag support</li>
+<li>Blending of skeletal animations</li>
+<li>Loading materials from scripts</li>
+<li>Built-in texture blending shader (TexCombine)</li>
+<li>Built-in shader implementing basic Phong lighting</li>
+<li>Perlin noise-based procedural textures</li>
+<li>Linear wave support for dynamic water</li>
+<li>New types of geometric primitives (truncated pyramid, dodecahedron, icosahedron, teapot)</li>
+<li>Improved explosion effect for meshes (in particular, it is now possible to return a mesh to its original state)</li>
+<li>Grid rendering</li>
+<li>Debug rendering of dummycube objects</li>
+<li>Many new functions for the camera</li>
+<li>The ability to copy transformation matrices (local and absolute) from one object to another. You can also copy bone matrices from a model with skeletal animation to objects and set the local matrix of an object manually, which allows you to implement any mathematical model of movement and rotation of objects without being tied to Euler angles</li>
+<li>The ability to apply impulses (instantaneous changes in speed) to dynamic objects in DCE. DCE also has landscape support</li>
+<li>Improved ODE physics. Unlike the old implementation in Xtreme3D 2.0, ODE now fully supports Freeform objects (both static and dynamic bodies), as well as terrain. In addition, it is now possible to set positions for geometries when creating them, which allows you to create composite bodies - such as, for example, a table with legs</li>
+<li>Functions for creating screenshots and saving textures from memory to BMP files</li>
+<li>Function for reading text files.</li>
+</ul>
+
+<h2>Xtreme3D 3.1 (09/30/2016)</h2>
+<p>In the fall of 2016, the first update of the new Xtreme3D branch was released - version 3.1. Here is a list of the most important changes in it:</p>
+<ul>
+<li>Improved API for Freeform objects - the ability to manually assemble Freeform from vertices and polygons, mesh transformation functions, and saving Freeform to a file</li>
+<li>Support for new file formats: CSM and LMTS (which were not in 3.0), X, ASE, DXS</li>
+<li>Ragdoll support in ODE</li>
+<li>The Movement object, which allows you to set movement trajectories for objects</li>
+<li>Improved BumpShader - support for shadow maps and automatic generation of tangent space</li>
+<li>Improved PhongShader - support for textures</li>
+<li>HUDShape object - 2D shape (rectangle, circle, segment and mesh are supported)</li>
+<li>Improved API for sprites - support for texture atlases (i.e. using a texture fragment to draw a sprite), as well as drawing from a given point instead of the center</li>
+<li>Alpha channel support for PNG</li>
+<li>Functions for querying texture sizes.</li>
+</ul>
+
+<h2>Xtreme3D 3.2 (2016-10-21)</h2>
+<ul>
+<li>Support for FBOs, fast off-screen buffers that can be used to implement multi-pass rendering and various complex post-processing effects</li>
+<li>New shader-compatible multitexturing mechanism for materials. Materials can now have up to 8 textures, and GLSL shaders can automatically accept them as parameters</li>
+<li><code>ViewerRenderObject</code> function for rendering individual objects and hierarchies</li>
+<li><code>MaterialLoadTexture</code> function</li>
+<li>A bug in the <code>ObjectSetParent</code> function has been fixed.</li>
+</ul>
+
+<h2>Xtreme3D 3.3 (26.11.2016)</h2>
+<ul>
+<li>New functions for Freeform that allow reading and modifying model geometry (vertex coordinates, normals, indices, etc.)</li>
+<li>Override Material support for views and FBOs. Allows you to specify a single material with which objects should be rendered, ignoring their own materials</li>
+<li>Support for color buffers of different formats for FBO (including 32-bit floating point)</li>
+<li>Function <code>FBORenderObjectEx</code></li>
+<li>Support for rendering ShadowMap shadows to a user-defined FBO instead of an internal buffer</li>
+<li>Functions <code>ViewerGetSize</code>, <code>ViewerGetPosition</code>, and <code>ViewerIsOpenGLExtensionSupported</code>.</li>
+</ul>
+
+<h2>Xtreme3D 3.4 (12/30/2016)</h2>
+<ul>
+<li>Added support for TTF fonts and output of any Unicode characters via UTF-8 encoding</li>
+<li>Added ObjectHash functions (hash table for storing any Xtreme3D objects)</li>
+<li>Changed API of the <code>FBORenderObjectEx</code> function — new parameters have appeared that allow selectively clearing the color buffer and depth buffer, as well as copying the contents of the FBO to the main frame buffer</li>
+<li>Support for passing the view and inverse view matrices to the GLSL shader parameter, as well as a special parameter that allows the shader to find out if there is a texture in a given texture block</li>
+<li>In order to speed up resource loading, Freeform objects no longer generate octrees and tangent and binormal vectors when loading. This should be done manually, if necessary, using the <code>FreeformGenTangents</code> and <code>FreeformBuildOctree</code></li>
+<li>A bug in the <code>MaterialCubeMapLoadImage</code> function has been fixed. GLSL also now uses seamless cubemap mapping for arbitrary mipmap levels of a cubemap texture if the <code>GL_ARB_seamless_cube_map</code> extension is supported.</li>
+</ul>
+
+<h2>Xtreme3D 3.5 (04.02.2017)</h2>
+<ul>
+<li>Added ClipPlane object — clipping plane</li>
+<li>Improved PhongShader and BumpShader shaders: added support for lsSpot light sources, fog, transparency, and rendering without lighting (if lighting is disabled in the view settings). Transparency is set via the alpha channel of the diffuse texture - or, alternatively, via the alpha value of the diffuse component of the material (Phongshader only)</li>
+<li>Added new functions for materials: <code>MaterialCullFrontFaces</code>, <code>MaterialSetZWrite</code></li>
+<li>Added new ODE functions that allow you to manually set the speed, position and rotation of dynamic bodies.</li>
+</ul>
+
+<h2>Xtreme3D 3.6 (12/17/2017)</h2>
+<p>One of the largest releases in the 3.x branch — this version has been in development for over six months.</p>
+<ul>
+<li>Added support for Windows encoding for TTF fonts, as well as custom 8-bit encodings</li>
+<li>Added new functions for materials: <code>MaterialSetTextureExFromLibrary</code>, <code>MaterialGetNameFromLibrary</code></li>
+<li>Added new functions for Freeform: functions <code>FreeformSetMaterialLibraries</code>, <code>FreeformMeshFaceGroupSetLightmapIndex</code>, <code>FreeformMeshFaceGroupGetLightmapIndex</code></li>
+<li>Added specialized proxy objects for actors (ActorProxy)</li>
+<li>Returned the functions <code>ActorMoveBone</code> and <code>ActorRotateBone</code>, added <code>ActorMeshSetVisible</code></li>
+<li>Returned <code>ObjectInFrustrum</code></li>
+<li>Returned mouse functions, added keyboard reading function</li>
+<li>Added functions for creating and managing windows</li>
+<li>Added functions for creating a color from RGB components</li>
+<li>Added experimental functions for saving a scene to a file and reading from it</li>
+<li>When creating a GLSL shader, an error message is no longer displayed if there are no errors</li>
+<li>In the PhongShader and BumpShader shaders, a bug with incorrect calculation of highlights has been fixed.</li>
+</ul>
+
+<h2>Xtreme3D 3.7 (21.07.2018)</h2>
+<p>The biggest release since 3.0. This version also took more than half a year to develop.</p>
+<ul>
+<li>A new lighting system that supports multiple light sources. Now you can create any number of sources — the 8 closest ones are taken into account when rendering an object. To do this, you need to add the LightFX effect to the object (the <code>LightFXCreate</code> function). Directional lights have a higher priority than point and cone lights. The system is compatible with built-in shaders and applies to all descendants of the object. The main drawback is that large objects (planes, terrain, level geometry) only take into account 8 light sources around their center, so it is recommended to use lightmapping for level lighting</li>
+<li>The total number of light sources can be set using the <code>EngineSetMaxLights</code> function. This helps to avoid overhead with more than 8 light sources. If the value is set to 0, the engine will use the maximum number of light sources supported by the video driver. The default value is 8, but the limitation does not apply to the LightFX system. </li>
+<li>Integration of the Kraft physics engine. This is a modern rigid body dynamics engine written in Delphi. It supports all basic geometries (plane, sphere, box, capsule) and static meshes, allows you to create composite geometries. Kraft is more stable than ODE, has improved collision checking and supports raycasting. You do not need an external DLL to use Kraft, since the engine is built directly into xtreme3d.dll. ODE support will be retained for the foreseeable future, but will no longer be updated</li>
+<li>Functions for editing the terrain height map: <code>BmpHDSCreateEmpty</code>, <code>BmpHDSSetHeight</code>, <code>BmpHDSGetHeight</code>. The <code>BmpHDSSave</code> function saves the height map to a BMP file</li>
+<li>The <code>TerrainGetHDSPosition</code> function returns the height map pixel position at a given point on the terrain</li>
+<li>Basic support for the FBX model format. So far, it only applies to Freeform, but in the future it is planned to be added to Actor. Only the binary version of the format is supported. Materials are not loaded. The loader is based on the OpenFBX library and requires OpenFBX.dll to use it</li>
+<li>New functions for proxy actors: <code>ActorProxyObjectSetAnimationRange</code>, <code>ActorProxyObjectSetInterval</code></li>
+<li>Functions for reading and unpacking PAK archives: <code>PakGetFileCount</code>, <code>PakGetFileName</code>, <code>PakExtract</code>, <code>PakExtractFile</code>. The <code>SetPakArchive</code> function now returns a PAK file pointer, which is required for the above functions. Compressed PAK archives are now supported</li>
+<li>Added <code>HUDSpriteGetMouseOver</code></li>
+<li>Added <code>ObjectGetScale</code></li>
+<li>The <code>ObjectDestroy</code> function now works with all types of Xtreme3D objects</li>
+<li>New functions for window management: <code>WindowSetIcon</code>, <code>WindowIsShowing</code></li>
+<li>The <code>ViewerResetPerformanceMonitor</code> function solves the problem with a gradual increase in FPS</li>
+<li>Added output of error messages when loading resources (Freeform, Actor, textures). Messages can be disabled using the <code>EngineShowLoadingErrors</code> function — in this case, the engine will ignore the error and continue working.</li>
+</ul>
+
+<h2>Xtreme3D 3.7.1 (05.08.2018)</h2>
+<ul>
+<li>Functions for returning data on light sources (<code>LightGetColor</code>, <code>LightGetShining</code>, <code>LightGetAttenuation</code>)</li>
+<li>Functions for changing and returning primitive options (<code>SphereOptions</code>, <code>SphereGetOptions</code>, <code>CylinderOptions</code>, <code>CylinderGetOptions</code>, etc.)</li>
+<li>A function that returns the name of an object's material (<code>ObjectGetMaterial</code>)</li>
+<li>Functions for returning the color and transparency of materials (<code>MaterialGetColor</code>, <code>MaterialGetAlpha</code>)</li>
+<li>Functions for changing grid parameters (<code>GridSetTille</code>, <code>GridSetStep</code>).</li>
+</ul>
+
+<h2>Xtreme3D 3.7.2 (02/26/2019)</h2>
+
+<ul>
+<li>Function <code>SpriteGetSize</code></li>
+<li>Functions <code>MaterialDestroy</code>, <code>MaterialSetName</code></li>
+<li>The TextureEx system now supports 16 texture slots instead of 8 — accordingly, 16 textures can be passed to a fragment shader if the video card supports this number of texture units</li>
+<li>Added the ability to unbind a shader from a material by calling <code>MaterialSetShader</code> with a null pointer: <code>MaterialSetShader('material', 0);</code></li>
+<li>Added the <code>LineSetNode</code> function.</li>
+</ul>
+
+<h2>Xtreme3D 3.8 (07/27/2019)</h2>
+<p>One of the largest releases in the 3.x branch — many new features, new primitives, and an integrated new physics engine for simulations of cloth, hair and soft bodies. </p>
+<ul>
+<li>Function <code>ViewerRenderToFilePNG</code> — saves a screenshot in PNG format with an alpha channel</li>
+<li>Function <code>ViewerPixelRayToWorld</code></li>
+<li>Function <code>ViewerShadeModel</code> — choose between flat and smooth normals</li>
+<li>New type of primitive Pipe, thanks to which you can create various pipes, tentacles, etc.</li>
+<li>Functions for working with Actor animation: <code>ActorGetAnimationName</code>, <code>ActorGetAnimationCount</code>, <code>ActorAnimationDestroy</code>, <code>ActorAnimationNextFrame</code>, <code>ActorAnimationPrevFrame</code>, <code>ActorSetFrame</code></li>
+<li>Function <code>ActorTriangleCount</code> — returns the number of triangles in the Actor</li>
+<li>Functions for managing paths: <code>MovementPathShow</code>, <code>MovementPathSetLoop</code>, <code>MovementPathDeleteNode</code></li>
+<li>Functions for sprites: <code>HUDSpriteXTiles</code>, <code>HUDSpriteYTiles</code></li>
+<li>New TilePlane primitive for more detailed tile texturing of a plane</li>
+<li>Function <code>FireFXRingExplosion</code></li>
+<li>Functions for working with free-form meshes: <code>FreeformMeshObjectGetName</code>, <code>FreeformMeshObjectSetName</code>, <code>FreeformMeshObjectDestroy</code></li>
+<li>Now the DCE manager can be detached from objects using the <code>ObjectDestroy</code> function and manipulated using standard functions. Example: <code>dyn = DceDynamicSetManager(obj, mng); ObjectDestroy(dyn);</code></li>
+<li><code>ObjectFindByName</code> function — returns a pointer to an object by name</li>
+<li>New VerletWorld physics engine for simulating soft objects (fabric, rope, hair, jelly) taking into account wind and gravity.</li>
+</ul>
+
+<h2>Xtreme3D 3.9 (05/20/2021)</h2>
+<ul>
+<li>Added new Engine function: <code>EngineGetTimeStep</code></li>
+<li>Added new Object functions: <code>ObjectIgnoreDepthBuffer</code>, <code>ObjectIsPicked</code></li>
+<li>Added new Window function: <code>WindowDispatch</code></li>
+<li>Invisible objects are now not taken into account when raycasts</li>
+<li>Missing textures are ignored when loading a model</li>
+<li>Kraft physics engine has been updated to the latest version</li>
+<li>Added binding for the Lua language</li>
+</ul>
+
+<h2>Xtreme3D 3.9.1 (20.09.2021)</h2>
+<ul>
+<li>All functions now use the C calling convention (<code>cdecl</code>). This is done for better compatibility with various programming languages, as most languages ??have good library support for C</li>
+<li>Added support for GameMaker Studio 2. For a quick setup guide, see the FAQ</li>
+<li>The <code>ViewerCreate</code> function now checks the window handle (<code>HWND</code>) and throws an error if the handle is invalid or such a window does not exist.</li>
+</ul>
+
+<h2>Xtreme3D 3.9.2 (04/09/2022)</h2>
+<ul>
+<li>Added the <code>PtrToReal</code> function to ensure compatibility with the new version of GameMaker Studio 2</li>
+<li>Added the <code>MouseIsPressed</code> function to read mouse button presses</li>
+<li>Fixed shadow rendering when using both dynamic cube maps</li>
+<li>BumpShader now uses 8 light sources and automatic tangent calculation by default (option set by <code>BumpShaderUseAutoTangentSpace</code> function).</li>
+</ul>
+
+<h2>Xtreme3D 4.0.0 (??.??.2025)</h2>
+<ul>
+<li>Transition to GLScene 2.2 and Delphi 10+</li>
+<li>Transition to 64-bit architecture. 32-bit architecture is no longer supported</li>
+<li>Compatibility with 64-bit GameMaker (former GameMaker: Studio 2)</li>
+<li>All strings in the engine are accepted only in UTF-8, support for other encodings has been removed</li>
+<li><code>Update</code> is now called <code>EngineUpdate</code>
+<li><code>TrisRendered</code> has been removed</li>
+<li><code>ViewerRenderEx</code> has been removed. Extended rendering now works differently</li>
+<li><code>ViewerRenderObject</code> is new</li>
+<li><code>EngineSetMaxLights</code> has changed its meaning. It now sets the maximum number of lights that are taken into account by the main lighting system and the LightFX system. By default, this number is 8 (the maximum for the main lighting system). If you want to use more light sources for the LightFX system, you need to use this function</li>
+<li>The <code>ViewerGetPickedObjectsList</code> function now works with PickList list objects that must be created manually</li>
+<li>New functions <code>PickListCreate</code>, <code>PickListClear</code>, <code>PickListGetCount</code>, <code>PickListGetHit</code></li>
+<li>The <code>ViewerRenderToFilePNG</code> function has been removed - saving to PNG is now supported in <code>ViewerRenderToFile</code></li>
+<li>New constants for <code>ViewerSetAntiAliasing</code> are supported: aa6x = 6, aa8x = 7, aa16x = 8, csa8x = 9, csa8xHQ = 10, csa16x = 11, csa16xHQ = 12</li>
+<li><code>CameraZoomAll</code> now requires Viewer in the second parameter</li>
+<li>New function <code>MaterialLibraryGetTextureByName</code></li>
+<li><code>SpriteNoZWrite</code> has been removed, use <code>MaterialSetDepthWrite</code></li> instead
+<li><code>MaterialCullFrontFaces</code> has been removed</li>
+<li><code>MaterialSetZWrite</code> is now called <code>MaterialSetDepthWrite</code></li>
+<li>New function <code>MaterialSetDepthTest</code></li>
+<li>TextureEx system has been reworked. The functions <code>MaterialLoadTextureEx</code>, <code>MaterialSetTextureEx</code>, <code>MaterialSetTextureExFromLibrary</code>, <code>MaterialGenTextureEx</code>, <code>MaterialEnableTextureEx</code> have been removed. Added functions <code>MaterialAddTextureEx</code>, <code>MaterialTextureExClear</code>, <code>TextureExLoad</code>, <code>TextureExSetFromMaterial</code>, <code>TextureExGenerate</code>, <code>TextureExDelete</code>, <code>TextureExSetTextureScale</code>, <code>TextureExSetTextureOffset</code>, <code>TextureExEnable</code></li>
+<li>New function <code>MaterialSetTextureFormatEx</code> and corresponding constants</li>
+<li>New constant for <code>MaterialSetTextureFormat</code>: <code>tfExtended = 12</code></li>
+<li>New constant for <code>MaterialSetTextureImageAlpha</code>: <code>tiaBottomRightPointColorTransparent = 9</code></li>
+<li>New function <code>MaterialSetTextureCompareMode</code></li>
+<li>The functions <code>ObjectGetCollisionPosition</code>, <code>ObjectGetCollisionNormal</code> have been removed - instead of them there are now <code>EngineGetLastRaycastPosition</code>, <code>EngineGetLastRaycastNormal</code>, which do the same</li>
+<li>Polygon functions have been removed</li>
+<li>The functions <code>TTFontSetEncoding</code>, <code>TTFontLoadCodePage</code> have been removed. TTFont now only supports UTF-8</li>
+<li><code>TextRead</code>, <code>TextConvertANSIToUTF8</code> functions removed</li>
+<li><code>OdeAddCone</code> function removed</li>
+<li>New function <code>BaseMeshBuildSilhouetteConnectivityData</code></li>
+<li>New function <code>ActorSetReference</code></li>
+<li>New functions <code>ObjectNotifyChange</code>, <code>ObjectStructureChanged</code>, <code>ObjectClearStructureChanged</code></li>
+<li>New functions <code>ObjectListCreate</code>, <code>ObjectListAdd</code>, <code>ObjectListGetCount</code></li>
+<li>FBO system reworked. The functions <code>FBOSetViewer</code>, <code>FBORenderObject</code>, <code>FBORenderObjectEx</code>, <code>FBOSetOverrideMaterial</code>, <code>FBOSetColorTextureFormat</code> have been removed. Added functions <code>FBOSetActive</code>, <code>FBOSetAspect</code>, <code>FBOSetPickableTarget</code>, <code>FBOSetSize</code>, <code>FBOSetRootObject</code>, <code>FBOSetBackgroundColor</code>, <code>FBOSetEnabledRenderBuffers</code>, <code>FBOSetSceneScaleFactor</code>, <code>FBOSetTargetVisibility</code>, <code>FBOSetMaterialLibrary</code>, <code>FBOSetColorTextureName</code>, <code>FBOSetDepthTextureName</code>, <code>FBOSetClearOptions</code>, <code>FBOSetStencilPrecision</code></li>
+ <li>New functions <code>GLSLShaderSetLogger</code>, <code>GLSLShaderForceDisableStencilTest</code>, <code>GLSLShaderSetOptions</code></li>
+<li>Reworked <code>ShadowMap</code> shadows. Removed functions <code>ShadowMapSetCaster</code>, <code>ShadowMapSetProjectionSize</code>, <code>ShadowMapSetZScale</code>, <code>ShadowMapSetZClippingPlanes</code>, <code>ShadowMapRender</code>. New functions <code>ShadowMapUpdate</code>, <code>ShadowMapSetViewer</code></li>
+<li>Added new object <code>ShadowCamera</code>, which is used in <code>ShadowMap</code>. New functions <code>ShadowCameraCreate</code>, <code>ShadowCameraSetProjectionSize</code>, <code>ShadowCameraSetZClippingPlanes</code></li>
+<li>Logger functions: <code>LoggerCreate</code>, <code>LoggerEnable</code>, <code>LoggerLog</code></li>
+<li>New function <code>WindowIsActive</code></li>
+<li>The function <code>PtrToReal</code> is now called <code>PointerToReal</code>.</li>
+</ul>
+
+</body>
+</html>

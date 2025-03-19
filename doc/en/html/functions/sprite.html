@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sprite</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="sprite">Sprite</h1>
+<p>Спрайт (Sprite) - двумерное изображение. В Xtreme3D поддерживаются экранные спрайты (отрисовываются на экране поверх проекции) и пространственные (присутствуют в трехмерной сцене в качестве плоскостей - их еще называют биллбордами). Главное отличие пространственного спрайта от простой плоскости заключается в том, что спрайт всегда повернут в сторону камеры. Это позволяет использовать пространственные спрайты в качестве различных псевдотрехмерных эффектов, такие как взрывы, вспышки, сияния. На их основе можно создать собственную систему частиц.</p>
+<p>Экранные спрайты применяются для отображения элементов интерфейса - прицел, иконки, шкала энергии и т.д.</p>
+<p>Все спрайты создаются из материалов. При этом поддерживаются их настройки - режимы смешивания, альфа-канал и др.</p>
+<hr />
+<h2 id="hudspritecreate">HUDSpriteCreate</h2>
+<p><code>real HUDSpriteCreate(string material, real width, real height, real parent);</code></p>
+<p>Создает новый экранный спрайт и возвращает ссылку на него.
+material - имя материала</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота спрайта в пикселях</li>
+<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudspritecreateex">HUDSpriteCreateEx</h2>
+<p><code>real HUDSpriteCreateEx(real width, real height, real left, real top, real right, real bottom, real parent);</code></p>
+<p>Создает новый экранный спрайт из фрагмента текстуры материала и возвращает ссылку на него. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.</p>
+<p>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции <code>ObjectSetMaterial</code>. </p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота спрайта в пикселях</li>
+<li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
+<li><code>right</code>, <code>bottom</code> - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
+<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudspritegetmouseover">HUDSpriteGetMouseOver</h2>
+<p><code>real HUDSpriteGetMouseOver(real sprite, real viewer);</code></p>
+<p>Возвращает 1, если курсор мыши находится над спрайтом в заданном виде, и 0 в противном случае. Функция полезна для реализации элементов интерфейса, таких, как кнопки.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>viewer</code> - ссылка на вид.</li>
+</ul>
+<hr />
+<h2 id="hudspritextiles">HUDSpriteXTiles</h2>
+<p><code>real HUDSpriteXTiles(real sprite, real xtiles);</code></p>
+<p>Задает тайлинг (количество повторений) текстуры спрайта по оси X.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>xtiles</code> - тайлинг по оси X.</li>
+</ul>
+<hr />
+<h2 id="hudspriteytiles">HUDSpriteYTiles</h2>
+<p>`real HUDSpriteYTiles(real sprite, real ytiles);</p>
+<p>Задает тайлинг (количество повторений) текстуры спрайта по оси Y.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>ytiles</code> - тайлинг по оси Y.</li>
+</ul>
+<hr />
+<h2 id="spritecreate">SpriteCreate</h2>
+<p><code>real SpriteCreate(string material, real width, real height, real parent);</code></p>
+<p>Создает новый пространственный спрайт и возвращает его id.</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>width</code>, <code>height</code> - ширина и высота спрайта в единицах координатной системы</li>
+<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="spritecreateex">SpriteCreateEx</h2>
+<p><code>real SpriteCreateEx(real width, real height, real left, real top, real right, real bottom, real parent);</code></p>
+<p>Создает новый пространственный спрайт из фрагмента текстуры материала и возвращает ссылку на него. Функция полезна при создании множества спрайтов сравнительного маленького размера, расположенных на одной большой текстуре - это значительно эффективнее, чем загружать несколько отдельных текстур для каждого спрайта.</p>
+<p>Материал в этой функции не задается из-за ограничения GML (не больше 4 аргументов в DLL-функции при использовании строкового аргумента). Вы можете назначить спрайту материал при помощи функции <code>ObjectSetMaterial</code>.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота спрайта в единицах координатной системы</li>
+<li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
+<li><code>right</code>, <code>bottom</code> - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
+<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="spritesetsize">SpriteSetSize</h2>
+<p><code>real SpriteSetSize(real sprite, real width, real height);</code></p>
+<p>Задает размер спрайта.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>width</code>, <code>height</code> - ширина и высота спрайта.</li>
+</ul>
+<hr />
+<h2 id="spritegetsize">SpriteGetSize</h2>
+<p><code>real SpriteGetSize(real sprite, real ind);</code></p>
+<p>Возвращает размер спрайта - ширину или высоту, в зависимости от заданного индекса размерности.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>ind</code> - индекс размерности (0 = ширина, 1 = высота).</li>
+</ul>
+<hr />
+<h2 id="spritescale">SpriteScale</h2>
+<p><code>real SpriteScale(real sprite, real hscale, real vscale);</code></p>
+<p>Изменяет размер спрайта относительно текущего размера.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>hscale</code>, <code>vscale</code> - добавляются к текущим значениям ширины и высоты.</li>
+</ul>
+<hr />
+<h2 id="spritesetrotation">SpriteSetRotation</h2>
+<p><code>real SpriteSetRotation(real sprite, real angle);</code></p>
+<p>Задает угол поворота спрайта. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>angle</code> - угол поворота.</li>
+</ul>
+<hr />
+<h2 id="spriterotate">SpriteRotate</h2>
+<p><code>real SpriteRotate(real sprite, real angle);</code></p>
+<p>Изменяет поворот спрайта относительно текущего угла. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>angle</code> - добавляется к текущему углу поворота.</li>
+</ul>
+<hr />
+<h2 id="spritemirror">SpriteMirror</h2>
+<p><code>real SpriteMirror(real sprite, real u, real v);</code></p>
+<p>Отображает спрайт зеркально по горизонтали и/или вертикали. Работает только для пространственных спрайтов.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>u</code> - горизонталь, <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
+<li><code>v</code> - вертикаль, <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="spritesetbounds">SpriteSetBounds</h2>
+<p><code>real SpriteSetBounds(real sprite, real left, real top, real right, real bottom);</code></p>
+<p>Задает фрагмент текстуры для спрайта в пикселях. Функция позволяет анимировать спрайт, последовательно сдвигая фрагмент вдоль набора кадров. Также можно использовать ее, например, для реализации мини-карты.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>left</code>, <code>top</code> - координаты левого верхнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры)</li>
+<li><code>right</code>, <code>bottom</code> - координаты координаты правого нижнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры).</li>
+</ul>
+<hr />
+<h2 id="spritesetboundsuv">SpriteSetBoundsUV</h2>
+<p><code>real SpriteSetBounds(real sprite, real left, real top, real right, real bottom);</code></p>
+<p>Задает фрагмент текстуры для спрайта в UV-координатах. Координаты (0, 0) соответствуют левому верхнему углу текстуры, (1, 1) - правому нижнему.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента</li>
+<li><code>right</code>, <code>bottom</code> - UV-координаты координаты правого нижнего угла фрагмента.</li>
+</ul>
+<hr />
+<h2 id="spritesetorigin">SpriteSetOrigin</h2>
+<p><code>real SpriteSetOrigin(real sprite, real x, real y);</code></p>
+<p>Задает исходную точку спрайта - то есть, точку, вокруг которой осуществляется вращение спрайта. По умолчанию вращение осуществляется вокруг центра спрайта.</p>
+<ul>
+<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>x</code>, <code>y</code> - координаты исходной точки в пикселях относительно центра спрайта (координаты (0, 0) соответствуют центру).</li>
+</ul>
+</body>
+</html>

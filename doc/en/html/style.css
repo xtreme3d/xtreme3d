@@ -1,0 +1,30 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    color: #8f7162;
+}
+
+h2 {
+    color: #8f7162;
+}
+
+p {
+    line-height: 1.2em;
+    padding-left: 2em;
+}
+
+a {
+    color: #b16300;
+}
+
+li code {
+    font-weight: bold;
+    color: #d6531b;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e0dcd6;
+}
