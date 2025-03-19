@@ -15,6 +15,11 @@
                 <param name="ImageNumber" value="0">
              </OBJECT>
         <LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Введение">
+                <param name="Local" value="intro.html">
+                <param name="ImageNumber" value="0">
+             </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value="История Xtreme3D">
                 <param name="Local" value="history.html">
                 <param name="ImageNumber" value="0">
