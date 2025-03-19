@@ -1,185 +1,170 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>HUDShape</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>HUDShape</H1>
-
-<A class=type>Класс: TGLHUDShape</A><BR><BR>
-
-<A>HUDShape - это двумерная фигура, которая отрисовывается на экране поверх проекции. Xtreme3D поддерживает четыре типа фигур: прямоугольник (rectangle), окружность (circle), отрезок (line) и меш (mesh). Фигуры могут иметь или не иметь материал. Фигурам можно индивидуально задавать цвет и прозрачность независимо от материала. 
-<BR>Фигуры можно использовать для отрисовки различных сложных элементов интерфейса - например, окружность хорошо подходит для создания круговой шкалы здоровья.
-</A>
-<HR>
-
-<A name="HUDShapeRectangleCreate"></A>
-<H1 class=name>HUDShapeRectangleCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeRectangleCreate</A><A>( width,height,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает фигуру-прямоугольник и возвращает ее id.</A>
-<BR><A>width,height - ширина и высота прямоугольника в пикселях.</A>
-<BR><A>parent - id родителя для фигуры (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="HUDShapeCircleCreate"></A>
-<H1 class=name>HUDShapeCircleCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeCircleCreate</A><A>( radius,slices,startAngle,endAngle,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает фигуру-окружность и возвращает ее id.</A>
-<BR><A>radius - радиус окружности</A>
-<BR><A>slices - количество ребер контура</A>
-<BR><A>startAngle,endAngle - начальный и конечный углы (в градусах). Эти параметры позволяют отрисовать не целую окружность, а ее сектор. Если задать 0 и 360, будет отрисована целая окружность</A>
-<BR><A>parent - id родителя для фигуры (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="HUDShapeLineCreate"></A>
-<H1 class=name>HUDShapeLineCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeLineCreate</A><A>( x1,y1,x2,y2,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает фигуру-отрезок и возвращает ее id.</A>
-<BR><A>x1,y1 - начальная точка отрезка в локальных координатах объекта (при собственном размере фигуры 1х1 они соответствуют пикселям)</A>
-<BR><A>x2,y2 - конечная точка отрезка в локальных координатах объекта (при собственном размере фигуры 1х1 они соответствуют пикселям)</A>
-<BR><A>parent - id родителя для фигуры (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="HUDShapeMeshCreate"></A>
-<H1 class=name>HUDShapeMeshCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeMeshCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает фигуру-меш и возвращает ее id. Меш позволяет отрисовать произвольную фигуру, составленную из треугольников при помощи функций </A>
-<A class=funclink href=../functions/hudshape.htm#HUDShapeMeshAddVertex>HUDShapeMeshAddVertex</A><A> и </A>
-<A class=funclink href=../functions/hudshape.htm#HUDShapeMeshAddTriangle>HUDShapeMeshAddTriangle</A><A>.</A>
-<BR><A>parent - id родителя для фигуры (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="HUDShapeSetSize"></A>
-<H1 class=name>HUDShapeSetSize</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeSetSize</A><A>( shape,width,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает размер фигуры. Обратите внимание, что размер имеет для разных фигур разную трактовку. Для прямоугольников размер соответствует реальному размеру на экране в пикселях. Для окружностей размер также соответствует пикселям и влияет на горизонтальный и вертикальный диаметры (то есть, при использовании неодинаковых ширины и высоты окружность превращается в эллипс). Для отрезков и мешей размер трактуется как коэффициент масштабирования, при этом единичный коэффициент соответствует ширине и высоте, равным 1. При таком размере отрезок и меш имеют исходный масштаб, и координаты точек будут соответствовать пикселям на экране.
-</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>width,height - ширина и высота фигуры.</A>
-<HR>
-
-<A name="HUDShapeScale"></A>
-<H1 class=name>HUDShapeScale</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeScale</A><A>( shape,hscale,vscale as </A><A class=type>real</A><A> );</A>
-<BR><A>Изменяет размер фигуры относительно текущего размера.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>hscale,vscale - добавляются к текущим значениям ширины и высоты.</A>
-<HR>
-
-<A name="HUDShapeSetRotation"></A>
-<H1 class=name>HUDShapeSetRotation</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeSetRotation</A><A>( shape,angle as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает угол поворота фигуры.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>angle - угол поворота (в градусах).</A>
-<HR>
-
-<A name="HUDShapeRotate"></A>
-<H1 class=name>HUDShapeRotate</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeRotate</A><A>( shape,angle as </A><A class=type>real</A><A> );</A>
-<BR><A>Изменяет поворот фигуры относительно текущего угла.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>angle - добавляется к текущему углу поворота.</A>
-<HR>
-
-<A name="HUDShapeSetColor"></A>
-<H1 class=name>HUDShapeSetColor</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeSetColor</A><A>( shape,color,alpha as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет и прозрачность фигуры. Этот цвет не зависит от материала, присвоенного фигуре - вы можете не присваивать материал и задавать цвет фигурам индивидуально. Если материал присвоен, то собственный цвет фигуры смешивается с текстурой материала.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>color - цвет</A>
-<BR><A>alpha - прозрачность.</A>
-<HR>
-
-<A name="HUDShapeSetOrigin"></A>
-<H1 class=name>HUDShapeSetOrigin</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeSetOrigin</A><A>( shape,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает исходную точку фигуры - то есть, точку, вокруг которой осуществляется вращение фигуры. По умолчанию вращение осуществляется вокруг центра фигуры.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>x,y - координаты исходной точки в пикселях относительно центра фигуры (координаты (0, 0) соответствуют центру).</A>
-<HR>
-
-<A name="HUDShapeCircleSetRadius"></A>
-<H1 class=name>HUDShapeCircleSetRadius</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeCircleSetRadius</A><A>( shape,radius as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает радиус фигуры-окружности. Вызов этой функции эквивалентен установке ширины и высоты, равных двухкратному радиусу.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>radius - радиус.</A>
-<HR>
-
-<A name="HUDShapeCircleSetSlices"></A>
-<H1 class=name>HUDShapeCircleSetSlices</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeCircleSetSlices</A><A>( shape,slices as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает количество ребер контура фигуры-окружности.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>slices - количество ребер контура.</A>
-<HR>
-
-<A name="HUDShapeCircleSetAngles"></A>
-<H1 class=name>HUDShapeCircleSetAngles</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeCircleSetAngles</A><A>( shape,startAngle,endAngle as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает начальный и конечный углы фигуры-окружности. Эти параметры позволяют отрисовать не целую окружность, а ее сектор. Если задать 0 и 360, будет отрисована целая окружность</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>startAngle,endAngle - начальный и конечный углы (в градусах).</A>
-<HR>
-
-<A name="HUDShapeLineSetPoints"></A>
-<H1 class=name>HUDShapeLineSetPoints</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeLineSetPoints</A><A>( shape,x1,y1,x2,y2 as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает начальную и конечную точки фигуры-отрезка. Точки задаются в локальных координатах объекта, поэтому при изменении размера фигуры они могут не совпадать с координатами пикселей на экране (они соответствуют пикселям при размере 1х1).</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>x1,y1 - начальная точка отрезка</A>
-<BR><A>x2,y2 - конечная точка отрезка.</A>
-<HR>
-
-<A name="HUDShapeLineSetWidth"></A>
-<H1 class=name>HUDShapeLineSetWidth</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeLineSetWidth</A><A>( shape,width as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает толщину фигуры-отрезка.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>width - толщина отрезка в пикселях.</A>
-<HR>
-
-<A name="HUDShapeMeshAddVertex"></A>
-<H1 class=name>HUDShapeMeshAddVertex</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeMeshAddVertex</A><A>( shape,x,y,u,v as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет новую вершину в фигуру-меш.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>x,y - вершина в локальных координатах объекта</A>
-<BR><A>u,v - текстурные координаты вершины.</A>
-<HR>
-
-<A name="HUDShapeMeshAddTriangle"></A>
-<H1 class=name>HUDShapeMeshAddTriangle</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeMeshAddTriangle</A><A>( shape,v1,v2,v3 as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет новый треугольник в фигуру-меш. Треугольник образуется вершинами индексов v1, v2, v3.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>v1,v2,v3 - индексы вершин.</A>
-<HR>
-
-<A name="HUDShapeMeshSetVertex"></A>
-<H1 class=name>HUDShapeMeshSetVertex</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeMeshSetVertex</A><A>( shape,index,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Модифицирует существующую вершину фигуры-меша.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>index - индекс вершины</A>
-<BR><A>x,y - вершина в локальных координатах объекта.</A>
-<HR>
-
-<A name="HUDShapeMeshSetTexCoord"></A>
-<H1 class=name>HUDShapeMeshSetTexCoord</H1>
-<A class=type>real</A><A> = </A><A class=function>HUDShapeMeshSetTexCoord</A><A>( shape,index,u,v as </A><A class=type>real</A><A> );</A>
-<BR><A>Модифицирует текстурные координаты существующей вершины фигуры-меша.</A>
-<BR><A>shape - id фигуры</A>
-<BR><A>index - индекс вершины</A>
-<BR><A>u,v - текстурные координаты.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>HUDShape</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="hudshape">HUDShape</h1>
+<p>HUDShape - это двумерная фигура, которая отрисовывается на экране поверх проекции. Xtreme3D поддерживает четыре типа фигур: прямоугольник (rectangle), окружность (circle), отрезок (line) и меш (mesh). Фигуры могут иметь или не иметь материал. Фигурам можно индивидуально задавать цвет и прозрачность независимо от материала.</p>
+<p>Фигуры можно использовать для отрисовки различных элементов интерфейса - например, окружность хорошо подходит для создания круговой шкалы здоровья.</p>
+<hr />
+<h2 id="hudshaperectanglecreate">HUDShapeRectangleCreate</h2>
+<p><code>real HUDShapeRectangleCreate(real width, real height, real parent);</code></p>
+<p>Создает фигуру-прямоугольник и возвращает указатель на нее.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота прямоугольника в пикселях.</li>
+<li><code>parent</code> - указатель на родителя для фигуры (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudshapecirclecreate">HUDShapeCircleCreate</h2>
+<p><code>real HUDShapeCircleCreate(real radius, real slices, real startAngle, real endAngle, real parent);</code></p>
+<p>Создает фигуру-окружность и возвращает указатель на нее.</p>
+<ul>
+<li><code>radius</code> - радиус окружности</li>
+<li><code>slices</code> - количество ребер контура</li>
+<li><code>startAngle</code>, <code>endAngle</code> - начальный и конечный углы (в градусах). Эти параметры позволяют отрисовать не целую окружность, а ее сектор. Если задать 0 и 360, будет отрисована целая окружность</li>
+<li><code>parent</code> - указатель на родителя для фигуры (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudshapelinecreate">HUDShapeLineCreate</h2>
+<p><code>real HUDShapeLineCreate(real x1, real y1, real x2, real y2, real parent);</code></p>
+<p>Создает фигуру-отрезок и возвращает указатель на нее.</p>
+<ul>
+<li><code>x1</code>, <code>y1</code> - начальная точка отрезка в локальных координатах объекта (при размере фигуры 1х1 они соответствуют пикселям)</li>
+<li><code>x2</code>, <code>y2</code> - конечная точка отрезка в локальных координатах объекта (при размере фигуры 1х1 они соответствуют пикселям)</li>
+<li><code>parent</code> - указатель на родителя для фигуры (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudshapemeshcreate">HUDShapeMeshCreate</h2>
+<p><code>real HUDShapeMeshCreate(real parent);</code></p>
+<p>Создает фигуру-меш и возвращает указатель на нее. Меш позволяет отрисовать произвольную фигуру, составленную из треугольников при помощи функций HUDShapeMeshAddVertex и HUDShapeMeshAddTriangle.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя для фигуры (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="hudshapesetsize">HUDShapeSetSize</h2>
+<p><code>real HUDShapeSetSize(real shape, real width, real height);</code></p>
+<p>Задает размер фигуры. Обратите внимание, что понятие размера имеет для разных фигур разный смысл. Для прямоугольников размер задает реальный размер на экране в пикселях. Для окружностей размер также соответствует пикселям и влияет на горизонтальный и вертикальный диаметры (то есть, при использовании неодинаковых ширины и высоты окружность превращается в эллипс). Для отрезков и мешей размер трактуется как коэффициент масштабирования, при этом единичный коэффициент соответствует ширине и высоте, равным 1. При таком размере отрезок и меш имеют исходный масштаб, и координаты точек будут соответствовать пикселям на экране.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>width</code>, <code>height</code> - ширина и высота фигуры.</li>
+</ul>
+<hr />
+<h2 id="hudshapescale">HUDShapeScale</h2>
+<p><code>real HUDShapeScale(real shape, real hscale, real vscale);</code></p>
+<p>Изменяет размер фигуры относительно текущего размера.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>hscale</code>, <code>vscale</code> - добавляются к текущим значениям ширины и высоты.</li>
+</ul>
+<hr />
+<h2 id="hudshapesetrotation">HUDShapeSetRotation</h2>
+<p><code>real HUDShapeSetRotation(real shape, real angle);</code></p>
+<p>Задает угол поворота фигуры.</p>
+<p><code>shape</code> - указатель на фигуру
+<code>angle</code> - угол поворота (в градусах).</p>
+<hr />
+<h2 id="hudshaperotate">HUDShapeRotate</h2>
+<p><code>real HUDShapeRotate(real shape, real angle);</code></p>
+<p>Изменяет поворот фигуры относительно текущего угла.</p>
+<p><code>shape</code> - указатель на фигуру
+<code>angle</code> - добавляется к текущему углу поворота.</p>
+<hr />
+<h2 id="hudshapesetcolor">HUDShapeSetColor</h2>
+<p><code>real HUDShapeSetColor(real shape, real color, real alpha);</code></p>
+<p>Задает цвет и прозрачность фигуры. Этот цвет не зависит от материала, присвоенного фигуре - вы можете не присваивать материал и задавать цвет фигурам индивидуально. Если материал присвоен, то собственный цвет фигуры смешивается с текстурой материала.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>color</code> - цвет</li>
+<li><code>alpha</code> - прозрачность.</li>
+</ul>
+<hr />
+<h2 id="hudshapesetorigin">HUDShapeSetOrigin</h2>
+<p><code>real HUDShapeSetOrigin(real shape, real x, real y);</code></p>
+<p>Задает исходную точку фигуры - то есть, точку, вокруг которой осуществляется вращение фигуры. По умолчанию вращение осуществляется вокруг центра фигуры.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>x</code>, <code>y</code> - координаты исходной точки в пикселях относительно центра фигуры (координаты (0, 0) соответствуют центру).</li>
+</ul>
+<hr />
+<h2 id="hudshapecirclesetradius">HUDShapeCircleSetRadius</h2>
+<p><code>real HUDShapeCircleSetRadius(real shape, real radius);</code></p>
+<p>Задает радиус фигуры-окружности. Вызов этой функции эквивалентен установке ширины и высоты, равных двухкратному радиусу.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>radius</code> - радиус. </li>
+</ul>
+<hr />
+<h2 id="hudshapecirclesetslices">HUDShapeCircleSetSlices</h2>
+<p><code>real HUDShapeCircleSetSlices(real shape, real slices);</code></p>
+<p>Задает количество ребер контура фигуры-окружности.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>slices</code> - количество ребер контура.</li>
+</ul>
+<hr />
+<h2 id="hudshapecirclesetangles">HUDShapeCircleSetAngles</h2>
+<p><code>real HUDShapeCircleSetAngles(real shape, real startAngle, real endAngle);</code></p>
+<p>Задает начальный и конечный углы фигуры-окружности. Эти параметры позволяют отрисовать не целую окружность, а ее сектор. Если задать 0 и 360, будет отрисована целая окружность.</p>
+<p><code>shape</code> - указатель на фигуру
+<code>startAngle</code>, <code>endAngle</code> - начальный и конечный углы (в градусах).</p>
+<hr />
+<h2 id="hudshapelinesetpoints">HUDShapeLineSetPoints</h2>
+<p><code>real HUDShapeLineSetPoints(real shape, real x1, real y1, real x2, real y2);</code></p>
+<p>Задает начальную и конечную точки фигуры-отрезка. Точки задаются в локальных координатах объекта, поэтому при изменении размера фигуры они могут не совпадать с координатами пикселей на экране (они соответствуют пикселям при размере 1х1).</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>x1</code>, <code>y1</code> - начальная точка отрезка</li>
+<li><code>x2</code>, <code>y2</code> - конечная точка отрезка.</li>
+</ul>
+<hr />
+<h2 id="hudshapelinesetwidth">HUDShapeLineSetWidth</h2>
+<p><code>real HUDShapeLineSetWidth(real shape, real width);</code></p>
+<p>Задает толщину фигуры-отрезка.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>width</code> - толщина отрезка в пикселях.</li>
+</ul>
+<hr />
+<h2 id="hudshapemeshaddvertex">HUDShapeMeshAddVertex</h2>
+<p><code>real HUDShapeMeshAddVertex(real shape, real x, real y, real u, real v);</code></p>
+<p>Добавляет новую вершину в фигуру-меш.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>x</code>, <code>y</code> - вершина в локальных координатах объекта</li>
+<li><code>u</code>, <code>v</code> - текстурные координаты вершины.</li>
+</ul>
+<hr />
+<h2 id="hudshapemeshaddtriangle">HUDShapeMeshAddTriangle</h2>
+<p><code>real HUDShapeMeshAddTriangle(real shape, real v1, real v2, real v3);</code></p>
+<p>Добавляет новый треугольник в фигуру-меш. Треугольник образуется вершинами индексов v1, v2, v3.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>v1</code>, <code>v2</code>, <code>v3</code> - индексы вершин.</li>
+</ul>
+<hr />
+<h2 id="hudshapemeshsetvertex">HUDShapeMeshSetVertex</h2>
+<p><code>real HUDShapeMeshSetVertex(real shape, real index, real x, real y);</code></p>
+<p>Модифицирует существующую вершину фигуры-меша.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>index</code> - индекс вершины</li>
+<li><code>x</code>, <code>y</code> - вершина в локальных координатах объекта.</li>
+</ul>
+<hr />
+<h2 id="hudshapemeshsettexcoord">HUDShapeMeshSetTexCoord</h2>
+<p><code>real HUDShapeMeshSetTexCoord(real shape, real index, real u, real v);</code></p>
+<p>Модифицирует текстурные координаты существующей вершины фигуры-меша.</p>
+<ul>
+<li><code>shape</code> - указатель на фигуру</li>
+<li><code>index</code> - индекс вершины</li>
+<li><code>u</code>, <code>v</code> - текстурные координаты.</li>
+</ul>
+</body>
+</html>
