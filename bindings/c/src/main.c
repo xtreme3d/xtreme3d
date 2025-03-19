@@ -11,8 +11,8 @@ int main(int argc, char** argv)
 
     EngineCreate();
     EngineShowLoadingErrors(1);
-    EngineSetCulling(0); //vcNone
-    EngineSetObjectsSorting(1); //osNone
+    EngineSetCulling(vcNone);
+    EngineSetObjectsSorting(osNone);
     EngineSetMaxLights(8);
 
     double windowWidth = 1280;
@@ -23,13 +23,13 @@ int main(int argc, char** argv)
     WindowSetTitle(window, "Xtreme3D 4.0");
 
     double viewer = ViewerCreate(0, 0, windowWidth, windowHeight, WindowGetHandle(window));
-    ViewerSetBackgroundColor(viewer, 8421504.0); //c_gray
+    ViewerSetBackgroundColor(viewer, c_gray);
     ViewerSetLighting(viewer, 1);
     ViewerEnableFog(viewer, 1);
     ViewerSetFogColor(viewer, 8421504.0);
     ViewerSetFogDistance(viewer, 0, 50);
-    ViewerSetAntiAliasing(viewer, 10); // csa8xHQ
-    ViewerEnableVSync(viewer, 0); //vsmSync
+    ViewerSetAntiAliasing(viewer, csa8xHQ);
+    ViewerEnableVSync(viewer, vsmSync);
     ViewerSetAutoRender(viewer, 0);
 
     double matlib = MaterialLibraryCreate();
@@ -48,10 +48,10 @@ int main(int argc, char** argv)
     CameraSetFocal(camera, 100);
     CameraSetNearPlaneBias(camera, 0.2);
 
-    double light1 = LightCreate(1, scene); //lsOmni
-    LightSetAmbientColor(light1, 0); //c_black
-    LightSetDiffuseColor(light1, 16777215.0); //c_white
-    LightSetSpecularColor(light1, 16777215.0); //c_white
+    double light1 = LightCreate(lsOmni, scene);
+    LightSetAmbientColor(light1, c_black);
+    LightSetDiffuseColor(light1, c_white);
+    LightSetSpecularColor(light1, c_white);
     ObjectSetPosition(light1, 1, 3, 1);
 
     double plane = PlaneCreate(0, 20, 20, 10, 10, scene);
@@ -108,10 +108,10 @@ int main(int argc, char** argv)
             if (KeyIsPressed('S'))
                 ObjectMove(camPos, 5 * dt);
 
-            if (KeyIsPressed(27)) // vk_escape
+            if (KeyIsPressed(vk_escape))
                 escPressed = 1;
 
-            if (MouseIsPressed(1) && WindowIsActive(window)) // mb_left
+            if (MouseIsPressed(mb_left) && WindowIsActive(window))
             {
                 if (mbLeftReleased)
                 {

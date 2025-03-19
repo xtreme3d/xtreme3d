@@ -3,6 +3,10 @@
 #ifndef XTREME3D_H
 #define XTREME3D_H
 
+#include <xtreme3d_constants.h>
+#include <xtreme3d_color_codes.h>
+#include <xtreme3d_input_codes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
