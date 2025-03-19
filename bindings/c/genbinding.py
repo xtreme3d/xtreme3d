@@ -5,7 +5,7 @@ import os
 import re
 
 declStrings = []
-bindStrings = []
+defStrings = []
 
 x3d_path = '../../source/xtreme3d'
 output_path = 'include'
@@ -36,6 +36,9 @@ declStrings.append("#ifdef __cplusplus")
 declStrings.append("extern \"C\" {")
 declStrings.append("#endif")
 declStrings.append("")
+
+defStrings.append("LIBRARY xtreme3d")
+defStrings.append("EXPORTS")
 
 for filename in os.listdir(directory):
     path = directory + '/' + filename
@@ -70,7 +73,7 @@ for filename in os.listdir(directory):
                         argName = "a" + t.title()
                         argNames.append(argName)
                 
-                funcDecl = "";
+                funcDecl = "__declspec(dllimport) ";
                 
                 if retType == "real":
                     funcDecl += "double ";
@@ -94,6 +97,8 @@ for filename in os.listdir(directory):
                 funcDecl += ";"
                 
                 declStrings.append(funcDecl)
+                
+                defStrings.append("    " + name)
 
     declStrings.append("")
 
@@ -106,3 +111,7 @@ declStrings.append("#endif /* XTREME3D_H */")
 bindingFile = open(outputDirectory + '/xtreme3d.h', 'w')
 for s in declStrings:
     bindingFile.write("%s\n" % s)
+
+defFile = open('xtreme3d.def', 'w')
+for s in defStrings:
+    defFile.write("%s\n" % s)
