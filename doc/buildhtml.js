@@ -19,7 +19,7 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "en";
+const lang = "en"; // TODO: make this command line argument
 
 const functions =
 [
