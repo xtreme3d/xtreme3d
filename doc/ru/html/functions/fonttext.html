@@ -23,7 +23,7 @@
 <hr />
 <h2 id="bmpfontcreate">BmpfontCreate</h2>
 <p><code>real BmpfontCreate(real width, real height, real hspace, real vspace, real intx, real inty, real start, real end);</code></p>
-<p>Создает новый шрифт и возвращает ссылку на него.</p>
+<p>Создает новый шрифт и возвращает указатель на него.</p>
 <ul>
 <li><code>width</code>, <code>height</code> - ширина и высота символа в пикселях</li>
 <li><code>hspace</code>, <code>vspace</code> - промежуток между символами по горизонтали и вертикали в пикселях</li>
@@ -35,13 +35,13 @@
 <p><code>real BmpfontLoad(real font, string material);</code></p>
 <p>Загружает изображение шрифта из текстуры указанного материала.</p>
 <ul>
-<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>font</code> - ссылка на указатель шрифта</li>
 <li><code>material</code> - имя материала.</li>
 </ul>
 <hr />
 <h2 id="ttfontcreate">TTFontCreate</h2>
 <p><code>real TTFontCreate(string filename, real height);</code></p>
-<p>Создает новый TTF-шрифт и возвращает ссылку на него.</p>
+<p>Создает новый TTF-шрифт и возвращает указатель на него.</p>
 <ul>
 <li><code>filename</code> - имя файла TTF</li>
 <li><code>height</code> - кегль (размер) шрифта в пикселях.</li>
@@ -51,13 +51,13 @@
 <p><code>real TTFontSetLineGap(real ttf, real gap);</code></p>
 <p>Задает междустрочный интервал TTF-шрифта, который используется при выводе многострочного текста. Интервал задается не в пикселях, а в долях от кегля шрифта - то есть, значение 1 соответствует интервалу, равному высоте одной строки текста.</p>
 <ul>
-<li><code>ttf</code> - ссылка на TTF-шрифт</li>
+<li><code>ttf</code> - указатель на TTF-шрифт</li>
 <li><code>gap</code> - междустрочный интервал.</li>
 </ul>
 <hr />
 <h2 id="windowsbitmapfontcreate">WindowsBitmapfontCreate</h2>
 <p><code>real WindowsBitmapfontCreate(string fontname, real size, real start, real end);</code></p>
-<p>Загружает системный шрифт Windows и возвращает ссылку на него.</p>
+<p>Загружает системный шрифт Windows и возвращает указатель на него.</p>
 <ul>
 <li><code>fontname</code> - название шрифта, например: "Arial"</li>
 <li><code>size</code> - размер шрифта</li>
@@ -66,26 +66,26 @@
 <hr />
 <h2 id="flattextcreate">FlatTextCreate</h2>
 <p><code>real FlatTextCreate(real font, string str, real parent);</code></p>
-<p>Создает плоский трехмерный текст и возвращает ссылку на него.</p>
+<p>Создает плоский трехмерный текст и возвращает указатель на него.</p>
 <ul>
-<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>font</code> - указатель на объект шрифта</li>
 <li><code>str</code> - текстовая строка для отображения</li>
-<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для текстового объекта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="flattextsetfont">FlatTextSetFont</h2>
 <p><code>real FlatTextSetFont(real text, real font);</code></p>
 <p>Задает шрифт плоского текста.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
-<li><code>font</code> - ссылка на объект шрифта.</li>
+<li><code>text</code> - указатель на объект текста</li>
+<li><code>font</code> - указатель на объект шрифта.</li>
 </ul>
 <hr />
 <h2 id="flattextsetcolor">FlatTextSetColor</h2>
 <p><code>real FlatTextSetColor(real text, real color, real alpha);</code></p>
 <p>Задает цвет плоского текста.</p>
 <ul>
-<li><code>font</code> - ссылка на объект текста</li>
+<li><code>font</code> - указатель на объект текста</li>
 <li><code>color</code> - цвет</li>
 <li><code>alpha</code> - прозрачность.</li>
 </ul>
@@ -94,7 +94,7 @@
 <p>`real FlatTextSetText(real text, string str);</p>
 <p>Задает текстовую строку для отображения плоским текстом.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
+<li><code>text</code> - указатель на объект текста</li>
 <li><code>str</code> - текстовая строка.</li>
 </ul>
 <hr />
@@ -102,30 +102,30 @@
 <p><code>real HUDTextCreate(real font, string str, real parent);</code></p>
 <p>Создает экранный текст и возвращает ссылку на него.</p>
 <ul>
-<li><code>font</code> - ссылка на объект шрифта</li>
+<li><code>font</code> - указатель на объект шрифта</li>
 <li><code>str</code> - текстовая строка для отображения</li>
-<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для текстового объекта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="hudtextsetrotation">HUDTextSetRotation</h2>
 <p><code>real HUDTextSetRotation(real text, real angle);</code></p>
 <p>Задает угол поворота экранного текста.</p>
-<p><code>text</code> - ссылка на объект текста
+<p><code>text</code> - указатель на объект текста
 <code>angle</code> - угол поворота в градусах.</p>
 <hr />
 <h2 id="hudtextsetfont">HUDTextSetFont</h2>
 <p><code>real HUDTextSetFont(real text, real font);</code></p>
 <p>Задает шрифт экранного текста.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
-<li><code>font</code> - ссылка на объект шрифта.</li>
+<li><code>text</code> - указатель на объект текста</li>
+<li><code>font</code> - указатель на объект шрифта.</li>
 </ul>
 <hr />
 <h2 id="hudtextsetcolor">HUDTextSetColor</h2>
 <p><code>real HUDTextSetColor(real text, real color, real alpha);</code></p>
 <p>Задает цвет экранного текста.</p>
 <ul>
-<li><code>font</code> - ссылка на объект текста</li>
+<li><code>font</code> - указатель на объект текста</li>
 <li><code>color</code> - цвет</li>
 <li><code>alpha</code> - прозрачность.</li>
 </ul>
@@ -134,7 +134,7 @@
 <p>`real HUDTextSetText(real text, string str);</p>
 <p>Задает текстовую строку для отображения экранным текстом.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
+<li><code>text</code> - указатель на объект текста</li>
 <li><code>str</code> - текстовая строка.</li>
 </ul>
 <hr />
@@ -142,17 +142,17 @@
 <p><code>real SpaceTextCreate(real font, string str, real extrusion, real parent);</code></p>
 <p>Создает объемный трехмерный текст и возвращает ссылку на него.</p>
 <ul>
-<li><code>font</code> - ссылка на объект шрифта. Поддерживается только WindowsBitmapfont</li>
+<li><code>font</code> - указатель на объект шрифта. Поддерживается только WindowsBitmapfont</li>
 <li><code>str</code> - текстовая строка для отображения</li>
 <li><code>extrusion</code> - толщина текста</li>
-<li><code>parent</code> - ссылка на родителя для текстового объекта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для текстового объекта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="spacetextsetextrusion">SpaceTextSetExtrusion</h2>
 <p><code>real SpaceTextSetExtrusion(real text, real extrusion);</code></p>
 <p>Задает толщину объемного текста.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
+<li><code>text</code> - указатель на объект текста</li>
 <li><code>extrusion</code> - толщина текста.</li>
 </ul>
 <hr />
@@ -160,15 +160,15 @@
 <p><code>real SpaceTextSetFont(real text, real font);</code></p>
 <p>Задает шрифт объемного текста.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
-<li><code>font</code> - ссылка на объект шрифта.</li>
+<li><code>text</code> - указатель на объект текста</li>
+<li><code>font</code> - указатель на объект шрифта.</li>
 </ul>
 <hr />
 <h2 id="spacetextsettext">SpaceTextSetText</h2>
 <p><code>real SpaceTextSetText(real text, string str);</code></p>
 <p>Задает текстовую строку для отображения объемным текстом.</p>
 <ul>
-<li><code>text</code> - ссылка на объект текста</li>
+<li><code>text</code> - указатель на объект текста</li>
 <li><code>str</code> - текстовая строка.</li>
 </ul>
 </body>

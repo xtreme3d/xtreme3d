@@ -103,17 +103,12 @@ int main(int argc, char** argv)
                 MouseSetPosition(mx, my);
             }
 
-            if (KeyIsPressed('W'))
-                ObjectMove(camPos, -5 * dt);
-            if (KeyIsPressed('A'))
-                ObjectStrafe(camPos, 5 * dt);
-            if (KeyIsPressed('D'))
-                ObjectStrafe(camPos, -5 * dt);
-            if (KeyIsPressed('S'))
-                ObjectMove(camPos, 5 * dt);
+            if (KeyIsPressed('W')) ObjectMove(camPos, -5 * dt);
+            if (KeyIsPressed('A')) ObjectStrafe(camPos, 5 * dt);
+            if (KeyIsPressed('D')) ObjectStrafe(camPos, -5 * dt);
+            if (KeyIsPressed('S')) ObjectMove(camPos, 5 * dt);
 
-            if (KeyIsPressed(vk_escape))
-                escPressed = 1;
+            if (KeyIsPressed(vk_escape)) escPressed = 1;
 
             if (MouseIsPressed(mb_left) && WindowIsActive(window))
             {

@@ -15,7 +15,7 @@
 <hr />
 <h2 id="picklistcreate">PickListCreate</h2>
 <p><code>real PickListCreate(real ps);</code></p>
-<p>—оздает новый список выборки и возвращает ссылку на него.</p>
+<p>—оздает новый список выборки и возвращает указатель на него.</p>
 <ul>
 <li><code>ps</code> - режим сортировки списка. ƒоступны следующие значени€ <code>ps</code>:<ul>
 <li><code>psDefault = 0</code> - режим по умолчанию</li>
@@ -28,21 +28,21 @@
 <p><code>real PickListClear(real picklist);</code></p>
 <p>ќчищает список выборки.</p>
 <ul>
-<li><code>picklist</code> - ссылка на список.</li>
+<li><code>picklist</code> - указатель на список.</li>
 </ul>
 <hr />
 <h2 id="picklistgetcount">PickListGetCount</h2>
 <p><code>real PickListGetCount(real picklist);</code></p>
 <p>¬озвращает количество объектов в списке выборки.</p>
 <ul>
-<li><code>picklist</code> - ссылка на список.</li>
+<li><code>picklist</code> - указатель на список.</li>
 </ul>
 <hr />
 <h2 id="picklistgethit">PickListGetHit</h2>
 <p><code>real PickListGetHit(real picklist, real index);</code></p>
 <p>¬озвращает объект из списка по заданному индексу.</p>
 <ul>
-<li><code>picklist</code> - ссылка на список</li>
+<li><code>picklist</code> - указатель на список</li>
 <li><code>index</code> - индекс (начина€ с 0).</li>
 </ul>
 </body>

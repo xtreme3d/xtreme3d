@@ -29,17 +29,17 @@
 <hr />
 <h2 id="lightcreate">LightCreate</h2>
 <p><code>real LightCreate(real ls, real parent);</code></p>
-<p>Создает новый источник освещения и возвращает ссылку на него.</p>
+<p>Создает новый источник освещения и возвращает указатель на него.</p>
 <ul>
 <li><code>ls</code> - тип источника освещения (<code>lsSpot</code>, <code>lsOmni</code> или <code>lsParallel</code> - соответственно, 0, 1 или 2)</li>
-<li><code>parent</code> - ссылка на родителя для источника освещения (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для источника освещения (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="lightsetambientcolor">LightSetAmbientColor</h2>
 <p><code>real LightSetAmbientColor(real light, real color);</code></p>
 <p>Задает компонент Аmbient источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>color</code> - цвет компонента.</li>
 </ul>
 <hr />
@@ -47,7 +47,7 @@
 <p><code>real LightSetDiffuseColor(real light, real color);</code></p>
 <p>Задает компонент Diffuse источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>color</code> - цвет компонента.</li>
 </ul>
 <hr />
@@ -55,7 +55,7 @@
 <p><code>real LightSetSpecularColor(real light, real color);</code></p>
 <p>Задает компонент Specular источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>color</code> - цвет компонента.</li>
 </ul>
 <hr />
@@ -63,7 +63,7 @@
 <p><code>real LightGetColor(real light, real ind);</code></p>
 <p>Возвращает цветовой компонент источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>ind</code> - индекс компонента (0 = Ambient, 1 = Diffuse, 2 = Specular).</li>
 </ul>
 <hr />
@@ -74,7 +74,7 @@
 <p>где а - величина затухания, с - постоянная составляющая (constant), l - линейная составляющая (linear), q - квадратичная составляющая (quadratic), d - расстояние от источника света. 
 Данная функция задает величину затухания через эти три составляющие.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>constant</code> - постоянная составляющая затухания</li>
 <li><code>linear</code> - линейная составляющая затухания</li>
 <li><code>quadratic</code> - квадратичная составляющая затухания.</li>
@@ -84,7 +84,7 @@
 <p><code>real LightGetAttenuation(real light, real ind);</code></p>
 <p>Возвращает составляющую затухания источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>ind</code> - индекс составляющей (0 = Constant, 1 = Linear, 2 = Quadratic).</li>
 </ul>
 <hr />
@@ -92,7 +92,7 @@
 <p><code>real LightSetShining(real light, real mode);</code></p>
 <p>Включает или выключает источник освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
@@ -100,14 +100,14 @@
 <p><code>real LightGetShining(real light);</code></p>
 <p>Возвращает 1, если источник света включен, и 0 в противном случае.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения.</li>
+<li><code>light</code> - указатель на источник освещения.</li>
 </ul>
 <hr />
 <h2 id="lightsetspotcutoff">LightSetSpotCutoff</h2>
 <p><code>real LightSetSpotCutoff(real light, real cutoff);</code></p>
 <p>Для направленного источника освещения задает угол между осью и стороной ограничивающего конуса (он же половина угла конуса). Иными словами, влияет на ширину конуса света. Если данное значение соответствует 180 градусам, направленный источник света рассматривается как точечный.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>cutoff</code> - угол.</li>
 </ul>
 <hr />
@@ -115,7 +115,7 @@
 <p><code>real LightSetSpotExponent(real light, real exponent);</code></p>
 <p>Для направленного источника освещения задает экспоненту убывания интенсивности в зависимости от угла между осью ограничивающего конуса и лучом распространения света.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>exponent</code> - экспонента.</li>
 </ul>
 <hr />
@@ -123,7 +123,7 @@
 <p><code>real LightSetSpotDirection(real light, real x, real y, real z);</code></p>
 <p>Для направленного источника освещения задает направление оси ограничивающего конуса.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>x</code>, <code>y</code>, <code>z</code> - единичный вектор направления.</li>
 </ul>
 <hr />
@@ -131,7 +131,7 @@
 <p><code>real LightSetStyle(real light, real ls);</code></p>
 <p>Задает тип источника освещения.</p>
 <ul>
-<li><code>light</code> - ссылка на источник освещения</li>
+<li><code>light</code> - указатель на источник освещения</li>
 <li><code>ls</code> - тип источника освещения (<code>lsSpot</code>, <code>lsOmni</code> или <code>lsParallel</code> - соответственно, 0, 1 или 2).</li>
 </ul>
 <hr />

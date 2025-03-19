@@ -19,7 +19,7 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "en"; // TODO: make this command line argument
+const lang = "ru"; // TODO: make this command line argument
 
 const functions =
 [
@@ -32,7 +32,8 @@ const functions =
     { title: "Light", inFilename: `markdown/${lang}/functions/light.md`, outFilename: `${lang}/html/functions/light.html` },
     { title: "Font and Text", inFilename: `markdown/${lang}/functions/fonttext.md`, outFilename: `${lang}/html/functions/fonttext.html` },
     { title: "Sprite", inFilename: `markdown/${lang}/functions/sprite.md`, outFilename: `${lang}/html/functions/sprite.html` },
-    { title: "HUDShape", inFilename: `markdown/${lang}/functions/hudshape.md`, outFilename: `${lang}/html/functions/hudshape.html` }
+    { title: "HUDShape", inFilename: `markdown/${lang}/functions/hudshape.md`, outFilename: `${lang}/html/functions/hudshape.html` },
+    { title: "Primitives", inFilename: `markdown/${lang}/functions/primitives.md`, outFilename: `${lang}/html/functions/primitives.html` }
 ];
 
 const outputEncoding = "win1251";

@@ -16,7 +16,7 @@
 <hr />
 <h2 id="cameracreate">CameraCreate</h2>
 <p><code>real CameraCreate(real parent);</code></p>
-<p>Создает новую камеру и возвращает ссылку на нее.</p>
+<p>Создает новую камеру и возвращает указатель на нее.</p>
 <ul>
 <li><code>parent</code> - ссылка на родителя для камеры (0 - отсутствие родителя). </li>
 </ul>
@@ -29,7 +29,7 @@
 <li><p><code>csOrthogonal = 1</code> - ортографическая (параллельная) проекция (без перспективного сокращения). Ортографическая проекция под углом 45 градусов называется изометрией;</p></li>
 <li><p><code>csOrtho2D = 2</code> - бесконечная ортографическая проекция. Значение, задаваемое функцией <code>CameraSetViewDepth</code> (дальность обзора) игнорируется;</p></li>
 <li><p><code>csInfinitePerspective = 3</code> - бесконечная перспектива. Значение, задаваемое функцией <code>CameraSetViewDepth</code> (дальность обзора) игнорируется.</p></li>
-<li><p><code>cam</code> - ссылка на камеру</p></li>
+<li><p><code>cam</code> - указатель на камеру</p></li>
 <li><p><code>cs</code> - стиль камеры.</p></li>
 </ul>
 <hr />
@@ -37,7 +37,7 @@
 <p><code>real CameraSetFocal(real cam, real fov);</code></p>
 <p>Задает угол зрения камеры. Изменяя это значение, можно добиться эффекта приближения/отдаления.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>fov</code> - угол зрения (значение по умолчанию: 50).</li>
 </ul>
 <hr />
@@ -45,7 +45,7 @@
 <p><code>real CameraSetSceneScale(real cam, real scale);</code></p>
 <p>Задает масштаб изображения камеры. По сути, аналог <code>CameraSetFocal</code>, но не затрагивающий перспективное сокращение.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>scale</code> - масштаб (значение по умолчанию: 1).</li>
 </ul>
 <hr />
@@ -53,7 +53,7 @@
 <p><code>real CameraScaleScene(real cam, real scale);</code></p>
 <p>Задает масштаб изображения камеры, как и <code>CameraSetSceneScale</code>, но относительно текущего значения масштаба. </p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>scale</code> - добавляется к текущему значению масштаба.</li>
 </ul>
 <hr />
@@ -61,7 +61,7 @@
 <p><code>real CameraSetViewDepth(real cam, real depth);</code></p>
 <p>Задает дальность обзора камеры - все объекты дальше этого расстояния не будут отрисованы. Это позволяет увеличить скорость рендеринга, но может привести к некоторым артефактам. Например, при слишком маленькой дальности обзора некоторые объекты могут частично "обрезаться", а при слишком большой - "наползать" друг на друга.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>depth</code> - дальность обзора (значение по умолчанию: 100).</li>
 </ul>
 <hr />
@@ -70,15 +70,15 @@
 <p>Назначает объект-цель камеры. При этом камера будет всегда направлена на цель, где бы она ни находилась, а обычные функции поворота игнорируются. Целью может быть любой объект - например, персонаж, которым управляет игрок.</p>
 <p>Обратите внимание, что назначение объекта-цели не привязывает позицию камеры к объекту - при перемещении цели камера останется на своем месте, и вам нужно двигать ее самостоятельно.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
-<li><code>obj</code> - ссылка на объект-цель.</li>
+<li><code>cam</code> - указатель на камеру</li>
+<li><code>obj</code> - указатель на объект-цель.</li>
 </ul>
 <hr />
 <h2 id="cameramovearoundtarget">CameraMoveAroundTarget</h2>
 <p>`real CameraMoveAroundTarget(real cam, real pitch, real turn)</p>
 <p>Вращает камеру вокруг ее объекта-цели. Вращение осуществляется по двум осям - X и Y.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>pitch</code> - угол поворота по оси X</li>
 <li><code>turn</code> - угол поворота по оси Y.</li>
 </ul>
@@ -87,7 +87,7 @@
 <p><code>real CameraSetDistanceToTarget(real cam, real distance);</code></p>
 <p>Изменяет расстояние между камерой и ее объектом-целью (приближает или отдаляет камеру относительно цели).</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>distance</code> - расстояние.</li>
 </ul>
 <hr />
@@ -95,14 +95,14 @@
 <p><code>real CameraGetDistanceToTarget(real cam);</code></p>
 <p>Возвращает расстояние между камерой и ее объектом-целью.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру.</li>
+<li><code>cam</code> - указатель на камеру.</li>
 </ul>
 <hr />
 <h2 id="cameracopytotexture">CameraCopyToTexture</h2>
 <p><code>real CameraCopyToTexture(real cam, string material, real width, real height);</code></p>
 <p>Копирует содержимое камеры (отрисованное изображение) в текстуру материала.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>material</code> - имя материала</li>
 <li><code>width</code>, <code>height</code> - ширина и высота генерируемой текстуры в пикселях. Должны быть степенью двойки (то есть, например, 128, 256, 512 и т.д.).</li>
 </ul>
@@ -111,14 +111,14 @@
 <p><code>real CameraGetNearPlane(real cam);</code></p>
 <p>Возвращает расстояние до ближней плоскости отсечения камеры (то есть, плоскости, ближе которой ничего не рисуется).</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру.</li>
+<li><code>cam</code> - указатель на камеру.</li>
 </ul>
 <hr />
 <h2 id="camerasetnearplanebias">CameraSetNearPlaneBias</h2>
 <p><code>real CameraSetNearPlaneBias(real cam, real bias);</code></p>
 <p>Задает коэффициент ближней плоскости отсечения камеры. Напрямую изменить ближнюю плоскость (как это делается для дальней плоскости функцией CameraSetViewDepth) невозможно - она вычисляется по специальной формуле с учетом угла зрения и разрешения вида. С помощью данного коэффициента можно смещать плоскость вперед (значения больше 1) или назад (значения меньше 1).</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру.</li>
+<li><code>cam</code> - указатель на камеру.</li>
 <li><code>bias</code> - коэффициент (значение по умолчанию: 1).</li>
 </ul>
 <hr />
@@ -126,7 +126,7 @@
 <p><code>real CameraAbsoluteVectorToTarget(real cam, real ind);</code></p>
 <p>Возвращает вектор Z в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление от камеры к объекту-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Direction.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру.</li>
+<li><code>cam</code> - указатель на камеру.</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
 </ul>
 <hr />
@@ -134,7 +134,7 @@
 <p><code>real CameraAbsoluteRightVectorToTarget(real cam, real ind);</code></p>
 <p>Возвращает вектор X в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление вправо от камеры относительно ее объекта-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Right.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
 </ul>
 <hr />
@@ -142,7 +142,7 @@
 <p><code>real CameraAbsoluteUpVectorToTarget(real cam, real ind);</code></p>
 <p>Возвращает вектор Y в ортономированном базисе камеры, ориентированной на ее объект-цель (иными словами, абсолютное направление вверх от камеры относительно ее объекта-цели). Если у камеры нет цели, возвращается ее собственный абсолютный вектор Up.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
 </ul>
 <hr />
@@ -150,15 +150,15 @@
 <p><code>real CameraZoomAll(real cam, real viewer);</code></p>
 <p>Располагает камеру в пространстве таким образом, чтобы вид, отображающий сцену, охватывал все объекты.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>cam</code> - указатель на камеру</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="camerascreendeltatovector">CameraScreenDeltaToVector</h2>
 <p>`real CameraScreenDeltaToVector(real cam, real deltax, real deltay, real ratio, real normx, real normy, real normz, real ind);</p>
 <p>Вычисляет абсолютный вектор переноса, соответствующий экранному вектору переноса камеры. Полезная функция для реализации элементов пользовательского интерфейса на сцене (3D-манипуляторов).</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>deltax</code>, <code>deltay</code> - целочисленный экранный вектор переноса</li>
 <li><code>ratio</code> - коэфициент, на который умножается экранный вектор</li>
 <li><code>normx</code>, <code>normy</code>, <code>normz</code> - нормаль плоскости, в которой следует вычислить трехмерный перенос</li>
@@ -169,7 +169,7 @@
 <p><code>real CameraScreenDeltaToVectorXY(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
 <p>Функция делает то же, что <code>CameraScreenDeltaToVector</code>, но оптимизирована для работы в плоскости XY.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>deltax</code>, <code>deltay</code> - целочисленный экранный вектор переноса</li>
 <li><code>ratio</code> - коэфициент, на который умножается экранный вектор</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
@@ -179,7 +179,7 @@
 <p><code>real CameraScreenDeltaToVectorXZ(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
 <p>Функция делает то же, что <code>CameraScreenDeltaToVector</code>, но оптимизирована для работы в плоскости XZ.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>deltax</code>, <code>deltay</code> - целочисленный экранный вектор переноса </li>
 <li><code>ratio</code> - коэфициент, на который умножается экранный вектор </li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z). </li>
@@ -189,7 +189,7 @@
 <p><code>real CameraScreenDeltaToVectorYZ(real cam, real deltax, real deltay, real ratio, real ind);</code></p>
 <p>Функция делает то же, что <code>CameraScreenDeltaToVector</code>, но оптимизирована для работы в плоскости YZ.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>deltax</code>, <code>deltay</code> - целочисленный экранный вектор переноса</li>
 <li><code>ratio</code> - коэфициент, на который умножается экранный вектор</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
@@ -199,7 +199,7 @@
 <p><code>real CameraAbsoluteEyeSpaceVector(real cam, real fordist, real rightdist, real updist, real ind);</code></p>
 <p>Вычисляет абсолютный вектор переноса, соответствующий заданному вектору переноса в видовом пространстве камеры.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - перенос вперед, вправо и вверх</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
 </ul>
@@ -208,7 +208,7 @@
 <p><code>real CameraSetAutoLeveling(real cam, real factor);</code></p>
 <p>Меняет вектор Direction камеры так, чтобы вектор Up указывал вверх (0, 1, 0).</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>factor</code> - чем выше это значение, тем медленнее будут корректироваться векторы.</li>
 </ul>
 <hr />
@@ -216,14 +216,14 @@
 <p><code>real CameraMoveInEyeSpace(real cam, real fordist, real rightdist, real updist);</code></p>
 <p>Двигает камеру в ее видовом пространстве.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - перенос вперед, вправо и вверх.</li>
 </ul>
 <hr />
 <h2 id="cameramovetargetineyespace">CameraMoveTargetInEyeSpace</h2>
 <p><code>real CameraMoveTargetInEyeSpace(real cam, real fordist, real rightdist, real updist);</code></p>
 <p>Двигает целевой объект камеры в ее видовом пространстве.</p>
-<p><code>cam</code> - ссылка на камеру</p>
+<p><code>cam</code> - указатель на камеру</p>
 <ul>
 <li><code>fordist</code>, <code>rightdist</code>, <code>updist</code> - перенос вперед, вправо и вверх.</li>
 </ul>
@@ -232,14 +232,14 @@
 <p><code>real CameraPointInFront(real cam, real x, real y, real z);</code></p>
 <p>Возвращает истину, если заданная точка находится в поле зрения камеры.</p>
 <ul>
-<li><code>cam</code> - ссылка на камеру</li>
+<li><code>cam</code> - указатель на камеру</li>
 <li><code>x</code>, <code>y</code>, <code>z</code> - координаты точки.</li>
 </ul>
 <hr />
 <h2 id="cameragetfieldofview">CameraGetFieldOfView</h2>
 <p><code>real CameraGetFieldOfView(real cam, real vpdim);</code></p>
 <p>Возвращает угол поля зрения камеры в градусах.</p>
-<p><code>cam</code> - ссылка на камеру
+<p><code>cam</code> - указатель на камеру
 <code>vpdim</code> - размерность вида (меньшее из ширины и высоты).</p>
 </body>
 </html>
