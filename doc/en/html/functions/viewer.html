@@ -15,7 +15,7 @@
 <hr />
 <h2 id="viewercreate">ViewerCreate</h2>
 <p><code>real ViewerCreate(real x, real y, real width, real height, real windowHandle);</code></p>
-<p>Создает новый вид и возвращает ссылку на него.</p>
+<p>Создает новый вид и возвращает указатель на него.</p>
 <ul>
 <li><code>x</code>, <code>y</code> - координаты вида (левый верхний угол) относительно родительского окна;</li>
 <li><code>width</code>, <code>height</code> - ширина и высота вида;</li>
@@ -28,15 +28,15 @@
 <p><code>real ViewerSetCamera(real viewer, real camera);</code></p>
 <p>Определяет камеру, которую должен использовать вид для отрисовки проекции на сцену. Можно использовать одну и ту же камеру для нескольких видов, но обычно каждому виду назначается своя отдельная камера.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>camera</code> - ссылка на камеру.</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>camera</code> - указатель на камеру.</li>
 </ul>
 <hr />
 <h2 id="viewerenablevsync">ViewerEnableVSync</h2>
 <p><code>real ViewerEnableVSync(real viewer, real vsm);</code></p>
 <p>Включает или выключает вертикальную синхронизацию для вида. Существует распространенная проблема, когда обновление экрана расходится во времени с рендерингом кадров. Эта функция решает проблему, синхронизируя видеокарту с монитором так, что FPS не превысит частоту обновления экрана. Это и называется вертикальной синхронизацией.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>vsm</code> - <code>vsmSync</code> или <code>vsmNoSync</code> (0 и 1 соответственно).</li>
 </ul>
 <hr />
@@ -44,22 +44,22 @@
 <p><code>real ViewerSetAutoRender(real viewer, real mode);</code></p>
 <p>Переключает неявный рендеринг. При включении этой опции вид будет автоматически рендериться при помощи встроенного в Xtreme3D механизма привязки к событию перерисовки окна. В этом случае вам не нужно вызывать <code>ViewerRender</code>. Опция по умолчанию отключена. Чаще всего ее стоит включать только при разработке приложений, некритичных к стабильности кадровой чпстоты, таких, как 3D-редакторы, либо для создания бенчмарков. В играх лучше организовать таймер с нужной вам частотой обновления и рендерить вид явно, вызовом <code>ViewerRender</code>.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>mode</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
 <h2 id="viewerrender">ViewerRender</h2>
 <p><code>real ViewerRender(real viewer);</code></p>
 <p>Совершает рендеринг вида - отрисовку проекции и вывод на экран. Эта функция рендерит все существующие объекты сцены.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewerbeginrender">ViewerBeginRender</h2>
 <p><code>real ViewerBeginRender(real viewer);</code></p>
 <p>Открывает сессию рендеринга в ручном режиме. Этот режим позволяет отрендерить в вид любые объекты в любом порядке, независимо от того, в каком порядке они были созданы. Ручной режим предназначен для нетривиальных многопроходных сценариев рендеринга. Используйте его лишь в том случае, когда вы знаете, что делаете. Режим нужно обязательно завершить функцией <code>ViewerEndRender</code>.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <p>Вот базовый пример рендеринга в ручном режиме - ручной аналог вызова <code>ViewerRender(viewer)</code>:</p>
 <pre><code>ViewerBeginRender(viewer);
@@ -72,7 +72,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerClear(real viewer, real clearColor, real clearDepth, real clearStencil);</code></p>
 <p>Очищает буферы вида. Функция корректно работает только в режиме ручного рендеринга. Эта функция, как правило, вызывается перед тем, как рендерить объекты.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>clearColor</code> - очищать ли цветовой буфер;</li>
 <li><code>clearDepth</code> - очищать ли буфер глубины;</li>
 <li><code>clearStencil</code> - очищать ли трафаретный буфер.</li>
@@ -82,7 +82,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerRenderObject(real viewer, real obj);</code></p>
 <p>Совершает рендеринг указанного объекта и его потомков в виде. Функция корректно работает только в режиме ручного рендеринга.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>obj</code> - ссылка на объект.</li>
 </ul>
 <hr />
@@ -90,14 +90,14 @@ ViewerEndRender(viewer);
 <p><code>real ViewerEndRender(real viewer);</code></p>
 <p>Завершает сессию рендеринга в ручном режиме и переключает задний и передний буферы. Вызов этой функции отображает отрендеренный кадр на экране.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewerrendertofile">ViewerRenderToFile</h2>
 <p><code>real ViewerRenderToFile(real viewer, string filename);</code></p>
 <p>Совершает рендеринг вида в файл BMP или PNG (иными словами, делает скриншот).</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>filename</code> - имя файла.</li>
 </ul>
 <hr />
@@ -105,7 +105,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerResize(real viewer, real x, real y, real width, real height);</code></p>
 <p>Изменяет позицию и размер вида. Обычно в играх это не требуется, но может пригодиться, например, если вы даете игроку возможность растягивать окно в оконном режиме. Обратите внимание, что эта функция довольно медленная и не должна вызываться постоянно.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - новые координаты вида (левый верхний угол) относительно левого верхнего угла родительского окна</li>
 <li><code>width</code>, <code>height</code> - новые ширина и высота вида.</li>
 </ul>
@@ -114,7 +114,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetSize(real viewer, real index);</code></p>
 <p>Возвращает ширину или высоту вида. </p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>index</code> - если этот параметр равен 0, функция возвращает ширину, если 1 - высоту.</li>
 </ul>
 <hr />
@@ -122,7 +122,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetPosition(real viewer, real index);</code></p>
 <p>Возвращает позицию вида (координату левого верхнего угла) относительно левого верхнего угла родительского окна.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>index</code> - если этот параметр равен 0, функция возвращает координату X, если 1 - Y.</li>
 </ul>
 <hr />
@@ -130,15 +130,15 @@ ViewerEndRender(viewer);
 <p><code>real ViewerSetVisible(real viewer, real mode);</code></p>
 <p>Прячет или показывает вид. Помните, что рендеринг для спрятанного вида не прекращается автоматически - для остановки рендеринга вам необходимо прекратить вызов ViewerRender для данного вида.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>mode</code> - true или false (1 и 0 соответственно).</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
 <h2 id="viewergetpixelcolor">ViewerGetPixelColor</h2>
 <p><code>real ViewerGetPixelColor(real viewer, real x, real y);</code></p>
 <p>Возвращает цвет пикселя на позиции x,y относительно верхнего левого угла вида.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты пикселя.</li>
 </ul>
 <hr />
@@ -146,7 +146,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetPixelDepth(real viewer, real x, real y);</code></p>
 <p>Возвращает глубину пикселя в Z-буфере на позиции x,y относительно верхнего левого угла вида.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты пикселя.</li>
 </ul>
 <hr />
@@ -154,15 +154,15 @@ ViewerEndRender(viewer);
 <p><code>real ViewerSetLighting(real viewer, real mode);</code></p>
 <p>Включает или выключает освещение для вида. Если освещение включено, при отрисовке объектов будут учтены источники света, в ином случае объекты будут отрисованы плоско, без затенения.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>mode</code> - true или false (1 и 0 соответственно).</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
 <h2 id="viewersetbackgroundcolor">ViewerSetBackgroundColor</h2>
 <p><code>real ViewerSetBackgroundColor(real viewer, real color);</code></p>
 <p>Определяет фоновой цвет вида. Это цвет, которым по умолчанию заполняется все пустое пространство позади объектов. Это не очень эффектно, но в некоторых случаях достаточно.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>color</code> - цвет.</li>
 </ul>
 <hr />
@@ -170,7 +170,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerSetAmbientColor(real viewer, real color);</code></p>
 <p>Определяет цвет окружения вида. Цвет окружения используется для задания общего оттенка объектов отдельно от источников света и вне зависимости от их собственных цветов. Можно привести такой пример: ночью все предметы, особенно белые, в неярком свете кажутся голубоватыми, независимо от их собственного цвета. Похожий эффект наблюдается и при использовании инфракрасной камеры.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>color</code> - цвет.</li>
 </ul>
 <hr />
@@ -178,15 +178,15 @@ ViewerEndRender(viewer);
 <p><code>real ViewerEnableFog(real viewer, real mode);</code></p>
 <p>Включает или выключает туман для вида. Туман - это очень распространенный эффект. Все объекты дальше определенного расстояния постепенно окрашиваются в заданный цвет по мере отдаления. Самые дальние объекты уже не имеют собственного цвета и, как предполагается, должны полностью слиться с фоном.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>mode</code> - true или false (1 и 0 соответственно).</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
 <h2 id="viewersetfogcolor">ViewerSetFogColor</h2>
 <p><code>real ViewerSetFogColor(real viewer, real color);</code></p>
 <p>Определяет цвет тумана.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>color</code> - цвет.</li>
 </ul>
 <hr />
@@ -194,7 +194,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerSetFogDistance(real viewer, real start, real end);</code></p>
 <p>Определяет расстояние "затуманивания".</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>start</code> - минимальное расстояние, объекты ближе которого не подвергаются действию тумана</li>
 <li><code>end</code> - максимальное расстояние, на котором объекты полностью окрашены в цвет тумана.</li>
 </ul>
@@ -203,7 +203,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerScreenToWorld(real viewer, real x, real y, real ind);</code></p>
 <p>Конвертирует двумерные координаты на экране в абсолютные трехмерные координаты сцены. За (0, 0) берется левый нижний угол экрана.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты на экране</li>
 <li><code>ind</code> - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1, z если ind=2.</li>
 </ul>
@@ -212,7 +212,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerWorldToScreen(real viewer, real x, real y, real z, real ind);</code></p>
 <p>Конвертирует абсолютные трехмерные координаты сцены в двумерные координаты на экране. За (0, 0) берется левый нижний угол экрана.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты на экране</li>
 <li><code>ind</code> - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1, z если ind=2.</li>
 </ul>
@@ -221,7 +221,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerPixelRayToWorld(real viewer, real x, real y, real ind);</code></p>
 <p>Конвертирует двумерные координаты вида x и y в трехмерные координаты сцены и возвращает индекс кординаты.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты на экране</li>
 <li><code>ind</code> - определяет, какую координату должна возвращать функция: x если ind=0, y если ind=1.</li>
 </ul>
@@ -230,7 +230,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerCopyToTexture(real viewer, string material);</code></p>
 <p>Копирует содержимое вида (отрисованное изображение) в текстуру материала. Обратите внимание, что эта функция работает только в том случае, когда ширина и высота вида соответствуют степеням двойки (512, 256, 128 и т.д.).</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>material</code> - имя материала.</li>
 </ul>
 <hr />
@@ -238,14 +238,14 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetFramesPerSecond(real viewer);</code></p>
 <p>Возвращает количество кадров в секунду, отрисовываемое видом (frames per second, FPS).</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewergetpickedobject">ViewerGetPickedObject</h2>
 <p><code>real ViewerGetPickedObject(real viewer, real x, real y);</code></p>
 <p>Возвращает ближайший объект, которому соответствует заданная точка на экране.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты точки.</li>
 </ul>
 <hr />
@@ -253,8 +253,8 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetPickedObjectsList(real viewer, real list, real x, real y, real w, real h, real num);</code></p>
 <p>Сохраняет в список объекты, которые попадают в заданную прямоугольную область на экране.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>list</code> - id списка PickList</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>list</code> - указатель на список PickList</li>
 <li><code>x</code>, <code>y</code> - координаты верхнего левого угла прямоугольника</li>
 <li><code>w</code>, <code>h</code> - ширина и высота прямоугольника</li>
 <li><code>num</code> - приблизительное ожидаемое количество объектов.</li>
@@ -264,7 +264,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerScreenToVector(real viewer, real x, real y, real ind);</code></p>
 <p>Вычисляет единичный вектор от позиции камеры вида к заданной точке на экране.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты на экране</li>
 <li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
 </ul>
@@ -273,7 +273,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerVectorToScreen(real viewer, real x, real y, real z, real ind);</code></p>
 <p>Вычисляет координаты точки на экране, соответствующей заданному единичному вектору от позиции камеры вида.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code>, <code>z</code> - вектор</li>
 <li><code>ind</code> - индекс координаты точки (0 = X, 1 = Y).</li>
 </ul>
@@ -282,7 +282,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerPixelToDistance(real viewer, real x, real y);</code></p>
 <p>Вычисляет расстояние от позиции камеры вида до ближайшего объекта, которому соответствует заданная точка на экране.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>x</code>, <code>y</code> - координаты на экране.</li>
 </ul>
 <hr />
@@ -290,8 +290,8 @@ ViewerEndRender(viewer);
 <p><code>real ViewerSetAntiAliasing(real viewer, real aa);</code></p>
 <p>Задает режим антиалиасинга (сглаживания) для вида, если это поддерживается видеодрайвером.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
-<li><code>aa</code> - режим антиалиасинга. Доступны следующие значения aa:</li>
+<li><code>viewer</code> - указатель на вид;</li>
+<li><code>aa</code> - режим антиалиасинга. Доступны следующие значения aa:<ul>
 <li><code>aaDefault</code> = 0 - значение по умолчанию (использовать настройку драйвера);</li>
 <li><code>aaNone</code> = 1 - антиалиасинг отключен;</li>
 <li><code>aa2x</code> = 2 - двойной MSAA;</li>
@@ -304,14 +304,14 @@ ViewerEndRender(viewer);
 <li><code>csa8x</code> = 9 - 8-кратный CSAA;</li>
 <li><code>csa8xHQ</code> = 10 - 8-кратный CSAA с технологией Quincunx (на видеокартах от NVIDIA);</li>
 <li><code>csa16x</code> = 11 - 16-кратный CSAA;</li>
-<li><code>csa16xHQ</code> = 12 - 16-кратный CSAA с технологией Quincunx (на видеокартах от NVIDIA).</li>
+<li><code>csa16xHQ</code> = 12 - 16-кратный CSAA с технологией Quincunx (на видеокартах от NVIDIA).</li></ul></li>
 </ul>
 <hr />
 <h2 id="viewershademodel">ViewerShadeModel</h2>
 <p><code>real ViewerShadeModel(real viewer, real smooth);</code></p>
 <p>Задает тип освещения на полигонах - плоское или сглаженное.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>smooth</code> - <code>true</code> (сглаженное освещение) или <code>false</code> (плоское освещение) (1 и 0 соответственно).</li>
 </ul>
 <hr />
@@ -319,28 +319,28 @@ ViewerEndRender(viewer);
 <p><code>real ViewerGetFBOSupported(real viewer);</code></p>
 <p>Возвращает истину, если видеодрайвер поддерживает кадровые буферы (FBO).</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewergetvbosupported">ViewerGetVBOSupported</h2>
 <p><code>real ViewerGetVBOSupported(real viewer);</code></p>
 <p>Возвращает истину, если видеодрайвер поддерживает вершинные буферы (VBO).</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewergetglslsupported">ViewerGetGLSLSupported</h2>
 <p><code>real ViewerGetGLSLSupported(real viewer);</code></p>
 <p>Возвращает истину, если видеодрайвер поддерживает шейдеры на языке GLSL.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="viewerisopenglextensionsupported">ViewerIsOpenGLExtensionSupported</h2>
 <p><code>real ViewerIsOpenGLExtensionSupported(real viewer, string ext);</code></p>
 <p>Возвращает истину, если видеодрайвер поддерживает заданное расширение OpenGL. С помощью этой функции можно заранее проверить, будут ли работать на целевой машине те или иные функции Xtreme3D, и предпринять соответствующие меры - например, вывести информативное сообщение об ошибке. Если какая-то функция зависит от расширения, в данной справке это оговорено в ее описании.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид;</li>
+<li><code>viewer</code> - указатель на вид;</li>
 <li><code>ext</code> - полное название расширения (например, <code>"GL_ARB_texture_float"</code> или <code>"GL_NV_occlusion_query"</code>).</li>
 </ul>
 <hr />
@@ -348,7 +348,7 @@ ViewerEndRender(viewer);
 <p><code>real ViewerResetPerformanceMonitor(real viewer);</code></p>
 <p>Сбрасывает счетчик частоты кадров вида.</p>
 <ul>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 </body>
 </html>

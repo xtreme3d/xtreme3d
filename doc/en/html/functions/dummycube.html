@@ -15,16 +15,16 @@
 <hr />
 <h2 id="dummycubecreate">DummycubeCreate</h2>
 <p><code>real DummycubeCreate(real parent);</code></p>
-<p>Создает новый даммикуб и возвращает ссылку на него.</p>
+<p>Создает новый даммикуб и возвращает указатель на него.</p>
 <ul>
-<li><code>parent</code> - ссылка на родителя для даммикуба (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для даммикуба (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="dummycubeamalgamate">DummycubeAmalgamate</h2>
 <p><code>real DummycubeAmalgamate(real object, real mode);</code></p>
 <p>Соединяет всех потомков даммикуба в общий список отображения OpenGL. Это позволяет в некоторых ситуациях достичь заметного прироста производительности, но все изменения, коснувшиеся потомков, будут игнорироваться. Некоторые объекты, имеющие собственное управление списком отображения, могут быть несовместимы с <code>DummycubeAmalgamate</code>. Кроме того, этот режим не позволяет осуществлять сортировку и отбор видимости обычным образом. Короче говоря, эта опция хороша для статичной непрозрачной геометрии, или когда положение камеры не меняется в течение длительного времени.</p>
 <ul>
-<li><code>object</code> - ссылка на даммикуб</li>
+<li><code>object</code> - указатель на даммикуб</li>
 <li><code>mode</code> - true или false (1 и 0 соответственно).</li>
 </ul>
 <hr />
@@ -32,7 +32,7 @@
 <p><code>real DummycubeSetCameraMode(real object, real cim);</code></p>
 <p>Позволяет зафиксировать позицию (<code>cimPosition</code>) или ориентацию (<code>cimOrientation</code>) даммикуба и его потомков по отношению к активной камере. То есть, в первом случае невозможно отойти или приблизиться к объекту, во втором - убрать объект из вида.</p>
 <ul>
-<li><code>object</code> - ссылка на даммикуб</li>
+<li><code>object</code> - указатель на даммикуб</li>
 <li><code>cim</code> - <code>cimNone</code> (значение по умолчанию), <code>cimPosition</code> или <code>cimOrientation</code> (0, 1 или 2 соответственно). </li>
 </ul>
 <hr />
@@ -40,7 +40,7 @@
 <p><code>real DummycubeSetVisible(real object, real mode);</code></p>
 <p>Переключает видимость даммикуба. Даммикуб отображается как каркасный куб.</p>
 <ul>
-<li><code>object</code> - ссылка на даммикуб</li>
+<li><code>object</code> - указатель на даммикуб</li>
 <li><code>mode</code> - true или false (1 и 0 соответственно).</li>
 </ul>
 <hr />
@@ -48,7 +48,7 @@
 <p><code>real DummycubeSetEdgeColor(real object, real color);</code></p>
 <p>Задает цвет ребер куба, в виде которого отображается видимый даммикуб.</p>
 <ul>
-<li><code>object</code> - ссылка на даммикуб</li>
+<li><code>object</code> - указатель на даммикуб</li>
 <li><code>color</code> - цвет.</li>
 </ul>
 <hr />
@@ -56,7 +56,7 @@
 <p><code>real DummycubeSetCubeSize(real object, real size);</code></p>
 <p>Задает размер грани куба, в виде которого отображается видимый даммикуб. Размер по умолчанию - 1.</p>
 <ul>
-<li><code>object</code> - ссылка на даммикуб</li>
+<li><code>object</code> - указатель на даммикуб</li>
 <li><code>size</code> - размер.</li>
 </ul>
 </body>

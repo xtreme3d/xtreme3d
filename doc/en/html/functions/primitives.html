@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Primitives</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+</head>
+<body>
+<h1 id="primitives">Primitives</h1>
+<p>Примитивы (Primitive) - простейшие геометрические тела, которые генерируются движком. К примитивам относятся плоскость (plane), куб (cube), сфера (sphere), цилиндр (cylinder), конус (cone), полый цилиндр (annulus), тор (torus), диск (disk), усеченная пирамида (frustrum), додекаэдр (dodecahedron), икосаэдр (icosahedron) и чайник Юта (teapot).</p>
+<hr />
+<h2 id="planecreate">PlaneCreate</h2>
+<p><code>real PlaneCreate(real singlequad, real width, real height, real xtiles, real ytiles, real parent);</code></p>
+<p>Создает плоскость и возвращает указатель на нее.</p>
+<ul>
+<li><code>singlequad</code> - определяет, разбивать ли плоскость на сетку, или представить ее одним квадратом - <code>false</code> или <code>true</code> (0 и 1 соответственно). При использовании освещения, как правило, лучше разбить плоскость</li>
+<li><code>width</code>, <code>height</code> - ширина и высота плоскости</li>
+<li><code>xtiles</code>, <code>ytiles</code> - при <code>singlequad</code> = 0 задают количество ячеек сетки по горизонтали и вертикали</li>
+<li><code>parent</code> - указатель на родителя для плоскости (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="planesetoptions">PlaneSetOptions</h2>
+<p><code>real PlaneSetOptions(real plane, real singlequad, real xtiles, real ytiles);</code></p>
+<p>Задает параметры плоскости.</p>
+<ul>
+<li><code>plane</code> - указатель на плоскость</li>
+<li><code>singlequad</code> - определяет, разбивать ли плоскость на сетку, или представить ее одним квадратом - false или true (0 и 1 соответственно). При использовании освещения, как правило, лучше разбить плоскость</li>
+<li><code>xtiles</code>, <code>ytiles</code> - при singlequad = 0 задают количество ячеек сетки по горизонтали и вертикали.</li>
+</ul>
+<hr />
+<h2 id="planegetoptions">PlaneGetOptions</h2>
+<p><code>real PlaneGetOptions(real plane, real ind);</code></p>
+<p>Возвращает параметры плоскости.</p>
+<ul>
+<li><code>plane</code> - указатель на плоскость</li>
+<li><code>ind</code> - индекс параметра (0 = <code>xtiles</code>, 1 = <code>ytiles</code>).</li>
+</ul>
+<hr />
+<h2 id="cubecreate">CubeCreate</h2>
+<p><code>real CubeCreate(real width, real height, real depth, real parent);</code></p>
+<p>Создает куб (строго говоря, прямоугольный параллелепипед) и возвращает указатель на него.</p>
+<ul>
+<li><code>width</code>, <code>height</code>, <code>depth</code> - ширина, высота и долгота куба</li>
+<li><code>parent</code> - указатель на родителя для куба (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="cubesetnormaldirection">CubeSetNormalDirection</h2>
+<p><code>real CubeSetNormalDirection(real cube, real nd);</code></p>
+<p>Задает направление нормалей куба.</p>
+<ul>
+<li><code>cube</code> - указатель на куб</li>
+<li><code>nd</code> - направление нормалей. Доступны следующие значения <code>nd</code>:<ul>
+<li><code>ndOutside</code> = 0 - нормали направлены внутрь (значение по умолчанию)</li>
+<li><code>ndInside</code> = 1 - нормали направлены наружу.</li></ul></li>
+</ul>
+<hr />
+<h2 id="cubegetnormaldirection">CubeGetNormalDirection</h2>
+<p><code>real CubeGetNormalDirection(real cube);</code></p>
+<p>Возвращает направление нормалей куба. </p>
+<ul>
+<li><code>cube</code> - указатель на куб.</li>
+</ul>
+<hr />
+<h2 id="spherecreate">SphereCreate</h2>
+<p><code>real SphereCreate(real radius, real slices, real stacks, real parent);</code></p>
+<p>Создает сферу и возвращает указатель на нее.</p>
+<ul>
+<li><code>radius</code> - радиус сферы</li>
+<li><code>slices</code>, <code>stacks</code> - задают количество меридиан и параллелей</li>
+<li><code>parent</code> - указатель на родителя для сферы (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="spheresetoptions">SphereSetOptions</h2>
+<p><code>real SphereSetOptions(real sphere, real radius, real slices, real stacks);</code></p>
+<p>Задает параметры сферы.</p>
+<ul>
+<li><code>sphere</code> - указатель на сферу</li>
+<li><code>radius</code> - радиус сферы</li>
+<li><code>slices</code>, <code>stacks</code> - задают количество меридиан и параллелей.</li>
+</ul>
+<hr />
+<h2 id="spheregetoptions">SphereGetOptions</h2>
+<p><code>real SphereGetOptions(real sphere, real ind);</code></p>
+<p>Возвращает параметры сферы.</p>
+<ul>
+<li><code>sphere</code> - указатель на сферу</li>
+<li><code>ind</code> - индекс параметра (0 = <code>radius</code>, 1 = <code>slices</code>, 2 = <code>stacks</code>).</li>
+</ul>
+<hr />
+<h2 id="spheresetanglelimits">SphereSetAngleLimits</h2>
+<p><code>real SphereSetAngleLimits(real sphere, real start, real stop, real top, real bottom);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>sphere</code> - указатель на сферу</li>
+<li><code>start</code>, <code>stop</code> - cведения отсутствуют</li>
+<li><code>top</code>, <code>bottom</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="spheregetanglelimits">SphereGetAngleLimits</h2>
+<p><code>real SphereGetAngleLimits(real sphere, real ind);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>sphere</code> - указатель на сферу</li>
+<li><code>ind</code> - индекс параметра (0 = <code>start</code>, 1 = <code>stop</code>, 2 = <code>top</code>, 3 = <code>bottom</code>).</li>
+</ul>
+<hr />
+<h2 id="cylindercreate">CylinderCreate</h2>
+<p><code>real CylinderCreate(real topradius, real bottomradius, real height, real slices, real stacks, real loops, real parent);</code></p>
+<p>Создает цилиндр и возвращает указатель на него.</p>
+<ul>
+<li><code>topradius</code> - радиус верхнего основания </li>
+<li><code>bottomradius</code> - радиус нижнего основания </li>
+<li><code>height</code> - высота (значение по умолчанию: 1) </li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей </li>
+<li><code>parent</code> - указатель на родителя для цилиндра (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="cylindersetoptions">CylinderSetOptions</h2>
+<p><code>real CylinderSetOptions(real cylinder, real topradius, real bottomradius, real height, real slices, real stacks, real loops);</code></p>
+<p>Задает параметры цилиндра.</p>
+<ul>
+<li><code>cylinder</code> - указатель на цилиндр</li>
+<li><code>topradius</code> - радиус верхнего основания </li>
+<li><code>bottomradius</code> - радиус нижнего основания </li>
+<li><code>height</code> - высота (значение по умолчанию: 1) </li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей.</li>
+</ul>
+<hr />
+<h2 id="cylindergetoptions">CylinderGetOptions</h2>
+<p><code>real CylinderGetOptions(real cylinder, real ind);</code></p>
+<p>Возвращает параметры цилиндра.</p>
+<ul>
+<li><code>cylinder</code> - указатель на цилиндр</li>
+<li><code>ind</code> - индекс параметра (0 = <code>topradius</code>, 1 = <code>bottomradius</code>, 2 = <code>height</code>, 3 = <code>slices</code>, 4 = <code>stacks</code>, 5 = <code>loops</code>).</li>
+</ul>
+<hr />
+<h2 id="conecreate">ConeCreate</h2>
+<p><code>real ConeCreate(real bottomradius, real height, real slices, real stacks, real loops, real parent);</code></p>
+<p>Создает конус и возвращает указатель на него.</p>
+<ul>
+<li><code>bottomradius</code> - радиус основания</li>
+<li><code>height</code> - высота (значение по умолчанию: 1)</li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей</li>
+<li><code>parent</code> - id родителя для конуса (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="conesetoptions">ConeSetOptions</h2>
+<p><code>real ConeSetOptions(real cone, real bottomradius, real height, real slices, real stacks, real loops);</code></p>
+<p>Задает параметры конуса.</p>
+<ul>
+<li><code>cone</code> - указатель на конус</li>
+<li><code>bottomradius</code> - радиус основания</li>
+<li><code>height</code> - высота (значение по умолчанию: 1)</li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей.</li>
+</ul>
+<hr />
+<h2 id="conegetoptions">ConeGetOptions</h2>
+<p><code>real ConeGetOptions(real cone, real ind);</code></p>
+<p>Возвращает параметры конуса.</p>
+<ul>
+<li><code>cone</code> - указатель на конус</li>
+<li><code>ind</code> - индекс параметра (0 = <code>bottomradius</code>, 1 = <code>height</code>, 2 = <code>slices</code>, 3 = <code>stacks</code>, 4 = <code>loops</code>).</li>
+</ul>
+<hr />
+<h2 id="annuluscreate">AnnulusCreate</h2>
+<p><code>real AnnulusCreate(real innerradius, real outerradius, real height, real slices, real stacks, real loops, real parent);</code></p>
+<p>Создает кольцо (полый цилиндр) и возвращает указатель на него.</p>
+<ul>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>height</code> - высота (значение по умолчанию: 1)</li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей</li>
+<li><code>parent</code> - указатель на родителя для полого цилиндра (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="annulussetoptions">AnnulusSetOptions</h2>
+<p><code>real AnnulusSetOptions(real annulus, real innerradius, real outerradius, real height, real slices, real stacks, real loops);</code></p>
+<p>Задает параметры кольца.</p>
+<ul>
+<li><code>annulus</code> - указатель на кольцо</li>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>height</code> - высота (значение по умолчанию: 1)</li>
+<li><code>slices</code>, <code>stacks</code>, <code>loops</code> - задают количество ребер, сегментов и концентрических окружностей.</li>
+</ul>
+<hr />
+<h2 id="annulusgetoptions">AnnulusGetOptions</h2>
+<p><code>real AnnulusGetOptions(real annulus, real ind);</code></p>
+<p>Возвращает параметры кольца.</p>
+<ul>
+<li><code>annulus</code> - указатель на кольцо</li>
+<li><code>ind</code> - индекс параметра (0 = <code>innerradius</code>, 1 = <code>outerradius</code>, 2 = <code>height</code>, 3 = <code>slices</code>, 4 = <code>stacks</code>, 5 = <code>loops</code>).</li>
+</ul>
+<hr />
+<h2 id="toruscreate">TorusCreate</h2>
+<p><code>real TorusCreate(real innerradius, real outerradiusrings, real rings, real sides, real parent);</code></p>
+<p>Создает тор и возвращает указатель на него. Тор - это тело, напоминающее бублик.</p>
+<ul>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>rings</code>, <code>sides</code> - задают количество колец и сегментов</li>
+<li><code>parent</code> - указатель на родителя для тора (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="torussetoptions">TorusSetOptions</h2>
+<p><code>real TorusSetOptions(real torus, real inerradius, real outerradiusrings, real rings, real sides);</code></p>
+<p>Задает параметры тора.</p>
+<ul>
+<li><code>torus</code> - указатель на тор</li>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>rings</code>, <code>sides</code> - задают количество колец и сегментов.</li>
+</ul>
+<hr />
+<h2 id="torusgetoptions">TorusGetOptions</h2>
+<p><code>real TorusGetOptions(real torus, real ind);</code></p>
+<p>Возвращает параметры тора.</p>
+<ul>
+<li><code>torus</code> - указатель на тор</li>
+<li><code>ind</code> - индекс параметра (0 = <code>innerradius</code>, 1 = <code>outerradius</code>, 2 = <code>rings</code>, 3 = <code>sides</code>).</li>
+</ul>
+<hr />
+<h2 id="diskcreate">DiskCreate</h2>
+<p><code>real DiskCreate(real innerradius, real outerradius, real startangle, real sweepangle, real loops, real slices, real parent);</code></p>
+<p>Создает диск и возвращает указатель на него.</p>
+<ul>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>startangle</code>, <code>sweepangle</code> - начальный и конечный угол сектора. Для замкнутого диска эти значения соответствуют 0, 360</li>
+<li><code>loops</code>, <code>slices</code> - задают количество концентрических окружностей и ребер</li>
+<li><code>parent</code> - указатель на родителя для диска (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="disksetoptions">DiskSetOptions</h2>
+<p><code>real DiskSetOptions(real disk, real innerradius, real outerradius, real startangle, real sweepangle, real loops, real slices);</code></p>
+<p>Задает параметры диска.</p>
+<ul>
+<li><code>disk</code> - указатель на диск</li>
+<li><code>innerradius</code> - радиус внутренней окружности</li>
+<li><code>outerradius</code> - радиус внешней окружности</li>
+<li><code>startangle</code>, <code>sweepangle</code> - начальный и конечный угол сектора. Для замкнутого диска эти значения соответствуют 0, 360</li>
+<li><code>loops</code>, <code>slices</code> - задают количество концентрических окружностей и ребер.</li>
+</ul>
+<hr />
+<h2 id="diskgetoptions">DiskGetOptions</h2>
+<p><code>real DiskGetOptions(real disk, real ind);</code></p>
+<p>Возвращает параметры диска.</p>
+<ul>
+<li><code>disk</code> - указатель на диск</li>
+<li><code>ind</code> - индекс параметра (0 = <code>innerradius</code>, 1 = <code>outerradius</code>, 2 = <code>startangle</code>, 3 = <code>sweepangle</code>, 4 = <code>loops</code>, 5 = <code>slices</code>).</li>
+</ul>
+<hr />
+<h2 id="frustrumcreate">FrustrumCreate</h2>
+<p><code>real FrustrumCreate(real basewidth, real basedepth, real apexheight, real cutheight, real parent);</code></p>
+<p>Создает усеченную пирамиду и возвращает указатель на нее.</p>
+<ul>
+<li><code>basewidth</code>, <code>basedepth</code> - ширина и глубина основания</li>
+<li><code>apexheight</code> - высота апекса (вершины, противолежащей основанию)</li>
+<li><code>cutheight</code> - высота отсечения</li>
+<li><code>parent</code> - указатель на родителя для усеченной пирамиды (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="frustrumsetoptions">FrustrumSetOptions</h2>
+<p><code>real FrustrumSetOptions(real frustrum, real basewidth, real basedepth, real apexheight, real cutheight);</code></p>
+<p>Задает параметры усеченной пирамиды.</p>
+<ul>
+<li><code>frustrum</code> - указатель на пирамиду</li>
+<li><code>basewidth</code>, <code>basedepth</code> - ширина и глубина основания</li>
+<li><code>apexheight</code> - высота апекса (вершины, противолежащей основанию)</li>
+<li><code>cutheight</code> - высота отсечения.</li>
+</ul>
+<hr />
+<h2 id="frustrumgetoptions">FrustrumGetOptions</h2>
+<p><code>real FrustrumGetOptions(real frustrum, real ind);</code></p>
+<p>Возвращает параметры усеченной пирамиды.</p>
+<ul>
+<li><code>frustrum</code> - указатель на пирамиду</li>
+<li><code>ind</code> - индекс параметра (0 = <code>basewidth</code>, 1 = <code>basedepth</code>, 2 = <code>apexheight</code>, 3 = <code>cutheight</code>).</li>
+</ul>
+<hr />
+<h2 id="dodecahedroncreate">DodecahedronCreate</h2>
+<p><code>real DodecahedronCreate(real parent);</code></p>
+<p>Создает додекаэдр (многогранник, составленный из 12 правильных пятиугольников) и возвращает указатель на него.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя для додекаэдра (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="icosahedroncreate">IcosahedronCreate</h2>
+<p><code>real IcosahedronCreate(real parent);</code></p>
+<p>Создает икосаэдр (многогранник, составленный из 20 равносторонних треугольников) и возвращает указатель на него.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя для икосаэдра (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="teapotcreate">TeapotCreate</h2>
+<p><code>real TeapotCreate(parent);</code></p>
+<p>Создает чайник Юта и возвращает указатель на него.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя для чайника (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="pipecreate">PipeCreate</h2>
+<p><code>real PipeCreate(real division, real slices, real parent);</code></p>
+<p>Создает трубу и возвращает указатель на нее.</p>
+<ul>
+<li><code>division</code> - сведения отсутствуют</li>
+<li><code>slices</code> - задает количество ребер</li>
+<li><code>parent</code> - указатель на родителя для трубы (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="pipeaddnode">PipeAddNode</h2>
+<p><code>real PipeAddNode(real pipe, real x, real y, real z);</code></p>
+<p>Добавляет узел к трубе и присваивает ему порядковый номер. Отсчет начинается с нуля.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - локальные координаты узла.</li>
+</ul>
+<hr />
+<h2 id="pipedeletenode">PipeDeleteNode</h2>
+<p><code>real PipeDeleteNode(real pipe, real index);</code></p>
+<p>Удаляет узел из трубы.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>index</code> - порядковый номер узла.</li>
+</ul>
+<hr />
+<h2 id="pipesetnode">PipeSetNode</h2>
+<p><code>real PipeSetNode(real pipe, real index, real x, real y, real z);</code></p>
+<p>Задает кординаты узла трубы.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>index</code> - порядковый номер узла</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - локальные кординаты узла.</li>
+</ul>
+<hr />
+<h2 id="pipesetdivision">PipeSetDivision</h2>
+<p><code>real PipeSetDivision(real pipe, real division);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>division</code> - сведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="pipesetslices">PipeSetSlices</h2>
+<p><code>real PipeSetSlices(real pipe, real slices);</code></p>
+<p>Задает количество ребер трубы.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>slices</code> - количество ребер.</li>
+</ul>
+<hr />
+<h2 id="pipesetradius">PipeSetRadius</h2>
+<p><code>real PipeSetRadius(real pipe, real radius);</code></p>
+<p>Задает радиус трубы.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>radius</code> - радиус.</li>
+</ul>
+<hr />
+<h2 id="pipesetsplinemode">PipeSetSplineMode</h2>
+<p><code>real PipeSetSplineMode(real pipe, real lsm);</code></p>
+<p>Задает режим сплайна трубы.</p>
+<ul>
+<li><code>pipe</code> - указатель на трубу</li>
+<li><code>lsm</code> - режим сплайна:<ul>
+<li><code>lsmLines</code> = 0 - прямая</li>
+<li><code>lsmCubicSpline</code> = 1 - кубический сплайн</li>
+<li><code>lsmBezierSpline</code> = 2 - сплайн Безье</li>
+<li><code>lsmNURBSCurve</code> = 3 - сплайн NURBS</li>
+<li><code>lsmSegments</code> = 4 - пунктир.</li></ul></li>
+</ul>
+<hr />
+<h2 id="tileplanecreate">TilePlaneCreate</h2>
+<p><code>real TilePlaneCreate(real parent);</code></p>
+<p>Создает тайловую плоскость и возвращает указатель на нее.</p>
+<p>parent - указатель на родителя для тайловой плоскости (0 - отсутствие родителя).</p>
+<hr />
+<h2 id="tileplanesettile">TilePlaneSetTile</h2>
+<p><code>real TilePlaneSetTile(real tileplane, real x, real y, string mat);</code></p>
+<p>Задает материал тайла в позиции x и y.</p>
+<p>tileplane - указатель на тайловую плоскость
+x, y - позиция тайла
+mat - материал.</p>
+</body>
+</html>

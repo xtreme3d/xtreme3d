@@ -17,11 +17,11 @@
 <hr />
 <h2 id="hudspritecreate">HUDSpriteCreate</h2>
 <p><code>real HUDSpriteCreate(string material, real width, real height, real parent);</code></p>
-<p>Создает новый экранный спрайт и возвращает ссылку на него.
+<p>Создает новый экранный спрайт и возвращает указатель на него.
 material - имя материала</p>
 <ul>
 <li><code>width</code>, <code>height</code> - ширина и высота спрайта в пикселях</li>
-<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для спрайта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="hudspritecreateex">HUDSpriteCreateEx</h2>
@@ -32,22 +32,22 @@ material - имя материала</p>
 <li><code>width</code>, <code>height</code> - ширина и высота спрайта в пикселях</li>
 <li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
 <li><code>right</code>, <code>bottom</code> - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
-<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для спрайта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="hudspritegetmouseover">HUDSpriteGetMouseOver</h2>
 <p><code>real HUDSpriteGetMouseOver(real sprite, real viewer);</code></p>
 <p>Возвращает 1, если курсор мыши находится над спрайтом в заданном виде, и 0 в противном случае. Функция полезна для реализации элементов интерфейса, таких, как кнопки.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
-<li><code>viewer</code> - ссылка на вид.</li>
+<li><code>sprite</code> - указатель на спрайт</li>
+<li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <hr />
 <h2 id="hudspritextiles">HUDSpriteXTiles</h2>
 <p><code>real HUDSpriteXTiles(real sprite, real xtiles);</code></p>
 <p>Задает тайлинг (количество повторений) текстуры спрайта по оси X.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>xtiles</code> - тайлинг по оси X.</li>
 </ul>
 <hr />
@@ -55,7 +55,7 @@ material - имя материала</p>
 <p>`real HUDSpriteYTiles(real sprite, real ytiles);</p>
 <p>Задает тайлинг (количество повторений) текстуры спрайта по оси Y.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>ytiles</code> - тайлинг по оси Y.</li>
 </ul>
 <hr />
@@ -65,7 +65,7 @@ material - имя материала</p>
 <ul>
 <li><code>material</code> - имя материала</li>
 <li><code>width</code>, <code>height</code> - ширина и высота спрайта в единицах координатной системы</li>
-<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для спрайта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="spritecreateex">SpriteCreateEx</h2>
@@ -76,14 +76,14 @@ material - имя материала</p>
 <li><code>width</code>, <code>height</code> - ширина и высота спрайта в единицах координатной системы</li>
 <li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
 <li><code>right</code>, <code>bottom</code> - UV-координаты правого нижнего угла фрагмента (относительно левого верхнего угла текстуры)</li>
-<li><code>parent</code> - ссылка на родителя для спрайта (0 - отсутствие родителя).</li>
+<li><code>parent</code> - указатель на родителя для спрайта (0 - отсутствие родителя).</li>
 </ul>
 <hr />
 <h2 id="spritesetsize">SpriteSetSize</h2>
 <p><code>real SpriteSetSize(real sprite, real width, real height);</code></p>
 <p>Задает размер спрайта.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>width</code>, <code>height</code> - ширина и высота спрайта.</li>
 </ul>
 <hr />
@@ -91,7 +91,7 @@ material - имя материала</p>
 <p><code>real SpriteGetSize(real sprite, real ind);</code></p>
 <p>Возвращает размер спрайта - ширину или высоту, в зависимости от заданного индекса размерности.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>ind</code> - индекс размерности (0 = ширина, 1 = высота).</li>
 </ul>
 <hr />
@@ -99,7 +99,7 @@ material - имя материала</p>
 <p><code>real SpriteScale(real sprite, real hscale, real vscale);</code></p>
 <p>Изменяет размер спрайта относительно текущего размера.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>hscale</code>, <code>vscale</code> - добавляются к текущим значениям ширины и высоты.</li>
 </ul>
 <hr />
@@ -107,7 +107,7 @@ material - имя материала</p>
 <p><code>real SpriteSetRotation(real sprite, real angle);</code></p>
 <p>Задает угол поворота спрайта. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>angle</code> - угол поворота.</li>
 </ul>
 <hr />
@@ -115,7 +115,7 @@ material - имя материала</p>
 <p><code>real SpriteRotate(real sprite, real angle);</code></p>
 <p>Изменяет поворот спрайта относительно текущего угла. Обратите внимание, что этот угол относится только к изображению и никак не влияет на обычный поворот объекта по осям XYZ.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>angle</code> - добавляется к текущему углу поворота.</li>
 </ul>
 <hr />
@@ -123,7 +123,7 @@ material - имя материала</p>
 <p><code>real SpriteMirror(real sprite, real u, real v);</code></p>
 <p>Отображает спрайт зеркально по горизонтали и/или вертикали. Работает только для пространственных спрайтов.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>u</code> - горизонталь, <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
 <li><code>v</code> - вертикаль, <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
@@ -132,7 +132,7 @@ material - имя материала</p>
 <p><code>real SpriteSetBounds(real sprite, real left, real top, real right, real bottom);</code></p>
 <p>Задает фрагмент текстуры для спрайта в пикселях. Функция позволяет анимировать спрайт, последовательно сдвигая фрагмент вдоль набора кадров. Также можно использовать ее, например, для реализации мини-карты.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>left</code>, <code>top</code> - координаты левого верхнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры)</li>
 <li><code>right</code>, <code>bottom</code> - координаты координаты правого нижнего угла фрагмента (в пикселях, относительно левого верхнего угла текстуры).</li>
 </ul>
@@ -141,7 +141,7 @@ material - имя материала</p>
 <p><code>real SpriteSetBounds(real sprite, real left, real top, real right, real bottom);</code></p>
 <p>Задает фрагмент текстуры для спрайта в UV-координатах. Координаты (0, 0) соответствуют левому верхнему углу текстуры, (1, 1) - правому нижнему.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>left</code>, <code>top</code> - UV-координаты левого верхнего угла фрагмента</li>
 <li><code>right</code>, <code>bottom</code> - UV-координаты координаты правого нижнего угла фрагмента.</li>
 </ul>
@@ -150,7 +150,7 @@ material - имя материала</p>
 <p><code>real SpriteSetOrigin(real sprite, real x, real y);</code></p>
 <p>Задает исходную точку спрайта - то есть, точку, вокруг которой осуществляется вращение спрайта. По умолчанию вращение осуществляется вокруг центра спрайта.</p>
 <ul>
-<li><code>sprite</code> - ссылка на спрайт</li>
+<li><code>sprite</code> - указатель на спрайт</li>
 <li><code>x</code>, <code>y</code> - координаты исходной точки в пикселях относительно центра спрайта (координаты (0, 0) соответствуют центру).</li>
 </ul>
 </body>
