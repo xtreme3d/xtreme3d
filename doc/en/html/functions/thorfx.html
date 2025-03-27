@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>ThorFX</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>ThorFX</H1>
+
+<A class=type>Класс: TGLThorFXManager, TGLBThorFX</A><BR><BR>
+
+<A>ThorFX - это узкоспециализированная система частиц, ориентированная на работу со сплошной линией. При помощи ThorFX 
+можно создать невероятно реалистичные молнии, электрические разряды, лучи лазера, потоки плазмы и прочие эффекты,  
+в которых используется прямая или ломаная линия.
+<BR>Система ThorFX состоит из двух компонентов: стержень, или ядро (core), и свечение (glow). Стержень - сплошная линия, 
+закрашенная одним цветом, а свечение представляет собой совокупность отдельных частиц (спрайтов), равномерно распределенных по всей 
+длине стержня. При достаточном количестве частиц они визуально сольются в сплошной объем, и будет казаться, что стержень 
+светится, как неоновая трубка.
+<BR>Для воссоздания эффекта электрического разряда (его еще называют эффектом Тесла, по имени выдающегося физика Николы Тесла) 
+включается вибрация и смещение - и перед нами уже не неоновая трубка, а настоящая молния!
+<BR>Положение системы в пространстве задается ее собственными координатами, а также координатами целевой точки, в которую должна "бить" 
+молния. <!--Вместо точки можно указать целевой объект, и тогда молния будет "бить" в него.-->
+<BR>
+<BR>В некоторых случаях необходимо создать сразу несколько одинаковых эффектов. Не очень-то удобно повторять все настройки для каждого 
+из них. Специально для такой ситуации предусмотрен менеджер ThorFX. Менеджер - это что-то вроде сервера, на котором выполняются все 
+вычисления, связанные с эффектом. А отдельные системы ThorFX - это клиенты, использующие настройки указанного для них менеджера. 
+Вы просто создаете менеджер, настраиваете его как вам угодно, а затем добавляете любое количество систем в любых нужных вам местах сцены. 
+Изменения, внесенные в настройки менеджера, автоматически коснутся всех подчиненных ему систем.</A>
+<BR><HR>
+
+<A name="ThorFXManagerCreate"></A>
+<H1 class=name>ThorFXManagerCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXManagerCreate</A><A>();</A>
+<BR><A>Создает новый менеджер ThorFX и возвращает его id.</A>
+<HR>
+
+<A name="ThorFXCreate"></A>
+<H1 class=name>ThorFXCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXCreate</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает новую систему ThorFX и прикрепляет ее к заданному объекту.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>target - id объекта.</A>
+<HR>
+
+<A name="ThorFXSetColor"></A>
+<H1 class=name>ThorFXSetColor</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetColor</A><A>( manager,incolor,inalpha,outcolor,outalpha,ccolor,calpha as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает цвет системы.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>incolor,inalpha - цвет и прозрачность центра свечения</A>
+<BR><A>outcolor,outalpha - цвет и прозрачность периферии свечения</A>
+<BR><A>ccolor,calpha - цвет и прозрачность стержня.</A>
+<HR>
+
+<A name="ThorFXEnableCore"></A>
+<H1 class=name>ThorFXEnableCore</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXEnableCore</A><A>( manager,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает стержень.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ThorFXEnableGlow"></A>
+<H1 class=name>ThorFXEnableGlow</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXEnableGlow</A><A>( manager,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Включает или выключает свечение.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
+<HR>
+
+<A name="ThorFXSetMaxParticles"></A>
+<H1 class=name>ThorFXSetMaxParticles</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetMaxParticles</A><A>( manager,particles as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает количество частиц в свечении. Чем выше это число, тем реалистичнее выглядит свечение.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>particles - количество частиц (от 0 до 255).</A>
+<HR>
+
+<A name="ThorFXSetGlowSize"></A>
+<H1 class=name>ThorFXSetGlowSize</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetGlowSize</A><A>( manager,size as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает размер свечения.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>size - размер.</A>
+<HR>
+
+<A name="ThorFXSetVibrate"></A>
+<H1 class=name>ThorFXSetVibrate</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetVibrate</A><A>( manager,vibrate as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает уровень вибрации стержня (амплитуду колебаний). Ноль означает отсутствие вибрации.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>vibrate - уровень вибрации.</A>
+<HR>
+
+<A name="ThorFXSetWildness"></A>
+<H1 class=name>ThorFXSetWildness</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetWildness</A><A>( manager,wildness as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает уровень смещения стержня относительно осевой линии. Электрический разряд как бы "дергается", усиливая впечатление от эффекта. 
+Такое часто можно наблюдать, как в природе, так и в научных экспериментах.
+<BR>Ноль означает отсутствие смещения.</A>
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>vibrate - уровень вибрации.</A>
+<HR>
+
+<A name="ThorFXSetTarget"></A>
+<H1 class=name>ThorFXSetTarget</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetTarget</A><A>( manager,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает целевую точку системы (то есть, точку, в которую бьет молния). Координаты этой точки всегда задаются локально, то есть относительно собственных координатных осей системы. Если бы координаты задавались абсолютно, все созданные системы одного менеджера были направлены в одну и ту же точку, что, согласитесь, обычно совсем нежелательно.
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>x,y,z - координаты точки.</A>
+<HR>
+
+<!--
+<A name="ThorFXSetTargetAsObject"></A>
+<H1 class=name>ThorFXSetTargetAsObject</H1>
+<A class=type>real</A><A> = </A><A class=function>ThorFXSetTargetAsObject</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает целевой объект системы. В этом случае все созданные системы менеджера ThorFX будут направлены в один и тот же объект. Это может быть полезно, скажем, когда вы создаете специальное электрическое оружие, которое бьет в ближайший к нему объект (такое оружие можно встретить, например, в GTA 2).
+<BR><A>manager - id менеджера ThorFX</A>
+<BR><A>object - id объекта.</A>
+<HR>
+-->
+
+</DIV>
+
+</BODY>
+</HTML>

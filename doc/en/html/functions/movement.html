@@ -1,0 +1,135 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>Movement</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>Movement</H1>
+
+<A class=type>Класс: TGLMovement, TGLMovementPath, TGLPathNode</A><BR><BR>
+
+<A>Объект Movement (движение) позволяет задавать объектам траектории движения. Траектории называются путями (Path). Путь может представлять собой набор отрезков, либо сплайн (кривую) - кубический, сплайн Безье или NURBS. Собственное движение объекта и движение по пути взаимоисключающи - то есть, пока объект движется по пути, его нельзя двигать обычными функциями </A><A class=funclink href=../functions/object.htm#ObjectMove>ObjectMove</A><A> и др. Объект Movement включает один или несколько путей, и вы можете переключаться между ними. Также возможен последовательный проход всех путей друг за другом.
+</A>
+<HR>
+
+<A name="MovementCreate"></A>
+<H1 class=name>MovementCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementCreate</A><A>( object as </A><A class=type>real</A><A> );</A>
+<BR><A>Создает объект Movement, который будет управлять движением заданного объекта, и возвращает его id.</A>
+<BR><A>object - id подконтрольного объекта.</A>
+<HR>
+
+<A name="MovementAddPath"></A>
+<H1 class=name>MovementAddPath</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementAddPath</A><A>( movement as </A><A class=type>real</A><A> );</A>
+<BR><A>Добавляет объекту Movement новый путь и возвращает его id (не индекс!).</A>
+<BR><A>movement - id объекта Movement.</A>
+<HR>
+
+<A name="MovementSetActivePath"></A>
+<H1 class=name>MovementSetActivePath</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementSetActivePath</A><A>( movement,index as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает текущий (активный) путь объекта Movement. Функция </A><A class=funclink href=../functions/movement.htm#MovementStart>MovementStart</A><A> 
+всегда начинает движение с первого узла этого пути.</A>
+<BR><A>movement - id объекта Movement</A>
+<BR><A>index - индекс пути, начиная с 0. Значение по умолчанию - 0.</A>
+<HR>
+
+<A name="MovementStart"></A>
+<H1 class=name>MovementStart</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementStart</A><A>( movement as </A><A class=type>real</A><A> );</A>
+<BR><A>Запускает движение подконтрольного объекта. Позиция и поворот объекта при этом всегда сбрасываются на начальный узел текущего пути.</A>
+<BR><A>movement - id объекта Movement.</A>
+<HR>
+
+<A name="MovementStop"></A>
+<H1 class=name>MovementStop</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementStop</A><A>( movement as </A><A class=type>real</A><A> );</A>
+<BR><A>Останавливает движение. После остановки подконтрольный объект можно двигать обычными функциями.</A>
+<BR><A>movement - id объекта Movement.</A>
+<HR>
+
+<A name="MovementAutoStartNextPath"></A>
+<H1 class=name>MovementAutoStartNextPath</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementAutoStartNextPath</A><A>( movement,mode as </A><A class=type>real</A><A> );</A>
+<BR><A>Определяет, переключаться ли автоматически на следующий путь, когда завершается текущий.</A>
+<BR><A>movement - id объекта Movement</A>
+<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). По умолчанию опция включена.</A>
+<HR>
+
+<A name="MovementPathSetSplineMode"></A>
+<H1 class=name>MovementPathSetSplineMode</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathSetSplineMode</A><A>( path,lsm as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает тип сплайна пути (lsm). Подробнее о типах сплайнов вы можете прочитать в разделе </A>
+<A class=link href=../functions/lines.htm>Lines</A><A>.</A>
+<BR><A class=constant name="lsmLines">lsmLines</A><A> = 0 - набор отрезков</A>
+<BR><A class=constant name="lsmCubicSpline">lsmCubicSpline</A><A> = 1 - кубический сплайн (значение по умолчанию)</A>
+<BR><A class=constant name="lsmBezierSpline">lsmBezierSpline</A><A> = 2 - сплайн Безье</A>
+<BR><A class=constant name="lsmNURBSCurve">lsmNURBSCurve</A><A> = 3 - NURBS.</A>
+<BR><A>path - id пути</A>
+<BR><A>lsm - тип сплайна.</A>
+<HR>
+
+<A name="MovementPathAddNode"></A>
+<H1 class=name>MovementPathAddNode</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathAddNode</A><A>( path as </A><A class=type>real</A><A> );</A>
+<BR><A>Добавляет в путь новый узел и возвращает его id. Узел - это контрольная точка, определяющая направление пути. Кроме позиции, узел определяет также и поворот - таким образом, объект во время перемещения может плавно вращаться от одного угла к другому. Кроме того, узел определяет скорость движения объекта вдоль отрезка пути.</A>
+<BR><A>path - id пути.</A>
+<HR>
+
+<A name="MovementPathDeleteNode"></A>
+<H1 class=name>MovementPathDeleteNode</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathDeleteNode</A><A>( path,node as </A><A class=type>real</A><A> );</A>
+<BR><A>Удаляет узел из пути.</A>
+<BR><A>path - id пути.</A>
+<BR><A>node - id узла.</A>
+<HR>
+
+<A name="MovementPathNodeSetPosition"></A>
+<H1 class=name>MovementPathNodeSetPosition</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathNodeSetPosition</A><A>( node,x,y,z as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает позицию узла.</A>
+<BR><A>node - id узла</A>
+<BR><A>x,y,z - позиция.</A>
+<HR>
+
+<A name="MovementPathNodeSetRotation"></A>
+<H1 class=name>MovementPathNodeSetRotation</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathNodeSetRotation</A><A>( node,pitch,turn,roll as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает поворот узла.</A>
+<BR><A>node - id узла</A>
+<BR><A>pitch,turn,roll - углы поворота в градусах по трем осям.</A>
+<HR>
+
+<A name="MovementPathNodeSetSpeed"></A>
+<H1 class=name>MovementPathNodeSetSpeed</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathNodeSetSpeed</A><A>( node,speed as </A><A class=type>real</A><A> );</A>
+<BR><A>Задает скорость узла.</A>
+<BR><A>node - id узла</A>
+<BR><A>speed - скорость.</A>
+<HR>
+
+<A name="MovementPathShow"></A>
+<H1 class=name>MovementPathShow</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathShow</A><A>( path,show as </A><A class=type>real</A><A> );</A>
+<BR><A>Переключает отображение пути в виде линий.</A>
+<BR><A>path - id пути</A>
+<BR><A>show - видимость (</A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>).</A>
+<HR>
+
+<A name="MovementPathSetLoop"></A>
+<H1 class=name>MovementPathSetLoop</H1>
+<A class=type>real</A><A> = </A><A class=function>MovementPathSetLoop</A><A>( path,loop as </A><A class=type>real</A><A> );</A>
+<BR><A>Переключает зацикленность пути.</A>
+<BR><A>path - id пути</A>
+<BR><A>loop - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<TITLE>ObjectHash</TITLE>
+<LINK href="../data/style.css" type=text/css rel=stylesheet>
+</HEAD>
+<BODY>
+
+<DIV ALIGN=justify>
+
+<H1 class=pagetitle>ObjectHash</H1>
+
+<A class=type>Класс: TObjectHash</A><BR><BR>
+
+<A>Объект ObjectHash предназначен для хранения любых других объектов Xtreme3D в хэш-таблице - специальной структуре данных, предоставляющей возможность доступа к объектам по именам. Это может пригодиться, например, для упрощения игровой логики, если вы загружаете сцену из файла (то есть, автоматически создаете множество объектов, неизвестных программе заранее).
+</A>
+<HR>
+
+<A name="ObjectHashCreate"></A>
+<H1 class=name>ObjectHashCreate</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashCreate</A><A>( );</A>
+<BR><A>Создает новую хэш-таблицу и возвращает ее id.</A>
+<HR>
+
+<A name="ObjectHashSetItem"></A>
+<H1 class=name>ObjectHashSetItem</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashSetItem</A><A>( hash as </A><A class=type>real</A><A>, key as </A><A class=type>string</A><A>, obj as </A><A class=type>real</A><A> );</A>
+<BR><A>Сохраняет заданный объект в хэш-таблице под заданным ключом (именем).</A>
+<BR><A>hash - id хэш-таблицы</A>
+<BR><A>key - строка-ключ</A>
+<BR><A>obj - id объекта.</A>
+<HR>
+
+<A name="ObjectHashGetItem"></A>
+<H1 class=name>ObjectHashGetItem</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashGetItem</A><A>( hash as </A><A class=type>real</A><A>, key as </A><A class=type>string</A><A> );</A>
+<BR><A>Возвращает объект, сохраненный в хэш-таблице под заданным ключом. Если в таблице нет такого ключа, то функция возвращает 0.</A>
+<BR><A>hash - id хэш-таблицы</A>
+<BR><A>key - строка-ключ.</A>
+<HR>
+
+<A name="ObjectHashDeleteItem"></A>
+<H1 class=name>ObjectHashDeleteItem</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashDeleteItem</A><A>( hash as </A><A class=type>real</A><A>, key as </A><A class=type>string</A><A> );</A>
+<BR><A>Удаляет из таблицы объект, сохраненный под заданным ключом. Если в таблице нет такого ключа, то ничего не происходит.</A>
+<BR><A>hash - id хэш-таблицы</A>
+<BR><A>key - строка-ключ.</A>
+<HR>
+
+<A name="ObjectHashGetItemCount"></A>
+<H1 class=name>ObjectHashGetItemCount</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashGetItemCount</A><A>( hash as </A><A class=type>real</A><A> );</A>
+<BR><A>Возвращает количество сохраненных в хэш-таблице объектов.</A>
+<BR><A>hash - id хэш-таблицы.</A>
+<HR>
+
+<A name="ObjectHashClear"></A>
+<H1 class=name>ObjectHashClear</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashClear</A><A>( hash as </A><A class=type>real</A><A> );</A>
+<BR><A>Очищает содержимое хэш-таблицы. Сама таблица остается, и ее можно использовать.</A>
+<BR><A>hash - id хэш-таблицы.</A>
+<HR>
+
+<A name="ObjectHashDestroy"></A>
+<H1 class=name>ObjectHashDestroy</H1>
+<A class=type>real</A><A> = </A><A class=function>ObjectHashDestroy</A><A>( hash as </A><A class=type>real</A><A> );</A>
+<BR><A>Уничтожает хэш-таблицу. Использовать ее после вызова этой функции нельзя.</A>
+<BR><A>hash - id хэш-таблицы.</A>
+<HR>
+
+</DIV>
+
+</BODY>
+</HTML>

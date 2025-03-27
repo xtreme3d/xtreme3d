@@ -691,3 +691,13 @@ Freeform обычно загружается из файла 3D-модели. Xt
 
 - `freeform` - указатель на объект свободной формы
 - `speed` - скорость.
+
+---
+
+## BaseMeshBuildSilhouetteConnectivityData
+
+`real BaseMeshBuildSilhouetteConnectivityData(real basemesh);`
+
+Вычисляет данные о связности силуэта модели (объекта свободной формы или актера).
+
+- `basemesh` - указатель на модель.

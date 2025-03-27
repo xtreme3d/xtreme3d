@@ -136,10 +136,9 @@
 
 <h2 id="q14">14. How to get a realistic camera perspective?</h2>
 <p>Sometimes, to achieve a realistic perspective, you need to correct the "optical" characteristics of the game camera. The following example of such correction reduces perspective distortions to a minimum:</p>
-<code><pre>
-CameraSetFocal(camera,120);
-CameraSetSceneScale(camera,0.5);
-</pre></code>
+<pre><code>CameraSetFocal(camera, 120);
+CameraSetSceneScale(camera, 0.5);
+</code></pre>
 
 <hr>
 
@@ -155,9 +154,8 @@ CameraSetSceneScale(camera,0.5);
 
 <h2 id="q17">17. How do I specify a line break in text objects?</h2>
 <p>In Xtreme3D text objects, the '#' character does NOT mean a line break. The thirteenth ASCII character (carriage return) is used for this - <code>chr(13)</code>, for example:</p>
-<code><pre>
-TextSetText(text, 'Line1' + chr(13) + 'Line2');
-</pre></code>
+<pre><code>TextSetText(text, "Line1" + chr(13) + "Line2");
+</code></pre>
 
 <hr>
 
@@ -173,9 +171,8 @@ TextSetText(text, 'Line1' + chr(13) + 'Line2');
 
 <h2 id="q20">20. Why are forces not applied to ODE bodies?</h2>
 <p>The thing is that in Xtreme3D 2.0.2.0, there is an option to automatically turn off bodies if they are inactive for a certain period of time, and it is impossible to apply forces to turned off bodies. Auto-off is enabled by default, you just need to turn it off:</p>
-<code><pre>
-OdeWorldSetAutoDisableFlag(false);
-</pre></code>
+<pre><code>OdeWorldSetAutoDisableFlag(false);
+</code></pre>
 
 <hr>
 
@@ -211,28 +208,24 @@ OdeWorldSetAutoDisableFlag(false);
 
 <h2 id="q26">26. Why doesn't BumpShader work? The object is painted black / textures are not visible / the shader is displayed incorrectly.</h2>
 <p>If you have not set any specific shader settings, this usually means that you have not set the necessary material settings. It is necessary to specify all the color components of the material (MaterialSetAmbientColor, MaterialSetDiffuseColor, MaterialSetSpecularColor) and the specular shine value (MaterialSetShininess), for example:</p>
-<code><pre>
-MaterialSetAmbientColor("material", c_black, 1);
+<pre><code>MaterialSetAmbientColor("material", c_black, 1);
 MaterialSetDiffuseColor("material", c_white, 1);
 MaterialSetSpecularColor("material", c_ltgray, 1);
 MaterialSetShininess("material", 32);
-</pre></code>
+</code></pre>
 <p>Also, if your object does not have its own tangent vectors (usually this is the case for Actors and built-in Xtreme3D primitives), then you need to switch to the automatic tangent space:</p>
-<code><pre>
-BumpShaderUseAutoTangentSpace(shader, true);
-</pre></code>
+<pre><code>BumpShaderUseAutoTangentSpace(shader, true);
+</code></pre>
 <p>Make sure the material has at least a diffuse texture (in slot 0) and a normal map (in slot 1). The normal map must be in tangent space.</p>
-<code><pre>
-MaterialCreate("material", "");
+<pre><code>MaterialCreate("material", "");
 MaterialLoadTextureEx("material", "textures/diffuse.png", 0);
 MaterialLoadTextureEx("material", "textures/normal.png", 1);
 BumpShaderSetDiffuseTexture(shader, "");
 BumpShaderSetNormalTexture(shader, "");
-</pre></code>
+</code></pre>
 <p>Finally, make sure the shader uses a number of lights greater than zero (8 is recommended, as this is the maximum number of lights that are considered when rendering a single object):</p>
-<code><pre>
-BumpShaderSetMaxLights(bump, 8);
-</pre></code>
+<pre><code>BumpShaderSetMaxLights(bump, 8);
+</code></pre>
 
 </body>
 </html>

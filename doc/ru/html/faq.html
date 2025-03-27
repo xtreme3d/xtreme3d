@@ -137,10 +137,9 @@
 
 <h2 id="q14">14. Как получить реалистичную перспективу камеры?</h2>
 <p>Иногда для достижения реалистичной перспективы требуется коррекция "оптических" характеристик игровой камеры. Следующий пример такой коррекции сводит перспективные искажения к минимуму:</p>
-<code><pre>
-CameraSetFocal(camera,120);
-CameraSetSceneScale(camera,0.5);
-</pre></code>
+<pre><code>CameraSetFocal(camera, 120);
+CameraSetSceneScale(camera, 0.5);
+</code></pre>
 
 <hr>
 
@@ -156,9 +155,8 @@ CameraSetSceneScale(camera,0.5);
 
 <h2 id="q17">17. Как указать переход на следующую строку в объектах текста?</h2>
 <p>В объектах текста Xtreme3D символ '#' НЕ означает переход на следующую строку. Для этого используется тринадцатый символ ASCII (возврат каретки) - <code>chr(13)</code>, например:</p>
-<code><pre>
-TextSetText(text, 'Line1' + chr(13) + 'Line2');
-</pre></code>
+<pre><code>TextSetText(text, "Line1" + chr(13) + "Line2");
+</code></pre>
 
 <hr>
 
@@ -174,9 +172,8 @@ TextSetText(text, 'Line1' + chr(13) + 'Line2');
 
 <h2 id="q20">20. Почему к телам ODE не прикладываются силы?</h2>
 <p>Дело в том, что в Xtreme3D 2.0.2.0 появилась возможность автовыключения тел, если они бездействуют определенное время, а к выключенным телам невозможно применить силы. Автовыключение по умолчанию активировано, его нужно просто выключить:</p>
-<code><pre>
-OdeWorldSetAutoDisableFlag(false);
-</pre></code>
+<pre><code>OdeWorldSetAutoDisableFlag(false);
+</code></pre>
 
 <hr>
 
@@ -212,28 +209,24 @@ OdeWorldSetAutoDisableFlag(false);
 
 <h2 id="q26">26. Почему не работает BumpShader? Объект закрашивается черным / не видны текстуры / шейдер отображается неправильно.</h2>
 <p>Если вы не выставляли никакие специфические настройки шейдера, то обычно это означает, что вы не задали необходимые настройки материала. Нужно обязательно указать все компоненты цвета материала (MaterialSetAmbientColor, MaterialSetDiffuseColor, MaterialSetSpecularColor) и значение зеркального блеска (MaterialSetShininess), например:</p>
-<code><pre>
-MaterialSetAmbientColor("material", c_black, 1);
+<pre><code>MaterialSetAmbientColor("material", c_black, 1);
 MaterialSetDiffuseColor("material", c_white, 1);
 MaterialSetSpecularColor("material", c_ltgray, 1);
 MaterialSetShininess("material", 32);
-</pre></code>
+</code></pre>
 <p>Также, если у вашего объекта нет собственных тангент-векторов (обычно так бывает для Актеров и встроенных примитивов Xtreme3D), то нужно переключиться на автоматическое пространство касательных:</p>
-<code><pre>
-BumpShaderUseAutoTangentSpace(shader, true);
-</pre></code>
+<pre><code>BumpShaderUseAutoTangentSpace(shader, true);
+</code></pre>
 <p>Убедитесь, что в материале есть, как минимум, диффузная текстура (в слоте 0) и карта нормалей (в слоте 1). Карта нормалей должна быть в пространстве касательных.</p>
-<code><pre>
-MaterialCreate("material", "");
+<pre><code>MaterialCreate("material", "");
 MaterialLoadTextureEx("material", "textures/diffuse.png", 0);
 MaterialLoadTextureEx("material", "textures/normal.png", 1);
 BumpShaderSetDiffuseTexture(shader, "");
 BumpShaderSetNormalTexture(shader, "");
-</pre></code>
+</code></pre>
 <p>Наконец, убедитесь, что шейдер использует количество источников света больше нуля (рекомендуется 8, так как это максимальное количество источников света, которые учитываются при рендеринге одного объекта):</p>
-<code><pre>
-BumpShaderSetMaxLights(bump, 8);
-</pre></code>
+<pre><code>BumpShaderSetMaxLights(bump, 8);
+</code></pre>
 
 </body>
 </html>
