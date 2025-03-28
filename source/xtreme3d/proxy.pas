@@ -8,7 +8,7 @@ begin
     pr := TGLProxyObject.CreateAsChild(scene.Objects);
   pr.MasterObject := TGLBaseSceneObject(RealToPtr(target));
   pr.ProxyOptions := [pooEffects, pooObjects];
-  result := Integer(pr);
+  result := ObjToReal(pr);
 end;
 
 function ProxyObjectSetOptions(proxy,
@@ -41,7 +41,7 @@ begin
     mp := TGLMultiProxy.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))
   else
     mp := TGLMultiProxy.CreateAsChild(scene.Objects);
-  result := Integer(mp);
+  result := ObjToReal(mp);
 end;
 
 function MultiProxyObjectAddTarget(mproxy, target, mindist, maxdist: real): real; cdecl;
@@ -64,7 +64,7 @@ begin
   else
     p := TGLActorProxy.CreateAsChild(scene.Objects);
   p.MasterObject := TGLActor(RealToPtr(actor));
-  result := Integer(p);
+  result := ObjToReal(p);
 end;
 
 function ActorProxyObjectSwitchToAnimation(proxy, anim: real): real; cdecl;

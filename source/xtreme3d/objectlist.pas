@@ -3,7 +3,7 @@ var
   list: TGLPersistentObjectList;
 begin
   list := TGLPersistentObjectList.Create;
-  result := PtrToReal(list);
+  result := ObjToReal(list);
 end;
 
 function ObjectListAdd(list, obj: real): real; cdecl;

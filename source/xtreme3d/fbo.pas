@@ -9,7 +9,7 @@ begin
   fbor.Width := Trunc(w);
   fbor.Height := Trunc(h);
   fbor.PostGenerateMipmap := False;
-  result := PtrToReal(fbor);
+  result := ObjToReal(fbor);
 end;
 
 function FBOSetActive(fbo, mode: real): real; cdecl;

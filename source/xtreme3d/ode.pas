@@ -305,7 +305,7 @@ begin
       BoxHeight := h;
       BoxDepth := d;
     end;
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;
@@ -332,7 +332,7 @@ begin
       Position.SetPoint(x, y, z);
       Radius := r;
     end;
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;
@@ -355,7 +355,7 @@ begin
     elem := dyna.AddNewElement(TGLODEElementBase);
   if elem <> nil then
   begin  
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;
@@ -384,7 +384,7 @@ begin
       Radius := r;
       Length := len;
     end;
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;
@@ -412,7 +412,7 @@ begin
       Radius := r;
       Length := len;
     end;
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;
@@ -442,7 +442,7 @@ begin
       Vertices := TGLFreeform(o).MeshObjects.Items[m].ExtractTriangles;
       Indices := BuildVectorCountOptimizedIndices(Vertices);
     end;
-    result := Integer(elem);
+    result := ObjToReal(elem);
     Exit;
   end;
   result := 0.0;

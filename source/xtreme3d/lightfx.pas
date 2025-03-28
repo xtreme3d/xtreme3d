@@ -5,6 +5,6 @@ var
 begin
   objct := TGLBaseSceneObject(RealToPtr(obj));
   fx := GetOrCreateLightFX(objct);
-  result := PtrToReal(fx);
+  result := ObjToReal(fx);
 end;
 

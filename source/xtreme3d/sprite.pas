@@ -9,7 +9,7 @@ begin
   GLHUDSprite1.SetSize(w, h);
   GLHUDSprite1.Material.MaterialLibrary:=matlib;
   GLHUDSprite1.Material.LibMaterialName:=StrConv(mtrl);
-  result:=Integer(GLHUDSprite1);
+  result:=ObjToReal(GLHUDSprite1);
 end;
 
 function HUDSpriteGetMouseOver(sprite, viewer: real): real; cdecl;
@@ -63,7 +63,7 @@ begin
   GLSprite1.SetSize(w, h);
   GLSprite1.Material.MaterialLibrary:=matlib;
   GLSprite1.Material.LibMaterialName:=StrConv(mtrl);
-  result:=Integer(GLSprite1);
+  result:=ObjToReal(GLSprite1);
 end;
 
 function SpriteSetSize(sprite,w,h: real): real; cdecl;
@@ -142,7 +142,7 @@ begin
   spr.UVTop := 1.0 - bottom;
   spr.UVRight := right;
   spr.UVBottom := 1.0 - top;
-  result := Integer(spr);
+  result := ObjToReal(spr);
 end;
 
 function HUDSpriteCreateEx(w, h, left, top, right, bottom, parent: real): real; cdecl;
@@ -158,7 +158,7 @@ begin
   spr.UVTop := 1.0 - bottom;
   spr.UVRight := right;
   spr.UVBottom := 1.0 - top;
-  result:= Integer(spr);
+  result:= ObjToReal(spr);
 end;
 
 function SpriteSetBounds(sprite, left, top, right, bottom: real): real; cdecl;

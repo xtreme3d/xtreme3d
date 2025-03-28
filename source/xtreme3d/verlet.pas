@@ -229,71 +229,83 @@ var
   objj: TGLVerletConstraint;
 begin
   objj:=TGLVerletConstraint(RealToPtr(obj));
-  objj.Enabled:= Boolean(trunc(en));
+  objj.Enabled := Boolean(trunc(en));
   result:=1;
 end;
 
-function VerletNodeNailedDown (world,ind,bol:real): real; cdecl;
+function VerletNodeNailedDown(world,ind,bol:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].NailedDown := Boolean(trunc(bol));
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].NailedDown := Boolean(trunc(bol));
   result:=1;
 end;
 
 function VerletNodeSetPosition (world,ind,x,y,z:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].Location := AffineVectorMake(x,y,z);
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].Location := AffineVectorMake(x,y,z);
   result:=1;
 end;
 
 function VerletNodeSetRadius (world,ind,rad:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].Radius := rad;
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].Radius := rad;
   result:=1;
 end;
 
 function VerletNodeSetFriction (world,ind,fr:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].Friction := fr;
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].Friction := fr;
   result:=1;
 end;
 
 function VerletNodeSetWeight (world,ind,weight:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].Weight := weight;
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].Weight := weight;
   result:=1;
 end;
 
 function VerletNodeApplyFriction (world,ind,fr,depth,x,y,z:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
+  nodeIndex: Integer;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  ver.Nodes.Items[trunc(ind)].ApplyFriction(fr,depth,AffineVectorMake(x,y,z));
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  nodeIndex := trunc(ind);
+  vworld.Nodes.Items[nodeIndex].ApplyFriction(fr,depth,AffineVectorMake(x,y,z));
   result:=1;
 end;
 
 function VerletAirResistanceCreate (world,Magnitude,Chaos:real): real; cdecl;
 var
-  ver: TGLVerletWorld;
+  vworld: TGLVerletWorld;
   air: TGLVerletAirResistance;
 begin
-  ver:=TGLVerletWorld(RealToPtr(world));
-  air:= TGLVerletAirResistance.Create(ver);
+  vworld:=TGLVerletWorld(RealToPtr(world));
+  air:= TGLVerletAirResistance.Create(vworld);
   air.WindDirection := AffineVectorMake(1,0,0);
   air.WindMagnitude:=Magnitude;
   air.WindChaos:=Chaos; 
@@ -329,35 +341,35 @@ end;
 
 function VerletConstraintGetCount (wr:real): real; cdecl;
 var
-  world: TGLVerletWorld;
+  vworld: TGLVerletWorld;
 begin
-  world:=TGLVerletWorld(RealToPtr(wr));
-  result:=world.Constraints.Count-1;
+  vworld:=TGLVerletWorld(RealToPtr(wr));
+  result:=vworld.Constraints.Count-1;
 end;
 
 function VerletConstraintSetSlack (wr,con,sla:real): real; cdecl;
 var
-  world: TGLVerletWorld;
+  vworld: TGLVerletWorld;
 begin
-  world:=TGLVerletWorld(RealToPtr(wr));
-  TGLVerletStick(world.Constraints[trunc(con)]).Slack := sla;
+  vworld:=TGLVerletWorld(RealToPtr(wr));
+  TGLVerletStick(vworld.Constraints[trunc(con)]).Slack := sla;
   result:=1;
 end;
 
 function VerletWorldSetSimTime (wr,tm:real): real; cdecl;
 var
-  world: TGLVerletWorld;
+  vworld: TGLVerletWorld;
 begin
-  world:=TGLVerletWorld(RealToPtr(wr));
-  world.SimTime:=tm;
+  vworld:=TGLVerletWorld(RealToPtr(wr));
+  vworld.SimTime:=tm;
   result:=1;
 end;
 
 function VerletWorldSetMaxDeltaTime (wr,tm:real): real; cdecl;
 var
-  world: TGLVerletWorld;
+  vworld: TGLVerletWorld;
 begin
-  world:=TGLVerletWorld(RealToPtr(wr));
-  world.MaxDeltaTime:=tm;
+  vworld:=TGLVerletWorld(RealToPtr(wr));
+  vworld.MaxDeltaTime:=tm;
   result:=1;
 end;

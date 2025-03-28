@@ -45,7 +45,7 @@ begin
   ffm.LightmapLibrary := t.MaterialLibrary;
   t.BuildMesh(ffm);
   ffm.BuildOctree;
-  result := Integer(ffm);
+  result := ObjToReal(ffm);
 end;
 
 function TreeSetBranchNoise(tree, noise: real): real; cdecl;

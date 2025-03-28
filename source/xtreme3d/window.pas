@@ -148,4 +148,3 @@ begin
   frm := TForm(RealToPtr(w));
   Result := integer(frm.Active);
 end;
-

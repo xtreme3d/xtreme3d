@@ -8,7 +8,7 @@ begin
     sd := TGLEarthSkyDome.CreateAsChild(scene.Objects);
   sd.Slices := trunc(slices);
   sd.Stacks := trunc(stacks);
-  result := Integer(sd);
+  result := ObjToReal(sd);
 end;
 
 function SkydomeSetOptions(skydome, fade, rotate: real): real; cdecl;

@@ -361,7 +361,7 @@ begin
   bestDistance := MaxSingle;
   res := RecursiveRaycast(object1, object2, rstart, rdir, collisionPoint, collisionNormal, bestDistance);
   if res <> nil then
-    result:=Integer(res)
+    result:=ObjToReal(res)
   else
     result:=0;
 end;
