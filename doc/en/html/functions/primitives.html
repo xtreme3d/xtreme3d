@@ -308,7 +308,7 @@
 <p><code>real PipeCreate(real division, real slices, real parent);</code></p>
 <p>Создает трубу и возвращает указатель на нее.</p>
 <ul>
-<li><code>division</code> - сведения отсутствуют</li>
+<li><code>division</code> - количество разбиений для каждого сегмента сплайна трубы</li>
 <li><code>slices</code> - задает количество ребер</li>
 <li><code>parent</code> - указатель на родителя для трубы (0 - отсутствие родителя).</li>
 </ul>
@@ -340,10 +340,10 @@
 <hr />
 <h2 id="pipesetdivision">PipeSetDivision</h2>
 <p><code>real PipeSetDivision(real pipe, real division);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Задает количество разбиений для каждого сегмента сплайна трубы. Чем выше это значение, тем меньше угловатость в изгибах трубы.</p>
 <ul>
 <li><code>pipe</code> - указатель на трубу</li>
-<li><code>division</code> - сведения отсутствуют.</li>
+<li><code>division</code> - количество разбиений.</li>
 </ul>
 <hr />
 <h2 id="pipesetslices">PipeSetSlices</h2>
