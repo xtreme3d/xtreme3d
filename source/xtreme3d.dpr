@@ -211,17 +211,17 @@ end;
 function LoadStringFromFile(const fileName: String): String;
 var
     n: Cardinal;
-	  fs: TFileStream;
+    fs: TFileStream;
 begin
     if FileStreamExists(fileName) then begin
-   	    fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
+        fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
         try
             n := fs.Size;
-   	        SetLength(Result, n);
+            SetLength(Result, n);
             if n > 0 then
-         	      fs.Read(Result[1], n);
+                fs.Read(Result[1], n);
         finally
-   	        fs.Free;
+            fs.Free;
         end;
     end
     else Result := '';
@@ -240,7 +240,7 @@ begin
     // Now check that it isn't only a substring of another extension.
     if Result then
         Result := ((ExtPos + Length(Extension) - 1)= Length(Buffer))
-                  or (Buffer[ExtPos + Length(Extension)]=' ');
+                or (Buffer[ExtPos + Length(Extension)]=' ');
     v.Buffer.RenderingContext.Deactivate;
 end;
 
