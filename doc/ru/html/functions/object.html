@@ -1,701 +1,713 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Object</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Object</H1>
-
-<A class=type>Класс: TGLBaseSceneObject</A><BR><BR>
-
-<A>Данные функции управляют любыми сценическими объектами, вне зависимости от типа. 
-<BR><HR>
-
-<A name="ObjectHide"></A>
-<H1 class=name>ObjectHide</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectHide</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Скрывает объект. Скрытые объекты не отрисовываются, однако все еще могут участвовать в алгоритмах обнаружения столкновений. 
-</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectShow"></A>
-<H1 class=name>ObjectShow</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectShow</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Показывает объект.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectIsVisible"></A>
-<H1 class=name>ObjectIsVisible</H1>
-<A class=type>boolean</A><A> = </A><A class=function>ObjectIsVisible</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину (1), если объект видимый, и ложь (0), если скрыт.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectCopy"></A>
-<H1 class=name>ObjectCopy</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCopy</A><A>( object,parent as </A><A class=type>real</A> );</A>
-<BR><A>Копирует объект, наследуя все его настройки, включая трансформацию в пространстве, Материал и т.д.</A>
-<BR><A>object - id объекта-оригинала</A>
-<BR><A>parent - id родителя для объекта-копии.</A>
-<HR>
-
-<A name="ObjectDestroy"></A>
-<H1 class=name>ObjectDestroy</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectDestroy</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Уничтожает объект. Безопасно уничтожить можно только те объекты, у которых нет потомков. Кроме того, у некоторых 
-типов объектов есть собственные функции уничтожения - в этом случае лучше использовать именно их.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectDestroyChildren"></A>
-<H1 class=name>ObjectDestroyChildren</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectDestroyChildren</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Уничтожает потомков объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectSetPosition"></A>
-<H1 class=name>ObjectSetPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetPosition</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальные координаты положения объекта в пространстве.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - координаты по трем осям.</A>
-<HR>
-
-<A name="ObjectGetPosition"></A>
-<H1 class=name>ObjectGetPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetPosition</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальные координаты положения объекта в пространстве.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetAbsolutePosition"></A>
-<H1 class=name>ObjectGetAbsolutePosition</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsolutePosition</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютные координаты положения объекта в пространстве.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectSetPositionOfObject"></A>
-<H1 class=name>ObjectSetPositionOfObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetPositionOfObject</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Синхронизирует абсолютные координаты объекта 1 с абсолютными координатами объекта 2.</A>
-<BR><A>object - id объекта 1</A>
-<BR><A>object - id объекта 2.</A>
-<HR>
-
-<A name="ObjectAlignWithObject"></A>
-<H1 class=name>ObjectAlignWithObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectAlignWithObject</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Синхронизирует абсолютный поворот объекта 1 с абсолютным поворотом объекта 2.</A>
-<BR><A>object - id объекта 1</A>
-<BR><A>object - id объекта 2.</A>
-<HR>
-
-<A name="ObjectSetPositionX"></A>
-<H1 class=name>ObjectSetPositionX</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetPositionX</A><A>( object,x as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальную координату положения объекта в пространстве по оси X.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x - координата по оси X.</A>
-<HR>
-
-<A name="ObjectSetPositionY"></A>
-<H1 class=name>ObjectSetPositionY</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetPositionY</A><A>( object,y as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальную координату положения объекта в пространстве по оси Y.</A>
-<BR><A>object - id объекта</A>
-<BR><A>y - координата по оси Y.</A>
-<HR>
-
-<A name="ObjectSetPositionZ"></A>
-<H1 class=name>ObjectSetPositionZ</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetPositionZ</A><A>( object,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальную координату положения объекта в пространстве по оси Z.</A>
-<BR><A>object - id объекта</A>
-<BR><A>z - координата по оси Z.</A>
-<HR>
-
-<A name="ObjectGetPositionX"></A>
-<H1 class=name>ObjectGetPositionX</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionX</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальную координату положения объекта в пространстве по оси X.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetPositionY"></A>
-<H1 class=name>ObjectGetPositionY</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionY</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальную координату положения объекта в пространстве по оси Y.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetPositionZ"></A>
-<H1 class=name>ObjectGetPositionZ</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetPositionZ</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальную координату положения объекта в пространстве по оси Z.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectSetAbsolutePosition"></A>
-<H1 class=name>ObjectSetAbsolutePosition</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetAbsolutePosition</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет абсолютные координаты положения объекта в пространстве.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - координаты по трем осям.</A>
-<HR>
-
-<A name="ObjectSetDirection"></A>
-<H1 class=name>ObjectSetDirection</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetDirection</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет единичный вектор локального направления объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="ObjectGetDirection"></A>
-<H1 class=name>ObjectGetDirection</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetDirection</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает единичный вектор локального направления объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectSetAbsoluteDirection"></A>
-<H1 class=name>ObjectSetAbsoluteDirection</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetAbsoluteDirection</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет единичный вектор абсолютного направления объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="ObjectGetAbsoluteDirection"></A>
-<H1 class=name>ObjectGetAbsoluteDirection</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteDirection</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает единичный вектор абсолютного направления объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetPitch"></A>
-<H1 class=name>ObjectGetPitch</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetPitch</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает угол локального поворота объекта по оси X.</A>
-<BR><A>object - id объекта</A>
-<HR>
-
-<A name="ObjectGetTurn"></A>
-<H1 class=name>ObjectGetTurn</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetTurn</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает угол локального поворота объекта по оси Y.</A>
-<BR><A>object - id объекта</A>
-<HR>
-
-<A name="ObjectGetRoll"></A>
-<H1 class=name>ObjectGetRoll</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetRoll</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает угол локального поворота объекта по оси Z.</A>
-<BR><A>object - id объекта</A>
-<HR>
-
-<A name="ObjectSetRotation"></A>
-<H1 class=name>ObjectSetRotation</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetRotation</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальный угол поворота объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - угол поворота по трем осям.</A>
-<HR>
-
-<A name="ObjectMove"></A>
-<H1 class=name>ObjectMove</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectMove</A><A>( object,speed as </A><A class=type>real</A> );</A>
-<BR><A>Двигает объект в направлении вектора Direction с заданной скоростью.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - линейная скорость.</A>
-<HR>
-
-<A name="ObjectLift"></A>
-<H1 class=name>ObjectLift</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectLift</A><A>( object,speed as </A><A class=type>real</A> );</A>
-<BR><A>Двигает объект в направлении вектора Up с заданной скоростью.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - линейная скорость.</A>
-<HR>
-
-<A name="ObjectTranslate"></A>
-<H1 class=name>ObjectTranslate</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectTranslate</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Перемещает объект по заданному вектору.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="ObjectStrafe"></A>
-<H1 class=name>ObjectStrafe</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectStrafe</A><A>( object,speed as </A><A class=type>real</A> );</A>
-<BR><A>Двигает объект в направлении вектора Left с заданной скоростью.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - линейная скорость.</A>
-<HR>
-
-<A name="ObjectRotate"></A>
-<H1 class=name>ObjectRotate</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRotate</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект локально на заданный угол по трем осям.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - углы по трем осям.</A>
-<HR>
-
-<A name="ObjectScale"></A>
-<H1 class=name>ObjectScale</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectScale</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет локальный масштаб объекта относительно текущего.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - масштаб по трем осям.</A>
-<HR>
-
-<A name="ObjectSetScale"></A>
-<H1 class=name>ObjectSetScale</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetScale</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Задает локальный масштаб объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - масштаб по трем осям.</A>
-<HR>
-
-<A name="ObjectGetScale"></A>
-<H1 class=name>ObjectGetScale</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetScale</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальный масштаб объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectSetUpVector"></A>
-<H1 class=name>ObjectSetUpVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetUpVector</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Задает единичный вектор Up объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="ObjectPointToObject"></A>
-<H1 class=name>ObjectPointToObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectPointToObject</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Направляет объект 1 в сторону объекта 2.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectShowAxes"></A>
-<H1 class=name>ObjectShowAxes</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectShowAxes</A><A>( object,mode as </A><A class=type>real</A> );</A>
-<BR><A>Включает или выключает отображение локальных осей объекта. Оси представлены бесконечными пунктирными 
-линиями трех цветов: красного, зеленого, синего (соблюдается соответствие RGB - XYZ).</A>
-<BR><A>object - id объекта</A>
-<BR><A>mode - <A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="ObjectGetGroundHeight"></A>
-<H1 class=name>ObjectGetGroundHeight</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetGroundHeight</A><A>( object,target as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает Y-координату наиболее высокой точки на поверхности целевого объекта (или его потомков) на абсолютной позиции XZ заданного объекта. Иными словами, высоту "земли" под объектом.</A>
-<BR><A>object - id объекта</A>
-<BR><A>target - целевой объект. В вычислениях также участвуют все потомки объекта, имеющие видимую геометрию.</A>
-<HR>
-
-<A name="ObjectSceneRaycast"></A>
-<H1 class=name>ObjectSceneRaycast</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSceneRaycast</A><A>( object,target as </A><A class=type>real</A> );</A>
-<BR><A>Выпускает луч вдоль абсолютного вектора Direction объекта и проверяет целевой объект и всех его потомков на факт пересечения с этим лучом. 
-Возвращает id первого пересеченного объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>target - целевой объект. В вычислениях также участвуют все потомки объекта, имеющие видимую геометрию.</A>
-<HR>
-
-<A name="ObjectRaycast"></A>
-<H1 class=name>ObjectRaycast</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRaycast</A><A>( object,target as </A><A class=type>real</A> );</A>
-<BR><A>Выпускает луч вдоль абсолютного вектора Direction объекта и проверяет целевой объект на факт пересечения с этим лучом. 
-Возвращает истину, если обнаружено пересечение, и ложь в противном случае.</A>
-<BR><A>object - id объекта</A>
-<BR><A>target - целевой объект.</A>
-<HR>
-
-<A name="ObjectSetMaterial"></A>
-<H1 class=name>ObjectSetMaterial</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetMaterial</A><A>( object as </A><A class=type>real</A><A>, material as </A><A class=type>string</A> );</A>
-<BR><A>Применяет к объекту материал.</A>
-<BR><A>object - id объекта</A>
-<BR><A>material - имя Материала.</A>
-<HR>
-
-<A name="ObjectGetMaterial"></A>
-<H1 class=name>ObjectGetMaterial</H1>
-<A class=type>string</A><A> = </A><A class=function>ObjectGetMaterial</A><A>( object as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает материал объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetDistance"></A>
-<H1 class=name>ObjectGetDistance</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetDistance</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает расстояние между двумя объектами.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectCheckCubeVsCube"></A>
-<H1 class=name>ObjectCheckCubeVsCube</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsCube</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ориентированными ограничивающими параллелепипедами (OBB) двух объектов.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectCheckSphereVsSphere"></A>
-<H1 class=name>ObjectCheckSphereVsSphere</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckSphereVsSphere</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ограничивающими сферами двух объектов.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectCheckSphereVsCube"></A>
-<H1 class=name>ObjectCheckSphereVsCube</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckSphereVsCube</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ограничивающей сферой объекта 1 и ориентированным ограничивающим параллелепипедом объекта 2.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectCheckCubeVsFace"></A>
-<H1 class=name>ObjectCheckCubeVsFace</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckCubeVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между ориентированным ограничивающим параллелепипедом (OBB) объекта 1 и геометрией объекта 2. Объект 2 должен быть типа freeform.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectCheckFaceVsFace"></A>
-<H1 class=name>ObjectCheckFaceVsFace</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectCheckFaceVsFace</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину при обнаружении столкновения между геометрией двух объектов. Объекты должны быть типа freeform.
-<BR>Эта проверка довольно медленная, поэтому рекомендуем оптимизировать ее использование - например, осуществлять точную проверку между геометриями объектов только в том случае, если обнаружено столкновение между их ограничивающими сферами.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectIsPointInObject"></A>
-<H1 class=name>ObjectIsPointInObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectIsPointInObject</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину, если заданная точка находится внутри объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - координаты точки.</A>
-<HR>
-
-<A name="ObjectSetCulling"></A>
-<H1 class=name>ObjectSetCulling</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetCulling</A><A>( object,mode as </A><A class=type>real</A> );</A>
-<BR><A>Включает или выключает отбор видимости объекта: если объект выходит из поля зрения, его отрисовка не происходит. 
-В некоторых случаях это может повысить производительность.</A>
-<BR><A>object - id объекта</A>
-<BR><A>mode - <A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="ObjectSetName"></A>
-<H1 class=name>ObjectSetName</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetName</A><A>( object as </A><A class=type>real</A><A>, name as </A><A class=type>string</A> );</A>
-<BR><A>Задает имя объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>name - имя.</A>
-<HR>
-
-<A name="ObjectGetName"></A>
-<H1 class=name>ObjectGetName</H1>
-<A class=type>string</A><A> = </A><A class=function>ObjectGetName</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает имя объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetClassName"></A>
-<H1 class=name>ObjectGetClassName</H1>
-<A class=type>string</A><A> = </A><A class=function>ObjectGetclassName</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает класс объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectSetTag"></A>
-<H1 class=name>ObjectSetTag</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetTag</A><A>( object,id as </A><A class=type>real</A> );</A>
-<BR><A>Задает уникальный идентификатор объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>id - идентификатор.</A>
-<HR>
-
-<A name="ObjectGetTag"></A>
-<H1 class=name>ObjectGetTag</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetTag</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает идентификатор объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetParent"></A>
-<H1 class=name>ObjectGetParent</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetParent</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает id родителя объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetChildCount"></A>
-<H1 class=name>ObjectGetChildCount</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetChildCount</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество потомков объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetChild"></A>
-<H1 class=name>ObjectGetChild</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetChild</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает id потомка объекта заданного номера.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - номер потомка.</A>
-<HR>
-
-<A name="ObjectGetIndex"></A>
-<H1 class=name>ObjectGetIndex</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetIndex</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает номер объекта в списке потомков его родителя (начиная с 0), или -1, если у объекта нет родителя.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectFindChild"></A>
-<H1 class=name>ObjectFindChild</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectFindChild</A><A>( object as </A><A class=type>real</A><A>, name as </A><A class=type>string</A> );</A>
-<BR><A>Возвращает id потомка объекта с заданным именем.</A>
-<BR><A>object - id родителя.</A>
-<BR><A>name - имя объекта.</A>
-<HR>
-
-<A name="ObjectFindByName "></A>
-<H1 class=name>ObjectFindByName </H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectFindByName </A><A>( name as </A><A class=type>string</A> );</A>
-<BR><A>Возвращает id объекта с заданным именем.</A>
-<BR><A>name - имя объекта.</A>
-<HR>
-
-<A name="ObjectGetBoundingsphereRadius"></A>
-<H1 class=name>ObjectGetBoundingsphereRadius</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetBoundingsphereRadius</A><A>( object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает радиус ограничивающей сферы объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ObjectGetAbsoluteUp"></A>
-<H1 class=name>ObjectGetAbsoluteUp</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютный единичный вектор Up объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectSetAbsoluteUp"></A>
-<H1 class=name>ObjectSetAbsoluteUp</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetAbsoluteUp</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Изменяет абсолютный единичный вектор Up объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="ObjectGetAbsoluteRight"></A>
-<H1 class=name>ObjectGetAbsoluteRight</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteRight</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютный единичный вектор Right объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetAbsoluteXVector"></A>
-<H1 class=name>ObjectGetAbsoluteXVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteXVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютный вектор X, выраженный в локальных координатах объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetAbsoluteYVector"></A>
-<H1 class=name>ObjectGetAbsoluteYVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteYVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютный вектор Y, выраженный в локальных координатах объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetAbsoluteZVector"></A>
-<H1 class=name>ObjectGetAbsoluteZVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetAbsoluteZVector</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает абсолютный вектор Z, выраженный в локальных координатах объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectGetRight"></A>
-<H1 class=name>ObjectGetRight</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetRight</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальный единичный вектор Right объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectMoveChildUp"></A>
-<H1 class=name>ObjectMoveChildUp</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectMoveChildUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сдвигает потомка объекта вверх в списке.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс потомка.</A>
-<HR>
-
-<A name="ObjectMoveChildDown"></A>
-<H1 class=name>ObjectMoveChildDown</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectMoveChildDown</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Сдвигает потомка объекта вниз в списке.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс потомка.</A>
-<HR>
-
-<A name="ObjectSetParent"></A>
-<H1 class=name>ObjectSetParent</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetParent</A><A>( object,parent as </A><A class=type>real</A> );</A>
-<BR><A>Делает объект потомком другого объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="ObjectRemoveChild"></A>
-<H1 class=name>ObjectRemoveChild</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRemoveChild</A><A>( object,child,keepchildren as </A><A class=type>real</A> );</A>
-<BR><A>Удаляет потомка объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>child - id потомка</A>
-<BR><A>keepchildren - указывает, нужно ли скопировать потомков удаляемого объекта его родителю (в противном случае потомки также будут удалены).</A>
-<HR>
-
-<A name="ObjectMoveObjectAround"></A>
-<H1 class=name>ObjectMoveObjectAround</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectMoveObjectAround</A><A>( object1,object2,x,y as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект 1 вокруг объекта 2.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2</A>
-<BR><A>x,y - углы поворота по осям X и Y.</A>
-<HR>
-
-<A name="ObjectPitch"></A>
-<H1 class=name>ObjectPitch</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectPitch</A><A>( object1,angle as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект локально по оси Х.</A>
-<BR><A>object - id объекта</A>
-<BR><A>angle - угол поворота.</A>
-<HR>
-
-<A name="ObjectTurn"></A>
-<H1 class=name>ObjectTurn</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectTurn</A><A>( object1,angle as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект локально по оси Y.</A>
-<BR><A>object - id объекта</A>
-<BR><A>angle - угол поворота.</A>
-<HR>
-
-<A name="ObjectRoll"></A>
-<H1 class=name>ObjectRoll</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRoll</A><A>( object1,angle as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект локально по оси Z.</A>
-<BR><A>object - id объекта</A>
-<BR><A>angle - угол поворота.</A>
-<HR>
-
-<A name="ObjectGetUp"></A>
-<H1 class=name>ObjectGetUp</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectGetUp</A><A>( object,ind as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает локальный единичный вектор Up объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс координаты (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="ObjectRotateAbsolute"></A>
-<H1 class=name>ObjectRotateAbsolute</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRotateAbsolute</A><A>( object,x,y,z as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект абсолютно на заданный угол по трем осям.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - углы по трем осям.</A>
-<HR>
-
-<A name="ObjectRotateAbsoluteVector"></A>
-<H1 class=name>ObjectRotateAbsoluteVector</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectRotateAbsoluteVector</A><A>( object,x,y,z,angle as </A><A class=type>real</A> );</A>
-<BR><A>Поворачивает объект абсолютно на заданный угол вокруг заданной оси.</A>
-<BR><A>object - id объекта</A>
-<BR><A>x,y,z - вектор оси поворота</A>
-<BR><A>angle - угол поворота.</A>
-<HR>
-
-<A name="ObjectInFrustrum"></A>
-<H1 class=name>ObjectInFrustrum</H1>
-<A class=type>boolean</A><A> = </A><A class=function>ObjectInFrustrum</A><A>( object,viewer as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает истину, если объект находится в поле зрения (попадает в пирамиду видимости) заданного вида, и ложь в противном случае.</A>
-<BR><A>object - id объекта</A>
-<BR><A>viewer - id вида.</A>
-<HR>
-
-<A name="ObjectSetMatrixColumn"></A>
-<H1 class=name>ObjectSetMatrixColumn</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectSetMatrixColumn</A><A>( object,ind,x,y,z,w as </A><A class=type>real</A> );</A>
-<BR><A>Заполняет столбец локальной матрицы трансформации объекта. Вызвав эту функцию для каждого из 4 столбцов, можно задать произвольную матрицу трансформации.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс столбца (0, 1, 2 или 3)</A>
-<BR><A>x,y,z,w - значения элементов столбца.</A>
-<HR>
-
-<A name="ObjectExportMatrix"></A>
-<H1 class=name>ObjectExportMatrix</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectExportMatrix</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Копирует локальную матрицу трансформации объекта 1 в локальную матрицу трансформации объекта 2.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectExportAbsoluteMatrix"></A>
-<H1 class=name>ObjectExportAbsoluteMatrix</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectExportAbsoluteMatrix</A><A>( object1,object2 as </A><A class=type>real</A> );</A>
-<BR><A>Копирует абсолютную матрицу трансформации объекта 1 в абсолютную матрицу трансформации объекта 2.</A>
-<BR><A>object1 - id объекта 1</A>
-<BR><A>object2 - id объекта 2.</A>
-<HR>
-
-<A name="ObjectIgnoreDepthBuffer"></A>
-<H1 class=name>ObjectIgnoreDepthBuffer</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectIgnoreDepthBuffer</A><A>( object,mode as </A><A class=type>real</A> );</A>
-<BR><A>При включении этой опции объект не учитывает буфер глубины при рендеринге - то есть, всегда рендерится поверх предыдущих данных в буфере кадра.</A>
-<BR><A>object1 - id объекта</A>
-<BR><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="ObjectIsPicked"></A>
-<H1 class=name>ObjectIsPicked</H1>
-<A class=type>real</A><A> = </A><A class=function>ObjectIsPicked</A><A>( object,viewer,x,y as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает 1, если точка по заданным координатам принадлежит объекту. Функция аналогична ViewerGetPickedObject, но, можно сказать, выполняет обратную задачу.</A>
-<BR><A>object1 - id объекта</A>
-<BR><A>viewer</A> - id вида</A>
-<BR><A>x,y</A> - координаты точки.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Object</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="object">Object</h1>
+<p>Данные функции управляют любыми сценическими объектами, вне зависимости от типа.</p>
+<hr />
+<h2 id="objecthide">ObjectHide</h2>
+<p><code>real ObjectHide(real object);</code></p>
+<p>Скрывает объект. Скрытые объекты не отрисовываются, однако могут участвовать в алгоритмах обнаружения столкновений.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectshow">ObjectShow</h2>
+<p><code>real ObjectShow(real object);</code></p>
+<p>Показывает объект.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectisvisible">ObjectIsVisible</h2>
+<p><code>boolean ObjectIsVisible(real object);</code></p>
+<p>Возвращает истину (1), если объект видимый, и ложь (0), если скрыт.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectcopy">ObjectCopy</h2>
+<p><code>real ObjectCopy(real object, real parent);</code></p>
+<p>Копирует объект, наследуя все его настройки, включая трансформацию в пространстве, материал и т. д.</p>
+<ul>
+<li><code>object</code> - указатель на объект-оригинал</li>
+<li><code>parent</code> - указатель на родителя для объекта-копии.</li>
+</ul>
+<hr />
+<h2 id="objectdestroy">ObjectDestroy</h2>
+<p><code>real ObjectDestroy(real object);</code></p>
+<p>Уничтожает объект. Безопасно уничтожить можно только те объекты, у которых нет потомков. Кроме того, у некоторых типов объектов есть собственные функции уничтожения - в этом случае лучше использовать именно их. </p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectdestroychildren">ObjectDestroyChildren</h2>
+<p><code>real ObjectDestroyChildren(real object);</code></p>
+<p>Уничтожает потомков объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectsetposition">ObjectSetPosition</h2>
+<p><code>real ObjectSetPosition(real object, real x, real y, real z);</code></p>
+<p>Изменяет локальные координаты положения объекта в пространстве.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectgetposition">ObjectGetPosition</h2>
+<p><code>real ObjectGetPosition(real object, real ind);</code></p>
+<p>Возвращает локальные координаты положения объекта в пространстве.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetabsoluteposition">ObjectGetAbsolutePosition</h2>
+<p><code>real ObjectGetAbsolutePosition(real object, real ind);</code></p>
+<p>Возвращает абсолютные координаты положения объекта в пространстве.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectsetpositionofobject">ObjectSetPositionOfObject</h2>
+<p><code>real ObjectSetPositionOfObject(real object1, real object2);</code></p>
+<p>Синхронизирует абсолютные координаты объекта 1 с абсолютными координатами объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectalignwithobject">ObjectAlignWithObject</h2>
+<p><code>real ObjectAlignWithObject(real object1, real object2);</code></p>
+<p>Синхронизирует абсолютный поворот объекта 1 с абсолютным поворотом объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectsetpositionx">ObjectSetPositionX</h2>
+<p><code>real ObjectSetPositionX(real object, real x);</code></p>
+<p>Изменяет локальную координату положения объекта в пространстве по оси X.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code> - координата по оси X.</li>
+</ul>
+<hr />
+<h2 id="objectsetpositiony">ObjectSetPositionY</h2>
+<p><code>real ObjectSetPositionY(real object, real y);</code></p>
+<p>Изменяет локальную координату положения объекта в пространстве по оси Y.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>y</code> - координата по оси Y.</li>
+</ul>
+<hr />
+<h2 id="objectsetpositionz">ObjectSetPositionZ</h2>
+<p><code>real ObjectSetPositionZ(real object, real z);</code></p>
+<p>Изменяет локальную координату положения объекта в пространстве по оси Z.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>z</code> - координата по оси Z.</li>
+</ul>
+<hr />
+<h2 id="objectgetpositionx">ObjectGetPositionX</h2>
+<p><code>real ObjectGetPositionX(real object);</code></p>
+<p>Возвращает локальную координату положения объекта в пространстве по оси X.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetpositiony">ObjectGetPositionY</h2>
+<p><code>real ObjectGetPositionY(real object);</code></p>
+<p>Возвращает локальную координату положения объекта в пространстве по оси Y.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetpositionz">ObjectGetPositionZ</h2>
+<p><code>real ObjectGetPositionZ(real object);</code></p>
+<p>Возвращает локальную координату положения объекта в пространстве по оси Z.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectsetabsoluteposition">ObjectSetAbsolutePosition</h2>
+<p><code>real ObjectSetAbsolutePosition(real object, real x, real y, real z);</code></p>
+<p>Изменяет абсолютные координаты положения объекта в пространстве.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectsetdirection">ObjectSetDirection</h2>
+<p><code>real ObjectSetDirection(real object, real x, real y, real z);</code></p>
+<p>Изменяет единичный вектор локального направления объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="objectgetdirection">ObjectGetDirection</h2>
+<p><code>real ObjectGetDirection(real object, real ind);</code></p>
+<p>Возвращает единичный вектор локального направления объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс оси (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectsetabsolutedirection">ObjectSetAbsoluteDirection</h2>
+<p><code>real ObjectSetAbsoluteDirection(real object, real x, real y, real z);</code></p>
+<p>Изменяет единичный вектор абсолютного направления объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="objectgetabsolutedirection">ObjectGetAbsoluteDirection</h2>
+<p><code>real ObjectGetAbsoluteDirection(real object, real ind);</code></p>
+<p>Возвращает единичный вектор абсолютного направления объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetpitch">ObjectGetPitch</h2>
+<p><code>real ObjectGetPitch(real object);</code></p>
+<p>Возвращает угол локального поворота объекта по оси X.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetturn">ObjectGetTurn</h2>
+<p><code>real ObjectGetTurn(real object);</code></p>
+<p>Возвращает угол локального поворота объекта по оси Y.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetroll">ObjectGetRoll</h2>
+<p><code>real ObjectGetRoll(real object);</code></p>
+<p>Возвращает угол локального поворота объекта по оси Z.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectsetrotation">ObjectSetRotation</h2>
+<p><code>real ObjectSetRotation(real object, real x, real y, real z);</code></p>
+<p>Изменяет локальный угол поворота объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - угол поворота по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectmove">ObjectMove</h2>
+<p><code>real ObjectMove(real object, real speed);</code></p>
+<p>Двигает объект в направлении вектора Direction с заданной скоростью.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - линейная скорость.</li>
+</ul>
+<hr />
+<h2 id="objectlift">ObjectLift</h2>
+<p><code>real ObjectLift(real object, real speed);</code></p>
+<p>Двигает объект в направлении вектора Up с заданной скоростью.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - линейная скорость.</li>
+</ul>
+<hr />
+<h2 id="objecttranslate">ObjectTranslate</h2>
+<p><code>real ObjectTranslate(real object, real x, real y, real z);</code></p>
+<p>Перемещает объект по заданному вектору.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="objectstrafe">ObjectStrafe</h2>
+<p><code>real ObjectStrafe(real object, real speed);</code></p>
+<p>Двигает объект в направлении вектора Left с заданной скоростью.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - линейная скорость.</li>
+</ul>
+<hr />
+<h2 id="objectrotate">ObjectRotate</h2>
+<p><code>real ObjectRotate(real object, real x, real y, real z);</code></p>
+<p>Поворачивает объект локально на заданный угол по трем осям.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - углы по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectscale">ObjectScale</h2>
+<p><code>real ObjectScale(real object, real x, real y, real z);</code></p>
+<p>Изменяет локальный масштаб объекта относительно текущего.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - масштаб по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectsetscale">ObjectSetScale</h2>
+<p><code>real ObjectSetScale(real object, real x, real y, real z);</code></p>
+<p>Задает локальный масштаб объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - масштаб по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectgetscale">ObjectGetScale</h2>
+<p><code>real ObjectGetScale(real object, real ind);</code></p>
+<p>Возвращает локальный масштаб объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты вектора (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectsetupvector">ObjectSetUpVector</h2>
+<p><code>real ObjectSetUpVector(real object, real x, real y, real z);</code></p>
+<p>Задает единичный вектор Up объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="objectpointtoobject">ObjectPointToObject</h2>
+<p><code>real ObjectPointToObject(real object1, real object2);</code></p>
+<p>Направляет объект 1 в сторону объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectshowaxes">ObjectShowAxes</h2>
+<p><code>real ObjectShowAxes(real object, real mode);</code></p>
+<p>Включает или выключает отображение локальных осей объекта. Оси представлены бесконечными пунктирными линиями трех цветов: красного, зеленого, синего (соблюдается соответствие RGB - XYZ).</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="objectgetgroundheight">ObjectGetGroundHeight</h2>
+<p><code>real ObjectGetGroundHeight(real object, real target);</code></p>
+<p>Возвращает Y-координату наиболее высокой точки на поверхности целевого объекта (или его потомков) на абсолютной позиции XZ заданного объекта. Иными словами, высоту "земли" под объектом.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>target</code> - целевой объект. В вычислениях также участвуют все потомки объекта, имеющие видимую геометрию.</li>
+</ul>
+<hr />
+<h2 id="objectsceneraycast">ObjectSceneRaycast</h2>
+<p><code>real ObjectSceneRaycast(real object, real target);</code></p>
+<p>Выпускает луч вдоль абсолютного вектора Direction объекта и проверяет целевой объект и всех его потомков на факт пересечения с этим лучом. Возвращает id первого пересеченного объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>target</code> - целевой объект. В вычислениях также участвуют все потомки объекта, имеющие видимую геометрию.</li>
+</ul>
+<hr />
+<h2 id="objectraycast">ObjectRaycast</h2>
+<p><code>real ObjectRaycast(real object, real target);</code></p>
+<p>Выпускает луч вдоль абсолютного вектора Direction объекта и проверяет целевой объект на факт пересечения с этим лучом. Возвращает истину, если обнаружено пересечение, и ложь в противном случае.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>target</code> - целевой объект.</li>
+</ul>
+<hr />
+<h2 id="objectsetmaterial">ObjectSetMaterial</h2>
+<p><code>real ObjectSetMaterial(real object, string material);</code></p>
+<p>Применяет к объекту материал.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="objectgetmaterial">ObjectGetMaterial</h2>
+<p><code>string ObjectGetMaterial(real object);</code></p>
+<p>Возвращает материал объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetdistance">ObjectGetDistance</h2>
+<p><code>real ObjectGetDistance(real object1, real object2);</code></p>
+<p>Возвращает расстояние между двумя объектами.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectcheckcubevscube">ObjectCheckCubeVsCube</h2>
+<p><code>real ObjectCheckCubeVsCube(real object1, real object2);</code></p>
+<p>Возвращает истину при обнаружении столкновения между ориентированными ограничивающими параллелепипедами (OBB) двух объектов.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectcheckspherevssphere">ObjectCheckSphereVsSphere</h2>
+<p><code>real ObjectCheckSphereVsSphere(real object1, real object2);</code></p>
+<p>Возвращает истину при обнаружении столкновения между ограничивающими сферами двух объектов.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectcheckspherevscube">ObjectCheckSphereVsCube</h2>
+<p><code>real ObjectCheckSphereVsCube(real object1, real object2);</code></p>
+<p>Возвращает истину при обнаружении столкновения между ограничивающей сферой объекта 1 и ориентированным ограничивающим параллелепипедом объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectcheckcubevsface">ObjectCheckCubeVsFace</h2>
+<p><code>real ObjectCheckCubeVsFace(real object1, real object2);</code></p>
+<p>Возвращает истину при обнаружении столкновения между ориентированным ограничивающим параллелепипедом (OBB) объекта 1 и геометрией объекта 2. Объект 2 должен быть типа freeform.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectcheckfacevsface">ObjectCheckFaceVsFace</h2>
+<p><code>real ObjectCheckFaceVsFace(real object1, real object2);</code></p>
+<p>Возвращает истину при обнаружении столкновения между геометрией двух объектов. Объекты должны быть типа freeform.</p>
+<p>Эта проверка довольно медленная, поэтому рекомендуем оптимизировать ее использование - например, осуществлять точную проверку между геометриями объектов только в том случае, если обнаружено столкновение между их ограничивающими сферами.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectispointinobject">ObjectIsPointInObject</h2>
+<p><code>real ObjectIsPointInObject(real object, real x, real y, real z);</code></p>
+<p>Возвращает истину, если заданная точка находится внутри объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты точки.</li>
+</ul>
+<hr />
+<h2 id="objectsetculling">ObjectSetCulling</h2>
+<p><code>real ObjectSetCulling(real object, real mode);</code></p>
+<p>Включает или выключает отбор видимости объекта: если объект выходит из поля зрения, его отрисовка не происходит. В некоторых случаях это может повысить производительность.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="objectsetname">ObjectSetName</h2>
+<p><code>real ObjectSetName(real object, string name);</code></p>
+<p>Задает имя объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>name</code> - имя.</li>
+</ul>
+<hr />
+<h2 id="objectgetname">ObjectGetName</h2>
+<p><code>string ObjectGetName(real object);</code></p>
+<p>Возвращает имя объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetclassname">ObjectGetClassName</h2>
+<p><code>string ObjectGetclassName(real object);</code></p>
+<p>Возвращает класс объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectsettag">ObjectSetTag</h2>
+<p><code>real ObjectSetTag(real object, real id);</code></p>
+<p>Задает уникальный идентификатор объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>id</code> - идентификатор.</li>
+</ul>
+<hr />
+<h2 id="objectgettag">ObjectGetTag</h2>
+<p><code>real ObjectGetTag(real object);</code></p>
+<p>Возвращает идентификатор объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetparent">ObjectGetParent</h2>
+<p><code>real ObjectGetParent(real object);</code></p>
+<p>Возвращает указатель на родителя объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetchildcount">ObjectGetChildCount</h2>
+<p><code>real ObjectGetChildCount(real object);</code></p>
+<p>Возвращает количество потомков объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetchild">ObjectGetChild</h2>
+<p><code>real ObjectGetChild(real object, real ind);</code></p>
+<p>Возвращает id потомка объекта заданного номера.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - номер потомка.</li>
+</ul>
+<hr />
+<h2 id="objectgetindex">ObjectGetIndex</h2>
+<p><code>real ObjectGetIndex(real object);</code></p>
+<p>Возвращает номер объекта в списке потомков его родителя (начиная с 0), или -1, если у объекта нет родителя.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectfindchild">ObjectFindChild</h2>
+<p><code>real ObjectFindChild(real object, string name);</code></p>
+<p>Возвращает указатель на потомка объекта с заданным именем.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>name</code> - имя потомка.</li>
+</ul>
+<hr />
+<h2 id="objectfindbyname">ObjectFindByName</h2>
+<p><code>real ObjectFindByName(string name);</code></p>
+<p>Возвращает id объекта с заданным именем.</p>
+<ul>
+<li><code>name</code> - имя потомка.</li>
+</ul>
+<hr />
+<h2 id="objectgetboundingsphereradius">ObjectGetBoundingsphereRadius</h2>
+<p><code>real ObjectGetBoundingsphereRadius(real object);</code></p>
+<p>Возвращает радиус ограничивающей сферы объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectgetabsoluteup">ObjectGetAbsoluteUp</h2>
+<p><code>real ObjectGetAbsoluteUp(real object, real ind);</code></p>
+<p>Возвращает абсолютный единичный вектор Up объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectsetabsoluteup">ObjectSetAbsoluteUp</h2>
+<p><code>real ObjectSetAbsoluteUp(real object, real x, real y, real z);</code></p>
+<p>Изменяет абсолютный единичный вектор Up объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="objectgetabsoluteright">ObjectGetAbsoluteRight</h2>
+<p><code>real ObjectGetAbsoluteRight(real object, real ind);</code></p>
+<p>Возвращает абсолютный единичный вектор Right объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetabsolutexvector">ObjectGetAbsoluteXVector</h2>
+<p><code>real ObjectGetAbsoluteXVector(real object, real ind);</code></p>
+<p>Возвращает абсолютный вектор X, выраженный в локальных координатах объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetabsoluteyvector">ObjectGetAbsoluteYVector</h2>
+<p><code>real ObjectGetAbsoluteYVector(real object, real ind);</code></p>
+<p>Возвращает абсолютный вектор Y, выраженный в локальных координатах объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetabsolutezvector">ObjectGetAbsoluteZVector</h2>
+<p><code>real ObjectGetAbsoluteZVector(real object, real ind);</code></p>
+<p>Возвращает абсолютный вектор Z, выраженный в локальных координатах объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectgetright">ObjectGetRight</h2>
+<p><code>real ObjectGetRight(real object, real ind);</code></p>
+<p>Возвращает локальный единичный вектор Right объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс оси (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectmovechildup">ObjectMoveChildUp</h2>
+<p><code>real ObjectMoveChildUp(real object, real ind);</code></p>
+<p>Сдвигает потомка объекта вверх в списке.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс потомка.</li>
+</ul>
+<hr />
+<h2 id="objectmovechilddown">ObjectMoveChildDown</h2>
+<p><code>real ObjectMoveChildDown(real object, real ind);</code></p>
+<p>Сдвигает потомка объекта вниз в списке.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс потомка.</li>
+</ul>
+<hr />
+<h2 id="objectsetparent">ObjectSetParent</h2>
+<p><code>real ObjectSetParent(real object, real parent);</code></p>
+<p>Делает объект потомком другого объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="objectremovechild">ObjectRemoveChild</h2>
+<p><code>real ObjectRemoveChild(real object, real child, real keepchildren);</code></p>
+<p>Удаляет потомка объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>child</code> - указатель на потомка</li>
+<li><code>keepchildren</code> - определяет, нужно ли скопировать потомков удаляемого объекта его родителю (в противном случае потомки также будут удалены).</li>
+</ul>
+<hr />
+<h2 id="objectmoveobjectaround">ObjectMoveObjectAround</h2>
+<p><code>real ObjectMoveObjectAround(real object1, real object2, real x, real y);</code></p>
+<p>Поворачивает объект 1 вокруг объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2</li>
+<li><code>x</code>, <code>y</code> - углы поворота по осям X и Y.</li>
+</ul>
+<hr />
+<h2 id="objectpitch">ObjectPitch</h2>
+<p><code>real ObjectPitch(real object, real angle);</code></p>
+<p>Поворачивает объект локально по оси Х.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>angle</code> - угол поворота.</li>
+</ul>
+<hr />
+<h2 id="objectturn">ObjectTurn</h2>
+<p><code>real ObjectTurn(real object, real angle);</code></p>
+<p>Поворачивает объект локально по оси Y.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>angle</code> - угол поворота.</li>
+</ul>
+<hr />
+<h2 id="objectroll">ObjectRoll</h2>
+<p><code>real ObjectRoll(real object1, real angle);</code></p>
+<p>Поворачивает объект локально по оси Z.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>angle</code> - угол поворота.</li>
+</ul>
+<hr />
+<h2 id="objectgetup">ObjectGetUp</h2>
+<p><code>real ObjectGetUp(real object, real ind);</code></p>
+<p>Возвращает локальный единичный вектор Up объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс координаты (0 = X, 1 = Y, 2 = Z).</li>
+</ul>
+<hr />
+<h2 id="objectrotateabsolute">ObjectRotateAbsolute</h2>
+<p><code>real ObjectRotateAbsolute(real object, real x, real y, real z);</code></p>
+<p>Поворачивает объект абсолютно на заданный угол по трем осям.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - углы по трем осям.</li>
+</ul>
+<hr />
+<h2 id="objectrotateabsolutevector">ObjectRotateAbsoluteVector</h2>
+<p><code>real ObjectRotateAbsoluteVector(real object, real x, real y, real z, real angle);</code></p>
+<p>Поворачивает объект абсолютно на заданный угол вокруг заданной оси.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор оси поворота</li>
+<li><code>angle</code> - угол поворота.</li>
+</ul>
+<hr />
+<h2 id="objectinfrustrum">ObjectInFrustrum</h2>
+<p><code>real ObjectInFrustrum(real object, real viewer);</code></p>
+<p>Возвращает 1 (<code>true</code>), если объект находится в поле зрения (попадает в пирамиду видимости) заданного вида, и 0 (<code>false</code>) в противном случае.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>viewer</code> - указатель вид.</li>
+</ul>
+<hr />
+<h2 id="objectsetmatrixcolumn">ObjectSetMatrixColumn</h2>
+<p><code>real ObjectSetMatrixColumn(real object, real ind, real x, real y, real z, real w);</code></p>
+<p>Заполняет столбец локальной матрицы трансформации объекта. Вызвав эту функцию для каждого из 4 столбцов, можно задать произвольную матрицу трансформации.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс столбца (0, 1, 2 или 3)</li>
+<li><code>x</code>, <code>y</code>, <code>z</code>, <code>w</code> - значения элементов столбца.</li>
+</ul>
+<hr />
+<h2 id="objectexportmatrix">ObjectExportMatrix</h2>
+<p><code>real ObjectExportMatrix(real object1, real object2);</code></p>
+<p>Копирует локальную матрицу трансформации объекта 1 в локальную матрицу трансформации объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectexportabsolutematrix">ObjectExportAbsoluteMatrix</h2>
+<p><code>real ObjectExportAbsoluteMatrix(real object1, real object2);</code></p>
+<p>Копирует абсолютную матрицу трансформации объекта 1 в абсолютную матрицу трансформации объекта 2.</p>
+<ul>
+<li><code>object1</code> - указатель на объект 1</li>
+<li><code>object2</code> - указатель на объект 2.</li>
+</ul>
+<hr />
+<h2 id="objectignoredepthbuffer">ObjectIgnoreDepthBuffer</h2>
+<p><code>real ObjectIgnoreDepthBuffer(real object, real mode);</code></p>
+<p>При включении этой опции объект не учитывает буфер глубины при рендеринге - то есть, всегда рендерится поверх предыдущих данных в буфере кадра.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="objectispicked">ObjectIsPicked</h2>
+<p><code>real ObjectIsPicked(real object, real viewer, real x, real y);</code></p>
+<p>Возвращает 1, если точка по заданным координатам принадлежит объекту. Функция аналогична ViewerGetPickedObject, но, можно сказать, выполняет обратную задачу.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>viewer</code> - указатель на вид</li>
+<li><code>x</code>, <code>y</code> - координаты точки.</li>
+</ul>
+<hr />
+<h2 id="objectnotifychange">ObjectNotifyChange</h2>
+<p><code>real ObjectNotifyChange(real object);</code></p>
+<p>Уведомляет объект о том, что его свойства или структура изменились.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectstructurechanged">ObjectStructureChanged</h2>
+<p><code>real ObjectStructureChanged(real object);</code></p>
+<p>Помечает объект как объект с измененной структурой потомков. Это необходимо для того, чтобы перестроить список отображения в некоторых особых сценариях рендеринга - например, при использовании <code>DummycubeAmalgamate</code>.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="objectclearstructurechanged">ObjectClearStructureChanged</h2>
+<p><code>real ObjectClearStructureChanged(real object);</code></p>
+<p>Удаляет пометку об измененной структуре, ранее добавленную функцией <code>ObjectStructureChanged</code>.</p>
+<ul>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+</body>
+</html>

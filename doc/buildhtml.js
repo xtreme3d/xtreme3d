@@ -43,6 +43,7 @@ const functions =
     { title: "Actor", inFilename: `markdown/${lang}/functions/actor.md`, outFilename: `${lang}/html/functions/actor.html` },
     { title: "Freeform", inFilename: `markdown/${lang}/functions/freeform.md`, outFilename: `${lang}/html/functions/freeform.html` },
     { title: "Terrain", inFilename: `markdown/${lang}/functions/terrain.md`, outFilename: `${lang}/html/functions/terrain.html` },
+    { title: "Object", inFilename: `markdown/${lang}/functions/object.md`, outFilename: `${lang}/html/functions/object.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` }
