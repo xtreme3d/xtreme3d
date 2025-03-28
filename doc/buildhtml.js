@@ -1,9 +1,15 @@
 const fs = require("fs");
 const showdown = require("showdown");
+const showdownHighlight = require("showdown-highlight");
 const Mustache = require("mustache");
 const iconv = require("iconv-lite");
 
-const mdConverter = new showdown.Converter();
+const mdConverter = new showdown.Converter({
+    extensions: [showdownHighlight({
+        pre: true, // Whether to add the classes to the <pre> tag, default is false
+        auto_detection: true // Whether to use hljs' auto language detection, default is true
+    })]
+});
 const pageTemplate = fs.readFileSync("template.html", "utf8");
 
 function generatePage(title, markdown, language, encoding="utf8")
@@ -19,7 +25,7 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "ru"; // TODO: make this command line argument
+const lang = "en"; // TODO: make this command line argument
 
 const functions =
 [
@@ -36,8 +42,10 @@ const functions =
     { title: "Primitives", inFilename: `markdown/${lang}/functions/primitives.md`, outFilename: `${lang}/html/functions/primitives.html` },
     { title: "Actor", inFilename: `markdown/${lang}/functions/actor.md`, outFilename: `${lang}/html/functions/actor.html` },
     { title: "Freeform", inFilename: `markdown/${lang}/functions/freeform.md`, outFilename: `${lang}/html/functions/freeform.html` },
+    { title: "Terrain", inFilename: `markdown/${lang}/functions/terrain.md`, outFilename: `${lang}/html/functions/terrain.html` },
     
-    { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` }
+    { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
+    { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` }
 ];
 
 const outputEncoding = "win1251";

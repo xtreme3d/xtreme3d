@@ -1,186 +1,179 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Terrain</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Terrain</H1>
-
-<A class=type>Класс: TGLBitmapHDS, TGLTerrainRenderer</A><BR><BR>
-
-<A>Xtreme3D поддерживает отрисовку ландшафта (terrain), состоящего из сетки прямоугольников - тайлов. При рендеринге ландшафта учитывается 
-расстояние от камеры для сокращения количества полигонов на удаленных участках (LOD). Этот процесс называется тесселяцией. 
-<BR>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, темные - снижение. HDS может быть загружена из файла изображения. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). В противном случае ландшафт будет выглядеть ступенчатым.
-<BR><HR>
-
-<A name="BmpHDSCreate"></A>
-<H1 class=name>BmpHDSCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSCreate</A><A>( filename as </A><A class=type>string</A><A> );</A>
-<BR><A>Загружает HDS из изображения и возвращает его id.</A>
-<BR><A>filename - имя файла.</A>
-<HR>
-
-<A name="BmpHDSCreateEmpty"></A>
-<H1 class=name>BmpHDSCreateEmpty</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSCreateEmpty</A><A>( width,height,fillvalue as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает в памяти новый HDS и возвращает его id.</A>
-<BR><A>width,height - ширина и высота HDS. Должны быть степенями двойки</A>
-<BR><A>fillvalue - значение начальной высоты, которым заполняется HDS (от 0.0 до 1.0). Ландшафт генерируется так, что высота 0.5 соответствует нулевой плоскости.</A>
-<HR>
-
-<A name="BmpHDSSetInfiniteWarp"></A>
-<H1 class=name>BmpHDSSetInfiniteWarp</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSSetInfiniteWarp</A><A>( hds,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает повторение HDS. При включенном повторении ландшафт будет бесконечным.</A>
-<BR><A>hds - id HDS</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="BmpHDSInvert"></A>
-<H1 class=name>BmpHDSInvert</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSInvert</A><A>( hds as </A><A class=type>real</A><A> );</A>
-<BR><A>Инвертирует HDS (обращает высоты).</A>
-<BR><A>hds - id HDS</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="BmpHDSSetHeight"></A>
-<H1 class=name>BmpHDSSetHeight</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSSetHeight</A><A>( hds,x,y,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает высоту в указанном пикселе HDS.</A>
-<BR><A>hds - id HDS</A>
-<BR><A>x,y - координаты пикселя</A>
-<BR><A>height - значение высоты (от 0.0 до 1.0).</A>
-<HR>
-
-<A name="BmpHDSGetHeight"></A>
-<H1 class=name>BmpHDSGetHeight</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSGetHeight</A><A>( hds,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает высоту в указанном пикселе HDS.</A>
-<BR><A>hds - id HDS</A>
-<BR><A>x,y - координаты пикселя.</A>
-<HR>
-
-<A name="BmpHDSSave"></A>
-<H1 class=name>BmpHDSSave</H1>
-<A class=type>real</A><A> = </A><A class=function>BmpHDSSave</A><A>( hds as </A><A class=type>real</A><A>, filename as </A><A class=type>string</A><A> );</A>
-<BR><A>Сохраняет HDS в файл BMP.</A>
-<BR><A>hds - id HDS</A>
-<BR><A>filename - имя файла.</A>
-<HR>
-
-<A name="TerrainCreate"></A>
-<H1 class=name>TerrainCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainCreate</A><A>( parent as </A><A class=type>real</A> );</A>
-<BR><A>Создает новый ландшафт и возвращает его id.</A>
-<BR><A>parent - id родителя для ландшафта (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="TerrainSetHeightData"></A>
-<H1 class=name>TerrainSetHeightData</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetHeightData</A><A>( terrain,hds as </A><A class=type>real</A> );</A>
-<BR><A>Применяет HDS к ландшафту.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>hds - id HDS.</A>
-<HR>
-
-<A name="TerrainSetTileSize"></A>
-<H1 class=name>TerrainSetTileSize</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetTileSize</A><A>( terrain,size as </A><A class=type>real</A> );</A>
-<BR><A>Задает размер тайла.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>size - размер тайла (значение по умолчанию: 16).</A>
-<HR>
-
-<A name="TerrainSetTilesPerTexture"></A>
-<H1 class=name>TerrainSetTilesPerTexture</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetTilesPerTexture</A><A>( terrain,tiles as </A><A class=type>real</A> );</A>
-<BR><A>Задает количество тайлов на текстуру.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>tiles - количество тайлов (значение по умолчанию: 1).</A>
-<HR>
-
-<A name="TerrainSetQualityDistance"></A>
-<H1 class=name>TerrainSetQualityDistance</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetQualityDistance</A><A>( terrain,distance as </A><A class=type>real</A> );</A>
-<BR><A>Задает расстояние от камеры, на котором детализация ландшафта начинает снижаться для повышения скорости отрисовки.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>distance - расстояние (значение по умолчанию: 0).</A>
-<HR>
-
-<A name="TerrainSetQualityStyle"></A>
-<H1 class=name>TerrainSetQualityStyle</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetQualityStyle</A><A>( terrain,hrs as </A><A class=type>real</A> );</A>
-<BR><A>Определяет метод обработки тайлов, находящихся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>. 
-Доступны следующие значения:
-<BR><A class=constant name="hrsFullGeometry">hrsFullGeometry</A><A> - осуществляется полный рендеринг (без LOD)</A>
-<BR><A class=constant name="hrsTesselated">hrsTesselated</A><A> - осуществляется одна адаптивная тесселяция (в соответствии со значением </A><A class=funclink href=../functions/terrain.htm#TerrainSetCLodPrecision>TerrainSetCLodPrecision</A><A>), 
-результат которой и используется в дальнейшем, не меняясь.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>hrs - <A class=constant>hrsFullGeometry</A><A> или </A><A class=constant>hrsTesselated</A><A> (0 и 1 соответственно).</A>
-<HR>
-
-<A name="TerrainSetMaxCLodTriangles"></A>
-<H1 class=name>TerrainSetMaxCLodTriangles</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetMaxCLodTriangles</A><A>( terrain,triangles as </A><A class=type>real</A> );</A>
-<BR><A>Задает максимально возможное количество полигонов для отдаленных участков ландшафта (CLOD). Этот лимит не затрагивает тайлы, находящиеся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>.
-<BR><A>terrain - id ландшафта</A>
-<BR><A>triangles - количество полигонов (значение по умолчанию: 65536).</A>
-<HR>
-
-<A name="TerrainSetCLodPrecision"></A>
-<H1 class=name>TerrainSetCLodPrecision</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetCLodPrecision</A><A>( terrain,precision as </A><A class=type>real</A> );</A>
-<BR><A>Задает точность обработки для отдаленных участков ландшафта (CLOD). Чем ниже это значение, тем выше детализация. Этот лимит не затрагивает тайлы, находящиеся ближе расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>.
-<BR><A>terrain - id ландшафта</A>
-<BR><A>precision - точность (>=1; значение по умолчанию: 100).</A>
-<HR>
-
-<A name="TerrainSetOcclusionFrameSkip"></A>
-<H1 class=name>TerrainSetOcclusionFrameSkip</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetOcclusionFrameSkip</A><A>( terrain,frames as </A><A class=type>real</A> );</A>
-<BR><A>Задает количество кадров отрисовки, в течение которых следует остановить отрисовку "невидимых" тайлов. Тайлы считаются "невидимыми", когда полностью перекрываются другими объектами или частями самого ландшафта (например, большие дома или горы). Это способствует снижению нагрузки на процессор, но может также привести к артефактам и снижению FPS на сценах с минимальным перекрытием (вид сверху) или статичной отрисовкой (когда точка обзора не меняется со временем). <BR>Данная оптимизация требует аппаратной поддержки расширения GL_NV_occlusion_query.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>frames - количество кадров (значение по умолчанию: 0).</A>
-<HR>
-
-<A name="TerrainSetOcclusionTesselate"></A>
-<H1 class=name>TerrainSetOcclusionTesselate</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainSetOcclusionTesselate</A><A>( terrain,tot as </A><A class=type>real</A> );</A>
-<BR><A>Определяет метод влияния перекрытия на тесселяцию. Выключение тесселяции для "невидимых" тайлов повышает производительность, но может негативно повлиять на тесселяцию соседних "видимых" тайлов. Этот эффект можно частично устранить повышением расстояния </A><A class=funclink href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A> - таким образом, артефакты будут проявляться на отдаленных областях ландшафта и будут менее заметны. 
-<BR><A>terrain - id ландшафта</A>
-<BR><A>tot - <A class=constant name="totTesselateAlways">totTesselateAlways</A><A> или </A><A class=constant name="totTesselateIfVisible">totTesselateIfVisible</A><A> (0 и 1 соответственно).</A>
-<HR>
-
-<A name="TerrainGetHeightAtObjectPosition"></A>
-<H1 class=name>TerrainGetHeightAtObjectPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainGetHeightAtObjectPosition</A><A>( terrain,object as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает высоту точки на поверхности ландшафта, соответствующей абсолютной позиции заданного объекта.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="TerrainGetHDSPosition"></A>
-<H1 class=name>TerrainGetHDSPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainGetHDSPosition</A><A>( terrain,x,y,z,index as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает координаты пикселя HDS, соответствующего точке на поверхности ландшафта.</A>
-<BR><A>terrain - id ландшафта</A>
-<BR><A>x,y,z - координаты точки</A>
-<BR><A>index - индекс координаты (0 = X, 1 = Y).</A>
-<HR>
-
-<A name="TerrainGetLastTriCount"></A>
-<H1 class=name>TerrainGetLastTriCount</H1>
-<A class=type>real</A><A> = </A><A class=function>TerrainGetLastTriCount</A><A>( terrain as </A><A class=type>real</A> );</A>
-<BR><A>Возвращает количество полигонов в ландшафте на момент последней отрисовки сцены.</A>
-<BR><A>terrain - id ландшафта.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Terrain</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="terrain">Terrain</h1>
+<p>Xtreme3D поддерживает отрисовку ландшафта (terrain), состоящего из сетки прямоугольников - тайлов. При рендеринге ландшафта поддерживается тесселяция, то есть, повышение детализации по мере приближения к камере.</p>
+<p>Для создания ландшафта необходима карта высот (HDS - Height Data Source) - черно-белое изображение, светлые участки которого означают увеличение высоты поверхности, темные - снижение. HDS может быть загружена из файла изображения. Глубина цвета этой текстуры должна соответствовать 8 битам на пиксель (256 цв., Grayscale). В противном случае ландшафт будет выглядеть ступенчатым.</p>
+<hr />
+<h2 id="bmphdscreate">BmpHDSCreate</h2>
+<p><code>real BmpHDSCreate(string filename);</code></p>
+<p>Загружает HDS из изображения и возвращает указатель на него.</p>
+<ul>
+<li><code>filename</code> - имя файла.</li>
+</ul>
+<hr />
+<h2 id="bmphdscreateempty">BmpHDSCreateEmpty</h2>
+<p><code>real BmpHDSCreateEmpty(real width, real height, real fillvalue);</code></p>
+<p>Создает в памяти чистый HDS и возвращает указатель на него.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота HDS. Должны быть степенями двойки: 64, 128, 256 и т.д.</li>
+<li><code>fillvalue</code> - значение высоты, которым заполняется HDS (от 0.0 до 1.0). Ландшафт генерируется так, что высота 0.5 соответствует в пространстве плоскости XZ, проходящей через начало координат.</li>
+</ul>
+<hr />
+<h2 id="bmphdssetinfinitewarp">BmpHDSSetInfiniteWarp</h2>
+<p><code>real BmpHDSSetInfiniteWarp(real hds, real mode);</code></p>
+<p>Включает или выключает повторение HDS. При включенном повторении ландшафт будет бесконечным.</p>
+<ul>
+<li><code>hds</code> - указатель на HDS</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="bmphdsinvert">BmpHDSInvert</h2>
+<p><code>real BmpHDSInvert(real hds);</code></p>
+<p>Инвертирует HDS (обращает высоты).</p>
+<ul>
+<li><code>hds</code> - указатель на HDS</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="bmphdssetheight">BmpHDSSetHeight</h2>
+<p><code>real BmpHDSSetHeight(real hds, real x, real y, real height);</code></p>
+<p>Задает высоту в указанном пикселе HDS.</p>
+<ul>
+<li><code>hds</code> - указатель на HDS</li>
+<li><code>x</code>, <code>y</code> - координаты пикселя</li>
+<li><code>height</code> - значение высоты (от 0.0 до 1.0).</li>
+</ul>
+<hr />
+<h2 id="bmphdsgetheight">BmpHDSGetHeight</h2>
+<p><code>real BmpHDSGetHeight(real hds, real x, real y);</code></p>
+<p>Возвращает высоту в указанном пикселе HDS.</p>
+<ul>
+<li><code>hds</code> - указатель на HDS</li>
+<li><code>x</code>, <code>y</code> - координаты пикселя.</li>
+</ul>
+<hr />
+<h2 id="bmphdssave">BmpHDSSave</h2>
+<p><code>real BmpHDSSave(real hds, string filename);</code></p>
+<p>Сохраняет HDS в файл BMP.</p>
+<ul>
+<li><code>hds</code> - указатель на HDS</li>
+<li><code>filename</code> - имя файла.</li>
+</ul>
+<hr />
+<h2 id="terraincreate">TerrainCreate</h2>
+<p><code>real TerrainCreate(real parent);</code></p>
+<p>Создает новый ландшафт и возвращает указатель на него.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя для ландшафта (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="terrainsetheightdata">TerrainSetHeightData</h2>
+<p><code>real TerrainSetHeightData(real terrain, real hds);</code></p>
+<p>Применяет HDS к ландшафту.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>hds</code> - указатель на HDS.</li>
+</ul>
+<hr />
+<h2 id="terrainsettilesize">TerrainSetTileSize</h2>
+<p><code>real TerrainSetTileSize(real terrain, real size);</code></p>
+<p>Задает размер тайла.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>size</code> - размер тайла (значение по умолчанию: 16).</li>
+</ul>
+<hr />
+<h2 id="terrainsettilespertexture">TerrainSetTilesPerTexture</h2>
+<p><code>real TerrainSetTilesPerTexture(real terrain, real tiles);</code></p>
+<p>Задает количество тайлов на текстуру.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>tiles</code> - количество тайлов (значение по умолчанию: 1).</li>
+</ul>
+<hr />
+<h2 id="terrainsetqualitydistance">TerrainSetQualityDistance</h2>
+<p><code>real TerrainSetQualityDistance(real terrain, real distance);</code></p>
+<p>Задает расстояние от камеры, на котором детализация ландшафта начинает снижаться для повышения скорости отрисовки.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>distance</code> - расстояние (значение по умолчанию: 0).</li>
+</ul>
+<hr />
+<h2 id="terrainsetqualitystyle">TerrainSetQualityStyle</h2>
+<p><code>real TerrainSetQualityStyle(real terrain, real hrs);</code></p>
+<p>Определяет метод обработки тайлов, находящихся ближе расстояния <code>TerrainSetQualityDistance</code>.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>hrs</code> - доступны следующие значения:<ul>
+<li><code>hrsFullGeometry</code> = 0 - осуществляется полный рендеринг (без LOD)</li>
+<li><code>hrsTesselated</code> = 1 - осуществляется одна адаптивная тесселяция (в соответствии со значением <code>TerrainSetCLodPrecision</code>), результат которой и используется в дальнейшем, не меняясь.</li></ul></li>
+</ul>
+<hr />
+<h2 id="terrainsetmaxclodtriangles">TerrainSetMaxCLodTriangles</h2>
+<p><code>real TerrainSetMaxCLodTriangles(real terrain, real triangles);</code></p>
+<p>Задает максимально возможное количество полигонов для отдаленных участков ландшафта (CLOD). Этот лимит не затрагивает тайлы, находящиеся ближе расстояния <code>TerrainSetQualityDistance</code>.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>triangles</code> - количество полигонов (значение по умолчанию: 65536).</li>
+</ul>
+<hr />
+<h2 id="terrainsetclodprecision">TerrainSetCLodPrecision</h2>
+<p><code>real TerrainSetCLodPrecision(real terrain, real precision);</code></p>
+<p>Задает точность обработки для отдаленных участков ландшафта (CLOD). Чем ниже это значение, тем выше детализация. Этот лимит не затрагивает тайлы, находящиеся ближе расстояния <code>TerrainSetQualityDistance</code>.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>precision</code> - точность (&gt;=1; значение по умолчанию: 100).</li>
+</ul>
+<hr />
+<h2 id="terrainsetocclusionframeskip">TerrainSetOcclusionFrameSkip</h2>
+<p><code>real TerrainSetOcclusionFrameSkip(real terrain, real frames);</code></p>
+<p>Задает количество кадров отрисовки, в течение которых следует остановить отрисовку "невидимых" тайлов. Тайлы считаются "невидимыми", когда полностью перекрываются другими объектами или частями самого ландшафта (например, большие дома или горы). Это способствует снижению нагрузки на процессор, но может также привести к артефактам и снижению FPS в сценах с минимальным перекрытием (вид сверху). Данная оптимизация требует аппаратной поддержки расширения <code>GL_NV_occlusion_query</code>.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>frames</code> - количество кадров (значение по умолчанию: 0).</li>
+</ul>
+<hr />
+<h2 id="terrainsetocclusiontesselate">TerrainSetOcclusionTesselate</h2>
+<p><code>real TerrainSetOcclusionTesselate(real terrain, real tot);</code></p>
+<p>Определяет метод влияния перекрытия на тесселяцию. Выключение тесселяции для "невидимых" тайлов повышает производительность, но может негативно повлиять на тесселяцию соседних "видимых" тайлов. Этот эффект можно частично устранить повышением расстояния <code>TerrainSetQualityDistance</code> - таким образом, артефакты будут проявляться на отдаленных областях ландшафта и будут менее заметны.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>tot</code> - <code>totTesselateAlways</code> или <code>totTesselateIfVisible</code> (0 и 1 соответственно).</li>
+</ul>
+<hr />
+<h2 id="terraingetheightatobjectposition">TerrainGetHeightAtObjectPosition</h2>
+<p><code>real TerrainGetHeightAtObjectPosition(real terrain, real object);</code></p>
+<p>Возвращает высоту точки на поверхности ландшафта, соответствующей абсолютной позиции заданного объекта.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="terraingethdsposition">TerrainGetHDSPosition</h2>
+<p><code>real TerrainGetHDSPosition(real terrain, real x, real y, real z, real index);</code></p>
+<p>Возвращает координаты пикселя HDS, соответствующего точке на поверхности ландшафта.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты точки</li>
+<li><code>index</code> - индекс координаты (0 = X, 1 = Y).</li>
+</ul>
+<hr />
+<h2 id="terraingetlasttricount">TerrainGetLastTriCount</h2>
+<p><code>real TerrainGetLastTriCount(real terrain);</code></p>
+<p>Возвращает количество полигонов в ландшафте на момент последней отрисовки сцены.</p>
+<ul>
+<li><code>terrain</code> - указатель на ландшафт.</li>
+</ul>
+</body>
+</html>

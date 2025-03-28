@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
 </head>
 <body>
 <h1 id="fontandtext">Font and Text</h1>
@@ -18,7 +19,7 @@
 <p>TTFont поддерживает входной текст в кодировке UTF-8, либо в системной кодировке Windows (по умолчанию используется кодовая страница 1251, но вы можете загрузить файл перекодирования с реализацией любой 8-битной кодировки функцией <code>TTFontLoadCodePage</code>).</p>
 <p>В целях обратной совместимости (и работы с объемным 3D-текстом) оставлен также третий вид шрифтовых объектов - системный (WindowsBitmapfont). Это, фактически, Bmpfont, который автоматически генерируется из указанного системного шрифта, установленного в Windows. Данный вид шрифтов также работает только с кодовыми страницами Windows и, к тому же, не может загружать шрифты из произвольных TTF-файлов, поэтому для экранного текста вместо него рекомендуется использовать TTFont.</p>
 <p>Обратите также внимание, что Xtreme3D, в отличие от встроенных функций GML, не распознает в строковых значениях символ # как переход на следующую строку. Вместо него рекомендуется использовать тринадцатый символ ASCII - <code>chr(13)</code>. Например:</p>
-<pre><code class="gml language-gml">HUDTextSetText(text, "line 1" + chr(13) + "line 2").
+<pre class="gml language-gml"><code class="hljs gml language-gml">HUDTextSetText(text, <span class="hljs-string">&quot;line 1&quot;</span> + <span class="hljs-built_in">chr</span>(<span class="hljs-number">13</span>) + <span class="hljs-string">&quot;line 2&quot;</span>).
 </code></pre>
 <hr />
 <h2 id="bmpfontcreate">BmpfontCreate</h2>
@@ -131,7 +132,7 @@
 </ul>
 <hr />
 <h2 id="hudtextsettext">HUDTextSetText</h2>
-<p>`real HUDTextSetText(real text, string str);</p>
+<p><code>real HUDTextSetText(real text, string str);</code></p>
 <p>Задает текстовую строку для отображения экранным текстом.</p>
 <ul>
 <li><code>text</code> - указатель на объект текста</li>

@@ -9,6 +9,7 @@
     "dependencies": {
         "iconv-lite": "^0.6.3",
         "mustache": "^4.2.0",
-        "showdown": "^2.1.0"
+        "showdown": "^2.1.0",
+        "showdown-highlight": "^3.1.0"
     }
 }

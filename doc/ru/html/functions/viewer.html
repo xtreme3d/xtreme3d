@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
 </head>
 <body>
 <h1 id="viewer">Viewer</h1>
@@ -21,7 +22,7 @@
 <li><code>width</code>, <code>height</code> - ширина и высота вида;</li>
 <li><code>windowHandle</code> - дескриптор окна (HWND), к которому следует привязать движок. Дескриптор окна игры в GML возвращается функцией <code>window_handle()</code>. В GameMaker: Studio 2 эта функция возвращает не <code>real</code>, а <code>ptr</code> (указатель). GML, к сожалению, не поддерживает передачу указателей в DLL-функции напрямую, поэтому нужно перевести это значение в <code>real</code>, прежде чем передавать во <code>ViewerCreate</code>. Для этого в Xtreme3D предусмотрена функция <a href="engine.html#pointertoreal">PointerToReal</a>:</li>
 </ul>
-<pre><code class="gml language-gml">viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
+<pre class="gml language-gml"><code class="hljs gml language-gml">viewer = ViewerCreate(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">window_get_width</span>(), <span class="hljs-built_in">window_get_height</span>(), PointerToReal(windowHandle));
 </code></pre>
 <hr />
 <h2 id="viewersetcamera">ViewerSetCamera</h2>
@@ -62,10 +63,10 @@
 <li><code>viewer</code> - указатель на вид.</li>
 </ul>
 <p>Вот базовый пример рендеринга в ручном режиме - ручной аналог вызова <code>ViewerRender(viewer)</code>:</p>
-<pre><code>ViewerBeginRender(viewer);
-ViewerClear(viewer, true, true, true);
-ViewerRenderObject(viewer, EngineRootObject());
-ViewerEndRender(viewer);
+<pre><code class="hljs"><span class="hljs-built_in">ViewerBeginRender</span>(viewer);
+<span class="hljs-built_in">ViewerClear</span>(viewer, true, true, true);
+<span class="hljs-built_in">ViewerRenderObject</span>(viewer, EngineRootObject());
+<span class="hljs-built_in">ViewerEndRender</span>(viewer);
 </code></pre>
 <hr />
 <h2 id="viewerclear">ViewerClear</h2>

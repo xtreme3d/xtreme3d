@@ -171,7 +171,7 @@ HUDTextSetText(text, "line 1" + chr(13) + "line 2").
 
 ## HUDTextSetText
 
-`real HUDTextSetText(real text, string str);
+`real HUDTextSetText(real text, string str);`
 
 Задает текстовую строку для отображения экранным текстом.
 
