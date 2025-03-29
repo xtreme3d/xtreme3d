@@ -396,11 +396,15 @@
 </ul>
 <hr />
 <h2 id="objectsetculling">ObjectSetCulling</h2>
-<p><code>real ObjectSetCulling(real object, real mode);</code></p>
-<p>Включает или выключает отбор видимости объекта: если объект выходит из поля зрения, его отрисовка не происходит. В некоторых случаях это может повысить производительность.</p>
+<p><code>real ObjectSetCulling(real object, real vc);</code></p>
+<p>Задает режим отбора видимости объекта.</p>
 <ul>
 <li><code>object</code> - указатель на объект</li>
-<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+<li><code>vc</code> - режим отбора видимости. Доступны следующие значения <code>vc</code>:<ul>
+<li><code>vcNone</code> = 0 - отсутствие отбора видимости;</li>
+<li><code>vcInherited</code> = 1 - отбор видимости наследуется от родителя объекта (значение по умолчанию);</li>
+<li><code>vcObjectBased</code> = 2 - объект может быть отобран в зависимости от своей позиции. Отбор объекта не затрагивает видимость его дочерних объектов;</li>
+<li><code>vcHierarchical</code> = 3 - отбор осуществляется по принципу иерархии: если материнский объект отобран, все его дочерние объекты также будут невидимы.</li></ul></li>
 </ul>
 <hr />
 <h2 id="objectsetname">ObjectSetName</h2>
@@ -426,16 +430,16 @@
 </ul>
 <hr />
 <h2 id="objectsettag">ObjectSetTag</h2>
-<p><code>real ObjectSetTag(real object, real id);</code></p>
-<p>Задает уникальный идентификатор объекта.</p>
+<p><code>real ObjectSetTag(real object, real tag);</code></p>
+<p>Задает метку объекта.</p>
 <ul>
 <li><code>object</code> - указатель на объект</li>
-<li><code>id</code> - идентификатор.</li>
+<li><code>tag</code> - метка.</li>
 </ul>
 <hr />
 <h2 id="objectgettag">ObjectGetTag</h2>
 <p><code>real ObjectGetTag(real object);</code></p>
-<p>Возвращает идентификатор объекта.</p>
+<p>Возвращает метку объекта.</p>
 <ul>
 <li><code>object</code> - указатель на объект.</li>
 </ul>
@@ -484,8 +488,8 @@
 <li><code>name</code> - имя потомка.</li>
 </ul>
 <hr />
-<h2 id="objectgetboundingsphereradius">ObjectGetBoundingsphereRadius</h2>
-<p><code>real ObjectGetBoundingsphereRadius(real object);</code></p>
+<h2 id="objectgetboundingsphereradius">ObjectGetBoundingSphereRadius</h2>
+<p><code>real ObjectGetBoundingSphereRadius(real object);</code></p>
 <p>Возвращает радиус ограничивающей сферы объекта.</p>
 <ul>
 <li><code>object</code> - указатель на объект.</li>

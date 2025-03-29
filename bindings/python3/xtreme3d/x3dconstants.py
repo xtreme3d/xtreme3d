@@ -51,7 +51,7 @@ csa8xHQ = 10
 csa16x = 11
 csa16xHQ = 12
 
-# Dummycube invariance
+# Dummycube camera invariance
 cimNone = 0
 cimPosition = 1
 cimOrientation = 2
@@ -71,7 +71,7 @@ lsParallel = 2
 ndOutside = 0
 ndInside = 1
 
-# Animation mode
+# Actor animation mode
 aamNone = 0
 aamPlayOnce = 1
 aamLoop = 2
@@ -167,7 +167,7 @@ tfRGBAFloat16 = 10
 tfRGBAFloat32 = 11
 tfExtended = 12
 
-# Texture format extended
+# Texture format (extended)
 tfALPHA4 = 0
 tfALPHA8 = 1
 tfALPHA12 = 2
@@ -335,7 +335,7 @@ twVertical = 2
 twHorizontal = 3
 twSeparate = 4
 
-# Texture wrap separate
+# Texture wrap (separate)
 twRepeat = 0
 twClampToEdge = 1
 twClampToBorder = 2
@@ -470,7 +470,7 @@ psName = 1
 psMinDepth = 2
 psMaxDepth = 3
 
-#
+# Actor reference
 aarMorph = 0
 aarSkeleton = 1
 aarNone = 2

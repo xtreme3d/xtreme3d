@@ -1,227 +1,385 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Constants</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Список констант</H1>
-
-<BR><A class=constantlink href=engine.htm#osInherited>osInherited</A><A> = 0</A>
-<BR><A class=constantlink href=engine.htm#osNone>osNone</A><A> = 1</A>
-<BR><A class=constantlink href=engine.htm#osRenderFarthestFirst>osRenderFarthestFirst</A><A> = 2</A>
-<BR><A class=constantlink href=engine.htm#osRenderBlendedLast>osRenderBlendedLast</A><A> = 3</A>
-<BR><A class=constantlink href=engine.htm#osRenderNearestFirst>osRenderNearestFirst</A><A> = 4</A>
-<BR>
-<BR><A class=constantlink href=engine.htm#vcNone>vcNone</A><A> = 0</A>
-<BR><A class=constantlink href=engine.htm#vcInherited>vcInherited</A><A> = 1</A>
-<BR><A class=constantlink href=engine.htm#vcObjectBased>vcObjectBased</A><A> = 2</A>
-<BR><A class=constantlink href=engine.htm#vcHierarchical>vcHierarchical</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=viewer.htm#vsmSync>vsmSync</A><A> = 0</A>
-<BR><A class=constantlink href=viewer.htm#vsmNoSync>vsmNoSync</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=dummycube.htm#cimNone>cimNone</A><A> = 0</A>
-<BR><A class=constantlink href=dummycube.htm#cimPosition>cimPosition</A><A> = 1</A>
-<BR><A class=constantlink href=dummycube.htm#cimOrientation>cimOrientation</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=camera.htm#csPerspective>csPerspective</A><A> = 0</A>
-<BR><A class=constantlink href=camera.htm#csOrthogonal>csOrthogonal</A><A> = 1</A>
-<BR><A class=constantlink href=camera.htm#csOrtho2D>csOrtho2D</A><A> = 2</A>
-<BR><A class=constantlink href=camera.htm#csInfinitePerspective>csInfinitePerspective</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=light.htm#lsSpot>lsSpot</A><A> = 0</A>
-<BR><A class=constantlink href=light.htm#lsOmni>lsOmni</A><A> = 1</A>
-<BR><A class=constantlink href=light.htm#lsParallel>lsParallel</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=primitives.htm#ndOutside>ndOutside</A><A> = 0</A>
-<BR><A class=constantlink href=primitives.htm#ndInside>ndInside</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=actor.htm#aamNone>aamNone</A><A> = 0</A>
-<BR><A class=constantlink href=actor.htm#aamPlayOnce>aamPlayOnce</A><A> = 1</A>
-<BR><A class=constantlink href=actor.htm#aamLoop>aamLoop</A><A> = 2</A>
-<BR><A class=constantlink href=actor.htm#aamBounceForward>aamBounceForward</A><A> = 3</A>
-<BR><A class=constantlink href=actor.htm#aamBounceBackward>aamBounceBackward</A><A> = 4</A>
-<BR><A class=constantlink href=actor.htm#aamLoopBackward>aamLoopBackward</A><A> = 5</A>
-<BR>
-<BR><A class=constantlink href=terrain.htm#hrsFullGeometry>hrsFullGeometry</A><A> = 0</A>
-<BR><A class=constantlink href=terrain.htm#hrsTesselated>hrsTesselated</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=terrain.htm#totTesselateAlways>totTesselateAlways</A><A> = 0</A>
-<BR><A class=constantlink href=terrain.htm#totTesselateIfVisible>totTesselateIfVisible</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=object.htm#scNoOverlap>scNoOverlap</A><A> = 0</A>
-<BR><A class=constantlink href=object.htm#scContainsFully>scContainsFully</A><A> = 1</A>
-<BR><A class=constantlink href=object.htm#scContainsPartially>scContainsPartially</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=material.htm#pmFill>pmFill</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#pmLines>pmLines</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#pmPoints>pmPoints</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tmmUser>tmmUser</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tmmObjectLinear>tmmObjectLinear</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#tmmEyeLinear>tmmEyeLinear</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#tmmSphere>tmmSphere</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#tmmCubeMapReflection>tmmCubeMapReflection</A><A> = 4</A>
-<BR><A class=constantlink href=material.htm#tmmCubeMapNormal>tmmCubeMapNormal</A><A> = 5</A>
-<BR><A class=constantlink href=material.htm#tmmCubeMapLight0>tmmCubeMapLight0</A><A> = 6</A>
-<BR><A class=constantlink href=material.htm#tmmCubeMapCamera>tmmCubeMapCamera</A><A> = 7</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tiaDefault>tiaDefault</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tiaAlphaFromIntensity>tiaAlphaFromIntensity</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#tiaSuperBlackTransparent>tiaSuperBlackTransparent</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#tiaLuminance>tiaLuminance</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#tiaLuminanceSqrt>tiaLuminanceSqrt</A><A> = 4</A>
-<BR><A class=constantlink href=material.htm#tiaOpaque>tiaOpaque</A><A> = 5</A>
-<BR><A class=constantlink href=material.htm#tiaTopLeftPointColorTransparent>tiaTopLeftPointColorTransparent</A><A> = 6</A>
-<BR><A class=constantlink href=material.htm#tiaInverseLuminance>tiaInverseLuminance</A><A> = 7</A>
-<BR><A class=constantlink href=material.htm#tiaInverseLuminanceSqrt>tiaInverseLuminanceSqrt</A><A> = 8</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tmDecal>tmDecal</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tmModulate>tmModulate</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#tmBlend>tmBlend</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#tmReplace>tmReplace</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=material.htm#bmOpaque>bmOpaque</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#bmTransparency>bmTransparency</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#bmAdditive>bmAdditive</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#bmAlphaTest50>bmAlphaTest50</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#bmAlphaTest100>bmAlphaTest100</A><A> = 4</A>
-<BR><A class=constantlink href=material.htm#bmModulate>bmModulate</A><A> = 5</A>
-<BR>
-<BR><A class=constantlink href=material.htm#miNearest>miNearest</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#miLinear>miLinear</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#miNearestMipmapNearest>miNearestMipmapNearest</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#miLinearMipmapNearest>miLinearMipmapNearest</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#miNearestMipmapLinear>miNearestMipmapLinear</A><A> = 4</A>
-<BR><A class=constantlink href=material.htm#miLinearMipmapLinear>miLinearMipmapLinear</A><A> = 5</A>
-<BR><A class=constantlink href=material.htm#maNearest>maNearest</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#maLinear>maLinear</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=material.htm#fcBufferDefault>fcBufferDefault</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#fcCull>fcCull</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#fcNoCull>fcNoCull</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tfDefault>tfDefault</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tfRGB>tfRGB</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#tfRGBA>tfRGBA</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#tfRGB16>tfRGB16</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#tfRGBA16>tfRGBA16</A><A> = 4</A>
-<BR><A class=constantlink href=material.htm#tfAlpha>tfAlpha</A><A> = 5</A>
-<BR><A class=constantlink href=material.htm#tfLuminance>tfLuminance</A><A> = 6</A>
-<BR><A class=constantlink href=material.htm#tfLuminanceAlpha>tfLuminanceAlpha</A><A> = 7</A>
-<BR><A class=constantlink href=material.htm#tfIntensity>tfIntensity</A><A> = 8</A>
-<BR><A class=constantlink href=material.htm#tfNormalMap>tfNormalMap</A><A> = 9</A>
-<BR><A class=constantlink href=material.htm#tfRGBAFloat16>tfRGBAFloat16</A><A> = 10</A>
-<BR><A class=constantlink href=material.htm#tfRGBAFloat32>tfRGBAFloat32</A><A> = 11</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tcDefault>tcDefault</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tcNone>tcNone</A><A> = 1</A>
-<BR><A class=constantlink href=material.htm#tcStandard>tcStandard</A><A> = 2</A>
-<BR><A class=constantlink href=material.htm#tcHighQuality>tcHighQuality</A><A> = 3</A>
-<BR><A class=constantlink href=material.htm#tcHighSpeed>tcHighSpeed</A><A> = 4</A>
-<BR>
-<BR><A class=constantlink href=material.htm#tfIsotropic>tfIsotropic</A><A> = 0</A>
-<BR><A class=constantlink href=material.htm#tfAnisotropic>tfAnisotropic</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=blur.htm#pNone>pNone</A><A> = 0</A>
-<BR><A class=constantlink href=blur.htm#pGlossy>pGlossy</A><A> = 1</A>
-<BR><A class=constantlink href=blur.htm#pBeastView>pBeastView</A><A> = 2</A>
-<BR><A class=constantlink href=blur.htm#pOceanDepth>pOceanDepth</A><A> = 3</A>
-<BR><A class=constantlink href=blur.htm#pDream>pDream</A><A> = 4</A>
-<BR><A class=constantlink href=blur.htm#pOverBlur>pOverBlur</A><A> = 5</A>
-<BR>
-<BR><A class=constantlink href=skybox.htm#sbmTop>sbmTop</A><A> = 0</A>
-<BR><A class=constantlink href=skybox.htm#sbmBottom>sbmBottom</A><A> = 1</A>
-<BR><A class=constantlink href=skybox.htm#sbmLeft>sbmLeft</A><A> = 2</A>
-<BR><A class=constantlink href=skybox.htm#sbmRight>sbmRight</A><A> = 3</A>
-<BR><A class=constantlink href=skybox.htm#sbmFront>sbmFront</A><A> = 4</A>
-<BR><A class=constantlink href=skybox.htm#sbmBack>sbmBack</A><A> = 5</A>
-<BR><A class=constantlink href=skybox.htm#sbmClouds>sbmClouds</A><A> = 6</A>
-<BR>
-<BR><A class=constantlink href=skybox.htm#sbsFull>sbsFull</A><A> = 0</A>
-<BR><A class=constantlink href=skybox.htm#sbsTopHalf>sbsTopHalf</A><A> = 1</A>
-<BR><A class=constantlink href=skybox.htm#sbsBottomHalf>sbsBottomHalf</A><A> = 2</A>
-<BR><A class=constantlink href=skybox.htm#sbsTopTwoThirds>sbsTopTwoThirds</A><A> = 3</A>
-<BR><A class=constantlink href=skybox.htm#sbsTopHalfClamped>sbsTopHalfClamped</A><A> = 4</A>
-<BR>
-<BR><A class=constantlink href=lines.htm#lsmLines>lsmLines</A><A> = 0</A>
-<BR><A class=constantlink href=lines.htm#lsmCubicSpline>lsmCubicSpline</A><A> = 1</A>
-<BR><A class=constantlink href=lines.htm#lsmBezierSpline>lsmBezierSpline</A><A> = 2</A>
-<BR><A class=constantlink href=lines.htm#lsmNURBSCurve>lsmNURBSCurve</A><A> = 3</A>
-<BR><A class=constantlink href=lines.htm#lsmSegments>lsmSegments</A><A> = 4</A>
-<BR>
-<BR><A class=constantlink href=lines.htm#lnaInvisible>lnaInvisible</A><A> = 0</A>
-<BR><A class=constantlink href=lines.htm#lnaAxes>lnaAxes</A><A> = 1</A>
-<BR><A class=constantlink href=lines.htm#lnaCube>lnaCube</A><A> = 2</A>
-<BR><A class=constantlink href=lines.htm#lnaDodecahedron>lnaDodecahedron</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=trail.htm#msUp>msUp</A><A> = 0</A>
-<BR><A class=constantlink href=trail.htm#msDirection>msDirection</A><A> = 1</A>
-<BR><A class=constantlink href=trail.htm#msFaceCamera>msFaceCamera</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=shadowvolume.htm#svmAccurate>svmAccurate</A><A> = 0</A>
-<BR><A class=constantlink href=shadowvolume.htm#svmDarkening>svmDarkening</A><A> = 1</A>
-<BR><A class=constantlink href=shadowvolume.htm#svmOff>svmOff</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=dce.htm#ccsDCEStandard>ccsDCEStandard</A><A> = 0</A>
-<BR><A class=constantlink href=dce.htm#ccsCollisionStandard>ccsCollisionStandard</A><A> = 1</A>
-<BR><A class=constantlink href=dce.htm#ccsHybrid>ccsHybrid</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=dce.htm#csbSlide>csbSlide</A><A> = 0</A>
-<BR><A class=constantlink href=dce.htm#csbBounce>csbBounce</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=ode.htm#osmStep>osmStep</A><A> = 0</A>
-<BR><A class=constantlink href=ode.htm#osmStepFast>osmStepFast</A><A> = 1</A>
-<BR><A class=constantlink href=ode.htm#osmQuickStep>osmQuickStep</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=partition.htm#cmFineCulling>cmFineCulling</A><A> = 0</A>
-<BR><A class=constantlink href=partition.htm#cmGrossCulling>cmGrossCulling</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=viewer.htm#aaDefault>aaDefault</A><A> = 0</A>
-<BR><A class=constantlink href=viewer.htm#aaNone>aaNone</A><A> = 1</A>
-<BR><A class=constantlink href=viewer.htm#aa2x>aa2x</A><A> = 2</A>
-<BR><A class=constantlink href=viewer.htm#aa2xHQ>aa2xHQ</A><A> = 3</A>
-<BR><A class=constantlink href=viewer.htm#aa4x>aa4x</A><A> = 4</A>
-<BR><A class=constantlink href=viewer.htm#aa4xHQ>aa4xHQ</A><A> = 5</A>
-<BR>
-<BR><A class=constantlink href=actor.htm#afpNone>afpNone</A><A> = 0</A>
-<BR><A class=constantlink href=actor.htm#afpLinear>afpLinear</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=dce.htm#ccsDCEStandard>ccsDCEStandard</A><A> = 0</A>
-<BR><A class=constantlink href=dce.htm#ccsCollisionStandard>ccsCollisionStandard</A><A> = 1</A>
-<BR><A class=constantlink href=dce.htm#ccsHybrid>ccsHybrid</A><A> = 2</A>
-<BR>
-<BR><A class=constantlink href=dce.htm#csEllipsoid>csEllipsoid</A><A> = 0</A>
-<BR><A class=constantlink href=dce.htm#csBox>csBox</A><A> = 1</A>
-<BR><A class=constantlink href=dce.htm#csFreeform>csFreeform</A><A> = 2</A>
-<BR><A class=constantlink href=dce.htm#csTerrain>csTerrain</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=grid.htm#glsSegments>glsSegments</A><A> = 0</A>
-<BR><A class=constantlink href=grid.htm#glsLine>glsLine</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=grid.htm#gpXY>gpXY</A><A> = 0</A>
-<BR><A class=constantlink href=grid.htm#gpYZ>gpYZ</A><A> = 1</A>
-<BR><A class=constantlink href=grid.htm#gpXZ>gpXZ</A><A> = 2</A>
-<BR><A class=constantlink href=grid.htm#gpXYZ>gpXYZ</A><A> = 3</A>
-<BR>
-<BR><A class=constantlink href=mirror.htm#msRect>msRect</A><A> = 0</A>
-<BR><A class=constantlink href=mirror.htm#msDisk>msDisk</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=text.htm#msRect>teUTF8</A><A> = 0</A>
-<BR><A class=constantlink href=text.htm#msDisk>teWindows</A><A> = 1</A>
-<BR>
-<BR><A class=constantlink href=kraft.htm#krbtUnknown>krbtUnknown</A><A> = 0</A>
-<BR><A class=constantlink href=kraft.htm#krbtStatic>krbtStatic</A><A> = 1</A>
-<BR><A class=constantlink href=kraft.htm#krbtDynamic>krbtDynamic</A><A> = 2</A>
-<BR><A class=constantlink href=kraft.htm#krbtKinematic>krbtKinematic</A><A> = 3</A>
-
-<BR><BR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Constants</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="">Список констант</h1>
+<p>Режим сортировки (<code>EngineSetObjectsSorting</code>):</p>
+<p><code>osInherited</code> = 0<br>
+<code>osNone</code> = 1<br>
+<code>osRenderFarthestFirst</code> = 2<br>
+<code>osRenderBlendedLast</code> = 3<br>
+<code>osRenderNearestFirst</code> = 4<br></p>
+<p>Режим отбора видимости (<code>EngineSetCulling</code>, <code>ObjectSetCulling</code>):</p>
+<p><code>vcNone</code> = 0<br>
+<code>vcInherited</code> = 1<br>
+<code>vcObjectBased</code> = 2<br>
+<code>vcHierarchical</code> = 3<br></p>
+<p>Вертикальная синхронизация (<code>ViewerEnableVSync</code>):</p>
+<p><code>vsmSync</code> = 0<br>
+<code>vsmNoSync</code> = 1<br></p>
+<p>Антиалиасинг (<code>ViewerSetAntiAliasing</code>):</p>
+<p><code>aaDefault</code> = 0<br>
+<code>aaNone</code> = 1<br>
+<code>aa2x</code> = 2<br>
+<code>aa2xHQ</code> = 3<br>
+<code>aa4x</code> = 4<br>
+<code>aa4xHQ</code> = 5<br>
+<code>aa6x</code> = 6<br>
+<code>aa8x</code> = 7<br>
+<code>aa16x</code> = 8<br>
+<code>csa8x</code> = 9<br>
+<code>csa8xHQ</code> = 10<br>
+<code>csa16x</code> = 11<br>
+<code>csa16xHQ</code> = 12<br></p>
+<p>Тип (стиль) камеры (<code>CameraSetStyle</code>):</p>
+<p><code>csPerspective</code> = 0<br>
+<code>csOrthogonal</code> = 1<br>
+<code>csOrtho2D</code> = 2<br>
+<code>csInfinitePerspective</code> = 3<br></p>
+<p>Режим инвариантности относительно камеры (<code>DummycubeSetCameraMode</code>):</p>
+<p><code>cimNone</code> = 0<br>
+<code>cimPosition</code> = 1<br>
+<code>cimOrientation</code> = 2<br></p>
+<p>Тип (стиль) источника освещения (<code>LightCreate</code>, <code>LightSetStyle</code>):</p>
+<p><code>lsSpot</code> = 0<br>
+<code>lsOmni</code> = 1<br>
+<code>lsParallel</code> = 2<br></p>
+<p>Направление нормалей (<code>CubeSetNormalDirection</code>):</p>
+<p><code>ndOutside</code> = 0<br>
+<code>ndInside</code> = 1<br></p>
+<p>Режим воспроизведения анимации (<code>ActorSetAnimationMode</code>):</p>
+<p><code>aamNone</code> = 0<br>
+<code>aamPlayOnce</code> = 1<br>
+<code>aamLoop</code> = 2<br>
+<code>aamBounceForward</code> = 3<br>
+<code>aamBounceBackward</code> = 4<br>
+<code>aamLoopBackward</code> = 5<br></p>
+<p>Режим тесселяции (<code>TerrainSetQualityStyle</code>):</p>
+<p><code>hrsFullGeometry</code> = 0<br>
+<code>hrsTesselated</code> = 1<br></p>
+<p>Режим тесселяции для невидимых тайлов (<code>TerrainSetOcclusionTesselate</code>):</p>
+<p><code>totTesselateAlways</code> = 0<br>
+<code>totTesselateIfVisible</code> = 1<br></p>
+<p>scNoOverlap = 0<br>
+scContainsFully = 1<br>
+scContainsPartially = 2<br></p>
+<p>pmFill = 0<br>
+pmLines = 1<br>
+pmPoints = 2<br></p>
+<p>tmmUser = 0<br>
+tmmObjectLinear = 1<br>
+tmmEyeLinear = 2<br>
+tmmSphere = 3<br>
+tmmCubeMapReflection = 4<br>
+tmmCubeMapNormal = 5<br>
+tmmCubeMapLight0 = 6<br>
+tmmCubeMapCamera = 7<br></p>
+<p>tiaDefault = 0<br>
+tiaAlphaFromIntensity = 1<br>
+tiaSuperBlackTransparent = 2<br>
+tiaLuminance = 3<br>
+tiaLuminanceSqrt = 4<br>
+tiaOpaque = 5<br>
+tiaTopLeftPointColorTransparent = 6<br>
+tiaInverseLuminance = 7<br>
+tiaInverseLuminanceSqrt = 8<br></p>
+<p>tmDecal = 0<br>
+tmModulate = 1<br>
+tmBlend = 2<br>
+tmReplace = 3<br></p>
+<p>bmOpaque = 0<br>
+bmTransparency = 1<br>
+bmAdditive = 2<br>
+bmAlphaTest50 = 3<br>
+bmAlphaTest100 = 4<br>
+bmModulate = 5<br></p>
+<p>miNearest = 0<br>
+miLinear = 1<br>
+miNearestMipmapNearest = 2<br>
+miLinearMipmapNearest = 3<br>
+miNearestMipmapLinear = 4<br>
+miLinearMipmapLinear = 5<br>
+maNearest = 0<br>
+maLinear = 1<br></p>
+<p>fcBufferDefault = 0<br>
+fcCull = 1<br>
+fcNoCull = 2<br></p>
+<p>tfDefault = 0<br>
+tfRGB = 1<br>
+tfRGBA = 2<br>
+tfRGB16 = 3<br>
+tfRGBA16 = 4<br>
+tfAlpha = 5<br>
+tfLuminance = 6<br>
+tfLuminanceAlpha = 7<br>
+tfIntensity = 8<br>
+tfNormalMap = 9<br>
+tfRGBAFloat16 = 10<br>
+tfRGBAFloat32 = 11<br>
+tfExtended = 12<br></p>
+<p>tfALPHA4 = 0<br>
+tfALPHA8 = 1<br>
+tfALPHA12 = 2<br>
+tfALPHA16 = 3<br>
+tfDEPTH<em>COMPONENT16 = 4<br>
+tfDEPTH</em>COMPONENT24 = 5<br>
+tfDEPTH<em>COMPONENT32 = 6<br>
+tfLUMINANCE4 = 7<br>
+tfLUMINANCE8 = 8<br>
+tfLUMINANCE12 = 9<br>
+tfLUMINANCE16 = 10<br>
+tfLUMINANCE4</em>ALPHA4 = 11<br>
+tfLUMINANCE6<em>ALPHA2 = 12<br>
+tfLUMINANCE8</em>ALPHA8 = 13<br>
+tfLUMINANCE12<em>ALPHA4 = 14<br>
+tfLUMINANCE12</em>ALPHA12 = 15<br>
+tfLUMINANCE16<em>ALPHA16 = 16<br>
+tfINTENSITY4 = 17<br>
+tfINTENSITY8 = 18<br>
+tfINTENSITY12 = 19<br>
+tfINTENSITY16I = 20<br>
+tfR3</em>G3<em>B2 = 21<br>
+tfRGB4 = 22<br>
+tfRGB5 = 23<br>
+tfRGB8 = 24<br>
+tfRGB10 = 25<br>
+tfRGB12 = 26<br>
+tfR16G16B16 = 27<br>
+tfRGBA2 = 28<br>
+tfRGBA4 = 29<br>
+tfRGB5</em>A1 = 30<br>
+tfRGBA8 = 31<br>
+tfRGB10<em>A2 = 32<br>
+tfRGBA12 = 33<br>
+tfR16G16B16A16 = 34<br>
+tfCOMPRESSED</em>RGB<em>S3TC</em>DXT1 = 35<br>
+tfCOMPRESSED<em>RGBA</em>S3TC<em>DXT1 = 36<br>
+tfCOMPRESSED</em>RGBA<em>S3TC</em>DXT3 = 37<br>
+tfCOMPRESSED<em>RGBA</em>S3TC<em>DXT5 = 38<br>
+tfSIGNED</em>LUMINANCE8 = 39<br>
+tfSIGNED<em>LUMINANCE8</em>ALPHA8 = 40<br>
+tfSIGNED<em>RGB8 = 41<br>
+tfSIGNED</em>RGBA8 = 42<br>
+tfSIGNED<em>RGB8</em>UNSIGNED<em>ALPHA8 = 43<br>
+tfSIGNED</em>ALPHA8 = 44<br>
+tfSIGNED<em>INTENSITY8 = 45<br>
+tfHILO16 = 46<br>
+tfSIGNED</em>HILO16 = 47<br>
+tfDSDT8 = 48<br>
+tfDSDT8<em>MAG8 = 49<br>
+tfDSDT8</em>MAG8<em>INTENSITY8 = 50<br>
+tfHILO8 = 51<br>
+tfSIGNED</em>HILO8 = 52<br>
+tfFLOAT<em>R16 = 53<br>
+tfFLOAT</em>R32 = 54<br>
+tfFLOAT<em>RG16 = 55<br>
+tfFLOAT</em>RGB16 = 56<br>
+tfFLOAT<em>RGBA16 = 57<br>
+tfFLOAT</em>RG32 = 58<br>
+tfFLOAT<em>RGB32 = 59<br>
+tfFLOAT</em>RGBA32 = 60<br>
+tfRGBA<em>FLOAT32 = 61<br>
+tfRGB</em>FLOAT32 = 62<br>
+tfALPHA<em>FLOAT32 = 63<br>
+tfINTENSITY</em>FLOAT32 = 64<br>
+tfLUMINANCE<em>FLOAT32 = 65<br>
+tfLUMINANCE</em>ALPHA<em>FLOAT32 = 66<br>
+tfRGBA</em>FLOAT16 = 67<br>
+tfRGB<em>FLOAT16 = 68<br>
+tfALPHA</em>FLOAT16 = 69<br>
+tfINTENSITY<em>FLOAT16 = 70<br>
+tfLUMINANCE</em>FLOAT16 = 71<br>
+tfLUMINANCE<em>ALPHA</em>FLOAT16 = 72<br>
+tfDEPTH24<em>STENCIL8 = 73<br>
+tfDEPTH</em>COMPONENT32F = 74<br>
+tfDEPTH32F<em>STENCIL8 = 75<br>
+tfSRGB8 = 76<br>
+tfSRGB8</em>ALPHA8 = 77<br>
+tfSLUMINANCE8 = 78<br>
+tfSLUMINANCE8<em>ALPHA8 = 79<br>
+tfCOMPRESSED</em>SRGB<em>S3TC</em>DXT1 = 80<br>
+tfCOMPRESSED<em>SRGB</em>ALPHA<em>S3TC</em>DXT1 = 81<br>
+tfCOMPRESSED<em>SRGB</em>ALPHA<em>S3TC</em>DXT3 = 82<br>
+tfCOMPRESSED<em>SRGB</em>ALPHA<em>S3TC</em>DXT5 = 83<br>
+tfRGB9<em>E5 = 84<br>
+tfR11F</em>G11F<em>B10F = 85<br>
+tfCOMPRESSED</em>LUMINANCE<em>LATC1 = 86<br>
+tfCOMPRESSED</em>SIGNED<em>LUMINANCE</em>LATC1 = 87<br>
+tfCOMPRESSED<em>LUMINANCE</em>ALPHA<em>LATC2 = 88<br>
+tfCOMPRESSED</em>SIGNED<em>LUMINANCE</em>ALPHA<em>LATC2 = 89<br>
+tfCOMPRESSED</em>LUMINANCE<em>ALPHA</em>3DC = 90<br>
+tfRGBA32UI = 91<br>
+tfRGB32UI = 92<br>
+tfALPHA32UI = 93<br>
+tfINTENSITY32UI = 94<br>
+tfLUMINANCE32UI = 95<br>
+tfLUMINANCE<em>ALPHA32UI = 96<br>
+tfRGBA16UI = 97<br>
+tfRGB16UI = 98<br>
+tfALPHA16UI = 99<br>
+tfINTENSITY16UI = 100<br>
+tfLUMINANCE16UI = 101<br>
+tfLUMINANCE</em>ALPHA16UI = 102<br>
+tfRGBA8UI = 103<br>
+tfRGB8UI = 104<br>
+tfALPHA8UI = 105<br>
+tfINTENSITY8UI = 106<br>
+tfLUMINANCE8UI = 107<br>
+tfLUMINANCE<em>ALPHA8UI = 108<br>
+tfRGBA32I = 109<br>
+tfRGB32I = 110<br>
+tfALPHA32I = 111<br>
+tfINTENSITY32I = 112<br>
+tfLUMINANCE32I = 113<br>
+tfLUMINANCE</em>ALPHA32I = 114<br>
+tfRGBA16I = 115<br>
+tfRGB16I = 116<br>
+tfALPHA16I = 117<br>
+tfLUMINANCE16I = 119<br>
+tfLUMINANCE<em>ALPHA16I = 120<br>
+tfRGBA8I = 121<br>
+tfRGB8I = 122<br>
+tfALPHA8I = 123<br>
+tfINTENSITY8I = 124<br>
+tfLUMINANCE8I = 125<br>
+tfLUMINANCE</em>ALPHA8I = 126<br>
+tfRG32UI = 127<br>
+tfR32UI = 128<br>
+tfRG16UI = 129<br>
+tfR16UI = 130<br>
+tfRG8UI = 131<br>
+tfR8UI = 132<br>
+tfRG32I = 133<br>
+tfR32I = 134<br>
+tfRG16I = 135<br>
+tfR16I = 136<br>
+tfRG8I = 137<br>
+tfR8I = 138<br>
+tfRG8 = 139<br>
+tfR8 = 140<br>
+tfRG16 = 141<br>
+tfR16 = 142<br>
+tfRG16F = 143<br>
+tfR16F = 144<br>
+tfRG32F = 145<br>
+tfR32F = 146<br>
+tfCOMPRESSED<em>RED</em>RGTC1 = 147<br>
+tfCOMPRESSED<em>SIGNED</em>RED<em>RGTC1 = 148<br>
+tfCOMPRESSED</em>RG<em>RGTC2 = 149<br>
+tfCOMPRESSED</em>SIGNED<em>RG</em>RGTC2 = 150<br>
+tfR8<em>SNORM = 151<br>
+tfRG8</em>SNORM = 152<br>
+tfRGB8<em>SNORM = 153<br>
+tfRGBA8</em>SNORM = 154<br>
+tfR16<em>SNORM = 155<br>
+tfRG16</em>SNORM = 156<br>
+tfRGB16<em>SNORM = 157<br>
+tfRGBA16</em>SNOR = 158<br></p>
+<p>tcDefault = 0<br>
+tcNone = 1<br>
+tcStandard = 2<br>
+tcHighQuality = 3<br>
+tcHighSpeed = 4<br></p>
+<p>tfIsotropic = 0<br>
+tfAnisotropic = 1<br></p>
+<p>pNone = 0<br>
+pGlossy = 1<br>
+pBeastView = 2<br>
+pOceanDepth = 3<br>
+pDream = 4<br>
+pOverBlur = 5<br></p>
+<p>sbmTop = 0<br>
+sbmBottom = 1<br>
+sbmLeft = 2<br>
+sbmRight = 3<br>
+sbmFront = 4<br>
+sbmBack = 5<br>
+sbmClouds = 6<br></p>
+<p>sbsFull = 0<br>
+sbsTopHalf = 1<br>
+sbsBottomHalf = 2<br>
+sbsTopTwoThirds = 3<br>
+sbsTopHalfClamped = 4<br></p>
+<p>lsmLines = 0<br>
+lsmCubicSpline = 1<br>
+lsmBezierSpline = 2<br>
+lsmNURBSCurve = 3<br>
+lsmSegments = 4<br></p>
+<p>lnaInvisible = 0<br>
+lnaAxes = 1<br>
+lnaCube = 2<br>
+lnaDodecahedron = 3<br></p>
+<p>msUp = 0<br>
+msDirection = 1<br>
+msFaceCamera = 2<br></p>
+<p>svmAccurate = 0<br>
+svmDarkening = 1<br>
+svmOff = 2<br></p>
+<p>ccsDCEStandard = 0<br>
+ccsCollisionStandard = 1<br>
+ccsHybrid = 2<br></p>
+<p>csbSlide = 0<br>
+csbBounce = 1<br></p>
+<p>osmStep = 0<br>
+osmStepFast = 1<br>
+osmQuickStep = 2<br></p>
+<p>cmFineCulling = 0<br>
+cmGrossCulling = 1<br></p>
+<p>afpNone = 0<br>
+afpLinear = 1<br></p>
+<p>ccsDCEStandard = 0<br>
+ccsCollisionStandard = 1<br>
+ccsHybrid = 2<br></p>
+<p>csEllipsoid = 0<br>
+csBox = 1<br>
+csFreeform = 2<br>
+csTerrain = 3<br></p>
+<p>glsSegments = 0<br>
+glsLine = 1<br></p>
+<p>gpXY = 0<br>
+gpYZ = 1<br>
+gpXZ = 2<br>
+gpXYZ = 3<br></p>
+<p>msRect = 0<br>
+msDisk = 1<br></p>
+<p>krbtUnknown = 0<br>
+krbtStatic = 1<br>
+krbtDynamic = 2<br>
+krbtKinematic = 3<br></p>
+<p>uspEveryIteration = 0<br>
+uspEveryFrame = 1<br>
+uspNever = 2<br></p>
+<p>psDefault = 0<br>
+psName = 1<br>
+psMinDepth = 2<br>
+psMaxDepth = 3<br></p>
+<p>aarMorph = 0<br>
+aarSkeleton = 1<br>
+aarNone = 2<br></p>
+<p>spDefault = 0<br>
+sp1bit = 1<br>
+sp4bits = 2<br>
+sp8bits = 3<br>
+sp16bits = 4<br></p>
+<p>tvDefault = 0<br>
+tvFBOOnly = 1<br></p>
+<p>llMin = 0<br>
+llMedium = 1<br>
+llMax = 3<br></p>
+<p>lkDebug = 0<br>
+lkInfo = 1<br>
+lkNotice = 2<br>
+lkWarning = 3<br>
+lkError = 4<br>
+lkFatalError = 5<br></p>
+</body>
+</html>

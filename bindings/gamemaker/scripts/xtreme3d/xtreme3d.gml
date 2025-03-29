@@ -5242,39 +5242,57 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 	return external_call(global._LoggerLog, aLogger, aLogLevel, aMessage);
 }
 
+// Object sorting
 #macro osInherited 0
 #macro osNone 1
 #macro osRenderFarthestFirst 2
 #macro osRenderBlendedLast 3
 #macro osRenderNearestFirst 4
+
+// Visibility culling
 #macro vcNone 0
 #macro vcInherited 1
 #macro vcObjectBased 2
 #macro vcHierarchical 3
+
+// VSync
 #macro vsmSync 0
 #macro vsmNoSync 1
+
+// Dummycube camera invariance
 #macro cimNone 0
 #macro cimPosition 1
 #macro cimOrientation 2
+
+// Camera projection style
 #macro csPerspective 0
 #macro csOrthogonal 1
 #macro csOrtho2D 2
 #macro csInfinitePerspective 4
+
+// Light source type
 #macro lsSpot 0
 #macro lsOmni 1
 #macro lsParallel 2
+
+// Actor animation mode
 #macro aamNone 0
 #macro aamPlayOnce 1
 #macro aamLoop 2
 #macro aamBounceForward 3
 #macro aamBounceBackward 4
 #macro aamLoopBackward 5
+
 #macro scNoOverlap 0
 #macro scContainsFully 1
 #macro scContainsPartially 2
+
+// Polygon mode
 #macro pmFill 0
 #macro pmLines 1
 #macro pmPoints 2
+
+// Texture mapping mode
 #macro tmmUser 0
 #macro tmmObjectLinear 1
 #macro tmmEyeLinear 2
@@ -5283,6 +5301,8 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro tmmCubeMapNormal 5
 #macro tmmCubeMapLight0 6
 #macro tmmCubeMapCamera 7
+
+// Texture image alpha
 #macro tiaDefault 0
 #macro tiaAlphaFromIntensity 1
 #macro tiaSuperBlackTransparent 2
@@ -5293,16 +5313,22 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro tiaInverseLuminance 7
 #macro tiaInverseLuminanceSqrt 8
 #macro tiaBottomRightPointColorTransparent 9
+
+// Texture mode
 #macro tmDecal 0
 #macro tmModulate 1
 #macro tmBlend 2
 #macro tmReplace 3
+
+// Blending mode
 #macro bmOpaque 0
 #macro bmTransparency 1
 #macro bmAdditive 2
 #macro bmAlphaTest50 3
 #macro bmAlphaTest100 4
 #macro bmModulate 5
+
+// Texture filter
 #macro miNearest 0
 #macro miLinear 1
 #macro miNearestMipmapNearest 2
@@ -5311,9 +5337,13 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro miLinearMipmapLinear 5
 #macro maNearest 0
 #macro maLinear 1
+
+// Face culling
 #macro fcBufferDefault 0
 #macro fcCull 1
 #macro fcNoCull 2
+
+// Texture format
 #macro tfDefault 0
 #macro tfRGB 1
 #macro tfRGBA 2
@@ -5328,6 +5358,7 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro tfRGBAFloat32 11
 #macro tfExtended 12
 
+// Texture format (extended)
 #macro tfALPHA4 0
 #macro tfALPHA8 1
 #macro tfALPHA12 2
@@ -5488,12 +5519,14 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro tfRGB16_SNORM 157
 #macro tfRGBA16_SNOR 158
 
+// Texture wrap
 #macro twNone 0
 #macro twBoth 1
 #macro twVertical 2
 #macro twHorizontal 3
 #macro twSeparate 4
 
+// Texture wrap (separate)
 #macro twRepeat 0
 #macro twClampToEdge 1
 #macro twClampToBorder 2
@@ -5501,9 +5534,11 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro twMirrorClampToEdge 4
 #macro twMirrorClampToBorder 5
 
+// Texture compare mode
 #macro tcmNone 0
 #macro tcmCompareRtoTexture 1
 
+// Texture depth compare func
 #macro cfNever 0
 #macro cfAlways 1
 #macro cfLess 2
@@ -5513,19 +5548,26 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro cfNotEqual 6
 #macro cfGEqual 7
 
+// Texture compression
 #macro tcDefault 0
 #macro tcNone 1
 #macro tcStandard 2
 #macro tcHighQuality 3
 #macro tcHighSpeed 4
+
+// Texture filtering quality
 #macro tfIsotropic 0
 #macro tfAnisotropic 1
+
+// Blur preset
 #macro pNone 0
 #macro pGlossy 1
 #macro pBeastView 2
 #macro pOceanDepth 3
 #macro pDream 4
 #macro pOverBlur 5
+
+// Skybox material
 #macro sbmTop 0
 #macro sbmBottom 1
 #macro sbmLeft 2
@@ -5533,33 +5575,51 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro sbmFront 4
 #macro sbmBack 5
 #macro sbmClouds 6
+
+// Skybox style
 #macro sbsFull 0
 #macro sbsTopHalf 1
 #macro sbsBottomHalf 2
 #macro sbTopTwoThirds 3
 #macro sbsTopHalfClamped 4
+
+// Lines spline mode
 #macro lsmLines 0
 #macro lsmCubicSpline 1
 #macro lsmBezierSpline 2
 #macro lsmNURBSCurve 3
 #macro lsmSegments 4
+
+// Lines nodes aspect
 #macro lnaInvisible 0
 #macro lnaAxes 1
 #macro lnaCube 2
 #macro lnaDodecahedron 3
+
+// Trail mark style
 #macro msUp 0
 #macro msDirection 1
 #macro msFaceCamera 2
+
+// Shadowvolume mode
 #macro svmAccurate 0
 #macro svmDarkening 1
 #macro svmOff 2
+
+// ODE step
 #macro osmStep 0
 #macro osmStepFast 1
 #macro osmQuickStep 2
+
+// Terrain quality style
 #macro hrsFullGeometry 0
 #macro hrsTesselated 1
+
+// Terrain occlusion tesselate
 #macro totTesselateAlways 0
 #macro totTesselateIfVisible 1
+
+// Antialiasing
 #macro aaDefault 0
 #macro aaNone 1
 #macro aa2x 2
@@ -5573,53 +5633,83 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 #macro csa8xHQ 10
 #macro csa16x 11
 #macro csa16xHQ 12
+
+// Frame interpolation
 #macro afpNone 0
 #macro afpLinear 1
+
+// 
 #macro ccsDCEStandard 0
 #macro ccsCollisionStandard 1
 #macro ccsHybrid 2
+
+// DCE slide or bounce
+#macro csbSlide 0
+#macro csbBounce 1
+
+// DCE collider shape
 #macro csEllipsoid 0
 #macro csBox 1
 #macro csFreeform 2
 #macro csTerrain 3
+
+// Partition culling
 #macro cmFineCulling 0
 #macro cmGrossCulling 1
+
+// Grid line style
 #macro glsSegments 0
 #macro glsLine 1
+
+// Grid parts
 #macro gpXY 0
 #macro gpYZ 1
 #macro gpXZ 2
 #macro gpXYZ 3
-#macro teUTF8 0
-#macro teWindows 1
+
+// Mirror shape
+#macro msRect 0
+#macro msDisk 1
+
+// Kraft body type
 #macro krbtUnknown 0
 #macro krbtStatic 1
 #macro krbtDynamic 2
 #macro krbtKinematic 3
+
+// 
 #macro uspEveryIteration 0
 #macro uspEveryFrame 1
 #macro uspNever 2
+
+// Pick sort type
 #macro psDefault 0
 #macro psName 1
 #macro psMinDepth 2
 #macro psMaxDepth 3
+
+// Actor reference
 #macro aarMorph 0
 #macro aarSkeleton 1
 #macro aarNone 2
 
+// Stencil precision
 #macro spDefault 0
 #macro sp1bit 1
 #macro sp4bits 2
 #macro sp8bits 3
 #macro sp16bits 4
 
+// FBO target visibility
 #macro tvDefault 0
 #macro tvFBOOnly 1
 
+//
 #macro llMin 0
 #macro llMedium 1
 #macro llMax 3
 
+// Log level
 #macro lkDebug 0
 #macro lkInfo 1
 #macro lkNotice 2

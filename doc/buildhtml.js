@@ -25,10 +25,11 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "en"; // TODO: make this command line argument
+const lang = "ru"; // TODO: make this command line argument
 
 const functions =
 [
+    { title: "Constants", inFilename: `markdown/${lang}/functions/constants.md`, outFilename: `${lang}/html/functions/constants.html` },
     { title: "Engine", inFilename: `markdown/${lang}/functions/engine.md`, outFilename: `${lang}/html/functions/engine.html` },
     { title: "Pak", inFilename: `markdown/${lang}/functions/pak.md`, outFilename: `${lang}/html/functions/pak.html` },
     { title: "Viewer", inFilename: `markdown/${lang}/functions/viewer.md`, outFilename: `${lang}/html/functions/viewer.html` },
