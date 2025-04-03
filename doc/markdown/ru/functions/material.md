@@ -763,12 +763,68 @@
 
 ## MaterialSetTextureWrap
 
-`real MaterialSetTextureWrap(string material, real mode);`
+`real MaterialSetTextureWrap(string material, real tw);`
 
 Переключает повторение текстуры, когда UV-координаты выходят за пределы диапазона [0..1].
 
 - `material` - имя материала
-- `mode` - `true` или `false` (1 и 0 соответственно).
+- `tw` - режим повторения. Доступны следующие значения `tw`:
+    - `twBoth` = 0 - повторение по горизонтали и вертикали (значение по умолчанию);
+    - `twNone` = 1 - повторение отключено;
+    - `twVertical` = 2 - повторение только по вертикали;
+    - `twHorizontal` = 3 - повторение только по горизонтали;
+    - `twSeparate` = 4 - значение задается индивидуально для всех трех осей функциями `MaterialSetTextureWrapS`, `MaterialSetTextureWrapT`, `MaterialSetTextureWrapR`
+
+---
+
+## MaterialSetTextureWrapS
+
+`real MaterialSetTextureWrapS(string material, real wrap);`
+
+Задает режим повторения текстуры по горизонтали, когда координата U (S) выходит за пределы диапазона [0..1].
+
+- `material` - имя материала
+- `wrap` - режим повторения. Доступны следующие значения `wrap`:
+    - `twRepeat` = 0 - повторение;
+    - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twMirrorRepeat` = 3 - зеркальное повторение;
+    - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
+    - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
+
+---
+
+## MaterialSetTextureWrapT
+
+`real MaterialSetTextureWrapT(string material, real wrap);`
+
+Задает режим повторения текстуры по горизонтали, когда координата V (T) выходит за пределы диапазона [0..1].
+
+- `material` - имя материала
+- `wrap` - режим повторения. Доступны следующие значения `wrap`:
+    - `twRepeat` = 0 - повторение;
+    - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twMirrorRepeat` = 3 - зеркальное повторение;
+    - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
+    - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
+
+---
+
+## MaterialSetTextureWrapR
+
+`real MaterialSetTextureWrapR(string material, real wrap);`
+
+Задает режим повторения текстуры по глубине, когда координата W (R) выходит за пределы диапазона [0..1].
+
+- `material` - имя материала
+- `wrap` - режим повторения. Доступны следующие значения `wrap`:
+    - `twRepeat` = 0 - повторение;
+    - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twMirrorRepeat` = 3 - зеркальное повторение;
+    - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
+    - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
 
 ---
 

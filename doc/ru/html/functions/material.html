@@ -625,11 +625,58 @@
 </ul>
 <hr />
 <h2 id="materialsettexturewrap">MaterialSetTextureWrap</h2>
-<p><code>real MaterialSetTextureWrap(string material, real mode);</code></p>
+<p><code>real MaterialSetTextureWrap(string material, real tw);</code></p>
 <p>Переключает повторение текстуры, когда UV-координаты выходят за пределы диапазона [0..1].</p>
 <ul>
 <li><code>material</code> - имя материала</li>
-<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+<li><code>tw</code> - режим повторения. Доступны следующие значения <code>tw</code>:<ul>
+<li><code>twBoth</code> = 0 - повторение по горизонтали и вертикали (значение по умолчанию);</li>
+<li><code>twNone</code> = 1 - повторение отключено;</li>
+<li><code>twVertical</code> = 2 - повторение только по вертикали;</li>
+<li><code>twHorizontal</code> = 3 - повторение только по горизонтали;</li>
+<li><code>twSeparate</code> = 4 - значение задается индивидуально для всех трех осей функциями <code>MaterialSetTextureWrapS</code>, <code>MaterialSetTextureWrapT</code>, <code>MaterialSetTextureWrapR</code></li></ul></li>
+</ul>
+<hr />
+<h2 id="materialsettexturewraps">MaterialSetTextureWrapS</h2>
+<p><code>real MaterialSetTextureWrapS(string material, real wrap);</code></p>
+<p>Задает режим повторения текстуры по горизонтали, когда координата U (S) выходит за пределы диапазона [0..1].</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>wrap</code> - режим повторения. Доступны следующие значения <code>wrap</code>:<ul>
+<li><code>twRepeat</code> = 0 - повторение;</li>
+<li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
+<li><code>twMirrorClampToEdge</code> = 4 - сведения отсутствуют;</li>
+<li><code>twMirrorClampToBorder</code> = 5 - сведения отсутствуют.</li></ul></li>
+</ul>
+<hr />
+<h2 id="materialsettexturewrapt">MaterialSetTextureWrapT</h2>
+<p><code>real MaterialSetTextureWrapT(string material, real wrap);</code></p>
+<p>Задает режим повторения текстуры по горизонтали, когда координата V (T) выходит за пределы диапазона [0..1].</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>wrap</code> - режим повторения. Доступны следующие значения <code>wrap</code>:<ul>
+<li><code>twRepeat</code> = 0 - повторение;</li>
+<li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
+<li><code>twMirrorClampToEdge</code> = 4 - сведения отсутствуют;</li>
+<li><code>twMirrorClampToBorder</code> = 5 - сведения отсутствуют.</li></ul></li>
+</ul>
+<hr />
+<h2 id="materialsettexturewrapr">MaterialSetTextureWrapR</h2>
+<p><code>real MaterialSetTextureWrapR(string material, real wrap);</code></p>
+<p>Задает режим повторения текстуры по глубине, когда координата W (R) выходит за пределы диапазона [0..1].</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>wrap</code> - режим повторения. Доступны следующие значения <code>wrap</code>:<ul>
+<li><code>twRepeat</code> = 0 - повторение;</li>
+<li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
+<li><code>twMirrorClampToEdge</code> = 4 - сведения отсутствуют;</li>
+<li><code>twMirrorClampToBorder</code> = 5 - сведения отсутствуют.</li></ul></li>
 </ul>
 <hr />
 <h2 id="materialgettexturewidth">MaterialGetTextureWidth</h2>

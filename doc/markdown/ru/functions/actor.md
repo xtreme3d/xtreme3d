@@ -148,12 +148,14 @@
 
 ## ActorSetFrameInterpolation
 
-`real ActorSetFrameInterpolation(real actor, real mode);`
+`real ActorSetFrameInterpolation(real actor, real afp);`
 
-Включает или выключает линейную интерполяцию между кадрами. При выключенной интерполяции будет резкая смена кадров.
+Задает режим интерполяции между кадрами.
 
 - `actor` - указатель на актера
-- `mode` - `true` или `false` (1 и 0 соответственно).
+- `afp` - режим интерполяции. Доступны следующие значения `afp`:
+    - `afpNone` = 0 - резкая смена кадров;
+    - `afpLinear` = 1 - линейная интерполяция.
 
 ---
 

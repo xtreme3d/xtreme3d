@@ -119,11 +119,13 @@
 </ul>
 <hr />
 <h2 id="actorsetframeinterpolation">ActorSetFrameInterpolation</h2>
-<p><code>real ActorSetFrameInterpolation(real actor, real mode);</code></p>
-<p>¬ключает или выключает линейную интерпол€цию между кадрами. ѕри выключенной интерпол€ции будет резка€ смена кадров.</p>
+<p><code>real ActorSetFrameInterpolation(real actor, real afp);</code></p>
+<p>«адает режим интерпол€ции между кадрами.</p>
 <ul>
 <li><code>actor</code> - указатель на актера</li>
-<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+<li><code>afp</code> - режим интерпол€ции. ƒоступны следующие значени€ <code>afp</code>:<ul>
+<li><code>afpNone</code> = 0 - резка€ смена кадров;</li>
+<li><code>afpLinear</code> = 1 - линейна€ интерпол€ци€.</li></ul></li>
 </ul>
 <hr />
 <h2 id="actoraddobject">ActorAddObject</h2>

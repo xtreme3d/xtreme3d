@@ -36,18 +36,25 @@
 `csa16x` = 11<br>
 `csa16xHQ` = 12<br>
 
+Режим сортировки списка выборки (`PickListCreate`):
+
+`psDefault` = 0<br>
+`psName` = 1<br>
+`psMinDepth` = 2<br>
+`psMaxDepth` = 3<br>
+
+Режим инвариантности даммикуба относительно камеры (`DummycubeSetCameraMode`):
+
+`cimNone` = 0<br>
+`cimPosition` = 1<br>
+`cimOrientation` = 2<br>
+
 Тип (стиль) камеры (`CameraSetStyle`):
 
 `csPerspective` = 0<br>
 `csOrthogonal` = 1<br>
 `csOrtho2D` = 2<br>
 `csInfinitePerspective` = 3<br>
-
-Режим инвариантности относительно камеры (`DummycubeSetCameraMode`):
-
-`cimNone` = 0<br>
-`cimPosition` = 1<br>
-`cimOrientation` = 2<br>
 
 Тип (стиль) источника освещения (`LightCreate`, `LightSetStyle`):
 
@@ -69,6 +76,17 @@
 `aamBounceBackward` = 4<br>
 `aamLoopBackward` = 5<br>
 
+Режим интерполяции (`ActorSetFrameInterpolation`):
+
+`afpNone` = 0<br>
+`afpLinear` = 1<br>
+
+Тип анимации (`ActorSetReference`):
+
+`aarMorph` = 0<br>
+`aarSkeleton` = 1<br>
+`aarNone` = 2<br>
+
 Режим тесселяции (`TerrainSetQualityStyle`):
 
 `hrsFullGeometry` = 0<br>
@@ -79,13 +97,13 @@
 `totTesselateAlways` = 0<br>
 `totTesselateIfVisible` = 1<br>
 
-`scNoOverlap` = 0<br>
-`scContainsFully` = 1<br>
-`scContainsPartially` = 2<br>
+Режим отображения полигонов (`MaterialSetPolygonMode`):
 
 `pmFill` = 0<br>
 `pmLines` = 1<br>
 `pmPoints` = 2<br>
+
+Режим проецирования текстуры (`MaterialSetTextureMappingMode`):
 
 `tmmUser` = 0<br>
 `tmmObjectLinear` = 1<br>
@@ -95,6 +113,8 @@
 `tmmCubeMapNormal` = 5<br>
 `tmmCubeMapLight0` = 6<br>
 `tmmCubeMapCamera` = 7<br>
+
+Режим прозрачности текстуры (`MaterialSetTextureImageAlpha`):
 
 `tiaDefault` = 0<br>
 `tiaAlphaFromIntensity` = 1<br>
@@ -106,10 +126,14 @@
 `tiaInverseLuminance` = 7<br>
 `tiaInverseLuminanceSqrt` = 8<br>
 
+Режим текстуры материала (`MaterialSetTextureMode`):
+
 `tmDecal` = 0<br>
 `tmModulate` = 1<br>
 `tmBlend` = 2<br>
 `tmReplace` = 3<br>
+
+Режим смешивания (`MaterialSetBlendingMode`):
 
 `bmOpaque` = 0<br>
 `bmTransparency` = 1<br>
@@ -117,6 +141,8 @@
 `bmAlphaTest50` = 3<br>
 `bmAlphaTest100` = 4<br>
 `bmModulate` = 5<br>
+
+Режим фильтрации текстуры (`MaterialSetTextureFilter`):
 
 `miNearest` = 0<br>
 `miLinear` = 1<br>
@@ -127,9 +153,13 @@
 `maNearest` = 0<br>
 `maLinear` = 1<br>
 
+Режим отбора видимости полигонов (`MaterialSetFaceCulling`):
+
 `fcBufferDefault` = 0<br>
 `fcCull` = 1<br>
 `fcNoCull` = 2<br>
+
+Формат текстуры (`MaterialSetTextureFormat`):
 
 `tfDefault` = 0<br>
 `tfRGB` = 1<br>
@@ -144,6 +174,8 @@
 `tfRGBAFloat16` = 10<br>
 `tfRGBAFloat32` = 11<br>
 `tfExtended` = 12<br>
+
+Расширенный формат текстуры (`MaterialSetTextureFormatEx`):
 
 `tfALPHA4` = 0<br>
 `tfALPHA8` = 1<br>
@@ -304,14 +336,37 @@
 `tfRGB16_SNORM` = 157<br>
 `tfRGBA16_SNOR` = 158<br>
 
+Режим сжатия текстуры (`MaterialSetTextureCompression`):
+
 `tcDefault` = 0<br>
 `tcNone` = 1<br>
 `tcStandard` = 2<br>
 `tcHighQuality` = 3<br>
 `tcHighSpeed` = 4<br>
 
+Режим фильтрации текстуры (`MaterialSetFilteringQuality`):
+
 `tfIsotropic` = 0<br>
 `tfAnisotropic` = 1<br>
+
+Повторение текстуры (`MaterialSetTextureWrap`):
+
+`twBoth` = 0<br>
+`twNone` = 1<br>
+`twVertical` = 2<br>
+`twHorizontal` = 3<br>
+`twSeparate` = 4<br>
+
+Раздельный режим повторения текстуры (`MaterialSetTextureWrapS`, `MaterialSetTextureWrapT`, `MaterialSetTextureWrapR`):
+
+`twRepeat` = 0<br>
+`twClampToEdge` = 1<br>
+`twClampToBorder` = 2<br>
+`twMirrorRepeat` = 3<br>
+`twMirrorClampToEdge`<br>
+`twMirrorClampToBorder`<br>
+
+Стиль размытия (`BlurSetPreset`):
 
 `pNone` = 0<br>
 `pGlossy` = 1<br>
@@ -319,6 +374,8 @@
 `pOceanDepth` = 3<br>
 `pDream` = 4<br>
 `pOverBlur` = 5<br>
+
+Грань скайбокса (`SkyboxSetMaterial`):
 
 `sbmTop` = 0<br>
 `sbmBottom` = 1<br>
@@ -328,11 +385,15 @@
 `sbmBack` = 5<br>
 `sbmClouds` = 6<br>
 
+Стиль скайбокса (`SkyboxSetStyle`):
+
 `sbsFull` = 0<br>
 `sbsTopHalf` = 1<br>
 `sbsBottomHalf` = 2<br>
 `sbsTopTwoThirds` = 3<br>
 `sbsTopHalfClamped` = 4<br>
+
+Режим сплайна (`LinesSetSplineMode`, `MovementPathSetSplineMode`):
 
 `lsmLines` = 0<br>
 `lsmCubicSpline` = 1<br>
@@ -340,73 +401,66 @@
 `lsmNURBSCurve` = 3<br>
 `lsmSegments` = 4<br>
 
+Режим отображения узлов (`LinesSetNodesAspect`):
+
 `lnaInvisible` = 0<br>
 `lnaAxes` = 1<br>
 `lnaCube` = 2<br>
 `lnaDodecahedron` = 3<br>
 
+Стиль шлейфа (`TrailSetMarkStyle`):
+
 `msUp` = 0<br>
 `msDirection` = 1<br>
 `msFaceCamera` = 2<br>
+
+Режим теневого объема (`ShadowvolumeSetMode`):
 
 `svmAccurate` = 0<br>
 `svmDarkening` = 1<br>
 `svmOff` = 2<br>
 
+Форма зеркала (`MirrorSetShape`):
+
+`msRect` = 0<br>
+`msDisk` = 1<br>
+
+Режим выбора столкновений в DCE (`DceManagerSetLayers`):
+
 `ccsDCEStandard` = 0<br>
 `ccsCollisionStandard` = 1<br>
 `ccsHybrid` = 2<br>
+
+Тип реакции объекта DCE на столкновение (`DceDynamicSetSlideOrBounce`):
 
 `csbSlide` = 0<br>
 `csbBounce` = 1<br>
 
-`osmStep` = 0<br>
-`osmStepFast` = 1<br>
-`osmQuickStep` = 2<br>
-
-`cmFineCulling` = 0<br>
-`cmGrossCulling` = 1<br>
-
-`afpNone` = 0<br>
-`afpLinear` = 1<br>
-
-`ccsDCEStandard` = 0<br>
-`ccsCollisionStandard` = 1<br>
-`ccsHybrid` = 2<br>
+Форма коллайдера DCE (`DceStaticSetShape`):
 
 `csEllipsoid` = 0<br>
 `csBox` = 1<br>
 `csFreeform` = 2<br>
 `csTerrain` = 3<br>
 
+Режим отбора видимости в структурах разбиения пространства (`OctreeCreate`, `QuadtreeCreate)`:
+
+`cmFineCulling` = 0<br>
+`cmGrossCulling` = 1<br>
+
+Стиль линий сетки (`GridSetLineStyle`):
+
 `glsSegments` = 0<br>
 `glsLine` = 1<br>
+
+Плоскость сетки (`GridSetParts`):
 
 `gpXY` = 0<br>
 `gpYZ` = 1<br>
 `gpXZ` = 2<br>
 `gpXYZ` = 3<br>
 
-`msRect` = 0<br>
-`msDisk` = 1<br>
-
-`krbtUnknown` = 0<br>
-`krbtStatic` = 1<br>
-`krbtDynamic` = 2<br>
-`krbtKinematic` = 3<br>
-
-`uspEveryIteration` = 0<br>
-`uspEveryFrame` = 1<br>
-`uspNever` = 2<br>
-
-`psDefault` = 0<br>
-`psName` = 1<br>
-`psMinDepth` = 2<br>
-`psMaxDepth` = 3<br>
-
-`aarMorph` = 0<br>
-`aarSkeleton` = 1<br>
-`aarNone` = 2<br>
+Точность стенсильного буфера FBO (`FBOSetStencilPrecision`):
 
 `spDefault` = 0<br>
 `sp1bit` = 1<br>
@@ -414,12 +468,37 @@
 `sp8bits` = 3<br>
 `sp16bits` = 4<br>
 
+Режим видимости целевого объекта FBO (`FBOSetTargetVisibility`):
+
 `tvDefault` = 0<br>
 `tvFBOOnly` = 1<br>
+
+Солвер ODE (`OdeManagerSetSolver`):
+
+`osmStep` = 0<br>
+`osmStepFast` = 1<br>
+`osmQuickStep` = 2<br>
+
+Тип твердого тела Kraft (`KraftCreateRigidBody`):
+
+`krbtUnknown` = 0<br>
+`krbtStatic` = 1<br>
+`krbtDynamic` = 2<br>
+`krbtKinematic` = 3<br>
+
+Режим обновления Verlet (`VerletWorldCreate`):
+
+`uspEveryIteration` = 0<br>
+`uspEveryFrame` = 1<br>
+`uspNever` = 2<br>
+
+Уровень вывода логгера (`LoggerCreate`):
 
 `llMin` = 0<br>
 `llMedium` = 1<br>
 `llMax` = 3<br>
+
+Тип лога (`LoggerLog`):
 
 `lkDebug` = 0<br>
 `lkInfo` = 1<br>
