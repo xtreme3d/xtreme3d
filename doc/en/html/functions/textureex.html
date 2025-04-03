@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TextureEx</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="textureex">TextureEx</h1>
+<p>Функции для расширенных текстур материала, которые создаются функцией <code>MaterialAddTextureEx</code>.</p>
+<hr />
+<h2 id="textureexload">TextureExLoad</h2>
+<p><code>real TextureExLoad(real textureExItem, string filename);</code></p>
+<p>Загружает текстуру из файла.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>filename</code> - путь к файлу изображения.</li>
+</ul>
+<hr />
+<h2 id="textureexsetfrommaterial">TextureExSetFromMaterial</h2>
+<p><code>real TextureExSetFromMaterial(real textureExItem, string material);</code></p>
+<p>Копирует текстуру из материала.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="textureexgenerate">TextureExGenerate</h2>
+<p><code>real TextureExGenerate(real textureExItem, real width, real height);</code></p>
+<p>Генерирует текстуру.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>width</code>, <code>height</code> - ширина и высота текстуры в пикселях.</li>
+</ul>
+<hr />
+<h2 id="textureexdelete">TextureExDelete</h2>
+<p><code>real TextureExDelete(real textureExItem);</code></p>
+<p>Удаляет текстуру.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру.</li>
+</ul>
+<hr />
+<h2 id="textureexsettexturescale">TextureExSetTextureScale</h2>
+<p><code>real TextureExSetTextureScale(real textureExItem, real xscale, real yscale);</code></p>
+<p>Задает масштаб текстуры.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>xscale</code>, <code>yscale</code> - масштаб по горизонтали и вертикали.</li>
+</ul>
+<hr />
+<h2 id="textureexsettextureoffset">TextureExSetTextureOffset</h2>
+<p><code>real TextureExSetTextureOffset(real textureExItem, real x, real y);</code></p>
+<p>Задает смещение текстуры.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>x</code>, <code>y</code> - смещение по горизонтали и вертикали.</li>
+</ul>
+<hr />
+<h2 id="textureexenable">TextureExEnable</h2>
+<p><code>real TextureExEnable(real textureItem, real mode);</code></p>
+<p>Включает или выключает текстуру.</p>
+<ul>
+<li><code>textureExItem</code> - указатель на текстуру</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+</body>
+</html>

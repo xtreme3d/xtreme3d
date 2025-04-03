@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Shaders</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="shaders">Shaders</h1>
+<p>Шейдер в Xtreme3D - это спецэффект для материала. Есть несколько видов шейдеров: Bump, Cel, HiddenLine, MultiMaterial, Outline, TexCombine, Phong и GLSL. Для применения шейдера к материалу используется функция <code>MaterialSetShader</code>. При помощи шейдеров на языке GLSL вы можете программировать свои собственные спецэффекты.</p>
+<hr />
+<h2 id="shaderenable">ShaderEnable</h2>
+<p><code>real ShaderEnable(real shader, real mode);</code></p>
+<p>Включает или выключает шейдер.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="bumpshadercreate">BumpShaderCreate</h2>
+<p><code>real BumpShaderCreate();</code></p>
+<p>Создает шейдер рельефа (bump mapping) и возвращает указатель на него. С его помощью можно добиться очень эффектной имитации неровностей на поверхности модели.</p>
+<p>Данный шейдер требует поддержки расширений <code>GL_ARB_shading_language</code> (или <code>GL_ARB_shading_language_100</code>), <code>GL_ARB_shader_objects</code>, <code>GL_ARB_vertex_shader</code>, <code>GL_ARB_fragment_shader</code>.</p>
+<hr />
+<h2 id="bumpshadersetdiffusetexture">BumpShaderSetDiffuseTexture</h2>
+<p><code>real BumpShaderSetDiffuseTexture(real shader, string material);</code></p>
+<p>Задает диффузную текстуру шейдера рельефа. Диффузная текстура - это обычная текстура, определяющая цвет поверхности объекта (а также прозрачность, если у нее есть альфа-канал).</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>material</code> - имя материала в текущей библиотеке, из которого следует читать текстуру. Если вместо имени указана пустая строка, то будет использована текстура материала, к которому подключен шейдер (текстура в слоте 0). Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetnormaltexture">BumpShaderSetNormalTexture</h2>
+<p><code>real BumpShaderSetNormalTexture(real shader, string material);</code></p>
+<p>Задает карту нормалей шейдера рельефа. Карта нормалей - это текстура, определяющая нормаль в каждой точке поверхности объекта (XYZ = RGB). BumpShader поддерживает карты нормалей в пространстве касательных (tangent space) - то есть, заданные в пространстве, где ось Z соответствует интерполированной нормали треугольника, а X и Y - взаимно перпендикулярным касательным к нормали (их также называют тангенс и бинормаль).</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>material</code> - имя материала в текущей библиотеке, из которого следует читать текстуру. Если вместо имени указана пустая строка, то будет использована вторая текстура материала, к которому подключен шейдер (текстура в слоте 1). Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetheighttexture">BumpShaderSetHeightTexture</h2>
+<p><code>real BumpShaderSetHeightTexture(real shader, string material);</code></p>
+<p>Задает карту высот шейдера рельефа. Карта высот - это текстура, темные элементы которой означают снижение высоты, а светлые - повышение. Карта высот необходима при использовании эффекта parallax mapping (см. ниже). Если этот эффект отключен, карта высот не требуется.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>material</code> - имя материала в текущей библиотеке, из которого следует читать текстуру. Если вместо имени указана пустая строка, то будет использована третья текстура материала, к которому подключен шейдер (текстура в слоте 2). Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</li>
+</ul>
+<hr />
+<h2 id="bumpshaderuseparallax">BumpShaderUseParallax</h2>
+<p><code>real BumpShaderUseParallax(real shader, real mode);</code></p>
+<p>Включает или выключает parallax mapping - эффект усиления иллюзии рельефа, достигаемый за счет смещения текстурных координат в зависимости от угла обзора. Этот эффект требует указания карты высот функцией BumpShaderSetHeightTexture.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно). По умолчанию parallax mapping выключен.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetparallaxoffset">BumpShaderSetParallaxOffset</h2>
+<p><code>real BumpShaderSetParallaxOffset(real shader, real offset);</code></p>
+<p>Задает коэффициент смещения для эффекта parallax mapping. Чем больше это значение, тем выше рельеф.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>offset</code> - смещение. Значение по умолчанию: 0.03.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetmaxlights">BumpShaderSetMaxLights</h2>
+<p><code>real BumpShaderSetMaxLights(real shader, real maxlights);</code></p>
+<p>Задает количество источников света, которые должны учитываться шейдером рельефа. Это количество, как правило, меньше или равно числу источников света, созданных функцией <code>LightCreate</code>. Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает все типы источников света: <code>lsOmni</code>, <code>lsSpot</code>, <code>lsParallel</code>.</p>
+<p>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией <code>LightSetShining</code>, игнорируется шейдером. Чтобы выключить источник света, можно функцией <code>LightSetAttenuation</code> выставить в ноль его постоянную составляющую затухания (constant attenuation).</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>maxlights</code> - количество источников света. Значение по умолчанию: 8.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetshadowmap">BumpShaderSetShadowMap</h2>
+<p><code>real BumpShaderSetShadowMap(real shader, real shadowmap);</code></p>
+<p>Задает теневую карту, которую шейдер рельефа должен использовать для отрисовки теней. По умолчанию теневая карта не присвоена, и шейдер не рендерит тени.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>shadowmap</code> - указатель на теневую карту. Если в этот параметр передать 0, то тени будут выключены.</li>
+</ul>
+<hr />
+<h2 id="bumpshadersetshadowblurradius">BumpShaderSetShadowBlurRadius</h2>
+<p><code>real BumpShaderSetShadowBlurRadius(real shader, real radius);</code></p>
+<p>Если шейдеру рельефа присвоена теневая карта, то эта функция задает радиус PCF-фильтрации теневой карты - в итоге, получаются мягкие тени.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>radius</code> - радиус размытия. Значение 0 означает отсутствие фильтрации (тени будут резкими). Рекомендуется выставлять значения радиуса от 1 до 3 - более высокие значения могут снизить производительность. Значение по умолчанию - 0.</li>
+</ul>
+<hr />
+<h2 id="bumpshaderuseautotangentspace">BumpShaderUseAutoTangentSpace</h2>
+<p><code>real BumpShaderUseAutoTangentSpace(real shader, real mode);</code></p>
+<p>Некоторые виды объектов Xtreme3D не предоставляют шейдерам информацию о пространстве касательных, необходимую для рендеринга рельефа - это актеры и встроенные примитивы. Данная функция решает эту проблему: она включает или выключает автоматическое генерирование касательного вектора и бинормали во фрагментном шейдере. Результат получается несколько менее качественный, чем при использовании полноценно предрассчитанных векторов - при сильном приближении иногда видны ребра полигонов, но это зависит от того, есть ли разрывы (швы) в текстурных координатах модели. Если UV-развертка непрерывна, как у примитивов, то ребер заметно не будет.</p>
+<p>Для включения этой опции необходимо, чтобы у модели были текстурные координаты.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно). По умолчанию опция включена.</li>
+</ul>
+<hr />
+<h2 id="celshadercreate">CelShaderCreate</h2>
+<p><code>real CelShaderCreate();</code></p>
+<p>Создает так называемый cel-шейдер и возвращает указатель на него. Этот тип шейдера используется для создания эффекта мультипликационного изображения. Он включает отрисовку контуров и упрощение модели освещения (свет и тень представлены четко разграниченными пятнами).</p>
+<p>Данный шейдер требует поддержки расширений GL<em>ARB</em>vertex<em>program<code>и</code>GL</em>ARB<em>fragment</em>program`.</p>
+<hr />
+<h2 id="celshadersetlinecolor">CelShaderSetLineColor</h2>
+<p><code>real CelShaderSetLineColor(real shader, real color);</code></p>
+<p>Задает цвет контура в cel-шейдере.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="celshadersetlinewidth">CelShaderSetLineWidth</h2>
+<p><code>real CelShaderSetLineWidth(real shader, real width);</code></p>
+<p>Задает толщину контура в cel-шейдере.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>width</code> - ширина.</li>
+</ul>
+<hr />
+<h2 id="celshadersetoptions">CelShaderSetOptions</h2>
+<p><code>real CelShaderSetOptions(real shader, real outlines, real textured);</code></p>
+<p>Задает опции cel-шейдера.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>outlines</code> - указывает, рисовать ли контуры - <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
+<li><code>textured</code> - указывает, использовать ли текстуру материала - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="hiddenlineshadercreate">HiddenLineShaderCreate</h2>
+<p><code>real HiddenLineShaderCreate();</code></p>
+<p>Создает шейдер скрытых линий и возвращает указатель на него. Скрытые линии в данном случае - это ребра полигонов, из которых состоят объекты. Обычно они не отображаются, но этот шейдер позволяет их увидеть.</p>
+<hr />
+<h2 id="hiddenlineshadersetlinesmooth">HiddenLineShaderSetLineSmooth</h2>
+<p><code>real HiddenLineShaderSetLineSmooth(real shader, real mode);</code></p>
+<p>Включает или выключает антиалиасинг линий (по умолчанию отключен).</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="hiddenlineshadersetsolid">HiddenLineShaderSetSolid</h2>
+<p><code>real HiddenLineShaderSetSolid(real shader, real mode);</code></p>
+<p>Включает или выключает отображение самого материала (по умолчанию отключено).</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="hiddenlineshadersetsurfacelit">HiddenLineShaderSetSurfaceLit</h2>
+<p><code>real HiddenLineShaderSetSurfaceLit(real shader, real mode);</code></p>
+<p>Включает или выключает влияние освещения на материал с шейдером.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="hiddenlineshadersetfrontline">HiddenLineShaderSetFrontLine</h2>
+<p><code>real HiddenLineShaderSetFrontLine(real shader, real width, real color, real p, real f);</code></p>
+<p>Задает параметры передних линий. Передние линии принадлежат полигонам, нормали которых повернуты в сторону наблюдателя.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>width</code> - толщина</li>
+<li><code>color</code> - цвет</li>
+<li><code>p</code> - cведения отсутствуют (по умолчанию 65535)</li>
+<li><code>f</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="hiddenlineshadersetbackline">HiddenLineShaderSetBackLine</h2>
+<p><code>real HiddenLineShaderSetBackLine(real shader, real width, real color, real p, real f);</code></p>
+<p>Задает параметры задних линий. Задние линии принадлежат полигонам, нормали которых повернуты в противоположную сторону от наблюдателя.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>width</code> - толщина</li>
+<li><code>color</code> - цвет</li>
+<li><code>p</code> - cведения отсутствуют (по умолчанию 65535)</li>
+<li><code>f</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="multimaterialshadercreate">MultiMaterialShaderCreate</h2>
+<p><code>real MultiMaterialShaderCreate(real matlib);</code></p>
+<p>Создает мультиматериальный шейдер и возвращает указатель на него. Этот шейдер позволяет создать материал, состоящий из нескольких слоев других материалов, с собственными текстурами и параметрами. Эти материалы загружаются из отдельной библиотеки.</p>
+<p>Этот чрезвычайно мощный шейдер будет главным образом полезен для имитации поверхностей, состоящих из нескольких веществ с различными свойствами: например, деревянный ящик, окованный металлом, или камень с вкраплениями лавы или кристаллов. Но ему можно найти и другие применения.</p>
+<p>Не рекомендуется создавать слишком много слоев, иначе движок будет тормозить. Если вы хотите создать сложный многокомпонентный материал, то эффективнее будет использовать шейдер GLSL.</p>
+<ul>
+<li><code>matlib</code> - указатель на библиотеку материалов. Материалы будут накладываться в том порядке, в каком они были добавлены в библиотеку (то есть, первый материал будет внизу).</li>
+</ul>
+<hr />
+<h2 id="outlineshadercreate">OutlineShaderCreate</h2>
+<p><code>real OutlineShaderCreate(real smooth);</code></p>
+<p>Создает контурный шейдер и возвращает указатель на него. Используется для простейшего мультипликационного эффекта - отрисовки контуров вокруг объекта.</p>
+<ul>
+<li><code>smooth</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="outlineshadersetlinecolor">OutlineShaderSetLineColor</h2>
+<p><code>real OutlineShaderSetLineColor(real shader, real color);</code></p>
+<p>Задает цвет контура в контурном шейдере.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="outlineshadersetlinewidth">OutlineShaderSetLineWidth</h2>
+<p><code>real OutlineShaderSetLineWidth(real shader, real width);</code></p>
+<p>Задает толщину контура в контурном шейдере.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>width</code> - ширина.</li>
+</ul>
+<hr />
+<h2 id="texcombineshadercreate">TexCombineShaderCreate</h2>
+<p><code>real TexCombineShaderCreate(real matlib);</code></p>
+<p>Создает шейдер комбинирования текстур и возвращает указатель на него. Этот шейдер позволяет запрограммировать простейшие операции с текстурами: суммирование, вычитание, умножение и т.д. - это что-то наподобие языка описания шейдеров, который работает только с текстурами. TexCombineShader поддерживает до 4 текстур - первые две задаются автоматически (это первая и вторая текстуры первого материала в библиотеке), третья и четвертая задаются вручную соответствующими функциями.</p>
+<ul>
+<li><code>matlib</code> - указатель на библиотеку материалов, из которой будут читаться текстуры.</li>
+</ul>
+<hr />
+<h2 id="texcombineshadermaterial3">TexCombineShaderMaterial3</h2>
+<p><code>real TexCombineShaderMaterial3(real shader, real material);</code></p>
+<p>Задает материал, из которого нужно прочитать третью текстуру для шейдера комбинирования текстур.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="texcombineshadermaterial4">TexCombineShaderMaterial4</h2>
+<p><code>real TexCombineShaderMaterial4(real shader, real material);</code></p>
+<p>Задает материал, из которого нужно прочитать четвертую текстуру для шейдера комбинирования текстур.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="texcombineshaderaddcombiner">TexCombineShaderAddCombiner</h2>
+<p>`real TexCombineShaderAddCombiner(real shader, string instruction);</p>
+<p>Добавляет новый комбинатор - то есть, инструкцию для комбинирования текстур. Синтаксис инструкции напоминает операцию присваивания в Pascal. Доступны четыре обозначения текстурных слоев (<code>"Tex0"</code>, <code>"Tex1"</code>, <code>"Tex2"</code>, <code>"Tex3"</code>), к которым можно добавлять суффиксы <code>".а"</code> и <code>".rgb"</code> для получения по отдельности альфа-канала и значений RGB, соответственно. Также поддерживаются идентификатор <code>PrimaryColor</code> (или просто <code>Col</code>) - основной цвет (освещенность вершины), функции <code>Interpolate</code> (интерполяция между двумя текстурами) и <code>Dot3</code> (скалярное произведение текстур).</p>
+<p>Результатом работы шейдера будет комбинатор с наибольшим индексом.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>instruction</code> - строка, содержащая инструкцию.</li>
+</ul>
+<p>Вот несколько примеров инструкций:</p>
+<p><code>"Tex1:=Tex0;"</code> - закрашивание первой текстурой<br>
+<code>"Tex1:=Tex0+Tex1;"</code> - суммирование первых двух текстур<br>
+<code>"Tex1:=Tex0-Tex1;"</code> - вычитание второй текстуры из первой<br>
+<code>"Tex1:=Tex0*Tex1;"</code> - умножение первых двух текстур<br>
+<code>"Tex1:=Interpolate(Tex0,Tex1,PrimaryColor);"</code> - интерполяция между первыми двумя текстурами с использованием освещенности в качестве параметра (то есть, текстура на освещенной стороне будет плавно переходить в текстуру на теневой стороне)<br>
+<code>"Tex1:=Dot3(Tex0,Tex1);"</code> - скалярное произведение первых двух текстур.</p>
+<hr />
+<h2 id="phongshadercreate">PhongShaderCreate</h2>
+<p><code>real PhongShaderCreate();</code></p>
+<p>Создает шейдер Фонга, реализующий попиксельное освещение с бликами по Блинну-Фонгу (Blinn-Phong), и возвращает указатель на него.</p>
+<p>Данный шейдер требует поддержки расширений <code>GL_ARB_shading_language</code> (или <code>GL_ARB_shading_language_100</code>), <code>GL_ARB_shader_objects</code>, <code>GL_ARB_vertex_shader</code>, <code>GL_ARB_fragment_shader</code>.</p>
+<hr />
+<h2 id="phongshaderusetexture">PhongShaderUseTexture</h2>
+<p><code>real PhongShaderUseTexture(real shader, real mode);</code></p>
+<p>Определяет, учитывать ли текстуру в шейдере Фонга. Используется текстура материала, к которому подключен шейдер (текстура в слоте 0). Помимо цвета, текстура определяет также прозрачность объекта, если у нее есть альфа-канал. Если эта опция отключена, для задания прозрачности используется значение альфа диффузной компоненты материала, к которому подключен шейдер. </p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно). По умолчанию текстура выключена.</li>
+</ul>
+<hr />
+<h2 id="phongshadersetmaxlights">PhongShaderSetMaxLights</h2>
+<p><code>real PhongShaderSetMaxLights(real shader, real maxlights);</code></p>
+<p>Задает количество источников света, которые должны учитываться шейдером Фонга. Это количество, как правило, меньше или равно числу источников света, созданных функцией <code>LightCreate</code>. Соответственно, оно ограничено восемью - по максимальному количеству встроенных источников света OpenGL. Шейдер поддерживает все типы источников света: <code>lsOmni</code>, <code>lsSpot</code>, <code>lsParallel</code>.</p>
+<p>Обратите также внимание, что состояние включенности/выключенности источников света, задаваемое функцией <code>LightSetShining</code>, игнорируется шейдером. Чтобы выключить источник света, можно функцией <code>LightSetAttenuation</code> выставить в ноль его постоянную составляющую затухания (constant attenuation)</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>maxlights</code> - количество источников света. Значение по умолчанию: 1.</li>
+</ul>
+<hr />
+<h2 id="glslshadercreate">GLSLShaderCreate</h2>
+<p><code>real GLSLShaderCreate(string vertexshader, string fragmentshader);</code></p>
+<p>Создает шейдер GLSL и возвращает указатель на него. GLSL (OpenGL Shading Language) - это язык описания шейдеров, при помощи которого вы можете запрограммировать графический конвейер (иными словами, управлять рендерингом объектов на вершинном и пиксельном уровне). За обработку вершин отвечает вершинная программа, за обработку пикселей - фрагментная.</p>
+<p>Данный шейдер требует поддержки расширений <code>GL_ARB_shading_language</code> (или <code>GL_ARB_shading_language_100</code>), <code>GL_ARB_shader_objects</code>, <code>GL_ARB_vertex_shader</code>, <code>GL_ARB_fragment_shader</code>.</p>
+<ul>
+<li><code>vertexshader</code> - строка, содержащая вершинную программу GLSL (не имя файла!)</li>
+<li><code>fragmentshader</code> - строка, содержащая фрагментную программу GLSL (не имя файла!)</li>
+</ul>
+<p>Если в функцию будет передана некорректная программа, будет выведено сообщение об ошибке, и движок продолжит работу. Ошибки выводятся в логгер, который задается функцией <code>GLSLShaderSetLogger</code>.</p>
+<hr />
+<h2 id="glslshadersetlogger">GLSLShaderSetLogger</h2>
+<p><code>real GLSLShaderSetLogger(real shader, real logger);</code></p>
+<p>Задает логгер, в который будут выводиться ошибки компиляции шейдера GLSL.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>logger</code> - указатель на логгер.</li>
+</ul>
+<hr />
+<h2 id="glslshaderforcedisablestenciltest">GLSLShaderForceDisableStencilTest</h2>
+<p><code>real GLSLShaderForceDisableStencilTest(real shader, real mode);</code></p>
+<p>Отключает стенсильный тест для шейдера GLSL.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="glslshadersetoptions">GLSLShaderSetOptions</h2>
+<p><code>real GLSLShaderSetOptions(real shader, real lightingEnabled, real fogEnabled);</code></p>
+<p>Переключает использование освещения и тумана для шейдера GLSL.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>lightingEnabled</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
+<li><code>fogEnabled</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="glslshadercreateparameter">GLSLShaderCreateParameter</h2>
+<p><code>real GLSLShaderCreateParameter(real shader, real name);</code></p>
+<p>Создает новый параметр шейдера и возвращает указатель на него. Эти параметры соответствуют uniform-переменным GLSL. Их можно модифицировать динамически в вашей игре, но в шейдере они доступны только для чтения.</p>
+<ul>
+<li><code>shader</code> - указатель на шейдер</li>
+<li><code>name</code> - имя параметра.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameter1i">GLSLShaderSetParameter1i</h2>
+<p><code>real GLSLShaderSetParameter1i(real param, real value);</code></p>
+<p>Передает в параметр шейдера значение типа <code>int</code> (целое число).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>value</code> - значение параметра. Если указать дробное число, то оно будет округлено вниз до ближайшего целого.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameter1f">GLSLShaderSetParameter1f</h2>
+<p><code>real GLSLShaderSetParameter1f(real param, real value);</code></p>
+<p>Передает в параметр шейдера значение типа <code>float</code> (вещественное число).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>value</code> - значение параметра.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameter2f">GLSLShaderSetParameter2f</h2>
+<p><code>real GLSLShaderSetParameter2f(real param, real x, real y);</code></p>
+<p>Передает в параметр шейдера значение типа <code>vec2</code> (вектор из двух вещественных чисел).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>x</code>, <code>y</code> - координаты вектора.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameter3f">GLSLShaderSetParameter3f</h2>
+<p><code>real GLSLShaderSetParameter3f(real param, real x, real y, real z);</code></p>
+<p>Передает в параметр шейдера значение типа <code>vec3</code> (вектор из трех вещественных чисел).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты вектора.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameter4f">GLSLShaderSetParameter4f</h2>
+<p><code>real GLSLShaderSetParameter4f(real param, real x, real y, real z, real w);</code></p>
+<p>Передает в параметр шейдера значение типа <code>vec4</code> (вектор из четырех вещественных чисел).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>x</code>, <code>y</code>, <code>z</code>, <code>w</code> - координаты вектора.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparametertexture">GLSLShaderSetParameterTexture</h2>
+<p><code>real GLSLShaderSetParameterTexture(real param, string material, real texunit);</code></p>
+<p>Передает в параметр шейдера текстуру заданного материала. Тип текстуры (<code>sampler2D</code>, <code>samplerCube</code> и пр.) устанавливается автоматически.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>material</code> - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована текстура материала, к которому подключен шейдер (текстура в слоте с индексом texunit). Таким образом, один и тот же шейдер может работать с разными текстурами в зависимости от материала, что в некоторых ситуациях очень удобно.</li>
+<li><code>texunit</code> - определяет, через какой текстурный блок передавать текстуру. Стандарт OpenGL гаранирует 8 доступных текстурных блоков (0-7) - у современных видеокарт их может быть и больше (до 16 и даже 32), но для лучшей совместимости лучше не использовать больше 8. При автоматическом использовании текстуры материала (см. пояснение к предыдущему аргументу), номер текстурного блока соответствует текстурному слоту материала, а их количество также равно 8. В одном шейдере нельзя передавать две разные текстуры через один и тот же текстурный блок.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparametersecondtexture">GLSLShaderSetParameterSecondTexture</h2>
+<p><code>real GLSLShaderSetParameterSecondTexture(real param, string material, real texunit);</code></p>
+<p>Передает в параметр шейдера вторую текстуру заданного материала. Тип текстуры (<code>sampler2D</code>, <code>samplerCube</code> и пр.) устанавливается автоматически.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>material</code> - имя материала (в активной библиотеке материалов). Если вместо имени указана пустая строка, то будет использована вторая текстура материала, к которому подключен шейдер. </li>
+<li><code>texunit</code> - определяет, через какой текстурный блок передавать текстуру.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterhastextureex">GLSLShaderSetParameterHasTextureEx</h2>
+<p><code>real GLSLShaderSetParameterHasTextureEx(real param, real index);</code></p>
+<p>Передает в параметр шейдера (<code>int</code> или <code>bool</code>) единицу, если у материала, к которому подключен шейдер, есть текстура в заданном текстурном блоке, и ноль в противном случае.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li>`index - индекс текстурного слота (от 0 до 7 включительно).</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparametermatrix">GLSLShaderSetParameterMatrix</h2>
+<p><code>real GLSLShaderSetParameterMatrix(real param, real object);</code></p>
+<p>Передает в параметр шейдера абсолютную матрицу трансформации заданного объекта (тип <code>mat4</code>).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterinvmatrix">GLSLShaderSetParameterInvMatrix</h2>
+<p><code>real GLSLShaderSetParameterInvMatrix(real param, real object);</code></p>
+<p>Передает в параметр шейдера обратную абсолютную матрицу трансформации заданного объекта (тип <code>mat4</code>).</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterviewmatrix">GLSLShaderSetParameterViewMatrix</h2>
+<p><code>real GLSLShaderSetParameterViewMatrix(real param);</code></p>
+<p>Передает в параметр шейдера текущую видовую матрицу (тип <code>mat4</code>), которая переносит точки и векторы из мирового пространства в видовое, где началом координат является позиция камеры, через которую совершается рендеринг. Параметр автоматически обновляется при трансформации камеры.</p>
+<ul>
+<li><code>param</code> - указатель на параметр.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterinvviewmatrix">GLSLShaderSetParameterInvViewMatrix</h2>
+<p><code>real GLSLShaderSetParameterInvViewMatrix(real param);</code></p>
+<p>Передает в параметр шейдера текущую обратную видовую матрицу (тип <code>mat4</code>), которая переносит точки и векторы из видового пространства в мировое. Параметр автоматически обновляется при трансформации камеры.</p>
+<ul>
+<li><code>param</code> - указатель на параметр.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparametershadowtexture">GLSLShaderSetParameterShadowTexture</h2>
+<p><code>real GLSLShaderSetParameterShadowTexture(real param, real shadowmap, real texunit);</code></p>
+<p>Передает в параметр шейдера текстуру буфера теневой карты. В GLSL она имеет тип <code>sampler2DShadow</code>. С помощью этой текстуры можно реализовать в шейдере рендеринг теней.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>shadowmap</code> - указатель на теневую карту</li>
+<li><code>texunit</code> - определяет, через какой текстурный блок передавать текстуру.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparametershadowmatrix">GLSLShaderSetParameterShadowMatrix</h2>
+<p><code>real GLSLShaderSetParameterShadowMatrix(real param, real shadowmap);</code></p>
+<p>Передает в параметр шейдера теневую матрицу из теневой карты (тип <code>mat4</code>). Эта матрица отображает векторы модельно-видового пространства в пространство отсечения теневого буфера.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>shadowmap</code> - указатель на теневую карту.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterfbocolortexture">GLSLShaderSetParameterFBOColorTexture</h2>
+<p><code>real GLSLShaderSetParameterFBOColorTexture(real param, real fbo, real texunit);</code></p>
+<p>Передает в параметр шейдера текстуру цветового буфера FBO.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>texunit</code> - определяет, через какой текстурный блок передавать текстуру.</li>
+</ul>
+<hr />
+<h2 id="glslshadersetparameterfbodepthtexture">GLSLShaderSetParameterFBODepthTexture</h2>
+<p><code>real GLSLShaderSetParameterFBODepthTexture(real param, real fbo, real texunit);</code></p>
+<p>Передает в параметр шейдера текстуру Z-буфера FBO.</p>
+<ul>
+<li><code>param</code> - указатель на параметр</li>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>texunit</code> - определяет, через какой текстурный блок передавать текстуру.</li>
+</ul>
+</body>
+</html>

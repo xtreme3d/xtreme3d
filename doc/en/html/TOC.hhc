@@ -14,6 +14,10 @@
   <PARAM name="Local" value="xtreme3d.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Introduction">
+  <PARAM name="Local" value="intro.html">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value=" Xtreme3D version history">
   <PARAM name="Local" value="history.html">
  </OBJECT>
@@ -184,8 +188,12 @@
   <PARAM name="Local" value="functions/material.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="TextureEx">
+  <PARAM name="Local" value="functions/textureex.html">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shaders">
-  <PARAM name="Local" value="functions/shader.html">
+  <PARAM name="Local" value="functions/shaders.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="ThorFX">

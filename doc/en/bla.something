@@ -15,6 +15,11 @@
                 <param name="ImageNumber" value="0">
              </OBJECT>
         <LI> <OBJECT type="text/sitemap">
+                <param name="Name" value="Introduction">
+                <param name="Local" value="intro.html">
+                <param name="ImageNumber" value="0">
+             </OBJECT>
+        <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value=" Xtreme3D version history">
                 <param name="Local" value="history.html">
                 <param name="ImageNumber" value="0">
@@ -227,8 +232,13 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="TextureEx">
+                        <param name="Local" value="functions/textureex.html">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Shaders">
-                        <param name="Local" value="functions/shader.html">
+                        <param name="Local" value="functions/shaders.html">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">

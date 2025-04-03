@@ -211,7 +211,7 @@
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shaders">
-  <PARAM name="Local" value="functions/shader.html">
+  <PARAM name="Local" value="functions/shaders.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="ThorFX">

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Introduction</title>
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="sakura.css" inline>
+</head>
+<body>
+<h1>Introduction</h1>
+
+<p>We strongly recommend that you read and take into account the following information before you start learning Xtreme3D.</p>
+
+<p>GameMaker is a game creation software which is designed primarily for creating 2D games and provides only basic means of rendering 3D graphics. However, thanks to the GML language extension mechanism, you can connect external libraries to GM, through which almost any additional functionality can be implemented, including high-performance rendering using professional graphics APIs such as Direct3D and OpenGL. Xtreme3D is one of such solutions, allowing you to create 3D worlds of any complexity in GM.</p>
+
+<p>It is necessary, however, to keep in mind that Xtreme3D does not magically turn GameMaker into a full-fledged 3D engine like Unity. For example, you will not have a convenient editor for 3D scenes and models. All game assets must be designed in a third-party editor, such as 3ds Max or Blender. Xtreme3D also does not have a built-in system for storing maps and binding game logic to 3D scene objects, so when creating a complex game (especially with modding support), you will need to create such a system by yourself.</p>
+
+<p>Xtreme3D is a dynamic link library (DLL) whose functions are called by the host application. Interaction with scene objects - for example, changing their properties - is done only through function calls. Since GML supports two data types when calling library functions (`real` and `string`) Xtreme3D objects are identified by real numbers (double-precision floating point numbers). In this documentation, these identifiers are called pointers - by analogy with pointers in C-like languages. At a low level, these are actually pointers (i.e., addresses in RAM), stored as `real` for compatibility with GameMaker.</p>
+
+<p>Xtreme3D is not tied to GameMaker in any way and can be used in any programming language that supports DLLs. For those cases where the language does not have an easy way to create a window and read user input, the engine provides the appropriate functions, so Xtreme3D is a self-sufficient solution for game development - that is, you don't have to use SDL, SFML, WinAPI, etc. At the same time, Xtreme3D can render its graphics into a window provided by the host application, as it happens in GameMaker. For the engine, both scenarios are equivalent.</p>
+
+<p>Xtreme3D is an almost complete wrapper of the popular Delphi graphics library GLScene, which based on OpenGL 1.x. The engine, like the library, uses the old-fashioned fixed rendering pipeline, although it supports GLSL shaders. The engine has several standard built-in shaders, but you will have to implement any non-trivial effects and rendering techniques by yourself. We do not accept suggestions for improvements to the engine if they cannot be implemented using GLScene. Among such improvements are switching to modern versions of OpenGL, support for other graphics APIs, and deferred rendering.</p>
+
+<p>Xtreme3D 4.x is intended primarily for users who have already worked with the previous versions of the engine for Game Maker classic (6.x-8.x) and for some reason want to continue - for example, to port an old Xtreme3D project to the modern GameMaker, or simply because they prefer working with familiar technology. Of course, Xtreme3D is not a competitive alternative to mainstream tools like Unity. However, it is still used to create new games and remakes of old ones, so it is up to you to decide whether it is suitable for real-world use nowadays.</p>
+
+</body>
+</html>
