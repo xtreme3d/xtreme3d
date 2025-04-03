@@ -787,7 +787,7 @@
 - `wrap` - режим повторения. Доступны следующие значения `wrap`:
     - `twRepeat` = 0 - повторение;
     - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
-    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры, который задается функцией `MaterialSetTextureBorderColor`;
     - `twMirrorRepeat` = 3 - зеркальное повторение;
     - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
     - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
@@ -804,7 +804,7 @@
 - `wrap` - режим повторения. Доступны следующие значения `wrap`:
     - `twRepeat` = 0 - повторение;
     - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
-    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры, который задается функцией `MaterialSetTextureBorderColor`;
     - `twMirrorRepeat` = 3 - зеркальное повторение;
     - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
     - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
@@ -821,10 +821,21 @@
 - `wrap` - режим повторения. Доступны следующие значения `wrap`:
     - `twRepeat` = 0 - повторение;
     - `twClampToEdge` = 1 - заполнение крайним цветом текстуры;
-    - `twClampToBorder` = 2 - заполнение цветом границы текстуры;
+    - `twClampToBorder` = 2 - заполнение цветом границы текстуры, который задается функцией `MaterialSetTextureBorderColor`;
     - `twMirrorRepeat` = 3 - зеркальное повторение;
     - `twMirrorClampToEdge` = 4 - сведения отсутствуют;
     - `twMirrorClampToBorder` = 5 - сведения отсутствуют.
+
+---
+
+## MaterialSetTextureBorderColor
+
+`real MaterialSetTextureBorderColor(string material, real color);`
+
+Задает цвет границы текстуры материала.
+
+- `material` - имя материала
+- `color` - цвет.
 
 ---
 
