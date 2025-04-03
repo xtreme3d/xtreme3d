@@ -1000,7 +1000,7 @@
 
 ----
 
-MaterialNoiseSetSharpness
+## MaterialNoiseSetSharpness
 
 `real MaterialNoiseSetSharpness(string material, real sharpness);`
 
