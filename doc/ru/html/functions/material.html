@@ -58,6 +58,14 @@
 <li><code>material</code> - имя материала.</li>
 </ul>
 <hr />
+<h2 id="materiallibrarygettexturebyname">MaterialLibraryGetTextureByName</h2>
+<p><code>real MaterialLibraryGetTextureByName(real matlib, string material);</code></p>
+<p>Возвращает указатель на текстуру материала по имени материала в заданной библиотеке материалов, либо 0, если указанного материала не существует.</p>
+<ul>
+<li><code>matlib</code> - указатель на библиотеку материалов</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
 <h2 id="materiallibraryloadscript">MaterialLibraryLoadScript</h2>
 <p><code>real MaterialLibraryLoadScript(real matlib, string filename);</code></p>
 <p>Загружает скрипт материала - то есть, создает в библиотеке новый материал согласно текстовому описанию из файла.</p>
@@ -233,13 +241,14 @@
 <li><code>tia</code> - режим прозрачности текстуры. Доступны следующие значения <code>tia</code>:<ul>
 <li><code>tiaDefault</code> = 0 - прозрачность по умолчанию (определяется альфа-каналом)</li>
 <li><code>tiaAlphaFromIntensity</code> = 1 - прозрачность выделяется из интенсивности цвета (чем темнее, тем прозрачнее)</li>
-<li><code>tiaSuperBlackTransparent</code> = 2 - текстура прозрачна в абсолютно черных местах (0, 0, 0)</li>
+<li><code>tiaSuperBlackTransparent</code> = 2 - текстура прозрачна в абсолютно черных пикселях (0, 0, 0)</li>
 <li><code>tiaLuminance</code> = 3 - сведения отсутствуют</li>
 <li><code>tiaLuminanceSqrt</code> = 4 - сведения отсутствуют</li>
 <li><code>tiaOpaque</code> = 5 - полная непрозрачность</li>
 <li><code>tiaTopLeftPointColorTransparent</code> = 6 - текстура прозрачна в местах одного цвета с левым нижним углом изображения</li>
 <li><code>tiaInverseLuminance</code> = 7 - сведения отсутствуют</li>
-<li><code>tiaInverseLuminanceSqrt</code> = 8 - сведения отсутствуют</li></ul></li>
+<li><code>tiaInverseLuminanceSqrt</code> = 8 - сведения отсутствуют</li>
+<li><code>tiaBottomRightPointColorTransparent</code> = 9 - текстура прозрачна в местах одного цвета с правым нижним углом изображения.</li></ul></li>
 </ul>
 <hr />
 <h2 id="materialsettexturescale">MaterialSetTextureScale</h2>
@@ -247,15 +256,15 @@
 <p>Задает масштаб текстуры материала.</p>
 <ul>
 <li><code>material</code> - имя материала</li>
-<li><code>u</code>, <code>v</code> - масштаб по горизонтали и вертикали.</li>
+<li><code>xscale</code>, <code>yscale</code> - масштаб по горизонтали и вертикали.</li>
 </ul>
 <hr />
 <h2 id="materialsettextureoffset">MaterialSetTextureOffset</h2>
-<p><code>real MaterialSetTextureOffset(string material, real u, real v);</code></p>
+<p><code>real MaterialSetTextureOffset(string material, real x, real y);</code></p>
 <p>Задает смещение текстуры материала.</p>
 <ul>
 <li><code>material</code> - имя материала</li>
-<li><code>u</code>, <code>v</code> - смещение по горизонтали и вертикали.</li>
+<li><code>x</code>, <code>y</code> - смещение по горизонтали и вертикали.</li>
 </ul>
 <hr />
 <h2 id="materialsettexturemode">MaterialSetTextureMode</h2>
@@ -542,6 +551,32 @@
 <li><code>tfRGBA16SNOR</code> = 158</li></ul></li>
 </ul>
 <hr />
+<h2 id="materialsettexturecomparemode">MaterialSetTextureCompareMode</h2>
+<p><code>real MaterialSetTextureCompareMode(string material, real tcm);</code></p>
+<p>Задает режим сравнения текстуры. Эта опция нужна только в одном случае - когда создается буфер глубины в FBO под теневую карту.</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>tcm</code> - режим сравнения текстуры. Доступны следующие значения <code>tcm</code>:<ul>
+<li><code>tcmNone</code> - сравнение отключено;</li>
+<li><code>tcmCompareRtoTexture</code> - значение, сэмплируемое из текстуры, вычисляется при помощи теста глубины для значения, задаваемого в шейдерной функции <code>shadow2D</code></li></ul></li>
+</ul>
+<hr />
+<h2 id="materialsettexturedepthcomparefunc">MaterialSetTextureDepthCompareFunc</h2>
+<p><code>real MaterialSetTextureDepthCompareFunc(string material, real cf);</code></p>
+<p>Задает функцию сравнения теста глубины текстуры. Эта функция срабатывает, если текстура используется в качестве буфера глубины в FBO.</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>cf</code> - функция сравнения текстуры. Доступны следующие значения <code>cf</code>:<ul>
+<li><code>cfNever</code> = 0 - тест всегда неуспешен;</li>
+<li><code>cfAlways</code> = 1 - тест всегда успешен;</li>
+<li><code>cfLess</code> = 2 - тест успешен, если глубина меньше, чем сэмпл из текстуры;</li>
+<li><code>cfLEqual</code> = 3 - тест успешен, если глубина меньше или равна сэмплу из текстуры;</li>
+<li><code>cfEqual</code> = 4 - тест успешен, если глубина равна сэмплу из текстуры;</li>
+<li><code>cfGreater</code> = 5 - тест успешен, если глубина больше, чем сэмпл из текстуры;</li>
+<li><code>cfNotEqual</code> = 6 - тест успешен, если глубина не равна сэмплу из текстуры;</li>
+<li><code>cfGEqual</code> = 7 - тест успешен, если глубина больше или равна сэмплу из текстуры.</li></ul></li>
+</ul>
+<hr />
 <h2 id="materialsettexturecompression">MaterialSetTextureCompression</h2>
 <p><code>real MaterialSetTextureCompression(string material, real tc);</code></p>
 <p>Задает режим сжатия текстуры.</p>
@@ -635,50 +670,12 @@
 <li><code>filename</code> - имя файла.</li>
 </ul>
 <hr />
-<h2 id="materialloadtextureex">MaterialLoadTextureEx</h2>
-<p><code>real MaterialLoadTextureEx(string material, string filename, real index);</code></p>
-<p>Загружает материалу текстуру в заданный текстурный слот. Всего доступно 8 слотов. Первые два слота (0 и 1) заменяют первую и вторую собственные текстуры материала.</p>
+<h2 id="materialaddtextureex">MaterialAddTextureEx</h2>
+<p><code>real MaterialAddTextureEx(string material, real index);</code></p>
+<p>Добавляет материалу текстуру в заданный текстурный слот и возвращает указатель на нее. Всего доступно 8 слотов. Первые два слота (0 и 1) заменяют первую и вторую собственные текстуры материала.</p>
 <ul>
 <li><code>material</code> - имя материала</li>
-<li><code>filename</code> - путь к файлу изображения</li>
 <li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно).</li>
-</ul>
-<hr />
-<h2 id="materialsettextureex">MaterialSetTextureEx</h2>
-<p><code>real MaterialSetTextureEx(string material1, string material2, real index);</code></p>
-<p>Копирует текстуру материала 2 в заданный текстурный слот материала 1.</p>
-<ul>
-<li><code>material1</code> - имя материала 1</li>
-<li><code>material2</code> - имя материала 2</li>
-<li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно).</li>
-</ul>
-<hr />
-<h2 id="materialsettextureexfromlibrary">MaterialSetTextureExFromLibrary</h2>
-<p><code>real MaterialSetTextureExFromLibrary(string material1, real matlib, string material2, real index);</code></p>
-<p>Копирует текстуру материала 2 из заданной библиотеки материалов в заданный текстурный слот материала 1.</p>
-<ul>
-<li><code>material1</code> - имя материала 1</li>
-<li><code>matlib</code> - id библиотеки материалов</li>
-<li><code>material2</code> - имя материала 2 в библиотеке matlib</li>
-<li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно).</li>
-</ul>
-<hr />
-<h2 id="materialgentextureex">MaterialGenTextureEx</h2>
-<p><code>real MaterialGenTextureEx(string material, real index, real width, real height);</code></p>
-<p>Создает пустую текстуру в заданном текстурном слоте материала.</p>
-<ul>
-<li><code>material</code> - имя материала</li>
-<li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно)</li>
-<li><code>width</code>, <code>height</code> - ширина и высота текстуры.</li>
-</ul>
-<hr />
-<h2 id="materialenabletextureex">MaterialEnableTextureEx</h2>
-<p><code>real MaterialEnableTextureEx(string material, real index, real mode);</code></p>
-<p>Включает или выключает текстуру в заданном текстурном слоте материала.</p>
-<ul>
-<li><code>material</code> - имя материала</li>
-<li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно)</li>
-<li><code>mode</code> - true или false (1 и 0 соответственно).</li>
 </ul>
 <hr />
 <h2 id="materialhastextureex">MaterialHasTextureEx</h2>
@@ -689,17 +686,32 @@
 <li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно).</li>
 </ul>
 <hr />
-<h2 id="materialcullfrontfaces">MaterialCullFrontFaces</h2>
-<p><code>real MaterialCullFrontFaces(string material, real mode);</code></p>
-<p>Задает сторону отсечения граней. Если эта опция включена, то будут отсекаться передние грани, в противном случае (по умолчанию) - задние.</p>
+<h2 id="materialgettextureex">MaterialGetTextureEx</h2>
+<p><code>real MaterialGetTextureEx(string material, real index);</code></p>
+<p>Возвращает текстуру материала в заданном текстурном слоте, либо 0, если ее не существует.</p>
+<ul>
+<li><code>material</code> - имя материала</li>
+<li><code>index</code> - индекс текстурного слота (от 0 до 7 включительно).</li>
+</ul>
+<hr />
+<h2 id="materialtextureexclear">MaterialTextureExClear</h2>
+<p><code>real MaterialTextureExClear(string material);</code></p>
+<p>Очищает текстуры материала во всех слотах.</p>
+<ul>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="materialsetdepthwrite">MaterialSetDepthWrite</h2>
+<p><code>real MaterialSetDepthWrite(string material, real mode);</code></p>
+<p>Включает или выключает запись в буфер глубины.</p>
 <ul>
 <li><code>material</code> - имя материала</li>
 <li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
 </ul>
 <hr />
-<h2 id="materialsetzwrite">MaterialSetZWrite</h2>
-<p><code>real MaterialSetZWrite(string material, real mode);</code></p>
-<p>Включает или выключает запись в Z-буфер.</p>
+<h2 id="materialsetdepthtest">MaterialSetDepthTest</h2>
+<p><code>real MaterialSetDepthTest(string material, real mode);</code></p>
+<p>Включает или выключает тест глубины - то есть, проверку перекрытия объекта другими объектами, уже отрисованными.</p>
 <ul>
 <li><code>material</code> - имя материала</li>
 <li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>

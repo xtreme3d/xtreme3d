@@ -206,6 +206,10 @@
   <PARAM name="Local" value="functions/material.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="TextureEx">
+  <PARAM name="Local" value="functions/textureex.html">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Shaders">
   <PARAM name="Local" value="functions/shader.html">
  </OBJECT>

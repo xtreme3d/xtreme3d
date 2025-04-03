@@ -1,5 +1,6 @@
 window_set_caption("Xtreme3D 4 Demo");
 
+// Initialize Xtreme3D
 dll_init("xtreme3d.dll");
 
 EngineCreate();
@@ -8,6 +9,7 @@ EngineSetCulling(vcNone);
 EngineSetObjectsSorting(osNone);
 EngineSetMaxLights(8);
 
+// Create viewer in the game window
 windowHandle = window_handle();
 viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
 ViewerSetBackgroundColor(viewer, c_gray);
@@ -19,11 +21,14 @@ ViewerSetAntiAliasing(viewer, csa8xHQ); //CSAA
 ViewerEnableVSync(viewer, vsmNoSync); 
 ViewerSetAutoRender(viewer, false);
 
+// Create main material library
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
 
+// Create Kraft physics engine instance
 kraft = KraftCreate();
 
+// Create root scene objects
 global.preprocess = DummycubeCreate(0);
 global.back = DummycubeCreate(0);
 global.scene = DummycubeCreate(0);
@@ -32,8 +37,8 @@ global.front = DummycubeCreate(0);
 raycastObjects = DummycubeCreate(global.scene);
 shadowCasters = DummycubeCreate(raycastObjects);
 
+// Create camera
 camPos = DummycubeCreate(global.scene);
-
 camera = CameraCreate(camPos);
 ViewerSetCamera(viewer, camera);
 ObjectSetPosition(camPos, 0, 2, 3);
@@ -41,6 +46,7 @@ CameraSetViewDepth(camera, 1000);
 CameraSetFocal(camera, 100);
 CameraSetNearPlaneBias(camera, 0.2);
 
+// Create shadow map
 shadowMapSize = 2048;
 shadowFboMatlib = MaterialLibraryCreate();
 MaterialLibraryActivate(shadowFboMatlib);
@@ -79,6 +85,7 @@ shadowMap = ShadowMapCreate(shadowFbo, viewer, shadowCamera);
 
 MaterialLibraryActivate(matlib);
 
+// Create light
 light1 = LightCreate(lsParallel, global.scene);
 ObjectPitch(light1, -135);
 LightSetAmbientColor(light1, c_black);
@@ -86,6 +93,7 @@ LightSetDiffuseColor(light1, c_white);
 LightSetSpecularColor(light1, c_white);
 ObjectSetPosition(light1, 3, 5, 3);
 
+// Create shader and scene objects
 bumpShader = BumpShaderCreate();
 BumpShaderSetDiffuseTexture(bumpShader, "");
 BumpShaderSetNormalTexture(bumpShader, "");
@@ -115,15 +123,14 @@ KraftRigidBodyFinish(rbPlane);
 MaterialCreate("mCrate", "textures/crate.png")
 MaterialSetAmbientColor("mCrate", c_ltgray, 1.0)
 
-var i, cube, rbCube, sCube;
-for (i = 0; i < 5; i += 1)
+for (var i = 0; i < 5; i += 1)
 {
     var cube = CubeCreate(1, 1, 1, raycastObjects);
     ObjectSetPosition(cube, -2, 2 + i * 1.8, i * 0.05);
     ObjectSetMaterial(cube, "mCrate");
-    rbCube = KraftCreateRigidBody(kraft, krbtDynamic);
+    var rbCube = KraftCreateRigidBody(kraft, krbtDynamic);
     KraftObjectSetRigidBody(cube, rbCube);
-    sCube = KraftCreateShapeBox(rbCube, 0.5, 0.5, 0.5);
+    var sCube = KraftCreateShapeBox(rbCube, 0.5, 0.5, 0.5);
     KraftShapeSetDensity(sCube, 200.0);
     KraftRigidBodyFinish(rbCube);
 }
@@ -168,6 +175,7 @@ MaterialSetAmbientColor("mRed", c_red, 1);
 MaterialSetDiffuseColor("mRed", c_red, 1);
 ObjectSetMaterial(sphereMarker, "mRed");
 
+// Create HUD
 ftfont = TTFontCreate("data/fonts/DroidSans.ttf", 20);
 text = HUDTextCreate(ftfont, "FPS: 0", global.front);
 HUDTextSetColor(text, c_white, 1.0);

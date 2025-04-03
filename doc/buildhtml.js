@@ -46,6 +46,7 @@ const functions =
     { title: "Terrain", inFilename: `markdown/${lang}/functions/terrain.md`, outFilename: `${lang}/html/functions/terrain.html` },
     { title: "Object", inFilename: `markdown/${lang}/functions/object.md`, outFilename: `${lang}/html/functions/object.html` },
     { title: "Material", inFilename: `markdown/${lang}/functions/material.md`, outFilename: `${lang}/html/functions/material.html` },
+    { title: "TextureEx", inFilename: `markdown/${lang}/functions/textureex.md`, outFilename: `${lang}/html/functions/textureex.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
