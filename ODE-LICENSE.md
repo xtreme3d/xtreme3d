@@ -1,5 +1,5 @@
 Open Dynamics Engine
-Copyright (c) 2001,2002, Russell L. Smith.
+Copyright (c) 2001, 2002, Russell L. Smith.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
