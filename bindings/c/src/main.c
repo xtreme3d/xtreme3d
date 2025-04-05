@@ -6,6 +6,16 @@
 #include <windows.h>
 #include <xtreme3d.h>
 
+double RightAscension(double aHours, double aMinutes, double aSeconds)
+{
+    return 15.0 * aHours + (15.0 / 60.0) * aMinutes + (15.0 / 3660.0) * aSeconds;
+}
+
+double Declination(double aDegrees, double aMinutes, double aSeconds)
+{
+    return aDegrees + (1.0 / 60.0) * aMinutes + (1.0 / 3660.0) * aSeconds;
+}
+
 int main(int argc, char** argv)
 {
     /* If you don't need the console window, uncomment the following: */

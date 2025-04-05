@@ -5184,4 +5184,8 @@ x3d.WindowIsActive.restype = ctypes.c_double
 def WindowIsActive(aW):
     return x3d.WindowIsActive(aW)
 
+def RightAscension(aHours, aMinutes, aSeconds):
+    return 15.0 * aHours + (15.0 / 60.0) * aMinutes + (15.0 / 3660.0) * aSeconds
 
+def Declination(aDegrees, aMinutes, aSeconds):
+    return aDegrees + (1.0 / 60.0) * aMinutes + (1.0 / 3660.0) * aSeconds

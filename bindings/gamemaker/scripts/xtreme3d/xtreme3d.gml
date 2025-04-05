@@ -5242,6 +5242,14 @@ function LoggerLog(aLogger, aLogLevel, aMessage) {
 	return external_call(global._LoggerLog, aLogger, aLogLevel, aMessage);
 }
 
+function RightAscension(aHours, aMinutes, aSeconds) {
+	return 15.0 * aHours + (15.0 / 60.0) * aMinutes + (15.0 / 3660.0) * aSeconds;
+}
+
+function Declination(aDegrees, aMinutes, aSeconds) {
+	return aDegrees + (1.0 / 60.0) * aMinutes + (1.0 / 3660.0) * aSeconds;
+}
+
 // Object sorting
 #macro osInherited 0
 #macro osNone 1
