@@ -75,7 +75,7 @@ Lensflare - это эффект, который часто можно наблю
 
 ## LensflareSetSecs
 
-`real LensflareSetSecs(real lf, real secs);
+`real LensflareSetSecs(real lf, real secs);`
 
 Задает количество кругов.
 

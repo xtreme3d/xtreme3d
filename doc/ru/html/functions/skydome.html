@@ -1,159 +1,141 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Skydome</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Skydome</H1>
-
-<A class=type>Класс: TGLEarthSkyDome</A><BR><BR>
-
-<A>Skydome в дословном переводе означает "небесный купол", "небосвод". В древности люди считали, что небо - это своего рода круглый купол, 
-окружающий землю, на котором подвешены солнце, луна, звезды и планеты. Есть известная гравюра с изображением человека, 
-добравшегося до края света и с изумлением заглядывающего в дыру, проделанную в "небесной тверди".
-<BR>В действительности все это, разумеется, не так. Но компьютерная графика - забавная штука. В ней и небо может быть куполом. А почему бы 
-и нет? Skydome - объект фонового плана, поэтому добраться до него, как тот человек с гравюры, невозможно. Кроме того, предусмотрены  
-почти все эффекты атмосферы. На куполе в буквальном смысле "подвешены" солнце и звезды. Солнце плавно ходит по небу: когда оно опускается к горизонту, 
-мы наблюдаем закат. А потом небо темнеет и наступает ночь. Звезды мерцают, как настоящие. Единственный минус - нет облаков. Их придется делать 
-самостоятельно. Это, вероятно, было допущено для того, чтобы не лишать разработчика возможности сделать, например, авиасимулятор: чтобы можно 
-было как опуститься до самой земли, так и подняться к облакам и видеть их с близкого расстояния.
-<BR>
-<BR>Цвет неба в skydome составлен из трех компонентов: Deep, Haze, Night и Sky. 
-<BR>Deep - цвет так называемого надира - точки, противоположной зениту; она расположена у нас под ногами. Обычно в реальной жизни надир увидеть 
-невозможно, земля мешает :) Но цвет этой точки важен, так как он определяет, с каким оттенком смешивается цвет неба по мере ухода за линию горизонта.
-<BR>Haze - цвет линии горизонта. Обычно соответствует цвету тумана.
-<BR>Sky - цвет зенита. В этот цвет окрашен весь небесный купол до линии горизонта.
-<BR>Night - цвет ночи. Когда солнце уходит за горизонт, этим цветом постепенно заполняются все компоненты неба, кроме Deep. Чаще всего это черный или темно-синий, хотя могут быть и другие варианты.</A>
-<BR><BR>
-<img src=../data/skydomecomponents.png align="center">
-<HR>
-
-<A name="SkydomeCreate"></A>
-<H1 class=name>SkydomeCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeCreate</A><A>( slices,stacks,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект skydome и возвращает его id.</A>
-<BR><A>slices,stacks - количество сегментов сферы по горизонтали и вертикали (параллелей и меридиан). Чем выше эти значения, тем качественнее выглядит небо.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="SkydomeSetOptions"></A>
-<H1 class=name>SkydomeSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetOptions</A><A>( sky,fade,rotate as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает две опции skydome: плавное появление звезд и поворот неба. Первая опция, по существу, определяет, нужно ли 
-"прятать" звезды в дневное время. Вторая позволяет имитировать вращение Земли вокруг своей оси. Рекомендуется включить обе опции, 
-так как по умолчанию они отключены.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>fade - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>rotate - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="SkydomeSetDeepColor"></A>
-<H1 class=name>SkydomeSetDeepColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetDeepColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет компонента Deep.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetHazeColor"></A>
-<H1 class=name>SkydomeSetHazeColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetHazeColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет компонента Haze.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetNightColor"></A>
-<H1 class=name>SkydomeSetNightColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetNightColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет компонента Night.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetSkyColor"></A>
-<H1 class=name>SkydomeSetSkyColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetSkyColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет компонента Sky.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetSunDawnColor"></A>
-<H1 class=name>SkydomeSetSunDawnColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetSunDawnColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет солнца на закате и рассвете.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetSunZenithColor"></A>
-<H1 class=name>SkydomeSetSunZenithColor</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetSunZenithColor</A><A>( sky,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет солнца в зените.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeSetSunElevation"></A>
-<H1 class=name>SkydomeSetSunElevation</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetSunElevation</A><A>( sky,angle as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает угол, под которым находится солнце по отношению к горизонту. Угол в 90 градусов соответствует зениту, -90 - надиру. 
-Изменяя это значение, можно задать движение солнца по небу. Чтобы оно всходило на востоке, а садилось на западе, необходимо 
-включить вращение неба функцией </A><A class=function>SkydomeSetOptions</A><A>.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>angle - угол.</A>
-<HR>
-
-<A name="SkydomeSetTurbidity"></A>
-<H1 class=name>SkydomeSetTurbidity</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeSetTurbidity</A><A>( sky,turbidity as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает уровень мутности атмосферы, вследствие которой происходит рассеивание световых лучей и уменьшение четкости границ между цветовыми 
-компонентами неба. Например, при низкой мутности солнце будет маленьким и четким, а при повышенной - огромным и размытым.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>turbidity - уровень мутности.</A>
-<HR>
-
-<A name="SkydomeAddRandomStars"></A>
-<H1 class=name>SkydomeAddRandomStars</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeAddRandomStars</A><A>( sky,stars,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет на небо заданное количество звезд в произвольном порядке. По умолчанию звезд на небе нет.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>stars - количество звезд</A>
-<BR><A>color - цвет звезд.</A>
-<HR>
-
-<A name="SkydomeAddStar"></A>
-<H1 class=name>SkydomeAddStar</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeAddStar</A><A>( sky,ra,dec,mag,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет на небо новую звезду. Положение звезды задается во второй экваториальной системе координат - прямым восхождением (right ascension) и склонением (declination). Обе величины задаются в градусах, хотя в астрономии прямое восхождение традиционно измеряется в часах, минутах и секундах (1 угловой час равен 360 / 24 = 15 градусам). Чтобы упростить перевод этих единиц в градусы, в Xtreme3D SDK есть скрипт RightAscension(hours,minutes,seconds). Также имеется скрипт Declination(degrees,minutes,seconds), при помощи которого можно получить единую величину из градусов, угловых минут и угловых секунд.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>ra - прямое восхождение</A>
-<BR><A>dec - склонение</A>
-<BR><A>mag - звездная величина</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="SkydomeClearStars"></A>
-<H1 class=name>SkydomeClearStars</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeClearStars</A><A>( sky as </A><A class=type>real</A><A> );</A>
-<BR><A>Удаляет все звезды с неба.</A>
-<BR><A>sky - id объекта skydome.</A>
-<HR>
-
-<A name="SkydomeTwinkleStars"></A>
-<H1 class=name>SkydomeTwinkleStars</H1>
-<A class=type>real</A><A> = </A><A class=function>SkydomeTwinkleStars</A><A>( sky,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает и выключает мерцание звезд.</A>
-<BR><A>sky - id объекта skydome</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Skydome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="skydome">Skydome</h1>
+<p>Skydome в дословном переводе означает "небесный купол", "небосвод". В древности люди считали, что небо - это своего рода круглый купол, окружающий землю, на котором подвешены солнце, луна, звезды и планеты. Есть известная гравюра с изображением человека, добравшегося до края света и с изумлением заглядывающего в дыру, проделанную в "небесной тверди".</p>
+<p>В действительности все это, разумеется, не так. Но компьютерная графика - забавная штука. В ней и небо может быть куполом. А почему бы и нет? Skydome - объект фонового плана, поэтому добраться до него, как тот человек с гравюры, невозможно. Кроме того, предусмотрены почти все эффекты атмосферы. На куполе в буквальном смысле "подвешены" солнце и звезды. Солнце плавно ходит по небу: когда оно опускается к горизонту, мы наблюдаем закат. А потом небо темнеет и наступает ночь. Звезды мерцают, как настоящие. Единственный минус - нет облаков. Их придется делать самостоятельно. Это, вероятно, было допущено для того, чтобы не лишать разработчика возможности сделать, например, авиасимулятор: чтобы можно было как опуститься до самой земли, так и подняться к облакам и видеть их с близкого расстояния.</p>
+<p>Цвет неба в skydome составлен из трех компонентов: Deep, Haze, Night и Sky.</p>
+<ul>
+<li>Deep - цвет так называемого надира - точки, противоположной зениту; она расположена у нас под ногами. Обычно в реальной жизни надир увидеть невозможно, земля мешает :) Но цвет этой точки важен, так как он определяет, с каким оттенком смешивается цвет неба по мере ухода за линию горизонта.</li>
+<li>Haze - цвет линии горизонта. Обычно соответствует цвету тумана.</li>
+<li>Sky - цвет зенита. В этот цвет окрашен весь небесный купол до линии горизонта.</li>
+<li>Night - цвет ночи. Когда солнце уходит за горизонт, этим цветом постепенно заполняются все компоненты неба, кроме Deep. Чаще всего это черный или темно-синий, хотя могут быть и другие варианты.</li>
+</ul>
+<hr />
+<h2 id="skydomecreate">SkydomeCreate</h2>
+<p><code>real SkydomeCreate(real slices, real stacks, real parent);</code></p>
+<p>Создает новый объект skydome и возвращает указатель на него.</p>
+<ul>
+<li><code>slices</code>, <code>stacks</code> - количество сегментов сферы по горизонтали и вертикали (параллелей и меридиан). Чем выше эти значения, тем качественнее выглядит небо.</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="skydomesetoptions">SkydomeSetOptions</h2>
+<p><code>real SkydomeSetOptions(real sky, real fade, real rotate);</code></p>
+<p>Задает две опции skydome: плавное появление звезд и поворот неба. Первая опция, по существу, определяет, нужно ли "прятать" звезды в дневное время. Вторая позволяет имитировать вращение Земли вокруг своей оси. Рекомендуется включить обе опции, так как по умолчанию они отключены.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>fade</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
+<li><code>rotate</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="skydomesetdeepcolor">SkydomeSetDeepColor</h2>
+<p><code>real SkydomeSetDeepColor(real sky, real color);</code></p>
+<p>Задает цвет компонента Deep.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesethazecolor">SkydomeSetHazeColor</h2>
+<p><code>real SkydomeSetHazeColor(real sky, real color);</code></p>
+<p>Задает цвет компонента Haze.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesetnightcolor">SkydomeSetNightColor</h2>
+<p><code>real SkydomeSetNightColor(real sky, real color);</code></p>
+<p>Задает цвет компонента Night.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesetskycolor">SkydomeSetSkyColor</h2>
+<p><code>real SkydomeSetSkyColor(real sky, real color);</code></p>
+<p>Задает цвет компонента Sky.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesetsundawncolor">SkydomeSetSunDawnColor</h2>
+<p><code>real SkydomeSetSunDawnColor(real sky, real color);</code></p>
+<p>Задает цвет солнца на закате и рассвете.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesetsunzenithcolor">SkydomeSetSunZenithColor</h2>
+<p><code>real SkydomeSetSunZenithColor(real sky, real color);</code></p>
+<p>Задает цвет солнца в зените.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomesetsunelevation">SkydomeSetSunElevation</h2>
+<p><code>real SkydomeSetSunElevation(real sky, real angle);</code></p>
+<p>Задает угол, под которым находится солнце по отношению к горизонту. Угол в 90 градусов соответствует зениту, -90 - надиру. Изменяя это значение, можно задать движение солнца по небу. Чтобы оно всходило на востоке, а садилось на западе, необходимо включить вращение неба функцией <code>SkydomeSetOptions</code>.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>angle</code> - угол.</li>
+</ul>
+<hr />
+<h2 id="skydomesetturbidity">SkydomeSetTurbidity</h2>
+<p><code>real SkydomeSetTurbidity(real sky, real turbidity);</code></p>
+<p>Задает уровень мутности атмосферы, вследствие которой происходит рассеивание световых лучей и уменьшение четкости границ между цветовыми компонентами неба. Например, при низкой мутности солнце будет маленьким и четким, а при повышенной - огромным и размытым.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>turbidity</code> - уровень мутности.</li>
+</ul>
+<hr />
+<h2 id="skydomeaddrandomstars">SkydomeAddRandomStars</h2>
+<p><code>real SkydomeAddRandomStars(real sky, real stars, real color);</code></p>
+<p>Добавляет на небо заданное количество звезд в произвольном порядке. По умолчанию звезд на небе нет.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>stars</code> - количество звезд</li>
+<li><code>color</code> - цвет звезд.</li>
+</ul>
+<hr />
+<h2 id="skydomeaddstar">SkydomeAddStar</h2>
+<p><code>real SkydomeAddStar(real sky, real ra, real dec, real mag, real color);</code></p>
+<p>Добавляет на небо новую звезду. Положение звезды задается во второй экваториальной системе координат - прямым восхождением (right ascension) и склонением (declination). Обе величины задаются в градусах, хотя в астрономии прямое восхождение традиционно измеряется в часах, минутах и секундах (1 угловой час равен 360 / 24 = 15 градусам). Чтобы упростить перевод этих единиц в градусы, в Xtreme3D SDK есть скрипт <code>RightAscension(hours, minutes, seconds)</code>. Также имеется скрипт <code>Declination(degrees, minutes, seconds)</code>, при помощи которого можно получить единую величину из градусов, угловых минут и угловых секунд.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>ra</code> - прямое восхождение</li>
+<li><code>dec</code> - склонение</li>
+<li><code>mag</code> - звездная величина</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="skydomeclearstars">SkydomeClearStars</h2>
+<p><code>real SkydomeClearStars(real sky);</code></p>
+<p>Удаляет все звезды с неба.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome.</li>
+</ul>
+<hr />
+<h2 id="skydometwinklestars">SkydomeTwinkleStars</h2>
+<p><code>real SkydomeTwinkleStars(real sky, real mode);</code></p>
+<p>Включает и выключает мерцание звезд.</p>
+<ul>
+<li><code>sky</code> - указатель на объект skydome</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+</body>
+</html>
