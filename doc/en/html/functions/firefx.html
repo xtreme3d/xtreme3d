@@ -1,141 +1,126 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>FireFX</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>FireFX</H1>
-
-<A class=type>Класс: TGLFireFXManager, TGLBFireFX</A><BR><BR>
-
-<A>FireFX - система частиц, моделирующая огонь. Хотя с помощью FireFX можно воссоздавать и другие эффекты: дым, искры, взрывы, дождь, фейерверк, бенгальские огни и т.д.
-<BR>Система FireFX состоит из конечного числа частиц - небольших объектов-спрайтов, изображающих крохотные цветные точки. Частицы обычно движутся 
-в одном направлении, соответствующем вектору Direction объекта системы (правда, можно "взорвать" систему - тогда частицы разлетятся во все стороны).
-<BR>
-<BR>В некоторых случаях необходимо создать сразу несколько одинаковых эффектов. Не очень-то удобно повторять все настройки для каждого 
-из них. Специально для такой ситуации предусмотрен менеджер FireFX. Менеджер - это что-то вроде сервера, на котором выполняются все 
-вычисления, связанные с эффектом. А отдельные системы FireFX - это клиенты, использующие настройки указанного для них менеджера. 
-Вы просто создаете менеджер, настраиваете его как вам угодно, а затем добавляете любое количество систем в любых нужных вам местах сцены. 
-Изменения, внесенные в настройки менеджера, автоматически коснутся всех подчиненных ему систем.</A>
-<BR><HR>
-
-<A name="FireFXManagerCreate"></A>
-<H1 class=name>FireFXManagerCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXManagerCreate</A><A>();</A>
-<BR><A>Создает новый менеджер FireFX и возвращает его id.</A>
-<HR>
-
-<A name="FireFXCreate"></A>
-<H1 class=name>FireFXCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXCreate</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новую систему FireFX и прикрепляет ее к заданному объекту.</A>
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="FireFXSetColor"></A>
-<H1 class=name>FireFXSetColor</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetColor</A><A>( manager,incolor,inalpha,outcolor,outalpha as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет частиц.</A>
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>incolor,inalpha - цвет и прозрачность центра частицы</A>
-<BR><A>outcolor,outalpha - цвет и прозрачность периферии частицы.</A>
-<HR>
-
-<A name="FireFXSetMaxParticles"></A>
-<H1 class=name>FireFXSetMaxParticles</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetMaxParticles</A><A>( manager,particles as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает максимальное количество частиц, отображаемых одновременно.</A>
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>particles - количество частиц (от 0 до 255).</A>
-<HR>
-
-<A name="FireFXSetParticleSize"></A>
-<H1 class=name>FireFXSetParticleSize</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetParticleSize</A><A>( manager,size as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает размер частиц.</A>
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>size - размер.</A>
-<HR>
-
-<A name="FireFXSetDensity"></A>
-<H1 class=name>FireFXSetDensity</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetDensity</A><A>( manager,density as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает плотность - количество частиц, появляющихся одновременно.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>density - плотность.</A>
-<HR>
-
-<A name="FireFXSetEvaporation"></A>
-<H1 class=name>FireFXSetEvaporation</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetEvaporation</A><A>( manager,evaporation as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает растяжку частиц по вертикали (чем выше, тем длиннее будут частицы).
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>evaporation - растяжка.</A>
-<HR>
-
-<A name="FireFXSetCrown"></A>
-<H1 class=name>FireFXSetCrown</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetCrown</A><A>( manager,crown as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает размер так называемой короны - окружности, по периметру которой появляются частицы. Если размер короны равен нулю, частицы появляются 
-из одной точки.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>crown - размер короны.</A>
-<HR>
-
-<A name="FireFXSetLife"></A>
-<H1 class=name>FireFXSetLife</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetLife</A><A>( manager,life as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает время жизни частиц (в десятых долях секунды).
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>life - время жизни.</A>
-<HR>
-
-<A name="FireFXSetBurst"></A>
-<H1 class=name>FireFXSetBurst</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetBurst</A><A>( manager,burst as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает скорость движения частиц.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>burst - скорость.</A>
-<HR>
-
-<A name="FireFXSetRadius"></A>
-<H1 class=name>FireFXSetRadius</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXSetRadius</A><A>( manager,radius as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает радиус окружности, в пределах которой допускается произвольное смещение источника частиц.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>radius - радиус.</A>
-<HR>
-
-<A name="FireFXExplosion"></A>
-<H1 class=name>FireFXExplosion</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXExplosion</A><A>( manager,isp,maxsp,lbf as </A><A class=type>real</A><A> );</A>
-<BR><A>"Взрывает" систему частиц. При этом частицы разлетятся во все стороны. Если вызвать эту функцию один раз, произойдет одиночный 
-взрыв, после чего система снова придет в норму. Но если вызывать ее постоянно, взрыв так и будет длиться, напоминая бенгальский огонь.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>isp - начальная скорость разлета</A>
-<BR><A>maxsp - максимальная скорость разлета</A>
-<BR><A>lbf - радиус сферы, за пределы которой взрыв не должен выйти.</A>
-<HR>
-
-<A name="FireFXRingExplosion"></A>
-<H1 class=name>FireFXRingExplosion</H1>
-<A class=type>real</A><A> = </A><A class=function>FireFXRingExplosion</A><A>( manager,isp,maxsp,lbf,rx,ry,rz,sx,sy,sz as </A><A class=type>real</A><A> );</A>
-<BR><A>"Взрывает" систему частиц в виде кольца или линии. При этом частицы разлетятся в пределах двух кординат. Если вызвать эту функцию один раз, произойдет одиночный 
-взрыв, после чего система снова придет в норму. Но если вызывать ее постоянно, взрыв так и будет длиться.
-<BR><A>manager - id менеджера FireFX</A>
-<BR><A>isp - начальная скорость разлета</A>
-<BR><A>maxsp - максимальная скорость разлета</A>
-<BR><A>lbf - радиус сферы, за пределы которой взрыв не должен выйти.</A>
-<BR><A>rx,ry,rz - кординаты поворота.</A>
-<BR><A>sx,sy,sz - маштаб.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FireFX</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="firefx">FireFX</h1>
+<p>FireFX - система частиц, моделирующая огонь. Хотя с помощью FireFX можно воссоздавать и другие эффекты: дым, искры, взрывы, дождь, фейерверк, бенгальские огни и т.д.</p>
+<p>Система FireFX состоит из конечного числа частиц - небольших объектов-спрайтов, изображающих крохотные цветные точки. Частицы обычно движутся в одном направлении, соответствующем вектору Direction объекта системы (правда, можно "взорвать" систему - тогда частицы разлетятся во все стороны).</p>
+<p>В некоторых случаях необходимо создать сразу несколько одинаковых эффектов. Не очень-то удобно повторять все настройки для каждого из них. Специально для такой ситуации предусмотрен менеджер FireFX. Менеджер - это что-то вроде сервера, на котором выполняются все вычисления, связанные с эффектом. А отдельные системы FireFX - это клиенты, использующие настройки указанного для них менеджера. Вы просто создаете менеджер, настраиваете его как вам угодно, а затем добавляете любое количество систем в любых нужных вам местах сцены. Изменения, внесенные в настройки менеджера, автоматически коснутся всех подчиненных ему систем.</p>
+<hr />
+<h2 id="firefxmanagercreate">FireFXManagerCreate</h2>
+<p><code>real FireFXManagerCreate();</code></p>
+<p>Создает новый менеджер FireFX и возвращает указатель на него.</p>
+<hr />
+<h2 id="firefxcreate">FireFXCreate</h2>
+<p><code>real FireFXCreate(real manager, real object);</code></p>
+<p>Создает новую систему FireFX и прикрепляет ее к заданному объекту.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="firefxsetcolor">FireFXSetColor</h2>
+<p><code>real FireFXSetColor(real manager, real incolor, real inalpha, real outcolor, real outalpha);</code></p>
+<p>Задает цвет частиц.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>incolor</code>, <code>inalpha</code> - цвет и прозрачность центра частицы</li>
+<li><code>outcolor</code>, <code>outalpha</code> - цвет и прозрачность периферии частицы.</li>
+</ul>
+<hr />
+<h2 id="firefxsetmaxparticles">FireFXSetMaxParticles</h2>
+<p><code>real FireFXSetMaxParticles(real manager, real particles);</code></p>
+<p>Задает максимальное количество частиц, отображаемых одновременно.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>particles</code> - количество частиц (от 0 до 255).</li>
+</ul>
+<hr />
+<h2 id="firefxsetparticlesize">FireFXSetParticleSize</h2>
+<p><code>real FireFXSetParticleSize(real manager, real size);</code></p>
+<p>Задает размер частиц.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>size</code> - размер.</li>
+</ul>
+<hr />
+<h2 id="firefxsetdensity">FireFXSetDensity</h2>
+<p><code>real FireFXSetDensity(real manager, real density);</code></p>
+<p>Задает плотность - количество частиц, появляющихся одновременно.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>density</code> - плотность.</li>
+</ul>
+<hr />
+<h2 id="firefxsetevaporation">FireFXSetEvaporation</h2>
+<p><code>real FireFXSetEvaporation(real manager, real evaporation);</code></p>
+<p>Задает растяжку частиц по вертикали (чем выше, тем длиннее будут частицы).</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>evaporation</code> - растяжка.</li>
+</ul>
+<hr />
+<h2 id="firefxsetcrown">FireFXSetCrown</h2>
+<p><code>real FireFXSetCrown(real manager, real crown);</code></p>
+<p>Задает размер так называемой короны - окружности, по периметру которой появляются частицы. Если размер короны равен нулю, частицы появляются из одной точки.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>crown</code> - размер короны.</li>
+</ul>
+<hr />
+<h2 id="firefxsetlife">FireFXSetLife</h2>
+<p><code>real FireFXSetLife(real manager, real life);</code></p>
+<p>Задает время жизни частиц (в десятых долях секунды).</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>life</code> - время жизни.</li>
+</ul>
+<hr />
+<h2 id="firefxsetburst">FireFXSetBurst</h2>
+<p><code>real FireFXSetBurst(real manager, real burst);</code></p>
+<p>Задает скорость движения частиц.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>burst</code> - скорость.</li>
+</ul>
+<hr />
+<h2 id="firefxsetradius">FireFXSetRadius</h2>
+<p><code>real FireFXSetRadius(real manager, real radius);</code></p>
+<p>Задает радиус окружности, в пределах которой допускается произвольное смещение источника частиц.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>radius</code> - радиус.</li>
+</ul>
+<hr />
+<h2 id="firefxexplosion">FireFXExplosion</h2>
+<p><code>real FireFXExplosion(real manager, real isp, real maxsp, real lbf);</code></p>
+<p>"Взрывает" систему частиц. При этом частицы разлетятся во все стороны. Если вызвать эту функцию один раз, произойдет одиночный взрыв, после чего система снова придет в норму. Но если вызывать ее постоянно, взрыв так и будет длиться, напоминая бенгальский огонь.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>isp</code> - начальная скорость разлета</li>
+<li><code>maxsp</code> - максимальная скорость разлета</li>
+<li><code>lbf</code> - радиус сферы, за пределы которой взрыв не должен выйти.</li>
+</ul>
+<hr />
+<h2 id="firefxringexplosion">FireFXRingExplosion</h2>
+<p><code>real FireFXRingExplosion(real manager, real isp, real maxsp, real lbf, real rx, real ry, real rz, real sx, real sy, real sz);</code></p>
+<p>"Взрывает" систему частиц в виде кольца или линии. При этом частицы разлетятся в пределах двух кординат. Если вызвать эту функцию один раз, произойдет одиночный взрыв, после чего система снова придет в норму. Но если вызывать ее постоянно, взрыв так и будет длиться.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FireFX</li>
+<li><code>isp</code> - начальная скорость разлета</li>
+<li><code>maxsp</code> - максимальная скорость разлета</li>
+<li><code>lbf</code> - радиус сферы, за пределы которой взрыв не должен выйти</li>
+<li><code>rx</code>, <code>ry</code>, <code>rz</code> - кординаты поворота</li>
+<li><code>sx</code>, <code>sy</code>, <code>sz</code> - маштаб.</li>
+</ul>
+</body>
+</html>

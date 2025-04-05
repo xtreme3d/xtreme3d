@@ -25,6 +25,9 @@ li code {
 }
 
 hr {
+    margin: 20px 0;
+    padding: 0;
+    height: 0;
     border: none;
-    border-top: 1px solid #e0dcd6;
+    border-top: 2px dashed #ddd;
 }

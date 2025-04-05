@@ -645,7 +645,7 @@
 <li><code>wrap</code> - режим повторени€. ƒоступны следующие значени€ <code>wrap</code>:<ul>
 <li><code>twRepeat</code> = 0 - повторение;</li>
 <li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
-<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры, который задаетс€ функцией <code>MaterialSetTextureBorderColor</code>;</li>
 <li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
 <li><code>twMirrorClampToEdge</code> = 4 - сведени€ отсутствуют;</li>
 <li><code>twMirrorClampToBorder</code> = 5 - сведени€ отсутствуют.</li></ul></li>
@@ -659,7 +659,7 @@
 <li><code>wrap</code> - режим повторени€. ƒоступны следующие значени€ <code>wrap</code>:<ul>
 <li><code>twRepeat</code> = 0 - повторение;</li>
 <li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
-<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры, который задаетс€ функцией <code>MaterialSetTextureBorderColor</code>;</li>
 <li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
 <li><code>twMirrorClampToEdge</code> = 4 - сведени€ отсутствуют;</li>
 <li><code>twMirrorClampToBorder</code> = 5 - сведени€ отсутствуют.</li></ul></li>
@@ -673,10 +673,18 @@
 <li><code>wrap</code> - режим повторени€. ƒоступны следующие значени€ <code>wrap</code>:<ul>
 <li><code>twRepeat</code> = 0 - повторение;</li>
 <li><code>twClampToEdge</code> = 1 - заполнение крайним цветом текстуры;</li>
-<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры;</li>
+<li><code>twClampToBorder</code> = 2 - заполнение цветом границы текстуры, который задаетс€ функцией <code>MaterialSetTextureBorderColor</code>;</li>
 <li><code>twMirrorRepeat</code> = 3 - зеркальное повторение;</li>
 <li><code>twMirrorClampToEdge</code> = 4 - сведени€ отсутствуют;</li>
 <li><code>twMirrorClampToBorder</code> = 5 - сведени€ отсутствуют.</li></ul></li>
+</ul>
+<hr />
+<h2 id="materialsettexturebordercolor">MaterialSetTextureBorderColor</h2>
+<p><code>real MaterialSetTextureBorderColor(string material, real color);</code></p>
+<p>«адает цвет границы текстуры материала.</p>
+<ul>
+<li><code>material</code> - им€ материала</li>
+<li><code>color</code> - цвет.</li>
 </ul>
 <hr />
 <h2 id="materialgettexturewidth">MaterialGetTextureWidth</h2>
@@ -795,7 +803,7 @@
 <li><code>mincut</code> - сведени€ отсутствуют.</li>
 </ul>
 <hr />
-<p>MaterialNoiseSetSharpness</p>
+<h2 id="materialnoisesetsharpness">MaterialNoiseSetSharpness</h2>
 <p><code>real MaterialNoiseSetSharpness(string material, real sharpness);</code></p>
 <p>—ведени€ отсутствуют.</p>
 <ul>

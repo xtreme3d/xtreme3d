@@ -1,124 +1,109 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Lensflare</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Lensflare</H1>
-
-<A class=type>Класс: TGLLensFlare</A><BR><BR>
-
-<A>Lensflare - это эффект, который часто можно наблюдать в объективе камеры при съемке ярких источников света. Блик света 
-многократно повторяется внутри системы линз в виде радужных кругов и колец, иногда шестиугольников. В компьютерных играх это 
-нередко используется для передачи ощущения пространства и атмосферы. Наиболее часто lensflare можно видеть в играх с открытым 
-пространством: это авиасимуляторы, гонки, некоторые FPS и т.д.
-<BR>В Xtreme3D есть отличный встроенный lensflare, который вы можете настроить по собственному вкусу и получить максимально реалистичный 
-эффект. Он состоит из главной вспышки, похожей на звезду, и нескольких кругов. Главная вспышка соответствует источнику света и 
-включает несколько элементов, которые можно задейстовать в любой комбинации: большие лучи, малые лучи, кольцо (его еще называют гало), 
-мягкое сияние.
-<BR>Создав объект lensflare, вы должны расположить его в том же месте, где находится источник света.
-</A>
-<BR><BR>
-<img src=../data/lensflareelements.jpg align="center">
-<HR>
-
-<A name="LensflareCreate"></A>
-<H1 class=name>LensflareCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект lensflare и возвращает его id.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="LensflareSetSize"></A>
-<H1 class=name>LensflareSetSize</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetSize</A><A>( lf,size as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает максимально возможный радиус для кругов.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>size - размер.</A>
-<HR>
-
-<A name="LensflareSetSeed"></A>
-<H1 class=name>LensflareSetSeed</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetSeed</A><A>( lf,seed as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает произвольное число, которое определит расположение кругов относительно друг друга, а также их размеры.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>seed - произвольное число.</A>
-<HR>
-
-<A name="LensflareSetSqueeze"></A>
-<H1 class=name>LensflareSetSqueeze</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetSqueeze</A><A>( lf,squeeze as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает растяжку главной вспышки по вертикали (1 соответствует нормальному состоянию).</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>squeeze - растяжка.</A>
-<HR>
-
-<A name="LensflareSetStreaks"></A>
-<H1 class=name>LensflareSetStreaks</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetStreaks</A><A>( lf,streaks as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает количество больших лучей.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>streaks - количество больших лучей.</A>
-<HR>
-
-<A name="LensflareSetStreakwidth"></A>
-<H1 class=name>LensflareSetStreakwidth</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetStreakwidth</A><A>( lf,width as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает ширину больших лучей.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>width - ширина.</A>
-<HR>
-
-<A name="LensflareSetSecs"></A>
-<H1 class=name>LensflareSetSecs</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetSecs</A><A>( lf,secs as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает количество кругов.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>secs - количество кругов.</A>
-<HR>
-
-<A name="LensflareSetResolution"></A>
-<H1 class=name>LensflareSetResolution</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetResolution</A><A>( lf,res as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает разрешение - количество сегментов, из которых состоят элементы lensflare. Чем выше это значение, тем "круглее" будут 
-все круги и кольца. А уменьшив разрешение, можно вместо кругов получить вышеупомянутые шестиугольники.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>res - разрешение.</A>
-<HR>
-
-<A name="LensflareSetElements"></A>
-<H1 class=name>LensflareSetElements</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetElements</A><A>( lf,glow,ring,streaks,rays,secs as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает комбинацию элементов lensflare. Отключив некоторые элементы, вы можете, например, сделать просто красивую звезду в небе, свет от автомобильных фар и т.д.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>glow - включает или выключает сияние: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>ring - включает или выключает кольцо: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>streaks - включает или выключает большие лучи: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>rays - включает или выключает малые лучи: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>secs - включает или выключает круги: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="LensflareSetGradients"></A>
-<H1 class=name>LensflareSetGradients</H1>
-<A class=type>real</A><A> = </A><A class=function>LensflareSetGradients</A><A>( lf,ind,color1,alpha1,color2,alpha2 as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет и прозрачность элементов. Вы должны указать цвет и прозрачность центра и краев для радиального градиента, которым заполняется элемент.
-<BR>Необходимо также указать индекс элемента, у которого следует менять цвет:
-<BR>1 = сияние
-<BR>2 = кольцо
-<BR>3 = большие лучи
-<BR>4 = малые лучи
-<BR>5 = круги.</A>
-<BR><A>lf - id объекта lensflare</A>
-<BR><A>ind - индекс элемента</A>
-<BR><A>color1,alpha1 - цвет и прозрачность центра</A>
-<BR><A>color2,alpha2 - цвет и прозрачность краев.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lensflare</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="lensflare">Lensflare</h1>
+<p>Lensflare - это эффект, который часто можно наблюдать в объективе камеры при съемке ярких источников света. Блик света многократно повторяется внутри системы линз в виде радужных кругов и колец, иногда шестиугольников. В компьютерных играх это нередко используется для передачи ощущения пространства и атмосферы. Наиболее часто lensflare можно видеть в играх с открытым пространством: это авиасимуляторы, гонки, некоторые FPS и т.д.</p>
+<p>В Xtreme3D есть отличный встроенный lensflare, который вы можете настроить по собственному вкусу и получить максимально реалистичный эффект. Он состоит из главной вспышки, похожей на звезду, и нескольких кругов. Главная вспышка соответствует источнику света и включает несколько элементов, которые можно задейстовать в любой комбинации: большие лучи, малые лучи, кольцо (его еще называют гало), мягкое сияние.</p>
+<p>Создав объект lensflare, вы должны расположить его в том же месте, где находится источник света.</p>
+<hr />
+<h2 id="lensflarecreate">LensflareCreate</h2>
+<p><code>real LensflareCreate(real parent);</code></p>
+<p>Создает новый объект lensflare и возвращает его id.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetsize">LensflareSetSize</h2>
+<p><code>real LensflareSetSize(real lf, real size);</code></p>
+<p>Задает максимально возможный радиус для кругов.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>size</code> - размер.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetseed">LensflareSetSeed</h2>
+<p><code>real LensflareSetSeed(real lf, real seed);</code></p>
+<p>Задает произвольное число, которое определит расположение кругов относительно друг друга, а также их размеры.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>seed</code> - произвольное число.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetsqueeze">LensflareSetSqueeze</h2>
+<p><code>real LensflareSetSqueeze(real lf, real squeeze);</code></p>
+<p>Задает растяжку главной вспышки по вертикали (1 соответствует нормальному состоянию).</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>squeeze</code> - растяжка.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetstreaks">LensflareSetStreaks</h2>
+<p><code>real LensflareSetStreaks(real lf, real streaks);</code></p>
+<p>Задает количество больших лучей.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>streaks</code> - количество больших лучей.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetstreakwidth">LensflareSetStreakwidth</h2>
+<p><code>real LensflareSetStreakwidth(real lf, real width);</code></p>
+<p>Задает ширину больших лучей.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>width</code> - ширина.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetsecs">LensflareSetSecs</h2>
+<p>`real LensflareSetSecs(real lf, real secs);</p>
+<p>Задает количество кругов.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>secs</code> - количество кругов.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetresolution">LensflareSetResolution</h2>
+<p><code>real LensflareSetResolution(real lf, real res);</code></p>
+<p>Задает разрешение - количество сегментов, из которых состоят элементы lensflare. Чем выше это значение, тем "круглее" будут все круги и кольца. А уменьшив разрешение, можно вместо кругов получить вышеупомянутые шестиугольники.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>res</code> - разрешение.</li>
+</ul>
+<hr />
+<h2 id="lensflaresetelements">LensflareSetElements</h2>
+<p><code>real LensflareSetElements(real lf, real glow, real ring, real streaks, real rays, real secs);</code></p>
+<p>Задает комбинацию элементов lensflare. Отключив некоторые элементы, вы можете, например, сделать просто красивую звезду в небе, свет от автомобильных фар и т.д.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>glow</code> - включает или выключает сияние: true или false (1 и 0 соответственно)</li>
+<li><code>ring</code> - включает или выключает кольцо: true или false (1 и 0 соответственно)</li>
+<li><code>streaks</code> - включает или выключает большие лучи: true или false (1 и 0 соответственно)</li>
+<li><code>rays</code> - включает или выключает малые лучи: true или false (1 и 0 соответственно)</li>
+<li><code>secs</code> - включает или выключает круги: true или false (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="lensflaresetgradients">LensflareSetGradients</h2>
+<p><code>real LensflareSetGradients(real lf, real ind, real color1, real alpha1, real color2, real alpha2);</code></p>
+<p>Задает цвет и прозрачность элементов. Вы должны указать цвет и прозрачность центра и краев для радиального градиента, которым заполняется элемент.</p>
+<ul>
+<li><code>lf</code> - указатель на объект lensflare</li>
+<li><code>ind</code> - индекс элемента, у которого следует менять цвет:<ul>
+<li>1 = сияние</li>
+<li>2 = кольцо</li>
+<li>3 = большие лучи</li>
+<li>4 = малые лучи</li>
+<li>5 = круги</li></ul></li>
+<li><code>color1</code>, <code>alpha1</code> - цвет и прозрачность центра</li>
+<li><code>color2</code>, <code>alpha2</code> - цвет и прозрачность краев.</li>
+</ul>
+</body>
+</html>
