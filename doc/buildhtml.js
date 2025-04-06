@@ -63,6 +63,7 @@ const functions =
     { title: "Mirror", inFilename: `markdown/${lang}/functions/mirror.md`, outFilename: `${lang}/html/functions/mirror.html` },
     { title: "Navigator", inFilename: `markdown/${lang}/functions/navigator.md`, outFilename: `${lang}/html/functions/navigator.html` },
     { title: "Movement", inFilename: `markdown/${lang}/functions/movement.md`, outFilename: `${lang}/html/functions/movement.html` },
+    { title: "DCE", inFilename: `markdown/${lang}/functions/dce.md`, outFilename: `${lang}/html/functions/dce.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
