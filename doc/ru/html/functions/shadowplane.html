@@ -1,67 +1,56 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Shadowplane</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Shadowplane</H1>
-
-<A class=type>Класс: TGLShadowPlane</A><BR><BR>
-
-<A>
-Теневая плоскость (shadowplane) аналогична обычному примитиву плоскости, отличаясь тем, что другие объекты 
-могут отбрасывать на нее тени. Этот метод построения теней очень быстрый и удобный, но он применим только 
-в отдельных случаях, когда объекты имеют ограниченную область перемещения. Например, вряд ли теневую плоскость 
-можно использовать в боевиках или гонках - зато она хорошо подойдет для спортивного симулятора, а также для логической или 
-казуальной игры.
-</A>
-<BR>
-<HR>
-
-<A name="ShadowplaneCreate"></A>
-<H1 class=name>ShadowplaneCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowplaneCreate</A><A>( width,height,xtiles,ytiles,target,light,color,alpha,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новую теневую плоскость и возвращает ее id.</A>
-<BR><A>width,height - ширина и высота плоскости</A>
-<BR><A>xtiles,ytiles - количество квадов по горизонтали и вертикали</A>
-<BR><A>target - id объекта, который должен отбрасывать тень (все его потомки также будут отбрасывать тени)</A>
-<BR><A>light - id источника света, который должен быть использован для построения теней</A>
-<BR><A>color,alpha - цвет и прозрачность теней</A>
-<BR><A>parent - id родителя для теневой плоскости (0 - отсутствие родителя).</A>
-<HR>
-
-<A name="ShadowplaneSetLight"></A>
-<H1 class=name>ShadowplaneSetLight</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowplaneSetLight</A><A>( sp,light as </A><A class=type>real</A><A> );</A>
-<BR><A>Меняет источник света, который используется для построения теней.</A>
-<BR><A>sp - id теневой плоскости</A>
-<BR><A>light - id источника света.</A>
-<HR>
-
-<A name="ShadowplaneSetObject"></A>
-<H1 class=name>ShadowplaneSetObject</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowplaneSetObject</A><A>( sp,target as </A><A class=type>real</A><A> );</A>
-<BR><A>Меняет объект, который должен отбрасывать тень (все его потомки также будут отбрасывать тени).</A>
-<BR><A>sp - id теневой плоскости</A>
-<BR><A>target - id объекта.</A>
-<HR>
-
-<A name="ShadowplaneSetOptions"></A>
-<H1 class=name>ShadowplaneSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowplaneSetOptions</A><A>( sp,stencil,scissor,transparent,ignorez as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции теневой плоскости.</A>
-<BR><A>sp - id теневой плоскости</A>
-<BR><A>stencil - включает или отключает стенсильный тест: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). При включенном стенсильном тесте тени будут обрезаться по границам плоскости</A>
-<BR><A>scissor - включает или выключает обрезку теней по экранной области, в которой рендерится теневая плоскость: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Это несколько ускоряет рендеринг, так как тени от объектов, не попадающие в плоскость, будут отсечены еще до стенсильного теста</A>
-<BR><A>transparent - включает или отключает прозрачность плоскости: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно)</A>
-<BR><A>ignorez - включает или отключает игнорирование z-буфера: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Shadowplane</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="shadowplane">Shadowplane</h1>
+<p>Теневая плоскость (shadowplane) аналогична обычному примитиву плоскости, отличаясь тем, что другие объекты могут отбрасывать на нее тени. Этот метод построения теней очень быстрый и удобный, но он применим только в отдельных случаях, когда объекты имеют ограниченную область перемещения. Например, вряд ли теневую плоскость можно использовать в боевиках или гонках - зато она хорошо подойдет для спортивного симулятора, а также для логической или казуальной игры. </p>
+<hr />
+<h2 id="shadowplanecreate">ShadowplaneCreate</h2>
+<p><code>real ShadowplaneCreate(real width, real height, real xtiles, real ytiles, real target, real light, real color, real alpha, real parent);</code></p>
+<p>Создает новую теневую плоскость и возвращает указатель на нее.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота плоскости</li>
+<li><code>xtiles</code>, <code>ytiles</code> - количество квадов по горизонтали и вертикали</li>
+<li><code>target</code> - указатель на объект, который должен отбрасывать тень (все его потомки также будут отбрасывать тени)</li>
+<li><code>light</code> - указатель на источник света, который должен быть использован для построения теней</li>
+<li><code>color</code>, <code>alpha</code> - цвет и прозрачность теней</li>
+<li><code>parent</code> - указатель на родителя для теневой плоскости (0 - отсутствие родителя).</li>
+</ul>
+<hr />
+<h2 id="shadowplanesetlight">ShadowplaneSetLight</h2>
+<p><code>real ShadowplaneSetLight(real sp, real light);</code></p>
+<p>Меняет источник света, который используется для построения теней.</p>
+<ul>
+<li><code>sp</code> - указатель на теневую плоскость</li>
+<li><code>light</code> - указатель на источник света.</li>
+</ul>
+<hr />
+<h2 id="shadowplanesetobject">ShadowplaneSetObject</h2>
+<p><code>real ShadowplaneSetObject(real sp, real target);</code></p>
+<p>Меняет объект, который должен отбрасывать тень (все его потомки также будут отбрасывать тени).</p>
+<ul>
+<li><code>sp</code> - указатель на теневую плоскость</li>
+<li><code>target</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="shadowplanesetoptions">ShadowplaneSetOptions</h2>
+<p><code>real ShadowplaneSetOptions(real sp, real stencil, real scissor, real transparent, real ignorez);</code></p>
+<p>Задает опции теневой плоскости.</p>
+<ul>
+<li><code>sp</code> - указатель на теневую плоскость</li>
+<li><code>stencil</code> - включает или отключает стенсильный тест: <code>true</code> или <code>false</code> (1 и 0 соответственно). При включенном стенсильном тесте тени будут обрезаться по границам плоскости</li>
+<li><code>scissor</code> - включает или выключает обрезку теней по экранной области, в которой рендерится теневая плоскость: <code>true</code> или <code>false</code> (1 и 0 соответственно). Это несколько ускоряет рендеринг, так как тени от объектов, не попадающие в плоскость, будут отсечены еще до стенсильного теста</li>
+<li><code>transparent</code> - включает или отключает прозрачность плоскости: <code>true</code> или <code>false</code> (1 и 0 соответственно)</li>
+<li><code>ignorez</code> - включает или отключает игнорирование z-буфера: <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+</body>
+</html>

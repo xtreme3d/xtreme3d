@@ -1,91 +1,67 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Skybox</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Skybox</H1>
-
-<A class=type>Класс: TGLSkyBox</A><BR><BR>
-
-<A>
-Помимо skydome, существует еще один способ воссоздания неба. Название skybox говорит само за себя - это так 
-называемая "небесная коробка" - куб, окружающий сцену со всех сторон. К граням куба применяются специальные 
-текстуры с нарисованным задним планом. Это может быть не только небо, но и горы, море, лес - любой пейзаж. 
-В этом и заключается преимущество skybox.
-</A>
-<BR><BR>
-<img src=../data/skybox.jpg align="center">
-<BR><BR>
-<A>
-Подобные текстуры получают в программах трехмерного моделирования путем рендеринга шести проекций на сцену 
-камерой с углом зрения в 90 градусов. Помимо skybox, эти текстуры (которые иногда называют кубическими или 
-трехмерными) могут применяться в статичных картах кубического проецирования (cubemaps).
-<BR>В Xtreme3D кроме вышеупомянутых шести текстур может использоваться еще одна - для облаков. В качестве 
-облаков создается дополнительная плоскость внутри куба. 
-<BR>Вы можете создать несколько "небесных коробок" с любыми элементами: например, только с одними облаками. 
-Так можно сделать несколько слоев облаков, чтобы было реалистичнее. Вы можете динамически 
-анимировать текстуры, чтобы получить движение облаков. Кроме того, если сделать любой объект дочерним для 
-"небесной коробки", он будет зафиксирован по отношению к небу. Таким способом очень просто добавить  
-солнце, луну, планеты... Несмотря на кажущуюся простоту и примитивность, skybox - очень мощный инструмент. 
-Если подойти к делу творчески, можно создать фантастические по красоте пейзажи.
-<BR>Единственный недостаток skybox - это ограниченное пространство деятельности игрока. Пейзаж не приблизится, 
-сколько бы к нему не шли. И к облакам на самолете тоже не подняться. Поэтому skybox применим только в тех 
-играх, где игроку заведомо не дано большой свободы перемещения. Это могут быть action, аркады, некоторые гонки, 
-а также интерьерные сцены (где пейзаж виден только из окна).
-</A>
-<HR>
-
-<A name="SkyboxCreate"></A>
-<H1 class=name>SkyboxCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>SkyboxCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый skybox и возвращает его id.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="SkyboxSetMaterial"></A>
-<H1 class=name>SkyboxSetMaterial</H1>
-<A class=type>real</A><A> = </A><A class=function>SkyboxSetMaterial</A><A>( skybox,sbm as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
-<BR><A>Применяет материал к заданной грани куба skybox. Грань определяется константой sbm:</A>
-<BR><A class=constant name="sbmTop">sbmTop</A><A> = 0 - верхняя грань</A>
-<BR><A class=constant name="sbmBottom">sbmBottom</A><A> = 1 - нижняя</A>
-<BR><A class=constant name="sbmLeft">sbmLeft</A><A> = 2 - левая</A>
-<BR><A class=constant name="sbmRight">sbmRight</A><A> = 3 - правая</A>
-<BR><A class=constant name="sbmFront">sbmFront</A><A> = 4 - передняя</A>
-<BR><A class=constant name="sbmBack">sbmBack</A><A> = 5 - задняя</A>
-<BR><A class=constant name="sbmClouds">sbmClouds</A><A> = 6 - плоскость облаков.</A>
-<BR><A>skybox - id объекта skybox</A>
-<BR><A>sbm - индекс грани</A>
-<BR><A>material - имя материала.</A>
-<HR>
-
-<A name="SkyboxSetClouds"></A>
-<H1 class=name>SkyboxSetClouds</H1>
-<A class=type>real</A><A> = </A><A class=function>SkyboxSetClouds</A><A>( skybox,offset,size as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции плоскости облаков - смещение по оси Y относительно центра куба, а также масштаб.</A>
-<BR><A>skybox - id объекта skybox</A>
-<BR><A>offset - смещение</A>
-<BR><A>size - масштаб.</A>
-<HR>
-
-<A name="SkyboxSetStyle"></A>
-<H1 class=name>SkyboxSetStyle</H1>
-<A class=type>real</A><A> = </A><A class=function>SkyboxSetStyle</A><A>( skybox,sbs as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает стиль "небесной коробки" (sbs). Доступны следующие значения sbs:</A>
-<BR><A class=constant name="sbsFull">sbsFull</A><A> = 0 - точка обзора совпадает с центром куба (значение по умолчанию)</A>
-<BR><A class=constant name="sbsTopHalf">sbsTopHalf</A><A> = 1 - куб смещен вверх на половину своей высоты</A>
-<BR><A class=constant name="sbsBottomHalf">sbsBottomHalf</A><A> = 2 - куб смещен вниз на половину своей высоты</A>
-<BR><A class=constant name="sbsTopTwoThirds">sbsTopTwoThirds</A><A> = 3 - куб смещен вверх на треть своей высоты</A>
-<BR><A class=constant name="sbsTopHalfClamped">sbsTopHalfClamped</A><A> = 4 - куб смещен вверх на половину своей высоты, нижняя грань обрезана.</A>
-<BR><A>skybox - id объекта skybox</A>
-<BR><A>sbs - стиль.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Skybox</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="skybox">Skybox</h1>
+<p>Помимо skydome, существует еще один способ воссоздания неба. Название говорит само за себя - это так называемая "небесная коробка" - куб, окружающий сцену со всех сторон. К граням куба применяются специальные текстуры с нарисованным задним планом. Это может быть не только небо, но и горы, море, лес - любой пейзаж. В этом и заключается преимущество скайбокса.</p>
+<p><img src="../data/skybox.jpg" alt="skybox" /></p>
+<p>Подобные текстуры получают в программах трехмерного моделирования путем рендеринга шести проекций на сцену камерой с углом зрения в 90 градусов. Помимо скайбоксов, эти текстуры (которые иногда называют кубическими или трехмерными) могут применяться в статичных картах кубического проецирования (cubemaps).</p>
+<p>В Xtreme3D кроме вышеупомянутых шести текстур может использоваться еще одна - для облаков. В качестве облаков создается дополнительная плоскость внутри куба.</p>
+<p>Вы можете создать несколько скайбоксов с любыми элементами: например, только с одними облаками. Так можно сделать несколько слоев облаков, чтобы было реалистичнее. Вы можете динамически анимировать текстуры, чтобы получить движение облаков. Кроме того, если сделать любой объект дочерним для скайбокса, он будет зафиксирован по отношению к небу. Таким способом очень просто добавить солнце, луну, планеты… Несмотря на кажущуюся простоту и примитивность, скайбокс - очень мощный инструмент. Если подойти к делу творчески, можно создать фантастические по красоте пейзажи.</p>
+<p>Единственный недостаток скайбокса - это ограниченное пространство деятельности игрока. Пейзаж не приблизится, сколько бы к нему не шли. И к облакам на самолете тоже не подняться. Поэтому скайбокс применим только в тех играх, где игроку заведомо не дано большой свободы перемещения. Это могут быть экшн, аркады, некоторые гонки, а также интерьерные сцены (где пейзаж виден только из окна).</p>
+<hr />
+<h2 id="skyboxcreate">SkyboxCreate</h2>
+<p><code>real SkyboxCreate(real parent);</code></p>
+<p>Создает новый скайбокс и возвращает его id.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="skyboxsetmaterial">SkyboxSetMaterial</h2>
+<p><code>real SkyboxSetMaterial(real skybox, real sbm, string material);</code></p>
+<p>Применяет материал к заданной грани куба skybox. Грань определяется константой <code>sbm</code>:</p>
+<ul>
+<li><code>skybox</code> - указатель на скайбокс</li>
+<li><code>sbm</code> - индекс грани. Доступны следующие значения <code>sbm</code>:<ul>
+<li><code>sbmTop</code> = 0 - верхняя грань</li>
+<li><code>sbmBottom</code> = 1 - нижняя</li>
+<li><code>sbmLeft</code> = 2 - левая</li>
+<li><code>sbmRight</code> = 3 - правая</li>
+<li><code>sbmFront</code> = 4 - передняя</li>
+<li><code>sbmBack</code> = 5 - задняя</li>
+<li><code>sbmClouds</code> = 6 - плоскость облаков</li></ul></li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="skyboxsetclouds">SkyboxSetClouds</h2>
+<p><code>real SkyboxSetClouds(real skybox, real offset, real size);</code></p>
+<p>Задает опции плоскости облаков - смещение по оси Y относительно центра куба, а также масштаб.</p>
+<ul>
+<li><code>skybox</code> - указатель на скайбокс</li>
+<li><code>offset</code> - смещение</li>
+<li><code>size</code> - масштаб.</li>
+</ul>
+<hr />
+<h2 id="skyboxsetstyle">SkyboxSetStyle</h2>
+<p><code>real SkyboxSetStyle(real skybox, real sbs);</code></p>
+<p>Задает стиль скайбокса.</p>
+<ul>
+<li><code>skybox</code> - указатель на скайбокс</li>
+<li><code>sbs</code> - стиль скайбокса. Доступны следующие значения <code>sbs</code>:<ul>
+<li><code>sbsFull</code> = 0 - точка обзора совпадает с центром куба (значение по умолчанию)</li>
+<li><code>sbsTopHalf</code> = 1 - куб смещен вверх на половину своей высоты</li>
+<li><code>sbsBottomHalf</code> = 2 - куб смещен вниз на половину своей высоты</li>
+<li><code>sbsTopTwoThirds</code> = 3 - куб смещен вверх на треть своей высоты</li>
+<li><code>sbsTopHalfClamped</code> = 4 - куб смещен вверх на половину своей высоты, нижняя грань обрезана.</li></ul></li>
+</ul>
+</body>
+</html>

@@ -1,151 +1,136 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Water</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Water</H1>
-
-<A class=type>Класс: TGLWaterPlane</A><BR><BR>
-
-<A>Реалистичная анимированная вода (water) является своего рода визитной карточкой Xtreme3D. Это и в самом деле красивый спецэффект, 
-позволяющий добиться высокой степени реализма сцены. Однако использовать воду надо осторожно, так как вычисления, связанные 
-с ней, довольно ресурсоемки.
-<BR>Water представляет собой плоскую поверхность, разбитую на определенное количество квадов, на которых возникают концентрические 
-волновые возмущения - получается эффект "дождя". Также поддерживаются линейные волны, как в океане - они параллельны, вычисляются по синусоиде и 
-равномерно движутся по всей поверхности воды.
-<BR>Сама по себе water - всего лишь геометрия и никакими свойствами жидкости, кроме волн, не обладает. Поэтому все остальные эффекты, 
-усиливающие впечатление от воды (отражение, брызги, физику плавающих объектов и т.д.) вам придется писать самостоятельно.
-</A>
-<HR>
-
-<A name="WaterCreate"></A>
-<H1 class=name>WaterCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект water и возвращает его id.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="WaterCreateRandomRipple"></A>
-<H1 class=name>WaterCreateRandomRipple</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreateRandomRipple</A><A>( water as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает случайное возмущение на поверхности воды.</A>
-<BR><A>water - id объекта water.</A>
-<HR>
-
-<A name="WaterCreateRippleAtGridPosition"></A>
-<H1 class=name>WaterCreateRippleAtGridPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtGridPosition</A><A>( water,x,y as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно исходной точки поверхности.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>x,y - координаты точки возмущения.</A>
-<HR>
-
-<A name="WaterCreateRippleAtWorldPosition"></A>
-<H1 class=name>WaterCreateRippleAtWorldPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtWorldPosition</A><A>( water,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно абсолютного начала координат.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>x,y,z - координаты точки возмущения.</A>
-<HR>
-
-<A name="WaterCreateRippleAtObjectPosition"></A>
-<H1 class=name>WaterCreateRippleAtObjectPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterCreateRippleAtObjectPosition</A><A>( water,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает возмущение в точке на поверхности воды, соответствующей абсолютной позиции заданного объекта. Функция пригождается, если нужно сделать волны, расходящиеся от упавшего в воду предмета.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="WaterSetMask"></A>
-<H1 class=name>WaterSetMask</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetMask</A><A>( water as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
-<BR><A>Загружает маску для воды из текстуры материала. Маска - монохромное изображение, в котором белые пиксели 
-означают видимые части воды, черные - невидимые. Например, если задать черную маску с изображением белой окружности, 
-получится круглый водоем.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>material - имя материала.</A>
-<HR>
-
-<A name="WaterSetActive"></A>
-<H1 class=name>WaterSetActive</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetActive</A><A>( water,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает анимацию воды.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="WaterReset"></A>
-<H1 class=name>WaterReset</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterReset</A><A>( water as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает воду к ее первоначальному состоянию.</A>
-<BR><A>water - id объекта water.</A>
-<HR>
-
-<A name="WaterSetRainTimeInterval"></A>
-<H1 class=name>WaterSetRainTimeInterval</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetRainTimeInterval</A><A>( water,interval as </A><A class=type>real</A><A> );</A>
-<BR><A>Для воды можно задать автоматическую генерацию возмущений. Это будет выглядеть, как будто идет дождь. Данная функция задает временной 
-интервал между двумя "каплями" в этом дожде. Если выставить это значение равным 0, то дождь будет отключен.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>interval - время в миллисекундах (в диапазоне от 0 до 1000000; по умолчанию 500).</A>
-<HR>
-
-<A name="WaterSetRainForce"></A>
-<H1 class=name>WaterSetRainForce</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetRainForce</A><A>( water,force as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает силу, с которой падают капли "дождя". Чем меньше это значение, тем быстрее исчезают волны.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>force - сила "дождя" (в диапазоне от 0 до 1000000; по умолчанию 5000).</A>
-<HR>
-
-<A name="WaterSetViscosity"></A>
-<H1 class=name>WaterSetViscosity</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetViscosity</A><A>( water,viscosity as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает вязкость воды - амплитуду возмущений. Чем меньше это значение, тем гелеобразнее жидкость.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>viscosity - вязкость (в диапазоне от 0 до 1; по умолчанию 0.99).</A>
-<HR>
-
-<A name="WaterSetElastic"></A>
-<H1 class=name>WaterSetElastic</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetElastic</A><A>( water,elastic as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает эластичность - скорость распространения возмущений. В реальном мире это свойство зависит от плотности вещества (например, у ртути плотность гораздо 
-выше, чем у воды, поэтому волны распространяются быстрее).</A>
-<BR><A>water - id объекта water</A>
-<BR><A>elastic - эластичность (по умолчанию 10).</A>
-<HR>
-
-<A name="WaterSetResolution"></A>
-<H1 class=name>WaterSetResolution</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetResolution</A><A>( water,res as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает разрешение воды - число квадов по стороне сетки. Чем выше это значение, тем выше 
-качество воды, и, соответственно, ниже скорость ее работы.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>res - разрешение (от 16 и выше; по умолчанию 64).</A>
-<HR>
-
-<A name="WaterSetLinearWaveHeight"></A>
-<H1 class=name>WaterSetLinearWaveHeight</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetLinearWaveHeight</A><A>( water,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает высоту линейных волн.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>height - высота (по умолчанию 1).</A>
-<HR>
-
-<A name="WaterSetLinearWaveFrequency"></A>
-<H1 class=name>WaterSetLinearWaveFrequency</H1>
-<A class=type>real</A><A> = </A><A class=function>WaterSetLinearWaveFrequency</A><A>( water,freq as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает частоту линейных волн (по сути, длину одного колебания). Если выставить это значение равным 0, то линейные волны будут отключены.</A>
-<BR><A>water - id объекта water</A>
-<BR><A>freq - частота (по умолчанию 0).</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Water</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="water">Water</h1>
+<p>Реалистичная анимированная вода (water) является своего рода визитной карточкой Xtreme3D. Это и в самом деле красивый спецэффект, позволяющий добиться высокой степени реализма сцены. Однако использовать воду надо осторожно, так как вычисления, связанные с ней, довольно ресурсоемки.</p>
+<p>Вода представляет собой плоскую поверхность, разбитую на определенное количество квадов, на которых возникают концентрические волновые возмущения - получается эффект "дождя". Также поддерживаются линейные волны, как в океане - они параллельны, вычисляются по синусоиде и равномерно движутся по всей поверхности воды.</p>
+<p>Сама по себе вода - всего лишь геометрия и никакими свойствами жидкости, кроме волн, не обладает. Поэтому все остальные эффекты, усиливающие впечатление от воды (отражение, брызги, физику плавающих объектов и т.д.) вам придется писать самостоятельно.</p>
+<hr />
+<h2 id="watercreate">WaterCreate</h2>
+<p><code>real WaterCreate(real parent);</code></p>
+<p>Создает новую воду и возвращает указатель на нее.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="watercreaterandomripple">WaterCreateRandomRipple</h2>
+<p><code>real WaterCreateRandomRipple(real water);</code></p>
+<p>Создает случайное возмущение на поверхности воды.</p>
+<ul>
+<li><code>water</code> - указатель на воду.</li>
+</ul>
+<hr />
+<h2 id="watercreaterippleatgridposition">WaterCreateRippleAtGridPosition</h2>
+<p><code>real WaterCreateRippleAtGridPosition(real water, real x, real y);</code></p>
+<p>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно исходной точки поверхности.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>x</code>, <code>y</code> - координаты точки возмущения.</li>
+</ul>
+<hr />
+<h2 id="watercreaterippleatworldposition">WaterCreateRippleAtWorldPosition</h2>
+<p><code>real WaterCreateRippleAtWorldPosition(real water, real x, real y, real z);</code></p>
+<p>Создает возмущение в заданной точке на поверхности воды. Координаты точки возмущения задаются относительно абсолютного начала координат.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - координаты точки возмущения.</li>
+</ul>
+<hr />
+<h2 id="watercreaterippleatobjectposition">WaterCreateRippleAtObjectPosition</h2>
+<p><code>real WaterCreateRippleAtObjectPosition(real water, real object);</code></p>
+<p>Создает возмущение в точке на поверхности воды, соответствующей абсолютной позиции заданного объекта. Функция пригождается, если нужно сделать волны, расходящиеся от упавшего в воду предмета.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="watersetmask">WaterSetMask</h2>
+<p><code>real WaterSetMask(real water, string material);</code></p>
+<p>Загружает маску для воды из текстуры материала. Маска - монохромное изображение, в котором белые пиксели означают видимые части воды, черные - невидимые. Например, если задать черную маску с изображением белой окружности, получится круглый водоем.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="watersetactive">WaterSetActive</h2>
+<p><code>real WaterSetActive(real water, real mode);</code></p>
+<p>Включает или выключает анимацию воды.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="waterreset">WaterReset</h2>
+<p><code>real WaterReset(real water);</code></p>
+<p>Возвращает воду к ее первоначальному состоянию.</p>
+<ul>
+<li><code>water</code> - указатель на воду.</li>
+</ul>
+<hr />
+<h2 id="watersetraintimeinterval">WaterSetRainTimeInterval</h2>
+<p><code>real WaterSetRainTimeInterval(real water, real interval);</code></p>
+<p>Для воды можно задать автоматическую генерацию возмущений. Это будет выглядеть, как будто идет дождь. Данная функция задает временной интервал между двумя "каплями" в этом дожде. Если выставить это значение равным 0, то дождь будет отключен.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>interval</code> - время в миллисекундах (в диапазоне от 0 до 1000000; по умолчанию 500).</li>
+</ul>
+<hr />
+<h2 id="watersetrainforce">WaterSetRainForce</h2>
+<p><code>real WaterSetRainForce(real water, real force);</code></p>
+<p>Задает силу, с которой падают капли "дождя". Чем меньше это значение, тем быстрее исчезают волны.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>force</code> - сила "дождя" (в диапазоне от 0 до 1000000; по умолчанию 5000).</li>
+</ul>
+<hr />
+<h2 id="watersetviscosity">WaterSetViscosity</h2>
+<p><code>real WaterSetViscosity(real water, real viscosity);</code></p>
+<p>Задает вязкость воды - амплитуду возмущений. Чем меньше это значение, тем гелеобразнее жидкость.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>viscosity</code> - вязкость (в диапазоне от 0 до 1; по умолчанию 0.99).</li>
+</ul>
+<hr />
+<h2 id="watersetelastic">WaterSetElastic</h2>
+<p><code>real WaterSetElastic(real water, real elastic);</code></p>
+<p>Задает эластичность - скорость распространения возмущений. В реальном мире это свойство зависит от плотности вещества (например, у ртути плотность гораздо выше, чем у воды, поэтому волны распространяются быстрее).</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>elastic</code> - эластичность (по умолчанию 10).</li>
+</ul>
+<hr />
+<h2 id="watersetresolution">WaterSetResolution</h2>
+<p><code>real WaterSetResolution(real water, real res);</code></p>
+<p>Задает разрешение воды - число квадов по стороне сетки. Чем выше это значение, тем выше качество воды, и, соответственно, ниже скорость ее работы.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>res</code> - разрешение (от 16 и выше; по умолчанию 64).</li>
+</ul>
+<hr />
+<h2 id="watersetlinearwaveheight">WaterSetLinearWaveHeight</h2>
+<p><code>real WaterSetLinearWaveHeight(real water, real height);</code></p>
+<p>Задает высоту линейных волн.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>height</code> - высота (по умолчанию 1).</li>
+</ul>
+<hr />
+<h2 id="watersetlinearwavefrequency">WaterSetLinearWaveFrequency</h2>
+<p><code>real WaterSetLinearWaveFrequency(real water, real freq);</code></p>
+<p>Задает частоту линейных волн (по сути, длину одного колебания). Если выставить это значение равным 0, то линейные волны будут отключены.</p>
+<ul>
+<li><code>water</code> - указатель на воду</li>
+<li><code>freq</code> - частота (по умолчанию 0).</li>
+</ul>
+</body>
+</html>
