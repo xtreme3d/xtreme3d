@@ -1,107 +1,94 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Shadowvolume</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Shadowvolume</H1>
-
-<A class=type>Класс: TGLShadowVolume</A><BR><BR>
-
-<A>
-Объект shadowvolume позволяет строить настоящие объемные тени в реальном времени! В отличие от shadowplane, тени здесь не 
-ограничены плоскостью, они могут падать на любые объекты. Этот метод построения теней заключается в создании объекта, 
-определяющего объём, внутри которого точки находятся в тени. К сожалению, он чрезвычайно ресурсоемкий и может привести 
-к колоссальному снижению производительности. Поэтому рекомендуется применять shadowvolume на небольшом количестве объектов.
-</A>
-<BR>
-<HR>
-
-<A name="ShadowvolumeCreate"></A>
-<H1 class=name>ShadowvolumeCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект shadowvolume и возвращает его id. Объекты, на которые должна падать тень, необходимо 
-сделать потомками shadowvolume.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="ShadowvolumeSetActive"></A>
-<H1 class=name>ShadowvolumeSetActive</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeSetActive</A><A>( sv,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает тени. В выключенном состоянии shadowvolume не потребляет вычислительных ресурсов, поэтому 
-стоит выключать его, когда тени не попадают в поле обзора.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="ShadowvolumeAddLight"></A>
-<H1 class=name>ShadowvolumeAddLight</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeAddLight</A><A>( sv,light as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет источник света, от которого падают тени. Вы можете добавить несколько источников, но это повлияет на 
-производительность.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>light - id источника света.</A>
-<HR>
-
-<A name="ShadowvolumeRemoveLight"></A>
-<H1 class=name>ShadowvolumeRemoveLight</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeRemoveLight</A><A>( sv,light as </A><A class=type>real</A><A> );</A>
-<BR><A>Удаляет источник света из shadowvolume.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>light - id источника света.</A>
-<HR>
-
-<A name="ShadowvolumeAddOccluder"></A>
-<H1 class=name>ShadowvolumeAddOccluder</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeAddOccluder</A><A>( sv,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет объект, который должен отбрасывать тень. Объект может одновременно и отбрасывать, и принимать тень.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ShadowvolumeRemoveOccluder"></A>
-<H1 class=name>ShadowvolumeRemoveOccluder</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeRemoveOccluder</A><A>( sv,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Удаляет объект из shadowvolume.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ShadowvolumeSetDarkeningColor"></A>
-<H1 class=name>ShadowvolumeSetDarkeningColor</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeSetDarkeningColor</A><A>( sv,color,alpha as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет и прозрачность теней.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>color,alpha - цвет и прозрачность.</A>
-<HR>
-
-<A name="ShadowvolumeSetMode"></A>
-<H1 class=name>ShadowvolumeSetMode</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeSetMode</A><A>( sv,svm as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает режим теней (svm):</A>
-<BR><A class=constant name="svmAccurate">svmAccurate</A><A> = 0 - режим по умолчанию</A>
-<BR><A class=constant name="svmDarkening">svmDarkening</A><A> = 1 - в этом режиме работает цвет и прозрачность теней</A>
-<BR><A class=constant name="svmOff">svmOff</A><A> = 2 - тени отключены.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>svm - режим теней.</A>
-<HR>
-
-<A name="ShadowvolumeSetOptions"></A>
-<H1 class=name>ShadowvolumeSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>ShadowvolumeSetOptions</A><A>( sv,showvolumes,cachesilhouettes,scissorclips,worldscissorclip as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции shadowvolume.</A>
-<BR><A>sv - id объекта shadowvolume</A>
-<BR><A>showvolumes - отображение теневых объемов: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Значение по умолчанию - 0</A>
-<BR><A>cachesilhouettes - включает или выключает кэширование силуэтов: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Кэширование может повысить производительность, когда объекты неподвижны относительно теней. Значение по умолчанию - 1.</A>
-<BR><A>scissorclips - включает или выключает обрезку теней внутри экранной области, соответствующей области влияния источника света: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Эта обрезка повышает производительность, если источник света имеет ограниченную область влияния, и слишком далекие от него тени не должны рендериться. Значение по умолчанию - 1.</A>
-<BR><A>worldscissorclip - включает или выключает обрезку теней внутри экранной области, соответствующей объекту, на который падает тень: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно). Значение по умолчанию - 0.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shadowvolume</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="shadowvolume">Shadowvolume</h1>
+<p>Объект shadowvolume позволяет строить настоящие объемные тени в реальном времени! В отличие от shadowplane, тени здесь не ограничены плоскостью, они могут падать на любые объекты. Этот метод построения теней заключается в создании объекта, определяющего объем, внутри которого точки находятся в тени. К сожалению, он чрезвычайно ресурсоемкий и может привести к колоссальному снижению производительности. Поэтому рекомендуется применять shadowvolume на небольшом количестве объектов.</p>
+<hr />
+<h2 id="shadowvolumecreate">ShadowvolumeCreate</h2>
+<p><code>real ShadowvolumeCreate(real parent);</code></p>
+<p>Создает новый объект shadowvolume и возвращает указатель на него. Объекты, на которые должна падать тень, необходимо сделать потомками shadowvolume.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumesetactive">ShadowvolumeSetActive</h2>
+<p><code>real ShadowvolumeSetActive(real sv, real mode);</code></p>
+<p>Включает или выключает тени. В выключенном состоянии shadowvolume не потребляет вычислительных ресурсов, поэтому стоит выключать его, когда тени не попадают в поле обзора.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="shadowvolumeaddlight">ShadowvolumeAddLight</h2>
+<p><code>real ShadowvolumeAddLight(real sv, real light);</code></p>
+<p>Добавляет источник света, от которого падают тени. Вы можете добавить несколько источников, но это повлияет на производительность.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>light</code> - указатель на источник света.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumeremovelight">ShadowvolumeRemoveLight</h2>
+<p><code>real ShadowvolumeRemoveLight(real sv, real light);</code></p>
+<p>Удаляет источник света из shadowvolume.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>light</code> - указатель на источник света.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumeaddoccluder">ShadowvolumeAddOccluder</h2>
+<p><code>real ShadowvolumeAddOccluder(real sv, real object);</code></p>
+<p>Добавляет объект, который должен отбрасывать тень. Объект может одновременно и отбрасывать, и принимать тень.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>object</code> - указаль на объект.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumeremoveoccluder">ShadowvolumeRemoveOccluder</h2>
+<p><code>real ShadowvolumeRemoveOccluder(real sv, real object);</code></p>
+<p>Удаляет объект из shadowvolume.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>object</code> - указаль на объект.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumesetdarkeningcolor">ShadowvolumeSetDarkeningColor</h2>
+<p><code>real ShadowvolumeSetDarkeningColor(real sv, real color, real alpha);</code></p>
+<p>Задает цвет и прозрачность теней.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>color</code>, <code>alpha</code> - цвет и прозрачность.</li>
+</ul>
+<hr />
+<h2 id="shadowvolumesetmode">ShadowvolumeSetMode</h2>
+<p><code>real ShadowvolumeSetMode(real sv, real svm);</code></p>
+<p>Задает режим теней.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>svm</code> - режим теней.<ul>
+<li><code>svmAccurate</code> = 0 - режим по умолчанию</li>
+<li><code>svmDarkening</code> = 1 - в этом режиме работает цвет и прозрачность теней</li>
+<li><code>svmOff</code> = 2 - тени отключены.</li></ul></li>
+</ul>
+<hr />
+<h2 id="shadowvolumesetoptions">ShadowvolumeSetOptions</h2>
+<p><code>real ShadowvolumeSetOptions(real sv, real showvolumes, real cachesilhouettes, real scissorclips, real worldscissorclip);</code></p>
+<p>Задает опции shadowvolume.</p>
+<ul>
+<li><code>sv</code> - указатель на объект shadowvolume</li>
+<li><code>showvolumes</code> - отображение теневых объемов: <code>true</code> или <code>false</code> (1 и 0 соответственно). Значение по умолчанию - 0</li>
+<li><code>cachesilhouettes</code> - включает или выключает кэширование силуэтов: <code>true</code> или <code>false</code> (1 и 0 соответственно). Кэширование может повысить производительность, когда объекты неподвижны относительно теней. Значение по умолчанию - 1.</li>
+<li><code>scissorclips</code> - включает или выключает обрезку теней внутри экранной области, соответствующей области влияния источника света: <code>true</code> или <code>false</code> (1 и 0 соответственно). Эта обрезка повышает производительность, если источник света имеет ограниченную область влияния, и слишком далекие от него тени не должны рендериться. Значение по умолчанию - 1.</li>
+<li><code>worldscissorclip</code> - включает или выключает обрезку теней внутри экранной области, соответствующей объекту, на который падает тень: <code>true</code> или <code>false</code> (1 и 0 соответственно). Значение по умолчанию - 0.</li>
+</ul>
+</body>
+</html>

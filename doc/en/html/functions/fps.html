@@ -1,186 +1,125 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>FPS</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>FPS</H1>
-
-<A class=type>Класс: TGLFPSMovementManager</A><BR><BR>
-
-<A>
-FPS - специальный, полностью автоматизированный метод обнаружения и обработки столкновений, оптимизированный 
-для игр от первого лица. Хотя ничто не мешает использовать его и в играх от третьего лица. Среда FPS чрезвычайно 
-проста в управлении, поэтому ее можно смело рекомендовать в качестве базовой системы столкновений как для начинающих, 
-так и для опытных пользователей Xtreme3D.
-</A>
-<BR>
-<HR>
-
-<A name="FpsManagerCreate"></A>
-<H1 class=name>FpsManagerCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerCreate</A><A>();</A>
-<BR><A>Создает менеджер FPS и возвращает его id.</A>
-<HR>
-
-<A name="FpsManagerSetNavigator"></A>
-<H1 class=name>FpsManagerSetNavigator</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerSetNavigator</A><A>( manager,nav as </A><A class=type>real</A><A> );</A>
-<BR><A>Указывает навигатор, который необходимо использовать в среде FPS. Если этого не сделать, 
-перемещение объектов будет невозможным.</A>
-<BR><A>manager - id менеджера FPS</A>
-<BR><A>nav - id навигатора.</A>
-<HR>
-
-<A name="FpsManagerSetMovementScale"></A>
-<H1 class=name>FpsManagerSetMovementScale</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerSetMovementScale</A><A>( manager,scale as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает коэффициент скорости движения. Фактически, этот параметр влияет только на силу гравитации.</A>
-<BR><A>manager - id менеджера FPS</A>
-<BR><A>scale - коэффициент скорости движения.</A>
-<HR>
-
-<A name="FpsManagerAddMap"></A>
-<H1 class=name>FpsManagerAddMap</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerAddMap</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет карту. Карта - это объект свободной формы (freeform), представляющий собой геометрию 
-уровня, используемую для обнаружения столкновений. Эта геометрия может не совпадать с той, что непосредственно 
-видна игроку в виде архитектурных построек и прочих объектов, так как с точки зрения оптимизации гораздо выгоднее 
-представить сложные элементы уровня в качестве простых невидимых "коробок".</A>
-<BR><A>manager - id менеджера FPS</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="FpsManagerRemoveMap"></A>
-<H1 class=name>FpsManagerRemoveMap</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerRemoveMap</A><A>( manager,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Удаляет заданную карту. На самом деле, карта остается нетронутой, просто она перестает учитываться 
-обработчиком столкновений FPS.</A>
-<BR><A>manager - id менеджера FPS</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="FpsManagerMapSetCollisionGroup"></A>
-<H1 class=name>FpsManagerMapSetCollisionGroup</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsManagerMapSetCollisionGroup</A><A>( manager,object,group as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>object - id объекта</A>
-<BR><A>group - cведения отсутствуют.</A>
-<HR>
-
-<A name="FpsSetManager"></A>
-<H1 class=name>FpsSetManager</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsSetManager</A><A>( object,manager as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает менеджер FPS для объекта. После этой процедуры объект будет учитываться при проверке столкновений, а его движение будет  
-управляться функциями FPS.</A>
-<BR><A>object - id объекта</A>
-<BR><A>manager - id менеджера FPS.</A>
-<HR>
-
-<A name="FpsSetCollisionGroup"></A>
-<H1 class=name>FpsSetCollisionGroup</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsSetCollisionGroup</A><A>( object,group as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>object - id объекта</A>
-<BR><A>group - cведения отсутствуют.</A>
-<HR>
-
-<A name="FpsSetSphereRadius"></A>
-<H1 class=name>FpsSetSphereRadius</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsSetSphereRadius</A><A>( object,radius as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает радиус ограничивающей сферы объекта в среде FPS.</A>
-<BR><A>object - id объекта</A>
-<BR><A>radius - cведения отсутствуют.</A>
-<HR>
-
-<A name="FpsSetGravity"></A>
-<H1 class=name>FpsSetGravity</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsSetGravity</A><A>( object,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Включает или выключает гравитацию объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
-<HR>
-
-<A name="FpsMove"></A>
-<H1 class=name>FpsMove</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsMove</A><A>( object,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает объект в его текущем направлении взгляда (вектор Direction) с заданной скоростью.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - скорость движения.</A>
-<HR>
-
-<A name="FpsStrafe"></A>
-<H1 class=name>FpsStrafe</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsStrafe</A><A>( object,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает объект вдоль вектора Left, т.е. вбок относительно направления взгляда.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - cведения отсутствуют.</A>
-<HR>
-
-<A name="FpsLift"></A>
-<H1 class=name>FpsLift</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsLift</A><A>( object,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает объект вдоль вектора Up, т.е вверх относительно направления взгляда.</A>
-<BR><A>object - id объекта</A>
-<BR><A>speed - cведения отсутствуют.</A>
-<HR>
-
-<A name="FpsGetVelocity"></A>
-<H1 class=name>FpsGetVelocity</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsGetVelocity</A><A>( object,ind as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает скорость объекта по заданной оси.</A>
-<BR><A>object - id объекта</A>
-<BR><A>ind - индекс оси (1 = X, 2 = Y, 3 = Z).</A>
-<HR>
-
-<!--
-<A name="FpsCountCollisions"></A>
-<H1 class=name>FpsCountCollisions</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsCountCollisions</A><A>( object as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает общее количество текущих столкновений объекта с картой. Считается, что в состоянии покоя 
-объект имеет нулевое количество столкновений.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="FpsClearCollisions"></A>
-<H1 class=name>FpsClearCollisions</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsClearCollisions</A><A>( object as </A><A class=type>real</A><A> );</A>
-<BR><A>Сбрасывает все столкновения объекта.</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="FpsGetCollisionPosition"></A>
-<H1 class=name>FpsGetCollisionPosition</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsGetCollisionPosition</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает координаты точки столкновения.</A>
-<BR><A>object - id объекта</A>
-<BR><A>col - номер столкновения</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="FpsGetCollisionNormal"></A>
-<H1 class=name>FpsGetCollisionNormal</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsGetCollisionNormal</A><A>( object,col,ind as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает нормаль к поверхности в точке столкновения. </A>
-<BR><A>object - id объекта</A>
-<BR><A>col - номер столкновения</A>
-<BR><A>ind - индекс оси (0 = X, 1 = Y, 2 = Z).</A>
-<HR>
-
-<A name="FpsGetCollidedObject"></A>
-<H1 class=name>FpsGetCollidedObject</H1>
-<A class=type>real</A><A> = </A><A class=function>FpsGetCollidedObject</A><A>( object,col as </A><A class=type>real</A><A> );</A>
-<BR><A>Возвращает id объекта, с которым произошло столкновение. </A>
-<BR><A>object - id объекта</A>
-<BR><A>col - номер столкновения.</A>
-<HR>
--->
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FPS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="fps">FPS</h1>
+<p>FPS - специальный, полностью автоматизированный метод обнаружения и обработки столкновений, оптимизированный для игр от первого лица. Хотя ничто не мешает использовать его и в играх от третьего лица. Среда FPS чрезвычайно проста в управлении, поэтому ее можно смело рекомендовать в качестве базовой системы столкновений как для начинающих, так и для опытных пользователей Xtreme3D. </p>
+<hr />
+<h2 id="fpsmanagercreate">FpsManagerCreate</h2>
+<p><code>real FpsManagerCreate();</code></p>
+<p>Создает менеджер FPS и возвращает указатель на него.</p>
+<hr />
+<h2 id="fpsmanagersetnavigator">FpsManagerSetNavigator</h2>
+<p><code>real FpsManagerSetNavigator(real manager, real nav);</code></p>
+<p>Задает навигатор, который необходимо использовать в среде FPS. Если этого не сделать, перемещение объектов будет невозможным.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FPS</li>
+<li><code>nav</code> - указатель на навигатор.</li>
+</ul>
+<hr />
+<h2 id="fpsmanagersetmovementscale">FpsManagerSetMovementScale</h2>
+<p><code>real FpsManagerSetMovementScale(real manager, real scale);</code></p>
+<p>Задает коэффициент скорости движения. Фактически, этот параметр влияет только на силу гравитации.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FPS</li>
+<li><code>scale</code> - коэффициент скорости движения.</li>
+</ul>
+<hr />
+<h2 id="fpsmanageraddmap">FpsManagerAddMap</h2>
+<p><code>real FpsManagerAddMap(real manager, real object);</code></p>
+<p>Добавляет карту. Карта - это объект свободной формы (freeform), представляющий собой геометрию уровня, используемую для обнаружения столкновений. Эта геометрия может не совпадать с той, что непосредственно видна игроку в виде архитектурных построек и прочих объектов, так как с точки зрения оптимизации гораздо выгоднее представить сложные элементы уровня в качестве простых невидимых боксов.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FPS</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="fpsmanagerremovemap">FpsManagerRemoveMap</h2>
+<p><code>real FpsManagerRemoveMap(real manager, real object);</code></p>
+<p>Удаляет заданную карту. На самом деле, карта остается нетронутой, просто она перестает учитываться обработчиком столкновений FPS.</p>
+<ul>
+<li><code>manager</code> - указатель на менеджер FPS</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="fpsmanagermapsetcollisiongroup">FpsManagerMapSetCollisionGroup</h2>
+<p><code>real FpsManagerMapSetCollisionGroup(real manager, real object, real group);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>group</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="fpssetmanager">FpsSetManager</h2>
+<p><code>real FpsSetManager(real object, real manager);</code></p>
+<p>Задает менеджер FPS для объекта. После этой процедуры объект будет учитываться при проверке столкновений, а его движение будет управляться функциями FPS.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>manager</code> - указатель на менеджер FPS.</li>
+</ul>
+<hr />
+<h2 id="fpssetcollisiongroup">FpsSetCollisionGroup</h2>
+<p><code>real FpsSetCollisionGroup(real object, real group);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>group</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="fpssetsphereradius">FpsSetSphereRadius</h2>
+<p><code>real FpsSetSphereRadius(real object, real radius);</code></p>
+<p>Задает радиус ограничивающей сферы объекта в среде FPS.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>radius</code> - cведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="fpssetgravity">FpsSetGravity</h2>
+<p><code>real FpsSetGravity(real object, real mode);</code></p>
+<p>Включает или выключает гравитацию объекта.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="fpsmove">FpsMove</h2>
+<p><code>real FpsMove(real object, real speed);</code></p>
+<p>Двигает объект в его текущем направлении взгляда с заданной скоростью.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - скорость движения.</li>
+</ul>
+<hr />
+<h2 id="fpsstrafe">FpsStrafe</h2>
+<p><code>real FpsStrafe(real object, real speed);</code></p>
+<p>Двигает объект вбок относительно направления взгляда.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - скорость движения.</li>
+</ul>
+<hr />
+<h2 id="fpslift">FpsLift</h2>
+<p><code>real FpsLift(real object, real speed);</code></p>
+<p>Двигает объект вверх относительно направления взгляда.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>speed</code> - скорость движения.</li>
+</ul>
+<hr />
+<h2 id="fpsgetvelocity">FpsGetVelocity</h2>
+<p><code>real FpsGetVelocity(real object, real ind);</code></p>
+<p>Возвращает скорость объекта по заданной оси.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>ind</code> - индекс оси (1 = X, 2 = Y, 3 = Z).</li>
+</ul>
+</body>
+</html>

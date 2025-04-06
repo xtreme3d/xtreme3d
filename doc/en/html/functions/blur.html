@@ -1,95 +1,80 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Blur</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Blur</H1>
-
-<A class=type>Класс: TGLBlur</A><BR><BR>
-
-<A>
-Размытие (Blur) - всем знакомый эффект. В данном случае речь идет о motion blur - размытии при движении, которое 
-визуально возникает при быстром повороте или перемещении точки обзора. Введение такого эффекта может придать реалистичности 
-в некоторых игровых ситуациях. Motion blur часто используется, например, в гонках.
-<BR>Принцип действия эффекта blur заключается в хранении и отрисовке нескольких предыдущих кадров с постепенным масштабированием и 
-уменьшением прозрачности (а также, в некоторых случаях, и цвета). Разумеется, это не может не сказаться на производительности. 
-Поэтому blur не стоит использовать слишком часто.
-</A>
-<HR>
-
-<A name="BlurCreate"></A>
-<H1 class=name>BlurCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurCreate</A><A>( target,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый объект blur и возвращает его id.</A>
-<BR><A>target - id объекта, который должен быть размыт. Размыты будут и все потомки этого объекта.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="BlurSetPreset"></A>
-<H1 class=name>BlurSetPreset</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurSetPreset</A><A>( blur,p as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает стиль размытия (p). Вы можете выбрать, какой из них больше подходит для конкретной ситуации. 
-<BR>Доступны следующие значения p:
-<BR></A><A class=constant name="pNone">pNone</A><A> = 0 - отсутствие размытия
-<BR></A><A class=constant name="pGlossy">pGlossy</A><A> = 1 - "блеск" - умеренное размытие и яркость, без тонировки
-<BR></A><A class=constant name="pBeastView">pBeastView</A><A> = 2 - "глазами зверя" - кроваво-красная тонировка, слабое размытие
-<BR></A><A class=constant name="pOceanDepth">pOceanDepth</A><A> = 3 - "в океанской глубине" - густая синяя тонировка, сильное размытие
-<BR></A><A class=constant name="pDream">pDream</A><A> = 4 - "сон" - сильное замедленное размытие, слабая яркость, без тонировки
-<BR></A><A class=constant name="pOverBlur">pOverBlur</A><A> = 5 - "сверхразмытие" - сильное размытие, сильная яркость, без тонировки.
-</A>
-<BR><A>blur - id объекта blur</A>
-<BR><A>p - стиль размытия.</A>
-<HR>
-
-<A name="BlurSetOptions"></A>
-<H1 class=name>BlurSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurSetOptions</A><A>( blur,delta,left,top,right,bottom as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции отрисовки размытия. Delta - задержка, время до наложения очередного кадра размытия. Чем ниже это значение, 
-тем качественнее эффект, но ниже производительность. Left, top, right, bottom - смещение границ кадров влево, вверх, вправо, вниз. Изменяя смещение, можно добиться горизонтального,  
-вертикального или диагонального размытия. 
-<BR>Для задержки и смещения обычно задаются очень маленькие значения - в пределах 0.001 - 0.015. Смещение допускает отрицательные значения.
-</A>
-<BR><A>blur - id объекта blur</A>
-<BR><A>delta - задержка в секундах</A>
-<BR><A>left,top,right,bottom - смещение влево, вверх, вправо, вниз.</A>
-<HR>
-
-<A name="BlurSetResolution"></A>
-<H1 class=name>BlurSetResolution</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurSetResolution</A><A>( blur,res as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает разрешение кадра размытия. Значение должно соответствовать степени двойки (512,256,128 и т.д.)</A>
-<BR><A>blur - id объекта blur</A>
-<BR><A>res - разрешение.</A>
-<HR>
-
-<A name="BlurSetColor"></A>
-<H1 class=name>BlurSetColor</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurSetColor</A><A>( blur,color as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет размытия.</A>
-<BR><A>blur - id объекта blur</A>
-<BR><A>color - цвет.</A>
-<HR>
-
-<A name="BlurSetBlendingMode"></A>
-<H1 class=name>BlurSetBlendingMode</H1>
-<A class=type>real</A><A> = </A><A class=function>BlurSetBlendingMode</A><A>( blur,bm as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает Задает режим смешивания размытия (bm). Доступны следующие значения bm:</A>
-<BR><A class=constant name="bmOpaque">bmOpaque</A><A> = 0 - отсутствие прозрачности и смешивания (полное замещение)</A>
-<BR><A class=constant name="bmTransparency">bmTransparency</A><A> = 1 - используется прозрачность (альфа-смешивание)</A>
-<BR><A class=constant name="bmAdditive">bmAdditive</A><A> = 2 - используется суммирование цветов</A>
-<BR><A class=constant name="bmAlphaTest50">bmAlphaTest50</A><A> = 3 - используется альфа-тест на 50% (прозрачность ниже 0.5 трактуется как полная прозрачность, выше - полная непрозрачность)</A>
-<BR><A class=constant name="bmAlphaTest100">bmAlphaTest100</A><A> = 4 - используется альфа-тест на 100% (прозрачность ниже 1.0 трактуется как полная прозрачность, выше - полная непрозрачность)</A>
-<BR><A class=constant name="bmModulate">bmModulate</A><A> = 5 - используется модуляция (умножение) цветов.</A>
-<BR><A>blur - id объекта blur</A>
-<BR><A>bm - режим смешивания.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blur</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="blur">Blur</h1>
+<p>Размытие (Blur) - всем знакомый эффект. В данном случае речь идет о motion blur - размытии при движении, которое визуально возникает при быстром повороте или перемещении точки обзора. Введение такого эффекта может придать реалистичности в некоторых игровых ситуациях. Motion blur часто используется, например, в гонках.</p>
+<p>Принцип действия эффекта blur заключается в хранении и отрисовке нескольких предыдущих кадров с постепенным масштабированием и уменьшением прозрачности (а также, в некоторых случаях, и цвета). Разумеется, это не может не сказаться на производительности. Поэтому blur не стоит использовать слишком часто.</p>
+<hr />
+<h2 id="blurcreate">BlurCreate</h2>
+<p><code>real BlurCreate(real target, real parent);</code></p>
+<p>Создает новый объект blur и возвращает указатель на него.</p>
+<ul>
+<li><code>target</code> - указатель на объект, который должен быть размыт. Размыты будут и все потомки этого объекта</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="blursetpreset">BlurSetPreset</h2>
+<p><code>real BlurSetPreset(real blur, real p);</code></p>
+<p>Задает стиль размытия (p). Вы можете выбрать, какой из них больше подходит для конкретной ситуации.</p>
+<ul>
+<li><code>blur</code> - указатель на объект blur</li>
+<li><code>p</code> - стиль размытия. Доступны следующие значения <code>p</code>:<ul>
+<li><code>pNone</code> = 0 - отсутствие размытия</li>
+<li><code>pGlossy</code> = 1 - "блеск" - умеренное размытие и яркость, без тонировки</li>
+<li><code>pBeastView</code> = 2 - "глазами зверя" - кроваво-красная тонировка, слабое размытие</li>
+<li><code>pOceanDepth</code> = 3 - "в океанской глубине" - густая синяя тонировка, сильное размытие</li>
+<li><code>pDream</code> = 4 - "сон" - сильное замедленное размытие, слабая яркость, без тонировки</li>
+<li><code>pOverBlur</code> = 5 - "сверхразмытие" - сильное размытие, сильная яркость, без тонировки.</li></ul></li>
+</ul>
+<hr />
+<h2 id="blursetoptions">BlurSetOptions</h2>
+<p><code>real BlurSetOptions(real blur, real delta, real left, real top, real right, real bottom);</code></p>
+<p>Задает опции отрисовки размытия. Delta - задержка, время до наложения очередного кадра размытия. Чем ниже это значение, тем качественнее эффект, но ниже производительность. Left, top, right, bottom - смещение границ кадров влево, вверх, вправо, вниз. Изменяя смещение, можно добиться горизонтального, вертикального или диагонального размытия.</p>
+<p>Для задержки и смещения обычно задаются очень маленькие значения - в пределах 0.001 - 0.015. Смещение допускает отрицательные значения.</p>
+<ul>
+<li><code>blur</code> - указатель на объект blur</li>
+<li><code>delta</code> - задержка в секундах</li>
+<li><code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code> - смещение влево, вверх, вправо, вниз.</li>
+</ul>
+<hr />
+<h2 id="blursetresolution">BlurSetResolution</h2>
+<p><code>real BlurSetResolution(real blur, real res);</code></p>
+<p>Задает разрешение кадра размытия. Значение должно соответствовать степени двойки (512, 256, 128 и т.д.).</p>
+<ul>
+<li><code>blur</code> - указатель на объект blur</li>
+<li><code>res</code> - разрешение.</li>
+</ul>
+<hr />
+<h2 id="blursetcolor">BlurSetColor</h2>
+<p><code>real BlurSetColor(real blur, real color);</code></p>
+<p>Задает цвет размытия.</p>
+<ul>
+<li><code>blur</code> - указатель на объект blur</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="blursetblendingmode">BlurSetBlendingMode</h2>
+<p><code>real BlurSetBlendingMode(real blur, realbm);</code></p>
+<p>Задает режим смешивания размытия (bm).</p>
+<ul>
+<li><code>blur</code> - указатель на объект blur</li>
+<li><code>bm</code> - режим смешивания. Доступны следующие значения <code>bm</code>:<ul>
+<li><code>bmOpaque</code> = 0 - отсутствие прозрачности и смешивания (полное замещение)</li>
+<li><code>bmTransparency</code> = 1 - используется прозрачность (альфа-смешивание)</li>
+<li><code>bmAdditive</code> = 2 - используется суммирование цветов</li>
+<li><code>bmAlphaTest50</code> = 3 - используется альфа-тест на 50% (прозрачность ниже 0.5 трактуется как полная прозрачность, выше - полная непрозрачность)</li>
+<li><code>bmAlphaTest100</code> = 4 - используется альфа-тест на 100% (прозрачность ниже 1.0 трактуется как полная прозрачность, выше - полная непрозрачность)</li>
+<li><code>bmModulate</code> = 5 - используется модуляция (умножение) цветов.</li></ul></li>
+</ul>
+</body>
+</html>
