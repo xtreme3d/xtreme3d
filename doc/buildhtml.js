@@ -60,6 +60,9 @@ const functions =
     { title: "Trail", inFilename: `markdown/${lang}/functions/trail.md`, outFilename: `${lang}/html/functions/trail.html` },
     { title: "Shadowplane", inFilename: `markdown/${lang}/functions/shadowplane.md`, outFilename: `${lang}/html/functions/shadowplane.html` },
     { title: "Shadowvolume", inFilename: `markdown/${lang}/functions/shadowvolume.md`, outFilename: `${lang}/html/functions/shadowvolume.html` },
+    { title: "Mirror", inFilename: `markdown/${lang}/functions/mirror.md`, outFilename: `${lang}/html/functions/mirror.html` },
+    { title: "Navigator", inFilename: `markdown/${lang}/functions/navigator.md`, outFilename: `${lang}/html/functions/navigator.html` },
+    { title: "Movement", inFilename: `markdown/${lang}/functions/movement.md`, outFilename: `${lang}/html/functions/movement.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },

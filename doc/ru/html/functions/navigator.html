@@ -1,161 +1,135 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Navigator</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Navigator</H1>
-
-<A class=type>Класс: TGLNavigator</A><BR><BR>
-
-<A>
-Навигатор (navigator) - это специальный объект, который облегчает управление другими объектами. 
-Объект, прикрепленный к навигатору, подчиняется функциям трансформации, вызываемым для навигатора. 
-Например, можно перемещать навигатор в разные стороны, поворачивать и т.д. Вы спросите, для чего 
-это нужно, когда аналогичные функции есть и для объектов? Дело в том, что управление объектами через 
-стандартные функции трансформации в некоторых ситуациях сопряжено с определенными трудностями. 
-Представьте, что вы хотите дать игроку возможность управлять в игре различными объектами. Например, 
-садиться в разные автомобили, как в GTA. В этом случае было бы гораздо удобнее осуществлять 
-управление навигатором и просто сменять прикрепленный объект в случае смены автомобиля. 
-<BR>Навигатор изначально ориентирован на реализацию игрового управления. Поэтому в нем 
-даже нет осей XYZ как таковых. Есть два режима поворота: горизонтальный и вертикальный. В первом случае 
-объект поворачивается вправо/влево, во втором - вверх/вниз. Первый поворот задает направление 
-горизонтального движения (по плоскости), второй - полета.
-<BR>Кроме того, навигатор располагает такими полезными средствами, как виртуальный вектор Up и угловой 
-ограничитель.
-<BR>Виртуальный вектор Up (Virtual Up) во многом аналогичен обычному вектору Up, единственное 
-отличие - вы можете в любой момент изменить его направление, трансформировав таким образом и координатную систему, 
-в которой перемещается прикрепленный к навигатору объект. Преимущество виртуального Up заключается в том, 
-что он меняется на уровне навигатора, а не объекта. Поэтому эту возможность следует рассматривать как 
-трансформатор пространства, в котором существует объект. Использование виртуального вектора Up делает 
-возможным, например, перемещение объекта по поверхности сферы. При этом локальная трансформация объекта 
-остается нетронутой и он может в любой момент повернуться в любую сторону, не изменяя вектор Up.
-</A>
-<BR>
-<HR>
-
-<A name="NavigatorCreate"></A>
-<H1 class=name>NavigatorCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorCreate</A><A>();</A>
-<BR><A>Создает навигатор и возвращает его id.</A>
-<HR>
-
-<A name="NavigatorSetObject"></A>
-<H1 class=name>NavigatorSetObject</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorSetObject</A><A>( nav,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Прикрепляет к навигатору объект.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="NavigatorSetUseVirtualUp"></A>
-<H1 class=name>NavigatorSetUseVirtualUp</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorSetUseVirtualUp</A><A>( nav,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Указывает необходимость использования виртуального вектора Up.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
-<HR>
-
-<A name="NavigatorSetVirtualUp"></A>
-<H1 class=name>NavigatorSetVirtualUp</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorSetVirtualUp</A><A>( nav,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает виртуальный вектор Up.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>x,y,z - вектор.</A>
-<HR>
-
-<A name="NavigatorTurnHorizontal"></A>
-<H1 class=name>NavigatorTurnHorizontal</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorTurnHorizontal</A><A>( nav,angle as </A><A class=type>real</A><A> );</A>
-<BR><A>Поворачивает навигатор по горизонтали.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>angle - угол.</A>
-<HR>
-
-<A name="NavigatorTurnVertical"></A>
-<H1 class=name>NavigatorTurnVertical</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorTurnVertical</A><A>( nav,angle as </A><A class=type>real</A><A> );</A>
-<BR><A>Поворачивает навигатор по вертикали.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>angle - угол.</A>
-<HR>
-
-<A name="NavigatorMoveForward"></A>
-<H1 class=name>NavigatorMoveForward</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorMoveForward</A><A>( nav,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает навигатор вперед/назад в горизонтальной плоскости.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>speed - скорость.</A>
-<HR>
-
-<A name="NavigatorStrafeHorizontal"></A>
-<H1 class=name>NavigatorStrafeHorizontal</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorStrafeHorizontal</A><A>( nav,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает навигатор влево/вправо в горизонтальной плоскости.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>speed - скорость.</A>
-<HR>
-
-<A name="NavigatorStrafeVertical"></A>
-<H1 class=name>NavigatorStrafeVertical</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorStrafeVertical</A><A>( nav,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает навигатор вверх/вниз.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>speed - скорость.</A>
-<HR>
-
-<A name="NavigatorStraighten"></A>
-<H1 class=name>NavigatorStraighten</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorStraighten</A><A>( nav as </A><A class=type>real</A><A> );</A>
-<BR><A>Сбрасывает поворот навигатора в первоначальное состояние.</A>
-<BR><A>nav - id навигатора.</A>
-<HR>
-
-<A name="NavigatorFlyForward"></A>
-<H1 class=name>NavigatorFlyForward</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorFlyForward</A><A>( nav,speed as </A><A class=type>real</A><A> );</A>
-<BR><A>Двигает навигатор вперед/назад.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>speed - скорость.</A>
-<HR>
-
-<A name="NavigatorMoveUpWhenMovingForward"></A>
-<H1 class=name>NavigatorMoveUpWhenMovingForward</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorMoveUpWhenMovingForward</A><A>( nav,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Определяет, должен ли навигатор "лететь" или "идти" - иными словами, переключает два распространенные стиля управления: как в авиасимуляторах (опция включена) и как в шутерах от первого лица (опция выключена).</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
-<HR>
-
-<A name="NavigatorInvertHorizontalWhenUpsideDown"></A>
-<H1 class=name>NavigatorInvertHorizontalWhenUpsideDown</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorInvertHorizontalWhenUpsideDown</A><A>( nav,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Если навигатор перевернется более чем на 90 градусов по вертикали, горизонтальное управление будет инвертированным - то есть, поворот влево будет вызывать поворот вправо, и наоборот. Данная опция решает эту проблему, инвертируя горизонтальный поворот.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
-<HR>
-
-<A name="NavigatorSetAngleLock"></A>
-<H1 class=name>NavigatorSetAngleLock</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorSetAngleLock</A><A>( nav,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Указывает необходимость использования углового ограничителя для вертикального поворота.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>mode - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A>.</A>
-<HR>
-
-<A name="NavigatorSetAngles"></A>
-<H1 class=name>NavigatorSetAngles</H1>
-<A class=type>real</A><A> = </A><A class=function>NavigatorSetAngles</A><A>( nav,min,max as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает угловые пороги ограничителя - минимальный и максимальный.</A>
-<BR><A>nav - id навигатора</A>
-<BR><A>min,max - минимальный и максимальный пороги ограничителя.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Navigator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="navigator">Navigator</h1>
+<p>Навигатор (navigator) - это специальный объект, который облегчает управление другими объектами. Объект, прикрепленный к навигатору, подчиняется функциям трансформации, вызываемым для навигатора. Например, можно перемещать навигатор в разные стороны, поворачивать и т.д. Вы спросите, для чего это нужно, когда аналогичные функции есть и для объектов? Дело в том, что управление объектами через стандартные функции трансформации в некоторых ситуациях сопряжено с определенными трудностями. Представьте, что вы хотите дать игроку возможность управлять в игре различными объектами. Например, садиться в разные автомобили, как в GTA. В этом случае было бы гораздо удобнее осуществлять управление навигатором и просто сменять прикрепленный объект в случае смены автомобиля.</p>
+<p>Навигатор изначально ориентирован на реализацию игрового управления. Поэтому в нем даже нет осей XYZ как таковых. Есть два режима поворота: горизонтальный и вертикальный. В первом случае объект поворачивается вправо/влево, во втором - вверх/вниз. Первый поворот задает направление горизонтального движения (по плоскости), второй - полета.</p>
+<p>Кроме того, навигатор располагает такими полезными средствами, как виртуальный вектор Up и угловой ограничитель.</p>
+<p>Виртуальный вектор Up (Virtual Up) во многом аналогичен обычному вектору Up, единственное отличие - вы можете в любой момент изменить его направление, трансформировав таким образом и координатную систему, в которой перемещается прикрепленный к навигатору объект. Преимущество виртуального Up заключается в том, что он меняется на уровне навигатора, а не объекта. Поэтому эту возможность следует рассматривать как трансформатор пространства, в котором существует объект. Использование виртуального вектора Up делает возможным, например, перемещение объекта по поверхности сферы. При этом локальная трансформация объекта остается нетронутой и он может в любой момент повернуться в любую сторону, не изменяя вектор Up.</p>
+<hr />
+<h2 id="navigatorcreate">NavigatorCreate</h2>
+<p><code>real NavigatorCreate();</code></p>
+<p>Создает навигатор и возвращает указатель на него.</p>
+<hr />
+<h2 id="navigatorsetobject">NavigatorSetObject</h2>
+<p><code>real NavigatorSetObject(real nav, real object);</code></p>
+<p>Прикрепляет к навигатору объект.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="navigatorsetusevirtualup">NavigatorSetUseVirtualUp</h2>
+<p><code>real NavigatorSetUseVirtualUp(real nav, real mode);</code></p>
+<p>Указывает необходимость использования виртуального вектора Up.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="navigatorsetvirtualup">NavigatorSetVirtualUp</h2>
+<p><code>real NavigatorSetVirtualUp(real nav, real x, real y, real z);</code></p>
+<p>Задает виртуальный вектор Up.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+</ul>
+<hr />
+<h2 id="navigatorturnhorizontal">NavigatorTurnHorizontal</h2>
+<p><code>real NavigatorTurnHorizontal(real nav, real angle);</code></p>
+<p>Поворачивает навигатор по горизонтали.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>angle</code> - угол.</li>
+</ul>
+<hr />
+<h2 id="navigatorturnvertical">NavigatorTurnVertical</h2>
+<p><code>real NavigatorTurnVertical(real nav, real angle);</code></p>
+<p>Поворачивает навигатор по вертикали.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>angle</code> - угол.</li>
+</ul>
+<hr />
+<h2 id="navigatormoveforward">NavigatorMoveForward</h2>
+<p><code>real NavigatorMoveForward(real nav, real speed);</code></p>
+<p>Двигает навигатор вперед/назад в горизонтальной плоскости.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>speed</code> - скорость.</li>
+</ul>
+<hr />
+<h2 id="navigatorstrafehorizontal">NavigatorStrafeHorizontal</h2>
+<p><code>real NavigatorStrafeHorizontal(real nav, real speed);</code></p>
+<p>Двигает навигатор влево/вправо в горизонтальной плоскости.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>speed</code> - скорость.</li>
+</ul>
+<hr />
+<h2 id="navigatorstrafevertical">NavigatorStrafeVertical</h2>
+<p><code>real NavigatorStrafeVertical(real nav, real speed);</code></p>
+<p>Двигает навигатор вверх/вниз.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>speed</code> - скорость.</li>
+</ul>
+<hr />
+<h2 id="navigatorstraighten">NavigatorStraighten</h2>
+<p><code>real NavigatorStraighten(real nav);</code></p>
+<p>Сбрасывает поворот навигатора в первоначальное состояние.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор.</li>
+</ul>
+<hr />
+<h2 id="navigatorflyforward">NavigatorFlyForward</h2>
+<p><code>real NavigatorFlyForward(real nav, real speed);</code></p>
+<p>Двигает навигатор вперед/назад.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>speed</code> - скорость.</li>
+</ul>
+<hr />
+<h2 id="navigatormoveupwhenmovingforward">NavigatorMoveUpWhenMovingForward</h2>
+<p><code>real NavigatorMoveUpWhenMovingForward(real nav, real mode);</code></p>
+<p>Определяет, должен ли навигатор "лететь" или "идти" - иными словами, переключает два распространенные стиля управления: как в авиасимуляторах (опция включена) и как в шутерах от первого лица (опция выключена).</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="navigatorinverthorizontalwhenupsidedown">NavigatorInvertHorizontalWhenUpsideDown</h2>
+<p><code>real NavigatorInvertHorizontalWhenUpsideDown(real nav, real mode);</code></p>
+<p>Если навигатор перевернется более чем на 90 градусов по вертикали, горизонтальное управление будет инвертированным - то есть, поворот влево будет вызывать поворот вправо, и наоборот. Данная опция решает эту проблему, инвертируя горизонтальный поворот.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="navigatorsetanglelock">NavigatorSetAngleLock</h2>
+<p><code>real NavigatorSetAngleLock(real nav, real mode);</code></p>
+<p>Указывает необходимость использования углового ограничителя для вертикального поворота.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="navigatorsetangles">NavigatorSetAngles</h2>
+<p><code>real NavigatorSetAngles(real nav, real min, real max);</code></p>
+<p>Задает угловые пороги ограничителя - минимальный и максимальный.</p>
+<ul>
+<li><code>nav</code> - указатель на навигатор</li>
+<li><code>min</code>, <code>max</code> - минимальный и максимальный пороги ограничителя.</li>
+</ul>
+</body>
+</html>

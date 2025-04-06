@@ -1,70 +1,64 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Mirror</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Mirror</H1>
-
-<A class=type>Класс: TGLMirror</A><BR><BR>
-
-<A>
-Зеркало (mirror) - плоскость, отражающая другие объекты. Эффект отражения достигается путем отрисовки зеркальных копий объектов внутри 
-прямоугольной или дискообразной плоскости отсечения.
-</A>
-<BR>
-<HR>
-
-<A name="MirrorCreate"></A>
-<H1 class=name>MirrorCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>MirrorCreate</A><A>( target,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новое зеркало и возвращает его id. Размер зеркала по умолчанию 1х1.</A>
-<BR><A>target - id целевого объекта, который должен отражаться в зеркале (все его потомки также будут отражаться).</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="MirrorSetObject"></A>
-<H1 class=name>MirrorSetObject</H1>
-<A class=type>real</A><A> = </A><A class=function>MirrorSetObject</A><A>( mirror,target as </A><A class=type>real</A><A> );</A>
-<BR><A>Меняет объект, который должен отражаться в зеркале.</A>
-<BR><A>mirror - id зеркала</A>
-<BR><A>target - id объекта.</A>
-<HR>
-
-<A name="MirrorSetOptions"></A>
-<H1 class=name>MirrorSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>MirrorSetOptions</A><A>( mirror,stencil,opaque,planeclipping,clearzbuffer as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции зеркала.</A>
-<BR><A>mirror - id зеркала</A>
-<BR><A>stencil - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, отражение будет обрезано по плоскости. По умолчанию: 1</A>
-<BR><A>opaque - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция выключена, плоскость зеркала будет прозрачной. По умолчанию: 0</A>
-<BR><A>planeclipping - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, объекты, находящиеся за зеркалом, не будут давать обратного отражения. По умолчанию: 0</A>
-<BR><A>clearzbuffer - </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 или 0). Если опция включена, отражение будет полностью перекрывать объекты, находящиеся за зеркалом. По умолчанию: 0.</A>
-<BR><A>Реалистичное зеркало даст комбинация 1,0,1,1.</A>
-<HR>
-
-<A name="MirrorSetShape"></A>
-<H1 class=name>MirrorSetShape</H1>
-<A class=type>real</A><A> = </A><A class=function>MirrorSetShape</A><A>( mirror,ms as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает форму зеркала - это может быть прямоугольная плоскость (</A><A class=constant>msRect</A><A>) или диск (</A><A class=constant>msDisk</A><A>).</A>
-<BR><A>mirror - id зеркала</A>
-<BR><A>ms - форма зеркала: </A><A class=constant>msRect</A><A> = 0 или </A><A class=constant>msDisk</A><A> = 1.</A></A>
-<HR>
-
-<A name="MirrorSetDiskOptions"></A>
-<H1 class=name>MirrorSetDiskOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>MirrorSetDiskOptions</A><A>( mirror,radius,slices as </A><A class=type>real</A><A> );</A>
-<BR><A>Если зеркало имеет форму диска, эта функция задает радиус и количество сегментов диска.</A>
-<BR><A>mirror - id зеркала</A>
-<BR><A>radius - радиус диска</A>
-<BR><A>slices - количество сегментов диска.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Mirror</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="mirror">Mirror</h1>
+<p>Зеркало (mirror) - плоскость, отражающая другие объекты. Эффект отражения достигается путем отрисовки зеркальных копий объектов внутри прямоугольной или дискообразной плоскости отсечения.</p>
+<hr />
+<h2 id="mirrorcreate">MirrorCreate</h2>
+<p><code>real MirrorCreate(real target, real parent);</code></p>
+<p>Создает новое зеркало и возвращает указатель на него. Размер зеркала по умолчанию 1х1.</p>
+<ul>
+<li><code>target</code> - указатель на целевой объект, который должен отражаться в зеркале (все его потомки также будут отражаться).</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="mirrorsetobject">MirrorSetObject</h2>
+<p><code>real MirrorSetObject(real mirror, real target);</code></p>
+<p>Меняет объект, который должен отражаться в зеркале.</p>
+<ul>
+<li><code>mirror</code> - указатель на зеркало</li>
+<li><code>target</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="mirrorsetoptions">MirrorSetOptions</h2>
+<p><code>real MirrorSetOptions(real mirror, real stencil, real opaque, real planeclipping, real clearzbuffer);</code></p>
+<p>Задает опции зеркала.</p>
+<ul>
+<li><code>mirror</code> - указатель на зеркало</li>
+<li><code>stencil</code> - <code>true</code> или <code>false</code> (1 или 0). Если опция включена, отражение будет обрезано по плоскости. По умолчанию: 1</li>
+<li><code>opaque</code> - <code>true</code> или <code>false</code> (1 или 0). Если опция выключена, плоскость зеркала будет прозрачной. По умолчанию: 0</li>
+<li><code>planeclipping</code> - <code>true</code> или <code>false</code> (1 или 0). Если опция включена, объекты, находящиеся за зеркалом, не будут давать обратного отражения. По умолчанию: 0</li>
+<li><code>clearzbuffer</code> - <code>true</code> или <code>false</code> (1 или 0). Если опция включена, отражение будет полностью перекрывать объекты, находящиеся за зеркалом. По умолчанию: 0.</li>
+</ul>
+<p>Реалистичное зеркало даст комбинация 1, 0, 1, 1.</p>
+<hr />
+<h2 id="mirrorsetshape">MirrorSetShape</h2>
+<p><code>real MirrorSetShape(real mirror, real ms);</code></p>
+<p>Задает форму зеркала - это может быть прямоугольная плоскость или диск.</p>
+<ul>
+<li><code>mirror</code> - указатель на зеркало</li>
+<li><code>ms</code> - форма зеркала. Доступны следующие значения <code>ms</code>:<ul>
+<li><code>msRect</code> = 0 - прямоугольник</li>
+<li><code>msDisk</code> = 1 - диск.</li></ul></li>
+</ul>
+<hr />
+<h2 id="mirrorsetdiskoptions">MirrorSetDiskOptions</h2>
+<p><code>real MirrorSetDiskOptions(real mirror, real radius, real slices);</code></p>
+<p>Если зеркало имеет форму диска, эта функция задает радиус и количество сегментов диска.</p>
+<ul>
+<li><code>mirror</code> - указатель на зеркало</li>
+<li><code>radius</code> - радиус диска</li>
+<li><code>slices</code> - количество сегментов диска.</li>
+</ul>
+</body>
+</html>
