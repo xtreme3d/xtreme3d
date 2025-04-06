@@ -25,7 +25,7 @@ function generatePage(title, markdown, language, encoding="utf8")
     return Mustache.render(pageTemplate, data);
 }
 
-const lang = "en"; // TODO: make this command line argument
+const lang = "ru"; // TODO: make this command line argument
 
 const functions =
 [
@@ -65,6 +65,7 @@ const functions =
     { title: "Movement", inFilename: `markdown/${lang}/functions/movement.md`, outFilename: `${lang}/html/functions/movement.html` },
     { title: "DCE", inFilename: `markdown/${lang}/functions/dce.md`, outFilename: `${lang}/html/functions/dce.html` },
     { title: "FPS", inFilename: `markdown/${lang}/functions/fps.md`, outFilename: `${lang}/html/functions/fps.html` },
+    { title: "Partition", inFilename: `markdown/${lang}/functions/partition.md`, outFilename: `${lang}/html/functions/partition.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
