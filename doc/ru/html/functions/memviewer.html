@@ -1,62 +1,58 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>MemoryViewer</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>MemoryViewer</H1>
-
-<A class=type>Класс: TGLMemoryViewer</A><BR><BR>
-
-<A>MemoryViewer (внеэкранный вид) аналогичен обычному виду (Viewer), но предназначен для рендеринга сцены в буфер в видеопамяти - так называемый offscreen buffer или p-buffer. Содержимое этого буфера затем может быть скопировано в текстуру материала. Главное предназначение MemoryViewer - эффекты пост-обработки, но ему можно найти множество других применений.
-</A>
-<HR>
-
-<A name="MemoryViewerCreate"></A>
-<H1 class=name>MemoryViewerCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>MemoryViewerCreate</A><A>( width,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый внеэкранный вид и возвращает его id.</A>
-<BR><A>width,height - ширина и высота внеэкранного вида (размер p-буфера).</A>
-<HR>
-
-<A name="MemoryViewerSetCamera"></A>
-<H1 class=name>MemoryViewerSetCamera</H1>
-<A class=type>real</A><A> = </A><A class=function>MemoryViewerSetCamera</A><A>( memviewer,camera as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает камеру, через которую внеэкранный вид должен рендерить сцену.</A>
-<BR><A>memviewer - id внеэкранного вида</A>
-<BR><A>camera - id камеры.</A>
-<HR>
-
-<A name="MemoryViewerSetViewport"></A>
-<H1 class=name>MemoryViewerSetViewport</H1>
-<A class=type>real</A><A> = </A><A class=function>MemoryViewerSetViewport</A><A>( memviewer,x,y,width,height as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает позицию и размер вьюпорта - области проекции сцены, которую нужно отрендерить: вы можете отрендерить не весь кадр, а только его фрагмент. <BR><A>Обратите внимание, что размер вьюпорта и размер p-буфера - это разные вещи: MemoryViewer может рендерить вьюпорт размером больше, чем буфер - в этом случае кадр будет соответствующим образом масштабирован, чтобы уместиться в буфер. Это позволяет создавать эффекты пост-обработки с небольшим p-буфером даже при фактическом рендеринге в высоком разрешении - например, с буфером 128х128 при разрешении 1280х720 (правда, чем больше эта разница, тем ниже качество).</A>
-<BR><A>Эту функцию нужно вызывать каждый раз перед тем, как отрендерить внеэкранный вид (так как вьюпорт каждый раз переназначается при рендеринге обычного экранного вида).</A>
-<BR><A>memviewer - id внеэкранного вида</A>
-<BR><A>x,y - позиция вьюпорта. Задается относительно левого верхнего угла.</A>
-<BR><A>width,height - размер вьюпорта.</A>
-<HR>
-
-<A name="MemoryViewerRender"></A>
-<H1 class=name>MemoryViewerRender</H1>
-<A class=type>real</A><A> = </A><A class=function>MemoryViewerRender</A><A>( memviewer as </A><A class=type>real</A><A> );</A>
-<BR><A>Совершает отрисовку сцены во внеэкранный вид. Обратите внимание, что будут отрисованы все видимые объекты сцены, включая экранные (текст и спрайты) - если вам это не нужно, то предварительно отключите их видимость.</A>
-<BR><A>memviewer - id внеэкранного вида.</A>
-<HR>
-
-<A name="MemoryViewerCopyToTexture"></A>
-<H1 class=name>MemoryViewerCopyToTexture</H1>
-<A class=type>real</A><A> = </A><A class=function>MemoryViewerCopyToTexture</A><A>( memviewer as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
-<BR><A>Копирует содержимое буфера кадра внеэкранного вида в текстуру заданного материала. Текстура должна быть предварительно создана функцией </A><A class=funclink href=../functions/material.htm#MaterialGenTexture>MaterialGenTexture</A><A>. Размер текстуры должен соответствовать размеру внеэкранного вида.</A>
-<BR><A>memviewer - id внеэкранного вида</A>
-<BR><A>material - имя материала.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>MemoryViewer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="memoryviewer">MemoryViewer</h1>
+<p>MemoryViewer (внеэкранный вид) аналогичен обычному виду (Viewer), но предназначен для рендеринга сцены в буфер в видеопамяти - так называемый offscreen buffer или p-buffer. Содержимое этого буфера затем может быть скопировано в текстуру материала. Главное предназначение MemoryViewer - эффекты пост-обработки, но ему можно найти множество других применений.</p>
+<hr />
+<h2 id="memoryviewercreate">MemoryViewerCreate</h2>
+<p><code>real MemoryViewerCreate(real width, real height);</code></p>
+<p>Создает новый внеэкранный вид и возвращает указатель на него.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота внеэкранного вида (размер p-буфера).</li>
+</ul>
+<hr />
+<h2 id="memoryviewersetcamera">MemoryViewerSetCamera</h2>
+<p><code>real MemoryViewerSetCamera(real memviewer, real camera);</code></p>
+<p>Задает камеру, через которую внеэкранный вид должен рендерить сцену.</p>
+<ul>
+<li><code>memviewer</code> - указатель на внеэкранный вид</li>
+<li><code>camera</code> - указатель на камеру.</li>
+</ul>
+<hr />
+<h2 id="memoryviewersetviewport">MemoryViewerSetViewport</h2>
+<p><code>real MemoryViewerSetViewport(real memviewer, real x, real y, real width, real height);</code></p>
+<p>Задает позицию и размер вьюпорта - области проекции сцены, которую нужно отрендерить: вы можете отрендерить не весь кадр, а только его фрагмент.</p>
+<p>Обратите внимание, что размер вьюпорта и размер p-буфера - это разные вещи: MemoryViewer может рендерить вьюпорт размером больше, чем буфер - в этом случае кадр будет соответствующим образом масштабирован, чтобы уместиться в буфер. Это позволяет создавать эффекты пост-обработки с небольшим p-буфером даже при фактическом рендеринге в высоком разрешении - например, с буфером 128х128 при разрешении 1280х720 (правда, чем больше эта разница, тем ниже качество).</p>
+<p>Эту функцию нужно вызывать каждый раз перед тем, как отрендерить внеэкранный вид (так как вьюпорт каждый раз переназначается при рендеринге обычного экранного вида).</p>
+<ul>
+<li><code>memviewer</code> - указатель на внеэкранный вид</li>
+<li><code>x</code>, <code>y</code> - позиция вьюпорта. Задается относительно левого верхнего угла.</li>
+<li><code>width</code>, <code>height</code> - размер вьюпорта.</li>
+</ul>
+<hr />
+<h2 id="memoryviewerrender">MemoryViewerRender</h2>
+<p><code>real MemoryViewerRender(real memviewer);</code></p>
+<p>Совершает отрисовку сцены во внеэкранный вид. Обратите внимание, что будут отрисованы все видимые объекты сцены, включая экранные (текст и спрайты) - если вам это не нужно, то предварительно отключите их видимость.</p>
+<ul>
+<li><code>memviewer</code> - указатель на внеэкранный вид.</li>
+</ul>
+<hr />
+<h2 id="memoryviewercopytotexture">MemoryViewerCopyToTexture</h2>
+<p><code>real MemoryViewerCopyToTexture(real memviewer, string material);</code></p>
+<p>Копирует содержимое буфера кадра внеэкранного вида в текстуру заданного материала. Текстура должна быть предварительно создана функцией <code>MaterialGenTexture</code>. Размер текстуры должен соответствовать размеру внеэкранного вида.</p>
+<ul>
+<li><code>memviewer</code> - указатель на внеэкранный вид</li>
+<li><code>material</code> - имя материала.</li>
+</ul>
+</body>
+</html>

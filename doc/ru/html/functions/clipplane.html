@@ -1,52 +1,46 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>ClipPlane</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>ClipPlane</H1>
-
-<A class=type>Класс: TGLClipPlane</A><BR><BR>
-
-<A>Объект ClipPlane (плоскость отсечения) позволяет отрендерить объекты только с одной стороны заданной плоскости. Это бывает полезным при реализации некоторых спецэффектов - например, отражений на воде в экранном пространстве. Просто поместите любые объекты в потомки к объекту ClipPlane, и они будут отсекаться, если ClipPlane активирован. Сам по себе ClipPlane - невидимый объект и не рендерит ничего.
-<BR/>Всего одновременно можно использовать до 6 плоскостей отсечения.
-<BR/>Обратите внимание, что при использовании GLSL для корректного отсечения объектов нужно выполнять в вершинном шейдере следующую операцию:
-<BR/>
-<BR/>gl_ClipVertex = gl_ModelViewMatrix * gl_Vertex;
-<BR/>
-<BR/>Также ClipPlane в большинстве случаев не будет корректно работать с объектом Mirror, поскольку Mirror задает собственную плоскость отсечения.
-</A>
-<HR>
-
-<A name="ClipPlaneCreate"></A>
-<H1 class=name>ClipPlaneCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>ClipPlaneCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новую плоскость отсечения и возвращает еe id.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="ClipPlaneEnable"></A>
-<H1 class=name>ClipPlaneEnable</H1>
-<A class=type>real</A><A> = </A><A class=function>ClipPlaneEnable</A><A>( cp,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Активирует или деактивирует плоскость отсечения. Если плоскость деактивирована, отсечение не производится.</A>
-<BR><A>cp - id плоскости отсечения</A>
-<BR><A>mode - <A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="ClipPlaneSetPlane"></A>
-<H1 class=name>ClipPlaneSetPlane</H1>
-<A class=type>real</A><A> = </A><A class=function>ClipPlaneSetPlane</A><A>( cp,px,py,pz,nx,ny,nz as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает параметры плоскости отсечения.</A>
-<BR><A>cp - id плоскости отсечения</A>
-<BR><A>px,py,pz - координаты центра плоскости</A>
-<BR><A>nx,ny,nz - нормаль плоскости. Отсечению подлежит вся графика, лежащая по обратную сторону плоскости относительно нормали.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>ClipPlane</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="clipplane">ClipPlane</h1>
+<p>Объект ClipPlane (плоскость отсечения) позволяет отрендерить объекты только с одной стороны заданной плоскости. Это бывает полезным при реализации некоторых спецэффектов - например, отражений на воде в экранном пространстве. Просто поместите любые объекты в потомки к объекту ClipPlane, и они будут отсекаться, если ClipPlane активирован. Сам по себе ClipPlane - невидимый объект и не рендерит ничего.</p>
+<p>Всего одновременно можно использовать до 6 плоскостей отсечения.</p>
+<p>Обратите внимание, что при использовании GLSL для корректного отсечения объектов нужно выполнять в вершинном шейдере следующую операцию:</p>
+<pre class="glsl language-glsl"><code class="hljs glsl language-glsl"><span class="hljs-built_in">gl_ClipVertex</span> = <span class="hljs-built_in">gl_ModelViewMatrix</span> * <span class="hljs-built_in">gl_Vertex</span>;
+</code></pre>
+<p>Также ClipPlane в большинстве случаев не будет корректно работать с объектом <a href="mirror.html">Mirror</a>, поскольку Mirror задает собственную плоскость отсечения.</p>
+<hr />
+<h2 id="clipplanecreate">ClipPlaneCreate</h2>
+<p><code>real ClipPlaneCreate(real parent);</code></p>
+<p>Создает новую плоскость отсечения и возвращает указатель на нее.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="clipplaneenable">ClipPlaneEnable</h2>
+<p><code>real ClipPlaneEnable(real cp, real mode);</code></p>
+<p>Активирует или деактивирует плоскость отсечения. Если плоскость деактивирована, отсечение не производится.</p>
+<ul>
+<li><code>cp</code> - указатель на плоскость отсечения</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="clipplanesetplane">ClipPlaneSetPlane</h2>
+<p><code>real ClipPlaneSetPlane(real cp, real px, real py, real pz, real nx, real ny, real nz);</code></p>
+<p>Задает параметры плоскости отсечения.</p>
+<ul>
+<li><code>cp</code> - указатель на плоскость отсечения</li>
+<li><code>px</code>, <code>py</code>, <code>pz</code> - координаты центра плоскости</li>
+<li><code>nx</code>, <code>ny</code>, <code>nz</code> - нормаль плоскости. Отсечению подлежит вся графика, лежащая по обратную сторону плоскости относительно нормали.</li>
+</ul>
+</body>
+</html>

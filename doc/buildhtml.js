@@ -67,6 +67,9 @@ const functions =
     { title: "FPS", inFilename: `markdown/${lang}/functions/fps.md`, outFilename: `${lang}/html/functions/fps.html` },
     { title: "Partition", inFilename: `markdown/${lang}/functions/partition.md`, outFilename: `${lang}/html/functions/partition.html` },
     { title: "Proxy", inFilename: `markdown/${lang}/functions/proxy.md`, outFilename: `${lang}/html/functions/proxy.html` },
+    { title: "Grid", inFilename: `markdown/${lang}/functions/grid.md`, outFilename: `${lang}/html/functions/grid.html` },
+    { title: "ClipPlane", inFilename: `markdown/${lang}/functions/clipplane.md`, outFilename: `${lang}/html/functions/clipplane.html` },
+    { title: "MemoryViewer", inFilename: `markdown/${lang}/functions/memoryviewer.md`, outFilename: `${lang}/html/functions/memviewer.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
