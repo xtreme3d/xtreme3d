@@ -70,6 +70,8 @@ const functions =
     { title: "Grid", inFilename: `markdown/${lang}/functions/grid.md`, outFilename: `${lang}/html/functions/grid.html` },
     { title: "ClipPlane", inFilename: `markdown/${lang}/functions/clipplane.md`, outFilename: `${lang}/html/functions/clipplane.html` },
     { title: "MemoryViewer", inFilename: `markdown/${lang}/functions/memoryviewer.md`, outFilename: `${lang}/html/functions/memviewer.html` },
+    { title: "FBO", inFilename: `markdown/${lang}/functions/fbo.md`, outFilename: `${lang}/html/functions/fbo.html` },
+    { title: "ShadowMap", inFilename: `markdown/${lang}/functions/shadowmap.md`, outFilename: `${lang}/html/functions/shadowmap.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },

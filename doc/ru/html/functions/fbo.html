@@ -1,120 +1,166 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>FBO</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>FBO</H1>
-
-<A class=type>Класс: TGLFBO</A><BR><BR>
-
-<A>FBO (Frame Buffer Object) - это современный механизм внеэкранного рендеринга, пришедший на смену p-буферам (см. 
-<A class=link href="memviewer.htm">MemoryViewer</A>). Как и MemoryViewer, FBO позволяет рендерить сцену в отдельный буфер в видеопамяти, содержимое которого затем становится доступным в качестве текстуры. Это позволяет производить над полученным изображением различные шейдерные операции постобработки, применять фильтры и спецэффекты.
-<BR/>В отличие от MemoryViewer, FBO не требует относительно дорогостоящей операции переключения контекстов OpenGL, поэтому на современных системах предпочтительнее использовать именно его. Также FBO работает намного быстрее, чем 
-</A><A class=funclink href=../functions/viewer.htm#ViewerCopyToTexture>ViewerCopyToTexture</A><A>, 
-которая, фактически, совершает копирование данных из одного буфера в другой. Еще одно преимущество - FBO предоставляет полноценный доступ к Z-буферу, что необходимо для реализации некоторых фильтров. При этом пользоваться FBO ничуть не сложнее, чем MemoryViewer. Единственное ограничение состоит в том, что доступ к текстурам FBO возможен только через шейдеры GLSL - то есть, нельзя создать материал, который бы использовал FBO-текстуру без шейдера.
-<BR/>Чтобы передать текстуры FBO в GLSL-шейдер, используйте функции 
-</A><A class=funclink href=../functions/shader.htm#GLSLShaderSetParameterFBOColorTexture>GLSLShaderSetParameterFBOColorTexture</A><A> и 
-</A><A class=funclink href=../functions/shader.htm#GLSLShaderSetParameterFBODepthTexture>GLSLShaderSetParameterFBODepthTexture</A><A> - 
-соответственно, для цветового буфера и Z-буфера.
-<BR/>Функции FBO требуют поддержки OpenGL 1.4 и расширения GL_ARB_framebuffer_object.
-</A>
-<HR>
-
-<A name="FBOCreate"></A>
-<H1 class=name>FBOCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOCreate</A><A>( width,height,viewer as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый FBO и возвращает его id.</A>
-<BR><A>width,height - ширина и высота буфера</A>
-<BR><A>viewer - id вида, настройки которого нужно использовать для рендеринга (фоновой цвет, туман, соотношение сторон и т.д.).</A>
-<HR>
-
-<A name="FBOSetCamera"></A>
-<H1 class=name>FBOSetCamera</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOSetCamera</A><A>( fbo,camera as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает камеру, через которую FBO должен рендерить сцену.</A>
-<BR><A>fbo - id FBO</A>
-<BR><A>camera - id камеры.</A>
-<HR>
-
-<A name="FBOSetViewer"></A>
-<H1 class=name>FBOSetViewer</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOSetViewer</A><A>( fbo,viewer as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает вид, настройки которого нужно использовать для рендеринга (фоновой цвет, туман, соотношение сторон и т.д.).</A>
-<BR><A>fbo - id FBO</A>
-<BR><A>view - id вида.</A>
-<HR>
-
-<A name="FBORenderObject"></A>
-<H1 class=name>FBORenderObject</H1>
-<A class=type>real</A><A> = </A><A class=function>FBORenderObject</A><A>( fbo,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Совершает рендеринг объекта в FBO. Обратите внимание, что читать текстуры FBO во время рендеринга в него не рекомендуется, это приведет к неопределенному результату. Иными словами, избегайте ситуации, когда в FBO рендерится объект, использующий шейдер, который читает текстуру того же FBO.</A>
-<BR><A>fbo - id FBO</A>
-<BR><A>object - объект, который нужно отрендерить (вместе с его потомками). Как правило, в этот параметр передается Dummycube, содержащий иерархию 3D-сцены.</A>
-<HR>
-
-<A name="FBORenderObjectEx"></A>
-<H1 class=name>FBORenderObjectEx</H1>
-<A class=type>real</A><A> = </A><A class=function>FBORenderObjectEx</A><A>( fbo,object,clearcolor,cleardepth,copycolor,copydepth as </A><A class=type>real</A><A> );</A>
-<BR><A>Совершает рендеринг объекта в FBO с расширенными опциями. Функция позволяет организовать многопроходный рендеринг.</A>
-<BR><A>fbo - id FBO</A>
-<BR><A>object - объект, который нужно отрендерить (вместе с его потомками). Как правило, в этот параметр передается Dummycube, содержащий иерархию 3D-сцены</A>
-<BR><A>clearcolor - определяет, очищать ли FBO фоновым цветом перед рендерингом - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
-<BR><A>cleardepth - определяет, очищать ли буфер глубины FBO перед рендерингом - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
-<BR><A>copycolor - определяет, копировать ли содержимое цветового буфера FBO в главный кадровый буфер после рендеринга - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно)</A>
-<BR><A>copydepth - определяет, копировать ли содержимое буфера глубины FBO в главный кадровый буфер после рендеринга - 
-<A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="FBOSetOverrideMaterial"></A>
-<H1 class=name>FBOSetOverrideMaterial</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOSetOverrideMaterial</A><A>( fbo,matlib as </A><A class=type>real</A><A>, material as </A><A class=type>string</A><A> );</A>
-<BR/><A class=ntext>Задает FBO замещающий материал. Этот материал будет использован для всех объектов, которые рендерятся в FBO, а их собственные материалы будут игнорироваться. Эта возможность пригождается для реализации некоторых спецэффектов и техник рендеринга, таких как отложенный рендеринг. 
-<BR/><A>fbo</A> - id FBO</A>
-<BR/><A>matlib</A> - id библиотеки материалов</A>
-<BR/><A>material</A> - имя материала в библиотеке. Если передать пустую строку, то замещающий материал будет отключен, и объекты будут, как обычно, рендериться со своими материалами.</A>
-<HR>
-
-<!--
-<A name="FBOUseFloatColorBuffer"></A>
-<H1 class=name>FBOUseFloatColorBuffer</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOUseFloatColorBuffer</A><A>( fbo,mode as </A><A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Определяет, использовать ли цветовой буфер формата 32-bit float (то есть, RGBA-буфер с 32-битным значением с плавающей запятой на каждый канал). Буфер такой точности необходим для хранения нецветовой информации.
-<BR/><A>fbo</A> - id FBO</A>
-<BR/><A>mode</A> - <A class=constant>true</A> или <A class=constant>false</A> (1 и 0 соответственно).</A>
-<HR>
--->
-
-<A name="FBOSetColorTextureFormat"></A>
-<H1 class=name>FBOSetColorTextureFormat</H1>
-<A class=type>real</A><A> = </A><A class=function>FBOSetColorTextureFormat</A><A>( fbo,tf as </A><A class=type>real</A><A> );</A>
-<BR/><A class=ntext>Задает формат хранения текстуры цветового буфера FBO в видеопамяти (tf). Функция использует те же константы tf, что и  
-</A><A class=funclink href=../functions/material.htm#MaterialSetTextureFormat>MaterialSetTextureFormat</A><A>
-Поддерживаются следующие значения tf:</A>
-<BR><A class=constant name="tfDefault">tfDefault</A><A> = 0 - формат по умолчанию (</A><A class=constant>tfRGBA</A><A>)</A>
-<BR><A class=constant name="tfRGB">tfRGB</A><A> = 1 - 24-битный RGB, 8 бит на компонент, без альфа-канала</A>
-<BR><A class=constant name="tfRGBA">tfRGBA</A><A> = 2 - 32-битный RGBA, 8 бит на компонент, включает альфа-канал</A>
-<BR><A class=constant name="tfRGB16">tfRGB16</A><A> = 3 - 16-битный RGB, 5 бит на компонент, без альфа-канала</A>
-<BR><A class=constant name="tfRGBA16">tfRGBA16</A><A> = 4 - 16-битный RGBA, 4 бита на компонент, включает альфа-канал</A>
-<BR><A class=constant name="tfAlpha">tfAlpha</A><A> = 5 - только 8-битный альфа-канал без цвета</A>
-<BR><A class=constant name="tfLuminance">tfLuminance</A><A> = 6 - только 8-битный компонент яркости, без альфа-канала</A>
-<BR><A class=constant name="tfLuminanceAlpha">tfLuminanceAlpha</A><A> = 7 - только 8-битный компонент яркости, включает альфа-канал</A>
-<BR><A class=constant name="tfIntensity">tfIntensity</A><A> = 8 - только 8-битный компонент насыщенности, без альфа-канала</A>
-<BR><A class=constant name="tfRGBAFloat16">tfRGBAFloat16</A><A> = 10 - 16-битный RGBA с плавающей запятой, включает альфа-канал</A>
-<BR><A class=constant name="tfRGBAFloat32">tfRGBAFloat32</A><A> = 11 - 32-битный RGBA с плавающей запятой, включает альфа-канал.</A>
-<BR>Последние два формата требуют поддержки расширения GL_ARB_texture_float.
-<BR/><A>fbo</A> - id FBO</A>
-<BR><A>tf - формат.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>FBO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="fbo">FBO</h1>
+<p>FBO (Frame Buffer Object) - это современный механизм внеэкранного рендеринга, пришедший на смену p-буферам (см. <a href="memviewer.html">MemoryViewer</a>). Как и MemoryViewer, FBO позволяет рендерить сцену в отдельный буфер в видеопамяти, содержимое которого затем становится доступным в качестве текстуры. Это позволяет производить над полученным изображением различные шейдерные операции постобработки, применять фильтры и спецэффекты.</p>
+<p>В отличие от MemoryViewer, FBO не требует относительно дорогостоящей операции переключения контекстов OpenGL, поэтому на современных системах предпочтительнее использовать именно его. Также FBO работает намного быстрее, чем <code>ViewerCopyToTexture</code>, которая, фактически, совершает копирование данных из одного буфера в другой. Еще одно преимущество - FBO предоставляет полноценный доступ к буферу глубины, что необходимо для реализации некоторых фильтров. При этом пользоваться FBO ничуть не сложнее, чем MemoryViewer. Единственное ограничение состоит в том, что доступ к текстурам FBO возможен только через шейдеры GLSL - то есть, нельзя создать материал, который бы использовал FBO-текстуру без шейдера.</p>
+<p>Чтобы передать текстуры FBO в GLSL-шейдер, используйте функции <code>GLSLShaderSetParameterFBOColorTexture</code> и <code>GLSLShaderSetParameterFBODepthTexture</code> - соответственно, для цветового буфера и буфера глубины.</p>
+<p>Функции FBO требуют поддержки OpenGL 1.4 и расширения <code>GL_ARB_framebuffer_object</code>.</p>
+<hr />
+<h2 id="fbocreate">FBOCreate</h2>
+<p><code>real FBOCreate(real width, real height, real parent);</code></p>
+<p>Создает новый FBO и возвращает указатель на него.</p>
+<ul>
+<li><code>width</code>, <code>height</code> - ширина и высота буфера</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="fbosetactive">FBOSetActive</h2>
+<p><code>real FBOSetActive(real fbo, real mode);</code></p>
+<p>Переключает активность FBO.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="fbosetaspect">FBOSetAspect</h2>
+<p><code>real FBOSetAspect(real fbo, real aspect);</code></p>
+<p>Задает соотношение сторон FBO (ширина, деленная на высоту).</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>aspect</code> - соотношение сторон.</li>
+</ul>
+<hr />
+<h2 id="fbosetpickabletarget">FBOSetPickableTarget</h2>
+<p><code>real FBOSetPickableTarget(real fbo, real mode);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="fbosetsize">FBOSetSize</h2>
+<p><code>real FBOSetSize(real fbo, real width, real height);</code></p>
+<p>Задает размер FBO.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>width</code>, <code>height</code> - ширина и высота в пикселях.</li>
+</ul>
+<hr />
+<h2 id="fbosetcamera">FBOSetCamera</h2>
+<p><code>real FBOSetCamera(real fbo, real camera);</code></p>
+<p>Задает камеру, через которую FBO должен рендерить сцену.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>camera</code> - указатель на камеру.</li>
+</ul>
+<hr />
+<h2 id="fbosetrootobject">FBOSetRootObject</h2>
+<p><code>real FBOSetRootObject(real fbo, real obj);</code></p>
+<p>Задает корневой объект для рендеринга. FBO будет рисовать этот объект и, рекурсивно, всех его потомков.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>obj</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="fbosetbackgroundcolor">FBOSetBackgroundColor</h2>
+<p><code>real FBOSetBackgroundColor(real fbo, real color);</code></p>
+<p>Задает фоновой цвет FBO (цвет очистки кадрового буфера).</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="fbosetenabledrenderbuffers">FBOSetEnabledRenderBuffers</h2>
+<p><code>real FBOSetEnabledRenderBuffers(real fbo, real depth, real stencil);</code></p>
+<p>Включает или выключает дополнительные буферы для FBO - буфер глубины и стенсильный буфер.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>depth</code> - <code>true</code> или <code>false</code></li>
+<li><code>stencil</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="fbosetscenescalefactor">FBOSetSceneScaleFactor</h2>
+<p><code>real FBOSetSceneScaleFactor(real fbo, real scale);</code></p>
+<p>Задает масштаб сцены при рендеринге в FBO.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>scale</code> - масштаб.</li>
+</ul>
+<hr />
+<h2 id="fbosettargetvisibility">FBOSetTargetVisibility</h2>
+<p><code>real FBOSetTargetVisibility(real fbo, real tv);</code></p>
+<p>Задает режим видимости объектов, которые рендерятся в FBO.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>tv</code> - режим видимости. Поддерживаются следующие значения <code>tv</code>:<ul>
+<li><code>tvDefault</code> = 0 - режим по умолчанию: видимость объектов не меняется;</li>
+<li><code>tvFBOOnly</code> = 1 - объекты рендерятся только в FBO и не рендерятся обычным образом.</li></ul></li>
+</ul>
+<hr />
+<h2 id="fbosetmateriallibrary">FBOSetMaterialLibrary</h2>
+<p><code>real FBOSetMaterialLibrary(real fbo, real matlib);</code></p>
+<p>Задает библиотеку материалов, в которой хранятся текстуры для FBO.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>matlib</code> - указатель на библиотеку материалов.</li>
+</ul>
+<hr />
+<h2 id="fbosetcolortexturename">FBOSetColorTextureName</h2>
+<p><code>real FBOSetColorTextureName(real fbo, string name);</code></p>
+<p>Задает имя материала, текстуру которого FBO должен использовать в качестве буфера кадра. Материал должен существовать в заданной библиотеке материалов, текстура должна быть создана функцией <code>MaterialGenTexture</code>.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>name</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="fbosetdepthtexturename">FBOSetDepthTextureName</h2>
+<p><code>real FBOSetDepthTextureName(real fbo, string name);</code></p>
+<p>Задает имя материала, текстуру которого FBO должен использовать в качестве буфера глубины. Материал должен существовать в заданной библиотеке материалов, текстура должна быть создана функцией <code>MaterialGenTexture</code>.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>name</code> - имя материала.</li>
+</ul>
+<hr />
+<h2 id="fbosetclearoptions">FBOSetClearOptions</h2>
+<p><code>real FBOSetClearOptions(real fbo, real clearColor, real clearDepth, real clearStencil, real useBufferBackground);</code></p>
+<p>Задает опции очистки FBO.</p>
+<ul>
+<li><code>clearColor</code> - очищать ли буфер кадра, <code>true</code> или <code>false</code></li>
+<li><code>clearDepth</code> - очищать ли буфер глубины, <code>true</code> или <code>false</code></li>
+<li><code>clearStencil</code> - очищать ли стенсильный буфер, <code>true</code> или <code>false</code></li>
+<li><code>useBufferBackground</code> - использовать ли для очистки фоновой цвет FBO, <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h2 id="fbosetstencilprecision">FBOSetStencilPrecision</h2>
+<p><code>real FBOSetStencilPrecision(real fbo, real sp);</code></p>
+<p>Задает точность стенсильного буфера.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>sp</code> - точность стенсильного буфера. Поддерживаются следующие значения <code>sp</code>:<ul>
+<li><code>spDefault</code> = 0</li>
+<li><code>sp1bit</code> = 1</li>
+<li><code>sp4bits</code> = 2</li>
+<li><code>sp8bits</code> = 3</li>
+<li><code>sp16bits</code> = 4</li></ul></li>
+</ul>
+<hr />
+<h2 id="fbosetshadowmapmode">FBOSetShadowMapMode</h2>
+<p><code>real FBOSetShadowMapMode(real fbo, real mode);</code></p>
+<p>Переключает режим рендеринга теней. В режиме рендеринга теней используется смещение полигонов, отключается отбор видимости и игнорируются материалы объектов.</p>
+<ul>
+<li><code>fbo</code> - указатель на FBO</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code></li>
+</ul>
+</body>
+</html>
