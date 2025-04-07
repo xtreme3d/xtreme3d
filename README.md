@@ -51,7 +51,7 @@ Features
 * Collision detection between bounding spheres, oriented bounding boxes and meshes
 * Raycasting
 * Built-in game-oriented collision systems (DCE, FPSManager)
-* Integrated rigid body physics using ODE engine
+* Integrated rigid body physics using [ODE](https://www.ode.org/) engine
 * [Kraft](https://github.com/BeRo1985/kraft) physics engine integration
 * Ragdolls
 * Octree and quadtree to speed-up rendering and collision tests
