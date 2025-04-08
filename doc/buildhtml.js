@@ -90,7 +90,13 @@ const functions =
     { title: "Tutorial 7. Loading a model from file", inFilename: `markdown/${lang}/tutorials/modelfile.md`, outFilename: `${lang}/html/tutorials/modelfile.html` },
     { title: "Tutorial 8. Morph-target animation", inFilename: `markdown/${lang}/tutorials/vertexanim.md`, outFilename: `${lang}/html/tutorials/vertexanim.html` },
     { title: "Tutorial 9. Skeletal animation", inFilename: `markdown/${lang}/tutorials/skeletalanim.md`, outFilename: `${lang}/html/tutorials/skeletalanim1.html` },
-    { title: "Tutorial 10. Third person camera", inFilename: `markdown/${lang}/tutorials/thirdpersoncamera.md`, outFilename: `${lang}/html/tutorials/thirdpersoncamera.html` }
+    { title: "Tutorial 10. Third person camera", inFilename: `markdown/${lang}/tutorials/thirdpersoncamera.md`, outFilename: `${lang}/html/tutorials/thirdpersoncamera.html` },
+    { title: "Tutorial 11. Collision checking", inFilename: `markdown/${lang}/tutorials/collisionchecking.md`, outFilename: `${lang}/html/tutorials/collisionchecking.html` },
+    { title: "Tutorial 12. 2D graphics", inFilename: `markdown/${lang}/tutorials/2dgraphics.md`, outFilename: `${lang}/html/tutorials/2dgraphics.html` },
+    { title: "Tutorial 13. Real-time shadows", inFilename: `markdown/${lang}/tutorials/realtimeshadows.md`, outFilename: `${lang}/html/tutorials/realtimeshadows.html` },
+    { title: "Tutorial 14. Creating sky", inFilename: `markdown/${lang}/tutorials/createsky.md`, outFilename: `${lang}/html/tutorials/createsky.html` },
+    { title: "Tutorial 15. Creating terrain", inFilename: `markdown/${lang}/tutorials/createterrain.md`, outFilename: `${lang}/html/tutorials/createterrain.html` },
+    { title: "Tutorial 16. Creating water", inFilename: `markdown/${lang}/tutorials/createwater.md`, outFilename: `${lang}/html/tutorials/createwater.html` }
 ];
 
 const outputEncoding = "win1251";

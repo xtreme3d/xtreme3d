@@ -1,44 +1,31 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Тени в реальном времени</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Урок 13<BR>Тени в реальном времени</H1>
-
-<A><B>Уровень:</B> средний<A>
-<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
-<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
-<BR>
-<BR>Xtreme3D поддерживает несколько способов рендерить тени. Во-первых, тени (и освещение в целом) могут быть предрассчитаны и "запечены" в текстуру - такая техника называется картой освещения (Lightmapping). Она позволяет получить очень красивый и реалистичный результат, но получившиеся тени будут статичными. Соответственно, эта техника применима только к неподвижным объектам - например, к интерьерам и архитектуре. К тому же, далеко не все форматы 3D-моделей поддерживают карты освещения, и не во всех 3D-редакторах их можно создавать. 
-<BR>
-<BR>Во-вторых, существует объект теневой плоскости (shadow plane). Он во всем похож на обычный примитив плоскости, за исключением того, что другие объекты могут отбрасывать на него тени. Результат получается очень красивый, но, к сожалению, плоские тени применимы далеко не во всех ситуациях. Например, от них мало толку, если ваш игровой уровень состоит из платформ на разной высоте, либо в нем вообще нет идеальных плоскостей (например, в случае использования реалистичного ландшафта). Есть, однако, целый ряд жанров, где использование shadow plane вполне оправдано - это, к примеру, разнообразные спортивные симуляторы (футбол, легкая атлетика, мини-гольф, боулинг, бильярд и т.д.), плоские лабиринтники, а также некоторые логические и казуальные игры.
-<BR>
-<BR>Также имеются две техники отрисовки объемных теней - shadow volume и shadow mapping. Первая заключается в создании объекта, определяющего объем, внутри которого точки находятся в тени. Данный метод дает очень точные тени на любом расстоянии, но работает достаточно медленно. Куда более перспективной выглядит новая техника, появившаяся в Xtreme3D 3.0 - теневые карты (shadow mapping). С их помощью можно очень быстро рендерить мягкие тени - но, правда, на ограниченном расстоянии от камеры. 
-<BR>
-<BR>Рассмотрим сначала теневую плоскость. Создать ее очень просто:
-<BR>
-<BR><A class=src>shadowTarget = </A><A class=func2link href=../functions/dummycube.htm#DummycubeCreate>DummycubeCreate</A><A class=src>(<B>global</B>.scene);</A>
-<BR><A class=src>shadowPlane = </A><A class=func2link href=../functions/shadowplane.htm#ShadowplaneCreate>ShadowplaneCreate</A><A class=src>(20, 20, 10, 10, shadowTarget, light, </A><A class=constant>c_black</A><A class=src>, 0.5, <B>global</B>.scene);</A>
-<BR>
-<BR>Теперь остается только добавить те объекты, которые должны отбрасывать тень, в потомки к shadowTarget.
-<BR>
-<BR>Работать с shadow volume ненамного сложнее:
-<BR>
-<BR><A>sv = </A><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeCreate>ShadowvolumeCreate</A><A>(<B>global</B>.scene);</A>
-<BR><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeAddLight>ShadowvolumeAddLight</A><A>(sv, light);</A>
-<BR>
-<BR>Добавьте те объекты, на которые должна падать тень, в потомки к sv. Те объекты, которые должны отбрасывать тень, добавляются так:
-<BR>
-<BR><A class=func2link href=../functions/shadowvolume.htm#ShadowvolumeAddOccluder>ShadowvolumeAddOccluder</A><A>(sv, obj);</A>
-<BR>
-</A>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Tutorial 13. Real-time shadows</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="13">Урок 13. Тени в реальном времени</h1>
+<p>Xtreme3D поддерживает несколько способов рендерить тени. Во-первых, тени (и освещение в целом) могут быть предрассчитаны и "запечены" в текстуру - такая техника называется картой освещения (Lightmapping). Она позволяет получить очень красивый и реалистичный результат, но получившиеся тени будут статичными. Соответственно, эта техника применима только к неподвижным объектам - например, к интерьерам и архитектуре. К тому же, далеко не все форматы 3D-моделей поддерживают карты освещения, и не во всех 3D-редакторах их можно создавать.</p>
+<p>Во-вторых, существует объект теневой плоскости (shadow plane). Он во всем похож на обычный примитив плоскости, за исключением того, что другие объекты могут отбрасывать на него тени. Результат получается очень красивый, но, к сожалению, плоские тени применимы далеко не во всех ситуациях. Например, от них мало толку, если ваш игровой уровень состоит из платформ на разной высоте, либо в нем вообще нет идеальных плоскостей (например, в случае использования реалистичного ландшафта). Есть, однако, целый ряд жанров, где использование shadow plane вполне оправдано - это, к примеру, разнообразные спортивные симуляторы (футбол, легкая атлетика, мини-гольф, боулинг, бильярд и т.д.), плоские лабиринтники, а также некоторые логические и казуальные игры.</p>
+<p>Также имеются две техники отрисовки объемных теней - shadow volume и shadow mapping. Первая заключается в создании объекта, определяющего объем, внутри которого точки находятся в тени. Данный метод дает очень точные тени на любом расстоянии, но работает достаточно медленно. Куда более перспективной выглядит новая техника, появившаяся в Xtreme3D 3.0 - теневые карты (shadow mapping). С их помощью можно очень быстро рендерить мягкие тени - но, правда, на ограниченном расстоянии от камеры.</p>
+<p>Рассмотрим сначала теневую плоскость. Создать ее очень просто:</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">shadowTarget = DummycubeCreate(<span class="hljs-symbol">global</span>.scene);
+shadowPlane = ShadowplaneCreate(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, shadowTarget, light, <span class="hljs-symbol">c_black</span>, <span class="hljs-number">0.5</span>, <span class="hljs-symbol">global</span>.scene);
+</code></pre>
+<p>Теперь остается только добавить те объекты, которые должны отбрасывать тень, в потомки к shadowTarget.</p>
+<p>Работать с shadow volume ненамного сложнее:</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">sv = ShadowvolumeCreate(<span class="hljs-symbol">global</span>.scene);
+ShadowvolumeAddLight(sv, light);
+</code></pre>
+<p>Добавьте те объекты, на которые должна падать тень, в потомки к sv. Те объекты, которые должны отбрасывать тень, добавляются так:</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">ShadowvolumeAddOccluder(sv, obj);
+</code></pre>
+</body>
+</html>

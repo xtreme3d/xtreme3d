@@ -1,66 +1,50 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Создание ландшафта</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Урок 15<BR>Создание ландшафта</H1>
-
-<A><B>Уровень:</B> средний<A>
-<BR><A><B>Версия Xtreme3D:</B> 3.0.x</A>
-<BR><A><B>Автор урока:</B> Gecko</A><A class=ntext>
-<BR>
-<BR>Ландшафт (Terrain) является важной составляющей игр многих жанров, моделирующих ситуации реального мира - это гонки, стратегии, многие шутеры и различные игры с открытым миром. Обычно ландшафт не моделируется вручную, а генерируется из так называемой карты высот - изображения, где темные участки означают понижение высоты, а светлые - повышение. Генерирование ландшафта может происходить как в программе 3D-моделирования, так и в самой игре - в последнем случае есть возможность оптимизировать рендеринг ландшафта, динамически изменяя его детализацию в зависимости от удаленности от камеры (динамический LOD). В Xtreme3D также имеется поддержка такой технологии.
-<BR>Чтобы отрисовать ландшафт, сначала необходимо загрузить карту высот, в терминологии Xtreme3D - HDS (Height Data Source, источник данных о высоте): 
-<BR>
-<BR><A>hds = </A><A class=func2link href=../functions/terrain.htm#BmpHDSCreate>BmpHDSCreate</A><A>('heightmap.bmp');</A>
-<BR><A class=func2link href=../functions/terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A><A>(hds, 0);</A>
-<BR>
-<BR>Функцией <A class=func2link href=../functions/terrain.htm#BmpHDSSetInfiniteWarp>BmpHDSSetInfiniteWarp</A> можно сделать карту высот бесконечно зацикленной во все четыре стороны - очень удобно, если вы хотите сделать безграничный мир.
-<BR>
-<BR>Теперь создаем ландшафт - объект Terrain:
-<BR>
-<BR><A>terrain = </A><A class=func2link href=../functions/terrain.htm#TerrainCreate>TerrainCreate</A><A>(<B>global</B>.scene);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetHeightData>TerrainSetHeightData</A><A>(terrain, hds);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetTileSize>TerrainSetTileSize</A><A>(terrain, 32);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetTilesPerTexture>TerrainSetTilesPerTexture</A><A>(terrain, 8);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetQualityDistance>TerrainSetQualityDistance</A><A>(terrain, 100);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetQualityStyle>TerrainSetQualityStyle</A><A>(terrain, </A>
-<A class=constant>hrsFullGeometry</A><A>);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetMaxCLodTriangles>TerrainSetMaxCLodTriangles</A><A>(terrain, 10000);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetCLodPrecision>TerrainSetCLodPrecision</A><A>(terrain, 50);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetOcclusionFrameSkip>TerrainSetOcclusionFrameSkip</A><A>(terrain, 0);</A>
-<BR><A class=func2link href=../functions/terrain.htm#TerrainSetOcclusionTesselate>TerrainSetOcclusionTesselate</A><A>(terrain, </A>
-<A class=constant>totTesselateIfVisible</A><A>);</A>
-<BR>
-<BR>Если запустить игру на данном этапе, то ландшафт, скорее всего, будет слишком высоким и повернутым на 90 градусов. Это нетрудно исправить, установив желаемый масштаб по оси Z и повернув объект по оси X:
-<BR>
-<BR><A class=func2link href=../functions/object.htm#ObjectSetScale>ObjectSetScale</A><A>(terrain, 1, 1, 0.1);</A>
-<BR><A class=func2link href=../functions/object.htm#ObjectRotate>ObjectRotate</A><A>(terrain, 90, 0, 0);</A>
-<BR>
-<BR>Отдельного слова заслуживает наложение текстуры на ландшафт. Это можно сделать разными способами, я же предлагаю следующий: первая текстура материала (диффузная) будет натянута на весь ландшафт, а вторая (текстура детализации) будет многократно повторяться с необходимым масштабом, накладываясь на первую в режиме modulate (то есть, изменяя яркость предыдущей). Таким образом, возникнет иллюзия того, что ландшафт использует огромную детализированную текстуру.
-<BR>
-<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('mTerrain', 'terrain-diffuse.jpg');</A>
-<BR><A class=func2link href=../functions/material.htm#MaterialSetOptions>MaterialSetOptions</A><A>('mTerrain', </A><A class=constant>false</A><A>, </A><A class=constant>true</A><A>);</A>
-<BR><A class=func2link href=../functions/material.htm#MaterialCreate>MaterialCreate</A><A>('detmap', 'terrain-detail.jpg');</A>
-<BR><A class=func2link href=../functions/material.htm#MaterialSetTextureScale>MaterialSetTextureScale</A><A>('detmap', 100, 100);</A>
-<BR><A class=func2link href=../functions/material.htm#MaterialSetSecondTexture>MaterialSetSecondTexture</A><A>('mTerrain', 'detmap');</A>
-<BR><A class=func2link href=../functions/object.htm#ObjectSetMaterial>ObjectSetMaterial</A><A>(terrain, 'mTerrain');</A>
-<BR>
-<BR>Обратите внимание, что мы отключаем освещение для материала ландшафта - дело в том, что динамический LOD не позволяет задавать нормали для вершин (поскольку наборы вершин постоянно меняются), что необходимо для корректного освещения полигонов. Поэтому для ландшафта следует использовать статическое освещение - карту освещенности, объединенную с диффузной текстурой.
-<BR>
-<BR>Осталась еще одна задача: перемещение персонажа по ландшафту. Это нетрудно сделать при помощи специально предусмотренной функции - 
-<A class=func2link href=../functions/object.htm#TerrainGetHeightAtObjectPosition>TerrainGetHeightAtObjectPosition</A>, которая возвращает высоту земли в точке, совпадающей с абсолютной позицией объекта:
-<BR>
-<BR><A class=func2link href=../functions/object.htm#ObjectSetPositionY>ObjectSetPositionY</A><A>(camPos, </A> 
-<A class=func2link href=../functions/object.htm#TerrainGetHeightAtObjectPosition>TerrainGetHeightAtObjectPosition</A><A>(terrain, camPos) + 1);</A>
-<BR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Tutorial 15. Creating terrain</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="15">Урок 15. Создание ландшафта</h1>
+<p>Ландшафт (Terrain) является важной составляющей игр многих жанров, моделирующих ситуации реального мира - это гонки, стратегии, многие шутеры и различные игры с открытым миром. Обычно ландшафт не моделируется вручную, а генерируется из так называемой карты высот - изображения, где темные участки означают понижение высоты, а светлые - повышение. Генерирование ландшафта может происходить как в программе 3D-моделирования, так и в самой игре - в последнем случае есть возможность оптимизировать рендеринг ландшафта, динамически изменяя его детализацию в зависимости от удаленности от камеры (динамический LOD). В Xtreme3D также имеется поддержка такой технологии. 
+Чтобы отрисовать ландшафт, сначала необходимо загрузить карту высот, в терминологии Xtreme3D - HDS (Height Data Source, источник данных о высоте):</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">hds = BmpHDSCreate(<span class="hljs-string">&quot;heightmap.bmp&quot;</span>);
+BmpHDSSetInfiniteWarp(hds, <span class="hljs-number">0</span>);
+</code></pre>
+<p>Функцией BmpHDSSetInfiniteWarp можно сделать карту высот бесконечно зацикленной во все четыре стороны - очень удобно, если вы хотите сделать безграничный мир.</p>
+<p>Теперь создаем ландшафт - объект Terrain:</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">terrain = TerrainCreate(<span class="hljs-symbol">global</span>.scene);
+TerrainSetHeightData(terrain, hds);
+TerrainSetTileSize(terrain, <span class="hljs-number">32</span>);
+TerrainSetTilesPerTexture(terrain, <span class="hljs-number">8</span>);
+TerrainSetQualityDistance(terrain, <span class="hljs-number">100</span>);
+TerrainSetQualityStyle(terrain, hrsFullGeometry);
+TerrainSetMaxCLodTriangles(terrain, <span class="hljs-number">10000</span>);
+TerrainSetCLodPrecision(terrain, <span class="hljs-number">50</span>);
+TerrainSetOcclusionFrameSkip(terrain, <span class="hljs-number">0</span>);
+TerrainSetOcclusionTesselate(terrain, totTesselateIfVisible);
+</code></pre>
+<p>Если запустить игру на данном этапе, то ландшафт, скорее всего, будет слишком высоким и повернутым на 90 градусов. Это нетрудно исправить, установив желаемый масштаб по оси Z и повернув объект по оси X: </p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">ObjectSetScale(terrain, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0.1</span>);
+ObjectRotate(terrain, <span class="hljs-number">90</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+</code></pre>
+<p>Отдельного слова заслуживает наложение текстуры на ландшафт. Это можно сделать разными способами, я же предлагаю следующий: первая текстура материала (диффузная) будет натянута на весь ландшафт, а вторая (текстура детализации) будет многократно повторяться с необходимым масштабом, накладываясь на первую в режиме modulate (то есть, изменяя яркость предыдущей). Таким образом, возникнет иллюзия того, что ландшафт использует огромную детализированную текстуру. </p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">MaterialCreate(<span class="hljs-string">&quot;mTerrain&quot;</span>, <span class="hljs-string">&quot;terrain-diffuse.jpg&quot;</span>);
+MaterialSetOptions(<span class="hljs-string">&quot;mTerrain&quot;</span>, <span class="hljs-symbol">false</span>, <span class="hljs-symbol">true</span>);
+MaterialCreate(<span class="hljs-string">&quot;detmap&quot;</span>, <span class="hljs-string">&quot;terrain-detail.jpg&quot;</span>);
+MaterialSetTextureScale(<span class="hljs-string">&quot;detmap&quot;</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
+MaterialSetSecondTexture(<span class="hljs-string">&quot;mTerrain&quot;</span>, <span class="hljs-string">&quot;detmap&quot;</span>);
+ObjectSetMaterial(terrain, <span class="hljs-string">&quot;mTerrain&quot;</span>);
+</code></pre>
+<p>Обратите внимание, что мы отключаем освещение для материала ландшафта - дело в том, что динамический LOD не позволяет задавать нормали для вершин (поскольку наборы вершин постоянно меняются), что необходимо для корректного освещения полигонов. Поэтому для ландшафта следует использовать статическое освещение - карту освещенности, объединенную с диффузной текстурой.</p>
+<p>Осталась еще одна задача: перемещение персонажа по ландшафту. Это нетрудно сделать при помощи специально предусмотренной функции - <code>TerrainGetHeightAtObjectPosition</code>, которая возвращает высоту земли в точке, совпадающей с абсолютной позицией объекта:</p>
+<pre class="gml language-gml"><code class="hljs gml language-gml">ObjectSetPositionY(camPos, TerrainGetHeightAtObjectPosition(terrain, camPos) + <span class="hljs-number">1</span>);
+</code></pre>
+</body>
+</html>
