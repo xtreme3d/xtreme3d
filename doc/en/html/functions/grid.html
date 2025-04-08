@@ -1,100 +1,97 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Grid</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Grid</H1>
-
-<A class=type>Класс: TGLXYZGrid</A><BR><BR>
-
-<A>Сетка (grid) - это набор пересекающихся отрезков, образующих равномерную прямоугольную сетку, двумерную или трехмерную. Этот объект удобен для использования в отладочных и вспомогательных целях, когда нужно визуализировать координатную плоскость.
-</A>
-<HR>
-
-<A name="GridCreate"></A>
-<H1 class=name>GridCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>GridCreate</A><A>( x,y,z,step,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новую сетку и возвращает еe id.</A>
-<BR><A>x,y,z - полуразмер сетки по трем осям</A>
-<BR><A>step - размер ячейки сетки</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="GridSetLineStyle"></A>
-<H1 class=name>GridSetLineStyle</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetLineStyle</A><A>( grid,gls as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает стиль линий сетки: </A><A class=constant name="cimNone">glsSegments</A><A> (сведения отсутствуют) или </A><A class=constant name="cimNone">glsLine</A><A> (сведения отсутствуют).</A>
-<BR><A>grid - id сетки</A>
-<BR><A>gls - стиль линий сетки: </A><A class=constant name="cimNone">glsSegments</A><A> = 0 или </A><A class=constant name="cimNone">glsLine</A><A> = 1.</A>
-<HR>
-
-<A name="GridSetLineSmoothing"></A>
-<H1 class=name>GridSetLineSmoothing</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetLineSmoothing</A><A>( grid,mode as </A><A class=type>real</A><A> );</A>
-<BR><A>Переключает сглаживание линий сетки.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>mode - сглаживание: </A><A class=constant>true</A><A> или </A><A class=constant>false</A><A> (1 и 0 соответственно).</A>
-<HR>
-
-<A name="GridSetParts"></A>
-<H1 class=name>GridSetParts</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetParts</A><A>( grid,gp as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает координатную плоскость сетки.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>gp - координатная плоскость. Доступны следующие значения gp:</A>
-<BR><A class=constant>gpXY</A><A> = 0 - плоскость XY</A>
-<BR><A class=constant>gpYZ</A><A> = 1 - плоскость YZ</A>
-<BR><A class=constant>gpXZ</A><A> = 2 - плоскость XZ</A>
-<BR><A class=constant>gpXYZ</A><A> = 3 - в этом режиме будет отрисована трехмерная сетка (XYZ)</A>
-<HR>
-
-<A name="GridSetColor"></A>
-<H1 class=name>GridSetColor</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetColor</A><A>( grid,color,alpha as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает цвет сетки.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>color - цвет</A>
-<BR><A>alpha - прозрачность.</A>
-<HR>
-
-<A name="GridSetSize"></A>
-<H1 class=name>GridSetSize</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetSize</A><A>( grid,size as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает толщину линии сетки.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>size - толщина линии.</A>
-<HR>
-
-<A name="GridSetPattern"></A>
-<H1 class=name>GridSetPattern</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetPattern</A><A>( grid,pattern as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>pattern - сведения отсутствуют.</A>
-<HR>
-
-<A name="GridSetTile"></A>
-<H1 class=name>GridSetTile</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetTile</A><A>( grid,x,y,z as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>x,y,z - сведения отсутствуют.</A>
-<HR>
-
-<A name="GridSetStep"></A>
-<H1 class=name>GridSetStep</H1>
-<A class=type>real</A><A> = </A><A class=function>GridSetStep</A><A>( grid,step as </A><A class=type>real</A><A> );</A>
-<BR><A>Сведения отсутствуют.</A>
-<BR><A>grid - id сетки</A>
-<BR><A>step - сведения отсутствуют.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Grid</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="grid">Grid</h1>
+<p>Сетка (grid) - это набор пересекающихся отрезков, образующих равномерную прямоугольную сетку, двумерную или трехмерную. Этот объект удобен для использования в отладочных и вспомогательных целях, когда нужно визуализировать координатную плоскость.</p>
+<hr />
+<h2 id="gridcreate">GridCreate</h2>
+<p><code>real GridCreate(real x, real y, real z, real step, real parent);</code></p>
+<p>Создает новую сетку и возвращает указатель на нее.</p>
+<ul>
+<li><code>x</code>, <code>y</code>, <code>z</code> - полуразмер сетки по трем осям</li>
+<li><code>step</code> - размер ячейки сетки</li>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="gridsetlinestyle">GridSetLineStyle</h2>
+<p><code>real GridSetLineStyle(real grid, real gls);</code></p>
+<p>Задает стиль линий сетки.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>gls</code> - стиль линий сетки. Поддерживаются следующие значения <code>gls</code>:<ul>
+<li><code>glsSegments</code> = 0 - сведения отсутствуют</li>
+<li><code>glsLine</code> = 1 - сведения отсутствуют.</li></ul></li>
+</ul>
+<hr />
+<h2 id="gridsetlinesmoothing">GridSetLineSmoothing</h2>
+<p><code>real GridSetLineSmoothing(real grid, real mode);</code></p>
+<p>Переключает сглаживание линий сетки.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>mode</code> - сглаживание: <code>true</code> или <code>false</code> (1 и 0 соответственно).</li>
+</ul>
+<hr />
+<h2 id="gridsetparts">GridSetParts</h2>
+<p><code>real GridSetParts(real grid, real gp);</code></p>
+<p>Задает координатную плоскость сетки.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>gp</code> - координатная плоскость. Поддерживаются следующие значения <code>gp</code>:<ul>
+<li><code>gpXY</code> = 0 - плоскость XY</li>
+<li><code>gpYZ</code> = 1 - плоскость YZ</li>
+<li><code>gpXZ</code> = 2 - плоскость XZ</li>
+<li><code>gpXYZ</code> = 3 - в этом режиме будет отрисована трехмерная сетка (XYZ)</li></ul></li>
+</ul>
+<hr />
+<h2 id="gridsetcolor">GridSetColor</h2>
+<p><code>real GridSetColor(real grid, real color, real alpha);</code></p>
+<p>Задает цвет сетки.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>color</code> - цвет</li>
+<li><code>alpha</code> - прозрачность.</li>
+</ul>
+<hr />
+<h2 id="gridsetsize">GridSetSize</h2>
+<p><code>real GridSetSize(real grid, real size);</code></p>
+<p>Задает толщину линии сетки.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>size</code> - толщина линии.</li>
+</ul>
+<hr />
+<h2 id="gridsetpattern">GridSetPattern</h2>
+<p><code>real GridSetPattern(real grid, real pattern);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>pattern</code> - сведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="gridsettile">GridSetTile</h2>
+<p><code>real GridSetTile(real grid, real x, real y, real z);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - сведения отсутствуют.</li>
+</ul>
+<hr />
+<h2 id="gridsetstep">GridSetStep</h2>
+<p><code>real = GridSetStep(real grid, real step);</code></p>
+<p>Сведения отсутствуют.</p>
+<ul>
+<li><code>grid</code> - указатель на сетку</li>
+<li><code>step</code> - сведения отсутствуют.</li>
+</ul>
+</body>
+</html>

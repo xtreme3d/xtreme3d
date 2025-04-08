@@ -73,6 +73,7 @@ const functions =
     { title: "FBO", inFilename: `markdown/${lang}/functions/fbo.md`, outFilename: `${lang}/html/functions/fbo.html` },
     { title: "ShadowMap", inFilename: `markdown/${lang}/functions/shadowmap.md`, outFilename: `${lang}/html/functions/shadowmap.html` },
     { title: "ODE", inFilename: `markdown/${lang}/functions/ode.md`, outFilename: `${lang}/html/functions/ode.html` },
+    { title: "Kraft", inFilename: `markdown/${lang}/functions/kraft.md`, outFilename: `${lang}/html/functions/kraft.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },

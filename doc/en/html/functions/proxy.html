@@ -1,101 +1,94 @@
-<HTML>
-<HEAD>
-<META http-equiv=Content-Type content="text/html; charset=windows-1251">
-<TITLE>Proxy</TITLE>
-<LINK href="../data/style.css" type=text/css rel=stylesheet>
-</HEAD>
-<BODY>
-
-<DIV ALIGN=justify>
-
-<H1 class=pagetitle>Proxy</H1>
-
-<A class=type>Класс: TGLProxyObject, TGLActorProxy, TGLMultiProxy</A><BR><BR>
-
-<A>Прокси - это специальный тип объекта, который не имеет собственной графики для отрисовки - он рисует графику другого объекта, но использует для этого собственную трансформацию. Иными словами, прокси - это лучший способ создать несколько копий 3D-модели, не дублируя ее в памяти.
-<BR>
-<BR>Мультипрокси - особый подвид прокси, который может рисовать разные объекты в зависимости от удаленности от камеры. С его помощью вы можете реализовать дискретный LOD (level of detail) - систему адаптивной детализации: чем дальше прокси от камеры, тем более низкополигональную модель он рендерит.
-<BR>
-<BR>Для Актеров следует использовать специальный вид прокси - ActorProxyObject. Он позволяет рендерить копию Актера со своей анимацией - это необходимо, если у вас в игре сосуществуют несколько однотипных персонажей (например, врагов).
-</A>
-<HR>
-
-<A name="ProxyObjectCreate"></A>
-<H1 class=name>ProxyObjectCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>ProxyObjectCreate</A><A>( object,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый прокси с графикой заданного объекта.</A>
-<BR><A>object - id объекта</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="ProxyObjectSetOptions"></A>
-<H1 class=name>ProxyObjectSetOptions</H1>
-<A class=type>real</A><A> = </A><A class=function>ProxyObjectSetOptions</A><A>( proxy,copyeffects,copyobjects,copytransform as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает опции прокси.</A>
-<BR><A>proxy - id прокси</A>
-<BR><A>copyeffects - указывает, копировать ли эффекты заданного объекта (речь идет о системах частиц, прикрепленных к объекту)</A>
-<BR><A>copyobjects - указывает, копировать ли потомков объекта</A>
-<BR><A>copytransform - указывает, копировать ли локальную трансформацию объекта.</A>
-<HR>
-
-<A name="ProxyObjectSetTarget"></A>
-<H1 class=name>ProxyObjectSetTarget</H1>
-<A class=type>real</A><A> = </A><A class=function>ProxyObjectSetTarget</A><A>( proxy,object as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает целевой объект прокси.</A>
-<BR><A>proxy - id прокси</A>
-<BR><A>object - id объекта.</A>
-<HR>
-
-<A name="ActorProxyObjectCreate"></A>
-<H1 class=name>ActorProxyObjectCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectCreate</A><A>( actor,parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый прокси-Актер.</A>
-<BR><A>actor - id Актера</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="ActorProxyObjectSwitchToAnimation"></A>
-<H1 class=name>ActorProxyObjectSwitchToAnimation</H1>
-<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSwitchToAnimation</A><A>( proxy,anim as </A><A class=type>real</A><A> );</A>
-<BR><A>Переключает анимационную последовательность для прокси-Актера с указанием номера анимации.</A>
-<BR><A>proxy - id прокси</A>
-<BR><A>anim - порядковый номер анимации.</A>
-<HR>
-
-<A name="ActorProxyObjectSetAnimationRange"></A>
-<H1 class=name>ActorProxyObjectSetAnimationRange</H1>
-<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSetAnimationRange</A><A>( proxy,start,end as </A><A class=type>real</A><A> );</A>
-<BR><A>Переключает анимационную последовательность для прокси-Актера с указанием первого и последнего кадра.</A>
-<BR><A>proxy - id прокси</A>
-<BR><A>start,end - первый и последний кадр анимации.</A>
-<HR>
-
-<A name="ActorProxyObjectSetInterval"></A>
-<H1 class=name>ActorProxyObjectSetInterval</H1>
-<A class=type>real</A><A> = </A><A class=function>ActorProxyObjectSetInterval</A><A>( proxy,interval as </A><A class=type>real</A><A> );</A>
-<BR><A>Задает интервал прокси-Актера - время в миллисекундах между двумя ключевыми кадрами. Значение по умолчанию - 100.</A>
-<BR><A>proxy - id прокси</A>
-<BR><A>interval - интервал.</A>
-<HR>
-
-<A name="MultiProxyObjectCreate"></A>
-<H1 class=name>MultiProxyObjectCreate</H1>
-<A class=type>real</A><A> = </A><A class=function>MultiProxyObjectCreate</A><A>( parent as </A><A class=type>real</A><A> );</A>
-<BR><A>Создает новый мультипрокси.</A>
-<BR><A>parent - id родителя.</A>
-<HR>
-
-<A name="MultiProxyObjectAddTarget"></A>
-<H1 class=name>MultiProxyObjectAddTarget</H1>
-<A class=type>real</A><A> = </A><A class=function>MultiProxyObjectAddTarget</A><A>( mproxy,object,mindist,maxdist as </A><A class=type>real</A><A> );</A>
-<BR><A>Добавляет целевой объект в мультипрокси и задает диапазон расстояний от камеры, на котором этот объект должен рендериться.</A>
-<BR><A>parent - id мультипрокси</A>
-<BR><A>object - id объекта</A>
-<BR><A>mindist - минимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект</A>
-<BR><A>maxdist - максимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект.</A>
-<HR>
-
-</DIV>
-
-</BODY>
-</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Proxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="proxy">Proxy</h1>
+<p>Прокси - это специальный тип объекта, который не имеет собственной графики для отрисовки - он рисует графику другого объекта, но использует для этого собственную трансформацию. Иными словами, прокси - это лучший способ создать несколько копий 3D-модели, не дублируя ее в памяти.</p>
+<p>Мультипрокси - подвид прокси, который может рисовать разные объекты в зависимости от удаленности от камеры. С его помощью вы можете реализовать дискретный LOD (level of detail) - систему адаптивной детализации: чем дальше прокси от камеры, тем более низкополигональную модель он рендерит.</p>
+<p>Для актеров следует использовать специальный подвид прокси - ActorProxyObject. Он позволяет рендерить копию актера со своей анимацией - это необходимо, если у вас в игре сосуществуют несколько однотипных персонажей (например, врагов).</p>
+<hr />
+<h2 id="proxyobjectcreate">ProxyObjectCreate</h2>
+<p><code>real ProxyObjectCreate(real object, real parent);</code></p>
+<p>Создает новый прокси с графикой заданного объекта и возвращает указатель на него.</p>
+<ul>
+<li><code>object</code> - указатель на объект</li>
+<li><code>parent</code> - указатель на родителя для прокси.</li>
+</ul>
+<hr />
+<h2 id="proxyobjectsetoptions">ProxyObjectSetOptions</h2>
+<p><code>real ProxyObjectSetOptions(real proxy, real copyeffects, real copyobjects, real copytransform);</code></p>
+<p>Задает опции прокси.</p>
+<ul>
+<li><code>proxy</code> - указатель на прокси</li>
+<li><code>copyeffects</code> - указывает, копировать ли эффекты заданного объекта (речь идет о системах частиц, прикрепленных к объекту)</li>
+<li><code>copyobjects</code> - указывает, копировать ли потомков объекта</li>
+<li><code>copytransform</code> - указывает, копировать ли локальную трансформацию объекта.</li>
+</ul>
+<hr />
+<h2 id="proxyobjectsettarget">ProxyObjectSetTarget</h2>
+<p><code>real ProxyObjectSetTarget(real proxy, real object);</code></p>
+<p>Задает целевой объект прокси.</p>
+<ul>
+<li><code>proxy</code> - указатель на прокси</li>
+<li><code>object</code> - указатель на объект.</li>
+</ul>
+<hr />
+<h2 id="actorproxyobjectcreate">ActorProxyObjectCreate</h2>
+<p><code>real ActorProxyObjectCreate(real actor, real parent);</code></p>
+<p>Создает новый прокси-актер и возвращает указатель на него.</p>
+<ul>
+<li><code>actor</code> - указатель на актера</li>
+<li><code>parent</code> - указатель на родителя для прокси.</li>
+</ul>
+<hr />
+<h2 id="actorproxyobjectswitchtoanimation">ActorProxyObjectSwitchToAnimation</h2>
+<p><code>real ActorProxyObjectSwitchToAnimation(real proxy, real anim);</code></p>
+<p>Переключает анимационную последовательность для прокси-Актера с указанием номера анимации.</p>
+<ul>
+<li><code>proxy</code> - указатель на прокси-актера</li>
+<li><code>anim</code> - порядковый номер анимации.</li>
+</ul>
+<hr />
+<h2 id="actorproxyobjectsetanimationrange">ActorProxyObjectSetAnimationRange</h2>
+<p><code>real ActorProxyObjectSetAnimationRange(real proxy, real start, real end);</code></p>
+<p>Переключает анимационную последовательность для прокси-Актера с указанием первого и последнего кадра.</p>
+<ul>
+<li><code>proxy</code> - указатель на прокси-актера</li>
+<li><code>start</code>, <code>end</code> - первый и последний кадр анимации.</li>
+</ul>
+<hr />
+<h2 id="actorproxyobjectsetinterval">ActorProxyObjectSetInterval</h2>
+<p><code>real ActorProxyObjectSetInterval(real proxy, real interval);</code></p>
+<p>Задает интервал прокси-актера - время в миллисекундах между двумя ключевыми кадрами. Значение по умолчанию - 100.</p>
+<ul>
+<li><code>proxy</code> - указатель на прокси</li>
+<li><code>interval</code> - интервал.</li>
+</ul>
+<hr />
+<h2 id="multiproxyobjectcreate">MultiProxyObjectCreate</h2>
+<p><code>real MultiProxyObjectCreate(real parent);</code></p>
+<p>Создает новый мультипрокси и возвращает указатель на него.</p>
+<ul>
+<li><code>parent</code> - указатель на родителя.</li>
+</ul>
+<hr />
+<h2 id="multiproxyobjectaddtarget">MultiProxyObjectAddTarget</h2>
+<p><code>real MultiProxyObjectAddTarget(real mproxy, real object, real mindist, real maxdist);</code></p>
+<p>Добавляет целевой объект в мультипрокси и задает диапазон расстояний от камеры, на котором этот объект должен рендериться.</p>
+<ul>
+<li><code>parent</code> - указатель на мультипрокси</li>
+<li><code>object</code> - указатель на объект</li>
+<li><code>mindist</code> - минимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект</li>
+<li><code>maxdist</code> - максимальное расстояние, на котором мультипрокси должен рисовать данный целевой объект.</li>
+</ul>
+</body>
+</html>
