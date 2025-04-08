@@ -313,6 +313,18 @@ VerletWorld - очень конфликтный движок. Когда при�
 
 ---
 
+## VerletConstraintSetSlack
+
+`real VerletConstraintSetSlack(real verletWorld, real constraint, real slack);`
+
+Сведения отсутствуют.
+
+- `verletWorld` - указатель на мир
+- `constraint` - указатель на поверхность
+- `slack` - сведения отсутствуют.
+
+---
+
 ## VerletGetNodeCount
 
 `real VerletGetNodeCount(real verletWorld);`
