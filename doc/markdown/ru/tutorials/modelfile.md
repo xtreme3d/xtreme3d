@@ -4,7 +4,7 @@
 
 Статичная (то есть, неанимированная) модель в Xtreme3D загружается в специальный объект - Freeform:
 
-```d
+```gml
 model = FreeformCreate("model.3ds", matlib, matlib, global.scene);
 ```
 
@@ -12,7 +12,7 @@ model = FreeformCreate("model.3ds", matlib, matlib, global.scene);
 
 Если файл с моделью включает информацию о текстурах, Xtreme3D попытается автоматически загрузить их. Вопрос только в том, где именно движок будет искать эти текстуры. По умолчанию - в рабочей директории игры. Но хранить их там - не лучшая идея. Гораздо удобнее поместить текстуры в какую-либо папку, наример, textures. Тогда нам придется указать активной библиотеке материалов, что текстуры следует искать именно там:
 
-```d
+```gm
 MaterialLibrarySetTexturePaths(matlib, "textures");
 ```
 
@@ -20,7 +20,7 @@ MaterialLibrarySetTexturePaths(matlib, "textures");
 
 Правда, как только вам захочется, чтобы автомобиль поехал, вы обнаружите, что невозможно повернуть колеса. Это неудивительно: они являются частью одного Freeform. Поэтому в такой ситуации следует разбить модель на ее составляющие - меши:
 
-```d
+```gml
 car = DummycubeCreate(global.scene);
 FreeformToFreeforms(model, car);
 ```
@@ -29,13 +29,13 @@ FreeformToFreeforms(model, car);
 
 Исходный Freeform нам уже не нужен, и мы его удаляем: 
 
-```d
+```gml
 ObjectDestroy(model);
 ```
 
 Чтобы управлять созданными объектами, нам нужно получить их идентификаторы. Это можно сделать функцией `ObjectGetChild`. Для этого не лишним будет знать, сколько всего мешей было в исходной модели. Допустим, что пять - четыре колеса и кузов:
 
-```d
+```gml
 car_body = ObjectGetChild(map, 0);
 car_wheel1 = ObjectGetChild(map, 1);
 car_wheel2 = ObjectGetChild(map, 2);
@@ -47,7 +47,7 @@ car_wheel4 = ObjectGetChild(map, 4);
 
 Таким образом, мы получили новую иерархию, по структуре полностью идентичную с исходной моделью. Вы теперь можете вращать колеса: 
 
-```d
+```gml
 ObjectPitch(car_wheel1, 3);
 ObjectPitch(car_wheel2, 3);
 ObjectPitch(car_wheel3, 3);

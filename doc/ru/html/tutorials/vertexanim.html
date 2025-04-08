@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>Tutorial 8. Vertex animation</title>
+    <title>Tutorial 8. Morph-target animation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
     <meta charset="windows-1251">
     <meta name="author" content="Gecko">
@@ -15,26 +15,26 @@
 <p>Объект Freeform предназначен, в основном, для неодушевленных предметов. Обычно это элементы декорации, транспортные средства, различные интерактивные объекты и т.д. Если мы хотим заселить наш виртуальный мир живыми существами, нам не обойтись без объектов Actor. Название говорит само за себя: актер - это живой персонаж. В Xtreme3D Актеры представляют собой анимированные модели. А анимация, как известно, бывает двух типов - вертексная и скелетная. На этом уроке мы рассмотрим вертексную анимацию.</p>
 <p>Вертексная (или вершинная) анимация характерна тем, что для формирования анимационной последовательности движок перемещает каждую вершину модели от одной позиции к другой. Этот тип анимации впервые был применен в Quake, и с тех пор форматы моделей серии Quake (MD2, MD3) стали своего рода стандартом во всех популяных движках. Xtreme3D предоставляет полную поддержку MD2 и MD3. Разница между ними заключается в том, что MD2 хранит всю модель целиком в одном файле, а MD3 - в трех (отдельно голова, туловище и ноги). При помощи специальных матриц туловище синхронизируется с ногами, а голова - с туловищем. Это было сделано для того, чтобы анимировать туловище и ноги по отдельности. Например, во время стрельбы персонаж может как бежать, так и идти медленно, а то и просто стоять на месте.</p>
 <p>На этом уроке мы рассмотрим вертексную анимацию с форматом MD2. Актер из модели MD2 создается так:</p>
-<pre class="d language-d"><code class="hljs d language-d">actor = ActorCreate(<span class="hljs-string">&quot;model.md2&quot;</span>, matlib, matlib, global.scene);
+<pre class="gml language-gml"><code class="hljs gml language-gml">actor = ActorCreate(<span class="hljs-string">&quot;model.md2&quot;</span>, matlib, matlib, <span class="hljs-symbol">global</span>.scene);
 </code></pre>
 <p>Иногда после загрузки модели оказывается, что она неправильно повернута. Это происходит потому, что в разных редакторах направление осей трактуется по-разному. Обычно "меняются местами" оси Y и Z. Вершины модели записаны так, что ее вектор Up направлен вдоль оси Z (в DirectX-приложениях это означает "вверх"), и, поскольку за направление "вверх" в Xtreme3D отвечает ось Y, а не Z, получается, что модель повернута на -90 градусов по оси X. Мы можем исправить это недоразумение несколькими способами. Самый простой - просто повернуть ее обратно:</p>
-<pre class="d language-d"><code class="hljs d language-d">ObjectPitch(actor, <span class="hljs-number">90</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ObjectPitch(actor, <span class="hljs-number">90</span>);
 </code></pre>
 <p>Но в некоторых случаях этого недостаточно. Поворачивая модель, мы также поворачиваем ее локальную систему координат. Это значит, что ее вектор Direction теперь указывает вдоль оси Y, а не Z, как должно быть. Если мы теперь переместим модель при помощи <code>ObjectMove</code>, она сдвинется вверх, а не вперед. Можно, конечно, вместо <code>ObjectMove</code> использовать <code>ObjectStrafe</code>, но это сделает программу менее аккуратной, да и запутаться так недолго. Гораздо лучше сначала поместить актера в потомки даммикубу, а уже потом поворачивать. И, соответственно, для перемещения использовать даммикуб, а не актера. Код будет следующий:</p>
-<pre class="d language-d"><code class="hljs d language-d">player = DummycubeCreate(global.scene);
+<pre class="gml language-gml"><code class="hljs gml language-gml">player = DummycubeCreate(<span class="hljs-symbol">global</span>.scene);
 actor = ActorCreate(<span class="hljs-string">&quot;model.md2&quot;</span>, matlib, matlib, player);
 ObjectPitch(actor, <span class="hljs-number">90</span>);
 </code></pre>
 <p>Формат MD2 предусматривает разделение всех кадров анимации на отдельные группы. Это сделано для того, чтобы отделить, скажем, анимацию бега от анимации прыжка. По умолчанию Xtreme3D воспроизводит все кадры один за другим, не обращая внимания на это разделение. Но мы можем в любое время переключиться на желаемую анимацию:</p>
-<pre class="d language-d"><code class="hljs d language-d">ActorSwitchToAnimation(actor, <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ActorSwitchToAnimation(actor, <span class="hljs-number">1</span>, <span class="hljs-symbol">false</span>);
 </code></pre>
 <p>И тогда будет воспроизводиться только группа кадров под номером 1. Третий параметр этой функции отвечает за плавность смены анимации: если установить его в <code>true</code>, то переключение будет постепенным.</p>
 <p>Примерно то же самое делает функция, указывающая диапазон кадров для воспроизведения:</p>
-<pre class="d language-d"><code class="hljs d language-d">ActorSetAnimationRange(actor, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ActorSetAnimationRange(actor, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>Нетрудно догадаться, что будет проигран только промежуток между десятым и двадцатым кадрами. Правда, эти две функции имеют одно важное различие. <code>ActorSwitchToAnimation</code> каждый раз при вызове переключает воспроизведение на первый кадр заданной группы, а <code>ActorSetAnimationRange</code> этого не делает (если заданный диапазон уже воспроизводится). Поэтому <code>ActorSetAnimationRange</code> можно вызывать многократно - например, внутри цикла, что в некоторых ситуациях оказывается весьма полезным.</p>
 <p>По умолчанию анимация воспроизводится циклически - то есть, при достижении последнего кадра, воспроизведение начинается заново. Для большинства случаев это то, что нужно (например, анимация ходьбы или бега всегда зациклена). Но мы можем указать и другие режимы воспроизведения:</p>
-<pre class="d language-d"><code class="hljs d language-d">ActorSetAnimationMode(actor, aam);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ActorSetAnimationMode(actor, aam);
 </code></pre>
 <p>Вместо <code>aam</code> подставляется одна из следующих констант:</p>
 <p><code>aamNone</code> - анимация не воспроизводится;<br>
@@ -44,7 +44,7 @@ ObjectPitch(actor, <span class="hljs-number">90</span>);
 <code>aamBounceBackward</code> - то же самое, но в обратную сторону;<br>
 <code>aamLoopBackward</code> - анимация повторяется циклически в обратную сторону.<br></p>
 <p>Наконец, существует также возможность отключить линейную интерполяцию между кадрами:</p>
-<pre class="d language-d"><code class="hljs d language-d">ActorSetFrameInterpolation(actor, <span class="hljs-literal">false</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ActorSetFrameInterpolation(actor, <span class="hljs-symbol">false</span>);
 </code></pre>
 <p>При этом кадры будут сменять друг друга резко, без плавного "перетекания". Это может быть полезным, например, в гонках, где кузов автомобиля может быть деформирован - в разных кадрах вершинной анимации можно хранить разные варианты повреждений.</p>
 </body>

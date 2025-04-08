@@ -18,18 +18,18 @@
 <p>Смысл в использовании нескольких библиотек материалов заключается в возможности определять для них индивидуальные пути к текстурам. Эти пути учитываются при загрузке моделей, использующих внешние файлы текстур. По умолчанию библиотеки ищут текстуры в рабочей директории игры. Разумеется, хранить их там — не самая лучшая идея. Несомненно, лучше распределить их по отдельным папкам. Например, если у вас есть три папки с тремя разными моделями уровней, то можно будет создать для каждой из них свою библиотеку материалов и назначить им пути к текстурам, соответствующие искомым папкам.</p>
 <p>Существует поистине огромное количество разнообразных настроек материалов. Кроме того, материалы позволяют применять к ним шейдеры, "фотографировать" в них картинки с экрана или с камеры, а также хранить различные невизуальные данные, например, маски и карты высот. Охватить в одной статье все возможности, которыми располагает система материалов Xtreme3D, просто нереально. Поэтому мы рассмотрим только самые основные: цвет, текстуру и несколько других.</p>
 <p>Сначала создается и активируется библиотека материалов:</p>
-<pre class="d language-d"><code class="hljs d language-d">matlib = MaterialLibraryCreate();
-MaterialLibraryActivate(matlib);
+<pre class="gm language-gm"><code class="hljs gm language-gm"><span class="hljs-attribute">matlib</span> <span class="hljs-operator">=</span> MaterialLibraryCreate()<span class="hljs-comment">;</span>
+MaterialLibraryActivate(matlib)<span class="hljs-comment">;</span>
 </code></pre>
 <p>Теперь можно создавать сами материалы:</p>
-<pre class="d language-d"><code class="hljs d language-d">MaterialCreate(<span class="hljs-string">&quot;mTexture&quot;</span>, <span class="hljs-string">&quot;texture.jpg&quot;</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">MaterialCreate(<span class="hljs-string">&quot;mTexture&quot;</span>, <span class="hljs-string">&quot;texture.jpg&quot;</span>);
 </code></pre>
 <p>Эта функция одновременно создает материал и присваивает ему текстуру из файла. Xtreme3D поддерживает форматы BMP, JPG, PNG, TGA, DDS. Рекомендуется использовать текстуры со стороной, равной 128, 256, 512 и прочим степеням двойки. Текстура не обязательно должна быть квадратной.</p>
 <p>Вы можете создать материал без текстуры, просто оставив строку имени файла пустой:</p>
-<pre class="d language-d"><code class="hljs d language-d">MaterialCreate(<span class="hljs-string">&quot;mColor&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);
+<pre class="gm language-gm"><code class="hljs gm language-gm">MaterialCreate(<span class="hljs-string">&quot;mColor&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)<span class="hljs-comment">;</span>
 </code></pre>
 <p>В этом случае можно задать цвет материала. Проще всего это сделать функцией</p>
-<pre class="d language-d"><code class="hljs d language-d">MaterialSetDiffuseColor(<span class="hljs-string">&quot;mColor&quot;</span>, c_red, <span class="hljs-number">1</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">MaterialSetDiffuseColor(<span class="hljs-string">&quot;mColor&quot;</span>, <span class="hljs-symbol">c_red</span>, <span class="hljs-number">1</span>);
 </code></pre>
 <p>Цвет вы можете передать встроенными константами GML (с<em>red, c</em>yellow, c<em>green и др.), функциями make</em>color<em>rgb(r, g, b) или make</em>color_hsv(h, s, v) для цветовых моделей RGB и HSV, соответственно, а также в обратном шестнадцатиричном формате, например, <code>$0000FF</code> означает красный.</p>
 <p>Кроме цвета, функция <code>MaterialSetDiffuseColor</code> задает значение прозрачности — альфа — лежащее в промежутке от 0 до 1. Альфа в нашем случае равно 1 (полная непрозрачность).</p>

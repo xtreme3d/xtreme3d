@@ -14,23 +14,23 @@
 <h1 id="7">Урок 7. Загрузка модели из файла</h1>
 <p>Примитивы - это, конечно, хорошо, но для создания полноценной игры их явно недостаточно. Самое любимое занятие каждого, кто начинает знакомиться с 3D-движками, - несомненно, загрузка в движок собственных моделей, подготовленных в стороннем редакторе. Xtreme3D поддерживает загрузку моделей форматов 3DS (3D Studio), OBJ (Maya), LWO (Lightwave), BSP (Quake), MS3D (Milkshape), B3D (Blitz3D), LOD (LODka 3D) и многих других.</p>
 <p>Статичная (то есть, неанимированная) модель в Xtreme3D загружается в специальный объект - Freeform:</p>
-<pre class="d language-d"><code class="hljs d language-d">model = FreeformCreate(<span class="hljs-string">&quot;model.3ds&quot;</span>, matlib, matlib, global.scene);
+<pre class="gml language-gml"><code class="hljs gml language-gml">model = FreeformCreate(<span class="hljs-string">&quot;model.3ds&quot;</span>, matlib, matlib, <span class="hljs-symbol">global</span>.scene);
 </code></pre>
 <p>Второй и третий параметры этой функции отвечают за библиотеки материалов, которые следует использовать, соответственно, для обычных текстур и карт освещения модели. Хорошим тоном является создание отдельной библиотеки материалов для каждого объекта Freeform, чтобы гарантированно избежать конфликта имен материалов. В данном случае для простоты используется одна и та же библиотека.</p>
 <p>Если файл с моделью включает информацию о текстурах, Xtreme3D попытается автоматически загрузить их. Вопрос только в том, где именно движок будет искать эти текстуры. По умолчанию - в рабочей директории игры. Но хранить их там - не лучшая идея. Гораздо удобнее поместить текстуры в какую-либо папку, наример, textures. Тогда нам придется указать активной библиотеке материалов, что текстуры следует искать именно там:</p>
-<pre class="d language-d"><code class="hljs d language-d">MaterialLibrarySetTexturePaths(matlib, <span class="hljs-string">&quot;textures&quot;</span>);
+<pre class="gm language-gm"><code class="hljs gm language-gm">MaterialLibrarySetTexturePaths(<span class="hljs-name">matlib</span>, <span class="hljs-string">&quot;textures&quot;</span>)<span class="hljs-comment">;</span>
 </code></pre>
 <p>Материалы будут загружены в библиотеку под теми именами, какие были заданы в 3D-редакторе. Используя эти имена, вы можете настраивать характеристики материалов. Это дает возможность частично изменять внешний вид модели. Например, представьте, что вы загрузили модель автомобиля. Вы можете изменить цвет корпуса или салона, не затрагивая другие детали, сделать прозрачные окна тонированными, добавить эффекты отражения на диски колес и т.д.</p>
 <p>Правда, как только вам захочется, чтобы автомобиль поехал, вы обнаружите, что невозможно повернуть колеса. Это неудивительно: они являются частью одного Freeform. Поэтому в такой ситуации следует разбить модель на ее составляющие - меши:</p>
-<pre class="d language-d"><code class="hljs d language-d">car = DummycubeCreate(global.scene);
+<pre class="gml language-gml"><code class="hljs gml language-gml">car = DummycubeCreate(<span class="hljs-symbol">global</span>.scene);
 FreeformToFreeforms(model, car);
 </code></pre>
 <p>Мы создаем даммикуб, который будет родителем для всех деталей автомобиля, и разбиваем модель на отдельные самостоятельные Freeform. Примите во внимание, что эта операция возможна только в том случае, если детали автомобиля (кузов, колеса, дверцы, багажник и т.д.) представляют собой отдельные меши - не все форматы моделей поддерживают такое разделение.</p>
 <p>Исходный Freeform нам уже не нужен, и мы его удаляем: </p>
-<pre class="d language-d"><code class="hljs d language-d">ObjectDestroy(model);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ObjectDestroy(model);
 </code></pre>
 <p>Чтобы управлять созданными объектами, нам нужно получить их идентификаторы. Это можно сделать функцией <code>ObjectGetChild</code>. Для этого не лишним будет знать, сколько всего мешей было в исходной модели. Допустим, что пять - четыре колеса и кузов:</p>
-<pre class="d language-d"><code class="hljs d language-d">car_body = ObjectGetChild(map, <span class="hljs-number">0</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">car_body = ObjectGetChild(map, <span class="hljs-number">0</span>);
 car_wheel1 = ObjectGetChild(map, <span class="hljs-number">1</span>);
 car_wheel2 = ObjectGetChild(map, <span class="hljs-number">2</span>);
 car_wheel3 = ObjectGetChild(map, <span class="hljs-number">3</span>);
@@ -38,7 +38,7 @@ car_wheel4 = ObjectGetChild(map, <span class="hljs-number">4</span>);
 </code></pre>
 <p>Помните, что отсчет ведется с нуля, поэтому первый потомок - нулевой.</p>
 <p>Таким образом, мы получили новую иерархию, по структуре полностью идентичную с исходной моделью. Вы теперь можете вращать колеса: </p>
-<pre class="d language-d"><code class="hljs d language-d">ObjectPitch(car_wheel1, <span class="hljs-number">3</span>);
+<pre class="gml language-gml"><code class="hljs gml language-gml">ObjectPitch(car_wheel1, <span class="hljs-number">3</span>);
 ObjectPitch(car_wheel2, <span class="hljs-number">3</span>);
 ObjectPitch(car_wheel3, <span class="hljs-number">3</span>);
 ObjectPitch(car_wheel4, <span class="hljs-number">3</span>);

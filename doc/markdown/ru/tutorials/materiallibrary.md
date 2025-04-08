@@ -12,14 +12,14 @@
 
 Сначала создается и активируется библиотека материалов:
 
-```d
+```gm
 matlib = MaterialLibraryCreate();
 MaterialLibraryActivate(matlib);
 ```
 
 Теперь можно создавать сами материалы:
 
-```d
+```gml
 MaterialCreate("mTexture", "texture.jpg");
 ```
 
@@ -27,13 +27,13 @@ MaterialCreate("mTexture", "texture.jpg");
 
 Вы можете создать материал без текстуры, просто оставив строку имени файла пустой:
 
-```d
+```gm
 MaterialCreate("mColor", "");
 ```
 
 В этом случае можно задать цвет материала. Проще всего это сделать функцией
 
-```d
+```gml
 MaterialSetDiffuseColor("mColor", c_red, 1);
 ```
 
