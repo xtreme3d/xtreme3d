@@ -96,7 +96,10 @@ const functions =
     { title: "Tutorial 13. Real-time shadows", inFilename: `markdown/${lang}/tutorials/realtimeshadows.md`, outFilename: `${lang}/html/tutorials/realtimeshadows.html` },
     { title: "Tutorial 14. Creating sky", inFilename: `markdown/${lang}/tutorials/createsky.md`, outFilename: `${lang}/html/tutorials/createsky.html` },
     { title: "Tutorial 15. Creating terrain", inFilename: `markdown/${lang}/tutorials/createterrain.md`, outFilename: `${lang}/html/tutorials/createterrain.html` },
-    { title: "Tutorial 16. Creating water", inFilename: `markdown/${lang}/tutorials/createwater.md`, outFilename: `${lang}/html/tutorials/createwater.html` }
+    { title: "Tutorial 16. Creating water", inFilename: `markdown/${lang}/tutorials/createwater.md`, outFilename: `${lang}/html/tutorials/createwater.html` },
+    { title: "Tutorial 17. Particles", inFilename: `markdown/${lang}/tutorials/particles.md`, outFilename: `${lang}/html/tutorials/particles.html` },
+    { title: "Tutorial 18. Shaders", inFilename: `markdown/${lang}/tutorials/shaders.md`, outFilename: `${lang}/html/tutorials/shaders.html` },
+    { title: "Tutorial 19. GLSL", inFilename: `markdown/${lang}/tutorials/glsl.md`, outFilename: `${lang}/html/tutorials/glsl.html` }
 ];
 
 const outputEncoding = "win1251";
