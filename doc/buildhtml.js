@@ -83,7 +83,10 @@ const functions =
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
-    { title: "Tutorial 3. Object hierarchy", inFilename: `markdown/${lang}/tutorials/hierarchy.md`, outFilename: `${lang}/html/tutorials/hierarchy.html` }
+    { title: "Tutorial 3. Object hierarchy", inFilename: `markdown/${lang}/tutorials/hierarchy.md`, outFilename: `${lang}/html/tutorials/hierarchy.html` },
+    { title: "Tutorial 4. First person camera", inFilename: `markdown/${lang}/tutorials/firstpersoncamera.md`, outFilename: `${lang}/html/tutorials/firstpersoncamera.html` },
+    { title: "Tutorial 5. Material library", inFilename: `markdown/${lang}/tutorials/materiallibrary.md`, outFilename: `${lang}/html/tutorials/matlib.html` },
+    { title: "Tutorial 6. Примитивы", inFilename: `markdown/${lang}/tutorials/primitives.md`, outFilename: `${lang}/html/tutorials/primitives.html` }
 ];
 
 const outputEncoding = "win1251";
