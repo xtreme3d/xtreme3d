@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Logger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="logger">Logger</h1>
+<p>Логгер - объект, при помощи которого вы можете выводить отладочные сообщения в файл. Эта возможность полезна для того, чтобы упростить формирование отчетов об ошибках: если возникла проблема, пользователь может отправить вам файл лога игры.</p>
+<p>Логировать ошибки вы должны самостоятельно, но некоторые объекты Xtreme3D (в данный момент - шейдеры GLSL) также могут использовать логгер для вывода своих ошибок.</p>
+<hr />
+<h1 id="loggercreate">LoggerCreate</h1>
+<p><code>real LoggerCreate(string filename, real loglevel);</code></p>
+<p>Создает логгер и возвращает указатель на него.</p>
+<ul>
+<li><code>filename</code> - путь к файлу лога</li>
+<li><code>loglevel</code> - уровень подробности лога. Доступны следующие значения <code>loglevel</code>:<ul>
+<li><code>llMin</code> = 0 - минимальный уровень. В лог выводятся только ошибки (<code>lkError</code> и <code>lkFatalError</code>);</li>
+<li><code>llMedium</code> = 1 - средний уровень. В лог выводятся ошибки и предупреждения (<code>lkNotice</code>, <code>lkWarning</code>, <code>lkError</code>, <code>lkFatalError</code>);</li>
+<li><code>llMax</code> = 2 - максимальный уровень. В лог выводятся все сообщения, включая отладочные.</li></ul></li>
+</ul>
+<hr />
+<h1 id="loggerenable">LoggerEnable</h1>
+<p><code>real LoggerEnable(real logger, real mode);</code></p>
+<p>Включает или выключает логгер.</p>
+<ul>
+<li><code>logger</code> - указатель на логгер</li>
+<li><code>mode</code> - <code>true</code> или <code>false</code>.</li>
+</ul>
+<hr />
+<h1 id="loggerlog">LoggerLog</h1>
+<p><code>real LoggerLog(real logger, real logtype, string msg);</code></p>
+<p>Выводит сообщение в логгер.</p>
+<ul>
+<li><code>logger</code> - указатель на логгер</li>
+<li><code>logtype</code> - тип сообщения. Доступны следующие значения <code>logtype</code>:<ul>
+<li><code>lkDebug</code> = 0 - отладочное сообщение. Используется при разработке и тестировании;</li>
+<li><code>lkInfo</code> = 1 - информационное сообщение. Используется, например, для вывода информации о системе;</li>
+<li><code>lkNotice</code> = 2 - оповещение. Используется, когда приложение делает что-то важное;</li>
+<li><code>lkWarning</code> = 3 - предупреждение. Используется, например, при изменении поведения программы в особых условиях;</li>
+<li><code>lkError</code> = 4 - ошибка. Используется, когда приложение не может выполнить какую-то функцию, но продолжает работать;</li>
+<li><code>lkFatalError</code> = 5 - фатальная ошибка. Используется, когда дальнейшая работа программы невозможна.</li></ul></li>
+<li><code>msg</code> - сообщение.</li>
+</ul>
+</body>
+</html>

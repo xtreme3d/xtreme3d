@@ -337,6 +337,10 @@
   <PARAM name="Name" value="Window">
   <PARAM name="Local" value="functions/window.html">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Logger">
+  <PARAM name="Local" value="functions/logger.html">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FAQ">

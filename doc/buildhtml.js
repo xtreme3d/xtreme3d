@@ -75,6 +75,11 @@ const functions =
     { title: "ODE", inFilename: `markdown/${lang}/functions/ode.md`, outFilename: `${lang}/html/functions/ode.html` },
     { title: "Kraft", inFilename: `markdown/${lang}/functions/kraft.md`, outFilename: `${lang}/html/functions/kraft.html` },
     { title: "Verlet", inFilename: `markdown/${lang}/functions/verlet.md`, outFilename: `${lang}/html/functions/verlet.html` },
+    { title: "ObjectHash", inFilename: `markdown/${lang}/functions/objecthash.md`, outFilename: `${lang}/html/functions/objecthash.html` },
+    { title: "Color", inFilename: `markdown/${lang}/functions/color.md`, outFilename: `${lang}/html/functions/color.html` },
+    { title: "Input", inFilename: `markdown/${lang}/functions/input.md`, outFilename: `${lang}/html/functions/input.html` },
+    { title: "Window", inFilename: `markdown/${lang}/functions/window.md`, outFilename: `${lang}/html/functions/window.html` },
+    { title: "Logger", inFilename: `markdown/${lang}/functions/logger.md`, outFilename: `${lang}/html/functions/logger.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
