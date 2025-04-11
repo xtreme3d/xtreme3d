@@ -17,6 +17,8 @@ class App:
         EngineSetObjectsSorting(osNone)
         EngineSetMaxLights(8)
         
+        AudioInit()
+        
         self.windowWidth = 1280
         self.windowHeight = 720
         
@@ -72,6 +74,9 @@ class App:
         self.running = True
         self.timer = 0.0
         self.dt = 1.0 / 60.0
+        
+        self.music = MusicLoad(b'data/robocop3.xm')
+        MusicPlay(self.music, -1)
         
         self.pluginSource = pluginBase.make_plugin_source(
             searchpath = ['./plugins'],
@@ -144,3 +149,4 @@ class App:
 
 app = App()
 app.run()
+AudioClose()

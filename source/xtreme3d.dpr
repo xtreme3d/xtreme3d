@@ -144,6 +144,7 @@ uses
   Hashes,
   SDL2,
   SDL2_TTF,
+  SDL2_Mixer,
   Kraft,
   GLKraft;
 
@@ -517,6 +518,7 @@ end;
 {$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 {$I 'xtreme3d/logger'}
+{$I 'xtreme3d/sound'}
 
 exports
     // Engine
@@ -1030,6 +1032,15 @@ exports
     KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 
     // Logger
-    LoggerCreate, LoggerEnable, LoggerLog;
+    LoggerCreate, LoggerEnable, LoggerLog,
+
+    // Audio
+    AudioInit, AudioClose,
+    AudioChannelIsPlaying, AudioMusicIsPlaying,
+    AudioSetChannelVolume, AudioSetMusicVolume, AudioSetChannelPannning,
+    AudioSetChannelPosition, AudioSetChannelDistance,
+    AudioStopChannel, AudioStopChannelDelayed, AudioStopMusic,
+    AudioPauseMusic, AudioResumeMusic, AudioRewindMusic, AudioSetMusicPosition,
+    SoundLoad, SoundPlay, MusicLoad, MusicPlay;
 begin
 end.
