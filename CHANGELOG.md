@@ -1,5 +1,9 @@
 Xtreme3D version history
 ========================
+v4.1.0 (by Gecko) - ??/??/2025
+------------------------------
+- Audio functions.
+
 v4.0.0 (by Gecko) - 09/04/2025
 ------------------------------
 - Based on GLScene 2.2 and Delphi 10.4

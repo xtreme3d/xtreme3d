@@ -81,6 +81,7 @@ const functions =
     { title: "Input", inFilename: `markdown/${lang}/functions/input.md`, outFilename: `${lang}/html/functions/input.html` },
     { title: "Window", inFilename: `markdown/${lang}/functions/window.md`, outFilename: `${lang}/html/functions/window.html` },
     { title: "Logger", inFilename: `markdown/${lang}/functions/logger.md`, outFilename: `${lang}/html/functions/logger.html` },
+    { title: "Audio", inFilename: `markdown/${lang}/functions/audio.md`, outFilename: `${lang}/html/functions/audio.html` },
     
     { title: "Tutorial 1. Basics", inFilename: `markdown/${lang}/tutorials/basics.md`, outFilename: `${lang}/html/tutorials/basics.html` },
     { title: "Tutorial 2. Simple scene", inFilename: `markdown/${lang}/tutorials/simplescene.md`, outFilename: `${lang}/html/tutorials/simplescene.html` },
