@@ -345,6 +345,10 @@
   <PARAM name="Name" value="Logger">
   <PARAM name="Local" value="functions/logger.html">
  </OBJECT>
+ <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="Audio">
+  <PARAM name="Local" value="functions/audio.html">
+ </OBJECT>
 </UL>
  <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="FAQ">

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Audio</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="audio">Audio</h1>
+<p>Функции Audio предоставляют возможность воспроизводить звуки с использованием <a href="https://github.com/libsdl-org/SDL_mixer">SDL_Mixer</a> - простого, но достаточно мощного звукового движка. Он поддерживает 8 каналов для звуковых эффектов + 1 канал для фоновой музыки. Поддерживаются все потоковые аудиоформаты (MP3, OGG/Vorbis, FLAC, VOC, WAV), MIDI, трекерные форматы (MOD, XM, S3M, IT с использованием библиотеки libxmp.dll), а также секвенсорные форматы консольных игр (таких, как SNES SPC, с использованием библиотеки libgme.dll).</p>
+<h2 id="audioinit">AudioInit</h2>
+<p><code>real AudioInit();</code></p>
+<p>Инициализирует звуковую систему. Эту функцию нужно вызвать один раз при старте приложения, после <code>EngineCreate</code>.</p>
+<hr />
+<h2 id="audioclose">AudioClose</h2>
+<p><code>real AudioClose();</code></p>
+<p>Закрывает звуковую систему. Эту функцию нужно вызвать один раз при завершении работы приложения.</p>
+<hr />
+<h2 id="audiochannelisplaying">AudioChannelIsPlaying</h2>
+<p><code>real AudioChannelIsPlaying(real channel);</code></p>
+<p>Возвращает <code>true</code>, если в заданном канале воспроизводится звук, и <code>false</code> в противном случае.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7.</li>
+</ul>
+<hr />
+<h2 id="audiosetchannelvolume">AudioSetChannelVolume</h2>
+<p><code>real AudioSetChannelVolume(real channel, real volume);</code></p>
+<p>Задает громкость канала.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>volume</code> - громкость от 0.0 до 1.0.</li>
+</ul>
+<hr />
+<h2 id="audiosetchannelpannning">AudioSetChannelPannning</h2>
+<p><code>real AudioSetChannelPannning(real channel, real panning);</code></p>
+<p>Задает стереобаланс канала.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>panning</code> - значение от 0.0 до 1.0. При 0.0 звук будет идти из левой колонки, при 1.0 - из правой.</li>
+</ul>
+<hr />
+<h2 id="audiosetchannelposition">AudioSetChannelPosition</h2>
+<p><code>real AudioSetChannelPosition(real channel, real angle, real distance);</code></p>
+<p>Задает пространственную позицию канала относительно слушателя.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>angle</code> - угол, в направлении которого доносится звук</li>
+<li><code>distance</code> - расстояние до источника звука. Это значение должно быть от 0 до 255.</li>
+</ul>
+<hr />
+<h2 id="audiosetchanneldistance">AudioSetChannelDistance</h2>
+<p><code>real AudioSetChannelDistance(real channel, real distance);</code></p>
+<p>Задает расстояние до источника звука.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>distance</code> - расстояние до источника звука. Это значение должно быть от 0 до 255.</li>
+</ul>
+<hr />
+<h2 id="audiostopchannel">AudioStopChannel</h2>
+<p><code>real AudioStopChannel(real channel, real fade);</code></p>
+<p>Останавливает звук в канале.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>fade</code> - если этот параметр больше нуля, то он задает длительность затухания звука (fade out) в секундах.</li>
+</ul>
+<hr />
+<h2 id="audiostopchanneldelayed">AudioStopChannelDelayed</h2>
+<p><code>real AudioStopChannelDelayed(real channel, real delay);</code></p>
+<p>Останавливает звук в канале с задержкой.</p>
+<ul>
+<li><code>channel</code> - номер канала от 0 до 7</li>
+<li><code>delay</code> - время задержки в секундах.</li>
+</ul>
+<hr />
+<h2 id="audiomusicisplaying">AudioMusicIsPlaying</h2>
+<p><code>real AudioMusicIsPlaying();</code></p>
+<p>Возвращает <code>true</code>, если музыка воспроизводится, и <code>false</code> в противном случае.</p>
+<hr />
+<h2 id="audiosetmusicvolume">AudioSetMusicVolume</h2>
+<p><code>real AudioSetMusicVolume(real volume);</code></p>
+<p>Задает громкость музыки.</p>
+<ul>
+<li><code>volume</code> - громкость от 0.0 до 1.0.</li>
+</ul>
+<hr />
+<h2 id="audiosetmusicposition">AudioSetMusicPosition</h2>
+<p><code>real AudioSetMusicVolume(real position);</code></p>
+<p>Задает позицию музыкальной дорожки.</p>
+<ul>
+<li><code>position</code> - </li>
+</ul>
+<hr />
+<h2 id="audiostopmusic">AudioStopMusic</h2>
+<p><code>real AudioStopMusic(real fade);</code></p>
+<p>Останавливает музыку.</p>
+<ul>
+<li><code>fade</code> - если этот параметр больше нуля, то он задает длительность затухания музыки (fade out) в секундах.</li>
+</ul>
+<hr />
+<h2 id="audiopausemusic">AudioPauseMusic</h2>
+<p><code>real AudioPauseMusic();</code></p>
+<p>Ставит музыку на паузу.</p>
+<hr />
+<h2 id="audioresumemusic">AudioResumeMusic</h2>
+<p><code>real AudioResumeMusic();</code></p>
+<p>Продолжает воспроизведение музыки после паузы.</p>
+<hr />
+<h2 id="audiorewindmusic">AudioRewindMusic</h2>
+<p><code>real AudioRewindMusic();</code></p>
+<p>Сбрасывает музыку на начало трека.</p>
+<hr />
+<h2 id="soundload">SoundLoad</h2>
+<p><code>real SoundLoad(string filename);</code></p>
+<p>Загружает звук и возвращает указатель на него.</p>
+<ul>
+<li><code>filename</code> - путь к аудиофайлу.</li>
+</ul>
+<hr />
+<h2 id="soundplay">SoundPlay</h2>
+<p><code>real SoundPlay(real sound, real channel, real loops);</code></p>
+<p>Воспроизводит звук.</p>
+<ul>
+<li><code>sound</code> - указатель на звук</li>
+<li><code>channel</code> - номер канала от 0 до 7 (либо -1, если канал не важен)</li>
+<li><code>loops</code> - количество повторов (0 для однократного воспроизведения, -1 для бесконечного повторения).</li>
+</ul>
+<hr />
+<h2 id="musicload">MusicLoad</h2>
+<p><code>real MusicLoad(string filename);</code></p>
+<p>Загружает музыку и возаращает указатель на нее.</p>
+<ul>
+<li><code>filename</code> - путь к фаудиофайлу.</li>
+</ul>
+<hr />
+<h2 id="musicplay">MusicPlay</h2>
+<p><code>real MusicPlay(real music, real loops);</code></p>
+<p>Воспроизводит музыку.</p>
+<ul>
+<li><code>music</code> - указатель на музыку</li>
+<li><code>loops</code> - количество повторов (0 для однократного воспроизведения, -1 для бесконечного повторения).</li>
+</ul>
+</body>
+</html>

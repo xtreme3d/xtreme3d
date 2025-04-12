@@ -880,6 +880,27 @@
 [SkydomeClearStars](skydome.html#skydomeclearstars)<br>
 [SkydomeTwinkleStars](skydome.html#skydometwinklestars)<br>
 
+[AudioInit](sound.html#audioinit)<br>
+[AudioClose](sound.html#audioclose)<br>
+[AudioChannelIsPlaying](sound.html#audiochannelisplaying)<br>
+[AudioMusicIsPlaying](sound.html#audiomusicisplaying)<br>
+[AudioSetChannelVolume](sound.html#audiosetchannelvolume)<br>
+[AudioSetMusicVolume](sound.html#audiosetmusicvolume)<br>
+[AudioSetChannelPannning](sound.html#audiosetchannelpannning)<br>
+[AudioSetChannelPosition](sound.html#audiosetchannelposition)<br>
+[AudioSetChannelDistance](sound.html#audiosetchanneldistance)<br>
+[AudioStopChannel](sound.html#audiostopchannel)<br>
+[AudioStopChannelDelayed](sound.html#audiostopchanneldelayed)<br>
+[AudioStopMusic](sound.html#audiostopmusic)<br>
+[AudioPauseMusic](sound.html#audiopausemusic)<br>
+[AudioResumeMusic](sound.html#audioresumemusic)<br>
+[AudioRewindMusic](sound.html#audiorewindmusic)<br>
+[AudioSetMusicPosition](sound.html#audiosetmusicposition)<br>
+[SoundLoad](sound.html#soundload)<br>
+[SoundPlay](sound.html#soundplay)<br>
+[MusicLoad](sound.html#musicload)<br>
+[MusicPlay](sound.html#musicplay)<br>
+
 [HUDSpriteCreate](sprite.html#hudspritecreate)<br>
 [HUDSpriteGetMouseOver](sprite.html#hudspritegetmouseover)<br>
 [HUDSpriteXTiles](sprite.html#hudspritextiles)<br>
