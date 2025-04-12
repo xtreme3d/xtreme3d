@@ -14,6 +14,14 @@ begin
   result := ObjToReal(frm);
 end;
 
+function WindowSetBackgroundColor(w, color: real): real; cdecl;
+var
+  frm: TForm;
+begin
+  frm := TForm(RealToPtr(w));
+  frm.Color := TColor(Trunc(color));
+end;
+
 function WindowCenter(w: real): real; cdecl;
 var
   frm: TForm;

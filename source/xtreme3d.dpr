@@ -13,8 +13,10 @@ uses
   VCL.Forms,
   VCL.Graphics,
   VCL.Dialogs,
+  VCL.Controls,
   VCL.Imaging.PNGImage,
-  Vcl.Imaging.Jpeg,
+  VCL.Imaging.Jpeg,
+  VCL.MPlayer,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
   GLS.Keyboard,
@@ -518,6 +520,7 @@ end;
 {$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
+{$I 'xtreme3d/windowcontrol'}
 {$I 'xtreme3d/color'}
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
@@ -525,6 +528,7 @@ end;
 {$I 'xtreme3d/logger'}
 {$I 'xtreme3d/sdl'}
 {$I 'xtreme3d/audio'}
+{$I 'xtreme3d/video'}
 
 exports
     // Engine
@@ -985,6 +989,10 @@ exports
     WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
     WindowSetIcon, WindowIsShowing,
     WindowDispatch, WindowIsActive,
+    WindowSetBackgroundColor,
+
+    // WindowControl
+    WindowControlCreate, WindowControlSetBackgroundColor, WindowControlFree,
 
     // Color
     MakeColorRGB, MakeColorRGBFloat,
@@ -1050,6 +1058,9 @@ exports
     AudioSetChannelPosition, AudioSetChannelDistance,
     AudioStopChannel, AudioStopChannelDelayed, AudioStopMusic,
     AudioPauseMusic, AudioResumeMusic, AudioRewindMusic, AudioSetMusicPosition,
-    SoundLoad, SoundPlay, MusicLoad, MusicPlay;
+    SoundLoad, SoundPlay, MusicLoad, MusicPlay,
+
+    // Video
+    VideoCreate, VideoPlay, VideoClose, VideoIsPlaying;
 begin
 end.
