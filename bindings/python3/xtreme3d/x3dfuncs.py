@@ -4956,6 +4956,28 @@ def VerletWorldSetMaxDeltaTime(aWr, aTm):
     return x3d.VerletWorldSetMaxDeltaTime(aWr, aTm)
 
 
+# video.pas
+x3d.VideoCreate.argtypes = [ctypes.c_double]
+x3d.VideoCreate.restype = ctypes.c_double
+def VideoCreate(aWincontrol):
+    return x3d.VideoCreate(aWincontrol)
+
+x3d.VideoIsPlaying.argtypes = [ctypes.c_double]
+x3d.VideoIsPlaying.restype = ctypes.c_double
+def VideoIsPlaying(aPlayer):
+    return x3d.VideoIsPlaying(aPlayer)
+
+x3d.VideoPlay.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.VideoPlay.restype = ctypes.c_double
+def VideoPlay(aPlayer, aFilename):
+    return x3d.VideoPlay(aPlayer, aFilename)
+
+x3d.VideoClose.argtypes = [ctypes.c_double]
+x3d.VideoClose.restype = ctypes.c_double
+def VideoClose(aPlayer):
+    return x3d.VideoClose(aPlayer)
+
+
 # viewer.pas
 x3d.ViewerCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerCreate.restype = ctypes.c_double
@@ -5236,6 +5258,11 @@ x3d.WindowCreate.restype = ctypes.c_double
 def WindowCreate(aX, aY, aW, aH, aResizeable):
     return x3d.WindowCreate(aX, aY, aW, aH, aResizeable)
 
+x3d.WindowSetBackgroundColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.WindowSetBackgroundColor.restype = ctypes.c_double
+def WindowSetBackgroundColor(aW, aColor):
+    return x3d.WindowSetBackgroundColor(aW, aColor)
+
 x3d.WindowCenter.argtypes = [ctypes.c_double]
 x3d.WindowCenter.restype = ctypes.c_double
 def WindowCenter(aW):
@@ -5290,5 +5317,22 @@ x3d.WindowIsActive.argtypes = [ctypes.c_double]
 x3d.WindowIsActive.restype = ctypes.c_double
 def WindowIsActive(aW):
     return x3d.WindowIsActive(aW)
+
+
+# windowcontrol.pas
+x3d.WindowControlCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.WindowControlCreate.restype = ctypes.c_double
+def WindowControlCreate(aWinhandle, aTop, aLeft, aWidth, aHeight):
+    return x3d.WindowControlCreate(aWinhandle, aTop, aLeft, aWidth, aHeight)
+
+x3d.WindowControlSetBackgroundColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.WindowControlSetBackgroundColor.restype = ctypes.c_double
+def WindowControlSetBackgroundColor(aWincontrol, aColor):
+    return x3d.WindowControlSetBackgroundColor(aWincontrol, aColor)
+
+x3d.WindowControlFree.argtypes = [ctypes.c_double]
+x3d.WindowControlFree.restype = ctypes.c_double
+def WindowControlFree(aWincontrol):
+    return x3d.WindowControlFree(aWincontrol)
 
 
