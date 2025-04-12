@@ -71,7 +71,7 @@ class App:
         self.mx = WindowGetPosition(self.window, 0) + self.windowWidth* 0.5
         self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
         MouseSetPosition(self.mx, self.my)
-        MouseShowCursor(not self.mouselookActive);
+        MouseShowCursor(not self.mouselookActive)
         
         self.running = True
         self.timer = 0.0

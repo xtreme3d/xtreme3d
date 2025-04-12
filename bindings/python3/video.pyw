@@ -51,6 +51,13 @@ class App:
         ObjectPitch(self.plane, 90)
         MaterialCreate(b'mPlane', b'data/ground.jpg')
         ObjectSetMaterial(self.plane, b'mPlane')
+        
+        self.mouselookActive = False
+        self.mbLeftReleased = True
+        self.pmx = MouseGetPositionX()
+        self.pmy = MouseGetPositionY()
+        self.mx = WindowGetPosition(self.window, 0) + self.windowWidth* 0.5
+        self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
 
         self.winControl = WindowControlCreate(WindowGetHandle(self.window), 0, 0, self.windowWidth, self.windowHeight)
         WindowControlSetBackgroundColor(self.winControl, c_black)
@@ -74,6 +81,9 @@ class App:
         ViewerEnableVSync(self.viewer, vsmSync)
         ViewerSetAutoRender(self.viewer, False)
         ViewerSetCamera(self.viewer, self.camera)
+        MouseSetPosition(self.mx, self.my)
+        self.mouselookActive = True
+        MouseShowCursor(not self.mouselookActive)
         self.rendering = True
 
     def run(self):
@@ -88,6 +98,8 @@ class App:
                     self.render(self.dt)
     
     def update(self, dt):
+        escPressed = False
+        
         mouseClicked = False
         if MouseIsPressed(1) and WindowIsActive(self.window):
             mouseClicked = True
@@ -99,8 +111,41 @@ class App:
                 VideoClose(self.video)
                 WindowControlFree(self.winControl)
                 self.initRender()
-        
-        escPressed = False
+        else:
+            if self.mouselookActive and WindowIsActive(self.window):
+                self.mx = WindowGetPosition(self.window, 0) + self.windowWidth * 0.5
+                self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
+                deltax = (self.mx - MouseGetPositionX()) / 6
+                deltay = (self.my - MouseGetPositionY()) / 6
+                ObjectRotate(self.camera, deltay, 0, 0)
+                ObjectRotate(self.camPos, 0, -deltax, 0)
+                MouseSetPosition(self.mx, self.my)
+
+            if KeyIsPressed(ord('W')):
+                ObjectMove(self.camPos, -5 * dt)
+            if KeyIsPressed(ord('A')):
+                ObjectStrafe(self.camPos, 5 * dt)
+            if KeyIsPressed(ord('D')):
+                ObjectStrafe(self.camPos, -5 * dt)
+            if KeyIsPressed(ord('S')):
+                ObjectMove(self.camPos, 5 * dt)
+            
+            if MouseIsPressed(1) and WindowIsActive(self.window): # mb_left
+                if self.mbLeftReleased:
+                    self.mbLeftReleased = False
+                    self.mouselookActive = not self.mouselookActive
+                    if not self.mouselookActive:
+                        MouseSetPosition(self.pmx, self.pmy)
+                        MouseShowCursor(True)
+                    else:
+                        self.pmx = MouseGetPositionX()
+                        self.pmy = MouseGetPositionY()
+                        self.mx = WindowGetPosition(self.window, 0) + self.windowWidth * 0.5
+                        self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
+                        MouseSetPosition(self.mx, self.my)
+                        MouseShowCursor(False)
+                else:
+                    self.mbLeftReleased = True
         
         if KeyIsPressed(27): # vk_escape
             escPressed = True
