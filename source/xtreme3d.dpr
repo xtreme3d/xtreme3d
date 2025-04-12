@@ -204,6 +204,11 @@ begin
     result := System.UTF8ToUnicodeString(s);
 end;
 
+function IsEmptyStr(s: PAnsiChar): Boolean;
+begin
+    result := (s = nil) or (s^ = #0);
+end;
+
 function IsKeyDown(vk: integer): Boolean;
 begin
    result := (GetAsyncKeyState(vk)<>0);
@@ -518,6 +523,7 @@ end;
 {$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 {$I 'xtreme3d/logger'}
+{$I 'xtreme3d/sdl'}
 {$I 'xtreme3d/audio'}
 
 exports
@@ -1033,6 +1039,9 @@ exports
 
     // Logger
     LoggerCreate, LoggerEnable, LoggerLog,
+
+    // SDL
+    SDLLogError,
 
     // Audio
     AudioInit, AudioClose,

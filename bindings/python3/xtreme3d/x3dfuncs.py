@@ -219,6 +219,108 @@ def ActorSetReference(aActor, aAar):
     return x3d.ActorSetReference(aActor, aAar)
 
 
+# audio.pas
+x3d.AudioInit.argtypes = []
+x3d.AudioInit.restype = ctypes.c_double
+def AudioInit():
+    return x3d.AudioInit()
+
+x3d.AudioClose.argtypes = []
+x3d.AudioClose.restype = ctypes.c_double
+def AudioClose():
+    return x3d.AudioClose()
+
+x3d.AudioChannelIsPlaying.argtypes = [ctypes.c_double]
+x3d.AudioChannelIsPlaying.restype = ctypes.c_double
+def AudioChannelIsPlaying(aChannel):
+    return x3d.AudioChannelIsPlaying(aChannel)
+
+x3d.AudioMusicIsPlaying.argtypes = []
+x3d.AudioMusicIsPlaying.restype = ctypes.c_double
+def AudioMusicIsPlaying():
+    return x3d.AudioMusicIsPlaying()
+
+x3d.AudioSetChannelVolume.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelVolume.restype = ctypes.c_double
+def AudioSetChannelVolume(aChannel, aVol):
+    return x3d.AudioSetChannelVolume(aChannel, aVol)
+
+x3d.AudioSetMusicVolume.argtypes = [ctypes.c_double]
+x3d.AudioSetMusicVolume.restype = ctypes.c_double
+def AudioSetMusicVolume(aVol):
+    return x3d.AudioSetMusicVolume(aVol)
+
+x3d.AudioSetChannelPannning.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelPannning.restype = ctypes.c_double
+def AudioSetChannelPannning(aChannel, aPanning):
+    return x3d.AudioSetChannelPannning(aChannel, aPanning)
+
+x3d.AudioSetChannelPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelPosition.restype = ctypes.c_double
+def AudioSetChannelPosition(aChannel, aAngle, aDistance):
+    return x3d.AudioSetChannelPosition(aChannel, aAngle, aDistance)
+
+x3d.AudioSetChannelDistance.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelDistance.restype = ctypes.c_double
+def AudioSetChannelDistance(aChannel, aDistance):
+    return x3d.AudioSetChannelDistance(aChannel, aDistance)
+
+x3d.AudioStopChannel.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioStopChannel.restype = ctypes.c_double
+def AudioStopChannel(aChannel, aFade):
+    return x3d.AudioStopChannel(aChannel, aFade)
+
+x3d.AudioStopChannelDelayed.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioStopChannelDelayed.restype = ctypes.c_double
+def AudioStopChannelDelayed(aChannel, aDelay):
+    return x3d.AudioStopChannelDelayed(aChannel, aDelay)
+
+x3d.AudioStopMusic.argtypes = [ctypes.c_double]
+x3d.AudioStopMusic.restype = ctypes.c_double
+def AudioStopMusic(aFade):
+    return x3d.AudioStopMusic(aFade)
+
+x3d.AudioPauseMusic.argtypes = []
+x3d.AudioPauseMusic.restype = ctypes.c_double
+def AudioPauseMusic():
+    return x3d.AudioPauseMusic()
+
+x3d.AudioResumeMusic.argtypes = []
+x3d.AudioResumeMusic.restype = ctypes.c_double
+def AudioResumeMusic():
+    return x3d.AudioResumeMusic()
+
+x3d.AudioRewindMusic.argtypes = []
+x3d.AudioRewindMusic.restype = ctypes.c_double
+def AudioRewindMusic():
+    return x3d.AudioRewindMusic()
+
+x3d.AudioSetMusicPosition.argtypes = [ctypes.c_double]
+x3d.AudioSetMusicPosition.restype = ctypes.c_double
+def AudioSetMusicPosition(aPos):
+    return x3d.AudioSetMusicPosition(aPos)
+
+x3d.SoundLoad.argtypes = [ctypes.c_char_p]
+x3d.SoundLoad.restype = ctypes.c_double
+def SoundLoad(aFilename):
+    return x3d.SoundLoad(aFilename)
+
+x3d.SoundPlay.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.SoundPlay.restype = ctypes.c_double
+def SoundPlay(aS, aChannel, aLoops):
+    return x3d.SoundPlay(aS, aChannel, aLoops)
+
+x3d.MusicLoad.argtypes = [ctypes.c_char_p]
+x3d.MusicLoad.restype = ctypes.c_double
+def MusicLoad(aFilename):
+    return x3d.MusicLoad(aFilename)
+
+x3d.MusicPlay.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MusicPlay.restype = ctypes.c_double
+def MusicPlay(aM, aLoops):
+    return x3d.MusicPlay(aM, aLoops)
+
+
 # blur.pas
 x3d.BlurCreate.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.BlurCreate.restype = ctypes.c_double
@@ -3806,6 +3908,13 @@ def ActorProxyObjectSetInterval(aProxy, aInterval):
     return x3d.ActorProxyObjectSetInterval(aProxy, aInterval)
 
 
+# sdl.pas
+x3d.SDLLogError.argtypes = [ctypes.c_double]
+x3d.SDLLogError.restype = ctypes.c_double
+def SDLLogError(aLogger):
+    return x3d.SDLLogError(aLogger)
+
+
 # shaders.pas
 x3d.ShaderEnable.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ShaderEnable.restype = ctypes.c_double
@@ -4271,108 +4380,6 @@ x3d.SkydomeTwinkleStars.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.SkydomeTwinkleStars.restype = ctypes.c_double
 def SkydomeTwinkleStars(aSkydome, aMode):
     return x3d.SkydomeTwinkleStars(aSkydome, aMode)
-
-
-# sound.pas
-x3d.AudioInit.argtypes = []
-x3d.AudioInit.restype = ctypes.c_double
-def AudioInit():
-    return x3d.AudioInit()
-
-x3d.AudioClose.argtypes = []
-x3d.AudioClose.restype = ctypes.c_double
-def AudioClose():
-    return x3d.AudioClose()
-
-x3d.AudioChannelIsPlaying.argtypes = [ctypes.c_double]
-x3d.AudioChannelIsPlaying.restype = ctypes.c_double
-def AudioChannelIsPlaying(aChannel):
-    return x3d.AudioChannelIsPlaying(aChannel)
-
-x3d.AudioMusicIsPlaying.argtypes = []
-x3d.AudioMusicIsPlaying.restype = ctypes.c_double
-def AudioMusicIsPlaying():
-    return x3d.AudioMusicIsPlaying()
-
-x3d.AudioSetChannelVolume.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.AudioSetChannelVolume.restype = ctypes.c_double
-def AudioSetChannelVolume(aChannel, aVol):
-    return x3d.AudioSetChannelVolume(aChannel, aVol)
-
-x3d.AudioSetMusicVolume.argtypes = [ctypes.c_double]
-x3d.AudioSetMusicVolume.restype = ctypes.c_double
-def AudioSetMusicVolume(aVol):
-    return x3d.AudioSetMusicVolume(aVol)
-
-x3d.AudioSetChannelPannning.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.AudioSetChannelPannning.restype = ctypes.c_double
-def AudioSetChannelPannning(aChannel, aPanning):
-    return x3d.AudioSetChannelPannning(aChannel, aPanning)
-
-x3d.AudioSetChannelPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.AudioSetChannelPosition.restype = ctypes.c_double
-def AudioSetChannelPosition(aChannel, aAngle, aDistance):
-    return x3d.AudioSetChannelPosition(aChannel, aAngle, aDistance)
-
-x3d.AudioSetChannelDistance.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.AudioSetChannelDistance.restype = ctypes.c_double
-def AudioSetChannelDistance(aChannel, aDistance):
-    return x3d.AudioSetChannelDistance(aChannel, aDistance)
-
-x3d.AudioStopChannel.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.AudioStopChannel.restype = ctypes.c_double
-def AudioStopChannel(aChannel, aFade):
-    return x3d.AudioStopChannel(aChannel, aFade)
-
-x3d.AudioStopChannelDelayed.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.AudioStopChannelDelayed.restype = ctypes.c_double
-def AudioStopChannelDelayed(aChannel, aDelay):
-    return x3d.AudioStopChannelDelayed(aChannel, aDelay)
-
-x3d.AudioStopMusic.argtypes = [ctypes.c_double]
-x3d.AudioStopMusic.restype = ctypes.c_double
-def AudioStopMusic(aFade):
-    return x3d.AudioStopMusic(aFade)
-
-x3d.AudioPauseMusic.argtypes = []
-x3d.AudioPauseMusic.restype = ctypes.c_double
-def AudioPauseMusic():
-    return x3d.AudioPauseMusic()
-
-x3d.AudioResumeMusic.argtypes = []
-x3d.AudioResumeMusic.restype = ctypes.c_double
-def AudioResumeMusic():
-    return x3d.AudioResumeMusic()
-
-x3d.AudioRewindMusic.argtypes = []
-x3d.AudioRewindMusic.restype = ctypes.c_double
-def AudioRewindMusic():
-    return x3d.AudioRewindMusic()
-
-x3d.AudioSetMusicPosition.argtypes = [ctypes.c_double]
-x3d.AudioSetMusicPosition.restype = ctypes.c_double
-def AudioSetMusicPosition(aPos):
-    return x3d.AudioSetMusicPosition(aPos)
-
-x3d.SoundLoad.argtypes = [ctypes.c_char_p]
-x3d.SoundLoad.restype = ctypes.c_double
-def SoundLoad(aFilename):
-    return x3d.SoundLoad(aFilename)
-
-x3d.SoundPlay.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
-x3d.SoundPlay.restype = ctypes.c_double
-def SoundPlay(aS, aChannel, aLoops):
-    return x3d.SoundPlay(aS, aChannel, aLoops)
-
-x3d.MusicLoad.argtypes = [ctypes.c_char_p]
-x3d.MusicLoad.restype = ctypes.c_double
-def MusicLoad(aFilename):
-    return x3d.MusicLoad(aFilename)
-
-x3d.MusicPlay.argtypes = [ctypes.c_double, ctypes.c_double]
-x3d.MusicPlay.restype = ctypes.c_double
-def MusicPlay(aM, aLoops):
-    return x3d.MusicPlay(aM, aLoops)
 
 
 # sprite.pas
