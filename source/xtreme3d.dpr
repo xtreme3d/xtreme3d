@@ -518,7 +518,7 @@ end;
 {$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 {$I 'xtreme3d/logger'}
-{$I 'xtreme3d/sound'}
+{$I 'xtreme3d/audio'}
 
 exports
     // Engine
