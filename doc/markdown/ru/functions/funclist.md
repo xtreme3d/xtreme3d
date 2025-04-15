@@ -804,6 +804,8 @@
 [ActorProxyObjectSetAnimationRange](proxy.html#actorproxyobjectsetanimationrange)<br>
 [ActorProxyObjectSetInterval](proxy.html#actorproxyobjectsetinterval)<br>
 
+[SDLLogError](sdl.html#sdllogerror)<br>
+
 [ShaderEnable](shaders.html#shaderenable)<br>
 [CelShaderCreate](shaders.html#celshadercreate)<br>
 [CelShaderSetLineColor](shaders.html#celshadersetlinecolor)<br>
@@ -1020,6 +1022,11 @@
 [VerletWorldSetSimTime](verlet.html#verletworldsetsimtime)<br>
 [VerletWorldSetMaxDeltaTime](verlet.html#verletworldsetmaxdeltatime)<br>
 
+[VideoCreate](video.html#videocreate)<br>
+[VideoIsPlaying](video.html#videoisplaying)<br>
+[VideoPlay](video.html#videoplay)<br>
+[VideoClose](video.html#videoclose)<br>
+
 [ViewerCreate](viewer.html#viewercreate)<br>
 [ViewerSetCamera](viewer.html#viewersetcamera)<br>
 [ViewerEnableVSync](viewer.html#viewerenablevsync)<br>
@@ -1077,6 +1084,7 @@
 [WaterSetLinearWaveFrequency](water.html#watersetlinearwavefrequency)<br>
 
 [WindowCreate](window.html#windowcreate)<br>
+[WindowSetBackgroundColor](window.html#windowsetbackgroundcolor)<br>
 [WindowCenter](window.html#windowcenter)<br>
 [WindowResize](window.html#windowresize)<br>
 [WindowGetPosition](window.html#windowgetposition)<br>
@@ -1088,4 +1096,8 @@
 [WindowSetIcon](window.html#windowseticon)<br>
 [WindowDispatch](window.html#windowdispatch)<br>
 [WindowIsActive](window.html#windowisactive)<br>
+
+[WindowControlCreate](windowcontrol.html#windowcontrolcreate)<br>
+[WindowControlSetBackgroundColor](windowcontrol.html#windowcontrolsetbackgroundcolor)<br>
+[WindowControlFree](windowcontrol.html#windowcontrolfree)<br>
 
