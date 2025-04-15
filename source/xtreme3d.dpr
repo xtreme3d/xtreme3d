@@ -148,7 +148,8 @@ uses
   SDL2_TTF,
   SDL2_Mixer,
   Kraft,
-  GLKraft;
+  GLKraft,
+  IniFiles;
 
 type
     TEmpty = class(TComponent)
@@ -529,6 +530,7 @@ end;
 {$I 'xtreme3d/sdl'}
 {$I 'xtreme3d/audio'}
 {$I 'xtreme3d/video'}
+{$I 'xtreme3d/ini'}
 
 exports
     // Engine
@@ -1061,6 +1063,12 @@ exports
     SoundLoad, SoundPlay, MusicLoad, MusicPlay,
 
     // Video
-    VideoCreate, VideoPlay, VideoClose, VideoIsPlaying;
+    VideoCreate, VideoPlay, VideoClose, VideoIsPlaying,
+
+    // INI
+    IniCreate, IniClose, IniUpdateFile,
+    IniWriteString, IniWriteNumber, IniWriteBool,
+    IniReadString, IniReadNumber, IniReadBool;
 begin
 end.
+

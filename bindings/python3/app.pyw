@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os.path
 import time
 import random
@@ -80,6 +82,12 @@ class App:
         self.music = MusicLoad(b'data/robocop3.xm')
         SDLLogError(self.logger)
         MusicPlay(self.music, -1)
+        
+        self.settings = IniCreate(b'./settings.ini')
+        #IniWriteString(self.settings, b'Test', b'foo', bytes('проверка', 'utf-8'))
+        print(IniReadString(self.settings, b'Test', b'foo', b'default').decode("utf-8"))
+        IniUpdateFile(self.settings)
+        IniClose(self.settings)
         
         self.pluginSource = pluginBase.make_plugin_source(
             searchpath = ['./plugins'],

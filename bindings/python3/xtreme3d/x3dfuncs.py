@@ -1589,6 +1589,53 @@ def HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV):
     return x3d.HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV)
 
 
+# ini.pas
+x3d.IniCreate.argtypes = [ctypes.c_char_p]
+x3d.IniCreate.restype = ctypes.c_double
+def IniCreate(aFilename):
+    return x3d.IniCreate(aFilename)
+
+x3d.IniClose.argtypes = [ctypes.c_double]
+x3d.IniClose.restype = ctypes.c_double
+def IniClose(aIni):
+    return x3d.IniClose(aIni)
+
+x3d.IniWriteString.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+x3d.IniWriteString.restype = ctypes.c_double
+def IniWriteString(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteString(aIni, aSection, aKey, aValue)
+
+x3d.IniWriteNumber.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniWriteNumber.restype = ctypes.c_double
+def IniWriteNumber(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteNumber(aIni, aSection, aKey, aValue)
+
+x3d.IniWriteBool.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniWriteBool.restype = ctypes.c_double
+def IniWriteBool(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteBool(aIni, aSection, aKey, aValue)
+
+x3d.IniReadString.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+x3d.IniReadString.restype = ctypes.c_char_p
+def IniReadString(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadString(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniReadNumber.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniReadNumber.restype = ctypes.c_double
+def IniReadNumber(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadNumber(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniReadBool.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniReadBool.restype = ctypes.c_double
+def IniReadBool(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadBool(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniUpdateFile.argtypes = [ctypes.c_double]
+x3d.IniUpdateFile.restype = ctypes.c_double
+def IniUpdateFile(aIni):
+    return x3d.IniUpdateFile(aIni)
+
+
 # input.pas
 x3d.MouseGetPositionX.argtypes = []
 x3d.MouseGetPositionX.restype = ctypes.c_double
