@@ -219,6 +219,108 @@ def ActorSetReference(aActor, aAar):
     return x3d.ActorSetReference(aActor, aAar)
 
 
+# audio.pas
+x3d.AudioInit.argtypes = []
+x3d.AudioInit.restype = ctypes.c_double
+def AudioInit():
+    return x3d.AudioInit()
+
+x3d.AudioClose.argtypes = []
+x3d.AudioClose.restype = ctypes.c_double
+def AudioClose():
+    return x3d.AudioClose()
+
+x3d.AudioChannelIsPlaying.argtypes = [ctypes.c_double]
+x3d.AudioChannelIsPlaying.restype = ctypes.c_double
+def AudioChannelIsPlaying(aChannel):
+    return x3d.AudioChannelIsPlaying(aChannel)
+
+x3d.AudioMusicIsPlaying.argtypes = []
+x3d.AudioMusicIsPlaying.restype = ctypes.c_double
+def AudioMusicIsPlaying():
+    return x3d.AudioMusicIsPlaying()
+
+x3d.AudioSetChannelVolume.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelVolume.restype = ctypes.c_double
+def AudioSetChannelVolume(aChannel, aVol):
+    return x3d.AudioSetChannelVolume(aChannel, aVol)
+
+x3d.AudioSetMusicVolume.argtypes = [ctypes.c_double]
+x3d.AudioSetMusicVolume.restype = ctypes.c_double
+def AudioSetMusicVolume(aVol):
+    return x3d.AudioSetMusicVolume(aVol)
+
+x3d.AudioSetChannelPannning.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelPannning.restype = ctypes.c_double
+def AudioSetChannelPannning(aChannel, aPanning):
+    return x3d.AudioSetChannelPannning(aChannel, aPanning)
+
+x3d.AudioSetChannelPosition.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelPosition.restype = ctypes.c_double
+def AudioSetChannelPosition(aChannel, aAngle, aDistance):
+    return x3d.AudioSetChannelPosition(aChannel, aAngle, aDistance)
+
+x3d.AudioSetChannelDistance.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioSetChannelDistance.restype = ctypes.c_double
+def AudioSetChannelDistance(aChannel, aDistance):
+    return x3d.AudioSetChannelDistance(aChannel, aDistance)
+
+x3d.AudioStopChannel.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioStopChannel.restype = ctypes.c_double
+def AudioStopChannel(aChannel, aFade):
+    return x3d.AudioStopChannel(aChannel, aFade)
+
+x3d.AudioStopChannelDelayed.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.AudioStopChannelDelayed.restype = ctypes.c_double
+def AudioStopChannelDelayed(aChannel, aDelay):
+    return x3d.AudioStopChannelDelayed(aChannel, aDelay)
+
+x3d.AudioStopMusic.argtypes = [ctypes.c_double]
+x3d.AudioStopMusic.restype = ctypes.c_double
+def AudioStopMusic(aFade):
+    return x3d.AudioStopMusic(aFade)
+
+x3d.AudioPauseMusic.argtypes = []
+x3d.AudioPauseMusic.restype = ctypes.c_double
+def AudioPauseMusic():
+    return x3d.AudioPauseMusic()
+
+x3d.AudioResumeMusic.argtypes = []
+x3d.AudioResumeMusic.restype = ctypes.c_double
+def AudioResumeMusic():
+    return x3d.AudioResumeMusic()
+
+x3d.AudioRewindMusic.argtypes = []
+x3d.AudioRewindMusic.restype = ctypes.c_double
+def AudioRewindMusic():
+    return x3d.AudioRewindMusic()
+
+x3d.AudioSetMusicPosition.argtypes = [ctypes.c_double]
+x3d.AudioSetMusicPosition.restype = ctypes.c_double
+def AudioSetMusicPosition(aPos):
+    return x3d.AudioSetMusicPosition(aPos)
+
+x3d.SoundLoad.argtypes = [ctypes.c_char_p]
+x3d.SoundLoad.restype = ctypes.c_double
+def SoundLoad(aFilename):
+    return x3d.SoundLoad(aFilename)
+
+x3d.SoundPlay.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.SoundPlay.restype = ctypes.c_double
+def SoundPlay(aS, aChannel, aLoops):
+    return x3d.SoundPlay(aS, aChannel, aLoops)
+
+x3d.MusicLoad.argtypes = [ctypes.c_char_p]
+x3d.MusicLoad.restype = ctypes.c_double
+def MusicLoad(aFilename):
+    return x3d.MusicLoad(aFilename)
+
+x3d.MusicPlay.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.MusicPlay.restype = ctypes.c_double
+def MusicPlay(aM, aLoops):
+    return x3d.MusicPlay(aM, aLoops)
+
+
 # blur.pas
 x3d.BlurCreate.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.BlurCreate.restype = ctypes.c_double
@@ -1485,6 +1587,53 @@ x3d.HUDShapeMeshSetTexCoord.argtypes = [ctypes.c_double, ctypes.c_double, ctypes
 x3d.HUDShapeMeshSetTexCoord.restype = ctypes.c_double
 def HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV):
     return x3d.HUDShapeMeshSetTexCoord(aShape, aIndex, aU, aV)
+
+
+# ini.pas
+x3d.IniCreate.argtypes = [ctypes.c_char_p]
+x3d.IniCreate.restype = ctypes.c_double
+def IniCreate(aFilename):
+    return x3d.IniCreate(aFilename)
+
+x3d.IniClose.argtypes = [ctypes.c_double]
+x3d.IniClose.restype = ctypes.c_double
+def IniClose(aIni):
+    return x3d.IniClose(aIni)
+
+x3d.IniWriteString.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+x3d.IniWriteString.restype = ctypes.c_double
+def IniWriteString(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteString(aIni, aSection, aKey, aValue)
+
+x3d.IniWriteNumber.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniWriteNumber.restype = ctypes.c_double
+def IniWriteNumber(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteNumber(aIni, aSection, aKey, aValue)
+
+x3d.IniWriteBool.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniWriteBool.restype = ctypes.c_double
+def IniWriteBool(aIni, aSection, aKey, aValue):
+    return x3d.IniWriteBool(aIni, aSection, aKey, aValue)
+
+x3d.IniReadString.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_char_p]
+x3d.IniReadString.restype = ctypes.c_char_p
+def IniReadString(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadString(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniReadNumber.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniReadNumber.restype = ctypes.c_double
+def IniReadNumber(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadNumber(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniReadBool.argtypes = [ctypes.c_double, ctypes.c_char_p, ctypes.c_char_p, ctypes.c_double]
+x3d.IniReadBool.restype = ctypes.c_double
+def IniReadBool(aIni, aSection, aKey, aDefaultvalue):
+    return x3d.IniReadBool(aIni, aSection, aKey, aDefaultvalue)
+
+x3d.IniUpdateFile.argtypes = [ctypes.c_double]
+x3d.IniUpdateFile.restype = ctypes.c_double
+def IniUpdateFile(aIni):
+    return x3d.IniUpdateFile(aIni)
 
 
 # input.pas
@@ -3806,6 +3955,13 @@ def ActorProxyObjectSetInterval(aProxy, aInterval):
     return x3d.ActorProxyObjectSetInterval(aProxy, aInterval)
 
 
+# sdl.pas
+x3d.SDLLogError.argtypes = [ctypes.c_double]
+x3d.SDLLogError.restype = ctypes.c_double
+def SDLLogError(aLogger):
+    return x3d.SDLLogError(aLogger)
+
+
 # shaders.pas
 x3d.ShaderEnable.argtypes = [ctypes.c_double, ctypes.c_double]
 x3d.ShaderEnable.restype = ctypes.c_double
@@ -4457,8 +4613,6 @@ def TerrainGetHDSPosition(aTerrain, aX, aY, aZ, aIndex):
     return x3d.TerrainGetHDSPosition(aTerrain, aX, aY, aZ, aIndex)
 
 
-# text.pas
-
 # texture.pas
 x3d.TextureExLoad.argtypes = [ctypes.c_double, ctypes.c_char_p]
 x3d.TextureExLoad.restype = ctypes.c_double
@@ -4849,6 +5003,28 @@ def VerletWorldSetMaxDeltaTime(aWr, aTm):
     return x3d.VerletWorldSetMaxDeltaTime(aWr, aTm)
 
 
+# video.pas
+x3d.VideoCreate.argtypes = [ctypes.c_double]
+x3d.VideoCreate.restype = ctypes.c_double
+def VideoCreate(aWincontrol):
+    return x3d.VideoCreate(aWincontrol)
+
+x3d.VideoIsPlaying.argtypes = [ctypes.c_double]
+x3d.VideoIsPlaying.restype = ctypes.c_double
+def VideoIsPlaying(aPlayer):
+    return x3d.VideoIsPlaying(aPlayer)
+
+x3d.VideoPlay.argtypes = [ctypes.c_double, ctypes.c_char_p]
+x3d.VideoPlay.restype = ctypes.c_double
+def VideoPlay(aPlayer, aFilename):
+    return x3d.VideoPlay(aPlayer, aFilename)
+
+x3d.VideoClose.argtypes = [ctypes.c_double]
+x3d.VideoClose.restype = ctypes.c_double
+def VideoClose(aPlayer):
+    return x3d.VideoClose(aPlayer)
+
+
 # viewer.pas
 x3d.ViewerCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
 x3d.ViewerCreate.restype = ctypes.c_double
@@ -5129,6 +5305,11 @@ x3d.WindowCreate.restype = ctypes.c_double
 def WindowCreate(aX, aY, aW, aH, aResizeable):
     return x3d.WindowCreate(aX, aY, aW, aH, aResizeable)
 
+x3d.WindowSetBackgroundColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.WindowSetBackgroundColor.restype = ctypes.c_double
+def WindowSetBackgroundColor(aW, aColor):
+    return x3d.WindowSetBackgroundColor(aW, aColor)
+
 x3d.WindowCenter.argtypes = [ctypes.c_double]
 x3d.WindowCenter.restype = ctypes.c_double
 def WindowCenter(aW):
@@ -5184,8 +5365,21 @@ x3d.WindowIsActive.restype = ctypes.c_double
 def WindowIsActive(aW):
     return x3d.WindowIsActive(aW)
 
-def RightAscension(aHours, aMinutes, aSeconds):
-    return 15.0 * aHours + (15.0 / 60.0) * aMinutes + (15.0 / 3660.0) * aSeconds
 
-def Declination(aDegrees, aMinutes, aSeconds):
-    return aDegrees + (1.0 / 60.0) * aMinutes + (1.0 / 3660.0) * aSeconds
+# windowcontrol.pas
+x3d.WindowControlCreate.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double, ctypes.c_double]
+x3d.WindowControlCreate.restype = ctypes.c_double
+def WindowControlCreate(aWinhandle, aTop, aLeft, aWidth, aHeight):
+    return x3d.WindowControlCreate(aWinhandle, aTop, aLeft, aWidth, aHeight)
+
+x3d.WindowControlSetBackgroundColor.argtypes = [ctypes.c_double, ctypes.c_double]
+x3d.WindowControlSetBackgroundColor.restype = ctypes.c_double
+def WindowControlSetBackgroundColor(aWincontrol, aColor):
+    return x3d.WindowControlSetBackgroundColor(aWincontrol, aColor)
+
+x3d.WindowControlFree.argtypes = [ctypes.c_double]
+x3d.WindowControlFree.restype = ctypes.c_double
+def WindowControlFree(aWincontrol):
+    return x3d.WindowControlFree(aWincontrol)
+
+

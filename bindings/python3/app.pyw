@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os.path
 import time
 import random
@@ -16,6 +18,10 @@ class App:
         EngineSetCulling(vcNone)
         EngineSetObjectsSorting(osNone)
         EngineSetMaxLights(8)
+        
+        self.logger = LoggerCreate(b"xtreme3d.log", llMax)
+        
+        AudioInit()
         
         self.windowWidth = 1280
         self.windowHeight = 720
@@ -67,11 +73,21 @@ class App:
         self.mx = WindowGetPosition(self.window, 0) + self.windowWidth* 0.5
         self.my = WindowGetPosition(self.window, 1) + self.windowHeight * 0.5
         MouseSetPosition(self.mx, self.my)
-        MouseShowCursor(not self.mouselookActive);
+        MouseShowCursor(not self.mouselookActive)
         
         self.running = True
         self.timer = 0.0
         self.dt = 1.0 / 60.0
+        
+        self.music = MusicLoad(b'data/robocop3.xm')
+        SDLLogError(self.logger)
+        MusicPlay(self.music, -1)
+        
+        self.settings = IniCreate(b'./settings.ini')
+        #IniWriteString(self.settings, b'Test', b'foo', bytes('проверка', 'utf-8'))
+        print(IniReadString(self.settings, b'Test', b'foo', b'default').decode("utf-8"))
+        IniUpdateFile(self.settings)
+        IniClose(self.settings)
         
         self.pluginSource = pluginBase.make_plugin_source(
             searchpath = ['./plugins'],
@@ -144,3 +160,4 @@ class App:
 
 app = App()
 app.run()
+AudioClose()

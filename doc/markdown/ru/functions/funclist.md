@@ -44,6 +44,27 @@
 [ActorTriangleCount](actor.html#actortrianglecount)<br>
 [ActorSetReference](actor.html#actorsetreference)<br>
 
+[AudioInit](audio.html#audioinit)<br>
+[AudioClose](audio.html#audioclose)<br>
+[AudioChannelIsPlaying](audio.html#audiochannelisplaying)<br>
+[AudioMusicIsPlaying](audio.html#audiomusicisplaying)<br>
+[AudioSetChannelVolume](audio.html#audiosetchannelvolume)<br>
+[AudioSetMusicVolume](audio.html#audiosetmusicvolume)<br>
+[AudioSetChannelPannning](audio.html#audiosetchannelpannning)<br>
+[AudioSetChannelPosition](audio.html#audiosetchannelposition)<br>
+[AudioSetChannelDistance](audio.html#audiosetchanneldistance)<br>
+[AudioStopChannel](audio.html#audiostopchannel)<br>
+[AudioStopChannelDelayed](audio.html#audiostopchanneldelayed)<br>
+[AudioStopMusic](audio.html#audiostopmusic)<br>
+[AudioPauseMusic](audio.html#audiopausemusic)<br>
+[AudioResumeMusic](audio.html#audioresumemusic)<br>
+[AudioRewindMusic](audio.html#audiorewindmusic)<br>
+[AudioSetMusicPosition](audio.html#audiosetmusicposition)<br>
+[SoundLoad](audio.html#soundload)<br>
+[SoundPlay](audio.html#soundplay)<br>
+[MusicLoad](audio.html#musicload)<br>
+[MusicPlay](audio.html#musicplay)<br>
+
 [BlurCreate](blur.html#blurcreate)<br>
 [BlurSetPreset](blur.html#blursetpreset)<br>
 [BlurSetOptions](blur.html#blursetoptions)<br>
@@ -783,6 +804,8 @@
 [ActorProxyObjectSetAnimationRange](proxy.html#actorproxyobjectsetanimationrange)<br>
 [ActorProxyObjectSetInterval](proxy.html#actorproxyobjectsetinterval)<br>
 
+[SDLLogError](sdl.html#sdllogerror)<br>
+
 [ShaderEnable](shaders.html#shaderenable)<br>
 [CelShaderCreate](shaders.html#celshadercreate)<br>
 [CelShaderSetLineColor](shaders.html#celshadersetlinecolor)<br>
@@ -999,6 +1022,11 @@
 [VerletWorldSetSimTime](verlet.html#verletworldsetsimtime)<br>
 [VerletWorldSetMaxDeltaTime](verlet.html#verletworldsetmaxdeltatime)<br>
 
+[VideoCreate](video.html#videocreate)<br>
+[VideoIsPlaying](video.html#videoisplaying)<br>
+[VideoPlay](video.html#videoplay)<br>
+[VideoClose](video.html#videoclose)<br>
+
 [ViewerCreate](viewer.html#viewercreate)<br>
 [ViewerSetCamera](viewer.html#viewersetcamera)<br>
 [ViewerEnableVSync](viewer.html#viewerenablevsync)<br>
@@ -1056,6 +1084,7 @@
 [WaterSetLinearWaveFrequency](water.html#watersetlinearwavefrequency)<br>
 
 [WindowCreate](window.html#windowcreate)<br>
+[WindowSetBackgroundColor](window.html#windowsetbackgroundcolor)<br>
 [WindowCenter](window.html#windowcenter)<br>
 [WindowResize](window.html#windowresize)<br>
 [WindowGetPosition](window.html#windowgetposition)<br>
@@ -1067,4 +1096,8 @@
 [WindowSetIcon](window.html#windowseticon)<br>
 [WindowDispatch](window.html#windowdispatch)<br>
 [WindowIsActive](window.html#windowisactive)<br>
+
+[WindowControlCreate](windowcontrol.html#windowcontrolcreate)<br>
+[WindowControlSetBackgroundColor](windowcontrol.html#windowcontrolsetbackgroundcolor)<br>
+[WindowControlFree](windowcontrol.html#windowcontrolfree)<br>
 

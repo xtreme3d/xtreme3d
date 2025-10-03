@@ -6,6 +6,7 @@ begin
     pak.LoadFromFile(StrConv(fname), $0002 or $0020);
     result := ObjToReal(pak);
 end;
+
 function PakGetFileCount(p: real): real; cdecl;
 var
     pak: TGLVfsPak;
@@ -21,6 +22,7 @@ begin
     pak := TGLVfsPak(RealToPtr(p));
     result := PAnsiChar(AnsiString(pak.Files[Trunc(index)]));
 end;
+
 function PakExtract(p: real; dir: PAnsiChar): real; cdecl;
 var
     pak: TGLVfsPak;
@@ -42,6 +44,7 @@ begin
     end;
     result := 1.0;
 end;
+
 function PakExtractFile(p, index: real; newname: PAnsiChar): real; cdecl;
 var
     pak: TGLVfsPak;

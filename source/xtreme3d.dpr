@@ -13,8 +13,10 @@ uses
   VCL.Forms,
   VCL.Graphics,
   VCL.Dialogs,
+  VCL.Controls,
   VCL.Imaging.PNGImage,
-  Vcl.Imaging.Jpeg,
+  VCL.Imaging.Jpeg,
+  VCL.MPlayer,
   GLS.ApplicationFileIO,
   GLS.BaseClasses,
   GLS.Keyboard,
@@ -144,8 +146,10 @@ uses
   Hashes,
   SDL2,
   SDL2_TTF,
+  SDL2_Mixer,
   Kraft,
-  GLKraft;
+  GLKraft,
+  IniFiles;
 
 type
     TEmpty = class(TComponent)
@@ -201,6 +205,11 @@ end;
 function StrConv(s: PAnsiChar): String;
 begin
     result := System.UTF8ToUnicodeString(s);
+end;
+
+function IsEmptyStr(s: PAnsiChar): Boolean;
+begin
+    result := (s = nil) or (s^ = #0);
 end;
 
 function IsKeyDown(vk: integer): Boolean;
@@ -512,11 +521,16 @@ end;
 {$I 'xtreme3d/clipplane'}
 {$I 'xtreme3d/input'}
 {$I 'xtreme3d/window'}
+{$I 'xtreme3d/windowcontrol'}
 {$I 'xtreme3d/color'}
 {$I 'xtreme3d/pipe'}
 {$I 'xtreme3d/verlet'}
 {$I 'xtreme3d/picklist'}
 {$I 'xtreme3d/logger'}
+{$I 'xtreme3d/sdl'}
+{$I 'xtreme3d/audio'}
+{$I 'xtreme3d/video'}
+{$I 'xtreme3d/ini'}
 
 exports
     // Engine
@@ -977,6 +991,10 @@ exports
     WindowCenter, WindowResize, WindowGetPosition, WindowGetSize,
     WindowSetIcon, WindowIsShowing,
     WindowDispatch, WindowIsActive,
+    WindowSetBackgroundColor,
+
+    // WindowControl
+    WindowControlCreate, WindowControlSetBackgroundColor, WindowControlFree,
 
     // Color
     MakeColorRGB, MakeColorRGBFloat,
@@ -1030,6 +1048,27 @@ exports
     KraftJointSetHingeAxis1, KraftJointSetHingeAxis2,
 
     // Logger
-    LoggerCreate, LoggerEnable, LoggerLog;
+    LoggerCreate, LoggerEnable, LoggerLog,
+
+    // SDL
+    SDLLogError,
+
+    // Audio
+    AudioInit, AudioClose,
+    AudioChannelIsPlaying, AudioMusicIsPlaying,
+    AudioSetChannelVolume, AudioSetMusicVolume, AudioSetChannelPannning,
+    AudioSetChannelPosition, AudioSetChannelDistance,
+    AudioStopChannel, AudioStopChannelDelayed, AudioStopMusic,
+    AudioPauseMusic, AudioResumeMusic, AudioRewindMusic, AudioSetMusicPosition,
+    SoundLoad, SoundPlay, MusicLoad, MusicPlay,
+
+    // Video
+    VideoCreate, VideoPlay, VideoClose, VideoIsPlaying,
+
+    // INI
+    IniCreate, IniClose, IniUpdateFile,
+    IniWriteString, IniWriteNumber, IniWriteBool,
+    IniReadString, IniReadNumber, IniReadBool;
 begin
 end.
+

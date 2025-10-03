@@ -26,6 +26,7 @@ unit sdl2_mixer;
 interface
 
 uses
+  supertypes,
   {$IFDEF FPC}
   ctypes,
   {$ENDIF}

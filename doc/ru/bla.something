@@ -421,6 +421,16 @@
                         <param name="Local" value="functions/logger.html">
                         <param name="ImageNumber" value="0">
                      </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Audio">
+                        <param name="Local" value="functions/audio.html">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="Video">
+                        <param name="Local" value="functions/video.html">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
         </UL>
         <LI> <OBJECT type="text/sitemap">
                 <param name="Name" value="FAQ">
