@@ -18,6 +18,17 @@
 
 ---
 
+## WindowSetBackgroundColor
+
+`real WindowSetBackgroundColor(real window, real color);`
+
+Задает фоновый цвет окна.
+
+- `window` - указатель на окно;
+- `color` - цвет.
+
+---
+
 ## WindowCenter
 
 `real WindowCenter(real window);`
@@ -131,3 +142,41 @@
 Возвращает 1 (true), если окно существует, и 0 (false), если окно закрыто пользователем.
 
 - `window` - указатель на окно.
+
+---
+
+## WindowControlCreate
+
+`real WindowControlCreate(real windowHandle, real top, real left, real width, real height);`
+
+Создает контроллер для заданного окна. Контроллер необходим для создания WinAPI-компонентов в окне - в частности, видеоплеера.
+
+- `windowHandle` - дескриптор окна (HWND). Дескриптор окна игры в GML возвращается функцией `window_handle()`. В GameMaker: Studio 2 эта функция возвращает не `real`, а `ptr` (указатель). GML, к сожалению, не поддерживает передачу указателей в DLL-функции напрямую, поэтому нужно перевести это значение в `real`, прежде чем передавать в `WindowControlCreate`. Для этого в Xtreme3D предусмотрена функция `PointerToReal`:
+
+```gml
+viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
+```
+
+- `top`, `left` - координаты контроллера (левый верхний угол) относительно окна;
+- `width`, `height` - ширина и высота контроллера.
+
+---
+
+## WindowControlSetBackgroundColor
+
+`real WindowControlSetBackgroundColor(real wincontrol, real color);`
+
+Задает фоновый цвет контроллера окна.
+
+- `wincontrol` - указатель на контроллер;
+- `color` - цвет.
+
+---
+
+## WindowControlFree
+
+`real WindowControlFree(real wincontrol);`
+
+Удаляет контроллер окна.
+
+- `wincontrol` - указатель на контроллер;

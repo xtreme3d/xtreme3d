@@ -422,6 +422,11 @@
                         <param name="ImageNumber" value="0">
                      </OBJECT>
                 <LI> <OBJECT type="text/sitemap">
+                        <param name="Name" value="INI">
+                        <param name="Local" value="functions/ini.html">
+                        <param name="ImageNumber" value="0">
+                     </OBJECT>
+                <LI> <OBJECT type="text/sitemap">
                         <param name="Name" value="Audio">
                         <param name="Local" value="functions/audio.html">
                         <param name="ImageNumber" value="0">

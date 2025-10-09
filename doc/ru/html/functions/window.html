@@ -24,6 +24,14 @@
 <li><code>resizeable</code> - может ли пользователь изменять размер окна (<code>true</code> или <code>false</code>). Обратите внимание, что изменение размера окна не приводит к изменению размеров подключенного к нему вида, это нужно делать вручную.</li>
 </ul>
 <hr />
+<h2 id="windowsetbackgroundcolor">WindowSetBackgroundColor</h2>
+<p><code>real WindowSetBackgroundColor(real window, real color);</code></p>
+<p>Задает фоновый цвет окна.</p>
+<ul>
+<li><code>window</code> - указатель на окно;</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
 <h2 id="windowcenter">WindowCenter</h2>
 <p><code>real WindowCenter(real window);</code></p>
 <p>Помещает окно в центр экрана.</p>
@@ -105,6 +113,34 @@
 <p>Возвращает 1 (true), если окно существует, и 0 (false), если окно закрыто пользователем.</p>
 <ul>
 <li><code>window</code> - указатель на окно.</li>
+</ul>
+<hr />
+<h2 id="windowcontrolcreate">WindowControlCreate</h2>
+<p><code>real WindowControlCreate(real windowHandle, real top, real left, real width, real height);</code></p>
+<p>Создает контроллер для заданного окна. Контроллер необходим для создания WinAPI-компонентов в окне - в частности, видеоплеера.</p>
+<ul>
+<li><code>windowHandle</code> - дескриптор окна (HWND). Дескриптор окна игры в GML возвращается функцией <code>window_handle()</code>. В GameMaker: Studio 2 эта функция возвращает не <code>real</code>, а <code>ptr</code> (указатель). GML, к сожалению, не поддерживает передачу указателей в DLL-функции напрямую, поэтому нужно перевести это значение в <code>real</code>, прежде чем передавать в <code>WindowControlCreate</code>. Для этого в Xtreme3D предусмотрена функция <code>PointerToReal</code>:</li>
+</ul>
+<pre class="gml language-gml"><code class="hljs gml language-gml">viewer = ViewerCreate(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">window_get_width</span>(), <span class="hljs-built_in">window_get_height</span>(), PointerToReal(windowHandle));
+</code></pre>
+<ul>
+<li><code>top</code>, <code>left</code> - координаты контроллера (левый верхний угол) относительно окна;</li>
+<li><code>width</code>, <code>height</code> - ширина и высота контроллера.</li>
+</ul>
+<hr />
+<h2 id="windowcontrolsetbackgroundcolor">WindowControlSetBackgroundColor</h2>
+<p><code>real WindowControlSetBackgroundColor(real wincontrol, real color);</code></p>
+<p>Задает фоновый цвет контроллера окна.</p>
+<ul>
+<li><code>wincontrol</code> - указатель на контроллер;</li>
+<li><code>color</code> - цвет.</li>
+</ul>
+<hr />
+<h2 id="windowcontrolfree">WindowControlFree</h2>
+<p><code>real WindowControlFree(real wincontrol);</code></p>
+<p>Удаляет контроллер окна.</p>
+<ul>
+<li><code>wincontrol</code> - указатель на контроллер;</li>
 </ul>
 </body>
 </html>

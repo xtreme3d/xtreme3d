@@ -327,6 +327,16 @@
 [HUDShapeMeshSetVertex](hudshapes.html#hudshapemeshsetvertex)<br>
 [HUDShapeMeshSetTexCoord](hudshapes.html#hudshapemeshsettexcoord)<br>
 
+[IniCreate](ini.html#inicreate)<br>
+[IniClose](ini.html#iniclose)<br>
+[IniWriteString](ini.html#iniwritestring)<br>
+[IniWriteNumber](ini.html#iniwritenumber)<br>
+[IniWriteBool](ini.html#iniwritebool)<br>
+[IniReadString](ini.html#inireadstring)<br>
+[IniReadNumber](ini.html#inireadnumber)<br>
+[IniReadBool](ini.html#inireadbool)<br>
+[IniUpdateFile](ini.html#iniupdatefile)<br>
+
 [MouseGetPositionX](input.html#mousegetpositionx)<br>
 [MouseGetPositionY](input.html#mousegetpositiony)<br>
 [MouseSetPosition](input.html#mousesetposition)<br>
@@ -1096,8 +1106,6 @@
 [WindowSetIcon](window.html#windowseticon)<br>
 [WindowDispatch](window.html#windowdispatch)<br>
 [WindowIsActive](window.html#windowisactive)<br>
-
 [WindowControlCreate](windowcontrol.html#windowcontrolcreate)<br>
 [WindowControlSetBackgroundColor](windowcontrol.html#windowcontrolsetbackgroundcolor)<br>
 [WindowControlFree](windowcontrol.html#windowcontrolfree)<br>
-

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>INI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <meta charset="windows-1251">
+    <meta name="author" content="Gecko">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../sakura.css" inline>
+    <link rel="stylesheet" type="text/css" href="../github.css" inline>
+</head>
+<body>
+<h1 id="ini">INI</h1>
+<p>Функции для записи и чтения файлов конфигурации *.ini. Их удобно использовать для хранения настроек игры.</p>
+<hr />
+<h2 id="inicreate">IniCreate</h2>
+<p><code>real IniCreate(string filename);</code></p>
+<p>Создает ini-документ в памяти и возвращает указатель на него. Документ не записывается в файл, пока не будет вызвана <code>IniUpdateFile</code>.</p>
+<ul>
+<li><code>filename</code> - путь к существующему или новому файлу *.ini.</li>
+</ul>
+<hr />
+<h2 id="iniclose">IniClose</h2>
+<p><code>real IniClose(real ini);</code></p>
+<p>Удаляет ini-документ.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ.</li>
+</ul>
+<hr />
+<h2 id="iniwritestring">IniWriteString</h2>
+<p><code>real IniWriteString(real ini, string section, string key, string value);</code></p>
+<p>Добавляет строковую запись в ini-документ.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>value</code> - значение.</li>
+</ul>
+<hr />
+<h2 id="iniwritenumber">IniWriteNumber</h2>
+<p><code>real IniWriteNumber(real ini, string section, string key, real value);</code></p>
+<p>Добавляет числовую запись в ini-документ.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>value</code> - значение.</li>
+</ul>
+<hr />
+<h2 id="iniwritebool">IniWriteBool</h2>
+<p><code>real IniWriteBool(real ini, string section, string key, real value);</code></p>
+<p>Добавляет логическую запись в ini-документ.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>value</code> - значение записи.</li>
+</ul>
+<hr />
+<h2 id="inireadstring">IniReadString</h2>
+<p><code>string IniReadString(real ini, string section, string key, string defaultvalue);</code></p>
+<p>Читает строковую запись из ini-документа.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>defaultvalue</code> - значение, которое нужно вернуть по умолчанию, если запись не существует.</li>
+</ul>
+<hr />
+<h2 id="inireadnumber">IniReadNumber</h2>
+<p><code>real IniReadNumber(real ini, string section, string key, real defaultvalue);</code></p>
+<p>Читает числовую запись из ini-документа.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>defaultvalue</code> - значение, которое нужно вернуть по умолчанию, если запись не существует.</li>
+</ul>
+<hr />
+<h2 id="inireadbool">IniReadBool</h2>
+<p><code>real IniReadBool(real ini, string section, string key, real defaultvalue);</code></p>
+<p>Читает логическую запись из ini-документа.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ;</li>
+<li><code>section</code> - имя секции;</li>
+<li><code>key</code> - ключ;</li>
+<li><code>defaultvalue</code> - значение, которое нужно вернуть по умолчанию, если запись не существует.</li>
+</ul>
+<hr />
+<h2 id="iniupdatefile">IniUpdateFile</h2>
+<p><code>real IniUpdateFile(real ini);</code></p>
+<p>Записывает ini-документ в файл. Нужно вызвать эту функцию после всех сделанных изменений.</p>
+<ul>
+<li><code>ini</code> - указатель на ini-документ.</li>
+</ul>
+</body>
+</html>

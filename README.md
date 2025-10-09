@@ -58,6 +58,7 @@ Features
 * Loading resources from GLScene PAK archives
 * Keyboard and mouse input
 * Window creation and management
+* Audio and video playback
 * ...plus a lot more!
 
 Language Bindings

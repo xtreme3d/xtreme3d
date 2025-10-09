@@ -346,6 +346,10 @@
   <PARAM name="Local" value="functions/logger.html">
  </OBJECT>
  <LI><OBJECT type="text/sitemap">
+  <PARAM name="Name" value="INI">
+  <PARAM name="Local" value="functions/ini.html">
+ </OBJECT>
+ <LI><OBJECT type="text/sitemap">
   <PARAM name="Name" value="Audio">
   <PARAM name="Local" value="functions/audio.html">
  </OBJECT>
