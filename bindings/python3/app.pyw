@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import os.path
 import time
 import random
@@ -7,7 +8,17 @@ import ctypes
 from xtreme3d import *
 from pluginbase import PluginBase
 
-pluginBase = PluginBase(package = 'editorPlugins')
+is_pyinstaller_bundle = hasattr(sys, "_MEIPASS")
+
+# script_dir - the absolute folder containing the running Python script
+if is_pyinstaller_bundle:
+    # Release version
+    script_dir = os.path.dirname(sys.executable)
+else:
+    # Dev version
+    script_dir = os.path.abspath(os.path.dirname(__file__))
+
+pluginBase = PluginBase(package = 'Xtreme3D')
 
 class App:
     def __init__(self):
@@ -19,9 +30,9 @@ class App:
         EngineSetObjectsSorting(osNone)
         EngineSetMaxLights(8)
         
-        self.logger = LoggerCreate(b"xtreme3d.log", llMax)
-        
         AudioInit()
+        
+        self.logger = LoggerCreate(b"xtreme3d.log", llMax)
         
         self.windowWidth = 1280
         self.windowHeight = 720
@@ -29,6 +40,15 @@ class App:
         self.window = WindowCreate(0, 0, self.windowWidth, self.windowHeight, False)
         WindowCenter(self.window)
         WindowSetTitle(self.window, b'Xtreme3D 4.0')
+        RestoreWindow(WindowGetHandle(self.window))
+        
+        # Close PyInstaller splash, if it exists
+        if is_pyinstaller_bundle:
+            try:
+                import pyi_splash
+                pyi_splash.close()
+            except ImportError:
+                pass
 
         self.viewer = ViewerCreate(0, 0, self.windowWidth, self.windowHeight, WindowGetHandle(self.window))
         ViewerSetBackgroundColor(self.viewer, c_gray)
@@ -81,12 +101,13 @@ class App:
         
         self.music = MusicLoad(b'data/robocop3.xm')
         SDLLogError(self.logger)
+        AudioSetMusicVolume(0.1)
         MusicPlay(self.music, -1)
         
         self.settings = IniCreate(b'./settings.ini')
         #IniWriteString(self.settings, b'Test', b'foo', bytes('проверка', 'utf-8'))
         print(IniReadString(self.settings, b'Test', b'foo', b'default').decode("utf-8"))
-        IniUpdateFile(self.settings)
+        #IniUpdateFile(self.settings)
         IniClose(self.settings)
         
         self.pluginSource = pluginBase.make_plugin_source(

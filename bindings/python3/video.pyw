@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import os.path
 import time
 import random
 import ctypes
 from xtreme3d import *
+
+is_pyinstaller_bundle = hasattr(sys, "_MEIPASS")
+
+# script_dir - the absolute folder containing the running Python script
+if is_pyinstaller_bundle:
+    # Release version
+    script_dir = os.path.dirname(sys.executable)
+else:
+    # Dev version
+    script_dir = os.path.abspath(os.path.dirname(__file__))
 
 class App:
     def __init__(self):
@@ -27,6 +38,7 @@ class App:
         WindowCenter(self.window)
         WindowSetTitle(self.window, b'Xtreme3D 4.0')
         WindowSetBackgroundColor(self.window, c_black)
+        RestoreWindow(WindowGetHandle(self.window))
         
         self.matlib = MaterialLibraryCreate()
         MaterialLibraryActivate(self.matlib)

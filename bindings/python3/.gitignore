@@ -1,4 +1,6 @@
 __pycache__/
 *.pyc
 *.dll
+*.log
 build/
+dist/
