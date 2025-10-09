@@ -1,12 +1,13 @@
 Xtreme3D version history
 ========================
-v4.1.0 (by Gecko) - ??/??/2025
+v4.1.0 (by Gecko) - 31/10/2025
 ------------------------------
 - INI file functions
 - Audio functions
 - Video functions
 - WindowControl functions
-- `WindowSetBackgroundColor`.
+- `WindowSetBackgroundColor`
+- `SDLLogError`.
 
 v4.0.0 (by Gecko) - 09/04/2025
 ------------------------------
@@ -57,11 +58,11 @@ v3.9.2 (by Gecko) - 09/04/2022
 - New function `PtrToReal` for compatibility with latest GameMaker Studio 2
 - `MouseIsPressed`
 - Fixed shadow map rendering when using with dynamic cubemaps
-- BumpShader now uses 8 light sources and auto tangent space by default. 
+- BumpShader now uses 8 light sources and auto tangent space by default.
 
 v3.9.1 (by Gecko) - 20/09/2021
 ------------------------------
-- Exported functions now use cdecl convention instead of stdcall
+- Exported functions now use `cdecl` convention instead of `stdcall`
 - ViewerCreate checks parent window handle and shows error message if the window is not valid
 - GameMaker Studio 2 support added.
 
