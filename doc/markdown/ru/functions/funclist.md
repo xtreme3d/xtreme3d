@@ -426,6 +426,7 @@
 [LoggerCreate](logger.html#loggercreate)<br>
 [LoggerEnable](logger.html#loggerenable)<br>
 [LoggerLog](logger.html#loggerlog)<br>
+[SDLLogError](sdl.html#sdllogerror)<br>
 
 [MaterialLibraryCreate](material.html#materiallibrarycreate)<br>
 [MaterialLibraryActivate](material.html#materiallibraryactivate)<br>
@@ -813,8 +814,6 @@
 [ActorProxyObjectSwitchToAnimation](proxy.html#actorproxyobjectswitchtoanimation)<br>
 [ActorProxyObjectSetAnimationRange](proxy.html#actorproxyobjectsetanimationrange)<br>
 [ActorProxyObjectSetInterval](proxy.html#actorproxyobjectsetinterval)<br>
-
-[SDLLogError](sdl.html#sdllogerror)<br>
 
 [ShaderEnable](shaders.html#shaderenable)<br>
 [CelShaderCreate](shaders.html#celshadercreate)<br>
