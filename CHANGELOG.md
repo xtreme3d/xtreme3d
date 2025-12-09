@@ -1,6 +1,6 @@
 Xtreme3D version history
 ========================
-v4.1.0 (by Gecko) - 31/10/2025
+v4.1.0 (by Gecko) - 09/12/2025
 ------------------------------
 - INI file functions
 - Audio functions
