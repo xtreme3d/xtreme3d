@@ -43,6 +43,26 @@ EXPORTS
     ActorSetFrame
     ActorTriangleCount
     ActorSetReference
+    AudioInit
+    AudioClose
+    AudioChannelIsPlaying
+    AudioMusicIsPlaying
+    AudioSetChannelVolume
+    AudioSetMusicVolume
+    AudioSetChannelPannning
+    AudioSetChannelPosition
+    AudioSetChannelDistance
+    AudioStopChannel
+    AudioStopChannelDelayed
+    AudioStopMusic
+    AudioPauseMusic
+    AudioResumeMusic
+    AudioRewindMusic
+    AudioSetMusicPosition
+    SoundLoad
+    SoundPlay
+    MusicLoad
+    MusicPlay
     BlurCreate
     BlurSetPreset
     BlurSetOptions
@@ -291,6 +311,15 @@ EXPORTS
     HUDShapeMeshAddTriangle
     HUDShapeMeshSetVertex
     HUDShapeMeshSetTexCoord
+    IniCreate
+    IniClose
+    IniWriteString
+    IniWriteNumber
+    IniWriteBool
+    IniReadString
+    IniReadNumber
+    IniReadBool
+    IniUpdateFile
     MouseGetPositionX
     MouseGetPositionY
     MouseSetPosition
@@ -746,6 +775,7 @@ EXPORTS
     ActorProxyObjectSwitchToAnimation
     ActorProxyObjectSetAnimationRange
     ActorProxyObjectSetInterval
+    SDLLogError
     ShaderEnable
     CelShaderCreate
     CelShaderSetLineColor
@@ -949,6 +979,10 @@ EXPORTS
     VerletConstraintSetSlack
     VerletWorldSetSimTime
     VerletWorldSetMaxDeltaTime
+    VideoCreate
+    VideoIsPlaying
+    VideoPlay
+    VideoClose
     ViewerCreate
     ViewerSetCamera
     ViewerEnableVSync
@@ -1004,6 +1038,7 @@ EXPORTS
     WaterSetLinearWaveHeight
     WaterSetLinearWaveFrequency
     WindowCreate
+    WindowSetBackgroundColor
     WindowCenter
     WindowResize
     WindowGetPosition
@@ -1015,3 +1050,6 @@ EXPORTS
     WindowSetIcon
     WindowDispatch
     WindowIsActive
+    WindowControlCreate
+    WindowControlSetBackgroundColor
+    WindowControlFree

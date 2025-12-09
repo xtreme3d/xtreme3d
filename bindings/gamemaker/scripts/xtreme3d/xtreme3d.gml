@@ -887,11 +887,12 @@ function dll_init(dll) {
 	global._WaterSetLinearWaveHeight = external_define(dll, "WaterSetLinearWaveHeight", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WaterSetLinearWaveFrequency = external_define(dll, "WaterSetLinearWaveFrequency", dll_cdecl, ty_real, 2, ty_real, ty_real);
 
-    // Misc
+	// Misc
 	global._PointerToReal = external_define(dll, "PointerToReal", dll_cdecl, ty_real, 1, ty_string);
 	
 	// Window
 	global._WindowCreate = external_define(dll, "WindowCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._WindowSetBackgroundColor = external_define(dll, "WindowSetBackgroundColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._WindowCenter = external_define(dll, "WindowCenter", dll_cdecl, ty_real, 1, ty_real);
 	global._WindowResize = external_define(dll, "WindowResize", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
 	global._WindowGetPosition = external_define(dll, "WindowGetPosition", dll_cdecl, ty_real, 2, ty_real, ty_real);
@@ -903,6 +904,11 @@ function dll_init(dll) {
 	global._WindowSetIcon = external_define(dll, "WindowSetIcon", dll_cdecl, ty_real, 2, ty_real, ty_string);
 	global._WindowDispatch = external_define(dll, "WindowDispatch", dll_cdecl, ty_real, 0);
 	global._WindowIsActive = external_define(dll, "WindowIsActive", dll_cdecl, ty_real, 1, ty_real);
+	
+	// WindowControl
+	global._WindowControlCreate = external_define(dll, "WindowControlCreate", dll_cdecl, ty_real, 5, ty_real, ty_real, ty_real, ty_real, ty_real);
+	global._WindowControlSetBackgroundColor = external_define(dll, "WindowControlSetBackgroundColor", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._WindowControlFree = external_define(dll, "WindowControlFree", dll_cdecl, ty_real, 1, ty_real);
 	
 	// Color
 	global._MakeColorRGB = external_define(dll, "MakeColorRGB", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
@@ -1121,6 +1127,48 @@ function dll_init(dll) {
 	global._LoggerCreate = external_define(dll, "LoggerCreate", dll_cdecl, ty_real, 2, ty_string, ty_real);
 	global._LoggerEnable = external_define(dll, "LoggerEnable", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	global._LoggerLog = external_define(dll, "LoggerLog", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_string);
+	
+	// Video
+	global._VideoCreate = external_define(dll, "VideoCreate", dll_cdecl, ty_real, 1, ty_real);
+	global._VideoIsPlaying = external_define(dll, "VideoIsPlaying", dll_cdecl, ty_real, 1, ty_real);
+	global._VideoPlay = external_define(dll, "VideoPlay", dll_cdecl, ty_real, 1, ty_real, ty_string);
+	global._VideoClose = external_define(dll, "VideoClose", dll_cdecl, ty_real, 1, ty_real, ty_real);
+	
+	// Audio
+	global._AudioInit = external_define(dll, "AudioInit", dll_cdecl, ty_real, 0);
+	global._AudioClose = external_define(dll, "AudioClose", dll_cdecl, ty_real, 0);
+	global._AudioChannelIsPlaying = external_define(dll, "AudioChannelIsPlaying", dll_cdecl, ty_real, 1, ty_real);
+	global._AudioMusicIsPlaying = external_define(dll, "AudioMusicIsPlaying", dll_cdecl, ty_real, 0);
+	global._AudioSetChannelVolume = external_define(dll, "AudioSetChannelVolume", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AudioSetMusicVolume = external_define(dll, "AudioSetMusicVolume", dll_cdecl, ty_real, 1, ty_real);
+	global._AudioSetChannelPannning = external_define(dll, "AudioSetChannelPannning", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AudioSetChannelPosition = external_define(dll, "AudioSetChannelPosition", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._AudioSetChannelDistance = external_define(dll, "AudioSetChannelDistance", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AudioStopChannel = external_define(dll, "AudioStopChannel", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AudioStopChannelDelayed = external_define(dll, "AudioStopChannelDelayed", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	global._AudioStopMusic = external_define(dll, "AudioStopMusic", dll_cdecl, ty_real, 1, ty_real);
+	global._AudioPauseMusic = external_define(dll, "AudioPauseMusic", dll_cdecl, ty_real, 0);
+	global._AudioResumeMusic = external_define(dll, "AudioResumeMusic", dll_cdecl, ty_real, 0);
+	global._AudioRewindMusic = external_define(dll, "AudioRewindMusic", dll_cdecl, ty_real, 0);
+	global._AudioSetMusicPosition = external_define(dll, "AudioSetMusicPosition", dll_cdecl, ty_real, 1, ty_real);
+	global._SoundLoad = external_define(dll, "SoundLoad", dll_cdecl, ty_real, 1, ty_string);
+	global._SoundPlay = external_define(dll, "SoundPlay", dll_cdecl, ty_real, 3, ty_real, ty_real, ty_real);
+	global._MusicLoad = external_define(dll, "MusicLoad", dll_cdecl, ty_real, 1, ty_string);
+	global._MusicPlay = external_define(dll, "MusicPlay", dll_cdecl, ty_real, 2, ty_real, ty_real);
+	
+	// INI
+	global._IniCreate = external_define(dll, "IniCreate", dll_cdecl, ty_real, 1, ty_string);
+	global._IniClose = external_define(dll, "IniClose", dll_cdecl, ty_real, 1, ty_real);
+	global._IniWriteString = external_define(dll, "IniWriteString", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_string);
+	global._IniWriteNumber = external_define(dll, "IniWriteNumber", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_real);
+	global._IniWriteBool = external_define(dll, "IniWriteBool", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_real);
+	global._IniReadString = external_define(dll, "IniReadString", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_string);
+	global._IniReadNumber = external_define(dll, "IniReadNumber", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_real);
+	global._IniReadBool = external_define(dll, "IniReadBool", dll_cdecl, ty_real, 4, ty_real, ty_string, ty_string, ty_real);
+	global._IniUpdateFile = external_define(dll, "IniUpdateFile", dll_cdecl, ty_real, 1, ty_real);
+	
+	// SDL
+	global._SDLLogError = external_define(dll, "SDLLogError", dll_cdecl, ty_real, 1, ty_real);
 }
 
 function ActorCreate(aFname, aMatl, aParent) {
@@ -5178,6 +5226,10 @@ function WindowCreate(aX, aY, aW, aH, aResizeable) {
 	return external_call(global._WindowCreate, aX, aY, aW, aH, aResizeable);
 }
 
+function WindowSetBackgroundColor(aW, aColor) {
+	return external_call(global._WindowSetBackgroundColor, aW, aColor);
+}
+
 function WindowCenter(aW) {
 	return external_call(global._WindowCenter, aW);
 }
@@ -5222,6 +5274,18 @@ function WindowIsActive(aW) {
 	return external_call(global._WindowIsActive, aW);
 }
 
+function WindowControlCreate(aWinhandle, aTop, aLeft, aWidth, aHeight) {
+	return external_call(global._WindowControlCreate, aWinhandle, aTop, aLeft, aWidth, aHeight);
+}
+
+function WindowControlSetBackgroundColor(aWincontrol, aColor) {
+	return external_call(global._WindowControlSetBackgroundColor, aWincontrol, aColor);
+}
+
+function WindowControlFree(aWincontrol) {
+	return external_call(global._WindowControlFree, aWincontrol);
+}
+
 function PointerToReal(p) {
 	return external_call(global._PointerToReal, p);
 }
@@ -5240,6 +5304,142 @@ function LoggerEnable(aLogger, aMode) {
 
 function LoggerLog(aLogger, aLogLevel, aMessage) {
 	return external_call(global._LoggerLog, aLogger, aLogLevel, aMessage);
+}
+
+function VideoCreate(aWincontrol) {
+	return external_call(global._VideoCreate, aWincontrol);
+}
+
+function VideoIsPlaying(aPlayer) {
+	return external_call(global._VideoIsPlaying, aPlayer);
+}
+
+function VideoPlay(aPlayer, aFilename) {
+	return external_call(global._VideoPlay, aPlayer, aFilename);
+}
+
+function VideoClose(aPlayer) {
+	return external_call(global._VideoClose, aPlayer);
+}
+
+function AudioInit() {
+	return external_call(global._AudioInit);
+}
+
+function AudioClose() {
+	return external_call(global._AudioClose);
+}
+
+function AudioChannelIsPlaying(aChannel) {
+	return external_call(global._AudioChannelIsPlaying, aChannel);
+}
+
+function AudioMusicIsPlaying() {
+	return external_call(global._AudioMusicIsPlaying);
+}
+
+function AudioSetChannelVolume(aChannel, aVol) {
+	return external_call(global._AudioSetChannelVolume, aChannel, aVol);
+}
+
+function AudioSetMusicVolume(aVol) {
+	return external_call(global._AudioSetMusicVolume, aVol);
+}
+
+function AudioSetChannelPannning(aChannel, aPanning) {
+	return external_call(global._AudioSetChannelPannning, aChannel, aPanning);
+}
+
+function AudioSetChannelPosition(aChannel, aAngle, aDistance) {
+	return external_call(global._AudioSetChannelPosition, aChannel, aAngle, aDistance);
+}
+
+function AudioSetChannelDistance(aChannel, aDistance) {
+	return external_call(global._AudioSetChannelDistance, aChannel, aDistance);
+}
+
+function AudioStopChannel(aChannel, aFade) {
+	return external_call(global._AudioStopChannel, aChannel, aFade);
+}
+
+function AudioStopChannelDelayed(aChannel, aDelay) {
+	return external_call(global._AudioStopChannelDelayed, aChannel, aDelay);
+}
+
+function AudioStopMusic(aFade) {
+	return external_call(global._AudioStopMusic, aFade);
+}
+
+function AudioPauseMusic() {
+	return external_call(global._AudioPauseMusic);
+}
+
+function AudioResumeMusic() {
+	return external_call(global._AudioResumeMusic);
+}
+
+function AudioRewindMusic() {
+	return external_call(global._AudioRewindMusic);
+}
+
+function AudioSetMusicPosition() {
+	return external_call(global._AudioSetMusicPosition, aPos);
+}
+
+function SoundLoad(aFilename) {
+	return external_call(global._SoundLoad, aFilename);
+}
+
+function SoundPlay(aSound, aChannel, aLoops) {
+	return external_call(global._SoundPlay, aSound, aChannel, aLoops);
+}
+
+function MusicLoad(aFilename) {
+	return external_call(global._MusicLoad, aFilename);
+}
+
+function MusicPlay(aMusic, aLoops) {
+	return external_call(global._MusicPlay, aMusic, aLoops);
+}
+
+function IniCreate(aFilename) {
+	return external_call(global._IniCreate, aFilename);
+}
+
+function IniClose(aIni) {
+	return external_call(global._IniClose, aIni);
+}
+
+function IniWriteString(aIni, aSection, aKey, aValue) {
+	return external_call(global._IniWriteString, aIni, aSection, aKey, aValue);
+}
+
+function IniWriteNumber(aIni, aSection, aKey, aValue) {
+	return external_call(global._IniWriteNumber, aIni, aSection, aKey, aValue);
+}
+
+function IniWriteBool(aIni, aSection, aKey, aValue) {
+	return external_call(global._IniWriteBool, aIni, aSection, aKey, aValue);
+}
+
+function IniReadString(aIni, aSection, aKey, aDefaultvalue) {
+	return external_call(global._IniReadString, aIni, aSection, aKey, aDefaultvalue);
+}
+
+function IniReadNumber(aIni, aSection, aKey, aDefaultvalue) {
+	return external_call(global._IniReadNumber, aIni, aSection, aKey, aDefaultvalue);
+}
+
+function IniReadBool(aIni, aSection, aKey, aDefaultvalue) {
+	return external_call(global._IniReadBool, aIni, aSection, aKey, aDefaultvalue);
+}
+
+function IniUpdateFile(aIni) {
+	return external_call(global._IniUpdateFile, aIni);
+}
+
+function SDLLogError(aLogger) {
+	return external_call(global._SDLLogError, aLogger);
 }
 
 function RightAscension(aHours, aMinutes, aSeconds) {

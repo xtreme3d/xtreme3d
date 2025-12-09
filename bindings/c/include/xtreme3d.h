@@ -56,6 +56,28 @@ __declspec(dllimport) double ActorSetFrame(double, double);
 __declspec(dllimport) double ActorTriangleCount(double);
 __declspec(dllimport) double ActorSetReference(double, double);
 
+/* audio.pas */
+__declspec(dllimport) double AudioInit(void);
+__declspec(dllimport) double AudioClose(void);
+__declspec(dllimport) double AudioChannelIsPlaying(double);
+__declspec(dllimport) double AudioMusicIsPlaying(void);
+__declspec(dllimport) double AudioSetChannelVolume(double, double);
+__declspec(dllimport) double AudioSetMusicVolume(double);
+__declspec(dllimport) double AudioSetChannelPannning(double, double);
+__declspec(dllimport) double AudioSetChannelPosition(double, double, double);
+__declspec(dllimport) double AudioSetChannelDistance(double, double);
+__declspec(dllimport) double AudioStopChannel(double, double);
+__declspec(dllimport) double AudioStopChannelDelayed(double, double);
+__declspec(dllimport) double AudioStopMusic(double);
+__declspec(dllimport) double AudioPauseMusic(void);
+__declspec(dllimport) double AudioResumeMusic(void);
+__declspec(dllimport) double AudioRewindMusic(void);
+__declspec(dllimport) double AudioSetMusicPosition(double);
+__declspec(dllimport) double SoundLoad(char*);
+__declspec(dllimport) double SoundPlay(double, double, double);
+__declspec(dllimport) double MusicLoad(char*);
+__declspec(dllimport) double MusicPlay(double, double);
+
 /* blur.pas */
 __declspec(dllimport) double BlurCreate(double, double);
 __declspec(dllimport) double BlurSetPreset(double, double);
@@ -331,6 +353,17 @@ __declspec(dllimport) double HUDShapeMeshAddVertex(double, double, double, doubl
 __declspec(dllimport) double HUDShapeMeshAddTriangle(double, double, double, double);
 __declspec(dllimport) double HUDShapeMeshSetVertex(double, double, double, double);
 __declspec(dllimport) double HUDShapeMeshSetTexCoord(double, double, double, double);
+
+/* ini.pas */
+__declspec(dllimport) double IniCreate(char*);
+__declspec(dllimport) double IniClose(double);
+__declspec(dllimport) double IniWriteString(double, char*, char*, char*);
+__declspec(dllimport) double IniWriteNumber(double, char*, char*, double);
+__declspec(dllimport) double IniWriteBool(double, char*, char*, double);
+__declspec(dllimport) char* IniReadString(double, char*, char*, char*);
+__declspec(dllimport) double IniReadNumber(double, char*, char*, double);
+__declspec(dllimport) double IniReadBool(double, char*, char*, double);
+__declspec(dllimport) double IniUpdateFile(double);
 
 /* input.pas */
 __declspec(dllimport) double MouseGetPositionX(void);
@@ -831,6 +864,9 @@ __declspec(dllimport) double ActorProxyObjectSwitchToAnimation(double, double);
 __declspec(dllimport) double ActorProxyObjectSetAnimationRange(double, double, double);
 __declspec(dllimport) double ActorProxyObjectSetInterval(double, double);
 
+/* sdl.pas */
+__declspec(dllimport) double SDLLogError(double);
+
 /* shaders.pas */
 __declspec(dllimport) double ShaderEnable(double, double);
 __declspec(dllimport) double CelShaderCreate(void);
@@ -974,8 +1010,6 @@ __declspec(dllimport) double TerrainGetHeightAtObjectPosition(double, double);
 __declspec(dllimport) double TerrainGetLastTriCount(double);
 __declspec(dllimport) double TerrainGetHDSPosition(double, double, double, double, double);
 
-/* text.pas */
-
 /* texture.pas */
 __declspec(dllimport) double TextureExLoad(double, char*);
 __declspec(dllimport) double TextureExSetFromMaterial(double, char*);
@@ -1062,6 +1096,12 @@ __declspec(dllimport) double VerletConstraintSetSlack(double, double, double);
 __declspec(dllimport) double VerletWorldSetSimTime(double, double);
 __declspec(dllimport) double VerletWorldSetMaxDeltaTime(double, double);
 
+/* video.pas */
+__declspec(dllimport) double VideoCreate(double);
+__declspec(dllimport) double VideoIsPlaying(double);
+__declspec(dllimport) double VideoPlay(double, char*);
+__declspec(dllimport) double VideoClose(double);
+
 /* viewer.pas */
 __declspec(dllimport) double ViewerCreate(double, double, double, double, double);
 __declspec(dllimport) double ViewerSetCamera(double, double);
@@ -1122,6 +1162,7 @@ __declspec(dllimport) double WaterSetLinearWaveFrequency(double, double);
 
 /* window.pas */
 __declspec(dllimport) double WindowCreate(double, double, double, double, double);
+__declspec(dllimport) double WindowSetBackgroundColor(double, double);
 __declspec(dllimport) double WindowCenter(double);
 __declspec(dllimport) double WindowResize(double, double, double, double, double);
 __declspec(dllimport) double WindowGetPosition(double, double);
@@ -1133,6 +1174,11 @@ __declspec(dllimport) double WindowIsShowing(double);
 __declspec(dllimport) double WindowSetIcon(double, char*);
 __declspec(dllimport) double WindowDispatch(void);
 __declspec(dllimport) double WindowIsActive(double);
+
+/* windowcontrol.pas */
+__declspec(dllimport) double WindowControlCreate(double, double, double, double, double);
+__declspec(dllimport) double WindowControlSetBackgroundColor(double, double);
+__declspec(dllimport) double WindowControlFree(double);
 
 #ifdef __cplusplus
 }
