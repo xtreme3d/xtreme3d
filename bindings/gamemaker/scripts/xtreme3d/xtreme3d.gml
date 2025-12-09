@@ -1131,8 +1131,8 @@ function dll_init(dll) {
 	// Video
 	global._VideoCreate = external_define(dll, "VideoCreate", dll_cdecl, ty_real, 1, ty_real);
 	global._VideoIsPlaying = external_define(dll, "VideoIsPlaying", dll_cdecl, ty_real, 1, ty_real);
-	global._VideoPlay = external_define(dll, "VideoPlay", dll_cdecl, ty_real, 1, ty_real, ty_string);
-	global._VideoClose = external_define(dll, "VideoClose", dll_cdecl, ty_real, 1, ty_real, ty_real);
+	global._VideoPlay = external_define(dll, "VideoPlay", dll_cdecl, ty_real, 2, ty_real, ty_string);
+	global._VideoClose = external_define(dll, "VideoClose", dll_cdecl, ty_real, 2, ty_real, ty_real);
 	
 	// Audio
 	global._AudioInit = external_define(dll, "AudioInit", dll_cdecl, ty_real, 0);
