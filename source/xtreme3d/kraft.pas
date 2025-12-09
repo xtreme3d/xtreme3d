@@ -37,6 +37,7 @@ var
   rbt: TKraftRigidBodyType;
 begin
   rb := TKraftRigidBody.Create(TKraft(RealToPtr(kr)));
+  rbt := krbtUnknown;
        if typ = 0 then rbt := krbtUnknown
   else if typ = 1 then rbt := krbtStatic
   else if typ = 2 then rbt := krbtDynamic
@@ -266,7 +267,7 @@ var
   sm: TKraftShapeMesh;
   freeform: TGLFreeForm;
   glsmesh: TGLMeshObject;
-  mi, vi, fgi, ii: Integer;
+  mi, fgi, ii: Integer;
   vi1, vi2, vi3: Integer;
   vec1, vec2, vec3: TAffineVector;
   nor1, nor2, nor3: TAffineVector; 

@@ -1,5 +1,5 @@
 {
-  "$GMProject":"",
+  "$GMProject":"v1",
   "%Name":"demo",
   "AudioGroups":[
     {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
@@ -25,6 +25,7 @@
     {"$GMFolder":"","%Name":"Tile Sets","folderPath":"folders/Tile Sets.yy","name":"Tile Sets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Timelines","folderPath":"folders/Timelines.yy","name":"Timelines","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
+  "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"cloth.3ds","CopyToMask":-1,"filePath":"datafiles/data/cloth","name":"cloth.3ds","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"tartan.jpg","CopyToMask":-1,"filePath":"datafiles/data/cloth","name":"tartan.jpg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -47,7 +48,12 @@
     {"$GMIncludedFile":"","%Name":"TRINITYrage.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"TRINITYrage.smd","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"trinityskin3.bmp","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"trinityskin3.bmp","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"walk.smd","CopyToMask":-1,"filePath":"datafiles/data/trinity","name":"walk.smd","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"libgme.dll","CopyToMask":-1,"filePath":"datafiles","name":"libgme.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"libopus-0.dll","CopyToMask":-1,"filePath":"datafiles","name":"libopus-0.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"libopusfile-0.dll","CopyToMask":-1,"filePath":"datafiles","name":"libopusfile-0.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"libxmp.dll","CopyToMask":-1,"filePath":"datafiles","name":"libxmp.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"ode64s.dll","CopyToMask":-1,"filePath":"datafiles","name":"ode64s.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"SDL2_mixer.dll","CopyToMask":-1,"filePath":"datafiles","name":"SDL2_mixer.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"SDL2_ttf.dll","CopyToMask":-1,"filePath":"datafiles","name":"SDL2_ttf.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"SDL2.dll","CopyToMask":-1,"filePath":"datafiles","name":"SDL2.dll","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"fxaa-fp.glsl","CopyToMask":-1,"filePath":"datafiles/shaders","name":"fxaa-fp.glsl","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -66,7 +72,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.1.152",
+    "IDEVersion":"2024.13.0.190",
   },
   "name":"demo",
   "resources":[

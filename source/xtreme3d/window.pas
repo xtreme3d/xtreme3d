@@ -20,6 +20,7 @@ var
 begin
   frm := TForm(RealToPtr(w));
   frm.Color := TColor(Trunc(color));
+  result := 1.0;
 end;
 
 function WindowCenter(w: real): real; cdecl;

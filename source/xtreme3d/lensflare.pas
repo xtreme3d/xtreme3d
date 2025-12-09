@@ -92,6 +92,7 @@ var
   gradient: TGLFlareGradient;
 begin
   lf := TGLLensFlare(RealToPtr(lensflare));
+  gradient := lf.GlowGradient;
   if ind = 0 then gradient := lf.GlowGradient;
   if ind = 1 then gradient := lf.RingGradient;
   if ind = 2 then gradient := lf.StreaksGradient;
