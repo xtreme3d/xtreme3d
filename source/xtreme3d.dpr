@@ -451,6 +451,7 @@ function getJointAxisParams(j: TGLODEJointBase; axis: Integer): TGLODEJointParam
 var
   res: TGLODEJointParams;
 begin
+  res := nil;
   if j is TGLODEJointHinge then
   begin
     if axis = 1 then

@@ -195,7 +195,6 @@ end;
 function GLSLShaderSetLogger(shader, logger: real): real; cdecl;
 var
   shadr: TGLSLShader;
-  loggerSession: TLogSession;
 begin
   shadr := TGLSLShader(RealToPtr(shader));
   shadr.logger := TLogSession(RealToPtr(logger));
@@ -502,9 +501,6 @@ end;
 function BumpShaderCreate: real; cdecl;
 var
   bump: TGLSLShader;
-  paramDiffTex: TGLSLShaderParameter;
-  paramNormTex: TGLSLShaderParameter;
-  paramHeightTex: TGLSLShaderParameter;
   paramMaxLights: TGLSLShaderParameter;
   paramUseParallax: TGLSLShaderParameter;
   paramParallaxHeight: TGLSLShaderParameter;
@@ -520,9 +516,9 @@ begin
   bump := TGLSLShader.Create(scene);
   bump.SetPrograms(bumpVertexProgram, bumpFragmentProgram);
 
-  paramDiffTex := bump.Param.AddUniform('diffuseMap');
-  paramNormTex := bump.Param.AddUniform('normalMap');
-  paramHeightTex := bump.Param.AddUniform('heightMap');
+  bump.Param.AddUniform('diffuseMap');
+  bump.Param.AddUniform('normalMap');
+  bump.Param.AddUniform('heightMap');
 
   paramMaxLights := bump.Param.AddUniform('maxNumLights');
   paramMaxLights.UniformType := uniform1i;

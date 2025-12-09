@@ -447,6 +447,7 @@ var
 begin
   mat:=matlib.Materials.GetLibMaterialByName(StrConv(mtrl));
   mat.Material.Texture.TextureFormatEx := TGLInternalFormat(Ord(Trunc(tfex)));
+  result:=1;
 end;
 
 function MaterialSetTextureCompression(mtrl: PAnsiChar; tc: real): real; cdecl;
@@ -665,7 +666,6 @@ end;
 function MaterialHasTextureEx(mtrl: PAnsiChar; index: real): real; cdecl;
 var
   mat: TGLLibMaterial;
-  tex: TGLTexture;
   i: Integer;
 begin
   mat := matlib.Materials.GetLibMaterialByName(StrConv(mtrl));

@@ -14,8 +14,6 @@ end;
 function HUDShapeCircleCreate(radius, slices, startAng, endAng, parent: real): real; cdecl;
 var
   shp: TGLHUDShape;
-  i: Integer;
-  angle, stepAngle, x, y: Single;
 begin
   if not (parent = 0) then
     shp := TGLHUDShape.CreateAsChild(TGLBaseSceneObject(RealToPtr(parent)))

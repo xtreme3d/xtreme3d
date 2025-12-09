@@ -292,6 +292,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := TGLODEElementBox(stat.AddNewElement(TGLODEElementBox));
   if dyna <> nil then
@@ -321,6 +322,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := TGLODEElementSphere(stat.AddNewElement(TGLODEElementSphere));
   if dyna <> nil then
@@ -349,6 +351,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := stat.AddNewElement(TGLODEElementBase);
   if dyna <> nil then
@@ -372,6 +375,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := TGLODEElementCylinder(stat.AddNewElement(TGLODEElementCylinder));
   if dyna <> nil then
@@ -400,6 +404,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := TGLODEElementCapsule(stat.AddNewElement(TGLODEElementCapsule));
   if dyna <> nil then
@@ -430,6 +435,7 @@ begin
   o := TGLBaseSceneObject(RealToPtr(obj));
   stat := GetOdeStatic(o);
   dyna := GetOdeDynamic(o);
+  elem := nil;
   if stat <> nil then
     elem := TGLODEElementTriMesh(stat.AddNewElement(TGLODEElementTriMesh));
   if dyna <> nil then
