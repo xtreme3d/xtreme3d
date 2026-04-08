@@ -1,4 +1,6 @@
-window_set_caption("Xtreme3D 4 Demo");
+// Hide GM window
+draw_enable_drawevent(false);
+application_surface_draw_enable(false);
 
 // Initialize Xtreme3D
 dll_init("xtreme3d.dll");
@@ -9,9 +11,14 @@ EngineSetCulling(vcNone);
 EngineSetObjectsSorting(osNone);
 EngineSetMaxLights(8);
 
+// Create custom window
+window = WindowCreate(0, 0, 1280, 720, false);
+WindowSetTitle(window, "Xtreme3D 4 Demo");
+WindowCenter(window);
+
 // Create viewer in the game window
-windowHandle = window_handle();
-viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), PointerToReal(windowHandle));
+windowHandle = WindowGetHandle(window);
+viewer = ViewerCreate(0, 0, window_get_width(), window_get_height(), windowHandle);
 ViewerSetBackgroundColor(viewer, c_gray);
 ViewerSetLighting(viewer, true);
 ViewerEnableFog(viewer, true);
@@ -66,7 +73,7 @@ MaterialSetTextureCompareMode("fboShadowDepth", tcmCompareRtoTexture);
 MaterialSetTextureDepthCompareFunc("fboShadowDepth", cfLess);
 
 shadowCamera = ShadowCameraCreate(global.scene);
-ShadowCameraSetProjectionSize(shadowCamera, 20);
+ShadowCameraSetProjectionSize(shadowCamera, 5);
 ShadowCameraSetZClippingPlanes(shadowCamera, -100, 100)
 ObjectPitch(shadowCamera, -45);
 ObjectSetPosition(shadowCamera, 0, 2, 0);
@@ -189,15 +196,12 @@ crosshair = HUDSpriteCreate("mSprites", 64, 64, global.front);
 SpriteSetBounds(crosshair, 0, 0, 64, 64);
 ObjectSetPosition(crosshair, window_get_width() / 2, window_get_height() / 2, 0);
 
-mouselookActive = true;
+mouselookActive = false;
 mb_left_released = true;
 mx = display_get_width() / 2;
 my = display_get_height() / 2;
 MouseSetPosition(mx, my);
-MouseShowCursor(not mouselookActive);
 
-application_surface_draw_enable(false);
 game_set_speed(60, gamespeed_fps);
 
-visible = false;
-alarm[0] = room_speed;
+canTakeScreenshot = true;

@@ -2982,11 +2982,11 @@ function MaterialGetNameFromLibrary(aMatlib, aIndex) {
 }
 
 function MaterialSetTextureCompareMode(aMaterial, aTcm) {
-	return external_call(global.MaterialSetTextureCompareMode, aMaterial, aTcm);
+	return external_call(global._MaterialSetTextureCompareMode, aMaterial, aTcm);
 }
 
 function MaterialSetTextureDepthCompareFunc(aMaterial, aCf) {
-	return external_call(global.MaterialSetTextureDepthCompareFunc, aMaterial, aCf);
+	return external_call(global._MaterialSetTextureDepthCompareFunc, aMaterial, aCf);
 }
 
 function MemoryViewerCreate(aW, aH) {
