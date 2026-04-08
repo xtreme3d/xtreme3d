@@ -8,14 +8,4 @@ All the files used by the engine (like models and textures) should go to the `da
 
 Peculiarities
 -------------
-* Since Xtreme3D does its own rendering, the GameMaker's built-in graphics engine should be disabled. This can be done with `draw_enable_drawevent`, but this function should be called after the game window initialization (otherwise the window will not appear). We recommend adding an alarm in Create event:
-
-```gml
-alarm[0] = room_speed;
-```
-
-And in Alarm 0 event:
-
-```gml
-draw_enable_drawevent(false);
-```
+GameMaker is constantly evolving, and unfortunately, as of 2026, it is not longer possible to do external rendering to GM's window. For such cases, Xtreme3D supports creating a custom window. GM's own window should be disabled, which is done by calling `draw_enable_drawevent(false)`. This means that all user input should be processed with Xtreme3D functions (`KeyIsPressed`, `MouseIsPressed`, `MouseGetPositionX`/`MouseGetPositionY`).
