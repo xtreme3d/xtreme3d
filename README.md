@@ -6,7 +6,7 @@ Xtreme3D originally was created for [Game Maker](https://gamemaker.io/) Classic.
 
 The engine is written in Delphi 12 and based on a modified version of GLScene 2.2. The code can be compiled with free Delphi Community Edition.
 
-Visit Xtreme3D site at [https://xtreme3d.ru](https://xtreme3d.ru).
+Visit Xtreme3D site at [https://xtreme3d.org](https://xtreme3d.org).
 
 Screenshots
 -----------
