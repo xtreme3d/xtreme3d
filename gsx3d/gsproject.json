@@ -1,0 +1,6 @@
+{
+    "main": "test.gs",
+    "target": "app.exe",
+    "version": "1.0.0",
+    "icon": "data/appicon.ico"
+}

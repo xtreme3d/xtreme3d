@@ -1,0 +1,45 @@
+{
+    "name": "gscript",
+    "description": "GScript3",
+    "homepage": "",
+    "license": "Boost",
+    "authors": [
+        "Timur Gafarov"
+    ],
+    "dependencies": {
+        "dlib": "~>1.4.1"
+    },
+    "targetType": "library",
+    "sourcePaths": ["src"],
+    "importPaths": ["src"],
+    "subPackages": [
+        {
+            "name": "gscript",
+            "targetType": "executable",
+            "targetName": "gscript",
+            "dependencies": {
+                "dlib": "~>1.4.1"
+            },
+            "sourcePaths": ["src", "tools/gscript", "bindings/xtreme3d"],
+            "importPaths": ["src", "tools/gscript", "bindings/xtreme3d"],
+            "mainSourceFile": "tools/gscript/main.d",
+            "buildRequirements":[
+                "allowWarnings"
+            ]
+        },
+        {
+            "name": "gsrunner",
+            "targetType": "executable",
+            "targetName": "gsrunner",
+            "dependencies": {
+                "dlib": "~>1.4.1"
+            },
+            "sourcePaths": ["src", "tools/gsrunner", "bindings/xtreme3d"],
+            "importPaths": ["src", "tools/gsrunner", "bindings/xtreme3d"],
+            "mainSourceFile": "tools/gsrunner/main.d",
+            "buildRequirements":[
+                "allowWarnings"
+            ]
+        }
+    ]
+}
