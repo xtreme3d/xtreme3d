@@ -52,6 +52,7 @@ void x3dInit() @nogc nothrow
         
         bindSymbol(cast(void**)&WindowCreate, "WindowCreate");
         bindSymbol(cast(void**)&WindowSetBackgroundColor, "WindowSetBackgroundColor");
+        bindSymbol(cast(void**)&WindowSetTitle, "WindowSetTitle");
         bindSymbol(cast(void**)&WindowCenter, "WindowCenter");
         bindSymbol(cast(void**)&WindowResize, "WindowResize");
         bindSymbol(cast(void**)&WindowDispatch, "WindowDispatch");
@@ -75,6 +76,7 @@ void x3dBindFunctions(GsVirtualMachine vm)
     
     vm.set("WindowCreate", GsDynamic(&x3d_WindowCreate));
     vm.set("WindowSetBackgroundColor", GsDynamic(&x3d_WindowSetBackgroundColor));
+    vm.set("WindowSetTitle", GsDynamic(&x3d_WindowSetTitle));
     vm.set("WindowCenter", GsDynamic(&x3d_WindowCenter));
     vm.set("WindowResize", GsDynamic(&x3d_WindowResize));
     vm.set("WindowDispatch", GsDynamic(&x3d_WindowDispatch));

@@ -13,6 +13,7 @@ alias f_ViewerRender = double function(double viewer);
 
 alias f_WindowCreate = double function(double x, double y, double width, double height, double resizeable);
 alias f_WindowSetBackgroundColor = double function(double window, double color);
+alias f_WindowSetTitle = double function(double window, const(char)* color);
 alias f_WindowCenter = double function(double window);
 alias f_WindowResize = double function(double window, double x, double y, double width, double height);
 alias f_WindowDispatch = double function(double window);

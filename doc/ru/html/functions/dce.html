@@ -43,15 +43,15 @@
 <hr />
 <h2 id="dcemanagersetworlddirection">DceManagerSetWorldDirection</h2>
 <p><code>real DceManagerSetWorldDirection(real manager, real x, real y, real z);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Задает направление гравитации.</p>
 <ul>
 <li><code>manager</code> - указатель на менеджер DCE</li>
-<li><code>x</code>, <code>y</code>, <code>z</code> - вектор.</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> - вектор направления.</li>
 </ul>
 <hr />
 <h2 id="dcemanagersetworldscale">DceManagerSetWorldScale</h2>
 <p><code>real DceManagerSetWorldScale(real manager, real scale);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Задает масштаб единиц, в которых измеряются мировые расстояния в менеджере DCE. По умолчанию равен 1. Менять этот параметр не рекомендуется без веских на то причин - например, если вы создаете космосим, где масштаб геометрических вычислений задается динамически для сохранения точности вещественных чисел.</p>
 <ul>
 <li><code>manager</code> - указатель на менеджер DCE</li>
 <li><code>scale</code> - масштаб.</li>
@@ -59,7 +59,7 @@
 <hr />
 <h2 id="dcemanagersetmovementscale">DceManagerSetMovementScale</h2>
 <p><code>real DceManagerSetMovementScale(real manager, real scale);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Задает масштаб единиц при движении (?). Это свойство пока никак движком не используется.</p>
 <ul>
 <li><code>manager</code> - указатель на менеджер DCE</li>
 <li><code>scale</code> - масштаб.</li>
@@ -67,13 +67,13 @@
 <hr />
 <h2 id="dcemanagersetlayers">DceManagerSetLayers</h2>
 <p><code>real DceManagerSetLayers(real manager, real ccs);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Задает логику разграничения столкновений по слоям.</p>
 <ul>
 <li><code>manager</code> - указатель на менеджер DCE</li>
-<li><code>ccs</code> - сведения отсутствуют.<ul>
-<li><code>ccsDCEStandard</code> = 0 - сведения отсутствуют</li>
-<li><code>ccsCollisionStandard</code> = 1 - сведения отсутствуют</li>
-<li><code>ccsHybrid</code> = 2 - сведения отсутствуют.</li></ul></li>
+<li><code>ccs</code> - режим использования слоев:<ul>
+<li><code>ccsDCEStandard</code> = 0 - приоритет слоя. Чем больше номер слоя объекта, тем он более универсален при столкновениях: объект со слоем N сталкивается со всеми объектами со слоями &lt;= N.</li>
+<li><code>ccsCollisionStandard</code> = 1 - объекты со слоем 0 сталкиваются со всеми остальными. Остальные объекты сталкиваются друг с другом, только если их слои неодинаковы. Этот режим удобен, например, для группировки опасных для игрока объектов типа снарядов или огня.</li>
+<li><code>ccsHybrid</code> = 2 - комбинация предыдущих режимов. Объекты со слоем 0 сталкиваются со всеми остальными. Остальные объекты используют приоритет слоев, как в режиме <code>ccsDCEStandard</code>. Объекты с отрицательным номером слоя вообще не участвуют в столкновениях.</li></ul></li>
 </ul>
 <hr />
 <h2 id="dcemanagersetmanualstep">DceManagerSetManualStep</h2>

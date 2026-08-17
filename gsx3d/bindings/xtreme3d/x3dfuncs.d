@@ -18,6 +18,7 @@ __gshared
     // Window
     f_WindowCreate WindowCreate;
     f_WindowSetBackgroundColor WindowSetBackgroundColor;
+    f_WindowSetTitle WindowSetTitle;
     f_WindowCenter WindowCenter;
     f_WindowResize WindowResize;
     f_WindowDispatch WindowDispatch;

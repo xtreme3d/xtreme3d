@@ -23,10 +23,15 @@ global.windowHeight = 720;
 
 //global.ShowConsole(false);
 global.EngineCreate();
+//global.EngineShowLoadingErrors(1);
+//global.EngineSetCulling(vcNone);
+//global.EngineSetObjectsSorting(osNone);
+//global.EngineSetMaxLights(8);
 
 const window = global.WindowCreate(0, 0, global.windowWidth, global.windowHeight, false);
 global.WindowCenter(window);
 global.WindowSetBackgroundColor(window, c_black);
+global.WindowSetTitle(window, "Xtreme3D 4.0");
 
 const viewer = global.ViewerCreate(0, 0, global.windowWidth, global.windowHeight, global.WindowGetHandle(window));
 global.ViewerSetBackgroundColor(viewer, c_gray);

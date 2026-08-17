@@ -86,6 +86,15 @@ GsDynamic x3d_WindowSetBackgroundColor(GsDynamic[] args)
     ));
 }
 
+GsDynamic x3d_WindowSetTitle(GsDynamic[] args)
+{
+    // TODO: use string cache
+    return GsDynamic(WindowSetTitle(
+        args[1].asNumber,
+        args[2].asString.toStringz
+    ));
+}
+
 GsDynamic x3d_WindowCenter(GsDynamic[] args)
 {
     return GsDynamic(WindowCenter(args[1].asNumber));

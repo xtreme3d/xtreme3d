@@ -243,7 +243,7 @@
 <hr />
 <h2 id="actormakeskeletaltranslationstatic">ActorMakeSkeletalTranslationStatic</h2>
 <p><code>real ActorMakeSkeletalTranslationStatic(real actor, real anim);</code></p>
-<p>Некоторые модели SMD содержат смещение скелета в анимации ходьбы - данная функция устраняет это смещение.</p>
+<p>Некоторые модели содержат смещение скелета в анимации ходьбы. Данная функция устраняет это смещение.</p>
 <ul>
 <li><code>actor</code> - указатель на актера</li>
 <li><code>anim</code> - порядковый номер анимации.</li>
@@ -251,7 +251,7 @@
 <hr />
 <h2 id="actormakeskeletalrotationdelta">ActorMakeSkeletalRotationDelta</h2>
 <p><code>real ActorMakeSkeletalRotationDelta(real actor, real anim);</code></p>
-<p>Сведения отсутствуют.</p>
+<p>Некоторые модели хранят абсолютные значения вращения у костей скелета. Данная функция удаляет этот компонент, делая кадры анимации пригодными для смешивания.</p>
 <ul>
 <li><code>actor</code> - указатель на актера</li>
 <li><code>anim</code> - порядковый номер анимации.</li>
