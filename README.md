@@ -8,6 +8,8 @@ The engine is written in Delphi 12 and based on a modified version of GLScene 2.
 
 Visit Xtreme3D site at [https://xtreme3d.org](https://xtreme3d.org).
 
+**Warning!** Other sites with "xtreme3d" in their somain are **not** legitimate Xtreme3D websites. **xtreme3d.ru was cybersquatted and is a scam!** Do not download anything from there; download prebuilt Xtreme3D SDK releases only from releases section of this repository, or from [https://xtreme3d.org](https://xtreme3d.org).
+
 Screenshots
 -----------
 [![Screenshot3](/screenshots/pbr-thumb.jpg)](/screenshots/pbr.jpg)
